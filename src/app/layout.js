@@ -190,14 +190,6 @@ export default function RootLayout({ children }) {
                           <div className="absolute -top-6 left-0 right-0 h-6 bg-transparent" />
                           <div className="absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white" />
                           <div className="w-48 py-2">
-                            {/* Add your Dholera SIR dropdown items here */}
-                            <Link 
-                              href="#item1"
-                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                              onClick={() => setIsDholeraOpen(false)}
-                            >
-                              About Dholera
-                            </Link>
                             <Link 
                               href="#item2"
                               className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
@@ -326,11 +318,9 @@ export default function RootLayout({ children }) {
                     </AnimatePresence>
                   </div>
                   
-                  {/* Mobile Dholera SIR Dropdown */}
-                  
                   
                   <Link
-                    href="#"
+                    href="/pages/Events"
                     className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                     onClick={handleClose}
                   >
@@ -344,7 +334,7 @@ export default function RootLayout({ children }) {
                     About
                   </Link>
                   <Link
-                    href="#testimonials"
+                    href="#gallery"
                     className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                     onClick={handleClose}
                   >
