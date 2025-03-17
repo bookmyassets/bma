@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {  getPosts } from "@/sanity/lib/api";
 import { urlFor } from "@/sanity/lib/image";
-import "../properties/project.css";
+import "../Blogs/project.css";
 import Image from "next/image";
 import { CalendarDays, MessageSquare, User } from "lucide-react";
 import { PortableText } from "next-sanity";
@@ -13,17 +13,16 @@ export default async function Home() {
   console.log("Posts data:", JSON.stringify(posts, null, 2));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b  from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b pt-20 from-gray-50 to-gray-100">
       {/* Hero Section */}
-      <div className="relative bg-[#151f28] text-white">
+      <div className="relative bg-black text-white">
         <div className="absolute inset-0 opacity-20 bg-cover bg-center"></div>
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            Our <span className="text-[#0e48fe]">Projects</span>
+            LOCATIONS
           </h1>
           <p className="text-lg text-center max-w-2xl mx-auto text-gray-200">
-            Discover the latest market insights, expert strategies, and
-            investment opportunities to grow your wealth.
+            
           </p>
         </div>
       </div>
@@ -39,17 +38,25 @@ export default async function Home() {
                   <div className="md:w-1/2 relative">
                     {post.mainImage && (
                       <div className="relative h-64 md:h-full">
+                        <Link
+                        href={
+                          post.slug?.current
+                            ? `/posts/${post.slug.current}`
+                            : "#"
+                        }>
+
                         <Image
                           src={
                             urlFor(post.mainImage)
-                              .width(800)
-                              .height(600)
-                              .url() || "/placeholder.svg"
+                            .width(800)
+                            .height(600)
+                            .url() || "/placeholder.svg"
                           }
                           alt={post.title}
                           fill
                           className="object-cover"
-                        />
+                          />
+                          </Link>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-70"></div>
 
                         {/* Position categories in the top-left corner of the image */}
@@ -96,7 +103,7 @@ export default async function Home() {
                             : "#"
                         }>
                       {post.title}
-                        <span className="bg-blue-500 rounded-lg ml-3 text-sm text-black  font-thin w-10 h-10">
+                        <span className="bg-blue-500 rounded-lg ml-3 text-sm text-white  font-thin w-16 h-14">
                           {" "}
                           Details Here{" "}
                         </span>

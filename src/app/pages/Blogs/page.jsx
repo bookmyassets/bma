@@ -19,7 +19,7 @@ export default async function Home() {
         <div className="absolute inset-0 opacity-20 bg-cover bg-center"></div>
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            LOCATIONS
+            BLOGS
           </h1>
           <p className="text-lg text-center max-w-2xl mx-auto text-gray-200">
             
@@ -87,20 +87,20 @@ export default async function Home() {
                     )}
                   </div>
                   <div className="md:w-1/2 bg-gray-300 text-[#151f28] p-6 md:p-8 flex flex-col justify-center">
-                    <h2 className="text-3xl font-bold mb-3 flex items-center flex-wrap">
                       <Link
                         href={
                           post.slug?.current
                             ? `/posts/${post.slug.current}`
                             : "#"
                         }>
+                    <h2 className="text-3xl font-bold mb-3 flex items-center flex-wrap">
                       {post.title}
-                        <span className="bg-blue-500 rounded-lg ml-3 text-sm text-black  font-thin w-10 h-10">
+                        <span className="bg-blue-500 rounded-lg ml-3 text-sm text-white font-thin w-16 h-10">
                           {" "}
                           Details Here{" "}
                         </span>
-                      </Link>
                     </h2>
+                      </Link>
 
                     <p className="text-gray-600 mb-4">{post.description}</p>
                     <div className="line-clamp-2 overflow-hidden mb-4">
