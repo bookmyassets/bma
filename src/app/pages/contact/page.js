@@ -88,11 +88,7 @@ const ContactPage = () => {
             </p>
 
             {/* Explore More Button */}
-            <div className="mt-8">
-              <button className="text-black bg-[#FDB913] px-8 py-4 text-xl rounded-md hover:bg-yellow-500 transition-all duration-300 font-medium">
-                Explore More
-              </button>
-            </div>
+
           </div>
         </div>
       </div>
