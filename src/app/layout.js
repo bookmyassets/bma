@@ -94,19 +94,11 @@ export default function RootLayout({ children }) {
                     Home
                   </Link>
                   <Link
-                    href="/pages/Blogs"
+                    href="/pages/about"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
                   >
-                    Blogs
+                    About
                   </Link>
-                  <Link
-                    href="/pages/Events"
-                    className="text-[#FDB913] hover:text-white px-3 py-2"
-                  >
-                    Events
-                  </Link>
-                  
-                  {/* Projects Dropdown with Animation */}
                   <div 
                     ref={projectsRef}
                     onMouseEnter={() => setIsProjectsDropdownOpen(true)}
@@ -167,6 +159,21 @@ export default function RootLayout({ children }) {
                       )}
                     </AnimatePresence>
                   </div>
+                  <Link
+                    href="/pages/Blogs"
+                    className="text-[#FDB913] hover:text-white px-3 py-2"
+                  >
+                    Blogs
+                  </Link>
+                  <Link
+                    href="/pages/Events"
+                    className="text-[#FDB913] hover:text-white px-3 py-2"
+                  >
+                    Events
+                  </Link>
+                  
+                  {/* Projects Dropdown with Animation */}
+                  
                   
                   {/* Dholera SIR Dropdown with Animation */}
                   <div 
@@ -211,23 +218,18 @@ export default function RootLayout({ children }) {
                   </div>
                   
                   <Link
-                    href="/pages/contact"
-                    className="text-[#FDB913] hover:text-white px-3 py-2"
-                  >
-                    Contact
-                  </Link>
-                  <Link
-                    href="/pages/about"
-                    className="text-[#FDB913] hover:text-white px-3 py-2"
-                  >
-                    About
-                  </Link>
-                  <Link
                     href="#testimonials"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
                   >
                     Gallery
                   </Link>
+                  <Link
+                    href="/pages/contact"
+                    className="text-[#FDB913] hover:text-white px-3 py-2"
+                  >
+                    Contact
+                  </Link>
+                  
                 </div>
               </div>
               
@@ -263,14 +265,12 @@ export default function RootLayout({ children }) {
                     Home
                   </Link>
                   <Link
-                    href="/pages/Blogs"
+                    href="/pages/about"
                     className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                     onClick={handleClose}
                   >
-                    Blogs
+                    About
                   </Link>
-                  
-                  {/* Mobile Projects Dropdown */}
                   <div>
                     <button
                       onClick={toggleProjectsDropdown}
@@ -286,6 +286,7 @@ export default function RootLayout({ children }) {
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                         strokeWidth="2"
+                  
                       >
                         <path
                           strokeLinecap="round"
@@ -317,21 +318,19 @@ export default function RootLayout({ children }) {
                       )}
                     </AnimatePresence>
                   </div>
-                  
-                  
+                  <Link
+                    href="/pages/Blogs"
+                    className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
+                    onClick={handleClose}
+                  >
+                    Blogs
+                  </Link>
                   <Link
                     href="/pages/Events"
                     className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                     onClick={handleClose}
                   >
                     Events
-                  </Link>
-                  <Link
-                    href="/pages/about"
-                    className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
-                    onClick={handleClose}
-                  >
-                    About
                   </Link>
                   <Link
                     href="#gallery"
