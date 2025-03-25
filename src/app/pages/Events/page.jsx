@@ -65,15 +65,7 @@ export default async function BlogPage() {
 
                   <p className="text-gray-600 mb-4">{posts[0].description}</p>
 
-                  <div className="flex items-center mt-auto">
-                    <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-                      <User className="h-5 w-5 text-gray-500" />
-                    </div>
-                    <div className="ml-3">
-                      <h3 className="text-sm font-semibold text-gray-800">{posts[0].author.name}</h3>
-                      <p className="text-xs text-gray-500">{posts[0].author.followers || 0} followers</p>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -106,14 +98,7 @@ export default async function BlogPage() {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-50"></div>
-                <span
-                  className="absolute top-3 left-3 text-white text-xs font-bold px-3 py-1 rounded-full"
-                  style={{
-                    backgroundColor: getCategoryColor(post.category),
-                  }}
-                >
-                  {post.category || "Blog"}
-                </span>
+                
               </div>
 
               {/* Blog Content */}
@@ -138,10 +123,7 @@ export default async function BlogPage() {
                   <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
                     <User className="h-4 w-4 text-gray-500" />
                   </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm font-semibold text-gray-800">{post.author.name}</h3>
-                    <p className="text-xs text-gray-500">{post.author.followers || 0} followers</p>
-                  </div>
+                  
                 </div>
               </div>
             </div>
