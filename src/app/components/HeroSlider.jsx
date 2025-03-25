@@ -36,7 +36,7 @@ export default function HomeSlider({ img1, img2, img3 }) {
       </Swiper>
 
       {/* Static Text and Button Overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white text-center px-8 z-10">
+      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 bg-opacity-50 text-white text-center px-8 z-10">
         <h1 className="text-5xl font-bold mt-4">
           Your Perfect Investment Opportunity Awaits
         </h1>

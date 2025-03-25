@@ -6,7 +6,7 @@ import img4 from "@/assests/logo-3.png"
 
 const ParallaxSection = () => {
   return (
-    <div className="h-screen overflow-auto">
+    <div className=" overflow-auto">
       {/* Fixed background image */}
       <div className="fixed top-0 left-0 w-full h-full -z-10">
         <Image
@@ -16,6 +16,7 @@ const ParallaxSection = () => {
           priority
           quality={100}
           objectFit="cover"
+          className="brightness-50"
         />
       </div>
       {/* Scrolling content */}

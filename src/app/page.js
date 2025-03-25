@@ -3,11 +3,11 @@ import HomeSlider from "./components/HeroSlider";
 import img1 from "@/assests/img1.webp"
 import img2 from "@/assests/img2.webp"
 import img3 from "@/assests/img3.webp"
-import Mid from "./components/Mid";
 import ShortsSection from "./components/YouTube";
 import ParallaxSection from "./components/Parallex";
-import WhyChooseSection from "./components/Why";
 import Footer from "./components/Footer";
+import FAQSection from "./components/Faq";
+import BrowseBlogsSection from "./components/BrowseBlogs";
 
 export default async function Home() {
   return (
@@ -18,10 +18,10 @@ export default async function Home() {
         <HomeSlider img1={img1} img2={img2} img3={img3}/>
       </section>
       <section className=''>
-        <Mid/>
+        <FAQSection/>
         <ShortsSection/>
         <ParallaxSection/>
-        <WhyChooseSection/>
+        <BrowseBlogsSection/>
         <FloatingButtons />
         <Footer/>
       </section>

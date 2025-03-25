@@ -3,10 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import logo from "@/assests/Bmalogo.png";
 import { Geist, Geist_Mono } from "next/font/google";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Menu,
-  X
-} from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import "./globals.css";
 import Image from "next/image";
@@ -27,14 +24,16 @@ export default function RootLayout({ children }) {
   const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
   const [isDholeraOpen, setIsDholeraOpen] = useState(false);
   const [projects, setProjects] = useState([]);
-  
+  const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] =
+    useState(false);
+
   const projectsRef = useRef(null);
   const dholeraRef = useRef(null);
 
   const handleClose = () => {
     setIsMenuOpen(false);
   };
-  
+
   const toggleProjectsDropdown = () => {
     setIsProjectsDropdownOpen(!isProjectsDropdownOpen);
     setIsDholeraOpen(false);
@@ -55,7 +54,7 @@ export default function RootLayout({ children }) {
         setIsDholeraOpen(false);
       }
     }
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -75,7 +74,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="fixed w-full bg-black text-[#FDB913] backdrop-blur-md z-50">
+        <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-50 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-32 items-center">
               <div className="flex-shrink-0">
@@ -83,7 +82,7 @@ export default function RootLayout({ children }) {
                   <Image src={logo} height={140} width={90} alt="logo" />
                 </Link>
               </div>
-              
+
               {/* Desktop Navigation */}
               <div className="hidden text-xl md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
@@ -99,7 +98,7 @@ export default function RootLayout({ children }) {
                   >
                     About
                   </Link>
-                  <div 
+                  <div
                     ref={projectsRef}
                     onMouseEnter={() => setIsProjectsDropdownOpen(true)}
                     onMouseLeave={() => setIsProjectsDropdownOpen(false)}
@@ -125,12 +124,14 @@ export default function RootLayout({ children }) {
                       </svg>
                       <span
                         style={{
-                          transform: isProjectsDropdownOpen ? "scaleX(1)" : "scaleX(0)",
+                          transform: isProjectsDropdownOpen
+                            ? "scaleX(1)"
+                            : "scaleX(0)",
                         }}
                         className="absolute -bottom-2 -left-2 -right-2 h-1 origin-left scale-x-0 rounded-full bg-orange-300 transition-transform duration-300 ease-out"
                       />
                     </div>
-                    
+
                     {/* Projects Dropdown Content */}
                     <AnimatePresence>
                       {isProjectsDropdownOpen && (
@@ -171,19 +172,16 @@ export default function RootLayout({ children }) {
                   >
                     Events
                   </Link>
-                  
+
                   {/* Projects Dropdown with Animation */}
-                  
-                  
+
                   {/* Dholera SIR Dropdown with Animation */}
-                  <div 
+                  <div
                     ref={dholeraRef}
                     onMouseEnter={() => setIsDholeraOpen(true)}
                     onMouseLeave={() => setIsDholeraOpen(false)}
                     className="relative group"
                   >
-                    
-                    
                     {/* Dholera Dropdown Content */}
                     <AnimatePresence>
                       {isDholeraOpen && (
@@ -197,14 +195,14 @@ export default function RootLayout({ children }) {
                           <div className="absolute -top-6 left-0 right-0 h-6 bg-transparent" />
                           <div className="absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white" />
                           <div className="w-48 py-2">
-                            <Link 
+                            <Link
                               href="#item2"
                               className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                               onClick={() => setIsDholeraOpen(false)}
                             >
                               Investment Options
                             </Link>
-                            <Link 
+                            <Link
                               href="#item3"
                               className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                               onClick={() => setIsDholeraOpen(false)}
@@ -216,7 +214,7 @@ export default function RootLayout({ children }) {
                       )}
                     </AnimatePresence>
                   </div>
-                  
+
                   <Link
                     href="#testimonials"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
@@ -229,12 +227,131 @@ export default function RootLayout({ children }) {
                   >
                     Contact
                   </Link>
-                  
+                  <div className="relative">
+                    <div
+                      className="text-[#FDB913] hover:text-white px-3 py-2 cursor-pointer flex items-center gap-1"
+                      onClick={() =>
+                        setIsGetInTouchDropdownOpen(!isGetInTouchDropdownOpen)
+                      }
+                    >
+                      Get in Touch
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+                          isGetInTouchDropdownOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+
+                    <AnimatePresence>
+                      {isGetInTouchDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 15 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                          className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
+                        >
+                          <div className="py-2">
+                            <a
+                              href="tel:+919717671112"
+                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                            >
+                              Call Now
+                            </a>
+                            <a
+                               href="https://wa.me/919717671112"
+                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                            >
+                              WhatsApp Us
+                            </a>
+                            <Link
+                              href="/enquire"
+                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                              onClick={() => setIsGetInTouchDropdownOpen(false)}
+                            >
+                              Enquire Now
+                            </Link>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
               </div>
-              
+
               {/* Mobile Menu Toggle Button */}
-              <div className="md:hidden">
+              <div className="md:hidden flex items-center gap-4">
+              <div className="relative">
+                    <div
+                      className="text-[#FDB913] hover:text-white px-3 py-2 cursor-pointer flex items-center gap-1"
+                      onClick={() =>
+                        setIsGetInTouchDropdownOpen(!isGetInTouchDropdownOpen)
+                      }
+                    >
+                      Get in Touch
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+                          isGetInTouchDropdownOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+
+                    <AnimatePresence>
+                      {isGetInTouchDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 15 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                          className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
+                        >
+                          <div className="py-2">
+                            <a
+                              href="tel:+919717671112"
+                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                            >
+                              Call Now
+                            </a>
+                            <a
+                              href="https://wa.me/919717671112"
+                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                            >
+                              WhatsApp Us
+                            </a>
+                            <Link
+                              href="/enquire"
+                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                              onClick={() => setIsGetInTouchDropdownOpen(false)}
+                            >
+                              Enquire Now
+                            </Link>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
                   {isMenuOpen ? (
                     <X className="h-6 w-6 text-[#FDB913]" />
@@ -242,10 +359,11 @@ export default function RootLayout({ children }) {
                     <Menu className="h-6 w-6 text-[#FDB913]" />
                   )}
                 </button>
+                
               </div>
             </div>
           </div>
-          
+
           {/* Mobile menu */}
           <AnimatePresence>
             {isMenuOpen && (
@@ -286,7 +404,6 @@ export default function RootLayout({ children }) {
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                         strokeWidth="2"
-                  
                       >
                         <path
                           strokeLinecap="round"
@@ -346,6 +463,7 @@ export default function RootLayout({ children }) {
                   >
                     Contact
                   </Link>
+                  
                 </div>
               </motion.div>
             )}
