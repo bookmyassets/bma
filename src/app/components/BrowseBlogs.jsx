@@ -114,7 +114,7 @@ const BrowseBlogsSection = () => {
             ></span>
           </h1>
           <p 
-            className="text-sm md:text-base max-w-2xl mx-auto mt-4"
+            className="text-sm md:text-xl max-w-2xl mx-auto mt-4"
             style={{ color: themeColors.darkGold }}
           >
             Discover some of our top blogs in Dholera. Exclusive opportunities await.
@@ -165,24 +165,20 @@ const BrowseBlogsSection = () => {
                   }}
                 >
                   <h3 
-                    className="text-xl font-bold mb-3" 
+                    className="text-2xl font-bold mb-3" 
                     style={{ color: themeColors.gold }}
                   >
                     {blog.title}
                   </h3>
                   <div 
-                    className="text-sm mb-4 line-clamp-3" 
+                    className="text-md mb-4 line-clamp-3" 
                     style={{ color: themeColors.darkGold }}
                   >
                     <PortableText value={blog.body} />
                   </div>
                   <Link href={`/post/${blog.slug?.current}`} passHref>
                     <button 
-                      className="w-full px-4 py-2 rounded-md transition-all duration-300 hover:opacity-80"
-                      style={{ 
-                        backgroundColor: themeColors.gold, 
-                        color: themeColors.black 
-                      }}
+                      className="w-full px-4 py-2 rounded-md transition-all font-semibold duration-300 hover:opacity-80 bg-white"
                     >
                       View Blog
                     </button>

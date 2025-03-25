@@ -20,7 +20,7 @@ const ParallaxSection = () => {
         />
       </div>
       {/* Scrolling content */}
-      <div className="relative z-10 py-12 pt-44 px-4">
+      <div className="relative z-10 py-12 px-4">
         <div className="flex flex-wrap justify-center items-center gap-8 max-w-6xl mx-auto">
           {/* Customer Satisfaction Box */}
           <div className="bg-white p-8 rounded-lg shadow-lg w-80 text-center">

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 
 export default function ShortsSection() {
@@ -14,7 +14,44 @@ export default function ShortsSection() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const intervalRef = useRef(null);
+  const containerRef = useRef(null);
 
+  // Track if any video is playing
+  const handleVideoPlay = useCallback(() => {
+    setIsPlaying(true);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  }, []);
+
+  const handleVideoPause = useCallback(() => {
+    setIsPlaying(false);
+    startAutoSlide();
+  }, []);
+
+  // Set up event listeners for videos
+  useEffect(() => {
+    const videos = document.querySelectorAll('iframe');
+    videos.forEach(video => {
+      // Note: Due to YouTube iframe restrictions, we can't directly detect play/pause
+      // This is a workaround using mouse events
+      video.addEventListener('mouseenter', handleVideoPlay);
+      video.addEventListener('mouseleave', handleVideoPause);
+      video.addEventListener('touchstart', handleVideoPlay);
+    });
+
+    return () => {
+      videos.forEach(video => {
+        video.removeEventListener('mouseenter', handleVideoPlay);
+        video.removeEventListener('mouseleave', handleVideoPause);
+        video.removeEventListener('touchstart', handleVideoPlay);
+      });
+    };
+  }, [handleVideoPlay, handleVideoPause]);
+
+  // Check mobile view
   useEffect(() => {
     const checkIfMobile = () => setIsMobile(window.innerWidth < 768);
     checkIfMobile();
@@ -23,18 +60,37 @@ export default function ShortsSection() {
   }, []);
 
   const showNext = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % shortsData.length);
-  }, [shortsData.length]);
+    if (!isPlaying) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % shortsData.length);
+    }
+  }, [shortsData.length, isPlaying]);
 
   const showPrev = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + shortsData.length) % shortsData.length);
-  }, [shortsData.length]);
+    if (!isPlaying) {
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + shortsData.length) % shortsData.length);
+    }
+  }, [shortsData.length, isPlaying]);
 
-  useEffect(() => {
-    const interval = setInterval(showNext, 7000);
-    return () => clearInterval(interval);
+  const startAutoSlide = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(showNext, 7000);
   }, [showNext]);
 
+  // Auto slide effect
+  useEffect(() => {
+    if (!isPlaying) {
+      startAutoSlide();
+    }
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [startAutoSlide, isPlaying]);
+
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') showPrev();
@@ -45,20 +101,31 @@ export default function ShortsSection() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showPrev, showNext]);
 
+  // Calculate the offset to center the current short
+  const calculateOffset = () => {
+    if (!containerRef.current) return 0;
+    const containerWidth = containerRef.current.offsetWidth;
+    const shortWidth = isMobile ? 350 : 470;
+    return (containerWidth - shortWidth) / 2 - currentIndex * shortWidth;
+  };
+
   return (
     <section 
-      className="bg-black py-12 overflow-hidden " 
+      className="bg-black py-12 overflow-hidden" 
       aria-label="YouTube Shorts Carousel"
     >
-      <div className="p-6 max-w-7xl mx-auto">
-        <h2 className="text-4xl text-white font-bold text-center mb-8">
+      <div className="p-4 max-w-7xl mx-auto">
+        <h2 className="text-3xl md:text-4xl text-white font-bold text-center mb-8">
           Latest Shorts
         </h2>
         
-        <div className="relative flex justify-center items-center">
+        <div 
+          className="relative overflow-hidden"
+          ref={containerRef}
+        >
           <motion.div 
-            className="flex gap-4 md:gap-10" 
-            animate={{ x: -currentIndex * (isMobile ? 360 : 480) }} 
+            className="flex gap-4 md:gap-6"
+            animate={{ x: calculateOffset() }}
             transition={{ 
               type: "spring", 
               stiffness: 100, 
@@ -68,24 +135,26 @@ export default function ShortsSection() {
             {shortsData.map((short) => (
               <div 
                 key={short.id} 
-                className="w-[350px] md:w-[470px] flex-shrink-0"
+                className={`w-[350px] md:w-[470px] flex-shrink-0 transition-opacity ${
+                  shortsData[currentIndex].id === short.id ? 'opacity-100' : 'opacity-70'
+                }`}
                 role="group" 
                 aria-roledescription="Short video"
               >
-                <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl p-4">
+                <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl p-2 md:p-4">
                   <iframe 
-                    className="w-full h-[620px] md:h-[750px] rounded-xl" 
+                    className="w-full h-[500px] md:h-[750px] rounded-xl" 
                     src={short.embedUrl} 
-                    title={short.title} 
+                    title={short.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     referrerPolicy="strict-origin-when-cross-origin"
                     loading="lazy"
                   ></iframe>
-                  <div className="p-4 text-center">
-                    <h3 className="text-white font-semibold text-lg line-clamp-2">
+                  <div className="p-2 md:p-4 text-center">
+                    <h3 className="text-white font-semibold text-base md:text-lg line-clamp-2">
                       {short.title}
                     </h3>
-                    <p className="text-gray-400 text-sm mt-1">
+                    <p className="text-gray-400 text-xs md:text-sm mt-1">
                       {short.views} views
                     </p>
                   </div>
@@ -99,14 +168,14 @@ export default function ShortsSection() {
           <button 
             onClick={showPrev} 
             aria-label="Previous short"
-            className="bg-[#dfb03c] text-black px-6 py-3 rounded-full hover:bg-yellow-500 transition text-lg"
+            className="bg-[#dfb03c] text-black px-6 py-2 md:py-3 rounded-full hover:bg-yellow-500 transition text-lg"
           >
             ←
           </button>
           <button 
             onClick={showNext} 
             aria-label="Next short"
-            className="bg-[#dfb03c] text-black px-6 py-3 rounded-full hover:bg-yellow-500 transition text-lg"
+            className="bg-[#dfb03c] text-black px-6 py-2 md:py-3 rounded-full hover:bg-yellow-500 transition text-lg"
           >
             →
           </button>
