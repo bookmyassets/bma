@@ -18,9 +18,9 @@ export default async function Home() {
       <div className="relative bg-black text-white">
         <div className="absolute inset-0 opacity-20 bg-cover bg-center"></div>
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
             BLOGS
-          </h1>
+          </h2>
           <p className="text-lg text-center max-w-2xl mx-auto text-gray-200">
             
           </p>
@@ -93,13 +93,13 @@ export default async function Home() {
                             ? `/posts/${post.slug.current}`
                             : "#"
                         }>
-                    <h2 className="text-3xl font-bold mb-3 flex items-center flex-wrap">
+                    <h1 className="text-3xl font-bold mb-3 flex items-center flex-wrap">
                       {post.title}
                         <span className="bg-blue-500 rounded-lg ml-3 text-sm text-white font-thin w-16 h-10">
                           {" "}
                           Details Here{" "}
                         </span>
-                    </h2>
+                    </h1>
                       </Link>
 
                     <p className="text-gray-600 mb-4">{post.description}</p>

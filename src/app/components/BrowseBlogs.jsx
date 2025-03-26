@@ -144,16 +144,6 @@ const BrowseBlogsSection = () => {
                       className="w-full h-full object-cover"
                     />
                   )}
-                  <div 
-                    className="absolute inset-0 flex items-end opacity-0 hover:opacity-100 transition-opacity duration-300"
-                    style={{ 
-                      background: `linear-gradient(to top, ${themeColors.black}CC, transparent)` 
-                    }}
-                  >
-                    <div className="p-4 text-white w-full">
-                      <h3 className="text-xl font-bold mb-1">{blog.title}</h3>
-                    </div>
-                  </div>
                 </div>
                 
                 {/* Blog Content */}
@@ -176,7 +166,7 @@ const BrowseBlogsSection = () => {
                   >
                     <PortableText value={blog.body} />
                   </div>
-                  <Link href={`/post/${blog.slug?.current}`} passHref>
+                  <Link href={`/posts/${blog.slug?.current}`} passHref>
                     <button 
                       className="w-full px-4 py-2 rounded-md transition-all font-semibold duration-300 hover:opacity-80 bg-white"
                     >
