@@ -8,24 +8,34 @@ import ParallaxSection from "./components/Parallex";
 import Footer from "./components/Footer";
 import FAQSection from "./components/Faq";
 import BrowseBlogsSection from "./components/BrowseBlogs";
+import ContactForm from "./components/Contactform";
 
 export default async function Home() {
   return (
-    <>
     <div className="">
-
-      <section >
+      <section>
         <HomeSlider img1={img1} img2={img2} img3={img3}/>
       </section>
-      <section className=''>
+      
+      <section>
         <FAQSection/>
-        <ShortsSection/>
-        <ParallaxSection/>
-        <BrowseBlogsSection/>
-        <FloatingButtons />
-        <Footer/>
       </section>
+      
+      <section>
+        <ShortsSection/>
+      </section>
+      
+      {/* Parallax section appears here, after ShortsSection */}
+      <section className="my-12"> {/* Add margin as needed */}
+        <ParallaxSection/>
+      </section>
+      
+      <section>
+        <BrowseBlogsSection/>
+      </section>
+      
+      <FloatingButtons />
+      <Footer/>
     </div>
-    </>
   );
 }

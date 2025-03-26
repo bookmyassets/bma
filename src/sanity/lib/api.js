@@ -19,7 +19,7 @@ export async function getPosts() {
 }
 
 export async function getblogs() {
-  const query = `*[_type == "post" && "Blog" in categories[]->title && author-> name == "Dholera Times" ]{
+  const query = `*[_type == "post" && "Blog" in categories[]->title && author-> name == "BookMyAssets" ]{
     _id,
     title,
     slug,
