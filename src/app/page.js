@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import FAQSection from "./components/Faq";
 import BrowseBlogsSection from "./components/BrowseBlogs";
 import ContactForm from "./components/Contactform";
+import TestimonialPagination from "./components/Testimonials";
 
 export default async function Home() {
   return (
@@ -33,8 +34,9 @@ export default async function Home() {
       <section>
         <BrowseBlogsSection/>
       </section>
-      
+      <TestimonialPagination/>
       <FloatingButtons />
+
       <Footer/>
     </div>
   );

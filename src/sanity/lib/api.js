@@ -68,3 +68,24 @@ export async function getPostBySlug(slug) {
     const post = await client.fetch(query, { slug });
     return post;
   }
+
+
+
+  export async function getEventBySlug(slug) {
+    const query = `*[_type == "event" && slug.current == $slug][0]{
+      _id,
+      eventName,
+      slug,
+      mainImage,
+      publishedAt,
+      description,
+      dateOfEvent,
+      timeOfEvent,
+      location,
+      mapsLink,
+      "eventMaterials": eventMaterials.asset->url,
+      categories[]->{title, _id}
+    }`;
+    const post = await client.fetch(query, { slug });
+    return post;
+  }

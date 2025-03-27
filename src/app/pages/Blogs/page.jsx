@@ -1,116 +1,58 @@
-import Link from "next/link";
-import {  getPosts } from "@/sanity/lib/api";
-import { urlFor } from "@/sanity/lib/image";
-import "../Blogs/project.css";
-import Image from "next/image";
-import { CalendarDays, MessageSquare, User } from "lucide-react";
-import { PortableText } from "next-sanity";
+// page.jsx
+import { getblogs } from "@/sanity/lib/api";
+import BlogCard from "./BlogCard";
+import TrendingBlogItem from "./trendingBlog";
 
-export default async function Home() {
-  const posts = await getPosts();
+export default async function BlogsPage() {
+  const posts = await getblogs();
 
-  // For debugging purposes only
-  console.log("Posts data:", JSON.stringify(posts, null, 2));
+  // Add error handling for post data
+  const safePosts = posts.map((post) => ({
+    ...post,
+    author: post.author || "BookMyAssets",
+    mainImage: post.mainImage || null,
+    slug: post.slug || { current: "#" },
+  }));
+
+  const trendingBlogs = safePosts.slice(0, 3);
+  const regularBlogs = safePosts;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b pt-20 from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      
+
       {/* Hero Section */}
-      <div className="relative bg-black text-white">
-        <div className="absolute inset-0 opacity-20 bg-cover bg-center"></div>
-        <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            BLOGS
-          </h2>
-          <p className="text-lg text-center max-w-2xl mx-auto text-gray-200">
-            
-          </p>
+      <div className="bg-gray-100 py-12">
+        <div className="max-w-7xl mx-auto px-4 py-28">
+          <h1 className="text-4xl font-bold text-center text-gray-800">BLOGS</h1>
         </div>
       </div>
 
-      {/* Content Section */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        {/* Featured Posts */}
-        {posts.length > 0 &&
-          posts.map((post) => (
-            <div key={post._id} className="mb-12">
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                <div className="md:flex">
-                  <div className="md:w-1/2 relative">
-                    {post.mainImage && (
-                      <div className="relative h-64 md:h-full">
-                        <Image
-                          src={
-                            urlFor(post.mainImage)
-                              .width(800)
-                              .height(600)
-                              .url() || "/placeholder.svg"
-                          }
-                          alt={post.title}
-                          fill
-                          className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-70"></div>
-
-                        {/* Position categories in the top-left corner of the image */}
-                        <div className="absolute top-4 left-4 flex flex-wrap gap-2 z-20">
-                          {post.categories && Array.isArray(post.categories) ? (
-                            post.categories.map((category, index) => (
-                              <span
-                                key={index}
-                                className={`px-3 py-1 text-sm font-bold rounded-full shadow-lg ${
-                                  category.title === "Sold Out"
-                                    ? "bg-red-600 text-white"
-                                    : "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
-                                }`}
-                              >
-                                {category.title}
-                              </span>
-                            ))
-                          ) : post.categories ? (
-                            <span
-                              className={`px-3 py-1 text-sm font-bold rounded-full shadow-lg ${
-                                post.categories.title.toLowerCase() ===
-                                "soldout"
-                                  ? "bg-red-600 text-white"
-                                  : "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
-                              }`}
-                            >
-                              {post.categories.title}
-                            </span>
-                          ) : (
-                            <span className="px-3 py-1 text-white text-sm font-bold rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-purple-600">
-                              Project
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="md:w-1/2 bg-gray-300 text-[#151f28] p-6 md:p-8 flex flex-col justify-center">
-                      <Link
-                        href={
-                          post.slug?.current
-                            ? `/posts/${post.slug.current}`
-                            : "#"
-                        }>
-                    <h1 className="text-3xl font-bold mb-3 flex items-center flex-wrap">
-                      {post.title}
-                        <span className="bg-blue-500 rounded-lg ml-3 text-sm text-white font-thin w-16 h-10">
-                          {" "}
-                          Details Here{" "}
-                        </span>
-                    </h1>
-                      </Link>
-
-                    <p className="text-gray-600 mb-4">{post.description}</p>
-                    <div className="line-clamp-2 overflow-hidden mb-4">
-                      <PortableText value={post.body} />
-                    </div>
-                  </div>
-                </div>
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+        <div className="flex flex-col max-sm:flex-col-reverse lg:flex-row gap-8">
+          {/* Trending Section - Left Sidebar */}
+          <div className="lg:w-1/3">
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#FDB913]">
+              <h2 className="text-2xl font-bold mb-6 text-gray-800">Trending Blogs</h2>
+              <div className="space-y-6">
+                {trendingBlogs.map((post) => (
+                  <TrendingBlogItem key={post._id} post={post} />
+                ))}
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Blog Grid */}
+          <div className="lg:w-2/3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {regularBlogs.map((post) => (
+                <BlogCard key={post._id} post={post} />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

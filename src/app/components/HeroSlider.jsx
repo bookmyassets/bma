@@ -124,7 +124,7 @@ export default function LandingPage({ img1, img2, img3 }) {
                   src={img}
                   alt={`Slide ${index + 1}`}
                   fill
-                  className="object-cover "
+                  className="object-cover bg-black"
                   priority={index === 0}
                 />
               </div>
@@ -179,7 +179,7 @@ export default function LandingPage({ img1, img2, img3 }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-20 flex justify-center items-center z-50"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
@@ -218,7 +218,7 @@ export default function LandingPage({ img1, img2, img3 }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
+            className="fixed inset-0  bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 50 }}
@@ -232,7 +232,7 @@ export default function LandingPage({ img1, img2, img3 }) {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-gradient-to-r from-yellow-500 to-yellow-600 p-2 rounded-full shadow-lg"
+                  className="bg-black  p-2 rounded-full shadow-lg"
                 >
                   <Image
                     src={logo}
