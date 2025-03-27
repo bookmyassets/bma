@@ -1,7 +1,7 @@
 // page.jsx
 import { getblogs } from "@/sanity/lib/api";
 import BlogCard from "./BlogCard";
-import TrendingBlogItem from "./trendingBlog";
+import TrendingBlogItem from "./TrendingBlog";
 
 export default async function BlogsPage() {
   const posts = await getblogs();
