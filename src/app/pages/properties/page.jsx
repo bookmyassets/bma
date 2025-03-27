@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {  getPosts } from "@/sanity/lib/api";
 import { urlFor } from "@/sanity/lib/image";
-import "../Blogs/project.css";
+import "../properties/project.css";
 import Image from "next/image";
 import { CalendarDays, MessageSquare, User } from "lucide-react";
 import { PortableText } from "next-sanity";
