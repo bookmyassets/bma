@@ -33,6 +33,61 @@ export async function getblogs() {
   return posts;
 }
 
+export async function Inventory() {
+  const query = `*[_type == "post" && author->name == "Dholera Times" && "Project" in categories[]->title] | order(publishedAt desc) [0..9] {
+      _id,
+      title,
+      publishedAt,
+      mainImage,
+      "pdfUrl": coalesce(pdfFile.asset->url, null),
+      "category": coalesce(categories[]->title, []),
+      "author": coalesce(author->name, "Unknown")
+  }`;
+
+  const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}`;
+
+  try {
+      const response = await fetch(url, { cache: 'no-store' }); // ✅ Cache disabled
+      const json = await response.json();
+      const posts = json.result || [];
+
+      // Filter out posts with no pdfUrl
+      const filteredPosts = posts.filter(post => post.pdfUrl);
+      return filteredPosts;
+  } catch (error) {
+      console.error("Error fetching posts:", error);
+      return [];
+  }
+}
+
+
+export async function Brochure() {
+const query = `*[_type == "post" && author->name == "Dholera Times" && "Brochure" in categories[]->title] | order(publishedAt desc) [0..9] {
+    _id,
+    title,
+    publishedAt,
+    mainImage,
+    "pdfUrl": coalesce(pdfFile.asset->url, null),
+    "category": coalesce(categories[]->title, []),
+    "author": coalesce(author->name, "Unknown")
+}`;
+
+const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}`;
+
+try {
+    const response = await fetch(url, { cache: 'no-store' }); // ✅ Cache disabled
+    const json = await response.json();
+    const posts = json.result || [];
+
+    // Filter out posts with no pdfUrl
+    const filteredPosts = posts.filter(post => post.pdfUrl);
+    return filteredPosts;
+} catch (error) {
+    console.error("Error fetching posts:", error);
+    return [];
+}
+}
+
 export async function getEvents() {
   const query = `*[_type == "post" && "Events" in categories[]->title && author-> name == "BookMyAssets" ]{
     _id,
