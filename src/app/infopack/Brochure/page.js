@@ -3,7 +3,7 @@ import { Brochure } from "@/sanity/lib/api";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Download, Eye } from "lucide-react";
-import bg from "@/assets/pexels2.jpg"
+import bg from "@/assests/pexels2.jpg"
 
 export default async function BlogPage() {
   let posts = [];
