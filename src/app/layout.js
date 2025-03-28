@@ -129,6 +129,55 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        
+      <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-M6ZWDM9CGE"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || []; 
+              function gtag(){ dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'G-M6ZWDM9CGE'); 
+            `,
+          }}
+        />
+      <title>Dholera Smart City - Invest in Affordable Plots Today</title>
+      <meta
+        name="description"
+        content="Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat’s first smart city for high ROI and future growth."
+      ></meta>
+      <meta
+        name="keywords"
+        content="Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City"
+      ></meta>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+      ></meta>
+      <meta name="robots" content="index, follow"></meta>
+      <link rel="canonical" href="https://www.bookmyassets.com/"></link>
+
+      <meta
+        property="og:title"
+        content="Dholera Smart City- Dholera Smart City Plot Price"
+        ></meta>
+
+      <meta
+        property="og:description"
+        content="Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat’s first smart city for high ROI and future growth."
+        ></meta>
+      <meta property="og:type" content="website"></meta>
+      <meta property="og:url" content="https://www.bookmyassets.com/"></meta>
+      <meta property="og:image"></meta>
+      <meta property="og:site_name" content="Book My Assets"></meta>
+
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -302,6 +351,13 @@ export default function RootLayout({ children }) {
                   >
                     Gallery
                   </Link>
+
+                  <Link
+                    href="/infopack"
+                    className="text-white hidden hover:text-orange-200 px-3 py-2"
+                  >
+                    Info Pack
+                  </Link>
                 </div>
               </div>
 
@@ -331,17 +387,14 @@ export default function RootLayout({ children }) {
                     </svg>
                   </div>
                   <div className="flex items-center ">
-
-                  <AnimatePresence>
-                    {isContactFormOpen && (
-                      <ContactForm
-                      onClose={() => setIsContactFormOpen(false)}
-                      
-                      />
-                    )}
-                  </AnimatePresence>
-                    </div>
-
+                    <AnimatePresence>
+                      {isContactFormOpen && (
+                        <ContactForm
+                          onClose={() => setIsContactFormOpen(false)}
+                        />
+                      )}
+                    </AnimatePresence>
+                  </div>
 
                   <AnimatePresence>
                     {isGetInTouchDropdownOpen && (
