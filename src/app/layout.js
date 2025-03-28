@@ -9,6 +9,7 @@ import "./globals.css";
 import Image from "next/image";
 import { getPosts } from "@/sanity/lib/api";
 import ContactForm from "./components/Contactform";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -130,7 +131,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        
+
       <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-M6ZWDM9CGE"
