@@ -8,7 +8,7 @@ const FloatingButtons = () => {
       
 
       {/* Mobile View - Fixed Box at Bottom */}
-      <div className="fixed bottom-0 left-0 w-full bg-white shadow-md p-3 flex justify-around md:hidden z-50">
+      <div className="fixed bottom-0 left-0 w-full bg-white shadow-md p-3 flex justify-around lg:hidden z-50">
         {/* WhatsApp Button */}
         <a
           href="https://wa.me/919876543210"

@@ -64,7 +64,7 @@ export default function FAQSection() {
               key={index}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="border rounded-lg p-4 shadow-md bg-gray-900 bg-opacity-80"
+              className="border rounded-lg p-4 shadow-2xl bg-gray-900 bg-opacity-80"
             >
               <button
                 className="w-full flex justify-between items-center text-[#edc46b] text-left text-xl font-bold"
@@ -80,10 +80,10 @@ export default function FAQSection() {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="mt-6 text-lg text-[#f6d99a] overflow-hidden"
+                    className="mt-6 text-lg text-[#f6d99a] overflow-hidden border-t-2 border-[#edc46b] border-opacity-50 py-5"
                   >
                     {Array.isArray(faq.answer) ? (
-                      <ul className="list-disc pl-5">
+                      <ul className="list-disc pl-5 ">
                         {faq.answer.map((point, i) => (
                           <li key={i}>{point}</li>
                         ))}

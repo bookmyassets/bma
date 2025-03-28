@@ -74,7 +74,7 @@ const Footer = () => {
           </div>
   
           {/* Copyright Bar - Optional */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="mt-8 max-md:mb-10 pt-6 border-t border-gray-200">
             <p className="text-center text-gray-500 text-sm">
               © {new Date().getFullYear()} BookMyAssets™. All rights reserved.
             </p>

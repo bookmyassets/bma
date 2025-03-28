@@ -10,10 +10,11 @@ import FAQSection from "./components/Faq";
 import BrowseBlogsSection from "./components/BrowseBlogs";
 import ContactForm from "./components/Contactform";
 import TestimonialPagination from "./components/Testimonials";
+import WhyChooseSection from "./components/Why";
 
 export default async function Home() {
   return (
-    <div className="">
+    <div className=" overflow-hidden">
       <section>
         <HomeSlider img1={img1} img2={img2} img3={img3}/>
       </section>
@@ -30,6 +31,9 @@ export default async function Home() {
       <section className="my-12"> {/* Add margin as needed */}
         <ParallaxSection/>
       </section>
+      <section className="my-12"> {/* Add margin as needed */}
+        <WhyChooseSection/>
+      </section>
       
       <section>
         <BrowseBlogsSection/>
@@ -37,7 +41,7 @@ export default async function Home() {
       <TestimonialPagination/>
       <FloatingButtons />
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }

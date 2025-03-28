@@ -32,7 +32,7 @@ const WhyChooseSection = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-yellow-500">NA, NOC, TITLE CLEAR PROJECT</h3>
+                  <h3 className="text-3xl max-sm:text-xl font-bold text-yellow-500">NA, NOC, TITLE CLEAR PROJECT</h3>
                   <div className="mt-2 h-0.5 w-full bg-yellow-500/30"></div>
                 </div>
               </div>
@@ -46,7 +46,7 @@ const WhyChooseSection = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-yellow-500">PRIME & STRATEGIC LOCATION</h3>
+                  <h3 className="text-3xl max-sm:text-xl font-bold text-yellow-500">PRIME & STRATEGIC LOCATION</h3>
                   <div className="mt-2 h-0.5 w-full bg-yellow-500/30"></div>
                 </div>
               </div>
@@ -60,7 +60,7 @@ const WhyChooseSection = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-yellow-500">IMMEDIATE SALEDEED REGISTRATION</h3>
+                  <h3 className="text-3xl max-sm:text-xl font-bold text-yellow-500">IMMEDIATE SALEDEED REGISTRATION</h3>
                   <div className="mt-2 h-0.5 w-full bg-yellow-500/30"></div>
                 </div>
               </div>
@@ -74,7 +74,7 @@ const WhyChooseSection = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-yellow-500">WORKING IN MORE THAN ONE SECTOR</h3>
+                  <h3 className="text-3xl max-sm:text-xl font-bold text-yellow-500">WORKING IN MORE THAN ONE SECTOR</h3>
                   <div className="mt-2 h-0.5 w-full bg-yellow-500/30"></div>
                 </div>
               </div>
