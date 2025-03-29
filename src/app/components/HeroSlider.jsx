@@ -141,10 +141,7 @@ export default function LandingPage({ img1, img2, img3 }) {
           {" "}
           {/* Removed max-w-7xl and added w-full */}
           {/* Left Content - Always centered */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+          <div
             className="flex flex-col items-center text-center space-y-4 w-full" /* Added items-center and w-full */
           >
             <h1 className="text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] px-4">
@@ -155,9 +152,7 @@ export default function LandingPage({ img1, img2, img3 }) {
               premium commercial and residential investment opportunities with
               unparalleled service.
             </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <div
               className="flex space-x-4 pt-4"
             >
               
@@ -167,8 +162,8 @@ export default function LandingPage({ img1, img2, img3 }) {
               >
                 Contact Us
               </button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
 

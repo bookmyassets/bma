@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { Brochure } from "@/sanity/lib/api";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
 import { Download, Eye } from "lucide-react";
 import bg from "@/assests/pexels2.jpg"
 

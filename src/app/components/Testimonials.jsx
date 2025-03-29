@@ -6,39 +6,39 @@ import { motion } from 'framer-motion';
 
 const testimonials = [
   {
-    quote: "This product completely changed how we approach our workflow. What used to take days now takes just hours. The team's support has been nothing short of exceptional.",
-    name: "Sarah Thompson",
-    title: "CEO, Innovative Tech Solutions",
+    quote: "Investing in Dholera Smart City through Book My Assets was one of the best decisions I made. The team guided me through every step, ensuring a hassle-free purchase. The plot prices are affordable, and I am already seeing a great appreciation in value. Highly recommended.",
+    name: "Rahul Mehta",
+    location: "Gurugram",
     avatar: "/api/placeholder/80/80"
   },
   {
-    quote: "I've worked with many services over the years, but none compare to the consistency and quality delivered here. They don't just meet expectations—they exceed them every single time.",
-    name: "Michael Rodriguez",
-    title: "Chief Operations Officer, Global Logistics Inc.",
+    quote: "I was initially skeptical about investing in Dholera, but Book My Assets provided me with all the necessary details and market insights. Their transparency and professionalism gave me confidence, and now I own a prime plot in Gujarat’s first smart city. Excited about the future.",
+    name: "Pooja Shah",
+    location: "Ahmedabad",
     avatar: "/api/placeholder/80/80"
   },
   {
-    quote: "As a startup, we needed a partner who could scale with us. Not only did they provide cutting-edge solutions, but they also became an integral part of our growth strategy.",
-    name: "Elena Kovacs",
-    title: "Founder, GreenTech Innovations",
+    quote: "Dholera Smart City is the future, and Book My Assets helped me secure a great investment opportunity. Their team is knowledgeable and responsive and ensures a smooth transaction. I am confident my investment will yield high returns in the coming years.",
+    name: "Vikas Patel",
+    location: "Delhi",
     avatar: "/api/placeholder/80/80"
   },
   {
-    quote: "In an industry where trust is everything, these professionals have proven themselves time and again. Their integrity and expertise are unmatched.",
-    name: "Rachel Williams",
-    title: "Senior Director, Financial Strategies Consulting",
+    quote: "I invested ₹25 lakhs in a plot at Dholera Smart City three years ago through Book My Assets. Today, my investment has already appreciated by 10%, and I can see the future growth potential is even higher. The team provided excellent support throughout the buying process, making it a seamless experience. I highly recommend Book My Assets to anyone looking for a profitable real estate investment.",
+    name: "Amit Khurana",
+    location: "Gurugram",
     avatar: "/api/placeholder/80/80"
   },
   {
-    quote: "Incredible attention to detail and a deep understanding of our complex needs. They've been a true strategic partner.",
-    name: "David Chen",
-    title: "Research Director, Advanced Analytics Group",
+    quote: "This was my first real estate investment, and I had many doubts. Book My Assets patiently guided me through every detail, helping me choose the best plot within my budget. The property value has already been appreciated, and I feel confident about my decision. Great service and a trustworthy team.",
+    name: "Anjali Mehta",
+    location: "Delhi",
     avatar: "/api/placeholder/80/80"
   },
   {
-    quote: "Transformative technology combined with exceptional customer support. They've helped us reimagine what's possible.",
-    name: "Jennifer Lee",
-    title: "Innovation Lead, TechFrontiers",
+    quote: "I wanted to invest in a futuristic city with strong growth potential, and Dholera Smart City was the perfect choice. The infrastructure development, government support, and upcoming projects make it a great investment hub. Thanks to Book My Assets for their expert advice and smooth transaction process.",
+    name: "Vikram Singh",
+    location: "Gurugram",
     avatar: "/api/placeholder/80/80"
   }
 ];
@@ -89,17 +89,13 @@ const TestimonialPagination = () => {
               "{testimonial.quote}"
             </p>
             <div className="flex items-center">
-              <img 
-                src={testimonial.avatar} 
-                alt={testimonial.name} 
-                className="w-12 h-12 rounded-full mr-4"
-              />
+              
               <div>
                 <h3 className="font-semibold text-gray-900">
                   {testimonial.name}
                 </h3>
                 <p className="text-sm text-gray-600">
-                  {testimonial.title}
+                  {testimonial.location}
                 </p>
               </div>
             </div>
