@@ -1,14 +1,14 @@
 import FloatingButtons from "./components/whatsapp";
 import HomeSlider from "./components/HeroSlider";
-import img1 from "@/assests/img1.webp"
-import img2 from "@/assests/img2.webp"
-import img3 from "@/assests/img3.webp"
+import img1 from "@/assests/banner.webp"
+import img2 from "@/assests/banner2.webp"
+import img3 from "@/assests/banner3.webp"
+import img4 from "@/assests/banner4.webp"
 import ShortsSection from "./components/YouTube";
 import ParallaxSection from "./components/Parallex";
 import Footer from "./components/Footer";
 import FAQSection from "./components/Faq";
 import BrowseBlogsSection from "./components/BrowseBlogs";
-import ContactForm from "./components/Contactform";
 import TestimonialPagination from "./components/Testimonials";
 import WhyChooseSection from "./components/Why";
 
@@ -16,7 +16,7 @@ export default async function Home() {
   return (
     <div className=" overflow-hidden">
       <section>
-        <HomeSlider img1={img1} img2={img2} img3={img3}/>
+        <HomeSlider img1={img1} img2={img2} img3={img3} img4={img4}/>
       </section>
       
       <section>

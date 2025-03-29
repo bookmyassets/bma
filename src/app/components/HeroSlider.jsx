@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import logo from "@/assests/Bmalogo.png"; // Adjust path to your logo
 
-export default function LandingPage({ img1, img2, img3 }) {
+export default function LandingPage({ img1, img2, img3, img4 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
@@ -105,26 +105,25 @@ export default function LandingPage({ img1, img2, img3 }) {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative h-[90vh]">
       {/* Slider Section */}
       <div className="absolute inset-0">
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
           slidesPerView={1}
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 5000 }}
           loop={true}
           pagination={{ clickable: true }}
-          className="h-full"
         >
           {sliderImages.map((img, index) => (
             <SwiperSlide key={index}>
-              <div className="relative w-full h-screen">
+              <div className="relative h-[90vh] ">
                 <Image
                   src={img}
                   alt={`Slide ${index + 1}`}
                   fill
-                  className="object-cover bg-black"
+                  className="max-sm:object-contain bg-black"
                   priority={index === 0}
                 />
               </div>
@@ -134,20 +133,19 @@ export default function LandingPage({ img1, img2, img3 }) {
       </div>
 
       {/* Overlay Content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center">
+      <div className="relative z-10 h-[90vh] flex items-center justify-center">
         {" "}
         {/* Added justify-center */}
         <div className="container mx-auto px-4 w-full">
           {" "}
-          {/* Removed max-w-7xl and added w-full */}
-          {/* Left Content - Always centered */}
+         
           <div
             className="flex flex-col items-center text-center space-y-4 w-full" /* Added items-center and w-full */
           >
             <h1 className="text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] px-4">
               Your Perfect Investment Opportunity
             </h1>
-            <p className="text-base md:text-xl max-w-2xl bg-clip-text text-black px-4">
+            <p className="text-base md:text-xl max-w-2xl bg-clip-text text-white px-4">
               BookMyAssets™ is your trusted real estate partner, offering
               premium commercial and residential investment opportunities with
               unparalleled service.

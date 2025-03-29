@@ -67,7 +67,7 @@ export default async function BlogPage() {
   }
 
   return (
-    <div className=" bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8 relative">
+    <div className=" bg-gradient-to-br from-gray-50 to-gray-100 py-40 sm:px-6 lg:px-8 relative">
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30 -z-10"
         style={{ backgroundImage: `url(${bg.src})` }}
