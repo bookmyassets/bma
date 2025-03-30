@@ -120,7 +120,7 @@ const BrowseBlogsSection = () => {
         {/* Browse More Blogs Button */}
         {blogs.length > 3 && (
           <div className="mt-10 flex justify-center">
-            <Link href="/post/blogs">
+            <Link href="/pages/blogs">
               <button
                 className="px-6 py-3 rounded-md transition-all duration-300 hover:scale-105"
                 style={{ backgroundColor: themeColors.gold, color: themeColors.black, boxShadow: `0 4px 0 ${themeColors.darkGold}` }}

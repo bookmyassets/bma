@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { FaUser, FaPhoneAlt, FaWhatsapp, FaPhone } from "react-icons/fa";
+import { FaUser, FaPhoneAlt} from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import logo from "@/assests/Bmalogo.png"; // Adjust path to your logo
 
-export default function LandingPage({ img1, img2, img3, img4 }) {
+export default function LandingPage({ img1, img2, img3, img4, mimg1, mimg2, mimg3, mimg4 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
@@ -18,7 +18,8 @@ export default function LandingPage({ img1, img2, img3, img4 }) {
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [showFormPopup, setShowFormPopup] = useState(false);
 
-  const sliderImages = [img1, img2, img3];
+  const sliderImages = [img1, img2, img3, img4];
+  const mobilesliderImages = [mimg1, mimg2, mimg3, mimg4];
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -107,7 +108,7 @@ export default function LandingPage({ img1, img2, img3, img4 }) {
   return (
     <div className="relative h-[90vh]">
       {/* Slider Section */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 max-sm:hidden">
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
@@ -124,6 +125,31 @@ export default function LandingPage({ img1, img2, img3, img4 }) {
                   alt={`Slide ${index + 1}`}
                   fill
                   className="max-sm:object-contain bg-black"
+                  priority={index === 0}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      <div className="absolute inset-0 lg:hidden">
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          spaceBetween={0}
+          slidesPerView={1}
+          autoplay={{ delay: 5000 }}
+          loop={true}
+          pagination={{ clickable: true }}
+        >
+          {mobilesliderImages.map((img, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative h-[90vh] ">
+                <Image
+                  src={img}
+                  alt={`Slide ${index + 1}`}
+                  fill
+                  className=" bg-black"
                   priority={index === 0}
                 />
               </div>
