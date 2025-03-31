@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import logo from "@/assests/Bmalogo.png"; 
+import logo from "@/assests/Bmalogo.png";
 
 export default function ContactForm({ onClose }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +11,7 @@ export default function ContactForm({ onClose }) {
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
-  
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setSubmissionCount(
@@ -21,17 +21,16 @@ export default function ContactForm({ onClose }) {
         parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
       );
     }
-    
-    // Add this event listener to prevent clicking the form from closing the parent container
+
     const handleClickInside = (e) => {
       e.stopPropagation();
     };
-    
+
     const formElement = document.getElementById("contact-form-container");
     if (formElement) {
       formElement.addEventListener("click", handleClickInside);
     }
-    
+
     return () => {
       if (formElement) {
         formElement.removeEventListener("click", handleClickInside);
@@ -58,7 +57,9 @@ export default function ContactForm({ onClose }) {
     }
 
     if (submissionCount >= 3) {
-      alert("You have reached the maximum submission limit. Try again after 24 hours.");
+      alert(
+        "You have reached the maximum submission limit. Try again after 24 hours."
+      );
       setIsLoading(false);
       return;
     }
@@ -79,7 +80,11 @@ export default function ContactForm({ onClose }) {
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
           body: JSON.stringify({
-            fields: { name: formData.fullName, phone: formData.phone, source: "BookMyAssets" },
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: "BookMyAssets",
+            },
             source: "Dholera Times Website",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
           }),
@@ -95,8 +100,7 @@ export default function ContactForm({ onClose }) {
           localStorage.setItem("lastSubmissionTime", now.toString());
           return newCount;
         });
-        
-        // Close the form after successful submission
+
         setTimeout(() => {
           if (onClose) onClose();
         }, 2000);
@@ -111,7 +115,10 @@ export default function ContactForm({ onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 transform translate-y-48 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]" onClick={onClose}>
+    <div
+      className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
+      onClick={onClose} // Close when clicking outside
+    >
       <motion.div
         id="contact-form-container"
         initial={{ scale: 0.9, y: 50 }}
@@ -120,12 +127,18 @@ export default function ContactForm({ onClose }) {
         className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
         onClick={(e) => e.stopPropagation()} // Prevent clicks inside from closing
       >
-        {/* Close Button */}
+        {/* Fixed Close Button */}
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onClose?.();
+          }}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none"
+          aria-label="Close form"
         >
-          ✕
+         
         </button>
 
         {/* Logo */}
@@ -136,7 +149,13 @@ export default function ContactForm({ onClose }) {
             transition={{ delay: 0.2 }}
             className="bg-black p-2 rounded-full shadow-lg"
           >
-            <Image src={logo} alt="Logo" width={60} height={60} className="rounded-full" />
+            <Image
+              src={logo}
+              alt="Logo"
+              width={60}
+              height={60}
+              className="rounded-full"
+            />
           </motion.div>
         </div>
 
@@ -144,10 +163,12 @@ export default function ContactForm({ onClose }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-center mb-6 pt-4"
+          className="text-center mb-6 "
         >
           <h2 className="text-3xl font-bold text-white mb-2">Get Started</h2>
-          <p className="text-gray-300 text-sm">Fill this form to explore premium investment opportunities</p>
+          <p className="text-gray-300 text-sm">
+            Fill this form to explore premium investment opportunities
+          </p>
         </motion.div>
 
         {showPopup ? (
@@ -158,13 +179,27 @@ export default function ContactForm({ onClose }) {
               className="mb-4 inline-block"
             >
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-10 w-10 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
             </motion.div>
             <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
-            <p className="text-gray-300">Your request has been submitted successfully. We'll contact you shortly.</p>
+            <p className="text-gray-300">
+              Your request has been submitted successfully. We'll contact you
+              shortly.
+            </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
