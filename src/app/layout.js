@@ -202,7 +202,7 @@ export default function RootLayout({ children }) {
                     Home
                   </Link>
                   <Link
-                    href="/pages/about"
+                    href="/about"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
                   >
                     About
@@ -214,7 +214,7 @@ export default function RootLayout({ children }) {
                     className="relative group"
                   >
                     <Link
-                      href="/pages/properties"
+                      href="/properties"
                       className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
                       onClick={toggleProjectsDropdown}
                       onMouseEnter={() => setIsProjectsDropdownOpen(true)}
@@ -269,13 +269,13 @@ export default function RootLayout({ children }) {
 
                   {/* Other Desktop Menu Items */}
                   <Link
-                    href="/pages/Blogs"
+                    href="/Blogs"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
                   >
                     Blogs
                   </Link>
                   <Link
-                    href="/pages/Events"
+                    href="/Events"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
                   >
                     Events
@@ -462,7 +462,7 @@ export default function RootLayout({ children }) {
                       Home
                     </Link>
                     <Link
-                      href="/pages/about"
+                      href="/about"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -472,7 +472,7 @@ export default function RootLayout({ children }) {
                     {/* Mobile Projects Dropdown */}
                     <div>
                       <Link
-                        href="/pages/properties"
+                        href="/properties"
                         onClick={toggleProjectsDropdown}
                         className="text-[#FDB913] flex items-center justify-between w-full px-3 py-2 hover:bg-[#420703] rounded-md"
                       >
@@ -522,14 +522,14 @@ export default function RootLayout({ children }) {
                     </div>
 
                     <Link
-                      href="/pages/Blogs"
+                      href="/Blogs"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Blogs
                     </Link>
                     <Link
-                      href="/pages/Events"
+                      href="/Events"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -543,7 +543,7 @@ export default function RootLayout({ children }) {
                       Gallery
                     </Link>
                     <Link
-                      href="/pages/contact"
+                      href="/contact"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
