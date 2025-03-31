@@ -223,6 +223,8 @@ export default function ContactForm({ onClose }) {
                 placeholder="Phone Number"
                 value={formData.phone}
                 onChange={handleChange}
+                min="10"
+                max="11"
                 required
                 className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
               />

@@ -1,7 +1,12 @@
+import ContactForm from "./FooterForm";
+
 const Footer = () => {
     return (
       <footer className="bg-white py-10">
         <div className="max-w-7xl mx-auto px-4">
+          <div className="pb-12">
+            <ContactForm/>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* About Us Column */}
             <div>

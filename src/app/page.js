@@ -44,8 +44,6 @@ export default async function Home() {
       </section>
       <TestimonialPagination/>
       <FloatingButtons />
-
-      <Footer />
     </div>
   );
 }

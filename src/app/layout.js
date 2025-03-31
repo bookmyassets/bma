@@ -10,6 +10,7 @@ import Image from "next/image";
 import { getPosts } from "@/sanity/lib/api";
 import ContactForm from "./components/Contactform";
 import Script from "next/script";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -565,6 +566,7 @@ export default function RootLayout({ children }) {
         </AnimatePresence>
 
         {children}
+      <Footer/>
       </body>
     </html>
   );
