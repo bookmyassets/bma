@@ -24,8 +24,7 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
-  const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] =
-    useState(false);
+  const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [projects, setProjects] = useState([]);
 
@@ -51,7 +50,7 @@ export default function RootLayout({ children }) {
     setIsGetInTouchDropdownOpen(false);
     setIsProjectsDropdownOpen(false);
   };
-
+  
   const toggleProjectsDropdown = () => {
     setIsProjectsDropdownOpen(!isProjectsDropdownOpen);
     setIsGetInTouchDropdownOpen(false);
@@ -61,7 +60,7 @@ export default function RootLayout({ children }) {
     setIsGetInTouchDropdownOpen(!isGetInTouchDropdownOpen);
     setIsProjectsDropdownOpen(false);
   };
-
+  
   // Handle clicks outside dropdowns
   useEffect(() => {
     function handleClickOutside(event) {
@@ -209,7 +208,10 @@ export default function RootLayout({ children }) {
                   </Link>
 
                   {/* Projects Dropdown */}
-                  <div ref={projectsRef} className="relative group">
+                  <div
+                    ref={projectsRef}
+                    className="relative group"
+                  >
                     <button
                       className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
                       onClick={toggleProjectsDropdown}
@@ -278,7 +280,10 @@ export default function RootLayout({ children }) {
                   </Link>
 
                   {/* Get in Touch Dropdown */}
-                  <div ref={getInTouchRef} className="relative group">
+                  <div
+                    ref={getInTouchRef}
+                    className="relative group"
+                  >
                     <button
                       className="text-[#FDB913] hover:text-white px-3 py-2 cursor-pointer flex items-center gap-1"
                       onClick={toggleGetInTouchDropdown}
@@ -313,9 +318,7 @@ export default function RootLayout({ children }) {
                           variants={dropdownVariants}
                           className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
                           onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
-                          onMouseLeave={() =>
-                            setIsGetInTouchDropdownOpen(false)
-                          }
+                          onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
                         >
                           <div className="py-2">
                             <button

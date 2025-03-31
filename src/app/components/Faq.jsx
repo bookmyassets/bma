@@ -22,14 +22,6 @@ const faqs = [
   },
   {
     question: "Is Tata investing in Dholera?",
-    answer: [
-      "Helps diversify your investment portfolio",
-      "Requires a smaller investment amount (low ticket size)",
-      "Offers potential for high returns",
-    ],
-  },
-  {
-    question: "Is my land investment secure?",
     answer: 
       "Yes, the Tata Group has invested in Dholera, particularly in the semiconductor, power, defence, and electronics manufacturing sectors. Tata Power has also expressed interest in renewable energy projects within the smart city. The investments align with the government's push to make Dholera an industrial and tech hub. However, official announcements on the exact scale are still awaited.",
      
@@ -50,7 +42,7 @@ export default function FAQSection() {
   };
 
   return (
-    <div className=" p-6">
+    <div className="p-12">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl font-bold text-black text-center mb-6">
           Frequently Asked Questions

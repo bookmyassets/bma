@@ -60,7 +60,7 @@ const BrowseBlogsSection = () => {
   const featuredBlogs = blogs.slice(0, 3);
 
   return (
-    <section className="py-12 md:py-24 px-6 md:px-36 relative bg-white">
+    <section className="py-12 px-6 md:px-36 relative bg-white">
       <div className="container mx-auto relative">
         {/* Section Title */}
         <div className="w-full px-2 mb-10 text-center">
@@ -122,7 +122,7 @@ const BrowseBlogsSection = () => {
           <div className="mt-10 flex justify-center">
             <Link href="/pages/Blogs">
               <button
-                className="px-6 py-3 rounded-md transition-all duration-300 hover:scale-105"
+                className="px-6 text-xl py-3 rounded-md transition-all duration-300 hover:scale-105"
                 style={{ backgroundColor: themeColors.gold, color: themeColors.black, boxShadow: `0 4px 0 ${themeColors.darkGold}` }}
               >
                 Browse More Blogs

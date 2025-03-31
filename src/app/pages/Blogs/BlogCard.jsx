@@ -1,47 +1,62 @@
-// components/BlogCard.jsx
-'use client';
-
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 
 export default function BlogCard({ post }) {
-  // Ensure post exists and has required properties
-  if (!post) return null;
+  // Handle author object properly
+  const authorName =
+    typeof post.author === "object"
+      ? post.author.name || "Unknown"
+      : post.author;
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 h-full">
+    <div className="bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105">
       {/* Image */}
-      <div className="relative h-48">
-        {post.mainImage && (
+      <div className="relative w-full h-48">
+        {post.mainImage ? (
           <Image
             src={urlFor(post.mainImage).url()}
-            alt={post.title || "Blog post"}
+            alt={post.title}
             fill
             className="object-cover"
           />
+        ) : (
+          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+            <span className="text-gray-400">No image available</span>
+          </div>
         )}
       </div>
-      
+
       {/* Content */}
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-3">{post.title}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-2">{post.description}</p>
-        
-        {/* Author - ensure this is properly formatted */}
-        {post.author && (
-          <p className="text-sm text-gray-500">
-            {typeof post.author === 'object' ? post.author.name : post.author}
-          </p>
-        )}
-        
-        {/* Read More button */}
-        <Link 
-          href={`/posts/${post.slug?.current}`}
-          className="mt-4 inline-block px-4 py-2 bg-[#d3ab45]  font-semibold text-white rounded hover:bg-[#FDB913]"
-        >
-          Read More
-        </Link>
+      <div className="p-4 flex flex-col flex-grow ">
+        {/* Title */}
+        <h3 className="text-xl font-semibold mb-2 line-clamp-2 h-14">
+          {post.title}
+        </h3>
+
+        <div className="space-y-4">
+
+
+        {/* Author & Date */}
+        <div className="text-sm text-gray-600  mt-8">
+          <span>{authorName}</span>
+        </div>
+
+        {/* Excerpt */}
+        {/* <p className="text-gray-700 line-clamp-3 mb-4 flex-grow">
+          {post.description || "Read more about this topic..."}
+          </p> */}
+
+        {/* Read More Button - Fixed at bottom */}
+        <div className="">
+          <Link
+            href={`/posts/${post.slug.current}`}
+            className="w-full px-4 py-2 transition-all font-semibold border-white rounded-xl hover:bg-[#FDB913] bg-black hover:text-black text-lg md:text-base text-[#FDB913] mt-auto"
+            >
+            Read More
+          </Link>
+            </div>
+        </div>
       </div>
     </div>
   );
