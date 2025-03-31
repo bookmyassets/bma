@@ -212,7 +212,8 @@ export default function RootLayout({ children }) {
                     ref={projectsRef}
                     className="relative group"
                   >
-                    <button
+                    <Link
+                      href="/pages/properties"
                       className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
                       onClick={toggleProjectsDropdown}
                       onMouseEnter={() => setIsProjectsDropdownOpen(true)}
@@ -235,7 +236,7 @@ export default function RootLayout({ children }) {
                           d="M19 9l-7 7-7-7"
                         />
                       </svg>
-                    </button>
+                    </Link>
 
                     <AnimatePresence>
                       {isProjectsDropdownOpen && (
@@ -469,7 +470,8 @@ export default function RootLayout({ children }) {
 
                     {/* Mobile Projects Dropdown */}
                     <div>
-                      <button
+                      <Link
+                        href="/pages/properties"
                         onClick={toggleProjectsDropdown}
                         className="text-[#FDB913] flex items-center justify-between w-full px-3 py-2 hover:bg-[#420703] rounded-md"
                       >
@@ -490,7 +492,7 @@ export default function RootLayout({ children }) {
                             d="M19 9l-7 7-7-7"
                           />
                         </svg>
-                      </button>
+                      </Link>
                       <AnimatePresence>
                         {isProjectsDropdownOpen && (
                           <motion.div
