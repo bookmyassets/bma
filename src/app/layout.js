@@ -131,8 +131,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-
-      <Script
+        <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-M6ZWDM9CGE"
         />
@@ -148,36 +147,35 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-      <title>Dholera Smart City - Invest in Affordable Plots Today</title>
-      <meta
-        name="description"
-        content="Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat’s first smart city for high ROI and future growth."
-      ></meta>
-      <meta
-        name="keywords"
-        content="Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City"
-      ></meta>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-      ></meta>
-      <meta name="robots" content="index, follow"></meta>
-      <link rel="canonical" href="https://www.bookmyassets.com/"></link>
+        <title>Dholera Smart City - Invest in Affordable Plots Today</title>
+        <meta
+          name="description"
+          content="Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat’s first smart city for high ROI and future growth."
+        ></meta>
+        <meta
+          name="keywords"
+          content="Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City"
+        ></meta>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+        <meta name="robots" content="index, follow"></meta>
+        <link rel="canonical" href="https://www.bookmyassets.com/"></link>
 
-      <meta
-        property="og:title"
-        content="Dholera Smart City- Dholera Smart City Plot Price"
+        <meta
+          property="og:title"
+          content="Dholera Smart City- Dholera Smart City Plot Price"
         ></meta>
 
-      <meta
-        property="og:description"
-        content="Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat’s first smart city for high ROI and future growth."
+        <meta
+          property="og:description"
+          content="Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat’s first smart city for high ROI and future growth."
         ></meta>
-      <meta property="og:type" content="website"></meta>
-      <meta property="og:url" content="https://www.bookmyassets.com/"></meta>
-      <meta property="og:image"></meta>
-      <meta property="og:site_name" content="Book My Assets"></meta>
-
+        <meta property="og:type" content="website"></meta>
+        <meta property="og:url" content="https://www.bookmyassets.com/"></meta>
+        <meta property="og:image"></meta>
+        <meta property="og:site_name" content="Book My Assets"></meta>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -220,7 +218,6 @@ export default function RootLayout({ children }) {
                   >
                     <div className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer">
                       <Link href="/pages/properties">Projects</Link>
-                      
                     </div>
 
                     <AnimatePresence>
@@ -263,57 +260,71 @@ export default function RootLayout({ children }) {
                     Events
                   </Link>
 
-                  {/* Get in Touch Dropdown */}
-                  <div
-                    ref={getInTouchRef}
-                    onMouseEnter={() => {
-                      setIsGetInTouchDropdownOpen(true);
-                      setIsProjectsDropdownOpen(false);
-                    }}
-                    onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
-                    className="relative"
-                  >
-                    <div className="text-[#FDB913] hover:text-white px-3 py-2 cursor-pointer flex items-center gap-1">
-                      Get in Touch
-                    </div>
+                  <div 
+  ref={getInTouchRef}
+  className="relative group"
+  onMouseEnter={() => {
+    setIsGetInTouchDropdownOpen(true);
+    setIsProjectsDropdownOpen(false);
+  }}
+  onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
+>
+  {/* Trigger button */}
+  <div className="text-[#FDB913] hover:text-white px-3 py-2 cursor-pointer flex items-center gap-1">
+    Get in Touch
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+        isGetInTouchDropdownOpen ? "rotate-180" : ""
+      }`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
 
-                    <AnimatePresence>
-                      {isGetInTouchDropdownOpen && (
-                        <motion.div
-                          initial="hidden"
-                          animate="visible"
-                          exit="exit"
-                          variants={dropdownVariants}
-                          className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
-                        >
-                          <div className="py-2">
-                            <a
-                              href="tel:+919717671112"
-                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                            >
-                              Call Now
-                            </a>
-                            <a
-                              href="https://wa.me/919717671112"
-                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                            >
-                              WhatsApp Us
-                            </a>
-                            <Link
-                              href="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                openContactForm();
-                              }}
-                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                            >
-                              Enquire Now
-                            </Link>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+  {/* Dropdown content */}
+  <AnimatePresence>
+    {isGetInTouchDropdownOpen && (
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        variants={dropdownVariants}
+        className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
+        // Add mouse events to the dropdown itself to handle edge cases
+        onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
+        onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
+      >
+        <div className="py-2">
+          <a
+            href="tel:+919717671112"
+            className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+          >
+            Call Now
+          </a>
+          <a
+            href="https://wa.me/919717671112"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+          >
+            WhatsApp Us
+          </a>
+          <button
+            onClick={openContactForm}
+            className="block w-full text-left px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+          >
+            Enquire Now
+          </button>
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
 
                   <Link
                     href="#testimonials"
@@ -356,12 +367,14 @@ export default function RootLayout({ children }) {
                       />
                     </svg>
                   </div>
-                  <div className="flex items-center ">
+                  <div className="flex items-center justify-center ">
                     <AnimatePresence>
                       {isContactFormOpen && (
-                        <ContactForm
-                          onClose={() => setIsContactFormOpen(false)}
-                        />
+                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                          <ContactForm
+                            onClose={() => setIsContactFormOpen(false)}
+                          />
+                        </div>
                       )}
                     </AnimatePresence>
                   </div>

@@ -1,6 +1,10 @@
 "use client";
-import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useState ,useEffect, useMemo } from "react";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export default function ShortsSection() {
   const shortsData = useMemo(() => [
@@ -12,44 +16,7 @@ export default function ShortsSection() {
     { id: 6, title: "Dholera Smart City", views: "175K", embedUrl: "https://www.youtube.com/embed/sMN4WychUPI" },
   ], []);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const intervalRef = useRef(null);
-  const containerRef = useRef(null);
-
-  // Track if any video is playing
-  const handleVideoPlay = useCallback(() => {
-    setIsPlaying(true);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-  }, []);
-
-  const handleVideoPause = useCallback(() => {
-    setIsPlaying(false);
-    startAutoSlide();
-  }, []);
-
-  // Set up event listeners for videos
-  useEffect(() => {
-    const videos = document.querySelectorAll('iframe');
-    videos.forEach(video => {
-      // Note: Due to YouTube iframe restrictions, we can't directly detect play/pause
-      // This is a workaround using mouse events
-      video.addEventListener('mouseenter', handleVideoPlay);
-      video.addEventListener('mouseleave', handleVideoPause);
-      video.addEventListener('touchstart', handleVideoPlay);
-    });
-
-    return () => {
-      videos.forEach(video => {
-        video.removeEventListener('mouseenter', handleVideoPlay);
-        video.removeEventListener('mouseleave', handleVideoPause);
-        video.removeEventListener('touchstart', handleVideoPlay);
-      });
-    };
-  }, [handleVideoPlay, handleVideoPause]);
 
   // Check mobile view
   useEffect(() => {
@@ -58,56 +25,6 @@ export default function ShortsSection() {
     window.addEventListener("resize", checkIfMobile);
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
-
-  const showNext = useCallback(() => {
-    if (!isPlaying) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % shortsData.length);
-    }
-  }, [shortsData.length, isPlaying]);
-
-  const showPrev = useCallback(() => {
-    if (!isPlaying) {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + shortsData.length) % shortsData.length);
-    }
-  }, [shortsData.length, isPlaying]);
-
-  const startAutoSlide = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = setInterval(showNext, 7000);
-  }, [showNext]);
-
-  // Auto slide effect
-  useEffect(() => {
-    if (!isPlaying) {
-      startAutoSlide();
-    }
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [startAutoSlide, isPlaying]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowLeft') showPrev();
-      if (e.key === 'ArrowRight') showNext();
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [showPrev, showNext]);
-
-  // Calculate the offset to center the current short
-  const calculateOffset = () => {
-    if (!containerRef.current) return 0;
-    const containerWidth = containerRef.current.offsetWidth;
-    const shortWidth = isMobile ? 350 : 470;
-    return (containerWidth - shortWidth) / 2 - currentIndex * shortWidth;
-  };
 
   return (
     <section 
@@ -119,66 +36,75 @@ export default function ShortsSection() {
           Latest Shorts
         </h2>
         
-        <div 
-          className="relative overflow-hidden"
-          ref={containerRef}
-        >
-          <motion.div 
-            className="flex gap-4 md:gap-6"
-            animate={{ x: calculateOffset() }}
-            transition={{ 
-              type: "spring", 
-              stiffness: 100, 
-              damping: 15 
+        <div className="relative px-4">
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={20}
+            centeredSlides={true}
+            loop={true}
+            grabCursor={true} 
+            touchRatio={1.5} 
+            touchAngle={45} 
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
             }}
+            navigation={true}
+            modules={[Pagination, Navigation, Autoplay]}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+             
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 25,
+                centeredSlides: false,
+              },
+              
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                centeredSlides: false,
+              },
+            }}
+            className="mySwiper"
           >
             {shortsData.map((short) => (
-              <div 
-                key={short.id} 
-                className={`w-[350px] md:w-[470px] flex-shrink-0 transition-opacity ${
-                  shortsData[currentIndex].id === short.id ? 'opacity-100' : 'opacity-70'
-                }`}
-                role="group" 
-                aria-roledescription="Short video"
-              >
-                <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl p-2 md:p-4">
-                  <iframe 
-                    className="w-full h-[500px] md:h-[750px] rounded-xl" 
-                    src={short.embedUrl} 
-                    title={short.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    loading="lazy"
-                  ></iframe>
-                  <div className="p-2 md:p-4 text-center">
-                    <h3 className="text-white font-semibold text-base md:text-lg line-clamp-2">
-                      {short.title}
-                    </h3>
-                    <p className="text-gray-400 text-xs md:text-sm mt-1">
-                      {short.views} views
-                    </p>
+              <SwiperSlide key={short.id}>
+                <div 
+                  className="w-full max-w-[350px] md:max-w-none mx-auto"
+                  role="group" 
+                  aria-roledescription="Short video"
+                >
+                  <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl p-2 md:p-4 h-full">
+                    <iframe 
+                      className="w-full h-[500px] md:h-[600px] rounded-xl" 
+                      src={short.embedUrl} 
+                      title={short.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      loading="lazy"
+                    ></iframe>
+                    <div className="p-2 md:p-4 text-center">
+                      <h3 className="text-white font-semibold text-base md:text-lg line-clamp-2">
+                        {short.title}
+                      </h3>
+                      <p className="text-gray-400 text-xs md:text-sm mt-1">
+                        {short.views} views
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </SwiperSlide>
             ))}
-          </motion.div>
-        </div>
-
-        <div className="flex justify-center gap-4 mt-8">
-          <button 
-            onClick={showPrev} 
-            aria-label="Previous short"
-            className="bg-[#dfb03c] text-black px-6 py-2 md:py-3 rounded-full hover:bg-yellow-500 transition text-lg"
-          >
-            ←
-          </button>
-          <button 
-            onClick={showNext} 
-            aria-label="Next short"
-            className="bg-[#dfb03c] text-black px-6 py-2 md:py-3 rounded-full hover:bg-yellow-500 transition text-lg"
-          >
-            →
-          </button>
+          </Swiper>
         </div>
       </div>
     </section>
