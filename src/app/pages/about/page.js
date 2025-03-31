@@ -1,10 +1,9 @@
-"use client"
+"use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import img from "@/assests/abtUs.jpg";
 import Footer from "@/app/components/Footer";
 import Link from "next/link";
-
 
 const RealEstateLandingPage = () => {
   const [counts, setCounts] = useState({
@@ -64,24 +63,50 @@ const RealEstateLandingPage = () => {
               </div>
 
               <p className="mb-6 text-lg">
-                BookMyassets endeavor to provides the best quality service for
-                its customers to make maximum profits.
+                At BookMyAssets, we don’t just offer land—we offer a vision of
+                the future.
               </p>
 
               <p className="mb-6 text-lg">
-                A team with a good understanding of the real estate market keeps
-                on learning new trends & innovations in the field.
+                At BookMyAssets, we don’t just offer land—we offer a vision of
+                the future.
               </p>
-
+              <h2 className="text-2xl font-semibold">Our Mission</h2>
               <p className="mb-6 text-lg">
-                Our ultimate goal is to keep our customers happy by providing
-                the best property in their budget.
+                Our mission is to empower investors by connecting them with
+                high-appreciation real estate opportunities in Dholera. We aim
+                to simplify land investment by providing verified, legally
+                secure, and high-potential plots, ensuring maximum returns and
+                long-term value for our clients.
+              </p>
+              <h2 className="text-2xl font-semibold">Why Choose Us?</h2>
+              <p className="mb-6 text-lg">
+                Exclusive Investment Opportunities – We focus solely on prime
+                plots in Dholera, ensuring you get the best options in this
+                futuristic city.
+              </p>
+              <p className="mb-6 text-lg">
+                Expert Market Insights – Our team of professionals provides
+                data-driven insights to help you make informed investment
+                decisions.
+              </p>
+              <p className="mb-6 text-lg">
+                Legally Verified Properties – We ensure all listings are legally
+                compliant, minimizing risks and ensuring a smooth transaction.
+              </p>
+              <p className="mb-6 text-lg">
+                End-to-End Assistance – From property selection to paperwork, we
+                offer comprehensive support to make your investment journey
+                seamless.
+              </p>
+              <p className="mb-6 text-lg">
+                Strong Growth Potential – Investing in Dholera Smart City means
+                securing a future in a city that is rapidly developing into an
+                economic powerhouse.
               </p>
 
               <button className="bg-white text-black py-4 px-8 font-bold hover:bg-gray-200 transition-colors">
-                <Link href="/pages/contact">
-                  Contact Us
-                </Link>
+                <Link href="/pages/contact">Contact Us</Link>
               </button>
             </div>
 
@@ -140,7 +165,7 @@ const RealEstateLandingPage = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

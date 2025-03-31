@@ -5,30 +5,23 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    question: "What is Dholera Smart City?",
+    question: "Is Dholera Smart City Completed?",
     answer:
-      "Dholera Smart City is India’s first planned greenfield smart city, located in Ahmedabad, Gujarat. It is part of the Delhi-Mumbai Industrial Corridor (DMIC) project and is envisioned as a global hub for economic activities through advanced infrastructure, technology, and sustainable development.",
+      "Dholera Smart City is still under development, with Phase 1 expected to be completed by 2025. The city is being developed as India’s first greenfield smart city under the Delhi-Mumbai Industrial Corridor (DMIC). Infrastructure like roads, power, and water supply is progressing rapidly. Full-scale completion is expected by 2040.",
   },
   {
-    question: "What are the major projects planned in Dholera?",
-    answer: [
-      "Dholera International Airport.",
-      "India’s first semiconductor plant by TATA - ₹91,000 Cr investment.",
-      "Asia’s largest solar park - 500MW",
-      "ReNew Power solar cell manufacturing unit",
-    ],
+    question: "Is Dholera Smart City a good investment?",
+    answer: 
+      "Yes, Dholera can be a good investment because it is growing fast with government support. Many industries and IT companies are planning to come here. Land prices are low now so early investment may give good returns.",
   },
   {
-    question: "Why should we invest in Dholera?",
-    answer: [
-      "India’s first fully planned smart city, built from scratch",
-      "Upcoming expressway to be operational in 4-5 months",
-      "International airport set for completion by 2026",
-      "₹90,000 Cr investment by TATA in India's first semiconductor plant, boosting growth potential",
-    ],
+    question: "Is Dholera bigger than Delhi?",
+    answer: 
+      "Yes, Dholera Smart City is planned to be larger than Delhi in terms of area. It spans approximately 920 sq km, while Delhi covers around 1,484 sq km, but Delhi includes built-up urban areas. Dholera’s planned urban development area is around 500 sq km, making it one of India’s largest planned cities.",
+      
   },
   {
-    question: "I live in Delhi NCR. Why should I invest so far away?",
+    question: "Is Tata investing in Dholera?",
     answer: [
       "Helps diversify your investment portfolio",
       "Requires a smaller investment amount (low ticket size)",
@@ -37,11 +30,15 @@ const faqs = [
   },
   {
     question: "Is my land investment secure?",
-    answer: [
-      "Located in a gated community",
-      "Registry-ready",
-      "N.A. (Non-Agricultural) and N.O.C. (No Objection Certificate) approvals",
-    ],
+    answer: 
+      "Yes, the Tata Group has invested in Dholera, particularly in the semiconductor, power, defence, and electronics manufacturing sectors. Tata Power has also expressed interest in renewable energy projects within the smart city. The investments align with the government's push to make Dholera an industrial and tech hub. However, official announcements on the exact scale are still awaited.",
+     
+  },
+  {
+    question: "What is the distance between Dholera Smart City to Ahmedabad?  ",
+    answer: 
+      "Dholera Smart City is approximately 100 km from Ahmedabad. The upcoming Ahmedabad-Dholera Expressway will reduce travel time to around an hour. Additionally, a proposed metro and high-speed rail will further improve connectivity. The region is expected to become a major economic corridor.",
+     
   },
 ];
 

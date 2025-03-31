@@ -401,7 +401,7 @@ export default function RootLayout({ children }) {
                           >
                             WhatsApp Us
                           </a>
-                          <a
+                          <button
                             onClick={(e) => {
                               e.preventDefault();
                               openContactForm();
@@ -409,7 +409,7 @@ export default function RootLayout({ children }) {
                             className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                           >
                             Enquire Now
-                          </a>
+                          </button>
                         </div>
                       </motion.div>
                     )}
