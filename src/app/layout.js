@@ -275,7 +275,7 @@ export default function RootLayout({ children }) {
                     Blogs
                   </Link>
                   <Link
-                    href="/Events"
+                    href="/events"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
                   >
                     Events
@@ -529,7 +529,7 @@ export default function RootLayout({ children }) {
                       Blogs
                     </Link>
                     <Link
-                      href="/Events"
+                      href="/events"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
