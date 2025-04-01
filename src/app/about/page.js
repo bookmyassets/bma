@@ -66,11 +66,6 @@ const RealEstateLandingPage = () => {
                 At BookMyAssets, we don’t just offer land—we offer a vision of
                 the future.
               </p>
-
-              <p className="mb-6 text-lg">
-                At BookMyAssets, we don’t just offer land—we offer a vision of
-                the future.
-              </p>
               <h2 className="text-2xl font-semibold">Our Mission</h2>
               <p className="mb-6 text-lg">
                 Our mission is to empower investors by connecting them with
