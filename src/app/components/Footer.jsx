@@ -149,11 +149,9 @@ const Footer = () => {
         </div>
 
         <div>
-          <li>
             <a href="/sitemap.xml" className="hidden">
               Sitemap
             </a>
-          </li>
         </div>
       </div>
     </footer>
