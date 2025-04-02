@@ -1,6 +1,8 @@
 import { getblogs } from "@/sanity/lib/api";
 import BlogCard from "./BlogCard";
 import TrendingBlogItem from "./TrendingBlog";
+import hero from "@/assests/blogHero.webp";
+import Image from "next/image";
 
 export default async function BlogsPage() {
   const posts = await getblogs();
@@ -19,11 +21,21 @@ export default async function BlogsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      
+
       {/* Hero Section */}
-      <div className="bg-gray-100 py-12">
-        <div className="max-w-7xl mx-auto px-4 py-16 sm:py-20 md:py-24">
-          <h1 className="text-4xl font-bold text-center text-gray-800">BLOGS</h1>
+      <div className="relative pt-12 h-80 md:h-96 w-full overflow-hidden">
+        <Image
+          src={hero}
+          alt="Dholera Skyline"
+          className="object-cover w-full h-full "
+          priority
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-6 py-10 ">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+              Blogs
+            </h1>
+          </div>
         </div>
       </div>
 
@@ -33,7 +45,9 @@ export default async function BlogsPage() {
           {/* Trending Section - Left Sidebar */}
           <div className="lg:w-1/4 ">
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#FDB913] sticky top-4">
-              <h2 className="text-2xl font-bold mb-6 text-gray-800">Trending Blogs</h2>
+              <h2 className="text-2xl font-bold mb-6 text-gray-800">
+                Trending Blogs
+              </h2>
               <div className="space-y-6">
                 {trendingBlogs.map((post) => (
                   <TrendingBlogItem key={post._id} post={post} />

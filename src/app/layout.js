@@ -11,6 +11,7 @@ import { getPosts } from "@/sanity/lib/api";
 import ContactForm from "./components/Contactform";
 import Script from "next/script";
 import Footer from "./components/Footer";
+import ContactNow from "./components/Callus";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -214,7 +215,7 @@ export default function RootLayout({ children }) {
                     className="relative group"
                   >
                     <Link
-                      href="/properties"
+                      href="/projects"
                       className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
                       onClick={toggleProjectsDropdown}
                       onMouseEnter={() => setIsProjectsDropdownOpen(true)}
@@ -269,17 +270,17 @@ export default function RootLayout({ children }) {
 
                   {/* Other Desktop Menu Items */}
                   <Link
-                    href="/Blogs"
+                    href="/blogs"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
                   >
                     Blogs
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/events"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
                   >
                     Events
-                  </Link>
+                  </Link> */}
 
                   {/* Get in Touch Dropdown */}
                   <div
@@ -472,7 +473,7 @@ export default function RootLayout({ children }) {
                     {/* Mobile Projects Dropdown */}
                     <div>
                       <Link
-                        href="/properties"
+                        href="/projects"
                         onClick={toggleProjectsDropdown}
                         className="text-[#FDB913] flex items-center justify-between w-full px-3 py-2 hover:bg-[#420703] rounded-md"
                       >
@@ -522,19 +523,19 @@ export default function RootLayout({ children }) {
                     </div>
 
                     <Link
-                      href="/Blogs"
+                      href="/blogs"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Blogs
                     </Link>
-                    <Link
+                   {/*  <Link
                       href="/events"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Events
-                    </Link>
+                    </Link> */}
                     <Link
                       href="#gallery"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
@@ -566,6 +567,7 @@ export default function RootLayout({ children }) {
         </AnimatePresence>
 
         {children}
+        <ContactNow/>
       <Footer/>
       </body>
     </html>

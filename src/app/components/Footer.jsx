@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="pb-12">
           <ContactForm />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* About Us Column */}
           <div>
             <h3 className="text-xl font-semibold text-yellow-500 mb-4">
@@ -27,7 +27,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/pages/about"
+                  href="/about"
                   className="text-gray-700 hover:text-yellow-600 transition"
                 >
                   About Us
@@ -35,7 +35,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/pages/contact"
+                  href="/contact"
                   className="text-gray-700 hover:text-yellow-600 transition"
                 >
                   Contact Us

@@ -88,7 +88,7 @@ export default function Copyright() {
             </div>
           </div>
         </div>
-        <Footer />
+     
       </div>
     </>
   );

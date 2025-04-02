@@ -56,7 +56,7 @@ export default async function Home() {
 
                 {/* Invest Button */}
                 <div className="mt-4">
-                  <Link href={post.slug?.current ? `/posts/${post.slug.current}` : "#"}>
+                  <Link href={post.slug?.current ? `/projects/${post.slug.current}` : "#"}>
                     <button className="w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-bold">
                       Invest Now
                     </button>
