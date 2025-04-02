@@ -255,7 +255,7 @@ export default function RootLayout({ children }) {
                             {projects.map((project) => (
                               <Link
                                 key={project._id}
-                                href={`/posts/${project.slug.current}`}
+                                href={`/projects/${project.slug.current}`}
                                 className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                                 onClick={() => setIsProjectsDropdownOpen(false)}
                               >
@@ -507,7 +507,7 @@ export default function RootLayout({ children }) {
                             {projects.map((project) => (
                               <Link
                                 key={project._id}
-                                href={`/posts/${project.slug.current}`}
+                                href={`/projects/${project.slug.current}`}
                                 className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md pl-6"
                                 onClick={() => {
                                   setIsMenuOpen(false);
