@@ -83,7 +83,7 @@ const RealEstateLandingPage = () => {
     },
     {
       id: 3,
-      name: "Jahnvi Goel",
+      name: "Janvi Goel",
       role: "Entrepreneur",
       comment:
         "The investment opportunities in Dholera through BookMyAssets have significantly boosted my portfolio. Highly recommended!",
@@ -193,7 +193,7 @@ const RealEstateLandingPage = () => {
 
               <div className="flex gap-4 mt-8">
                 <button className="bg-yellow-500 text-black py-4 px-8 font-bold hover:bg-yellow-400 transition-colors rounded-md">
-                  <Link href="/properties">Explore Properties</Link>
+                  <Link href="/projects">Explore Properties</Link>
                 </button>
                 <button className="bg-transparent border-2 border-white text-white py-4 px-8 font-bold hover:bg-white/10 transition-colors rounded-md">
                   <Link href="/contact">Contact Us</Link>
@@ -422,11 +422,11 @@ const RealEstateLandingPage = () => {
                 "{testimonials[testimonialIndex].comment}"
               </p>
               <div className="text-yellow-500 flex mt-6">
-                <Star size={20} />
-                <Star size={20} />
-                <Star size={20} />
-                <Star size={20} />
-                <Star size={20} />
+                <Star size={20} fill="#facc15" />
+                <Star size={20} fill="#facc15" />
+                <Star size={20} fill="#facc15" />
+                <Star size={20} fill="#facc15" />
+                <Star size={20} fill="#facc15" />
               </div>
               <div className="absolute top-4 right-4 text-6xl text-gray-700 opacity-20">
                 "
