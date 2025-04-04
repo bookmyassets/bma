@@ -56,7 +56,7 @@ export default function FAQSection() {
               className="border rounded-lg p-4 shadow-2xl bg-gray-900 bg-opacity-80"
             >
               <button
-                className="w-full flex justify-between items-center text-[#edc46b] text-left text-xl font-bold"
+                className="w-full flex justify-between items-center text-[#edc46b] text-left text-lg font-bold"
                 onClick={() => toggleFAQ(index)}
               >
                 {faq.question}
@@ -72,7 +72,7 @@ export default function FAQSection() {
                     className="mt-6 text-lg text-[#f6d99a] overflow-hidden border-t-2 border-[#edc46b] border-opacity-50 py-5"
                   >
                     {Array.isArray(faq.answer) ? (
-                      <ul className="list-disc pl-5 ">
+                      <ul className="list-disc pl-2 ">
                         {faq.answer.map((point, i) => (
                           <li key={i}>{point}</li>
                         ))}

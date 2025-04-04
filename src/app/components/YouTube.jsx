@@ -1,5 +1,5 @@
 "use client";
-import React, { useState ,useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -17,6 +17,8 @@ export default function ShortsSection() {
   ], []);
 
   const [isMobile, setIsMobile] = useState(false);
+  const swiperRef = useRef(null);
+  const iframeRefs = useRef([]);
 
   // Check mobile view
   useEffect(() => {
@@ -24,6 +26,38 @@ export default function ShortsSection() {
     checkIfMobile();
     window.addEventListener("resize", checkIfMobile);
     return () => window.removeEventListener("resize", checkIfMobile);
+  }, []);
+
+  // Setup message listener for YouTube iframes
+  useEffect(() => {
+    const handleMessage = (event) => {
+      // Check if the message is from YouTube
+      if (event.origin !== "https://www.youtube.com") return;
+      
+      try {
+        const data = JSON.parse(event.data);
+        const iframe = iframeRefs.current.find(
+          (iframe) => iframe?.contentWindow === event.source
+        );
+
+        if (!iframe || !swiperRef.current) return;
+
+        switch (data.event) {
+          case "onStateChange":
+            if (data.info === 1) { // Video started playing
+              swiperRef.current.autoplay.stop();
+            } else if (data.info === 0 || data.info === 2) { // Video ended or paused
+              swiperRef.current.autoplay.start();
+            }
+            break;
+        }
+      } catch (e) {
+        console.error("Error handling YouTube message:", e);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
   }, []);
 
   return (
@@ -38,6 +72,9 @@ export default function ShortsSection() {
         
         <div className="relative px-4">
           <Swiper
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
             slidesPerView={1}
             spaceBetween={20}
             centeredSlides={true}
@@ -56,18 +93,15 @@ export default function ShortsSection() {
               disableOnInteraction: false,
             }}
             breakpoints={{
-              
               640: {
                 slidesPerView: 1,
                 spaceBetween: 20,
               },
-             
               768: {
                 slidesPerView: 2,
                 spaceBetween: 25,
                 centeredSlides: false,
               },
-              
               1024: {
                 slidesPerView: 3,
                 spaceBetween: 30,
@@ -76,7 +110,7 @@ export default function ShortsSection() {
             }}
             className="mySwiper"
           >
-            {shortsData.map((short) => (
+            {shortsData.map((short, index) => (
               <SwiperSlide key={short.id}>
                 <div 
                   className="w-full max-w-[350px] md:max-w-none mx-auto"
@@ -85,10 +119,12 @@ export default function ShortsSection() {
                 >
                   <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl p-2 md:p-4 h-full">
                     <iframe 
+                      ref={(el) => iframeRefs.current[index] = el}
                       className="w-full h-[500px] md:h-[600px] rounded-xl" 
-                      src={short.embedUrl} 
+                      src={`${short.embedUrl}?enablejsapi=1`} 
                       title={short.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      allowFullScreen
                       referrerPolicy="strict-origin-when-cross-origin"
                       loading="lazy"
                     ></iframe>
