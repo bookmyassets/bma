@@ -10,7 +10,7 @@ const DholeraInvestment = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-8 bg-white text-black rounded-lg shadow-lg">
+    <div className="max-w-7xl mx-auto mt-10 p-8 bg-white text-black rounded-lg shadow-lg">
       <header className="text-center mb-10">
         <h1 className="text-4xl font-bold mb-4" style={{ color: colors.gold }}>
           Why Choose Us for Investment in Dholera Smart City?

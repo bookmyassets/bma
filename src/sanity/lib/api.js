@@ -12,7 +12,7 @@ export async function getPosts() {
     publishedAt,
     body,
     author->{name, image},
-    categories[]->{title}
+    categories[]->{title},
   }`;
   const posts = await client.fetch(query, {}, { cache: 'no-store' });
   return posts;
@@ -105,26 +105,52 @@ export async function getEvents() {
 
 // Fetch a single blog post by slug
 export async function getPostBySlug(slug) {
-    const query = `*[_type == "post" && slug.current == $slug][0]{
-      _id,
-      title,
-      slug,
-      mainImage,
-      publishedAt,
-      body,
-      author->{
-        name,
-        image
-      },
-      categories[]->{
-        title
+  const query = `*[_type == "post" && slug.current == $slug][0]{
+    _id,
+    title,
+    slug,
+    mainImage,
+    publishedAt,
+    body,
+    author->{
+      name,
+      image
+    },
+    categories[]->{
+      title
+    }
+  }`;
+  const post = await client.fetch(query, { slug }, { cache: 'no-store' });
+  return post;
+}
+
+  export async function getProjectBySlug(slug) {
+    const query = `
+      *[_type == "post" && slug.current == $slug][0] {
+        title,
+        description,
+        body,
+        categories[]->{title},
+        mainImage,
+        location,
+        investment,
+        returns,
+        "relatedProjects": *[
+          _type == "post" && 
+          author->name == "Dholera Times" && 
+          "Sub-Project" in categories[]->title && 
+          slug.current != $slug
+        ]{
+          title,
+          "slug": slug.current,
+          mainImage
+        }
       }
-    }`;
+    `;
+    
     const post = await client.fetch(query, { slug }, { cache: 'no-store' });
     return post;
   }
-
-
 
   export async function getEventBySlug(slug) {
     const query = `*[_type == "event" && slug.current == $slug][0]{

@@ -44,6 +44,11 @@ export default {
         type: 'datetime',
       },
       {
+        name: 'Location',
+        title: 'Location',
+        type: 'string',
+      },
+      {
         name: 'body',
         title: 'Body',
         type: 'blockContent',
