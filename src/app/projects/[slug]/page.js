@@ -9,23 +9,27 @@ export default async function ProjectDetail({ params }) {
   const { slug } = await params;
 
   if (!slug) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
   }
 
   try {
     // Fetch both post and related projects using the same slug
     const [post, projects] = await Promise.all([
       getPostBySlug(slug),
-      getProjectBySlug(slug)
+      getProjectBySlug(slug),
     ]);
 
     if (!post) {
-      return <div className="min-h-screen flex items-center justify-center">Project not found</div>;
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          Project not found
+        </div>
+      );
     }
-
-    // Calculate read time (rough estimate)
-    const wordCount = JSON.stringify(post.body).split(" ").length;
-    const readTime = Math.ceil(wordCount / 200);
 
     const components = {
       types: {
@@ -66,7 +70,9 @@ export default async function ProjectDetail({ params }) {
       },
       block: {
         h2: ({ children }) => (
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-black">{children}</h2>
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-black">
+            {children}
+          </h2>
         ),
         h3: ({ children }) => (
           <h3 className="text-2xl font-semibold mt-8 mb-4 text-black">
@@ -121,13 +127,13 @@ export default async function ProjectDetail({ params }) {
         {/* Hero Section */}
         <div className="relative bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 py-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {post.title}
+            </h1>
             <p className="text-lg text-gray-300 max-w-3xl mb-6">
               {post.description}
             </p>
-            <div className="flex items-center gap-4 text-[#FDB913]">
-              <span>Read time: {readTime} min</span>
-            </div>
+
           </div>
         </div>
 
@@ -162,7 +168,46 @@ export default async function ProjectDetail({ params }) {
 
             {/* Sidebar */}
             <div className="lg:w-1/3">
-              <div className="sticky top-24">
+              <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+                <h3 className="text-xl font-bold mb-4 text-black">
+                  Our Dholera Projects
+                </h3>
+                <div className="space-y-4">
+                  {projects?.relatedProjects &&
+                  projects.relatedProjects.length > 0 ? (
+                    projects.relatedProjects.map((project) => (
+                      <Link
+                        key={project.slug}
+                        href={`/projects/${project.slug}`}
+                        className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
+                      >
+                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
+                          {project.mainImage && (
+                            <Image
+                              src={urlFor(project.mainImage)
+                                .width(64)
+                                .height(64)
+                                .url()}
+                              alt={project.title}
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-black">
+                            {project.title}
+                          </h4>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <p className="text-gray-500">No related projects found.</p>
+                  )}
+                </div>
+              </div>
+              <div className="sticky mt-8 top-24">
                 {/* Project Info Card */}
                 <div className="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-200">
                   <h3 className="text-xl font-bold mb-4 text-black">
@@ -173,13 +218,17 @@ export default async function ProjectDetail({ params }) {
                       <span className="text-gray-600">Status</span>
                       <span className="font-medium text-[#C69C21]">
                         {post.categories?.find((c) =>
-                          ["active", "sold out", "coming soon"].includes(c.title)
+                          ["active", "sold out", "coming soon"].includes(
+                            c.title
+                          )
                         )?.title || "Active"}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Location</span>
-                      <span className="font-medium">{post.location || "—"}</span>
+                      <span className="font-medium">
+                        {post.location || "—"}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Investment</span>
@@ -203,44 +252,6 @@ export default async function ProjectDetail({ params }) {
                 </div>
 
                 {/* Related Projects Section */}
-                <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
-                  <h3 className="text-xl font-bold mb-4 text-black">
-                    Our Dholera Projects
-                  </h3>
-                  <div className="space-y-4">
-                    {projects?.relatedProjects && projects.relatedProjects.length > 0 ? (
-                      projects.relatedProjects.map((project) => (
-                        <Link
-                          key={project.slug}
-                          href={`/projects/${project.slug}`}
-                          className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
-                        >
-                          <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-                            {project.mainImage && (
-                              <Image
-                                src={urlFor(project.mainImage)
-                                  .width(64)
-                                  .height(64)
-                                  .url()}
-                                alt={project.title}
-                                width={64}
-                                height={64}
-                                className="w-full h-full object-cover"
-                              />
-                            )}
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-black">
-                              {project.title}
-                            </h4>
-                          </div>
-                        </Link>
-                      ))
-                    ) : (
-                      <p className="text-gray-500">No related projects found.</p>
-                    )}
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -275,7 +286,10 @@ export default async function ProjectDetail({ params }) {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-2">Error loading project</h1>
           <p className="text-gray-600">Please try again later</p>
-          <Link href="/projects" className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]">
+          <Link
+            href="/projects"
+            className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
+          >
             ← Back to Projects
           </Link>
         </div>

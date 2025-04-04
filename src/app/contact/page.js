@@ -200,7 +200,7 @@ const ContactPage = () => {
 
                 <div className="flex space-x-3">
                   <a
-                    href="#"
+                    href="https://www.facebook.com/people/Bookmyassets/61556534554379/"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                   >
                     <span className="sr-only">Facebook</span>
@@ -213,7 +213,7 @@ const ContactPage = () => {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                    href="https://x.com/BookMyAssets"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                   >
                     <span className="sr-only">Twitter</span>
@@ -239,7 +239,7 @@ const ContactPage = () => {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/bookmyassets/"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                   >
                     <span className="sr-only">Instagram</span>
@@ -252,7 +252,7 @@ const ContactPage = () => {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                    href="https://www.youtube.com/@BookMyAssets"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                   >
                     <span className="sr-only">YouTube</span>
