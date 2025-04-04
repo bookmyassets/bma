@@ -14,7 +14,7 @@ export async function getPosts() {
     author->{name, image},
     categories[]->{title}
   }`;
-  const posts = await client.fetch(query);
+  const posts = await client.fetch(query, {}, { cache: 'no-store' });
   return posts;
 }
 
@@ -29,7 +29,7 @@ export async function getblogs() {
     author->{name, image},
     categories[]->{title}
   }`;
-  const posts = await client.fetch(query);
+  const posts = await client.fetch(query, {}, { cache: 'no-store' });
   return posts;
 }
 
@@ -99,7 +99,7 @@ export async function getEvents() {
     author->{name, image},
     categories[]->{title}
   }`;
-  const posts = await client.fetch(query);
+  const posts = await client.fetch(query, {}, { cache: 'no-store' });
   return posts;
 }
 
@@ -120,7 +120,7 @@ export async function getPostBySlug(slug) {
         title
       }
     }`;
-    const post = await client.fetch(query, { slug });
+    const post = await client.fetch(query, { slug }, { cache: 'no-store' });
     return post;
   }
 
@@ -141,6 +141,6 @@ export async function getPostBySlug(slug) {
       "eventMaterials": eventMaterials.asset->url,
       categories[]->{title, _id}
     }`;
-    const post = await client.fetch(query, { slug });
+    const post = await client.fetch(query, { slug }, { cache: 'no-store' });
     return post;
   }
