@@ -102,7 +102,7 @@ const BrowseBlogsSection = () => {
 
                   <div className="flex-grow"></div> {/* Pushes button to bottom */}
 
-                  <Link href={`/posts/${blog.slug?.current}`} passHref>
+                  <Link href={`/blogs/${blog.slug?.current}`} passHref>
                     <button
                       className="w-full px-4 py-2 transition-all font-semibold border-white rounded-full hover:bg-[#FDB913] bg-black hover:text-black text-lg md:text-base text-[#FDB913] mt-auto"
                     >
