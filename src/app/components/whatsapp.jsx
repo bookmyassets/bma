@@ -20,7 +20,7 @@ const FloatingButtons = () => {
         </a>
         {/* Call Button */}
         <a
-          href="tel:+919876543210"
+          href="tel:+918130371647"
           className="flex items-center justify-center text-blue-500 text-lg font-semibold"
         >
           <FaPhoneAlt size={24} className="mr-2" /> Call

@@ -203,7 +203,7 @@ const DholeraInvestment = () => {
             className="bg-white py-2 px-6 rounded-full font-bold transition-colors hover:bg-gray-100"
             style={{ color: colors.darkGold }}
           >
-            +91 97 1767 1112
+            +91 81 3037 1647
           </a>
         </div>
       </footer>

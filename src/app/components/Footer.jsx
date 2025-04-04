@@ -131,10 +131,10 @@ const Footer = () => {
                   </svg>
                 </div>
                 <a
-                  href="tel:+919717671112"
+                  href="tel:+918130371647"
                   className="text-gray-700 hover:text-yellow-600 transition"
                 >
-                  +91 97 1767 1112
+                  +91 81 3037 1647
                 </a>
               </li>
             </ul>

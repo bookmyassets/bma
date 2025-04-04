@@ -191,10 +191,10 @@ const ContactPage = () => {
                     </svg>
                   </div>
                   <a
-                    href="tel:+919717671112"
+                    href="tel:+918130371647"
                     className="text-blue-600 hover:underline"
                   >
-                    +91 97 1767 1112
+                    +91 81 3037 1647
                   </a>
                 </div>
 
