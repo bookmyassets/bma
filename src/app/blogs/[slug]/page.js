@@ -75,8 +75,8 @@ export default async function Post({ params }) {
 
   return (
     <main className="  pt-44 py-12">
-      <article className="w-[70vw] mx-auto h-[55vh] bg-white shadow-2xl scale-105 overflow-hidden">
-      {post.mainImage && (
+      <article className="md:w-[70vw] mx-auto max-sm:pl-4 max-sm:pr-2 w-full md:h-[55vh] bg-white shadow-2xl scale-105 overflow-hidden">
+        {post.mainImage && (
           <div className="relative w-full">
             <Image
               src={urlFor(post.mainImage)?.url() || ""}
@@ -89,8 +89,6 @@ export default async function Post({ params }) {
         )}
       </article>
       <div className="max-w-5xl mx-auto">
-      
-
         <div className="px-8 py-10">
           {/* Categories */}
           {post.categories && post.categories.length > 0 && (
@@ -114,8 +112,10 @@ export default async function Post({ params }) {
           {/* Meta information */}
 
           {/* Content */}
-          <div className="text-lg antialiased md:subpixel-antialiased tracking-wide decoration-inherit
- max-w-none">
+          <div
+            className="text-lg antialiased md:subpixel-antialiased tracking-wide decoration-inherit
+ max-w-none"
+          >
             <PortableText value={post.body} components={components} />
           </div>
         </div>
