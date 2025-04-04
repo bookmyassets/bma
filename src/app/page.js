@@ -15,6 +15,7 @@ import FAQSection from "./components/Faq";
 import BrowseBlogsSection from "./components/BrowseBlogs";
 import TestimonialPagination from "./components/Testimonials";
 import WhyChooseSection from "./components/Why";
+import DholeraInvestmentPage from "./components/BMA";
 
 export default async function Home() {
   return (
@@ -29,6 +30,10 @@ export default async function Home() {
       
       <section>
         <ShortsSection/>
+      </section>
+
+      <section>
+        <DholeraInvestmentPage/>  
       </section>
       
       {/* Parallax section appears here, after ShortsSection */}
