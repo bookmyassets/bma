@@ -5,8 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function ProjectDetail({ params }) {
-  // Properly destructure params without await
-  const { slug } = await params;
+  const { slug } = await params; // Fixed destructuring
 
   if (!slug) {
     return (
@@ -17,7 +16,6 @@ export default async function ProjectDetail({ params }) {
   }
 
   try {
-    // Fetch both post and related projects using the same slug
     const [post, projects] = await Promise.all([
       getPostBySlug(slug),
       getProjectBySlug(slug),
@@ -34,13 +32,12 @@ export default async function ProjectDetail({ params }) {
     const components = {
       types: {
         image: ({ value }) => {
-          if (!value?.asset?._ref) {
-            return null;
-          }
+          if (!value?.asset?._ref) return null;
           return (
             <figure className="my-8">
               <img
-                alt={value.alt || " "}
+                loading="lazy"
+                alt={value.alt || ""}
                 src={urlFor(value).width(1200).url()}
                 width={1200}
                 height={800}
@@ -56,17 +53,15 @@ export default async function ProjectDetail({ params }) {
         },
       },
       marks: {
-        link: ({ children, value }) => {
-          return (
-            <a
-              href={value.href}
-              rel="noopener noreferrer"
-              className="text-[#C69C21] hover:text-[#FDB913] underline decoration-[#FDB913]/30 hover:decoration-[#FDB913] transition-colors"
-            >
-              {children}
-            </a>
-          );
-        },
+        link: ({ children, value }) => (
+          <a
+            href={value.href}
+            rel="noopener noreferrer"
+            className="text-[#C69C21] hover:text-[#FDB913] underline decoration-[#FDB913]/30 hover:decoration-[#FDB913] transition-colors"
+          >
+            {children}
+          </a>
+        ),
       },
       block: {
         h2: ({ children }) => (
@@ -92,89 +87,123 @@ export default async function ProjectDetail({ params }) {
 
     return (
       <div className="bg-white min-h-screen">
-        {/* Navigation Bar */}
-        <div className="bg-white shadow-sm sticky top-0 z-10">
-          <div className="max-w-7xl mx-auto px-4 py-4">
-            <div className="flex justify-between items-center">
-              <Link href="/" className="flex items-center gap-2">
-                <span className="text-[#C69C21]">←</span>
-                <span className="font-medium text-black">Back to Projects</span>
-              </Link>
-              <div className="flex gap-2">
-                {post.categories &&
-                  post.categories.length > 0 &&
-                  post.categories.map((category) => (
-                    <span
-                      key={category.title}
-                      className={`px-3 py-1 text-sm font-semibold rounded-full ${
-                        category.title === "sold out"
-                          ? "bg-red-600 text-white"
-                          : category.title === "active"
-                            ? "bg-[#FDB913] text-black"
-                            : category.title === "coming soon"
-                              ? "bg-black text-[#FDB913]"
-                              : "bg-[#FDB913] text-black"
-                      }`}
-                    >
-                      {category.title}
-                    </span>
-                  ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Sticky Nav Placeholder */}
+        <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />
 
-        {/* Hero Section */}
-        <div className="relative bg-black text-white">
+        {/* Fixed Hero Section */}
+        <header className="fixed top-4 left-0 w-full bg-black text-white z-20">
           <div className="max-w-7xl mx-auto px-4 py-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl translate-y-12 font-bold">
               {post.title}
             </h1>
             <p className="text-lg text-gray-300 max-w-3xl mb-6">
               {post.description}
             </p>
-
           </div>
-        </div>
+        </header>
 
-        {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Content wrapper with padding to push below fixed header */}
+        <main className="pt-[160px]  max-w-7xl mx-auto px-4 py-4">
+          {/* Back link and tags */}
           <div className="flex flex-col lg:flex-row gap-10">
-            {/* Article Content */}
-            <div className="lg:w-2/3">
-              {/* Main Image */}
+            {/* Article */}
+            <article className="lg:w-2/3">
               {post.mainImage && (
-                <div className="mb-10 rounded-xl overflow-hidden shadow-lg">
+                <div className="mb-10 overflow-hidden shadow-2xl pt-8 scale-105">
                   <Image
                     src={
-                      urlFor(post.mainImage).width(1200).height(800).url() || ""
+                      urlFor(post.mainImage).width(1200).height(900).url() || ""
                     }
                     alt={post.title}
                     width={1200}
                     height={800}
-                    className="w-full h-auto"
+                    className="w-full h-full"
                     priority
                   />
                 </div>
               )}
 
-              {/* Content */}
-              <article className="bg-white rounded-xl shadow-md p-8 border border-gray-200">
-                <div className="prose prose-lg max-w-none">
+              {/* 👇 Move this section here — right after mainImage, before content */}
+              <div className="lg:hidden mb-10">
+                <h3 className="text-xl font-bold mb-4 text-black">
+                  Our Dholera Projects
+                </h3>
+                <div className="grid grid-cols-3 sm:grid-cols-3 gap-4">
+                  {projects?.relatedProjects?.length > 0 ? (
+                    projects.relatedProjects.map((project) => (
+                      <Link
+                        key={project.slug}
+                        href={`/projects/${project.slug}`}
+                        className="flex gap-3 items-center bg-white hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
+                      >
+                        
+                        <div>
+                          <h4 className="text-sm font-semibold text-black">
+                            {project.title}
+                          </h4>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <p className="text-gray-500">No related projects found.</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Main rich text content */}
+              <div className="bg-white rounded-xl shadow-md p-8 border border-gray-200">
+                <div className="text-lg leading-5 max-w-none">
                   <PortableText value={post.body} components={components} />
                 </div>
-              </article>
-            </div>
+              </div>
+            </article>
+
+            {/*   <div className="lg:hidden">
+                <h3 className="text-xl font-bold mb-4 text-black">
+                  Our Dholera Projects
+                </h3>
+                <div className="grid grid-cols-3 sm:grid-cols-2 gap-4">
+                  {projects?.relatedProjects?.length > 0 ? (
+                    projects.relatedProjects.map((project) => (
+                      <Link
+                        key={project.slug}
+                        href={`/projects/${project.slug}`}
+                        className="flex gap-3 items-center bg-white hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
+                      >
+                        <div className="w-16 h-16 rounded-md overflow-hidden bg-gray-200">
+                          {project.mainImage && (
+                            <img
+                              src={urlFor(project.mainImage)
+                                .width(64)
+                                .height(64)
+                                .url()}
+                              alt={project.title}
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-black">
+                            {project.title}
+                          </h4>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <p className="text-gray-500">No related projects found.</p>
+                  )}
+                </div>
+              </div> */}
 
             {/* Sidebar */}
-            <div className="lg:w-1/3">
-              <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <aside className="lg:w-1/3">
+              {/* Related Projects */}
+              <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200">
                 <h3 className="text-xl font-bold mb-4 text-black">
                   Our Dholera Projects
                 </h3>
                 <div className="space-y-4">
-                  {projects?.relatedProjects &&
-                  projects.relatedProjects.length > 0 ? (
+                  {projects?.relatedProjects?.length > 0 ? (
                     projects.relatedProjects.map((project) => (
                       <Link
                         key={project.slug}
@@ -207,9 +236,10 @@ export default async function ProjectDetail({ params }) {
                   )}
                 </div>
               </div>
-              <div className="sticky mt-8 top-24">
-                {/* Project Info Card */}
-                <div className="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-200">
+
+              {/* Project Info */}
+              <div className="sticky mt-8 top-32">
+                <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 mb-6">
                   <h3 className="text-xl font-bold mb-4 text-black">
                     Project Details
                   </h3>
@@ -243,44 +273,23 @@ export default async function ProjectDetail({ params }) {
                       </span>
                     </div>
                   </div>
-
                   <div className="mt-6 pt-6 border-t border-gray-200">
-                    <button className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
+                    <button
+                      aria-label="Request more information"
+                      className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors"
+                    >
                       Request More Information
                     </button>
                   </div>
                 </div>
-
-                {/* Related Projects Section */}
               </div>
-            </div>
+            </aside>
           </div>
-        </div>
-
-        {/* CTA Section */}
-        {/* <div className="bg-black text-white py-16 mt-12">
-          <div className="max-w-5xl mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              Interested in this Project?
-            </h2>
-            <p className="text-lg text-gray-300 mb-8">
-              Our investment experts are ready to answer your questions and guide
-              you through the process.
-            </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <button className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
-                Schedule a Call
-              </button>
-              <button className="bg-transparent text-[#FDB913] border-2 border-[#FDB913] px-8 py-3 rounded-lg font-bold hover:bg-[#FDB913]/10 transition-colors">
-                Download Brochure
-              </button>
-            </div>
-          </div>
-        </div> */}
+        </main>
       </div>
     );
   } catch (error) {
-    console.error("Error loading project:", error);
+    console.error("Error loading project:", slug, error);
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
