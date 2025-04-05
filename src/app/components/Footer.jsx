@@ -28,16 +28,16 @@ const Footer = () => {
             
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-6">
-              <a href="#" className="text-gray-500 hover:text-yellow-600 transition">
+              <a href="https://www.facebook.com/people/Bookmyassets/61556534554379/" className="text-gray-500 hover:text-yellow-600 transition">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-yellow-600 transition">
+              <a href="https://x.com/BookMyAssets" className="text-gray-500 hover:text-yellow-600 transition">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-yellow-600 transition">
+              <a href="https://www.instagram.com/bookmyassets/" className="text-gray-500 hover:text-yellow-600 transition">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-yellow-600 transition">
+              <a href="https://www.linkedin.com/company/bookmyassetss" className="text-gray-500 hover:text-yellow-600 transition">
                 <Linkedin size={20} />
               </a>
             </div>
