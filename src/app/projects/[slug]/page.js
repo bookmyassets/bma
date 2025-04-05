@@ -1,3 +1,4 @@
+"use client";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import { getPostBySlug, getProjectBySlug } from "@/sanity/lib/api";
@@ -5,7 +6,19 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function ProjectDetail({ params }) {
-  const { slug } = await params; // Fixed destructuring
+  /*  const [activeTab, setActiveTab] = useState("KeyRole"); */
+
+  const { slug } = await params;
+  const handleScroll = () => {
+    window.location.href = '#footer';
+  };
+
+  const buttonStyle = (id) =>
+    `px-6 py-4 rounded-lg font-semibold transition-all duration-300 shadow ${
+      activeTab === id
+        ? "bg-[#d8b66d] text-white"
+        : "bg-white text-gray-800 hover:bg-gray-100"
+    }`;
 
   if (!slug) {
     return (
@@ -136,7 +149,6 @@ export default async function ProjectDetail({ params }) {
                         href={`/projects/${project.slug}`}
                         className="flex gap-3 items-center bg-white hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
                       >
-                        
                         <div>
                           <h4 className="text-sm font-semibold text-black">
                             {project.title}
@@ -157,43 +169,6 @@ export default async function ProjectDetail({ params }) {
                 </div>
               </div>
             </article>
-
-            {/*   <div className="lg:hidden">
-                <h3 className="text-xl font-bold mb-4 text-black">
-                  Our Dholera Projects
-                </h3>
-                <div className="grid grid-cols-3 sm:grid-cols-2 gap-4">
-                  {projects?.relatedProjects?.length > 0 ? (
-                    projects.relatedProjects.map((project) => (
-                      <Link
-                        key={project.slug}
-                        href={`/projects/${project.slug}`}
-                        className="flex gap-3 items-center bg-white hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
-                      >
-                        <div className="w-16 h-16 rounded-md overflow-hidden bg-gray-200">
-                          {project.mainImage && (
-                            <img
-                              src={urlFor(project.mainImage)
-                                .width(64)
-                                .height(64)
-                                .url()}
-                              alt={project.title}
-                              className="w-full h-full object-cover"
-                            />
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-semibold text-black">
-                            {project.title}
-                          </h4>
-                        </div>
-                      </Link>
-                    ))
-                  ) : (
-                    <p className="text-gray-500">No related projects found.</p>
-                  )}
-                </div>
-              </div> */}
 
             {/* Sidebar */}
             <aside className="lg:w-1/3">
@@ -275,7 +250,8 @@ export default async function ProjectDetail({ params }) {
                   </div>
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <button
-                      aria-label="Request more information"
+                      aria-label="ContactForm"
+                      onClick={handleScroll}
                       className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors"
                     >
                       Request More Information

@@ -570,7 +570,7 @@ export default function RootLayout({ children }) {
 
         {children}
         <ContactNow/>
-      <Footer/>
+      <Footer />
       </body>
     </html>
   );
