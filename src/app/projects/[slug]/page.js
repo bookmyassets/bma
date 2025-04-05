@@ -1,4 +1,4 @@
-"use client";
+
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import { getPostBySlug, getProjectBySlug } from "@/sanity/lib/api";
@@ -9,16 +9,7 @@ export default async function ProjectDetail({ params }) {
   /*  const [activeTab, setActiveTab] = useState("KeyRole"); */
 
   const { slug } = await params;
-  const handleScroll = () => {
-    window.location.href = '#footer';
-  };
-
-  const buttonStyle = (id) =>
-    `px-6 py-4 rounded-lg font-semibold transition-all duration-300 shadow ${
-      activeTab === id
-        ? "bg-[#d8b66d] text-white"
-        : "bg-white text-gray-800 hover:bg-gray-100"
-    }`;
+  
 
   if (!slug) {
     return (
@@ -250,8 +241,6 @@ export default async function ProjectDetail({ params }) {
                   </div>
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <button
-                      aria-label="ContactForm"
-                      onClick={handleScroll}
                       className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors"
                     >
                       Request More Information

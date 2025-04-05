@@ -122,15 +122,15 @@ const Footer = () => {
                   <span className="mr-2">›</span> Privacy Policy
                 </a>
               </li>
-              {/* <li>
+              <li>
                 <a
-                  href="/policies/refund"
+                  href="/policies/refund-and-cancellation"
                   className="text-gray-700 hover:text-yellow-600 transition flex items-center"
                 >
-                  <span className="mr-2">›</span> Refund Policy
+                  <span className="mr-2">›</span> Refund & Cancellation Policy
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a
                   href="/policies/disclaimer"
                   className="text-gray-700 hover:text-yellow-600 transition flex items-center"
