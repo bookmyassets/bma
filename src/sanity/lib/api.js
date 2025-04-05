@@ -137,7 +137,7 @@ export async function getPostBySlug(slug) {
         returns,
         "relatedProjects": *[
           _type == "post" && 
-          author->name == "Dholera Times" && 
+          author->name == "BookMyAssets" && 
           "Sub-Project" in categories[]->title && 
           slug.current != $slug
         ]{
