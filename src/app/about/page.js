@@ -160,7 +160,7 @@ const RealEstateLandingPage = () => {
   return (
     <div>
       {/* Hero Section with Gradient Background */}
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white relative">
+      <div className=" bg-gradient-to-b from-gray-900 to-black text-white relative">
         {/* Floating Contact Button */}
         
 
