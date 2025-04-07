@@ -42,9 +42,9 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="p-12">
+    <div className="p-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl font-bold text-black text-center mb-6">
+        <h2 className="text-2xl md:text-5xl font-extrabold text-black text-center mb-6">
           Frequently Asked Questions
         </h2>
         <div className="space-y-4 relative">
