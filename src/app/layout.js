@@ -185,11 +185,11 @@ export default function RootLayout({ children }) {
       >
         <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-50 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-28 max-md:h-24 items-center">
+            <div className="flex justify-between h-20 max-md:h-24 items-center">
               {/* Logo */}
               <div className="flex-shrink-0">
                 <Link href="/">
-                  <Image src={logo} height={140} width={90} alt="logo" />
+                  <Image src={logo} height={80} width={80} alt="logo" />
                 </Link>
               </div>
 

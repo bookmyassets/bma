@@ -7,7 +7,7 @@ const Footer = () => {
     <footer id="footer" className="bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Contact Form Section */}
-        <div id="ContactForm" className="bg-white rounded-lg shadow-lg p-8 mb-12" >
+        <div id="ContactForm" className="bg-white shadow-2xl p-2 mb-12" >
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
             Reach Out To Us
           </h2>
