@@ -60,7 +60,7 @@ const BrowseBlogsSection = () => {
   const featuredBlogs = blogs.slice(0, 3);
 
   return (
-    <section className="py-12 px-6 md:px-36 relative bg-white">
+    <section className=" px-6 md:px-36 relative bg-white">
       <div className="container mx-auto relative">
         {/* Section Title */}
         <div className="w-full px-2 mb-10 text-center">
@@ -74,7 +74,7 @@ const BrowseBlogsSection = () => {
         </div>
 
         {featuredBlogs.length > 0 ? (
-          <div className="px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className=" px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredBlogs.map((blog) => (
               <div
                 key={blog._id}
@@ -119,7 +119,7 @@ const BrowseBlogsSection = () => {
 
         {/* Browse More Blogs Button */}
         {blogs.length > 3 && (
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 py-8 flex justify-center">
             <Link href="/blogs">
               <button
                 className="px-6 text-xl py-3 rounded-md transition-all duration-300 hover:scale-105"

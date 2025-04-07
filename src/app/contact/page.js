@@ -8,7 +8,7 @@ const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "", // Added missing subject field
+    subject: "", 
     message: "",
     phone: "",
   });

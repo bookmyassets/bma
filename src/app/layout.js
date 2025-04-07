@@ -330,22 +330,23 @@ export default function RootLayout({ children }) {
                               onClick={openContactForm}
                               className="block w-full text-left px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                             >
-                              Enquire Now
+                              Book A Free Site Visit
                             </button>
                             <a
-                              href="tel:+919717671112"
+                              href="tel:+918130371647"
                               className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                             >
                               Call Now
                             </a>
                             <a
-                              href="https://wa.me/919717671112"
+                              href="https://wa.me/918130371647"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                             >
                               WhatsApp Us
                             </a>
+                            
                           </div>
                         </motion.div>
                       )}
