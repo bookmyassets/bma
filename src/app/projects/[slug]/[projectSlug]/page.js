@@ -4,12 +4,10 @@ import { getPostBySlug, getProjectBySlug } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 
-export default async function ProjectDetail({ params }) {
-  /*  const [activeTab, setActiveTab] = useState("KeyRole"); */
+export default async function SubProjectDetail({ params }) {
+  const { slug, projectSlug } = await params;
 
-  const { slug } = await params;
-  
-  if (!slug) {
+  if (!slug || !projectSlug) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         Loading...
@@ -18,21 +16,18 @@ export default async function ProjectDetail({ params }) {
   }
 
   try {
-    const [post, projects] = await Promise.all([
+    const [mainProject, subProject] = await Promise.all([
       getPostBySlug(slug),
-      getProjectBySlug(slug),
+      getProjectBySlug(projectSlug),
     ]);
 
-    if (!post) {
+    if (!mainProject || !subProject) {
       return (
         <div className="min-h-screen flex items-center justify-center">
           Project not found
         </div>
       );
     }
-
-    // Extract the actual slug string values
-    const postSlugStr = typeof post.slug === 'object' ? post.slug.current : post.slug;
 
     const components = {
       types: {
@@ -92,34 +87,41 @@ export default async function ProjectDetail({ params }) {
 
     return (
       <div className="bg-white min-h-screen">
-        {/* Sticky Nav Placeholder */}
         <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />
 
-        {/* Fixed Hero Section */}
         <header className="fixed top-4 left-0 w-full bg-black text-white z-20">
           <div className="max-w-7xl mx-auto px-4 py-16">
             <h1 className="text-4xl md:text-5xl translate-y-12 font-bold">
-              {post.title}
+              {subProject.title}
             </h1>
             <p className="text-lg text-gray-300 max-w-3xl mb-6">
-              {post.description}
+              {subProject.description}
             </p>
           </div>
         </header>
 
-        {/* Content wrapper with padding to push below fixed header */}
         <main className="pt-[160px] max-w-7xl mx-auto px-4 py-4">
-          {/* Back link and tags */}
+          <div className="mb-6">
+            <Link
+              href={`/projects/${slug}`}
+              className="text-[#C69C21] hover:text-[#FDB913] flex items-center gap-2"
+            >
+              ← Back to {mainProject.title}
+            </Link>
+          </div>
+
           <div className="flex flex-col lg:flex-row gap-10">
-            {/* Article */}
             <article className="lg:w-2/3">
-              {post.mainImage && (
+              {subProject.mainImage && (
                 <div className="mb-10 overflow-hidden shadow-2xl pt-8 scale-105">
                   <Image
                     src={
-                      urlFor(post.mainImage).width(1200).height(900).url() || ""
+                      urlFor(subProject.mainImage)
+                        .width(1200)
+                        .height(900)
+                        .url() || ""
                     }
-                    alt={post.title}
+                    alt={subProject.title}
                     width={1200}
                     height={800}
                     className="w-full h-full"
@@ -128,62 +130,78 @@ export default async function ProjectDetail({ params }) {
                 </div>
               )}
 
-              {/* 👇 Mobile view related projects - Fixed href with proper slug handling */}
               <div className="lg:hidden mb-10">
                 <h3 className="text-xl font-bold mb-4 text-black">
-                  Our {post.title} Projects
+                  Our {mainProject.title} Projects
                 </h3>
-                <div className="grid grid-cols-3 sm:grid-cols-3 gap-4">
-                  {projects?.relatedProjects?.length > 0 ? (
-                    projects.relatedProjects.map((project) => {
-                      // Extract project slug string safely
-                      const projectSlugStr = typeof project.slug === 'object' ? project.slug.current : project.slug;
-                      
+
+                {subProject?.relatedProjects?.length > 0 ? (
+                  <div className="grid grid-cols-3 gap-4">
+                    {subProject.relatedProjects.map((project) => {
+                      const projectSlugStr =
+                        typeof project.slug === "object"
+                          ? project.slug.current
+                          : project.slug;
+
                       return (
                         <Link
                           key={projectSlugStr}
-                          href={`/projects/${postSlugStr}/${projectSlugStr}`}
-                          className="flex gap-3 items-center bg-white hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
+                          href={`/projects/${slug}/${projectSlugStr}`}
+                          className="flex flex-col items-center text-center hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
                         >
-                          <div>
-                            <h4 className="text-sm font-semibold text-black">
-                              {project.title}
-                            </h4>
+                          <div className="w-full aspect-square rounded-lg overflow-hidden bg-gray-200 mb-2">
+                            {project.mainImage && (
+                              <Image
+                                src={urlFor(project.mainImage)
+                                  .width(200)
+                                  .height(200)
+                                  .url()}
+                                alt={project.title}
+                                width={200}
+                                height={200}
+                                className="w-full h-full object-cover"
+                              />
+                            )}
                           </div>
+                          <h4 className="text-sm font-semibold text-black">
+                            {project.title}
+                          </h4>
                         </Link>
                       );
-                    })
-                  ) : (
-                    <p className="text-gray-500">No related projects found.</p>
-                  )}
-                </div>
+                    })}
+                  </div>
+                ) : (
+                  <p className="text-gray-500">No related projects found.</p>
+                )}
               </div>
 
-              {/* Main rich text content */}
               <div className="bg-white rounded-xl shadow-md p-8 border border-gray-200">
                 <div className="text-lg leading-5 max-w-none">
-                  <PortableText value={post.body} components={components} />
+                  <PortableText
+                    value={subProject.body}
+                    components={components}
+                  />
                 </div>
               </div>
             </article>
 
-            {/* Sidebar */}
             <aside className="lg:w-1/3">
-              {/* Related Projects */}
               <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200">
                 <h3 className="text-xl font-bold mb-4 text-black">
-                  Our {post.title} Projects
+                  Our {mainProject.title} Projects
                 </h3>
                 <div className="space-y-4">
-                  {projects?.relatedProjects?.length > 0 ? (
-                    projects.relatedProjects.map((project) => {
-                      // Extract project slug string safely
-                      const projectSlugStr = typeof project.slug === 'object' ? project.slug.current : project.slug;
-                      
+                  {subProject?.relatedProjects?.length > 0 ? (
+                    subProject.relatedProjects.map((project) => {
+                      const projectSlugStr =
+                        typeof project.slug === "object"
+                          ? project.slug.current
+                          : project.slug;
+
                       return (
                         <Link
                           key={projectSlugStr}
-                          href={`/projects/${postSlugStr}/${projectSlugStr}`}
+                          href={`/projects/${slug}/${projectSlugStr}`}
                           className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
                         >
                           <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
@@ -214,7 +232,6 @@ export default async function ProjectDetail({ params }) {
                 </div>
               </div>
 
-              {/* Project Info */}
               <div className="sticky mt-8 top-32">
                 <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 mb-6">
                   <h3 className="text-xl font-bold mb-4 text-black">
@@ -224,7 +241,7 @@ export default async function ProjectDetail({ params }) {
                     <div className="flex justify-between">
                       <span className="text-gray-600">Status</span>
                       <span className="font-medium text-[#C69C21]">
-                        {post.categories?.find((c) =>
+                        {subProject.categories?.find((c) =>
                           ["active", "sold out", "coming soon"].includes(
                             c.title
                           )
@@ -234,29 +251,57 @@ export default async function ProjectDetail({ params }) {
                     <div className="flex justify-between">
                       <span className="text-gray-600">Location</span>
                       <span className="font-medium">
-                        {post.location || "—"}
+                        {subProject.location || "—"}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Investment</span>
                       <span className="font-medium">
-                        {post.investment || "Contact for details"}
+                        {subProject.investment || "Contact for details"}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Returns</span>
                       <span className="font-medium">
-                        {post.returns || "Contact for details"}
+                        {subProject.returns || "Contact for details"}
                       </span>
                     </div>
                   </div>
                   <div className="mt-6 pt-6 border-t border-gray-200">
-                    <button
-                      className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors"
-                    >
+                    <button className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
                       Request More Information
                     </button>
                   </div>
+                </div>
+
+                <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+                  <h3 className="text-xl font-bold mb-4 text-black">
+                    Parent Project
+                  </h3>
+                  <Link
+                    href={`/projects/${slug}`}
+                    className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
+                  >
+                    <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
+                      {mainProject.mainImage && (
+                        <Image
+                          src={urlFor(mainProject.mainImage)
+                            .width(64)
+                            .height(64)
+                            .url()}
+                          alt={mainProject.title}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-black">
+                        {mainProject.title}
+                      </h4>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </aside>
@@ -265,7 +310,7 @@ export default async function ProjectDetail({ params }) {
       </div>
     );
   } catch (error) {
-    console.error("Error loading project:", slug, error);
+    console.error("Error loading project:", error);
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
