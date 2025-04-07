@@ -199,7 +199,7 @@ const DholeraInvestment = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <span className="text-lg">For any queries regarding investment:</span>
           <a
-            href="tel:+919717671112"
+            href="tel:+918130371647"
             className="bg-white py-2 px-6 rounded-full font-bold transition-colors hover:bg-gray-100"
             style={{ color: colors.darkGold }}
           >

@@ -8,7 +8,7 @@ export default function ContactNow() {
         <div className="fixed bottom-8 right-8 z-50 max-md:hidden">
           <button className="bg-yellow-500 hover:bg-yellow-600 text-black p-4 rounded-full shadow-lg flex items-center">
             <Phone className="mr-2" />{" "}
-            <Link href="https://wa.me/919717671112" className="hidden md:inline">Contact Now</Link>
+            <Link href="https://wa.me/918130371647" className="hidden md:inline">Contact Now</Link>
           </button>
         </div>
     </div>

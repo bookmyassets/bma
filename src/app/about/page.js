@@ -461,7 +461,7 @@ const RealEstateLandingPage = () => {
               <Link href="/projects">Explore Properties</Link>
             </button>
             <button className="bg-white text-black py-4 px-8 rounded-md font-bold hover:bg-gray-100 transition-colors">
-              <Link href="https://wa.me/919717671112">Schedule Consultation</Link>
+              <Link href="https://wa.me/918130371647">Schedule Consultation</Link>
             </button>
           </div>
         </div>
