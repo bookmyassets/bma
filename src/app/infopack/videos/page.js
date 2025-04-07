@@ -4,9 +4,10 @@ export default async function BlogPage() {
   // Agar YouTube video links Sanity ya kisi aur source se fetch karne hain, to yahan fetch karo
   const videos = [
     "hNbWaEU1d_A?si=c5c7r-9oUr-CB8QD",
-    "TwsGjPP-wPg?si=9zL4ChmD54Iun750",
-    "Ac0wGh72S2g?si=pzZvS9Y3bKx2mOnL",
-    "hNbWaEU1d_A?si=c5c7r-9oUr-CB8QD",
+    "rYv0f3BPhkg?si=AMWq3AMNQKwAW9Q_",
+    "RhQ1EdoQthc?si=E0gr-_r2za9T5TRU",
+    "d_OATHg69UE?si=zPAeMlms8__JRZZH",
+    "eugms9FsV1M?si=xDcpLcq4EfM-hsUW",
   ]; // YouTube video IDs
 
   return (
