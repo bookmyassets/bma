@@ -44,7 +44,8 @@ export async function Inventory() {
       "author": coalesce(author->name, "Unknown")
   }`;
 
-  const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}`;
+  const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}&nocdn=true`;
+
 
   try {
       const response = await fetch(url, { cache: 'no-store' }); // ✅ Cache disabled
