@@ -48,7 +48,7 @@ export async function Inventory() {
 
 
   try {
-      const response = await fetch(url, { cache: 'no-store' }); // ✅ Cache disabled
+      const response = await fetch(url, { cache: 'no-store' }); 
       const json = await response.json();
       const posts = json.result || [];
 
@@ -76,7 +76,7 @@ export async function Brochure() {
   const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}`;
 
   try {
-      const response = await fetch(url, { cache: 'no-store' }); // ✅ Cache disabled
+      const response = await fetch(url, { cache: 'no-store' }); 
       const json = await response.json();
       const posts = json.result || [];
 
