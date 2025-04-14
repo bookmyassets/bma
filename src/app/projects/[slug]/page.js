@@ -92,7 +92,7 @@ export default async function ProjectDetail({ params }) {
     };
 
     return (
-      <html lang="en">
+      <div>
         <head>
           <title>{post.metaTitle || post.title}</title>
           <meta
@@ -285,7 +285,7 @@ export default async function ProjectDetail({ params }) {
             </div>
           </main>
         </div>
-      </html>
+      </div>
     );
   } catch (error) {
     console.error("Error loading project:", slug, error);
