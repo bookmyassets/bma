@@ -74,7 +74,7 @@ export default async function Post({ params }) {
   };
 
   return (
-    <html lang="en">
+    <div>
       <head>
         <title>{post.metaTitle || post.title}</title>
         <meta name="description" content={post.metaDescription || post.title} />
@@ -130,6 +130,6 @@ export default async function Post({ params }) {
           </div>
         </div>
       </main>
-    </html>
+    </div>
   );
 }
