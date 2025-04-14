@@ -96,6 +96,7 @@ export default async function SubProjectDetail({ params }) {
           {subProject.keywords && Array.isArray(subProject.keywords) && (
             <meta name="keywords" content={subProject.keywords.join(", ")} />
           )}
+          
         </head>
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />
