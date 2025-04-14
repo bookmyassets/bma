@@ -74,17 +74,22 @@ export default async function Post({ params }) {
   };
 
   return (
+    <html lang="en">
+      <head>
+        
+      </head>
+
     <main className="  pt-44 py-12">
       <article className="md:w-[70vw] mx-auto max-sm:pl-4 max-sm:pr-2 w-full md:h-[55vh] bg-white shadow-2xl scale-105 overflow-hidden">
       {post.mainImage && (
-          <div className="relative w-full">
+        <div className="relative w-full">
             <Image
               src={urlFor(post.mainImage)?.url() || ""}
               alt={post.title}
               width={800}
               height={600}
               className="w-full h-full object-cover"
-            />
+              />
           </div>
         )}
       </article>
@@ -97,8 +102,8 @@ export default async function Post({ params }) {
             <div className="flex gap-2 mb-6">
               {post.categories.map((category) => (
                 <span
-                  key={category.title}
-                  className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
+                key={category.title}
+                className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
                 >
                   {category.title}
                 </span>
@@ -121,5 +126,6 @@ export default async function Post({ params }) {
         </div>
       </div>
     </main>
+   </html>
   );
 }

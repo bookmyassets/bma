@@ -15,21 +15,6 @@ const nextConfig = {
         destination: '/contact',
         permanent: true, 
       },
-      {
-        source: '/INFOPACK',
-        destination: '/infopack',
-        permanent: true,
-      },
-      {
-        source: '/Infopack',
-        destination: '/infopack',
-        permanent: true,
-      },
-      {
-        source: '/INFOpack',
-        destination: '/infopack',
-        permanent: true,
-      },
     ];
   },
 };

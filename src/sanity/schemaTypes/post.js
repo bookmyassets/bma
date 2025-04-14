@@ -10,6 +10,22 @@ export default {
         type: 'string',
       },
       {
+        name: 'metaTitle',
+        title: 'Meta Title',
+        type: 'string',
+      },
+      {
+        name: 'metaDescription',
+        title: 'Meta Description',
+        type: 'string',
+      },
+      {
+        name: 'keywords',
+        title: 'Meta Keywords',
+        type: 'array',
+        of: [{ type: 'string' }],
+      },
+      {
         name: 'slug',
         title: 'Slug',
         type: 'slug',
