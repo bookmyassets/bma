@@ -109,6 +109,9 @@ export async function getPostBySlug(slug) {
   const query = `*[_type == "post" && slug.current == $slug][0]{
     _id,
     title,
+    metaTitle,
+    metaDescription,
+    keywords,
     slug,
     mainImage,
     publishedAt,
@@ -129,6 +132,9 @@ export async function getPostBySlug(slug) {
     const query = `
       *[_type == "post" && slug.current == $slug][0] {
         title,
+        metaTitle,
+    metaDescription,
+    keywords,
         description,
         body,
         categories[]->{title},

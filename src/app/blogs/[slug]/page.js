@@ -76,56 +76,60 @@ export default async function Post({ params }) {
   return (
     <html lang="en">
       <head>
-        
+        <title>{post.metaTitle || post.title}</title>
+        <meta name="description" content={post.metaDescription || post.title} />
+        {post.keywords && Array.isArray(post.keywords) && (
+          <meta name="keywords" content={post.keywords.join(", ")} />
+        )}
       </head>
 
-    <main className="  pt-44 py-12">
-      <article className="md:w-[70vw] mx-auto max-sm:pl-4 max-sm:pr-2 w-full md:h-[55vh] bg-white shadow-2xl scale-105 overflow-hidden">
-      {post.mainImage && (
-        <div className="relative w-full">
-            <Image
-              src={urlFor(post.mainImage)?.url() || ""}
-              alt={post.title}
-              width={800}
-              height={600}
-              className="w-full h-full object-cover"
+      <main className="  pt-44 py-12">
+        <article className="md:w-[70vw] mx-auto max-sm:pl-4 max-sm:pr-2 w-full md:h-[55vh] bg-white shadow-2xl scale-105 overflow-hidden">
+          {post.mainImage && (
+            <div className="relative w-full">
+              <Image
+                src={urlFor(post.mainImage)?.url() || ""}
+                alt={post.title}
+                width={800}
+                height={600}
+                className="w-full h-full object-cover"
               />
-          </div>
-        )}
-      </article>
-      <div className="max-w-5xl mx-auto">
-      
-
-        <div className="px-8 py-10">
-          {/* Categories */}
-          {post.categories && post.categories.length > 0 && (
-            <div className="flex gap-2 mb-6">
-              {post.categories.map((category) => (
-                <span
-                key={category.title}
-                className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
-                >
-                  {category.title}
-                </span>
-              ))}
             </div>
           )}
+        </article>
+        <div className="max-w-5xl mx-auto">
+          <div className="px-8 py-10">
+            {/* Categories */}
+            {post.categories && post.categories.length > 0 && (
+              <div className="flex gap-2 mb-6">
+                {post.categories.map((category) => (
+                  <span
+                    key={category.title}
+                    className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
+                  >
+                    {category.title}
+                  </span>
+                ))}
+              </div>
+            )}
 
-          {/* Title */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
-            {post.title}
-          </h1>
+            {/* Title */}
+            <h1 className="text-4xl font-bold text-gray-900 mb-6">
+              {post.title}
+            </h1>
 
-          {/* Meta information */}
+            {/* Meta information */}
 
-          {/* Content */}
-          <div className="text-lg antialiased md:subpixel-antialiased tracking-wide decoration-inherit
- max-w-none">
-            <PortableText value={post.body} components={components} />
+            {/* Content */}
+            <div
+              className="text-lg antialiased md:subpixel-antialiased tracking-wide decoration-inherit
+ max-w-none"
+            >
+              <PortableText value={post.body} components={components} />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
-   </html>
+      </main>
+    </html>
   );
 }
