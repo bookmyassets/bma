@@ -3,10 +3,10 @@ import { CalendarDays, MessageSquare, User } from "lucide-react";
 export default async function BlogPage() {
   // Agar YouTube video links Sanity ya kisi aur source se fetch karne hain, to yahan fetch karo
   const videos = [
+    "2VxAIiBeHrY?si=8KJozT3WhjTDc0nA",
     "QatlBaBSoAA?si=tCoK3XWBYBhwfd1l",
     "J4ypn-wgQxY?si=joh8hfuRxK3g59A7",
     "u1u5rLNkyKg?si=4eXKtVlrpdvMmzC7",
-    "2VxAIiBeHrY?si=8KJozT3WhjTDc0nA",
   ]; // YouTube video IDs
 
   return (
