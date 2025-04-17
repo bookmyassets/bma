@@ -150,21 +150,12 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-        <title>Dholera Smart City - Invest in Affordable Plots Today</title>
-        <meta
-          name="description"
-          content="Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat's first smart city for high ROI and future growth."
-        ></meta>
-        <meta
-          name="keywords"
-          content="Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City"
-        ></meta>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
         <meta name="robots" content="index, follow"></meta>
-        <link rel="canonical" href="https://www.bookmyassets.com/"></link>
+        <link rel="canonical" ></link>
 
         <meta
           property="og:title"

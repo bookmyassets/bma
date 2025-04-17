@@ -17,6 +17,17 @@ import TestimonialPagination from "./components/Testimonials";
 import WhyChooseSection from "./components/Why";
 import DholeraInvestmentPage from "./components/BMA";
 
+export async function generateMetadata() {
+
+  return {
+    title: "Dholera Smart City - Invest in Affordable Plots Today",  // Use the fetched post's title for dynamic title
+    description: "Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat's first smart city for high ROI and future growth.", // Same for description
+    canonical: "https://www.bookmyassets.com/",
+    keywords: "Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City"
+  };
+}
+
+
 export default async function Home() {
   return (
     <div className=" overflow-hidden">
