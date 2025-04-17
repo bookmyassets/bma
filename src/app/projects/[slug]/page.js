@@ -4,6 +4,21 @@ import { getPostBySlug, getProjectBySlug } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 
+export async function generateMetadata({ params }) {
+  // Ensure the slug is properly resolved before using it
+  const { slug } = params; // params is already available, but use destructuring
+  
+  // Fetch the post using the slug
+  const post = await getPostBySlug(slug); 
+
+  return {
+    title: post.title,  // Use the fetched post's title for dynamic title
+    description: post.metaDescription, // Same for description
+    
+  };
+}
+
+
 export default async function ProjectDetail({ params }) {
   /*  const [activeTab, setActiveTab] = useState("KeyRole"); */
 

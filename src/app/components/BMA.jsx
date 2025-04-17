@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 
 const DholeraInvestment = () => {
@@ -10,6 +11,52 @@ const DholeraInvestment = () => {
   };
 
   return (
+    <>
+<div 
+  className="text-center"
+  style={{
+    background: `linear-gradient(135deg, ${colors.gold}, ${colors.darkGold})`,
+    color: colors.black,
+    padding: "1.5rem 2rem",
+    borderRadius: "12px",
+    cursor: "pointer",
+    transition: "all 0.3s",
+    border: `3px solid ${colors.darkGold}`,
+    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+    fontWeight: "bold",
+    fontSize: "1.2rem",
+    textTransform: "uppercase",
+    position: "relative",
+    overflow: "hidden"
+  }}
+  onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02)"}
+  onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+  onClick={() => window.open("https://www.bookmyassets.com/contact")}
+>
+  <div style={{
+    position: "absolute",
+    top: "10px",
+    right: "-30px",
+    background: "red",
+    color: "white",
+    padding: "0.2rem 2rem",
+    transform: "rotate(45deg)",
+    fontSize: "0.8rem",
+    boxShadow: "0 2px 4px rgba(0,0,0,0.3)"
+  }}>
+    ONLY FEW LEFT!
+  </div>
+
+  
+  <span style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.2)" }}>
+    🏡 <span style={{ color: "#d10000" }}>DHOLERA PLOTS</span> @ <span style={{ fontSize: "1.4rem" }}>₹10 LAKH*</span> 🏙️
+  </span>
+  <br />
+  <span style={{ fontSize: "0.9rem", opacity: 0.9 }}>
+    ⚡ INSTANT REGISTRATION | ❌ NO HIDDEN COSTS | ⏳ OFFER ENDS SOON!
+  </span>
+</div>
+
     <div className="max-w-7xl mx-auto mt-10 p-8 bg-white text-black rounded-lg shadow-lg">
       <header className="text-center mb-10">
         <h1 className="text-4xl font-bold mb-4" style={{ color: colors.gold }}>
@@ -18,7 +65,7 @@ const DholeraInvestment = () => {
         <div
           className="w-24 h-1 mx-auto mb-6"
           style={{ backgroundColor: colors.darkGold }}
-        ></div>
+          ></div>
       </header>
 
       <section className="mb-8">
@@ -41,11 +88,11 @@ const DholeraInvestment = () => {
         <div
           className="p-6 rounded-lg border-l-4 shadow-md hover:shadow-lg transition-shadow"
           style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
-        >
+          >
           <h2
             className="text-2xl font-bold mb-4"
             style={{ color: colors.darkGold }}
-          >
+            >
             An Introduction To Book My Assets
           </h2>
           <p className="leading-relaxed">
@@ -59,11 +106,11 @@ const DholeraInvestment = () => {
         <div
           className="p-6 rounded-lg border-l-4 shadow-md hover:shadow-lg transition-shadow"
           style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
-        >
+          >
           <h2
             className="text-2xl font-bold mb-4"
             style={{ color: colors.darkGold }}
-          >
+            >
             Re-sale Support Team
           </h2>
           <p className="leading-relaxed">
@@ -77,11 +124,11 @@ const DholeraInvestment = () => {
         <div
           className="p-6 rounded-lg border-l-4 shadow-md hover:shadow-lg transition-shadow"
           style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
-        >
+          >
           <h2
             className="text-2xl font-bold mb-4"
             style={{ color: colors.darkGold }}
-          >
+            >
             Best Price Plots in Prime Locations
           </h2>
           <p className="leading-relaxed">
@@ -95,11 +142,11 @@ const DholeraInvestment = () => {
         <div
           className="p-6 rounded-lg border-l-4 shadow-md hover:shadow-lg transition-shadow"
           style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
-        >
+          >
           <h2
             className="text-2xl font-bold mb-4"
             style={{ color: colors.darkGold }}
-          >
+            >
             Expert Team with Updated Insights
           </h2>
           <p className="leading-relaxed">
@@ -114,7 +161,7 @@ const DholeraInvestment = () => {
       <div
         className="p-8 rounded-lg shadow-lg mb-10 text-black"
         style={{ backgroundColor: colors.gold }}
-      >
+        >
         <h2 className="text-2xl font-bold mb-4" style={{ color: colors.black }}>
           Timely Project Deliveries with Proven Success
         </h2>
@@ -127,37 +174,37 @@ const DholeraInvestment = () => {
           <div
             className="bg-white p-3 rounded text-center font-semibold"
             style={{ color: colors.darkGold }}
-          >
+            >
             Paradise 1 & 2
           </div>
           <div
             className="bg-white p-3 rounded text-center font-semibold"
             style={{ color: colors.darkGold }}
-          >
+            >
             Pride 1, 2, & 3
           </div>
           <div
             className="bg-white p-3 rounded text-center font-semibold"
             style={{ color: colors.darkGold }}
-          >
+            >
             Marina
           </div>
           <div
             className="bg-white p-3 rounded text-center font-semibold"
             style={{ color: colors.darkGold }}
-          >
+            >
             Maple
           </div>
           <div
             className="bg-white p-3 rounded text-center font-semibold"
             style={{ color: colors.darkGold }}
-          >
+            >
             Orchid
           </div>
           <div
             className="bg-white p-3 rounded text-center font-semibold"
             style={{ color: colors.darkGold }}
-          >
+            >
             Hello Dholera
           </div>
         </div>
@@ -166,11 +213,11 @@ const DholeraInvestment = () => {
       <div
         className="p-6 rounded-lg border-l-4 shadow-md mb-10"
         style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
-      >
+        >
         <h2
           className="text-2xl font-bold mb-4"
           style={{ color: colors.darkGold }}
-        >
+          >
           Register-Ready Plots for a Secure Investment
         </h2>
         <p className="leading-relaxed">
@@ -186,7 +233,7 @@ const DholeraInvestment = () => {
         style={{
           background: `linear-gradient(to right, ${colors.darkGold}, ${colors.gold})`,
         }}
-      >
+        >
         <h2 className="text-2xl font-bold mb-4">Conclusion</h2>
         <p className="leading-relaxed mb-6">
           These factors explain why you should invest in Dholera Smart City with
@@ -202,12 +249,13 @@ const DholeraInvestment = () => {
             href="tel:+918130371647"
             className="bg-white py-2 px-6 rounded-full font-bold transition-colors hover:bg-gray-100"
             style={{ color: colors.darkGold }}
-          >
+            >
             +91 81 3037 1647
           </a>
         </div>
       </footer>
     </div>
+            </>
   );
 };
 
