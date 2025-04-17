@@ -41,7 +41,17 @@ export default function FAQSection() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const colors = {
+    black: "#000000",
+    gold: "#FDB913",
+    darkGold: "#C69C21",
+    white: "#FFFFFF",
+  };
+
+
   return (
+    <>
+   
     <div className="p-8">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl md:text-5xl font-extrabold text-black text-center mb-6">
@@ -50,26 +60,26 @@ export default function FAQSection() {
         <div className="space-y-4 relative">
           {faqs.map((faq, index) => (
             <motion.div
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 200 }}
-              className="border rounded-lg p-4 shadow-2xl bg-gray-900 bg-opacity-80"
+            key={index}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="border rounded-lg p-4 shadow-2xl bg-gray-900 bg-opacity-80"
             >
               <button
                 className="w-full flex justify-between items-center text-[#edc46b] text-left text-lg font-bold"
                 onClick={() => toggleFAQ(index)}
-              >
+                >
                 {faq.question}
                 {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
               </button>
               <AnimatePresence>
                 {openIndex === index && (
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="mt-6 text-lg text-[#f6d99a] overflow-hidden border-t-2 border-[#edc46b] border-opacity-50 py-5"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-6 text-lg text-[#f6d99a] overflow-hidden border-t-2 border-[#edc46b] border-opacity-50 py-5"
                   >
                     {Array.isArray(faq.answer) ? (
                       <ul className="list-disc pl-2 ">
@@ -88,5 +98,51 @@ export default function FAQSection() {
         </div>
       </div>
     </div>
+
+    <div 
+  className="text-center border border-b-2 border-white"
+  style={{
+    background: `linear-gradient(135deg, ${colors.gold}, ${colors.darkGold})`,
+    color: colors.black,
+    padding: "1.5rem 2rem",
+    borderRadius: "12px",
+    cursor: "pointer",
+    transition: "all 0.3s",
+    border: `3px solid ${colors.darkGold}`,
+    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+    fontWeight: "bold",
+    fontSize: "1.2rem",
+    textTransform: "uppercase",
+    position: "relative",
+    overflow: "hidden"
+  }}
+  onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02)"}
+  onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+  onClick={() => window.open("https://www.bookmyassets.com/contact")}
+>
+  <div style={{
+    position: "absolute",
+    top: "10px",
+    right: "-30px",
+    background: "red",
+    color: "white",
+    padding: "0.2rem 2rem",
+    transform: "rotate(45deg)",
+    fontSize: "0.8rem",
+    boxShadow: "0 2px 4px rgba(0,0,0,0.3)"
+  }}>
+    ONLY FEW LEFT!
+  </div>
+
+  
+  <span style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.2)" }}>
+    🏡 <span style={{ color: "#d10000" }}>DHOLERA PLOTS</span> @ <span style={{ fontSize: "1.4rem" }}>₹10 LAKH*</span> 🏙️
+  </span>
+  <br />
+  <span  style={{ fontSize: "0.9rem", opacity: 0.9 }}>
+    ⚡ INSTANT REGISTRATION | ❌ NO HIDDEN COSTS | ⏳ OFFER ENDS SOON!
+  </span>
+</div>
+          </>
   );
 }

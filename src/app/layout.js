@@ -157,15 +157,7 @@ export default function RootLayout({ children }) {
         <meta name="robots" content="index, follow"></meta>
         <link rel="canonical" ></link>
 
-        <meta
-          property="og:title"
-          content="Dholera Smart City- Dholera Smart City Plot Price"
-        ></meta>
-
-        <meta
-          property="og:description"
-          content="Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat's first smart city for high ROI and future growth."
-        ></meta>
+        
         <meta property="og:type" content="website"></meta>
         <meta property="og:url" content="https://www.bookmyassets.com/"></meta>
         <meta property="og:image"></meta>

@@ -2,10 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import maps from "@/assests/maps.png";
+import maps from "@/assests/locations.webp";
 import videos from "@/assests/videos.webp"; // Ensure correct path
-import inventory from "@/assests/inventory.webp"; // Ensure correct path
-import brochure from "@/assests/brochure.webp"; // Ensure correct path
+import inventory from "@/assests/plot.webp"; // Ensure correct path
+import brochure from "@/assests/brouchure.webp"; // Ensure correct path
 
 export default function Info() {
   const [viewMode, setViewMode] = useState("card");
@@ -68,15 +68,7 @@ export default function Info() {
   return (
     <div className=" py-36 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-gray-700 sm:text-5xl bg-clip-text">
-            Explore <span className="text-[#d8b66d]"> Dholera </span>
-          </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            Discover strategic investment opportunities in India's first planned
-            smart city
-          </p>
-        </div>
+        
 
         {/* Card View */}
         {viewMode === "card" && (
@@ -89,7 +81,7 @@ export default function Info() {
                       src={item.image}
                       alt={item.title}
                       fill
-                      className=" max-sm:w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                      className=" max-sm:w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
