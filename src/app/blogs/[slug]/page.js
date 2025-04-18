@@ -14,9 +14,10 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,  // Use the fetched post's title for dynamic title
     description: post.metaDescription, // Same for description
-    
   };
 }
+
+
 
 
 export default async function Post({ params }) {
@@ -87,17 +88,41 @@ export default async function Post({ params }) {
       ),
     },
   };
-
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "alternativeHeadline": post.altHeadline || post.title,
+    "image": post.mainImage?.url,
+    "author": {
+      "@type": "Organization",
+      "name": "BookMyAssets"
+    },
+    "editor": "BookMyAssets Editorial Team",
+    "genre": post.genre || "General",
+    "keywords": post.keywords?.join(", "),
+    "wordcount": post.wordCount?.toString() || "1000",
+    "publisher": {
+      "@type": "Organization",
+      "name": "BookMyAssets",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.bookmyassets.com/assets/images/logo.png"
+      }
+    },
+    "url": `https://www.bookmyassets.com/blogs/${post.slug.current}`,
+    "mainEntityOfPage": `https://www.bookmyassets.com/blogs/${post.slug.current}`,
+    "datePublished": post.publishedAt,
+    "dateModified": post._updatedAt || post.publishedAt,
+    "description": post.metaDescription
+  };
   return (
     <div>
-      <head>
-        <title>{post.metaTitle || post.title}</title>
-        <meta name="description" content={post.metaDescription || post.title} />
-        {post.keywords && Array.isArray(post.keywords) && (
-          <meta name="keywords" content={post.keywords.join(", ")} />
-        )}
-      </head>
-
+       <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+        
       <main className="  pt-44 py-12">
         <article className="md:w-[70vw] mx-auto max-sm:pl-4 max-sm:pr-2 w-full md:h-[55vh] bg-white shadow-2xl scale-105 overflow-hidden">
           {post.mainImage && (
