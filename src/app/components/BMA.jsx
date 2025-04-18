@@ -46,12 +46,12 @@ const DholeraInvestment = () => {
           className="p-6 rounded-lg border-l-4 shadow-md hover:shadow-lg transition-shadow"
           style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
           >
-          <h2
+          <h3
             className="text-2xl font-bold mb-4"
             style={{ color: colors.darkGold }}
             >
             An Introduction To Book My Assets
-          </h2>
+          </h3>
           <p className="leading-relaxed">
             We understand that the business of India has just been initiated.
             Therefore, we spend noticeable time and energy considering the needs
@@ -64,12 +64,12 @@ const DholeraInvestment = () => {
           className="p-6 rounded-lg border-l-4 shadow-md hover:shadow-lg transition-shadow"
           style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
           >
-          <h2
+          <h3
             className="text-2xl font-bold mb-4"
             style={{ color: colors.darkGold }}
             >
             Re-sale Support Team
-          </h2>
+          </h3>
           <p className="leading-relaxed">
             If you want to invest in Dholera Smart City with Book My Assets, we
             assure you of our assistance at every stage. Our support team will
@@ -82,12 +82,12 @@ const DholeraInvestment = () => {
           className="p-6 rounded-lg border-l-4 shadow-md hover:shadow-lg transition-shadow"
           style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
           >
-          <h2
+          <h3
             className="text-2xl font-bold mb-4"
             style={{ color: colors.darkGold }}
             >
             Best Price Plots in Prime Locations
-          </h2>
+          </h3>
           <p className="leading-relaxed">
             We will make sure your investment in Dholera Smart City is
             beneficial by providing you with plots at the best price in prime
@@ -100,12 +100,12 @@ const DholeraInvestment = () => {
           className="p-6 rounded-lg border-l-4 shadow-md hover:shadow-lg transition-shadow"
           style={{ borderLeftColor: colors.gold, backgroundColor: "#FFFBF0" }}
           >
-          <h2
+          <h3
             className="text-2xl font-bold mb-4"
             style={{ color: colors.darkGold }}
             >
             Expert Team with Updated Insights
-          </h2>
+          </h3>
           <p className="leading-relaxed">
             Investing can be stressful due to many questions like where and how
             to invest. Investing in Dholera Smart City with us will lower your

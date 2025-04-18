@@ -168,9 +168,9 @@ export default function LandingPage({ img1, img2, img3, img4, mimg1, mimg2, mimg
           <div
             className="flex flex-col items-center text-center space-y-4 w-full" /* Added items-center and w-full */
           >
-            <h1 className="text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] px-4">
+            <h2 className="text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] px-4">
               Your Perfect Investment Opportunity
-            </h1>
+            </h2>
             <p className="text-base md:text-xl max-w-2xl bg-clip-text text-white px-4">
               BookMyAssets™ is your trusted real estate partner, offering
               premium commercial and residential investment opportunities with

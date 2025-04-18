@@ -84,7 +84,7 @@ const TestimonialPagination = () => {
   return (
     <div className="bg-black py-16">
       <div className="container mx-auto px-4">
-        <h3 className={`text-center text-3xl font-semibold text-[#FDB913] mb-10`}>Our Clients</h3>
+        <h2 className={`text-center text-3xl font-semibold text-[#FDB913] mb-10`}>Our Clients</h2>
         <motion.div 
           key={currentPage} 
           initial={{ opacity: 0, x: 50 }}
