@@ -128,9 +128,10 @@ export default async function ProjectDetail({ params }) {
         ),
       },
     };
-
+ const canonicalUrl = `https://www.bookmyassets.com/projects/${post.slug.current}`
     return (
       <div className="bg-white min-h-screen">
+ <link rel="canonical" href={canonicalUrl}/>
         {/* Sticky Nav Placeholder */}
         <div className="bg-white shadow-sm py-8 h-8" />
 

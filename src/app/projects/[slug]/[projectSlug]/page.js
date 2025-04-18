@@ -14,6 +14,7 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,  // Use the fetched post's title for dynamic title
     description: post.metaDescription, // Same for description
+    keywords : post.keywords
     
   };
 }
@@ -102,17 +103,7 @@ export default async function SubProjectDetail({ params }) {
 
     return (
       <div>
-        <head>
-          <title>{subProject.metaTitle || subProject.title}</title>
-          <meta
-            name="description"
-            content={subProject.metaDescription || subProject.title}
-          />
-          {subProject.keywords && Array.isArray(subProject.keywords) && (
-            <meta name="keywords" content={subProject.keywords.join(", ")} />
-          )}
-
-        </head>
+        
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />
 

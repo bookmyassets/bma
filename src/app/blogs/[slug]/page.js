@@ -14,6 +14,7 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,  // Use the fetched post's title for dynamic title
     description: post.metaDescription, // Same for description
+    
   };
 }
 
@@ -116,12 +117,16 @@ export default async function Post({ params }) {
     "dateModified": post._updatedAt || post.publishedAt,
     "description": post.metaDescription
   };
+
+  const canonicalUrl = `https://www.bookmyassets.com/blogs/${post.slug.current}`
   return (
     <div>
        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
+
+        <link rel="canonical" href={canonicalUrl}/>
         
       <main className="  pt-44 py-12">
         <article className="md:w-[70vw] mx-auto max-sm:pl-4 max-sm:pr-2 w-full md:h-[55vh] bg-white shadow-2xl scale-105 overflow-hidden">
