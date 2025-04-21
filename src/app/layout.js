@@ -342,6 +342,12 @@ export default function RootLayout({ children }) {
                   >
                     Gallery
                   </Link>
+                  <Link
+                    href="/career"
+                    className="text-[#FDB913] hover:text-white px-3 py-2"
+                  >
+                    Career
+                  </Link>
 
                   <Link
                     href="/infopack"
@@ -528,6 +534,13 @@ export default function RootLayout({ children }) {
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Gallery
+                    </Link>
+                    <Link
+                      href="/career"
+                      className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Career
                     </Link>
                     <Link
                       href="/contact"
