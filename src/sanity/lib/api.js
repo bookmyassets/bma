@@ -31,6 +31,21 @@ export async function getblogs() {
   }`;
   const posts = await client.fetch(query, {}, { cache: 'no-store' });
   return posts;
+
+}
+export async function getUpdates() {
+  const query = `*[_type == "post" && "Latest Updates" in categories[]->title && author-> name == "BookMyAssets" ]{
+    _id,
+    title,
+    slug,
+    mainImage,
+    publishedAt,
+    body,
+    author->{name, image},
+    categories[]->{title}
+  }`;
+  const posts = await client.fetch(query, {}, { cache: 'no-store' });
+  return posts;
 }
 
 export async function Inventory() {

@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /about
+Disallow: /policies/copyright
+Disallow: /policies/terms
+Disallow: /policies/privacy
+Disallow: /properties
