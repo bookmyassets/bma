@@ -10,6 +10,7 @@ export async function generateMetadata({ params }) {
   
   // Fetch the post using the slug
   const post = await getPostBySlug(slug); 
+  
 
   return {
     title: post.title,  // Use the fetched post's title for dynamic title

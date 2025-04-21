@@ -15,6 +15,7 @@ import BrowseBlogsSection from "./components/BrowseBlogs";
 import TestimonialPagination from "./components/Testimonials";
 import WhyChooseSection from "./components/Why";
 import DholeraInvestmentPage from "./components/BMA";
+import Link from "next/link";
 
 export async function generateMetadata() {
   return {
@@ -176,6 +177,27 @@ export default async function Home() {
           {/* Add margin as needed */}
           <ParallaxSection />
         </section>
+        <section>
+        <div className="py-16 bg-[#e9b30a] text-black">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Ready to Invest in Your Future?
+          </h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Join the hundreds of satisfied investors who have secured their
+            future with prime Dholera properties.
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <button className="bg-black text-white py-4 px-8 rounded-md font-bold hover:bg-gray-800 transition-colors">
+              <Link href="/projects">Explore Properties</Link>
+            </button>
+            <button className="bg-white text-black py-4 px-8 rounded-md font-bold hover:bg-gray-100 transition-colors">
+              <Link href="https://wa.me/918130371647">Schedule Consultation</Link>
+            </button>
+          </div>
+        </div>
+      </div>
+        </section>  
         <section className="my-12">
           {" "}
           {/* Add margin as needed */}
@@ -185,6 +207,7 @@ export default async function Home() {
         <section>
           <BrowseBlogsSection />
         </section>
+       
         <TestimonialPagination />
         <FloatingButtons />
       </div>

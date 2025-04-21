@@ -157,8 +157,11 @@ const RealEstateLandingPage = () => {
     };
   }, []);
 
+  const canonicalUrl = `https://www.bookmyassets.com/about`
+
   return (
     <div>
+      <link rel="canonical" href={canonicalUrl}/>
       {/* Hero Section with Gradient Background */}
       <div className=" bg-gradient-to-b from-gray-900 to-black text-white relative">
         {/* Floating Contact Button */}
@@ -447,25 +450,7 @@ const RealEstateLandingPage = () => {
       </div>
 
       {/* Call to Action Section */}
-      <div className="py-16 bg-[#e9b30a] text-black">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to Invest in Your Future?
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join the hundreds of satisfied investors who have secured their
-            future with prime Dholera properties.
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <button className="bg-black text-white py-4 px-8 rounded-md font-bold hover:bg-gray-800 transition-colors">
-              <Link href="/projects">Explore Properties</Link>
-            </button>
-            <button className="bg-white text-black py-4 px-8 rounded-md font-bold hover:bg-gray-100 transition-colors">
-              <Link href="https://wa.me/918130371647">Schedule Consultation</Link>
-            </button>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };
