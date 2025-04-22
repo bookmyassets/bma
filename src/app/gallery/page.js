@@ -1,27 +1,33 @@
 import React from "react";
 import hero from "@/assests/DIA.webp";
-import ABCD from "@/assests/DIA.webp";
-import dholeraMap from "@/assests/DIA.webp";
-import expressway from "@/assests/DIA.webp";
-import dholeraSIR from "@/assests/DIA.webp";
-import DIA from "@/assests/DIA.webp";
-import abt from "@/assests/DIA.webp";
+import road from "@/assests/gallery/Dholera Road.webp"
+import roads from "@/assests/gallery/Dholera Roads.webp"
+import solarPlant from "@/assests/gallery/Dholera Solar Plant.webp"
+import solarProject from "@/assests/gallery/Dholera Solar Project.webp"
+import semiconductor from "@/assests/gallery/TATA Semiconductor.webp"
+import tata from "@/assests/gallery/TATA.webp"
+import connectivity from "@/assests/gallery/public_transport_and_connectivity.webp"
+import skillDevelopment from "@/assests/gallery/LocalEmployment_and_SkillDevelopment.webp"
+import investment from "@/assests/gallery/Investment_Opportunities_DholeraSmartCity.webp"
 import Image from "next/image";
 
 export default function DholeraProgressPage() {
   const galleryImages = [
-    { id: 1, src: ABCD, alt: "Dholera Infrastructure Development", caption: "State-of-the-art infrastructure development in progress" },
-    { id: 2, src: dholeraMap, alt: "Dholera Smart City Project", caption: "Master plan of India's first greenfield smart city" },
-    { id: 3, src: expressway, alt: "Dholera Expressway", caption: "High-speed connectivity via the Ahmedabad-Dholera Expressway" },
-    { id: 4, src: dholeraSIR, alt: "Dholera SIR Overview", caption: "Aerial view of the Special Investment Region" },
-    { id: 5, src: DIA, alt: "Dholera International Airport", caption: "Upcoming international airport boosting connectivity" },
-    { id: 6, src: abt, alt: "Dholera Smart City Vision", caption: "Sustainable urban planning with smart technology" },
+    { id: 1, src: road, alt: "Dholera Infrastructure", caption: "State-of-the-art infrastructure development in progress" },
+    { id: 2, src: roads, alt: "Dholera Smart City Project", caption: "Master plan of India's first greenfield smart city" },
+    { id: 3, src: solarPlant, alt: "Dholera Solar Plant", caption: "High-speed connectivity via the Ahmedabad-Dholera Expressway" },
+    { id: 4, src: solarProject, alt: "Dholera Solar Project", caption: "Aerial view of the Special Investment Region" },
+    { id: 5, src: semiconductor, alt: "Dholera Semicon", caption: "Upcoming international airport boosting connectivity" },
+    { id: 6, src: tata, alt: "TATA", caption: "Sustainable urban planning with smart technology" },
+    { id: 7, src: connectivity, alt: "Public Transport and connectivity", caption: "Sustainable urban planning with smart technology" },
+    { id: 8, src: skillDevelopment, alt: "Local Employment and Skill Development", caption: "Sustainable urban planning with smart technology" },
+    { id: 9, src: investment, alt: "Investment Opportunities Dholera SmartCity", caption: "Sustainable urban planning with smart technology" },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-200">
       {/* Hero Section with Enhanced Overlay */}
-      <div className="relative h-[70vh] overflow-hidden">
+      <div className="relative h-[40vh] overflow-hidden">
         <Image
           src={hero}
           alt="Dholera Skyline"
@@ -63,7 +69,7 @@ export default function DholeraProgressPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                 <h3 className="text-white text-xl font-bold mb-2">{image.alt}</h3>
-                <p className="text-white/80 text-sm">{image.caption}</p>
+               
               </div>
             </div>
           ))}
