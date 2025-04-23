@@ -1,501 +1,140 @@
-"use client";
-import { useState, useRef } from "react";
-import {
-  FaUser,
-  FaEnvelope,
-  FaPhoneAlt,
-  FaMapMarkerAlt,
-  FaFileAlt,
-  FaBuilding,
-  FaChevronLeft,
-  FaUpload,
-  FaClock,
-  FaCalendarAlt,
-  FaDollarSign,
-} from "react-icons/fa";
+import Link from 'next/link';
+import React from 'react';
+import Posting from './job-opening/page';
 
-export default function CareerPage() {
-  const [currentView, setCurrentView] = useState("jobListings");
-  const [selectedJob, setSelectedJob] = useState(null);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [status, setStatus] = useState({ type: "", message: "" });
-  const fileInputRef = useRef(null);
-  const [fileName, setFileName] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-  
-    try {
-      const res = await fetch("/api/apply", {
-        method: "POST",
-        body: formData,
-      });
-  
-      const data = await res.json();
-      if (res.ok) {
-        setSubmitSuccess(true);
-        setStatus({ type: "success", message: "Application submitted successfully!" });
-      } else {
-        throw new Error(data.message || "Something went wrong.");
-      }
-    } catch (err) {
-      setStatus({ type: "error", message: err.message });
-    }
-  };
-  
-
-  const jobListings = [
-    {
-      id: 1,
-      title: "Portfolio Manager",
-      company: "Book My Assets",
-      description:
-        "Join our team as a Portfolio Manager and help our clients achieve their financial goals through expert asset management.",
-      location: "JMD Megapolis, Sector 48, Gurgaon",
-      jobType: "Full Time",
-      qualifications: "12+",
-      experience: "Minimum 1 yr experience",
-      salary: "upto 35k",
-      workingHours: "10:30 AM - 7:30 PM",
-      workingDays: "6 Days",
-      contactEmail: "hr@bookmyassets.com",
-      contactPhone: "9717671112",
-      skills: [
-        "Financial analysis",
-        "Investment management",
-        "Client relations",
-        "Market research",
-      ],
-    },
-    {
-      id: 2,
-      title: "Field Executive (Sales)",
-      company: "Book My Assets",
-      description:
-        "Join our team as a Portfolio Manager and help our clients achieve their financial goals through expert asset management.",
-      location: "JMD Megapolis, Sector 48, Gurgaon",
-      jobType: "Full Time",
-      qualifications: "12+",
-      experience: " Minimum 1 yr experience in field sales",
-      salary: "upto 30k",
-      workingHours: "10:30 AM - 7:30 PM",
-      workingDays: "6 Days",
-      contactEmail: "hr@bookmyassets.com",
-      contactPhone: "9717671112",
-      skills: [
-        "Rejection Handling",
-        "Good Communication",
-        "Convincing SkillConvincing Skills",
-      ],
-    },
-    {
-      id: 3,
-      title: "Video Conferencing Sales Executive",
-      company: "Book My Assets",
-      description:
-        "Join our team as a Portfolio Manager and help our clients achieve their financial goals through expert asset management.",
-      location: "JMD Megapolis, Sector 48, Gurgaon",
-      jobType: "Full Time",
-      qualifications: "12+",
-      experience: "Minimum 2 yr experience in Sales",
-      salary: "upto 35k",
-      workingHours: "10:30 AM - 7:30 PM",
-      workingDays: "6 Days",
-      contactEmail: "hr@bookmyassets.com",
-      contactPhone: "9717671112",
-      skills: [
-        "Rejection Handling",
-        "Good Communication",
-        "Convincing SkillConvincing Skills",
-      ],
-    },
-  ];
-
-  const handleJobSelect = (job) => {
-    setSelectedJob(job);
-    setCurrentView("applicationForm");
-  };
-
-  const handleBackToJobs = () => {
-    setCurrentView("jobListings");
-    setSelectedJob(null);
-    setSubmitSuccess(false);
-    setStatus({ type: "", message: "" });
-    setFileName("");
-  };
-
+const CareersPage = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
-      {/* Banner */}
-      <div
-        className="relative h-48 md:h-72 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
-          <h2 className="text-white text-4xl md:text-5xl font-bold">
-            Career Opportunities
-          </h2>
+    <div className="bg-white min-h-screen font-sans">
+      {/* Header */}
+      <header className="bg-black text-white py-6 border-b-4" style={{borderColor: '#d9b244'}}>
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl font-bold mb-2">
+            Book <span style={{color: '#d9b244'}}>My Assets</span>
+          </h1>
+          <p className="text-lg italic">Your gateway to a smarter future in real estate</p>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <div className="relative bg-black text-white py-20">
+        <div className="absolute inset-0 opacity-50 bg-black">
+          {/* Background image placeholder */}
+          <div className="w-full h-full bg-gray-800"></div>
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-4xl font-bold mb-4">Careers at Book My Assets</h2>
+          <p className="text-xl max-w-3xl mx-auto">
+            Your gateway to a smarter future in real estate. Join one of the fastest-growing
+            groups within the real estate market specializing in Dholera Smart City investments.
+          </p>
         </div>
       </div>
 
+      {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
-        {currentView === "jobListings" && (
-          <>
-            <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
-              Current Openings
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {jobListings.map((job) => (
-                <div
-                  key={job.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transition-transform hover:scale-[1.02] hover:shadow-xl"
-                >
-                  <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-5 border-b border-gray-200">
-                    <h3 className="text-2xl font-bold text-white">{job.title}</h3>
-                    <p className="text-sm text-blue-100 mt-2 flex items-center">
-                      <FaBuilding className="inline mr-2" />{" "}
-                      {job.company || "Book My Assets"}
-                    </p>
-                    <p className="text-sm text-blue-100 mt-1 flex items-center">
-                      <FaMapMarkerAlt className="inline mr-2" /> {job.location}
-                    </p>
-                  </div>
+        {/* Why Work With Us Section */}
+        <section className="mb-16">
+          <h3 className="text-3xl font-bold mb-6 pb-2 inline-block relative">
+            Why Work with Book My Assets?
+            <span className="absolute bottom-0 left-0 w-20 h-1" style={{backgroundColor: '#d9b244'}}></span>
+          </h3>
+          <p className="mb-8 text-lg">
+            <strong>Book My Assets</strong> is not simply an estate portal - we're a brand built upon trust,
+            creativity, and potential. Our team is focused on helping investors identify the finest plots 
+            available in Dholera while offering unmatched services and market information.
+          </p>
 
-                  <div className="p-6">
-                    <p className="text-gray-700 mb-5 text-lg">{job.description}</p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-                      <div className="flex items-start">
-                        <FaFileAlt className="mt-1 mr-2 text-indigo-600" />
-                        <div>
-                          <h4 className="font-bold text-gray-800">Qualifications:</h4>
-                          <p className="text-gray-700">{job.qualifications}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <FaUser className="mt-1 mr-2 text-indigo-600" />
-                        <div>
-                          <h4 className="font-bold text-gray-800">Experience:</h4>
-                          <p className="text-gray-700">{job.experience}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <FaDollarSign className="mt-1 mr-2 text-indigo-600" />
-                        <div>
-                          <h4 className="font-bold text-gray-800">Salary:</h4>
-                          <p className="text-gray-700">{job.salary}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <FaClock className="mt-1 mr-2 text-indigo-600" />
-                        <div>
-                          <h4 className="font-bold text-gray-800">Working Hours:</h4>
-                          <p className="text-gray-700">{job.workingHours}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <FaCalendarAlt className="mt-1 mr-2 text-indigo-600" />
-                        <div>
-                          <h4 className="font-bold text-gray-800">Working Days:</h4>
-                          <p className="text-gray-700">{job.workingDays}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <FaEnvelope className="mt-1 mr-2 text-indigo-600" />
-                        <div>
-                          <h4 className="font-bold text-gray-800">Contact:</h4>
-                          <p className="text-gray-700">
-                            {job.contactEmail} | {job.contactPhone}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mb-5">
-                      <h4 className="font-bold text-gray-800 mb-3 flex items-center">
-                        <FaFileAlt className="mr-2 text-indigo-600" /> Skills
-                        Required:
-                      </h4>
-                      <ul className="grid grid-cols-2 gap-2">
-                        {job.skills.map((skill, index) => (
-                          <li key={index} className="text-gray-700 flex items-center">
-                            <span className="h-2 w-2 rounded-full bg-indigo-500 mr-2"></span>
-                            {skill}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <button
-                      onClick={() => handleJobSelect(job)}
-                      className="w-full py-3 bg-gradient-to-r from-indigo-600 to-blue-700 text-white font-bold rounded-lg hover:from-indigo-700 hover:to-blue-800 transition duration-300 shadow-md flex items-center justify-center"
-                    >
-                      Apply Now
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-        {currentView === "applicationForm" && !submitSuccess && (
-          <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-700 to-blue-600 text-white p-6">
-              <div className="flex items-center">
-                <button
-                  onClick={handleBackToJobs}
-                  className="mr-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition"
-                >
-                  <FaChevronLeft className="text-white" />
-                </button>
-                <div>
-                  <h2 className="text-2xl font-bold">
-                    Apply for: {selectedJob.title}
-                  </h2>
-                  <p className="text-blue-100 mt-1 flex items-center">
-                    <FaBuilding className="mr-2" /> Book My Assets
-                  </p>
-                  <p className="text-blue-100 mt-1 flex items-center">
-                    <FaMapMarkerAlt className="mr-2" /> {selectedJob.location}
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md border-b-4 hover:translate-y-[-8px] transition-transform duration-300" 
+                 style={{borderColor: '#d9b244'}}>
+              <div className="text-4xl mb-4" style={{color: '#d9b244'}}>
+                <i className="fas fa-users"></i>
               </div>
+              <h4 className="text-xl font-bold mb-3">Expert Collaboration</h4>
+              <p>Work with highly experienced professionals in real estate and digital marketing</p>
             </div>
 
-            <div className="p-8">
-              <form
-                onSubmit={handleSubmit}
-                method="POST"
-                encType="multipart/form-data"
-                className="space-y-6"
-              >
-                {/* Hidden field to store job title */}
-                <input
-                  type="hidden"
-                  name="jobTitle"
-                  value={selectedJob.title}
-                />
-                <input type="hidden" name="jobId" value={selectedJob.id} />
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md border-b-4 hover:translate-y-[-8px] transition-transform duration-300"
+                 style={{borderColor: '#d9b244'}}>
+              <div className="text-4xl mb-4" style={{color: '#d9b244'}}>
+                <i className="fas fa-city"></i>
+              </div>
+              <h4 className="text-xl font-bold mb-3">Leading Development</h4>
+              <p>At Dholera Smart City Development, we pride ourselves on leading its development</p>
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="firstName"
-                      className="block text-sm font-medium text-gray-700 flex items-center"
-                    >
-                      <FaUser className="mr-2 text-indigo-600" /> First Name
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      autoComplete="given-name"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                      placeholder="Enter your first name"
-                    />
-                  </div>
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md border-b-4 hover:translate-y-[-8px] transition-transform duration-300"
+                 style={{borderColor: '#d9b244'}}>
+              <div className="text-4xl mb-4" style={{color: '#d9b244'}}>
+                <i className="fas fa-chart-line"></i>
+              </div>
+              <h4 className="text-xl font-bold mb-3">Skill Development</h4>
+              <p>Build and expand your skillset in an atmosphere conducive to learning in performance-driven environments</p>
+            </div>
 
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="lastName"
-                      className="block text-sm font-medium text-gray-700 flex items-center"
-                    >
-                      <FaUser className="mr-2 text-indigo-600" /> Last Name
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      autoComplete="family-name"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                      placeholder="Enter your last name"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 flex items-center"
-                    >
-                      <FaEnvelope className="mr-2 text-indigo-600" /> Email
-                      Address
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      autoComplete="email"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-gray-700 flex items-center"
-                    >
-                      <FaPhoneAlt className="mr-2 text-indigo-600" /> Phone
-                      Number
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      id="phone"
-                      autoComplete="tel"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                      placeholder="+91 XXXXX XXXXX"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="currentCompany"
-                    className="block text-sm font-medium text-gray-700 flex items-center"
-                  >
-                    <FaBuilding className="mr-2 text-indigo-600" /> Current
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    name="currentCompany"
-                    id="currentCompany"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                    placeholder="Where are you currently working?"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="experience"
-                    className="block text-sm font-medium text-gray-700 flex items-center"
-                  >
-                    <FaFileAlt className="mr-2 text-indigo-600" /> Years of
-                    Experience
-                  </label>
-                  <input
-                    type="text"
-                    name="experience"
-                    id="experience"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                    placeholder="How many years of relevant experience do you have?"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="currentCTC"
-                    className="block text-sm font-medium text-gray-700 flex items-center"
-                  >
-                    <FaFileAlt className="mr-2 text-indigo-600" />
-                     Current CTC
-                  </label>
-                  <input
-                    type="text"
-                    name="currentCTC"
-                    id="currentCTC"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                    placeholder="How many years of relevant experience do you have?"
-                  />
-                </div>
-
-                <div className="space-y-3">
-                  <label
-                    htmlFor="resume"
-                    className="block text-sm font-medium text-gray-700 flex items-center"
-                  >
-                    <FaUpload className="mr-2 text-indigo-600" /> Upload Your
-                    Resume
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="file"
-                      name="resume"
-                      id="resume"
-                      accept=".pdf,.doc,.docx"
-                      required
-                      className="w-full px-4 py-12 border-2 border-dashed border-gray-300 rounded-lg text-center focus:outline-none focus:border-indigo-500 transition cursor-pointer bg-gray-50 hover:bg-gray-100 file:hidden"
-                    />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                      <FaUpload className="text-3xl text-indigo-500 mb-2" />
-                      <p className="text-sm text-gray-600">
-                        Drag and drop your resume here or click to browse
-                      </p>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Supported formats: PDF, DOC, DOCX
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4">
-                  <button
-                    type="submit"
-                    className="w-full py-4 bg-gradient-to-r from-indigo-600 to-blue-700 text-white font-bold rounded-lg 
-                             hover:from-indigo-700 hover:to-blue-800 transition duration-300 shadow-md flex items-center justify-center"
-                  >
-                    Submit Application
-                  </button>
-                </div>
-              </form>
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md border-b-4 hover:translate-y-[-8px] transition-transform duration-300"
+                 style={{borderColor: '#d9b244'}}>
+              <div className="text-4xl mb-4" style={{color: '#d9b244'}}>
+                <i className="fas fa-lightbulb"></i>
+              </div>
+              <h4 className="text-xl font-bold mb-3">Shape the Future</h4>
+              <p>Contribute directly to shaping the future of real estate investment</p>
             </div>
           </div>
-        )}
+        </section>
 
-        {currentView === "applicationForm" && submitSuccess && (
-          <div className="max-w-xl mx-auto bg-white rounded-xl shadow-xl p-10 text-center">
-            <div className="w-24 h-24 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-8">
-              <svg
-                className="w-12 h-12 text-green-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 13l4 4L19 7"
-                ></path>
-              </svg>
-            </div>
+        {/* Who Are We Looking For Section */}
+        <section className="mb-16">
+          <h3 className="text-3xl font-bold mb-6 pb-2 inline-block relative">
+            Who Are We Looking For?
+            <span className="absolute bottom-0 left-0 w-20 h-1" style={{backgroundColor: '#d9b244'}}></span>
+          </h3>
+          <p className="mb-6 text-lg">
+            At <strong>Book My Assets</strong>, we're always on the lookout for dynamic, passionate, and innovative 
+            individuals who want to change the world. No matter if your expertise lies in real estate sales, 
+            content writing, digital marketing, customer support, or back office operations, 
+            <strong> Book My Assets</strong> can give you the chance to build a career!
+          </p>
+        </section>
 
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              Application Submitted!
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              Thank you for your application! We'll review it and get back to
-              you soon.
-            </p>
+        {/* What Sets Us Apart Section */}
+        <section className="mb-16">
+          <h3 className="text-3xl font-bold mb-6 pb-2 inline-block relative">
+            What Sets Us Apart?
+            <span className="absolute bottom-0 left-0 w-20 h-1" style={{backgroundColor: '#d9b244'}}></span>
+          </h3>
+          <p className="text-lg">
+            <strong>Book My Assets</strong> isn't your average real estate agency - our expertise lies in 
+            providing clean titles approved by the government, plots with lasting value for our clients. 
+            Joining our staff means representing an organization dedicated to ethical business practices, 
+            a growth-minded mindset, and a strong online presence.
+          </p>
+          <p className="text-lg mt-4">
+            We believe in building communities, so our primary objective is to help our users meet their 
+            goals and realize their dreams.
+          </p>
+        </section>
+      </div>
 
-            <button
-              onClick={handleBackToJobs}
-              className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-blue-700 text-white font-bold rounded-lg 
-                        hover:from-indigo-700 hover:to-blue-800 transition duration-300 shadow-md"
-            >
-              Back to Job Listings
-            </button>
-          </div>
-        )}
+      {/* CTA Section */}
+      <div className="bg-black text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h3 className="text-3xl font-bold mb-6">Ready to Join Our Team?</h3>
+          <p className="text-xl max-w-3xl mx-auto mb-8">
+            Be part of a company that's redefining the future of real estate investment in India's 
+            premier smart cities.
+          </p>
+          <Link
+          href="/career/job-opening"
+          className="px-8 py-3 rounded text-lg font-bold text-black hover:bg-black hover:text-gold border-2 transition-colors duration-300"
+                  style={{backgroundColor: '#d9b244', borderColor: '#d9b244'}}>
+            Apply Today
+          </Link>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default CareersPage;
