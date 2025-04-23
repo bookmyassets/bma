@@ -20,6 +20,11 @@ const nextConfig = {
         destination: '/about',
         permanent: true, 
       },
+      {
+        source : '/projects/:slug',
+        destination : '/projects/dholera/:slug',
+        permanent: true, 
+      }
     ];
   },
 };
