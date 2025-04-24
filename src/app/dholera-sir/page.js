@@ -35,7 +35,7 @@ export default async function Projects() {
           {posts.length > 0 ? (
             posts.map((post) => (
               <Link
-                href={post.slug?.current ? `/dholera/${post.slug.current}` : "#"}
+                href={post.slug?.current ? `/dholera-sir/${post.slug.current}` : "#"}
                 key={post._id}
                 className="group"
               >
