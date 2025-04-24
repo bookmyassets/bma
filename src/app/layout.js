@@ -271,61 +271,7 @@ export default function RootLayout({ children }) {
                     </AnimatePresence>
                   </div>
 
-                  {/* Dholera SIR Dropdown */}
-                  {/* <div ref={dholeraRef} className="relative group">
-                    <Link
-                      href="/dholera-sir"
-                      className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
-                      onClick={toggleDholeraDropdown}
-                      onMouseEnter={() => setIsDholeraDropdownOpen(true)}
-                      onMouseLeave={() => setIsDholeraDropdownOpen(false)}
-                    >
-                      Dholera SIR
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
-                          isDholeraDropdownOpen ? "rotate-180" : ""
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </Link>
-
-                    <AnimatePresence>
-                      {isDholeraDropdownOpen && (
-                        <motion.div
-                          initial="hidden"
-                          animate="visible"
-                          exit="exit"
-                          variants={dropdownVariants}
-                          className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50"
-                          onMouseEnter={() => setIsDholeraDropdownOpen(true)}
-                          onMouseLeave={() => setIsDholeraDropdownOpen(false)}
-                        >
-                          <div className="w-48 py-2">
-                            {dholeraItems.map((item, index) => (
-                              <Link
-                                key={index}
-                                href={item.href}
-                                className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                                onClick={() => setIsDholeraDropdownOpen(false)}
-                              >
-                                {item.title}
-                              </Link>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div> */}
+                 
 
 <div ref={dholeraRef} className="relative group">
                     <Link
@@ -335,7 +281,7 @@ export default function RootLayout({ children }) {
                       onMouseEnter={() => setIsDholeraDropdownOpen(true)}
                       onMouseLeave={() => setIsDholeraDropdownOpen(false)}
                     >
-                      Projects
+                      Dholera SIR
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${

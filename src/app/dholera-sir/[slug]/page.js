@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export async function generateMetadata({ params }) {
   // Ensure the slug is properly resolved before using it
-  const { slug } = params; // params is already available, but use destructuring
+  const { slug } = await params; // params is already available, but use destructuring
   
   // Fetch the post using the slug
   const post = await getPostBySlug(slug); 

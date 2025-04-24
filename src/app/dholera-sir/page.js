@@ -130,9 +130,9 @@ export default async function Projects() {
             Join thousands of investors who have already secured their financial
             future with us.
           </p>
-          <button className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
+          <Link href="/contact" className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
             Contact Us
-          </button>
+          </Link>
         </div>
       </div>
     </div>
