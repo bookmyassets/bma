@@ -2,9 +2,22 @@ import Link from 'next/link';
 import React from 'react';
 import Posting from './job-opening/page';
 
+export async function generateMetadata() {
+
+  return {
+    title: "Careers at BookMyAssets | Join Our Innovative Real Estate Team",
+    description:
+      "Request your exclusive Info Pack from BookMyAssets to explore premium residential and commercial investment opportunities in Dholera Smart City. Get expert guidance and insights today.", 
+    keywords:
+      "BookMyAssets careers, real estate jobs, Dholera Smart City careers, property investment jobs, real estate career opportunities, BookMyAssets recruitment.",
+  };
+}
 
 const CareersPage = () => {
+  const canonicalUrl = `https://www.bookmyassets.com/career`
   return (
+    <>
+    <link rel="canonical" href={canonicalUrl}/>
     <div className="bg-white min-h-screen font-sans">
       {/* Header */}
       <header className="bg-black text-white py-6 border-b-4" style={{borderColor: '#d9b244'}}>
@@ -134,6 +147,7 @@ const CareersPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import { getUpdates } from "@/sanity/lib/api";
 import BlogCard from "./BlogCard";
 import TrendingBlogItem from "./TrendingBlog";
-import hero from "@/assests/blogHero.webp";
+import hero from "@/assests/latest-updates.webp";
 import Image from "next/image";
 
 export default async function BlogsPage() {

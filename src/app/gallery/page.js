@@ -11,6 +11,17 @@ import skillDevelopment from "@/assests/gallery/LocalEmployment_and_SkillDevelop
 import investment from "@/assests/gallery/Investment_Opportunities_DholeraSmartCity.webp"
 import Image from "next/image";
 
+export async function generateMetadata() {
+
+  return {
+    title: "Explore Stunning Real Estate Dholera Projects | BookMyAssets Gallery",
+    description:
+      "Discover a curated gallery of premium real estate projects with BookMyAssets. Explore high-quality images of residential and commercial properties to find your perfect investment opportunity.", 
+    keywords:
+      "Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City",
+  };
+}
+
 export default function DholeraProgressPage() {
   const galleryImages = [
     { id: 1, src: road, alt: "Dholera Infrastructure", caption: "State-of-the-art infrastructure development in progress" },
@@ -23,8 +34,10 @@ export default function DholeraProgressPage() {
     { id: 8, src: skillDevelopment, alt: "Local Employment and Skill Development", caption: "Sustainable urban planning with smart technology" },
     { id: 9, src: investment, alt: "Investment Opportunities Dholera SmartCity", caption: "Sustainable urban planning with smart technology" },
   ];
-
+const canonicalUrl = `https://www.bookmyassets.com/gallery`
   return (
+    <>
+    <link rel="canonical" href={canonicalUrl}/>
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-200">
       {/* Hero Section with Enhanced Overlay */}
       <div className="relative h-[40vh] overflow-hidden">
@@ -58,8 +71,8 @@ export default function DholeraProgressPage() {
         <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {galleryImages.map((image) => (
             <div
-              key={image.id}
-              className=" group relative overflow-hidden rounded-xl transition-all duration-300 shadow-2xl h-80"
+            key={image.id}
+            className=" group relative overflow-hidden rounded-xl transition-all duration-300 shadow-2xl h-80"
             >
               <Image
                 src={image.src}
@@ -84,5 +97,6 @@ export default function DholeraProgressPage() {
         </div>
       </div>
     </div>
+                </>
   );
 }

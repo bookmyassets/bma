@@ -5,10 +5,24 @@ import Image from "next/image";
 import { PortableText } from "next-sanity";
 import hero from "@/assests/BmaInvest.webp";
 
+export async function generateMetadata() {
+
+  return {
+    title: "Invest in Dholera SIR with BookMyAssets: Unlock High-Return Real Estate Opportunities",
+    description:
+      "Discover prime investment opportunities in Dholera Special Investment Region (SIR) with BookMyAssets. Secure affordable residential and commercial plots in India's first Greenfield Smart City and benefit from rapid infrastructure development.", 
+    keywords:
+      "Dholera SIR, Dholera Smart City, residential plots, commercial properties, Gujarat smart city, investment opportunities, Dholera land purchase",
+  };
+}
+
 export default async function Projects() {
   const posts = await projectInfo();
 
+  const canonicalUrl = `https://www.bookmyassets.com/dholera-sir`
   return (
+    <>
+    <link rel="canonical" href={canonicalUrl}/>
     <div className="min-h-screen bg-white">
       {/* Hero Section with Black Background */}
       <div className="relative bg-black text-white">
@@ -124,7 +138,7 @@ export default async function Projects() {
       <div className="bg-black text-white py-16">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Ready to Invest in Our Projects?
+            Invest in Dholera Today
           </h2>
           <p className="text-lg text-gray-300 mb-8">
             Join thousands of investors who have already secured their financial
@@ -136,5 +150,6 @@ export default async function Projects() {
         </div>
       </div>
     </div>
+    </>
   );
 }

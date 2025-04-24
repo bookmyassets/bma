@@ -1,5 +1,4 @@
 "use client";
-import Footer from "@/app/components/Footer";
 import Image from "next/image";
 import React, { useState } from "react";
 import img from "@/assests/contact.jpg";

@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react";
 
+
 const locations = [
   {
     name: "Orchid Township",
@@ -25,12 +26,27 @@ const locations = [
   },
 ];
 
+const generateMetadata = () => {
+
+  return {
+    title: "BookMyAssets Info Pack: Exclusive Investment Opportunities in Dholera Smart City",
+    description:
+      "Request your exclusive Info Pack from BookMyAssets to explore premium residential and commercial investment opportunities in Dholera Smart City. Get expert guidance and insights today.", 
+    keywords:
+      "BookMyAssets, Info Pack",
+  };
+}
+
 export default function LocationsComponent() {
   const [expandedLocation, setExpandedLocation] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [viewMode, setViewMode] = useState("list");
   const [heights, setHeights] = useState({});
   const contentRefs = useRef(locations.map(() => React.createRef()));
+
+  
+
+  const canonicalUrl = `https://www.bookmyassets.com/infopack/locations`
 
   // Check if device is mobile on component mount and window resize
   useEffect(() => {
@@ -75,6 +91,7 @@ export default function LocationsComponent() {
   const renderListView = () => {
     return (
       <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+        <link rel="canonical" href={canonicalUrl}/>
         {locations.map((location, index) => (
           <div key={index} className="border-b last:border-b-0 border-gray-300">
             <div 
@@ -145,6 +162,7 @@ export default function LocationsComponent() {
   const renderGridView = () => {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8 pt-40">
+        <link rel="canonical" href={canonicalUrl}/>
         {locations.map((location, index) => (
           <div
             key={index}
@@ -185,6 +203,7 @@ export default function LocationsComponent() {
 
   return (
     <div className="w-full max-w-7xl mx-auto space-y-3 px-4 py-40 sm:px-6 lg:px-8">
+      <link rel="canonical" href={canonicalUrl}/>
      {/*  <h1 className="md:text-5xl font-bold text-3xl text-center text-gray-500 p-4 animate-fadeIn">DHOLERA LOCATIONS</h1> */}
       <p className="text-center md:text-xl md:font-medium font-semibold mb-6 animate-fadeIn">
         Know more about nearby landmarks and our project's location on Google Maps

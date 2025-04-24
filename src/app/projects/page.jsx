@@ -5,10 +5,23 @@ import Image from "next/image";
 import { PortableText } from "next-sanity";
 import hero from "@/assests/BmaInvest.webp";
 
+export async function generateMetadata() {
+  return {
+    title: "Discover Premium Real Estate Projects | BookMyAssets", 
+    description:
+      "Explore a curated selection of premium residential and commercial real estate projects with BookMyAssets. Find your ideal property investment today.", // Same for description
+    keywords:
+      "Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City",
+  };
+}
+
 export default async function Projects() {
   const posts = await getPosts();
-
+  const canonicalUrl = `https://www.bookmyassets.com/projects`
   return (
+    <>
+    <link rel="canonical" href={canonicalUrl}/>
+
     <div className="min-h-screen bg-white">
       {/* Hero Section with Black Background */}
       <div className="relative bg-black text-white">
@@ -19,7 +32,7 @@ export default async function Projects() {
           alt="hero"
           fill
           className="object-cover brightness-50"
-        />
+          />
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-5xl font-bold text-white">LOCATION</h1>
         </div>
@@ -53,21 +66,21 @@ export default async function Projects() {
                 href={post.slug?.current ? `/projects/${post.slug.current}` : "#"}
                 key={post._id}
                 className="group"
-              >
+                >
                 <div className="bg-white rounded-xl shadow-md overflow-hidden h-full hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 border border-gray-200">
                   {/* Project Image */}
                   <div className="relative h-52">
                     {post.mainImage ? (
                       <Image
-                        src={
-                          urlFor(post.mainImage).width(800).height(400).url() ||
+                      src={
+                        urlFor(post.mainImage).width(800).height(400).url() ||
                           "/placeholder.svg"
                         }
                         alt={post.title}
                         fill
                         className="object-cover"
-                      />
-                    ) : (
+                        />
+                      ) : (
                       <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21]"></div>
                     )}
 
@@ -76,17 +89,17 @@ export default async function Projects() {
                       {post.categories && Array.isArray(post.categories) ? (
                         post.categories.map((category, index) => (
                           <span
-                            key={index}
-                            className={`px-3 py-1 text-sm font-semibold rounded-full shadow-md ${
-                              category.title.toLowerCase() === "sold out"
-                                ? "bg-red-600 text-white"
-                                : category.title.toLowerCase() === "active"
-                                  ? "bg-[#FDB913] text-black"
-                                  : category.title.toLowerCase() ===
-                                      "coming soon"
-                                    ? "bg-black text-[#FDB913]"
-                                    : "bg-[#FDB913] text-black"
-                            }`}
+                          key={index}
+                          className={`px-3 py-1 text-sm font-semibold rounded-full shadow-md ${
+                            category.title.toLowerCase() === "sold out"
+                            ? "bg-red-600 text-white"
+                            : category.title.toLowerCase() === "active"
+                            ? "bg-[#FDB913] text-black"
+                            : category.title.toLowerCase() ===
+                            "coming soon"
+                            ? "bg-black text-[#FDB913]"
+                            : "bg-[#FDB913] text-black"
+                          }`}
                           >
                             {category.title}
                           </span>
@@ -151,5 +164,6 @@ export default async function Projects() {
         </div>
       </div>
     </div>
+          </>
   );
 }

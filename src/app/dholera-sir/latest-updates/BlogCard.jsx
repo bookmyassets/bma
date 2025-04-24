@@ -50,7 +50,7 @@ export default function BlogCard({ post }) {
         {/* Read More Button - Fixed at bottom */}
         <div className="">
           <Link
-            href={`/latest-updates/${post.slug.current}`}
+            href={`/dholera-sir/latest-updates/${post.slug.current}`}
             className="w-full px-4 py-2 transition-all font-semibold border-white rounded-xl hover:bg-[#FDB913] bg-black hover:text-black text-lg md:text-base text-[#FDB913] mt-auto"
             >
             Read More
