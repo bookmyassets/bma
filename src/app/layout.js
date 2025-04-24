@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import "./globals.css";
 import Image from "next/image";
-import { getPosts } from "@/sanity/lib/api";
+import { getPosts, projectInfo } from "@/sanity/lib/api";
 import ContactForm from "./components/Contactform";
 import Script from "next/script";
 import Footer from "./components/Footer";
@@ -31,17 +31,11 @@ export default function RootLayout({ children }) {
   const [isDholeraDropdownOpen, setIsDholeraDropdownOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [info, setInfo] = useState([]);
 
   const projectsRef = useRef(null);
   const getInTouchRef = useRef(null);
   const dholeraRef = useRef(null);
-
-  // Dholera SIR dropdown items
-  const dholeraItems = [
-    { title: "Connectivity", href: "/dholera/connectivity" },
-    { title: "ABCD Building", href: "/dholera/abcd-building" },
-    { title: "Latest Updates", href: "/dholera/latest-updates" },
-  ];
 
   // Close all dropdowns
   const closeAllDropdowns = () => {
@@ -109,6 +103,14 @@ export default function RootLayout({ children }) {
     async function fetchData() {
       const projectsData = await getPosts();
       setProjects(projectsData);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const infoData = await projectInfo();
+      setInfo(infoData);
     }
     fetchData();
   }, []);
@@ -270,9 +272,9 @@ export default function RootLayout({ children }) {
                   </div>
 
                   {/* Dholera SIR Dropdown */}
-                  <div ref={dholeraRef} className="relative group">
+                  {/* <div ref={dholeraRef} className="relative group">
                     <Link
-                      href="/dholera/abcd-building"
+                      href="/dholera-sir"
                       className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
                       onClick={toggleDholeraDropdown}
                       onMouseEnter={() => setIsDholeraDropdownOpen(true)}
@@ -317,6 +319,61 @@ export default function RootLayout({ children }) {
                                 onClick={() => setIsDholeraDropdownOpen(false)}
                               >
                                 {item.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div> */}
+
+<div ref={dholeraRef} className="relative group">
+                    <Link
+                      href="/dholera-sir"
+                      className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
+                      onClick={toggleDholeraDropdown}
+                      onMouseEnter={() => setIsDholeraDropdownOpen(true)}
+                      onMouseLeave={() => setIsDholeraDropdownOpen(false)}
+                    >
+                      Projects
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+                          isProjectsDropdownOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </Link>
+
+                    <AnimatePresence>
+                      {isDholeraDropdownOpen && (
+                        <motion.div
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          variants={dropdownVariants}
+                          className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50"
+                          onMouseEnter={() => setIsDholeraDropdownOpen(true)}
+                          onMouseLeave={() => setIsDholeraDropdownOpen(false)}
+                        >
+                          <div className="w-48 py-2">
+                            {info.map((proj) => (
+                              <Link
+                                key={proj._id}
+                                href={`/dholera-sir/${proj.slug.current}`}
+                                className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                                onClick={() => setIsDholeraDropdownOpen(false)}
+                              >
+                                {proj.title}
                               </Link>
                             ))}
                           </div>
@@ -587,9 +644,10 @@ export default function RootLayout({ children }) {
                     </div>
 
                     {/* Mobile Dholera SIR Dropdown */}
+                    
                     <div>
                       <Link
-                        href="/dholera/abcd-building"
+                        href="/dholera-sir"
                         onClick={toggleDholeraDropdown}
                         className="text-[#FDB913] flex items-center justify-between w-full px-3 py-2 hover:bg-[#420703] rounded-md"
                       >
@@ -620,17 +678,17 @@ export default function RootLayout({ children }) {
                             variants={dropdownVariants}
                             className="ml-4 mt-1 space-y-1"
                           >
-                            {dholeraItems.map((item, index) => (
+                            {info.map((project) => (
                               <Link
-                                key={index}
-                                href={item.href}
+                                key={project._id}
+                                href={`/dholera-sir/${project.slug.current}`}
                                 className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md pl-6"
                                 onClick={() => {
                                   setIsMenuOpen(false);
                                   setIsDholeraDropdownOpen(false);
                                 }}
                               >
-                                {item.title}
+                                {project.title}
                               </Link>
                             ))}
                           </motion.div>
@@ -638,6 +696,7 @@ export default function RootLayout({ children }) {
                       </AnimatePresence>
                     </div>
 
+                   
                     <Link
                       href="/blogs"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
