@@ -90,8 +90,6 @@ export async function Inventory() {
   }
 }
 
-
-
 export async function Brochure() {
   const query = `*[_type == "post" && author->name == "BookMyAssets" && "Brochure" in categories[]->title] | order(publishedAt desc) [0..9] {
       _id,
