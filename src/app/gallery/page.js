@@ -38,7 +38,7 @@ const canonicalUrl = `https://www.bookmyassets.com/gallery`
   return (
     <>
     <link rel="canonical" href={canonicalUrl}/>
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-200">
+    <div className="min-h-screen pt-12 bg-gradient-to-b from-slate-50 to-slate-200">
       {/* Hero Section with Enhanced Overlay */}
       <div className="relative h-[40vh] overflow-hidden">
         <Image

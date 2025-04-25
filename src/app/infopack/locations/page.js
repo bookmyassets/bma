@@ -1,41 +1,44 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react";
-
+import bg from "@/assests/bg-image.webp"
 
 const locations = [
   {
     name: "Orchid Township",
     coordinates: "22°21'50.2\"N 72°11'18.8\"E",
     mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3689.7267443410783!2d72.1885556!3d22.363944399999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjLCsDIxJzUwLjIiTiA3MsKwMTEnMTguOCJF!5e0!3m2!1sen!2sin!4v1742204914354!5m2!1sen!2sin",
+      "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4419.985248834462!2d72.18597707529447!3d22.36394167964078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjLCsDIxJzUwLjIiTiA3MsKwMTEnMTguOCJF!5e1!3m2!1sen!2sin!4v1744287582830!5m2!1sen!2sin",
     link: "https://maps.app.goo.gl/WkCLTWstRABSY6jA7?g_st=iw",
   },
   {
     name: "Dholera International Airport",
     coordinates: "22°31'50.2\"N 72°02'18.8\"E",
     mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57812.81960503426!2d72.29363084274443!3d22.343902600491873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f210061a11ded%3A0xd9b68d7064988291!2sYashnand%20Engineers%20and%20Contractors%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1742205039372!5m2!1sen!2sin",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4420.349690016662!2d72.30066889999551!3d22.35245658219883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f210061a11ded%3A0xd9b68d7064988291!2sYashnand%20Engineers%20and%20Contractors%20Pvt%20Ltd!5e1!3m2!1sen!2sin!4v1744287663714!5m2!1sen!2sin",
     link: "https://maps.app.goo.gl/zmuKb7sAwUt1cimp9",
   },
   {
     name: "TATA Semiconductor",
     coordinates: "22°41'50.2\"N 72°21'18.8\"E",
     mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3693.300263675601!2d72.1980051!3d22.2286835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f25005f33eaa3%3A0x15756b95b1ebde4a!2sTata%20Electronics%20Private%20Limited!5e0!3m2!1sen!2sin!4v1742205122068!5m2!1sen!2sin",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4424.265940861396!2d72.1980051!3d22.2286835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f25005f33eaa3%3A0x15756b95b1ebde4a!2sTata%20Electronics%20Private%20Limited!5e1!3m2!1sen!2sin!4v1744287710047!5m2!1sen!2sin",
     link: "https://maps.app.goo.gl/j7QTwgdeFNBF4Fer9",
   },
+  {
+    name: "ReNew Solar Plant",
+    coordinates: "22°41'50.2\"N 72°21'18.8\"E",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10523.298366847725!2d72.2001527342238!3d22.221203952366253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f252fd5610c47%3A0x40c757ece7a9838f!2sReNew%20Solar%20Cell!5e1!3m2!1sen!2sin!4v1744287385226!5m2!1sen!2sin",
+    link: "https://maps.app.goo.gl/UajRzCGCj1cNbW9T8",
+  },
+  {
+    name: "Maritime Park",
+    coordinates: "22°41'50.2\"N 72°21'18.8\"E",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4424.504206549407!2d72.19462990000001!3d22.221132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f25ad3a2d92bd%3A0x5ebb4b680f8bdeb7!2sMaritime%20Park%20Dholera!5e1!3m2!1sen!2sin!4v1744287754083!5m2!1sen!2sin",
+    link: "https://maps.app.goo.gl/ZN7qNLW7rAy7ArZU7",
+  },
 ];
-
-const generateMetadata = () => {
-
-  return {
-    title: "BookMyAssets Info Pack: Exclusive Investment Opportunities in Dholera Smart City",
-    description:
-      "Request your exclusive Info Pack from BookMyAssets to explore premium residential and commercial investment opportunities in Dholera Smart City. Get expert guidance and insights today.", 
-    keywords:
-      "BookMyAssets, Info Pack",
-  };
-}
 
 export default function LocationsComponent() {
   const [expandedLocation, setExpandedLocation] = useState(null);
@@ -43,10 +46,6 @@ export default function LocationsComponent() {
   const [viewMode, setViewMode] = useState("list");
   const [heights, setHeights] = useState({});
   const contentRefs = useRef(locations.map(() => React.createRef()));
-
-  
-
-  const canonicalUrl = `https://www.bookmyassets.com/infopack/locations`
 
   // Check if device is mobile on component mount and window resize
   useEffect(() => {
@@ -91,7 +90,6 @@ export default function LocationsComponent() {
   const renderListView = () => {
     return (
       <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-        <link rel="canonical" href={canonicalUrl}/>
         {locations.map((location, index) => (
           <div key={index} className="border-b last:border-b-0 border-gray-300">
             <div 
@@ -161,8 +159,7 @@ export default function LocationsComponent() {
   // Grid view for desktop
   const renderGridView = () => {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8 pt-40">
-        <link rel="canonical" href={canonicalUrl}/>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8 pt-8 ">
         {locations.map((location, index) => (
           <div
             key={index}
@@ -201,14 +198,22 @@ export default function LocationsComponent() {
     );
   };
 
-  return (
-    <div className="w-full max-w-7xl mx-auto space-y-3 px-4 py-40 sm:px-6 lg:px-8">
-      <link rel="canonical" href={canonicalUrl}/>
-     {/*  <h1 className="md:text-5xl font-bold text-3xl text-center text-gray-500 p-4 animate-fadeIn">DHOLERA LOCATIONS</h1> */}
+return (
+  <div
+    className=" min-h-[89vh] bg-gradient-to-b from-blue-50 to-gray-100 py-16 px-4 sm:px-6 lg:px-8"
+    style={{
+      backgroundImage: `url(${bg.src})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}
+  >
+    <div className="w-full max-w-7xl mx-auto space-y-3 max-md:flex flex-col justify-center items-center pt-24 px-4 py-8 sm:px-6 lg:px-8">
+      {/* <h1 className="md:text-5xl font-bold text-3xl text-center text-gray-500 p-4 animate-fadeIn">DHOLERA LOCATIONS</h1> */}
       <p className="text-center md:text-xl md:font-medium font-semibold mb-6 animate-fadeIn">
         Know more about nearby landmarks and our project's location on Google Maps
       </p>
-      
+
       {/* Toggle view buttons for desktop */}
       {!isMobile && (
         <div className="flex justify-center mb-6 animate-fadeIn">
@@ -216,11 +221,11 @@ export default function LocationsComponent() {
             <button
               type="button"
               className={`px-4 py-2 text-sm font-medium rounded-l-lg border transition-all duration-300 ${
-                viewMode === "grid"
-                  ? "bg-[#d8b66d] text-white border-[#d8b66d]"
-                  : "bg-white text-gray-700 border-gray-200 hover:bg-gray-100"
+                viewMode === 'grid'
+                  ? 'bg-[#d8b66d] text-white border-[#d8b66d]'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
               }`}
-              onClick={() => setViewMode("grid")}
+              onClick={() => setViewMode('grid')}
               aria-label="Grid view"
             >
               <svg
@@ -236,11 +241,11 @@ export default function LocationsComponent() {
             <button
               type="button"
               className={`px-4 py-2 text-sm font-medium rounded-r-lg border transition-all duration-300 ${
-                viewMode === "list"
-                  ? "bg-[#d8b66d] text-white border-[#d8b66d]"
-                  : "bg-white text-gray-700 border-gray-200 hover:bg-gray-100"
+                viewMode === 'list'
+                  ? 'bg-[#d8b66d] text-white border-[#d8b66d]'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
               }`}
-              onClick={() => setViewMode("list")}
+              onClick={() => setViewMode('list')}
               aria-label="List view"
             >
               <svg
@@ -260,23 +265,29 @@ export default function LocationsComponent() {
           </div>
         </div>
       )}
-      
-      {/* Add animation for the container */}
+
+      {/* Content area */}
       <div className="animate-fadeIn">
-        {isMobile || viewMode === "list" ? renderListView() : renderGridView()}
+        {isMobile || viewMode === 'list' ? renderListView() : renderGridView()}
       </div>
-      
-      {/* Add keyframes for animations */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 0.6s ease-out forwards;
-        }
-      `}</style>
     </div>
-  );
-}
+
+    {/* Animation keyframes */}
+    <style jsx>{`
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+    `}</style>
+  </div>
+)};

@@ -4,7 +4,7 @@ import { MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin } from "luc
 
 const Footer = () => {
   return (
-    <footer id="footer" className="bg-gray-50 py-16">
+    <footer id="footer" className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Contact Form Section */}
         <div id="ContactForm" className="bg-white shadow-2xl p-2 mb-12" >
@@ -21,7 +21,7 @@ const Footer = () => {
             <h3 className="text-xl font-semibold text-yellow-600 mb-4 border-b border-yellow-200 pb-2">
               About Us
             </h3>
-            <p className="text-gray-700 mb-4">
+            <p className="text-white mb-4">
               BookMyAssets™ is the preferred real estate IPA (Indian Property
               Associate) of Gurgaon for commercial and residential spaces.
             </p>
@@ -52,7 +52,7 @@ const Footer = () => {
               <li>
                 <a
                   href="/about"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> About Us
                 </a>
@@ -60,7 +60,7 @@ const Footer = () => {
               {/* <li>
                 <a
                   href="/services"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Our Services
                 </a>
@@ -68,7 +68,7 @@ const Footer = () => {
               <li>
                 <a
                   href="/projects"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Projects
                 </a>
@@ -76,7 +76,7 @@ const Footer = () => {
               <li>
                 <a
                   href="/contact"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Contact Us
                 </a>
@@ -84,7 +84,7 @@ const Footer = () => {
               <li>
                 <a
                   href="/blogs"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Blog
                 </a>
@@ -101,7 +101,7 @@ const Footer = () => {
               <li>
                 <a
                   href="/policies/copyright"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Copyright Policy
                 </a>
@@ -109,7 +109,7 @@ const Footer = () => {
               <li>
                 <a
                   href="/policies/terms"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Terms of Use
                 </a>
@@ -117,7 +117,7 @@ const Footer = () => {
               <li>
                 <a
                   href="/policies/privacy"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Privacy Policy
                 </a>
@@ -125,7 +125,7 @@ const Footer = () => {
               <li>
                 <a
                   href="/policies/refund-and-cancellation"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Refund & Cancellation Policy
                 </a>
@@ -133,7 +133,7 @@ const Footer = () => {
               {/* <li>
                 <a
                   href="/policies/disclaimer"
-                  className="text-gray-700 hover:text-yellow-600 transition flex items-center"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Disclaimer
                 </a>
@@ -151,7 +151,7 @@ const Footer = () => {
                 <div className="flex-shrink-0 text-yellow-500 mr-3 mt-1">
                   <MapPin size={18} />
                 </div>
-                <span className="text-gray-700">
+                <span className="text-white">
                   620, JMD Megapolis, Sohna Rd, Sector 48, Gurugram, India
                   122018
                 </span>
@@ -162,7 +162,7 @@ const Footer = () => {
                 </div>
                 <a
                   href="mailto:info@bookmyassets.com"
-                  className="text-gray-700 hover:text-yellow-600 transition"
+                  className="text-white hover:text-yellow-600 transition"
                 >
                   info@bookmyassets.com
                 </a>
@@ -173,7 +173,7 @@ const Footer = () => {
                 </div>
                 <a
                   href="tel:+918130371647"
-                  className="text-gray-700 hover:text-yellow-600 transition"
+                  className="text-white hover:text-yellow-600 transition"
                 >
                   +91 81 3037 1647
                 </a>

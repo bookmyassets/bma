@@ -18,16 +18,9 @@ const CareersPage = () => {
   return (
     <>
     <link rel="canonical" href={canonicalUrl}/>
-    <div className="bg-white min-h-screen font-sans">
+    <div className="bg-white min-h-screen pt-20 font-sans">
       {/* Header */}
-      <header className="bg-black text-white py-6 border-b-4" style={{borderColor: '#d9b244'}}>
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-2">
-            Book <span style={{color: '#d9b244'}}>My Assets</span>
-          </h1>
-          <p className="text-lg italic">Your gateway to a smarter future in real estate</p>
-        </div>
-      </header>
+      
 
       {/* Hero Section */}
       <div className="relative bg-black text-white py-20">
