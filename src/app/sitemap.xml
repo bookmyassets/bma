@@ -1,153 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Home -->
+  <url>
+    <loc>https://www.bookmyassets.com/</loc>
+  </url>
 
-<url>
-  <loc>https://www.bookmyassets.com/</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/projects</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/dholera/abcd-building</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/contact</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/gallery</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/career</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/infopack</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/policies/refund-and-cancellation</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/projects/dholera</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs/how-tata-semiconductor-fab-dholera-impact-plot-prices</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs/invest-in-dholera-sir-projects</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs/dholera-ahmedabad-expressway</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs/dholera-international-airport</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs/dholera-solar-power-project</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs/first-smart-city-dholera</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs/why-invest-in-dholera-india-first-greenfield-smart-city</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/blogs/factors-affecting-dholera-plot-prices</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/infopack/locations</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/infopack/videos</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/infopack/Brochure</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/infopack/Inventory</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/projects/dholera/paradise-p1</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/projects/dholera/maple-township-mt</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/projects/dholera/marina-bay-mb</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/projects/dholera/paradise-p2</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/projects/dholera/orchid-township-ot</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://www.bookmyassets.com/projects/dholera/westwyn-c</loc>
-  <lastmod>2025-04-21T13:59:43+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
+  <!-- Projects -->
+  <url>
+    <loc>https://www.bookmyassets.com/projects</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/projects/dholera</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/projects/dholera/paradise-p1</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/projects/dholera/marina-bay-mb</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/projects/dholera/paradise-p2</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/projects/dholera/orchid-township-ot</loc>
+  </url>
 
+  <!-- Dholera SIR -->
+  <url>
+    <loc>https://www.bookmyassets.com/dholera-sir</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/dholera-sir/abcd-building-dholera</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/dholera-sir/connectivity-in-dholera</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/dholera-sir/latest-update</loc>
+  </url>
 
+  <!-- Blogs -->
+  <url>
+    <loc>https://www.bookmyassets.com/blogs</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/blogs/dholera-ahmedabad-expressway</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/blogs/dholera-international-airport</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/blogs/dholera-solar-power-project</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/blogs/first-smart-city-dholera</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/blogs/factors-affecting-dholera-plot-prices</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/blogs/invest-in-dholera-sir-projects</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/blogs/how-tata-semiconductor-fab-dholera-impact-plot-prices</loc>
+  </url>
+
+  <!-- Policies -->
+  <url>
+    <loc>https://www.bookmyassets.com/policies/copyright</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/policies/terms</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/policies/privacy</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/policies/refund-and-cancellation</loc>
+  </url>
+
+  <!-- Infopack -->
+  <url>
+    <loc>https://www.bookmyassets.com/infopack</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/infopack/locations</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/infopack/videos</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/infopack/Brochure</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/infopack/Inventory</loc>
+  </url>
+
+  <!-- Career -->
+  <url>
+    <loc>https://www.bookmyassets.com/career</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/career/job-opening</loc>
+  </url>
+
+  <!-- About, Contact, Gallery -->
+  <url>
+    <loc>https://www.bookmyassets.com/about</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/contact</loc>
+  </url>
+  <url>
+    <loc>https://www.bookmyassets.com/gallery</loc>
+  </url>
 
 </urlset>
