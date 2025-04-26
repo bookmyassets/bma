@@ -89,7 +89,7 @@ export default async function Home() {
             description:
               "Preferred real estate IPA in Gurgaon offering commercial and residential properties in Dholera Smart City.",
             areaServed: "IN",
-            telephone: "+91 97 1767 1112",
+            telephone: "+91 81 3037 1647",
             email: "info@bookmyassets.com",
           }),
         }}

@@ -76,6 +76,7 @@ export default function Info() {
       )
     },
   ];
+  const canonicalUrl = `https://www.bookmyassets.com/infopack`
 
   return (
     <div className="py-24 max-sm:py-16 px-4 sm:min-h-[75vh] sm:px-6 lg:px-8 min-h-[50vh] overflow-auto relative" 
@@ -85,6 +86,8 @@ export default function Info() {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
+                <link rel="canonical" href={canonicalUrl}/>
+
       {/* Semi-transparent overlay for better readability */}
       <div className="absolute inset-0 bg-white bg-opacity-50 z-0"></div>
       

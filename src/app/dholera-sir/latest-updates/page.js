@@ -17,9 +17,11 @@ export default async function BlogsPage() {
 
   const trendingBlogs = safePosts.slice(0, 3);
   const regularBlogs = safePosts;
-
+  const canonicalUrl = `https://www.bookmyassets.com/dholera-sir/latest-updates`
+  
   return (
     <div className="min-h-screen bg-white">
+      <link rel="canonical" href={canonicalUrl}/>
       {/* Navigation */}
 
       {/* Hero Section */}

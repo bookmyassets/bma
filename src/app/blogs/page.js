@@ -17,10 +17,11 @@ export default async function BlogsPage() {
 
   const trendingBlogs = safePosts.slice(0, 3);
   const regularBlogs = safePosts;
+  const canonicalUrl = `https://www.bookmyassets.com/blogs`
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
+        <link rel="canonical" href={canonicalUrl}/>
 
       {/* Hero Section */}
       <div className="relative pt-12 h-80 md:h-96 w-full overflow-hidden">

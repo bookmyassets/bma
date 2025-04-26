@@ -44,9 +44,12 @@ const ContactPage = () => {
       setIsSubmitting(false);
     }
   };
+  const canonicalUrl = `https://www.bookmyassets.com/contact`
 
   return (
     <div className="min-h-screen flex flex-col">
+              <link rel="canonical" href={canonicalUrl}/>
+
       {/* Hero Section */}
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row-reverse items-center justify-between py-16 mt-20 gap-10">

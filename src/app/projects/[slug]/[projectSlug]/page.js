@@ -100,9 +100,12 @@ export default async function SubProjectDetail({ params }) {
         ),
       },
     };
-
+    const canonicalUrl = `https://www.bookmyassets.com/projects/${slug}/${projectSlug}`
+    
+    
     return (
       <div>
+        <link rel="canonical" href={canonicalUrl}/>
         
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />
