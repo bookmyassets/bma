@@ -1,155 +1,91 @@
-import Link from "next/link";
-import {  projectInfo } from "@/sanity/lib/api";
-import { urlFor } from "@/sanity/lib/image";
+import { getUpdates, projectInfo } from "@/sanity/lib/api";
+import hero from "@/assests/blogHero.webp";
 import Image from "next/image";
-import { PortableText } from "next-sanity";
-import hero from "@/assests/BmaInvest.webp";
+import BlogCard from "./BlogCard";
+import TrendingBlogItem from "./TrendingBlog";
+import Link from "next/link";
 
-export async function generateMetadata() {
-
-  return {
-    title: "Invest in Dholera SIR with BookMyAssets: Unlock High-Return Real Estate Opportunities",
-    description:
-      "Discover prime investment opportunities in Dholera Special Investment Region (SIR) with BookMyAssets. Secure affordable residential and commercial plots in India's first Greenfield Smart City and benefit from rapid infrastructure development.", 
-    keywords:
-      "Dholera SIR, Dholera Smart City, residential plots, commercial properties, Gujarat smart city, investment opportunities, Dholera land purchase",
-  };
-}
-
-export default async function Projects() {
+export default async function BlogsPage() {
   const posts = await projectInfo();
 
-  const canonicalUrl = `https://www.bookmyassets.com/dholera-sir`
+  // Add error handling for post data
+  const safePosts = posts.map((post) => ({
+    ...post,
+    author: post.author || "BookMyAssets",
+    mainImage: post.mainImage || null,
+    slug: post.slug || { current: "#" },
+  }));
+
+  const p = await getUpdates();
+
+  const trendingBlogs = p.slice(0, 3);
+  const regularBlogs = safePosts;
+  const canonicalUrl = `https://www.bookmyassets.com/blogs`;
+
   return (
     <>
-    <link rel="canonical" href={canonicalUrl}/>
-    <div className="min-h-screen bg-white">
-      {/* Hero Section with Black Background */}
-      <div className="relative bg-black text-white">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-        <div className="relative w-full h-[300px]">
-        <Image
-          src={hero}
-          alt="hero"
-          fill
-          className="object-cover brightness-50"
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl font-bold text-white">Dholera SIR</h1>
-        </div>
-      </div>
-      </div>
-
-      {/* Project Filters (Optional) */}
-      
-
-      {/* Projects Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.length > 0 ? (
-            posts.map((post) => (
-              <Link
-                href={post.slug?.current ? `/dholera-sir/${post.slug.current}` : "#"}
-                key={post._id}
-                className="group"
-              >
-                <div className="bg-white rounded-xl shadow-md overflow-hidden h-full hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 border border-gray-200">
-                  {/* Project Image */}
-                  <div className="relative h-52">
-                    {post.mainImage ? (
-                      <Image
-                        src={
-                          urlFor(post.mainImage).width(800).height(400).url() ||
-                          "/placeholder.svg"
-                        }
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21]"></div>
-                    )}
-
-                    {/* Status Badge */}
-                    <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                      {post.categories && Array.isArray(post.categories) ? (
-                        post.categories.map((category, index) => (
-                          <span
-                            key={index}
-                            className={`px-3 py-1 text-sm font-semibold rounded-full shadow-md ${
-                              category.title.toLowerCase() === "sold out"
-                                ? "bg-red-600 text-white"
-                                : category.title.toLowerCase() === "active"
-                                  ? "bg-[#FDB913] text-black"
-                                  : category.title.toLowerCase() ===
-                                      "coming soon"
-                                    ? "bg-black text-[#FDB913]"
-                                    : "bg-[#FDB913] text-black"
-                            }`}
-                          >
-                            {category.title}
-                          </span>
-                        ))
-                      ) : (
-                        <span className="px-3 py-1 text-sm font-semibold rounded-full shadow-md bg-[#FDB913] text-black">
-                          Project
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <h2 className="text-xl font-bold mb-3 text-black group-hover:text-[#C69C21] transition-colors">
-                      {post.title}
-                    </h2>
-
-                    <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-                      {post.description}
-                    </p>
-
-                    {/* Key Info */}
-                    <div className="border-t border-gray-200 pt-4 mt-auto">
-                      <div className="flex items-center justify-between text-sm">
-                        <div className="flex items-center">
-                          <span className="inline-block w-2 h-2 rounded-full bg-[#FDB913] mr-2"></span>
-                          <span className="text-black font-medium">
-                            View Details
-                          </span>
-                        </div>
-                        <span className="text-[#C69C21] font-medium">
-                          &rarr;
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <div className="col-span-full py-12 text-center text-gray-500">
-              <p className="text-lg">No projects available at the moment.</p>
+      <link rel="canonical" href={canonicalUrl} />
+      <div className="min-h-screen bg-white">
+        {/* Hero Section with Black Background */}
+        <div className="relative bg-black text-white">
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+          <div className="relative w-full h-[300px]">
+            <Image
+              src={hero}
+              alt="Dholera Skyline"
+              fill
+              className="object-cover brightness-50"
+              priority
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h1 className="text-5xl font-bold text-white">Dholera SIR</h1>
             </div>
-          )}
+          </div>
         </div>
-      </div>
 
-      {/* Bottom CTA Section */}
-      <div className="bg-black text-white py-16">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Invest in Dholera Today
-          </h2>
-          <p className="text-lg text-gray-300 mb-8">
-            Join thousands of investors who have already secured their financial
-            future with us.
-          </p>
-          <Link href="/contact" className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
-            Contact Us
-          </Link>
+        {/* Main Content */}
+        <div className="px-4 py-12">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Trending Section - Left Sidebar */}
+            <div className="lg:w-1/4">
+              <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#FDB913] sticky top-4">
+                <h2 className="text-2xl font-bold mb-6 text-gray-800">
+                  Latest Updates on Dholera
+                </h2>
+                <div className="space-y-6">
+                  {trendingBlogs.map((post) => (
+                    <TrendingBlogItem key={post._id} post={post} />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Blog Grid */}
+            <div className="lg:w-3/4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {regularBlogs.map((post) => (
+                  <BlogCard key={post._id} post={post} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA Section */}
+        <div className="bg-black text-white py-16">
+          <div className="max-w-5xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-4">
+              Stay Updated with Dholera SIR
+            </h2>
+            <p className="text-lg text-gray-300 mb-8">
+              Subscribe to our newsletter for the latest investment opportunities and updates.
+            </p>
+            <Link href="/contact" className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
+              Contact Us
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
