@@ -18,7 +18,10 @@ export default function ShortsSection() {
 
   const [isMobile, setIsMobile] = useState(false);
   const swiperRef = useRef(null);
-  const iframeRefs = useRef([]);
+  const iframeRefs = useRef({});
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [currentPlayingId, setCurrentPlayingId] = useState(null);
 
   // Check mobile view
   useEffect(() => {
@@ -28,28 +31,88 @@ export default function ShortsSection() {
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
-  // Setup message listener for YouTube iframes
+  // Function to pause all YouTube videos
+  const pauseAllVideos = (exceptIndex = null) => {
+    Object.entries(iframeRefs.current).forEach(([index, iframe]) => {
+      // Skip the current playing video if exceptIndex is provided
+      if (exceptIndex !== null && parseInt(index) === exceptIndex) return;
+      
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'pauseVideo' }), 
+          '*'
+        );
+      }
+    });
+  };
+
+  // Setup YouTube API
   useEffect(() => {
+    // Create YouTube API script if it doesn't exist
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    // Handle messages from YouTube iframes
     const handleMessage = (event) => {
-      // Check if the message is from YouTube
-      if (event.origin !== "https://www.youtube.com") return;
+      if (event.origin.indexOf("youtube.com") === -1) return;
       
       try {
-        const data = JSON.parse(event.data);
-        const iframe = iframeRefs.current.find(
-          (iframe) => iframe?.contentWindow === event.source
-        );
-
-        if (!iframe || !swiperRef.current) return;
-
-        switch (data.event) {
-          case "onStateChange":
-            if (data.info === 1) { // Video started playing
+        let data;
+        try {
+          data = JSON.parse(event.data);
+        } catch (e) {
+          // Sometimes YouTube sends data in different formats
+          if (typeof event.data === 'object') {
+            data = event.data;
+          } else {
+            return;
+          }
+        }
+        
+        // Find which iframe sent the message
+        let sourceIframeIndex = null;
+        Object.entries(iframeRefs.current).forEach(([index, iframe]) => {
+          if (iframe && iframe.contentWindow === event.source) {
+            sourceIframeIndex = parseInt(index);
+          }
+        });
+        
+        if (sourceIframeIndex === null) return;
+        
+        // Handle state changes
+        if (data.event === "onStateChange" || (data.info && typeof data.info.playerState !== 'undefined')) {
+          const playerState = data.info === 1 ? 1 : 
+                             (data.info === 0 || data.info === 2) ? 0 : 
+                             data.info?.playerState;
+          
+          if (playerState === 1) { // Video is playing
+            // Stop all other videos
+            pauseAllVideos(sourceIframeIndex);
+            
+            // Update state
+            setIsVideoPlaying(true);
+            setCurrentPlayingId(sourceIframeIndex);
+            
+            // Stop autoplay
+            if (swiperRef.current) {
               swiperRef.current.autoplay.stop();
-            } else if (data.info === 0 || data.info === 2) { // Video ended or paused
-              swiperRef.current.autoplay.start();
             }
-            break;
+          } else if (playerState === 0 || playerState === 2) { // Video ended or paused
+            // Only update if this was the currently playing video
+            if (currentPlayingId === sourceIframeIndex) {
+              setIsVideoPlaying(false);
+              setCurrentPlayingId(null);
+              
+              // Restart autoplay
+              if (swiperRef.current) {
+                swiperRef.current.autoplay.start();
+              }
+            }
+          }
         }
       } catch (e) {
         console.error("Error handling YouTube message:", e);
@@ -58,7 +121,18 @@ export default function ShortsSection() {
 
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, []);
+  }, [currentPlayingId]);
+
+  // Handle slide change
+  const handleSlideChange = (swiper) => {
+    setActiveIndex(swiper.realIndex);
+    pauseAllVideos();
+    setIsVideoPlaying(false);
+    setCurrentPlayingId(null);
+    
+    // Always restart the autoplay when slides change
+    swiper.autoplay.start();
+  };
 
   return (
     <section 
@@ -75,6 +149,7 @@ export default function ShortsSection() {
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
+            onSlideChange={handleSlideChange}
             slidesPerView={1}
             spaceBetween={20}
             centeredSlides={true}
@@ -91,6 +166,7 @@ export default function ShortsSection() {
             autoplay={{
               delay: 5000,
               disableOnInteraction: false,
+              pauseOnMouseEnter: true,
             }}
             breakpoints={{
               640: {
@@ -119,13 +195,12 @@ export default function ShortsSection() {
                 >
                   <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl p-2 md:p-4 h-full">
                     <iframe 
-                      ref={(el) => iframeRefs.current[index] = el}
+                      ref={(el) => { iframeRefs.current[index] = el; }}
                       className="w-full h-[500px] md:h-[600px] rounded-xl" 
-                      src={`${short.embedUrl}?enablejsapi=1`} 
+                      src={`${short.embedUrl}?enablejsapi=1&origin=${window.location.origin}&controls=1&rel=0&modestbranding=1`} 
                       title={short.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                       allowFullScreen
-                      referrerPolicy="strict-origin-when-cross-origin"
                       loading="lazy"
                     ></iframe>
                     <div className="p-2 md:p-4 text-center">

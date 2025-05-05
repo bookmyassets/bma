@@ -8,10 +8,10 @@ import { urlFor } from "@/sanity/lib/image";
 
 
 const BrowsePropertiesSection = () => {
-  // Hello Dholera brand colors from the logo
+  
   const brandColors = {
-    maroon: "#650000", // Deep maroon/burgundy background
-    gold: "#FDB913",   // Bright yellow/gold for text and accents
+    maroon: "#650000", 
+    gold: "#FDB913",
   };
 
   const [projects, setProjects] = useState([]);
