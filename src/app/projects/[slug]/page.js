@@ -1,6 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import { getPostBySlug, projectInfo } from "@/sanity/lib/api";
+import { getPostBySlug, getProjectBySlug, projectInfo } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 import ProjectSlider from "./slider";
@@ -51,7 +51,7 @@ export default async function ProjectDetail({ params }) {
   try {
     const [post, projects] = await Promise.all([
       getPostBySlug(slug),
-      projectInfo(),
+      getProjectBySlug(slug),
     ]);
 
     if (!post) {

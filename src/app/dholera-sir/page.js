@@ -6,12 +6,7 @@ import TrendingBlogItem from "./TrendingBlog";
 import Link from "next/link";
 
 export default async function BlogsPage() {
-  const posts = (await projectInfo()) || []; // Fallback to empty array if null/undefined
-
-  // Optional warning for debugging
-  if (!Array.isArray(posts)) {
-    console.warn("projectInfo() did not return an array:", posts);
-  }
+  const posts = await projectInfo();
 
   // Add error handling for post data
   const safePosts = posts.map((post) => ({
@@ -21,10 +16,11 @@ export default async function BlogsPage() {
     slug: post.slug || { current: "#" },
   }));
 
-  const p = (await getUpdates()) || [];
+  const p = await getUpdates();
+
   const trendingBlogs = p.slice(0, 3);
   const regularBlogs = safePosts;
-  const canonicalUrl = `https://www.bookmyassets.com/blogs`;
+  const canonicalUrl = `https://www.bookmyassets.com/dholera-sir`;
 
   return (
     <>
@@ -84,10 +80,7 @@ export default async function BlogsPage() {
             <p className="text-lg text-gray-300 mb-8">
               Subscribe to our newsletter for the latest investment opportunities and updates.
             </p>
-            <Link
-              href="/contact"
-              className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg"
-            >
+            <Link href="/contact" className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
               Contact Us
             </Link>
           </div>

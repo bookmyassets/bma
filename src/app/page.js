@@ -149,7 +149,6 @@ export default async function Home() {
           <HomeSlider
             img1={img1}
             img2={img2}
-          
             img4={img4}
             mimg1={mimg1}
             mimg2={mimg2}
