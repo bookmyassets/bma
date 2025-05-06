@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import logo from "@/assests/Bmalogo.png"; // Adjust path to your logo
 
-export default function LandingPage({ img1, img2, img3, img4, mimg1, mimg2, mimg3, mimg4 }) {
+export default function LandingPage({ img1, img2, img4, mimg1, mimg2, mimg3, mimg4 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
@@ -18,7 +18,7 @@ export default function LandingPage({ img1, img2, img3, img4, mimg1, mimg2, mimg
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [showFormPopup, setShowFormPopup] = useState(false);
 
-  const sliderImages = [img1, img2, img3, img4];
+  const sliderImages = [img1, img2, img4];
   const mobilesliderImages = [mimg1, mimg2, mimg3, mimg4];
 
   useEffect(() => {

@@ -2,7 +2,6 @@ import FloatingButtons from "./components/whatsapp";
 import HomeSlider from "./components/HeroSlider";
 import img1 from "@/assests/banner.webp";
 import img2 from "@/assests/banner2.webp";
-import img3 from "@/assests/banner3.webp";
 import img4 from "@/assests/banner4.webp";
 import mimg1 from "@/assests/mb1.webp";
 import mimg2 from "@/assests/mb2.webp";
@@ -150,7 +149,7 @@ export default async function Home() {
           <HomeSlider
             img1={img1}
             img2={img2}
-            img3={img3}
+          
             img4={img4}
             mimg1={mimg1}
             mimg2={mimg2}
