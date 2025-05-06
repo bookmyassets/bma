@@ -1,15 +1,16 @@
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import { getPostBySlug, getProjectBySlug } from "@/sanity/lib/api";
+import { getPostBySlug, projectInfo } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import ProjectSlider from "./slider";
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  
+
   // Fetch the post using the slug
   const post = await getPostBySlug(slug);
-  
+
   // Return null or default metadata if post doesn't exist
   if (!post) {
     return {
@@ -32,7 +33,9 @@ export default async function ProjectDetail({ params }) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center p-8">
-          <h1 className="text-2xl font-bold mb-2">Missing Project Information</h1>
+          <h1 className="text-2xl font-bold mb-2">
+            Missing Project Information
+          </h1>
           <p className="text-gray-600">No project slug was provided</p>
           <Link
             href="/projects"
@@ -48,7 +51,7 @@ export default async function ProjectDetail({ params }) {
   try {
     const [post, projects] = await Promise.all([
       getPostBySlug(slug),
-      getProjectBySlug(slug),
+      projectInfo(),
     ]);
 
     if (!post) {
@@ -56,7 +59,9 @@ export default async function ProjectDetail({ params }) {
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center p-8">
             <h1 className="text-2xl font-bold mb-2">Project Not Found</h1>
-            <p className="text-gray-600">The requested project could not be found</p>
+            <p className="text-gray-600">
+              The requested project could not be found
+            </p>
             <Link
               href="/projects"
               className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
@@ -128,19 +133,17 @@ export default async function ProjectDetail({ params }) {
         ),
       },
     };
- const canonicalUrl = `https://www.bookmyassets.com/projects/${post.slug.current}`
+    const canonicalUrl = `https://www.bookmyassets.com/projects/${post.slug.current}`;
     return (
       <div className="bg-white min-h-screen">
- <link rel="canonical" href={canonicalUrl}/>
+        <link rel="canonical" href={canonicalUrl} />
         {/* Sticky Nav Placeholder */}
         <div className="bg-white shadow-sm py-8 h-8" />
 
         {/* Hero Section */}
         <header className="w-full bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 py-8">
-            <h1 className="text-4xl md:text-5xl font-bold">
-              {post.title}
-            </h1>
+            <h1 className="text-4xl md:text-5xl font-bold">{post.title}</h1>
           </div>
         </header>
 
@@ -165,7 +168,7 @@ export default async function ProjectDetail({ params }) {
               {/* Mobile view related projects */}
               <div className="lg:hidden mb-10">
                 <h3 className="text-xl font-bold mb-4 text-black">
-                  Our {post.title} Projects
+                  About {post.title}
                 </h3>
                 {projects?.relatedProjects?.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -192,124 +195,129 @@ export default async function ProjectDetail({ params }) {
                     })}
                   </div>
                 ) : (
-                  <p className="text-gray-500">
-                    No related projects found.
-                  </p>
+                  <p className="text-gray-500">No related projects found.</p>
                 )}
               </div>
 
               {/* Main rich text content */}
               <div className="bg-white rounded-xl shadow-md p-8 border border-gray-200">
                 <div className="text-lg leading-relaxed">
-                  <PortableText value={post.body} components={portableTextComponents} />
+                  <PortableText
+                    value={post.body}
+                    components={portableTextComponents}
+                  />
                 </div>
               </div>
+            <ProjectSlider />
             </article>
 
             {/* Sidebar */}
-          {/* Sidebar */}
-<aside className="lg:w-1/3">
-  {/* Related Projects - Fixed on scroll */}
-  <div className="sticky top-20">
-    {/* Our Dholera Projects */}
-    <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200 mb-6">
-      <h3 className="text-xl font-bold mb-4 text-black">
-        Our {post.title} Projects
-      </h3>
-      <div className="space-y-4 max-h-[300px] overflow-y-auto">
-        {projects?.relatedProjects?.length > 0 ? (
-          projects.relatedProjects.map((project) => {
-            // Extract project slug string safely
-            const projectSlugStr =
-              typeof project.slug === "object"
-                ? project.slug.current
-                : project.slug;
+            {/* Sidebar */}
+            <aside className="lg:w-1/3">
+              {/* Related Projects - Fixed on scroll */}
+              <div className="sticky top-20">
+                {/* Our Dholera Projects */}
+                <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200 mb-6">
+                  <h3 className="text-xl font-bold mb-4 text-black">
+                  About {post.title}
+                  </h3>
+                  <div className="space-y-4 max-h-[300px] overflow-y-auto">
+                    {projects?.relatedProjects?.length > 0 ? (
+                      projects.relatedProjects.map((project) => {
+                        // Extract project slug string safely
+                        const projectSlugStr =
+                          typeof project.slug === "object"
+                            ? project.slug.current
+                            : project.slug;
 
-            return (
-              <Link
-                key={project._id || projectSlugStr}
-                href={`/projects/${postSlugStr}/${projectSlugStr}`}
-                className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
-              >
-                <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-                  {project.mainImage ? (
-                    <Image
-                      src={urlFor(project.mainImage)
-                        .width(64)
-                        .height(64)
-                        .url()}
-                      alt={project.title}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200" />
-                  )}
+                        return (
+                          <Link
+                            key={project._id || projectSlugStr}
+                            href={`/projects/${postSlugStr}/${projectSlugStr}`}
+                            className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
+                          >
+                            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
+                              {project.mainImage ? (
+                                <Image
+                                  src={urlFor(project.mainImage)
+                                    .width(64)
+                                    .height(64)
+                                    .url()}
+                                  alt={project.title}
+                                  width={64}
+                                  height={64}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-gray-200" />
+                              )}
+                            </div>
+                            <div>
+                              <h4 className="font-medium text-black">
+                                {project.title}
+                              </h4>
+                            </div>
+                          </Link>
+                        );
+                      })
+                    ) : (
+                      <p className="text-gray-500">
+                        No related projects found.
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-medium text-black">
-                    {project.title}
-                  </h4>
-                </div>
-              </Link>
-            );
-          })
-        ) : (
-          <p className="text-gray-500">
-            No related projects found.
-          </p>
-        )}
-      </div>
-    </div>
 
-    {/* Project Details - Part of the same sticky container */}
-    <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 mb-6">
-      <h3 className="text-xl font-bold mb-4 text-black">
-        Project Details
-      </h3>
-      <div className="space-y-4">
-        <div className="flex justify-between items-center">
-          <span className="text-gray-600">Status</span>
-          <span className="font-medium text-[#C69C21]">
-            {post.categories && Array.isArray(post.categories) 
-              ? (post.categories.find(c => 
-                  c && c.title && ["active", "sold out", "coming soon"].includes(
-                    c.title.toLowerCase()
-                  )
-                )?.title || "Active")
-              : "Active"}
-          </span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-gray-600">Location</span>
-          <span className="font-medium">
-            {post.location || "—"}
-          </span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-gray-600">Investment</span>
-          <span className="font-medium">
-            {post.investment || "Contact for details"}
-          </span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-gray-600">Returns</span>
-          <span className="font-medium">
-            {post.returns || "Contact for details"}
-          </span>
-        </div>
-      </div>
-      <div className="mt-6 pt-6 border-t border-gray-200">
-        <Link href="/contact" className="block w-full">
-          <button className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
-            Request More Information
-          </button>
-        </Link>
-      </div>
-    </div>
-  </div>
-</aside>
+                {/* Project Details - Part of the same sticky container */}
+                <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 mb-6">
+                  <h3 className="text-xl font-bold mb-4 text-black">
+                    Project Details
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Status</span>
+                      <span className="font-medium text-[#C69C21]">
+                        {post.categories && Array.isArray(post.categories)
+                          ? post.categories.find(
+                              (c) =>
+                                c &&
+                                c.title &&
+                                ["active", "sold out", "coming soon"].includes(
+                                  c.title.toLowerCase()
+                                )
+                            )?.title || "Active"
+                          : "Active"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Location</span>
+                      <span className="font-medium">
+                        {post.location || "—"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Investment</span>
+                      <span className="font-medium">
+                        {post.investment || "Contact for details"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Returns</span>
+                      <span className="font-medium">
+                        {post.returns || "Contact for details"}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <Link href="/contact" className="block w-full">
+                      <button className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
+                        Request More Information
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </div>
         </main>
       </div>

@@ -4,6 +4,13 @@ import bg from "@/assests/bg-image.webp"
 
 const locations = [
   {
+    name: "Wetwyn County",
+    coordinates: "22°41'50.2\"N 72°21'18.8\"E",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35344.53857731938!2d72.20113283321216!3d22.424291772729436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395ed9023a7c4ccf%3A0x917dafab28e1aa95!2sGJ%20SH%2040%2C%20Gujarat%20382465!5e1!3m2!1sen!2sin!4v1746533802687!5m2!1sen!2sin",
+    link: "https://maps.app.goo.gl/wqMPQS4TV9VfAAyM8",
+  },
+  {
     name: "Orchid Township",
     coordinates: "22°21'50.2\"N 72°11'18.8\"E",
     mapSrc:
@@ -38,6 +45,7 @@ const locations = [
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4424.504206549407!2d72.19462990000001!3d22.221132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f25ad3a2d92bd%3A0x5ebb4b680f8bdeb7!2sMaritime%20Park%20Dholera!5e1!3m2!1sen!2sin!4v1744287754083!5m2!1sen!2sin",
     link: "https://maps.app.goo.gl/ZN7qNLW7rAy7ArZU7",
   },
+  
 ];
 
 export default function LocationsComponent() {

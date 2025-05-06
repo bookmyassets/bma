@@ -49,7 +49,7 @@ export async function getUpdates() {
 }
 
 export async function projectInfo() {
-  const query = `*[_type == "post" && "project-Info" in categories[]->title && author-> name == "BookMyAssets" ]{
+  const query = `*[_type == "post" && "project-Info" in categories[]->title && author->name == "BookMyAssets"]{
     _id,
     title,
     slug,
@@ -59,9 +59,13 @@ export async function projectInfo() {
     author->{name, image},
     categories[]->{title}
   }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
+
+  const posts = await client.fetch(query, {}, { cache: "no-store" });
+
+  // Wrap into an object with `relatedProjects` key to match your component expectations
+  return { relatedProjects: posts };
 }
+
 
 export async function Inventory() {
   const query = `*[_type == "post" && author->name == "Dholera Times" && "Project" in categories[]->title && !("Sold Out" in categories[]->title)] | order(publishedAt desc)[0..9] {
