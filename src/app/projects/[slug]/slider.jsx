@@ -119,7 +119,7 @@ export default function ProjectSlider() {
   
   return (
     <div className="relative w-full max-w-6xl mx-auto px-4 py-8 group">
-      <h3 className="text-2xl font-bold mb-6 text-black">Similar Projects</h3>
+      <h3 className="text-2xl font-bold mb-6 text-black">About Dholera</h3>
       <div className="relative overflow-hidden rounded-lg">
         {/* Slider container */}
         <div 

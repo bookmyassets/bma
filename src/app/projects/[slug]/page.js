@@ -168,7 +168,7 @@ export default async function ProjectDetail({ params }) {
               {/* Mobile view related projects */}
               <div className="lg:hidden mb-10">
                 <h3 className="text-xl font-bold mb-4 text-black">
-                  About {post.title}
+                Our {post.title} Projects
                 </h3>
                 {projects?.relatedProjects?.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -219,7 +219,7 @@ export default async function ProjectDetail({ params }) {
                 {/* Our Dholera Projects */}
                 <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200 mb-6">
                   <h3 className="text-xl font-bold mb-4 text-black">
-                  About {post.title}
+                  Our {post.title} Projects
                   </h3>
                   <div className="space-y-4 max-h-[300px] overflow-y-auto">
                     {projects?.relatedProjects?.length > 0 ? (
