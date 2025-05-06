@@ -110,18 +110,18 @@ export default async function SubProjectDetail({ params }) {
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />
 
-          <header className="fixed top-4 left-0 w-full bg-black text-white z-20">
-            <div className="max-w-7xl mx-auto px-4 py-16">
-              <h1 className="text-4xl md:text-5xl translate-y-12 font-bold">
+          <header className=" left-0 w-full bg-black text-white z-20">
+            <div className="max-w-7xl mx-auto px-4 py-8">
+              <h1 className="text-4xl md:text-5xl font-bold">
                 {subProject.title}
               </h1>
-              <p className="text-lg text-gray-300 max-w-3xl mb-6">
+              <p className="text-lg text-gray-300 max-w-3xl">
                 {subProject.description}
               </p>
             </div>
           </header>
 
-          <main className="pt-[160px] max-w-7xl mx-auto px-4 py-4">
+          <main className=" max-w-7xl mx-auto px-4 py-4">
             <div className="mb-6">
               <Link
                 href={`/projects/${slug}`}
