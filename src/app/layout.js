@@ -109,8 +109,14 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     async function fetchData() {
-      const infoData = await projectInfo();
-      setInfo(infoData);
+      try {
+        const infoData = await projectInfo();
+        // Ensure we always have an array, even if empty
+        setInfo(Array.isArray(infoData) ? infoData : []);
+      } catch (error) {
+        console.error("Failed to fetch project info:", error);
+        setInfo([]); // Set to empty array on error
+      }
     }
     fetchData();
   }, []);
@@ -273,60 +279,70 @@ export default function RootLayout({ children }) {
 
                  
 
-<div ref={dholeraRef} className="relative group">
-                    <Link
-                      href="/dholera-sir"
-                      className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
-                      onClick={toggleDholeraDropdown}
-                      onMouseEnter={() => setIsDholeraDropdownOpen(true)}
-                      onMouseLeave={() => setIsDholeraDropdownOpen(false)}
-                    >
-                      Dholera SIR
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
-                          isProjectsDropdownOpen ? "rotate-180" : ""
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </Link>
 
-                    <AnimatePresence>
-                      {isDholeraDropdownOpen && (
-                        <motion.div
-                          initial="hidden"
-                          animate="visible"
-                          exit="exit"
-                          variants={dropdownVariants}
-                          className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50"
-                          onMouseEnter={() => setIsDholeraDropdownOpen(true)}
-                          onMouseLeave={() => setIsDholeraDropdownOpen(false)}
-                        >
-                          <div className="w-48 py-2">
-                            {info.map((proj) => (
-                              <Link
-                                key={proj._id}
-                                href={`/dholera-sir/${proj.slug.current}`}
-                                className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                                onClick={() => setIsDholeraDropdownOpen(false)}
-                              >
-                                {proj.title}
-                              </Link>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+
+<div ref={dholeraRef} className="relative group">
+  <Link
+    href="/dholera-sir"
+    className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
+    onClick={toggleDholeraDropdown}
+    onMouseEnter={() => setIsDholeraDropdownOpen(true)}
+    onMouseLeave={() => setIsDholeraDropdownOpen(false)}
+  >
+    Dholera SIR
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+        isDholeraDropdownOpen ? "rotate-180" : ""
+      }`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </Link>
+
+  <AnimatePresence>
+    {isDholeraDropdownOpen && (
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        variants={dropdownVariants}
+        className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50"
+        onMouseEnter={() => setIsDholeraDropdownOpen(true)}
+        onMouseLeave={() => setIsDholeraDropdownOpen(false)}
+      >
+        <div className="w-48 py-2">
+          {info && Array.isArray(info) ? (
+            info.length > 0 ? (
+              info.map((proj) => (
+                <Link
+                  key={proj._id}
+                  href={`/dholera-sir/${proj.slug?.current || proj.slug}`}
+                  className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                  onClick={() => setIsDholeraDropdownOpen(false)}
+                >
+                  {proj.title}
+                </Link>
+              ))
+            ) : (
+              <p className="px-4 py-2 text-gray-500">No projects found</p>
+            )
+          ) : (
+            <p className="px-4 py-2 text-gray-500">Loading...</p>
+          )}
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
 
                   {/* Other Desktop Menu Items */}
                   <Link
