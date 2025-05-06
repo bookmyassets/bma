@@ -39,23 +39,27 @@ export default async function Home() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "BookMyAssets",
-            alternateName: "BMA",
-            url: "https://www.bookmyassets.com",
-            logo: "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FBmalogo.ab09adfe.png&w=96&q=75",
-            contactPoint: {
-              "@type": "ContactPoint",
-              telephone: "+91 81 3037 1647",
-              contactType: "sales",
-              areaServed: "IN",
-              availableLanguage: "en",
-            },
-            sameAs: [
-              "https://www.facebook.com/people/Bookmyassets/61556534554379/",
-              "https://www.instagram.com/bookmyassets/",
-              "https://www.youtube.com/@BookMyAssets",
-            ],
+  "@type": "Corporation",
+  "name": "BookMyAssets",
+  "alternateName":"BMA",
+  "url": "https://www.bookmyassets.com/",
+  "logo": "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FBmalogo.ab09adfe.png&w=96&q=75",
+  "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "620, JMD Megapolis, Sohna Rd, Sector 48,",
+        "addressLocality": "Gurgaon",
+        "addressRegion": "Haryana",
+        "postalCode": "122001",
+        "addressCountry": "IN"
+      },
+  "sameAs": [
+    "https://www.facebook.com/people/Bookmyassets/61556534554379/",
+    "https://www.instagram.com/bookmyassets/",
+    "https://www.youtube.com/@BookMyAssets",
+    "https://x.com/BookMyAssets",
+    "https://www.linkedin.com/company/bookmyassetss"
+  ]
+
           }),
         }}
       />
@@ -82,14 +86,24 @@ export default async function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "RealEstateAgent",
-            name: "BookMyAssets",
-            url: "https://www.bookmyassets.com",
-            logo: "https://www.bookmyassets.com/assets/images/logo.png",
-            description:
-              "Preferred real estate IPA in Gurgaon offering commercial and residential properties in Dholera Smart City.",
-            areaServed: "IN",
-            telephone: "+91 81 3037 1647",
-            email: "info@bookmyassets.com",
+            "name": "BookMyAssets",
+            "url": "https://www.bookmyassets.com",
+            "logo": "https://www.bookmyassets.com/assets/images/logo.png",
+            "image": "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout.d8188d06.webp&w=640&q=75",
+            "priceRange": "from ₹10 Lakhs",
+            "telephone": "+91 97 1767 1112",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "620, JMD Megapolis, Sohna Rd, Sector 48,",
+              "addressLocality": "Gurgaon",
+              "addressRegion": "Haryana",
+              "postalCode": "122001",
+              "addressCountry": "IN"
+            },
+            "areaServed": {
+              "@type": "Place",
+              "name": "Dholera Smart City"
+            }          
           }),
         }}
       />
