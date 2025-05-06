@@ -11,13 +11,6 @@ const locations = [
     link: "https://maps.app.goo.gl/wqMPQS4TV9VfAAyM8",
   },
   {
-    name: "Orchid Township",
-    coordinates: "22°21'50.2\"N 72°11'18.8\"E",
-    mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4419.985248834462!2d72.18597707529447!3d22.36394167964078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjLCsDIxJzUwLjIiTiA3MsKwMTEnMTguOCJF!5e1!3m2!1sen!2sin!4v1744287582830!5m2!1sen!2sin",
-    link: "https://maps.app.goo.gl/WkCLTWstRABSY6jA7?g_st=iw",
-  },
-  {
     name: "Dholera International Airport",
     coordinates: "22°31'50.2\"N 72°02'18.8\"E",
     mapSrc:
