@@ -231,9 +231,9 @@ export default async function Post({ params }) {
     return (
       <div className="bg-white min-h-screen">
         <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-        />
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
         <link rel="canonical" href={canonicalUrl} />
         
         <div className="bg-white shadow-sm sticky top-0 z-30" />
