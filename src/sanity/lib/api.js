@@ -174,36 +174,38 @@ export async function getPostBySlug(slug) {
   return post;
 }
 
-  export async function getProjectBySlug(slug) {
-    const query = `
-      *[_type == "post" && slug.current == $slug][0] {
+export async function getProjectBySlug(slug) {
+  const query = `
+    *[_type == "post" && slug.current == $slug][0]  {
+      title,
+      metaTitle,
+      metaDescription,
+      keywords,
+      description,
+      body,
+      categories[]->{title},
+      mainImage,
+      location,
+      investment,
+      returns,
+      "relatedProjects": *[
+        _type == "post" && 
+        author->name == "BookMyAssets" && 
+        "Sub-Project" in categories[]->title && 
+        !("Sold Out" in categories[]->title) &&
+        slug.current != $slug
+      ]{
         title,
-        metaTitle,
-    metaDescription,
-    keywords,
-        description,
-        body,
-        categories[]->{title},
-        mainImage,
-        location,
-        investment,
-        returns,
-        "relatedProjects": *[
-          _type == "post" && 
-          author->name == "BookMyAssets" && 
-          "Sub-Project" in categories[]->title && 
-          slug.current != $slug
-        ]{
-          title,
-          "slug": slug.current,
-          mainImage
-        }
+        "slug": slug.current,
+        mainImage
       }
-    `;
-    
-    const post = await client.fetch(query, { slug }, { cache: 'no-store' });
-    return post;
-  }
+    }
+  `;
+
+  const post = await client.fetch(query, { slug }, { cache: 'no-store' });
+  return post;
+}
+
 
   export async function getEventBySlug(slug) {
     const query = `*[_type == "event" && slug.current == $slug][0]{
