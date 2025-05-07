@@ -4,7 +4,7 @@ import bg from "@/assests/bg-image.webp"
 
 const locations = [
   {
-    name: "Wetwyn County",
+    name: "Westwyn County",
     coordinates: "22°41'50.2\"N 72°21'18.8\"E",
     mapSrc:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35344.53857731938!2d72.20113283321216!3d22.424291772729436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395ed9023a7c4ccf%3A0x917dafab28e1aa95!2sGJ%20SH%2040%2C%20Gujarat%20382465!5e1!3m2!1sen!2sin!4v1746533802687!5m2!1sen!2sin",
