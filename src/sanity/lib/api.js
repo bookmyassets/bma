@@ -82,14 +82,15 @@ export async function projectInfo() {
 }
 
 export async function Inventory() {
-  const query = `*[_type == "post" && author->name == "Dholera Times" && "Project" in categories[]->title] | order(publishedAt desc) {
+  const query = `*[_type == "post" && author->name == "BookMyAssets" && "Sub-Project" in categories[]->title] | order(publishedAt desc) {
     _id,
     title,
     publishedAt,
     mainImage,
     "pdfUrl": coalesce(pdfFile.asset->url, null),
-    "category": coalesce(categories[]->title, []),
-    "author": coalesce(author->name, "Unknown")
+    "categories": coalesce(categories[]->title, []),
+    "author": coalesce(author->name, "Unknown"),
+    "isSoldOut": "Sold Out" in categories[]->title
   }`;
 
   const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}`;
