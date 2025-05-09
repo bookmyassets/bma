@@ -196,7 +196,7 @@ const ContactPage = () => {
                     href="tel:+918130371647"
                     className="text-blue-600 hover:underline"
                   >
-                    +91 81 3037 1647
+                    +91 81 30 37 1647
                   </a>
                 </div>
 
