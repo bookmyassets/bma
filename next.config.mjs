@@ -271,7 +271,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/careers',
+        source: '/carrers',
         destination: '/career',
         permanent: true,
       },

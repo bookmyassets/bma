@@ -7,22 +7,12 @@ import ProjectSlider from "./slider";
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
-
-  // Fetch the post using the slug
   const post = await getPostBySlug(slug);
 
-  // Return null or default metadata if post doesn't exist
-  if (!post) {
-    return {
-      title: "Project Not Found",
-      description: "The requested project could not be found",
-    };
-  }
-
   return {
-    title: post.title || "Project Detail",
-    description: post.metaDescription || post.excerpt || post.title,
-    keywords: post.keywords?.join(", ") || "",
+    title: post.title ,
+    description: post.metaDescription ,
+    keywords: post.keywords?.join(", "),
     robots: {
     index: false,
     follow: true
@@ -140,6 +130,9 @@ export default async function ProjectDetail({ params }) {
     const canonicalUrl = `https://www.bookmyassets.com/projects/${post.slug.current}`;
     return (
       <div className="bg-white min-h-screen">
+        <title>{post.metaTitle}</title>
+        <meta name="description" content={post.metaDescription}/>
+        <meta name="keywords" content={post.keywords}/>
         <link rel="canonical" href={canonicalUrl} />
         {/* Sticky Nav Placeholder */}
         <div className="bg-white shadow-sm py-8 h-8" />

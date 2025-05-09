@@ -7,22 +7,20 @@ import Image from "next/image";
 export async function generateMetadata({ params }) {
   // Ensure the slug is properly resolved before using it
   const { slug } = params; // params is already available, but use destructuring
-  
+
   // Fetch the post using the slug
-  const post = await getPostBySlug(slug); 
+  const post = await getPostBySlug(slug);
 
   return {
-    title: post.title,  // Use the fetched post's title for dynamic title
+    title: post.title, // Use the fetched post's title for dynamic title
     description: post.metaDescription, // Same for description
-    keywords : post.keywords,
+    keywords: post.keywords,
     robots: {
-    index: false,
-    follow: true
-  }
-    
+      index: false,
+      follow: true,
+    },
   };
 }
-
 
 export default async function SubProjectDetail({ params }) {
   const { slug, projectSlug } = await params;
@@ -104,47 +102,49 @@ export default async function SubProjectDetail({ params }) {
         ),
       },
     };
-    const canonicalUrl = `https://www.bookmyassets.com/projects/${slug}/${projectSlug}`
-    
+    const canonicalUrl = `https://www.bookmyassets.com/projects/${slug}/${projectSlug}`;
+
     const post = await Promise.all([getProjectBySlug(slug)]);
 
     const schemaData = {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": post.title,
-      "alternativeHeadline": post.altHeadline || post.title,
-      "image": post.mainImage?.url,
-      "author": {
+      headline: post.title,
+      alternativeHeadline: post.altHeadline || post.title,
+      image: post.mainImage?.url,
+      author: {
         "@type": "Organization",
-        "name": "BookMyAssets"
+        name: "BookMyAssets",
       },
-      "editor": "BookMyAssets Editorial Team",
-      "genre": post.genre || "General",
-      "keywords": post.keywords?.join(", "),
-     
-      "publisher": {
+      editor: "BookMyAssets Editorial Team",
+      genre: post.genre || "General",
+      keywords: post.keywords?.join(", "),
+
+      publisher: {
         "@type": "Organization",
-        "name": "BookMyAssets",
-        "logo": {
+        name: "BookMyAssets",
+        logo: {
           "@type": "ImageObject",
-          "url": "https://www.bookmyassets.com/assets/images/logo.png"
-        }
+          url: "https://www.bookmyassets.com/assets/images/logo.png",
+        },
       },
-      "url": `https://www.bookmyassets.com/projects/${slug}`,
-      
-      "datePublished": post.publishedAt,
-      "dateModified": post._updatedAt || post.publishedAt,
-      "description": post.metaDescription
+      url: `https://www.bookmyassets.com/projects/${slug}`,
+
+      datePublished: post.publishedAt,
+      dateModified: post._updatedAt || post.publishedAt,
+      description: post.metaDescription,
     };
 
-    
     return (
       <div>
         <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
-        <link rel="canonical" href={canonicalUrl}/>
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+        <title>{subProject.metaTitle}</title>
+        <meta name="description" content={subProject.metaDescription} />
+        <meta name="keywords" content={subProject.keywords} />
+        <link rel="canonical" href={canonicalUrl} />
         <meta name="robots" content="noindex, follow"></meta>
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />

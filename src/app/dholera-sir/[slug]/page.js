@@ -149,6 +149,9 @@ export default async function Post({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
+      <title>{post.metaTitle}</title>
+        <meta name="description" content={post.metaDescription} />
+        <meta name="keywords" content={post.keywords} />
       <link rel="canonical" href={canonicalUrl}/>
       
       {/* Hero Section with Image */}

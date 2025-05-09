@@ -161,6 +161,9 @@ const RealEstateLandingPage = () => {
 
   return (
     <div>
+      <title>BookMyAssets™ | Trusted Real Estate Investment Partner in Dholera Smart City</title>
+      <meta name="description" content="Discover BookMyAssets™, your reliable real estate partner specializing in premium, legally verified plots in Dholera Smart City. Benefit from expert insights, secure investments, and a commitment to maximizing your returns." />
+        <meta name="keywords" content="BookMyAssets, Dholera Smart City, real estate investment, NA NOC title clearance, prime plots Dholera, property investment India, legal property verification, Dholera land investment, commercial and residential plots, real estate consulting" />
       <link rel="canonical" href={canonicalUrl}/>
       {/* Hero Section with Gradient Background */}
       <div className=" bg-gradient-to-b from-gray-900 to-black text-white relative">
