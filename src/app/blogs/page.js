@@ -3,6 +3,8 @@ import BlogCard from "./BlogCard";
 import TrendingBlogItem from "./TrendingBlog";
 import hero from "@/assests/blogHero.webp";
 import Image from "next/image";
+import m from "@/assests/dholera-blog.webp"
+import n from "@/assests/mobile_home_blogs.webp"
 
 export default async function BlogsPage() {
   const posts = await getblogs();
@@ -24,17 +26,23 @@ export default async function BlogsPage() {
         <link rel="canonical" href={canonicalUrl}/>
 
       {/* Hero Section */}
-      <div className="relative pt-12 h-80 md:h-96 w-full overflow-hidden">
+      <div className="relative pt-12 h-80 md:h-[450px] w-full overflow-hidden">
         <Image
-          src={hero}
+          src={m}
           alt="Dholera Skyline"
-          className="object-cover w-full h-full "
+          className="object-cover w-full h-full max-sm:hidden"
+          priority
+        />
+        <Image
+          src={n}
+          alt="Dholera Skyline"
+          className="object-cover w-full h-full md:hidden"
           priority
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-6 py-10 ">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-              Blogs
+             Dholera Smart City Blogs
             </h1>
           </div>
         </div>

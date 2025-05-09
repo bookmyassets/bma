@@ -3,7 +3,7 @@ import { getPosts } from "@/sanity/lib/api";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { PortableText } from "next-sanity";
-import hero from "@/assests/BmaInvest.webp";
+import hero from "@/assests/dholera-project.webp";
 
 export async function generateMetadata() {
   return {
