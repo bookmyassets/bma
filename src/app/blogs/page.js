@@ -39,10 +39,10 @@ export default async function BlogsPage() {
           className="object-cover w-full h-full md:hidden"
           priority
         />
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 max-w-6xl mx-auto flex items-center ">
           <div className="text-center px-6 py-10 ">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-             Dholera Smart City Blogs
+            <h1 className="text-4xl md:text-6xl text-left font-bold text-white mb-2">
+             Dholera <br/>Smart City <br/> <span className="text-[#ddb954]">Blogs</span> 
             </h1>
           </div>
         </div>

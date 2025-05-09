@@ -33,8 +33,8 @@ export default async function Projects() {
           fill
           className="object-cover brightness-50"
           />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl font-bold text-white">LOCATION</h1>
+        <div className="absolute inset-0 max-w-6xl mx-auto flex items-center">
+          <h1 className="text-5xl font-bold text-left text-white">Dholera Smart City <br /> <span className="text-[#ddb954]"> Projects</span></h1>
         </div>
       </div>
       </div>

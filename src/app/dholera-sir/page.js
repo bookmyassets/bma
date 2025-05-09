@@ -49,13 +49,15 @@ export default async function BlogsPage() {
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-6 text-center">
+            <div className="absolute inset-0 max-w-6xl mx-auto flex items-center p-6 text-left">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 Dholera SIR
+                <br/>
+                <span className="text-[#ddb954]">
+
+                Special Investment Region
+                </span>
               </h1>
-              <p className="text-xl max-w-2xl">
-                Discover investment opportunities in India's first smart industrial city
-              </p>
             </div>
           </div>
         </div>
