@@ -7,15 +7,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import logo from "@/assests/Bmalogo.png";
 
-export default function LandingPage({ img1, mimg1  }) {
+export default function LandingPage({ img1, mimg1 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [showFormPopup, setShowFormPopup] = useState(false);
-
-
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -62,7 +60,7 @@ export default function LandingPage({ img1, mimg1  }) {
 
     try {
       const response = await fetch(
-       "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -108,9 +106,9 @@ export default function LandingPage({ img1, mimg1  }) {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
@@ -120,9 +118,9 @@ export default function LandingPage({ img1, mimg1  }) {
       x: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const buttonVariants = {
@@ -132,19 +130,19 @@ export default function LandingPage({ img1, mimg1  }) {
       y: 0,
       transition: {
         delay: 0.6,
-        duration: 0.5
-      }
+        duration: 0.5,
+      },
     },
     hover: {
       scale: 1.05,
       backgroundColor: "#FDB913",
       color: "#000",
-      transition: { duration: 0.3 }
-    }
+      transition: { duration: 0.3 },
+    },
   };
 
   return (
-    <div className="relative h-[90vh]">
+    <div className="relative h-[80vh]">
       {/* Desktop Background */}
       <div className="absolute inset-0 hidden md:block">
         <Image
@@ -170,51 +168,49 @@ export default function LandingPage({ img1, mimg1  }) {
       {/* Content Overlay */}
       <div className="relative z-10 h-full flex flex-col justify-between items-center pb-16">
         {/* Text Section - Left Aligned */}
-        <motion.div 
+        <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
           className="container mx-auto px-4 pt-40 md:pt-60"
         >
-          <div className="max-w-2xl">
-            <motion.h1 
+          <div className="max-w-2xl space-y-8">
+            <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-7xl font-bold leading-tight text-transparent text-white mb-6"
+              className="text-4xl md:text-6xl font-bold text-center leading-tight text-transparent text-white mb-6"
             >
               BookMyAssets
             </motion.h1>
-            <motion.h2 
+            <motion.h2
               variants={itemVariants}
-              className="text-4xl md:text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] mb-6"
+              className="text-4xl md:text-5xl font-bold text-center leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] mb-6"
             >
               Your Perfect Investment Opportunity
             </motion.h2>
-            
-            <motion.p 
+            {/* Contact Button - Bottom */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              className="w-full flex justify-center"
+            >
+              <motion.button
+                variants={buttonVariants}
+                whileHover="hover"
+                onClick={() => setShowFormPopup(true)}
+                className="px-8 py-3 border border-white rounded-full bg-black text-[#FDB913] text-sm md:text-base shadow-lg"
+              >
+                Contact Us
+              </motion.button>
+            </motion.div>
+            <motion.p
               variants={itemVariants}
-              className="text-base md:text-xl text-white mb-8"
+              className="text-base md:text-xl text-white"
             >
               BookMyAssets™ is your trusted real estate partner, offering
               premium commercial and residential investment opportunities with
               unparalleled service.
             </motion.p>
           </div>
-        </motion.div>
-        
-        {/* Contact Button - Bottom */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          className="w-full flex justify-center"
-        >
-          <motion.button
-            variants={buttonVariants}
-            whileHover="hover"
-            onClick={() => setShowFormPopup(true)}
-            className="px-8 py-3 border border-white rounded-full bg-black text-[#FDB913] text-sm md:text-base shadow-lg"
-          >
-            Contact Us
-          </motion.button>
         </motion.div>
       </div>
 
