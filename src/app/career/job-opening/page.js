@@ -1,4 +1,5 @@
 "use client";
+import Head from "next/head";
 import { useState, useRef } from "react";
 import {
   FaUser,
@@ -127,6 +128,14 @@ export default function Posting() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+
+ 
+        <title>Exciting Job Openings at Book My Assets | Apply Now for Career Opportunities</title>
+        <meta name="description" content="Explore current job openings at Book My Assets. We're hiring Portfolio Managers, Field Executives, and Sales Executives. Apply today and start your career with us!" />
+        <meta name="keywords" content="Book My Assets careers, job openings Gurgaon, Portfolio Manager job, Field Executive sales job, Sales Executive video conferencing, asset management jobs, real estate careers, Book My Assets hiring" />
+        <link rel="canonical" href="https://www.bookmyassets.com/career/job-opening" />
+  
+
       {/* Banner */}
       <div
         className="relative h-48 md:h-72 bg-cover bg-center"

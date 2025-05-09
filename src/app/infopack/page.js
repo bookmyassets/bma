@@ -1,7 +1,6 @@
 import React from 'react'
 import Info from './Info'
 
-// For App Router, metadata should be exported like this
 export const metadata = {
   robots: {
     index: false,
@@ -9,7 +8,7 @@ export const metadata = {
   }
 };
 
-export default function Page() {
+export default function page() {
   return (
     <div>
       <Info/>

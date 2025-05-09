@@ -12,6 +12,7 @@ import ContactForm from "./components/Contactform";
 import Script from "next/script";
 import Footer from "./components/Footer";
 import ContactNow from "./components/Callus";
+import FloatingButtons from "./components/whatsapp";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -271,9 +272,7 @@ export default function RootLayout({ children }) {
                     </AnimatePresence>
                   </div>
 
-                 
-
-<div ref={dholeraRef} className="relative group">
+                  <div ref={dholeraRef} className="relative group">
                     <Link
                       href="/dholera-sir"
                       className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
@@ -544,7 +543,7 @@ export default function RootLayout({ children }) {
                         onClick={toggleProjectsDropdown}
                         className="text-[#FDB913] flex items-center justify-between w-full px-3 py-2 hover:bg-[#420703] rounded-md"
                       >
-                        <span>Locations</span>
+                        <span>Projects</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
@@ -590,7 +589,7 @@ export default function RootLayout({ children }) {
                     </div>
 
                     {/* Mobile Dholera SIR Dropdown */}
-                    
+
                     <div>
                       <Link
                         href="/dholera-sir"
@@ -642,7 +641,6 @@ export default function RootLayout({ children }) {
                       </AnimatePresence>
                     </div>
 
-                   
                     <Link
                       href="/blogs"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
@@ -696,6 +694,7 @@ export default function RootLayout({ children }) {
 
         {children}
         <ContactNow />
+        <FloatingButtons/>
         <Footer />
       </body>
     </html>

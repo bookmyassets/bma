@@ -31,8 +31,8 @@ const RealEstateLandingPage = () => {
 
   const targets = {
     partners: 50,
-    properties: 100,
-    customers: 500,
+    properties: 1000,
+    customers: 400,
   };
 
   // Sample properties data

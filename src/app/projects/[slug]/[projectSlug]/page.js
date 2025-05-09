@@ -14,7 +14,11 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,  // Use the fetched post's title for dynamic title
     description: post.metaDescription, // Same for description
-    keywords : post.keywords
+    keywords : post.keywords,
+    robots: {
+    index: false,
+    follow: true
+  }
     
   };
 }
@@ -141,7 +145,7 @@ export default async function SubProjectDetail({ params }) {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
     />
         <link rel="canonical" href={canonicalUrl}/>
-        
+        <meta name="robots" content="noindex, follow"></meta>
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />
 

@@ -28,35 +28,31 @@ export default function BlogCard({ post }) {
       </div>
 
       {/* Content */}
-      <div className="p-4 flex flex-col flex-grow ">
+      <div className="flex flex-col flex-grow ">
         {/* Title */}
-        <h3 className="text-xl font-semibold mb-2 line-clamp-2 h-14">
-          {post.title}
-        </h3>
+        <Link
+          href={`/blogs/${post.slug.current}`}
+          className="w-full px-4 py-2 transition-all font-semibold  hover:bg-[#FDB913] bg-black hover:text-black text-lg md:text-base text-[#FDB913] mt-auto"
+        >
+          <h3 className="text-xl font-semibold mb-2 line-clamp-2 h-14">
+            {post.title}
+          </h3>
 
-        <div className="space-y-4">
+          <div className="space-y-4">
+            {/* Author & Date */}
+            <div className="text-sm text-gray-600  mt-8">
+              <span>{authorName}</span>
+            </div>
 
-
-        {/* Author & Date */}
-        <div className="text-sm text-gray-600  mt-8">
-          <span>{authorName}</span>
-        </div>
-
-        {/* Excerpt */}
-        {/* <p className="text-gray-700 line-clamp-3 mb-4 flex-grow">
+            {/* Excerpt */}
+            {/* <p className="text-gray-700 line-clamp-3 mb-4 flex-grow">
           {post.description || "Read more about this topic..."}
           </p> */}
 
-        {/* Read More Button - Fixed at bottom */}
-        <div className="">
-          <Link
-            href={`/blogs/${post.slug.current}`}
-            className="w-full px-4 py-2 transition-all font-semibold border-white rounded-xl hover:bg-[#FDB913] bg-black hover:text-black text-lg md:text-base text-[#FDB913] mt-auto"
-            >
-            Read More
-          </Link>
-            </div>
-        </div>
+            {/* Read More Button - Fixed at bottom */}
+            <div className="">Read More</div>
+          </div>
+        </Link>
       </div>
     </div>
   );

@@ -275,6 +275,46 @@ const nextConfig = {
         destination: '/career',
         permanent: true,
       },
+      {
+        source: '/copyright',
+        destination: '/policies/copyright',
+        permanent: true,
+      },
+      {
+        source: '/terms-of-use',
+        destination: '/policies/terms',
+        permanent: true,
+      },
+      {
+        source: '/pages/Blogs',
+        destination: '/blogs',
+        permanent: true,
+      },
+      {
+        source: '/pages/about',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/pages/properties',
+        destination: '/projects',
+        permanent: true,
+      },
+      {
+        source: '/pages/contact',
+        destination: '/contact',
+        permanent: true,
+      },
+      {
+        source: '/pages/Events',
+        destination: '/events',
+        permanent: true,
+      },
+      {
+        source: '/privacy-policy',
+        destination: '/policies/privacy',
+        permanent: true,
+      },
       
     ];
   },

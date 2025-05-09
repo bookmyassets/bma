@@ -2,6 +2,13 @@ import { Play, ChevronRight, Info } from "lucide-react";
 import Link from "next/link";
 import bg from "@/assests/bg-image.webp"
 
+export const metadata = {
+  robots: {
+    index: false,
+    follow: true
+  }
+};
+
 export default async function VideosPage() {
   // Assuming YouTube video links could be fetched from Sanity or another source
   const videos = [

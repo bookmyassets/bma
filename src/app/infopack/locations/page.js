@@ -2,6 +2,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import bg from "@/assests/bg-image.webp"
 
+const metadata = {
+  robots: {
+    index: false,
+    follow: true
+  }
+};
+
 const locations = [
   {
     name: "WestWyn County",

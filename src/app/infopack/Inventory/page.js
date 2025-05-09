@@ -6,10 +6,11 @@ import { Download, Eye, MapPin, Info } from "lucide-react";
 import bg from "@/assests/bg-image.webp";
 
 export const metadata = {
-  name: "robots",
-  content: "noindex, follow"
+  robots: {
+    index: false,
+    follow: true
+  }
 };
-
 
 export default async function InventoryPage() {
   let posts = [];

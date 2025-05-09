@@ -1,4 +1,3 @@
-import FloatingButtons from "./components/whatsapp";
 import HomeSlider from "./components/HeroSlider";
 import img1 from "@/assests/heroBMA.webp";
 import mimg1 from "@/assests/heroMobile.png";
@@ -213,7 +212,7 @@ export default async function Home() {
         </section>
        
         <TestimonialPagination />
-        <FloatingButtons />
+        
       </div>
     </>
   );

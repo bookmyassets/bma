@@ -23,6 +23,10 @@ export async function generateMetadata({ params }) {
     title: post.title || "Project Detail",
     description: post.metaDescription || post.excerpt || post.title,
     keywords: post.keywords?.join(", ") || "",
+    robots: {
+    index: false,
+    follow: true
+  }
   };
 }
 

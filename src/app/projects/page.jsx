@@ -39,24 +39,6 @@ export default async function Projects() {
       </div>
       </div>
 
-      {/* Project Filters (Optional) */}
-      <div className="bg-white border-b shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-3">
-          <button className="px-5 py-2 bg-[#FDB913] text-black rounded-lg font-medium hover:bg-[#C69C21] transition-colors">
-            All Projects
-          </button>
-          <button className="px-5 py-2 bg-white text-black hover:bg-gray-100 rounded-lg font-medium border border-black">
-            Active
-          </button>
-          <button className="px-5 py-2 bg-white text-black hover:bg-gray-100 rounded-lg font-medium border border-black">
-            Sold Out
-          </button>
-          <button className="px-5 py-2 bg-white text-black hover:bg-gray-100 rounded-lg font-medium border border-black">
-            Coming Soon
-          </button>
-        </div>
-      </div>
-
       {/* Projects Grid */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

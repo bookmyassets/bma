@@ -89,12 +89,7 @@ const canonicalUrl = `https://www.bookmyassets.com/gallery`
         </div>
 
         {/* Navigation with Category Tags */}
-        <div className="mt-16 flex flex-wrap justify-center gap-3">
-          <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full cursor-pointer hover:bg-blue-200 transition-colors font-medium">All Images</span>
-          <span className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-200 transition-colors font-medium">Infrastructure</span>
-          <span className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-200 transition-colors font-medium">Transportation</span>
-          <span className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-200 transition-colors font-medium">Urban Planning</span>
-        </div>
+        
       </div>
     </div>
                 </>

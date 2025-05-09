@@ -9,7 +9,7 @@ const Footer = () => {
         {/* Contact Form Section */}
         <div id="ContactForm" className="bg-white shadow-2xl p-2 mb-12" >
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-            Reach Out To Us
+            Book free consultation
           </h2>
           <ContactForm  />
         </div>
