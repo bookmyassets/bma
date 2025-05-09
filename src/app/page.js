@@ -1,12 +1,7 @@
 import FloatingButtons from "./components/whatsapp";
 import HomeSlider from "./components/HeroSlider";
-import img1 from "@/assests/banner.webp";
-import img2 from "@/assests/banner2.webp";
-import img4 from "@/assests/banner4.webp";
-import mimg1 from "@/assests/mb1.webp";
-import mimg2 from "@/assests/mb2.webp";
-import mimg3 from "@/assests/mb3.webp";
-import mimg4 from "@/assests/mb4.webp";
+import img1 from "@/assests/heroBMA.webp";
+import mimg1 from "@/assests/heroMobile.png";
 import ShortsSection from "./components/YouTube";
 import ParallaxSection from "./components/Parallex";
 import FAQSection from "./components/Faq";
@@ -162,12 +157,9 @@ export default async function Home() {
         <section>
           <HomeSlider
             img1={img1}
-            img2={img2}
-            img4={img4}
+           
             mimg1={mimg1}
-            mimg2={mimg2}
-            mimg3={mimg3}
-            mimg4={mimg4}
+           
           />
         </section>
 

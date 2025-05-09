@@ -4,5 +4,6 @@ Disallow: /policies/copyright
 Disallow: /policies/terms
 Disallow: /policies/privacy
 Disallow: /properties
+Disallow: /policies/refund-and-cancellation
 
 Sitemap : https://www.bookmyassets.com/sitemap.xml

@@ -1,5 +1,5 @@
 "use client"
-import { getProjectBySlug, projectInfo } from '@/sanity/lib/api'
+import { getProjectBySlug, projectInfoX } from '@/sanity/lib/api'
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -24,7 +24,7 @@ export default function ProjectSlider() {
           throw new Error("No project slug found in URL")
         }
 
-        const data = await projectInfo()
+        const data = await projectInfoX()
         
         // Check if relatedProjects exists and use it, otherwise use empty array
         const projectsData = data?.relatedProjects || []

@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import "./globals.css";
 import Image from "next/image";
-import { getPosts, projectInfoX } from "@/sanity/lib/api";
+import { getPosts, projectInfo } from "@/sanity/lib/api";
 import ContactForm from "./components/Contactform";
 import Script from "next/script";
 import Footer from "./components/Footer";
@@ -109,7 +109,7 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     async function fetchData() {
-      const infoData = await projectInfoX();
+      const infoData = await projectInfo();
       setInfo(infoData);
     }
     fetchData();

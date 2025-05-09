@@ -108,7 +108,7 @@ export default async function Post({ params }) {
   }
 
   try {
-    const [post, trendingBlogs, relatedBlogs] = await Promise.all([
+    const [ post, trendingBlogs, relatedBlogs] = await Promise.all([
       getPostBySlug(slug),
       getblogs(0,4), // Get only 4 blogs
       getUpdates(slug, 3), 

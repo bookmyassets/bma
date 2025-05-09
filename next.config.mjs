@@ -259,7 +259,22 @@ const nextConfig = {
         source: '/projects/paradise-p2/paradise-p2',
         destination: '/projects/dholera/paradise-p2/paradise-p2',
         permanent: true,
-      }
+      },
+      {
+        source: '/careers',
+        destination: '/career',
+        permanent: true,
+      },
+      {
+        source: '/dholera/abcd-building',
+        destination: '/dholera-sir/abcd-building-dholera',
+        permanent: true,
+      },
+      {
+        source: '/careers',
+        destination: '/career',
+        permanent: true,
+      },
       
     ];
   },

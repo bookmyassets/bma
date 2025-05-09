@@ -49,21 +49,6 @@ export async function getUpdates() {
 }
 
 export async function projectInfoX() {
-  const query = `*[_type == "post" && "project-Info" in categories[]->title && author-> name == "BookMyAssets" ]{
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
-    categories[]->{title}
-  }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
-}
-
-export async function projectInfo() {
   const query = `*[_type == "post" && "project-Info" in categories[]->title && author->name == "BookMyAssets"]{
     _id,
     title,
@@ -79,6 +64,40 @@ export async function projectInfo() {
 
   // Wrap into an object with `relatedProjects` key to match your component expectations
   return { relatedProjects: posts };
+}
+
+/* export async function projectInfo() {
+  const query = `*[_type == "post" && "project-Info" in categories[]->title && author->name == "BookMyAssets"]{
+    _id,
+    title,
+    slug,
+    mainImage,
+    publishedAt,
+    body,
+    author->{name, image},
+    categories[]->{title}
+  }`;
+
+  const posts = await client.fetch(query, {}, { cache: "no-store" });
+
+  // Wrap into an object with `relatedProjects` key to match your component expectations
+  return { relatedProjects: posts };
+} */
+
+export async function projectInfo() {
+  const query = `*[_type == "post" && "project-Info" in categories[]->title && author->name == "BookMyAssets"]{
+    _id,
+    title,
+    slug,
+    mainImage,
+    publishedAt,
+    body,
+    author->{name, image},
+    categories[]->{title}
+  }`;
+  const posts = await client.fetch(query, {}, { cache: 'no-store' });
+  return posts;
+
 }
 
 export async function Inventory() {

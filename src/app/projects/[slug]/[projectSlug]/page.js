@@ -102,9 +102,44 @@ export default async function SubProjectDetail({ params }) {
     };
     const canonicalUrl = `https://www.bookmyassets.com/projects/${slug}/${projectSlug}`
     
+    const post = await Promise.all([getProjectBySlug(slug)]);
+
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "alternativeHeadline": post.altHeadline || post.title,
+      "image": post.mainImage?.url,
+      "author": {
+        "@type": "Organization",
+        "name": "BookMyAssets"
+      },
+      "editor": "BookMyAssets Editorial Team",
+      "genre": post.genre || "General",
+      "keywords": post.keywords?.join(", "),
+     
+      "publisher": {
+        "@type": "Organization",
+        "name": "BookMyAssets",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bookmyassets.com/assets/images/logo.png"
+        }
+      },
+      "url": `https://www.bookmyassets.com/projects/${slug}`,
+      
+      "datePublished": post.publishedAt,
+      "dateModified": post._updatedAt || post.publishedAt,
+      "description": post.metaDescription
+    };
+
     
     return (
       <div>
+        <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
         <link rel="canonical" href={canonicalUrl}/>
         
         <div className="bg-white min-h-screen">

@@ -1,16 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import { FaUser, FaPhoneAlt} from "react-icons/fa";
+import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import "swiper/css";
 import "swiper/css/pagination";
-import logo from "@/assests/Bmalogo.png"; // Adjust path to your logo
+import logo from "@/assests/Bmalogo.png";
 
-export default function LandingPage({ img1, img2, img4, mimg1, mimg2, mimg3, mimg4 }) {
+export default function LandingPage({ img1, mimg1  }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
@@ -18,8 +15,7 @@ export default function LandingPage({ img1, img2, img4, mimg1, mimg2, mimg3, mim
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [showFormPopup, setShowFormPopup] = useState(false);
 
-  const sliderImages = [img1, img2, img4];
-  const mobilesliderImages = [mimg1, mimg2, mimg3, mimg4];
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -66,7 +62,7 @@ export default function LandingPage({ img1, img2, img4, mimg1, mimg2, mimg3, mim
 
     try {
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+       "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -105,90 +101,121 @@ export default function LandingPage({ img1, img2, img4, mimg1, mimg2, mimg3, mim
     }
   };
 
+  // Text animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.6,
+        duration: 0.5
+      }
+    },
+    hover: {
+      scale: 1.05,
+      backgroundColor: "#FDB913",
+      color: "#000",
+      transition: { duration: 0.3 }
+    }
+  };
+
   return (
     <div className="relative h-[90vh]">
-      {/* Slider Section */}
-      <div className="absolute inset-0 max-sm:hidden">
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={0}
-          slidesPerView={1}
-          autoplay={{ delay: 5000 }}
-          loop={true}
-          pagination={{ clickable: true }}
-        >
-          {sliderImages.map((img, index) => (
-            <SwiperSlide key={index}>
-              <div className="relative h-[90vh] ">
-                <Image
-                  src={img}
-                  alt={`Slide ${index + 1}`}
-                  fill
-                  className="max-sm:object-contain bg-black"
-                  priority={index === 0}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      {/* Desktop Background */}
+      <div className="absolute inset-0 hidden md:block">
+        <Image
+          src={img1}
+          alt="Investment Opportunity"
+          fill
+          className="bg-black"
+          priority
+        />
       </div>
 
-      <div className="absolute inset-0 lg:hidden">
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={0}
-          slidesPerView={1}
-          autoplay={{ delay: 5000 }}
-          loop={true}
-          pagination={{ clickable: true }}
-        >
-          {mobilesliderImages.map((img, index) => (
-            <SwiperSlide key={index}>
-              <div className="relative h-[90vh] ">
-                <Image
-                  src={img}
-                  alt={`Slide ${index + 1}`}
-                  fill
-                  className=" bg-black"
-                  priority={index === 0}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      {/* Mobile Background - Hidden by default */}
+      <div className="absolute inset-0 block md:hidden">
+        <Image
+          src={mimg1}
+          alt="Investment Opportunity Mobile"
+          fill
+          className=" bg-black"
+          priority
+        />
       </div>
 
-      {/* Overlay Content */}
-      <div className="relative z-10 h-[90vh] flex items-center justify-center">
-        {" "}
-        {/* Added justify-center */}
-        <div className="container mx-auto px-4 w-full">
-          {" "}
-         
-          <div
-            className="flex flex-col items-center text-center space-y-4 w-full" /* Added items-center and w-full */
-          >
-            <h2 className="text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] px-4">
+      {/* Content Overlay */}
+      <div className="relative z-10 h-full flex flex-col justify-between items-center pb-16">
+        {/* Text Section - Left Aligned */}
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="container mx-auto px-4 pt-40 md:pt-60"
+        >
+          <div className="max-w-2xl">
+            <motion.h1 
+              variants={itemVariants}
+              className="text-4xl md:text-7xl font-bold leading-tight text-transparent text-white mb-6"
+            >
+              BookMyAssets
+            </motion.h1>
+            <motion.h2 
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] mb-6"
+            >
               Your Perfect Investment Opportunity
-            </h2>
-            <p className="text-base md:text-xl max-w-2xl bg-clip-text text-white px-4">
+            </motion.h2>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-base md:text-xl text-white mb-8"
+            >
               BookMyAssets™ is your trusted real estate partner, offering
               premium commercial and residential investment opportunities with
               unparalleled service.
-            </p>
-            <div
-              className="flex space-x-4 pt-4"
-            >
-              
-              <button
-                onClick={() => setShowFormPopup(true)}
-                className="px-6 py-2 border border-white rounded-full hover:bg-[#FDB913] bg-black hover:text-black transition text-sm md:text-base text-[#FDB913]"
-              >
-                Contact Us
-              </button>
-            </div>
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
+        
+        {/* Contact Button - Bottom */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          className="w-full flex justify-center"
+        >
+          <motion.button
+            variants={buttonVariants}
+            whileHover="hover"
+            onClick={() => setShowFormPopup(true)}
+            className="px-8 py-3 border border-white rounded-full bg-black text-[#FDB913] text-sm md:text-base shadow-lg"
+          >
+            Contact Us
+          </motion.button>
+        </motion.div>
       </div>
 
       {/* Success Popup */}
@@ -237,7 +264,7 @@ export default function LandingPage({ img1, img2, img4, mimg1, mimg2, mimg3, mim
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0  bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
+            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
           >
             <motion.div
               initial={{ scale: 0.9, y: 50 }}
@@ -251,7 +278,7 @@ export default function LandingPage({ img1, img2, img4, mimg1, mimg2, mimg3, mim
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-black  p-2 rounded-full shadow-lg"
+                  className="bg-black p-2 rounded-full shadow-lg"
                 >
                   <Image
                     src={logo}

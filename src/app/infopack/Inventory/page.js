@@ -5,6 +5,12 @@ import { urlFor } from "@/sanity/lib/image";
 import { Download, Eye, MapPin, Info } from "lucide-react";
 import bg from "@/assests/bg-image.webp";
 
+export const metadata = {
+  name: "robots",
+  content: "noindex, follow"
+};
+
+
 export default async function InventoryPage() {
   let posts = [];
   let isLoading = true;
