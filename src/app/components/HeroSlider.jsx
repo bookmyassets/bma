@@ -149,7 +149,7 @@ export default function LandingPage({ img1, mimg1 }) {
           src={img1}
           alt="Investment Opportunity"
           fill
-          className="object-contain  bg-black"
+          className="object-cover  bg-black"
           priority
         />
       </div>
