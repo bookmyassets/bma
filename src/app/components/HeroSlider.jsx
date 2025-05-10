@@ -142,14 +142,14 @@ export default function LandingPage({ img1, mimg1 }) {
   };
 
   return (
-    <div className="relative h-[80vh]">
+    <div className="relative h-[80vh] w-full">
       {/* Desktop Background */}
       <div className="absolute inset-0 hidden md:block">
         <Image
           src={img1}
           alt="Investment Opportunity"
           fill
-          className="bg-black"
+          className="object-cover bg-black"
           priority
         />
       </div>
@@ -160,58 +160,55 @@ export default function LandingPage({ img1, mimg1 }) {
           src={mimg1}
           alt="Investment Opportunity Mobile"
           fill
-          className=" bg-black"
+          className="object-cover bg-black"
           priority
         />
       </div>
 
       {/* Content Overlay */}
-      <div className="relative z-10 h-full flex flex-col justify-between items-center pb-16">
-        {/* Text Section - Left Aligned */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="container mx-auto px-4 pt-40 md:pt-60"
-        >
-          <div className="max-w-2xl space-y-8">
+      <div className="relative z-10 h-full flex items-center justify-center w-full">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="max-w-7xl mx-auto text-left"
+          >
             <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-6xl font-bold text-center leading-tight text-transparent text-white mb-6"
+              className="text-4xl md:text-6xl font-bold text-white mb-6"
             >
               BookMyAssets
             </motion.h1>
             <motion.h2
               variants={itemVariants}
-              className="text-4xl md:text-5xl font-bold text-center leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] mb-6"
+              className="max-w-2xl text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] mb-6"
             >
               Your Perfect Investment Opportunity
             </motion.h2>
-            {/* Contact Button - Bottom */}
             <motion.div
-              initial="hidden"
-              animate="visible"
-              className="w-full flex justify-center"
+              variants={buttonVariants}
+              className="w-full flex "
             >
               <motion.button
-                variants={buttonVariants}
                 whileHover="hover"
                 onClick={() => setShowFormPopup(true)}
-                className="px-8 py-3 border border-white rounded-full bg-black text-[#FDB913] text-sm md:text-base shadow-lg"
+                className="max-w-2xl font-semibold px-8 py-3 border border-white rounded-full bg-black text-[#FDB913] hover:bg-[#FDB913] hover:text-black text-sm md:text-base shadow-lg"
               >
                 Contact Us
               </motion.button>
             </motion.div>
             <motion.p
               variants={itemVariants}
-              className="text-base md:text-xl text-white"
+              className="max-w-2xl text-base md:text-xl text-white mt-8 mb-10"
             >
               BookMyAssets™ is your trusted real estate partner, offering
               premium commercial and residential investment opportunities with
               unparalleled service.
             </motion.p>
-          </div>
-        </motion.div>
+            
+          </motion.div>
+        </div>
       </div>
 
       {/* Success Popup */}
