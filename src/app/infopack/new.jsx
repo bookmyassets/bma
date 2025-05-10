@@ -14,7 +14,6 @@ import { getPosts, getSub } from "@/sanity/lib/api";
 import Dholera from "./Dholera";
 import BrowseBlogs from "./Blogs";
 
-
 // Feature card component for better reusability
 const FeatureCard = ({ href, image, alt, title }) => (
   <Link
@@ -37,21 +36,20 @@ const FeatureCard = ({ href, image, alt, title }) => (
 
 export default async function Info() {
   const westwyn = await getSub();
-  const proj = await getPosts();
-  
+  const posts = await getPosts();
+  const proj = posts[0];
+
   const subProjectInventory = westwyn.filter((item) => {
- 
     if (!item || !item.categories || !Array.isArray(item.categories)) {
       return false;
     }
-    
-    const isSoldOut = item.categories.some(cat => 
-      cat && cat.title && cat.title.toLowerCase() === "sold out"
+
+    const isSoldOut = item.categories.some(
+      (cat) => cat && cat.title && cat.title.toLowerCase() === "sold out"
     );
-    
+
     return !isSoldOut;
   });
-
 
   return (
     <main
@@ -144,18 +142,20 @@ export default async function Info() {
                         className="object-cover"
                       />
                     </div>
-                    
+
                     {/* Content section */}
                     <div className="p-4 flex flex-col flex-grow">
-                      <h3 className="font-bold text-3xl mb-2 text-gray-800">{west.title}</h3>
+                      <h3 className="font-bold text-3xl mb-2 text-gray-800">
+                        {west.title}
+                      </h3>
                       <div className="line-clamp-3 text-lg text-gray-600 mb-4">
                         <PortableText value={west.body} />
                       </div>
-                      
+
                       {/* Read more button */}
                       <div className="mt-auto">
                         <Link
-                          href={`/project/${proj.slug}/${west.slug?.current || ""}`}
+                          href={`/projects/${proj.slug.current}/${west.slug?.current || ""}`}
                           className="inline-block bg-amber-400 text-gray-800 font-medium py-2 px-4 rounded hover:bg-amber-500 transition-colors"
                         >
                           Read More
@@ -168,7 +168,8 @@ export default async function Info() {
             ) : (
               <div className="col-span-full text-center p-8 bg-gray-100 rounded-md">
                 <p className="text-gray-600 text-lg">
-                  No sub-projects available at the moment. Please check back later.
+                  No sub-projects available at the moment. Please check back
+                  later.
                 </p>
               </div>
             )}
@@ -182,20 +183,19 @@ export default async function Info() {
           >
             About <span>Dholera-SIR</span>
           </h2>
-              <div>
-                <Dholera/>
-              </div>
-
+          <div>
+            <Dholera />
+          </div>
         </section>
         <section>
-<h2
+          <h2
             id="updates-heading"
             className="bg-amber-300 text-gray-900 text-xl md:text-3xl lg:text-4xl text-center p-3 md:p-5 font-semibold mx-auto rounded-md mb-8"
           >
             Dholera Blogs
           </h2>
           <div>
-              <BrowseBlogs/>
+            <BrowseBlogs />
           </div>
         </section>
       </div>
