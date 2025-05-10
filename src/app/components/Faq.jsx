@@ -113,8 +113,6 @@ export default function FAQSection() {
         <Image
           src={clickBait}
           alt="clickbait mobile"
-          width={400}
-          height={600}
           className="w-full h-auto"
         />
         <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-4 px-4">
@@ -135,8 +133,6 @@ export default function FAQSection() {
         <Image
           src={clickBaitm}
           alt="clickbait desktop"
-          width={1200}
-          height={600}
           className="w-full h-auto"
         />
         <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-6 px-8">
