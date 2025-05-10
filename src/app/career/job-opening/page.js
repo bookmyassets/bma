@@ -74,7 +74,7 @@ export default function Posting() {
       title: "Field Executive (Sales)",
       company: "Book My Assets",
       description:
-        "Join our team as a Portfolio Manager and help our clients achieve their financial goals through expert asset management.",
+        "Join our team as a Field Executive (Sales) and help our clients achieve their financial goals through expert asset management.",
       location: "JMD Megapolis, Sector 48, Gurgaon",
       jobType: "Full Time",
       qualifications: "12+",
@@ -95,7 +95,7 @@ export default function Posting() {
       title: "Video Conferencing Sales Executive",
       company: "Book My Assets",
       description:
-        "Join our team as a Portfolio Manager and help our clients achieve their financial goals through expert asset management.",
+        "Join our team as a Video Conferencing Sales Executive and help our clients achieve their financial goals through expert asset management.",
       location: "JMD Megapolis, Sector 48, Gurgaon",
       jobType: "Full Time",
       qualifications: "12+",
