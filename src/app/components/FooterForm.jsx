@@ -71,7 +71,7 @@ export default function ContactForm() {
             className="rounded-full mx-auto mb-4"
           />
           <h2 className="text-3xl font-bold text-white mb-2 text-center">
-            Get Started
+            Book free consultation
           </h2>
           <p className="text-gray-300 text-sm text-center">
             Fill this form to explore premium investment opportunities

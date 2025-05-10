@@ -32,7 +32,7 @@ export default function BlogCard({ post }) {
         {/* Title */}
         <Link
           href={`/blogs/${post.slug.current}`}
-          className="w-full px-4 py-2 transition-all font-semibold  hover:bg-[#FDB913] bg-black hover:text-black text-lg md:text-base text-[#FDB913] mt-auto"
+          className="w-full px-4 py-2 transition-all font-semibold hover:bg-[#FDB913] bg-white text-lg md:text-base text-black mt-auto"
         >
           <h3 className="text-xl font-semibold mb-2 line-clamp-2 h-14">
             {post.title}
@@ -44,13 +44,8 @@ export default function BlogCard({ post }) {
               <span>{authorName}</span>
             </div>
 
-            {/* Excerpt */}
-            {/* <p className="text-gray-700 line-clamp-3 mb-4 flex-grow">
-          {post.description || "Read more about this topic..."}
-          </p> */}
-
             {/* Read More Button - Fixed at bottom */}
-            <div className="">Read More</div>
+            <p>Read More</p>
           </div>
         </Link>
       </div>

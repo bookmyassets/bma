@@ -26,7 +26,7 @@ export default async function BlogsPage() {
         <link rel="canonical" href={canonicalUrl}/>
 
       {/* Hero Section */}
-      <div className="relative pt-12 h-80 md:h-[450px] w-full overflow-hidden">
+      <div className="relative pt-12 h-[400px] w-full overflow-hidden">
         <Image
           src={m}
           alt="Dholera Skyline"

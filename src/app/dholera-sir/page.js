@@ -1,5 +1,6 @@
 import { getUpdates, projectInfo } from "@/sanity/lib/api";
 import hero from "@/assests/blogHero.webp";
+import herom from "@/assests/dholeraSIRm.webp";
 import Image from "next/image";
 import BlogCard from "./BlogCard";
 import TrendingBlogItem from "./TrendingBlog";
@@ -40,14 +41,21 @@ export default async function BlogsPage() {
     <>
       {/* Hero Section with Black Background */}
       <div className="bg-black text-white">
-        <div className="px-4 py-16 relative">
+        <div className="px-4 relative">
           <div className="relative h-[400px] w-full rounded-xl overflow-hidden">
             <Image
               src={hero}
               alt="Dholera SIR"
               fill
               priority
-              className="object-cover"
+              className="object-cover max-sm:hidden"
+            />
+            <Image
+              src={herom}
+              alt="Dholera SIR"
+              fill
+              priority
+              className="object-cover h-full md:hidden"
             />
             <div className="absolute inset-0 max-w-6xl mx-auto flex items-center p-6 text-left">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">

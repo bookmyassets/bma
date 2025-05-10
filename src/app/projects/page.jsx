@@ -26,7 +26,7 @@ export default async function Projects() {
       {/* Hero Section with Black Background */}
       <div className="relative bg-black text-white">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-        <div className="relative w-full h-[300px]">
+        <div className="relative w-full h-[400px]">
         <Image
           src={hero}
           alt="hero"
@@ -34,7 +34,7 @@ export default async function Projects() {
           className="object-cover brightness-50"
           />
         <div className="absolute inset-0 max-w-6xl mx-auto flex items-center">
-          <h1 className="text-5xl font-bold text-left text-white">Dholera Smart City <br /> <span className="text-[#ddb954]"> Projects</span></h1>
+          <h1 className="text-5xl px-4 font-bold text-left text-white">Dholera Smart City <br /> <span className="text-[#ddb954]"> Projects</span></h1>
         </div>
       </div>
       </div>
