@@ -114,7 +114,7 @@ const BrowseBlogsSection = () => {
             ))}
           </div>
         ) : (
-          <NotFound />
+          <NotFound/>
         )}
 
         {/* Browse More Blogs Button */}

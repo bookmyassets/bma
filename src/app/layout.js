@@ -190,7 +190,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-75 z-50">
+        <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-50 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-20  items-center">
               {/* Logo */}
@@ -436,19 +436,19 @@ export default function RootLayout({ children }) {
               <div className="lg:hidden flex items-center gap-4">
                 <div className="relative">
                   <button
-                    className="text-[#FDB913] hover:text-white px-3 py-2 cursor-pointer flex items-center gap-1"
+                    className="text-white text-xl font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
                     onClick={toggleGetInTouchDropdown}
                   >
                     Get in Touch
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+                      className={`h-4 w-4 text-white  font-semibold transition-transform duration-300 ${
                         isGetInTouchDropdownOpen ? "rotate-180" : ""
                       }`}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="4"
                     >
                       <path
                         strokeLinecap="round"

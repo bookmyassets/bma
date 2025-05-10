@@ -1,5 +1,5 @@
 import React from 'react'
-import Info from './Info'
+import Info from './new'
 import Head from 'next/head';
 
 /* export const metadata = {

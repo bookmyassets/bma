@@ -18,6 +18,21 @@ export async function getPosts() {
   return posts;
 }
 
+export async function getSub() {
+  const query = `*[_type == "post" && "Sub-Project" in categories[]->title && author-> name == "BookMyAssets" ]{
+    _id,
+    title,
+    slug,
+    mainImage,
+    publishedAt,
+    body,
+    author->{name, image},
+    categories[]->{title},
+  }`;
+  const posts = await client.fetch(query, {}, { cache: 'no-store' });
+  return posts;
+}
+
 export async function getblogs() {
   const query = `*[_type == "post" && "Blog" in categories[]->title && author-> name == "BookMyAssets" ]{
     _id,
