@@ -190,7 +190,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-50 z-50">
+        <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-50 bg-black/60 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-20  items-center">
               {/* Logo */}
@@ -475,13 +475,13 @@ export default function RootLayout({ children }) {
                             Enquire Now
                           </button>
                           <a
-                            href="tel:+918130371647 "
+                            href="tel:+918130371647"
                             className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                           >
                             Call Now
                           </a>
                           <a
-                            href="https://wa.me/918130371647 "
+                            href="https://wa.me/918130371647"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"

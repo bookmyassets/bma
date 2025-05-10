@@ -57,7 +57,7 @@ export default async function Info() {
     <main
       className="py-16 px-4 sm:px-6 pt-28 lg:px-8 min-h-[70vh] overflow-auto relative"
       style={{
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${bg.src})`,
+        backgroundImage: `url(${bg.src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

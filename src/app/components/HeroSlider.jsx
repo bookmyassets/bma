@@ -142,14 +142,14 @@ export default function LandingPage({ img1, mimg1 }) {
   };
 
   return (
-    <div className="relative h-[80vh] w-full">
+    <div className="relative pt-12 h-[80vh] w-full">
       {/* Desktop Background */}
       <div className="absolute inset-0 hidden md:block">
         <Image
           src={img1}
           alt="Investment Opportunity"
           fill
-          className="object-cover bg-black"
+          className="object-contain  bg-black"
           priority
         />
       </div>
@@ -172,7 +172,7 @@ export default function LandingPage({ img1, mimg1 }) {
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            className="max-w-7xl mx-auto text-left"
+            className="max-w-7xl mx-auto text-center md:text-left"
           >
             <motion.h1
               variants={itemVariants}
@@ -188,7 +188,7 @@ export default function LandingPage({ img1, mimg1 }) {
             </motion.h2>
             <motion.div
               variants={buttonVariants}
-              className="w-full flex "
+              className="w-full max-sm:flex justify-center items-center"
             >
               <motion.button
                 whileHover="hover"
