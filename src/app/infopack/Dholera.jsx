@@ -123,8 +123,8 @@ export default function Dholera() {
             src={urlFor(project.mainImage).width(800).height(600).url()}
             alt={project.title || 'Project image'}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover"
+            
+            className="object-contain md:object-cover"
           />
         </div>
       )}
