@@ -174,12 +174,12 @@ export default function LandingPage({ img1, mimg1 }) {
             variants={containerVariants}
             className="max-w-7xl mx-auto text-center md:text-left"
           >
-            <motion.h1
+            <motion.h2
               variants={itemVariants}
               className="text-4xl md:text-6xl font-bold text-white mb-6"
             >
               BookMyAssets
-            </motion.h1>
+            </motion.h2>
             <motion.h2
               variants={itemVariants}
               className="max-w-2xl text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] mb-6"
