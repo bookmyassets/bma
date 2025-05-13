@@ -153,7 +153,7 @@ export default function FAQSection() {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-[1000]">
             <PopupForm
               title="Free Site Visit"
-              buttonName="Download Now"
+              buttonName="Submit"
               onClose={closeBrochureForm}
               onSuccess={() => setIsFormSubmitted(true)}
             />

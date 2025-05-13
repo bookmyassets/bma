@@ -142,14 +142,14 @@ export default function LandingPage({ img1, mimg1 }) {
   };
 
   return (
-    <div className="relative pt-12 h-[80vh] w-full">
+    <div className="relative pt-12 h-[90vh] w-full">
       {/* Desktop Background */}
       <div className="absolute inset-0 hidden md:block">
         <Image
           src={img1}
           alt="Investment Opportunity"
           fill
-          className="object-cover  bg-black"
+          className="object-cover bg-black"
           priority
         />
       </div>
@@ -166,7 +166,7 @@ export default function LandingPage({ img1, mimg1 }) {
       </div>
 
       {/* Content Overlay */}
-      <div className="relative z-10 h-full flex items-center justify-center w-full">
+      <div className="relative z-10 h-full flex items-center justify-center">
         <div className="container mx-auto px-4">
           <motion.div
             initial="hidden"

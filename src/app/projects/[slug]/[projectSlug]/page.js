@@ -191,47 +191,47 @@ export default async function SubProjectDetail({ params }) {
                 )}
 
                 <div className="lg:hidden mb-10">
+
+                  {subProject?.relatedProjects?.length > 0 && (
+                    <aside className="your-sidebar-class">
                   <h3 className="text-xl font-bold mb-4 text-black">
                     Our {mainProject.title} Projects
                   </h3>
+                      <div className="grid grid-cols-3 gap-4">
+                        {subProject.relatedProjects.map((project) => {
+                          const projectSlugStr =
+                            typeof project.slug === "object"
+                              ? project.slug.current
+                              : project.slug;
 
-                  {subProject?.relatedProjects?.length > 0 ? (
-                    <div className="grid grid-cols-3 gap-4">
-                      {subProject.relatedProjects.map((project) => {
-                        const projectSlugStr =
-                          typeof project.slug === "object"
-                            ? project.slug.current
-                            : project.slug;
-
-                        return (
-                          <Link
-                            key={projectSlugStr}
-                            href={`/projects/${slug}/${projectSlugStr}`}
-                            className="flex flex-col items-center text-center hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
-                          >
-                            <div className="w-full aspect-square rounded-lg overflow-hidden bg-gray-200 mb-2">
-                              {project.mainImage && (
-                                <Image
-                                  src={urlFor(project.mainImage)
-                                    .width(200)
-                                    .height(200)
-                                    .url()}
-                                  alt={project.title}
-                                  width={200}
-                                  height={200}
-                                  className="w-full h-full object-cover"
-                                />
-                              )}
-                            </div>
-                            <h4 className="text-sm font-semibold text-black">
-                              {project.title}
-                            </h4>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <p className="text-gray-500">No related projects found.</p>
+                          return (
+                            <Link
+                              key={projectSlugStr}
+                              href={`/projects/${slug}/${projectSlugStr}`}
+                              className="flex flex-col items-center text-center hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
+                            >
+                              <div className="w-full aspect-square rounded-lg overflow-hidden bg-gray-200 mb-2">
+                                {project.mainImage && (
+                                  <Image
+                                    src={urlFor(project.mainImage)
+                                      .width(200)
+                                      .height(200)
+                                      .url()}
+                                    alt={project.title}
+                                    width={200}
+                                    height={200}
+                                    className="w-full h-full object-cover"
+                                  />
+                                )}
+                              </div>
+                              <h4 className="text-sm font-semibold text-black">
+                                {project.title}
+                              </h4>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </aside>
                   )}
                 </div>
 
@@ -246,13 +246,13 @@ export default async function SubProjectDetail({ params }) {
               </article>
 
               <aside className="lg:w-1/3">
-                <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200">
-                  <h3 className="text-xl font-bold mb-4 text-black">
-                    Our {mainProject.title} Projects
-                  </h3>
-                  <div className="space-y-4">
-                    {subProject?.relatedProjects?.length > 0 ? (
-                      subProject.relatedProjects.map((project) => {
+                {subProject?.relatedProjects?.length > 0 && (
+                  <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200">
+                    <h3 className="text-xl font-bold mb-4 text-black">
+                      Our {mainProject.title} Projects
+                    </h3>
+                    <div className="space-y-4">
+                      {subProject.relatedProjects.map((project) => {
                         const projectSlugStr =
                           typeof project.slug === "object"
                             ? project.slug.current
@@ -285,14 +285,10 @@ export default async function SubProjectDetail({ params }) {
                             </div>
                           </Link>
                         );
-                      })
-                    ) : (
-                      <p className="text-gray-500">
-                        No related projects found.
-                      </p>
-                    )}
+                      })}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className="sticky mt-8 top-32">
                   <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 mb-6">
