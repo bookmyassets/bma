@@ -1,14 +1,17 @@
 import React from "react";
 import hero from "@/assests/DIA.webp";
-import road from "@/assests/gallery/Dholera Road.webp";
-import roads from "@/assests/gallery/Dholera Roads.webp";
-import solarPlant from "@/assests/gallery/Dholera Solar Plant.webp";
-import solarProject from "@/assests/gallery/Dholera Solar Project.webp";
-import semiconductor from "@/assests/gallery/TATA Semiconductor.webp";
-import tata from "@/assests/gallery/TATA.webp";
-import connectivity from "@/assests/gallery/public_transport_and_connectivity.webp";
-import skillDevelopment from "@/assests/gallery/LocalEmployment_and_SkillDevelopment.webp";
-import investment from "@/assests/gallery/Investment_Opportunities_DholeraSmartCity.webp";
+import abcd from "@/assests/gallery/abcd-building-dholera.webp";
+import artificialRiver from "@/assests/gallery/artificial-revier.webp";
+import artificialRiver2 from "@/assests/gallery/artificial-revier-dholera.webp";
+import dholeraMetro from "@/assests/gallery/dholera-metro.webp";
+import outerRoad from "@/assests/gallery/outer-ring-road.webp";
+import rVilla from "@/assests/gallery/renamed_villa.webp";
+import renew from "@/assests/gallery/renew-dholera.webp";
+import runwayDIA from "@/assests/gallery/runway-of-dholera-international-airport.webp";
+import tata from "@/assests/gallery/tata-plant-under-construction-dholera.webp";
+import semicon from "@/assests/gallery/tata-semiconductor-plant.webp";
+import waterPlant from "@/assests/gallery/water-treatment-plant.webp";
+import westwyn from "@/assests/gallery/westwyn-dholera.webp";
 import Image from "next/image";
 
 export async function generateMetadata() {
@@ -26,55 +29,73 @@ export default function DholeraProgressPage() {
   const galleryImages = [
     {
       id: 1,
-      src: road,
-      alt: "Dholera Infrastructure",
+      src: abcd,
+      alt: "ABCD Building",
       caption: "State-of-the-art infrastructure development in progress",
     },
     {
       id: 2,
-      src: roads,
+      src: artificialRiver,
       alt: "Dholera Smart City Project",
       caption: "Master plan of India's first greenfield smart city",
     },
     {
       id: 3,
-      src: solarPlant,
+      src: artificialRiver2,
       alt: "Dholera Solar Plant",
       caption: "High-speed connectivity via the Ahmedabad-Dholera Expressway",
     },
     {
       id: 4,
-      src: solarProject,
+      src: dholeraMetro,
       alt: "Dholera Solar Project",
       caption: "Aerial view of the Special Investment Region",
     },
     {
       id: 5,
-      src: semiconductor,
+      src: outerRoad,
       alt: "Dholera Semicon",
       caption: "Upcoming international airport boosting connectivity",
     },
     {
       id: 6,
-      src: tata,
+      src: rVilla,
       alt: "TATA",
       caption: "Sustainable urban planning with smart technology",
     },
     {
       id: 7,
-      src: connectivity,
+      src: renew,
       alt: "Public Transport and connectivity",
       caption: "Sustainable urban planning with smart technology",
     },
     {
       id: 8,
-      src: skillDevelopment,
+      src: runwayDIA,
       alt: "Local Employment and Skill Development",
       caption: "Sustainable urban planning with smart technology",
     },
     {
       id: 9,
-      src: investment,
+      src: tata,
+      alt: "Investment Opportunities Dholera SmartCity",
+      caption: "Sustainable urban planning with smart technology",
+    },
+    {
+      id: 10,
+      src: semicon,
+      alt: "Investment Opportunities Dholera SmartCity",
+      caption: "Sustainable urban planning with smart technology",
+    },
+    {
+      id: 11,
+      src: waterPlant,
+      alt: "Investment Opportunities Dholera SmartCity",
+      caption: "Sustainable urban planning with smart technology",
+    },
+    {
+      id: 12,
+      src: westwyn,
       alt: "Investment Opportunities Dholera SmartCity",
       caption: "Sustainable urban planning with smart technology",
     },
@@ -122,11 +143,11 @@ export default function DholeraProgressPage() {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   priority={image.id <= 3}
                 />
-                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                {/* <div className="absolute inset-0 flex flex-col justify-end p-6">
                   <h3 className="text-white text-xl font-bold mb-2">
                     {image.alt}
                   </h3>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
