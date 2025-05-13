@@ -63,7 +63,7 @@ export default async function BlogsPage() {
                 <br/>
                 <span className="text-[#ddb954]">
 
-                Special Investment Region
+                Special Investment <br/> Region
                 </span>
               </h1>
             </div>
