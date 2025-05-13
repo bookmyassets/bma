@@ -162,7 +162,7 @@ const DholeraInvestment = () => {
             className="bg-white p-3 rounded text-center font-semibold"
             style={{ color: colors.darkGold }}
             >
-            Hello Dholera
+            WestWyn County
           </div>
         </div>
       </div>

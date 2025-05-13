@@ -95,6 +95,57 @@ const RelatedBlogCard = ({ blog }) => {
     </Link>
   );
 };
+const LatestupdatesCard = ({ blog }) => {
+  return (
+    <Link href={`/dholera-sir/${blog.slug.current}`}>
+      <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
+        <div className="relative h-48 overflow-hidden">
+          {blog.mainImage ? (
+            <Image
+              src={urlFor(blog.mainImage).width(400).height(250).url()}
+              alt={blog.title}
+              width={400}
+              height={250}
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center">
+              <span className="text-gray-400">No image</span>
+            </div>
+          )}
+          {blog.categories && blog.categories.length > 0 && (
+            <div className="absolute top-2 left-2">
+              <span className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full bg-opacity-90">
+                {blog.categories[0].title || "Blog"}
+              </span>
+            </div>
+          )}
+        </div>
+        <div className="p-5">
+          <div className="text-sm text-gray-500 mb-2">
+            {new Date(blog.publishedAt || blog._createdAt).toLocaleDateString(
+              "en-US",
+              {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              }
+            )}
+          </div>
+          <h3 className="font-bold text-lg mb-2 text-gray-900 line-clamp-2">
+            {blog.title}
+          </h3>
+          <p className="text-gray-700 mb-4 line-clamp-3">{blog.description}</p>
+          <div className="flex items-center justify-between mt-auto">
+            <span className="hover:text-[#C69C21] text-[#FDB913] p-1 rounded-xl font-semibold bg-gray-800 inline-flex items-center">
+              Read more
+            </span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
 
 export default async function Post({ params }) {
   const { slug } = params;
@@ -446,7 +497,7 @@ export default async function Post({ params }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedBlogs && relatedBlogs.length > 0
                 ? relatedBlogs.map((blog) => (
-                    <RelatedBlogCard key={blog._id} blog={blog} />
+                    <LatestupdatesCard key={blog._id} blog={blog} />
                   ))
                 : Array(3)
                     .fill(0)

@@ -65,33 +65,6 @@ export default async function Projects() {
                       ) : (
                       <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21]"></div>
                     )}
-
-                    {/* Status Badge */}
-                    <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                      {post.categories && Array.isArray(post.categories) ? (
-                        post.categories.map((category, index) => (
-                          <span
-                          key={index}
-                          className={`px-3 py-1 text-sm font-semibold rounded-full shadow-md ${
-                            category.title.toLowerCase() === "sold out"
-                            ? "bg-red-600 text-white"
-                            : category.title.toLowerCase() === "active"
-                            ? "bg-[#FDB913] text-black"
-                            : category.title.toLowerCase() ===
-                            "coming soon"
-                            ? "bg-black text-[#FDB913]"
-                            : "bg-[#FDB913] text-black"
-                          }`}
-                          >
-                            {category.title}
-                          </span>
-                        ))
-                      ) : (
-                        <span className="px-3 py-1 text-sm font-semibold rounded-full shadow-md bg-[#FDB913] text-black">
-                          Project
-                        </span>
-                      )}
-                    </div>
                   </div>
 
                   {/* Content */}

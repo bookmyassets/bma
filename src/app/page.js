@@ -193,7 +193,7 @@ export default async function Home() {
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <button className="bg-black text-white py-4 px-8 rounded-md font-bold hover:bg-gray-800 transition-colors">
-              <Link href="/projects">Explore Properties</Link>
+              <Link href="/projects/dholera/westwyn-county-wc">Explore Properties</Link>
             </button>
             <button className="bg-white text-black py-4 px-8 rounded-md font-bold hover:bg-gray-100 transition-colors">
               <Link href="https://wa.me/918130371647">Schedule Consultation</Link>

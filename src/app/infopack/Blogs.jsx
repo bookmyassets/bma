@@ -29,7 +29,7 @@ const BrowseBlogs = () => {
   };
 
   return (
-    <section className="px-6 md:px-36 relative bg-white">
+    <section className="px-6 md:px-36 relative">
       <div className="container mx-auto relative">
         {b.length > 0 ? (
           <div className="max-w-4xl mx-auto space-y-4 px-2 gap-8">
