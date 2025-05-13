@@ -37,6 +37,8 @@ export default function RootLayout({ children }) {
   const projectsRef = useRef(null);
   const getInTouchRef = useRef(null);
   const dholeraRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+  const menuToggleRef = useRef(null);
 
   // Close all dropdowns
   const closeAllDropdowns = () => {
@@ -78,9 +80,10 @@ export default function RootLayout({ children }) {
     setIsGetInTouchDropdownOpen(false);
   };
 
-  // Handle clicks outside dropdowns
+  // Handle clicks outside dropdowns and mobile menu
   useEffect(() => {
     function handleClickOutside(event) {
+      // Handle dropdown clicks
       if (
         projectsRef.current &&
         !projectsRef.current.contains(event.target) &&
@@ -91,13 +94,24 @@ export default function RootLayout({ children }) {
       ) {
         closeAllDropdowns();
       }
+
+      // Handle mobile menu clicks
+      if (
+        isMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target) &&
+        menuToggleRef.current &&
+        !menuToggleRef.current.contains(event.target)
+      ) {
+        setIsMenuOpen(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isMenuOpen]);
 
   // Fetch projects
   useEffect(() => {
@@ -493,7 +507,7 @@ export default function RootLayout({ children }) {
                     )}
                   </AnimatePresence>
                 </div>
-                <button onClick={toggleMenu}>
+                <button onClick={toggleMenu} ref={menuToggleRef}>
                   {isMenuOpen ? (
                     <X className="h-6 w-6 text-[#FDB913]" />
                   ) : (
@@ -514,7 +528,10 @@ export default function RootLayout({ children }) {
                 variants={mobileMenuVariants}
                 className="fixed inset-0 bg-black bg-opacity-90 pt-96 flex justify-center items-center z-50"
               >
-                <div className="bg-[#1A0D00] p-5 w-4/5 max-w-md rounded-lg shadow-lg">
+                <div 
+                  ref={mobileMenuRef} 
+                  className="bg-[#1A0D00] p-5 w-4/5 max-w-md rounded-lg shadow-lg"
+                >
                   <div className="flex justify-end">
                     <button onClick={() => setIsMenuOpen(false)}>
                       <X className="h-6 w-6 text-[#FDB913]" />
