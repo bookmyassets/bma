@@ -118,11 +118,11 @@ export default function FAQSection() {
         <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-4 px-4">
           <button
             onClick={openBrochureForm}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg flex-1"
+            className="bg-gray-800 text-white text-center px-4 py-2 rounded-lg flex-1"
           >
             Free Site Visit
           </button>
-          <Link href="/infopack" className="bg-gray-800 text-white px-4 py-2 rounded-lg flex-1">
+          <Link href="/infopack" className="bg-gray-800 text-white text-center px-4 py-2 rounded-lg flex-1">
             Project Info
           </Link>
         </div>
