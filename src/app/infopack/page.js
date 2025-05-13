@@ -16,6 +16,7 @@ import Head from 'next/head';
 export default function page() {
   return (
     <div>
+      <meta name="robots" content="noindex, follow"></meta>
       <Info/>
     </div>
   )
