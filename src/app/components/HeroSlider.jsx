@@ -159,14 +159,14 @@ export default function LandingPage({ img1, mimg1 }) {
           src={mimg1}
           alt="Investment Opportunity Mobile"
           fill
-          className=" pt-12 bg-black"
+          className="pt-12 bg-black"
           priority
         />
       </div>
 
       {/* Content Overlay */}
       <div className="relative z-10 h-full flex left-0 right-0">
-  <div className="container mx-auto px-4 flex flex-col items-center bottom-0 justify-end h-full">
+  <div className="container mx-auto px-4 flex flex-col items-center justify-end h-full">
     <motion.div
       initial="hidden"
       animate="visible"
