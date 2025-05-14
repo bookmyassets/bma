@@ -113,7 +113,7 @@ export default function FAQSection() {
         <Image
           src={clickBait}
           alt="clickbait mobile"
-          className="w-full h-auto"
+          className=" h-auto"
         />
         <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-4 px-4">
           <button

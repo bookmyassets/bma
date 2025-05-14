@@ -1,7 +1,6 @@
-
 import HomeSlider from "./components/HeroSlider";
 import img1 from "@/assests/heroBMA.webp";
-import mimg1 from "@/assests/heroMobile.png";
+import mimg1 from "@/assests/heroMobile.webp";
 import ShortsSection from "./components/YouTube";
 import ParallaxSection from "./components/Parallex";
 import FAQSection from "./components/Faq";

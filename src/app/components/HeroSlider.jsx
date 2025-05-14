@@ -142,14 +142,13 @@ export default function LandingPage({ img1, mimg1 }) {
   };
 
   return (
-    <div className="relative pt-12 h-[90vh] w-full">
+    <div className="relative pt-12 h-[85vh] md:h-[75vh]">
       {/* Desktop Background */}
       <div className="absolute inset-0 hidden md:block">
         <Image
           src={img1}
           alt="Investment Opportunity"
-          fill
-          className="object-cover bg-black"
+          className="w-full pt-[54px]"
           priority
         />
       </div>
@@ -160,56 +159,35 @@ export default function LandingPage({ img1, mimg1 }) {
           src={mimg1}
           alt="Investment Opportunity Mobile"
           fill
-          className="object-cover bg-black"
+          className=" pt-12 bg-black"
           priority
         />
       </div>
 
       {/* Content Overlay */}
-      <div className="relative z-10 h-full flex items-center justify-center">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-            className="max-w-7xl mx-auto text-center md:text-left"
-          >
-            <motion.h2
-              variants={itemVariants}
-              className="text-4xl md:text-6xl font-bold text-white mb-6"
-            >
-              BookMyAssets
-            </motion.h2>
-            <motion.h2
-              variants={itemVariants}
-              className="max-w-2xl text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FDB913] to-[#C69C21] mb-6"
-            >
-              Your Perfect Investment Opportunity
-            </motion.h2>
-            <motion.div
-              variants={buttonVariants}
-              className="w-full max-sm:flex justify-center items-center"
-            >
-              <motion.button
-                whileHover="hover"
-                onClick={() => setShowFormPopup(true)}
-                className="max-w-2xl font-semibold px-8 py-3 border border-white rounded-full bg-black text-[#FDB913] hover:bg-[#FDB913] hover:text-black text-sm md:text-base shadow-lg"
-              >
-                Contact Us
-              </motion.button>
-            </motion.div>
-            <motion.p
-              variants={itemVariants}
-              className="max-w-2xl text-base md:text-xl text-white mt-8 mb-10"
-            >
-              BookMyAssets™ is your trusted real estate partner, offering
-              premium commercial and residential investment opportunities with
-              unparalleled service.
-            </motion.p>
-            
-          </motion.div>
-        </div>
-      </div>
+      <div className="relative z-10 h-full flex left-0 right-0">
+  <div className="container mx-auto px-4 flex flex-col items-center bottom-0 justify-end h-full">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="max-w-7xl w-full text-center"
+    >
+      <motion.div
+        variants={buttonVariants}
+        className="flex justify-center"
+      >
+        <motion.button
+          whileHover="hover"
+          onClick={() => setShowFormPopup(true)}
+          className="font-semibold px-8 py-3 border border-white rounded-full bg-black text-[#FDB913] hover:bg-[#FDB913] hover:text-black text-sm md:text-base shadow-lg"
+        >
+          Contact Us
+        </motion.button>
+      </motion.div>
+    </motion.div>
+  </div>
+</div>
 
       {/* Success Popup */}
       <AnimatePresence>
