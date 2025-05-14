@@ -13,10 +13,19 @@ import Head from 'next/head';
 }
 }; */
 
+export const metadata = {
+  title: "Website title",
+  description: "My description",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+
 export default function page() {
   return (
     <div>
-      <meta name="robots" content="noindex, follow"></meta>
+      
       <Info/>
     </div>
   )

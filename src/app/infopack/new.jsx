@@ -14,6 +14,8 @@ import { getPosts, getSub } from "@/sanity/lib/api";
 import Dholera from "./Dholera";
 import BrowseBlogs from "./Blogs";
 
+
+
 // Feature card component for better reusability
 const FeatureCard = ({ href, image, alt, title }) => (
   <Link

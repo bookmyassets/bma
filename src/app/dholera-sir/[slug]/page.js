@@ -158,19 +158,7 @@ export default async function Post({ params }) {
       <div className="w-full bg-gradient-to-b from-gray-900 to-gray-800 relative">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="max-w-7xl mx-auto pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Categories */}
-          {post.categories && post.categories.length > 0 && (
-            <div className="flex gap-2 mb-6">
-              {post.categories.map((category) => (
-                <span
-                  key={category.title}
-                  className="px-4 py-1.5 bg-yellow-500 text-gray-900 text-sm font-medium rounded-full shadow-md"
-                >
-                  {category.title}
-                </span>
-              ))}
-            </div>
-          )}
+          
 
           {/* Title */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
