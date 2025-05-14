@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState, useEffect } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
@@ -71,9 +71,9 @@ export default function LandingPage({ img1, mimg1 }) {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: "BookMyAssets",
+              source: "BookMyAssets Website Home",
             },
-            source: "Dholera Times Website",
+            source: "BookMyAssets Website",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
           }),
         }
@@ -164,30 +164,24 @@ export default function LandingPage({ img1, mimg1 }) {
         />
       </div>
 
-      {/* Content Overlay */}
-      <div className="relative z-10 h-full flex left-0 right-0">
-  <div className="container mx-auto px-4 flex flex-col items-center justify-end h-full">
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      className="max-w-7xl w-full text-center"
-    >
-      <motion.div
-        variants={buttonVariants}
-        className="flex justify-center"
-      >
-        <motion.button
-          whileHover="hover"
-          onClick={() => setShowFormPopup(true)}
-          className="font-semibold px-8 py-3 border border-white rounded-full bg-black text-[#FDB913] hover:bg-[#FDB913] hover:text-black text-sm md:text-base shadow-lg"
+      {/* Content Overlay - Contact Us Button positioned absolute to the image container */}
+      <div className="absolute -bottom-2 left-0 right-0 z-10 flex justify-center">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
         >
-          Contact Us
-        </motion.button>
-      </motion.div>
-    </motion.div>
-  </div>
-</div>
+          <motion.div variants={buttonVariants}>
+            <motion.button
+              whileHover="hover"
+              onClick={() => setShowFormPopup(true)}
+              className="font-semibold px-8 py-3 border border-white rounded-full bg-black text-yellow-400 hover:bg-yellow-400 hover:text-black text-sm md:text-base shadow-lg"
+            >
+              Contact Us
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
 
       {/* Success Popup */}
       <AnimatePresence>
