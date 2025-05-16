@@ -93,7 +93,7 @@ export default function ContactForm({ onClose }) {
       localStorage.setItem("lastSubmissionTime", now.toString());
     }
 
-    if (submissionCount >= 8) {
+    if (submissionCount >= 3) {
       setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
       setIsLoading(false);
       return;
@@ -128,7 +128,8 @@ export default function ContactForm({ onClose }) {
         }),
       });
 
-      const data = await response.json();
+      // Handle potential empty response
+      const data = response.status !== 204 ? await response.json().catch(() => ({})) : {};
 
       if (response.ok) {
         // Success handling
