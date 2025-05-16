@@ -11,8 +11,26 @@ export default function ContactForm({ onClose }) {
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
   useEffect(() => {
+    // Load reCAPTCHA script
+    const loadRecaptcha = () => {
+      if (typeof window !== "undefined" && !window.grecaptcha) {
+        const script = document.createElement("script");
+        script.src = `https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+        script.async = true;
+        script.defer = true;
+        script.onload = () => setRecaptchaLoaded(true);
+        document.head.appendChild(script);
+      } else if (window.grecaptcha) {
+        setRecaptchaLoaded(true);
+      }
+    };
+
+    loadRecaptcha();
+
+    // Get submission count from localStorage
     if (typeof window !== "undefined") {
       setSubmissionCount(
         parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
@@ -22,6 +40,7 @@ export default function ContactForm({ onClose }) {
       );
     }
 
+    // Prevent modal close when clicking inside
     const handleClickInside = (e) => {
       e.stopPropagation();
     };
@@ -47,19 +66,14 @@ export default function ContactForm({ onClose }) {
     e.preventDefault();
     setIsLoading(true);
 
-    //reCAPTCHA
-    let token;
-    try {
-      token = await grecaptcha.enterprise.execute(
-        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-        { action: "submit" }
-      );
-    } catch (err) {
-      alert("reCAPTCHA failed. Please try again.");
+    // Validate form
+    if (!formData.fullName || !formData.phone) {
+      alert("Please fill in all fields");
       setIsLoading(false);
       return;
     }
 
+    // Check submission limits
     const now = Date.now();
     const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
 
@@ -77,13 +91,22 @@ export default function ContactForm({ onClose }) {
       return;
     }
 
-    if (!formData.fullName || !formData.phone) {
-      alert("Please fill in all fields");
-      setIsLoading(false);
-      return;
-    }
-
+    // Execute reCAPTCHA
     try {
+      if (!window.grecaptcha || !window.grecaptcha.enterprise) {
+        throw new Error("reCAPTCHA not loaded properly");
+      }
+
+      const token = await new Promise((resolve, reject) => {
+        window.grecaptcha.enterprise.ready(() => {
+          window.grecaptcha.enterprise
+            .execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: "submit" })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
+
+      // Submit form data
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
@@ -97,6 +120,7 @@ export default function ContactForm({ onClose }) {
               name: formData.fullName,
               phone: formData.phone,
               source: "BookMyAssets",
+              recaptchaToken: token, // Include token in your submission
             },
             source: "Dholera Times Website",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
@@ -105,6 +129,7 @@ export default function ContactForm({ onClose }) {
       );
 
       if (response.ok) {
+        // Success handling
         setFormData({ fullName: "", phone: "" });
         setShowPopup(true);
         setSubmissionCount((prev) => {
@@ -118,36 +143,31 @@ export default function ContactForm({ onClose }) {
           if (onClose) onClose();
         }, 2000);
       } else {
-        alert("Error submitting form");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Error submitting form");
       }
     } catch (error) {
-      alert("Error: " + error.message);
+      console.error("Form submission error:", error);
+      alert(error.message || "Error submitting form. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  function submitButton(token) {
-    document.getElementById("demo-form").submit();
-  }
-
   return (
     <div
       className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
-      onClick={onClose} // Close when clicking outside
+      onClick={onClose}
     >
-      <head>
-        <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeAQuoqAAAAADZ_zblFpjcW5937vEnwSJ1QAj6i"></script>
-      </head>
       <motion.div
         id="contact-form-container"
         initial={{ scale: 0.9, y: 50 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 50 }}
         className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
-        onClick={(e) => e.stopPropagation()} // Prevent clicks inside from closing
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Fixed Close Button */}
+        {/* Close Button */}
         <button
           type="button"
           onClick={(e) => {
@@ -157,7 +177,22 @@ export default function ContactForm({ onClose }) {
           }}
           className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none"
           aria-label="Close form"
-        ></button>
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-6 w-6" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M6 18L18 6M6 6l12 12" 
+            />
+          </svg>
+        </button>
 
         {/* Logo */}
         <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
@@ -241,8 +276,8 @@ export default function ContactForm({ onClose }) {
                 placeholder="Phone Number"
                 value={formData.phone}
                 onChange={handleChange}
-                min="10"
-                max="11"
+                minLength="10"
+                maxLength="15"
                 required
                 className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
               />
@@ -250,11 +285,16 @@ export default function ContactForm({ onClose }) {
 
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !recaptchaLoaded}
               className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold"
             >
-              {isLoading ? "Submitting..." : "Request Exclusive Consultation"}
+              {isLoading ? "Submitting..." : recaptchaLoaded ? "Request Exclusive Consultation" : "Loading..."}
             </button>
+            
+            {/* Invisible reCAPTCHA badge */}
+            <div className="text-xs text-gray-500 text-center mt-2">
+              This site is protected by reCAPTCHA Enterprise
+            </div>
           </form>
         )}
       </motion.div>
