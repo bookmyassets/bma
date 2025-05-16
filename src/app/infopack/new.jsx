@@ -84,7 +84,7 @@ export default async function Info() {
 
           <div className="pt-4 flex justify-center ">
             <Link
-              href="https://shorturl.at/iVgBy"
+              href="https://shorturl.at/biVVf"
               className="bg-gray-800 text-amber-400 md:text-3xl font-semibold flex gap-4 items-center p-4 rounded-md  hover:bg-gray-700 transition-colors"
               aria-label="Download Dholera Times Brochure"
             >

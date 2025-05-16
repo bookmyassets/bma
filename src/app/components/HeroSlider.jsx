@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
@@ -143,45 +143,29 @@ export default function LandingPage({ img1, mimg1 }) {
 
   return (
     <div className="relative pt-12 h-[85vh] md:h-[75vh]">
-      {/* Desktop Background */}
-      <div className="absolute inset-0 hidden md:block">
-        <Image
-          src={img1}
-          alt="Investment Opportunity"
-          className="w-full pt-[54px]"
-          priority
-        />
-      </div>
+  {/* Background Images (unchanged) */}
+  <div className="absolute inset-0 hidden lg:block">
+    <Image src={img1} alt="Investment Opportunity" className="w-full pt-[54px]" priority />
+  </div>
+  <div className="absolute inset-0 block lg:hidden">
+    <Image src={mimg1} alt="Investment Opportunity Mobile" fill className="pt-12 bg-black" priority />
+  </div>
 
-      {/* Mobile Background - Hidden by default */}
-      <div className="absolute inset-0 block md:hidden">
-        <Image
-          src={mimg1}
-          alt="Investment Opportunity Mobile"
-          fill
-          className="pt-12 bg-black"
-          priority
-        />
-      </div>
-
-      {/* Content Overlay - Contact Us Button positioned absolute to the image container */}
-      <div className="absolute -bottom-2 left-0 right-0 z-10 flex justify-center">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
+  {/* Contact Us Button - Bottom-Centered & Responsive */}
+  <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-6 max-sm:pb-0 md:pb-0">
+    <motion.div initial="hidden" animate="visible" variants={containerVariants}>
+      <motion.div variants={buttonVariants}>
+        <motion.button
+          whileHover="hover"
+          onClick={() => setShowFormPopup(true)}
+          className="font-semibold px-8 py-3 border border-white rounded-full bg-black text-yellow-400 hover:bg-yellow-400 hover:text-black text-sm md:text-base shadow-lg"
         >
-          <motion.div variants={buttonVariants}>
-            <motion.button
-              whileHover="hover"
-              onClick={() => setShowFormPopup(true)}
-              className="font-semibold px-8 py-3 border border-white rounded-full bg-black text-yellow-400 hover:bg-yellow-400 hover:text-black text-sm md:text-base shadow-lg"
-            >
-              Contact Us
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      </div>
+          Contact Us
+        </motion.button>
+      </motion.div>
+    </motion.div>
+  </div>
+
 
       {/* Success Popup */}
       <AnimatePresence>
