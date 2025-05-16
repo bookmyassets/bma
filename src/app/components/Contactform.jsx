@@ -47,6 +47,19 @@ export default function ContactForm({ onClose }) {
     e.preventDefault();
     setIsLoading(true);
 
+    //reCAPTCHA
+    let token;
+    try {
+      token = await grecaptcha.enterprise.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+        { action: "submit" }
+      );
+    } catch (err) {
+      alert("reCAPTCHA failed. Please try again.");
+      setIsLoading(false);
+      return;
+    }
+
     const now = Date.now();
     const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
 
@@ -114,11 +127,18 @@ export default function ContactForm({ onClose }) {
     }
   };
 
+  function submitButton(token) {
+    document.getElementById("demo-form").submit();
+  }
+
   return (
     <div
       className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
       onClick={onClose} // Close when clicking outside
     >
+      <head>
+        <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeAQuoqAAAAADZ_zblFpjcW5937vEnwSJ1QAj6i"></script>
+      </head>
       <motion.div
         id="contact-form-container"
         initial={{ scale: 0.9, y: 50 }}
@@ -137,9 +157,7 @@ export default function ContactForm({ onClose }) {
           }}
           className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none"
           aria-label="Close form"
-        >
-         
-        </button>
+        ></button>
 
         {/* Logo */}
         <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
