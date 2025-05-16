@@ -12,6 +12,7 @@ export default function ContactForm({ onClose }) {
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     // Load reCAPTCHA script
@@ -60,15 +61,24 @@ export default function ContactForm({ onClose }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrorMessage(""); // Clear error messages on input change
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setErrorMessage("");
 
     // Validate form
     if (!formData.fullName || !formData.phone) {
-      alert("Please fill in all fields");
+      setErrorMessage("Please fill in all fields");
+      setIsLoading(false);
+      return;
+    }
+
+    // Simple phone validation
+    if (!/^\d{10,15}$/.test(formData.phone)) {
+      setErrorMessage("Please enter a valid phone number (10-15 digits)");
       setIsLoading(false);
       return;
     }
@@ -83,10 +93,8 @@ export default function ContactForm({ onClose }) {
       localStorage.setItem("lastSubmissionTime", now.toString());
     }
 
-    if (submissionCount >= 3) {
-      alert(
-        "You have reached the maximum submission limit. Try again after 24 hours."
-      );
+    if (submissionCount >= 8) {
+      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
       setIsLoading(false);
       return;
     }
@@ -97,6 +105,7 @@ export default function ContactForm({ onClose }) {
         throw new Error("reCAPTCHA not loaded properly");
       }
 
+      // Get reCAPTCHA token
       const token = await new Promise((resolve, reject) => {
         window.grecaptcha.enterprise.ready(() => {
           window.grecaptcha.enterprise
@@ -106,27 +115,20 @@ export default function ContactForm({ onClose }) {
         });
       });
 
-      // Submit form data
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: "BookMyAssets",
-              recaptchaToken: token, // Include token in your submission
-            },
-            source: "Dholera Times Website",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-          }),
-        }
-      );
+      // Submit to our API endpoint which handles verification and submission
+      const response = await fetch("/api/submitContact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          phone: formData.phone,
+          recaptchaToken: token,
+        }),
+      });
+
+      const data = await response.json();
 
       if (response.ok) {
         // Success handling
@@ -143,12 +145,11 @@ export default function ContactForm({ onClose }) {
           if (onClose) onClose();
         }, 2000);
       } else {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Error submitting form");
+        throw new Error(data.message || "Error submitting form");
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      alert(error.message || "Error submitting form. Please try again.");
+      setErrorMessage(error.message || "Error submitting form. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -256,6 +257,12 @@ export default function ContactForm({ onClose }) {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
+            {errorMessage && (
+              <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
+                {errorMessage}
+              </div>
+            )}
+            
             <div className="relative">
               <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
               <input
@@ -286,7 +293,7 @@ export default function ContactForm({ onClose }) {
             <button
               type="submit"
               disabled={isLoading || !recaptchaLoaded}
-              className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold"
+              className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isLoading ? "Submitting..." : recaptchaLoaded ? "Request Exclusive Consultation" : "Loading..."}
             </button>
