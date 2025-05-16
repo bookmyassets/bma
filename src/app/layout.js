@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
   const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] =
     useState(false);
   const [isDholeraDropdownOpen, setIsDholeraDropdownOpen] = useState(false);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [projects, setProjects] = useState([]);
   const [info, setInfo] = useState([]);
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
   const dholeraRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const menuToggleRef = useRef(null);
+  const galleryRef = useRef(null);
 
   // Close all dropdowns
   const closeAllDropdowns = () => {
@@ -64,6 +66,12 @@ export default function RootLayout({ children }) {
 
   const toggleProjectsDropdown = () => {
     setIsProjectsDropdownOpen(!isProjectsDropdownOpen);
+    setIsGetInTouchDropdownOpen(false);
+    setIsDholeraDropdownOpen(false);
+  };
+
+  const toggleGalleryDropdown = () => {
+    setIsGalleryOpen(!isGalleryOpen);
     setIsGetInTouchDropdownOpen(false);
     setIsDholeraDropdownOpen(false);
   };
@@ -433,12 +441,72 @@ export default function RootLayout({ children }) {
                     </AnimatePresence>
                   </div>
 
-                  <Link
-                    href="/gallery"
-                    className="text-[#FDB913] hover:text-white px-3 py-2"
-                  >
-                    Gallery
-                  </Link>
+                  <div className="relative group" ref={galleryRef}>
+                    <button
+                      onClick={toggleGalleryDropdown}
+                      className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
+                      onMouseEnter={() => setIsGalleryOpen(true)}
+                      onMouseLeave={() => setIsGalleryOpen(false)}
+                    >
+                      Gallery
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+                          isGalleryOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+
+                    <AnimatePresence>
+                      {isGalleryOpen && (
+                        <motion.div
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          variants={{
+                            hidden: { opacity: 0, y: -10 },
+                            visible: { opacity: 1, y: 0 },
+                            exit: { opacity: 0, y: -10 },
+                          }}
+                          className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50"
+                          onMouseEnter={() => setIsGalleryOpen(true)}
+                          onMouseLeave={() => setIsGalleryOpen(false)}
+                        >
+                          <div className="w-48 py-2">
+                            {[
+                              {
+                                title: "Images",
+                                path: "/gallery/images",
+                              },
+                              {
+                                title: "Videos",
+                                path: "/gallery/videos",
+                              },
+                            ].map((item) => (
+                              <Link
+                                key={item.path}
+                                href={item.path}
+                                className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                                onClick={() => setIsGalleryOpen(false)}
+                              >
+                                {item.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                   <Link
                     href="/career"
                     className="text-[#FDB913] hover:text-white px-3 py-2"
@@ -537,8 +605,8 @@ export default function RootLayout({ children }) {
                 variants={mobileMenuVariants}
                 className="fixed inset-0 bg-black bg-opacity-90 pt-96 flex justify-center items-center z-50"
               >
-                <div 
-                  ref={mobileMenuRef} 
+                <div
+                  ref={mobileMenuRef}
                   className="bg-[#1A0D00] p-5 w-4/5 max-w-md rounded-lg shadow-lg"
                 >
                   <div className="flex justify-end">
@@ -681,13 +749,71 @@ export default function RootLayout({ children }) {
                     >
                       Events
                     </Link> */}
-                    <Link
-                      href="/gallery"
-                      className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Gallery
-                    </Link>
+
+                    <div>
+                      <Link
+                        href="/gallery/images"
+                        onClick={toggleGalleryDropdown}
+                        className="text-[#FDB913] flex items-center justify-between w-full px-3 py-2 hover:bg-[#420703] rounded-md"
+                      >
+                        <span>Gallery</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+                            isGalleryOpen ? "rotate-180" : ""
+                          }`}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </Link>
+                      <AnimatePresence>
+                        {isGalleryOpen && (
+                          <motion.div
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            variants={{
+                              hidden: { opacity: 0, height: 0 },
+                              visible: { opacity: 1, height: "auto" },
+                              exit: { opacity: 0, height: 0 },
+                            }}
+                            className="ml-4 mt-1 space-y-1 overflow-hidden"
+                          >
+                            {[
+                              {
+                                title: "Images",
+                                path: "/gallery/images",
+                              },
+                              {
+                                title: "Videos",
+                                path: "/gallery/videos",
+                              },
+                            ].map((item) => (
+                              <Link
+                                key={item.path}
+                                href={item.path}
+                                className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md pl-6"
+                                onClick={() => {
+                                  setIsMenuOpen(false);
+                                  setIsGalleryOpen(false);
+                                }}
+                              >
+                                {item.title}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
                     <Link
                       href="/career"
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
@@ -720,7 +846,7 @@ export default function RootLayout({ children }) {
 
         {children}
         <ContactNow />
-        <FloatingButtons/>
+        <FloatingButtons />
         <Footer />
       </body>
     </html>

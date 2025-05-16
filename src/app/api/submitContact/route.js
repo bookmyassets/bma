@@ -1,21 +1,20 @@
-// pages/api/submitContact.js
+// app/api/submitContact/route.js
+import { NextResponse } from 'next/server';
 import axios from 'axios';
 
-export default async function handler(req, res) {
-  // Only allow POST requests
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
-
+export async function POST(request) {
   try {
-    const { fullName, phone, recaptchaToken } = req.body;
+    const { fullName, phone, recaptchaToken } = await request.json();
 
     // Validate inputs
     if (!fullName || !phone) {
-      return res.status(400).json({ message: 'Missing required fields' });
+      return NextResponse.json(
+        { message: 'Missing required fields' },
+        { status: 400 }
+      );
     }
 
-    // If recaptchaToken is provided, verify it
+    // Verify reCAPTCHA if token provided
     if (recaptchaToken && process.env.GOOGLE_CLOUD_API_KEY && process.env.RECAPTCHA_PROJECT_ID) {
       try {
         const recaptchaResponse = await axios.post(
@@ -33,29 +32,29 @@ export default async function handler(req, res) {
             },
           }
         );
-  
-        // Check if the token is valid
+
         const { tokenProperties } = recaptchaResponse.data;
         
         if (!tokenProperties.valid) {
           console.error('Invalid reCAPTCHA token:', tokenProperties.invalidReason);
-          return res.status(400).json({ 
-            message: 'reCAPTCHA verification failed', 
-            reason: tokenProperties.invalidReason 
-          });
+          return NextResponse.json(
+            { 
+              message: 'reCAPTCHA verification failed',
+              reason: tokenProperties.invalidReason 
+            },
+            { status: 400 }
+          );
         }
       } catch (recaptchaError) {
-        // Log error but continue with form submission as fallback
         console.error('reCAPTCHA verification error:', recaptchaError);
-        // Optionally, you can reject the submission here if you want stricter validation
-        // return res.status(400).json({ message: 'reCAPTCHA verification failed' });
+        // Continue with submission as fallback
       }
     }
 
     // Submit to TeleCRM API
     try {
       await axios.post(
-        'https://api.telecrm.in/',
+        'https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead',
         {
           fields: {
             name: fullName,
@@ -73,25 +72,40 @@ export default async function handler(req, res) {
         }
       );
 
-      // Return success response
-      return res.status(200).json({ 
-        success: true,
-        message: 'Form submitted successfully' 
-      });
+      return NextResponse.json(
+        { 
+          success: true,
+          message: 'Form submitted successfully' 
+        },
+        { status: 200 }
+      );
     } catch (teleCRMError) {
       console.error('TeleCRM API error:', teleCRMError);
-      return res.status(500).json({ 
-        message: 'Error submitting to CRM system',
-        error: teleCRMError.response?.data?.message || teleCRMError.message 
-      });
+      return NextResponse.json(
+        { 
+          message: 'Error submitting to CRM system',
+          error: teleCRMError.response?.data?.message || teleCRMError.message 
+        },
+        { status: 500 }
+      );
     }
 
   } catch (error) {
     console.error('General form submission error:', error);
-    
-    return res.status(500).json({ 
-      message: 'Server error processing your request',
-      error: error.message 
-    });
+    return NextResponse.json(
+      { 
+        message: 'Server error processing your request',
+        error: error.message 
+      },
+      { status: 500 }
+    );
   }
+}
+
+// Add this to explicitly handle unsupported methods
+export async function GET() {
+  return NextResponse.json(
+    { message: 'Method not allowed' },
+    { status: 405 }
+  );
 }

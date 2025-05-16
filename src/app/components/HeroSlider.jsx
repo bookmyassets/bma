@@ -142,7 +142,7 @@ export default function LandingPage({ img1, mimg1 }) {
   };
 
   return (
-    <div className="relative pt-12 h-[85vh] md:h-[75vh]">
+    <div className="relative pt-12 md:pt-16 h-[85vh] md:h-[78vh]">
   {/* Background Images (unchanged) */}
   <div className="absolute inset-0 hidden lg:block">
     <Image src={img1} alt="Investment Opportunity" className="w-full pt-[54px]" priority />
@@ -152,7 +152,7 @@ export default function LandingPage({ img1, mimg1 }) {
   </div>
 
   {/* Contact Us Button - Bottom-Centered & Responsive */}
-  <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-6 max-sm:pb-0 md:pb-0">
+  <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center items-center pb-2 max-sm:pb-0">
     <motion.div initial="hidden" animate="visible" variants={containerVariants}>
       <motion.div variants={buttonVariants}>
         <motion.button

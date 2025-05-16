@@ -202,7 +202,7 @@ const ContactPage = () => {
 
                 <div className="flex space-x-3">
                   <a
-                    href="https://www.facebook.com/people/Bookmyassets/61556534554379/"
+                    href="https://www.facebook.com/share/1AXGEEX1M8/"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                   >
                     <span className="sr-only">Facebook</span>
@@ -228,7 +228,7 @@ const ContactPage = () => {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/company/bookmyassetss"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                   >
                     <span className="sr-only">LinkedIn</span>

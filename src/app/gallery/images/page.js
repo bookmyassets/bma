@@ -1,18 +1,18 @@
 import React from "react";
 import hero from "@/assests/DIA.webp";
 import abcd from "@/assests/gallery/abcd-building-dholera.webp";
-import artificialRiver from "@/assests/gallery/artificial-revier.webp";
-import artificialRiver2 from "@/assests/gallery/artificial-revier-dholera.webp";
+import artificialRiver2 from "@/assests/gallery/artificial-river-dholera.webp";
+import artificialRiverfront from "@/assests/gallery/river-front-dholera.webp";
 import dholeraMetro from "@/assests/gallery/dholera-metro.webp";
-import outerRoad from "@/assests/gallery/outer-ring-road.webp";
-import rVilla from "@/assests/gallery/renamed_villa.webp";
-import renew from "@/assests/gallery/renew-dholera.webp";
-import runwayDIA from "@/assests/gallery/runway-of-dholera-international-airport.webp";
-import tata from "@/assests/gallery/tata-plant-under-construction-dholera.webp";
-import semicon from "@/assests/gallery/tata-semiconductor-plant.webp";
-import waterPlant from "@/assests/gallery/water-treatment-plant.webp";
-import westwyn from "@/assests/gallery/westwyn-dholera.webp";
+import outerRoad from "@/assests/gallery/dholera-ring-road.webp";
+import industry from "@/assests/gallery/indestrial-developement-dholera.webp";
+import runwayDIA from "@/assests/gallery/international-airport-runway-dholera.webp";
+import tata from "@/assests/gallery/tata-project-dholera.webp";
+import stb from "@/assests/gallery/stb-plant-dholera.webp";
+import westwyn from "@/assests/gallery/westwyn-county-project.webp";
+import solar from "@/assests/gallery/renew-solar-project-dholera.webp"
 import Image from "next/image";
+
 
 export async function generateMetadata() {
   return {
@@ -35,68 +35,62 @@ export default function DholeraProgressPage() {
     },
     {
       id: 2,
-      src: artificialRiver,
-      alt: "Dholera Smart City Project",
-      caption: "Master plan of India's first greenfield smart city",
-    },
-    {
-      id: 3,
       src: artificialRiver2,
-      alt: "Dholera Solar Plant",
+      alt: "Dholera Artifical River",
       caption: "High-speed connectivity via the Ahmedabad-Dholera Expressway",
     },
     {
-      id: 4,
+      id: 3,
       src: dholeraMetro,
-      alt: "Dholera Solar Project",
+      alt: "Dholera Metro",
       caption: "Aerial view of the Special Investment Region",
     },
     {
-      id: 5,
+      id: 4,
       src: outerRoad,
-      alt: "Dholera Semicon",
+      alt: "Dholera Ring Road",
+      caption: "Upcoming international airport boosting connectivity",
+    },
+    {
+      id: 5,
+      src: industry,
+      alt: "Dholera SemiConductor Industry",
       caption: "Upcoming international airport boosting connectivity",
     },
     {
       id: 6,
-      src: rVilla,
-      alt: "TATA",
+      src: solar,
+      alt: "Dholera Solar Plant",
       caption: "Sustainable urban planning with smart technology",
     },
     {
       id: 7,
-      src: renew,
-      alt: "Public Transport and connectivity",
+      src: artificialRiverfront,
+      alt: "Dholera River Front",
       caption: "Sustainable urban planning with smart technology",
     },
     {
       id: 8,
-      src: runwayDIA,
-      alt: "Local Employment and Skill Development",
+      src: stb,
+      alt: "Dholera Sewage Treatment Plant",
       caption: "Sustainable urban planning with smart technology",
     },
     {
       id: 9,
-      src: tata,
-      alt: "Investment Opportunities Dholera SmartCity",
+      src: runwayDIA,
+      alt: "Dholera International Airport",
       caption: "Sustainable urban planning with smart technology",
     },
     {
       id: 10,
-      src: semicon,
-      alt: "Investment Opportunities Dholera SmartCity",
+      src: tata,
+      alt: "TATA SemiConductor Industry",
       caption: "Sustainable urban planning with smart technology",
     },
     {
       id: 11,
-      src: waterPlant,
-      alt: "Investment Opportunities Dholera SmartCity",
-      caption: "Sustainable urban planning with smart technology",
-    },
-    {
-      id: 12,
       src: westwyn,
-      alt: "Investment Opportunities Dholera SmartCity",
+      alt: "Dholera WestWyn County",
       caption: "Sustainable urban planning with smart technology",
     },
   ];
@@ -143,11 +137,11 @@ export default function DholeraProgressPage() {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   priority={image.id <= 3}
                 />
-                {/* <div className="absolute inset-0 flex flex-col justify-end p-6">
-                  <h3 className="text-white text-xl font-bold mb-2">
+                 <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <h3 className="text-white bg-black text-center rounded-md text-xl font-bold mb-2">
                     {image.alt}
                   </h3>
-                </div> */}
+                </div> 
               </div>
             ))}
           </div>

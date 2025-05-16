@@ -315,6 +315,11 @@ const nextConfig = {
         destination: '/policies/privacy',
         permanent: true,
       },
+      {
+        source: '/blogs/latest-update',
+        destination: '/dholera-sir/latest-update',
+        permanent: true,
+      },
       
     ];
   },
