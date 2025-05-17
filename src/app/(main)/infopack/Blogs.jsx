@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import NotFound from "@/app/components/ui/NotFound";
+import NotFound from "../components/ui/NotFound";
 
 const BrowseBlogs = () => {
   const b = [
@@ -59,7 +59,7 @@ const BrowseBlogs = () => {
             ))}
           </div>
         ) : (
-          <NotFound />
+          <NotFound/>
         )}
 
         {/* Browse More Blogs Button */}

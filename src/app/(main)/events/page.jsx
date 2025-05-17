@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { getblogs } from "@/sanity/lib/api";
-import EventSwiper from '@/app/components/EventSwiper';
+import EventSwiper from '../components/EventSwiper';
 
 export default async function EventsPage() {
   const events = await getblogs();
