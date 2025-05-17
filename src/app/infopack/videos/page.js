@@ -10,30 +10,45 @@ export const metadata = {
 };
 
 export default async function VideosPage() {
-  // Assuming YouTube video links could be fetched from Sanity or another source
-  const videos = [
-    {
-      id: "2VxAIiBeHrY?si=8KJozT3WhjTDc0nA",
-      title: "Dholera Smart City Overview",
-      duration: "5:42"
-    },
-    {
-      id:  "QatlBaBSoAA?si=tCoK3XWBYBhwfd1l",
-      title: "Ahmedabad to Dholera in 45 Mins!",
-      duration: "7:18"
-    },
-    {
-      id: "J4ypn-wgQxY?si=joh8hfuRxK3g59A7",
-      title: "TATA’s ₹91,000 Cr. Semiconductor Revolution Begins!",
-      duration: "4:55"
-    },
-    {
-      id: "u1u5rLNkyKg?si=4eXKtVlrpdvMmzC7",
+ 
+    const videos = [
+  {
+    id: "zAcI2tX7iig?si=AIKkQe7Mqz4w2R5z",
+    title: "[2025] PROGRESS: TATA Semiconductor Plant in Dholera",
+    duration: "4:55"
+  },
+  {
+    id: "G5Ms2tm4Ugo?si=YirL0HYi4QpdbnVu",
+    title: "Dholera's Heart: Man-Made River Front in Activation Area",
+    duration: "6:30"
+  },
+  {
+    id: "7-GxVQoTOpE?si=ogpKMjhGJlUCaCJM",
+    title: "ReNew's Massive Solar Cell Manufacturing Plant",
+    duration: "unknown"
+  },
+  {
+    id: "naVwT2D5wIo?si=WyDRWX0nweM-CzX0",
+    title: "CURRENT UPDATE: Dholera International Airport to be Functional in 2026",
+    duration: "unknown"
+  },
+  {
+    id: "oazaDlcEPtM?si=bwhGMkt1rL07qieb",
+    title: "Ahmedabad-Dholera Expressway connectivity",
+    duration: "unknown"
+  },
+  {
+    id: "zfMSlCTWG58?si=j3DAps573LkHozD3",
+    title: "100% Water Recycling at Dholera's Water Treatment Plant",
+    duration: "unknown"
+  },
+  {
+    id: "-EtnTmJW28U?si=ELPbv4LXwHQFp-1Y",
+    title: "WestWyn County - Premium Plots on Fedra-Pipli Highway, Dholera",
+    duration: "unknown"
+  }
+];
 
-      title: "Dholera International Airport: Latest On-Ground Updates",
-      duration: "6:30"
-    },
-  ];
 
   if (videos.length === 0) {
     return (

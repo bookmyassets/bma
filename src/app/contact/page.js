@@ -1,19 +1,77 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import img from "@/assests/contact.jpg";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "", 
+    subject: "",
     message: "",
     phone: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ type: "", message: "" });
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
+  const recaptchaRef = useRef(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+ useEffect(() => {
+     // Load standard reCAPTCHA script
+     const loadRecaptcha = () => {
+       if (typeof window !== "undefined" && !window.grecaptcha) {
+         try {
+           const script = document.createElement("script");
+           script.src = "https://www.google.com/recaptcha/api.js";
+           script.async = true;
+           script.defer = true;
+           script.onload = () => setRecaptchaLoaded(true);
+           script.onerror = () => {
+             console.error("Failed to load reCAPTCHA script");
+             setRecaptchaLoaded(true); // Still set as loaded so form submission can proceed as fallback
+           };
+           document.head.appendChild(script);
+         } catch (err) {
+           console.error("reCAPTCHA script loading error:", err);
+           setRecaptchaLoaded(true); // Still set as loaded as fallback
+         }
+       } else if (window.grecaptcha) {
+         setRecaptchaLoaded(true);
+       }
+     };
+ 
+     loadRecaptcha();
+ 
+     // Get submission count from localStorage
+     if (typeof window !== "undefined") {
+       setSubmissionCount(
+         parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+       );
+       setLastSubmissionTime(
+         parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+       );
+     }
+ 
+     // Prevent modal close when clicking inside
+     const handleClickInside = (e) => {
+       e.stopPropagation();
+     };
+ 
+     const formElement = document.getElementById("contact-form-container");
+     if (formElement) {
+       formElement.addEventListener("click", handleClickInside);
+     }
+ 
+     return () => {
+       if (formElement) {
+         formElement.removeEventListener("click", handleClickInside);
+       }
+     };
+   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,32 +81,170 @@ const ContactPage = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setSubmitStatus({
-        type: "success",
-        message: "Message sent successfully!",
-      });
-      setFormData({ name: "", email: "", subject: "", phone: "", message: "" }); // Reset all fields
-    } catch (error) {
+  const validateForm = () => {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
       setSubmitStatus({
         type: "error",
-        message: "Failed to send message. Please try again.",
+        message: "Please fill all required fields.",
+      });
+      return false;
+    }
+
+    // Email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setSubmitStatus({
+        type: "error",
+        message: "Please enter a valid email address.",
+      });
+      return false;
+    }
+
+    // Phone validation (if phone is provided)
+    if (formData.phone && !/^\d{10,15}$/.test(formData.phone)) {
+      setSubmitStatus({
+        type: "error",
+        message:
+          "Please enter a valid phone number (10-15 digits) or leave it blank.",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const checkSubmissionLimit = () => {
+    const now = Date.now();
+    const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
+
+    if (hoursPassed >= 24) {
+      setSubmissionCount(0);
+      localStorage.setItem("formSubmissionCount", "0");
+      localStorage.setItem("lastSubmissionTime", now.toString());
+    }
+
+    if (submissionCount >= 3) {
+      setSubmitStatus({
+        type: "error",
+        message:
+          "You have reached the maximum submission limit. Try again after 24 hours.",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const now = Date.now();
+
+      // Send to TeleCRM
+      const response = await fetch(
+        `https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+          },
+          body: JSON.stringify({
+            fields: {
+              name: formData.name,
+              email: formData.email,
+              phone: formData.phone,
+              subject: formData.subject,
+              message: formData.message,
+              source: "BookMyAssets Website Contact Page",
+            },
+            source: "BookMyAssets Website",
+            tags: ["Website Lead", "Contact Form", "BookMyAssets"],
+            recaptchaToken: token,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit to TeleCRM");
+      }
+
+      // Success handling
+      setSubmitStatus({
+        type: "success",
+        message: "Message sent successfully! We'll contact you soon.",
+      });
+      setFormData({ name: "", email: "", subject: "", phone: "", message: "" });
+
+      // Update submission count
+      setSubmissionCount((prev) => {
+        const newCount = prev + 1;
+        localStorage.setItem("formSubmissionCount", newCount.toString());
+        localStorage.setItem("lastSubmissionTime", now.toString());
+        return newCount;
+      });
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus({
+        type: "error",
+        message: error.message || "Failed to send message. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
+
+      // Reset reCAPTCHA
+      if (window.grecaptcha && recaptchaRef.current) {
+        window.grecaptcha.reset(recaptchaRef.current);
+      }
     }
   };
-  const canonicalUrl = `https://www.bookmyassets.com/contact`
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: "", message: "" });
+
+    if (!validateForm() || !checkSubmissionLimit()) {
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Execute reCAPTCHA
+    if (window.grecaptcha && recaptchaLoaded) {
+      try {
+        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
+          window.grecaptcha.render(recaptchaRef.current, {
+            sitekey: siteKey,
+            callback: onRecaptchaSuccess,
+            theme: "light",
+          });
+        } else {
+          window.grecaptcha.execute(siteKey, { action: "submit" });
+        }
+      } catch (error) {
+        console.error("reCAPTCHA execution error:", error);
+        setSubmitStatus({
+          type: "error",
+          message: "Verification error. Please try again.",
+        });
+        setIsSubmitting(false);
+      }
+    } else {
+      setSubmitStatus({
+        type: "error",
+        message: "Security verification not loaded. Please refresh the page.",
+      });
+      setIsSubmitting(false);
+    }
+  };
+  const canonicalUrl = `https://www.bookmyassets.com/contact`;
 
   return (
     <div className="min-h-screen flex flex-col">
-              <link rel="canonical" href={canonicalUrl}/>
+      <link rel="canonical" href={canonicalUrl} />
 
       {/* Hero Section */}
       <div className="container mx-auto px-4">
@@ -90,7 +286,6 @@ const ContactPage = () => {
             </p>
 
             {/* Explore More Button */}
-
           </div>
         </div>
       </div>
@@ -361,6 +556,24 @@ const ContactPage = () => {
 
                 <div>
                   <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Phone (optional)
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                    placeholder="Your phone number"
+                  />
+                </div>
+
+                <div>
+                  <label
                     htmlFor="message"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
@@ -378,18 +591,35 @@ const ContactPage = () => {
                   />
                 </div>
 
+                {/* reCAPTCHA container */}
+                <div 
+        className="g-recaptcha" 
+        ref={recaptchaRef}
+        data-sitekey={siteKey}
+        data-size="invisible"
+      ></div>
+
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !recaptchaLoaded}
                   className={`w-full py-3 px-6 text-white font-medium rounded-lg 
-                    ${
-                      isSubmitting
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-yellow-500 hover:bg-yellow-600"
-                    } transition-colors duration-200`}
+              ${
+                isSubmitting || !recaptchaLoaded
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-yellow-500 hover:bg-yellow-600"
+              } transition-colors duration-200`}
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {!recaptchaLoaded
+                    ? "Loading security..."
+                    : isSubmitting
+                      ? "Sending..."
+                      : "Send Message"}
                 </button>
+
+                {/* reCAPTCHA attribution */}
+                <div className="text-xs text-gray-500 text-center mt-2">
+                  This site is protected by reCAPTCHA
+                </div>
               </form>
             </div>
           </div>
