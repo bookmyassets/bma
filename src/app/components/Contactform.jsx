@@ -15,32 +15,22 @@ export default function ContactForm({ onClose }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    // Load reCAPTCHA script with error handling
+    // Load reCAPTCHA script
     const loadRecaptcha = () => {
       if (typeof window !== "undefined") {
-        try {
-          // Check if grecaptcha is already loaded
-          if (window.grecaptcha) {
-            setRecaptchaLoaded(true);
-            return;
-          }
-          
-          const script = document.createElement("script");
-          script.src = `https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            // Still set as loaded so form submission can proceed as fallback
-            setRecaptchaLoaded(true);
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          // Still set as loaded so form submission can proceed as fallback
+        const script = document.createElement("script");
+        script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+        script.async = true;
+        script.defer = true;
+        script.onload = () => {
           setRecaptchaLoaded(true);
-        }
+          console.log("reCAPTCHA loaded");
+        };
+        script.onerror = () => {
+          console.error("Failed to load reCAPTCHA");
+          setRecaptchaLoaded(false);
+        };
+        document.body.appendChild(script);
       }
     };
 
@@ -56,49 +46,32 @@ export default function ContactForm({ onClose }) {
       );
     }
 
-    // Prevent modal close when clicking inside
-    const handleClickInside = (e) => {
-      e.stopPropagation();
-    };
-
-    const formElement = document.getElementById("contact-form-container");
-    if (formElement) {
-      formElement.addEventListener("click", handleClickInside);
-    }
-
     return () => {
-      if (formElement) {
-        formElement.removeEventListener("click", handleClickInside);
-      }
+      // Cleanup if needed
     };
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    setErrorMessage(""); // Clear error messages on input change
+    setErrorMessage("");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage("");
-
-    // Validate form
+  const validateForm = () => {
     if (!formData.fullName || !formData.phone) {
       setErrorMessage("Please fill in all fields");
-      setIsLoading(false);
-      return;
+      return false;
     }
 
-    // Simple phone validation
     if (!/^\d{10,15}$/.test(formData.phone)) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
-      setIsLoading(false);
-      return;
+      return false;
     }
 
-    // Check submission limits
+    return true;
+  };
+
+  const checkSubmissionLimit = () => {
     const now = Date.now();
     const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
 
@@ -110,59 +83,95 @@ export default function ContactForm({ onClose }) {
 
     if (submissionCount >= 8) {
       setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const sendToTeleCRM = async (token) => {
+    try {
+      // TeleCRM API endpoint (replace with your actual TeleCRM endpoint)
+      const telecrmEndpoint = process.env.NEXT_PUBLIC_TELECRM_API_ENDPOINT;
+      
+      // Prepare the data for TeleCRM
+      const leadData = {
+        name: formData.fullName,
+        phone: formData.phone,
+        source: "Website Form",
+        recaptcha_token: token,
+        // Add any additional fields required by TeleCRM
+      };
+
+      const response = await fetch(telecrmEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any required authentication headers
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+        },
+        body: JSON.stringify(leadData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to submit to TeleCRM");
+      }
+
+      return true;
+    } catch (error) {
+      console.error("TeleCRM API error:", error);
+      throw error;
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
+
+    // Validate form
+    if (!validateForm()) {
       setIsLoading(false);
       return;
     }
 
-    // Execute reCAPTCHA
+    // Check submission limits
+    if (!checkSubmissionLimit()) {
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      if (!window.grecaptcha || !window.grecaptcha.enterprise) {
-        throw new Error("reCAPTCHA not loaded properly");
+      // Execute reCAPTCHA
+      if (!window.grecaptcha) {
+        throw new Error("reCAPTCHA not loaded");
       }
 
-      // Get reCAPTCHA token
-      const token = await new Promise((resolve, reject) => {
-        window.grecaptcha.enterprise.ready(() => {
-          window.grecaptcha.enterprise
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: "submit" })
-            .then(resolve)
-            .catch(reject);
-        });
+      const token = await window.grecaptcha.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+        { action: "submit" }
+      );
+
+      // Send data to TeleCRM
+      await sendToTeleCRM(token);
+
+      // On success
+      setFormData({ fullName: "", phone: "" });
+      setShowPopup(true);
+      
+      // Update submission count
+      const now = Date.now();
+      setSubmissionCount((prev) => {
+        const newCount = prev + 1;
+        localStorage.setItem("formSubmissionCount", newCount.toString());
+        localStorage.setItem("lastSubmissionTime", now.toString());
+        return newCount;
       });
 
-      // Submit to our API endpoint which handles verification and submission
-      const response = await fetch("/api/submitContact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          phone: formData.phone,
-          recaptchaToken: token,
-        }),
-      });
-
-      // Handle potential empty response
-      const data = response.status !== 204 ? await response.json().catch(() => ({})) : {};
-
-      if (response.ok) {
-        // Success handling
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
-
-        setTimeout(() => {
-          if (onClose) onClose();
-        }, 2000);
-      } else {
-        throw new Error(data.message || "Error submitting form");
-      }
+      setTimeout(() => {
+        if (onClose) onClose();
+      }, 2000);
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(error.message || "Error submitting form. Please try again.");
@@ -171,6 +180,7 @@ export default function ContactForm({ onClose }) {
     }
   };
 
+  // ... (rest of your component JSX remains the same)
   return (
     <div
       className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
