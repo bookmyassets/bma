@@ -1,4 +1,3 @@
-import Footer from "@/app/components/Footer";
 import React from "react";
 
 export default function Copyright() {
