@@ -18,7 +18,7 @@ export async function POST(request) {
     if (recaptchaToken && process.env.GOOGLE_CLOUD_API_KEY && process.env.RECAPTCHA_PROJECT_ID) {
       try {
         const recaptchaResponse = await axios.post(
-          `https://recaptchaenterprise.googleapis.com/v1/projects/${process.env.RECAPTCHA_PROJECT_ID}/assessments`,
+          `https://www.google.com/u/1/recaptcha/admin/site/725480266`,
           {
             event: {
               token: recaptchaToken,
