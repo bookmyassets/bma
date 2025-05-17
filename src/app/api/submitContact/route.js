@@ -14,79 +14,52 @@ export async function POST(request) {
       );
     }
 
-    // reCAPTCHA token validation
-    if (!recaptchaToken) {
-      return NextResponse.json(
-        { message: 'reCAPTCHA verification required' },
-        { status: 400 }
-      );
-    }
-
-    // Verify the reCAPTCHA token with the standard verification endpoint
-    try {
-      const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-      
-      if (!secretKey) {
-        console.error('RECAPTCHA_SECRET_KEY not configured');
-        return NextResponse.json(
-          { message: 'Server configuration error' },
-          { status: 500 }
-        );
-      }
-
-      // Use URLSearchParams format for reCAPTCHA verification
-      const params = new URLSearchParams();
-      params.append('secret', secretKey);
-      params.append('response', recaptchaToken);
-
-      const recaptchaResponse = await axios.post(
-        'https://www.google.com/recaptcha/api/siteverify',
-        params.toString(),
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+    // Verify reCAPTCHA if token provided
+    if (recaptchaToken && process.env.GOOGLE_CLOUD_API_KEY && process.env.RECAPTCHA_PROJECT_ID) {
+      try {
+        const recaptchaResponse = await axios.post(
+          `https://recaptchaenterprise.googleapis.com/v1/projects/${process.env.RECAPTCHA_PROJECT_ID}/assessments`,
+          {
+            event: {
+              token: recaptchaToken,
+              siteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+            },
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${process.env.GOOGLE_CLOUD_API_KEY}`,
+            },
           }
-        }
-      );
-
-      if (!recaptchaResponse.data.success) {
-        console.error('reCAPTCHA verification failed:', recaptchaResponse.data);
-        return NextResponse.json(
-          { message: 'reCAPTCHA verification failed, please try again' },
-          { status: 400 }
         );
-      }
 
-    } catch (recaptchaError) {
-      console.error('reCAPTCHA verification error:', recaptchaError);
-      return NextResponse.json(
-        { message: 'Error verifying reCAPTCHA' },
-        { status: 500 }
-      );
+        const { tokenProperties } = recaptchaResponse.data;
+        
+        if (!tokenProperties.valid) {
+          console.error('Invalid reCAPTCHA token:', tokenProperties.invalidReason);
+          return NextResponse.json(
+            { 
+              message: 'reCAPTCHA verification failed',
+              reason: tokenProperties.invalidReason 
+            },
+            { status: 400 }
+          );
+        }
+      } catch (recaptchaError) {
+        console.error('reCAPTCHA verification error:', recaptchaError);
+        // Continue with submission as fallback
+      }
     }
 
-    // TeleCRM API submission
+    // Submit to TeleCRM API
     try {
-      const teleCrmApiKey = process.env.NEXT_PUBLIC_TELECRM_API_KEY;
-      
-      if (!teleCrmApiKey) {
-        console.error('TELECRM_API_KEY not configured');
-        return NextResponse.json(
-          { message: 'Server configuration error' },
-          { status: 500 }
-        );
-      }
-
-      // Replace with your actual TeleCRM API endpoint
-      const TELECRM_API_ENDPOINT = 'https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead';
-
       await axios.post(
-        TELECRM_API_ENDPOINT,
+        'https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead',
         {
           fields: {
             name: fullName,
             phone: phone,
-            source: "BookMyAssets Website",
+            source: "BookMyAssets",
           },
           source: "Dholera Times Website",
           tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
@@ -94,11 +67,11 @@ export async function POST(request) {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${teleCrmApiKey}`,
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
         }
       );
-      
+
       return NextResponse.json(
         { 
           success: true,
@@ -108,10 +81,6 @@ export async function POST(request) {
       );
     } catch (teleCRMError) {
       console.error('TeleCRM API error:', teleCRMError);
-      
-      // Log the detailed error for debugging
-      console.error('Response:', teleCRMError.response?.data);
-      
       return NextResponse.json(
         { 
           message: 'Error submitting to CRM system',
@@ -133,22 +102,8 @@ export async function POST(request) {
   }
 }
 
-// Handle unsupported methods
+// Add this to explicitly handle unsupported methods
 export async function GET() {
-  return NextResponse.json(
-    { message: 'Method not allowed' },
-    { status: 405 }
-);
-}
-
-export async function PUT() {
-  return NextResponse.json(
-    { message: 'Method not allowed' },
-    { status: 405 }
-  );
-}
-
-export async function DELETE() {
   return NextResponse.json(
     { message: 'Method not allowed' },
     { status: 405 }

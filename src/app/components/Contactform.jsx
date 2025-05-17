@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -13,11 +13,39 @@ export default function ContactForm({ onClose }) {
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const recaptchaRef = useRef(null);
-  const [showRecaptcha, setShowRecaptcha] = useState(false);
-  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
+    // Load reCAPTCHA script with error handling
+    const loadRecaptcha = () => {
+      if (typeof window !== "undefined") {
+        try {
+          // Check if grecaptcha is already loaded
+          if (window.grecaptcha) {
+            setRecaptchaLoaded(true);
+            return;
+          }
+          
+          const script = document.createElement("script");
+          script.src = `https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+          script.async = true;
+          script.defer = true;
+          script.onload = () => setRecaptchaLoaded(true);
+          script.onerror = () => {
+            console.error("Failed to load reCAPTCHA script");
+            // Still set as loaded so form submission can proceed as fallback
+            setRecaptchaLoaded(true);
+          };
+          document.head.appendChild(script);
+        } catch (err) {
+          console.error("reCAPTCHA script loading error:", err);
+          // Still set as loaded so form submission can proceed as fallback
+          setRecaptchaLoaded(true);
+        }
+      }
+    };
+
+    loadRecaptcha();
+
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
       setSubmissionCount(
@@ -45,74 +73,28 @@ export default function ContactForm({ onClose }) {
     };
   }, []);
 
-  // Load reCAPTCHA script when we need to show it
-  useEffect(() => {
-    if (showRecaptcha && !recaptchaLoaded) {
-      const loadRecaptcha = () => {
-        try {
-          // Check if script is already added
-          if (document.querySelector('script[src*="recaptcha"]')) {
-            setRecaptchaLoaded(true);
-            return;
-          }
-
-          const script = document.createElement("script");
-          script.src = `https://www.google.com/recaptcha/api.js?render=explicit`;
-          script.async = true;
-          script.defer = true;
-          script.onload = () => {
-            setRecaptchaLoaded(true);
-            console.log("reCAPTCHA script loaded successfully");
-            // Render reCAPTCHA explicitly after script loads
-            if (window.grecaptcha && recaptchaSiteKey) {
-              try {
-                window.grecaptcha.ready(() => {
-                  recaptchaRef.current = window.grecaptcha.render("recaptcha-container", {
-                    sitekey: recaptchaSiteKey,
-                    callback: onRecaptchaSuccess,
-                    "error-callback": onRecaptchaError,
-                    "expired-callback": onRecaptchaExpired
-                  });
-                });
-              } catch (err) {
-                console.error("Error rendering reCAPTCHA:", err);
-                setErrorMessage("Error loading CAPTCHA verification. Please try again later.");
-              }
-            }
-          };
-          script.onerror = (error) => {
-            console.error("Failed to load reCAPTCHA script:", error);
-            setErrorMessage("Error loading CAPTCHA verification. Please try again later.");
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setErrorMessage("Error loading CAPTCHA verification. Please try again later.");
-        }
-      };
-
-      loadRecaptcha();
-    }
-  }, [showRecaptcha, recaptchaLoaded, recaptchaSiteKey]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
     setErrorMessage(""); // Clear error messages on input change
   };
 
-  const initiateSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // First validate the form
+    setIsLoading(true);
+    setErrorMessage("");
+
+    // Validate form
     if (!formData.fullName || !formData.phone) {
       setErrorMessage("Please fill in all fields");
+      setIsLoading(false);
       return;
     }
 
     // Simple phone validation
     if (!/^\d{10,15}$/.test(formData.phone)) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
+      setIsLoading(false);
       return;
     }
 
@@ -128,37 +110,25 @@ export default function ContactForm({ onClose }) {
 
     if (submissionCount >= 8) {
       setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setIsLoading(false);
       return;
     }
 
-    // Show reCAPTCHA if form is valid
-    setShowRecaptcha(true);
-  };
-
-  const onRecaptchaSuccess = (token) => {
-    handleSubmit(token);
-  };
-
-  const onRecaptchaError = () => {
-    setErrorMessage("reCAPTCHA verification failed. Please try again.");
-    setIsLoading(false);
-  };
-
-  const onRecaptchaExpired = () => {
-    setErrorMessage("reCAPTCHA verification expired. Please verify again.");
-    setIsLoading(false);
-  };
-
-  const handleSubmit = async (recaptchaToken) => {
-    setIsLoading(true);
-    setErrorMessage("");
-
+    // Execute reCAPTCHA
     try {
-      if (!recaptchaToken) {
-        setErrorMessage("Please complete the reCAPTCHA verification");
-        setIsLoading(false);
-        return;
+      if (!window.grecaptcha || !window.grecaptcha.enterprise) {
+        throw new Error("reCAPTCHA not loaded properly");
       }
+
+      // Get reCAPTCHA token
+      const token = await new Promise((resolve, reject) => {
+        window.grecaptcha.enterprise.ready(() => {
+          window.grecaptcha.enterprise
+            .execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: "submit" })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
 
       // Submit to our API endpoint which handles verification and submission
       const response = await fetch("/api/submitContact", {
@@ -169,7 +139,7 @@ export default function ContactForm({ onClose }) {
         body: JSON.stringify({
           fullName: formData.fullName,
           phone: formData.phone,
-          recaptchaToken: recaptchaToken,
+          recaptchaToken: token,
         }),
       });
 
@@ -180,7 +150,6 @@ export default function ContactForm({ onClose }) {
         // Success handling
         setFormData({ fullName: "", phone: "" });
         setShowPopup(true);
-        const now = Date.now();
         setSubmissionCount((prev) => {
           const newCount = prev + 1;
           localStorage.setItem("formSubmissionCount", newCount.toString());
@@ -197,10 +166,6 @@ export default function ContactForm({ onClose }) {
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(error.message || "Error submitting form. Please try again.");
-      // Reset reCAPTCHA on error
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
-      }
     } finally {
       setIsLoading(false);
     }
@@ -307,7 +272,7 @@ export default function ContactForm({ onClose }) {
             </p>
           </div>
         ) : (
-          <form onSubmit={initiateSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {errorMessage && (
               <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
                 {errorMessage}
@@ -341,22 +306,17 @@ export default function ContactForm({ onClose }) {
               />
             </div>
 
-            {showRecaptcha && (
-              <div className="flex justify-center my-4">
-                <div id="recaptcha-container"></div>
-              </div>
-            )}
-
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !recaptchaLoaded}
               className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Submitting..." : (showRecaptcha ? "Complete Verification Above" : "Request Exclusive Consultation")}
+              {isLoading ? "Submitting..." : recaptchaLoaded ? "Request Exclusive Consultation" : "Loading..."}
             </button>
             
+            {/* Invisible reCAPTCHA badge */}
             <div className="text-xs text-gray-500 text-center mt-2">
-              This site is protected by reCAPTCHA
+              This site is protected by reCAPTCHA Enterprise
             </div>
           </form>
         )}
