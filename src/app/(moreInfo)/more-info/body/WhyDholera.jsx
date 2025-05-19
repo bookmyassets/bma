@@ -293,7 +293,7 @@ export default function WhyDholera() {
                           src={card.image}
                           alt={card.title}
                           fill
-                          className="object-cover h-full rounded-t-lg"
+                          className="object-cover rounded-t-lg"
                         />
                       </div>
                       <div className="mt-4">

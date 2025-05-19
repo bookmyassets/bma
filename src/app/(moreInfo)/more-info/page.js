@@ -4,6 +4,7 @@ import img1 from "@/assests/heroBMA.webp";
 import mimg1 from "@/assests/heroMobile.webp";
 import WhyInvest from "./body/WhyInvest";
 import WhyDholera from "./body/WhyDholera";
+import Westwyn from "./body/Westwyn";
 
 export default function page() {
   return (
@@ -14,6 +15,7 @@ export default function page() {
         </section>
         <WhyInvest/>
         <WhyDholera/>
+        <Westwyn/>
       </div>
     </>
   );
