@@ -5,6 +5,7 @@ import mimg1 from "@/assests/heroMobile.webp";
 import WhyInvest from "./body/WhyInvest";
 import WhyDholera from "./body/WhyDholera";
 import Westwyn from "./body/Westwyn";
+import FAQSection from "./body/FAQ";
 
 export default function page() {
   return (
@@ -16,6 +17,7 @@ export default function page() {
         <WhyInvest/>
         <WhyDholera/>
         <Westwyn/>
+        <FAQSection/>
       </div>
     </>
   );
