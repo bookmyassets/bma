@@ -1,11 +1,17 @@
 import React from 'react'
+import Navbar from './components/Navbar'
+import "./globals.css";
 
-export default function layout() {
+export default function RootLayout({ children }) {
   return (
-    <>
-        <div>
-            
-        </div>
-    </>
+   <html lang="en">
+    <head>
+
+    </head>
+    <body>
+        <Navbar/>
+        {children}
+    </body>
+   </html>
   )
 }
