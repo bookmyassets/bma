@@ -10,30 +10,30 @@ import Link from "next/link";
 
 const faqs = [
   {
-    question: "Is Dholera Smart City Completed?",
+    question: "Is it safe to invest in Dholera SIR?",
     answer:
-      "Dholera Smart City is still under development, with Phase 1 expected to be completed by 2025. The city is being developed as India’s first greenfield smart city under the Delhi-Mumbai Industrial Corridor (DMIC). Infrastructure like roads, power, and water supply is progressing rapidly. Full-scale completion is expected by 2040.",
+      "Yes, investing in Dholera SIR (Special Investment Region) is considered safe and forward-looking, especially for long-term investors. Backed by the Government of Gujarat and supported by central government initiatives under the Delhi-Mumbai Industrial Corridor (DMIC), Dholera SIR is India's first Greenfield smart city. The area has been planned with world-class infrastructure, including plug-and-play industrial zones, an international airport, metro connectivity, and expressways — all driven by a master plan with clear legal and administrative backing. Additionally, Dholera has Title Clear land parcels, NA/NOC approved zones, and robust due diligence frameworks in place. Investors can choose from residential plots, commercial land, or industrial spaces with clarity and legal transparency. With thousands of acres already under active development and big corporate players entering the region, it offers a rare opportunity where government trust, smart infrastructure, and futuristic planning align."
   },
   {
-    question: "Is Dholera Smart City a good investment?",
+    question: "Is TATA invested in Dholera Smart City?",
     answer:
-      "Yes, Dholera can be a good investment because it is growing fast with government support. Many industries and IT companies are planning to come here. Land prices are low now so early investment may give good returns.",
+      "Absolutely. Tata Group has made one of the largest industrial investments in India right within Dholera Smart City, setting up a ₹91,000 crore semiconductor fabrication plant through Tata Electronics in collaboration with Taiwan's PSMC (Powerchip Semiconductor Manufacturing Corp). This project is part of India’s larger Semiconductor Mission and places Dholera on the global tech map as a hub for advanced electronics manufacturing. The project is not just a factory — it's a smart, AI-integrated chip manufacturing ecosystem that reflects the scale and vision of what Dholera Smart City is set to become. With Tata's involvement, confidence among investors, both institutional and individual, has surged. It validates the region’s potential, infrastructure readiness, and government commitment, making it one of the most secure and exciting places to invest in 2025 and beyond."
   },
   {
-    question: "Is Dholera bigger than Delhi?",
+    question: "Why is Dholera so famous?",
     answer:
-      "Yes, Dholera Smart City is planned to be larger than Delhi in terms of area. It spans approximately 920 sq km, while Delhi covers around 1,484 sq km, but Delhi includes built-up urban areas. Dholera’s planned urban development area is around 500 sq km, making it one of India’s largest planned cities.",
+      "Dholera is famous for being India’s first Greenfield smart city, planned from scratch with integrated infrastructure, global urban planning standards, and scalable zoning for industries, housing, and technology. Located in Gujarat, it forms a key node in the Delhi-Mumbai Industrial Corridor (DMIC), offering unmatched connectivity through expressways, a dedicated freight corridor, and a proposed international airport. It is a symbol of India’s future — combining technology, sustainability, and industrial growth in one ecosystem. What sets Dholera apart is its Activation Area — a 22.5 sq. km zone where roads, drainage, ICT, and utility infrastructure are already functional. Major companies are now building projects here, and the city has become a magnet for the semiconductor, renewable energy, electric mobility, and logistics sectors. The ambition to make it the \"next Dubai or Shanghai\" is not just hype — it’s backed by real progress on the ground."
   },
   {
-    question: "Is Tata investing in Dholera?",
+    question: "When will Dholera Smart City be fully ready?",
     answer:
-      "Yes, the Tata Group has invested in Dholera, particularly in the semiconductor, power, defence, and electronics manufacturing sectors. Tata Power has also expressed interest in renewable energy projects within the smart city. The investments align with the government's push to make Dholera an industrial and tech hub. However, official announcements on the exact scale are still awaited.",
+      "Dholera Smart City is being developed in well-phased stages, with the Activation Area (22.5 sq km) already in advanced stages of completion as of May 2025. Roads, ICT networks, water management, and other core infrastructure are ready, and companies like Tata Electronics, Avaada Energy, and ReNew Power have already begun construction or signed MoUs. In simpler terms, the city isn’t a dream anymore — it’s already breathing. The entire Dholera SIR spans over 920 sq. km, and full-scale development is expected to continue till 2040. However, investors and industrial players are already taking positions in Phase 1 zones like the Fedra-Pipli Highway. By 2027–2030, Dholera is expected to become a fully functional industrial and residential hub, with global-scale manufacturing, export-ready infrastructure, and thousands of residents living in smart homes. Investing now is like investing in Gurgaon before it became Gurgaon."
   },
   {
-    question: "What is the distance between Dholera Smart City to Ahmedabad?  ",
+    question: "Which companies have invested in Dholera?",
     answer:
-      "Dholera Smart City is approximately 100 km from Ahmedabad. The upcoming Ahmedabad-Dholera Expressway will reduce travel time to around an hour. Additionally, a proposed metro and high-speed rail will further improve connectivity. The region is expected to become a major economic corridor.",
-  },
+      "The most headline-grabbing investment in Dholera is by the Tata Group, which is building a ₹91,000 crore semiconductor plant in collaboration with Taiwan’s PSMC. This plant will manufacture 50,000 wafers per month and represents a massive leap in India’s journey toward becoming a tech manufacturing powerhouse. Tata’s involvement gives immense credibility to Dholera’s future and reinforces the city’s strategic importance. Apart from Tata, several major players have committed to Dholera. These include Grew Energy's solar cell manufacturing unit under Tata Chemicals, HPCL’s hydrogen energy facility, Vedanta’s proposed semiconductor plant, Polycab’s cable manufacturing, Chiripal Industries' textile investments, Avaada Energy’s renewable parks, and ReNew Power’s energy expansion. Even Torrent Power is developing the power infrastructure for the city. With such a lineup of blue-chip names, Dholera is no longer just a smart city — it’s India’s new industrial epicentre."
+  }
 ];
 
 export default function FAQSection() {
