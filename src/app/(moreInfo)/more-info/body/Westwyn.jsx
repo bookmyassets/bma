@@ -330,7 +330,7 @@ export default function Westwyn() {
             <div className="lg:pl-8">
               <div className="relative">
                 {/* Main Project Image */}
-                <div className="project-image relative h-96 lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+                <div className=" relative h-96 lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                   {/* Replace with actual project image */}
                   <Image
                     src={projectImage}
