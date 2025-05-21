@@ -39,53 +39,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links Column */}
-          <div>
-            <h3 className="text-xl font-semibold text-yellow-600 mb-4 border-b border-yellow-200 pb-2">
-              Quick Links
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="/about"
-                  className="text-white hover:text-yellow-600 transition flex items-center"
-                >
-                  <span className="mr-2">›</span> About Us
-                </a>
-              </li>
-              {/* <li>
-                <a
-                  href="/services"
-                  className="text-white hover:text-yellow-600 transition flex items-center"
-                >
-                  <span className="mr-2">›</span> Our Services
-                </a>
-              </li> */}
-              <li>
-                <a
-                  href="/projects"
-                  className="text-white hover:text-yellow-600 transition flex items-center"
-                >
-                  <span className="mr-2">›</span> Projects
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/contact"
-                  className="text-white hover:text-yellow-600 transition flex items-center"
-                >
-                  <span className="mr-2">›</span> Contact Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/blogs"
-                  className="text-white hover:text-yellow-600 transition flex items-center"
-                >
-                  <span className="mr-2">›</span> Blog
-                </a>
-              </li>
-            </ul>
-          </div>
+          
 
           {/* Policies Column */}
           <div>
@@ -125,14 +79,7 @@ const Footer = () => {
                   <span className="mr-2">›</span> Refund & Cancellation Policy
                 </a>
               </li>
-              {/* <li>
-                <a
-                  href="/policies/disclaimer"
-                  className="text-white hover:text-yellow-600 transition flex items-center"
-                >
-                  <span className="mr-2">›</span> Disclaimer
-                </a>
-              </li> */}
+              
             </ul>
           </div>
 
@@ -183,19 +130,7 @@ const Footer = () => {
             <p className="text-gray-500 text-sm mb-4 md:mb-0">
               © {new Date().getFullYear()} BookMyAssets™. All rights reserved.
             </p>
-            <div className="flex space-x-4 text-sm">
-              <a href="/sitemap.xml" className="text-gray-500 hover:text-yellow-600 transition">
-                Sitemap
-              </a>
-              {/* <span className="text-gray-400">|</span>
-              <a href="/faq" className="text-gray-500 hover:text-yellow-600 transition">
-                FAQ
-              </a>
-              <span className="text-gray-400">|</span>
-              <a href="/careers" className="text-gray-500 hover:text-yellow-600 transition">
-                Careers
-              </a> */}
-            </div>
+            
           </div>
         </div>
       </div>
