@@ -32,7 +32,7 @@ export default function Navbar() {
             <a href="#WhyInvest" className="hover:text-white transition duration-200">Why Invest</a>
             <a href="#WhyDholera" className="hover:text-white transition duration-200">Why Dholera</a>
             <a href="#westwyn-county" className="hover:text-white transition duration-200">Westwyn County</a>
-            <a href="#gallery" className="hover:text-white transition duration-200">Gallery</a>
+            {/* <a href="#gallery" className="hover:text-white transition duration-200">Gallery</a> */}
             <a href="#Faqs" className="hover:text-white transition duration-200">FAQ</a>
           </div>
 
@@ -69,7 +69,7 @@ export default function Navbar() {
                 { href: '#WhyInvest', label: 'Why Invest' },
                 { href: '#WhyDholera', label: 'Why Dholera' },
                 { href: '#westwyn-county', label: 'Westwyn County' },
-                { href: '#gallery', label: 'Gallery' },
+               /*  { href: '#gallery', label: 'Gallery' }, */
                 { href: '#Faqs', label: 'FAQ' },
               ].map(({ href, label }) => (
                 <a

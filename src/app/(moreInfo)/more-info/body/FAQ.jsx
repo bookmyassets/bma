@@ -63,7 +63,7 @@ export default function FAQSection() {
 
   return (
     <>
-      <div className="relative p-8">
+      <div id="Faqs" className="relative p-8">
         <Image
         src={bg}
         alt="Background Image"

@@ -144,7 +144,7 @@ export default function Westwyn() {
     }, observerOptions);
     
     // Observe all animation elements
-    document.querySelectorAll('.fade-in-up, .feature-item, .project-image, .amenity-item')
+    document.querySelectorAll('.fade-in-up, .feature-item, .project-image, .amenity-item, .investment-calculator')
       .forEach(el => observer.observe(el));
       
     return () => {
@@ -221,7 +221,7 @@ export default function Westwyn() {
           
           /* Calculator animation */
           .investment-calculator {
-          
+            opacity: 0;
             transform: translateY(30px);
             transition:
               opacity 0.8s ease,
@@ -258,12 +258,17 @@ export default function Westwyn() {
             overflow-y: auto;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
           }
+          
+          /* Add spacing between sections */
+          .westwyn-container section {
+            margin-bottom: 5rem;
+          }
         `}
       </style>
 
-      <div id="Westwyn" className="westwyn-container bg-gray-50 mb-8">
+      <div id="westwyn-county" className="westwyn-container bg-gray-50 mb-8">
         {/* Header Section */}
-        <div className="max-w-7xl pt-8 mx-auto px-4 mb-8">
+        <section className="max-w-7xl pt-8 mx-auto px-4 mb-16">
           <div className="text-center space-y-4">
             <h1 className="text-xl md:text-4xl font-bold text-gray-800">
               WestWyn County
@@ -274,10 +279,10 @@ export default function Westwyn() {
               Smart City Living
             </p>
           </div>
-        </div>
+        </section>
 
         {/* Main Content Section */}
-        <div className="max-w-7xl mx-auto px-4">
+        <section className="max-w-7xl mx-auto px-4 mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Features */}
             <div className="space-y-8">
@@ -364,10 +369,10 @@ export default function Westwyn() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
         
         {/* New Amenities Section */}
-        <div className="max-w-7xl mx-auto px-4 mt-20">
+        <section className="max-w-7xl mx-auto px-4 mb-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Premium Amenities</h2>
             <div className="bg-[#d7b36c] w-32 mx-auto h-1 mb-4"></div>
@@ -390,10 +395,10 @@ export default function Westwyn() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
         
         {/* Investment Calculator Section */}
-        <div className="max-w-7xl mx-auto px-4 mt-20">
+        <section className="max-w-7xl mx-auto px-4 mb-20">
           <div className="investment-calculator bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="bg-[#d7b36c] p-6 text-white">
               <h2 className="text-2xl font-bold">Investment Calculator</h2>
@@ -492,12 +497,42 @@ export default function Westwyn() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Combined Row for Ready to Invest and Statistics */}
-        <div className="max-w-7xl mx-auto px-4 mt-20">
+        {/* Combined Row for Ready to Invest and Statistics - Reversed Order */}
+        <section className="max-w-7xl mx-auto px-4 mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Ready to Invest Section - Takes 1/3 of row */}
+            {/* Statistics Section - Now First */}
+            <div className="fade-in-up bg-black rounded-2xl shadow-lg p-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 text-center">
+                <div>
+                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+                    200+
+                  </div>
+                  <div className="text-white text-sm">Sq. Yards Plots</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+                    24x7
+                  </div>
+                  <div className="text-white text-sm">Security</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+                    100%
+                  </div>
+                  <div className="text-white text-sm">Legal Approval</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+                    70+
+                  </div>
+                  <div className="text-white text-sm">Plots</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Ready to Invest Section - Now Second */}
             <div className="westwyn-feature-card fade-in-up p-6 bg-gradient-to-r from-[#d7b36c] to-[#c4a055] rounded-lg text-white">
               <h3 className="text-2xl font-bold mb-3">Ready to Invest?</h3>
               <p className="mb-4 opacity-90">
@@ -511,38 +546,8 @@ export default function Westwyn() {
                 Contact Us Today
               </button>
             </div>
-
-            {/* Statistics Section - Takes 2/3 of row */}
-            <div className="fade-in-up bg-black rounded-2xl shadow-lg p-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 text-center">
-                <div className="">
-                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
-                    200+
-                  </div>
-                  <div className="text-white text-sm">Sq. Yards Plots</div>
-                </div>
-                <div className="">
-                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
-                    24x7
-                  </div>
-                  <div className="text-white text-sm">Security</div>
-                </div>
-                <div className="">
-                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
-                    100%
-                  </div>
-                  <div className="text-white text-sm">Legal Approval</div>
-                </div>
-                <div className="">
-                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
-                    70+
-                  </div>
-                  <div className="text-white text-sm">Plots</div>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
+        </section>
       </div>
 
       {/* Contact Form Modal - Using AnimatePresence for animation */}
