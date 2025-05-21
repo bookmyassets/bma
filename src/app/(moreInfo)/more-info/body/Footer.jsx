@@ -10,7 +10,7 @@ const Footer = () => {
         
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* About Us Column */}
           <div>
             <h3 className="text-xl font-semibold text-yellow-600 mb-4 border-b border-yellow-200 pb-2">
@@ -107,17 +107,6 @@ const Footer = () => {
                   className="text-white hover:text-yellow-600 transition"
                 >
                   info@bookmyassets.com
-                </a>
-              </li>
-              <li className="flex items-center">
-                <div className="flex-shrink-0 text-yellow-500 mr-3">
-                  <Phone size={18} />
-                </div>
-                <a
-                  href="tel:+918130371647"
-                  className="text-white hover:text-yellow-600 transition"
-                >
-                  +91 81 30 37 1647
                 </a>
               </li>
             </ul>
