@@ -13,10 +13,6 @@ export async function generateMetadata({ params }) {
     title: post.title ,
     description: post.metaDescription ,
     keywords: post.keywords?.join(", "),
-    robots: {
-    index: false,
-    follow: true
-  }
   };
 }
 
