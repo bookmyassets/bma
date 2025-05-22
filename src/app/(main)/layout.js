@@ -14,6 +14,8 @@ import Footer from "./components/Footer";
 import ContactNow from "./components/Callus";
 import FloatingButtons from "./components/whatsapp";
 
+const FACEBOOK_PIXEL_ID = "1147887730461644";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
