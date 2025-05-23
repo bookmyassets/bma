@@ -1,12 +1,13 @@
-"use client";
-import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
+'use client';
 
-export default function ThankYouPage() {
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { Suspense } from "react";
+
+function ThankYouContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const returnUrl = searchParams.get("return") || "/";
+  const returnUrl = new URLSearchParams(window.location.search).get('return') || '/';
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,5 +57,13 @@ export default function ThankYouPage() {
         </p>
       </motion.div>
     </div>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ThankYouContent />
+    </Suspense>
   );
 }

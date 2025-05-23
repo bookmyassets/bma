@@ -5,14 +5,14 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/Bmalogo.png";
 
-export default function ContactForm({ 
-  onClose, 
-  title, 
+export default function ContactForm({
+  onClose,
+  title,
   subtitle = "Fill this form to explore premium investment opportunities",
   buttonName,
   thankYouTitle = "Thank You!",
   thankYouMessage = "Your request has been submitted successfully.",
-  source = "BookMyAssets Website"
+  source = "BookMyAssets Website",
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
@@ -103,18 +103,19 @@ export default function ContactForm({
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours."
+      );
       return false;
     }
 
     return true;
   };
 
-  
-const onRecaptchaSuccess = async (token) => {
+  const onRecaptchaSuccess = async (token) => {
     try {
       const now = Date.now();
-      
+
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
@@ -152,24 +153,27 @@ const onRecaptchaSuccess = async (token) => {
           setShowThankYou(false);
           if (onClose) onClose();
           // Redirect to thank-you page with return URL
-          router.push(`/thank-you?return=${encodeURIComponent(pathname)}`);
+          router.push(
+            `/more-info/thankyou?return=${encodeURIComponent(pathname)}`
+          );
         }, 1000);
       } else {
         throw new Error("Error submitting form");
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      setErrorMessage(error.message || "Error submitting form. Please try again.");
+      setErrorMessage(
+        error.message || "Error submitting form. Please try again."
+      );
     } finally {
       setIsLoading(false);
-      
+
       // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         window.grecaptcha.reset(recaptchaRef.current);
       }
     }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -299,18 +303,18 @@ const onRecaptchaSuccess = async (token) => {
               className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none"
               aria-label="Close form"
             >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-6 w-6" 
-                fill="none" 
-                viewBox="0 0 24 24" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M6 18L18 6M6 6l12 12" 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
             </button>
@@ -367,10 +371,12 @@ const onRecaptchaSuccess = async (token) => {
                     </svg>
                   </div>
                 </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Thank You!
+                </h3>
                 <p className="text-gray-300">
-                  Your request has been submitted successfully. We'll contact you
-                  shortly.
+                  Your request has been submitted successfully. We'll contact
+                  you shortly.
                 </p>
               </div>
             ) : (
@@ -380,7 +386,7 @@ const onRecaptchaSuccess = async (token) => {
                     {errorMessage}
                   </div>
                 )}
-                
+
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -433,7 +439,11 @@ const onRecaptchaSuccess = async (token) => {
                   disabled={isLoading || !recaptchaLoaded}
                   className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? "Verifying..." : recaptchaLoaded ? buttonName : "Loading..."}
+                  {isLoading
+                    ? "Verifying..."
+                    : recaptchaLoaded
+                      ? buttonName
+                      : "Loading..."}
                 </motion.button>
               </form>
             )}
