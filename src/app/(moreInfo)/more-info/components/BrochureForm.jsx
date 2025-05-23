@@ -110,7 +110,8 @@ export default function ContactForm({
     return true;
   };
 
-  const onRecaptchaSuccess = async (token) => {
+  
+const onRecaptchaSuccess = async (token) => {
     try {
       const now = Date.now();
       
@@ -150,8 +151,8 @@ export default function ContactForm({
         setTimeout(() => {
           setShowThankYou(false);
           if (onClose) onClose();
-          // Redirect to main page (you can change this URL as needed)
-          window.location.href = '/';
+          // Redirect to thank-you page with return URL
+          router.push(`/thank-you?return=${encodeURIComponent(pathname)}`);
         }, 1000);
       } else {
         throw new Error("Error submitting form");
@@ -168,6 +169,7 @@ export default function ContactForm({
       }
     }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

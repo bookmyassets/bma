@@ -147,7 +147,7 @@ export default function LandingPage({ img1, mimg1 }) {
           setShowFormPopup(false);
           setShowPopup(false);
           // Redirect to main page (you can change this URL as needed)
-          window.location.href = '/';
+          window.location.href = '/more-info';
         }, 1000);
       } else {
         throw new Error("Error submitting form");
