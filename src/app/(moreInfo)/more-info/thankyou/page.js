@@ -1,15 +1,18 @@
 'use client';
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Suspense } from "react";
 
-function ThankYouContent() {
+export default function ThankYouPage() {
   const router = useRouter();
-  const returnUrl = new URLSearchParams(window.location.search).get('return') || '/';
+  const [returnUrl, setReturnUrl] = useState('/');
 
   useEffect(() => {
+    // This code only runs on the client side
+    const params = new URLSearchParams(window.location.search);
+    setReturnUrl(params.get('return') || '/');
+
     const timer = setTimeout(() => {
       router.push(returnUrl);
     }, 3000); // Redirect after 3 seconds
@@ -57,13 +60,5 @@ function ThankYouContent() {
         </p>
       </motion.div>
     </div>
-  );
-}
-
-export default function ThankYouPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-      <ThankYouContent />
-    </Suspense>
   );
 }
