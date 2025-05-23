@@ -1,21 +1,19 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function ThankYouPage() {
   const router = useRouter();
-  const [returnUrl, setReturnUrl] = useState('/');
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get('return') || '/more-info';
 
   useEffect(() => {
-    // This code only runs on the client side
-    const params = new URLSearchParams(window.location.search);
-    setReturnUrl(params.get('return') || '/');
-
+    // Redirect back after 3 seconds
     const timer = setTimeout(() => {
       router.push(returnUrl);
-    }, 3000); // Redirect after 3 seconds
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [router, returnUrl]);

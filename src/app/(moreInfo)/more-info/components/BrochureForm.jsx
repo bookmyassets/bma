@@ -147,16 +147,15 @@ export default function ContactForm({
           return newCount;
         });
 
-        // Show thank you page and redirect
+        // Show thank you popup for 2 seconds
         setShowThankYou(true);
         setTimeout(() => {
           setShowThankYou(false);
           if (onClose) onClose();
-          // Redirect to thank-you page with return URL
-          router.push(
-            `/more-info/thankyou?return=${encodeURIComponent(pathname)}`
-          );
-        }, 1000);
+
+          // Push to thank-you route (this will change the URL)
+          router.push(`/thank-you?return=${encodeURIComponent(pathname)}`);
+        }, 2000);
       } else {
         throw new Error("Error submitting form");
       }
@@ -167,8 +166,6 @@ export default function ContactForm({
       );
     } finally {
       setIsLoading(false);
-
-      // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         window.grecaptcha.reset(recaptchaRef.current);
       }
