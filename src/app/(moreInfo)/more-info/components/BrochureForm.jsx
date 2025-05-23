@@ -4,6 +4,7 @@ import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/Bmalogo.png";
+import { useRouter, usePathname } from "next/navigation"
 
 export default function ContactForm({
   onClose,
@@ -24,7 +25,8 @@ export default function ContactForm({
   const [showThankYou, setShowThankYou] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
+  const router = useRouter(); // Add this
+  const pathname = usePathname(); // Add this
   useEffect(() => {
     // Load reCAPTCHA script
     const loadRecaptcha = () => {
