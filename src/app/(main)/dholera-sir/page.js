@@ -7,18 +7,17 @@ import TrendingBlogItem from "./TrendingBlog";
 import Link from "next/link";
 
 export default async function BlogsPage() {
-  // Fetch data and handle potential errors
+
   let posts = [];
   try {
     const postsData = await projectInfo();
-    // Check if postsData is an array
+    
     posts = Array.isArray(postsData) ? postsData : [];
     console.log("Posts data fetched:", posts.length);
   } catch (error) {
     console.error("Error fetching project info:", error);
   }
 
-  // Add error handling for post data
   const safePosts = posts.map((post) => ({
     ...post,
     author: post.author || "BookMyAssets",

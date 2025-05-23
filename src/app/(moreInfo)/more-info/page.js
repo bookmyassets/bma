@@ -7,6 +7,9 @@ import WhyDholera from "./body/WhyDholera";
 import Westwyn from "./body/Westwyn";
 import FAQSection from "./body/FAQ";
 import About from "./body/About";
+import TestimonialPagination from "./body/Testimonials";
+import Ammenties from "./body/Ammenties";
+import EndSection from "./body/EndSection";
 
 export default function page() {
   return (
@@ -16,10 +19,13 @@ export default function page() {
           <LandingPage img1={img1} mimg1={mimg1} />
         </section>
         <About/>
+        <Westwyn/>
         <WhyInvest/>
         <WhyDholera/>
-        <Westwyn/>
+        <Ammenties/>
+        <TestimonialPagination/>
         <FAQSection/>
+        <EndSection/>
       </div>
     </>
   );

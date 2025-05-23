@@ -12,29 +12,33 @@ import ContactForm from "../components/BrochureForm";
 
 const faqs = [
   {
-    question: "Is Dholera Smart City Completed?",
+    question: "Is Dholera Smart City completed?",
     answer:
-      "Dholera Smart City is still under development, with Phase 1 expected to be completed by 2025. The city is being developed as India’s first greenfield smart city under the Delhi-Mumbai Industrial Corridor (DMIC). Infrastructure like roads, power, and water supply is progressing rapidly. Full-scale completion is expected by 2040.",
+      "Dholera Smart City is still under development. India’s first greenfield smart city under DMIC, Dholera is rapidly developing with key infrastructure in progress and full completion expected by 2040.",
   },
   {
-    question: "Is Dholera Smart City a good investment?",
+    question: "What are the top companies investing in Dholera? ",
     answer:
-      "Yes, Dholera can be a good investment because it is growing fast with government support. Many industries and IT companies are planning to come here. Land prices are low now so early investment may give good returns.",
+      "Tata, Adani, Foxconn, Wipro, IBM, Reliance Communications, Vedanta, Cisco and many more" },
+  {
+    question: "How far is Westwyn County from key locations?",
+    answer:
+      "20 mins from Dholera International Airport, close to ABCD Building, with direct highway access.",
   },
   {
-    question: "Is Dholera bigger than Delhi?",
+    question: "What plot sizes are available?",
     answer:
-      "Yes, Dholera Smart City is planned to be larger than Delhi in terms of area. It spans approximately 920 sq km, while Delhi covers around 1,484 sq km, but Delhi includes built-up urban areas. Dholera’s planned urban development area is around 500 sq km, making it one of India’s largest planned cities.",
+      "From 200 sq. yards to 400 sq. yards suitable for both investment and home building.",
   },
   {
-    question: "Is Tata investing in Dholera?",
+    question: "Can I build on my plot?",
     answer:
-      "Yes, the Tata Group has invested in Dholera, particularly in the semiconductor, power, defence, and electronics manufacturing sectors. Tata Power has also expressed interest in renewable energy projects within the smart city. The investments align with the government's push to make Dholera an industrial and tech hub. However, official announcements on the exact scale are still awaited.",
+      "Yes, you can construct a home as per AUDA regulations.",
   },
   {
-    question: "What is the distance between Dholera Smart City to Ahmedabad?  ",
+    question: "How do I book or visit?",
     answer:
-      "Dholera Smart City is approximately 100 km from Ahmedabad. The upcoming Ahmedabad-Dholera Expressway will reduce travel time to around an hour. Additionally, a proposed metro and high-speed rail will further improve connectivity. The region is expected to become a major economic corridor.",
+      "Fill out the contact us form or call us to book your plot or schedule a site visit.",
   },
 ];
 

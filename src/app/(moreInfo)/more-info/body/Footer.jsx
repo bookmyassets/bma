@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 import { MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
@@ -6,10 +7,6 @@ const Footer = () => {
   return (
     <footer id="footer" className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Contact Form Section */}
-        
-
-        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* About Us Column */}
           <div>
@@ -17,8 +14,7 @@ const Footer = () => {
               About Us
             </h3>
             <p className="text-white mb-4">
-              BookMyAssets™ is the preferred real estate IPA (Indian Property
-              Associate) of Gurgaon for commercial and residential spaces.
+              Book My Assets delivers verified, AUDA-approved projects in Dholera — trusted by 1000+ investors for transparent, expert-led investments.
             </p>
             
             {/* Social Media Icons */}
@@ -37,10 +33,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-
-          {/* Quick Links Column */}
           
-
           {/* Policies Column */}
           <div>
             <h3 className="text-xl font-semibold text-yellow-600 mb-4 border-b border-yellow-200 pb-2">
@@ -48,36 +41,36 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="/policies/copyright"
+                <Link
+                  href="/more-info/policy/copyright"
                   className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Copyright Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/policies/terms"
+                <Link
+                  href="/more-info/policy/terms"
                   className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Terms of Use
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/policies/privacy"
+                <Link
+                  href="/more-info/policy/privacy"
                   className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/policies/refund-and-cancellation"
+                <Link
+                  href="/more-info/policy/refund-and-cancellation"
                   className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Refund & Cancellation Policy
-                </a>
+                </Link>
               </li>
               
             </ul>
@@ -86,7 +79,7 @@ const Footer = () => {
           {/* Contact Column */}
           <div>
             <h3 className="text-xl font-semibold text-yellow-600 mb-4 border-b border-yellow-200 pb-2">
-              Contact Us
+              Reach Our Head office
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start">

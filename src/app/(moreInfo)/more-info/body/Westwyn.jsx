@@ -7,29 +7,12 @@ import nanoc from "@/assests/landing/naNoc.webp";
 import residential from "@/assests/landing/residentialPlot.webp";
 import hidden from "@/assests/landing/hiddenCharges.webp";
 import Image from "next/image";
-import projectImage from "@/assests/landing/westwyn-project.webp"; 
-import { AnimatePresence, motion } from "framer-motion";
-import ContactForm from "../components/BrochureForm";
+import projectImage from "@/assests/landing/westwyn-project.webp";
+import bg from "@/assests/bg-image.webp";
 
 // Icons for new features
-import { Dumbbell, ShieldCheck, Waves, Battery } from "lucide-react";
 
 const features = [
-  {
-    icon: nanoc,
-    title: "NA/NOC Plots",
-    description: "Approved plots with all necessary clearances",
-  },
-  {
-    icon: residential,
-    title: "Residential Plots",
-    description: "Premium residential plotting options",
-  },
-  {
-    icon: hidden,
-    title: "Transparent Pricing",
-    description: "No hidden charges, clear pricing structure",
-  },
   {
     icon: govtApprovedProject,
     title: "Govt Approved Projects",
@@ -45,112 +28,88 @@ const features = [
     title: "After Sales Support",
     description: "Comprehensive post-purchase assistance",
   },
-];
-
-const amenities = [
   {
-    icon: <Dumbbell className="w-10 h-10 text-[#d7b36c]" />,
-    title: "Yoga Center",
-    description: "Dedicated space for wellness and meditation"
+    icon: hidden,
+    title: "Transparent Pricing",
+    description: "No hidden charges, clear pricing structure",
   },
   {
-    icon: <ShieldCheck className="w-10 h-10 text-[#d7b36c]" />,
-    title: "24/7 CCTV Surveillance",
-    description: "Round-the-clock security monitoring"
+    icon: nanoc,
+    title: "NA/NOC Plots",
+    description: "Approved plots with all necessary clearances",
   },
-  {
-    icon: <Waves className="w-10 h-10 text-[#d7b36c]" />,
-    title: "Swimming Pool",
-    description: "Resort-style pool for recreation"
-  },
-  {
-    icon: <Battery className="w-10 h-10 text-[#d7b36c]" />,
-    title: "EV Charging Stations",
-    description: "Future-ready infrastructure for electric vehicles"
-  }
 ];
 
 export default function Westwyn() {
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [investmentYear, setInvestmentYear] = useState(5);
   const [plotSize, setPlotSize] = useState(200);
   const [customYear, setCustomYear] = useState("");
-  
+
   const baseRate = 9250; // Current price per sq. yard
   const targetRate = 17000; // Price after 5 years
   const annualGrowthRate = 0.05; // 5% annual growth
-  
+
   const calculateFutureValue = (years) => {
     // If years is 2 or less, use linear interpolation to match exactly 13000 at 2 years
     if (years <= 5) {
       const incrementPerYear = (targetRate - baseRate) / 5;
-      return baseRate + (incrementPerYear * years);
+      return baseRate + incrementPerYear * years;
     } else {
       // For years > 2, use compound growth at 5% from the 2-year mark
       return targetRate * Math.pow(1 + annualGrowthRate, years - 5);
     }
   };
-  
+
   const calculateInvestment = () => {
     let years = investmentYear;
     if (customYear) {
       years = parseInt(customYear);
     }
-    
+
     const futureRate = calculateFutureValue(years);
     const currentInvestment = baseRate * plotSize;
     const futureValue = futureRate * plotSize;
     const profit = futureValue - currentInvestment;
-    const percentageGrowth = ((futureValue / currentInvestment) - 1) * 100;
-    
+    const percentageGrowth = (futureValue / currentInvestment - 1) * 100;
+
     return {
       currentValue: currentInvestment,
       futureValue: futureValue,
       profit: profit,
       percentageGrowth: percentageGrowth,
-      ratePerSqYard: futureRate
+      ratePerSqYard: futureRate,
     };
   };
-  
+
   const investmentDetails = calculateInvestment();
 
-  const openContactForm = () => {
-    setIsContactFormOpen(true);
-    // Prevent background scrolling when modal is open
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeContactForm = () => {
-    setIsContactFormOpen(false);
-    // Enable scrolling when modal is closed
-    document.body.style.overflow = 'auto';
-  };
-  
   useEffect(() => {
     // Initialize animation observers when component mounts
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px"
+      rootMargin: "0px 0px -50px 0px",
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-visible');
+          entry.target.classList.add("animate-visible");
           observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
-    
+
     // Observe all animation elements
-    document.querySelectorAll('.fade-in-up, .feature-item, .project-image, .amenity-item, .investment-calculator')
-      .forEach(el => observer.observe(el));
-      
+    document
+      .querySelectorAll(
+        ".fade-in-up, .feature-item, .project-image, .amenity-item, .investment-calculator"
+      )
+      .forEach((el) => observer.observe(el));
+
     return () => {
       observer.disconnect();
       // Ensure we clean up by enabling scrolling when component unmounts
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, []);
 
@@ -173,7 +132,8 @@ export default function Westwyn() {
           }
 
           /* Staggered animation for feature items */
-          .feature-item, .amenity-item {
+          .feature-item,
+          .amenity-item {
             opacity: 0;
             transform: translateX(-30px);
             transition:
@@ -181,21 +141,26 @@ export default function Westwyn() {
               transform 0.5s ease;
           }
 
-          .feature-item.animate-visible, .amenity-item.animate-visible {
+          .feature-item.animate-visible,
+          .amenity-item.animate-visible {
             opacity: 1;
             transform: translateX(0);
           }
 
-          .feature-item:nth-child(1), .amenity-item:nth-child(1) {
+          .feature-item:nth-child(1),
+          .amenity-item:nth-child(1) {
             transition-delay: 0.1s;
           }
-          .feature-item:nth-child(2), .amenity-item:nth-child(2) {
+          .feature-item:nth-child(2),
+          .amenity-item:nth-child(2) {
             transition-delay: 0.2s;
           }
-          .feature-item:nth-child(3), .amenity-item:nth-child(3) {
+          .feature-item:nth-child(3),
+          .amenity-item:nth-child(3) {
             transition-delay: 0.3s;
           }
-          .feature-item:nth-child(4), .amenity-item:nth-child(4) {
+          .feature-item:nth-child(4),
+          .amenity-item:nth-child(4) {
             transition-delay: 0.4s;
           }
           .feature-item:nth-child(5) {
@@ -218,7 +183,7 @@ export default function Westwyn() {
             opacity: 1;
             transform: translateX(0);
           }
-          
+
           /* Calculator animation */
           .investment-calculator {
             opacity: 0;
@@ -228,12 +193,12 @@ export default function Westwyn() {
               transform 0.8s ease;
             transition-delay: 0.3s;
           }
-          
+
           .investment-calculator.animate-visible {
             opacity: 1;
             transform: translateY(0);
           }
-          
+
           /* Modal styles */
           .modal-overlay {
             position: fixed;
@@ -248,7 +213,7 @@ export default function Westwyn() {
             z-index: 1000;
             padding: 1rem;
           }
-          
+
           .modal-content {
             background: white;
             border-radius: 0.5rem;
@@ -258,7 +223,7 @@ export default function Westwyn() {
             overflow-y: auto;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
           }
-          
+
           /* Add spacing between sections */
           .westwyn-container section {
             margin-bottom: 5rem;
@@ -278,6 +243,37 @@ export default function Westwyn() {
               A Premium Verified Plot on Fedra-Pipli Highway - Your Gateway to
               Smart City Living
             </p>
+          </div>
+        </section>
+
+        <section className="max-w-7xl mx-auto">
+          <div className="fade-in-up bg-black rounded-2xl shadow-lg p-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 text-center">
+              <div>
+                <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+                  200+
+                </div>
+                <div className="text-white text-sm">Sq. Yards Plots</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+                  24x7
+                </div>
+                <div className="text-white text-sm">Security</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+                  100%
+                </div>
+                <div className="text-white text-sm">Legal Approval</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+                  70+
+                </div>
+                <div className="text-white text-sm">Plots</div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -370,231 +366,9 @@ export default function Westwyn() {
             </div>
           </div>
         </section>
-        
+
         {/* New Amenities Section */}
-        <section className="max-w-7xl mx-auto px-4 mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Premium Amenities</h2>
-            <div className="bg-[#d7b36c] w-32 mx-auto h-1 mb-4"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Experience luxury living with our exclusive amenities designed for comfort and convenience.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {amenities.map((amenity, index) => (
-              <div 
-                key={index} 
-                className="amenity-item bg-white rounded-lg shadow-md p-6 text-center transition-all hover:shadow-lg"
-              >
-                <div className="flex justify-center mb-4">
-                  {amenity.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{amenity.title}</h3>
-                <p className="text-gray-600">{amenity.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-        
-        {/* Investment Calculator Section */}
-        <section className="max-w-7xl mx-auto px-4 mb-20">
-          <div className="investment-calculator bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-[#d7b36c] p-6 text-white">
-              <h2 className="text-2xl font-bold">Investment Calculator</h2>
-              <p>See how your investment grows over time</p>
-            </div>
-            
-            <div className="p-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-gray-700 mb-2 font-medium">Plot Size (sq. yards)</label>
-                    <div className="flex space-x-4">
-                      {[200, 300, 400].map(size => (
-                        <button 
-                          key={size}
-                          onClick={() => setPlotSize(size)} 
-                          className={`py-2 px-4 rounded-md ${
-                            plotSize === size 
-                              ? 'bg-[#d7b36c] text-white' 
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-gray-700 mb-2 font-medium">Investment Duration</label>
-                    <div className="flex space-x-4 mb-4">
-                      {[5, 7, 10].map(year => (
-                        <button 
-                          key={year}
-                          onClick={() => {
-                            setInvestmentYear(year);
-                            setCustomYear("");
-                          }} 
-                          className={`py-2 px-4 rounded-md ${
-                            investmentYear === year && !customYear
-                              ? 'bg-[#d7b36c] text-white' 
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          }`}
-                        >
-                          {year} Years
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Your Investment Growth</h3>
-                  
-                  <div className="space-y-4">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Current Price per sq. yard:</span>
-                      <span className="font-semibold">₹{baseRate.toLocaleString()}</span>
-                    </div>
-                    
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Future Price per sq. yard:</span>
-                      <span className="font-semibold">₹{Math.round(investmentDetails.ratePerSqYard).toLocaleString()}</span>
-                    </div>
-                    
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Current Investment:</span>
-                      <span className="font-semibold">₹{Math.round(investmentDetails.currentValue).toLocaleString()}</span>
-                    </div>
-                    
-                    <div className="flex justify-between text-lg text-[#d7b36c]">
-                      <span className="font-semibold">Future Value:</span>
-                      <span className="font-bold">₹{Math.round(investmentDetails.futureValue).toLocaleString()}</span>
-                    </div>
-                    
-                    <div className="pt-4 border-t border-gray-200">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Potential Profit:</span>
-                        <span className="font-semibold text-green-600">₹{Math.round(investmentDetails.profit).toLocaleString()}</span>
-                      </div>
-                      
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Growth:</span>
-                        <span className="font-semibold text-green-600">{Math.round(investmentDetails.percentageGrowth)}%</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <button
-                    onClick={openContactForm}
-                    className="mt-6 bg-[#d7b36c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c4a055] transition-colors w-full"
-                  >
-                    Invest Now
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Combined Row for Ready to Invest and Statistics - Reversed Order */}
-        <section className="max-w-7xl mx-auto px-4 mb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Statistics Section - Now First */}
-            <div className="fade-in-up bg-black rounded-2xl shadow-lg p-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 text-center">
-                <div>
-                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
-                    200+
-                  </div>
-                  <div className="text-white text-sm">Sq. Yards Plots</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
-                    24x7
-                  </div>
-                  <div className="text-white text-sm">Security</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
-                    100%
-                  </div>
-                  <div className="text-white text-sm">Legal Approval</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-[#d7b36c] mb-2">
-                    70+
-                  </div>
-                  <div className="text-white text-sm">Plots</div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Ready to Invest Section - Now Second */}
-            <div className="westwyn-feature-card fade-in-up p-6 bg-gradient-to-r from-[#d7b36c] to-[#c4a055] rounded-lg text-white">
-              <h3 className="text-2xl font-bold mb-3">Ready to Invest?</h3>
-              <p className="mb-4 opacity-90">
-                Don't miss this opportunity to be part of India's first smart
-                city.
-              </p>
-              <button
-                onClick={openContactForm}
-                className="westwyn-cta-button bg-white text-[#d7b36c] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-              >
-                Contact Us Today
-              </button>
-            </div>
-          </div>
-        </section>
       </div>
-
-      {/* Contact Form Modal - Using AnimatePresence for animation */}
-      <AnimatePresence>
-        {isContactFormOpen && (
-          <motion.div 
-            className="modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeContactForm}
-          >
-            <motion.div 
-              className="modal-content"
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={e => e.stopPropagation()} // Prevent closing when clicking inside the modal
-            >
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold text-gray-800">
-                    Book A Free Consultation Today
-                  </h3>
-                  <button
-                    onClick={closeContactForm}
-                    className="text-gray-500 hover:text-gray-700"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <ContactForm
-                  title="Book A Free Consultation Today"
-                  buttonName="Get A Call Back"
-                  onClose={closeContactForm}
-                />
-                <button
-                  onClick={closeContactForm}
-                  className="bg-[#d7b36c] text-white px-4 py-2 rounded w-full mt-4"
-                >
-                  Close
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

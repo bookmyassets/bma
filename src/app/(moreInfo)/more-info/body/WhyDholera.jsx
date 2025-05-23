@@ -1,5 +1,4 @@
 "use client"
-import React from 'react'
 import bgImg from "@/assests/landing/bgIMG.webp"
 import Image from 'next/image'
 import semiconductor from "@/assests/landing/tata_semiconductor_plant.webp";
@@ -145,7 +144,9 @@ const cardsData = [
   },
 ];
 
+
 export default function WhyDholera() {
+
   return (
     <div id='WhyDholera' className="relative">
         <style jsx global>{`
@@ -271,10 +272,8 @@ export default function WhyDholera() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold leading-tight font-poppins tracking-tight mb-4 text-white drop-shadow-lg">
-                WHY INVEST IN{" "}
-                <span className="text-[#d7b36c] relative inline-block">
-                  DHOLERA SMART CITY
-                </span>
+                Westwyn County Mega Projects
+                
               </h2>
               <div className="w-24 h-1 bg-[#d7b36c] mx-auto mt-4"></div>
             </div>
@@ -321,6 +320,7 @@ export default function WhyDholera() {
             </div>
           </div>
         </section>
+
     </div>
   )
 }
