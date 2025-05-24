@@ -263,13 +263,13 @@ const onRecaptchaSuccess = async (token) => {
   return (
     <div id="hero" className="relative h-[75vh] md:h-[72vh]">
       {/* Background Images */}
-     <div className="relative">
+     <div >
   <div className="absolute inset-0 hidden lg:block">
-    <Image src={img1} alt="Investment Opportunity" className="w-full" priority />
-  </div>
-  <div className="absolute inset-0 block lg:hidden">
-    <Image src={mimg1} alt="Investment Opportunity Mobile" fill className="bg-black" priority />
-  </div>
+        <Image src={img1} alt="Investment Opportunity" className="w-full " priority />
+      </div>
+      <div className="absolute inset-0 block lg:hidden">
+        <Image src={mimg1} alt="Investment Opportunity Mobile" fill className=" bg-black" priority />
+      </div>
   {/* <div className="absolute inset-0 z-50 text-red-600 flex items-center justify-center md:justify-start md:pl-8 lg:pl-16 xl:pl-20">
     <p className="text-center md:text-left px-4 md:px-0">
       Premium, Registry-Ready Plot in Dholera — Built for Smart Investors
