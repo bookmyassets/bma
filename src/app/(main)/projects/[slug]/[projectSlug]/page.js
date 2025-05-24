@@ -15,10 +15,6 @@ export async function generateMetadata({ params }) {
     title: post.title, // Use the fetched post's title for dynamic title
     description: post.metaDescription, // Same for description
     keywords: post.keywords,
-    robots: {
-      index: false,
-      follow: true,
-    },
   };
 }
 
