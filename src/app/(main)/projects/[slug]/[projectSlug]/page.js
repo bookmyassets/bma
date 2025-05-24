@@ -3,6 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { getPostBySlug, getProjectBySlug } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import CostSheet from "@/app/(main)/components/costSheet";
 
 export async function generateMetadata({ params }) {
   // Ensure the slug is properly resolved before using it
@@ -360,6 +361,7 @@ export default async function SubProjectDetail({ params }) {
                 </div>
               </aside>
             </div>
+            <CostSheet/>
           </main>
         </div>
       </div>
