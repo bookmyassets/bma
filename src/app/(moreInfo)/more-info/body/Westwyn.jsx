@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import govtApprovedProject from "@/assests/landing/govt-approved-project.webp";
 import salesDeed from "@/assests/landing/immediate-sale-deed.webp";
 import afterSales from "@/assests/landing/after-sales.webp";
-import nanoc from "@/assests/landing/naNoc.webp";
+import buybackguarantee from "@/assests/landing/buy-back-guarantee.webp";
+import location from "@/assests/landing/location.webp";
 import residential from "@/assests/landing/residentialPlot.webp";
 import hidden from "@/assests/landing/hiddenCharges.webp";
 import Image from "next/image";
@@ -34,9 +35,9 @@ const features = [
     description: "No hidden charges, clear pricing structure",
   },
   {
-    icon: nanoc,
-    title: "NA/NOC Plots",
-    description: "Approved plots with all necessary clearances",
+    icon: buybackguarantee,
+    title: "Buy Back Guarantee",
+    description: "Terms & Conditions Apply",
   },
 ];
 
@@ -244,6 +245,13 @@ export default function Westwyn() {
               Smart City Living
             </p>
           </div>
+        </section>
+
+        <section className="flex justify-center items-center bg-black p-2 border-4 border-[#d7b36c]">
+          <Image
+            src={location}
+            alt="map"
+          />
         </section>
 
         <section className="max-w-7xl mx-auto">

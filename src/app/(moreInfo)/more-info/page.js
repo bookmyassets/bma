@@ -1,6 +1,6 @@
 import React from "react";
 import LandingPage from "./body/HeroSlider";
-import img1 from "@/assests/heroBMA.webp";
+import img1 from "@/assests/landing/heroDesktop.webp";
 import mimg1 from "@/assests/landing/heroMobile.webp";
 import WhyInvest from "./body/WhyInvest";
 import WhyDholera from "./body/WhyDholera";

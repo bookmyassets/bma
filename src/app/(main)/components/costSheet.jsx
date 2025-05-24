@@ -374,7 +374,6 @@ export default function CostSheet() {
                   type="text"
                   value="50000.00"
                   className="border p-2 w-full rounded"
-                  readOnly
                 />
               </td>
             </tr>

@@ -6,7 +6,7 @@ import rail from "@/assests/landing/mono_rail_connectivity.webp";
 import airport from "@/assests/landing/dholera_international_airport.webp";
 import expressway from "@/assests/landing/expressway_landing.webp";
 import solar from "@/assests/landing/renewable_solar.webp";
-import mega from "@/assests/landing/mega_industrial_park.webp";
+import mega from "@/assests/landing/freight.webp";
 
 const cardsData = [
   {
@@ -122,8 +122,8 @@ const cardsData = [
   },
   {
     image: mega,
-    title: "Dholera Mega Industrial Park",
-    backTitle: "Dholera Mega Industrial Park",
+    title: "Dholera Freight Coridor",
+    backTitle: "Dholera Freight Coridor",
     description:
       "A vast industrial development zone attracting global manufacturers with world-class infrastructure and business-friendly policies.",
     icon: (
