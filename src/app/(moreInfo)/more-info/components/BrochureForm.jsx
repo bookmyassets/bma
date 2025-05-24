@@ -160,7 +160,7 @@ export default function ContactForm({
           handleClose();
 
           // Push to thank-you route (this will change the URL)
-          router.push(`/thank-you`);
+          router.push(`/thankyou`);
         }, 2000);
       } else {
         throw new Error("Error submitting form");
