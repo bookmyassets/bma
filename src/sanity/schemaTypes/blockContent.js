@@ -59,18 +59,6 @@ export default {
       ]
     },
     // Add code block type
-    {
-      type: 'code',
-      title: 'Code Block',
-      options: {
-        language: 'javascript',
-        languageAlternatives: [
-          { title: 'JavaScript', value: 'javascript' },
-          { title: 'HTML', value: 'html' },
-          { title: 'CSS', value: 'css' },
-        ],
-        withFilename: true,
-      }
-    }
+  
   ],
 };
