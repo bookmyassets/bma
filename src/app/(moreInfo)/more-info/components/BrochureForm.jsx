@@ -118,66 +118,69 @@ export default function ContactForm({
     return true;
   };
 
-  const onRecaptchaSuccess = async (token) => {
-    try {
-      const now = Date.now();
 
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+const onRecaptchaSuccess = async (token) => {
+  try {
+    const now = Date.now();
+
+    const response = await fetch(
+      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+        },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            source: source,
           },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: source,
-            },
-            source: "BookMyAssets Google Ads",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-            recaptchaToken: token,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
-
-        // Show thank you popup for 2 seconds
-        setShowThankYou(true);
-        setTimeout(() => {
-          setShowThankYou(false);
-          handleClose();
-
-          // Push to thank-you route (this will change the URL)
-          router.push(`/thankyou`);
-        }, 2000);
-      } else {
-        throw new Error("Error submitting form");
+          source: "BookMyAssets Google Ads",
+          tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+          recaptchaToken: token,
+        }),
       }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setErrorMessage(
-        error.message || "Error submitting form. Please try again."
-      );
-    } finally {
-      setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
-      }
+    );
+
+    if (response.ok) {
+      setFormData({ fullName: "", phone: "" });
+      setShowPopup(true);
+      setSubmissionCount((prev) => {
+        const newCount = prev + 1;
+        localStorage.setItem("formSubmissionCount", newCount.toString());
+        localStorage.setItem("lastSubmissionTime", now.toString());
+        return newCount;
+      });
+
+      // Show thank you popup for 2 seconds
+      setShowThankYou(true);
+      setTimeout(() => {
+        setShowThankYou(false);
+        handleClose();
+
+        // Get current pathname for return URL
+        const currentPath = pathname || window.location.pathname;
+        
+        // Push to thank-you route with return URL
+        router.push(`/thankyou?return=${encodeURIComponent(currentPath)}`);
+      }, 2000);
+    } else {
+      throw new Error("Error submitting form");
     }
-  };
-
+  } catch (error) {
+    console.error("Form submission error:", error);
+    setErrorMessage(
+      error.message || "Error submitting form. Please try again."
+    );
+  } finally {
+    setIsLoading(false);
+    if (window.grecaptcha && recaptchaRef.current) {
+      window.grecaptcha.reset(recaptchaRef.current);
+    }
+  }
+};
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);

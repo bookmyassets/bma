@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, Suspense } from 'react';
+import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 
@@ -11,10 +11,10 @@ function ThankYouContent() {
   const returnUrl = searchParams.get('return') || '/more-info';
 
   useEffect(() => {
-    // Redirect back after 3 seconds
+    // Redirect back after 2 seconds instead of 3
     const timer = setTimeout(() => {
       router.push(returnUrl);
-    }, 3000);
+    }, 2000); // Changed from 3000 to 2000
 
     return () => clearTimeout(timer);
   }, [router, returnUrl]);
@@ -72,7 +72,7 @@ function ThankYouContent() {
           transition={{ delay: 0.5 }}
           className="text-sm text-gray-500"
         >
-          You'll be redirected back in a moment...
+          You'll be redirected back in 2 seconds...
         </motion.p>
       </motion.div>
     </div>
