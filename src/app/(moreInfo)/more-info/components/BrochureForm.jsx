@@ -25,8 +25,16 @@ export default function ContactForm({
   const [showThankYou, setShowThankYou] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const router = useRouter(); // Add this
-  const pathname = usePathname(); // Add this
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Handle close function
+  const handleClose = () => {
+    if (onClose && typeof onClose === 'function') {
+      onClose();
+    }
+  };
+
   useEffect(() => {
     // Load reCAPTCHA script
     const loadRecaptcha = () => {
@@ -53,7 +61,6 @@ export default function ContactForm({
 
     loadRecaptcha();
 
-    // Get submission count from localStorage
     if (typeof window !== "undefined") {
       setSubmissionCount(
         parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
@@ -63,20 +70,17 @@ export default function ContactForm({
       );
     }
 
-    // Prevent modal close when clicking inside
-    const handleClickInside = (e) => {
-      e.stopPropagation();
+    // Handle Escape key press
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape') {
+        handleClose();
+      }
     };
 
-    const formElement = document.getElementById("contact-form-container");
-    if (formElement) {
-      formElement.addEventListener("click", handleClickInside);
-    }
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      if (formElement) {
-        formElement.removeEventListener("click", handleClickInside);
-      }
+      document.removeEventListener('keydown', handleEscapeKey);
     };
   }, []);
 
@@ -153,7 +157,7 @@ export default function ContactForm({
         setShowThankYou(true);
         setTimeout(() => {
           setShowThankYou(false);
-          if (onClose) onClose();
+          handleClose();
 
           // Push to thank-you route (this will change the URL)
           router.push(`/thank-you?return=${encodeURIComponent(pathname)}`);
@@ -206,6 +210,18 @@ export default function ContactForm({
       setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
       setIsLoading(false);
     }
+  };
+
+  // Handle backdrop click
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+
+  // Prevent modal content click from closing modal
+  const handleModalContentClick = (e) => {
+    e.stopPropagation();
   };
 
   return (
@@ -281,7 +297,7 @@ export default function ContactForm({
       {!showThankYou && (
         <div
           className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
-          onClick={onClose}
+          onClick={handleBackdropClick}
         >
           <motion.div
             id="contact-form-container"
@@ -289,17 +305,13 @@ export default function ContactForm({
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 50 }}
             className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
-            onClick={(e) => e.stopPropagation()}
+            onClick={handleModalContentClick}
           >
             {/* Close Button */}
             <button
               type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                onClose?.();
-              }}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none"
+              onClick={handleClose}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full p-1 transition-all duration-200 hover:bg-gray-700 z-10"
               aria-label="Close form"
             >
               <svg
@@ -308,11 +320,11 @@ export default function ContactForm({
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                strokeWidth={2}
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>

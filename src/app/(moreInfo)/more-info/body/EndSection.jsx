@@ -4,9 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../components/BrochureForm";
 
 export default function EndSection() {
-
-    const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -18,34 +16,34 @@ export default function EndSection() {
 
   return (
     <>
-        {/* Combined Row for Ready to Invest and Statistics - Reversed Order */}
-        <div className="w-full pt-4 pb-4 bg-gradient-to-r from-[#d7b36c] to-[#c4a055]">
-
-      <section className="max-w-7xl mx-auto px-4">
-        {/* Ready to Invest Section - Now Second */}
-        <div className=" p-6  rounded-lg text-black">
-          <h3 className="text-2xl font-bold mb-3">
-            Secure your plot in Westwyn County Today! OR Start your smart city
-            investment journey NOW with Westwyn County
-          </h3>
-          <p className="mb-4 opacity-90">
-            Limited AUDA-approved plots available near Dholera’s fastest-growing
-            corridor. Don’t miss your chance to invest in India’s first smart
-            city — our experts are here to guide you every step of the way.
-          </p>
-          <button
-            onClick={openContactForm}
-            className="westwyn-cta-button bg-white text-[#d7b36c] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-          >
-            Reserve your plot
-          </button>
-        </div>
-      </section>
+      {/* Combined Row for Ready to Invest and Statistics - Reversed Order */}
+      <div className="w-full pt-4 pb-4 bg-gradient-to-r from-[#d7b36c] to-[#c4a055]">
+        <section className="max-w-7xl mx-auto px-4">
+          {/* Ready to Invest Section - Now Second */}
+          <div className=" p-6  rounded-lg text-black">
+            <h3 className="text-2xl font-bold mb-3">
+              Secure your plot in Westwyn County Today! OR Start your smart city
+              investment journey NOW with Westwyn County
+            </h3>
+            <p className="mb-4 opacity-90">
+              Limited AUDA-approved plots available near Dholera’s
+              fastest-growing corridor. Don’t miss your chance to invest in
+              India’s first smart city — our experts are here to guide you every
+              step of the way.
+            </p>
+            <button
+              onClick={openContactForm}
+              className=" bg-white text-[#d7b36c] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            >
+              Reserve your plot
+            </button>
           </div>
+        </section>
+      </div>
       {/* Contact Form Modal - Using AnimatePresence for animation */}
       <AnimatePresence>
         {isContactFormOpen && (
-            <motion.div
+          <motion.div
             className="modal-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -88,5 +86,5 @@ export default function EndSection() {
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }
