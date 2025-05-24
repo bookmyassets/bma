@@ -13,7 +13,7 @@ export default function ContactForm({
   buttonName,
   thankYouTitle = "Thank You!",
   thankYouMessage = "Your request has been submitted successfully.",
-  source = "BookMyAssets Website",
+  source = "BookMyAssets google ads",
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
@@ -136,7 +136,7 @@ export default function ContactForm({
               phone: formData.phone,
               source: source,
             },
-            source: "BookMyAssets Website",
+            source: "BookMyAssets Google Ads",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
@@ -160,7 +160,7 @@ export default function ContactForm({
           handleClose();
 
           // Push to thank-you route (this will change the URL)
-          router.push(`/thank-you?return=${encodeURIComponent(pathname)}`);
+          router.push(`/thank-you`);
         }, 2000);
       } else {
         throw new Error("Error submitting form");

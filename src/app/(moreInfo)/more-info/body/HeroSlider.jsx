@@ -123,8 +123,8 @@ export default function LandingPage({ img1, mimg1 }) {
               phone: formData.phone,
               source: "BookMyAssets Website Home",
             },
-            source: "BookMyAssets Website",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+            source: "BookMyAssets Google Ads",
+            tags: ["Dholera Investment", "Website Lead", "BookMyAssets Google Ads"],
             recaptchaToken: token,
           }),
         }
