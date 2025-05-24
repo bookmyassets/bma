@@ -20,6 +20,12 @@ export default function LandingPage({ img1, mimg1 }) {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
+   const handleClose = () => {
+    if (onClose && typeof onClose === 'function') {
+      onClose();
+    }
+  };
+
   useEffect(() => {
     // Load reCAPTCHA script
     const loadRecaptcha = () => {
@@ -46,7 +52,6 @@ export default function LandingPage({ img1, mimg1 }) {
 
     loadRecaptcha();
 
-    // Get submission count from localStorage
     if (typeof window !== "undefined") {
       setSubmissionCount(
         parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
@@ -56,20 +61,17 @@ export default function LandingPage({ img1, mimg1 }) {
       );
     }
 
-    // Prevent modal close when clicking inside
-    const handleClickInside = (e) => {
-      e.stopPropagation();
+    // Handle Escape key press
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape') {
+        handleClose();
+      }
     };
 
-    const formElement = document.getElementById("hero-form-container");
-    if (formElement) {
-      formElement.addEventListener("click", handleClickInside);
-    }
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      if (formElement) {
-        formElement.removeEventListener("click", handleClickInside);
-      }
+      document.removeEventListener('keydown', handleEscapeKey);
     };
   }, []);
 
@@ -98,73 +100,78 @@ export default function LandingPage({ img1, mimg1 }) {
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours."
+      );
       return false;
     }
 
     return true;
   };
 
-  const onRecaptchaSuccess = async (token) => {
-    try {
-      const now = Date.now();
-      
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+
+const onRecaptchaSuccess = async (token) => {
+  try {
+    const now = Date.now();
+
+    const response = await fetch(
+      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+        },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            source: source,
           },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: "BookMyAssets Website Home",
-            },
-            source: "BookMyAssets Google Ads",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets Google Ads"],
-            recaptchaToken: token,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
-
-        // Show thank you page and redirect
-        setShowThankYou(true);
-        setTimeout(() => {
-          setShowThankYou(false);
-          setShowFormPopup(false);
-          setShowPopup(false);
-          // Redirect to main page (you can change this URL as needed)
-          window.location.href = '/more-info';
-        }, 1000);
-      } else {
-        throw new Error("Error submitting form");
+          source: "BookMyAssets Google Ads",
+          tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+          recaptchaToken: token,
+        }),
       }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setErrorMessage(error.message || "Error submitting form. Please try again.");
-    } finally {
-      setIsLoading(false);
-      
-      // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
-      }
+    );
+
+    if (response.ok) {
+      setFormData({ fullName: "", phone: "" });
+      setShowPopup(true);
+      setSubmissionCount((prev) => {
+        const newCount = prev + 1;
+        localStorage.setItem("formSubmissionCount", newCount.toString());
+        localStorage.setItem("lastSubmissionTime", now.toString());
+        return newCount;
+      });
+
+      // Show thank you popup for 2 seconds
+      setShowThankYou(true);
+      setTimeout(() => {
+        setShowThankYou(false);
+        handleClose();
+
+        // Get current pathname for return URL
+        const currentPath = pathname || window.location.pathname;
+        
+        // Push to thank-you route with return URL
+        router.push(`/more-info/thankyou`);
+      }, 2000);
+    } else {
+      throw new Error("Error submitting form");
     }
-  };
-
+  } catch (error) {
+    console.error("Form submission error:", error);
+    setErrorMessage(
+      error.message || "Error submitting form. Please try again."
+    );
+  } finally {
+    setIsLoading(false);
+    if (window.grecaptcha && recaptchaRef.current) {
+      window.grecaptcha.reset(recaptchaRef.current);
+    }
+  }
+};
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -197,6 +204,18 @@ export default function LandingPage({ img1, mimg1 }) {
       setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
       setIsLoading(false);
     }
+  };
+
+  // Handle backdrop click
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+
+  // Prevent modal content click from closing modal
+  const handleModalContentClick = (e) => {
+    e.stopPropagation();
   };
 
   // Animation variants
