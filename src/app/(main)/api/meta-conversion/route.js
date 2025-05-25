@@ -16,7 +16,6 @@ export async function POST(req) {
       },
     ],
   };
-
   const response = await fetch(
     `https://graph.facebook.com/v18.0/${pixelId}/events?access_token=${accessToken}`,
     {
