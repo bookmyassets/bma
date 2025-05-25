@@ -48,6 +48,7 @@ export default function RootLayout({ children }) {
 
   const FACEBOOK_PIXEL_ID = "1147887730461644";
 
+  
   useEffect(() => {
     initFacebookPixel(FACEBOOK_PIXEL_ID);
     trackPageView();
