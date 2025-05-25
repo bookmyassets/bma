@@ -20,7 +20,7 @@ export default function LandingPage({ img1, mimg1 }) {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-   const handleClose = () => {
+  const handleClose = () => {
     if (onClose && typeof onClose === 'function') {
       onClose();
     }
@@ -110,68 +110,68 @@ export default function LandingPage({ img1, mimg1 }) {
   };
 
 
-const onRecaptchaSuccess = async (token) => {
-  try {
-    const now = Date.now();
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const now = Date.now();
 
-    const response = await fetch(
-      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-        },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            source: source,
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
-          source: "BookMyAssets Google Ads",
-          tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-          recaptchaToken: token,
-        }),
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: source,
+            },
+            source: "BookMyAssets Google Ads",
+            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+            recaptchaToken: token,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        setFormData({ fullName: "", phone: "" });
+        setShowPopup(true);
+        setSubmissionCount((prev) => {
+          const newCount = prev + 1;
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", now.toString());
+          return newCount;
+        });
+
+        // Show thank you popup for 2 seconds
+        setShowThankYou(true);
+        setTimeout(() => {
+          setShowThankYou(false);
+          setShowFormPopup(false);
+
+          // Get current pathname for return URL
+          const currentPath = pathname || window.location.pathname;
+
+          // Push to thank-you route with return URL
+          router.push(`/more-info/thankyou`);
+        }, 2000);
+      } else {
+        throw new Error("Error submitting form");
       }
-    );
-
-    if (response.ok) {
-      setFormData({ fullName: "", phone: "" });
-      setShowPopup(true);
-      setSubmissionCount((prev) => {
-        const newCount = prev + 1;
-        localStorage.setItem("formSubmissionCount", newCount.toString());
-        localStorage.setItem("lastSubmissionTime", now.toString());
-        return newCount;
-      });
-
-      // Show thank you popup for 2 seconds
-      setShowThankYou(true);
-      setTimeout(() => {
-        setShowThankYou(false);
-        handleClose();
-
-        // Get current pathname for return URL
-        const currentPath = pathname || window.location.pathname;
-        
-        // Push to thank-you route with return URL
-        router.push(`/more-info/thankyou`);
-      }, 2000);
-    } else {
-      throw new Error("Error submitting form");
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setErrorMessage(
+        error.message || "Error submitting form. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+      if (window.grecaptcha && recaptchaRef.current) {
+        window.grecaptcha.reset(recaptchaRef.current);
+      }
     }
-  } catch (error) {
-    console.error("Form submission error:", error);
-    setErrorMessage(
-      error.message || "Error submitting form. Please try again."
-    );
-  } finally {
-    setIsLoading(false);
-    if (window.grecaptcha && recaptchaRef.current) {
-      window.grecaptcha.reset(recaptchaRef.current);
-    }
-  }
-};
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -209,7 +209,7 @@ const onRecaptchaSuccess = async (token) => {
   // Handle backdrop click
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      handleClose();
+      setShowFormPopup(false);
     }
   };
 
@@ -263,19 +263,19 @@ const onRecaptchaSuccess = async (token) => {
   return (
     <div id="hero" className="relative h-[75vh] md:h-[72vh]">
       {/* Background Images */}
-     <div >
-  <div className="absolute inset-0 hidden lg:block">
-        <Image src={img1} alt="Investment Opportunity" className="w-full " priority />
+      <div >
+        <div className="absolute inset-0 hidden lg:block">
+          <Image src={img1} alt="Investment Opportunity" className="w-full " priority />
+        </div>
+        <div className="absolute inset-0 block lg:hidden">
+          <Image src={mimg1} alt="Investment Opportunity Mobile" fill className=" bg-black" priority />
+        </div>
+        <div className="absolute max-w-7xl mx-auto inset-0 z-50 font-semibold text-xl md:text-4xl translate-y-28 text-black flex lg:items-center justify-center lg  :justify-start ">
+          <p className="text-center md:text-left px-4 md:px-0">
+            Premium, Registry-Ready Plot in Dholera <br /> — Built for Smart Investors
+          </p>
+        </div>
       </div>
-      <div className="absolute inset-0 block lg:hidden">
-        <Image src={mimg1} alt="Investment Opportunity Mobile" fill className=" bg-black" priority />
-      </div>
-  {/* <div className="absolute inset-0 z-50 text-red-600 flex items-center justify-center md:justify-start md:pl-8 lg:pl-16 xl:pl-20">
-    <p className="text-center md:text-left px-4 md:px-0">
-      Premium, Registry-Ready Plot in Dholera — Built for Smart Investors
-    </p>
-  </div> */}
-</div>
 
       {/* Contact Us Button - Bottom-Centered & Responsive */}
       <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center items-center pb-2 max-sm:pb-0">
@@ -359,15 +359,12 @@ const onRecaptchaSuccess = async (token) => {
         )}
       </AnimatePresence>
 
-      {/* Form Popup with reCAPTCHA */}
+      {/* Form Popup */}
       <AnimatePresence>
         {showFormPopup && !showThankYou && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
-            onClick={() => setShowFormPopup(false)}
+          <div
+            className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
+            onClick={handleBackdropClick}
           >
             <motion.div
               id="hero-form-container"
@@ -375,8 +372,31 @@ const onRecaptchaSuccess = async (token) => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 50 }}
               className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
-              onClick={(e) => e.stopPropagation()}
+              onClick={handleModalContentClick}
             >
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setShowFormPopup(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full p-1 transition-all duration-200 hover:bg-gray-700 z-10"
+                aria-label="Close form"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
               {/* Logo */}
               <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
                 <motion.div
@@ -394,32 +414,6 @@ const onRecaptchaSuccess = async (token) => {
                   />
                 </motion.div>
               </div>
-
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setShowFormPopup(false);
-                }}
-                className="absolute top-3 right-3 text-gray-400 hover:text-white focus:outline-none"
-                aria-label="Close form"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
 
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -530,7 +524,7 @@ const onRecaptchaSuccess = async (token) => {
                 </form>
               )}
             </motion.div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>

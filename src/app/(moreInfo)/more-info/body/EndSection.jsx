@@ -22,8 +22,7 @@ export default function EndSection() {
           {/* Ready to Invest Section - Now Second */}
           <div className=" p-6  rounded-lg text-black">
             <h3 className="text-2xl font-bold mb-3">
-              Secure your plot in Westwyn County Today! OR Start your smart city
-              investment journey NOW with Westwyn County
+              Secure your plot in Westwyn County Today!
             </h3>
             <p className="mb-4 opacity-90">
               Limited AUDA-approved plots available near Dholera’s

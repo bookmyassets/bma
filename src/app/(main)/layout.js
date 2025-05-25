@@ -13,6 +13,8 @@ import Script from "next/script";
 import Footer from "./components/Footer";
 import ContactNow from "./components/Callus";
 import FloatingButtons from "./components/whatsapp";
+import { usePathname } from "next/navigation";
+import { initFacebookPixel, trackPageView } from "@/lib/fbpixel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +43,17 @@ export default function RootLayout({ children }) {
   const mobileMenuRef = useRef(null);
   const menuToggleRef = useRef(null);
   const galleryRef = useRef(null);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    initFacebookPixel(FACEBOOK_PIXEL_ID);
+    trackPageView();
+  }, []);
+
+  useEffect(() => {
+    trackPageView();
+  }, [pathname]);
 
   // Close all dropdowns
   const closeAllDropdowns = () => {
