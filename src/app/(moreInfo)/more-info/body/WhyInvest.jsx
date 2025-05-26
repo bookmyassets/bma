@@ -222,7 +222,7 @@ export default function WhyInvest() {
                         isFormSubmitted
                           ? "bg-green-600 hover:bg-green-700"
                           : "bg-[#d7b36c] hover:bg-[#c2a05e]"
-                      } text-white font-bold rounded-lg transition duration-300 transform hover:scale-105 font-poppins shadow-md animate-float`}
+                      } text-black font-bold rounded-lg transition duration-300 transform hover:scale-105 font-poppins shadow-md animate-float`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -272,8 +272,8 @@ export default function WhyInvest() {
                           Starting From
                         </div>
                         <div className="text-xl font-bold text-gray-800">
-                          <p className=" strike">₹9,500/sq.ft</p>
-                          ₹9,000/sq.ft
+                          <p className="line-through">₹9,500/sq.ft</p>
+                          ₹9,250/sq.ft
                         </div>
                       </div>
                       <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
