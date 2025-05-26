@@ -2,24 +2,24 @@ import { Dumbbell, ShieldCheck, Waves, Battery } from "lucide-react";
 
 const amenities = [
   {
-    icon: <Dumbbell className="w-10 h-10 text-[#d7b36c]" />,
-    title: "Yoga Center",
-    description: "Dedicated space for wellness and meditation",
-  },
-  {
     icon: <ShieldCheck className="w-10 h-10 text-[#d7b36c]" />,
     title: "24/7 CCTV Surveillance",
     description: "Round-the-clock security monitoring",
   },
   {
-    icon: <Waves className="w-10 h-10 text-[#d7b36c]" />,
-    title: "Swimming Pool",
-    description: "Resort-style pool for recreation",
-  },
-  {
     icon: <Battery className="w-10 h-10 text-[#d7b36c]" />,
     title: "EV Charging Stations",
     description: "Future-ready infrastructure for electric vehicles",
+  },
+  {
+    icon: <Dumbbell className="w-10 h-10 text-[#d7b36c]" />,
+    title: "Yoga Center",
+    description: "Dedicated space for wellness and meditation",
+  },
+  {
+    icon: <Waves className="w-10 h-10 text-[#d7b36c]" />,
+    title: "Swimming Pool",
+    description: "Resort-style pool for recreation",
   },
 ];
 

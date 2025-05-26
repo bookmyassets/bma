@@ -83,10 +83,16 @@ export default function Navbar() {
               About
             </a>
             <a
+              href="#westwyn-county"
+              className="hover:text-white transition duration-200"
+            >
+              Westwyn County
+            </a>
+            <a
               href="#WhyInvest"
               className="hover:text-white transition duration-200"
             >
-              Why Invest
+              Investment Benefits
             </a>
             <a
               href="#WhyDholera"
@@ -95,10 +101,10 @@ export default function Navbar() {
               Why Dholera
             </a>
             <a
-              href="#westwyn-county"
+              href="#Testimonials"
               className="hover:text-white transition duration-200"
             >
-              Westwyn County
+              Testimonials
             </a>
             <a
               href="#Faqs"
@@ -249,9 +255,10 @@ export default function Navbar() {
               {[
                 { href: "#hero", label: "Home" },
                 { href: "#about", label: "About" },
+                { href: "#westwyn-county", label: "Westwyn County" },
                 { href: "#WhyInvest", label: "Why Invest" },
                 { href: "#WhyDholera", label: "Why Dholera" },
-                { href: "#westwyn-county", label: "Westwyn County" },
+                { href: "#Testimonials", label: "Testimonials" },
                 { href: "#Faqs", label: "FAQ" },
               ].map(({ href, label }) => (
                 <a

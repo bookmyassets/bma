@@ -102,8 +102,9 @@ export default function About() {
               </h2>
               <p className="text-gray-600 text-lg mb-6 ">
                 At BookMyAssets, we don't just offer land—we offer a vision of the future. 
-                Over 5+ projects successfully sold out in Dholera Smart City. <br />
+                Multiple projects successfully sold in Dholera Smart City. <br />
                 <span className="font-semibold">WestWyn County is yet another step toward your smarter future.</span>
+                <br/>
                 See Why 1000+ Investors Trusted Us
               </p>
               <div className="mt-8">

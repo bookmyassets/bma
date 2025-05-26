@@ -200,10 +200,14 @@ export default function WhyInvest() {
                   </h3>
                   <div className="w-20 h-1 bg-[#d7b36c] mb-6"></div>
                   <p className="text-lg md:text-xl text-gray-700 font-poppins mb-6">
-                    Be a part of Dholera's growth story! With the region set to
-                    become a hub for industries like aviation, electronics, and
-                    renewable energy, your investment in Emerald City promises
-                    not just a home but a future full of possibilities.
+                    With major investments pouring into aviation, electronics,
+                    defense, and green energy, Dholera Smart City is poised to
+                    become Gujarat’s industrial and innovation hub. Your
+                    investment in WestWyn County offers not just land — but high
+                    future returns, world-class infrastructure, and the
+                    first-mover advantage in India’s most ambitious smart city.
+                    Download our brochure to explore plot options, pricing, and
+                    location insights.
                   </p>
                   <div className="flex flex-col md:text-xl sm:flex-row gap-4">
                     <button
@@ -268,6 +272,7 @@ export default function WhyInvest() {
                           Starting From
                         </div>
                         <div className="text-xl font-bold text-gray-800">
+                          <p className=" strike">₹9,500/sq.ft</p>
                           ₹9,000/sq.ft
                         </div>
                       </div>

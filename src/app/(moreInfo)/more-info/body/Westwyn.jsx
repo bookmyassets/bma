@@ -37,7 +37,7 @@ const features = [
   {
     icon: buybackguarantee,
     title: "Buy Back Guarantee",
-    description: "Terms & Conditions Apply",
+    description: "*Terms & Conditions Apply*",
   },
 ];
 
@@ -241,8 +241,7 @@ export default function Westwyn() {
             </h1>
             <div className="bg-[#d7b36c] w-48 mx-auto h-1"></div>
             <p className="font-light italic text-gray-600 text-lg max-w-2xl mx-auto">
-              A Premium Verified Plot on Fedra-Pipli Highway - Your Gateway to
-              Smart City Living
+              Platinum-rated, AUDA-approved plots on Fedra-Pipli Highway in Dholera’s growth zone — built for smart investors.
             </p>
           </div>
         </section>
@@ -295,9 +294,7 @@ export default function Westwyn() {
                   Why Choose WestWyn County?
                 </h2>
                 <p className="text-gray-600 mb-8">
-                  Experience premium living with world-class amenities and
-                  modern infrastructure in Dholera's most sought-after
-                  residential project.
+                  WestWyn County offers premium residential plots with world-class amenities and modern infrastructure—an ideal investment near Dholera’s Special investment Zone
                 </p>
               </div>
 

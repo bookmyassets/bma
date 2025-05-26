@@ -96,9 +96,9 @@ const TestimonialPagination = () => {
   };
 
   return (
-    <div className="bg-black py-16">
+    <div id='Testimonials' className="bg-black py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-center text-3xl font-semibold text-[#FDB913] mb-10">Our Clients</h2>
+        <h2 className="text-center text-3xl font-semibold text-[#FDB913] mb-10">Customer Testimonials</h2>
         
         {/* Mobile Slider View */}
         {isMobile && (
