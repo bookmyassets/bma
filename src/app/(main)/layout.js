@@ -237,6 +237,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
+
+
         <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-50 bg-black/60 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-24  items-center">
