@@ -307,15 +307,7 @@ export default function WhyInvest() {
               priority
             />
             <div className="absolute inset-0 bg-black opacity-20"></div>
-            {/* Button positioned at bottom-4 */}
-            <div className="absolute flex justify-center items-center bottom-4 left-0 right-0 px-4">
-              <button
-                onClick={openForm}
-                className="bg-[#d7b36c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c4a055] transition-colors w-full max-w-md mx-auto"
-              >
-                Invest Now
-              </button>
-            </div>
+            
           </div>
 
           {/* Mobile Image */}
@@ -328,15 +320,7 @@ export default function WhyInvest() {
               priority
             />
             <div className="absolute inset-0"></div>
-            {/* Button positioned at bottom-4 */}
-            <div className="absolute bottom-4 left-0 right-0 px-4">
-              <button
-                onClick={openForm}
-                className="bg-[#d7b36c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c4a055] transition-colors w-full"
-              >
-                Invest Now
-              </button>
-            </div>
+           
           </div>
         </div>
       </section>

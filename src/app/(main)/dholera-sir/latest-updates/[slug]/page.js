@@ -5,22 +5,17 @@ import Link from "next/link";
 import Image from "next/image";
 
 export async function generateMetadata({ params }) {
-  // Ensure the slug is properly resolved before using it
-  const { slug } = params; // params is already available, but use destructuring
   
-  // Fetch the post using the slug
+  const { slug } = params; 
+
   const post = await getPostBySlug(slug); 
   
 
   return {
-    title: post.title,  // Use the fetched post's title for dynamic title
-    description: post.metaDescription, // Same for description
-    
+    title: post.title,  
+    description: post.metaDescription, 
   };
 }
-
-
-
 
 export default async function Post({ params }) {
   const post = await getPostBySlug(params.slug);
@@ -164,9 +159,6 @@ export default async function Post({ params }) {
               {post.title}
             </h1>
 
-            {/* Meta information */}
-
-            {/* Content */}
             <div
               className="text-lg antialiased md:subpixel-antialiased tracking-wide decoration-inherit
  max-w-none"

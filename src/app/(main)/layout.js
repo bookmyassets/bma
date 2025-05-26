@@ -52,7 +52,6 @@ export default function RootLayout({ children }) {
     initFacebookPixel(FACEBOOK_PIXEL_ID);
     trackPageView();
   }, []);
-  
 
   useEffect(() => {
     trackPageView();
@@ -237,9 +236,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-
-
-
         <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-50 bg-black/60 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-24  items-center">
@@ -269,14 +265,14 @@ export default function RootLayout({ children }) {
                   {/* Projects Dropdown */}
                   <div ref={projectsRef} className="relative group">
                     <Link
-                      href="/projects"
+                      href="/projects/dholera/westwyn-county-wc"
                       className="flex items-center gap-1 px-3 py-2 text-[#FDB913] hover:text-white cursor-pointer"
-                      onClick={toggleProjectsDropdown}
+                      /* onClick={toggleProjectsDropdown}
                       onMouseEnter={() => setIsProjectsDropdownOpen(true)}
-                      onMouseLeave={() => setIsProjectsDropdownOpen(false)}
+                      onMouseLeave={() => setIsProjectsDropdownOpen(false)} */
                     >
                       Projects
-                      <svg
+                      {/* <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
                           isProjectsDropdownOpen ? "rotate-180" : ""
@@ -291,7 +287,7 @@ export default function RootLayout({ children }) {
                           strokeLinejoin="round"
                           d="M19 9l-7 7-7-7"
                         />
-                      </svg>
+                      </svg> */}
                     </Link>
 
                     <AnimatePresence>
@@ -371,6 +367,12 @@ export default function RootLayout({ children }) {
                                 {proj.title}
                               </Link>
                             ))}
+                            <Link
+                              href="/dholera-sir/latest-updates"
+                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                            >
+                              Latest Updates
+                            </Link>
                           </div>
                         </motion.div>
                       )}
@@ -652,12 +654,12 @@ export default function RootLayout({ children }) {
                     {/* Mobile Projects Dropdown */}
                     <div>
                       <Link
-                        href="/projects"
-                        onClick={toggleProjectsDropdown}
+                        href="/projects/dholera/westwyn-county-wc"
+                        /* onClick={toggleProjectsDropdown} */
                         className="text-[#FDB913] flex items-center justify-between w-full px-3 py-2 hover:bg-[#420703] rounded-md"
                       >
                         <span>Projects</span>
-                        <svg
+                        {/* <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
                             isProjectsDropdownOpen ? "rotate-180" : ""
@@ -672,7 +674,7 @@ export default function RootLayout({ children }) {
                             strokeLinejoin="round"
                             d="M19 9l-7 7-7-7"
                           />
-                        </svg>
+                        </svg> */}
                       </Link>
                       <AnimatePresence>
                         {isProjectsDropdownOpen && (
@@ -749,6 +751,12 @@ export default function RootLayout({ children }) {
                                 {project.title}
                               </Link>
                             ))}
+                            <Link
+                              href="/dholera-sir/latest-updates"
+                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                            >
+                              Latest Updates
+                            </Link>
                           </motion.div>
                         )}
                       </AnimatePresence>

@@ -10,8 +10,8 @@ export async function generateMetadata({ params }) {
   const post = await getPostBySlug(slug);
 
   return {
-    title: post.title ,
-    description: post.metaDescription ,
+    title: post.title,
+    description: post.metaDescription,
     keywords: post.keywords?.join(", "),
   };
 }
@@ -127,8 +127,8 @@ export default async function ProjectDetail({ params }) {
     return (
       <div className="bg-white min-h-screen">
         <title>{post.metaTitle}</title>
-        <meta name="description" content={post.metaDescription}/>
-        <meta name="keywords" content={post.keywords}/>
+        <meta name="description" content={post.metaDescription} />
+        <meta name="keywords" content={post.keywords} />
         <link rel="canonical" href={canonicalUrl} />
         {/* Sticky Nav Placeholder */}
         <div className="bg-white shadow-sm py-8 h-8" />
@@ -161,7 +161,7 @@ export default async function ProjectDetail({ params }) {
               {/* Mobile view related projects */}
               <div className="lg:hidden mb-10">
                 <h3 className="text-xl font-bold mb-4 text-black">
-                Our {post.title} Projects
+                  Our {post.title} Projects
                 </h3>
                 {projects?.relatedProjects?.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -178,8 +178,16 @@ export default async function ProjectDetail({ params }) {
                           href={`/projects/${postSlugStr}/${projectSlugStr}`}
                           className="flex gap-3 items-center bg-white hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
                         >
-                          <div>
-                            <h4 className="text-sm font-semibold text-black">
+                          <div className="flex items-center gap-4 w-full">
+                            <div className="relative w-12 lg:w-24 h-12 lg:h-24 flex-shrink-0">
+                              <Image
+                                src={urlFor(project.mainImage).url()}
+                                alt={project.title}
+                                fill
+                                className="object-cover rounded"
+                              />
+                            </div>
+                            <h4 className="text-sm lg:text-base font-semibold text-black">
                               {project.title}
                             </h4>
                           </div>
@@ -201,7 +209,7 @@ export default async function ProjectDetail({ params }) {
                   />
                 </div>
               </div>
-            <ProjectSlider />
+              <ProjectSlider />
             </article>
 
             {/* Sidebar */}
@@ -212,7 +220,7 @@ export default async function ProjectDetail({ params }) {
                 {/* Our Dholera Projects */}
                 <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200 mb-6">
                   <h3 className="text-xl font-bold mb-4 text-black">
-                  Our {post.title} Projects
+                    Our {post.title} Projects
                   </h3>
                   <div className="space-y-4 max-h-[300px] overflow-y-auto">
                     {projects?.relatedProjects?.length > 0 ? (

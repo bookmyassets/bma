@@ -141,7 +141,7 @@ export default async function SubProjectDetail({ params }) {
         <meta name="description" content={subProject.metaDescription} />
         <meta name="keywords" content={subProject.keywords} />
         <link rel="canonical" href={canonicalUrl} />
-        <meta name="robots" content="noindex, follow"></meta>
+        <meta name="robots" content="index, follow"></meta>
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30 h-16" />
 
