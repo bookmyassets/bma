@@ -264,25 +264,25 @@ export default function LandingPage({ img1, mimg1 }) {
     <div id="hero" className="relative h-[75vh] md:h-[70vh]">
       {/* Background Images */}
       <div className="">
-  {/* Desktop Image */}
-  <div className="absolute inset-0 hidden lg:block">
-    <Image src={img1} alt="Investment Opportunity" className="w-full" priority />
-    <div className="absolute inset-0 bg-black opacity-20"></div> {/* Black Overlay */}
-  </div>
+        {/* Desktop Image */}
+        <div className="absolute inset-0 hidden lg:block">
+          <Image src={img1} alt="Investment Opportunity" className="w-full" priority />
+          <div className="absolute inset-0 bg-black opacity-20"></div> {/* Black Overlay */}
+        </div>
 
-  {/* Mobile Image */}
-  <div className="absolute inset-0 block lg:hidden">
-    <Image src={mimg1} alt="Investment Opportunity Mobile" fill className="w-full" priority />
-    <div className="absolute inset-0 "></div> {/* Black Overlay */}
-  </div>
+        {/* Mobile Image */}
+        <div className="absolute inset-0 block lg:hidden">
+          <Image src={mimg1} alt="Investment Opportunity Mobile" fill className="w-full" priority />
+          <div className="absolute inset-0 "></div> {/* Black Overlay */}
+        </div>
 
-  {/* Text Overlay */}
-  <div className="absolute max-w-7xl mx-auto inset-0 z-10 font-semibold text-xl md:text-5xl max-sm:translate-y-40 text-white flex lg:items-center justify-center lg:justify-start">
-    <p className="text-center md:text-left px-4 md:px-0">
-      Premium, Registry-Ready Plot <br /> in Dholera Built for Smart Investors
-    </p>
-  </div>
-</div>
+        {/* Text Overlay */}
+        <div className="absolute max-w-7xl mx-auto inset-0 z-10 font-semibold text-xl md:text-5xl max-sm:translate-y-40 text-gray-200 flex lg:items-center justify-center lg:justify-start">
+          <p className="text-center md:text-left px-4 md:px-0">
+            Premium, Registry-Ready <br /> Plot in Dholera <br /> Built for Smart Investors
+          </p>
+        </div>
+      </div>
 
 
       {/* Contact Us Button - Bottom-Centered & Responsive */}

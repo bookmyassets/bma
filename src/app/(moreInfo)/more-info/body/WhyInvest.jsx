@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import ContactForm from "../components/BrochureForm";
 import { AnimatePresence } from "framer-motion";
+import priceBanner from "@/assests/landing/price-cut-banner.webp"
+import priceBannerMobile from "@/assests/landing/Price-cut-mobile-banner.webp"
+import Image from "next/image";
 
 export default function WhyInvest() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -218,11 +221,10 @@ export default function WhyInvest() {
                           openContactForm();
                         }
                       }}
-                      className={`inline-flex items-center px-6 py-3 ${
-                        isFormSubmitted
-                          ? "bg-green-600 hover:bg-green-700"
-                          : "bg-[#d7b36c] hover:bg-[#c2a05e]"
-                      } text-black font-bold rounded-lg transition duration-300 transform hover:scale-105 font-poppins shadow-md animate-float`}
+                      className={`inline-flex items-center px-6 py-3 ${isFormSubmitted
+                        ? "bg-green-600 hover:bg-green-700"
+                        : "bg-[#d7b36c] hover:bg-[#c2a05e]"
+                        } text-black font-bold rounded-lg transition duration-300 transform hover:scale-105 font-poppins shadow-md animate-float`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +277,7 @@ export default function WhyInvest() {
                           <p className="line-through">₹9,500/sq.ft</p>
                           ₹9,250/sq.ft
                         </div>
-                        
+
                       </div>
                       <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
                         <div className="text-sm text-gray-600 mb-1">
@@ -293,9 +295,55 @@ export default function WhyInvest() {
           </div>
         </section>
       </div>
+
+      <section>
+        <div className="relative mb-8">
+          {/* Desktop Image */}
+          <div className="hidden lg:block relative">
+            <Image
+              src={priceBanner}
+              alt="Investment Opportunity"
+              className="w-full"
+              priority
+            />
+            <div className="absolute inset-0 bg-black opacity-20"></div>
+            {/* Button positioned at bottom-4 */}
+            <div className="absolute flex justify-center items-center bottom-4 left-0 right-0 px-4">
+              <button
+                onClick={openForm}
+                className="bg-[#d7b36c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c4a055] transition-colors w-full max-w-md mx-auto"
+              >
+                Invest Now
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Image */}
+          <div className="block lg:hidden relative h-[300px]"> {/* Set a fixed height for mobile */}
+            <Image
+              src={priceBannerMobile}
+              alt="Investment Opportunity Mobile"
+              fill
+              className="object-contain w-full"
+              priority
+            />
+            <div className="absolute inset-0"></div>
+            {/* Button positioned at bottom-4 */}
+            <div className="absolute bottom-4 left-0 right-0 px-4">
+              <button
+                onClick={openForm}
+                className="bg-[#d7b36c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c4a055] transition-colors w-full"
+              >
+                Invest Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="max-w-7xl mx-auto px-4 mb-20">
         <div className="investment-calculator bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="bg-[#d7b36c] p-6 text-white">
+          <div className="bg-[#d7b36c] p-6 text-black">
             <h2 className="text-2xl font-bold">Investment Calculator</h2>
             <p>See how your investment grows over time</p>
           </div>
@@ -313,11 +361,10 @@ export default function WhyInvest() {
                     <button
                       key={size}
                       onClick={() => setPlotSize(size)}
-                      className={`py-2 px-4 rounded-md ${
-                        plotSize === size
-                          ? "bg-[#d7b36c] text-white"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
+                      className={`py-2 px-4 rounded-md ${plotSize === size
+                        ? "bg-[#d7b36c] text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        }`}
                     >
                       {size}
                     </button>
@@ -337,11 +384,10 @@ export default function WhyInvest() {
                         setInvestmentYear(year);
                         setCustomYear("");
                       }}
-                      className={`py-2 px-4 rounded-md ${
-                        investmentYear === year && !customYear
-                          ? "bg-[#d7b36c] text-white"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
+                      className={`py-2 px-4 rounded-md ${investmentYear === year && !customYear
+                        ? "bg-[#d7b36c] text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        }`}
                     >
                       {year} Years
                     </button>
@@ -418,6 +464,9 @@ export default function WhyInvest() {
               >
                 Invest Now
               </button>
+              <p className="pt-4 text-gray-600">
+                Disclaimer : calculations are estimates and don't guarantee exact returns the
+              </p>
             </div>
           </div>
         </div>
