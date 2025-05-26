@@ -24,6 +24,7 @@ export default function CostSheet() {
     totalPaymentYards: '',
     maintenanceRate: 500, // Default maintenance rate
     maintenanceCharge: 0,
+    oneTimeMaintenance: 50000, // Default one-time maintenance value
     totalCharges: 0,
     plotTotalPayment: 0,
   });
@@ -44,8 +45,8 @@ export default function CostSheet() {
     if (formData.plotAreaYards && formData.basePlotPriceYards) {
       const plotPrice = plotPriceWithPLC;
       const totalPayment = formData.plotAreaYards * plotPrice;
-      const maintenance = formData.plotAreaYards * formData.maintenanceRate; // Use selected maintenance rate
-      const totalCharges = maintenance + 20000 + 50000; // Legal Fee is Rs20000 + Maintenance(for 3 years) 50,000
+      const maintenance = formData.plotAreaYards * formData.maintenanceRate;
+      const totalCharges = maintenance + 20000 + parseFloat(formData.oneTimeMaintenance); // Legal Fee + One Time Maintenance
       const plotTotalPayment = totalPayment + totalCharges;
       const plotAreaFeet = formData.plotAreaYards * 9;
   
@@ -58,13 +59,13 @@ export default function CostSheet() {
         plotTotalPayment: plotTotalPayment.toFixed(2),
       }));
     }
-  }, [formData.plotAreaYards, formData.basePlotPriceYards, formData.plc, formData.maintenanceRate]);
+  }, [formData.plotAreaYards, formData.basePlotPriceYards, formData.plc, formData.maintenanceRate, formData.oneTimeMaintenance]);
 
   // Function to generate the PDF
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    const { name, phone, email, plc, plotNo, plotAreaYards, plotAreaFeet, totalPaymentYards, maintenanceRate, maintenanceCharge, totalCharges, plotTotalPayment } = formData;
+    const { name, phone, email, plc, plotNo, plotAreaYards, plotAreaFeet, totalPaymentYards, maintenanceRate, maintenanceCharge, oneTimeMaintenance, totalCharges, plotTotalPayment } = formData;
 
     let startY = 40;
 
@@ -93,6 +94,7 @@ export default function CostSheet() {
       const formattedPricePerYard = formatIndianNumber(plotPriceWithPLC);
       const formattedTotalPaymentYards = formatIndianNumber(totalPaymentYards);
       const formattedMaintenanceCharge = formatIndianNumber(maintenanceCharge);
+      const formattedOneTimeMaintenance = formatIndianNumber(oneTimeMaintenance);
       const formattedTotalCharges = formatIndianNumber(totalCharges);
       const formattedPlotTotalPayment = formatIndianNumber(plotTotalPayment);
 
@@ -133,7 +135,7 @@ export default function CostSheet() {
         body: [
           [`Development Charge (${maintenanceRate} x Size)`, `Rs. ${formattedMaintenanceCharge}`],
           ['Legal Fee (Per Sale Deed)', 'Rs. 20,000.00'],
-          ['Maintenance For 3 years', 'Rs. 50,000.00'],
+          ['Maintenance For 3 years', `Rs. ${formattedOneTimeMaintenance}`],
           ['Total Charges', `Rs. ${formattedTotalCharges}`],
           ['Plot Total Payment', `Rs. ${formattedPlotTotalPayment}`],
         ],
@@ -371,8 +373,10 @@ export default function CostSheet() {
               <td className="p-2 font-semibold">One Time Maintenance(for 3 years)</td>
               <td className="p-2">
                 <input
-                  type="text"
-                  value="50000.00"
+                  type="number"
+                  name="oneTimeMaintenance"
+                  value={formData.oneTimeMaintenance}
+                  onChange={handleChange}
                   className="border p-2 w-full rounded"
                 />
               </td>
