@@ -275,6 +275,7 @@ export default function WhyInvest() {
                           <p className="line-through">₹9,500/sq.ft</p>
                           ₹9,250/sq.ft
                         </div>
+                        
                       </div>
                       <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
                         <div className="text-sm text-gray-600 mb-1">
