@@ -254,28 +254,28 @@ export default function Westwyn() {
         </section>
 
         <section className="max-w-7xl mx-auto">
-          <div className="fade-in-up bg-black rounded-2xl shadow-lg p-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 text-center">
-              <div>
-                <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+          <div className="fade-in-up bg-black border-4 border-[#d7b36c] md:rounded-2xl shadow-lg p-8">
+            <div className="grid grid-cols-2  md:grid-cols-4 text-center">
+              <div className="mb-2">
+                <div className="text-3xl font-bold text-[#d7b36c] text-center">
                   200+
                 </div>
                 <div className="text-white text-sm">Sq. Yards Plots</div>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+              <div className="mb-2">
+                <div className="text-3xl font-bold text-[#d7b36c] text-center">
                   24x7
                 </div>
                 <div className="text-white text-sm">Security</div>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+              <div className="mb-2">
+                <div className="text-3xl font-bold text-[#d7b36c] text-center">
                   100%
                 </div>
                 <div className="text-white text-sm">Legal Approval</div>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-[#d7b36c] mb-2">
+              <div className="mb-2">
+                <div className="text-3xl font-bold text-[#d7b36c] text-center">
                   70+
                 </div>
                 <div className="text-white text-sm">Plots</div>

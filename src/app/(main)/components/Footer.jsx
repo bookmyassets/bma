@@ -86,6 +86,14 @@ const Footer = () => {
                   <span className="mr-2">›</span> Blog
                 </a>
               </li>
+              <li>
+                <a
+                  href="sitemap.html"
+                  className="text-white hover:text-yellow-600 transition flex items-center"
+                >
+                  <span className="mr-2">›</span> Sitemap
+                </a>
+              </li>
             </ul>
           </div>
 

@@ -6,21 +6,21 @@ import { motion } from 'framer-motion';
 
 const testimonials = [
   {
-    quote: "Investing in Dholera Smart City through Book My Assets was one of the best decisions I made. The team guided me through every step, ensuring a hassle-free purchase. The plot prices are affordable, and I am already seeing a great appreciation in value. Highly recommended.",
-    name: "Rahul Mehta",
-    location: "Gurugram",
+    quote: "Investing in WestWyn County through BookMyAssets was a smart move. Dholera Smart City has massive growth potential, and this project is right in the middle of it.",
+    name: " Rajesh Gupta",
+    location: "Delhi NCR Investor",
     avatar: "/api/placeholder/80/80"
   },
   {
-    quote: "I was initially skeptical about investing in Dholera, but Book My Assets provided me with all the necessary details and market insights. Their transparency and professionalism gave me confidence, and now I own a prime plot in Gujarat's first smart city. Excited about the future.",
-    name: "Pooja Shah",
+    quote: "I wanted early access to Dholera Special Investment Region, and WestWyn County checked all boxes—location, approvals, and guidance from BookMyAssets.",
+    name: "Vikas Singh",
     location: "Ahmedabad",
     avatar: "/api/placeholder/80/80"
   },
   {
-    quote: "Dholera Smart City is the future, and Book My Assets helped me secure a great investment opportunity. Their team is knowledgeable and responsive and ensures a smooth transaction. I am confident my investment will yield high returns in the coming years.",
-    name: "Vikas Patel",
-    location: "Delhi",
+    quote: "I trust BookMyAssets because they only deal in verified plots. WestWyn County in Dholera Smart City gave me both peace of mind and strong future returns",
+    name: "Sumit Patel",
+    location: " Surat",
     avatar: "/api/placeholder/80/80"
   },
 

@@ -105,7 +105,7 @@ export default function About() {
                 Multiple projects successfully sold in Dholera Smart City. <br />
                 <span className="font-semibold">WestWyn County is yet another step toward your smarter future.</span>
                 <br/>
-                See Why 1000+ Investors Trusted Us
+                
               </p>
               <div className="mt-8">
                 <div className="flex items-center space-x-3">

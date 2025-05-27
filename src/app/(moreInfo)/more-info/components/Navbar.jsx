@@ -80,7 +80,7 @@ export default function Navbar() {
               href="#about"
               className="hover:text-white transition duration-200"
             >
-              About
+              About Us
             </a>
             <a
               href="#westwyn-county"
@@ -98,7 +98,7 @@ export default function Navbar() {
               href="#WhyDholera"
               className="hover:text-white transition duration-200"
             >
-              Why Dholera
+              Mega Projects
             </a>
             <a
               href="#Testimonials"
@@ -254,10 +254,10 @@ export default function Navbar() {
             <div className="flex flex-col space-y-4 font-semibold">
               {[
                 { href: "#hero", label: "Home" },
-                { href: "#about", label: "About" },
+                { href: "#about", label: "About Us" },
                 { href: "#westwyn-county", label: "Westwyn County" },
                 { href: "#WhyInvest", label: "Why Invest" },
-                { href: "#WhyDholera", label: "Why Dholera" },
+                { href: "#WhyDholera", label: "Mega Projects" },
                 { href: "#Testimonials", label: "Testimonials" },
                 { href: "#Faqs", label: "FAQ" },
               ].map(({ href, label }) => (

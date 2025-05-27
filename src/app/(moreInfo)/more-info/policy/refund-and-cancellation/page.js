@@ -46,7 +46,7 @@ export default function Copyright() {
                   Legal fees include costs related to documentation and registration of the property.
                 </p>
                 <p>
-                  For any further assistance or clarification, feel free to reach out to us via email at{" "}
+                  For any further assistance please fill out the form to schedule a free consultation with our real estate experts.{" "}
                   <a href="mailto:info@bookmyassets.com" className="text-blue-400 underline">
                     info@bookmyassets.com
                   </a>{" "}

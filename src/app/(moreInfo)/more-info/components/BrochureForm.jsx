@@ -17,8 +17,7 @@ export default function ContactForm({
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
-  const [showFormPopup, setShowFormPopup] = useState(false);
-const [showSubmissionSuccess, setShowSubmissionSuccess] = useState(false); 
+  const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
@@ -29,37 +28,6 @@ const [showSubmissionSuccess, setShowSubmissionSuccess] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
-  const [wasTriggered, setWasTriggered] = useState(false);
-useEffect(() => {
-  // Check if already shown or if user has submitted before
-  if (wasTriggered || submissionCount > 0) return;
-
-  // Timer approach (5 seconds)
-  const timer = setTimeout(() => {
-    if (!wasTriggered && !showThankYou && submissionCount === 0) {
-      setShowFormPopup(true);
-      setWasTriggered(true);
-    }
-  }, 5000);
-
-  // Scroll approach (5% of page)
-  const handleScroll = () => {
-    const scrollThreshold = document.body.scrollHeight * 0.05;
-    if (window.scrollY > scrollThreshold && !wasTriggered && !showThankYou && submissionCount === 0) {
-      setShowFormPopup(true);
-      setWasTriggered(true);
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timer);
-    }
-  };
-
-  window.addEventListener('scroll', handleScroll);
-  
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-    clearTimeout(timer);
-  };
-}, [wasTriggered, submissionCount]);
   // Handle close function
   const handleClose = () => {
     if (onClose && typeof onClose === 'function') {
@@ -140,7 +108,7 @@ useEffect(() => {
       setSubmissionCount(0);
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
-    } else if (submissionCount >= 3) {
+    } else if (submissionCount >= 50) {
       setErrorMessage(
         "You have reached the maximum submission limit. Try again after 24 hours."
       );
@@ -178,7 +146,7 @@ const onRecaptchaSuccess = async (token) => {
 
     if (response.ok) {
       setFormData({ fullName: "", phone: "" });
-      setShowSubmissionSuccess(true); // Changed from setShowPopup
+      setShowPopup(true);
       setSubmissionCount((prev) => {
         const newCount = prev + 1;
         localStorage.setItem("formSubmissionCount", newCount.toString());
@@ -191,6 +159,11 @@ const onRecaptchaSuccess = async (token) => {
       setTimeout(() => {
         setShowThankYou(false);
         handleClose();
+
+        // Get current pathname for return URL
+        const currentPath = pathname || window.location.pathname;
+        
+        // Push to thank-you route with return URL
         router.push(`/more-info/thankyou`);
       }, 2000);
     } else {
@@ -324,7 +297,7 @@ const onRecaptchaSuccess = async (token) => {
       </AnimatePresence>
 
       {/* Form Modal */}
-      {showFormPopup && !showThankYou && (
+      {!showThankYou && (
         <div
           className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
           onClick={handleBackdropClick}
@@ -388,7 +361,7 @@ const onRecaptchaSuccess = async (token) => {
               <p className="text-gray-300 text-sm">{subtitle}</p>
             </motion.div>
 
-            {showSubmissionSuccess ? (
+            {showPopup ? (
               <div className="text-center py-8">
                 <motion.div
                   initial={{ scale: 0 }}

@@ -14,17 +14,16 @@ export default function WhyInvest() {
   const [plotSize, setPlotSize] = useState(200);
   const [customYear, setCustomYear] = useState("");
 
-  const baseRate = 9250; // Current price per sq. yard
-  const targetRate = 17000; // Price after 5 years
-  const annualGrowthRate = 0.05; // 5% annual growth
+  const baseRate = 9250; 
+  const targetRate = 17000; 
+  const annualGrowthRate = 0.05; 
 
   const calculateFutureValue = (years) => {
-    // If years is 2 or less, use linear interpolation to match exactly 13000 at 2 years
+    
     if (years <= 5) {
       const incrementPerYear = (targetRate - baseRate) / 5;
       return baseRate + incrementPerYear * years;
     } else {
-      // For years > 2, use compound growth at 5% from the 2-year mark
       return targetRate * Math.pow(1 + annualGrowthRate, years - 5);
     }
   };
@@ -311,7 +310,7 @@ export default function WhyInvest() {
           </div>
 
           {/* Mobile Image */}
-          <div className="block lg:hidden relative h-[300px]"> {/* Set a fixed height for mobile */}
+          <div className="block lg:hidden relative h-[300px]"> 
             <Image
               src={priceBannerMobile}
               alt="Investment Opportunity Mobile"
@@ -448,8 +447,8 @@ export default function WhyInvest() {
               >
                 Invest Now
               </button>
-              <p className="pt-4 text-gray-600">
-                Disclaimer : calculations are estimates and don't guarantee exact returns the
+              <p className="pt-4 text-gray-600 font-semibold">
+                Disclaimer : Calculations are estimates and don't guarantee exact returns
               </p>
             </div>
           </div>
