@@ -162,7 +162,7 @@ export default async function SubProjectDetail({ params }) {
                 href={`/projects/${slug}`}
                 className="text-[#C69C21] hover:text-[#FDB913] flex items-center gap-2"
               >
-                ← Back to {mainProject.title}
+                ← More about {mainProject.title}
               </Link>
             </div>
 
