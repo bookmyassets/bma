@@ -181,9 +181,7 @@ export default function About() {
 
                   {/* Project Info Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 text-white">
-                    <div className="bg-[#d7b36c]/90 inline-block px-3 py-1 rounded-md text-sm font-semibold mb-3">
-                      {project.status}
-                    </div>
+                    
                     <h3 className="text-2xl font-bold mb-2">{project.name}</h3>
                     <p className="text-sm text-gray-200 mb-4">
                       {project.description}

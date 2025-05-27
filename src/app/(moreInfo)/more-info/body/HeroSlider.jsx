@@ -30,7 +30,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
         const timer = setTimeout(() => {
           openForm();
           localStorage.setItem('popupShown', 'true');
-        }, 5000); // 5 seconds
+        }, 2000); // 5 seconds
 
         const handleScroll = () => {
           if (window.scrollY > window.innerHeight * 0.05) {
