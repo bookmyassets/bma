@@ -108,7 +108,7 @@ export default function ContactForm({
       setSubmissionCount(0);
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
-    } else if (submissionCount >= 50) {
+    } else if (submissionCount >= 3) {
       setErrorMessage(
         "You have reached the maximum submission limit. Try again after 24 hours."
       );
