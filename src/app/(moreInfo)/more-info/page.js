@@ -15,37 +15,6 @@ import PopupForm from "./components/PopUpForm";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(1800); 
-
-  useEffect(() => {
-  let timer; 
-
-  if (showForm) {
-    setTimeLeft(1800);
-
-    timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-  }
-
-  return () => clearInterval(timer); // Cleanup
-}, [showForm]);
-
-
-  const formatTime = (seconds) => {
-  const mins = Math.floor(seconds / 60)
-    .toString()
-    .padStart(2, "0");
-  const secs = (seconds % 60).toString().padStart(2, "0");
-  return `${mins}:${secs}`;
-};
-
 
   return (
     <>
@@ -70,7 +39,7 @@ export default function Page() {
       {showForm && (
         <PopupForm
           onClose={() => setShowForm(false)}
-          title={`Exclusive Deal: Own a plot at ₹9,250/sq. yard — hurry, limited units! – ${formatTime(timeLeft)} left`}
+          title={`Exclusive Deal: Own a plot at ₹9,250/sq. yard — hurry, limited units! –  left`}
           buttonName="Speak with a Plot Specialist"
           className="font-medium"
         />

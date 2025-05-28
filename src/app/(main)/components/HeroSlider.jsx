@@ -291,7 +291,7 @@ export default function LandingPage({ img1, mimg1 }) {
                     className="rounded-full"
                   />
                 </motion.div>
-              </div>
+              </div>  
 
               <button
                 onClick={() => setShowFormPopup(false)}

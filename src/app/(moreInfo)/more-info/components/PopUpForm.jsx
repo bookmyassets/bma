@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect, useRef } from "react";
 import { FaUser, FaPhoneAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
 import Image from "next/image";
@@ -18,7 +17,7 @@ export default function PopupForm({
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showFormPopup, setShowFormPopup] = useState(false);
-  const [showSubmissionSuccess, setShowSubmissionSuccess] = useState(false); 
+  const [showSubmissionSuccess, setShowSubmissionSuccess] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,6 +27,37 @@ export default function PopupForm({
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const router = useRouter();
   const pathname = usePathname();
+  const [showForm, setShowForm] = useState(false);
+
+  const [timeLeft, setTimeLeft] = useState(1800);
+
+  useEffect(() => {
+    let timer;
+
+    if (showForm) {
+      setTimeLeft(1800);
+
+      timer = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(timer); // Cleanup
+  }, [showForm]);
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const secs = (seconds % 60).toString().padStart(2, "0");
+    return `${mins}:${secs}`;
+  };
 
   const [wasTriggered, setWasTriggered] = useState(false);
 
@@ -35,14 +65,14 @@ export default function PopupForm({
   const parseTitle = (title) => {
     const priceMatch = title.match(/₹([0-9,]+)/);
     const timeMatch = title.match(/(\d+:\d+:\d+)/);
-    const price = priceMatch ? `₹${priceMatch[1]}` : null;
+    const price = priceMatch ? `₹${priceMatch[1]}` : "₹9250";
     const timeLeft = timeMatch ? timeMatch[1] : null;
-    
+
     return {
       price,
       timeLeft,
-      mainText: title,
-      subText: "Limited units available - Don't miss out!"
+      mainText: "Limited Plots left",
+      subText: "Secure yours before the offer ends"
     };
   };
 
@@ -72,7 +102,7 @@ export default function PopupForm({
     };
 
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       clearTimeout(timer);
@@ -174,7 +204,7 @@ export default function PopupForm({
       const now = Date.now();
 
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "",
         {
           method: "POST",
           headers: {
@@ -282,7 +312,7 @@ export default function PopupForm({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-gradient-to-br from-green-900 to-green-800 flex justify-center items-center z-[1001]"
+            className="fixed inset-0 bg-gray-900 flex justify-center items-center z-[1001]"
           >
             <motion.div
               initial={{ scale: 0.5, y: 50 }}
@@ -296,10 +326,10 @@ export default function PopupForm({
                 transition={{ delay: 0.2 }}
                 className="mb-6"
               >
-                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto">
+                <div className="w-24 h-24 bg-[#FDB913] rounded-full flex items-center justify-center mx-auto">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-12 w-12 text-green-600"
+                    className="h-12 w-12 text-black"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -345,7 +375,7 @@ export default function PopupForm({
       {/* Form Modal */}
       {showFormPopup && !showThankYou && (
         <div
-          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-60 p-4 z-[1000]"
+          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 p-4 z-[1000]"
           onClick={handleBackdropClick}
         >
           <motion.div
@@ -353,16 +383,35 @@ export default function PopupForm({
             initial={{ scale: 0.9, y: 50, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.9, y: 50, opacity: 0 }}
-            className="bg-white rounded-2xl shadow-2xl max-w-lg w-full relative overflow-hidden"
+            className="bg-gray-900 rounded-2xl shadow-2xl max-w-lg w-full relative overflow-visible border border-[#FDB913]"
             onClick={handleModalContentClick}
           >
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20">
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                className="bg-black p-4 rounded-full shadow-2xl border-4 border-white relative"
+              >
+                <Image
+                  src={logo}
+                  alt="Logo"
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
+                {/* Shine effect */}
+                <div className="absolute top-2 left-2 w-4 h-4 bg-white opacity-40 rounded-full blur-sm"></div>
+              </motion.div>
+            </div>
+
             {/* Header Section with Gradient Background */}
-            <div className="bg-black text-white p-6 pb-8 relative">
+            <div className="bg-black text-white p-6 pb-8 pt-12 relative rounded-t-2xl">
               {/* Close Button */}
               <button
                 type="button"
                 onClick={handleClose}
-                className="absolute top-4 right-4 text-white/80 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 rounded-full p-2 transition-all duration-200 hover:bg-white/10 z-10"
+                className="absolute top-4 right-4 text-white/80 hover:text-[#FDB913] focus:outline-none focus:ring-2 focus:ring-[#FDB913]/50 rounded-full p-2 transition-all duration-200 hover:bg-gray-800 z-10"
                 aria-label="Close form"
               >
                 <svg
@@ -381,63 +430,46 @@ export default function PopupForm({
                 </svg>
               </button>
 
-              {/* Logo */}
-              <div className="flex justify-center mb-4">
-                <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                  className="bg-black p-3 rounded-full shadow-lg"
-                >
-                  <Image
-                    src={logo}
-                    alt="Logo"
-                    width={50}
-                    height={50}
-                    className="rounded-full"
-                  />
-                </motion.div>
-              </div>
-
-              {/* Title Section */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-center"
-              >
+              {/* Content Section */}
+              <div className="text-center">
+                {/* Exclusive Deal Section */}
                 <div className="mb-3">
-                  <span className="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2">
+                  <span className="bg-[#FDB913] text-black px-3 py-1 rounded-full text-sm font-bold inline-flex items-center gap-2">
                     <FaClock className="text-xs" />
-                    EXCLUSIVE DEAL
+                    EXCLUSIVE DEAL!
                   </span>
                 </div>
-                
-                <h2 className="text-2xl md:text-3xl font-bold mb-2 leading-tight">
+
+                <h2 className="text-2xl md:text-3xl font-bold mb-1 leading-tight text-[#FDB913]">
                   {titleInfo.mainText}
                 </h2>
-                
+
                 {titleInfo.price && (
-                  <div className="text-3xl md:text-4xl font-black text-[#d7b36c] mb-2">
-                    {titleInfo.price}/sq. yard
+                  <div className="flex flex-col items-center gap-1 mb-2">
+                    <div className="text-2xl line-through text-gray-400">
+                      ₹9500/sq. yard
+                    </div>
+                    <div className="text-3xl md:text-4xl font-black text-white">
+                      {titleInfo.price}/sq. yard
+                    </div>
                   </div>
                 )}
-                
-                <p className="text-white/90 text-sm mb-3">
+
+                <p className="text-white/90 text-lg">
                   {titleInfo.subText}
                 </p>
-                
+
                 {titleInfo.timeLeft && (
-                  <div className="bg-[#d7b36c] text-black px-4 py-2 rounded-lg inline-flex items-center gap-2 font-bold">
+                  <div className="bg-[#FDB913] text-black px-4 py-2 rounded-lg inline-flex items-center gap-2 font-bold mb-6">
                     <FaClock className="text-sm" />
-                    {titleInfo.timeLeft} left!
+                    {formatTime(timeLeft)} left!
                   </div>
                 )}
-              </motion.div>
+              </div>
             </div>
 
             {/* Form Section */}
-            <div className="p-6">
+            <div className="p-6 bg-white rounded-b-2xl">
               {showSubmissionSuccess ? (
                 <div className="text-center py-8">
                   <motion.div
@@ -445,10 +477,10 @@ export default function PopupForm({
                     animate={{ scale: 1 }}
                     className="mb-4 inline-block"
                   >
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                    <div className="w-16 h-16 bg-[#FDB913] rounded-full flex items-center justify-center mx-auto">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-10 w-10 text-white"
+                        className="h-10 w-10 text-black"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -462,22 +494,16 @@ export default function PopupForm({
                       </svg>
                     </div>
                   </motion.div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-2xl font-bold text-[#FDB913] mb-2">
                     Thank You!
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-800">
                     Your request has been submitted successfully. We'll contact
                     you shortly.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-bold text-gray-800 mb-1">
-                      Book Now
-                    </h3>
-                  </div>
-
                   {errorMessage && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
@@ -494,14 +520,14 @@ export default function PopupForm({
                     transition={{ delay: 0.4 }}
                     className="relative"
                   >
-                    <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-red-500" />
+                    <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#FDB913]" />
                     <input
                       name="fullName"
                       placeholder="Enter your full name"
                       value={formData.fullName}
                       onChange={handleChange}
                       required
-                      className="w-full p-2 pl-12 bg-gray-50 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 border border-gray-200 hover:border-red-300 transition-colors"
+                      className="w-full p-3 pl-12 bg-gray-900 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FDB913] border border-gray-600 hover:border-[#FDB913] transition-colors"
                     />
                   </motion.div>
 
@@ -511,7 +537,7 @@ export default function PopupForm({
                     transition={{ delay: 0.5 }}
                     className="relative"
                   >
-                    <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-red-500" />
+                    <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#FDB913]" />
                     <input
                       name="phone"
                       type="tel"
@@ -521,7 +547,7 @@ export default function PopupForm({
                       minLength="10"
                       maxLength="15"
                       required
-                      className="w-full p-2 pl-12 bg-gray-50 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 border border-gray-200 hover:border-red-300 transition-colors"
+                      className="w-full p-3 pl-12 bg-gray-900 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FDB913] border border-gray-600 hover:border-[#FDB913] transition-colors"
                     />
                   </motion.div>
 
@@ -538,24 +564,24 @@ export default function PopupForm({
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading || !recaptchaLoaded}
-                    className="w-full py-4 px-6 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl hover:from-red-700 hover:to-red-800 transition-all shadow-lg hover:shadow-red-500/25 font-semibold text-lg disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-4 px-6 bg-[#FDB913] text-black rounded-xl hover:bg-[#FDB913]/90 transition-all shadow-lg hover:shadow-[#FDB913]/25 font-bold text-lg disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isLoading ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
                         Verifying...
                       </>
                     ) : recaptchaLoaded ? (
                       <>
                         <FaPhoneAlt className="text-sm" />
-                        {buttonName}
+                        I'm ready to invest
                       </>
                     ) : (
                       "Loading..."
                     )}
                   </motion.button>
 
-                  <p className="text-xs text-gray-500 text-center">
+                  <p className="text-xs text-gray-400 text-center">
                     By submitting, you agree to receive calls/WhatsApp messages about our services
                   </p>
                 </form>

@@ -192,6 +192,36 @@ export default function WhyInvest() {
           `}
         </style>
         <section id="WhyInvest" className=" py-8 bg-white">
+
+  <section>
+        <div className="relative mb-8">
+          {/* Desktop Image */}
+          <div className="hidden lg:block relative">
+            <Image
+              src={priceBanner}
+              alt="Investment Opportunity"
+              className="w-full"
+              priority
+            />
+            <div className="absolute inset-0 bg-black opacity-20"></div>
+            
+          </div>
+
+          {/* Mobile Image */}
+          <div className="block lg:hidden relative h-[300px]"> 
+            <Image
+              src={priceBannerMobile}
+              alt="Investment Opportunity Mobile"
+              fill
+              className="object-contain w-full"
+              priority
+            />
+            <div className="absolute inset-0"></div>
+           
+          </div>
+        </div>
+      </section>
+
           <div className="max-w-7xl mx-auto">
             {/* Investment Returns Section */}
             <div className="bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-lg p-8 animate-on-scroll">
@@ -273,7 +303,6 @@ export default function WhyInvest() {
                           Starting From
                         </div>
                         <div className="text-xl font-bold text-gray-800">
-                          <p className="line-through">₹9,500/sq.ft</p>
                           ₹9,250/sq.ft
                         </div>
 
@@ -295,34 +324,7 @@ export default function WhyInvest() {
         </section>
       </div>
 
-      <section>
-        <div className="relative mb-8">
-          {/* Desktop Image */}
-          <div className="hidden lg:block relative">
-            <Image
-              src={priceBanner}
-              alt="Investment Opportunity"
-              className="w-full"
-              priority
-            />
-            <div className="absolute inset-0 bg-black opacity-20"></div>
-            
-          </div>
-
-          {/* Mobile Image */}
-          <div className="block lg:hidden relative h-[300px]"> 
-            <Image
-              src={priceBannerMobile}
-              alt="Investment Opportunity Mobile"
-              fill
-              className="object-contain w-full"
-              priority
-            />
-            <div className="absolute inset-0"></div>
-           
-          </div>
-        </div>
-      </section>
+    
 
       <section className="max-w-7xl mx-auto px-4 mb-20">
         <div className="investment-calculator bg-white rounded-lg shadow-lg overflow-hidden">
