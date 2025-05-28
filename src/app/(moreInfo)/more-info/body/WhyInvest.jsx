@@ -243,6 +243,7 @@ export default function WhyInvest() {
                   </p>
                   <div className="flex flex-col md:text-xl sm:flex-row gap-4">
                     <button
+                    id="brochure"
                       onClick={() => {
                         if (isFormSubmitted) {
                           downloadBrochure();

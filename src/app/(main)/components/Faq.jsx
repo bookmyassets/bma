@@ -137,6 +137,7 @@ export default function FAQSection() {
         />
         <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-6 px-8">
           <button
+            id="Faq-form"
             onClick={openBrochureForm}
             className="bg-gray-800 text-white px-6 py-3 rounded-lg text-2xl font-semibold hover:bg-gray-900 transition-colors"
           >
