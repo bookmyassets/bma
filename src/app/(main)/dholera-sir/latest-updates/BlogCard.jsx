@@ -1,63 +1,54 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
 export default function BlogCard({ post }) {
-  // Handle author object properly
-  const authorName =
-    typeof post.author === "object"
-      ? post.author.name || "Unknown"
-      : post.author;
-
   return (
-    <div className="bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105">
-      {/* Image */}
-      <div className="relative w-full h-48">
-        {post.mainImage ? (
-          <Image
-            src={urlFor(post.mainImage).url()}
-            alt={post.title}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-            <span className="text-gray-400">No image available</span>
-          </div>
-        )}
-      </div>
+    <Link
+      href={`/dholera-sir/latest-updates/${post.slug.current}`}
+      className="group"
+    >
+      <div className="bg-white rounded-xl shadow-md overflow-hidden h-full hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 border border-gray-200">
+        {/* Blog Image */}
+        <div className="relative h-52">
+          {post.mainImage ? (
+            <Image
+              src={
+                urlFor(post.mainImage).width(800).height(400).url() ||
+                "/placeholder.svg"
+              }
+              alt={post.title}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21]"></div>
+          )}
 
-      {/* Content */}
-      <div className="p-4 flex flex-col flex-grow ">
-        {/* Title */}
-        <h3 className="text-xl font-semibold mb-2 line-clamp-2 h-14">
-          {post.title}
-        </h3>
-
-        <div className="space-y-4">
-
-
-        {/* Author & Date */}
-        <div className="text-sm text-gray-600  mt-8">
-          <span>{authorName}</span>
         </div>
 
-        {/* Excerpt */}
-        {/* <p className="text-gray-700 line-clamp-3 mb-4 flex-grow">
-          {post.description || "Read more about this topic..."}
-          </p> */}
+        {/* Content */}
+        <div className="p-6">
+          <h2 className="text-xl font-bold mb-3 text-black group-hover:text-[#C69C21] transition-colors">
+            {post.title}
+          </h2>
 
-        {/* Read More Button - Fixed at bottom */}
-        <div className="">
-          <Link
-            href={`/dholera-sir/latest-updates/${post.slug.current}`}
-            className="w-full px-4 py-2 transition-all font-semibold border-white rounded-xl hover:bg-[#FDB913] bg-black hover:text-black text-lg md:text-base text-[#FDB913] mt-auto"
-            >
-            Read More
-          </Link>
+          {/* Footer with "Read More" */}
+          <div className="border-t border-gray-200 pt-4 mt-auto">
+            <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center">
+                <span className="inline-block w-2 h-2 rounded-full bg-[#FDB913] mr-2"></span>
+                <span className="text-black font-medium">
+                  Read More
+                </span>
+              </div>
+              <span className="text-[#C69C21] font-medium">
+                &rarr;
+              </span>
             </div>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
