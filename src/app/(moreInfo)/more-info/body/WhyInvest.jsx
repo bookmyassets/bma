@@ -445,6 +445,7 @@ export default function WhyInvest() {
               </div>
 
               <button
+                id="Invest-Calculator"
                 onClick={openForm}
                 className="mt-6 bg-[#d7b36c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c4a055] transition-colors w-full"
               >

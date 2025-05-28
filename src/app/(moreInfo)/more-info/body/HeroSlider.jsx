@@ -416,6 +416,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
               {/* Close Button */}
               <button
                 type="button"
+                id="hero-form"
                 onClick={() => setShowFormPopup(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full p-1 transition-all duration-200 hover:bg-gray-700 z-10"
                 aria-label="Close form"
