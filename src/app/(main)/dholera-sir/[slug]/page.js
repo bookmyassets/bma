@@ -100,7 +100,7 @@ export default async function Post({ params }) {
         <Link
           href={value.href}
           rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 hover:decoration-blue-600 transition-colors font-medium"
+          className="text-[#C69C21] hover:text-[#FDB913] underline decoration-[#FDB913]/30 hover:decoration-[#FDB913] transition-colors"
         >
           {children}
         </Link>
