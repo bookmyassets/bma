@@ -8,8 +8,6 @@ import { useRouter, usePathname } from "next/navigation"
 export default function PopupForm({
   onClose,
   title,
-  subtitle = "",
-  buttonName,
   thankYouTitle = "Thank You!",
   thankYouMessage = "Your request has been submitted successfully.",
   source = "BookMyAssets google ads",
@@ -78,36 +76,18 @@ export default function PopupForm({
 
   const titleInfo = parseTitle(title);
 
-  useEffect(() => {
-    // Check if already shown or if user has submitted before
-    if (wasTriggered || submissionCount > 0) return;
+useEffect(() => {
+  if (wasTriggered || submissionCount > 0) return;
 
-    // Timer approach (5 seconds)
-    const timer = setTimeout(() => {
-      if (!wasTriggered && !showThankYou && submissionCount === 0) {
-        setShowFormPopup(true);
-        setWasTriggered(true);
-      }
-    }, 5000);
+  const timer = setTimeout(() => {
+    if (!wasTriggered && !showThankYou && submissionCount === 0) {
+      setShowFormPopup(true);
+      setWasTriggered(true);
+    }
+  }, 100); 
 
-    // Scroll approach (5% of page)
-    const handleScroll = () => {
-      const scrollThreshold = document.body.scrollHeight * 0.05;
-      if (window.scrollY > scrollThreshold && !wasTriggered && !showThankYou && submissionCount === 0) {
-        setShowFormPopup(true);
-        setWasTriggered(true);
-        window.removeEventListener('scroll', handleScroll);
-        clearTimeout(timer);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timer);
-    };
-  }, [wasTriggered, submissionCount]);
+  return () => clearTimeout(timer);
+}, [wasTriggered, submissionCount]);
 
   // Handle close function
   const handleClose = () => {
@@ -204,7 +184,7 @@ export default function PopupForm({
       const now = Date.now();
 
       const response = await fetch(
-        "",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
