@@ -35,7 +35,7 @@ export default function EndSection() {
               onClick={openContactForm}
               className=" bg-white text-[#d7b36c] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
-              Reserve your plot
+              Enquire Now
             </button>
           </div>
         </section>
@@ -59,9 +59,7 @@ export default function EndSection() {
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold text-gray-800">
-                    Book A Free Consultation Today
-                  </h3>
+
                   <button
                     onClick={closeContactForm}
                     className="text-gray-500 hover:text-gray-700"
@@ -70,8 +68,8 @@ export default function EndSection() {
                   </button>
                 </div>
                 <ContactForm
-                  title="Reserve Your WestWyn County Plot Today"
-                  buttonName="Reserve My Plot"
+                  title=""
+                  buttonName="Book A Call"
                   onClose={closeContactForm}
                 />
                 <button

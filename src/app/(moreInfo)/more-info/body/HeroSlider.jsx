@@ -461,12 +461,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
                 transition={{ delay: 0.3 }}
                 className="text-center mb-6 pt-4"
               >
-                <h2 className="text-3xl font-bold text-white mb-2">
-                  Talk to Us Before Plots Run Out!
-                </h2>
-                <p className="text-gray-300 text-sm">
-                  Fill this form to explore premium investment opportunities
-                </p>
+                
               </motion.div>
 
               {showPopup ? (
@@ -559,7 +554,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
                     disabled={isLoading || !recaptchaLoaded}
                     className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? "Verifying..." : recaptchaLoaded ? "Speak with a Plot Specialist" : "Loading..."}
+                    {isLoading ? "Verifying..." : recaptchaLoaded ? "Talk To Investment Advisor" : "Loading..."}
                   </motion.button>
                 </form>
               )}

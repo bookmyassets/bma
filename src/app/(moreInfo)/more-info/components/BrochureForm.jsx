@@ -9,7 +9,7 @@ import { useRouter, usePathname } from "next/navigation"
 export default function ContactForm({
   onClose,
   title,
-  subtitle = "Fill this form to explore premium investment opportunities",
+  subtitle = "",
   buttonName,
   thankYouTitle = "Thank You!",
   thankYouMessage = "Your request has been submitted successfully.",

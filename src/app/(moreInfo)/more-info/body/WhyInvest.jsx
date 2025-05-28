@@ -445,11 +445,11 @@ export default function WhyInvest() {
               </div>
 
               <button
-                id="Invest-Calculator"
+                id="  "
                 onClick={openForm}
                 className="mt-6 bg-[#d7b36c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c4a055] transition-colors w-full"
               >
-                Invest Now
+                Talk To Our Expert Advisor
               </button>
               <p className="pt-4 text-gray-600 font-semibold">
                 Disclaimer : Calculations are estimates and don't guarantee exact returns
@@ -462,8 +462,8 @@ export default function WhyInvest() {
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-[1000]">
             <ContactForm
-              title="Get the WestWyn County Brochure Instantly"
-              buttonName="Get details"
+              title=""
+              buttonName="Get Brochure"
               onClose={closeContactForm}
             />
           </div>
@@ -473,8 +473,8 @@ export default function WhyInvest() {
         {isFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-[1000]">
             <ContactForm
-              title="Ready to Turn Your Calculation into a Smart Investment?"
-              buttonName="Book My Free Consultation"
+              title=""
+              buttonName="Connect To Investment Advisor"
               onClose={closeForm}
             />
           </div>

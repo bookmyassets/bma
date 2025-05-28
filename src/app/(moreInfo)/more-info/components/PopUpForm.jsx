@@ -69,8 +69,8 @@ export default function PopupForm({
     return {
       price,
       timeLeft,
-      mainText: "Limited Plots left",
-      subText: "Secure yours before the offer ends"
+      mainText: "For This WEEK",
+      subText: ""
     };
   };
 
@@ -416,7 +416,7 @@ useEffect(() => {
                 <div className="mb-3">
                   <span className="bg-[#FDB913] text-black px-3 py-1 rounded-full text-sm font-bold inline-flex items-center gap-2">
                     <FaClock className="text-xs" />
-                    EXCLUSIVE DEAL!
+                    Inaugural Offer
                   </span>
                 </div>
 
@@ -553,8 +553,7 @@ useEffect(() => {
                       </>
                     ) : recaptchaLoaded ? (
                       <>
-                        <FaPhoneAlt className="text-sm" />
-                        I'm ready to invest
+                        Talk To Investment Advisor
                       </>
                     ) : (
                       "Loading..."
