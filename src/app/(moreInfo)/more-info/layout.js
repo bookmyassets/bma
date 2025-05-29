@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import "./globals.css";
 import Footer from "./body/Footer";
-import FloatingButtons from "@/app/(main)/components/whatsapp";
+import FloatingButtons from "./components/whatsapp";
 import Script from "next/script";
 
 export default function RootLayout({ children }) {

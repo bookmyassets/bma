@@ -159,6 +159,7 @@ export default function Navbar() {
                       <a
                         href="tel:+918130371647"
                         className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                        id="call-now"
                       >
                         Call Now
                       </a>
@@ -166,6 +167,7 @@ export default function Navbar() {
                         href="https://wa.me/918130371647"
                         target="_blank"
                         rel="noopener noreferrer"
+                        id="whatsapp-git"
                         className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                       >
                         WhatsApp Us
