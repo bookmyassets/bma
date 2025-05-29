@@ -9,7 +9,6 @@ import n from "@/assests/mobile_home_blogs.webp"
 export default async function BlogsPage() {
   const posts = await getblogs();
 
-  // Add error handling for post data
   const safePosts = posts.map((post) => ({
     ...post,
     author: post.author || "BookMyAssets",
