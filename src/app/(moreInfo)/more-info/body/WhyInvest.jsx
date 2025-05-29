@@ -465,7 +465,7 @@ export default function WhyInvest() {
               title=""
               buttonName="Get Brochure"
               onClose={closeContactForm}
-              id="brochure"
+              
             />
           </div>
         )}
