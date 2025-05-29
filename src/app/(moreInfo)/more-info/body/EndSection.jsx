@@ -31,7 +31,7 @@ export default function EndSection() {
               step of the way.
             </p>
             <button
-              id="faq-form"
+              
               onClick={openContactForm}
               className=" bg-white text-[#d7b36c] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
@@ -71,6 +71,7 @@ export default function EndSection() {
                   title=""
                   buttonName="Book A Call"
                   onClose={closeContactForm}
+                  id="faq-form"
                 />
                 <button
                   onClick={closeContactForm}

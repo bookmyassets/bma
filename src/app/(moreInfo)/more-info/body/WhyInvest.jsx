@@ -243,7 +243,7 @@ export default function WhyInvest() {
                   </p>
                   <div className="flex flex-col md:text-xl sm:flex-row gap-4">
                     <button
-                    id="brochure"
+                    
                       onClick={() => {
                         if (isFormSubmitted) {
                           downloadBrochure();
@@ -465,6 +465,7 @@ export default function WhyInvest() {
               title=""
               buttonName="Get Brochure"
               onClose={closeContactForm}
+              id="brochure"
             />
           </div>
         )}
@@ -476,6 +477,7 @@ export default function WhyInvest() {
               title=""
               buttonName="Connect To Investment Advisor"
               onClose={closeForm}
+              id="invest-calc"
             />
           </div>
         )}
