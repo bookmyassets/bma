@@ -3,8 +3,8 @@ import React, { useState, useRef } from "react";
 import logo from "@/assests/Bmalogo.png";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import ContactForm from "./BrochureForm";
 import { Menu, X } from "lucide-react"; // Add this import for the icons
+import GetinTouch from "./GetinTouch";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -277,7 +277,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
-            <ContactForm
+            <GetinTouch
               title="Get A Call Back"
               buttonName="Register"
               onClose={() => setIsContactFormOpen(false)}

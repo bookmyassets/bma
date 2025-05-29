@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import ContactForm from "../components/BrochureForm";
 import { AnimatePresence } from "framer-motion";
 import priceBanner from "@/assests/landing/price-cut-banner.webp"
 import priceBannerMobile from "@/assests/landing/Price-cut-mobile-banner.webp"
 import Image from "next/image";
+import BrochureDownload from "../components/BrochureDownload";
+import InvestCalc from "../components/Investcalc";
 
 export default function WhyInvest() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -461,7 +462,7 @@ export default function WhyInvest() {
       <AnimatePresence>
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-[1000]">
-            <ContactForm
+            <BrochureDownload
               title=""
               buttonName="Get Brochure"
               onClose={closeContactForm}
@@ -473,7 +474,7 @@ export default function WhyInvest() {
       <AnimatePresence>
         {isFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-[1000]">
-            <ContactForm
+            <InvestCalc
               title=""
               buttonName="Connect To Investment Advisor"
               onClose={closeForm}

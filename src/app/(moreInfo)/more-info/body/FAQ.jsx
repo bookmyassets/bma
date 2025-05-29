@@ -8,7 +8,7 @@ import clickBaitm from "@/assests/dholeraClickBaitm.webp";
 import clickBait from "@/assests/dholeraClickBait.webp";
 
 import Link from "next/link";
-import ContactForm from "../components/BrochureForm";
+
 
 const faqs = [
   {

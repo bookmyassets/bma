@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import ContactForm from "../components/BrochureForm";
+import Enquire from "../components/EnquireNow";
 
 export default function EndSection() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -67,7 +67,7 @@ export default function EndSection() {
                     ✕
                   </button>
                 </div>
-                <ContactForm
+                <Enquire
                   title=""
                   buttonName="Book A Call"
                   onClose={closeContactForm}
