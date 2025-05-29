@@ -130,7 +130,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
       setSubmissionCount(0);
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
-    } else if (submissionCount >= 3) {
+    } else if (submissionCount >= 30) {
       setErrorMessage(
         "You have reached the maximum submission limit. Try again after 24 hours."
       );
@@ -416,7 +416,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
               {/* Close Button */}
               <button
                 type="button"
-                id="hero-form"
+                
                 onClick={() => setShowFormPopup(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full p-1 transition-all duration-200 hover:bg-gray-700 z-10"
                 aria-label="Close form"
@@ -552,6 +552,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading || !recaptchaLoaded}
+                    id="hero-form"
                     className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {isLoading ? "Verifying..." : recaptchaLoaded ? "Talk To Investment Advisor" : "Loading..."}
