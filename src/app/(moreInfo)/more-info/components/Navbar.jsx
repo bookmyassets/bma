@@ -1,16 +1,19 @@
 "use client";
 import React, { useState, useRef } from "react";
+import { useRouter, usePathname } from "next/navigation"; // Add these imports
 import logo from "@/assests/Bmalogo.png";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react"; // Add this import for the icons
+import { Menu, X } from "lucide-react";
 import GetinTouch from "./GetinTouch";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] =
-    useState(false);
+  const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  
+  const router = useRouter(); // Add router hook
+  const pathname = usePathname(); // Add pathname hook
   
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -20,8 +23,21 @@ export default function Navbar() {
     setIsContactFormOpen(false);
   };
 
-  const handleScrollClick = () => {
+  // Updated navigation handler
+  const handleNavigation = (section) => {
     setIsMenuOpen(false);
+    
+    // Check if we're on the main page
+    if (pathname === '/more-info') {
+      // If on main page, just scroll to section
+      const element = document.getElementById(section.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on different page, navigate to main page with hash
+      router.push(`/more-info${section}`);
+    }
   };
 
   const toggleGetInTouchDropdown = () => {
@@ -53,12 +69,26 @@ export default function Navbar() {
     },
   };
 
+  // Navigation items
+  const navItems = [
+    { href: "#hero", label: "Home" },
+    { href: "#about", label: "About Us" },
+    { href: "#westwyn-county", label: "Westwyn County" },
+    { href: "#WhyInvest", label: "Investment Benefits" },
+    { href: "#WhyDholera", label: "Mega Projects" },
+    { href: "#Testimonials", label: "Testimonials" },
+    { href: "#Faqs", label: "FAQ" },
+  ];
+
   return (
     <nav className="bg-black text-[#e1b24c] fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#hero" className="flex-shrink-0">
+          <button 
+            onClick={() => handleNavigation("#hero")} 
+            className="flex-shrink-0"
+          >
             <Image
               src={logo}
               height={60}
@@ -66,52 +96,20 @@ export default function Navbar() {
               alt="Logo"
               className="cursor-pointer"
             />
-          </a>
+          </button>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8 text-lg font-semibold">
-            <a
-              href="#hero"
-              className="hover:text-white transition duration-200"
-            >
-              Home
-            </a>
-            <a
-              href="#about"
-              className="hover:text-white transition duration-200"
-            >
-              About Us
-            </a>
-            <a
-              href="#westwyn-county"
-              className="hover:text-white transition duration-200"
-            >
-              Westwyn County
-            </a>
-            <a
-              href="#WhyInvest"
-              className="hover:text-white transition duration-200"
-            >
-              Investment Benefits
-            </a>
-            <a
-              href="#WhyDholera"
-              className="hover:text-white transition duration-200"
-            >
-              Mega Projects
-            </a>
-            <a
-              href="#Testimonials"
-              className="hover:text-white transition duration-200"
-            >
-              Testimonials
-            </a>
-            <a
-              href="#Faqs"
-              className="hover:text-white transition duration-200"
-            >
-              FAQ
-            </a>
+            {navItems.map(({ href, label }) => (
+              <button
+                key={label}
+                onClick={() => handleNavigation(href)}
+                className="hover:text-white transition duration-200"
+              >
+                {label}
+              </button>
+            ))}
+            
             <div ref={getInTouchRef} className="relative group">
               <button
                 className="text-[#FDB913] hover:text-white px-3 py-2 cursor-pointer flex items-center gap-1"
@@ -254,23 +252,14 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4 font-semibold">
-              {[
-                { href: "#hero", label: "Home" },
-                { href: "#about", label: "About Us" },
-                { href: "#westwyn-county", label: "Westwyn County" },
-                { href: "#WhyInvest", label: "Why Invest" },
-                { href: "#WhyDholera", label: "Mega Projects" },
-                { href: "#Testimonials", label: "Testimonials" },
-                { href: "#Faqs", label: "FAQ" },
-              ].map(({ href, label }) => (
-                <a
+              {navItems.map(({ href, label }) => (
+                <button
                   key={label}
-                  href={href}
-                  onClick={handleScrollClick}
-                  className="hover:text-white transition duration-200"
+                  onClick={() => handleNavigation(href)}
+                  className="hover:text-white transition duration-200 text-left"
                 >
                   {label}
-                </a>
+                </button>
               ))}
             </div>
           </div>
