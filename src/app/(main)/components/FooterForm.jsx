@@ -73,9 +73,9 @@ export default function ContactForm() {
           <h2 className="text-3xl font-bold text-white mb-2 text-center">
             Book free consultation
           </h2>
-          <p className="text-gray-300 text-sm text-center">
+          {/* <p className="text-gray-300 text-sm text-center">
             Fill this form to explore premium investment opportunities
-          </p>
+          </p> */}
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">

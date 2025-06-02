@@ -319,12 +319,12 @@ export default function LandingPage({ img1, mimg1 }) {
                 transition={{ delay: 0.3 }}
                 className="text-center mb-6 pt-4"
               >
-                <h2 className="text-3xl font-bold text-white mb-2">
+                {/* <h2 className="text-3xl font-bold text-white mb-2">
                   Book Free Consultation
                 </h2>
                 <p className="text-gray-300 text-sm">
                   Fill this form to explore premium investment opportunities
-                </p>
+                </p> */}
               </motion.div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -409,7 +409,7 @@ export default function LandingPage({ img1, mimg1 }) {
                       Processing...
                     </>
                   ) : (
-                    "Request Exclusive Consultation"
+                    "Talk To Investment Advisor"
                   )}
                 </motion.button>
               </form>
