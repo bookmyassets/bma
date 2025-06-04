@@ -194,12 +194,12 @@ export default function RootLayout({ children }) {
   };
 
   const isActiveLink = (pathname, linkPath) => {
-  // Special case for home page
-  if (linkPath === "/") {
-    return pathname === linkPath;
-  }
-  return pathname.startsWith(linkPath);
-};
+    // Special case for home page
+    if (linkPath === "/") {
+      return pathname === linkPath;
+    }
+    return pathname.startsWith(linkPath);
+  };
 
   return (
     <html lang="en">
@@ -491,88 +491,90 @@ export default function RootLayout({ children }) {
                   </div>
 
                   <div className="relative group" ref={galleryRef}>
-  <button
-    onClick={toggleGalleryDropdown}
-    className={`flex items-center gap-1 px-3 py-2 ${
-      isActiveLink(pathname, "/gallery")
-        ? "text-white font-semibold"
-        : "text-[#FDB913] hover:text-white"
-    } cursor-pointer`}
-    onMouseEnter={() => setIsGalleryOpen(true)}
-    onMouseLeave={() => setIsGalleryOpen(false)}
-  >
-    Gallery
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className={`h-4 w-4 ${
-        isActiveLink(pathname, "/gallery") ? "text-white" : "text-[#FDB913]"
-      } transition-transform duration-300 ${
-        isGalleryOpen ? "rotate-180" : ""
-      }`}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </button>
+                    <button
+                      onClick={toggleGalleryDropdown}
+                      className={`flex items-center gap-1 px-3 py-2 ${
+                        isActiveLink(pathname, "/gallery")
+                          ? "text-white font-semibold"
+                          : "text-[#FDB913] hover:text-white"
+                      } cursor-pointer`}
+                      onMouseEnter={() => setIsGalleryOpen(true)}
+                      onMouseLeave={() => setIsGalleryOpen(false)}
+                    >
+                      Gallery
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`h-4 w-4 ${
+                          isActiveLink(pathname, "/gallery")
+                            ? "text-white"
+                            : "text-[#FDB913]"
+                        } transition-transform duration-300 ${
+                          isGalleryOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
 
-  <AnimatePresence>
-    {isGalleryOpen && (
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        variants={{
-          hidden: { opacity: 0, y: -10 },
-          visible: { opacity: 1, y: 0 },
-          exit: { opacity: 0, y: -10 },
-        }}
-        className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50"
-        onMouseEnter={() => setIsGalleryOpen(true)}
-        onMouseLeave={() => setIsGalleryOpen(false)}
-      >
-        <div className="w-48 py-2">
-          {[
-            {
-              title: "Images",
-              path: "/gallery/images",
-            },
-            {
-              title: "Videos",
-              path: "/gallery/videos",
-            },
-          ].map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className={`block px-4 py-2 ${
-                isActiveLink(pathname, item.path)
-                  ? "bg-gray-200 font-medium"
-                  : "text-black hover:bg-gray-200"
-              } transition-colors`}
-              onClick={() => setIsGalleryOpen(false)}
-            >
-              {item.title}
-            </Link>
-          ))}
-        </div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-</div>
+                    <AnimatePresence>
+                      {isGalleryOpen && (
+                        <motion.div
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          variants={{
+                            hidden: { opacity: 0, y: -10 },
+                            visible: { opacity: 1, y: 0 },
+                            exit: { opacity: 0, y: -10 },
+                          }}
+                          className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50"
+                          onMouseEnter={() => setIsGalleryOpen(true)}
+                          onMouseLeave={() => setIsGalleryOpen(false)}
+                        >
+                          <div className="w-48 py-2">
+                            {[
+                              {
+                                title: "Images",
+                                path: "/gallery/images",
+                              },
+                              {
+                                title: "Videos",
+                                path: "/gallery/videos",
+                              },
+                            ].map((item) => (
+                              <Link
+                                key={item.path}
+                                href={item.path}
+                                className={`block px-4 py-2 ${
+                                  isActiveLink(pathname, item.path)
+                                    ? "bg-gray-200 font-medium"
+                                    : "text-black hover:bg-gray-200"
+                                } transition-colors`}
+                                onClick={() => setIsGalleryOpen(false)}
+                              >
+                                {item.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                   <Link
                     href="/career"
-      className={`px-3 py-2 ${
-        isActiveLink(pathname, "/career")
-          ? "text-white font-semibold"
-          : "text-[#FDB913] hover:text-white"
-      }`}
+                    className={`px-3 py-2 ${
+                      isActiveLink(pathname, "/career")
+                        ? "text-white font-semibold"
+                        : "text-[#FDB913] hover:text-white"
+                    }`}
                   >
                     Career
                   </Link>

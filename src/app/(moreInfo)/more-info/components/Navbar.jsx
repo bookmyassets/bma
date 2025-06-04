@@ -269,8 +269,8 @@ export default function Navbar() {
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <GetinTouch
-              title="Get A Call Back"
-              buttonName="Register"
+              title=""
+              buttonName="Talk To Investment Advisor"
               onClose={() => setIsContactFormOpen(false)}
             />
           </div>
