@@ -44,41 +44,31 @@ export default function EndSection() {
       <AnimatePresence>
         {isContactFormOpen && (
           <motion.div
-            className="modal-overlay"
+            className=""
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeContactForm}
           >
             <motion.div
-              className="modal-content"
+              className=""
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+              onClick={(e) => e.stopPropagation()} 
             >
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-4">
+              <div className="">
+                <div className="">
 
-                  <button
-                    onClick={closeContactForm}
-                    className="text-gray-500 hover:text-gray-700"
-                  >
-                    ✕
-                  </button>
+                  
                 </div>
                 <Enquire
                   title=""
-                  buttonName="Book A Call"
+                  buttonName="Talk To Investment Advisor"
                   onClose={closeContactForm}
                   id="faq-form"
                 />
-                <button
-                  onClick={closeContactForm}
-                  className="bg-[#d7b36c] text-white px-4 py-2 rounded w-full mt-4"
-                >
-                  Close
-                </button>
+                
               </div>
             </motion.div>
           </motion.div>
