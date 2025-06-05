@@ -71,7 +71,7 @@ export default function ContactForm() {
             className="rounded-full mx-auto mb-4"
           />
           <h2 className="text-3xl font-bold text-white mb-2 text-center">
-            Book free consultation
+            Get Expert Guidance on Dholera Investment
           </h2>
           {/* <p className="text-gray-300 text-sm text-center">
             Fill this form to explore premium investment opportunities
@@ -111,7 +111,7 @@ export default function ContactForm() {
             disabled={isLoading}
             className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold"
           >
-            {isLoading ? "Submitting..." : "Request Exclusive Consultation"}
+            {isLoading ? "Submitting..." : "Book Consultation"}
           </button>
         </form>
       </div>

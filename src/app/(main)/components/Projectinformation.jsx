@@ -35,8 +35,8 @@ export default function Projectinformation() {
               onClick={(e) => e.stopPropagation()}
             >
               <PopupForm
-                title="Talk To Investment Advisor"
-                buttonName="Submit"
+                title="Get Expert Guidance on Dholera Investment"
+                buttonName="Book Consultation"
                 onClose={closeContactForm}
               />
             </motion.div>

@@ -117,14 +117,14 @@ export default async function BlogsPage() {
       <div className="bg-black text-white py-16">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Stay Updated with Dholera SIR
+            Get All the Updates
           </h2>
           <p className="text-lg text-gray-300 mb-8">
-            Subscribe to our newsletter for the latest investment opportunities and updates.
+            Click the button below to chat directly with our investment advisor and get the latest updates, project details, and expert guidance.
           </p>
-          <Link href="/contact" className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
-            Contact Us
-          </Link>
+          <a href="https://wa.me/918130371647" className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
+            Get Updates Now
+          </a>
         </div>
       </div>
     </>

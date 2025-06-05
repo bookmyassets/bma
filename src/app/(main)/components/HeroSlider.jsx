@@ -340,6 +340,14 @@ export default function LandingPage({ img1, mimg1 }) {
                   transition={{ delay: 0.4 }}
                   className="relative"
                 >
+                  <p className="text-2xl font-semibold text-white">Get Expert Guidance on Dholera Investment</p>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="relative"
+                >
                   <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
                   <input
                     name="fullName"
@@ -409,7 +417,7 @@ export default function LandingPage({ img1, mimg1 }) {
                       Processing...
                     </>
                   ) : (
-                    "Talk To Investment Advisor"
+                    "Book Consultation"
                   )}
                 </motion.button>
               </form>
