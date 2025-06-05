@@ -4,5 +4,8 @@ Disallow: /policies/terms
 Disallow: /policies/privacy
 Disallow: /properties
 Disallow: /policies/refund-and-cancellation
+Disallow: /events
+Disallow: /events/dholera-international-airport
+Disallow: /events/dholera-ahmedabad-expressway
 
 Sitemap : https://www.bookmyassets.com/sitemap.xml
