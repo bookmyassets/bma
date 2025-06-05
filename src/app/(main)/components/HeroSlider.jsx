@@ -281,14 +281,14 @@ export default function LandingPage({ img1, mimg1 }) {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-black p-2 rounded-full shadow-lg"
+                  className="bg-black p-2  shadow-lg"
                 >
                   <Image
                     src={logo}
                     alt="Logo"
                     width={60}
                     height={60}
-                    className="rounded-full"
+                    className=""
                   />
                 </motion.div>
               </div>  

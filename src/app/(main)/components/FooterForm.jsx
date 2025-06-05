@@ -68,7 +68,7 @@ export default function ContactForm() {
             alt="Logo"
             width={80}
             height={80}
-            className="rounded-full mx-auto mb-4"
+            className=" mx-auto mb-4"
           />
           <h2 className="text-3xl font-bold text-white mb-2 text-center">
             Get Expert Guidance on Dholera Investment

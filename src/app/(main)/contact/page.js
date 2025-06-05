@@ -218,8 +218,8 @@ const ContactPage = () => {
         // Always render fresh reCAPTCHA widget
         if (recaptchaRef.current) {
           // Clear previous widget
-          recaptchaRef.current.innerHTML = '';
-          
+          recaptchaRef.current.innerHTML = "";
+
           // Render new widget
           window.grecaptcha.render(recaptchaRef.current, {
             sitekey: siteKey,
@@ -481,7 +481,10 @@ const ContactPage = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="w-full md:w-2/3 bg-white rounded-lg shadow-lg p-8" id="contact-form-container">
+            <div
+              className="w-full md:w-2/3 bg-white rounded-lg shadow-lg p-8"
+              id="contact-form-container"
+            >
               <h2 className="text-3xl font-bold text-gray-800 mb-6">
                 Send Us a Message
               </h2>
@@ -520,20 +523,19 @@ const ContactPage = () => {
 
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="phone"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    Email
+                    Phone
                   </label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
-                    placeholder="your@email.com"
+                    placeholder="Your phone number"
                   />
                 </div>
 
@@ -553,24 +555,6 @@ const ContactPage = () => {
                     onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
                     placeholder="Message subject"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Phone (optional)
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
-                    placeholder="Your phone number"
                   />
                 </div>
 

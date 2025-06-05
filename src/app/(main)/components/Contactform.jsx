@@ -109,7 +109,7 @@ export default function ContactForm({ onClose }) {
       const now = Date.now();
       
       // Submit to our API endpoint
-      const response = await fetch("/api/submitContact", {
+      const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -234,14 +234,14 @@ export default function ContactForm({ onClose }) {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="bg-black p-2 rounded-full shadow-lg"
+            className="bg-black p-2 shadow-lg"
           >
             <Image
               src={logo}
               alt="Logo"
               width={60}
               height={60}
-              className="rounded-full"
+              className=""
             />
           </motion.div>
         </div>
@@ -252,10 +252,10 @@ export default function ContactForm({ onClose }) {
           transition={{ delay: 0.3 }}
           className="text-center mb-6 "
         >
-          {/* <h2 className="text-3xl font-bold text-white mb-2"></h2>
+          <h2 className="text-3xl font-bold text-white mb-2"></h2>
           <p className="text-gray-300 text-sm">
-            Fill this form to explore premium investment opportunities
-          </p> */}
+           Get Expert Guidance on Dholera Investment
+          </p>
         </motion.div>
 
         {showPopup ? (
@@ -333,7 +333,7 @@ export default function ContactForm({ onClose }) {
               disabled={isLoading || !recaptchaLoaded}
               className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Verifying..." : recaptchaLoaded ? "Register" : "Loading..."}
+              {isLoading ? "Verifying..." : recaptchaLoaded ? "Book Consultation" : "Book Consultation"}
             </button>
           </form>
         )}
