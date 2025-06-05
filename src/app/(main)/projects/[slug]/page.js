@@ -4,9 +4,10 @@ import { getPostBySlug, getProjectBySlug, getProjectSOBySlug, projectInfo } from
 import Link from "next/link";
 import Image from "next/image";
 import ProjectSlider from "./slider";
+import ProjectsModalWithButton from "./ProjectModal";
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   return {
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProjectDetail({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   if (!slug) {
     return (
@@ -325,6 +326,9 @@ export default async function ProjectDetail({ params }) {
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Article */}
             <article className="lg:w-2/3">
+
+              <ProjectsModalWithButton currentSlug = {slug}/>
+
               {post.mainImage && (
                 <div className="mb-10 overflow-hidden shadow-2xl pt-4 scale-105">
                   <Image

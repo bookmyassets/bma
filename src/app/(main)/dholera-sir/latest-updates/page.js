@@ -1,7 +1,7 @@
 import { getUpdates } from "@/sanity/lib/api";
 import BlogCard from "./BlogCard";
 import TrendingBlogItem from "./TrendingBlog";
-import hero from "@/assests/latest-updates.webp";
+import hero from "@/assests/latest-dholera-update.webp";
 import Image from "next/image";
 
 export default async function BlogsPage() {
@@ -35,7 +35,7 @@ export default async function BlogsPage() {
         <div className="absolute inset-0 flex items-center justify-start max-w-7xl mx-auto">
           <div className="text-left px-6 py-10 ">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-              Latest Updates
+              Dholera <br/> Latest Updates
             </h1>
           </div>
         </div>

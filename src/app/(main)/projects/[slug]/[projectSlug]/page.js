@@ -8,9 +8,10 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import CostSheet from "@/app/(main)/components/costSheet";
+import ProjectsModalWithButton from "../ProjectModal";
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const post = await getPostBySlug(slug);
 
@@ -353,6 +354,7 @@ export default async function SubProjectDetail({ params }) {
 
             <div className="flex flex-col lg:flex-row gap-10">
               <article className="lg:w-2/3">
+              <ProjectsModalWithButton currentSlug = {slug}/>
                 {subProject.mainImage && (
                   <div className="mb-10 overflow-hidden shadow-2xl pt-8 scale-105">
                     <Image
