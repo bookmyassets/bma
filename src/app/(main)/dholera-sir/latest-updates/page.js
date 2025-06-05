@@ -43,7 +43,7 @@ export default async function BlogsPage() {
 
       {/* Main Content */}
       <div className="max-w-8xl mx-auto px-4 py-8 md:py-12 ml-4 md:ml-12 mr-4 md:mr-12">
-        <div className="flex flex-col max-sm:flex-col-reverse lg:flex-row gap-6">
+        <div className="flex flex-col max-sm:flex-col lg:flex-row gap-6">
           {/* Trending Section - Left Sidebar */}
           <div className="lg:w-1/4 ">
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#FDB913] sticky top-4">
