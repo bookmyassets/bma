@@ -20,58 +20,58 @@ const ContactPage = () => {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
- useEffect(() => {
-     // Load standard reCAPTCHA script
-     const loadRecaptcha = () => {
-       if (typeof window !== "undefined" && !window.grecaptcha) {
-         try {
-           const script = document.createElement("script");
-           script.src = "https://www.google.com/recaptcha/api.js";
-           script.async = true;
-           script.defer = true;
-           script.onload = () => setRecaptchaLoaded(true);
-           script.onerror = () => {
-             console.error("Failed to load reCAPTCHA script");
-             setRecaptchaLoaded(true); // Still set as loaded so form submission can proceed as fallback
-           };
-           document.head.appendChild(script);
-         } catch (err) {
-           console.error("reCAPTCHA script loading error:", err);
-           setRecaptchaLoaded(true); // Still set as loaded as fallback
-         }
-       } else if (window.grecaptcha) {
-         setRecaptchaLoaded(true);
-       }
-     };
- 
-     loadRecaptcha();
- 
-     // Get submission count from localStorage
-     if (typeof window !== "undefined") {
-       setSubmissionCount(
-         parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
-       );
-       setLastSubmissionTime(
-         parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
-       );
-     }
- 
-     // Prevent modal close when clicking inside
-     const handleClickInside = (e) => {
-       e.stopPropagation();
-     };
- 
-     const formElement = document.getElementById("contact-form-container");
-     if (formElement) {
-       formElement.addEventListener("click", handleClickInside);
-     }
- 
-     return () => {
-       if (formElement) {
-         formElement.removeEventListener("click", handleClickInside);
-       }
-     };
-   }, []);
+  useEffect(() => {
+    // Load reCAPTCHA script
+    const loadRecaptcha = () => {
+      if (typeof window !== "undefined" && !window.grecaptcha) {
+        try {
+          const script = document.createElement("script");
+          script.src = "https://www.google.com/recaptcha/api.js";
+          script.async = true;
+          script.defer = true;
+          script.onload = () => setRecaptchaLoaded(true);
+          script.onerror = () => {
+            console.error("Failed to load reCAPTCHA script");
+            setRecaptchaLoaded(true); // Still set as loaded so form submission can proceed as fallback
+          };
+          document.head.appendChild(script);
+        } catch (err) {
+          console.error("reCAPTCHA script loading error:", err);
+          setRecaptchaLoaded(true); // Still set as loaded as fallback
+        }
+      } else if (window.grecaptcha) {
+        setRecaptchaLoaded(true);
+      }
+    };
+
+    loadRecaptcha();
+
+    // Get submission count from localStorage
+    if (typeof window !== "undefined") {
+      setSubmissionCount(
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+      );
+      setLastSubmissionTime(
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+      );
+    }
+
+    // Prevent modal close when clicking inside
+    const handleClickInside = (e) => {
+      e.stopPropagation();
+    };
+
+    const formElement = document.getElementById("contact-form-container");
+    if (formElement) {
+      formElement.addEventListener("click", handleClickInside);
+    }
+
+    return () => {
+      if (formElement) {
+        formElement.removeEventListener("click", handleClickInside);
+      }
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -212,17 +212,20 @@ const ContactPage = () => {
       return;
     }
 
-    // Execute reCAPTCHA
+    // Execute reCAPTCHA - Fixed implementation
     if (window.grecaptcha && recaptchaLoaded) {
       try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
+        // Always render fresh reCAPTCHA widget
+        if (recaptchaRef.current) {
+          // Clear previous widget
+          recaptchaRef.current.innerHTML = '';
+          
+          // Render new widget
           window.grecaptcha.render(recaptchaRef.current, {
             sitekey: siteKey,
             callback: onRecaptchaSuccess,
             theme: "light",
           });
-        } else {
-          window.grecaptcha.execute(siteKey, { action: "submit" });
         }
       } catch (error) {
         console.error("reCAPTCHA execution error:", error);
@@ -240,6 +243,7 @@ const ContactPage = () => {
       setIsSubmitting(false);
     }
   };
+
   const canonicalUrl = `https://www.bookmyassets.com/contact`;
 
   return (
@@ -284,8 +288,6 @@ const ContactPage = () => {
               We welcome you to the world of sheer convenience where all your
               property and financing needs are made super easy.
             </p>
-
-            {/* Explore More Button */}
           </div>
         </div>
       </div>
@@ -479,7 +481,7 @@ const ContactPage = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="w-full md:w-2/3 bg-white rounded-lg shadow-lg p-8">
+            <div className="w-full md:w-2/3 bg-white rounded-lg shadow-lg p-8" id="contact-form-container">
               <h2 className="text-3xl font-bold text-gray-800 mb-6">
                 Send Us a Message
               </h2>
@@ -591,13 +593,10 @@ const ContactPage = () => {
                   />
                 </div>
 
-                {/* reCAPTCHA container */}
-                <div 
-        className="g-recaptcha" 
-        ref={recaptchaRef}
-        data-sitekey={siteKey}
-        data-size="invisible"
-      ></div>
+                {/* reCAPTCHA container - visible widget */}
+                <div className="flex justify-center">
+                  <div ref={recaptchaRef}></div>
+                </div>
 
                 <button
                   type="submit"
