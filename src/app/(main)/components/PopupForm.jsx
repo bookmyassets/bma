@@ -9,7 +9,6 @@ export default function PopupForm({ title, buttonName, onClose }) {
   const [showPopup, setShowPopup] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
     phone: "",
   });
 
@@ -145,20 +144,6 @@ export default function PopupForm({ title, buttonName, onClose }) {
                 name="fullName"
                 placeholder="Full Name"
                 value={formData.fullName}
-                onChange={handleChange}
-                required
-                className="w-full p-4 pl-12 rounded-xl border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition shadow-sm"
-              />
-            </div>
-
-            {/* Email Input */}
-            <div className="relative">
-              <FaEnvelope className="absolute left-4 top-4 text-gray-500" />
-              <input
-                name="email"
-                type="email"
-                placeholder="Email Address"
-                value={formData.email}
                 onChange={handleChange}
                 required
                 className="w-full p-4 pl-12 rounded-xl border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition shadow-sm"

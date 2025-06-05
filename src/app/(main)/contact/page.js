@@ -145,7 +145,7 @@ const ContactPage = () => {
 
       // Send to TeleCRM
       const response = await fetch(
-        `https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead`,
+        `https://api.telecrm.in/enterpriselead`,
         {
           method: "POST",
           headers: {

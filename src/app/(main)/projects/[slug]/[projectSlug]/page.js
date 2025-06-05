@@ -354,7 +354,7 @@ export default async function SubProjectDetail({ params }) {
 
             <div className="flex flex-col lg:flex-row gap-10">
               <article className="lg:w-2/3">
-              <ProjectsModalWithButton currentSlug = {slug}/>
+                <ProjectsModalWithButton currentSlug={slug} />
                 {subProject.mainImage && (
                   <div className="mb-10 overflow-hidden shadow-2xl pt-8 scale-105">
                     <Image
@@ -529,11 +529,14 @@ export default async function SubProjectDetail({ params }) {
                       <div className="flex justify-between">
                         <span className="text-gray-600">Status</span>
                         <span className="font-medium text-[#C69C21]">
-  {subProject.categories?.find(c => c.title === "Sold Out") 
-    ? "Inactive" 
-    : subProject.categories?.find(c => ["Active", "coming soon"].includes(c.title))?.title || "Active"
-  }
-</span>
+                          {subProject.categories?.find(
+                            (c) => c.title === "Sold Out"
+                          )
+                            ? "Inactive"
+                            : subProject.categories?.find((c) =>
+                                ["Active", "coming soon"].includes(c.title)
+                              )?.title || "Active"}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Location</span>
