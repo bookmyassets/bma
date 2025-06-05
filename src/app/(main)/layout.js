@@ -393,7 +393,7 @@ export default function RootLayout({ children }) {
                             ))}
                             <Link
                               href="/dholera-sir/latest-updates"
-                              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
+                              className="block px-4 py-2 text-[#FDB913] hover:bg-gray-200 transition-colors"
                             >
                               Latest Updates
                             </Link>
@@ -700,6 +700,7 @@ export default function RootLayout({ children }) {
                       <Link
                         href="/projects/dholera/westwyn-county-wc"
                         /* onClick={toggleProjectsDropdown} */
+                        onClick={() => setIsMenuOpen(false)}
                         className="text-[#FDB913] flex items-center justify-between w-full px-3 py-2 hover:bg-[#420703] rounded-md"
                       >
                         <span>Projects</span>
