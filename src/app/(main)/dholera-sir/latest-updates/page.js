@@ -35,7 +35,7 @@ export default async function BlogsPage() {
         <div className="absolute inset-0 flex items-center justify-start max-w-7xl mx-auto">
           <div className="text-left px-6 py-10 ">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-              Dholera <br/> Latest Updates
+              Dholera  <br/> <span className="text-[#ddb954]">Latest Updates</span> 
             </h1>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ProjectSlider from "./slider";
 import ProjectsModalWithButton from "./ProjectModal";
+import Projectinformation from "../../components/Projectinformation";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -542,11 +543,9 @@ export default async function ProjectDetail({ params }) {
                     </div>
                   </div>
                   <div className="mt-6 pt-6 border-t border-gray-200">
-                    <Link href="/contact" className="block w-full">
-                      <button className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
-                        Request More Information
-                      </button>
-                    </Link>
+                      <div className="w-full text-center bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
+                        <Projectinformation/>
+                      </div>
                   </div>
                 </div>
               </div>

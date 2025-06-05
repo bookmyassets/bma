@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CostSheet from "@/app/(main)/components/costSheet";
 import ProjectsModalWithButton from "../ProjectModal";
+import Projectinformation from "@/app/(main)/components/Projectinformation";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -558,9 +559,9 @@ export default async function SubProjectDetail({ params }) {
                       </div>
                     </div>
                     <div className="mt-6 pt-6 border-t border-gray-200">
-                      <button className="w-full bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
-                        Request More Information
-                      </button>
+                      <div className="w-full text-center bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
+                       <Projectinformation />
+                      </div>
                     </div>
                   </div>
 
