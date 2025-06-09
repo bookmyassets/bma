@@ -399,9 +399,7 @@ export default async function ProjectDetail({ params }) {
 
             {/* Sidebar */}
             <aside className="lg:w-1/3">
-              {/* Related Projects - Fixed on scroll */}
               <div className="sticky top-20">
-                {/* Our Dholera Projects */}
                 <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200 mb-6">
                   <h3 className="text-xl font-bold mb-4 text-black">
                     Our {post.title} Projects
@@ -409,7 +407,6 @@ export default async function ProjectDetail({ params }) {
                   <div className="space-y-4 max-h-[300px] overflow-y-auto">
                     {projects?.relatedProjects?.length > 0 ? (
                       projects.relatedProjects.map((project) => {
-                        // Extract project slug string safely
                         const projectSlugStr =
                           typeof project.slug === "object"
                             ? project.slug.current

@@ -12,9 +12,9 @@ import Link from "next/link";
 
 export async function generateMetadata() {
   return {
-    title: "Dholera Smart City - Invest in Affordable Plots Today", // Use the fetched post's title for dynamic title
+    title: "Register-Ready Plots | Secure Property Investments – BookMyAssets",
     description:
-      "Explore the Dholera Smart City and find affordable plot prices. Invest in Gujarat's first smart city for high ROI and future growth.", // Same for description
+      "Explore secure investment opportunities with BookMyAssets. We offer register-ready residential plots with N.A. NOC compliance and title clearance for a hassle-free property purchase.", // Same for description
     canonical: `https://www.bookmyassets.com/`,
     keywords:
       "Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City",
