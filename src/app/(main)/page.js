@@ -12,9 +12,9 @@ import Link from "next/link";
 
 export async function generateMetadata() {
   return {
-    title: "Register-Ready Plots | Secure Property Investments – BookMyAssets",
+    title: "Register-Ready Plots | Secure Investments – BookMyAssets",
     description:
-      "Explore secure investment opportunities with BookMyAssets. We offer register-ready residential plots with N.A. NOC compliance and title clearance for a hassle-free property purchase.", // Same for description
+      "Invest securely with BookMyAssets – register-ready plots with N.A. NOC & title clearance. Hassle-free residential property investment awaits you", 
     canonical: `https://www.bookmyassets.com/`,
     keywords:
       "Dholera Smart City, Dholera Smart City Project, Dholera Gujarat India, Dholera SIR, Dholera Residential Plots, Dholera SIR Residential Plots, Special Investment Region, Dholera Land Price, Investment in Dholera Smart City",
