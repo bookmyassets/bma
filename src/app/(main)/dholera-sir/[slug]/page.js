@@ -16,7 +16,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Post({ params }) {
-  const post = await getPostBySlug(params.slug);
+  const slug = await params;
+  const post = await getPostBySlug(slug);
 
   // Calculate read time (rough estimate)
   const wordCount = JSON.stringify(post.body).split(" ").length;

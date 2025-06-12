@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import logo from "@/assests/Bmalogo.png";
 
-export default function LandingPage({ img1, mimg1 }) {
+export default function LandingPage({ img1, mimg1, openForm }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
@@ -18,6 +18,37 @@ export default function LandingPage({ img1, mimg1 }) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window !== 'undefined') {
+      // Check localStorage to see if popup was already shown
+      const popupShown = localStorage.getItem('popupShown');
+      
+      if (!popupShown) {
+        const timer = setTimeout(() => {
+          openForm();
+          localStorage.setItem('popupShown', 'true');
+        }, 2000); // 5 seconds
+
+        const handleScroll = () => {
+          if (window.scrollY > window.innerHeight * 0.05) {
+            openForm();
+            localStorage.setItem('popupShown', 'true');
+            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(timer);
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+          clearTimeout(timer);
+        };
+      }
+    }
+  }, [openForm]);
 
   useEffect(() => {
     // Load reCAPTCHA script
