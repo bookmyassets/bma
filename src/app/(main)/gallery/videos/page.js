@@ -4,7 +4,7 @@ import bg from "@/assests/bg-image.webp"
 
 export const metadata = {
   robots: {
-    index: false,
+    index: true,
     follow: true
   }
 };

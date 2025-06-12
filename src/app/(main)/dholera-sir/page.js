@@ -4,14 +4,12 @@ import herom from "@/assests/dholeraSIRm.webp";
 import Image from "next/image";
 import BlogCard from "./BlogCard";
 import TrendingBlogItem from "./TrendingBlog";
-import Link from "next/link";
 
 export default async function BlogsPage() {
-
   let posts = [];
   try {
     const postsData = await projectInfo();
-    
+
     posts = Array.isArray(postsData) ? postsData : [];
     console.log("Posts data fetched:", posts.length);
   } catch (error) {
@@ -22,7 +20,9 @@ export default async function BlogsPage() {
     ...post,
     author: post.author || "BookMyAssets",
     mainImage: post.mainImage || null,
-    slug: post.slug?.current ? { current: post.slug.current } : { current: "#" },
+    slug: post.slug?.current
+      ? { current: post.slug.current }
+      : { current: "#" },
   }));
 
   // Fetch trending blogs
@@ -40,6 +40,10 @@ export default async function BlogsPage() {
     <>
       {/* Hero Section with Black Background */}
       <div className="bg-black text-white">
+        <meta
+          name="description"
+          content="Explore Dholera SIR—India’s premier greenfield smart city. Get the latest infrastructure, connectivity, smart-tech & investment insights with BookMyAssets."
+        />
         <div className="px-4 relative">
           <div className="relative h-[400px] w-full rounded-xl overflow-hidden">
             <Image
@@ -59,10 +63,9 @@ export default async function BlogsPage() {
             <div className="absolute inset-0 max-w-6xl mx-auto flex items-center p-6 text-left">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 Dholera SIR
-                <br/>
+                <br />
                 <span className="text-[#ddb954]">
-
-                Special Investment <br/> Region
+                  Special Investment <br /> Region
                 </span>
               </h1>
             </div>
@@ -86,7 +89,9 @@ export default async function BlogsPage() {
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-500">No updates available at the moment.</p>
+                <p className="text-gray-500">
+                  No updates available at the moment.
+                </p>
               )}
             </div>
           </div>
@@ -105,7 +110,8 @@ export default async function BlogsPage() {
                   No Blog Posts Available
                 </h3>
                 <p className="text-gray-600">
-                  Check back soon for information about Dholera SIR investment opportunities.
+                  Check back soon for information about Dholera SIR investment
+                  opportunities.
                 </p>
               </div>
             )}
@@ -116,13 +122,15 @@ export default async function BlogsPage() {
       {/* Bottom CTA Section */}
       <div className="bg-black text-white py-16">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Get All the Updates
-          </h2>
+          <h2 className="text-3xl font-bold mb-4">Get All the Updates</h2>
           <p className="text-lg text-gray-300 mb-8">
-            Click the button below to chat directly with our investment advisor and get the latest updates, project details, and expert guidance.
+            Click the button below to chat directly with our investment advisor
+            and get the latest updates, project details, and expert guidance.
           </p>
-          <a href="https://wa.me/918130371647" className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg">
+          <a
+            href="https://wa.me/918130371647"
+            className="bg-[#FDB913] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#C69C21] transition-colors shadow-lg"
+          >
             Get Updates Now
           </a>
         </div>
