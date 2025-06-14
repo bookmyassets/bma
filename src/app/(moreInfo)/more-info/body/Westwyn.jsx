@@ -5,13 +5,9 @@ import salesDeed from "@/assests/landing/immediate-sale-deed.webp";
 import afterSales from "@/assests/landing/after-sales.webp";
 import buybackguarantee from "@/assests/landing/buy-back-guarantee.webp";
 import location from "@/assests/landing/location.webp";
-import residential from "@/assests/landing/residentialPlot.webp";
 import hidden from "@/assests/landing/hiddenCharges.webp";
 import Image from "next/image";
 import projectImage from "@/assests/landing/westwyn-project.webp";
-import bg from "@/assests/bg-image.webp";
-
-// Icons for new features
 
 const features = [
   {

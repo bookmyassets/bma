@@ -16,21 +16,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Post({ params }) {
-  const slug = await params;
+  const {slug} = await params;
   const post = await getPostBySlug(slug);
-
-  // Calculate read time (rough estimate)
-  const wordCount = JSON.stringify(post.body).split(" ").length;
-  const readTime = Math.ceil(wordCount / 200); // Assuming 200 words per minute
-  const isProject = post.categories?.some(
-    (category) => category.title.toLowerCase() === "project"
-  );
-
-  // Format the publication date if available
-  const formattedDate = post.publishedAt
-    ? format(new Date(post.publishedAt), "MMMM dd, yyyy")
-    : null;
-
+ 
   const components = {
   types: {
     image: ({ value }) => {
@@ -244,7 +232,7 @@ export default async function Post({ params }) {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: post.title,
+    headline: post?.title,
     alternativeHeadline: post.altHeadline || post.title,
     image: post.mainImage?.url,
     author: {
@@ -294,25 +282,7 @@ export default async function Post({ params }) {
 
           {/* Metadata row */}
           <div className="flex items-center text-gray-300 text-sm md:text-base mb-8">
-            {formattedDate && (
-              <div className="flex items-center mr-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                <span>{formattedDate}</span>
-              </div>
-            )}
+            
             <div className="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -328,7 +298,6 @@ export default async function Post({ params }) {
                   d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span>{readTime} min read</span>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { FaUser, FaPhoneAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import { FaUser, FaPhoneAlt, FaClock } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/Bmalogo.png";
@@ -14,7 +14,7 @@ export default function Popup({
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
-  const [showFormPopup, setShowFormPopup] = useState(true); // ✅ Changed to true to show immediately
+  const [showFormPopup, setShowFormPopup] = useState(true); 
   const [showSubmissionSuccess, setShowSubmissionSuccess] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
@@ -46,7 +46,7 @@ export default function Popup({
       }, 1000);
     }
 
-    return () => clearInterval(timer); // Cleanup
+    return () => clearInterval(timer); 
   }, [showForm]);
 
   const formatTime = (seconds) => {
