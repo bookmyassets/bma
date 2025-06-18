@@ -908,13 +908,13 @@ export default function RootLayout({ children }) {
         </nav>
 
         {/* Contact Form Modal */}
-        <AnimatePresence>
-          {isContactFormOpen && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
-              <ContactForm onClose={() => setIsContactFormOpen(false)} />
-            </div>
-          )}
-        </AnimatePresence>
+          <AnimatePresence>
+            {isContactFormOpen && (
+              <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
+                <ContactForm onClose={() => setIsContactFormOpen(false)} />
+              </div>
+            )}
+          </AnimatePresence>
 
         {children}
         <ContactNow />
