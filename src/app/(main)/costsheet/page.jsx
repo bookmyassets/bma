@@ -24,6 +24,7 @@ export default function CostSheet() {
     basePlotPriceYards: 9250,
     plotAreaFeet: "",
     totalPaymentYards: "",
+    legalFee: 20000,
     maintenanceRate: 500,
     maintenanceCharge: 0,
     oneTimeMaintenance: 50000,
@@ -79,7 +80,7 @@ export default function CostSheet() {
       const totalPayment = formData.plotAreaYards * plotPrice;
       const maintenance = formData.plotAreaYards * formData.maintenanceRate;
       const totalCharges =
-        maintenance + 20000 + parseFloat(formData.oneTimeMaintenance);
+        maintenance + parseFloat(formData.legalFee) + parseFloat(formData.oneTimeMaintenance);
       const plotTotalPayment = totalPayment + totalCharges;
       const plotAreaFeet = formData.plotAreaYards * 9;
 
@@ -98,6 +99,7 @@ export default function CostSheet() {
     formData.plc,
     formData.maintenanceRate,
     formData.oneTimeMaintenance,
+    formData.legalFee, // Added legalFee to dependency array
   ]);
 
   const generatePDF = () => {
@@ -116,6 +118,7 @@ export default function CostSheet() {
       maintenanceRate,
       maintenanceCharge,
       oneTimeMaintenance,
+      legalFee,
       totalCharges,
       plotTotalPayment,
     } = formData;
@@ -147,6 +150,7 @@ export default function CostSheet() {
       const formattedMaintenanceCharge = formatIndianNumber(maintenanceCharge);
       const formattedOneTimeMaintenance =
         formatIndianNumber(oneTimeMaintenance);
+      const formattedLegalFee = formatIndianNumber(legalFee);
       const formattedTotalCharges = formatIndianNumber(totalCharges);
       const formattedPlotTotalPayment = formatIndianNumber(plotTotalPayment);
 
@@ -202,7 +206,7 @@ export default function CostSheet() {
             `Development Charge (${maintenanceRate} x Size)`,
             `Rs. ${formattedMaintenanceCharge}`,
           ],
-          ["Legal Fee (Per Sale Deed)", "Rs. 20,000.00"],
+          ["Legal Fee (Per Sale Deed)", `Rs. ${formattedLegalFee}`],
           ["Maintenance For 3 years", `Rs. ${formattedOneTimeMaintenance}`],
           ["Total Charges", `Rs. ${formattedTotalCharges}`],
           ["Plot Total Payment", `Rs. ${formattedPlotTotalPayment}`],
@@ -477,10 +481,11 @@ export default function CostSheet() {
               <td className="p-2 font-semibold">Legal Fee (Per Sale Deed)</td>
               <td className="p-2">
                 <input
-                  type="text"
-                  value="20000.00"
+                  type="number"
+                  name="legalFee"
+                  value={formData.legalFee}
+                  onChange={handleChange}
                   className="border p-2 w-full rounded"
-                  readOnly
                 />
               </td>
             </tr>
@@ -530,7 +535,7 @@ export default function CostSheet() {
         >
           Generate PDF
         </button>
-      </form>
+        </form>
     </div>
   );
 }
