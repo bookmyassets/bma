@@ -127,7 +127,7 @@ export default function Posting() {
         "Join our team as a Senior Account Executive and play a key role in managing financial records ensuring compliance and driving accuracy in reporting, empowering our clients with expert asset management. Male Only Applicants",
       location: "JMD Megapolis, Sector 48, Gurgaon",
       jobType: "Full Time",
-      qualifications: "B.Com/M. Com/ MBA",
+      qualifications: "B.Com/M. Com/ MBA in Finance",
       experience: "Minimum 2 year of experience in Accounts",
       salary: "upto 35k",
       workingHours: "10:30 AM - 7:30 PM",
