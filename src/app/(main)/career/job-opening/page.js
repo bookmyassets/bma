@@ -56,7 +56,7 @@ export default function Posting() {
       location: "JMD Megapolis, Sector 48, Gurgaon",
       jobType: "Full Time",
       qualifications: "Diploma",
-      experience: "Minimum 5-8 year of experience",
+      experience: "Minimum 5-8 year of experience in Sales",
       salary: "9 LPA",
       workingHours: "10:30 AM - 7:30 PM",
       workingDays: "6 Days",
