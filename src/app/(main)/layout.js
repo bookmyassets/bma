@@ -576,7 +576,7 @@ export default function RootLayout({ children }) {
                         : "text-[#FDB913] hover:text-white"
                     }`}
                   >
-                    Career
+                    Careers
                   </Link>
 
                   <Link
@@ -891,7 +891,7 @@ export default function RootLayout({ children }) {
                       className="text-[#FDB913] block px-3 py-2 hover:bg-[#420703] rounded-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      Career
+                      Careers
                     </Link>
                     <Link
                       href="/contact"
