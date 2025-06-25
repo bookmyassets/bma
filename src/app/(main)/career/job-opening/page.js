@@ -13,6 +13,9 @@ import {
   FaClock,
   FaCalendarAlt,
   FaDollarSign,
+  FaBriefcase,
+  FaMars,
+  FaVenus,
 } from "react-icons/fa";
 
 export default function Posting() {
@@ -56,6 +59,7 @@ export default function Posting() {
       location: "JMD Megapolis, Sector 48, Gurgaon",
       jobType: "Full Time",
       qualifications: "Diploma",
+      numberOfOpenings: 2,
       experience: "Minimum 5-8 year of experience in Sales",
       salary: "9 LPA",
       workingHours: "10:30 AM - 7:30 PM",
@@ -73,6 +77,31 @@ export default function Posting() {
     },
     {
       id: 2,
+      title: "Senior Sales Representative",
+      company: "Book My Assets",
+      description:
+        "Join our team as a Real Estate Sales Manager and help our clients achieve their financial goals through expert asset management.",
+      location: "JMD Megapolis, Sector 48, Gurgaon",
+      jobType: "Full Time",
+      qualifications: "Diploma",
+      numberOfOpenings: 15,
+      experience: "Minimum 3+ year of experience in Sales",
+      salary: "50000",
+      workingHours: "10:30 AM - 7:30 PM",
+      workingDays: "6 Days",
+      contactEmail: "hr@bookmyassets.com",
+      contactPhone: "9717671112",
+      skills: [
+        "Good Communication",
+        "Presentable",
+        "Negotiation Skills",
+        "Client relations",
+        "Quick Adaptability",
+        "Convincing Skill",
+      ],
+    },
+    {
+      id: 3,
       title: "Field Executive (Sales)",
       company: "Book My Assets",
       description:
@@ -80,6 +109,7 @@ export default function Posting() {
       location: "JMD Megapolis, Sector 48, Gurgaon",
       jobType: "Full Time",
       qualifications: "12th/Diploma",
+      numberOfOpenings: 1,
       experience: " Minimum 2 - 3 year of experience in field sales",
       salary: "upto 30k",
       workingHours: "10:30 AM - 7:30 PM",
@@ -96,7 +126,7 @@ export default function Posting() {
       ],
     },
     {
-      id: 3,
+      id: 4,
       title: "Video Conferencing Sales Executive",
       company: "Book My Assets",
       description:
@@ -104,6 +134,7 @@ export default function Posting() {
       location: "JMD Megapolis, Sector 48, Gurgaon",
       jobType: "Full Time",
       qualifications: "12th/Diploma",
+      numberOfOpenings: "2-3",
       experience: "Minimum 2 yr experience in Sales",
       salary: "upto 35k",
       workingHours: "10:30 AM - 7:30 PM",
@@ -120,7 +151,7 @@ export default function Posting() {
       ],
     },
     {
-      id: 4,
+      id: 5,
       title: "Senior Accounts Executive",
       company: "Book My Assets",
       description:
@@ -128,6 +159,7 @@ export default function Posting() {
       location: "JMD Megapolis, Sector 48, Gurgaon",
       jobType: "Full Time",
       qualifications: "B.Com/M. Com/ MBA in Finance",
+      numberOfOpenings: 2,
       experience: "Minimum 2 year of experience in Accounts",
       salary: "upto 35k",
       workingHours: "10:30 AM - 7:30 PM",
@@ -215,6 +247,13 @@ export default function Posting() {
                         <div>
                           <h4 className="font-bold text-gray-800">Qualifications:</h4>
                           <p className="text-gray-700">{job.qualifications}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <FaBriefcase className="mt-1 mr-2 text-indigo-600" />
+                        <div>
+                          <h4 className="font-bold text-gray-800">No Of Openings:</h4>
+                          <p className="text-gray-700">{job.numberOfOpenings}</p>
                         </div>
                       </div>
 
@@ -405,6 +444,22 @@ export default function Posting() {
                   </div>
                 </div>
 
+                <div className="space-y-2">
+                  <label
+                    htmlFor="Gender"
+                    className="block text-sm font-medium text-gray-700 flex items-center"
+                  >
+                    <FaMars className="mr-2 text-indigo-600" /> 
+                    <FaVenus className="mr-2 text-indigo-600" /> Gender
+                  </label>
+                  <input
+                    type="text"
+                    name="gender"
+                    id="gender"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                    placeholder="Male/Female"
+                  />
+                </div>
                 <div className="space-y-2">
                   <label
                     htmlFor="currentCompany"

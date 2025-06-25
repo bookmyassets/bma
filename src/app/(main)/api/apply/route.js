@@ -81,6 +81,7 @@ export async function POST(request) {
       lastName: formData.get("lastName"),
       email: formData.get("email"),
       phone: formData.get("phone") || "",
+      gender: formData.get("gender") || "",
       currentCompany: formData.get("currentCompany") || "",
       jobTitle: formData.get("jobTitle"),
       jobId: formData.get("jobId") || "",
@@ -199,7 +200,7 @@ async function uploadResume(drive, resumeFile, tempFilePath, folderId, namePrefi
 
 async function saveToSheet(sheets, { 
   jobTitle, firstName, lastName, email, 
-  phone, currentCompany, resumeLink, experience, currentCTC
+  phone, gender, currentCompany, resumeLink, experience, currentCTC
 }) {
   try {
     await sheets.spreadsheets.values.append({
@@ -214,6 +215,7 @@ async function saveToSheet(sheets, {
           lastName,
           email,
           phone,
+          gender,
           currentCompany,
           resumeLink,
           experience,
