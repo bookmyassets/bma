@@ -11,6 +11,63 @@ import CostSheet from "@/app/(main)/components/costSheet";
 import ProjectsModalWithButton from "../ProjectModal";
 import Projectinformation from "@/app/(main)/components/Projectinformation";
 import Reviews from "@/app/(main)/components/Reviews";
+import { ExternalLink, MapPin, DollarSign, TrendingUp, Star, Eye, ArrowRight } from 'lucide-react';
+
+// ProjectCard Component
+const ProjectCard = ({ project, isSoldOut = false, isParent = false, slug }) => {
+  const projectSlugStr = typeof project.slug === "object" ? project.slug.current : project.slug;
+  
+  return (
+    <Link 
+      href={isParent ? `/projects/${slug}` : `/projects/${slug}/${projectSlugStr}`}
+      className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-100 hover:border-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden block"
+    >
+      <div className="flex gap-4 p-4">
+        <div className="relative flex-shrink-0">
+          <div className="w-20 h-20 rounded-xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-inner">
+            {project.mainImage && (
+              <Image
+                src={urlFor(project.mainImage).width(80).height(80).url()}
+                alt={project.title}
+                width={80}
+                height={80}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+            )}
+          </div>
+          {isSoldOut && (
+            <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold shadow-lg">
+              SOLD
+            </div>
+          )}
+        </div>
+        
+        <div className="flex min-w-0">
+          <h4 className="font-semibold flex items-center  text-gray-900 text-lg md:text-xl mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
+            {project.title}
+          </h4>
+          {isParent && (
+            <span className="inline-flex items-center text-sm md:text-3xl bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-semibold border border-blue-200 mt-2">
+              <Eye className="w-3 h-3 mr-1" />
+              PARENT PROJECT
+            </span>
+          )}
+        </div>
+        
+      </div>
+    </Link>
+  );
+};
+
+// Helper function for status colors
+const getStatusColor = (status) => {
+  switch (status?.toLowerCase()) {
+    case 'active': return 'text-green-600 bg-green-50 border-green-200';
+    case 'coming soon': return 'text-orange-600 bg-orange-50 border-orange-200';
+    case 'inactive': return 'text-red-600 bg-red-50 border-red-200';
+    default: return 'text-blue-600 bg-blue-50 border-blue-200';
+  }
+};
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -49,6 +106,11 @@ export default async function SubProjectDetail({ params }) {
         </div>
       );
     }
+
+    // Determine project status
+    const status = subProject.categories?.find(c => c.title === "Sold Out") 
+      ? "Inactive" 
+      : subProject.categories?.find(c => ["Active", "coming soon"].includes(c.title))?.title || "Active";
 
     const components = {
       types: {
@@ -354,8 +416,8 @@ export default async function SubProjectDetail({ params }) {
               </Link>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-10">
-              <article className="lg:w-2/3">
+            <div className="flex flex-col gap-10">
+              <article className="">
                 <ProjectsModalWithButton currentSlug={slug} />
                 {subProject.mainImage && (
                   <div className="mb-10 overflow-hidden shadow-2xl pt-8 scale-105">
@@ -428,175 +490,126 @@ export default async function SubProjectDetail({ params }) {
                   </div>
                 </div>
               </article>
-
-              <aside className="lg:w-1/3">
-                {subProject?.relatedProjects?.length > 0 && (
-                  <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200">
-                    <h3 className="text-xl font-bold mb-4 text-black">
-                      Our {mainProject.title} Projects
-                    </h3>
-                    <div className="space-y-4">
-                      {subProject.relatedProjects.map((project) => {
-                        const projectSlugStr =
-                          typeof project.slug === "object"
-                            ? project.slug.current
-                            : project.slug;
-
-                        return (
-                          <Link
-                            key={projectSlugStr}
-                            href={`/projects/${slug}/${projectSlugStr}`}
-                            className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
-                          >
-                            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-                              {project.mainImage && (
-                                <Image
-                                  src={urlFor(project.mainImage)
-                                    .width(64)
-                                    .height(64)
-                                    .url()}
-                                  alt={project.title}
-                                  width={64}
-                                  height={64}
-                                  className="w-full h-full object-cover"
-                                />
-                              )}
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-black">
-                                {project.title}
-                              </h4>
-                            </div>
-                          </Link>
-                        );
-                      })}
+              
+              <div className="max-w-5xl mx-auto">
+                <div className="bg-gradient-to-br from-white via-white to-purple-50/30 rounded-3xl shadow-xl border border-gray-100 p-8 backdrop-blur-sm">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                          <Star className="w-4 h-4 text-white fill-current" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900">
+                          Parent Project
+                        </h3>
+                      </div>
+                      
+                      <ProjectCard project={mainProject} slug={slug} className=""/>
                     </div>
-                  </div>
-                )}
-
-                {soldOutProjects?.relatedProjects?.length > 0 && (
-                  <div className="bg-white rounded-xl max-md:hidden shadow-md mt-4 p-6 border border-gray-200">
-                    <h3 className="text-xl font-bold mb-4 text-black">
-                      Our Sold Out Projects
-                    </h3>
-                    <div className="space-y-4 max-h-[300px] overflow-y-auto">
-                      {soldOutProjects.relatedProjects.map((project) => {
-                        const projectSlugStr =
-                          typeof project.slug === "object"
-                            ? project.slug.current
-                            : project.slug;
-
-                        return (
-                          <Link
-                            key={projectSlugStr}
-                            href={`/projects/${slug}/${projectSlugStr}`}
-                            className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
-                          >
-                            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-                              {project.mainImage && (
-                                <Image
-                                  src={urlFor(project.mainImage)
-                                    .width(64)
-                                    .height(64)
-                                    .url()}
-                                  alt={project.title}
-                                  width={64}
-                                  height={64}
-                                  className="w-full h-full object-cover"
-                                />
-                              )}
-                            </div>
-                            <div className="flex-1">
-                              <h4 className="font-medium text-black">
-                                {project.title}
-                              </h4>
-                              <div className="flex items-center gap-2 mt-1">
-                                <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full font-medium">
-                                  SOLD OUT
-                                </span>
-                              </div>
-                            </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-                <div className="sticky mt-8 top-32">
-                  <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 mb-6">
-                    <h3 className="text-xl font-bold mb-4 text-black">
-                      Project Details
-                    </h3>
-                    <div className="space-y-4">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Status</span>
-                        <span className="font-medium text-[#C69C21]">
-                          {subProject.categories?.find(
-                            (c) => c.title === "Sold Out"
-                          )
-                            ? "Inactive"
-                            : subProject.categories?.find((c) =>
-                                ["Active", "coming soon"].includes(c.title)
-                              )?.title || "Active"}
-                        </span>
+                <aside className="lg:flex space-x-8">
+                  {/* Related Projects Section */}
+                  {subProject?.relatedProjects?.length > 0 && (
+                    <div className="bg-white rounded-3xl max-md:hidden shadow-xl border border-gray-100 p-8 backdrop-blur-sm bg-white/95">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                          <ExternalLink className="w-4 h-4 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900">
+                          Our {mainProject.title} Projects
+                        </h3>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Location</span>
-                        <span className="font-medium">
-                          {subProject.location || "—"}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Investment</span>
-                        <span className="font-medium">
-                          {subProject.investment || "Contact for details"}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Returns</span>
-                        <span className="font-medium">
-                          {subProject.returns || "Contact for details"}
-                        </span>
+                      <div className="space-y-3">
+                        {subProject.relatedProjects.map((project) => (
+                          <ProjectCard key={project.slug.current} project={project} slug={slug} />
+                        ))}
                       </div>
                     </div>
-                    <div className="mt-6 pt-6 border-t border-gray-200">
-                      <div className="w-full text-center bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
-                       <Projectinformation />
+                  )}
+
+                  {/* Sold Out Projects Section */}
+                  {soldOutProjects?.relatedProjects?.length > 0 && (
+                    <div className="bg-white rounded-3xl max-md:hidden shadow-xl mt-6 border border-gray-100 p-8 backdrop-blur-sm bg-white/95">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center">
+                          <Star className="w-4 h-4 text-white fill-current" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900">
+                          Our Sold Out Projects
+                        </h3>
+                      </div>
+                      <div className="space-y-3 max-h-[350px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                        {soldOutProjects.relatedProjects.map((project) => (
+                          <ProjectCard key={project.slug.current} project={project} isSoldOut={true} slug={slug} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                    
+
+                  {/* Sticky Sidebar */}
+                  <div className="sticky mt-8 top-32 space-y-6">
+                    
+                    {/* Project Details Card */}
+                    <div className="bg-gradient-to-br from-white via-white to-blue-50/30 rounded-3xl shadow-xl border border-gray-100 p-8 backdrop-blur-sm">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
+                          <Eye className="w-4 h-4 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900">
+                          Project Details
+                        </h3>
+                      </div>
+                      
+                      <div className="space-y-5">
+                        <div className="flex justify-between items-center p-4 bg-gray-50/50 rounded-xl border border-gray-100">
+                          <span className="text-gray-600 font-medium flex items-center gap-2">
+                            <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                            Status
+                          </span>
+                          <span className={`font-semibold px-3 py-1 rounded-full text-sm border ${getStatusColor(status)}`}>
+                            {status}
+                          </span>
+                        </div>
+                        
+                        <div className="flex justify-between items-center p-4 bg-gray-50/50 rounded-xl border border-gray-100">
+                          <span className="text-gray-600 font-medium flex items-center gap-2">
+                            <MapPin className="w-4 h-4" />
+                            Location
+                          </span>
+                          <span className="font-semibold text-gray-900 text-right max-w-[200px]">
+                            {subProject.location || "—"}
+                          </span>
+                        </div>
+                        
+                        <div className="flex justify-between items-center p-4 bg-gray-50/50 rounded-xl border border-gray-100">
+                          <span className="text-gray-600 font-medium flex items-center gap-2">
+                            <DollarSign className="w-4 h-4" />
+                            Investment
+                          </span>
+                          <span className="font-semibold text-gray-900 text-right max-w-[200px]">
+                            {subProject.investment || "Contact for details"}
+                          </span>
+                        </div>
+                        
+                        <div className="flex justify-between items-center p-4 bg-gray-50/50 rounded-xl border border-gray-100">
+                          <span className="text-gray-600 font-medium flex items-center gap-2">
+                            <TrendingUp className="w-4 h-4" />
+                            Returns
+                          </span>
+                          <span className="font-semibold text-green-600 text-right max-w-[200px]">
+                            {subProject.returns || "Contact for details"}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-8 pt-6 border-t border-gray-200">
+                        <div className="max-w-7xl bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 hover:from-yellow-500 hover:via-amber-500 hover:to-amber-600 text-gray-900 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl  flex items-center justify-center gap-2 cursor-pointer">
+                          <Projectinformation />
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
-                    <h3 className="text-xl font-bold mb-4 text-black">
-                      Parent Project
-                    </h3>
-                    <Link
-                      href={`/projects/${slug}`}
-                      className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
-                    >
-                      <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-                        {mainProject.mainImage && (
-                          <Image
-                            src={urlFor(mainProject.mainImage)
-                              .width(64)
-                              .height(64)
-                              .url()}
-                            alt={mainProject.title}
-                            width={64}
-                            height={64}
-                            className="w-full h-full object-cover"
-                          />
-                        )}
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-black">
-                          {mainProject.title}
-                        </h4>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              </aside>
+                </aside>
+              </div>
             </div>
             <CostSheet />
           </main>
