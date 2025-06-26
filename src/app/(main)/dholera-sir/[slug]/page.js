@@ -25,12 +25,12 @@ export async function generateMetadata({ params }) {
 export default async function Post({ params }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
- 
+
   if (!post || !post.slug?.current) {
     notFound();
   }
 
-  // The middleware will handle redirects, so if we reach here, 
+  // The middleware will handle redirects, so if we reach here,
   // it means this slug is allowed to be accessed directly
 
   const components = {
@@ -58,12 +58,12 @@ export default async function Post({ params }) {
           </figure>
         );
       },
-      
+
       table: ({ value }) => {
         if (!value?.rows || !Array.isArray(value.rows)) {
           return null;
         }
-        
+
         return (
           <div className="overflow-x-auto my-8">
             <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
@@ -72,12 +72,18 @@ export default async function Post({ params }) {
                   if (!row?.cells || !Array.isArray(row.cells)) {
                     return null;
                   }
-                  
+
                   return (
-                    <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                    <tr
+                      key={i}
+                      className={i % 2 === 0 ? "bg-gray-50" : "bg-white"}
+                    >
                       {row.cells.map((cell, j) => (
-                        <td key={j} className="px-4 py-3 border border-gray-200 text-gray-700">
-                          {cell || ''}
+                        <td
+                          key={j}
+                          className="px-4 py-3 border border-gray-200 text-gray-700"
+                        >
+                          {cell || ""}
                         </td>
                       ))}
                     </tr>
@@ -88,14 +94,14 @@ export default async function Post({ params }) {
           </div>
         );
       },
-      
+
       code: ({ value }) => (
         <pre className="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto my-6">
           <code className="font-mono text-sm">{value.code}</code>
         </pre>
       ),
     },
-    
+
     marks: {
       link: ({ children, value }) => {
         return (
@@ -122,27 +128,29 @@ export default async function Post({ params }) {
           {children}
         </code>
       ),
-      'strike-through': ({ children }) => (
+      "strike-through": ({ children }) => (
         <del className="line-through text-gray-500">{children}</del>
       ),
       textColor: ({ children, value }) => (
-        <span style={{ color: value?.color || 'inherit' }}>{children}</span>
+        <span style={{ color: value?.color || "inherit" }}>{children}</span>
       ),
       textBackground: ({ children, value }) => (
-        <span style={{ backgroundColor: value?.color || 'transparent' }}>{children}</span>
+        <span style={{ backgroundColor: value?.color || "transparent" }}>
+          {children}
+        </span>
       ),
       button: ({ children, value }) => {
         const getButtonClasses = () => {
           switch (value.style) {
-            case 'secondary':
-              return 'bg-gray-600 hover:bg-gray-700';
-            case 'outline':
-              return 'bg-transparent border-2 border-blue-600 text-blue-600 hover:bg-blue-50';
+            case "secondary":
+              return "bg-gray-600 hover:bg-gray-700";
+            case "outline":
+              return "bg-transparent border-2 border-blue-600 text-blue-600 hover:bg-blue-50";
             default:
-              return 'bg-blue-600 hover:bg-blue-700';
+              return "bg-blue-600 hover:bg-blue-700";
           }
         };
-        
+
         return (
           <Link
             href={value.href}
@@ -153,7 +161,7 @@ export default async function Post({ params }) {
         );
       },
     },
-    
+
     block: {
       h1: ({ children }) => (
         <h1 className="text-4xl font-bold mt-20 mb-8 text-gray-900 border-b border-gray-200 pb-3">
@@ -194,19 +202,29 @@ export default async function Post({ params }) {
         </blockquote>
       ),
       leftAlign: ({ children }) => (
-        <p className="mb-6 text-gray-700 leading-relaxed text-lg text-left">{children}</p>
+        <p className="mb-6 text-gray-700 leading-relaxed text-lg text-left">
+          {children}
+        </p>
       ),
       centerAlign: ({ children }) => (
-        <p className="mb-6 text-gray-700 leading-relaxed text-lg text-center">{children}</p>
+        <p className="mb-6 text-gray-700 leading-relaxed text-lg text-center">
+          {children}
+        </p>
       ),
       rightAlign: ({ children }) => (
-        <p className="mb-6 text-gray-700 leading-relaxed text-lg text-right">{children}</p>
+        <p className="mb-6 text-gray-700 leading-relaxed text-lg text-right">
+          {children}
+        </p>
       ),
       justify: ({ children }) => (
-        <p className="mb-6 text-gray-700 leading-relaxed text-lg text-justify">{children}</p>
+        <p className="mb-6 text-gray-700 leading-relaxed text-lg text-justify">
+          {children}
+        </p>
       ),
       small: ({ children }) => (
-        <p className="mb-6 text-gray-700 leading-relaxed text-base">{children}</p>
+        <p className="mb-6 text-gray-700 leading-relaxed text-base">
+          {children}
+        </p>
       ),
       medium: ({ children }) => (
         <p className="mb-6 text-gray-700 leading-relaxed text-lg">{children}</p>
@@ -215,10 +233,12 @@ export default async function Post({ params }) {
         <p className="mb-6 text-gray-700 leading-relaxed text-xl">{children}</p>
       ),
       xlarge: ({ children }) => (
-        <p className="mb-6 text-gray-700 leading-relaxed text-2xl">{children}</p>
+        <p className="mb-6 text-gray-700 leading-relaxed text-2xl">
+          {children}
+        </p>
       ),
     },
-    
+
     list: {
       bullet: ({ children }) => (
         <ul className="list-disc pl-6 mb-6 space-y-2 text-gray-700">
@@ -231,7 +251,7 @@ export default async function Post({ params }) {
         </ol>
       ),
     },
-    
+
     listItem: {
       bullet: ({ children }) => (
         <li className="text-lg leading-relaxed">{children}</li>
@@ -287,45 +307,20 @@ export default async function Post({ params }) {
       {/* Hero Section with Image */}
       <div className="w-full bg-gradient-to-b from-gray-900 to-gray-800 relative">
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="max-w-7xl mx-auto pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Title */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            {post.title}
-          </h1>
-
-          {/* Metadata row */}
-          <div className="flex items-center text-gray-300 text-sm md:text-base mb-8">
-            <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
+        <div className="max-w-7xl mx-auto pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10"></div>
       </div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20">
         {/* Featured Image Card */}
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden mb-12">
+        <div className="bg-white rounded-2xl  shadow-2xl overflow-hidden mb-12">
           {post.mainImage && (
-            <div className="relative w-full h-[50vh] md:h-[60vh]">
+            <div className="relative w-full">
               <Image
                 src={urlFor(post.mainImage)?.url() || ""}
                 alt={post.title}
-                fill
-                className="object-cover"
-                priority
+                width={800}
+                height={600}
+                className="w-full h-full object-cover"
               />
             </div>
           )}

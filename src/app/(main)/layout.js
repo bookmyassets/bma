@@ -430,7 +430,7 @@ export default function RootLayout({ children }) {
                         onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
                         onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
                       >
-                        Get in Touch
+                        Contact
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
@@ -595,7 +595,7 @@ export default function RootLayout({ children }) {
                     className="text-white text-xl font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
                     onClick={toggleGetInTouchDropdown}
                   >
-                    Get in Touch
+                    Contact
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className={`h-4 w-4 text-white  font-semibold transition-transform duration-300 ${

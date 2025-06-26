@@ -10,6 +10,7 @@ import Image from "next/image";
 import CostSheet from "@/app/(main)/components/costSheet";
 import ProjectsModalWithButton from "../ProjectModal";
 import Projectinformation from "@/app/(main)/components/Projectinformation";
+import Reviews from "@/app/(main)/components/Reviews";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -599,6 +600,7 @@ export default async function SubProjectDetail({ params }) {
             </div>
             <CostSheet />
           </main>
+          <Reviews/>
         </div>
       </div>
     );
