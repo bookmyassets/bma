@@ -11,15 +11,31 @@ import CostSheet from "@/app/(main)/components/costSheet";
 import ProjectsModalWithButton from "../ProjectModal";
 import Projectinformation from "@/app/(main)/components/Projectinformation";
 import Reviews from "@/app/(main)/components/Reviews";
-import { ExternalLink, MapPin, DollarSign, TrendingUp, Star, Eye, ArrowRight } from 'lucide-react';
+import {
+  ExternalLink,
+  MapPin,
+  DollarSign,
+  TrendingUp,
+  Star,
+  Eye,
+  ArrowRight,
+} from "lucide-react";
 
 // ProjectCard Component
-const ProjectCard = ({ project, isSoldOut = false, isParent = false, slug }) => {
-  const projectSlugStr = typeof project.slug === "object" ? project.slug.current : project.slug;
-  
+const ProjectCard = ({
+  project,
+  isSoldOut = false,
+  isParent = false,
+  slug,
+}) => {
+  const projectSlugStr =
+    typeof project.slug === "object" ? project.slug.current : project.slug;
+
   return (
-    <Link 
-      href={isParent ? `/projects/${slug}` : `/projects/${slug}/${projectSlugStr}`}
+    <Link
+      href={
+        isParent ? `/projects/${slug}` : `/projects/${slug}/${projectSlugStr}`
+      }
       className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-100 hover:border-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden block"
     >
       <div className="flex gap-4 p-4">
@@ -41,7 +57,7 @@ const ProjectCard = ({ project, isSoldOut = false, isParent = false, slug }) => 
             </div>
           )}
         </div>
-        
+
         <div className="flex min-w-0">
           <h4 className="font-semibold flex items-center  text-gray-900 text-lg md:text-xl mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
             {project.title}
@@ -53,7 +69,6 @@ const ProjectCard = ({ project, isSoldOut = false, isParent = false, slug }) => 
             </span>
           )}
         </div>
-        
       </div>
     </Link>
   );
@@ -62,10 +77,14 @@ const ProjectCard = ({ project, isSoldOut = false, isParent = false, slug }) => 
 // Helper function for status colors
 const getStatusColor = (status) => {
   switch (status?.toLowerCase()) {
-    case 'active': return 'text-green-600 bg-green-50 border-green-200';
-    case 'coming soon': return 'text-orange-600 bg-orange-50 border-orange-200';
-    case 'inactive': return 'text-red-600 bg-red-50 border-red-200';
-    default: return 'text-blue-600 bg-blue-50 border-blue-200';
+    case "active":
+      return "text-green-600 bg-green-50 border-green-200";
+    case "coming soon":
+      return "text-orange-600 bg-orange-50 border-orange-200";
+    case "inactive":
+      return "text-red-600 bg-red-50 border-red-200";
+    default:
+      return "text-blue-600 bg-blue-50 border-blue-200";
   }
 };
 
@@ -108,9 +127,11 @@ export default async function SubProjectDetail({ params }) {
     }
 
     // Determine project status
-    const status = subProject.categories?.find(c => c.title === "Sold Out") 
-      ? "Inactive" 
-      : subProject.categories?.find(c => ["Active", "coming soon"].includes(c.title))?.title || "Active";
+    const status = subProject.categories?.find((c) => c.title === "Sold Out")
+      ? "Inactive"
+      : subProject.categories?.find((c) =>
+          ["Active", "coming soon"].includes(c.title)
+        )?.title || "Active";
 
     const components = {
       types: {
@@ -490,20 +511,20 @@ export default async function SubProjectDetail({ params }) {
                   </div>
                 </div>
               </article>
-              
+
               <div className="max-w-5xl mx-auto">
                 <div className="bg-gradient-to-br from-white via-white to-purple-50/30 rounded-3xl shadow-xl border border-gray-100 p-8 backdrop-blur-sm">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                          <Star className="w-4 h-4 text-white fill-current" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-gray-900">
-                          Parent Project
-                        </h3>
-                      </div>
-                      
-                      <ProjectCard project={mainProject} slug={slug} className=""/>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                      <Star className="w-4 h-4 text-white fill-current" />
                     </div>
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Parent Project
+                    </h3>
+                  </div>
+
+                  <ProjectCard project={mainProject} slug={slug} className="" />
+                </div>
                 <aside className="lg:flex space-x-8">
                   {/* Related Projects Section */}
                   {subProject?.relatedProjects?.length > 0 && (
@@ -518,7 +539,11 @@ export default async function SubProjectDetail({ params }) {
                       </div>
                       <div className="space-y-3">
                         {subProject.relatedProjects.map((project) => (
-                          <ProjectCard key={project.slug.current} project={project} slug={slug} />
+                          <ProjectCard
+                            key={project.slug.current}
+                            project={project}
+                            slug={slug}
+                          />
                         ))}
                       </div>
                     </div>
@@ -537,17 +562,19 @@ export default async function SubProjectDetail({ params }) {
                       </div>
                       <div className="space-y-3 max-h-[350px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                         {soldOutProjects.relatedProjects.map((project) => (
-                          <ProjectCard key={project.slug.current} project={project} isSoldOut={true} slug={slug} />
+                          <ProjectCard
+                            key={project.slug.current}
+                            project={project}
+                            isSoldOut={true}
+                            slug={slug}
+                          />
                         ))}
                       </div>
                     </div>
                   )}
 
-                    
-
                   {/* Sticky Sidebar */}
                   <div className="sticky mt-8 top-32 space-y-6">
-                    
                     {/* Project Details Card */}
                     <div className="bg-gradient-to-br from-white via-white to-blue-50/30 rounded-3xl shadow-xl border border-gray-100 p-8 backdrop-blur-sm">
                       <div className="flex items-center gap-3 mb-6">
@@ -558,18 +585,20 @@ export default async function SubProjectDetail({ params }) {
                           Project Details
                         </h3>
                       </div>
-                      
+
                       <div className="space-y-5">
                         <div className="flex justify-between items-center p-4 bg-gray-50/50 rounded-xl border border-gray-100">
                           <span className="text-gray-600 font-medium flex items-center gap-2">
                             <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                             Status
                           </span>
-                          <span className={`font-semibold px-3 py-1 rounded-full text-sm border ${getStatusColor(status)}`}>
+                          <span
+                            className={`font-semibold px-3 py-1 rounded-full text-sm border ${getStatusColor(status)}`}
+                          >
                             {status}
                           </span>
                         </div>
-                        
+
                         <div className="flex justify-between items-center p-4 bg-gray-50/50 rounded-xl border border-gray-100">
                           <span className="text-gray-600 font-medium flex items-center gap-2">
                             <MapPin className="w-4 h-4" />
@@ -579,7 +608,7 @@ export default async function SubProjectDetail({ params }) {
                             {subProject.location || "—"}
                           </span>
                         </div>
-                        
+
                         <div className="flex justify-between items-center p-4 bg-gray-50/50 rounded-xl border border-gray-100">
                           <span className="text-gray-600 font-medium flex items-center gap-2">
                             <DollarSign className="w-4 h-4" />
@@ -589,7 +618,7 @@ export default async function SubProjectDetail({ params }) {
                             {subProject.investment || "Contact for details"}
                           </span>
                         </div>
-                        
+
                         <div className="flex justify-between items-center p-4 bg-gray-50/50 rounded-xl border border-gray-100">
                           <span className="text-gray-600 font-medium flex items-center gap-2">
                             <TrendingUp className="w-4 h-4" />
@@ -600,9 +629,9 @@ export default async function SubProjectDetail({ params }) {
                           </span>
                         </div>
                       </div>
-                      
+
                       <div className="mt-8 pt-6 border-t border-gray-200">
-                        <div className="max-w-7xl bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 hover:from-yellow-500 hover:via-amber-500 hover:to-amber-600 text-gray-900 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl  flex items-center justify-center gap-2 cursor-pointer">
+                        <div className="max-w-7xl bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 hover:from-yellow-500 hover:via-amber-500 hover:to-amber-600 text-gray-900 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer">
                           <Projectinformation />
                         </div>
                       </div>
@@ -613,7 +642,7 @@ export default async function SubProjectDetail({ params }) {
             </div>
             <CostSheet />
           </main>
-          <Reviews/>
+          <Reviews />
         </div>
       </div>
     );
