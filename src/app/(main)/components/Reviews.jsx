@@ -38,7 +38,6 @@ export default function Reviews() {
     if (testimonialsRef.current) observer.observe(testimonialsRef.current);
 
     return () => {
-      clearInterval(timer);
       clearInterval(testimonialTimer);
       observer.disconnect();
     };
