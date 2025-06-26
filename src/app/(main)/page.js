@@ -207,8 +207,8 @@ export default function Home() {
       {showpopForm && (
         <Popup
           onClose={() => setpopShowForm(false)}
-          title={`Exclusive Deal: Own a plot at ₹9,250/sq. yard — hurry, limited units! –  left`}
-          buttonName="Speak with a Plot Specialist"
+          title={`Dholera – India’s Safest Investment`}
+          buttonName="Limited Plots – Booking Closing Soon"
           className="font-medium"
         />
       )}

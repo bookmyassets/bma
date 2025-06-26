@@ -69,8 +69,8 @@ export default function Popup({
     return {
       price,
       timeLeft,
-      mainText: "For This WEEK",
-      subText: ""
+      mainText: "Dholera – India’s Safest Investment",
+      subText: "Limited Plots – Booking Closing Soon"
     };
   };
 
@@ -406,18 +406,18 @@ export default function Popup({
               {/* Content Section */}
               <div className="text-center">
                 {/* Exclusive Deal Section */}
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <span className="bg-[#FDB913] text-black px-3 py-1 rounded-full text-sm font-bold inline-flex items-center gap-2">
                     <FaClock className="text-xs" />
                     Inaugural Offer
                   </span>
-                </div>
+                </div> */}
 
-                <h2 className="text-2xl md:text-3xl font-bold mb-1 leading-tight text-[#FDB913]">
+                <h2 className="text-3xl md:text-4xl font-bold mb-1 leading-tight text-[#FDB913]">
                   {titleInfo.mainText}
                 </h2>
 
-                {titleInfo.price && (
+                {/* {titleInfo.price && (
                   <div className="flex flex-col items-center gap-1 mb-2">
                     <div className="text-2xl line-through text-gray-400">
                       ₹9500/sq. yard
@@ -426,9 +426,9 @@ export default function Popup({
                       {titleInfo.price}/sq. yard
                     </div>
                   </div>
-                )}
+                )} */}
 
-                <p className="text-white/90 text-lg">
+                <p className="text-white/90 text-xl">
                   {titleInfo.subText}
                 </p>
 
