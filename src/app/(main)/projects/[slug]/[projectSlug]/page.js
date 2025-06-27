@@ -482,39 +482,44 @@ export default async function SubProjectDetail({ params }) {
 
                   <ProjectCard project={mainProject} slug={slug} className="" />
                 </div>
-                <aside className="lg:flex space-x-8">
-                  <div className="sticky mt-8 top-32 space-y-6 w-full">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      <div className="bg-gradient-to-br from-white via-white to-blue-50/30 rounded-3xl shadow-xl border border-gray-100 p-8 backdrop-blur-sm">
-                        <PopupForm title={`Book Your ${subProject.title} Now`} buttonName="Reserve Now"/>
-                      </div>
+                
 
-                      {/* Sold Out Projects Section */}
-                      {soldOutProjects?.relatedProjects?.length > 0 && (
-                        <div className="bg-gradient-to-br from-white via-white to-red-50/30 rounded-3xl shadow-xl border border-gray-100 p-8 backdrop-blur-sm">
-                          <div className="flex items-center gap-3 mb-6">
-                            <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center">
-                              <Star className="w-4 h-4 text-white fill-current" />
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900">
-                              Our Sold Out Projects
-                            </h3>
-                          </div>
-                          <div className="space-y-3 max-h-[350px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-                            {soldOutProjects.relatedProjects.map((project) => (
-                              <ProjectCard
-                                key={project.slug.current}
-                                project={project}
-                                isSoldOut={true}
-                                slug={slug}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </aside>
+<aside className="lg:flex space-x-8">
+  {/* Sticky Sidebar with Form and Sold Out Projects side by side */}
+  <div className="sticky mt-8 top-32 space-y-6 w-full">
+    {/* Container for Form and Sold Out Projects */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Project Details Card with Form */}
+      <div className="bg-gradient-to-br from-white via-white to-blue-50/30 rounded-3xl shadow-xl border border-gray-100 p-8 backdrop-blur-sm">
+        <PopupForm title={`Book Your ${subProject.title} Now`} buttonName="Schedule Visit"/>
+      </div>
+
+      {/* Sold Out Projects Section */}
+      {soldOutProjects?.relatedProjects?.length > 0 && (
+        <div className="bg-gradient-to-br from-white via-white to-red-50/30 rounded-3xl shadow-xl border border-gray-100 p-8 backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center">
+              <Star className="w-4 h-4 text-white fill-current" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900">
+              Our Sold Out Projects
+            </h3>
+          </div>
+          <div className="space-y-3 max-h-[350px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            {soldOutProjects.relatedProjects.map((project) => (
+              <ProjectCard
+                key={project.slug.current}
+                project={project}
+                isSoldOut={true}
+                slug={slug}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</aside>
               </div>
             </div>
             <CostSheet />
