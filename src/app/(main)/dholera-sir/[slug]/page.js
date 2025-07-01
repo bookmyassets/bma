@@ -6,8 +6,9 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+   const { slug } = await params;
+  const site = 'bookmyassets';
+  const post = await getPostBySlug(slug, site);
 
   if (!post) {
     return {
@@ -23,15 +24,14 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Post({ params }) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+   const { slug } = await params;
+  const site = 'bookmyassets';
+  const post = await getPostBySlug(slug, site);
 
   if (!post || !post.slug?.current) {
     notFound();
   }
 
-  // The middleware will handle redirects, so if we reach here,
-  // it means this slug is allowed to be accessed directly
 
   const components = {
     types: {

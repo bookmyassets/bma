@@ -186,28 +186,43 @@ export async function getEvents() {
 }
 
 // Fetch a single blog post by slug
-export async function getPostBySlug(slug) {
-  const query = `*[_type == "post" && slug.current == $slug][0]{
+export async function getPostBySlug(slug, site) {
+  const query = `*[
+    _type == "post" &&
+    slug.current == $slug &&
+    site == $site
+  ][0]{
     _id,
     title,
     metaTitle,
     metaDescription,
-    keywords,
+    "keywords": keywords[]->title,
     slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{
-      name,
-      image
+    mainImage {
+      asset->{ _id, _ref, url, metadata { dimensions, lqip } },
+      alt,
+      caption,
+      url
     },
-    categories[]->{
-      title
-    }
+    publishedAt,
+    _createdAt,
+    body[]{
+      ...,
+      _type == "image" => {
+        ...,
+        asset->{ _id, _ref, url, metadata { dimensions, lqip } },
+        "url": url
+      },
+      markDefs[]{ ..., _type == "link" => { "href": @.href } }
+    },
+    author->{ name, image },
+    categories[]->{ title, _id },
+    readingTime
   }`;
-  const post = await client.fetch(query, { slug }, { cache: 'no-store' });
-  return post;
+
+  return await client.fetch(query, { slug, site });
 }
+
 
 export async function getProjectBySlug(slug) {
   const query = `

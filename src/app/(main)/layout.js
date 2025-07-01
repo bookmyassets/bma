@@ -341,7 +341,7 @@ export default function RootLayout({ children }) {
                   <div ref={dholeraRef} className="relative group">
                     <Link
                       href="/dholera-sir"
-                      className={`flex items-center gap-1 px-3 py-2 ${
+                      className={`flex items-center gap-1 px-6 py-2 ${
                         isActiveLink(pathname, "/dholera-sir")
                           ? "text-white font-semibold"
                           : "text-[#FDB913] hover:text-white"

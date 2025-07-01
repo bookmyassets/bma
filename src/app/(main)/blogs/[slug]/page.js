@@ -5,8 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
-  const post = await getPostBySlug(slug);
+  const { slug } = await params;
+  const site = "bookmyassets";
+  const post = await getPostBySlug(slug, site);
 
   return {
     title: post.title,
@@ -148,7 +149,8 @@ const LatestupdatesCard = ({ blog }) => {
 };
 
 export default async function Post({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
+  const site = "bookmyassets";
 
   if (!slug) {
     return (
@@ -160,7 +162,7 @@ export default async function Post({ params }) {
 
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
-      getPostBySlug(slug),
+      getPostBySlug(slug, site),
       getblogs(0, 4), // Get only 4 blogs
       getUpdates(slug, 3),
     ]);
