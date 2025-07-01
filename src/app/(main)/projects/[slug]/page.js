@@ -7,9 +7,11 @@ import ProjectSlider from "./slider";
 import ProjectsModalWithButton from "./ProjectModal";
 import Projectinformation from "../../components/Projectinformation";
 
+const site = 'bookmyassets'
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug,site);
 
   return {
     title: post.title,
@@ -42,9 +44,9 @@ export default async function ProjectDetail({ params }) {
 
   try {
     const [post, projects, SO] = await Promise.all([
-      getPostBySlug(slug),
-      getProjectBySlug(slug),
-      getProjectSOBySlug(slug)
+      getPostBySlug(slug,site),
+      getProjectBySlug(slug,site),
+      getProjectSOBySlug(slug,site)
     ]);
 
     if (!post) {

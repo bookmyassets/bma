@@ -22,6 +22,8 @@ import {
 } from "lucide-react";
 import PopupForm from "@/app/(main)/components/PopupForm";
 
+const site = 'bookmyassets'
+
 // ProjectCard Component
 const ProjectCard = ({
   project,
@@ -90,19 +92,21 @@ const getStatusColor = (status) => {
 };
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+   const { slug } = await params;
+  const site = 'bookmyassets';
 
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug,site);
 
-  return {
+  /* return {
     title: post.title,
     description: post.metaDescription,
     keywords: post.keywords,
-  };
+  }; */
 }
 
 export default async function SubProjectDetail({ params }) {
   const { slug, projectSlug } = await params;
+  const site = 'bookmyassets';
 
   if (!slug || !projectSlug) {
     return (
@@ -114,9 +118,9 @@ export default async function SubProjectDetail({ params }) {
 
   try {
     const [mainProject, subProject, soldOutProjects] = await Promise.all([
-      getPostBySlug(slug),
-      getProjectBySlug(projectSlug),
-      getProjectSOBySlug(slug),
+      getPostBySlug(slug,site),
+      getProjectBySlug(projectSlug,site),
+      getProjectSOBySlug(slug,site),
     ]);
 
     if (!mainProject || !subProject) {

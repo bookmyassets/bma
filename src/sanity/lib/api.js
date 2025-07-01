@@ -2,65 +2,97 @@
 import { client } from './client';
 import { NextResponse } from 'next/server';
 
-// Fetch all blog posts
+// Define site name from env or fallback
+const site =  "bookmyassets";
+
+/* Projects */
 export async function getPosts() {
-  const query = `*[_type == "post" && "Project" in categories[]->title && author-> name == "BookMyAssets" ]{
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
-    categories[]->{title},
+  const query = `*[_type == "post" && "Project" in categories[]->title && site == $site ]{
+    _id, title, slug, mainImage, publishedAt, body, author->{name, image}, categories[]->{title}
   }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
+  return await client.fetch(query, { site }, { cache: 'no-store' });
 }
 
 export async function getSub() {
-  const query = `*[_type == "post" && "Sub-Project" in categories[]->title && author-> name == "BookMyAssets" ]{
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
-    categories[]->{title},
+  const query = `*[_type == "post" && "Sub-Project" in categories[]->title && site == $site ]{
+    _id, title, slug, mainImage, publishedAt, body, author->{name, image}, categories[]->{title}
   }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
+  return await client.fetch(query, { site }, { cache: 'no-store' });
 }
 
 export async function getblogs() {
-  const query = `*[_type == "post" && "Blog" in categories[]->title && author-> name == "BookMyAssets" ]{
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
-    categories[]->{title}
+  const query = `*[_type == "post" && "Blog" in categories[]->title && site == $site ]{
+    _id, title, slug, mainImage, publishedAt, body, author->{name, image}, categories[]->{title}
   }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
-
+  return await client.fetch(query, { site }, { cache: 'no-store' });
 }
+
 export async function getUpdates() {
-  const query = `*[_type == "post" && "Updates" in categories[]->title && author-> name == "BookMyAssets" ]{
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
-    categories[]->{title}
+  const query = `*[_type == "post" && "Updates" in categories[]->title && site == $site ]{
+    _id, title, slug, mainImage, publishedAt, body, author->{name, image}, categories[]->{title}
   }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
+  return await client.fetch(query, { site }, { cache: 'no-store' });
+}
+
+export async function projectInfo() {
+  const query = `*[_type == "post" && "project-Info" in categories[]->title && site == $site ]{
+    _id, title, slug, mainImage, publishedAt, body, author->{name, image}, categories[]->{title}
+  }`;
+  return await client.fetch(query, { site }, { cache: 'no-store' });
+}
+
+/* Inventory & Brochure */
+export async function Inventory() {
+  const query = `*[_type == "post" && site == $site && "Sub-Project" in categories[]->title] | order(publishedAt desc) {
+    _id, title, publishedAt, mainImage,
+    "pdfUrl": coalesce(pdfFile.asset->url, null),
+    "categories": coalesce(categories[]->title, []),
+    "author": coalesce(author->name, "Unknown"),
+    "isSoldOut": "Sold Out" in categories[]->title
+  }`;
+
+  return await client.fetch(query, { site }, { cache: 'no-store' }).then(posts =>
+    posts.filter(post => post.pdfUrl)
+  ).catch(error => {
+    console.error("Error fetching Inventory:", error);
+    return [];
+  });
+}
+
+export async function Brochure() {
+  const query = `*[_type == "post" && site == $site && "Brochure" in categories[]->title] | order(publishedAt desc) [0..9] {
+    _id, title, publishedAt, mainImage,
+    "pdfUrl": coalesce(pdfFile.asset->url, null),
+    "category": coalesce(categories[]->title, []),
+    "author": coalesce(author->name, "Unknown")
+  }`;
+
+  return await client.fetch(query, { site }, { cache: 'no-store' }).then(posts =>
+    posts.filter(post => post.pdfUrl)
+  ).catch(error => {
+    console.error("Error fetching Brochure:", error);
+    return [];
+  });
+}
+
+/* Events */
+export async function getEvents() {
+  const query = `*[_type == "post" && "Events" in categories[]->title && site == $site ]{
+    _id, title, slug, mainImage, publishedAt, body, author->{name, image}, categories[]->{title}
+  }`;
+  return await client.fetch(query, { site }, { cache: 'no-store' });
+}
+
+/* Fetch single post by slug */
+export async function getPostBySlug(slug) {
+  const query = `*[_type == "post" && slug.current == $slug && site == $site][0]{
+    _id, title, metaTitle, metaDescription, "keywords": keywords[]->title, slug,
+    mainImage { asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, alt, caption, url },
+    publishedAt, _createdAt,
+    body[]{ ..., _type=="image"=>{..., asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, "url": url }, markDefs[]{..., _type=="link"=>{"href":@.href}} },
+    author->{ name, image }, categories[]->{ title, _id }, readingTime
+  }`;
+  return await client.fetch(query, { slug, site });
 }
 
 export async function projectInfoX() {
@@ -81,256 +113,65 @@ export async function projectInfoX() {
   return { relatedProjects: posts };
 }
 
-/* export async function projectInfo() {
-  const query = `*[_type == "post" && "project-Info" in categories[]->title && author->name == "BookMyAssets"]{
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
-    categories[]->{title}
+export async function getProjectBySlug(slug) {
+  const query = `*[
+    _type == "post" && slug.current == $slug && site == $site
+  ][0]{
+    title, metaTitle, metaDescription, keywords, description, body,
+    categories[]->{title},
+    mainImage, location, investment, returns,
+    "relatedProjects": *[
+      _type == "post" && site == $site && "Sub-Project" in categories[]->title && !("Sold Out" in categories[]->title) && slug.current != $slug
+    ]{
+      title, "slug": slug.current, mainImage
+    }
   }`;
-
-  const posts = await client.fetch(query, {}, { cache: "no-store" });
-
-  // Wrap into an object with `relatedProjects` key to match your component expectations
-  return { relatedProjects: posts };
-} */
-
-export async function projectInfo() {
-  const query = `*[_type == "post" && "project-Info" in categories[]->title && author->name == "BookMyAssets"]{
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
-    categories[]->{title}
-  }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
-
+  return await client.fetch(query, { slug, site });
 }
 
-export async function Inventory() {
-  const query = `*[_type == "post" && author->name == "BookMyAssets" && "Sub-Project" in categories[]->title] | order(publishedAt desc) {
-    _id,
-    title,
-    publishedAt,
-    mainImage,
-    "pdfUrl": coalesce(pdfFile.asset->url, null),
-    "categories": coalesce(categories[]->title, []),
-    "author": coalesce(author->name, "Unknown"),
-    "isSoldOut": "Sold Out" in categories[]->title
+export async function getSubProjects(slug) {
+  const query = `*[
+    _type == "post" && slug.current == $slug && site == $site
+  ][0]{
+    title, metaTitle, metaDescription, keywords, description, body,
+    categories[]->{title},
+    mainImage, location, investment, returns,
+    "relatedProjects": *[
+      _type == "post" && site == $site && "Sub-Project" in categories[]->title && slug.current != $slug
+    ]{
+      title, "slug": slug.current, mainImage
+    }
   }`;
-
-  const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}`;
-
-  try {
-    const response = await fetch(url, { cache: 'no-store' });
-    const json = await response.json();
-    const posts = json.result || [];
-
-    // Filter to return only posts that have a PDF URL
-    const filteredPosts = posts.filter(post => post.pdfUrl);
-    return filteredPosts;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return [];
-  }
+  return await client.fetch(query, { slug, site });
 }
 
-export async function Brochure() {
-  const query = `*[_type == "post" && author->name == "BookMyAssets" && "Brochure" in categories[]->title] | order(publishedAt desc) [0..9] {
+export async function getProjectSOBySlug(slug) {
+  const query = `*[
+    _type == "post" && slug.current == $slug && site == $site
+  ][0]{
+    title, metaTitle, metaDescription, keywords, description, body,
+    categories[]->{title},
+    mainImage, location, investment, returns,
+    "relatedProjects": *[
+      _type == "post" && site == $site && "Sub-Project" in categories[]->title && "Sold Out" in categories[]->title && slug.current != $slug
+    ]{
       _id,
       title,
-      publishedAt,
-      mainImage,
-      "pdfUrl": coalesce(pdfFile.asset->url, null),
-      "category": coalesce(categories[]->title, []),
-      "author": coalesce(author->name, "Unknown")
+      slug,
+      mainImage
+    }
   }`;
-
-  const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}`;
-
-  try {
-      const response = await fetch(url, { cache: 'no-store' }); 
-      const json = await response.json();
-      const posts = json.result || [];
-
-      // Filter out posts with no pdfUrl
-      const filteredPosts = posts.filter(post => post.pdfUrl);
-      return filteredPosts;
-  } catch (error) {
-      console.error("Error fetching posts:", error);
-      return [];
-  }
-}
-
-export async function getEvents() {
-  const query = `*[_type == "post" && "Events" in categories[]->title && author-> name == "BookMyAssets" ]{
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
-    categories[]->{title}
-  }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
-}
-
-// Fetch a single blog post by slug
-export async function getPostBySlug(slug, site) {
-  const query = `*[
-    _type == "post" &&
-    slug.current == $slug &&
-    site == $site
-  ][0]{
-    _id,
-    title,
-    metaTitle,
-    metaDescription,
-    "keywords": keywords[]->title,
-    slug,
-    mainImage {
-      asset->{ _id, _ref, url, metadata { dimensions, lqip } },
-      alt,
-      caption,
-      url
-    },
-    publishedAt,
-    _createdAt,
-    body[]{
-      ...,
-      _type == "image" => {
-        ...,
-        asset->{ _id, _ref, url, metadata { dimensions, lqip } },
-        "url": url
-      },
-      markDefs[]{ ..., _type == "link" => { "href": @.href } }
-    },
-    author->{ name, image },
-    categories[]->{ title, _id },
-    readingTime
-  }`;
-
   return await client.fetch(query, { slug, site });
 }
 
 
-export async function getProjectBySlug(slug) {
-  const query = `
-    *[_type == "post" && slug.current == $slug][0]  {
-      title,
-      metaTitle,
-      metaDescription,
-      keywords,
-      description,
-      body,
-      categories[]->{title},
-      mainImage,
-      location,
-      investment,
-      returns,
-      "relatedProjects": *[
-        _type == "post" && 
-        author->name == "BookMyAssets" && 
-        "Sub-Project" in categories[]->title && 
-        !("Sold Out" in categories[]->title) &&
-        slug.current != $slug
-      ]{
-        title,
-        "slug": slug.current,
-        mainImage
-      }
-    }
-  `;
-
-  const post = await client.fetch(query, { slug }, { cache: 'no-store' });
-  return post;
-}
-
-export async function getSubProjects(slug) {
-  const query = `
-    *[_type == "post" && slug.current == $slug][0]  {
-      title,
-      metaTitle,
-      metaDescription,
-      keywords,
-      description,
-      body,
-      categories[]->{title},
-      mainImage,
-      location,
-      investment,
-      returns,
-      "relatedProjects": *[
-        _type == "post" && 
-        author->name == "BookMyAssets" && 
-        "Sub-Project" in categories[]->title && 
-        slug.current != $slug
-      ]{
-        title,
-        "slug": slug.current,
-        mainImage
-      }
-    }
-  `;
-
-  const post = await client.fetch(query, { slug }, { cache: 'no-store' });
-  return post;
-}
-
 export async function getAllSubProjects() {
-  const query = `
-    *[_type == "post" && "Sub-Project" in categories[]->title] {
-      title,
-      "slug": slug.current,
-      mainImage,
-      categories[]->{title}
-    }
-  `;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' });
-  return posts;
-}
-
-
-export async function getProjectSOBySlug(slug) {
-  const query = `
-    *[_type == "post" && slug.current == $slug][0]  {
-      title,
-      metaTitle,
-      metaDescription,
-      keywords,
-      description,
-      body,
-      categories[]->{title},
-      mainImage,
-      location,
-      investment,
-      returns,
-      "relatedProjects": *[
-        _type == "post" && 
-        author->name == "BookMyAssets" && 
-        "Sub-Project" in categories[]->title && 
-        "Sold Out" in categories[]->title &&
-        slug.current != $slug
-      ]{
-        title,
-        "slug": slug.current,
-        mainImage
-      }
-    }
-  `;
-
-  const post = await client.fetch(query, { slug }, { cache: 'no-store' });
-  return post;
+  const query = `*[
+    _type == "post" && "Sub-Project" in categories[]->title && site == $site
+  ]{
+    title, "slug": slug.current, mainImage, categories[]->{title}
+  }`;
+  return await client.fetch(query, { site });
 }
 
   export async function getEventBySlug(slug) {
