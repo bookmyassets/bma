@@ -340,6 +340,13 @@ const nextConfig = {
         destination: '/sitemap.html',
         permanent: true,
       },
+      {
+        source:
+          "/dholera-sir/latest-updates/sitemap.html",
+        destination:
+          "/sitemap.html",
+        permanent: true,
+      },
       
     ];
   },
