@@ -320,6 +320,26 @@ const nextConfig = {
         destination: '/dholera-sir/latest-update',
         permanent: true,
       },
+      {
+        source: '/blogs/sitemap.html',
+        destination: '/sitemap.html',
+        permanent: true,
+      },
+      {
+        source: '/projects/sitemap.html',
+        destination: '/sitemap.html',
+        permanent: true,
+      },
+      {
+        source: '/blogs/sitemap.xml',
+        destination: '/sitemap.html',
+        permanent: true,
+      },
+      {
+        source: '/projects/sitemap.xml',
+        destination: '/sitemap.html',
+        permanent: true,
+      },
       
     ];
   },
