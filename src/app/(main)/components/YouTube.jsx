@@ -61,13 +61,13 @@ export default function ShortsSection() {
         id: 5,
         title: "Dholera Smart City",
         views: "120K",
-        embedUrl: `https://www.youtube.com/embed/sMN4WychUPI?enablejsapi=1&origin=${origin}&controls=1&rel=0&modestbranding=1`,
+        embedUrl: `https://www.youtube.com/embed/q4OuleCT67g?enablejsapi=1&origin=${origin}&controls=1&rel=0&modestbranding=1`,
       },
       {
         id: 6,
-        title: "Dholera Smart City",
+        title: "WestWyn County, Dholera ",
         views: "175K",
-        embedUrl: `https://www.youtube.com/embed/sMN4WychUPI?enablejsapi=1&origin=${origin}&controls=1&rel=0&modestbranding=1`,
+        embedUrl: `https://www.youtube.com/embed/kF-yZZ2LVH8?enablejsapi=1&origin=${origin}&controls=1&rel=0&modestbranding=1`,
       },
     ];
   }, [origin]);
