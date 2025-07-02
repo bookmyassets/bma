@@ -5,24 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }) {
-   const { slug } = await params;
-  const site = 'bookmyassets';
-  const post = await getPostBySlug(slug, site);
-
-  if (!post) {
-    return {
-      title: "Page Not Found",
-      description: "The requested page could not be found.",
-    };
-  }
-
-  return {
-    title: post.title,
-    description: post.metaDescription,
-  };
-}
-
 export default async function Post({ params }) {
    const { slug } = await params;
   const site = 'bookmyassets';

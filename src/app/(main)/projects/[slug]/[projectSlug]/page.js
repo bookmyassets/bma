@@ -91,19 +91,6 @@ const getStatusColor = (status) => {
   }
 };
 
-export async function generateMetadata({ params }) {
-   const { slug } = await params;
-  const site = 'bookmyassets';
-
-  const post = await getPostBySlug(slug,site);
-
-  /* return {
-    title: post.title,
-    description: post.metaDescription,
-    keywords: post.keywords,
-  }; */
-}
-
 export default async function SubProjectDetail({ params }) {
   const { slug, projectSlug } = await params;
   const site = 'bookmyassets';

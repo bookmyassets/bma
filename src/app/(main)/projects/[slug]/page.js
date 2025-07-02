@@ -9,17 +9,6 @@ import Projectinformation from "../../components/Projectinformation";
 
 const site = 'bookmyassets'
 
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug,site);
-
-  return {
-    title: post.title,
-    description: post.metaDescription,
-    keywords: post.keywords?.join(", "),
-  };
-}
-
 export default async function ProjectDetail({ params }) {
   const { slug } = await params;
 
