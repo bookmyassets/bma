@@ -5,13 +5,6 @@ import { urlFor } from "@/sanity/lib/image";
 import { Download, Eye, FileText, Info } from "lucide-react";
 import bg from "@/assests/pexels2.jpg";
 
-export const metadata = {
-  robots: {
-    index: false,
-    follow: true
-  }
-};
-
 export default async function BrochurePage() {
   let posts = [];
   let isLoading = true;
