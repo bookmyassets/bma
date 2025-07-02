@@ -4,16 +4,6 @@ import { getblogs, getUpdates, getPostBySlug } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const site = "bookmyassets";
-  const post = await getPostBySlug(slug, site);
-
-  return {
-    title: post.title,
-    description: post.metaDescription,
-  };
-}
 
 // Trending Blog Item Component
 const TrendingBlogItem = ({ post }) => {
