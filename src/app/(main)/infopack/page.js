@@ -13,13 +13,6 @@ import Head from 'next/head';
 }
 }; */
 
-export const metadata = {
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
-
 export default function page() {
   return (
     <div>

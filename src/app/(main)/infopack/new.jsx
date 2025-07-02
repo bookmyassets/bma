@@ -14,7 +14,12 @@ import { getPosts, getSub } from "@/sanity/lib/api";
 import Dholera from "./Dholera";
 import BrowseBlogs from "./Blogs";
 
-
+export const metadata = {
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 // Feature card component for better reusability
 const FeatureCard = ({ href, image, alt, title }) => (
