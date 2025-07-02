@@ -88,7 +88,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="sitemap.html"
+                  href="/sitemap.html"
                   className="text-white hover:text-yellow-600 transition flex items-center"
                 >
                   <span className="mr-2">›</span> Sitemap
