@@ -63,7 +63,7 @@ const BrowseBlogsSection = () => {
     <section className=" px-6 md:px-36 relative bg-white">
       <div className="container mx-auto relative">
         {/* Section Title */}
-        <div className="w-full px-2 mb-10 text-center">
+        <div className="w-full px-2 mt-8 mb-8 text-center">
           <h2 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-3 text-gold relative inline-block pb-2" style={{ color: themeColors.gold }}>
             Featured Blogs
             <span className="absolute bottom-0 left-1/4 right-1/4 h-1 rounded-full" style={{ backgroundColor: themeColors.gold }}></span>

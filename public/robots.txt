@@ -7,6 +7,10 @@ Disallow: /policies/refund-and-cancellation
 Disallow: /events
 Disallow: /events/dholera-international-airport
 Disallow: /events/dholera-ahmedabad-expressway
+Disallow: /infopack/
+Disallow: /infopack/locations
+Disallow: /infopack/videos
+Disallow: /infopack/inventory
 noindex : /projects/maple-township-mt/paradise-p2
 noindex : /projects/marina-bay-mb/maple-township-mt
 noindex : /projects/marina-bay-mb/westwyn-county-wc
@@ -20,6 +24,7 @@ noindex : /projects/maple-township-mt/paradise-p1
 noindex : /projects/paradise-p1/sitemap.html
 noindex : /projects/marina-bay-mb/paradise-p1
 noindex : /projects/maple-township-mt/infrastructure-development
+noindex : /projects/dholera/sitemap.html
 noindex : /projects/dholera/sitemap.html
 
 Sitemap : https://www.bookmyassets.com/sitemap.xml

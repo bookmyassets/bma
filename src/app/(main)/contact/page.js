@@ -6,7 +6,6 @@ import img from "@/assests/contact.jpg";
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     subject: "",
     message: "",
     phone: "",
@@ -84,22 +83,13 @@ const ContactPage = () => {
   const validateForm = () => {
     if (
       !formData.name ||
-      !formData.email ||
+      !formData.phone ||
       !formData.subject ||
       !formData.message
     ) {
       setSubmitStatus({
         type: "error",
         message: "Please fill all required fields.",
-      });
-      return false;
-    }
-
-    // Email validation
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setSubmitStatus({
-        type: "error",
-        message: "Please enter a valid email address.",
       });
       return false;
     }
