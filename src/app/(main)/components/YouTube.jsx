@@ -72,21 +72,41 @@ export default function ShortsSection() {
     ];
   }, [origin]);
 
-  // Pause all videos
+  // Pause all videos except the one specified
   const pauseAllVideos = (exceptIndex = null) => {
     Object.entries(iframeRefs.current).forEach(([index, iframe]) => {
-      if (exceptIndex !== null && parseInt(index) === exceptIndex) return;
+      const indexNum = parseInt(index);
+      if (exceptIndex !== null && indexNum === exceptIndex) return;
       if (iframe && iframe.contentWindow) {
-        iframe.contentWindow.postMessage(
-          JSON.stringify({ event: "command", func: "pauseVideo" }),
-          "*"
-        );
+        try {
+          iframe.contentWindow.postMessage(
+            '{"event":"command","func":"pauseVideo","args":""}',
+            "*"
+          );
+        } catch (e) {
+          console.error("Error pausing video:", e);
+        }
       }
     });
   };
 
+  // Stop autoplay when video plays
+  const stopAutoplay = () => {
+    if (swiperRef.current && swiperRef.current.autoplay) {
+      swiperRef.current.autoplay.stop();
+    }
+  };
+
+  // Start autoplay when video stops
+  const startAutoplay = () => {
+    if (swiperRef.current && swiperRef.current.autoplay) {
+      swiperRef.current.autoplay.start();
+    }
+  };
+
   // YouTube API setup and listener
   useEffect(() => {
+    // Load YouTube API if not already loaded
     if (!window.YT) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -95,20 +115,26 @@ export default function ShortsSection() {
     }
 
     const handleMessage = (event) => {
+      // Only handle messages from YouTube
       if (!event.origin.includes("youtube.com")) return;
 
       try {
         let data;
-        try {
-          data = JSON.parse(event.data);
-        } catch (e) {
-          if (typeof event.data === "object") {
-            data = event.data;
-          } else {
+        
+        // Parse the message data
+        if (typeof event.data === "string") {
+          try {
+            data = JSON.parse(event.data);
+          } catch (e) {
             return;
           }
+        } else if (typeof event.data === "object") {
+          data = event.data;
+        } else {
+          return;
         }
 
+        // Find which iframe sent the message
         let sourceIframeIndex = null;
         Object.entries(iframeRefs.current).forEach(([index, iframe]) => {
           if (iframe && iframe.contentWindow === event.source) {
@@ -118,23 +144,27 @@ export default function ShortsSection() {
 
         if (sourceIframeIndex === null) return;
 
-        const playerState =
-          data.info === 1
-            ? 1
-            : data.info === 0 || data.info === 2
-            ? 0
-            : data.info?.playerState;
+        // Handle different message formats
+        let playerState = null;
+        
+        if (data.event === "video-progress" || data.event === "onStateChange") {
+          playerState = data.info;
+        } else if (data.info !== undefined) {
+          playerState = data.info;
+        }
 
-        if (playerState === 1) {
+        // Handle player state changes
+        if (playerState === 1) { // Playing
+          // Pause all other videos
           pauseAllVideos(sourceIframeIndex);
           setIsVideoPlaying(true);
           setCurrentPlayingId(sourceIframeIndex);
-          if (swiperRef.current) swiperRef.current.autoplay.stop();
-        } else if (playerState === 0 || playerState === 2) {
+          stopAutoplay();
+        } else if (playerState === 0 || playerState === 2) { // Ended or Paused
           if (currentPlayingId === sourceIframeIndex) {
             setIsVideoPlaying(false);
             setCurrentPlayingId(null);
-            if (swiperRef.current) swiperRef.current.autoplay.start();
+            startAutoplay();
           }
         }
       } catch (e) {
@@ -149,10 +179,19 @@ export default function ShortsSection() {
   // Slide change handler
   const handleSlideChange = (swiper) => {
     setActiveIndex(swiper.realIndex);
+    // Pause all videos when slide changes
     pauseAllVideos();
     setIsVideoPlaying(false);
     setCurrentPlayingId(null);
-    swiper.autoplay.start();
+    // Restart autoplay after slide change
+    setTimeout(() => {
+      startAutoplay();
+    }, 100);
+  };
+
+  // Handle swiper initialization
+  const handleSwiperInit = (swiper) => {
+    swiperRef.current = swiper;
   };
 
   return (
@@ -168,9 +207,7 @@ export default function ShortsSection() {
         <div className="relative px-4">
           {shortsData.length > 0 && (
             <Swiper
-              onSwiper={(swiper) => {
-                swiperRef.current = swiper;
-              }}
+              onSwiper={handleSwiperInit}
               onSlideChange={handleSlideChange}
               slidesPerView={1}
               spaceBetween={20}
