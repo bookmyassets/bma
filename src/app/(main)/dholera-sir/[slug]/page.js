@@ -300,9 +300,9 @@ export default async function Post({ params }) {
               <Image
                 src={urlFor(post.mainImage)?.url() || ""}
                 alt={post.title}
-                width={800}
+                width={1200}
                 height={600}
-                className="w-full h-full object-cover"
+                className="w-full h-screen"
               />
             </div>
           )}
