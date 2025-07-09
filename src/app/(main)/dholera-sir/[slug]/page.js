@@ -302,7 +302,7 @@ export default async function Post({ params }) {
                 alt={post.title}
                 width={1200}
                 height={600}
-                className="w-full h-screen"
+                className="w-full h-screen object-cover"
               />
             </div>
           )}

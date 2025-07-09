@@ -35,6 +35,7 @@ export default function RootLayout({ children }) {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [info, setInfo] = useState([]);
 
   const projectsRef = useRef(null);
@@ -56,6 +57,15 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     trackPageView();
   }, [pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   // Close all dropdowns
   const closeAllDropdowns = () => {
@@ -244,9 +254,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="fixed w-full text-[#FDB913] backdrop-blur-xl backdrop-brightness-50 bg-black/60 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-24  items-center">
+        <nav className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-black/95 backdrop-blur-xl border-b border-yellow-500/20 shadow-xl' 
+          : 'bg-gradient-to-r from-black/80 via-black/60 to-black/80 backdrop-blur-lg'
+      }`}>
+       <div className="h-1 bg-[#d6b873]"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-24">
               {/* Logo */}
               <div className="flex-shrink-0">
                 <Link href="/">

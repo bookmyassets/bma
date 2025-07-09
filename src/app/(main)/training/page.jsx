@@ -1,10 +1,27 @@
-"use client"
-import React, { useState } from 'react';
-import { Play, CheckCircle, Clock, FileText, MessageSquare, Phone, Mail, Star, Award, Users, BookOpen, Download, ExternalLink, ArrowLeft } from 'lucide-react';
+"use client";
+import React, { useState } from "react";
+import {
+  Play,
+  CheckCircle,
+  Clock,
+  FileText,
+  MessageSquare,
+  Phone,
+  Mail,
+  Star,
+  Award,
+  Users,
+  BookOpen,
+  Download,
+  ExternalLink,
+  ArrowLeft,
+} from "lucide-react";
 
 // Import your Company component
-import Company from './Company';
-import RealEstate from './RealEstate';
+import Company from "./Company";
+import RealEstate from "./RealEstate";
+import DholeraSIR from "./DholeraSIR";
+
 
 export default function NewJoineeTraining() {
   const [completedModules, setCompletedModules] = useState([]);
@@ -18,7 +35,7 @@ export default function NewJoineeTraining() {
       description: "Learn about our mission, values, and company culture",
       duration: "45 min",
       difficulty: "Beginner",
-      icon: <Users className="w-6 h-6" />
+      icon: <Users className="w-6 h-6" />,
     },
     {
       id: 2,
@@ -26,7 +43,7 @@ export default function NewJoineeTraining() {
       description: "Essential HR policies, code of conduct, and compliance",
       duration: "30 min",
       difficulty: "Beginner",
-      icon: <FileText className="w-6 h-6" />
+      icon: <FileText className="w-6 h-6" />,
     },
     {
       id: 3,
@@ -34,7 +51,7 @@ export default function NewJoineeTraining() {
       description: "Security protocols, system access, and digital tools",
       duration: "60 min",
       difficulty: "Intermediate",
-      icon: <Award className="w-6 h-6" />
+      icon: <Award className="w-6 h-6" />,
     },
     {
       id: 4,
@@ -42,7 +59,7 @@ export default function NewJoineeTraining() {
       description: "Department-specific skills and responsibilities",
       duration: "90 min",
       difficulty: "Advanced",
-      icon: <BookOpen className="w-6 h-6" />
+      icon: <BookOpen className="w-6 h-6" />,
     },
     {
       id: 5,
@@ -50,8 +67,8 @@ export default function NewJoineeTraining() {
       description: "Department-specific skills and responsibilities",
       duration: "90 min",
       difficulty: "Advanced",
-      icon: <BookOpen className="w-6 h-6" />
-    }
+      icon: <BookOpen className="w-6 h-6" />,
+    },
   ];
 
   const resources = [
@@ -64,30 +81,39 @@ export default function NewJoineeTraining() {
   const faqs = [
     {
       question: "How do I access my company email?",
-      answer: "Your IT administrator will provide login credentials within 24 hours of your start date."
+      answer:
+        "Your IT administrator will provide login credentials within 24 hours of your start date.",
     },
     {
       question: "When will I receive my ID card?",
-      answer: "ID cards are typically ready within 2-3 business days. You'll be notified when it's ready for pickup."
+      answer:
+        "ID cards are typically ready within 2-3 business days. You'll be notified when it's ready for pickup.",
     },
     {
       question: "What are the working hours?",
-      answer: "Standard working hours are 9:00 AM to 6:00 PM, Monday through Friday. Flexible arrangements may be available."
+      answer:
+        "Standard working hours are 9:00 AM to 6:00 PM, Monday through Friday. Flexible arrangements may be available.",
     },
     {
       question: "How do I submit time off requests?",
-      answer: "Use the HR portal or speak with your direct supervisor. Submit requests at least 2 weeks in advance."
-    }
+      answer:
+        "Use the HR portal or speak with your direct supervisor. Submit requests at least 2 weeks in advance.",
+    },
   ];
 
   const handleStartModule = (moduleId) => {
     if (moduleId === 1) {
       // Company Overview module
-      setCurrentModule('company');
-    } else if(moduleId === 2){
-      setCurrentModule('RealEstate')
-    }
-     else {
+      setCurrentModule("company");
+    } else if (moduleId === 2) {
+      setCurrentModule("RealEstate");
+    } else if (moduleId === 3) {
+      setCurrentModule("DholeraSIR");
+    } else if (moduleId === 4) {
+      setCurrentModule("Westwyn");
+    } else if (moduleId === 5) {
+      setCurrentModule("Assessment");
+    } else {
       // For other modules, you can add more logic here
       alert(`Starting module ${moduleId}. You can add more components here.`);
     }
@@ -98,17 +124,18 @@ export default function NewJoineeTraining() {
   };
 
   const toggleModuleCompletion = (moduleId) => {
-    setCompletedModules(prev => 
-      prev.includes(moduleId) 
-        ? prev.filter(id => id !== moduleId)
+    setCompletedModules((prev) =>
+      prev.includes(moduleId)
+        ? prev.filter((id) => id !== moduleId)
         : [...prev, moduleId]
     );
   };
 
-  const progressPercentage = (completedModules.length / trainingModules.length) * 100;
+  const progressPercentage =
+    (completedModules.length / trainingModules.length) * 100;
 
   // If a module is selected, show that module's component
-  if (currentModule === 'company') {
+  if (currentModule === "company") {
     return (
       <div className="min-h-screen bg-gray-50 pt-24">
         {/* Back to Training Button */}
@@ -124,17 +151,19 @@ export default function NewJoineeTraining() {
               </button>
               <div className="flex items-center space-x-2">
                 <Users className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-gray-700">Company Overview & Culture</span>
+                <span className="text-sm font-medium text-gray-700">
+                  Company Overview & Culture
+                </span>
               </div>
             </div>
           </div>
         </div>
-        
+
         {/* Company Component */}
         <Company />
       </div>
     );
-  } else if (currentModule === 'RealEstate') {
+  } else if (currentModule === "RealEstate") {
     return (
       <div className="min-h-screen bg-gray-50 pt-24">
         {/* Back to Training Button */}
@@ -150,14 +179,97 @@ export default function NewJoineeTraining() {
               </button>
               <div className="flex items-center space-x-2">
                 <Users className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-gray-700">Real Estate</span>
+                <span className="text-sm font-medium text-gray-700">
+                  Real Estate
+                </span>
               </div>
             </div>
           </div>
         </div>
-        
+
         {/* Component */}
         <RealEstate />
+      </div>
+    );
+  } else if (currentModule === "DholeraSIR") {
+    return (
+      <div className="min-h-screen bg-gray-50 pt-24">
+        {/* Back to Training Button */}
+        <div className="bg-white shadow-sm border-b sticky top-24 z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              <button
+                onClick={handleBackToTraining}
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                <span>Back to Training</span>
+              </button>
+              <div className="flex items-center space-x-2">
+                <Users className="w-5 h-5 text-blue-600" />
+                <span className="text-sm font-medium text-gray-700">
+                  Dholera SIR
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <DholeraSIR/>
+      </div>
+    );
+  } else if (currentModule === "WestWyn") {
+    return (
+      <div className="min-h-screen bg-gray-50 pt-24">
+        {/* Back to Training Button */}
+        <div className="bg-white shadow-sm border-b sticky top-24 z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              <button
+                onClick={handleBackToTraining}
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                <span>Back to Training</span>
+              </button>
+              <div className="flex items-center space-x-2">
+                <Users className="w-5 h-5 text-blue-600" />
+                <span className="text-sm font-medium text-gray-700">
+                  Dholera SIR
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <DholeraSIR/>
+      </div>
+    );
+  } else if (currentModule === "Assessment") {
+    return (
+      <div className="min-h-screen bg-gray-50 pt-24">
+        {/* Back to Training Button */}
+        <div className="bg-white shadow-sm border-b sticky top-24 z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              <button
+                onClick={handleBackToTraining}
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                <span>Back to Training</span>
+              </button>
+              <div className="flex items-center space-x-2">
+                <Users className="w-5 h-5 text-blue-600" />
+                <span className="text-sm font-medium text-gray-700">
+                  Dholera SIR
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <DholeraSIR/>
       </div>
     );
   }
@@ -173,13 +285,17 @@ export default function NewJoineeTraining() {
                 <span className="text-white font-bold text-xl">C</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">BookMyAssets</h1>
+                <h1 className="text-2xl font-bold text-gray-900">
+                  BookMyAssets
+                </h1>
                 <p className="text-sm text-gray-600">New Joinee Training</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
               <Star className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm font-medium text-gray-700">Welcome Portal</span>
+              <span className="text-sm font-medium text-gray-700">
+                Welcome Portal
+              </span>
             </div>
           </div>
         </div>
@@ -195,7 +311,7 @@ export default function NewJoineeTraining() {
             Your journey to success starts here. Let's get you up to speed!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button 
+            <button
               onClick={() => setShowWelcomeVideo(true)}
               className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
@@ -203,8 +319,7 @@ export default function NewJoineeTraining() {
               <span>Watch Welcome Message</span>
             </button>
             <div className="text-sm opacity-75">
-              <Clock className="w-4 h-4 inline mr-1" />
-              3 min welcome video
+              <Clock className="w-4 h-4 inline mr-1" />3 min welcome video
             </div>
           </div>
         </div>
@@ -215,20 +330,25 @@ export default function NewJoineeTraining() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Training Progress</h3>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Training Progress
+              </h3>
               <span className="text-sm font-medium text-gray-600">
-                {completedModules.length} of {trainingModules.length} modules completed
+                {completedModules.length} of {trainingModules.length} modules
+                completed
               </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
-              <div 
+              <div
                 className="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
             <div className="flex justify-between text-sm text-gray-600">
               <span>Just getting started</span>
-              <span className="font-medium">{Math.round(progressPercentage)}% Complete</span>
+              <span className="font-medium">
+                {Math.round(progressPercentage)}% Complete
+              </span>
               <span>Training complete! 🎓</span>
             </div>
           </div>
@@ -239,13 +359,20 @@ export default function NewJoineeTraining() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Training Modules</h3>
-            <p className="text-lg text-gray-600">Complete these modules to get fully onboarded</p>
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Training Modules
+            </h3>
+            <p className="text-lg text-gray-600">
+              Complete these modules to get fully onboarded
+            </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {trainingModules.map((module) => (
-              <div key={module.id} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
+              <div
+                key={module.id}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+              >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-3">
@@ -253,13 +380,19 @@ export default function NewJoineeTraining() {
                         {module.icon}
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-900">{module.title}</h4>
+                        <h4 className="text-lg font-semibold text-gray-900">
+                          {module.title}
+                        </h4>
                         <div className="flex items-center space-x-3 text-sm text-gray-500">
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            module.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
-                            module.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
-                            'bg-red-100 text-red-800'
-                          }`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${
+                              module.difficulty === "Beginner"
+                                ? "bg-green-100 text-green-800"
+                                : module.difficulty === "Intermediate"
+                                  ? "bg-yellow-100 text-yellow-800"
+                                  : "bg-red-100 text-red-800"
+                            }`}
+                          >
                             {module.difficulty}
                           </span>
                         </div>
@@ -269,15 +402,15 @@ export default function NewJoineeTraining() {
                       onClick={() => toggleModuleCompletion(module.id)}
                       className={`p-2 rounded-full transition-all duration-200 ${
                         completedModules.includes(module.id)
-                          ? 'bg-green-500 text-white'
-                          : 'bg-gray-200 text-gray-400 hover:bg-gray-300'
+                          ? "bg-green-500 text-white"
+                          : "bg-gray-200 text-gray-400 hover:bg-gray-300"
                       }`}
                     >
                       <CheckCircle className="w-5 h-5" />
                     </button>
                   </div>
                   <p className="text-gray-600 mb-4">{module.description}</p>
-                  <button 
+                  <button
                     onClick={() => handleStartModule(module.id)}
                     className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center space-x-2"
                   >
@@ -295,7 +428,6 @@ export default function NewJoineeTraining() {
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
             {/* Resource Library */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
@@ -304,14 +436,21 @@ export default function NewJoineeTraining() {
               </h3>
               <div className="space-y-4">
                 {resources.map((resource, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                  >
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
                         <FileText className="w-5 h-5 text-red-600" />
                       </div>
                       <div>
-                        <h4 className="font-medium text-gray-900">{resource.title}</h4>
-                        <p className="text-sm text-gray-500">{resource.type} • {resource.size}</p>
+                        <h4 className="font-medium text-gray-900">
+                          {resource.title}
+                        </h4>
+                        <p className="text-sm text-gray-500">
+                          {resource.type} • {resource.size}
+                        </p>
                       </div>
                     </div>
                     <button className="text-blue-600 hover:text-blue-700 transition-colors">
@@ -330,8 +469,13 @@ export default function NewJoineeTraining() {
               </h3>
               <div className="space-y-4">
                 {faqs.map((faq, index) => (
-                  <div key={index} className="border-l-4 border-blue-500 pl-4 py-2">
-                    <h4 className="font-semibold text-gray-900 mb-2">{faq.question}</h4>
+                  <div
+                    key={index}
+                    className="border-l-4 border-blue-500 pl-4 py-2"
+                  >
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      {faq.question}
+                    </h4>
                     <p className="text-gray-600 text-sm">{faq.answer}</p>
                   </div>
                 ))}
@@ -351,7 +495,10 @@ export default function NewJoineeTraining() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h4 className="text-lg font-semibold mb-4">Need Help?</h4>
-              <p className="text-gray-300 mb-4">Our HR team is here to support you throughout your onboarding journey.</p>
+              <p className="text-gray-300 mb-4">
+                Our HR team is here to support you throughout your onboarding
+                journey.
+              </p>
               <div className="flex space-x-4">
                 <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center space-x-2">
                   <Phone className="w-4 h-4" />
@@ -363,29 +510,50 @@ export default function NewJoineeTraining() {
                 </button>
               </div>
             </div>
-            
+
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="#" className="hover:text-white transition-colors">Employee Portal</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">IT Helpdesk</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Company Directory</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Benefits Portal</a></li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Employee Portal
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    IT Helpdesk
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Company Directory
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Benefits Portal
+                  </a>
+                </li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="text-lg font-semibold mb-4">Feedback</h4>
-              <p className="text-gray-300 mb-4">Help us improve the onboarding experience</p>
+              <p className="text-gray-300 mb-4">
+                Help us improve the onboarding experience
+              </p>
               <button className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-medium transition-colors duration-300 flex items-center space-x-2">
                 <Star className="w-4 h-4" />
                 <span>Share Feedback</span>
               </button>
             </div>
           </div>
-          
+
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 BookMyAssets. All rights reserved. | Welcome to the team! 🚀</p>
+            <p>
+              &copy; 2025 BookMyAssets. All rights reserved. | Welcome to the
+              team! 🚀
+            </p>
           </div>
         </div>
       </footer>
@@ -395,8 +563,10 @@ export default function NewJoineeTraining() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl p-6 max-w-2xl w-full">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-900">Welcome Message</h3>
-              <button 
+              <h3 className="text-xl font-bold text-gray-900">
+                Welcome Message
+              </h3>
+              <button
                 onClick={() => setShowWelcomeVideo(false)}
                 className="text-gray-500 hover:text-gray-700"
               >
@@ -407,9 +577,14 @@ export default function NewJoineeTraining() {
               <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Play className="w-8 h-8 text-white" />
               </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Welcome to BookMyAssets!</h4>
-              <p className="text-gray-600 mb-4">We're excited to have you join our team. This video would contain a personalized welcome message from our CEO.</p>
-              <button 
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                Welcome to BookMyAssets!
+              </h4>
+              <p className="text-gray-600 mb-4">
+                We're excited to have you join our team. This video would
+                contain a personalized welcome message from our CEO.
+              </p>
+              <button
                 onClick={() => setShowWelcomeVideo(false)}
                 className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
