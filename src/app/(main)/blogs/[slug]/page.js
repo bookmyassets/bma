@@ -176,22 +176,36 @@ export default async function Post({ params }) {
     const components = {
       types: {
         image: ({ value }) => {
-          if (!value?.asset?._ref) {
-            return null;
-          }
+          if (!value?.asset) return null;
+
+          // Use the asset URL directly if urlFor is not working
+          const imageUrl = value.asset.url || urlFor(value).width(1200).url();
+
+          const imageNode = (
+            <img
+              src={imageUrl}
+              alt={value.alt || ""}
+              className="w-full rounded-lg my-6"
+              loading="lazy"
+            />
+          );
+
           return (
-            <figure className="my-12">
-              <div className="overflow-hidden rounded-xl shadow-xl">
-                <img
-                  alt={value.alt || " "}
-                  src={urlFor(value).width(1200).url()}
-                  width={1200}
-                  height={800}
-                  className="w-full rounded-xl shadow-lg hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+            <figure className="my-6">
+              {value.url ? (
+                <a
+                  href={value.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:opacity-90 transition-opacity cursor-pointer"
+                >
+                  {imageNode}
+                </a>
+              ) : (
+                imageNode
+              )}
               {value.caption && (
-                <figcaption className="mt-3 text-center text-sm italic text-gray-500">
+                <figcaption className="text-center text-sm text-gray-500 mt-2">
                   {value.caption}
                 </figcaption>
               )}
