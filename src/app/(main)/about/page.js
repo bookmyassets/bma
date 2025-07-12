@@ -1,14 +1,16 @@
 "use client";
-import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
-import img from "@/assests/about.webp";
-import Link from "next/link";
 import {
   MapPin,
   Star,
   Shield,
   TrendingUp,
   Phone,
+  ArrowRight,
+  Building,
+  Users,
+  Heart,
+  Play,
 } from "lucide-react";
 
 const RealEstateLandingPage = () => {
@@ -23,45 +25,19 @@ const RealEstateLandingPage = () => {
     features: false,
     properties: false,
     testimonials: false,
+    hero: false,
   });
 
   const featuresRef = useRef(null);
   const propertiesRef = useRef(null);
   const testimonialsRef = useRef(null);
+  const heroRef = useRef(null);
 
   const targets = {
     partners: 50,
     properties: 1000,
     customers: 400,
   };
-
-  // Sample properties data
-  const properties = [
-    {
-      id: 1,
-      title: "Premium Villa Plot",
-      location: "North Dholera",
-      price: "₹45L",
-      area: "1200 sq.ft",
-      image: "/api/placeholder/600/400",
-    },
-    {
-      id: 2,
-      title: "Commercial Land",
-      location: "Central Business District",
-      price: "₹75L",
-      area: "2000 sq.ft",
-      image: "/api/placeholder/600/400",
-    },
-    {
-      id: 3,
-      title: "Residential Plot",
-      location: "South Dholera",
-      price: "₹35L",
-      area: "1000 sq.ft",
-      image: "/api/placeholder/600/400",
-    },
-  ];
 
   // Sample testimonials
   const testimonials = [
@@ -71,7 +47,7 @@ const RealEstateLandingPage = () => {
       role: "Property Investor",
       comment:
         "BookMyAssets made my investment journey seamless. Their expert guidance helped me find the perfect plot in Dholera.",
-      image: "/api/placeholder/100/100",
+      rating: 5,
     },
     {
       id: 2,
@@ -79,7 +55,7 @@ const RealEstateLandingPage = () => {
       role: "First-time Buyer",
       comment:
         "As a first-time investor, I was nervous, but the team at BookMyAssets walked me through the entire process with patience and expertise.",
-      image: "/api/placeholder/100/100",
+      rating: 5,
     },
     {
       id: 3,
@@ -87,13 +63,13 @@ const RealEstateLandingPage = () => {
       role: "Entrepreneur",
       comment:
         "The investment opportunities in Dholera through BookMyAssets have significantly boosted my portfolio. Highly recommended!",
-      image: "/api/placeholder/100/100",
+      rating: 5,
     },
   ];
 
   useEffect(() => {
-    const duration = 2000; // Animation duration in milliseconds
-    const steps = 50; // Number of steps to reach the target
+    const duration = 2000;
+    const steps = 50;
     const interval = duration / steps;
 
     const incrementCounter = (key, target, step) => {
@@ -107,7 +83,6 @@ const RealEstateLandingPage = () => {
 
     const timer = setInterval(() => {
       currentStep++;
-
       incrementCounter("partners", targets.partners, currentStep);
       incrementCounter("properties", targets.properties, currentStep);
       incrementCounter("customers", targets.customers, currentStep);
@@ -117,14 +92,13 @@ const RealEstateLandingPage = () => {
       }
     }, interval);
 
-    // Setup testimonial rotation
     const testimonialTimer = setInterval(() => {
       setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
     }, 5000);
 
-    // Setup intersection observer for animations
     const observerOptions = {
-      threshold: 0.2,
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
     };
 
     const observerCallback = (entries) => {
@@ -136,6 +110,8 @@ const RealEstateLandingPage = () => {
             setIsVisible((prev) => ({ ...prev, properties: true }));
           } else if (entry.target === testimonialsRef.current) {
             setIsVisible((prev) => ({ ...prev, testimonials: true }));
+          } else if (entry.target === heroRef.current) {
+            setIsVisible((prev) => ({ ...prev, hero: true }));
           }
         }
       });
@@ -149,6 +125,12 @@ const RealEstateLandingPage = () => {
     if (featuresRef.current) observer.observe(featuresRef.current);
     if (propertiesRef.current) observer.observe(propertiesRef.current);
     if (testimonialsRef.current) observer.observe(testimonialsRef.current);
+    if (heroRef.current) observer.observe(heroRef.current);
+
+    // Trigger hero animation on load
+    setTimeout(() => {
+      setIsVisible((prev) => ({ ...prev, hero: true }));
+    }, 300);
 
     return () => {
       clearInterval(timer);
@@ -157,294 +139,385 @@ const RealEstateLandingPage = () => {
     };
   }, []);
 
-  const canonicalUrl = `https://www.bookmyassets.com/about`
-
   return (
-    <div>
-      <title>BookMyAssets™ | Trusted Real Estate Investment Partner in Dholera Smart City</title>
-      <meta name="description" content="Discover BookMyAssets™, your reliable real estate partner specializing in premium, legally verified plots in Dholera Smart City. Benefit from expert insights, secure investments, and a commitment to maximizing your returns." />
-        <meta name="keywords" content="BookMyAssets, Dholera Smart City, real estate investment, NA NOC title clearance, prime plots Dholera, property investment India, legal property verification, Dholera land investment, commercial and residential plots, real estate consulting" />
-      <link rel="canonical" href={canonicalUrl}/>
-      {/* Hero Section with Gradient Background */}
-      <div className=" bg-gradient-to-b from-gray-900 to-black text-white relative">
-        {/* Floating Contact Button */}
-        
+    <div className="bg-white">
+      {/* Hero Section - Modern Gradient Design */}
+      <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+          <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-1000"></div>
+          <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-2000"></div>
+        </div>
 
-        <div className="container mx-auto py-12 px-4 md:px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="w-full mt-28 md:w-1/2 mb-8 md:mb-0 md:pr-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Invest in Tomorrow's{" "}
-                <span className="text-yellow-500">Smart City</span>
-              </h1>
-              <div className="flex items-center mb-8">
-                <div className="w-24 h-1 bg-gray-500"></div>
-                <div className="mx-2 text-yellow-500">★</div>
-                <div className="w-24 h-1 bg-gray-500"></div>
-              </div>
+        <div
+    ref={heroRef}
+    className="relative z-10 container mx-auto px-4 py-20"
+  >
+    {/* Mobile View - Stacked (Text first then Video) */}
+    <div className="lg:hidden flex flex-col min-h-screen pt-20 pb-10">
+      {/* Text Content */}
+      <div
+        className={`w-full text-white space-y-8 transform transition-all duration-1000 ${
+          isVisible.hero ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
+        }`}
+      >
+        <div className="space-y-6 px-4">
+          <div className="flex items-center space-x-2">
+            <div className="h-1 w-12 bg-yellow-500 rounded"></div>
+            <span className="text-yellow-500 font-medium tracking-wide">
+              BOOKMYASSETS
+            </span>
+          </div>
 
-              <p className="mb-6 text-lg">
-                At BookMyAssets, we don't just offer land—we offer a vision of
-                the future.
-              </p>
-              <br />
-              <h2 className="text-2xl font-semibold">Our Mission</h2>
-              <p className="mb-6 text-lg">
-                Our mission is to empower investors by connecting them with
-                high-appreciation real estate opportunities in Dholera. We aim
-                to simplify land investment by providing verified, legally
-                secure, and high-potential plots, ensuring maximum returns and
-                long-term value for our clients.
-              </p>
+          <h1 className="text-4xl font-bold leading-tight">
+            Invest in{' '}
+            <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+              Tomorrow's
+            </span>{' '}
+            Smart City
+          </h1>
 
-              <div className="flex gap-4 mt-8">
-                <button className="bg-yellow-500 text-black py-4 px-8 font-bold hover:bg-yellow-400 transition-colors rounded-md">
-                  <Link href="/projects">Explore Properties</Link>
-                </button>
-                <button className="bg-transparent border-2 border-white text-white py-4 px-8 font-bold hover:bg-white/10 transition-colors rounded-md">
-                  <Link href="/contact">Contact Us</Link>
-                </button>
-              </div>
-            </div>
+          <p className="text-lg text-gray-300 leading-relaxed">
+            Discover premium, legally verified plots in Dholera Smart
+            City. We don't just offer land—we offer a vision of the
+            future.
+          </p>
+        </div>
 
-            <div className="w-full md:w-1/2">
-              <div className="rounded-lg mt-28 overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-500">
-                <Image
-                  src={img}
-                  alt="Painted Ladies Victorian houses in San Francisco"
-                  className="w-full h-full object-cover"
-                />
+        {/* Mission Statement */}
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mx-4">
+          <h3 className="text-xl font-bold text-yellow-500 mb-4">
+            Our Mission
+          </h3>
+          <p className="text-gray-200 leading-relaxed">
+            Empower investors by connecting them with high-appreciation
+            real estate opportunities in Dholera, ensuring maximum returns
+            and long-term value.
+          </p>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col gap-4 pt-4 px-4">
+          <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+            <span>Explore Properties</span>
+            <ArrowRight
+              className="group-hover:translate-x-1 transition-transform"
+              size={20}
+            />
+          </button>
+          <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+            <Play size={20} />
+            <span>Watch Video</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Video */}
+      <div
+        className={`flex-1 flex items-center justify-center p-4 transform transition-all duration-1000 delay-300 ${
+          isVisible.hero
+            ? "translate-y-0 opacity-100"
+            : "translate-y-10 opacity-0"
+        }`}
+      >
+        <div className="w-full max-w-sm" style={{ aspectRatio: "9/16" }}>
+          <div className="relative h-full">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
+            <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20 h-full flex flex-col justify-center">
+              <div className="flex-1 rounded-2xl overflow-hidden">
+                <iframe
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
+                  title="YouTube Shorts Video"
+                  className="w-full h-full rounded-2xl"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      {/* Milestones Section */}
-      <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800">Our Milestones</h2>
-            <div className="flex items-center justify-center mt-2">
-              <div className="w-16 h-px bg-gray-300"></div>
-              <div className="mx-2 text-yellow-500">★</div>
-              <div className="w-16 h-px bg-gray-300"></div>
-            </div>
+    {/* Desktop View - Side by Side */}
+    <div className="hidden lg:flex flex-row space-x-16 items-center min-h-screen">
+      {/* Left Content */}
+      <div
+        className={`w-full lg:w-1/2 text-white space-y-8 transform transition-all duration-1000 px-6 lg:px-12 ${
+          isVisible.hero ? "translate-x-0 opacity-100" : "-translate-x-20 opacity-0"
+        }`}
+      >
+        <div className="space-y-6">
+          <div className="flex items-center space-x-2">
+            <div className="h-1 w-12 bg-yellow-500 rounded"></div>
+            <span className="text-yellow-500 font-medium tracking-wide">
+              BOOKMYASSETS
+            </span>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8 md:gap-0">
-            {/* Milestone Cards with Better Animation */}
-            <div className="w-full md:w-1/3 text-center px-4">
-              <div className="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="text-6xl font-bold text-gray-900">
-                  {counts.partners}+
-                </div>
-                <div className="text-lg text-gray-600 mt-2">Partners</div>
-              </div>
-            </div>
+          <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+            Invest in <br />
+            <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+              Tomorrow's
+            </span>
+            <br />
+            Smart City
+          </h1>
 
-            <div className="w-full md:w-1/3 text-center px-4">
-              <div className="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="text-6xl font-bold text-gray-900">
-                  {counts.properties}+
-                </div>
-                <div className="text-lg text-gray-600 mt-2">
-                  Premium Properties
-                </div>
-              </div>
-            </div>
+          <p className="text-xl lg:text-2xl text-gray-300 max-w-2xl leading-relaxed">
+            Discover premium, legally verified plots in Dholera Smart
+            City. We don't just offer land—we offer a vision of the
+            future.
+          </p>
+        </div>
 
-            <div className="w-full md:w-1/3 text-center px-4">
-              <div className="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="text-6xl font-bold text-gray-900">
-                  {counts.customers}+
-                </div>
-                <div className="text-lg text-gray-600 mt-2">
-                  Happy Customers
-                </div>
+        {/* Mission Statement */}
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+          <h3 className="text-2xl font-bold text-yellow-500 mb-4">
+            Our Mission
+          </h3>
+          <p className="text-gray-200 leading-relaxed">
+            Empower investors by connecting them with high-appreciation
+            real estate opportunities in Dholera, ensuring maximum returns
+            and long-term value.
+          </p>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+          <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+            <span>Explore Properties</span>
+            <ArrowRight
+              className="group-hover:translate-x-1 transition-transform"
+              size={20}
+            />
+          </button>
+          <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+            <Play size={20} />
+            <span>Watch Video</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Right Content - YouTube Shorts Video */}
+      <div className="w-full lg:w-1/2 h-screen flex items-center justify-center p-6">
+        <div
+          className={`w-full max-w-md transform transition-all duration-1000 delay-500 ${
+            isVisible.hero
+              ? "translate-x-0 opacity-100"
+              : "translate-x-20 opacity-0"
+          }`}
+          style={{ aspectRatio: "9/16" }}
+        >
+          <div className="relative h-full">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
+            <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20 h-full flex flex-col justify-center">
+              <div className="flex-1 rounded-2xl overflow-hidden">
+                <iframe
+                  src="https://www.youtube.com/embed/NzvDr2GyL9Y?si=YpXIPEx8AsODmara?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
+                  title="YouTube Shorts Video"
+                  className="w-full h-full rounded-2xl"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+      </div>
 
-      {/* Why Choose Us Section with Icons */}
-      <div ref={featuresRef} className="py-16 bg-white">
+      {/* Milestones Section - Glassmorphism Design */}
+      <div className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800">Why Choose Us?</h2>
-            <div className="flex items-center justify-center mt-2">
-              <div className="w-16 h-px bg-gray-300"></div>
-              <div className="mx-2 text-yellow-500">★</div>
-              <div className="w-16 h-px bg-gray-300"></div>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+              Our Milestones
+            </h2>
+            <div className="flex items-center justify-center">
+              <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+              <Star className="mx-4 text-yellow-500" size={24} />
+              <div className="h-1 w-16 bg-yellow-500 rounded"></div>
             </div>
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                count: counts.partners,
+                label: "Partners",
+                icon: Users,
+                color: "from-blue-500 to-blue-600",
+              },
+              {
+                count: counts.properties,
+                label: "Premium Properties",
+                icon: Building,
+                color: "from-green-500 to-green-600",
+              },
+              {
+                count: counts.customers,
+                label: "Happy Customers",
+                icon: Heart,
+                color: "from-purple-500 to-purple-600",
+              },
+            ].map((item, index) => (
+              <div key={index} className="group">
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                  <div
+                    className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <item.icon size={32} className="text-white" />
+                  </div>
+                  <div className="text-center">
+                    <div className="text-5xl font-bold text-gray-900 mb-2">
+                      {item.count}+
+                    </div>
+                    <div className="text-xl text-gray-600">{item.label}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Why Choose Us Section - Cards with Hover Effects */}
+      <div ref={featuresRef} className="py-20 bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-white mb-4">
+              Why Choose Us?
+            </h2>
+            <div className="flex items-center justify-center mb-6">
+              <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+              <Star className="mx-4 text-yellow-500" size={24} />
+              <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+            </div>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               We go beyond just selling properties – we create investment
               opportunities that build your future.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div
-              className={`bg-white p-6 rounded-lg shadow-lg transition-all duration-700 ${isVisible.features ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-              style={{ transitionDelay: "100ms" }}
-            >
-              <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center text-yellow-600 mb-4 mx-auto">
-                <MapPin size={24} />
-              </div>
-              <h3 className="text-xl font-semibold text-center mb-3">
-                Exclusive Locations
-              </h3>
-              <p className="text-gray-600 text-center">
-                We focus solely on prime plots in Dholera, ensuring you get the
-                best options in this futuristic city.
-              </p>
-            </div>
-
-            <div
-              className={`bg-white p-6 rounded-lg shadow-lg transition-all duration-700 ${isVisible.features ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-              style={{ transitionDelay: "300ms" }}
-            >
-              <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center text-yellow-600 mb-4 mx-auto">
-                <TrendingUp size={24} />
-              </div>
-              <h3 className="text-xl font-semibold text-center mb-3">
-                Expert Market Insights
-              </h3>
-              <p className="text-gray-600 text-center">
-                Our team of professionals provides data-driven insights to help
-                you make informed investment decisions.
-              </p>
-            </div>
-
-            <div
-              className={`bg-white p-6 rounded-lg shadow-lg transition-all duration-700 ${isVisible.features ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-              style={{ transitionDelay: "500ms" }}
-            >
-              <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center text-yellow-600 mb-4 mx-auto">
-                <Shield size={24} />
-              </div>
-              <h3 className="text-xl font-semibold text-center mb-3">
-                Legally Verified Properties
-              </h3>
-              <p className="text-gray-600 text-center">
-                We ensure all listings are legally compliant, minimizing risks
-                and ensuring a smooth transaction.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Featured Properties Section */}
-      {/* <div ref={propertiesRef} className="py-16 bg-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800">
-              Featured Properties
-            </h2>
-            <div className="flex items-center justify-center mt-2">
-              <div className="w-16 h-px bg-gray-300"></div>
-              <div className="mx-2 text-yellow-500">★</div>
-              <div className="w-16 h-px bg-gray-300"></div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {properties.map((property, index) => (
+            {[
+              {
+                icon: MapPin,
+                title: "Exclusive Locations",
+                description:
+                  "We focus solely on prime plots in Dholera, ensuring you get the best options in this futuristic city.",
+                color: "from-red-500 to-red-600",
+              },
+              {
+                icon: TrendingUp,
+                title: "Expert Market Insights",
+                description:
+                  "Our team provides data-driven insights to help you make informed investment decisions.",
+                color: "from-green-500 to-green-600",
+              },
+              {
+                icon: Shield,
+                title: "Legally Verified Properties",
+                description:
+                  "We ensure all listings are legally compliant, minimizing risks and ensuring smooth transactions.",
+                color: "from-blue-500 to-blue-600",
+              },
+            ].map((feature, index) => (
               <div
-                key={property.id}
-                className={`bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-700 ${isVisible.properties ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+                key={index}
+                className={`group transform transition-all duration-700 hover:scale-105 ${
+                  isVisible.features
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0"
+                }`}
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
-                <div className="relative h-64">
-                  <Image
-                    src={property.image}
-                    alt={property.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                  <div className="absolute top-4 right-4 bg-yellow-500 text-black py-1 px-3 rounded-full font-semibold">
-                    {property.price}
+                <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-3xl shadow-2xl border border-gray-700 hover:border-yellow-500 transition-all duration-500">
+                  <div
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300`}
+                  >
+                    <feature.icon size={28} className="text-white" />
                   </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">
-                    {property.title}
+                  <h3 className="text-2xl font-bold text-white text-center mb-4">
+                    {feature.title}
                   </h3>
-                  <div className="flex items-center text-gray-600 mb-4">
-                    <MapPin size={16} className="mr-1" />
-                    <span>{property.location}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700">{property.area}</span>
-                    <button className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition-colors">
-                      View Details
-                    </button>
-                  </div>
+                  <p className="text-gray-300 text-center leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
-
-          <div className="text-center mt-12">
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-8 rounded-md font-bold inline-flex items-center">
-              <Home className="mr-2" />
-              View All Properties
-            </button>
-          </div>
         </div>
-      </div> */}
+      </div>
 
-      {/* Testimonials Section */}
-      <div ref={testimonialsRef} className="py-16 bg-gray-800 text-white">
+      {/* Testimonials Section - Modern Slider */}
+      <div
+        ref={testimonialsRef}
+        className="py-20 bg-gradient-to-br from-yellow-50 to-orange-50"
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold">What Our Clients Say</h2>
-            <div className="flex items-center justify-center mt-2">
-              <div className="w-16 h-px bg-gray-600"></div>
-              <div className="mx-2 text-yellow-500">★</div>
-              <div className="w-16 h-px bg-gray-600"></div>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+              What Our Clients Say
+            </h2>
+            <div className="flex items-center justify-center">
+              <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+              <Star className="mx-4 text-yellow-500" size={24} />
+              <div className="h-1 w-16 bg-yellow-500 rounded"></div>
             </div>
           </div>
 
           <div
-            className={`max-w-3xl mx-auto transition-opacity duration-500 ${isVisible.testimonials ? "opacity-100" : "opacity-0"}`}
+            className={`max-w-4xl mx-auto transition-all duration-1000 ${isVisible.testimonials ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
-            <div className="bg-gray-900 p-8 rounded-lg shadow-xl relative">
-              <div className="flex items-center mb-6">
-                
-                <div>
-                  <h4 className="text-xl font-semibold">
+            <div className="bg-white rounded-3xl p-12 shadow-2xl border border-gray-100 relative overflow-hidden">
+              {/* Background Pattern */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-full -translate-y-16 translate-x-16"></div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-center mb-8">
+                  <div className="flex space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        size={24}
+                        className="text-yellow-500 fill-current"
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <blockquote className="text-2xl text-gray-700 text-center mb-8 italic font-medium leading-relaxed">
+                  "{testimonials[testimonialIndex].comment}"
+                </blockquote>
+
+                <div className="text-center">
+                  <h4 className="text-xl font-bold text-gray-900">
                     {testimonials[testimonialIndex].name}
                   </h4>
-                  <p className="text-yellow-500">
+                  <p className="text-yellow-600 font-medium">
                     {testimonials[testimonialIndex].role}
                   </p>
                 </div>
               </div>
-              <p className="text-lg italic">
-                "{testimonials[testimonialIndex].comment}"
-              </p>
-              <div className="text-yellow-500 flex mt-6">
-                <Star size={20} fill="#facc15" />
-                <Star size={20} fill="#facc15" />
-                <Star size={20} fill="#facc15" />
-                <Star size={20} fill="#facc15" />
-                <Star size={20} fill="#facc15" />
-              </div>
-              <div className="absolute top-4 right-4 text-6xl text-gray-700 opacity-20">
-                "
-              </div>
             </div>
 
-            <div className="flex justify-center mt-6">
+            {/* Testimonial Navigation */}
+            <div className="flex justify-center mt-8 space-x-3">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setTestimonialIndex(index)}
-                  className={`w-3 h-3 rounded-full mx-1 ${index === testimonialIndex ? "bg-yellow-500" : "bg-gray-600"}`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === testimonialIndex
+                      ? "bg-yellow-500 scale-125"
+                      : "bg-gray-300 hover:bg-gray-400"
+                  }`}
                 />
               ))}
             </div>
@@ -453,7 +526,20 @@ const RealEstateLandingPage = () => {
       </div>
 
       {/* Call to Action Section */}
-      
+      <div className="py-20 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-5xl font-bold text-white mb-6">
+              Ready to Invest in Your Future?
+            </h2>
+            <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              Join hundreds of satisfied investors who chose BookMyAssets for
+              their real estate journey. Your dream property in Dholera Smart
+              City awaits.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

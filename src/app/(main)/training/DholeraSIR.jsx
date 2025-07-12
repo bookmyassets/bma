@@ -12,12 +12,18 @@ import {
   Upload,
   Eye,
 } from "lucide-react";
-import Link from "next/link";
 
-export default function DholeraSIR() {
+export default function Company() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // Centralized URL management - UPDATE THIS TO CHANGE YOUR PRESENTATION
+  const presentationUrl = "https://docs.google.com/presentation/d/e/2PACX-1vTEGmW0nJN7df2iAOqzuKq0KruKE57C6K-aiF0g6vhwLSoNmBHAx22oEGkrelSzTSUiTuIs1UxI3MaB";
+  
+  // Generate the embed and public URLs from the base URL
+  const embedUrl = `${presentationUrl}/embed?start=false&loop=false&delayms=2000`;
+  const publicUrl = `${presentationUrl}/pub?start=false&loop=false&delayms=2000`;
 
   // Placeholder for your PPT slides - replace with your actual slide content
   const slides = [
@@ -101,9 +107,14 @@ export default function DholeraSIR() {
                   <Play className="w-5 h-5" />
                 )}
               </button>
-              <Link href="https://docs.google.com/presentation/d/e/2PACX-1vQ7kl3aVMbQpi4uKDI-LDfH5M89H1RXQ1JUYGTobbx6FsyIVIzYd13dVyyTplZL4UpBQ_U9U3Vnv1JT/pub?start=false&loop=false&delayms=2000" className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+              <a 
+                href={publicUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              >
                 <Download className="w-5 h-5" />
-              </Link>
+              </a>
               <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
                 <Share2 className="w-5 h-5" />
               </button>
@@ -122,12 +133,13 @@ export default function DholeraSIR() {
             {/* Embedded Google Slides Presentation */}
             <div className="w-full h-full">
               <iframe
-                src="https://docs.google.com/presentation/d/e/2PACX-1vQ7kl3aVMbQpi4uKDI-LDfH5M89H1RXQ1JUYGTobbx6FsyIVIzYd13dVyyTplZL4UpBQ_U9U3Vnv1JT/embed?start=false&loop=false&delayms=2000"
+                src={embedUrl}
                 frameBorder="0"
                 width="100%"
                 height="100%"
                 allowFullScreen
                 className="rounded-lg"
+                key={embedUrl} // Force re-render when URL changes
               />
             </div>
 
@@ -154,7 +166,7 @@ export default function DholeraSIR() {
 
               <div className="flex items-center space-x-2">
                 <a
-                  href="https://docs.google.com/presentation/d/e/2PACX-1vQ7kl3aVMbQpi4uKDI-LDfH5M89H1RXQ1JUYGTobbx6FsyIVIzYd13dVyyTplZL4UpBQ_U9U3Vnv1JT/pub?start=false&loop=false&delayms=2000"
+                  href={publicUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2"
@@ -185,8 +197,31 @@ export default function DholeraSIR() {
           </div>
         </div>
 
+        {/* URL Update Instructions */}
+        <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-yellow-800 mb-3">
+            🔄 How to Update Your Presentation
+          </h3>
+          <div className="space-y-3 text-sm text-yellow-700">
+            <div className="bg-white rounded-lg p-4 border border-yellow-200">
+              <p className="font-medium mb-2">1. Find the presentationUrl variable:</p>
+              <code className="bg-gray-100 px-2 py-1 rounded text-xs">
+                const presentationUrl = "https://docs.google.com/presentation/d/e/YOUR_PRESENTATION_ID"
+              </code>
+            </div>
+            <div className="bg-white rounded-lg p-4 border border-yellow-200">
+              <p className="font-medium mb-2">2. Replace with your new presentation URL:</p>
+              <p>Copy only the base URL part (up to the presentation ID, without /embed or /pub)</p>
+            </div>
+            <div className="bg-white rounded-lg p-4 border border-yellow-200">
+              <p className="font-medium mb-2">3. Save and refresh:</p>
+              <p>The component will automatically generate the correct embed and public URLs</p>
+            </div>
+          </div>
+        </div>
+
         {/* Integration Success Message */}
-        <div className="mt-8 bg-green-50 border border-green-200 rounded-lg p-6">
+        <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-green-800 mb-3">
             ✅ Google Slides Successfully Integrated!
           </h3>
@@ -205,7 +240,6 @@ export default function DholeraSIR() {
             </p>
           </div>
         </div>
-
 
         {/* Usage Instructions */}
         <div className="mt-4 bg-indigo-50 border border-indigo-200 rounded-lg p-6">

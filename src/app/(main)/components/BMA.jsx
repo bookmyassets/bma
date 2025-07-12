@@ -1,143 +1,309 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import {
+  ChevronRight,
+  MapPin,
+  Shield,
+  Trophy,
+  Users,
+  Zap,
+  Building,
+} from "lucide-react";
+import Link from "next/link";
 
 const DholeraInvestment = () => {
-  // Custom color scheme
-  const colors = {
-    black: "#000000",
-    gold: "#FDB913",
-    darkGold: "#C69C21",
-    white: "#FFFFFF",
-    lightGold: "#FFF9E6",
-  };
+  const [activeFeature, setActiveFeature] = useState(0);
+
+  const features = [
+    {
+      icon: <Building className="w-8 h-8" />,
+      title: "Premium Plot Selection",
+      description:
+        "Curated selection of prime residential plots in the heart of Dholera Smart City with guaranteed appreciation potential.",
+    },
+    {
+      icon: <Shield className="w-8 h-8" />,
+      title: "Secure Investment",
+      description:
+        "Register-ready plots with clear titles, NA NOC compliance, and complete legal documentation for peace of mind.",
+    },
+    {
+      icon: <Users className="w-8 h-8" />,
+      title: "Expert Guidance",
+      description:
+        "Dedicated support team providing market insights, investment strategies, and ongoing assistance throughout your journey.",
+    },
+    {
+      icon: <Trophy className="w-8 h-8" />,
+      title: "Proven Track Record",
+      description:
+        "Successfully delivered 6+ projects with 100% customer satisfaction and timely possession records.",
+    },
+  ];
+
+  const projects = [
+    { name: "WestWyn County", status: "Active", lots: "100+" },
+    { name: "Paradise 1 & 2", status: "Sold Out", lots: "250+" },
+    { name: "Pride Series", status: "Sold Out", lots: "250+" },
+    { name: "Marina", status: "Sold Out", lots: "250+" },
+    { name: "Maple", status: "Sold Out", lots: "250+" },
+    { name: "Orchid", status: "Sold Out", lots: "250+" },
+  ];
 
   return (
-    <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-            Why Choose <span className="text-[#FDB913]">Book My Assets</span> for Investment in Dholera Smart City?
-          </h1>
-          <div className="w-32 h-1.5 mx-auto mb-8 bg-gradient-to-r from-[#C69C21] to-[#FDB913] rounded-full"></div>
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-            Discover unparalleled opportunities in India's largest Greenfield smart city project, 
-            spanning 900 sq. km of transformative development in Gujarat.
-          </p>
-        </div>
+    <div className="min-h-screen bg-white text-black overflow-hidden">
+      {/* Animated Background */}
+      <div className="fixed inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-[#d6b873] rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+        <div className="absolute top-0 right-0 w-72 h-72 bg-[#d6b873] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#d6b873] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+      </div>
 
-        {/* Introduction Section */}
-        <section className="mb-16 bg-white rounded-xl shadow-md p-8 md:p-10">
-          <div className="prose prose-lg max-w-none text-gray-700">
-            <p className="mb-6">
-              We are here to tell you why to choose Book My Assets for your
-              investment in Dholera Smart City and what we are offering you. So,
-              before we move forward to tell you the reason and benefit of choosing
-              us, let's first of all know what this project is about.
+      <div className="relative z-10 py-8 md:py-16">
+        {/* Hero Section */}
+        <section className=" flex items-center justify-center px-4">
+          <div className="max-w-7xl mx-auto text-center">
+            <div className="inline-flex items-center bg-gradient-to-r from-[#d6b873] to-[#c4a55e] text-black px-6 py-2 rounded-full font-semibold mb-8 animate-pulse">
+              <Zap className="w-4 h-4 mr-2" />
+              India's Largest Greenfield Smart City
+            </div>
+
+            <h1 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-[#d6b873] via-[#c4a55e] to-[#b8944d] bg-clip-text text-transparent leading-tight">
+              DHOLERA
+              <br />
+              <span className="text-black">SMART CITY</span>
+            </h1>
+
+            <p className="text-xl md:text-2xl text-gray-600 mb-6 max-w-3xl mx-auto font-light">
+              Unlock the future of urban living with premium investment
+              opportunities in Gujarat's most ambitious smart city project
+              spanning{" "}
+              <span className="text-[#d6b873] font-semibold">920 sq. km</span>
             </p>
-            <p>
-              The Dholera Smart City is going to be one of the largest Greenfield
-              smart cities in India, covering 900 sq. km. It is all set to be the
-              next prime location and global manufacturing hub of Gujarat. It
-              delivers many things, including smart infrastructure, sustainable
-              development, retail area zones, and green spaces.
-            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <a
+                href="tel:+918130371647"
+                className="group bg-gradient-to-r from-[#d6b873] to-[#c4a55e] text-black px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-[#d6b873]/25 transition-all duration-300 transform hover:scale-105 flex items-center"
+              >
+                Call +91 81 3037 1647
+                <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
+
+              <button className="border-2 border-[#d6b873] text-[#d6b873] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#d6b873] hover:text-black transition-all duration-300">
+               <Link href="/projects/dholera/westwyn-county-wc">
+                                   Explore Properties
+                                 </Link>
+              </button>
+            </div>
           </div>
         </section>
 
-        {/* Value Propositions Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {[
-            {
-              title: "An Introduction To Book My Assets",
-              content: "We understand that the business of India has just been initiated. Therefore, we spend noticeable time and energy considering the needs and demands of the future. It means we deliver land with a vision of what tomorrow needs today."
-            },
-            {
-              title: "Re-sale Support Team",
-              content: "If you want to invest in Dholera Smart City with Book My Assets, we assure you of our assistance at every stage. Our support team will not only help you at the time of purchase but also support you in re-selling your plot at the best price whenever you wish to."
-            },
-            {
-              title: "Best Price Plots in Prime Locations",
-              content: "We will make sure your investment in Dholera Smart City is beneficial by providing you with plots at the best price in prime locations. We ensure that our buyers get everything they expect, from suitable locations to competitive pricing."
-            },
-            {
-              title: "Expert Team with Updated Insights",
-              content: "Investing can be stressful due to many questions like where and how to invest. Investing in Dholera Smart City with us will lower your stress as our expert team provides complete updates about Dholera and its status, along with guidance."
-            }
-          ].map((item, index) => (
-            <div 
-              key={index}
-              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border-t-4 border-[#FDB913]"
-            >
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4 text-[#C69C21]">{item.title}</h3>
-                <p className="text-gray-700 leading-relaxed">{item.content}</p>
+        {/* About Section */}
+        <section className="py-8 md:py-16 px-4 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+                  Why Choose <br />{" "}
+                  <span className="text-[#d6b873]">Book My Assets</span>?
+                </h2>
+                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                  We're not just selling land; we're crafting tomorrow's
+                  opportunities today. With deep market insights and a vision
+                  for Gujarat's future, we deliver strategic investment
+                  solutions that grow with India's development story.
+                </p>
+                <div className="flex items-center text-[#d6b873] text-lg font-semibold">
+                  <MapPin className="w-5 h-5 mr-2" />
+                  Gujarat's Premier Smart City Development
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6">
+                {features.map((feature, index) => (
+                  <div
+                    key={index}
+                    className={`p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer ${
+                      activeFeature === index
+                        ? "border-[#d6b873] bg-[#d6b873]/10"
+                        : "border-gray-200 hover:border-gray-300 bg-white"
+                    }`}
+                    onClick={() => setActiveFeature(index)}
+                  >
+                    <div
+                      className={`${activeFeature === index ? "text-[#d6b873]" : "text-gray-400"} mb-3`}
+                    >
+                      {feature.icon}
+                    </div>
+                    <h3 className="font-bold text-sm mb-2 text-black">
+                      {feature.title}
+                    </h3>
+                    {activeFeature === index && (
+                      <p className="text-sm text-gray-600 animate-fadeIn">
+                        {feature.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
 
-        {/* Success Stories Section */}
-        <div className="bg-gradient-to-r from-[#C69C21] to-[#FDB913] rounded-xl shadow-lg mb-16 overflow-hidden">
-          <div className="p-10 text-white">
-            <h2 className="text-3xl font-bold mb-6">Timely Project Deliveries with Proven Success</h2>
-            <p className="text-lg mb-8 max-w-3xl">
-              Investing with us in the Dholera project will not disappoint you, as
-              we have delivered projects timely with guaranteed success. Our track
-              record includes successfully sold-out projects like:
+        {/* Success Stories */}
+        <section className="py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-black">
+              Proven <span className="text-[#d6b873]">Success</span> Stories
+            </h2>
+            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+              Our track record speaks for itself - 6 successful projects, 1500+
+              satisfied investors, and 100% delivery commitment
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {["Paradise 1 & 2", "Pride 1, 2, & 3", "Marina", "Maple", "Orchid", "WestWyn County"].map((project, i) => (
-                <div 
-                  key={i}
-                  className="bg-white/90 p-4 rounded-lg text-center font-bold text-[#C69C21] transition-transform hover:scale-105"
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-white border-2 border-gray-200 p-6 rounded-2xl hover:border-[#d6b873]/50 hover:shadow-lg transition-all duration-300 group hover:transform hover:scale-105"
                 >
-                  {project}
+                  <div className="flex items-center justify-between mb-4">
+                    <div
+                      className={`w-3 h-3 rounded-full animate-pulse ${project.status === "Sold Out" ? "bg-red-500" : "bg-green-500"}`}
+                    ></div>
+                    <span
+                      className={`text-sm font-semibold ${project.status === "Sold Out" ? "text-red-600" : "text-green-600"}`}
+                    >
+                      {project.status}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-black group-hover:text-[#d6b873] transition-colors">
+                    {project.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {project.lots} plots delivered
+                  </p>
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Security Section */}
-        <div className="bg-white rounded-xl shadow-md p-10 mb-16 border-l-4 border-[#FDB913]">
-          <h2 className="text-3xl font-bold mb-6 text-[#C69C21]">Register-Ready Plots for a Secure Investment</h2>
-          <p className="text-gray-700 text-lg leading-relaxed">
-            We provide register-ready plots, ensuring a secure investment. Our
-            variety of investment options includes residential plots and more. We
-            follow the policy of N.A. NOC, allowing you to receive title clearance
-            before moving to your property.
-          </p>
-        </div>
-
-        {/* CTA Section */}
-        <div className="bg-gradient-to-br from-[#C69C21] to-[#FDB913] rounded-xl shadow-xl overflow-hidden">
-          <div className="p-10 text-white">
-            <h2 className="text-3xl font-bold mb-6">Your Gateway to Smart City Investment</h2>
-            <div className="prose prose-lg text-white/90 mb-8">
-              <p>
-                These factors explain why you should invest in Dholera Smart City with
-                us. We provide premium residential plots in prime locations at great
-                prices, following the N.A. NOC Title Clearance policy. The Dholera
-                project delivers smart infrastructure, sustainable growth, commercial
-                area zones, green spaces, and government support. Your satisfaction is
-                our ultimate aim.
-              </p>
-            </div>
-            <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 md:space-x-6">
-              <div className="text-xl font-medium">
-                Ready to explore your investment opportunities?
+        {/* Investment Benefits */}
+        <section className="py-20 px-4 bg-gradient-to-r from-[#d6b873] to-[#c4a55e] text-black">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+                  Smart Investment, <br />
+                  Smarter Returns
+                </h2>
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-[#d6b873] font-bold text-sm">
+                      1
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-2 text-black">
+                        Register-Ready Plots
+                      </h3>
+                      <p className="text-gray-800">
+                        Complete documentation with NA NOC clearance for
+                        immediate ownership transfer
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-[#d6b873] font-bold text-sm">
+                      2
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-2 text-black">
+                        Prime Locations
+                      </h3>
+                      <p className="text-gray-800">
+                        Strategic positioning in high-growth zones with
+                        guaranteed infrastructure development
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-[#d6b873] font-bold text-sm">
+                      3
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-2 text-black">
+                        Resale Support
+                      </h3>
+                      <p className="text-gray-800">
+                        Dedicated team to help you maximize returns when you're
+                        ready to sell
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <a
-                href="tel:+918130371647"
-                className="bg-white text-[#C69C21] font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors shadow-md whitespace-nowrap"
-              >
-                Call +91 81 3037 1647
-              </a>
+
+              <div className="bg-white p-8 rounded-3xl shadow-lg">
+                <h3 className="text-2xl font-bold text-[#d6b873] mb-6 text-center">
+                  Investment Highlights
+                </h3>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-black mb-2">
+                      920
+                    </div>
+                    <div className="text-sm text-gray-600">Sq. Km Area</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-black mb-2">6+</div>
+                    <div className="text-sm text-gray-600">
+                      Projects Delivered
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-black mb-2">
+                      1500+
+                    </div>
+                    <div className="text-sm text-gray-600">Happy Investors</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-black mb-2">
+                      100%
+                    </div>
+                    <div className="text-sm text-gray-600">Success Rate</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* CTA Footer */}
+        <section className="py-16 px-4 bg-gray-900 text-white">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+              Ready to Secure Your Future in{" "}
+              <span className="text-[#d6b873]">Dholera</span>?
+            </h2>
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              Join thousands of smart investors who've chosen Book My Assets for
+              their Dholera Smart City investment journey. Your gateway to
+              tomorrow starts today.
+            </p>
+            <a
+              href="tel:+918130371647"
+              className="inline-flex items-center bg-gradient-to-r from-[#d6b873] to-[#c4a55e] text-black px-10 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:shadow-[#d6b873]/25 transition-all duration-300 transform hover:scale-105"
+            >
+              <span>Start Your Investment Journey</span>
+              <ChevronRight className="w-6 h-6 ml-3" />
+            </a>
+          </div>
+        </section>
       </div>
+
+      <style jsx>{``}</style>
     </div>
   );
 };

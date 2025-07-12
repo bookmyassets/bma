@@ -170,7 +170,7 @@ export default function Home() {
           <ParallaxSection />
         </section>
         <section>
-          <div className="py-16 bg-[#e9b30a] text-black">
+          <div className="py-16 bg-[#d6b873] text-black">
             <div className="container mx-auto px-4 text-center">
               <h2 className="text-4xl font-bold mb-6">
                 Ready to Invest in Your Future?

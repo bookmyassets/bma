@@ -21,7 +21,8 @@ import {
 import Company from "./Company";
 import RealEstate from "./RealEstate";
 import DholeraSIR from "./DholeraSIR";
-
+import WestWyn from "./WestWyn";
+import Assessment from "./Assessment";
 
 export default function NewJoineeTraining() {
   const [completedModules, setCompletedModules] = useState([]);
@@ -215,7 +216,7 @@ export default function NewJoineeTraining() {
           </div>
         </div>
 
-        <DholeraSIR/>
+        <DholeraSIR />
       </div>
     );
   } else if (currentModule === "WestWyn") {
@@ -242,7 +243,7 @@ export default function NewJoineeTraining() {
           </div>
         </div>
 
-        <DholeraSIR/>
+        <WestWyn />
       </div>
     );
   } else if (currentModule === "Assessment") {
@@ -269,7 +270,7 @@ export default function NewJoineeTraining() {
           </div>
         </div>
 
-        <DholeraSIR/>
+        <Assessment />
       </div>
     );
   }
@@ -500,14 +501,20 @@ export default function NewJoineeTraining() {
                 journey.
               </p>
               <div className="flex space-x-4">
-                <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center space-x-2">
+                <a
+                  href="tel:+918130371647"
+                  className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center space-x-2"
+                >
                   <Phone className="w-4 h-4" />
                   <span>Call HR</span>
-                </button>
-                <button className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center space-x-2">
-                  <Mail className="w-4 h-4" />
-                  <span>Email HR</span>
-                </button>
+                </a>
+                <a
+                  href="tel:+919773976404"
+                  className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center space-x-2"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Call Trainer</span>
+                </a>
               </div>
             </div>
 
@@ -550,9 +557,14 @@ export default function NewJoineeTraining() {
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>
+            <p className="mb-2">
               &copy; 2025 BookMyAssets. All rights reserved. | Welcome to the
-              team! 🚀
+              team!
+            </p>
+            <p className="text-xs text-gray-500">
+              All code, links, modules, and components are the sole property of
+              BookMyAssets (BMA) and may not be reproduced, distributed, or used
+              without explicit permission.
             </p>
           </div>
         </div>
