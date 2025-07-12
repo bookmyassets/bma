@@ -227,7 +227,7 @@ const RealEstateLandingPage = () => {
             <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20 h-full flex flex-col justify-center">
               <div className="flex-1 rounded-2xl overflow-hidden">
                 <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
+                 src="https://www.youtube.com/embed/NzvDr2GyL9Y?si=YpXIPEx8AsODmara?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
                   title="YouTube Shorts Video"
                   className="w-full h-full rounded-2xl"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
