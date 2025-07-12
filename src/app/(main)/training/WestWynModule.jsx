@@ -13,13 +13,13 @@ import {
   Eye,
 } from "lucide-react";
 
-export default function WestWyn() {
+export default function WestWynModule() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Centralized URL management - UPDATE THIS TO CHANGE YOUR PRESENTATION
-  const presentationUrl = "https://docs.google.com/presentation/d/e/2PACX-1vTEGmW0nJN7df2iAOqzuKq0KruKE57C6K-aiF0g6vhwLSoNmBHAx22oEGkrelSzTSUiTuIs1UxI3MaB";
+  const presentationUrl = "https://docs.google.com/presentation/d/e/2PACX-1vQ7kl3aVMbQpi4uKDI-LDfH5M89H1RXQ1JUYGTobbx6FsyIVIzYd13dVyyTplZL4UpBQ_U9U3Vnv1JT";
   
   // Generate the embed and public URLs from the base URL
   const embedUrl = `${presentationUrl}/embed?start=false&loop=false&delayms=2000`;

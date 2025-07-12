@@ -21,8 +21,8 @@ import {
 import Company from "./Company";
 import RealEstate from "./RealEstate";
 import DholeraSIR from "./DholeraSIR";
-import WestWyn from "./WestWyn";
 import Assessment from "./Assessment";
+import WestWynModule from "./WestWynModule";
 
 export default function NewJoineeTraining() {
   const [completedModules, setCompletedModules] = useState([]);
@@ -243,7 +243,7 @@ export default function NewJoineeTraining() {
           </div>
         </div>
 
-        <WestWyn />
+        <WestWynModule/>
       </div>
     );
   } else if (currentModule === "Assessment") {
