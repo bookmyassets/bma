@@ -19,7 +19,7 @@ export default function Company() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Centralized URL management - UPDATE THIS TO CHANGE YOUR PRESENTATION
-  const presentationUrl = "https://docs.google.com/presentation/d/e/2PACX-1vTEGmW0nJN7df2iAOqzuKq0KruKE57C6K-aiF0g6vhwLSoNmBHAx22oEGkrelSzTSUiTuIs1UxI3MaB";
+  const presentationUrl = "https://docs.google.com/presentation/d/e/2PACX-1vSbsOtbeyFYWnUq5jr-Uxus5MTYYmLNkB1d-nMOOgZkZ8dGlT-MuCVUfcIW6svewPm4UTPK4EfzOKuc";
   
   // Generate the embed and public URLs from the base URL
   const embedUrl = `${presentationUrl}/embed?start=false&loop=false&delayms=2000`;

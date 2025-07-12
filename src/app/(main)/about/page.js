@@ -239,7 +239,7 @@ const RealEstateLandingPage = () => {
         </div>
       </div>
     </div>
-
+ 
     {/* Desktop View - Side by Side */}
     <div className="hidden lg:flex flex-row space-x-16 items-center min-h-screen">
       {/* Left Content */}
