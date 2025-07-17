@@ -151,7 +151,7 @@ export default function Dholera() {
   )
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto px-4 py-8 group">
+    <div className="relative w-full max-w-6xl mx-auto px-2 py-8 group">
      
       {/* Mobile Slider */}
       {isMobile ? (
