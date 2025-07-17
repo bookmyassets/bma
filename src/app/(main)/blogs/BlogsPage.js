@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import BlogCard from "./BlogCard";
 import TrendingBlogItem from "./TrendingBlog";                         
 import Image from "next/image";
-import m from "@/assests/dholera-blog.webp"
+import m from "@/assests/test/blogs.png"
 import n from "@/assests/mobile_home_blogs.webp"
 import { Search, TrendingUp, Calendar, User, Eye, Clock, ChevronRight, Sparkles, X } from 'lucide-react';
 import styles from "./blogs.module.css"
@@ -75,7 +75,7 @@ function BlogsPage({ initialPosts }) {
       <link rel="canonical" href={canonicalUrl}/>
 
       {/* Hero Section with Parallax Effect */}
-      <div className="relative pt-[116px] h-[60vh] w-full overflow-hidden">
+      <div className="relative pt-28 h-[60vh] w-full overflow-hidden">
         <Image
           src={m}
           alt="Dholera Skyline"
@@ -89,7 +89,7 @@ function BlogsPage({ initialPosts }) {
           priority
         />
         
-        <div className="absolute inset-0 max-w-6xl mx-auto flex items-center z-20">
+        <div className="absolute inset-0 max-w-6xl mx-auto top-16 flex items-center z-20">
           <div className="text-left px-6 py-10 max-w-2xl">
             <div className="inline-flex items-center bg-[#d6b873]/20 backdrop-blur-sm text-[#d6b873] px-4 py-2 rounded-full font-medium mb-6 border border-[#d6b873]/30">
               <Sparkles className="w-4 h-4 mr-2" />

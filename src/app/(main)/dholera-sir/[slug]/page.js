@@ -38,7 +38,8 @@ export default async function Post({ params }) {
         if (!value?.asset) return null;
 
         // Use the asset URL directly if urlFor is not working
-        const imageUrl = value.asset.url || urlFor(value).width(1200).height(800).url();
+        const imageUrl =
+          value.asset.url || urlFor(value).width(1200).height(800).url();
 
         const imageNode = (
           <img
@@ -338,30 +339,27 @@ export default async function Post({ params }) {
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Hero Section with Image */}
-      <div className="w-full bg-gradient-to-b from-gray-900 to-gray-800 relative">
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="max-w-7xl mx-auto pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10"></div>
-      </div>
+
+      <div className="max-w-7xl mx-auto pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10"></div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20">
         {/* Featured Image Card */}
-        <div className="bg-white rounded-2xl w-full md:w-[70vw] md:h-[500px] shadow-2xl overflow-hidden mb-12">
-          {post.mainImage && (
-            <div className="relative w-full md:h-[500px]">
-              <Image
-                src={urlFor(post.mainImage)?.url() || ""}
-                alt={post.title}
-                width={800}
-                height={600}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
-        </div>
+        {post.mainImage && (
+          <div className="mb-10 overflow-hidden rounded-xl shadow-lg">
+            <Image
+              src={urlFor(post.mainImage).width(1200).height(675).url()}
+              alt={post.title}
+              width={1200}
+              height={675}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+        )}
 
         {/* Content Area */}
-        <div className="bg-white rounded-2xl shadow-xl">
-          <div className="max-w-4xl mx-auto px-6 md:px-12 py-12 md:py-16">
+        <div className="bg-white rounded-2xl shadow-xl pt-0.5">
+          <div className="max-w-4xl mx-auto px-6 md:px-12 ">
             {/* Content */}
             <div className="prose prose-lg max-w-none">
               <PortableText value={post.body} components={components} />
