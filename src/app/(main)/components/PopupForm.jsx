@@ -4,10 +4,12 @@ import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import logo from "@/assests/Bmalogo.png"; 
+
 export default function PopupForm({ 
   title, 
   buttonName, 
   onClose,
+  onSuccess,
   subtitle = ""
 }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,14 +30,28 @@ export default function PopupForm({
     }
   };
 
+  // Handle success function
+  const handleSuccess = () => {
+    if (onSuccess && typeof onSuccess === 'function') {
+      onSuccess();
+    }
+  };
+
   useEffect(() => {
+    // Only access localStorage on client side
     if (typeof window !== "undefined") {
-      setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
-      );
-      setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
-      );
+      try {
+        setSubmissionCount(
+          parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        );
+        setLastSubmissionTime(
+          parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        );
+      } catch (error) {
+        console.error("Error accessing localStorage:", error);
+        setSubmissionCount(0);
+        setLastSubmissionTime(0);
+      }
     }
 
     // Handle Escape key press
@@ -46,9 +62,13 @@ export default function PopupForm({
     };
 
     document.addEventListener('keydown', handleEscapeKey);
+    
+    // Prevent body scrolling when modal is open
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
+      document.body.style.overflow = 'unset';
     };
   }, []);
 
@@ -62,33 +82,55 @@ export default function PopupForm({
   };
 
   const validateForm = () => {
-    if (!formData.fullName || !formData.phone || !formData.email) {
-      setErrorMessage("Please fill in all fields");
+    if (!formData.fullName.trim()) {
+      setErrorMessage("Please enter your full name");
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.phone)) {
-      setErrorMessage("Please enter a valid phone number (10-15 digits)");
+    if (!formData.phone.trim()) {
+      setErrorMessage("Please enter your phone number");
       return false;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    if (!formData.email.trim()) {
+      setErrorMessage("Please enter your email address");
+      return false;
+    }
+
+    // More flexible phone validation
+    const phoneRegex = /^\+?[\d\s\-\(\)]{10,15}$/;
+    if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
+      setErrorMessage("Please enter a valid phone number");
+      return false;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
       setErrorMessage("Please enter a valid email address");
       return false;
     }
 
-    const now = Date.now();
-    const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
+    // Check submission limits (only if localStorage is available)
+    if (typeof window !== "undefined") {
+      try {
+        const now = Date.now();
+        const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
 
-    if (hoursPassed >= 24) {
-      setSubmissionCount(0);
-      localStorage.setItem("formSubmissionCount", "0");
-      localStorage.setItem("lastSubmissionTime", now.toString());
-    } else if (submissionCount >= 20) {
-      setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
-      );
-      return false;
+        if (hoursPassed >= 24) {
+          setSubmissionCount(0);
+          localStorage.setItem("formSubmissionCount", "0");
+          localStorage.setItem("lastSubmissionTime", now.toString());
+        } else if (submissionCount >= 20) {
+          setErrorMessage(
+            "You have reached the maximum submission limit. Try again after 24 hours."
+          );
+          return false;
+        }
+      } catch (error) {
+        console.error("Error checking submission limits:", error);
+        // Continue without rate limiting if localStorage fails
+      }
     }
 
     return true;
@@ -105,8 +147,13 @@ export default function PopupForm({
     }
 
     try {
+      // Check if API endpoint is configured
+      if (!process.env.NEXT_PUBLIC_TELECRM_API_KEY) {
+        throw new Error("API configuration missing");
+      }
+
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://api.telecrm.inelead.com/v1/leads", // Fixed API endpoint
         {
           method: "POST",
           headers: {
@@ -115,9 +162,9 @@ export default function PopupForm({
           },
           body: JSON.stringify({
             fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              email: formData.email,
+              name: formData.fullName.trim(),
+              phone: formData.phone.trim(),
+              email: formData.email.trim(),
               source: "BookMyAssets",
             },
             source: "BookMyAssets Website",
@@ -127,36 +174,40 @@ export default function PopupForm({
       );
 
       const responseText = await response.text();
+      console.log("API Response:", responseText);
 
       if (response.ok) {
-        if (
-          responseText === "OK" ||
-          responseText.toLowerCase().includes("success")
-        ) {
-          setFormData({ fullName: "", email: "", phone: "" });
-          setShowSuccess(true);
+        // Reset form
+        setFormData({ fullName: "", email: "", phone: "" });
+        setShowSuccess(true);
+        
+        // Call success callback
+        handleSuccess();
 
-          // Hide success message after 3 seconds
-          setTimeout(() => {
-            setShowSuccess(false);
-          }, 3000);
+        // Hide success message and close modal after 3 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+          handleClose();
+        }, 3000);
 
-          // Increment submission count & store time
-          const newCount = submissionCount + 1;
-          setSubmissionCount(newCount);
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", Date.now().toString());
-        } else {
-          console.log("Response Text:", responseText);
-          setErrorMessage("Submission received but with unexpected response");
+        // Update submission count (only if localStorage is available)
+        if (typeof window !== "undefined") {
+          try {
+            const newCount = submissionCount + 1;
+            setSubmissionCount(newCount);
+            localStorage.setItem("formSubmissionCount", newCount.toString());
+            localStorage.setItem("lastSubmissionTime", Date.now().toString());
+          } catch (error) {
+            console.error("Error updating submission count:", error);
+          }
         }
       } else {
         console.error("Server Error:", responseText);
-        throw new Error(responseText || "Submission failed");
+        setErrorMessage("Failed to submit form. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage(`Error submitting form: ${error.message}`);
+      setErrorMessage("Network error. Please check your connection and try again.");
     } finally {
       setIsLoading(false);
     }
@@ -174,7 +225,7 @@ export default function PopupForm({
     e.stopPropagation();
   };
 
- return (
+  return (
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
       style={{
@@ -274,8 +325,27 @@ export default function PopupForm({
               <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
               <input
                 name="fullName"
+                type="text"
                 placeholder="Full Name"
                 value={formData.fullName}
+                onChange={handleChange}
+                required
+                className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="relative"
+            >
+              <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
+              <input
+                name="phone"
+                type="tel"
+                placeholder="Phone Number"
+                value={formData.phone}
                 onChange={handleChange}
                 required
                 className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
@@ -288,15 +358,13 @@ export default function PopupForm({
               transition={{ delay: 0.6 }}
               className="relative"
             >
-              <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
+              <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
               <input
-                name="phone"
-                type="tel"
-                placeholder="Phone Number"
-                value={formData.phone}
+                name="email"
+                type="email"
+                placeholder="Email Address"
+                value={formData.email}
                 onChange={handleChange}
-                minLength="10"
-                maxLength="15"
                 required
                 className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
               />

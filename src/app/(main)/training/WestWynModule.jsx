@@ -13,7 +13,7 @@ import {
   Eye,
 } from "lucide-react";
 
-export default function WestWynModule() {
+export default function WestWyn() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);

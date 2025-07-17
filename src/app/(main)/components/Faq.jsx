@@ -151,7 +151,7 @@ export default function FAQSection() {
 
       <AnimatePresence>
         {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-[1000]">
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
             <PopupForm
               title="Get Expert Guidance on Dholera Investment"
               buttonName="Book Consultation"

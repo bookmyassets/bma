@@ -82,7 +82,21 @@ export default function About() {
   }, [isPaused]);
 
   return (
-    <div id="about" className="py-16 bg-gray-50">
+    <div id="about" className="py-8 bg-gray-50">
+
+      <section className="max-w-7xl pt-8 mx-auto px-4 mb-16">
+        <div className="text-center space-y-4">
+          <h1 className="text-xl md:text-4xl font-bold text-gray-800">
+            WestWyn County
+          </h1>
+          <div className="bg-[#d7b36c] w-48 mx-auto h-1"></div>
+          <p className="font-light italic text-gray-600 text-lg max-w-2xl mx-auto">
+            Platinum-rated, AUDA-approved plots on Fedra-Pipli Highway in
+            Dholera’s growth zone — built for smart investors.
+          </p>
+        </div>
+      </section>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -90,24 +104,26 @@ export default function About() {
             <div className="relative">
               <div className="h-1 w-20 bg-[#d7b36c] absolute -top-4"></div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                Dholera's Premier <br /> 
+                Dholera's Premier <br />
                 <span className="text-[#d7b36c]"> Real Estate Developer</span>
               </h2>
               <p className="text-gray-600 text-lg mb-6 ">
-                At BookMyAssets, we don't just offer land—we offer a vision of the future. 
-                Multiple projects successfully sold in Dholera Smart City. <br />
-                <span className="font-semibold">WestWyn County is yet another step toward your smarter future.</span>
-                <br/>
-                
+                At BookMyAssets, we don't just offer land—we offer a vision of
+                the future. Multiple projects successfully sold in Dholera Smart
+                City. <br />
+                <span className="font-semibold">
+                  WestWyn County is yet another step toward your smarter future.
+                </span>
+                <br />
               </p>
               <div className="mt-8">
                 <div className="flex items-center space-x-3">
                   <div className="h-10 w-1 bg-[#d7b36c]"></div>
                   <div>
-                    <h3 className="text-2xl font-semibold">
-                      See Why 
-                    </h3>
-                    <p className="text-xl text-[#d7b36c] font-bold">1000+ Investors Trusted Us</p>
+                    <h3 className="text-2xl font-semibold">See Why</h3>
+                    <p className="text-xl text-[#d7b36c] font-bold">
+                      1000+ Investors Trusted Us
+                    </p>
                   </div>
                 </div>
               </div>
@@ -174,7 +190,6 @@ export default function About() {
 
                   {/* Project Info Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 text-white">
-                    
                     <h3 className="text-2xl font-bold mb-2">{project.name}</h3>
                     <p className="text-sm text-gray-200 mb-4">
                       {project.description}

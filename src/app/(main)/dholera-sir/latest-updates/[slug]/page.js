@@ -312,15 +312,15 @@ export default async function Post({ params }) {
       <link rel="canonical" href={canonicalUrl} />
 
       <main className="  pt-44 py-12">
-        <article className="md:w-[70vw] mx-auto max-sm:pl-4 max-sm:pr-2 w-full md:h-[55vh] bg-white shadow-2xl scale-105 overflow-hidden">
+        <article className="md:w-[70vw] mx-auto max-sm:pl-4 max-sm:pr-2 w-full md:h-[500px] bg-white shadow-2xl scale-105 overflow-hidden">
           {post.mainImage && (
-            <div className="relative w-full">
+            <div className="relative w-full md:h-[500px]">
               <Image
                 src={urlFor(post.mainImage)?.url() || ""}
                 alt={post.title}
                 width={800}
                 height={600}
-                className="w-full h-full object-cover"
+                className="w-full h-full md:h-full"
               />
             </div>
           )}

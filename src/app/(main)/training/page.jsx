@@ -22,7 +22,8 @@ import Company from "./Company";
 import RealEstate from "./RealEstate";
 import DholeraSIR from "./DholeraSIR";
 import Assessment from "./Assessment";
-import WestWynModule from "./WestWynModule";
+import WestWyn from "./WestWynModule";
+
 
 export default function NewJoineeTraining() {
   const [completedModules, setCompletedModules] = useState([]);
@@ -111,7 +112,7 @@ export default function NewJoineeTraining() {
     } else if (moduleId === 3) {
       setCurrentModule("DholeraSIR");
     } else if (moduleId === 4) {
-      setCurrentModule("Westwyn");
+      setCurrentModule("WestwynModule");
     } else if (moduleId === 5) {
       setCurrentModule("Assessment");
     } else {
@@ -219,7 +220,7 @@ export default function NewJoineeTraining() {
         <DholeraSIR />
       </div>
     );
-  } else if (currentModule === "WestWyn") {
+  } else if (currentModule === "WestwynModule") {
     return (
       <div className="min-h-screen bg-gray-50 pt-24">
         {/* Back to Training Button */}
@@ -243,7 +244,7 @@ export default function NewJoineeTraining() {
           </div>
         </div>
 
-        <WestWynModule/>
+        <WestWyn/>
       </div>
     );
   } else if (currentModule === "Assessment") {

@@ -1,6 +1,6 @@
 import React from 'react'
-import Info from './new'
 import Head from 'next/head';
+import Info from './latest';
 
 /* export const metadata = {
   robots: {
@@ -16,7 +16,6 @@ import Head from 'next/head';
 export default function page() {
   return (
     <div>
-      
       <Info/>
     </div>
   )

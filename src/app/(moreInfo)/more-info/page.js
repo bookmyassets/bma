@@ -28,9 +28,9 @@ export default function Page() {
         </section>
         <About />
         <Westwyn />
-        <WhyInvest />
-        <WhyDholera />
         <Ammenties />
+        <WhyDholera />
+        <WhyInvest />
         <TestimonialPagination />
         <FAQSection />
         <EndSection />

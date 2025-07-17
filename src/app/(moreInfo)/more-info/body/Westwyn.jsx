@@ -32,7 +32,7 @@ const features = [
   },
   {
     icon: buybackguarantee,
-    title: "Buy Back Guarantee",
+    title: "Buy Back Option",
     description: "*Terms & Conditions Apply*",
   },
 ];
@@ -231,23 +231,122 @@ export default function Westwyn() {
       <div id="westwyn-county" className="westwyn-container bg-gray-50 mb-8">
         {/* Header Section */}
         <section className="max-w-7xl pt-8 mx-auto px-4 mb-16">
-          <div className="text-center space-y-4">
-            <h1 className="text-xl md:text-4xl font-bold text-gray-800">
-              WestWyn County
-            </h1>
-            <div className="bg-[#d7b36c] w-48 mx-auto h-1"></div>
-            <p className="font-light italic text-gray-600 text-lg max-w-2xl mx-auto">
-              Platinum-rated, AUDA-approved plots on Fedra-Pipli Highway in Dholera’s growth zone — built for smart investors.
-            </p>
-          </div>
-        </section>
+  <div className="text-center space-y-4">
+    <h4 className="text-xl md:text-4xl font-bold text-gray-800">
+      Location Advantage of WestWyn County
+    </h4>
+    <div className="bg-[#d7b36c] w-48 mx-auto h-1"></div>
+    <p className="font-light italic text-gray-600 text-lg max-w-2xl mx-auto">
+      Plots on Fedra-Pipli Highway in Dholera's growth zone — built for smart investors.
+    </p>
+  </div>
+</section>
 
-        <section className="flex justify-center items-center bg-black p-2 border-4 border-[#d7b36c]">
-          <Image
-            src={location}
-            alt="map"
-          />
-        </section>
+<section className="max-w-7xl mx-auto px-4 mb-16">
+  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+    {/* Left Side - Location Advantages */}
+    <div className="space-y-6">
+      <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#d7b36c]">
+        <div className="flex items-center space-x-4">
+          <div className="bg-[#d7b36c] p-3 rounded-full">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h5 className="text-lg font-semibold text-gray-800">Strategic Highway Location</h5>
+            <p className="text-sm text-gray-600">Direct access to Fedra-Pipli State Highway</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#d7b36c]">
+        <div className="flex items-center space-x-4">
+          <div className="bg-[#d7b36c] p-3 rounded-full">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+          </div>
+          <div>
+            <h5 className="text-lg font-semibold text-gray-800">Smart City Infrastructure</h5>
+            <p className="text-sm text-gray-600">Part of Dholera Smart City development</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#d7b36c]">
+        <div className="flex items-center space-x-4">
+          <div className="bg-[#d7b36c] p-3 rounded-full">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <div>
+            <h5 className="text-lg font-semibold text-gray-800">Industrial Growth Zone</h5>
+            <p className="text-sm text-gray-600">Proximity to major industrial developments</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Center - Map */}
+    <div className="lg:col-span-1 flex justify-center">
+      <div className="bg-black p-2 border-4 border-[#d7b36c]">
+        <Image
+          src={location}
+          alt="WestWyn County Location Map"
+          className=""
+        />
+      </div>
+    </div>
+
+    {/* Right Side - More Advantages */}
+    <div className="space-y-6">
+      <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#d7b36c]">
+        <div className="flex items-center space-x-4">
+          <div className="bg-[#d7b36c] p-3 rounded-full">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+            </svg>
+          </div>
+          <div>
+            <h5 className="text-lg font-semibold text-gray-800">Airport Connectivity</h5>
+            <p className="text-sm text-gray-600">Close to upcoming international airport</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#d7b36c]">
+        <div className="flex items-center space-x-4">
+          <div className="bg-[#d7b36c] p-3 rounded-full">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2zm0 0V5a2 2 0 012-2h14a2 2 0 012 2v2M7 12h10"/>
+            </svg>
+          </div>
+          <div>
+            <h5 className="text-lg font-semibold text-gray-800">Expressway Access</h5>
+            <p className="text-sm text-gray-600">Direct connection to Ahmedabad via expressway</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#d7b36c]">
+        <div className="flex items-center space-x-4">
+          <div className="bg-[#d7b36c] p-3 rounded-full">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+            </svg>
+          </div>
+          <div>
+            <h5 className="text-lg font-semibold text-gray-800">High ROI Potential</h5>
+            <p className="text-sm text-gray-600">Excellent investment opportunity with growth potential</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         <section className="max-w-7xl mx-auto">
           <div className="fade-in-up bg-black border-4 border-[#d7b36c] md:rounded-2xl shadow-lg p-8">

@@ -48,7 +48,7 @@ const cardsData = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+          d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2zm0 0V5a2 2 0 012-2h14a2 2 0 012 2v2M7 12h10"
         />
       </svg>
     ),
@@ -92,12 +92,11 @@ const cardsData = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M13 10V3L4 14h7v7l9-11h-7z"
+          d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
         />
       </svg>
     ),
   },
-
   {
     image: solar,
     title: "Dholera Solar Power Plant",
@@ -115,7 +114,7 @@ const cardsData = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
         />
       </svg>
     ),
@@ -137,7 +136,7 @@ const cardsData = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3m-6 12H3m18 0h-3M8 8h8M8 12h8"
         />
       </svg>
     ),
@@ -272,7 +271,7 @@ export default function WhyDholera() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold leading-tight font-poppins tracking-tight mb-4 text-white drop-shadow-lg">
-                Westwyn County Mega Projects
+                Dholera Smart City Mega Projects
                 
               </h2>
               <div className="w-24 h-1 bg-[#d7b36c] mx-auto mt-4"></div>

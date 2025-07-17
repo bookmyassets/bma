@@ -6,9 +6,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-
   const { slug } = await params;
-  const site = 'bookmyassets';
+  const site = "bookmyassets";
   const post = await getPostBySlug(slug, site);
 
   if (!post) {
@@ -25,9 +24,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Post({ params }) {
-  
   const { slug } = await params;
-  const site = 'bookmyassets';
+  const site = "bookmyassets";
   const post = await getPostBySlug(slug, site);
 
   if (!post || !post.slug?.current) {
@@ -37,42 +35,62 @@ export default async function Post({ params }) {
   const components = {
     types: {
       image: ({ value }) => {
-          if (!value?.asset) return null;
+        if (!value?.asset) return null;
 
-          // Use the asset URL directly if urlFor is not working
-          const imageUrl = value.asset.url || urlFor(value).width(1200).url();
+        // Use the asset URL directly if urlFor is not working
+        const imageUrl = value.asset.url || urlFor(value).width(1200).height(800).url();
 
-          const imageNode = (
-            <img
-              src={imageUrl}
-              alt={value.alt || ""}
-              className="w-full rounded-lg my-6"
-              loading="lazy"
+        const imageNode = (
+          <img
+            src={imageUrl}
+            alt={value.alt || ""}
+            className="w-full h-full rounded-lg my-6"
+            loading="lazy"
+          />
+        );
+
+        return (
+          <figure className="my-6">
+            {value.url ? (
+              <a
+                href={value.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:opacity-90 transition-opacity cursor-pointer"
+              >
+                {imageNode}
+              </a>
+            ) : (
+              imageNode
+            )}
+            {value.caption && (
+              <figcaption className="text-center text-sm text-gray-500 mt-2">
+                {value.caption}
+              </figcaption>
+            )}
+          </figure>
+        );
+      },
+
+      htmlTableBlock: ({ value }) => {
+        if (!value?.html) return null;
+
+        return (
+          <div className="my-8 overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+            <div
+              className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-white 
+              [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700 
+              [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
+              [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
+              [&_tr:last-child_td]:border-b-0
+              [&_tr:hover]:bg-gray-50/50
+              [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
+              [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
+              dangerouslySetInnerHTML={{ __html: value.html }}
             />
-          );
-
-          return (
-            <figure className="my-6">
-              {value.url ? (
-                <a
-                  href={value.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:opacity-90 transition-opacity cursor-pointer"
-                >
-                  {imageNode}
-                </a>
-              ) : (
-                imageNode
-              )}
-              {value.caption && (
-                <figcaption className="text-center text-sm text-gray-500 mt-2">
-                  {value.caption}
-                </figcaption>
-              )}
-            </figure>
-          );
-        },
+          </div>
+        );
+      },
 
       table: ({ value }) => {
         if (!value?.rows || !Array.isArray(value.rows)) {
@@ -327,9 +345,9 @@ export default async function Post({ params }) {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20">
         {/* Featured Image Card */}
-        <div className="bg-white rounded-2xl  shadow-2xl overflow-hidden mb-12">
+        <div className="bg-white rounded-2xl w-full md:w-[70vw] md:h-[500px] shadow-2xl overflow-hidden mb-12">
           {post.mainImage && (
-            <div className="relative w-full">
+            <div className="relative w-full md:h-[500px]">
               <Image
                 src={urlFor(post.mainImage)?.url() || ""}
                 alt={post.title}

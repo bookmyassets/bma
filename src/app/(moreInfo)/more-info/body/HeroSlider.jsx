@@ -22,29 +22,29 @@ export default function LandingPage({ img1, mimg1, openForm }) {
 
   useEffect(() => {
     // Only run on client side
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Check localStorage to see if popup was already shown
-      const popupShown = localStorage.getItem('popupShown');
-      
+      const popupShown = localStorage.getItem("popupShown");
+
       if (!popupShown) {
         const timer = setTimeout(() => {
           openForm();
-          localStorage.setItem('popupShown', 'true');
+          localStorage.setItem("popupShown", "true");
         }, 2000); // 5 seconds
 
         const handleScroll = () => {
           if (window.scrollY > window.innerHeight * 0.05) {
             openForm();
-            localStorage.setItem('popupShown', 'true');
-            window.removeEventListener('scroll', handleScroll);
+            localStorage.setItem("popupShown", "true");
+            window.removeEventListener("scroll", handleScroll);
             clearTimeout(timer);
           }
         };
 
-        window.addEventListener('scroll', handleScroll);
-        
+        window.addEventListener("scroll", handleScroll);
+
         return () => {
-          window.removeEventListener('scroll', handleScroll);
+          window.removeEventListener("scroll", handleScroll);
           clearTimeout(timer);
         };
       }
@@ -52,7 +52,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
   }, [openForm]);
 
   const handleClose = () => {
-    if (onClose && typeof onClose === 'function') {
+    if (onClose && typeof onClose === "function") {
       onClose();
     }
   };
@@ -94,15 +94,15 @@ export default function LandingPage({ img1, mimg1, openForm }) {
 
     // Handle Escape key press
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         handleClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
 
@@ -139,7 +139,6 @@ export default function LandingPage({ img1, mimg1, openForm }) {
 
     return true;
   };
-
 
   const onRecaptchaSuccess = async (token) => {
     try {
@@ -297,28 +296,43 @@ export default function LandingPage({ img1, mimg1, openForm }) {
       <div className="">
         {/* Desktop Image */}
         <div className="absolute inset-0 hidden lg:block">
-          <Image src={img1} alt="Investment Opportunity" className="w-full" priority />
-          <div className="absolute inset-0 bg-black opacity-20"></div> {/* Black Overlay */}
+          <Image
+            src={img1}
+            alt="Investment Opportunity"
+            className="w-full"
+            priority
+          />
+          <div className="absolute inset-0 bg-black opacity-20"></div>
         </div>
 
         {/* Mobile Image */}
         <div className="absolute inset-0 block lg:hidden">
-          <Image src={mimg1} alt="Investment Opportunity Mobile" fill className="w-full" priority />
-          <div className="absolute inset-0 "></div> {/* Black Overlay */}
+          <Image
+            src={mimg1}
+            alt="Investment Opportunity Mobile"
+            fill
+            className="w-full"
+            priority
+          />
+          <div className="absolute inset-0 "></div>
         </div>
 
-        {/* Text Overlay */}
-        <div className="absolute max-w-7xl mx-auto inset-0 z-10 font-semibold text-xl md:text-5xl max-sm:translate-y-40 text-gray-200 flex lg:items-center justify-center lg:justify-start">
-          <p className="text-center md:text-left px-4 md:px-0">
-            Premium, Registry-Ready <br /> Plot in Dholera <br /> Built for Smart Investors
+        {/* Text Overlay - Bottom Left */}
+        <div className="absolute max-w-7xl mx-auto inset-0 z-10 font-semibold text-xl md:text-5xl text-gray-200 flex items-end justify-start">
+          <p className="text-left px-4 md:px-8 pb-8 md:pb-12 lg:pb-16">
+            Premium, Residential Plots <br /> in Dholera... <br /> WestWyn
+            County
           </p>
         </div>
       </div>
 
-
       {/* Contact Us Button - Bottom-Centered & Responsive */}
       <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center items-center pb-2 max-sm:pb-0">
-        <motion.div initial="hidden" animate="visible" variants={containerVariants}>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
           <motion.div variants={buttonVariants}>
             <motion.button
               whileHover="hover"
@@ -416,7 +430,6 @@ export default function LandingPage({ img1, mimg1, openForm }) {
               {/* Close Button */}
               <button
                 type="button"
-                
                 onClick={() => setShowFormPopup(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full p-1 transition-all duration-200 hover:bg-gray-700 z-10"
                 aria-label="Close form"
@@ -460,9 +473,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
                 className="text-center mb-6 pt-4"
-              >
-                
-              </motion.div>
+              ></motion.div>
 
               {showPopup ? (
                 <div className="text-center py-8">
@@ -488,10 +499,12 @@ export default function LandingPage({ img1, mimg1, openForm }) {
                       </svg>
                     </div>
                   </motion.div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Thank You!
+                  </h3>
                   <p className="text-gray-300">
-                    Your request has been submitted successfully. We'll contact you
-                    shortly.
+                    Your request has been submitted successfully. We'll contact
+                    you shortly.
                   </p>
                 </div>
               ) : (
@@ -555,7 +568,11 @@ export default function LandingPage({ img1, mimg1, openForm }) {
                     id="hero-form"
                     className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? "Verifying..." : recaptchaLoaded ? "Talk To Investment Advisor" : "Loading..."}
+                    {isLoading
+                      ? "Verifying..."
+                      : recaptchaLoaded
+                        ? "Talk To Investment Advisor"
+                        : "Loading..."}
                   </motion.button>
                 </form>
               )}
