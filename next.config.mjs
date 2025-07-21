@@ -4,28 +4,26 @@ const nextConfig = {
     return [
       {
         source: '/LandX-Beta/:path*',
-        destination: '/api/landx?path=/:path*',
+        destination: '/api/landx?path=:path*', // Removed the extra slash
       },
       {
         source: '/landx',
         destination: '/api/landx',
       },
+      // Add this to catch all paths under /api/landx
+      {
+        source: '/api/landx/:path*',
+        destination: '/api/landx?path=:path*',
+      },
     ];
   },
-  // Optional: Add headers for better proxy support
   async headers() {
     return [
       {
-        source: '/api/landx/:path*',
+        source: '/:path*',
         headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
         ],
       },
     ];

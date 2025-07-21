@@ -1,7 +1,7 @@
 // app/api/landx/route.js
 
 const TARGET_DOMAIN = 'https://bigbucket.online';
-const TARGET_BASE_PATH = '/LandX-Beta';
+const TARGET_BASE_PATH = '/namanTest';
 const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`; // Start with login.php
 const BASE_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}`;
 
@@ -46,30 +46,31 @@ function extractSetCookies(response) {
 function modifyHtmlContent(html, baseUrl, currentPath = '') {
   let modifiedHtml = html;
   
-  // Fix form actions
-  modifiedHtml = modifiedHtml.replace(/action="([^"]*?)"/g, (match, action) => {
-    if (action.startsWith('http')) return match;
+  // Enhanced form action handling
+  modifiedHtml = modifiedHtml.replace(/action="([^"]*?)"/gi, (match, action) => {
+    if (action.startsWith('http') || action.startsWith('//')) return match;
     if (action === '' || action === '.') {
       return `action="/api/landx${currentPath}"`;
     }
     if (action.startsWith('/')) {
       return `action="/api/landx?path=${encodeURIComponent(action)}"`;
     }
-    return `action="/api/landx?path=${encodeURIComponent('/' + action)}"`;
+    return `action="/api/landx?path=${encodeURIComponent(currentPath + '/' + action)}"`;
   });
-  
-  // Fix href links
-  modifiedHtml = modifiedHtml.replace(/href="([^"]*?)"/g, (match, href) => {
-    if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('javascript:')) {
+
+  // Enhanced href handling
+  modifiedHtml = modifiedHtml.replace(/href="([^"]*?)"/gi, (match, href) => {
+    if (href.startsWith('http') || href.startsWith('#') || 
+        href.startsWith('mailto:') || href.startsWith('javascript:')) {
       return match;
     }
     if (href.startsWith('/')) {
       return `href="/api/landx?path=${encodeURIComponent(href)}"`;
     }
     if (href === '' || href === '.') {
-      return `href="/api/landx"`;
+      return `href="/api/landx?path=${encodeURIComponent(currentPath)}"`;
     }
-    return `href="/api/landx?path=${encodeURIComponent('/' + href)}"`;
+    return `href="/api/landx?path=${encodeURIComponent(currentPath + '/' + href)}"`;
   });
   
   // Fix src attributes for resources
@@ -101,17 +102,22 @@ function modifyHtmlContent(html, baseUrl, currentPath = '') {
 // Helper to construct target URL
 function constructTargetUrl(path) {
   if (!path || path === '/') {
-    return TARGET_URL; // Default to login.php
+    return TARGET_URL; // Default to dashboard.php
   }
-  
+
   // Remove leading slash if present
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  
+
+  // Handle special PHP files directly
+  if (cleanPath.endsWith('.php')) {
+    return `${BASE_URL}/${cleanPath}`;
+  }
+
   // If it's a full path starting with the base path, use it directly
   if (path.startsWith(TARGET_BASE_PATH)) {
     return `${TARGET_DOMAIN}${path}`;
   }
-  
+
   return `${BASE_URL}/${cleanPath}`;
 }
 
@@ -119,9 +125,10 @@ export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
     const requestedPath = searchParams.get('path') || '/';
-    const targetUrl = constructTargetUrl(requestedPath);
+    console.log('GET Request - Path:', requestedPath); // Add this
     
-    console.log('GET Request - Target URL:', targetUrl);
+    const targetUrl = constructTargetUrl(requestedPath);
+    console.log('Constructed Target URL:', targetUrl); // Add this
     
     const targetHeaders = { ...commonHeaders };
     
