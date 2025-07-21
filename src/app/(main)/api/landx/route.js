@@ -1,8 +1,15 @@
 // app/api/landx/route.js
 
 const TARGET_DOMAIN = 'https://bigbucket.online';
-const TARGET_BASE_PATH = '/namanTest';
-const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`; // Start with login.php
+const TARGET_BASE_PATH = '/LandX-Beta';
+const TARGET_URLS = {
+  '/dashboard': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
+  '/logout': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/logout.php`,
+  '/login': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/login.php`,
+  // Add more mappings as needed
+  '/default': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/index.php`, // Default fallback
+  '/superadmin': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/superadmin.php`,
+};
 const BASE_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}`;
 
 const commonHeaders = {
@@ -46,31 +53,30 @@ function extractSetCookies(response) {
 function modifyHtmlContent(html, baseUrl, currentPath = '') {
   let modifiedHtml = html;
   
-  // Enhanced form action handling
-  modifiedHtml = modifiedHtml.replace(/action="([^"]*?)"/gi, (match, action) => {
-    if (action.startsWith('http') || action.startsWith('//')) return match;
+  // Fix form actions
+  modifiedHtml = modifiedHtml.replace(/action="([^"]*?)"/g, (match, action) => {
+    if (action.startsWith('http')) return match;
     if (action === '' || action === '.') {
       return `action="/api/landx${currentPath}"`;
     }
     if (action.startsWith('/')) {
       return `action="/api/landx?path=${encodeURIComponent(action)}"`;
     }
-    return `action="/api/landx?path=${encodeURIComponent(currentPath + '/' + action)}"`;
+    return `action="/api/landx?path=${encodeURIComponent('/' + action)}"`;
   });
-
-  // Enhanced href handling
-  modifiedHtml = modifiedHtml.replace(/href="([^"]*?)"/gi, (match, href) => {
-    if (href.startsWith('http') || href.startsWith('#') || 
-        href.startsWith('mailto:') || href.startsWith('javascript:')) {
+  
+  // Fix href links
+  modifiedHtml = modifiedHtml.replace(/href="([^"]*?)"/g, (match, href) => {
+    if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('javascript:')) {
       return match;
     }
     if (href.startsWith('/')) {
       return `href="/api/landx?path=${encodeURIComponent(href)}"`;
     }
     if (href === '' || href === '.') {
-      return `href="/api/landx?path=${encodeURIComponent(currentPath)}"`;
+      return `href="/api/landx"`;
     }
-    return `href="/api/landx?path=${encodeURIComponent(currentPath + '/' + href)}"`;
+    return `href="/api/landx?path=${encodeURIComponent('/' + href)}"`;
   });
   
   // Fix src attributes for resources
@@ -102,33 +108,42 @@ function modifyHtmlContent(html, baseUrl, currentPath = '') {
 // Helper to construct target URL
 function constructTargetUrl(path) {
   if (!path || path === '/') {
-    return TARGET_URL; // Default to dashboard.php
+    return `${BASE_URL}/dashboard.php`; // Default to dashboard.php
   }
 
-  // Remove leading slash if present
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-
-  // Handle special PHP files directly
-  if (cleanPath.endsWith('.php')) {
-    return `${BASE_URL}/${cleanPath}`;
+  // Handle specific PHP files directly
+  if (path.endsWith('.php')) {
+    return `${BASE_URL}/${path}`;
   }
 
-  // If it's a full path starting with the base path, use it directly
-  if (path.startsWith(TARGET_BASE_PATH)) {
-    return `${TARGET_DOMAIN}${path}`;
+  // Handle known paths
+  switch(path) {
+    case '/dashboard':
+      return `${BASE_URL}/dashboard.php`;
+    case '/logout':
+      return `${BASE_URL}/logout.php`;
+    case '/login':
+      return `${BASE_URL}/login.php`;
+    // Add more cases as needed
+    default:
+      // If it's a full path starting with the base path, use it directly
+      if (path.startsWith(TARGET_BASE_PATH)) {
+        return `${TARGET_DOMAIN}${path}`;
+      }
+      
+      // Otherwise, construct the URL normally
+      const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+      return `${BASE_URL}/${cleanPath}`;
   }
-
-  return `${BASE_URL}/${cleanPath}`;
 }
 
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
     const requestedPath = searchParams.get('path') || '/';
-    console.log('GET Request - Path:', requestedPath); // Add this
-    
     const targetUrl = constructTargetUrl(requestedPath);
-    console.log('Constructed Target URL:', targetUrl); // Add this
+    
+    console.log('GET Request - Target URL:', targetUrl);
     
     const targetHeaders = { ...commonHeaders };
     
