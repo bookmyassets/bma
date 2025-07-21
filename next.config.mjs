@@ -1,5 +1,35 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/LandX-Beta/:path*',
+        destination: '/api/landx?path=/:path*',
+      },
+      {
+        source: '/landx',
+        destination: '/api/landx',
+      },
+    ];
+  },
+  // Optional: Add headers for better proxy support
+  async headers() {
+    return [
+      {
+        source: '/api/landx/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+    ];
+  },
   images: {
     domains: ['cdn.sanity.io'], 
     remotePatterns: [

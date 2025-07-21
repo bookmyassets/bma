@@ -1,51 +1,119 @@
 import { PortableText } from "@portabletext/react";
-import { urlFor } from "@/sanity/lib/image";
-import { getPostBySlug, getProjectBySlug, getProjectSOBySlug, projectInfo } from "@/sanity/lib/api";
-import Link from "next/link";
+import {
+  getPostBySlug,
+  getblogs,
+  getProjectInfo,
+  getProjects,
+} from "@/sanity/lib/api";
+import CostSheet from "@/app/(main)/components/costSheet";
 import Image from "next/image";
-import ProjectSlider from "./slider";
-import ProjectsModalWithButton from "./ProjectModal";
-import Projectinformation from "../../components/Projectinformation";
+import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
+import CommonForm from "../../components/FormSection";
 
-const site = 'bookmyassets'
+export async function generateMetadata({ params }) {
+   const { slug } = await params;
+  const site = 'dholera-times';
+  const post = await getPostBySlug(slug, site);
 
-export default async function ProjectDetail({ params }) {
-  const { slug } = await params;
+  return {
+    title: post.title,
+    description: post.metaDescription,
+  };
+}
+
+// Trending Blog Item Component
+const TrendingBlogItem = ({ post }) => {
+  return (
+    <Link href={`/projects/${post.slug.current}`}>
+      <div className="flex gap-4 items-center bg-white hover:bg-gray-50 p-4 rounded-lg border border-gray-100 transition-all hover:shadow-md">
+        {post.mainImage && (
+          <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+            <Image
+              src={urlFor(post.mainImage).width(80).height(80).url()}
+              alt={post.title}
+              width={80}
+              height={80}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+        <div>
+          <h4 className="font-semibold text-gray-900 line-clamp-2">
+            {post.title}
+          </h4>
+          <p className="text-sm text-gray-500 line-clamp-1 mt-1">
+            {post.description}
+          </p>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+const Projects = ({ post }) => {
+  // Check if post exists and has required properties
+  if (!post || !post.slug?.current) return null;
+
+  // Check if category is "sold out" (case insensitive)
+  if (post.category && post.category.toLowerCase().trim() === "sold out") {
+    return null;
+  }
+
+  return (
+    <Link href={`/dholera-sir/${post.slug.current}`}>
+      <link rel="canonical" href={`https://www.dholeratimes.com/projects/${post.slug.current}`}/>
+      <meta name="robots" content="index, dofollow"/>
+
+      <div className="flex gap-4 items-center bg-white hover:bg-gray-50 p-4 rounded-lg border border-gray-100 transition-all hover:shadow-md">
+        {post.mainImage && (
+          <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+            <Image
+              src={urlFor(post.mainImage).width(80).height(80).url()}
+              alt={post.title || "Project image"}
+              width={80}
+              height={80}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+        <div>
+          <h4 className="font-semibold text-gray-900 line-clamp-2">
+            {post.title || "Untitled Project"}
+          </h4>
+          <p className="text-sm text-gray-500 line-clamp-1 mt-1">
+            {post.description || ""}
+          </p>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default async function Post({ params }) {
+   const { slug } = await params;
+  const site = 'dholera-times';
 
   if (!slug) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-8">
-          <h1 className="text-2xl font-bold mb-2">
-            Missing Project Information
-          </h1>
-          <p className="text-gray-600">No project slug was provided</p>
-          <Link
-            href="/projects"
-            className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
-          >
-            ← Back to Projects
-          </Link>
-        </div>
+        <div className="animate-pulse">Loading...</div>
       </div>
     );
   }
 
   try {
-    const [post, projects, SO] = await Promise.all([
-      getPostBySlug(slug,site),
-      getProjectBySlug(slug,site),
-      getProjectSOBySlug(slug,site)
+    const [post, trendingBlogs, projects, projectInfo] = await Promise.all([
+      getPostBySlug(slug, site),
+      getProjects(4),
+      getProjectInfo(),
     ]);
 
     if (!post) {
       return (
         <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center p-8">
-            <h1 className="text-2xl font-bold mb-2">Project Not Found</h1>
-            <p className="text-gray-600">
-              The requested project could not be found
-            </p>
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-2">Project not found</h1>
             <Link
               href="/projects"
               className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
@@ -57,80 +125,53 @@ export default async function ProjectDetail({ params }) {
       );
     }
 
-    // Extract the actual slug string values
-    const postSlugStr =
-      typeof post.slug === "object" ? post.slug.current : post.slug;
+    const isProject = post.categories?.some(
+      (category) => category.title.toLowerCase() === "project"
+    );
+
+    const isSold = post.categories?.some(
+      (category) => category.title === "Sold Out"
+    );
 
     const components = {
       types: {
         image: ({ value }) => {
-          if (!value?.asset?._ref) {
-            return null;
-          }
+          if (!value?.asset) return null;
+
+          const imageUrl = value.asset.url || urlFor(value).width(1200).url();
+
+          const imageNode = (
+            <img
+              src={imageUrl}
+              alt={value.alt || ""}
+              className="w-full rounded-lg my-6"
+              loading="lazy"
+            />
+          );
+
           return (
-            <figure className="my-12">
-              <div className="overflow-hidden rounded-xl shadow-xl">
-                <img
-                  alt={value.alt || " "}
-                  src={urlFor(value).width(1200).url()}
-                  width={1200}
-                  height={800}
-                  className="w-full rounded-xl shadow-lg hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+            <figure className="my-6">
+              {value.url ? (
+                <a
+                  href={value.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:opacity-90 transition-opacity cursor-pointer"
+                >
+                  {imageNode}
+                </a>
+              ) : (
+                imageNode
+              )}
               {value.caption && (
-                <figcaption className="mt-3 text-center text-sm italic text-gray-500">
+                <figcaption className="text-center text-sm text-gray-500 mt-2">
                   {value.caption}
                 </figcaption>
               )}
             </figure>
           );
         },
-
-        // Fixed table component
-        table: ({ value }) => {
-          if (!value?.rows || !Array.isArray(value.rows)) {
-            return null;
-          }
-
-          return (
-            <div className="overflow-x-auto my-8">
-              <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
-                <tbody>
-                  {value.rows.map((row, i) => {
-                    if (!row?.cells || !Array.isArray(row.cells)) {
-                      return null;
-                    }
-
-                    return (
-                      <tr
-                        key={i}
-                        className={i % 2 === 0 ? "bg-gray-50" : "bg-white"}
-                      >
-                        {row.cells.map((cell, j) => (
-                          <td
-                            key={j}
-                            className="px-4 py-3 border border-gray-200 text-gray-700"
-                          >
-                            {cell || ""}
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          );
-        },
-
-        code: ({ value }) => (
-          <pre className="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto my-6">
-            <code className="font-mono text-sm">{value.code}</code>
-          </pre>
-        ),
       },
-
       marks: {
         link: ({ children, value }) => {
           return (
@@ -190,7 +231,6 @@ export default async function ProjectDetail({ params }) {
           );
         },
       },
-
       block: {
         h1: ({ children }) => (
           <h1 className="text-4xl font-bold mt-20 mb-8 text-gray-900 border-b border-gray-200 pb-3">
@@ -273,7 +313,6 @@ export default async function ProjectDetail({ params }) {
           </p>
         ),
       },
-
       list: {
         bullet: ({ children }) => (
           <ul className="list-disc pl-6 mb-6 space-y-2 text-gray-700">
@@ -286,7 +325,6 @@ export default async function ProjectDetail({ params }) {
           </ol>
         ),
       },
-
       listItem: {
         bullet: ({ children }) => (
           <li className="text-lg leading-relaxed">{children}</li>
@@ -296,258 +334,256 @@ export default async function ProjectDetail({ params }) {
         ),
       },
     };
-    
-    const canonicalUrl = `https://www.bookmyassets.com/projects/${post.slug.current}`;
+
+    // Format date for display
+    const formattedDate = new Date(
+      post.publishedAt || post._createdAt
+    ).toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
     return (
       <div className="bg-white min-h-screen">
-        <title>{post.metaTitle}</title>
-        <meta name="description" content={post.metaDescription} />
-        <meta name="keywords" content={post.keywords} />
-        <link rel="canonical" href={canonicalUrl} />
+        <link
+          rel="canonical"
+          href={`https://www.dholeratimes.com/projects/${post.slug.current}`}
+        />
         {/* Sticky Nav Placeholder */}
-        <div className="bg-white shadow-sm py-8 h-8" />
+        <div className="bg-white shadow-sm sticky top-0 z-30" />
 
-        {/* Hero Section */}
-        <header className="w-full bg-black text-white">
-          <div className="max-w-7xl mx-auto px-4 py-8">
-            <h1 className="text-4xl md:text-5xl font-bold">{post.title}</h1>
-          </div>
-        </header>
-
-        {/* Content wrapper */}
-        <main className=" max-w-7xl mx-auto px-4 py-4">
+        {/* Main content */}
+        <main className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Article */}
             <article className="lg:w-2/3">
+              {/* Header with breadcrumbs */}
+              <div className="mb-4">
+                <nav className="flex" aria-label="Breadcrumb">
+                  <ol className="inline-flex items-center space-x-1 md:space-x-3">
+                    <li className="inline-flex items-center">
+                      <Link
+                        href="/"
+                        className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
+                      >
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <div className="flex items-center">
+                        <svg
+                          className="w-3 h-3 text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        <Link
+                          href="/projects"
+                          className="ml-1 text-sm font-medium text-gray-500 hover:text-gray-700 md:ml-2"
+                        >
+                          Projects
+                        </Link>
+                      </div>
+                    </li>
+                    <li aria-current="page">
+                      <div className="flex items-center">
+                        <svg
+                          className="w-3 h-3 text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 line-clamp-1">
+                          {post.title}
+                        </span>
+                      </div>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
 
-              <ProjectsModalWithButton currentSlug = {slug}/>
+              {/* Categories */}
+              <div className="mb-8">
+                {post.categories && post.categories.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {post.categories.map((category) => (
+                      <span
+                        key={category._id || category.title}
+                        className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
+                      >
+                        {category.title}
+                      </span>
+                    ))}
+                    {isProject && !isSold && (
+                      <span className="px-3 py-1 bg-red-50 text-red-600 text-sm font-semibold rounded-full">
+                        22 Plots Left
+                      </span>
+                    )}
+                  </div>
+                )}
 
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                  {post.title}
+                </h1>
+
+                {/* Publication date */}
+                <div className="flex items-center gap-4 text-gray-500 text-sm mb-6">
+                  <div className="flex items-center">
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                    <time className="text-gray-500">{formattedDate}</time>
+                  </div>
+
+                  {post.readingTime && (
+                    <div className="flex items-center">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+                      <span>{post.readingTime} min read</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Featured Image */}
               {post.mainImage && (
-                <div className="mb-10 overflow-hidden shadow-2xl pt-4 scale-105">
+                <div className="mb-10 overflow-hidden rounded-xl shadow-lg">
                   <Image
-                    src={urlFor(post.mainImage).width(1200).height(900).url()}
+                    src={urlFor(post.mainImage).width(1200).height(675).url()}
                     alt={post.title}
                     width={1200}
-                    height={800}
-                    className="w-full h-full object-cover"
+                    height={675}
+                    className="w-full h-auto"
                     priority
                   />
                 </div>
               )}
 
-              {/* Mobile view related projects */}
-              <div className="lg:hidden mb-10">
-                <h3 className="text-xl font-bold mb-4 text-black">
-                  Our {post.title} Projects
-                </h3>
-                {projects?.relatedProjects?.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {projects.relatedProjects.map((project) => {
-                      // Extract project slug string safely
-                      const projectSlugStr =
-                        typeof project.slug === "object"
-                          ? project.slug.current
-                          : project.slug;
+              {/* Content */}
+              <div className="bg-white rounded-xl shadow-2xl text-black leading-5 shadow-t-2xl p-8 border border-gray-200">
+                <div className="text-xl max-w-none">
+                  <PortableText value={post.body} components={components} />
+                </div>
 
-                      return (
+                {/* Tags */}
+                {post.tags && post.tags.length > 0 && (
+                  <div className="mt-12 pt-6 border-t border-gray-200">
+                    <h4 className="font-semibold text-gray-900 mb-3">
+                      Related Topics:
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.map((tag) => (
                         <Link
-                          key={project._id || projectSlugStr}
-                          href={`/projects/${postSlugStr}/${projectSlugStr}`}
-                          className="flex gap-3 items-center bg-white hover:bg-gray-100 p-3 rounded-lg border border-gray-200 transition"
+                          key={tag}
+                          href={`/projects/tag/${tag}`}
+                          className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-full transition"
                         >
-                          <div className="flex items-center gap-4 w-full">
-                            <div className="relative w-12 lg:w-24 h-12 lg:h-24 flex-shrink-0">
-                              <Image
-                                src={urlFor(project.mainImage).url()}
-                                alt={project.title}
-                                fill
-                                className="object-cover rounded"
-                              />
-                            </div>
-                            <h4 className="text-sm lg:text-base font-semibold text-black">
-                              {project.title}
-                            </h4>
-                          </div>
+                          #{tag}
                         </Link>
-                      );
-                    })}
+                      ))}
+                    </div>
                   </div>
-                ) : (
-                  <p className="text-gray-500">No related projects found.</p>
                 )}
               </div>
-
-              {/* Main rich text content */}
-              <div className="bg-white rounded-xl shadow-md p-8 border border-gray-200">
-                <div className="text-lg leading-relaxed">
-                  <PortableText
-                    value={post.body}
-                    components={components}
-                  />
-                </div>
-              </div>
-              <ProjectSlider />
             </article>
+
+            <div className="md:hidden pt-4">
+          <CommonForm title="Still Have Questions? Contact Us Now" />
+        </div>
 
             {/* Sidebar */}
             <aside className="lg:w-1/3">
-              <div className="sticky top-20">
-                <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200 mb-6">
-                  <h3 className="text-xl font-bold mb-4 text-black">
-                    Our {post.title} Projects
+              <div className="sticky space-y-4 top-24">
+                {/* Trending posts */}
+                <div className="bg-[#151f28] rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
+                  <h3 className="text-xl font-bold mb-4 text-blue-300">
+                    Our Projects
                   </h3>
-                  <div className="space-y-4 max-h-[300px] overflow-y-auto">
-                    {projects?.relatedProjects?.length > 0 ? (
-                      projects.relatedProjects.map((project) => {
-                        const projectSlugStr =
-                          typeof project.slug === "object"
-                            ? project.slug.current
-                            : project.slug;
-
-                        return (
-                          <Link
-                            key={project._id || projectSlugStr}
-                            href={`/projects/${postSlugStr}/${projectSlugStr}`}
-                            className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
-                          >
-                            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-                              {project.mainImage ? (
-                                <Image
-                                  src={urlFor(project.mainImage)
-                                    .width(64)
-                                    .height(64)
-                                    .url()}
-                                  alt={project.title}
-                                  width={64}
-                                  height={64}
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <div className="w-full h-full bg-gray-200" />
-                              )}
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-black">
-                                {project.title}
-                              </h4>
-                            </div>
-                          </Link>
-                        );
-                      })
+                  <div className="">
+                    {trendingBlogs && trendingBlogs.length > 0 ? (
+                      trendingBlogs.map((blog) => (
+                        <div key={blog._id} className="mb-3">
+                          <TrendingBlogItem post={blog} />
+                        </div>
+                      ))
                     ) : (
-                      <p className="text-gray-500">
-                        No related projects found.
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="bg-white rounded-xl max-md:hidden shadow-md p-6 border border-gray-200 mb-6">
-                  <h3 className="text-xl font-bold mb-4 text-black">
-                    Our Sold Out Projects
-                  </h3>
-                  <div className="space-y-4 max-h-[300px] overflow-y-auto">
-                    {SO?.relatedProjects?.length > 0 ? (
-                      SO.relatedProjects.map((SO) => {
-                        const projectSOSlugStr =
-                          typeof SO.slug === "object"
-                            ? SO.slug.current
-                            : SO.slug;
-
-                        return (
-                          <Link
-                            key={SO._id || projectSOSlugStr}
-                            href={`/projects/${postSlugStr}/${projectSOSlugStr}`}
-                            className="flex gap-3 items-center hover:bg-gray-100 p-2 rounded-lg transition"
-                          >
-                            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-                              {SO.mainImage ? (
-                                <Image
-                                  src={urlFor(SO.mainImage)
-                                    .width(64)
-                                    .height(64)
-                                    .url()}
-                                  alt={SO.title}
-                                  width={64}
-                                  height={64}
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <div className="w-full h-full bg-gray-200" />
-                              )}
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-black">
-                                {SO.title}
-                              </h4>
-                            </div>
-                          </Link>
-                        );
-                      })
-                    ) : (
-                      <p className="text-gray-500">
-                        No related projects found.
+                      <p className="text-gray-400">
+                        No trending articles found.
                       </p>
                     )}
                   </div>
                 </div>
 
-                {/* Project Details - Part of the same sticky container */}
-                <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 mb-6">
-                  <h3 className="text-xl font-bold mb-4 text-black">
-                    Project Details
+                <div className="bg-[#151f28] rounded-xl shadow-md p-6 border border-gray-700">
+                  <h3 className="text-xl font-bold mb-4 text-blue-300">
+                    Explore Dholera SIR
                   </h3>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Status</span>
-                      <span className="font-medium text-[#C69C21]">
-                        {post.categories && Array.isArray(post.categories)
-                          ? post.categories.find(
-                              (c) =>
-                                c &&
-                                c.title &&
-                                ["active", "sold out", "coming soon"].includes(
-                                  c.title.toLowerCase()
-                                )
-                            )?.title || "Active"
-                          : "Active"}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Location</span>
-                      <span className="font-medium">
-                        {post.location || "—"}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Investment</span>
-                      <span className="font-medium">
-                        {post.investment || "Contact for details"}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Returns</span>
-                      <span className="font-medium">
-                        {post.returns || "Contact for details"}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="mt-6 pt-6 border-t border-gray-200">
-                      <div className="w-full text-center bg-[#FDB913] hover:bg-[#C69C21] text-black py-3 rounded-lg font-medium transition-colors">
-                        <Projectinformation/>
-                      </div>
+                  <div className="">
+                    {projects && projects.length > 0 ? (
+                      projects.map((project) => (
+                        <div key={project._id} className="mb-3">
+                          <Projects post={project} />
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-400">No projects found.</p>
+                    )}
                   </div>
                 </div>
               </div>
             </aside>
           </div>
         </main>
+
+        {/* Cost Sheet */}
+        {isProject && <CostSheet />}
+        <div className="max-sm:hidden pt-4">
+          <CommonForm title="Still Have Questions? Contact Us Now" />
+        </div>
+
       </div>
     );
   } catch (error) {
     console.error("Error loading project:", slug, error);
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-8">
+        <div className="text-center">
           <h1 className="text-2xl font-bold mb-2">Error loading project</h1>
           <p className="text-gray-600">Please try again later</p>
           <Link
