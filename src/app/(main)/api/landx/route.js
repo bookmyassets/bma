@@ -72,9 +72,9 @@ function modifyHtmlContent(html, currentPath = "") {
   // Normalize currentPath
   currentPath = currentPath.replace(/\/+$/, '');
 
-  // First pass - modify all standard links and forms
+  // all standard links and forms
   let modifiedHtml = html
-    // Rewrite href attributes
+    // href attributes
     .replace(/href="([^"]*?)"/gi, (match, href) => {
       if (href.startsWith('http') || href.startsWith('//') || 
           href.startsWith('#') || href.startsWith('mailto:') || 
@@ -98,7 +98,7 @@ function modifyHtmlContent(html, currentPath = "") {
       )}"`;
     })
     
-    // Rewrite form actions
+    // Form actions
     .replace(/action="([^"]*?)"/gi, (match, action) => {
       if (action.startsWith('http') || !action) return match;
       
@@ -113,7 +113,6 @@ function modifyHtmlContent(html, currentPath = "") {
       )}"`;
     })
     
-    // Fix src attributes for resources
     .replace(/src="([^"]*?)"/g, (match, src) => {
       if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//')) {
         return match;
@@ -121,7 +120,6 @@ function modifyHtmlContent(html, currentPath = "") {
       return `src="${BASE_URL}/${src.startsWith('/') ? src.slice(1) : src}"`;
     })
     
-    // Fix background images in CSS
     .replace(/url\(["']?([^"')]*?)["']?\)/g, (match, url) => {
       if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('//')) {
         return match;
@@ -129,9 +127,8 @@ function modifyHtmlContent(html, currentPath = "") {
       return `url("${BASE_URL}/${url.startsWith('/') ? url.slice(1) : url}")`;
     });
 
-  // Second pass - modify JavaScript code that makes requests
   modifiedHtml = modifiedHtml
-    // Fix fetch/XHR requests in JavaScript
+    //fetch/XHR requests in JavaScript
     .replace(/(fetch|axios|jQuery\.ajax|XMLHttpRequest|\.post|\.get)\(['"]([^'"]*?)['"]/g, 
       (match, method, url) => {
         if (url.startsWith('http') || url.startsWith('//')) return match;
@@ -144,7 +141,7 @@ function modifyHtmlContent(html, currentPath = "") {
         return match;
       })
     
-    // Fix form submissions in JavaScript
+    // Form submissions in JavaScript
     .replace(/(\.action|formAction|\.submit|\.url)\s*=\s*['"]([^'"]*?)['"]/g,
       (match, prop, url) => {
         if (url.startsWith('http') || url.startsWith('//')) return match;
@@ -164,7 +161,7 @@ function modifyHtmlContent(html, currentPath = "") {
   return modifiedHtml;
 }
 
-// Unified request handler
+// request handler
 async function handleRequest(req, method = 'GET') {
  /*  console.log(`🚀 ${method} Request started`);
   console.log(`🚀 Request URL:`, req.url); */
