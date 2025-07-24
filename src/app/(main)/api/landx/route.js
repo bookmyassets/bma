@@ -1,412 +1,321 @@
 // app/api/landx/route.js
 
-const TARGET_DOMAIN = 'https://bigbucket.online';
-const TARGET_BASE_PATH = '/LandX-Beta';
-const TARGET_URLS = {
-  '/dashboard': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
-  '/logout': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/logout.php`,
-  '/login': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/login.php`,
-  // Add more mappings as needed
-  '/default': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/index.php`, // Default fallback
-  '/superadmin': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/superadmin.php`,
-};
+const TARGET_DOMAIN = "https://bigbucket.online";
+const TARGET_BASE_PATH = "/LandX-Beta";
+const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
 const BASE_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}`;
 
 const commonHeaders = {
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-  'Accept-Language': 'en-US,en;q=0.9',
-  'Accept-Encoding': 'gzip, deflate, br',
-  'Connection': 'keep-alive',
-  'Upgrade-Insecure-Requests': '1',
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+  Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+  "Accept-Language": "en-US,en;q=0.9",
+  "Accept-Encoding": "gzip, deflate, br",
+  Connection: "keep-alive",
+  "Upgrade-Insecure-Requests": "1",
 };
 
-// Helper function to forward cookies from client to target server
+// Helper function to forward cookies
 function forwardCookies(clientRequest, targetHeaders) {
-  const cookies = clientRequest.headers.get('cookie');
+  const cookies = clientRequest.headers.get("cookie");
   if (cookies) {
-    targetHeaders['Cookie'] = cookies;
+    targetHeaders["Cookie"] = cookies;
   }
 }
 
-// Helper function to forward cookies from target server back to client
+// Robust cookie extraction
 function extractSetCookies(response) {
   const setCookieHeaders = [];
   
-  // Handle both single and multiple set-cookie headers
+  // Standard way to get Set-Cookie header
   const setCookieHeader = response.headers.get('set-cookie');
   if (setCookieHeader) {
-    // Split multiple cookies if they're in a single header
-    const cookies = setCookieHeader.split(',').map(cookie => cookie.trim());
+    // Handle multiple cookies in one header
+    const cookies = setCookieHeader.split(/\s*,\s*(?=[^;]+;)/);
     setCookieHeaders.push(...cookies);
   }
   
-  // Also check for raw headers if available
-  if (response.headers.raw && response.headers.raw()['set-cookie']) {
-    setCookieHeaders.push(...response.headers.raw()['set-cookie']);
+  // Try raw headers if available
+  if (typeof response.headers.raw === 'function') {
+    const rawSetCookies = response.headers.raw()['set-cookie'] || [];
+    setCookieHeaders.push(...rawSetCookies);
   }
   
   return setCookieHeaders;
 }
 
-// Enhanced HTML content modifier
-function modifyHtmlContent(html, baseUrl, currentPath = '') {
-  let modifiedHtml = html;
-  
-  // Fix form actions
-  modifiedHtml = modifiedHtml.replace(/action="([^"]*?)"/g, (match, action) => {
-    if (action.startsWith('http')) return match;
-    if (action === '' || action === '.') {
-      return `action="/api/landx${currentPath}"`;
-    }
-    if (action.startsWith('/')) {
-      return `action="/api/landx?path=${encodeURIComponent(action)}"`;
-    }
-    return `action="/api/landx?path=${encodeURIComponent('/' + action)}"`;
-  });
-  
-  // Fix href links
-  modifiedHtml = modifiedHtml.replace(/href="([^"]*?)"/g, (match, href) => {
-    if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('javascript:')) {
-      return match;
-    }
-    if (href.startsWith('/')) {
-      return `href="/api/landx?path=${encodeURIComponent(href)}"`;
-    }
-    if (href === '' || href === '.') {
-      return `href="/api/landx"`;
-    }
-    return `href="/api/landx?path=${encodeURIComponent('/' + href)}"`;
-  });
-  
-  // Fix src attributes for resources
-  modifiedHtml = modifiedHtml.replace(/src="([^"]*?)"/g, (match, src) => {
-    if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//')) return match;
-    if (src.startsWith('/')) {
-      return `src="${baseUrl}${src}"`;
-    }
-    return `src="${baseUrl}/${src}"`;
-  });
-  
-  // Fix background images in CSS
-  modifiedHtml = modifiedHtml.replace(/url\(["']?([^"')]*?)["']?\)/g, (match, url) => {
-    if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('//')) return match;
-    if (url.startsWith('/')) {
-      return `url("${baseUrl}${url}")`;
-    }
-    return `url("${baseUrl}/${url}")`;
-  });
-  
-  // Add base tag to help with relative URLs
-  if (modifiedHtml.includes('<head>')) {
-    modifiedHtml = modifiedHtml.replace('<head>', `<head>\n<base href="${baseUrl}/">`);
+// Standardized URL construction
+function constructTargetUrl(path) {
+  // Handle empty/root path
+  if (!path || path === '/' || path === '') {
+    return TARGET_URL;
   }
-  
+
+  // Remove leading slash if present
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+
+  // Special cases
+  if (cleanPath === 'favicon.ico') {
+    return `${TARGET_DOMAIN}/favicon.ico`;
+  }
+
+  // All PHP files should use the base URL pattern
+  if (cleanPath.endsWith('.php')) {
+    return `${BASE_URL}/${cleanPath}`;
+  }
+
+  // All other cases
+  return `${BASE_URL}/${cleanPath}`;
+}
+
+// Enhanced HTML content modifier
+function modifyHtmlContent(html, currentPath = "") {
+  // Normalize currentPath
+  currentPath = currentPath.replace(/\/+$/, '');
+
+  // First pass - modify all standard links and forms
+  let modifiedHtml = html
+    // Rewrite href attributes
+    .replace(/href="([^"]*?)"/gi, (match, href) => {
+      if (href.startsWith('http') || href.startsWith('//') || 
+          href.startsWith('#') || href.startsWith('mailto:') || 
+          href.startsWith('javascript:')) {
+        return match;
+      }
+      
+      // Handle absolute paths
+      if (href.startsWith('/')) {
+        return `href="/api/landx?path=${encodeURIComponent(href)}"`;
+      }
+      
+      // Handle PHP files
+      if (href.endsWith('.php')) {
+        return `href="/api/landx?path=${encodeURIComponent(href)}"`;
+      }
+      
+      // Handle relative paths
+      return `href="/api/landx?path=${encodeURIComponent(
+        currentPath ? `${currentPath}/${href}` : href
+      )}"`;
+    })
+    
+    // Rewrite form actions
+    .replace(/action="([^"]*?)"/gi, (match, action) => {
+      if (action.startsWith('http') || !action) return match;
+      
+      // Handle absolute paths
+      if (action.startsWith('/')) {
+        return `action="/api/landx?path=${encodeURIComponent(action)}"`;
+      }
+      
+      // Handle relative paths
+      return `action="/api/landx?path=${encodeURIComponent(
+        currentPath ? `${currentPath}/${action}` : action
+      )}"`;
+    })
+    
+    // Fix src attributes for resources
+    .replace(/src="([^"]*?)"/g, (match, src) => {
+      if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//')) {
+        return match;
+      }
+      return `src="${BASE_URL}/${src.startsWith('/') ? src.slice(1) : src}"`;
+    })
+    
+    // Fix background images in CSS
+    .replace(/url\(["']?([^"')]*?)["']?\)/g, (match, url) => {
+      if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('//')) {
+        return match;
+      }
+      return `url("${BASE_URL}/${url.startsWith('/') ? url.slice(1) : url}")`;
+    });
+
+  // Second pass - modify JavaScript code that makes requests
+  modifiedHtml = modifiedHtml
+    // Fix fetch/XHR requests in JavaScript
+    .replace(/(fetch|axios|jQuery\.ajax|XMLHttpRequest|\.post|\.get)\(['"]([^'"]*?)['"]/g, 
+      (match, method, url) => {
+        if (url.startsWith('http') || url.startsWith('//')) return match;
+        
+        if (url.includes('.php') || url.startsWith('/api/')) {
+          return `${method}('/api/landx?path=${encodeURIComponent(
+            url.startsWith('/') ? url.slice(1) : url
+          )}'`;
+        }
+        return match;
+      })
+    
+    // Fix form submissions in JavaScript
+    .replace(/(\.action|formAction|\.submit|\.url)\s*=\s*['"]([^'"]*?)['"]/g,
+      (match, prop, url) => {
+        if (url.startsWith('http') || url.startsWith('//')) return match;
+        return `${prop} = '/api/landx?path=${encodeURIComponent(
+          url.startsWith('/') ? url.slice(1) : url
+        )}'`;
+      });
+
+  // Add base tag if missing
+  if (!modifiedHtml.includes('<base href="')) {
+    modifiedHtml = modifiedHtml.replace(
+      /<head>/i, 
+      '<head>\n<base href="${BASE_URL}/">'
+    );
+  }
+
   return modifiedHtml;
 }
 
-// Helper to construct target URL
-function constructTargetUrl(path) {
-  if (!path || path === '/') {
-    return `${BASE_URL}/dashboard.php`; // Default to dashboard.php
-  }
+// Unified request handler
+async function handleRequest(req, method = 'GET') {
+ /*  console.log(`🚀 ${method} Request started`);
+  console.log(`🚀 Request URL:`, req.url); */
 
-  // Handle specific PHP files directly
-  if (path.endsWith('.php')) {
-    return `${BASE_URL}/${path}`;
-  }
-
-  // Handle known paths
-  switch(path) {
-    case '/dashboard':
-      return `${BASE_URL}/dashboard.php`;
-    case '/logout':
-      return `${BASE_URL}/logout.php`;
-    case '/login':
-      return `${BASE_URL}/login.php`;
-    // Add more cases as needed
-    default:
-      // If it's a full path starting with the base path, use it directly
-      if (path.startsWith(TARGET_BASE_PATH)) {
-        return `${TARGET_DOMAIN}${path}`;
-      }
-      
-      // Otherwise, construct the URL normally
-      const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-      return `${BASE_URL}/${cleanPath}`;
-  }
-}
-
-export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
-    const requestedPath = searchParams.get('path') || '/';
+    let requestedPath = searchParams.get("path") || "/";
+    
+    // Special case for root proxy URL
+    if (req.url.endsWith('/api/landx') && requestedPath === '/') {
+      requestedPath = 'dashboard.php';
+    }
+
     const targetUrl = constructTargetUrl(requestedPath);
-    
-    console.log('GET Request - Target URL:', targetUrl);
-    
-    const targetHeaders = { ...commonHeaders };
-    
-    // Forward cookies from client
-    forwardCookies(req, targetHeaders);
-    
-    // Set proper referer
-    targetHeaders['Referer'] = BASE_URL + '/';
-    
-    // Forward other important headers
-    const xRequestedWith = req.headers.get('x-requested-with');
-    if (xRequestedWith) {
-      targetHeaders['X-Requested-With'] = xRequestedWith;
-    }
-
-    const res = await fetch(targetUrl, {
-      headers: targetHeaders,
-      redirect: 'manual', // Handle redirects manually
-    });
-
-    // Handle redirects
-    if (res.status >= 300 && res.status < 400) {
-      const location = res.headers.get('location');
-      if (location) {
-        console.log('Redirect detected:', location);
-        
-        // Convert the redirect location to our proxy format
-        let redirectPath;
-        if (location.startsWith('http')) {
-          // Absolute URL - extract the path
-          const url = new URL(location);
-          redirectPath = url.pathname + url.search + url.hash;
-        } else {
-          // Relative URL
-          redirectPath = location;
-        }
-        
-        // Extract and forward cookies from redirect response
-        const setCookies = extractSetCookies(res);
-        
-        const responseHeaders = {
-          'Location': `/api/landx?path=${encodeURIComponent(redirectPath)}`,
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-        };
-        
-        if (setCookies.length > 0) {
-          responseHeaders['Set-Cookie'] = setCookies;
-        }
-        
-        return new Response(null, {
-          status: 302,
-          headers: responseHeaders,
-        });
-      }
-    }
-
-    const html = await res.text();
-    const modifiedHtml = modifyHtmlContent(html, BASE_URL, requestedPath);
-    
-    // Extract cookies from target response
-    const setCookies = extractSetCookies(res);
-    
-    const responseHeaders = {
-      'Content-Type': res.headers.get('content-type') || 'text/html; charset=utf-8',
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache',
-      'Expires': '0',
-    };
-    
-    // Forward set-cookie headers
-    if (setCookies.length > 0) {
-      responseHeaders['Set-Cookie'] = setCookies;
-    }
-
-    return new Response(modifiedHtml, {
-      status: res.status,
-      headers: responseHeaders,
-    });
-  } catch (error) {
-    console.error('GET Proxy Error:', error);
-    return new Response(`Proxy Error: ${error.message}`, { status: 500 });
-  }
-}
-
-export async function POST(req) {
-  try {
-    const body = await req.text();
-    const { searchParams } = new URL(req.url);
-    const requestedPath = searchParams.get('path') || '/';
-    const targetUrl = constructTargetUrl(requestedPath);
-    
-    console.log('POST Request - Target URL:', targetUrl);
-    console.log('POST Body:', body);
-
-    const targetHeaders = {
-      ...commonHeaders,
-      'Content-Type': req.headers.get('content-type') || 'application/x-www-form-urlencoded',
-      'Content-Length': Buffer.byteLength(body).toString(),
-    };
-
-    // Forward cookies from client
-    forwardCookies(req, targetHeaders);
-    
-    // Set proper referer and origin for forms
-    targetHeaders['Referer'] = BASE_URL + '/';
-    targetHeaders['Origin'] = BASE_URL;
-    
-    // Forward X-Requested-With for AJAX requests
-    const xRequestedWith = req.headers.get('x-requested-with');
-    if (xRequestedWith) {
-      targetHeaders['X-Requested-With'] = xRequestedWith;
-    }
-
-    const res = await fetch(targetUrl, {
-      method: 'POST',
-      headers: targetHeaders,
-      body,
-      redirect: 'manual', // Handle redirects manually
-    });
-
-    // Handle redirects (common after login)
-    if (res.status >= 300 && res.status < 400) {
-      const location = res.headers.get('location');
-      if (location) {
-        console.log('POST Redirect detected:', location);
-        
-        let redirectPath;
-        if (location.startsWith('http')) {
-          const url = new URL(location);
-          redirectPath = url.pathname + url.search + url.hash;
-        } else {
-          redirectPath = location;
-        }
-        
-        const setCookies = extractSetCookies(res);
-        
-        const responseHeaders = {
-          'Location': `/api/landx?path=${encodeURIComponent(redirectPath)}`,
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-        };
-        
-        if (setCookies.length > 0) {
-          responseHeaders['Set-Cookie'] = setCookies;
-        }
-        
-        return new Response(null, {
-          status: 302,
-          headers: responseHeaders,
-        });
-      }
-    }
-
-    const html = await res.text();
-    const modifiedHtml = modifyHtmlContent(html, BASE_URL, requestedPath);
-    
-    // Extract cookies from target response
-    const setCookies = extractSetCookies(res);
-    
-    const responseHeaders = {
-      'Content-Type': res.headers.get('content-type') || 'text/html; charset=utf-8',
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache',
-      'Expires': '0',
-    };
-    
-    // Forward set-cookie headers to maintain session
-    if (setCookies.length > 0) {
-      responseHeaders['Set-Cookie'] = setCookies;
-    }
-
-    return new Response(modifiedHtml, {
-      status: res.status,
-      headers: responseHeaders,
-    });
-  } catch (error) {
-    console.error('POST Proxy Error:', error);
-    return new Response(`Proxy Error: ${error.message}`, { status: 500 });
-  }
-}
-
-// Keep the other HTTP methods simple for now
-export async function PUT(req) {
-  return handleOtherMethods(req, 'PUT');
-}
-
-export async function DELETE(req) {
-  return handleOtherMethods(req, 'DELETE');
-}
-
-async function handleOtherMethods(req, method) {
-  try {
-    const body = method !== 'DELETE' ? await req.text() : undefined;
-    const { searchParams } = new URL(req.url);
-    const requestedPath = searchParams.get('path') || '/';
-    const targetUrl = constructTargetUrl(requestedPath);
+    //console.log(`🎯 ${method} - Final Target URL:`, targetUrl);
 
     const targetHeaders = { ...commonHeaders };
     
-    if (body && method !== 'DELETE') {
-      targetHeaders['Content-Type'] = req.headers.get('content-type') || 'application/json';
+    // Forward cookies
+    forwardCookies(req, targetHeaders);
+    
+    // Add referer and origin
+    const refererUrl = new URL(req.url);
+    targetHeaders.Referer = `${refererUrl.origin}/api/landx`;
+    if (method !== 'GET') {
+      targetHeaders.Origin = refererUrl.origin;
+      targetHeaders['X-Requested-With'] = 'XMLHttpRequest';
+    }
+
+    // Handle request body
+    const body = method !== 'GET' ? await req.text() : undefined;
+    if (body && method !== 'GET') {
+      targetHeaders['Content-Type'] = req.headers.get('content-type') || 'application/x-www-form-urlencoded';
       targetHeaders['Content-Length'] = Buffer.byteLength(body).toString();
     }
 
-    forwardCookies(req, targetHeaders);
-    targetHeaders['Referer'] = BASE_URL + '/';
+    //console.log(`📤 ${method} Headers:`, targetHeaders);
+    if (body) console.log(`📤 ${method} Body:`, body.substring(0, 200));
 
-    const fetchOptions = {
+    const res = await fetch(targetUrl, {
       method,
       headers: targetHeaders,
-      redirect: 'manual',
-    };
-    
-    if (body) {
-      fetchOptions.body = body;
-    }
+      body,
+      redirect: 'manual'
+    });
 
-    const res = await fetch(targetUrl, fetchOptions);
-    
+    //console.log(`📥 Response status:`, res.status);
+    //console.log(`📥 Response headers:`, Object.fromEntries(res.headers.entries()));
+
     // Handle redirects
     if (res.status >= 300 && res.status < 400) {
       const location = res.headers.get('location');
       if (location) {
-        let redirectPath;
+        let redirectPath = location;
+        
+        // Convert full URLs to paths
         if (location.startsWith('http')) {
           const url = new URL(location);
-          redirectPath = url.pathname + url.search + url.hash;
-        } else {
-          redirectPath = location;
-        }
-        
-        const setCookies = extractSetCookies(res);
-        const responseHeaders = {
-          'Location': `/api/landx?path=${encodeURIComponent(redirectPath)}`,
-        };
-        
-        if (setCookies.length > 0) {
-          responseHeaders['Set-Cookie'] = setCookies;
+          if (url.hostname === new URL(TARGET_DOMAIN).hostname) {
+            redirectPath = url.pathname;
+          } else {
+            // External redirect - pass through
+            return new Response(null, {
+              status: res.status,
+              headers: {
+                Location: location,
+                'Set-Cookie': extractSetCookies(res),
+                'Cache-Control': 'no-cache, no-store, must-revalidate'
+              }
+            });
+          }
         }
         
         return new Response(null, {
           status: 302,
-          headers: responseHeaders,
+          headers: {
+            Location: `/api/landx?path=${encodeURIComponent(redirectPath)}`,
+            'Set-Cookie': extractSetCookies(res),
+            'Cache-Control': 'no-cache, no-store, must-revalidate'
+          }
         });
       }
     }
 
+    // Handle API responses differently
+    const contentType = res.headers.get('content-type') || '';
+    const isJson = contentType.includes('application/json');
+    const isHtml = contentType.includes('text/html');
+
     const responseText = await res.text();
-    const setCookies = extractSetCookies(res);
-    
-    const responseHeaders = {
-      'Content-Type': res.headers.get('content-type') || 'text/html; charset=utf-8',
-    };
-    
-    if (setCookies.length > 0) {
-      responseHeaders['Set-Cookie'] = setCookies;
+
+    if (isJson) {
+      // Directly return JSON responses without modification
+      //console.log('📦 JSON Response:', responseText.substring(0, 200));
+      return new Response(responseText, {
+        status: res.status,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Set-Cookie': extractSetCookies(res)
+        }
+      });
     }
 
+    if (isHtml) {
+      // Modify HTML content
+      const modifiedHtml = modifyHtmlContent(responseText, requestedPath);
+      //console.log('📦 Modified HTML length:', modifiedHtml.length);
+      
+      return new Response(modifiedHtml, {
+        status: res.status,
+        headers: {
+          'Content-Type': 'text/html',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Set-Cookie': extractSetCookies(res)
+        }
+      });
+    }
+
+    // For all other content types, return as-is
     return new Response(responseText, {
       status: res.status,
-      headers: responseHeaders,
+      headers: {
+        'Content-Type': contentType,
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Set-Cookie': extractSetCookies(res)
+      }
     });
   } catch (error) {
-    console.error(`${method} Proxy Error:`, error);
-    return new Response(`Proxy Error: ${error.message}`, { status: 500 });
+    console.error(`💥 ${method} Proxy Error:`, error);
+    console.error(`💥 Error stack:`, error.stack);
+    return new Response(`Proxy Error: ${error.message}`, { 
+      status: 500,
+      headers: { 'Content-Type': 'text/plain' }
+    });
   }
+}
+
+// Export HTTP methods
+export async function GET(req) {
+  return handleRequest(req, 'GET');
+}
+
+export async function POST(req) {
+  return handleRequest(req, 'POST');
+}
+
+export async function PUT(req) {
+  return handleRequest(req, 'PUT');
+}
+
+export async function DELETE(req) {
+  return handleRequest(req, 'DELETE');
 }
