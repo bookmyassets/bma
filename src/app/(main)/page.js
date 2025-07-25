@@ -157,51 +157,17 @@ export default function Home() {
       <div className="">
         <section>
           <HomeSlider img1={img1} mimg1={mimg1} openForm={() => setpopShowForm(true)} />
-          
         
           <FAQSection />
+          <DholeraInvestmentPage />
         
           <ShortsSection />
         
-          <DholeraInvestmentPage />
         </section>
+        
         <section className="my-12">
-          {" "}
-          <ParallaxSection />
-        </section>
-        <section>
-  <div className="py-16 bg-[#d6b873] text-black">
-    <div className="container mx-auto px-4 text-center">
-      <h2 className="text-4xl font-bold mb-6">
-        Ready to Invest in Your Future?
-      </h2>
-      <p className="text-xl mb-8 max-w-2xl mx-auto">
-        Join the hundreds of satisfied investors who have secured their
-        future with prime Dholera properties.
-      </p>
-      <div className="flex flex-col md:flex-row gap-4 justify-center">
-        <Link
-          href="/projects/dholera/westwyn-county-wc"
-          className="bg-black text-white py-4 px-8 rounded-md font-bold hover:bg-gray-800 transition-colors inline-block"
-        >
-          Explore Properties
-        </Link>
-        <Link
-          href="https://wa.me/918130371647"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-white text-black py-4 px-8 rounded-md font-bold hover:bg-gray-100 transition-colors inline-block"
-        >
-          Schedule Consultation
-        </Link>
-      </div>
-    </div>
-  </div>
-</section>
-        <section className="my-12">
-          {" "}
-          {/* Add margin as needed */}
-          <WhyChooseSection />
+
+          {/* <WhyChooseSection /> */}
         
           <BrowseBlogsSection />
         </section>

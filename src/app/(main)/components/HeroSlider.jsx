@@ -253,7 +253,7 @@ export default function LandingPage({ img1, mimg1, openForm }) {
   };
 
   return (
-    <div className="relative pt-12 md:pt-40 h-[85vh] md:h-[78vh]">
+    <div className="relative  h-[80vh] ">
       {/* Background Images (unchanged) */}
       <div className="absolute inset-0 hidden lg:block">
         <Image src={img1} alt="Investment Opportunity" className="w-full pt-24" priority />
@@ -262,16 +262,16 @@ export default function LandingPage({ img1, mimg1, openForm }) {
         <Image src={mimg1} alt="Investment Opportunity Mobile" fill className="pt-12 bg-black" priority />
       </div>
 
-      {/* <div className="absolute inset-0">
+      {/* <div className="absolute pt-12 md:pt-40 inset-0">
         <video
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover z-0"
+            className="absolute inset-0 w-full h-full  z-0"
           >
-               <source src="/video/video2.mp4" type="video/mp4" />
+               <source src="/video/bma-home-page-video.mp4" type="video/mp4" />
           </video>
       </div> */}
 

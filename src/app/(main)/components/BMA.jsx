@@ -55,11 +55,141 @@ const DholeraInvestment = () => {
   return (
     <div className="min-h-screen bg-white text-black overflow-hidden">
       {/* Animated Background */}
-     
+
+<section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Left Side - BMA Logo/Image */}
+              <div className="flex justify-center lg:justify-start">
+                <div className="relative">
+                  <div className="bg-black p-8 rounded-2xl shadow-xl border border-gray-200">
+                    <Image
+                      src={logo}
+                      alt="BMA Group of Companies Logo"
+                      className="w-44 md:w-96 h-44 md:h-96 object-contain"
+                    />
+                  </div>
+                  {/* Decorative elements */}
+                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-[#d7b36c] rounded-full opacity-20"></div>
+                  <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#d7b36c] rounded-full opacity-30"></div>
+                </div>
+              </div>
+
+              {/* Right Side - Content */}
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+                    About BMA Group of Companies
+                  </h2>
+                  <div className="bg-[#d7b36c] w-24 h-1"></div>
+                  <p className="text-lg font-medium text-[#d7b36c] italic">
+                    Focused on Your Growth. Driven by Your Trust.
+                  </p>
+                </div>
+
+                <div className="space-y-4 text-gray-700 leading-relaxed">
+                  <p className="text-lg">
+                    At BMA Group of Companies (BookMyAssets), we believe real
+                    estate is more than land—it's about securing your future and
+                    building wealth safely and confidently. With expertise
+                    across India and globally, we've found unmatched potential
+                    in Dholera Smart City, where we're creating premium projects
+                    and a complete investment ecosystem.
+                  </p>
+
+                  <p className="text-lg">
+                    Through our four powerful arms—
+                    <span className="font-semibold text-gray-800">
+                      BMA Developers
+                    </span>
+                    ,{" "}
+                    <span className="font-semibold text-gray-800">
+                      Channel Partners
+                    </span>
+                    ,{" "}
+                    <span className="font-semibold text-gray-800">
+                      Allied Services
+                    </span>
+                    , and{" "}
+                    <span className="font-semibold text-gray-800">
+                      Truliyo Digital
+                    </span>
+                    —we guide, protect, and grow your investments, ensuring you
+                    always come first.
+                  </p>
+                </div>
+
+                {/* Four Arms of BMA */}
+                <div className="grid grid-cols-2 gap-4 mt-8">
+                  <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#d7b36c]">
+                    <h4 className="font-semibold text-gray-800 text-lg">
+                      BMA Developers
+                    </h4>
+                    <p className="text-xs text-gray-600 mt-1">
+                      Premium Project Development
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#d7b36c]">
+                    <h4 className="font-semibold text-gray-800 text-lg">
+                      Channel Partners
+                    </h4>
+                    <p className="text-xs text-gray-600 mt-1">
+                      Extensive Network Support
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#d7b36c]">
+                    <h4 className="font-semibold text-gray-800 text-lg">
+                      Allied Services
+                    </h4>
+                    <p className="text-xs text-gray-600 mt-1">
+                      Complete Investment Solutions
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#d7b36c]">
+                    <h4 className="font-semibold text-gray-800 text-lg">
+                      Truliyo Digital
+                    </h4>
+                    <p className="text-xs text-gray-600 mt-1">
+                      Digital Innovation Platform
+                    </p>
+                  </div>
+                </div>
+
+                {/* Call to Action */}
+                <div className="pt-6">
+                  <p className="text-lg font-medium text-gray-800 mb-4">
+                    Discover how we're turning opportunities into lasting value
+                    for you.
+                  </p>
+                  <Link
+                    href="/about"
+                    className="bg-[#d7b36c] hover:bg-[#c4a055] text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center space-x-2"
+                  >
+                    <span>Learn More About Us</span>
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
 
       <div className="relative py-8 md:py-16">
         {/* Hero Section */}
-        <section className=" flex items-center justify-center px-4">
+        <section className=" flex items-center justify-center px-4 pb-8">
           <div className="max-w-7xl mx-auto text-center">
             <div className="inline-flex items-center bg-gradient-to-r from-[#d6b873] to-[#c4a55e] text-black px-6 py-2 rounded-full font-semibold mb-8 animate-pulse">
               <Zap className="w-4 h-4 mr-2" />
@@ -89,92 +219,15 @@ const DholeraInvestment = () => {
               </a>
 
               <button className="border-2 border-[#d6b873] text-[#d6b873] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#d6b873] hover:text-black transition-all duration-300">
-               <Link href="/projects/dholera/westwyn-county-wc">
-                                   Explore Properties
-                                 </Link>
+                <Link href="/projects/dholera/westwyn-county-wc">
+                  Explore Properties
+                </Link>
               </button>
             </div>
           </div>
         </section>
 
-        <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16">
-  <div className="max-w-7xl mx-auto px-4">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      
-      {/* Left Side - BMA Logo/Image */}
-      <div className="flex justify-center lg:justify-start">
-        <div className="relative">
-          <div className="bg-black p-8 rounded-2xl shadow-xl border border-gray-200">
-            <Image
-              src={logo}
-              alt="BMA Group of Companies Logo" 
-              className="w-44 md:w-96 h-44 md:h-96 object-contain"
-            />
-          </div>
-          {/* Decorative elements */}
-          <div className="absolute -top-4 -right-4 w-20 h-20 bg-[#d7b36c] rounded-full opacity-20"></div>
-          <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#d7b36c] rounded-full opacity-30"></div>
-        </div>
-      </div>
-
-      {/* Right Side - Content */}
-      <div className="space-y-6">
-        <div className="space-y-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
-            About BMA Group of Companies
-          </h2>
-          <div className="bg-[#d7b36c] w-24 h-1"></div>
-          <p className="text-lg font-medium text-[#d7b36c] italic">
-            Focused on Your Growth. Driven by Your Trust.
-          </p>
-        </div>
-
-        <div className="space-y-4 text-gray-700 leading-relaxed">
-          <p className="text-lg">
-            At BMA Group of Companies (BookMyAssets), we believe real estate is more than land—it's about securing your future and building wealth safely and confidently. With expertise across India and globally, we've found unmatched potential in Dholera Smart City, where we're creating premium projects and a complete investment ecosystem.
-          </p>
-          
-          <p className="text-lg">
-            Through our four powerful arms—<span className="font-semibold text-gray-800">BMA Developers</span>, <span className="font-semibold text-gray-800">Channel Partners</span>, <span className="font-semibold text-gray-800">Allied Services</span>, and <span className="font-semibold text-gray-800">Truliyo Digital</span>—we guide, protect, and grow your investments, ensuring you always come first.
-          </p>
-        </div>
-
-        {/* Four Arms of BMA */}
-        <div className="grid grid-cols-2 gap-4 mt-8">
-          <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#d7b36c]">
-            <h4 className="font-semibold text-gray-800 text-lg">BMA Developers</h4>
-            <p className="text-xs text-gray-600 mt-1">Premium Project Development</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#d7b36c]">
-            <h4 className="font-semibold text-gray-800 text-lg">Channel Partners</h4>
-            <p className="text-xs text-gray-600 mt-1">Extensive Network Support</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#d7b36c]">
-            <h4 className="font-semibold text-gray-800 text-lg">Allied Services</h4>
-            <p className="text-xs text-gray-600 mt-1">Complete Investment Solutions</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#d7b36c]">
-            <h4 className="font-semibold text-gray-800 text-lg">Truliyo Digital</h4>
-            <p className="text-xs text-gray-600 mt-1">Digital Innovation Platform</p>
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="pt-6">
-          <p className="text-lg font-medium text-gray-800 mb-4">
-            Discover how we're turning opportunities into lasting value for you.
-          </p>
-          <Link href="/about" className="bg-[#d7b36c] hover:bg-[#c4a055] text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center space-x-2">
-            <span>Learn More About Us</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        
 
         {/* About Section */}
         <section className="py-8 md:py-16 px-4 bg-gray-50">

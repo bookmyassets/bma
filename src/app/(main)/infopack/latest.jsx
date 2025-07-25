@@ -237,7 +237,7 @@ export default async function Info() {
         {/* Enhanced Hero Section */}
         <section
           aria-labelledby="hero-heading"
-          className="text-center space-y-8 mt-12"
+          className="text-center space-y-8 pt-16"
         >
           <div className="space-y-6">
             <h1
