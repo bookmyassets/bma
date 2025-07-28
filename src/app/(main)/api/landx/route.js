@@ -64,11 +64,10 @@ function constructTargetUrl(path) {
   }
 
   // PDF files should go in /uploads/pdfs/
-  if (cleanPath.endsWith('.pdf')) {
-    // Extract just the filename part in case there are path segments
-    const pdfFilename = cleanPath.split('/').pop();
-    return `${BASE_URL}/uploads/pdfs/${pdfFilename}`;
-  }
+ if (cleanPath.endsWith('.pdf')) {
+  const pdfFilename = cleanPath.split('/').pop();
+  return `${BASE_URL}/uploads/pdfs/${pdfFilename}`;
+}
 
   // All other cases
   return `${BASE_URL}/${cleanPath}`;
