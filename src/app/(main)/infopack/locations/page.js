@@ -2,13 +2,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import bg from "@/assests/bg-image.webp"
 
+
 const locations = [
   {
     name: "WestWyn County",
     coordinates: "22°41'50.2\"N 72°21'18.8\"E",
     mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35344.53857731938!2d72.20113283321216!3d22.424291772729436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395ed9023a7c4ccf%3A0x917dafab28e1aa95!2sGJ%20SH%2040%2C%20Gujarat%20382465!5e1!3m2!1sen!2sin!4v1746533802687!5m2!1sen!2sin",
-    link: "https://maps.app.goo.gl/wqMPQS4TV9VfAAyM8",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4580.5316429671975!2d72.17771279999998!3d22.448890000000105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395ed900459779db%3A0xe211952def5d9bab!2sWestWyn%20County!5e1!3m2!1sen!2sin!4v1753684185448!5m2!1sen!2sin",
+    link: "https://maps.app.goo.gl/DM97JCjuQotau73j7",
   },
   {
     name: "Dholera International Airport",

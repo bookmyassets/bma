@@ -32,31 +32,33 @@ export const metadata = {
 
 // Fixed Navigation Component
 const FixedNavigation = () => (
-  <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-40 bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-amber-200/50 px-6 py-4">
-    <div className="flex items-center gap-6">
-      <Link
-        href="/infopack/locations"
-        className="group flex items-center gap-3 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-      >
-        <FaMapMarkerAlt className="text-lg" />
-        <span className="font-semibold">Locations</span>
-      </Link>
+  <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-40 w-[95%] max-w-2xl">
+    <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-amber-200/50 px-3 py-3 md:px-6 md:py-4">
+      <div className="flex items-center justify-center gap-2 md:gap-6">
+        <Link
+          href="/infopack/locations"
+          className="group flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex-1 md:flex-none justify-center md:justify-start"
+        >
+          <FaMapMarkerAlt className="text-sm md:text-lg" />
+          <span className="font-semibold text-sm md:text-base">Locations</span>
+        </Link>
 
-      <Link
-        href="/infopack/videos"
-        className="group flex items-center gap-3 px-4 py-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-      >
-        <FaVideo className="text-lg" />
-        <span className="font-semibold">Videos</span>
-      </Link>
+        <Link
+          href="/infopack/videos"
+          className="group flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex-1 md:flex-none justify-center md:justify-start"
+        >
+          <FaVideo className="text-sm md:text-lg" />
+          <span className="font-semibold text-sm md:text-base">Videos</span>
+        </Link>
 
-      <Link
-        href="/infopack/inventory"
-        className="group flex items-center gap-3 px-4 py-2 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-      >
-        <FaBuilding className="text-lg" />
-        <span className="font-semibold">Available Plots</span>
-      </Link>
+        <Link
+          href="/infopack/inventory"
+          className="group flex items-center gap-2 px-2 py-2 md:px-4 md:py-2 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex-1 md:flex-none justify-center md:justify-start"
+        >
+          <FaBuilding className="text-sm md:text-lg" />
+          <span className="font-semibold text-xs md:text-base whitespace-nowrap">Available Plots</span>
+        </Link>
+      </div>
     </div>
   </div>
 );
@@ -256,11 +258,12 @@ export default async function Info() {
             </p>
           </div>
 
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl max-w-4xl mx-auto">
-            <p className="text-gray-800 font-medium text-xl md:text-2xl leading-relaxed">
-              🏆 Verified Residential Plots • 📋 Immediate Registry • 👥 Trusted
-              by 400+ Investors
-            </p>
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl max-w-4xl flex justify-center items-center mx-auto">
+            <ul className="text-gray-800 font-medium text-xl md:text-2xl leading-relaxed text-left">
+              <li>🏆 Verified Residential Plots </li>
+              <li>📋 Immediate Registry </li>
+              <li>👥 Trusted by 400+ Investors </li>
+            </ul>
           </div>
 
           <div className="pt-6">
