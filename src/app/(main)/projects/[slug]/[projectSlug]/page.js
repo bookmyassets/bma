@@ -451,7 +451,7 @@ export default async function SubProjectDetail({ params }) {
                   </div>
                 )}
 
-                <div className="mt-12 mb-12">
+                <div className="mt-12 mb-8">
                   {subProject.projectDocuments &&
                     subProject.projectDocuments.length > 0 && (
                       <ProjectDocuments
