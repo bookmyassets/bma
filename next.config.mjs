@@ -60,8 +60,8 @@ const nextConfig = {
         destination: 'https://bigbucket.online/LandX-Beta/img/:path*',
       },
       {
-        source: '/assets/:path*',
-        destination: 'https://bigbucket.online/LandX-Beta/assets/:path*',
+        source: '/uploads/pdfs/:path*',
+        destination: 'https://bigbucket.online/LandX-Beta/uploads/pdfs/:path*',
       },
       // Default LandX-Beta access - should be last
       {

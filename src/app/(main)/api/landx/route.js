@@ -63,6 +63,13 @@ function constructTargetUrl(path) {
     return `${BASE_URL}/${cleanPath}`;
   }
 
+  // PDF files should go in /uploads/pdfs/
+  if (cleanPath.endsWith('.pdf')) {
+    // Extract just the filename part in case there are path segments
+    const pdfFilename = cleanPath.split('/').pop();
+    return `${BASE_URL}/uploads/pdfs/${pdfFilename}`;
+  }
+
   // All other cases
   return `${BASE_URL}/${cleanPath}`;
 }
@@ -113,6 +120,7 @@ function modifyHtmlContent(html, currentPath = "") {
       )}"`;
     })
     
+
     .replace(/src="([^"]*?)"/g, (match, src) => {
       if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//')) {
         return match;
