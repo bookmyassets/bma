@@ -21,8 +21,9 @@ import {
   ArrowRight,
 } from "lucide-react";
 import PopupForm from "@/app/(main)/components/PopupForm";
+import ProjectDocuments from "../ProjectDocuments";
 
-const site = 'bookmyassets'
+const site = "bookmyassets";
 
 // ProjectCard Component
 const ProjectCard = ({
@@ -93,7 +94,7 @@ const getStatusColor = (status) => {
 
 export default async function SubProjectDetail({ params }) {
   const { slug, projectSlug } = await params;
-  const site = 'bookmyassets';
+  const site = "bookmyassets";
 
   if (!slug || !projectSlug) {
     return (
@@ -105,9 +106,9 @@ export default async function SubProjectDetail({ params }) {
 
   try {
     const [mainProject, subProject, soldOutProjects] = await Promise.all([
-      getPostBySlug(slug,site),
-      getProjectBySlug(projectSlug,site),
-      getProjectSOBySlug(slug,site),
+      getPostBySlug(slug, site),
+      getProjectBySlug(projectSlug, site),
+      getProjectSOBySlug(slug, site),
     ]);
 
     if (!mainProject || !subProject) {
@@ -450,6 +451,15 @@ export default async function SubProjectDetail({ params }) {
                   </div>
                 )}
 
+                <div className="mt-12">
+                  {subProject.projectDocuments &&
+                    subProject.projectDocuments.length > 0 && (
+                      <ProjectDocuments
+                        documents={subProject.projectDocuments}
+                      />
+                    )}
+                </div>
+
                 <div className="bg-white rounded-xl shadow-md p-8 border border-gray-200">
                   <div className="text-lg leading-5 max-w-none">
                     <PortableText
@@ -506,6 +516,7 @@ export default async function SubProjectDetail({ params }) {
                 </div>
               </div>
             </div>
+
             <CostSheet />
           </main>
           <Reviews />

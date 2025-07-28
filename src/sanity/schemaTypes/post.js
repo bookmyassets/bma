@@ -40,7 +40,7 @@ export default {
         type: 'reference',
         to: [{ type: 'author' }],
       },
-      {
+       {
       name: 'site',
       title: 'Site',
       type: 'string',
@@ -61,6 +61,20 @@ export default {
         options: {
           hotspot: true,
         },
+        fields: [
+          {
+            name: 'alt',
+            title: 'Alt Text',
+            type: 'string',
+            description: 'Alternative text for the image (for accessibility)',
+          },
+          {
+            name: 'link',
+            title: 'Image Link',
+            type: 'url',
+            description: 'Optional link that the image should redirect to when clicked',
+          },
+        ],
       },
       {
         name: 'categories',
@@ -82,6 +96,28 @@ export default {
         name: 'body',
         title: 'Body',
         type: 'blockContent',
+      },
+      {
+        name: 'pdfFile',
+        title: 'PDF File',
+        type: 'file',
+        options: {
+          accept: '.pdf', 
+        },
+      },
+      {
+        name: 'projectDocuments',
+        title: 'Project Documents',
+        type: 'array',
+        of: [
+          {
+            type: 'file',
+            options: {
+              accept: '.pdf',
+            },
+          }
+        ],
+        description: 'Upload multiple PDF files',
       },
     ],
   };
