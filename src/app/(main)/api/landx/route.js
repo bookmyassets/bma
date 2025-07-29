@@ -1,5 +1,4 @@
 // app/api/landx/route.js
-
 const TARGET_DOMAIN = "https://bigbucket.online";
 const TARGET_BASE_PATH = "/LandX-Beta";
 const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
@@ -14,65 +13,32 @@ const commonHeaders = {
   "Upgrade-Insecure-Requests": "1",
 };
 
-// Helper function to forward cookies
-function forwardCookies(clientRequest, targetHeaders) {
-  const cookies = clientRequest.headers.get("cookie");
-  if (cookies) {
-    targetHeaders["Cookie"] = cookies;
-  }
-}
-
-// Robust cookie extraction
-function extractSetCookies(response) {
-  const setCookieHeaders = [];
-  
-  // Standard way to get Set-Cookie header
-  const setCookieHeader = response.headers.get('set-cookie');
-  if (setCookieHeader) {
-    // Handle multiple cookies in one header
-    const cookies = setCookieHeader.split(/\s*,\s*(?=[^;]+;)/);
-    setCookieHeaders.push(...cookies);
-  }
-  
-  // Try raw headers if available
-  if (typeof response.headers.raw === 'function') {
-    const rawSetCookies = response.headers.raw()['set-cookie'] || [];
-    setCookieHeaders.push(...rawSetCookies);
-  }
-  
-  return setCookieHeaders;
-}
-
 // Standardized URL construction
 function constructTargetUrl(path) {
-  // Handle empty/root path
-  if (!path || path === '/' || path === '') {
+  const decodedPath = decodeURIComponent(path);
+
+  if (!decodedPath || decodedPath === '/') {
     return TARGET_URL;
   }
 
-  // Remove leading slash if present
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
 
-  // Special cases
+  // Handle PDF requests differently
+  if (cleanPath.includes('uploads/pdfs/')) {
+    const pdfFilename = cleanPath.split('uploads/pdfs/')[1];
+    return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${pdfFilename}`;
+  }
+
+  // Other existing cases
   if (cleanPath === 'favicon.ico') {
     return `${TARGET_DOMAIN}/favicon.ico`;
   }
-
-  // All PHP files should use the base URL pattern
   if (cleanPath.endsWith('.php')) {
     return `${BASE_URL}/${cleanPath}`;
   }
 
-  // PDF files should go in /uploads/pdfs/
- if (cleanPath.endsWith('.pdf')) {
-  const pdfFilename = cleanPath.split('/').pop();
-  return `${BASE_URL}/uploads/pdfs/${pdfFilename}`;
-}
-
-  // All other cases
   return `${BASE_URL}/${cleanPath}`;
 }
-
 // Enhanced HTML content modifier
 function modifyHtmlContent(html, currentPath = "") {
   // Normalize currentPath
@@ -168,29 +134,83 @@ function modifyHtmlContent(html, currentPath = "") {
   return modifiedHtml;
 }
 
-// request handler
-async function handleRequest(req, method = 'GET') {
- /*  console.log(`🚀 ${method} Request started`);
-  console.log(`🚀 Request URL:`, req.url); */
 
+// Helper functions
+function forwardCookies(clientRequest, targetHeaders) {
+  const cookies = clientRequest.headers.get("cookie");
+  if (cookies) {
+    targetHeaders["Cookie"] = cookies;
+  }
+}
+
+function extractSetCookies(response) {
+  const setCookieHeaders = [];
+  const setCookieHeader = response.headers.get('set-cookie');
+  if (setCookieHeader) {
+    setCookieHeaders.push(...setCookieHeader.split(/\s*,\s*(?=[^;]+;)/));
+  }
+  if (typeof response.headers.raw === 'function') {
+    setCookieHeaders.push(...(response.headers.raw()['set-cookie'] || []));
+  }
+  return setCookieHeaders;
+}
+
+// PDF-specific handler
+async function handlePdfRequest(requestedPath) {
+  const pdfFilename = decodeURIComponent(requestedPath.split('uploads/pdfs/')[1]);
+  const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${encodeURIComponent(pdfFilename)}?t=${Date.now()}`;
+
+  console.log(`Fetching PDF from: ${targetUrl}`);
+  
+  try {
+    const pdfResponse = await fetch(targetUrl, {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    });
+    
+    if (!pdfResponse.ok) {
+      console.error(`PDF fetch failed: ${pdfResponse.status}`);
+      return new Response('PDF not found', { status: 404 });
+    }
+
+    // Get the response as a ReadableStream
+    const pdfStream = pdfResponse.body;
+    
+    return new Response(pdfStream, {
+      status: pdfResponse.status,
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `inline; filename="${pdfFilename}"`,
+        'Cache-Control': 'no-store, max-age=0',
+        'Access-Control-Allow-Origin': '*',
+        ...Object.fromEntries(pdfResponse.headers.entries())
+      }
+    });
+  } catch (error) {
+    console.error('PDF fetch error:', error);
+    return new Response('PDF fetch error', { status: 500 });
+  }
+}
+
+// Main request handler
+async function handleRequest(req, method = 'GET') {
   try {
     const { searchParams } = new URL(req.url);
     let requestedPath = searchParams.get("path") || "/";
-    
-    // Special case for root proxy URL
-    if (req.url.endsWith('/api/landx') && requestedPath === '/') {
-      requestedPath = 'dashboard.php';
+
+    // Handle PDF requests
+    if (requestedPath.includes('uploads/pdfs/')) {
+      return handlePdfRequest(requestedPath);
     }
 
+    // Handle non-PDF requests
     const targetUrl = constructTargetUrl(requestedPath);
-    //console.log(`🎯 ${method} - Final Target URL:`, targetUrl);
-
     const targetHeaders = { ...commonHeaders };
     
-    // Forward cookies
     forwardCookies(req, targetHeaders);
     
-    // Add referer and origin
     const refererUrl = new URL(req.url);
     targetHeaders.Referer = `${refererUrl.origin}/api/landx`;
     if (method !== 'GET') {
@@ -198,108 +218,86 @@ async function handleRequest(req, method = 'GET') {
       targetHeaders['X-Requested-With'] = 'XMLHttpRequest';
     }
 
-    // Handle request body
     const body = method !== 'GET' ? await req.text() : undefined;
     if (body && method !== 'GET') {
       targetHeaders['Content-Type'] = req.headers.get('content-type') || 'application/x-www-form-urlencoded';
       targetHeaders['Content-Length'] = Buffer.byteLength(body).toString();
     }
 
-    //console.log(`📤 ${method} Headers:`, targetHeaders);
-    if (body) console.log(`📤 ${method} Body:`, body.substring(0, 200));
-
-    const res = await fetch(targetUrl, {
+    const response = await fetch(targetUrl, {
       method,
       headers: targetHeaders,
       body,
       redirect: 'manual'
     });
 
-    //console.log(`📥 Response status:`, res.status);
-    //console.log(`📥 Response headers:`, Object.fromEntries(res.headers.entries()));
-
     // Handle redirects
-    if (res.status >= 300 && res.status < 400) {
-      const location = res.headers.get('location');
+    if (response.status >= 300 && response.status < 400) {
+      const location = response.headers.get('location');
       if (location) {
         let redirectPath = location;
-        
-        // Convert full URLs to paths
         if (location.startsWith('http')) {
           const url = new URL(location);
           if (url.hostname === new URL(TARGET_DOMAIN).hostname) {
             redirectPath = url.pathname;
           } else {
-            // External redirect - pass through
             return new Response(null, {
-              status: res.status,
+              status: response.status,
               headers: {
                 Location: location,
-                'Set-Cookie': extractSetCookies(res),
+                'Set-Cookie': extractSetCookies(response),
                 'Cache-Control': 'no-cache, no-store, must-revalidate'
               }
             });
           }
         }
-        
         return new Response(null, {
           status: 302,
           headers: {
             Location: `/api/landx?path=${encodeURIComponent(redirectPath)}`,
-            'Set-Cookie': extractSetCookies(res),
+            'Set-Cookie': extractSetCookies(response),
             'Cache-Control': 'no-cache, no-store, must-revalidate'
           }
         });
       }
     }
 
-    // Handle API responses differently
-    const contentType = res.headers.get('content-type') || '';
-    const isJson = contentType.includes('application/json');
-    const isHtml = contentType.includes('text/html');
+    const contentType = response.headers.get('content-type') || '';
+    const responseText = await response.text();
 
-    const responseText = await res.text();
-
-    if (isJson) {
-      // Directly return JSON responses without modification
-      //console.log('📦 JSON Response:', responseText.substring(0, 200));
+    if (contentType.includes('application/json')) {
       return new Response(responseText, {
-        status: res.status,
+        status: response.status,
         headers: {
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Set-Cookie': extractSetCookies(res)
+          'Set-Cookie': extractSetCookies(response)
         }
       });
     }
 
-    if (isHtml) {
-      // Modify HTML content
+    if (contentType.includes('text/html')) {
       const modifiedHtml = modifyHtmlContent(responseText, requestedPath);
-      //console.log('📦 Modified HTML length:', modifiedHtml.length);
-      
       return new Response(modifiedHtml, {
-        status: res.status,
+        status: response.status,
         headers: {
           'Content-Type': 'text/html',
           'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Set-Cookie': extractSetCookies(res)
+          'Set-Cookie': extractSetCookies(response)
         }
       });
     }
 
-    // For all other content types, return as-is
     return new Response(responseText, {
-      status: res.status,
+      status: response.status,
       headers: {
         'Content-Type': contentType,
         'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Set-Cookie': extractSetCookies(res)
+        'Set-Cookie': extractSetCookies(response)
       }
     });
   } catch (error) {
-    console.error(`💥 ${method} Proxy Error:`, error);
-    console.error(`💥 Error stack:`, error.stack);
+    console.error(`Proxy Error:`, error);
     return new Response(`Proxy Error: ${error.message}`, { 
       status: 500,
       headers: { 'Content-Type': 'text/plain' }

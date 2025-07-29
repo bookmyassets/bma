@@ -60,8 +60,8 @@ const nextConfig = {
         destination: 'https://bigbucket.online/LandX-Beta/img/:path*',
       },
       {
-        source: '/uploads/pdfs/:path*',
-        destination: 'https://bigbucket.online/LandX-Beta/uploads/pdfs/:path*',
+        source: "/uploads/pdfs/:path*",
+        destination: "/api/landx?path=uploads/pdfs/:path*",
       },
       // Default LandX-Beta access - should be last
       {
@@ -78,21 +78,43 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
-          { key: 'Referrer-Policy', value: 'same-origin' },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-XSS-Protection", value: "1; mode=block" },
+          { key: "Referrer-Policy", value: "same-origin" },
         ],
       },
       // Specific headers for API routes
       {
-        source: '/api/:path*',
+        source: "/api/:path*",
         headers: [
-          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
-          { key: 'Pragma', value: 'no-cache' },
-          { key: 'Expires', value: '0' },
+          {
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
+          },
+          { key: "Pragma", value: "no-cache" },
+          { key: "Expires", value: "0" },
+        ],
+      },
+      {
+        source: "/api/landx",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS" },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "X-Requested-With, Content-Type",
+          },
+        ],
+      },
+      {
+        source: "/uploads/pdfs/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Expose-Headers", value: "*" },
+          { key: "Cache-Control", value: "no-store, max-age=0" },
         ],
       },
     ];
