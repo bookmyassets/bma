@@ -1,4 +1,5 @@
 // app/api/landx/route.js
+
 const TARGET_DOMAIN = "https://bigbucket.online";
 const TARGET_BASE_PATH = "/LandX-Beta";
 const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
@@ -13,40 +14,65 @@ const commonHeaders = {
   "Upgrade-Insecure-Requests": "1",
 };
 
-// Standardized URL construction
+// Helper function to forward cookies
+function forwardCookies(clientRequest, targetHeaders) {
+  const cookies = clientRequest.headers.get("cookie");
+  if (cookies) {
+    targetHeaders["Cookie"] = cookies;
+  }
+}
+
+// Robust cookie extraction
+function extractSetCookies(response) {
+  const setCookieHeaders = [];
+  
+  const setCookieHeader = response.headers.get('set-cookie');
+  if (setCookieHeader) {
+    const cookies = setCookieHeader.split(/\s*,\s*(?=[^;]+;)/);
+    setCookieHeaders.push(...cookies);
+  }
+  
+  if (typeof response.headers.raw === 'function') {
+    const rawSetCookies = response.headers.raw()['set-cookie'] || [];
+    setCookieHeaders.push(...rawSetCookies);
+  }
+  
+  return setCookieHeaders;
+}
+
+// Standardized URL construction with PDF handling
 function constructTargetUrl(path) {
-  const decodedPath = decodeURIComponent(path);
-
-  if (!decodedPath || decodedPath === '/') {
-    return TARGET_URL;
-  }
-
-  const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
-
-  // Handle PDF requests differently
-  if (cleanPath.includes('uploads/pdfs/')) {
-    const pdfFilename = cleanPath.split('uploads/pdfs/')[1];
-    return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${pdfFilename}`;
-  }
-
-  // Other existing cases
-  if (cleanPath === 'favicon.ico') {
-    return `${TARGET_DOMAIN}/favicon.ico`;
-  }
-  if (cleanPath.endsWith('.php')) {
+  // Handle PDF generation requests
+  if (path.includes('generate_pdf.php')) {
+    const cleanPath = decodeURIComponent(path)
+      .replace(/^[^?]*[\/]([^?]+\.php\?[^"]+)/, '$1');
     return `${BASE_URL}/${cleanPath}`;
   }
 
+  // Handle empty/root path
+  if (!path || path === '/' || path === '') {
+    return TARGET_URL;
+  }
+
+  // Remove leading slash if present
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+
+  // Special cases
+  if (cleanPath === 'favicon.ico') {
+    return `${TARGET_DOMAIN}/favicon.ico`;
+  }
+
+  // All other cases
   return `${BASE_URL}/${cleanPath}`;
 }
-// Enhanced HTML content modifier
+
+// Enhanced HTML content modifier with PDF link handling
 function modifyHtmlContent(html, currentPath = "") {
   // Normalize currentPath
   currentPath = currentPath.replace(/\/+$/, '');
 
-  // all standard links and forms
   let modifiedHtml = html
-    // href attributes
+    // Rewrite href attributes
     .replace(/href="([^"]*?)"/gi, (match, href) => {
       if (href.startsWith('http') || href.startsWith('//') || 
           href.startsWith('#') || href.startsWith('mailto:') || 
@@ -70,22 +96,31 @@ function modifyHtmlContent(html, currentPath = "") {
       )}"`;
     })
     
-    // Form actions
+    // Special handling for PDF generation links
+    .replace(
+      /href="([^"]*?(?:dashboard\.php[\/%]?)?generate_pdf\.php\?index=\d+[^"]*?)"/gi,
+      (match, href) => {
+        if (href.startsWith('http')) return match;
+        
+        const pdfPath = href.replace(/^[^?]*[\/%]([^?]+\.php\?[^"]+)/, '$1');
+        return `href="/api/landx?path=${encodeURIComponent(pdfPath)}"`;
+      }
+    )
+    
+    // Rewrite form actions
     .replace(/action="([^"]*?)"/gi, (match, action) => {
       if (action.startsWith('http') || !action) return match;
       
-      // Handle absolute paths
       if (action.startsWith('/')) {
         return `action="/api/landx?path=${encodeURIComponent(action)}"`;
       }
       
-      // Handle relative paths
       return `action="/api/landx?path=${encodeURIComponent(
         currentPath ? `${currentPath}/${action}` : action
       )}"`;
     })
     
-
+    // Fix src attributes for resources
     .replace(/src="([^"]*?)"/g, (match, src) => {
       if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//')) {
         return match;
@@ -93,6 +128,7 @@ function modifyHtmlContent(html, currentPath = "") {
       return `src="${BASE_URL}/${src.startsWith('/') ? src.slice(1) : src}"`;
     })
     
+    // Fix background images in CSS
     .replace(/url\(["']?([^"')]*?)["']?\)/g, (match, url) => {
       if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('//')) {
         return match;
@@ -100,8 +136,8 @@ function modifyHtmlContent(html, currentPath = "") {
       return `url("${BASE_URL}/${url.startsWith('/') ? url.slice(1) : url}")`;
     });
 
+  // Modify JavaScript code that makes requests
   modifiedHtml = modifiedHtml
-    //fetch/XHR requests in JavaScript
     .replace(/(fetch|axios|jQuery\.ajax|XMLHttpRequest|\.post|\.get)\(['"]([^'"]*?)['"]/g, 
       (match, method, url) => {
         if (url.startsWith('http') || url.startsWith('//')) return match;
@@ -114,7 +150,6 @@ function modifyHtmlContent(html, currentPath = "") {
         return match;
       })
     
-    // Form submissions in JavaScript
     .replace(/(\.action|formAction|\.submit|\.url)\s*=\s*['"]([^'"]*?)['"]/g,
       (match, prop, url) => {
         if (url.startsWith('http') || url.startsWith('//')) return match;
@@ -134,78 +169,18 @@ function modifyHtmlContent(html, currentPath = "") {
   return modifiedHtml;
 }
 
-
-// Helper functions
-function forwardCookies(clientRequest, targetHeaders) {
-  const cookies = clientRequest.headers.get("cookie");
-  if (cookies) {
-    targetHeaders["Cookie"] = cookies;
-  }
-}
-
-function extractSetCookies(response) {
-  const setCookieHeaders = [];
-  const setCookieHeader = response.headers.get('set-cookie');
-  if (setCookieHeader) {
-    setCookieHeaders.push(...setCookieHeader.split(/\s*,\s*(?=[^;]+;)/));
-  }
-  if (typeof response.headers.raw === 'function') {
-    setCookieHeaders.push(...(response.headers.raw()['set-cookie'] || []));
-  }
-  return setCookieHeaders;
-}
-
-// PDF-specific handler
-async function handlePdfRequest(requestedPath) {
-  const pdfFilename = decodeURIComponent(requestedPath.split('uploads/pdfs/')[1]);
-  const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${encodeURIComponent(pdfFilename)}?t=${Date.now()}`;
-
-  console.log(`Fetching PDF from: ${targetUrl}`);
-  
-  try {
-    const pdfResponse = await fetch(targetUrl, {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache'
-      }
-    });
-    
-    if (!pdfResponse.ok) {
-      console.error(`PDF fetch failed: ${pdfResponse.status}`);
-      return new Response('PDF not found', { status: 404 });
-    }
-
-    // Get the response as a ReadableStream
-    const pdfStream = pdfResponse.body;
-    
-    return new Response(pdfStream, {
-      status: pdfResponse.status,
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `inline; filename="${pdfFilename}"`,
-        'Cache-Control': 'no-store, max-age=0',
-        'Access-Control-Allow-Origin': '*',
-        ...Object.fromEntries(pdfResponse.headers.entries())
-      }
-    });
-  } catch (error) {
-    console.error('PDF fetch error:', error);
-    return new Response('PDF fetch error', { status: 500 });
-  }
-}
-
-// Main request handler
+// Unified request handler
 async function handleRequest(req, method = 'GET') {
   try {
     const { searchParams } = new URL(req.url);
     let requestedPath = searchParams.get("path") || "/";
-
-    // Handle PDF requests
-    if (requestedPath.includes('uploads/pdfs/')) {
-      return handlePdfRequest(requestedPath);
+    
+    // Clean up PDF generation paths
+    if (requestedPath.includes('generate_pdf.php')) {
+      requestedPath = decodeURIComponent(requestedPath)
+        .replace(/^[^?]*[\/]([^?]+\.php\?[^"]+)/, '$1');
     }
 
-    // Handle non-PDF requests
     const targetUrl = constructTargetUrl(requestedPath);
     const targetHeaders = { ...commonHeaders };
     

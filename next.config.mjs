@@ -33,6 +33,10 @@ const nextConfig = {
         source: '/dashboard.php',
         destination: '/api/landx?path=dashboard.php',
       },
+      {
+        source: '/generate_pdf.php',
+        destination: '/api/landx?path=generate_pdf.php',
+      },
       // Handle other common PHP files
       {
         source: '/index.php',
@@ -74,7 +78,6 @@ const nextConfig = {
       },
     ];
   },
-  
   async headers() {
     return [
       {
