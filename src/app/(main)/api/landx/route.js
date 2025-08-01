@@ -206,6 +206,19 @@ async function handleRequest(req, method = 'GET') {
       redirect: 'manual'
     });
 
+    // Handle PDF responses differently
+    const contentType = response.headers.get('content-type') || '';
+    if (contentType.includes('application/pdf')) {
+      return new Response(await response.blob(), {
+        status: response.status,
+        headers: {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': response.headers.get('content-disposition') || 'inline',
+          'Cache-Control': 'no-cache, no-store, must-revalidate'
+        }
+      });
+    }
+
     // Handle redirects
     if (response.status >= 300 && response.status < 400) {
       const location = response.headers.get('location');
@@ -237,10 +250,10 @@ async function handleRequest(req, method = 'GET') {
       }
     }
 
-    const contentType = response.headers.get('content-type') || '';
+    const contentType2 = response.headers.get('content-type') || '';
     const responseText = await response.text();
 
-    if (contentType.includes('application/json')) {
+    if (contentType2.includes('application/json')) {
       return new Response(responseText, {
         status: response.status,
         headers: {
@@ -251,7 +264,7 @@ async function handleRequest(req, method = 'GET') {
       });
     }
 
-    if (contentType.includes('text/html')) {
+    if (contentType2.includes('text/html')) {
       const modifiedHtml = modifyHtmlContent(responseText, requestedPath);
       return new Response(modifiedHtml, {
         status: response.status,
