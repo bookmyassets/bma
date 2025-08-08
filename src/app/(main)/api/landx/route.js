@@ -46,7 +46,7 @@ function isPdfRequest(path) {
   const decodedPath = decodeURIComponent(path);
   return decodedPath.includes('uploads/pdfs/') || 
          decodedPath.toLowerCase().endsWith('.pdf') ||
-         decodedPath.includes('generate_pdf.php');
+         decodedPath.includes('generate_pdf.php'); // This will catch dashboard.php/generate_pdf.php too
 }
 
 // Standardized URL construction
@@ -191,7 +191,23 @@ async function handlePdfRequest(requestedPath, req) {
     const decodedPath = decodeURIComponent(requestedPath);
     console.log(`PDF Request - Decoded path: ${decodedPath}`);
     
-    if (decodedPath.includes('uploads/pdfs/')) {
+    // Fix: Handle the dashboard.php/generate_pdf.php case
+    if (decodedPath.includes('generate_pdf.php')) {
+      // Extract just the generate_pdf.php part with parameters
+      const generatePdfMatch = decodedPath.match(/generate_pdf\.php(\?.*)?$/);
+      if (generatePdfMatch) {
+        const pdfPath = `generate_pdf.php${generatePdfMatch[1] || ''}`;
+        targetUrl = `${BASE_URL}/${pdfPath}`;
+        
+        // Extract filename from URL parameters if available
+        const urlParams = new URLSearchParams(generatePdfMatch[1]?.substring(1) || '');
+        const index = urlParams.get('index');
+        filename = index ? `document_${index}.pdf` : 'generated_document.pdf';
+      } else {
+        console.error('Invalid generate_pdf.php path structure');
+        return new Response('Invalid PDF generation path', { status: 400 });
+      }
+    } else if (decodedPath.includes('uploads/pdfs/')) {
       // Extract filename from uploads/pdfs/ path
       const pathParts = decodedPath.split('uploads/pdfs/');
       const pdfFilename = pathParts[1];
@@ -203,16 +219,6 @@ async function handlePdfRequest(requestedPath, req) {
       
       filename = pdfFilename;
       targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${pdfFilename}`;
-    } else if (decodedPath.includes('generate_pdf.php')) {
-      // Handle generate_pdf.php with parameters
-      const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
-      targetUrl = `${BASE_URL}/${cleanPath}`;
-      
-      // Extract filename from URL parameters if available
-      const urlParams = new URLSearchParams(decodedPath.split('?')[1] || '');
-      const index = urlParams.get('index');
-      filename = index ? `document_${index}.pdf` : 'generated_document.pdf';
-      
     } else if (decodedPath.toLowerCase().endsWith('.pdf')) {
       // Direct PDF access
       filename = decodedPath.split('/').pop();
