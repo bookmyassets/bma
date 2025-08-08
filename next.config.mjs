@@ -1,83 +1,88 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
+ async rewrites() {
     return [
       // Handle favicon specifically
       {
-        source: '/favicon.ico',
-        destination: '/api/landx?path=/favicon.ico',
+        source: "/favicon.ico",
+        destination: "/api/landx?path=/favicon.ico",
       },
       // Test the basic API route first
       {
-        source: '/test-api',
-        destination: '/api/landx?path=dashboard.php',
+        source: "/test-api",
+        destination: "/api/landx?path=dashboard.php",
       },
       // Direct access to specific PHP files with explicit handling
       {
-        source: '/logout.php',
-        destination: '/api/landx?path=logout.php',
+        source: "/logout.php",
+        destination: "/api/landx?path=logout.php",
       },
       {
-        source: '/superadmin.php',
-        destination: '/api/landx?path=superadmin.php',
+        source: "/superadmin.php",
+        destination: "/api/landx?path=superadmin.php",
       },
       {
-        source: '/edit.php',
-        destination: '/api/landx?path=edit.php',
+        source: "/edit.php",
+        destination: "/api/landx?path=edit.php",
       },
       {
-        source: '/login.php', 
-        destination: '/api/landx?path=login.php',
+        source: "/login.php",
+        destination: "/api/landx?path=login.php",
       },
       {
-        source: '/dashboard.php',
-        destination: '/api/landx?path=dashboard.php',
+        source: "/dashboard.php",
+        destination: "/api/landx?path=dashboard.php",
       },
       {
-        source: '/generate_pdf.php',
-        destination: '/api/landx?path=generate_pdf.php',
+        source: "/api.php",
+        destination: "/api/landx?path=api.php",
+      },
+      {
+        source: "/generate_pdf.php",
+        destination: "/api/landx?path=generate_pdf.php",
       },
       // Handle other common PHP files
       {
-        source: '/index.php',
-        destination: '/api/landx?path=index.php',
+        source: "/index.php",
+        destination: "/api/landx?path=index.php",
       },
       {
-        source: '/admin.php',
-        destination: '/api/landx?path=admin.php',
+        source: "/admin.php",
+        destination: "/api/landx?path=admin.php",
       },
       // Handle CSS, JS, and image files
       {
-        source: '/css/:path*',
-        destination: 'https://bigbucket.online/LandX-Beta/css/:path*',
+        source: "/css/:path*",
+        destination: "https://bigbucket.online/LandX-Beta/css/:path*",
       },
       {
-        source: '/js/:path*',
-        destination: 'https://bigbucket.online/LandX-Beta/js/:path*',
+        source: "/js/:path*",
+        destination: "https://bigbucket.online/LandX-Beta/js/:path*",
       },
       {
-        source: '/images/:path*',
-        destination: 'https://bigbucket.online/LandX-Beta/images/:path*',
+        source: "/images/:path*",
+        destination: "https://bigbucket.online/LandX-Beta/images/:path*",
       },
       {
-        source: '/img/:path*',
-        destination: 'https://bigbucket.online/LandX-Beta/img/:path*',
+        source: "/img/:path*",
+        destination: "https://bigbucket.online/LandX-Beta/img/:path*",
       },
       {
         source: "/uploads/pdfs/:path*",
         destination: "/api/landx?path=uploads/pdfs/:path*",
       },
-      // Default LandX-Beta access - should be last
+      // Default landx access - should be last
       {
-        source: '/landx',
-        destination: '/api/landx',
+        source: "/landx",
+        destination: "/api/landx",
       },
       {
-        source: '/landx/:path*',
-        destination: '/api/landx?path=:path*',
+        source: "/landx/:path*",
+        destination: "/api/landx?path=:path*",
       },
     ];
   },
+
   async headers() {
     return [
       {
@@ -126,10 +131,10 @@ const nextConfig = {
   // Additional configuration for better production handling
   poweredByHeader: false,
   compress: true,
-  
+
   // Handle trailing slashes consistently
   trailingSlash: false,
-  
+
   // Better error handling
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
