@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import logo from "@/assests/Bmalogo.png";
+import logo from "@/assests/bma-independence-logo.png";
 import { Geist, Geist_Mono } from "next/font/google";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
