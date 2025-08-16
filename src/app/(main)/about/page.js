@@ -193,36 +193,27 @@ const RealEstateLandingPage = () => {
 
   return (
     <div className="bg-white">
-      {/* Hero Section - Modern Gradient Design */}
-      <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-1000"></div>
-          <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-2000"></div>
-        </div>
-
-        <div
-          ref={heroRef}
-          className="relative z-10 container mx-auto px-4 py-20"
-        >
+      {/* Hero Section - Fixed Layout */}
+      <div className="relative min-h-screen bg-gray-900 overflow-hidden">
+        <div ref={heroRef} className="relative z-10 container mx-auto px-4 py-8">
+          
           {/* Mobile View - Stacked (Text first then Video) */}
-          <div className="lg:hidden flex flex-col min-h-screen pt-20 pb-10">
+          <div className="lg:hidden flex flex-col min-h-screen justify-center space-y-8">
             {/* Text Content */}
             <div
-              className={`w-full text-white space-y-8 transform transition-all duration-1000 ${
+              className={`w-full text-white space-y-6 transform transition-all duration-1000 ${
                 isVisible.hero ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
               }`}
             >
-              <div className="space-y-6 px-4">
-                <div className="flex items-center space-x-2">
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2 pt-16">
                   <div className="h-1 w-12 bg-yellow-500 rounded"></div>
-                  <span className="text-yellow-500 font-medium tracking-wide">
+                  <span className="text-yellow-500 font-medium tracking-wide text-sm">
                     BMA GROUP OF COMPANIES
                   </span>
                 </div>
 
-                <h1 className="text-4xl font-bold leading-tight">
+                <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
                   Invest in{' '}
                   <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
                     Tomorrow's
@@ -238,7 +229,7 @@ const RealEstateLandingPage = () => {
               </div>
 
               {/* Mission Statement */}
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mx-4">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
                 <h3 className="text-xl font-bold text-yellow-500 mb-4">
                   Our Mission
                 </h3>
@@ -248,7 +239,7 @@ const RealEstateLandingPage = () => {
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col gap-4 pt-4 px-4">
+              <div className="flex flex-col gap-4">
                 <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                   <span>Explore Properties</span>
                   <ArrowRight
@@ -265,17 +256,17 @@ const RealEstateLandingPage = () => {
 
             {/* Video */}
             <div
-              className={`flex-1 flex items-center justify-center p-4 transform transition-all duration-1000 delay-300 ${
+              className={`flex items-center justify-center transform transition-all duration-1000 delay-300 ${
                 isVisible.hero
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
               }`}
             >
-              <div className="w-full max-w-sm" style={{ aspectRatio: "9/16" }}>
+              <div className="w-full max-w-xs" style={{ aspectRatio: "9/16", height: "400px" }}>
                 <div className="relative h-full">
                   <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
-                  <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20 h-full flex flex-col justify-center">
-                    <div className="flex-1 rounded-2xl overflow-hidden">
+                  <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20 h-full">
+                    <div className="h-full rounded-2xl overflow-hidden">
                       <iframe
                         src="https://www.youtube.com/embed/NzvDr2GyL9Y?si=YpXIPEx8AsODmara?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
                         title="YouTube Shorts Video"
@@ -291,84 +282,85 @@ const RealEstateLandingPage = () => {
           </div>
    
           {/* Desktop View - Side by Side */}
-          <div className="hidden lg:flex flex-row space-x-16 items-center min-h-screen">
-            {/* Left Content */}
-            <div
-              className={`w-full lg:w-1/2 text-white space-y-8 transform transition-all duration-1000 px-6 lg:px-12 ${
-                isVisible.hero ? "translate-x-0 opacity-100" : "-translate-x-20 opacity-0"
-              }`}
-            >
-              <div className="space-y-6">
-                <div className="flex items-center space-x-2">
-                  <div className="h-1 w-12 bg-yellow-500 rounded"></div>
-                  <span className="text-yellow-500 font-medium tracking-wide">
-                    BMA GROUP OF COMPANIES
-                  </span>
+          <div className="hidden lg:flex lg:items-center lg:justify-center min-h-screen pt-8">
+            <div className="grid grid-cols-2 gap-12 xl:gap-16 max-w-7xl w-full items-center">
+              {/* Left Content */}
+              <div
+                className={`text-white space-y-6 xl:space-y-8 transform transition-all duration-1000 ${
+                  isVisible.hero ? "translate-x-0 opacity-100" : "-translate-x-20 opacity-0"
+                }`}
+              >
+                <div className="space-y-4 xl:space-y-6">
+                  <div className="flex items-center space-x-2">
+                    <div className="h-1 w-12 bg-yellow-500 rounded"></div>
+                    <span className="text-yellow-500 font-medium tracking-wide text-sm xl:text-base">
+                      BMA GROUP OF COMPANIES
+                    </span>
+                  </div>
+
+                  <h1 className="text-4xl xl:text-5xl 2xl:text-6xl font-bold leading-tight">
+                    Invest in <br />
+                    <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                      Tomorrow's
+                    </span>
+                    <br />
+                    Smart City
+                  </h1>
+
+                  <p className="text-lg xl:text-xl text-gray-300 leading-relaxed">
+                    Discover premium, legally verified plots in Dholera Smart
+                    City. We don't just offer land—we offer a vision of the
+                    future.
+                  </p>
                 </div>
 
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                  Invest in <br />
-                  <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                    Tomorrow's
-                  </span>
-                  <br />
-                  Smart City
-                </h1>
+                {/* Mission Statement */}
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 xl:p-8 border border-white/20">
+                  <h3 className="text-xl xl:text-2xl font-bold text-yellow-500 mb-4">
+                    Our Mission
+                  </h3>
+                  <p className="text-gray-200 leading-relaxed">
+                    To help people grow their money safely, confidently, and with maximum returns through strategic real estate investments in India's first greenfield smart city.
+                  </p>
+                </div>
 
-                <p className="text-xl lg:text-2xl text-gray-300 max-w-2xl leading-relaxed">
-                  Discover premium, legally verified plots in Dholera Smart
-                  City. We don't just offer land—we offer a vision of the
-                  future.
-                </p>
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                    <span>Explore Properties</span>
+                    <ArrowRight
+                      className="group-hover:translate-x-1 transition-transform"
+                      size={20}
+                    />
+                  </button>
+                  <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                    <Play size={20} />
+                    <span>Watch Video</span>
+                  </button>
+                </div>
               </div>
 
-              {/* Mission Statement */}
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                <h3 className="text-2xl font-bold text-yellow-500 mb-4">
-                  Our Mission
-                </h3>
-                <p className="text-gray-200 leading-relaxed">
-                  To help people grow their money safely, confidently, and with maximum returns through strategic real estate investments in India's first greenfield smart city.
-                </p>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
-                  <span>Explore Properties</span>
-                  <ArrowRight
-                    className="group-hover:translate-x-1 transition-transform"
-                    size={20}
-                  />
-                </button>
-                <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
-                  <Play size={20} />
-                  <span>Watch Video</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Right Content - YouTube Shorts Video */}
-            <div className="w-full lg:w-1/2 h-screen flex items-center justify-center p-6">
-              <div
-                className={`w-full max-w-md transform transition-all duration-1000 delay-500 ${
-                  isVisible.hero
-                    ? "translate-x-0 opacity-100"
-                    : "translate-x-20 opacity-0"
-                }`}
-                style={{ aspectRatio: "9/16" }}
-              >
-                <div className="relative h-full">
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
-                  <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20 h-full flex flex-col justify-center">
-                    <div className="flex-1 rounded-2xl overflow-hidden">
-                      <iframe
-                        src="https://www.youtube.com/embed/NzvDr2GyL9Y?si=YpXIPEx8AsODmara?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
-                        title="YouTube Shorts Video"
-                        className="w-full h-full rounded-2xl"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+              {/* Right Content - YouTube Shorts Video */}
+              <div className="flex items-center justify-center">
+                <div
+                  className={`w-full max-w-sm transform transition-all duration-1000 delay-500 ${
+                    isVisible.hero
+                      ? "translate-x-0 opacity-100"
+                      : "translate-x-20 opacity-0"
+                  }`}
+                >
+                  <div className="relative" style={{ aspectRatio: "9/16", height: "600px" }}>
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
+                    <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/20 h-full">
+                      <div className="h-full rounded-2xl overflow-hidden">
+                        <iframe
+                          src="https://www.youtube.com/embed/NzvDr2GyL9Y?si=YpXIPEx8AsODmara?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
+                          title="YouTube Shorts Video"
+                          className="w-full h-full rounded-2xl"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -383,30 +375,30 @@ const RealEstateLandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-5xl font-bold text-gray-900 mb-4">About Us</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">About Us</h2>
               <div className="flex items-center justify-center mb-6">
                 <div className="h-1 w-16 bg-yellow-500 rounded"></div>
                 <Star className="mx-4 text-yellow-500" size={24} />
                 <div className="h-1 w-16 bg-yellow-500 rounded"></div>
               </div>
-              <p className="text-2xl text-yellow-600 font-bold mb-4">
+              <p className="text-lg sm:text-xl text-yellow-600 font-bold mb-4">
                 Focused on Your Growth. Driven by Your Trust.
               </p>
             </div>
 
             <div
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center transform transition-all duration-1000 ${
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch transform transition-all duration-1000 ${
                 isVisible.about ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               }`}
             >
               {/* Left Content */}
-              <div className="space-y-8">
-                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Story</h3>
-                  <p className="text-gray-700 leading-relaxed mb-6">
+              <div className="space-y-8 flex flex-col">
+                <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 flex-1 flex flex-col">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Our Story</h3>
+                  <p className="text-gray-700 leading-relaxed mb-6 flex-1">
                     At BMA Group of Companies (aka BookMyAssets), we believe that real estate is not just about land; it is about people, possibilities, and building a secure future for every investor.
                   </p>
-                  <div className="bg-yellow-50 rounded-2xl p-6 border-l-4 border-yellow-500">
+                  <div className="bg-yellow-50 rounded-2xl p-4 sm:p-6 border-l-4 border-yellow-500">
                     <h4 className="text-lg font-bold text-yellow-600 mb-2">Our Simple Goal</h4>
                     <p className="text-gray-700">
                       To help people grow their money safely, confidently, and with maximum returns.
@@ -414,9 +406,9 @@ const RealEstateLandingPage = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 border border-blue-200">
-                  <h3 className="text-2xl font-bold text-blue-900 mb-4">Why Dholera?</h3>
-                  <p className="text-blue-800 leading-relaxed mb-4">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-6 sm:p-8 border border-blue-200 flex-1 flex flex-col">
+                  <h3 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4">Why Dholera?</h3>
+                  <p className="text-blue-800 leading-relaxed mb-4 flex-1">
                     Because it's not just the future, it is <strong>your future</strong>.
                   </p>
                   <div className="space-y-3">
@@ -441,23 +433,27 @@ const RealEstateLandingPage = () => {
               </div>
 
               {/* Right Content */}
-              <div className="space-y-8">
-                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Journey</h3>
-                  <p className="text-gray-700 leading-relaxed mb-6">
+              <div className="space-y-8 flex flex-col">
+                <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 flex-1 flex flex-col">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Our Journey</h3>
+                  <p className="text-gray-700 leading-relaxed mb-6 flex-1">
                     Over the years, we have helped thousands of investors across India and overseas invest in the right places: Gurugram, Delhi NCR, Noida, Dubai, Dholera, and more.
                   </p>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-gray-700 leading-relaxed flex-1">
                     After doing a deep comparison of all our projects, our research proved one thing clearly: Dholera offers better growth, returns, and long-term potential than any other location.
                   </p>
+                  <p className="text-gray-700 leading-relaxed flex-1">
+                    After doing a deep comparison of all our projects, our research proved one thing clearly.
+                  </p>
+                 
                 </div>
 
-                <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 border border-yellow-200">
-                  <h3 className="text-2xl font-bold text-orange-900 mb-4">Our Promise</h3>
-                  <p className="text-orange-800 leading-relaxed mb-4">
+                <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-6 sm:p-8 border border-yellow-200 flex-1 flex flex-col">
+                  <h3 className="text-xl sm:text-2xl font-bold text-orange-900 mb-4">Our Promise</h3>
+                  <p className="text-orange-800 leading-relaxed mb-4 flex-1">
                     We are Not Just in Real Estate. We are in the Business of Growing People's Wealth, Dreams, and Trust.
                   </p>
-                  <p className="text-orange-800 leading-relaxed">
+                  <p className="text-orange-800 leading-relaxed flex-1">
                     Everything we do is built around one core belief: <strong>"You" come first.</strong> We are here to guide you, protect your money, simplify your journey, and give you investment opportunities that truly change your life.
                   </p>
                 </div>
@@ -468,16 +464,16 @@ const RealEstateLandingPage = () => {
       </div>
 
       {/* BMA Group Companies Section */}
-      <div ref={companiesRef} className="py-20 bg-gradient-to-br from-gray-900 to-gray-800">
+      <div ref={companiesRef} className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-white mb-4">BMA Group of Companies</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">BMA Group of Companies</h2>
             <div className="flex items-center justify-center mb-6">
               <div className="h-1 w-16 bg-yellow-500 rounded"></div>
               <Star className="mx-4 text-yellow-500" size={24} />
               <div className="h-1 w-16 bg-yellow-500 rounded"></div>
             </div>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto">
+            <p className="text-xl text-black max-w-4xl mx-auto">
               Four strong arms, each one created to serve you better, faster, and smarter in your real estate investment journey.
             </p>
           </div>
@@ -493,7 +489,7 @@ const RealEstateLandingPage = () => {
                 }`}
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
-                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:border-yellow-500 transition-all duration-500 h-full">
+                <div className="bg-gray-900 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:border-yellow-500 transition-all duration-500 h-full">
                   <div className="flex items-center space-x-4 mb-6">
                     <div
                       className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${company.color} flex items-center justify-center group-hover:rotate-12 transition-transform duration-300`}
@@ -529,7 +525,7 @@ const RealEstateLandingPage = () => {
       <div className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Our Milestones
             </h2>
             <div className="flex items-center justify-center">
@@ -568,10 +564,10 @@ const RealEstateLandingPage = () => {
                     <item.icon size={32} className="text-white" />
                   </div>
                   <div className="text-center">
-                    <div className="text-5xl font-bold text-gray-900 mb-2">
+                    <div className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
                       {item.count}+
                     </div>
-                    <div className="text-xl text-gray-600">{item.label}</div>
+                    <div className="text-lg lg:text-xl text-gray-600">{item.label}</div>
                   </div>
                 </div>
               </div>
@@ -584,7 +580,7 @@ const RealEstateLandingPage = () => {
       <div ref={featuresRef} className="py-20 bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-white mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
               Why Choose Us?
             </h2>
             <div className="flex items-center justify-center mb-6">
@@ -675,7 +671,7 @@ const RealEstateLandingPage = () => {
       <div ref={testimonialsRef} className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               What Our Clients Say
             </h2>
             <div className="flex items-center justify-center mb-6">
@@ -754,13 +750,13 @@ const RealEstateLandingPage = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
+      <div className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
               Ready to Invest in Your Future?
             </h2>
-            <p className="text-xl text-gray-300 mb-10">
+            <p className="text-xl text-gray-600 mb-10">
               Join hundreds of smart investors who are building wealth through
               strategic real estate investments in Dholera Smart City.
             </p>
@@ -772,7 +768,7 @@ const RealEstateLandingPage = () => {
                   size={20}
                 />
               </button>
-              <button className="bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+              <button className="border-2 border-yellow-500 hover:bg-yellow-500 text-yellow-500 hover:text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                 <Phone size={20} />
                 <span>Call Us Now</span>
               </button>

@@ -1,0 +1,594 @@
+"use client";
+
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import logo from "@/assests/bma-logo.png";
+import Image from "next/image";
+import { getAllSubProjects } from "@/sanity/lib/api";
+import { urlFor } from "@/sanity/lib/image";
+import { Menu } from "lucide-react";
+
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isResidentialMenuOpen, setIsResidentialMenuOpen] = useState(false);
+  const [isDholeraMenuOpen, setIsDholeraMenuOpen] = useState(false);
+  const [subProjects, setSubProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    async function fetchSubProjects() {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Fetch all sub-projects
+        const projects = await getAllSubProjects();
+        
+        // Separate sold out projects
+        const activeProjects = projects.filter(project => 
+          !project.categories.some(cat => cat.title === "Sold Out")
+        );
+        
+        const soldOutProjects = projects.filter(project => 
+          project.categories.some(cat => cat.title === "Sold Out")
+        );
+
+        setSubProjects({
+          active: activeProjects,
+          soldOut: soldOutProjects
+        });
+      } catch (error) {
+        console.error("Error fetching sub-projects:", error);
+        setError("Failed to load projects");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (isResidentialMenuOpen) {
+      fetchSubProjects();
+    }
+  }, [isResidentialMenuOpen]);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    document.body.style.overflow = isMobileMenuOpen ? 'unset' : 'hidden';
+  };
+
+  const toggleResidentialMenu = () => {
+    setIsResidentialMenuOpen(!isResidentialMenuOpen);
+    document.body.style.overflow = isResidentialMenuOpen ? 'unset' : 'hidden';
+  };
+
+  const toggleDholeraMenu = () => {
+    setIsDholeraMenuOpen(!isDholeraMenuOpen);
+  };
+
+  const closeAllMenus = () => {
+    setIsMobileMenuOpen(false);
+    setIsResidentialMenuOpen(false);
+    setIsDholeraMenuOpen(false);
+    document.body.style.overflow = 'unset';
+  };
+  
+  return (
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-[#f9f9f9] border-b border-gray-200/50 shadow-lg"
+            : ""
+        }`}
+      >
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <Link href="/" onClick={closeAllMenus}>
+                <Image src={logo} height={75} width={75} alt="logo" className="p-1" />
+              </Link>
+            </div>
+
+            {/* Desktop Navigation Links */}
+            <div className="hidden md:flex items-center space-x-12">
+              <button
+                onClick={toggleResidentialMenu}
+                className={`font-medium transition-colors duration-300 hover:text-yellow-500 ${
+                  isScrolled ? "text-black" : "text-white"
+                }`}
+              >
+                Residential
+              </button>
+              <Link
+                href="/bulk-land"
+                className={`font-medium transition-colors duration-300 hover:text-yellow-500 ${
+                  isScrolled ? "text-black" : "text-white"
+                }`}
+              >
+                Bulk Land
+              </Link>
+              <div className="relative group">
+                <button
+                  className={`font-medium transition-colors duration-300 hover:text-yellow-500 ${
+                    isScrolled ? "text-black" : "text-white"
+                  }`}
+                >
+                  Dholera SIR
+                </button>
+                <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                  <Link
+                    href="/new/about-dholera-sir"
+                    className="block px-4 py-2 text-black hover:bg-gray-100 transition-colors"
+                  >
+                    About Dholera SIR
+                  </Link>
+                  <Link
+                    href="/new/dholera-sir-blogs"
+                    className="block px-4 py-2 text-black hover:bg-gray-100 transition-colors"
+                  >
+                    Dholera Blogs
+                  </Link>
+                  <Link
+                    href="/new/dholera-sir-updates"
+                    className="block px-4 py-2 text-black hover:bg-gray-100 transition-colors"
+                  >
+                    Latest Updates
+                  </Link>
+                </div>
+              </div>
+              {/* Desktop Action Buttons */}
+              <div className="hidden md:flex items-center space-x-12">
+                <Link
+                  href="/about"
+                  className="bg-yellow-500 text-black px-6 py-2 rounded-md font-medium hover:bg-yellow-600 transition duration-300 shadow-md"
+                >
+                  Contact Us
+                </Link>
+
+                {/* Dropdown for additional links */}
+                <div className="relative group">
+                  <button
+                    className={`font-medium transition-colors duration-300 hover:text-yellow-500 ${
+                      isScrolled ? "text-black" : "text-white"
+                    }`}
+                  >
+                    <Menu className="inline-block mr-1 bg-white text-black h-10 w-10 p-1 rounded-sm" />
+                  </button>
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                    <Link
+                      href="/careers"
+                      className="block px-4 py-2 text-black hover:bg-gray-100 transition-colors"
+                    >
+                      Careers
+                    </Link>
+                    <Link
+                      href="/channel-partner"
+                      className="block px-4 py-2 text-black hover:bg-gray-100 transition-colors"
+                    >
+                      Channel Partner
+                    </Link>
+                    <Link
+                      href="/gallery"
+                      className="block px-4 py-2 text-black hover:bg-gray-100 transition-colors"
+                    >
+                      Gallery
+                    </Link>
+                    <Link
+                      href="/gallery"
+                      className="block px-4 py-2 text-black hover:bg-gray-100 transition-colors"
+                    >
+                      About 
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMobileMenu}
+                className={`p-2 rounded-md transition-colors duration-300 ${
+                  isScrolled
+                    ? "text-black hover:bg-gray-100"
+                    : "text-white hover:bg-white/10"
+                }`}
+              >
+                <svg
+                  className={`h-6 w-6 text-black transition-transform duration-300 ${isMobileMenuOpen ? "rotate-90" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isMobileMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Residential Projects Overlay Menu */}
+      <div className={`fixed inset-0 max-sm:hidden z-40 transition-all duration-500 ease-in-out ${
+        isResidentialMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+      }`}>
+        {/* Background Overlay */}
+        <div 
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={closeAllMenus}
+        ></div>
+        
+        {/* Menu Content */}
+        <div className={`relative z-50 flex items-center justify-center min-h-screen p-4 transition-all duration-500 ${
+          isResidentialMenuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+        }`}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900">Our Projects</h2>
+                  <p className="text-gray-600 mt-1">Explore our premium residential developments in Dholera Smart City</p>
+                </div>
+                <button 
+                  onClick={closeAllMenus}
+                  className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6">
+              {error ? (
+                <div className="text-red-500 text-center py-8">
+                  {error}
+                </div>
+              ) : loading ? (
+                <div className="flex justify-center items-center py-8">
+                  <p className="text-gray-500">Loading projects...</p>
+                </div>
+              ) : (
+                <div>
+                  {/* Active Projects */}
+                  {subProjects.active && subProjects.active.length > 0 && (
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                        Available Projects ({subProjects.active.length})
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {subProjects.active && subProjects.active.map((project, index) => (
+                          <ProjectCard 
+                            key={project._id || project.slug || `active-project-${index}`} 
+                            project={project} 
+                            closeAllMenus={closeAllMenus}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Sold Out Projects */}
+                  {subProjects.soldOut && subProjects.soldOut.length > 0 && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                        Sold Out Projects ({subProjects.soldOut.length})
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {subProjects.soldOut && subProjects.soldOut.map((project, index) => (
+                          <ProjectCard 
+                            key={project._id || project.slug || `soldout-project-${index}`} 
+                            project={project} 
+                            closeAllMenus={closeAllMenus}
+                            isSoldOut
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {!loading && (!subProjects.active || subProjects.active.length === 0) && (!subProjects.soldOut || subProjects.soldOut.length === 0) && (
+                    <div className="text-center py-8">
+                      <p className="text-gray-500">No projects available at the moment</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 z-30 md:hidden transition-all duration-300 ${
+        isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+      }`}>
+        <div 
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={closeAllMenus}
+        ></div>
+        
+        <div className={`relative z-50 bg-white h-full w-full ml-auto transition-all duration-300 ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+           {/*  <Image src={logo} height={60} width={60} alt="logo" /> */}
+            <button 
+              onClick={closeAllMenus}
+              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full"
+            >
+              <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+</svg>
+            </button>
+          </div>
+          
+          <div className="p-4 space-y-2">
+            {/* Residential Dropdown */}
+            <div className="border-b border-gray-100 pb-2">
+              <button
+                onClick={toggleResidentialMenu}
+                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-2"
+              >
+                <span>Residential</span>
+                <svg 
+                  className={`w-5 h-5 transition-transform ${isResidentialMenuOpen ? 'rotate-180' : ''}`} 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {isResidentialMenuOpen && (
+                <div className="pl-4 mt-2 space-y-2">
+                  {loading ? (
+                    <div className="text-gray-500 text-sm py-2">Loading projects...</div>
+                  ) : error ? (
+                    <div className="text-red-500 text-sm py-2">{error}</div>
+                  ) : (
+                    <>
+                      {subProjects.active && subProjects.active.length > 0 && (
+                        <>
+                          <div className="text-sm font-medium text-gray-500 mt-2">Available Projects</div>
+                          {subProjects.active.map((project, index) => (
+                            <Link
+                              key={`mobile-active-${index}`}
+                              href={`/new/dholera-residential-plots/${project.slug}`}
+                              onClick={closeAllMenus}
+                              className="flex items-center py-2 pl-2 rounded hover:bg-gray-50"
+                            >
+                              {project.mainImage && (
+                                <div className="w-10 h-10 rounded-md overflow-hidden mr-3">
+                                  <Image
+                                    src={urlFor(project.mainImage).width(100).height(100).url()}
+                                    alt={project.title || 'Project image'}
+                                    width={40}
+                                    height={40}
+                                    className="object-cover w-full h-full"
+                                  />
+                                </div>
+                              )}
+                              <div>
+                                <div className="text-black">{project.title || 'Untitled Project'}</div>
+                                {project.location && (
+                                  <div className="text-xs text-gray-500">{project.location}</div>
+                                )}
+                              </div>
+                            </Link>
+                          ))}
+                        </>
+                      )}
+                      
+                      {subProjects.soldOut && subProjects.soldOut.length > 0 && (
+                        <>
+                          <div className="text-sm font-medium text-gray-500 mt-4">Sold Out Projects</div>
+                          {subProjects.soldOut.map((project, index) => (
+                            <Link
+                              key={`mobile-soldout-${index}`}
+                              href={`/new/dholera-residential-plots/${project.slug}`}
+                              onClick={closeAllMenus}
+                              className="flex items-center py-2 pl-2 rounded hover:bg-gray-50 opacity-70"
+                            >
+                              {project.mainImage && (
+                                <div className="w-10 h-10 rounded-md overflow-hidden mr-3">
+                                  <Image
+                                    src={urlFor(project.mainImage).width(100).height(100).url()}
+                                    alt={project.title || 'Project image'}
+                                    width={40}
+                                    height={40}
+                                    className="object-cover w-full h-full"
+                                  />
+                                </div>
+                              )}
+                              <div>
+                                <div className="text-black">{project.title || 'Untitled Project'}</div>
+                                {project.location && (
+                                  <div className="text-xs text-gray-500">{project.location}</div>
+                                )}
+                              </div>
+                              <span className="ml-auto text-xs bg-red-100 text-red-600 px-2 py-1 rounded">
+                                Sold Out
+                              </span>
+                            </Link>
+                          ))}
+                        </>
+                      )}
+                      
+                      {!loading && (!subProjects.active || subProjects.active.length === 0) && (!subProjects.soldOut || subProjects.soldOut.length === 0) && (
+                        <div className="text-gray-500 text-sm py-2">No projects available</div>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+            
+            <Link
+              href="/bulk-land"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-2 border-b border-gray-100"
+            >
+              Bulk Land
+            </Link>
+            
+            {/* Dholera SIR Dropdown */}
+            <div className="border-b border-gray-100 pb-2">
+              <button
+                onClick={toggleDholeraMenu}
+                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-2"
+              >
+                <span>Dholera SIR</span>
+                <svg 
+                  className={`w-5 h-5 transition-transform ${isDholeraMenuOpen ? 'rotate-180' : ''}`} 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {isDholeraMenuOpen && (
+                <div className="pl-4 mt-2 space-y-2">
+                  <Link
+                    href="/new/about-dholera-sir"
+                    onClick={closeAllMenus}
+                    className="block py-2 text-gray-600 hover:text-yellow-500"
+                  >
+                    About Dholera SIR
+                  </Link>
+                  <Link
+                    href="/new/dholera-sir-blogs"
+                    onClick={closeAllMenus}
+                    className="block py-2 text-gray-600 hover:text-yellow-500"
+                  >
+                    Dholera Blogs
+                  </Link>
+                  <Link
+                    href="/new/dholera-sir-updates"
+                    onClick={closeAllMenus}
+                    className="block py-2 text-gray-600 hover:text-yellow-500"
+                  >
+                    Latest Updates on Dholera
+                  </Link>
+                </div>
+              )}
+            </div>
+            
+            <Link
+              href="/contact"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-2 border-b border-gray-100"
+            >
+              Contact Us
+            </Link>
+            <Link
+              href="/about"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-2 border-b border-gray-100"
+            >
+              About Us
+            </Link>
+            <Link
+              href="/careers"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-2 border-b border-gray-100"
+            >
+              Careers
+            </Link>
+            <Link
+              href="/channel-partner"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-2 border-b border-gray-100"
+            >
+              Channel Partner
+            </Link>
+            <Link
+              href="/gallery"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-2"
+            >
+              Gallery
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ProjectCard({ project, closeAllMenus, isSoldOut = false }) {
+  return (
+    <Link
+      href={`/new/dholera-residential-plots/${project.slug}`}
+      onClick={closeAllMenus}
+      className={`group p-4 border rounded-lg transition-all duration-300 relative overflow-hidden ${
+        isSoldOut 
+          ? 'border-gray-200 hover:border-gray-300 bg-gray-50' 
+          : 'border-gray-200 hover:border-yellow-300 hover:shadow-md'
+      }`}
+    >
+      {isSoldOut && (
+        <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-md z-10">
+          Sold Out
+        </div>
+      )}
+      
+      <div className={`w-full h-24 rounded-lg mb-3 flex items-center justify-center relative overflow-hidden ${
+        isSoldOut 
+          ? 'bg-gradient-to-r from-gray-100 to-gray-200' 
+          : 'bg-gradient-to-r from-yellow-100 to-yellow-200 group-hover:from-yellow-200 group-hover:to-yellow-300'
+      }`}>
+        {project.mainImage ? (
+          <Image 
+            src={urlFor(project.mainImage).width(300).height(150).url()}
+            alt={project.title || 'Project image'}
+            fill
+            className="object-cover rounded-lg"
+          />
+        ) : (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        )}
+      </div>
+      
+      <div className={`font-medium ${
+        isSoldOut ? 'text-gray-600' : 'text-gray-900 group-hover:text-yellow-600'
+      }`}>
+        {project.title || 'Untitled Project'}
+      </div>
+      
+      
+    </Link>
+  );
+}

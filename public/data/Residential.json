@@ -1,0 +1,58 @@
+[
+  {
+    "projectName": "WestWyn County",
+    "link": "westwyn-county",
+    "location": "Fedra-Pipli State Highway, Dholera, Gujarat",
+    "image": "/assets/residential/westwyn.webp",
+    "constructionStatus" : "Under Construction",
+    "status" : "ongoing"         
+  },
+  {
+    "projectName": "Orchid",
+    "link": "dholera-forest-estate",
+    "location": "Gamph, Dholera",
+    "image": "/assets/residential/westwyn-county.png",
+    "constructionStatus" : "Under Construction",
+    "status" : "sold-out"
+  },
+  {
+    "projectName": "Paradise",
+    "link": "dholera-expressway-city",
+    "location": "Shela, Dholera",
+    "image": "/assets/residential/westwyn-county.png",
+    "constructionStatus" : "Under Construction",
+    "status" : "sold-out"
+  },
+  {
+    "projectName": "Paradise 2",
+    "link": "dholera-expressway-township",
+    "location": "Shela, Dholera",
+    "image": "/assets/residential/westwyn-county.png",
+    "constructionStatus" : "Under Construction",
+    "status" : "sold-out"
+  },
+  {
+    "projectName": "Maple Township",
+    "link": "dholera-expressway-city-v",
+    "location": "Gamph, Gujarat",
+    "image": "/assets/residential/westwyn-county.png",
+    "constructionStatus" : "Under Construction",
+    "status" : "sold-out"
+  },
+  {
+    "projectName": "Marina bay",
+    "link": "dholera-expressway-avenue-1",
+    "location": "Gamph, Dholera",
+    "image": "/assets/residential/westwyn-county.png",
+    "constructionStatus" : "Under Construction",
+    "status" : "sold-out"
+  },
+  {
+    "projectName": "Pride",
+    "link": "dholera-expressway-avenue-1",
+    "location": "Kasindra, Dholera",
+    "image": "/assets/residential/westwyn-county.png",
+    "constructionStatus" : "Under Construction",
+    "status" : "sold-out"
+  }
+]

@@ -29,9 +29,8 @@ const CareersPage = () => {
           <div className="container mx-auto px-4 text-center relative z-10 flex flex-col items-center space-y-8">
             <h2 className="text-4xl font-bold">Careers at Book My Assets</h2>
             <p className="text-xl max-w-3xl mx-auto">
-              Your gateway to a smarter future in real estate. Join one of the
-              fastest-growing groups within the real estate market specializing
-              in Dholera Smart City investments.
+              Career Opportunities at Book My Assets: Grow with India’s Leading Real Estate Innovators
+
             </p>
             <div className="mt-8">
               <Link
@@ -50,18 +49,18 @@ const CareersPage = () => {
           {/* Why Work With Us Section */}
           <section className="mb-16">
             <h3 className="text-3xl font-bold mb-6 pb-2 inline-block relative">
-              Why Work with Book My Assets?
+             Why Build Your Career at Book My Assets?
+
               <span
                 className="absolute bottom-0 left-0 w-20 h-1"
                 style={{ backgroundColor: "#d9b244" }}
               ></span>
             </h3>
             <p className="mb-8 text-lg">
-              <strong>Book My Assets</strong> is not simply an estate portal -
-              we're a brand built upon trust, creativity, and potential. Our
-              team is focused on helping investors identify the finest plots
-              available in Dholera while offering unmatched services and market
-              information.
+              We are more than a real estate platform – we are visionaries
+              creating India's smart investment future. At Book My Assets, we
+              combine industry expertise with innovative thinking to deliver
+              exceptional value in Dholera's booming property market.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -133,36 +132,38 @@ const CareersPage = () => {
               ></span>
             </h3>
             <p className="mb-6 text-lg">
-              At <strong>Book My Assets</strong>, we're always on the lookout
-              for dynamic, passionate, and innovative individuals who want to
-              change the world. No matter if your expertise lies in real estate
-              sales, content writing, digital marketing, customer support, or
-              back office operations,
-              <strong> Book My Assets</strong> can give you the chance to build
-              a career!
+              At Book My Assets, we are always looking for dynamic, passionate,
+              and forward-thinking professionals who are ready to make a real
+              impact. Whether your skills are in real estate sales, content
+              creation, digital marketing, customer support, or back-office
+              operations, we offer you the platform to grow, learn, and succeed.
+              Join India’s fastest-growing real estate brand specializing in
+              Dholera Smart City investments and build a rewarding career with
+              endless opportunities.
             </p>
           </section>
 
           {/* What Sets Us Apart Section */}
           <section className="mb-16">
             <h3 className="text-3xl font-bold mb-6 pb-2 inline-block relative">
-              What Sets Us Apart?
+              What Makes Us Different
+
               <span
                 className="absolute bottom-0 left-0 w-20 h-1"
                 style={{ backgroundColor: "#d9b244" }}
               ></span>
             </h3>
             <p className="text-lg">
-              <strong>Book My Assets</strong> isn't your average real estate
-              agency - our expertise lies in providing clean titles approved by
-              the government, plots with lasting value for our clients. Joining
-              our staff means representing an organization dedicated to ethical
-              business practices, a growth-minded mindset, and a strong online
-              presence.
-            </p>
-            <p className="text-lg mt-4">
-              We believe in building communities, so our primary objective is to
-              help our users meet their goals and realize their dreams.
+              At Book My Assets, we redefine real estate by offering more than
+              just plots. We provide government-approved titles and lasting
+              value with complete transparency. Unlike traditional agencies, we
+              mix ethical business practices with a growth-focused approach.
+              <br/>
+              This ensures end-to-end assistance to every client with their
+              investment. But we are not only about transactions; we focus on
+              building communities and making dreams come true. When you join
+              our team, you become part of a progressive movement that
+              prioritizes trust, innovation, and real impact.
             </p>
           </section>
         </div>

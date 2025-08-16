@@ -1,0 +1,209 @@
+import { getblogs, projectInfo } from "@/sanity/lib/api";
+import React from "react";
+import BlogCard from "./BlogCard";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+
+export default async function page() {
+  let posts = [];
+  try {
+    const postsData = await getblogs();
+    posts = Array.isArray(postsData) ? postsData : [];
+    console.log("Posts data fetched:", posts.length);
+  } catch (error) {
+    console.error("Error fetching project info:", error);
+  }
+
+  const safePosts = posts.map((post) => ({
+    ...post,
+    author:
+      typeof post.author === "object" && post.author?.name
+        ? post.author.name
+        : typeof post.author === "string"
+          ? post.author
+          : "BookMyAssets",
+    authorImage:
+      typeof post.author === "object" && post.author?.image
+        ? post.author.image
+        : null,
+    mainImage: post.mainImage || null,
+    slug: post.slug?.current
+      ? { current: post.slug.current }
+      : { current: "#" },
+  }));
+
+  return (
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-[#FF9933] via-white to-[#138808] relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#FF9933] opacity-20 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#138808] opacity-20 rounded-full blur-3xl translate-x-1/4 translate-y-1/4"></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#000080] opacity-10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"></div>
+
+        <div className="relative z-10">
+          {/* Hero Section */}
+          <div className="max-w-7xl mx-auto px-4 pt-28 pb-16">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
+                Dholera SIR
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#138808]">
+                  Investment Blog
+                </span>
+              </h1>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                Stay updated with the latest insights, market trends, and
+                investment opportunities in India's first planned greenfield
+                smart city
+              </p>
+            </div>
+
+            {/* CTA Banner */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 mb-16 border border-white/20">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div className="text-center lg:text-left">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-3">
+                    🚀 Ready to Invest in Dholera SIR?
+                  </h2>
+                  <p className="text-gray-600 text-lg">
+                    Get expert guidance and exclusive investment opportunities
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button className="bg-gradient-to-r from-[#FF9933] to-[#138808] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                    Get Free Consultation
+                  </button>
+                  <button className="border-2 border-[#FF9933] text-[#FF9933] px-8 py-3 rounded-xl font-semibold hover:bg-[#FF9933] hover:text-white transition-all duration-300">
+                    Download Brochure
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Blog Posts Section */}
+          <div className="max-w-7xl mx-auto px-4 pb-16">
+            {safePosts.length > 0 ? (
+              <>
+                {/* Featured Post */}
+                {safePosts[0] && (
+                  <div className="mb-16">
+                    <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                      Featured Article
+                    </h2>
+                    <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/20">
+                      <div className="grid lg:grid-cols-2 gap-0">
+                        <div className="relative h-64 lg:h-auto">
+                          {safePosts[0].mainImage ? (
+                            <Image
+                              src={urlFor(safePosts[0].mainImage)
+                                .width(800)
+                                .height(400)
+                                .url()}
+                              alt={
+                                safePosts[0].title || "Dholera SIR Blog Post"
+                              }
+                              width={800}
+                              height={400}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 flex items-center justify-center">
+                              <div className="text-6xl">📰</div>
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-8 lg:p-12 flex flex-col justify-center">
+                          <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-4 leading-tight">
+                            {safePosts[0].title}
+                          </h3>
+                          <p className="text-gray-600 text-lg mb-6 line-clamp-3">
+                            {safePosts[0].description ||
+                              "Discover the latest insights about Dholera SIR investment opportunities and market trends."}
+                          </p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-gray-500">
+                              By{" "}
+                              {typeof safePosts[0].author === "object"
+                                ? safePosts[0].author.name || "BookMyAssets"
+                                : safePosts[0].author}
+                            </span>
+                            <button className="bg-[#FF9933] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#e8851f] transition-colors">
+                              Read More
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* All Posts Grid */}
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                    Latest Articles
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {safePosts.map((post, index) => (
+                      <div
+                        key={post._id}
+                        className={`transform hover:-translate-y-2 transition-all duration-300 ${index === 0 ? "lg:hidden" : ""}`}
+                      >
+                        <BlogCard post={post} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-20">
+                <div className="bg-white/95 backdrop-blur-sm p-12 rounded-2xl shadow-xl max-w-2xl mx-auto border border-white/20">
+                  <div className="text-6xl mb-6">📝</div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                    Blog Coming Soon!
+                  </h3>
+                  <p className="text-gray-600 text-lg mb-8">
+                    We're preparing valuable content about Dholera SIR
+                    investment opportunities. Stay tuned for expert insights and
+                    market analysis.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button className="bg-gradient-to-r from-[#FF9933] to-[#138808] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                      Get Notified
+                    </button>
+                    <button className="border-2 border-[#FF9933] text-[#FF9933] px-8 py-3 rounded-xl font-semibold hover:bg-[#FF9933] hover:text-white transition-all duration-300">
+                      Explore Projects
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Newsletter Signup Section */}
+          <div className="max-w-7xl mx-auto px-4 pb-16">
+            <div className="bg-gradient-to-r from-[#FF9933]/90 to-[#138808]/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 lg:p-12 text-center border border-white/20">
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Stay Updated with Dholera SIR News
+              </h2>
+              <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+                Get the latest updates on investment opportunities,
+                infrastructure developments, and market insights delivered to
+                your inbox
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="flex-1 px-6 py-3 rounded-xl border-none outline-none text-gray-800"
+                />
+                <button className="bg-white text-[#FF9933] px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap">
+                  Subscribe Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
