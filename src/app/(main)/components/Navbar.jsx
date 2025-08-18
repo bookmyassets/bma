@@ -492,7 +492,7 @@ useEffect(() => {
                 world-class amenities
               </p>
             </div>
-            <div className="mt-auto">
+{/*             <div className="mt-auto">
               <Link
                 href="/residential"
                 onClick={closeAllMenus}
@@ -500,7 +500,7 @@ useEffect(() => {
               >
                 View All Projects
               </Link>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Side - Content */}
