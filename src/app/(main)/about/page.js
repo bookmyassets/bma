@@ -229,14 +229,14 @@ const RealEstateLandingPage = () => {
               </div>
 
               {/* Mission Statement */}
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+{/*               <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
                 <h3 className="text-xl font-bold text-yellow-500 mb-4">
                   Our Mission
                 </h3>
                 <p className="text-gray-200 leading-relaxed">
                   To help people grow their money safely, confidently, and with maximum returns through strategic real estate investments in India's first greenfield smart city.
                 </p>
-              </div>
+              </div> */}
 
               {/* CTA Buttons */}
               <div className="flex flex-col gap-4">
@@ -315,14 +315,14 @@ const RealEstateLandingPage = () => {
                 </div>
 
                 {/* Mission Statement */}
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 xl:p-8 border border-white/20">
+                {/* <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 xl:p-8 border border-white/20">
                   <h3 className="text-xl xl:text-2xl font-bold text-yellow-500 mb-4">
                     Our Mission
                   </h3>
                   <p className="text-gray-200 leading-relaxed">
                     To help people grow their money safely, confidently, and with maximum returns through strategic real estate investments in India's first greenfield smart city.
                   </p>
-                </div>
+                </div> */}
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
