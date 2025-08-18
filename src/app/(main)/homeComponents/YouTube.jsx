@@ -6,6 +6,7 @@ export default function ShortsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentPlayingId, setCurrentPlayingId] = useState(null);
+  const [itemsPerView, setItemsPerView] = useState(3); // responsive per view
   const iframeRefs = useRef({});
   const autoScrollRef = useRef(null);
 
@@ -14,6 +15,23 @@ export default function ShortsSection() {
     if (typeof window !== "undefined") {
       setOrigin(window.location.origin);
     }
+  }, []);
+
+  // Update items per view based on screen size
+  useEffect(() => {
+    const updateItemsPerView = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(3);
+      }
+    };
+
+    updateItemsPerView();
+    window.addEventListener("resize", updateItemsPerView);
+    return () => window.removeEventListener("resize", updateItemsPerView);
   }, []);
 
   const shortsData = useMemo(() => {
@@ -63,9 +81,9 @@ export default function ShortsSection() {
     if (isVideoPlaying) return; // Don't auto-scroll if video is playing
 
     autoScrollRef.current = setInterval(() => {
-      setCurrentIndex(prev => {
+      setCurrentIndex((prev) => {
         const next = prev + 1;
-        return next >= shortsData.length - 2 ? 0 : next; // Reset when reaching end
+        return next >= shortsData.length - itemsPerView ? 0 : next;
       });
     }, 4000); // 4 seconds
 
@@ -74,7 +92,7 @@ export default function ShortsSection() {
         clearInterval(autoScrollRef.current);
       }
     };
-  }, [isVideoPlaying, shortsData.length]);
+  }, [isVideoPlaying, shortsData.length, itemsPerView]);
 
   // Pause all videos except the one specified
   const pauseAllVideos = (exceptIndex = null) => {
@@ -96,7 +114,6 @@ export default function ShortsSection() {
 
   // YouTube API setup and listener
   useEffect(() => {
-    // Load YouTube API if not already loaded
     if (!window.YT) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -105,13 +122,10 @@ export default function ShortsSection() {
     }
 
     const handleMessage = (event) => {
-      // Only handle messages from YouTube
       if (!event.origin.includes("youtube.com")) return;
 
       try {
         let data;
-        
-        // Parse the message data
         if (typeof event.data === "string") {
           try {
             data = JSON.parse(event.data);
@@ -124,7 +138,6 @@ export default function ShortsSection() {
           return;
         }
 
-        // Find which iframe sent the message
         let sourceIframeIndex = null;
         Object.entries(iframeRefs.current).forEach(([index, iframe]) => {
           if (iframe && iframe.contentWindow === event.source) {
@@ -134,22 +147,18 @@ export default function ShortsSection() {
 
         if (sourceIframeIndex === null) return;
 
-        // Handle different message formats
         let playerState = null;
-        
         if (data.event === "video-progress" || data.event === "onStateChange") {
           playerState = data.info;
         } else if (data.info !== undefined) {
           playerState = data.info;
         }
 
-        // Handle player state changes
-        if (playerState === 1) { // Playing
-          // Pause all other videos
+        if (playerState === 1) {
           pauseAllVideos(sourceIframeIndex);
           setIsVideoPlaying(true);
           setCurrentPlayingId(sourceIframeIndex);
-        } else if (playerState === 0 || playerState === 2) { // Ended or Paused
+        } else if (playerState === 0 || playerState === 2) {
           if (currentPlayingId === sourceIframeIndex) {
             setIsVideoPlaying(false);
             setCurrentPlayingId(null);
@@ -166,23 +175,26 @@ export default function ShortsSection() {
 
   // Navigation functions
   const goToNext = () => {
-    setCurrentIndex(prev => {
+    setCurrentIndex((prev) => {
       const next = prev + 1;
-      return next >= shortsData.length - 2 ? 0 : next;
+      return next >= shortsData.length - itemsPerView ? 0 : next;
     });
   };
 
   const goToPrev = () => {
-    setCurrentIndex(prev => {
+    setCurrentIndex((prev) => {
       const next = prev - 1;
-      return next < 0 ? shortsData.length - 3 : next;
+      return next < 0 ? shortsData.length - itemsPerView : next;
     });
   };
 
   if (shortsData.length === 0) return null;
 
   return (
-    <section className="bg-black py-8 overflow-hidden" aria-label="YouTube Shorts Carousel">
+    <section
+      className="bg-black py-8 overflow-hidden"
+      aria-label="YouTube Shorts Carousel"
+    >
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl text-[#deae3c] font-bold text-center mb-2">
           Dholera in Motion
@@ -198,8 +210,18 @@ export default function ShortsSection() {
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300"
             aria-label="Previous videos"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
 
@@ -208,21 +230,35 @@ export default function ShortsSection() {
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300"
             aria-label="Next videos"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
 
           {/* Videos Container */}
           <div className="overflow-hidden mx-8">
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+              style={{
+                transform: `translateX(-${
+                  currentIndex * (100 / itemsPerView)
+                }%)`,
+              }}
             >
               {shortsData.map((short, index) => (
                 <div
                   key={short.id}
-                  className="w-1/3 flex-shrink-0 px-2"
+                  className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2"
                   role="group"
                   aria-roledescription="Short video"
                 >
@@ -254,18 +290,20 @@ export default function ShortsSection() {
 
           {/* Dots Indicator */}
           <div className="flex justify-center mt-4 space-x-2">
-            {Array.from({ length: shortsData.length - 2 }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  currentIndex === index 
-                    ? 'bg-[#deae3c] w-6' 
-                    : 'bg-white/30 hover:bg-white/50'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+            {Array.from({ length: shortsData.length - itemsPerView + 1 }).map(
+              (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    currentIndex === index
+                      ? "bg-[#deae3c] w-6"
+                      : "bg-white/30 hover:bg-white/50"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              )
+            )}
           </div>
         </div>
       </div>
