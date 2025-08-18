@@ -697,7 +697,7 @@ useEffect(() => {
                       />
 
                       {/* Project Name and Location at Bottom */}
-                      <div className="absolute bottom-5 left-0 right-0 p-4 text-black space-y-2">
+                      <div className="absolute bottom-5 left-0 right-0 p-4 text-white space-y-2">
                         <div className="space-y-2">
                           {/* Project Name */}
                           <h3 className="text-lg font-semibold group-hover:text-orange-300 transition-colors duration-300 leading-tight">
