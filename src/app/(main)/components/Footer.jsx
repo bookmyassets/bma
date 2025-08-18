@@ -53,7 +53,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/about">About us</Link></li>
               <li><Link href="/dholera-sir-blogs">Blog</Link></li>
