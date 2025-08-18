@@ -562,7 +562,7 @@ export default function HeroCarousel() {
                       }`}
                     >
                       <div className="pl-10">
-                        <p className="text-[#deae3c] leading-relaxed">
+                        <p className="text-yellow-500 leading-relaxed">
                           {index === 0 &&
                             "Experience living surrounded by nature with thoughtfully designed green spaces and forest aesthetics."}
                           {index === 1 &&
