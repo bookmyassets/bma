@@ -30,10 +30,10 @@ export default function Footer() {
             </div>
             {/* Social Icons */}
             <div className="flex gap-4 text-xl mt-4">
-              <Link href="#"><FaFacebook className="text-blue-600" /></Link>
+              <Link href="https://www.facebook.com/profile.php?id=61574896794632"><FaFacebook className="text-blue-600" /></Link>
               <Link href="https://www.instagram.com/bookmyassets/"><FaInstagram className="text-pink-500" /></Link>
               <Link href="https://x.com/BookMyAssets"><FaXTwitter className="text-black" /></Link>
-              <Link href="#"><FaLinkedin className="text-blue-700" /></Link>
+              <Link href="https://www.linkedin.com/company/bookmyassetss/"><FaLinkedin className="text-blue-700" /></Link>
               <Link href="https://www.youtube.com/@BookMyAssets"><FaYoutube className="text-red-600" /></Link>
             </div>
           </div>

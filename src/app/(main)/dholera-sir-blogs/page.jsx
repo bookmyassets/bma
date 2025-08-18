@@ -34,11 +34,9 @@ export default async function page() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-[#FF9933] via-white to-[#138808] relative overflow-hidden">
+      <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Background decorative elements */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#FF9933] opacity-20 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#138808] opacity-20 rounded-full blur-3xl translate-x-1/4 translate-y-1/4"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#000080] opacity-10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"></div>
+       
 
         <div className="relative z-10">
           {/* Hero Section */}
