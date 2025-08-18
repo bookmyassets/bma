@@ -9,49 +9,49 @@
   },
   {
     "projectName": "Orchid",
-    "link": "dholera-forest-estate",
+    "link": "orchid",
     "location": "Gamph, Dholera",
-    "image": "/assets/residential/westwyn-county.png",
+    "image": "/assets/residential/orchid-cover.webp",
     "constructionStatus" : "Under Construction",
     "status" : "sold-out"
   },
   {
     "projectName": "Paradise",
-    "link": "dholera-expressway-city",
+    "link": "paradise",
     "location": "Shela, Dholera",
-    "image": "/assets/residential/westwyn-county.png",
+    "image": "/assets/residential/paradise1.webp",
     "constructionStatus" : "Under Construction",
     "status" : "sold-out"
   },
   {
     "projectName": "Paradise 2",
-    "link": "dholera-expressway-township",
+    "link": "paradise-2",
     "location": "Shela, Dholera",
-    "image": "/assets/residential/westwyn-county.png",
+    "image": "/assets/residential/paradise2.webp",
     "constructionStatus" : "Under Construction",
     "status" : "sold-out"
   },
   {
     "projectName": "Maple Township",
-    "link": "dholera-expressway-city-v",
+    "link": "maple-township",
     "location": "Gamph, Gujarat",
-    "image": "/assets/residential/westwyn-county.png",
+    "image": "/assets/residential/maple-township.webp",
     "constructionStatus" : "Under Construction",
     "status" : "sold-out"
   },
   {
     "projectName": "Marina bay",
-    "link": "dholera-expressway-avenue-1",
+    "link": "marina-bay",
     "location": "Gamph, Dholera",
-    "image": "/assets/residential/westwyn-county.png",
+    "image": "/assets/residential/marina-bay.webp",
     "constructionStatus" : "Under Construction",
     "status" : "sold-out"
   },
   {
     "projectName": "Pride",
-    "link": "dholera-expressway-avenue-1",
+    "link": "pride",
     "location": "Kasindra, Dholera",
-    "image": "/assets/residential/westwyn-county.png",
+    "image": "/assets/residential/maple-township.webp",
     "constructionStatus" : "Under Construction",
     "status" : "sold-out"
   }
