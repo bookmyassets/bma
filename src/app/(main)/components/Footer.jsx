@@ -24,7 +24,7 @@ export default function Footer() {
               />
             </Link>
             <div className="space-y-2 text-sm">
-              <p className="flex items-center gap-2"><FaPhone className=' rotate-90' /> +91 81 30 37 16 47</p>
+              <a className="flex items-center gap-2" href="tel:+918130371647"><FaPhone className=' rotate-90' /> +91 81 30 37 16 47</a>
               <p className="flex items-center gap-2"><FaEnvelope /> info@bookmyassets.com</p>
               <p className="flex items-center gap-2"><FaMapMarkerAlt /> 620, 6th Floor, JMD Megapolis,<br /> Sector 48, Gurugram, Haryana 122001</p>
             </div>
@@ -65,12 +65,12 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Resources</h3>
+            <h3 className="text-lg font-semibold mb-4">Policies</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/community">Community</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-              <li><Link href="/dpa">DPA</Link></li>
-              <li><Link href="/terms">Terms of service</Link></li>
+              <li><Link href="/policies/terms">Terms of Service</Link></li>
+              <li><Link href="/policies/privacy">Privacy Policy</Link></li>
+              <li><Link href="/policies/copyright">Copyright Policy</Link></li>
+              <li><Link href="/policies/refund-and-cancellation">Refund and Cancellation</Link></li>
             </ul>
           </div>
         </div>
@@ -83,12 +83,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 space-y-2 md:space-y-0">
           <p>© {new Date().getFullYear()} BookMyAssets. All rights reserved</p>
-          <div className="flex gap-4">
-            <Link href="/policies/terms">Terms of Service</Link>
-            <Link href="/policies/privacy">Privacy Policy</Link>
-            <Link href="/policies/copyright">Copyright Policy</Link>
-            <Link href="/policies/refund-and-cancellation">Refund and Cancellation</Link>
-          </div>
         </div>
       </div>
     </footer>

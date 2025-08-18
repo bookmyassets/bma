@@ -20,11 +20,6 @@ const faqs = [
       "The Ahmedabad–Dholera Expressway, connecting Ahmedabad to Dholera Smart City in under an hour, is expected to be inaugurated by mid-2025, enhancing accessibility and investment appeal.",
   },
   {
-    question: "How long does Dholera plot registry take?",
-    answer:
-      "BookMyAssets ensures a same-day registry process, completed right after full payment, giving you instant and secure ownership.",
-  },
-  {
     question: "What legal documents are required to buy plots in Dholera?",
     answer:
       "To buy plots in Dholera city, you need a sale deed, NA/NOC clearance, title deed, and valid identification proofs, ensuring secure ownership.",
@@ -96,6 +91,9 @@ export default function FAQSection() {
                 </div>
               </div>
             ))}
+            <div className="pt-4">
+              <a className="px-2 py-3 bg-[#deae3c] rounded-md" href="tel:+918130371647">For more questions, give us a missed call.</a>
+            </div>
           </div>
         </div>
       </div>

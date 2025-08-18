@@ -34,38 +34,27 @@ export default function WestWyn() {
             <div className="">
               <p className="text-lg mb-2 "></p>
               <p className="text-gray-600 ">
-                <span className="-translate-y-2">BookMyAssets</span> <br />
-                <span className="">
-                  Dholera Residential Plots in the heart of Dholera City just 45
-                  minutes from Ahmedabad by drive{" "}
-                </span>
-              </p>
-            </div>
-            <div>
-              {/* <h3 className="text-lg font-bold text-gray-600 mb-2">heading</h3> */}
-              <p className="text-gray-600">
-                This prime location is perfect for investors seeking residential
-                plots with smart infrastructure, seamless connectivity, and
-                future-ready amenities.
-              </p>
-            </div>
-            <div>
-              {/* <h3 className="text-lg font-bold text-gray-600 mb-2">heading</h3> */}
-              <p className="text-gray-600">
-                With rapid growth in the{" "}
-                <span className="">Dholera Smart City</span> region, Westwyn
-                Country ensures both lifestyle comfort and strong investment
-                potential.
+                Westwyn County ensures high growth potential as part of Dholera
+                Smart City — India’s first and largest greenfield smart city.
+                The project offers government-approved planning, world-class
+                infrastructure, and long-term appreciation, along with modern
+                amenities such as landscaped gardens, wide internal roads, 24x7
+                power supply, and drainage system, gated security, and sports
+                facilities. Strategically located near Fedra, Pipli Highway, and
+                the upcoming Dholera International Airport, and backed by strong
+                investor interest including the Tata Semiconductor Plant,
+                Westwyn County stands as a secure and future-ready investment
+                opportunity.
               </p>
             </div>
           </div>
-          <div className="pt-8 max-sm:hidden">
+          <div className="md:pt-12 max-sm:hidden">
             <Link
-                  href="/dholera-residential-plots/westwyn-county"
-                  className="bg-yellow-500 text-black px-6 py-3 rounded-md font-medium hover:bg-yellow-600 transition duration-300 shadow-md"
-                >
-                  About WestWyn County
-                </Link>
+              href="/dholera-residential-plots/westwyn-county"
+              className="bg-yellow-500 text-black px-6 py-3 rounded-md font-medium hover:bg-yellow-600 transition duration-300 shadow-md"
+            >
+              About WestWyn County
+            </Link>
           </div>
         </div>
       </div>

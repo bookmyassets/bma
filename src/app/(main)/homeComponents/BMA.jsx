@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import BMAimage from "@/assests/BMA.webp"
+import BMAimage from "@/assests/BMA.webp";
 
 export default function BMA() {
   // Counter states for new section 3
@@ -76,17 +76,11 @@ export default function BMA() {
       <div className="flex flex-col pt-8 md:pt-20 md:flex-row px-4 md:px-8 py-12 gap-6 md:gap-12 max-w-7xl mx-auto overflow-hidden">
         {/* Left Section (40%) */}
         <div className="w-full md:w-2/5 pl-2 pr-2">
-          <h1 className="text-xl font-semibold text-black ">
-            Why Invest With
-          </h1>
+          <h1 className="text-xl font-semibold text-black ">Why Invest With</h1>
           <h2 className="text-[32px] font-semibold text-[#deae3c]">
             BookMyAssets
           </h2>
-          <Image
-            src={BMAimage}
-            alt="BMA"
-            className="pt-16"
-          />
+          <Image src={BMAimage} alt="BMA" className="pt-8" />
         </div>
 
         {/* Right Section (50%) */}
@@ -95,67 +89,64 @@ export default function BMA() {
             <p className="text-lg mb-2 "></p>
             <p className="text-gray-600 ">
               BookMyAssets offers unmatched expertise and legally verified
-              opportunities in the Dholera Project, India's most ambitious smart
-              city development.
+              opportunities in the Dholera smart city, India’s most ambitious
+              smart city development. With prime plots in the rapidly growing
+              Dholera city, we provide secure investments backed by government
+              support, world-class infrastructure, and high future appreciation
+              potential. We are proud to be part of Dholera’s growth story with
+              over 6 successful project units delivered. At BookMyAssets, our focus is on
+              building trust-driven investments and establishing ourselves as
+              the most reliable brand in real estate through our strong
+              ecosystem — Truliyo Digital, BMA Developers, BMA Allied Services,
+              and our extensive BMA Channel Partners network.
             </p>
           </div>
-          <div>
-            <p className="text-gray-600">
-              With prime plots in the rapidly growing Dholera City, we provide
-              secure investments backed by government support, world-class
-              infrastructure, and high future appreciation potential.
-            </p>
+          
+          <div id="counters-section" className="">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-2 gap-8 md:gap-10">
+                {/* Partners Counter */}
+                <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-28">
+                  <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
+                    {partners}+
+                  </div>
+                  <div className="text-base md:text-lg font-semibold text-gray-800">
+                    Partners
+                  </div>
+                </div>
+
+                {/* Plots Counter */}
+                <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-28">
+                  <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
+                    {plots}+
+                  </div>
+                  <div className="text-base md:text-lg font-semibold text-gray-800">
+                    Plots
+                  </div>
+                </div>
+
+                {/* Happy Customers Counter */}
+                <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-28">
+                  <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
+                    {customers}+
+                  </div>
+                  <div className="text-base md:text-lg font-semibold text-gray-800">
+                    Happy Customers
+                  </div>
+                </div>
+
+                {/* Residential Projects Counter */}
+                <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-28">
+                  <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
+                    {projects}+
+                  </div>
+                  <div className="text-base md:text-lg font-semibold text-gray-800">
+                    Residential Projects
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div
-  id="counters-section"
-  className=""
->
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-2 gap-8 md:gap-10">
-      
-      {/* Partners Counter */}
-      <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-36">
-        <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
-          {partners}+
-        </div>
-        <div className="text-base md:text-lg font-semibold text-gray-800">
-          Partners
-        </div>
-      </div>
-
-      {/* Plots Counter */}
-      <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-36">
-        <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
-          {plots}+
-        </div>
-        <div className="text-base md:text-lg font-semibold text-gray-800">
-          Plots
-        </div>
-      </div>
-
-      {/* Happy Customers Counter */}
-      <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-36">
-        <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
-          {customers}+
-        </div>
-        <div className="text-base md:text-lg font-semibold text-gray-800">
-          Happy Customers
-        </div>
-      </div>
-
-      {/* Residential Projects Counter */}
-      <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-36">
-        <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
-          {projects}+
-        </div>
-        <div className="text-base md:text-lg font-semibold text-gray-800">
-          Residential Projects
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
 
           <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center">
             <Link

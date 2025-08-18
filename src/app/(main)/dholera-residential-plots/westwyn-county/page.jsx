@@ -473,7 +473,7 @@ export default function HeroCarousel() {
                       }`}
                     >
                       <div className="pl-10">
-                        <p className="text-[#deae3c] leading-relaxed">
+                        <p className="text-black hover:text-[#deae3c] leading-relaxed">
                           {index === 0 &&
                             "Prime Location: Located on Fedra-Pipli State Highway, just 12 minutes from Ahmedabad-Dholera Expressway, Dholera International Airport, Metro, and industrial hubs, including the TATA Semiconductor Plant (25 minutes away) and Dedicated Freight Corridor."}
                           {index === 1 &&
@@ -496,14 +496,14 @@ export default function HeroCarousel() {
       </div>
 
       {/* Section 5 - Features */}
-      <div className="py-12 md:py-20 bg-white">
+      {/* <div className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center text-[#deae3c] mb-12 md:mb-16">
             Features
           </h2>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
-            {/* Left Column - Features List */}
+            
             <div className="w-full lg:w-1/2 order-2 lg:order-1">
               <div className="space-y-4">
                 {[
@@ -562,7 +562,7 @@ export default function HeroCarousel() {
                       }`}
                     >
                       <div className="pl-10">
-                        <p className="text-yellow-500 leading-relaxed">
+                        <p className="text-black hover:text-[#deae3c] leading-relaxed">
                           {index === 0 &&
                             "Experience living surrounded by nature with thoughtfully designed green spaces and forest aesthetics."}
                           {index === 1 &&
@@ -581,7 +581,7 @@ export default function HeroCarousel() {
               </div>
             </div>
 
-            {/* Right Column - Image */}
+           
             <div className="w-full lg:w-1/2 order-1 lg:order-2">
               <div className="relative">
                 <Image
@@ -593,7 +593,7 @@ export default function HeroCarousel() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <ProjectAmenities />
       <div className="pt-4 pb-4">
         <CostSheet />
