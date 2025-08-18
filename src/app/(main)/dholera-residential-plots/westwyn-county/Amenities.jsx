@@ -126,7 +126,7 @@ const ProjectAmenities = () => {
     },
   ];
 
-  const visibleAmenities = showAll ? amenities : amenities.slice(0, 3);
+  const visibleAmenities = showAll ? amenities : amenities.slice(0, 6);
 
   return (
     <div className="bg-white p-6">

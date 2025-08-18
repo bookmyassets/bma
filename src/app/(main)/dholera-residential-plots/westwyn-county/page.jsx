@@ -313,7 +313,7 @@ export default function HeroCarousel() {
                     "brochure"
                   )
                 }
-                className="px-6 py-3 bg-[#deae3c] hover:bg-white text-white hover:text-[#c49b35] hover:border-[#c49b35] border-2 border-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 ease-in-out"
+                className="bg-yellow-500 text-black px-6 py-3 rounded-md font-medium hover:bg-yellow-600 transition duration-300 shadow-md"
               >
                 Download Brochure
               </button>
@@ -327,7 +327,7 @@ export default function HeroCarousel() {
                     "siteVisit"
                   )
                 }
-                className="px-6 py-3 hover:bg-[#deae3c] bg-white border-[#deae3c] border-2 text-[#deae3c] hover:text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 ease-in-out"
+                className="px-6 py-3 hover:bg-[#deae3c] bg-white border-[#deae3c] border-2 text-[#deae3c] hover:text-black   font-medium rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 ease-in-out"
               >
                 Book Free Site Visit
               </button>

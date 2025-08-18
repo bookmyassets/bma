@@ -56,10 +56,10 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/about">About us</Link></li>
-              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/dholera-sir-blogs">Blog</Link></li>
               <li><Link href="/careers">Careers</Link></li>
-              <li><Link href="/customers">Bulk Land</Link></li>
-              <li><Link href="/brand">Channel Partner</Link></li>
+              <li><Link href="/bulk-land">Bulk Land</Link></li>
+              <li><Link href="/channel-partner">Channel Partner</Link></li>
             </ul>
           </div>
 
@@ -84,10 +84,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 space-y-2 md:space-y-0">
           <p>© {new Date().getFullYear()} BookMyAssets. All rights reserved</p>
           <div className="flex gap-4">
-            <Link href="/terms">Terms of Service</Link>
-            <Link href="/policy">Policy service</Link>
-            <Link href="/cookie">Cookie Policy</Link>
-            <Link href="/partners">Partners</Link>
+            <Link href="/policies/terms">Terms of Service</Link>
+            <Link href="/policies/privacy">Privacy Policy</Link>
+            <Link href="/policies/copyright">Copyright Policy</Link>
+            <Link href="/policies/refund-and-cancellation">Refund and Cancellation</Link>
           </div>
         </div>
       </div>

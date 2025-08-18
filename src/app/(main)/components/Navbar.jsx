@@ -7,16 +7,16 @@ import Image from "next/image";
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 //Dholera SIR
-import aboutDholera from "@/assests/dholeraSIR/about-dholera-sir.webp"
-import dholeraBlogs from "@/assests/dholeraSIR/dholera-blogs.webp"
-import dholeraUpdates from "@/assests/dholeraSIR/dholera-latest-update.webp"
+import aboutDholera from "@/assests/dholeraSIR/about-dholera-sir.webp";
+import dholeraBlogs from "@/assests/dholeraSIR/dholera-blogs.webp";
+import dholeraUpdates from "@/assests/dholeraSIR/dholera-latest-update.webp";
 //Bulk Land
-import residential from "@/assests/bulkLand/residential-zone.webp"
-import hac from "@/assests/bulkLand/high-access-corridor.webp"
-import cityCenter from "@/assests/bulkLand/city-centre.webp"
-import industrial from "@/assests/bulkLand/industrial-zone.webp"
-import sport from "@/assests/bulkLand/recriation-sports-and-entertainment.webp"
-import knowledgeIT from "@/assests/bulkLand/knowledge-and-it.webp"
+import residential from "@/assests/bulkLand/residential-zone.webp";
+import hac from "@/assests/bulkLand/high-access-corridor.webp";
+import cityCenter from "@/assests/bulkLand/city-centre.webp";
+import industrial from "@/assests/bulkLand/industrial-zone.webp";
+import sport from "@/assests/bulkLand/recriation-sports-and-entertainment.webp";
+import knowledgeIT from "@/assests/bulkLand/knowledge-and-it.webp";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -171,31 +171,31 @@ export default function Navbar() {
 
         // Mock data for Dholera projects - replace with actual API call
         const mockDholeraProjects = [
-  {
-    projectName: "About Dholera SIR",  // This will split as "About" (first line) and "Dholera SIR" (second line)
-    location: "Dholera SIR, Gujarat",
-    image: aboutDholera,
-    link: "about-dholera-sir",
-    status: "ongoing",
-    constructionStatus: "Under Development",
-  },
-  {
-    projectName: "Dholera Blogs",
-    location: "Dholera SIR, Gujarat",
-    image: dholeraBlogs,
-    link: "dholera-sir-blogs",
-    status: "upcoming",
-    constructionStatus: "Planning Stage",
-  },
-  {
-    projectName: "Dholera Latest Updates",
-    location: "Dholera SIR, Gujarat",
-    image: dholeraUpdates,
-    link: "dholera-sir-updates",
-    status: "ongoing",
-    constructionStatus: "Under Construction",
-  },
-];
+          {
+            projectName: "About Dholera SIR", // This will split as "About" (first line) and "Dholera SIR" (second line)
+            location: "Dholera SIR, Gujarat",
+            image: aboutDholera,
+            link: "about-dholera-sir",
+            status: "ongoing",
+            constructionStatus: "Under Development",
+          },
+          {
+            projectName: "Dholera Blogs",
+            location: "Dholera SIR, Gujarat",
+            image: dholeraBlogs,
+            link: "dholera-sir-blogs",
+            status: "upcoming",
+            constructionStatus: "Planning Stage",
+          },
+          {
+            projectName: "Dholera Latest Updates",
+            location: "Dholera SIR, Gujarat",
+            image: dholeraUpdates,
+            link: "dholera-sir-updates",
+            status: "ongoing",
+            constructionStatus: "Under Construction",
+          },
+        ];
 
         // Simulate API delay
         await new Promise((resolve) => setTimeout(resolve, 500));
@@ -247,44 +247,49 @@ export default function Navbar() {
   };
 
   // Close dropdowns when clicking outside or on scroll
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        !event.target.closest(".dropdown-container") &&
-        !event.target.closest(".residential-dropdown") &&
-        !event.target.closest(".dholera-dropdown") &&
-        !event.target.closest(".bulk-land-dropdown")
-      ) {
-        setIsResidentialMenuOpen(false);
-        setIsDholeraMenuOpen(false);
-        setIsBulkLandMenuOpen(false);
-      }
-    };
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (window.innerWidth < 768) return; // ignore clicks outside on mobile
 
-    const handleScroll = () => {
+    if (
+      !event.target.closest(".dropdown-container") &&
+      !event.target.closest(".residential-dropdown") &&
+      !event.target.closest(".dholera-dropdown") &&
+      !event.target.closest(".bulk-land-dropdown")
+    ) {
       setIsResidentialMenuOpen(false);
       setIsDholeraMenuOpen(false);
       setIsBulkLandMenuOpen(false);
-    };
+    }
+  };
 
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        setIsResidentialMenuOpen(false);
-        setIsDholeraMenuOpen(false);
-        setIsBulkLandMenuOpen(false);
-      }
-    };
+  const handleScroll = () => {
+    if (window.innerWidth < 768) return; // ignore scroll on mobile
+    setIsResidentialMenuOpen(false);
+    setIsDholeraMenuOpen(false);
+    setIsBulkLandMenuOpen(false);
+  };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    window.addEventListener("scroll", handleScroll);
-    document.addEventListener("keydown", handleEscape);
+  const handleEscape = (event) => {
+    if (event.key === "Escape") {
+      setIsResidentialMenuOpen(false);
+      setIsDholeraMenuOpen(false);
+      setIsBulkLandMenuOpen(false);
+    }
+  };
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, []);
+  document.addEventListener("mousedown", handleClickOutside);
+  window.addEventListener("scroll", handleScroll);
+  document.addEventListener("keydown", handleEscape);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+    window.removeEventListener("scroll", handleScroll);
+    document.removeEventListener("keydown", handleEscape);
+  };
+}, []);
+
+
 
   return (
     <>
@@ -384,14 +389,14 @@ export default function Navbar() {
               {/* Desktop Action Buttons */}
               <div className="flex items-center space-x-6">
                 <Link
-                  href="/about"
+                  href="/contact"
                   className="bg-yellow-500 text-black px-6 py-2 rounded-md font-medium hover:bg-yellow-600 transition duration-300 shadow-md"
                 >
                   Contact Us
                 </Link>
 
                 {/* Menu Dropdown for additional links */}
-                <div className="relative group dropdown-container">
+                <div className="relative group ">
                   <button
                     className={`font-medium transition-colors duration-300 hover:text-yellow-500 ${textColor}`}
                   >
@@ -479,7 +484,7 @@ export default function Navbar() {
           {/* Left Side - Title */}
           <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-gray-50 to-white">
             <div>
-              <h3 className="text-7xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl lg:text-7xl font-light text-gray-900 leading-tight">
                 Residential <br /> Projects
               </h3>
               <p className="text-gray-600 mt-4 text-xl">
@@ -642,12 +647,12 @@ export default function Navbar() {
       )}
 
       {/* Bulk Land Dropdown Menu */}
-     {isBulkLandMenuOpen && (
+      {isBulkLandMenuOpen && (
         <div className="bulk-land-dropdown hidden md:flex fixed left-0 top-20 w-screen h-[calc(100vh-5rem)] bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300">
           {/* Left Side - Title */}
           <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-orange-50 to-white">
             <div>
-              <h3 className="text-7xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl lg:text-7xl font-light text-gray-900 leading-tight">
                 Bulk Land <br /> Opportunities
               </h3>
               <p className="text-gray-600 mt-4 text-xl">
@@ -724,7 +729,7 @@ export default function Navbar() {
           {/* Left Side - Title */}
           <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-blue-50 to-white">
             <div>
-              <h3 className="text-7xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl lg:text-7xl font-light text-gray-900 leading-tight">
                 DHOLERA SIR
               </h3>
               <p className="text-gray-600 mt-4 text-xl">
@@ -752,9 +757,13 @@ export default function Navbar() {
               <div className="grid grid-cols-4 gap-4 pb-6 h-full">
                 {dholeraProjects.map((project, index) => {
                   // Split project name for two lines
-                  const titleWords = project.projectName.split(' ');
-                  const firstLine = titleWords.slice(0, Math.ceil(titleWords.length / 2)).join(' ');
-                  const secondLine = titleWords.slice(Math.ceil(titleWords.length / 2)).join(' ');
+                  const titleWords = project.projectName.split(" ");
+                  const firstLine = titleWords
+                    .slice(0, Math.ceil(titleWords.length / 2))
+                    .join(" ");
+                  const secondLine = titleWords
+                    .slice(Math.ceil(titleWords.length / 2))
+                    .join(" ");
 
                   return (
                     <Link
@@ -762,7 +771,9 @@ export default function Navbar() {
                       href={`/${project.link}`}
                       onClick={closeAllMenus}
                       className={`group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col ${
-                        project.status === "sold-out" ? "opacity-75 cursor-not-allowed" : ""
+                        project.status === "sold-out"
+                          ? "opacity-75 cursor-not-allowed"
+                          : ""
                       }`}
                     >
                       <div className="relative w-full aspect-[4/5] overflow-hidden rounded-xl flex-shrink-0">
@@ -772,33 +783,31 @@ export default function Navbar() {
                           height={300}
                           width={400}
                           className={`object-cover w-full h-full transition-transform duration-700 ease-out ${
-                            project.status === "sold-out" 
-                              ? "grayscale group-hover:grayscale" 
+                            project.status === "sold-out"
+                              ? "grayscale group-hover:grayscale"
                               : "group-hover:scale-110"
                           }`}
                           priority={index < 6}
                         />
 
-                       
-                       
                         {/* Project Title and Location at Bottom */}
-<div className="absolute bottom-0 left-0 p-4 text-white">
-  <div className="text-left space-y-2">
-    {/* Two-Line Project Title */}
-    <div className={`font-semibold group-hover:text-[#deae3c] transition-colors duration-300 leading-tight ${
-      project.status === "sold-out" ? "text-gray-300" : ""
-    }`}>
-      <div className="text-[20px]">
-        {firstLine}
-      </div>
-      {secondLine && (
-        <div className="text-[24px]">
-          {secondLine}
-        </div>
-      )}
-    </div>
-  </div>
-</div>
+                        <div className="absolute bottom-0 left-0 p-4 text-white">
+                          <div className="text-left space-y-2">
+                            {/* Two-Line Project Title */}
+                            <div
+                              className={`font-semibold group-hover:text-[#deae3c] transition-colors duration-300 leading-tight ${
+                                project.status === "sold-out"
+                                  ? "text-gray-300"
+                                  : ""
+                              }`}
+                            >
+                              <div className="text-[20px]">{firstLine}</div>
+                              {secondLine && (
+                                <div className="text-[24px]">{secondLine}</div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </Link>
                   );
@@ -822,10 +831,10 @@ export default function Navbar() {
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
-        <div
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        {/* <div
+          className=" bg-black/60"
           onClick={closeAllMenus}
-        ></div>
+        ></div> */}
 
         <div
           className={`relative z-50 bg-white h-full w-full transition-all duration-300 overflow-y-auto ${
@@ -859,7 +868,7 @@ export default function Navbar() {
             <div className="border-b border-gray-100 pb-2">
               <button
                 onClick={toggleResidentialMenu}
-                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-3 transition-colors"
+                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-3 "
               >
                 <span>Residential</span>
                 <svg
@@ -1011,28 +1020,6 @@ export default function Navbar() {
 
               {isDholeraMenuOpen && (
                 <div className="pl-4 mt-2 space-y-2 border-l-2 border-blue-500">
-                  <Link
-                    href="/about-dholera-sir"
-                    onClick={closeAllMenus}
-                    className="block py-2 text-gray-600 hover:text-blue-500 transition-colors"
-                  >
-                    About Dholera SIR
-                  </Link>
-                  <Link
-                    href="/dholera-sir-blogs"
-                    onClick={closeAllMenus}
-                    className="block py-2 text-gray-600 hover:text-blue-500 transition-colors"
-                  >
-                    Dholera Blogs
-                  </Link>
-                  <Link
-                    href="/dholera-sir-updates"
-                    onClick={closeAllMenus}
-                    className="block py-2 text-gray-600 hover:text-blue-500 transition-colors"
-                  >
-                    Latest Updates on Dholera
-                  </Link>
-
                   {/* Dholera Projects in Mobile */}
                   {dholeraLoading ? (
                     <div className="text-gray-500 text-sm py-4 text-center">
@@ -1051,7 +1038,7 @@ export default function Navbar() {
                       {dholeraProjects.map((project, index) => (
                         <Link
                           key={index}
-                          href={`/dholera-projects/${project.link}`}
+                          href={`/${project.link}`}
                           onClick={closeAllMenus}
                           className="flex items-center py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
                         >
