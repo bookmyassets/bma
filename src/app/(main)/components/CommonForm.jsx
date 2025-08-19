@@ -206,7 +206,7 @@ export default function CommonForm({ title }) {
 
   return (
     <div>
-      <section className="py-12 bg-gradient-to-r from-gray-900 to-teal-900 animate-gradient-x">
+      <section className="py-12 bg-black">
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-white text-3xl sm:text-4xl font-bold text-center">
@@ -269,7 +269,7 @@ export default function CommonForm({ title }) {
                       value={formData.fullName}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                       placeholder="Enter your name"
                     />
                   </div>
@@ -288,7 +288,7 @@ export default function CommonForm({ title }) {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                       placeholder="Enter your phone number"
                     />
                   </div>
@@ -302,7 +302,7 @@ export default function CommonForm({ title }) {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+                    className="w-full bg-yellow-600 shadow-md hover:bg-yellow-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
                   >
                     {isLoading ? "Submitting..." : "Submit"}
                   </button>
