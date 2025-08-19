@@ -484,7 +484,7 @@ useEffect(() => {
           {/* Left Side - Title */}
           <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-gray-50 to-white">
             <div>
-              <h3 className="text-5xl lg:text-7xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl font-light text-gray-900 leading-tight">
                 Residential <br /> Projects
               </h3>
               <p className="text-gray-600 mt-4 text-xl">
@@ -652,7 +652,7 @@ useEffect(() => {
           {/* Left Side - Title */}
           <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-orange-50 to-white">
             <div>
-              <h3 className="text-5xl lg:text-7xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl font-light text-gray-900 leading-tight">
                 Bulk Land <br /> Opportunities
               </h3>
               <p className="text-gray-600 mt-4 text-xl">
@@ -729,7 +729,7 @@ useEffect(() => {
           {/* Left Side - Title */}
           <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-blue-50 to-white">
             <div>
-              <h3 className="text-5xl lg:text-7xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl font-light text-gray-900 leading-tight">
                 DHOLERA SIR
               </h3>
               <p className="text-gray-600 mt-4 text-xl">
