@@ -119,6 +119,7 @@ const TrendingBlogItem = ({ post }) => {
   );
 };
 
+
 export default async function Post({ params }) {
   const { slug } = await params;
   const site = "bookmyassets";

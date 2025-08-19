@@ -4,6 +4,20 @@ import BlogCard from "./BlogCard";
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import SidebarWithForm from "./Sidebar";
+
+const formatDate = (dateString) => {
+  if (!dateString) return "";
+
+  const date = new Date(dateString);
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
+  return date.toLocaleDateString("en-US", options);
+};
 
 export default async function page() {
   let posts = [];
@@ -23,18 +37,18 @@ export default async function page() {
       : { current: "#" },
   }));
 
+  // Get the 3 most recently published posts for popular articles
+  const popularArticles = [...safePosts]
+    .sort((a, b) => new Date(b.publishedAt || b._createdAt) - new Date(a.publishedAt || a._createdAt))
+    .slice(0, 3);
+
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-[#FF9933] via-white to-[#138808] relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#FF9933] opacity-20 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#138808] opacity-20 rounded-full blur-3xl translate-x-1/4 translate-y-1/4"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#000080] opacity-10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"></div>
-
-        <div className="relative z-10 max-w-6xl mx-auto px-4 pt-28 pb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {/* Left Column - Blog Posts */}
-            <div className="lg:col-span-2 space-y-8">
+      <div className="min-h-screen bg-white relative overflow-hidden">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 pt-28 pb-16">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Main Content - Blog Posts (comes first on mobile) */}
+            <div className="lg:w-2/3 space-y-8 order-1 lg:order-2">
               <div>
                 <h1 className="text-4xl font-bold text-gray-800 mb-2">
                   Dholera SIR Latest Updates
@@ -49,45 +63,52 @@ export default async function page() {
               {safePosts.length > 0 ? (
                 <div className="space-y-8">
                   {/* Featured Blog Post */}
-                  <article className="bg-white rounded-xl shadow-sm overflow-hidden">
-                    <div className="h-48 bg-gray-200 flex items-center justify-center">
-                      {safePosts[0].mainImage ? (
-                        <Image
-                          src={urlFor(safePosts[0].mainImage)
-                            .width(800)
-                            .height(400)
-                            .url()}
-                          alt={safePosts[0].title || "Dholera SIR Blog Post"}
-                          width={800}
-                          height={400}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 flex items-center justify-center">
-                          <div className="text-6xl">📰</div>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-6">
-                      <Link href={`/blog/${safePosts[0].slug.current}`}>
-                        <h2 className="text-xl font-bold text-gray-800 mb-3 hover:text-[#FF9933] cursor-pointer transition-colors">
+                  <article className="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
+                    <Link
+                      href={`/dholera-sir-updates/${safePosts[0].slug.current}`}
+                    >
+                      <div className="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+                        {safePosts[0].mainImage ? (
+                          <Image
+                            src={urlFor(safePosts[0].mainImage)
+                              .width(800)
+                              .height(400)
+                              .url()}
+                            alt={safePosts[0].title || "Dholera SIR Blog Post"}
+                            width={800}
+                            height={400}
+                            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 flex items-center justify-center">
+                            <div className="text-6xl">📰</div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6 bg-black text-white hover:text-[#deae3c] transition-colors duration-300">
+                        <h2 className="text-xl font-bold mb-3 cursor-pointer">
                           {safePosts[0].title ||
                             "Latest Dholera SIR Investment Updates"}
                         </h2>
-                      </Link>
-                      <p className="text-gray-600 mb-4">
-                        {safePosts[0].description ||
-                          "Discover the latest developments and investment opportunities in India's first planned smart city - Dholera Special Investment Region."}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm text-gray-500">5 min read</p>
-                        <Link href={`/blog/${safePosts[0].slug.current}`}>
-                          <button className="text-[#FF9933] font-medium hover:underline">
+
+                        <p className="mb-4">
+                          {safePosts[0].description ||
+                            "Discover the latest developments and investment opportunities in India's first planned smart city - Dholera Special Investment Region."}
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <p className="text-sm">
+                            {formatDate(
+                              safePosts[0].publishedAt ||
+                                safePosts[0]._createdAt
+                            )}
+                          </p>
+
+                          <button className="font-medium hover:underline">
                             Read More →
                           </button>
-                        </Link>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </article>
 
                   {/* Smaller Blog Posts Grid */}
@@ -95,45 +116,45 @@ export default async function page() {
                     {safePosts.slice(1).map((post, index) => (
                       <article
                         key={post._id}
-                        className="bg-white rounded-xl shadow-sm overflow-hidden"
+                        className="bg-[#0d0d0d] rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.03]"
                       >
-                        <div className="h-32 bg-gray-200 flex items-center justify-center">
-                          {post.mainImage ? (
-                            <Image
-                              src={urlFor(post.mainImage)
-                                .width(800)
-                                .height(400)
-                                .url()}
-                              alt={post.title || "Dholera SIR Blog Post"}
-                              width={800}
-                              height={400}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 flex items-center justify-center">
-                              <div className="text-6xl">📰</div>
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-4">
-                          <Link
-                            href={`/dholera-sir-updates/${post.slug.current}`}
-                          >
-                            <h3 className="text-lg font-semibold text-gray-800 mb-2 hover:text-[#FF9933] cursor-pointer transition-colors">
+                        <Link
+                          href={`/dholera-sir-updates/${post.slug.current}`}
+                        >
+                          <div className="h-32 bg-gray-200 flex items-center justify-center overflow-hidden">
+                            {post.mainImage ? (
+                              <Image
+                                src={urlFor(post.mainImage)
+                                  .width(800)
+                                  .height(400)
+                                  .url()}
+                                alt={post.title || "Dholera SIR Blog Post"}
+                                width={800}
+                                height={400}
+                                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 flex items-center justify-center">
+                                <div className="text-6xl">📰</div>
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-4 text-white hover:text-[#deae3c] transition-colors duration-300">
+                            <h3 className="text-lg font-semibold mb-2 cursor-pointer">
                               {post.title ||
                                 `Dholera Investment Guide ${index + 2}`}
                             </h3>
-                          </Link>
-                          <p className="text-sm text-gray-500">
-                            {index + 4} min read
-                          </p>
-                        </div>
+                            <p className="text-sm">
+                              {formatDate(post.publishedAt || post._createdAt)}
+                            </p>
+                          </div>
+                        </Link>
                       </article>
                     ))}
                   </div>
                 </div>
               ) : (
-                <div className="bg-white rounded-xl shadow-sm p-8 text-center">
+                <div className="bg-white rounded-xl shadow-sm p-8 text-center transition-all duration-300 hover:shadow-lg hover:scale-[1.01]">
                   <div className="h-48 bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 rounded-lg mb-6 flex items-center justify-center">
                     <div className="text-6xl">🏙️</div>
                   </div>
@@ -152,105 +173,10 @@ export default async function page() {
               )}
             </div>
 
-            {/* Right Column - Sidebar */}
-            <aside className="lg:sticky lg:top-24 space-y-6">
-              {/* Get Our Free Guide Widget */}
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Get Free Dholera Investment Guide
-                </h3>
-                <p className="text-gray-600 text-sm mb-6">
-                  Download our comprehensive guide covering investment
-                  opportunities, infrastructure development, and future
-                  prospects in Dholera SIR.
-                </p>
-                <form className="space-y-4">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF9933] focus:border-[#FF9933]"
-                    required
-                  />
-                  <button 
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-[#FF9933] to-[#138808] text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
-                  >
-                    Download Free Guide
-                  </button>
-                </form>
-              </div>
-
-              {/* Popular Articles Widget */}
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-6">
-                  Popular Articles
-                </h3>
-                <div className="space-y-4">
-                  <article className="pb-4 border-b border-gray-100 last:border-b-0 last:pb-0">
-                    <Link href="/blog/why-invest-dholera" className="block group">
-                      <h4 className="text-base font-semibold text-gray-800 mb-1 group-hover:text-[#FF9933] transition-colors">
-                        Why Invest in Dholera SIR?
-                      </h4>
-                      <p className="text-sm text-gray-500">6 min read</p>
-                    </Link>
-                  </article>
-                  <article className="pb-4 border-b border-gray-100 last:border-b-0 last:pb-0">
-                    <Link href="/blog/dholera-master-plan" className="block group">
-                      <h4 className="text-base font-semibold text-gray-800 mb-1 group-hover:text-[#FF9933] transition-colors">
-                        Dholera Master Plan 2025
-                      </h4>
-                      <p className="text-sm text-gray-500">8 min read</p>
-                    </Link>
-                  </article>
-                  <article className="pb-4 border-b border-gray-100 last:border-b-0 last:pb-0">
-                    <Link href="/blog/infrastructure-development" className="block group">
-                      <h4 className="text-base font-semibold text-gray-800 mb-1 group-hover:text-[#FF9933] transition-colors">
-                        Infrastructure Development Progress
-                      </h4>
-                      <p className="text-sm text-gray-500">5 min read</p>
-                    </Link>
-                  </article>
-                </div>
-              </div>
-
-              {/* Schedule a Consultation */}
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Schedule Investment Consultation
-                </h3>
-                <p className="text-gray-600 text-sm mb-6">
-                  Ready to invest in Dholera SIR? Get personalized guidance from
-                  our investment experts.
-                </p>
-                <button className="w-full bg-[#FF9933] text-white py-3 rounded-lg font-medium hover:bg-[#e8851f] transition-all duration-300 hover:shadow-md">
-                  Book Free Consultation
-                </button>
-              </div>
-
-              {/* Newsletter Signup */}
-              <div className="bg-gradient-to-br from-[#FF9933]/10 to-[#138808]/10 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Stay Updated
-                </h3>
-                <p className="text-gray-600 text-sm mb-6">
-                  Get weekly updates about Dholera SIR developments directly in your inbox.
-                </p>
-                <form className="space-y-3">
-                  <input
-                    type="email"
-                    placeholder="Your email address"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF9933] focus:border-[#FF9933]"
-                    required
-                  />
-                  <button 
-                    type="submit"
-                    className="w-full bg-[#138808] text-white py-2 rounded-lg font-medium hover:bg-[#0f7006] transition-colors text-sm"
-                  >
-                    Subscribe Now
-                  </button>
-                </form>
-              </div>
-            </aside>
+            {/* Sidebar (comes second on mobile) */}
+            <div className="lg:w-1/3 order-2 lg:order-1">
+              <SidebarWithForm popularArticles={popularArticles} className="lg:sticky lg:top-24 space-y-6" />
+            </div>
           </div>
         </div>
       </div>
