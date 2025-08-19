@@ -19,9 +19,9 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           <h3 className="text-xl font-bold mb-4 text-blue-300">
             Latest Blogs
           </h3>
-          <div className="space-y-4 max-h-[400px] overflow-y-auto">
+          <div className="space-y-8 max-h-[400px] overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
-              <Link key={item._id} href={`/blogs/${item.slug.current}`}>
+              <Link key={item._id} href={`/dholera-sir-blogs/${item.slug.current}`}>
                 <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3 rounded-lg border border-gray-100 transition-all hover:shadow-md">
                   {item.mainImage && (
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
@@ -507,7 +507,7 @@ export default async function Post({ params }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedBlogs && relatedBlogs.length > 0
                 ? relatedBlogs.map((blog) => (
-                    <Link key={blog._id} href={`/dholera-sir/${blog.slug.current}`}>
+                    <Link key={blog._id} href={`/dholera-sir-updates/${blog.slug.current}`}>
                       <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
                         <div className="relative h-48 overflow-hidden">
                           {blog.mainImage ? (
