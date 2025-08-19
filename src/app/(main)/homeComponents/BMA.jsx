@@ -151,7 +151,7 @@ export default function BMA() {
           <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center">
             <Link
               href="/about"
-              className="bg-yellow-500 text-black px-6 py-3 rounded-md font-medium hover:bg-yellow-600 transition duration-300 shadow-md"
+              className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
             >
               About BMA
             </Link>

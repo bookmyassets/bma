@@ -313,7 +313,7 @@ export default function HeroCarousel() {
                     "brochure"
                   )
                 }
-                className="bg-yellow-500 text-black px-6 py-3 rounded-md font-medium hover:bg-yellow-600 transition duration-300 shadow-md"
+                className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
               >
                 Download Brochure
               </button>
@@ -359,7 +359,7 @@ export default function HeroCarousel() {
                 {sqYards.toFixed(2)}
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                Sq Acre
+                Acre
               </div>
               <div className="text-sm md:text-base text-gray-600">
                 Premium Residential Project

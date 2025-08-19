@@ -390,7 +390,7 @@ useEffect(() => {
               <div className="flex items-center space-x-6">
                 <Link
                   href="/contact"
-                  className="bg-yellow-500 text-black px-6 py-2 rounded-md font-medium hover:bg-yellow-600 transition duration-300 shadow-md"
+                  className="bg-[#deae3c] text-black px-6 py-2 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
                 >
                   Contact Us
                 </Link>
