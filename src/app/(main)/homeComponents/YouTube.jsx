@@ -200,7 +200,7 @@ export default function ShortsSection() {
           Dholera in Motion
         </h2>
         <p className="text-center font-light text-white text-lg mb-6">
-          See India's Smart City Revolution Live
+          Witness real-time progress in the Dholera smart city project
         </p>
 
         <div className="relative">
