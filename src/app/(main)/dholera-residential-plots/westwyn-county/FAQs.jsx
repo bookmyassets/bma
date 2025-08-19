@@ -17,12 +17,12 @@ const faqs = [
   {
     question: "How can BookMyAssets (BMA) help me buy a plot in WestWyn County easily?",
     answer:
-      "With a global presence and only focusing on Dholera Smart City, BookMyAssets offers 365-day site visit assistance, immediate sale deed registration, and an in-house due diligence team, along with resale support and buyback assistance*.",
+      "With a global presence and fully focusing on Dholera Smart City, BookMyAssets offers 365-day site visit assistance, immediate sale deed registration, and an in-house due diligence team, along with resale support and buyback assistance*.",
   },
   {
     question: "How does WestWyn County compare to other projects in Dholera?",
     answer:
-      "WestWyn County offers government-approved plots with premium amenities and future-ready facilities, making it both a lifestyle and investment upgrade.",
+      "WestWyn County stands apart with its strategic location near the upcoming Dholera International Airport and Expressway, ensuring unmatched connectivity and growth potential. Unlike many projects, it offers government approved plots backed by premium amenities and future ready infrastructure. This combination not only elevates lifestyle but also makes WestWyn County a high yield investment opportunity in one of India’s fastest growing smart city zones.",
   },
   {
     question: "What legal approvals does WestWyn County have?",
@@ -32,7 +32,7 @@ const faqs = [
   {
     question: "Is WestWyn County an eco-friendly project?",
     answer:
-      "It features landscaped gardens, green zones, EV charging stations, Tree plantation, Jogging track, and Kids play area.",
+      "It features landscaped gardens, green zones, EV charging stations, lush green surroundings, jogging track, and automated street lights.",
   },
 ];
 
