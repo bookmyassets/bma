@@ -129,20 +129,22 @@ const ProjectAmenities = () => {
               }}
             >
               {/* Icon Container */}
-              <div
-                className={`inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br ${amenity.color} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300`}
-              >
-                <div className="text-white">{amenity.icon}</div>
+             <div className="flex justify-center mb-6">
+                <div
+                  className={`flex items-center justify-center w-12 h-12 bg-gradient-to-br ${amenity.color} rounded-2xl group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <div className="text-white">{amenity.icon}</div>
+                </div>
               </div>
 
               {/* Content */}
               <div>
-                <h3 className="text-lg font-medium mb-3 transition-colors duration-300" style={{ color: "#0d0d0d" }}>
+                <h3 className="text-lg text-center font-medium mb-3 transition-colors duration-300" style={{ color: "#0d0d0d" }}>
                   {amenity.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed transition-colors duration-300">
+                {/* <p className="text-gray-600 text-sm leading-relaxed transition-colors duration-300">
                   {amenity.description}
-                </p>
+                </p> */}
               </div>
             </div>
           ))}

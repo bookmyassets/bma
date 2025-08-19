@@ -2,17 +2,8 @@ import Image from "next/image";
 import React from "react";
 import banner from "@/assests/banner.webp";
 import {
-  TrendingUp,
-  LayoutGrid,
-  Plug,
-  Users,
-  Landmark,
-  ShoppingBag,
-  UtensilsCrossed,
-  HeartPulse,
-  GraduationCap,
-  Home,
-  HomeIcon,
+  Factory, Truck, Wrench, Zap, School,
+  Network, Construction, Banknote, Ruler, Globe2
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 
@@ -36,7 +27,7 @@ export default function page() {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-white text-4xl font-bold tracking-wide mb-2 md:mb-4">
-              RESIDENTIAL ZONE
+              Industrial Zone
             </h1>
             <p className="text-white text-lg font-light tracking-wider">
               Where Smart Living Begins
@@ -89,16 +80,15 @@ export default function page() {
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="text-center">
           <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-            The High Access Corridor in Dholera SIR is planned as a dynamic
-            mixed-use zone with high visibility and connectivity, ideal for
-            large-scale commercial, hospitality, and residential developments.
-            Designed for businesses that thrive on accessibility such as malls,
-            hotels, corporate offices, retail hubs, and high-density housing. It
-            serves as a vibrant economic artery within the smart city’s
-            masterplan. With prime frontage along major roads, modern
-            infrastructure, and flexible development permissions, this corridor
-            is positioned to become a landmark destination for commerce, living,
-            and leisure in Dholera.
+            The Industrial Zone in Dholera SIR is dedicated to large-scale
+            manufacturing, logistics, and production-led growth. It is meant for
+            industries, factories, warehouses, and allied businesses that
+            require well-planned infrastructure and direct connectivity to
+            highways, ports, and the upcoming international airport. As the
+            backbone of Dholera’s economic masterplan, this zone enables global
+            and domestic companies to establish operations in a world-class
+            industrial ecosystem supported by smart utilities, reliable power,
+            and modern logistics networks.
           </p>
         </div>
       </div>
@@ -118,30 +108,30 @@ export default function page() {
         {/* Benefits Grid */}
         <div>
           <p className="text-center text-3xl font-semibold mb-8">
-            Benefits of Buying Bulk Land in Residential Zones
+            Benefits of Buying Bulk Land in Industrial Zones
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
             {/* High Appreciation Potential */}
             <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <TrendingUp className="w-16 h-16 text-blue-600" />
+              <Factory className="w-16 h-16 text-blue-600" />
               <p className="text-lg font-medium text-gray-800">
-                High Appreciation Potential
+                Manufacturing & Heavy Industries
               </p>
             </div>
 
             {/* Mixed-Use Flexibility */}
             <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <LayoutGrid className="w-16 h-16 text-green-600" />
+              <Truck className="w-16 h-16 text-green-600" />
               <p className="text-lg font-medium text-gray-800">
-                Mixed-Use Flexibility
+                Warehousing & Logistics
               </p>
             </div>
 
             {/* Plug & Play Infrastructure */}
             <div className=" flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <Plug className="w-16 h-16 text-purple-600" />
+              <Wrench className="w-16 h-16 text-purple-600" />
               <p className="text-lg font-medium text-gray-800">
-                Plug & Play Infrastructure
+                Light & Medium Industries
               </p>
             </div>
           </div>
@@ -149,17 +139,17 @@ export default function page() {
         <div className="md:flex justify-center items-center pt-4 max-sm:space-y-4 md:space-x-8">
           {/* Community-Centric Planning */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-            <Users className="w-16 h-16 text-orange-600" />
+            <Zap className="w-16 h-16 text-orange-600" />
             <p className="text-lg font-medium text-gray-800">
-              Community-Centric Planning
+              Utilities & Support Services
             </p>
           </div>
 
           {/* Government-Backed Development */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-            <Landmark className="w-16 h-16 text-red-600" />
+            <School className="w-16 h-16 text-red-600" />
             <p className="text-lg font-medium text-gray-800">
-              Government-Backed Development
+              Institutional & Ancillary Facilities
             </p>
           </div>
         </div>
@@ -174,42 +164,42 @@ export default function page() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Retail & Commercial Services */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-            <ShoppingBag className="w-16 h-16 text-blue-600" />
+            <Network className="w-16 h-16 text-blue-600" />
             <p className="text-lg font-medium text-gray-800">
-              Retail & Commercial Services
+              Strategic Connectivity
             </p>
           </div>
 
           {/* Hospitality & Food Services */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
-            <UtensilsCrossed className="w-16 h-16 text-red-600" />
+            <Construction className="w-16 h-16 text-red-600" />
             <p className="text-lg font-medium text-gray-800">
-              Hospitality & Food Services
+              Plug-and-Play Infrastructure 
             </p>
           </div>
 
           {/* Healthcare & Wellness */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-            <HeartPulse className="w-16 h-16 text-green-600" />
+            <Banknote className="w-16 h-16 text-green-600" />
             <p className="text-lg font-medium text-gray-800">
-              Healthcare & Wellness
+              High ROI & Incentives 
             </p>
           </div>
         </div>
         <div className="md:flex justify-center items-center pt-4 max-sm:space-y-4 md:space-x-8">
           {/* Education & Community Facilities */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-            <GraduationCap className="w-16 h-16 text-purple-600" />
+            <Ruler className="w-16 h-16 text-purple-600" />
             <p className="text-lg font-medium text-gray-800">
-              Education & Community Facilities
+              Scalable Land Parcels
             </p>
           </div>
 
           {/* Residential & Housing Projects */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
-            <HomeIcon className="w-16 h-16 text-orange-600" />
+            <Globe2 className="w-16 h-16 text-orange-600" />
             <p className="text-lg font-medium text-gray-800">
-              Residential & Housing Projects
+              Global Investment Magnet
             </p>
           </div>
         </div>

@@ -92,16 +92,16 @@ export default function BMA() {
               opportunities in the Dholera smart city, India’s most ambitious
               smart city development. With prime plots in the rapidly growing
               Dholera city, we provide secure investments backed by government
-              support, world-class infrastructure, and high future appreciation
+              support, world class infrastructure, and high future appreciation
               potential. We are proud to be part of Dholera’s growth story with
-              over 6 successful project units delivered. At BookMyAssets, our focus is on
-              building trust-driven investments and establishing ourselves as
-              the most reliable brand in real estate through our strong
-              ecosystem — Truliyo Digital, BMA Developers, BMA Allied Services,
-              and our extensive BMA Channel Partners network.
+              over 6 successful project units delivered. At BookMyAssets, our
+              focus is on building trust driven investments and establishing
+              ourselves as the most reliable brand in real estate through our
+              strong ecosystem — Truliyo Digital, BMA Developers, BMA Allied
+              Services, and our extensive BMA Channel Partners network.
             </p>
           </div>
-          
+
           <div id="counters-section" className="">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 gap-8 md:gap-10">
