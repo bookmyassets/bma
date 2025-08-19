@@ -140,9 +140,9 @@ export default function HeroCarousel() {
 
             const amenitiesInterval = setInterval(() => {
               setAmenities((prev) => {
-                if (prev >= 18) {
+                if (prev >= 15) {
                   clearInterval(amenitiesInterval);
-                  return 18;
+                  return 15;
                 }
                 return prev + 1;
               });
@@ -359,10 +359,10 @@ export default function HeroCarousel() {
                 {sqYards.toFixed(2)}
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                Sq Yards
+                Sq Acre
               </div>
               <div className="text-sm md:text-base text-gray-600">
-                Premium Plot Size
+                Premium Residential Project
               </div>
             </div>
 
@@ -419,23 +419,23 @@ export default function HeroCarousel() {
               <div className="space-y-4">
                 {[
                   {
-                    title: "Strategic Location",
+                    title: "Prime Location",
                     icon: "📍",
                   },
                   {
-                    title: "High ROI Potential",
+                    title: "Investment-Friendly",
                     icon: "📈",
                   },
                   {
-                    title: "Unique Concept",
+                    title: "100% Government-Verified",
                     icon: "🌿",
                   },
                   {
-                    title: "100% Legal",
+                    title: "High ROI Potential",
                     icon: "✅",
                   },
                   {
-                    title: "Trusted Developer",
+                    title: "Smart Infrastructure",
                     icon: "🏆",
                   },
                 ].map((benefit, index) => (
@@ -475,15 +475,15 @@ export default function HeroCarousel() {
                       <div className="pl-10">
                         <p className="text-black hover:text-[#deae3c] leading-relaxed">
                           {index === 0 &&
-                            "Prime Location: Located on Fedra-Pipli State Highway, just 12 minutes from Ahmedabad-Dholera Expressway, Dholera International Airport, Metro, and industrial hubs, including the TATA Semiconductor Plant (25 minutes away) and Dedicated Freight Corridor."}
+                            "Located on Fedra-Pipli State Highway, just 12 minutes from Ahmedabad-Dholera Expressway, Dholera International Airport, Metro, and industrial hubs, including the TATA Semiconductor Plant (25 minutes away) and Dedicated Freight Corridor."}
                           {index === 1 &&
-                            "Investment-Friendly: We offer registry-ready plots with flexible payment plans on Dholera residential plots. Our team ensures end-to-end assistance with resale support and buyback assistance*."}
+                            "Investment We offer registry-ready plots with flexible payment plans on Dholera residential plots. Our team ensures end-to-end assistance with resale support and buyback assistance*."}
                           {index === 2 &&
-                            "Government Verified: We offer immediate registry on Dholera plots with NA/NOC clearance and clear titles."}
+                            "We offer immediate registry on Dholera plots with NA/NOC clearance and clear titles."}
                           {index === 3 &&
-                            "High ROI Potential: Early-stage entry in a developing future-ready city, with potential for 3-10x appreciation by 2030."}
+                            "Early-stage entry in a developing future-ready city, with potential for 3-10x appreciation by 2030."}
                           {index === 4 &&
-                            "Smart Infrastructure: 9 meter and 12 meter internal roads, underground trunk infrastructure for wire cables, and water and drainage systems."}
+                            "9 meter and 12 meter internal roads, underground trunk infrastructure for wire cables, and water and drainage systems."}
                         </p>
                       </div>
                     </div>
@@ -600,7 +600,7 @@ export default function HeroCarousel() {
       </div>
       <FAQSection/>
       {/* Form */}
-      <CommonForm />
+      <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
 
       <AnimatePresence>
         {isContactFormOpen && (
