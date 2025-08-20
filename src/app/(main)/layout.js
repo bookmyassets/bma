@@ -6,6 +6,8 @@ import { initFacebookPixel, trackPageView } from "@/lib/fbpixel";
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import Script from 'next/script';
+import FloatingButtons from './components/whatsapp';
+import ContactNow from './components/Callus';
 
 export default function RootLayout({ children }) {
 
@@ -72,6 +74,8 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <FloatingButtons/>
+        <ContactNow/>
       </body>
     </html>
   );
