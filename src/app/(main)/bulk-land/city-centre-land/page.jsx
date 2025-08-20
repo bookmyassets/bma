@@ -118,7 +118,7 @@ export default function page() {
           <p className="text-center text-3xl font-semibold mb-8">
             Benefits of Buying Bulk Land in City Centre Zones
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
             {/* High Appreciation Potential */}
             <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
               <ShoppingBag className="w-16 h-16 text-blue-600" />
@@ -165,7 +165,7 @@ export default function page() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto pb-8 pt-12">
+      <div className="max-w-6xl mx-auto pb-8 pt-12 p-4">
         <p className="text-center text-3xl font-semibold mb-8">
           Types of City Centre Projects Allowed
         </p>

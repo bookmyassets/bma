@@ -97,7 +97,15 @@ const ProjectAmenities = () => {
     },
   ];
 
-  const visibleAmenities = showAll ? amenities : amenities.slice(0, 15);
+  // For desktop: show all or 15 items
+  // For mobile: show all or 6 items
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const initialMobileItems = 6;
+  const initialDesktopItems = 15;
+  
+  const visibleAmenities = showAll 
+    ? amenities 
+    : amenities.slice(0, isMobile ? initialMobileItems : initialDesktopItems);
 
   return (
     <div className="bg-white p-6">
@@ -115,7 +123,7 @@ const ProjectAmenities = () => {
         </div>
 
         {/* Amenities Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 pt-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pt-4">
           {visibleAmenities.map((amenity, index) => (
             <div
               key={index}
@@ -142,15 +150,22 @@ const ProjectAmenities = () => {
                 <h3 className="text-lg text-center font-medium mb-3 transition-colors duration-300" style={{ color: "#0d0d0d" }}>
                   {amenity.title}
                 </h3>
-                {/* <p className="text-gray-600 text-sm leading-relaxed transition-colors duration-300">
-                  {amenity.description}
-                </p> */}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Show More / Less Button */}
+        {/* Show More / Less Button - Only show on mobile when there are more than 6 amenities */}
+        {amenities.length > initialMobileItems && (
+          <div className="flex justify-center mt-8 md:hidden">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-6 py-3 bg-[#deae3c] text-white font-medium rounded-lg hover:bg-[#c6992a] transition-colors duration-300"
+            >
+              {showAll ? "Show Less" : "Show More"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -164,7 +164,7 @@ export default function page() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto pb-8 pt-12">
+      <div className="max-w-6xl mx-auto pb-8 pt-12 p-4">
         <p className="text-center text-3xl font-semibold mb-8">
           Types of High Access Corridor Projects Allowed
         </p>
