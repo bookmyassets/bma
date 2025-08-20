@@ -14,6 +14,7 @@ import {
   Home,
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
+import hacMap from "@/assests/bulkLand/high-access-corridor-bulk-land-map.webp"
 
 export default function page() {
   return (
@@ -103,13 +104,11 @@ export default function page() {
       </div>
 
       <div className="max-w-6xl mx-auto p-4">
-        <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-lg mb-8">
+        <div className="relative flex justify-center items-center rounded-lg overflow-hidden shadow-lg mb-8">
           <Image
-            src="/api/placeholder/300x400.png"
-            alt="residential land plots"
-            className="w-full h-full object-cover"
-            width={400}
-            height={400}
+            src={hacMap}
+            alt="High Access Corridor Zone Dholera SIR land plots"
+            className="w-96 h-96"
             priority
           />
         </div>

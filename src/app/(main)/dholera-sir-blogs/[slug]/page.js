@@ -4,6 +4,7 @@ import {
   getPostBySlug,
   getblogs,
   getUpdates,
+  projectInfo,
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,12 +18,12 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
           <h3 className="text-xl font-bold mb-4 text-blue-300">
-            Latest Blogs
+            About Dholera SIR
           </h3>
-          <div className="space-y-4 max-h-[400px] overflow-y-auto">
+          <div className=" overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
-              <Link key={item._id} href={`/blogs/${item.slug.current}`}>
-                <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3 rounded-lg border border-gray-100 transition-all hover:shadow-md">
+              <Link key={item._id} href={`/dholera-sir-blogs/${item.slug.current}`}>
+                <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3 border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                       <Image
@@ -48,7 +49,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           </div>
           
           <div className="mt-6 pt-4 border-t border-gray-600">
-            <Link href="/blogs">
+            <Link href="/about-dholera-sir">
               <button className="w-full text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
                 Explore More
               </button>
@@ -62,13 +63,16 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           <p className="text-gray-700 mb-4 text-sm">
             Interested in our insights? Contact our experts
           </p>
+          <a href="tel:+918130371647" >
           <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+
             Contact Now
           </button>
+          </a>
         </div>
 
         {/* Newsletter Signup */}
-        <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+        {/* <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
           <h4 className="font-semibold text-gray-900 mb-3">Stay Updated</h4>
           <p className="text-gray-600 text-sm mb-4">
             Subscribe to get the latest updates and insights
@@ -83,7 +87,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
               Subscribe
             </button>
           </div>
-        </div>
+        </div> */}
 
       </div>
     </aside>
@@ -134,7 +138,7 @@ export default async function Post({ params }) {
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
       getPostBySlug(slug, site),
-      getblogs(0, 6), // Get 6 blogs for sidebar
+      projectInfo(0, 6), // Get 6 blogs for sidebar
       getUpdates(slug, 3),
     ]);
 
@@ -387,7 +391,7 @@ export default async function Post({ params }) {
                           />
                         </svg>
                         <Link
-                          href="/blogs"
+                          href="/dholera-sir-blogs"
                           className="ml-1 text-sm font-medium text-gray-500 hover:text-gray-700 md:ml-2"
                         >
                           Blogs
@@ -506,7 +510,7 @@ export default async function Post({ params }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedBlogs && relatedBlogs.length > 0
                 ? relatedBlogs.map((blog) => (
-                    <Link key={blog._id} href={`/dholera-sir/${blog.slug.current}`}>
+                    <Link key={blog._id} href={`/dholera-sir-blogs/${blog.slug.current}`}>
                       <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
                         <div className="relative h-48 overflow-hidden">
                           {blog.mainImage ? (
@@ -559,7 +563,7 @@ export default async function Post({ params }) {
           <h1 className="text-2xl font-bold mb-2">Error loading blog post</h1>
           <p className="text-gray-600">Please try again later</p>
           <Link
-            href="/blogs"
+            href="/dholera-sir-blogs"
             className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
           >
             ← Back to Blogs

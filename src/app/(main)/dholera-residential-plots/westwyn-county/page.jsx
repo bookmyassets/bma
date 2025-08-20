@@ -211,8 +211,18 @@ export default function HeroCarousel() {
             </div>
 
             {/* CTA Button */}
-            <button className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full">
-              Enquire Now
+            <button
+              onClick={() =>
+                openContactForm(
+                  "Westwyn County - Premium Plots",
+                  "Please fill out the form to get exclusive details of WestWyn County. Fields marked with * are mandatory.",
+                  "Enquire Now",
+                  ""
+                )
+              }
+              className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
+            >
+              Secure Your Spot at Westwyn County
             </button>
           </div>
         </div>
@@ -598,10 +608,25 @@ export default function HeroCarousel() {
       <div className="pt-4 pb-4">
         <CostSheet />
       </div>
-      <FAQSection/>
+      <FAQSection />
       {/* Form */}
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
 
+      <AnimatePresence>
+        {isContactFormOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
+            <div className="w-full max-w-md">
+              <ContactForm
+                onClose={closeContactForm}
+                title={formTitle}
+                headline={formHeadline}
+                buttonName={buttonName}
+                onAfterSubmit={handleAfterSubmit}
+              />
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">

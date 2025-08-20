@@ -162,7 +162,7 @@ const nextConfig = {
 
       {
         source: '/blog',
-        destination: '/blogs',
+        destination: '/dholera-sir-blogs',
         permanent: true, 
       },
       {
@@ -177,7 +177,7 @@ const nextConfig = {
       },
       {
         source: '/projects/paradise-2',
-        destination: '/projects/dholera/paradise-2',
+        destination: '/dholera-residential-plots/paradise-2',
         permanent: true,
       },
       {

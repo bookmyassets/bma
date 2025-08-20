@@ -178,7 +178,7 @@ export default async function page() {
           </div>
 
           {/* Newsletter Signup Section */}
-          <div className="max-w-7xl mx-auto px-4 pb-16">
+          {/* <div className="max-w-7xl mx-auto px-4 pb-16">
             <div className="bg-gradient-to-r from-[#FF9933]/90 to-[#138808]/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 lg:p-12 text-center border border-white/20">
               <h2 className="text-3xl font-bold text-white mb-4">
                 Stay Updated with Dholera SIR News
@@ -199,7 +199,7 @@ export default async function page() {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
