@@ -17,12 +17,12 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
-          <h3 className="text-xl font-bold mb-4 text-blue-300">
-            About Dholera SIR
+          <h3 className="text-xl font-bold mb-4 text-white">
+            Latest Updates
           </h3>
           <div className=" overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
-              <Link key={item._id} href={`/dholera-sir-blogs/${item.slug.current}`}>
+              <Link key={item._id} href={`/dholera-sir-updates/${item.slug.current}`}>
                 <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3 border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
@@ -49,8 +49,8 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           </div>
           
           <div className="mt-6 pt-4 border-t border-gray-600">
-            <Link href="/about-dholera-sir">
-              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
+            <Link href="/dholera-sir-updates">
+              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#c6a45d] p-3 transition-colors">
                 Explore More
               </button>
             </Link>
@@ -148,7 +148,7 @@ export default async function Post({ params }) {
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-2">Blog post not found</h1>
             <Link
-              href="/blogs"
+              href="/dholera-sir-blogs"
               className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
             >
               ← Back to Blogs

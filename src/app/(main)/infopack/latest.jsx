@@ -377,7 +377,7 @@ export default async function Info() {
                       {/* Enhanced read more button */}
                       <div className="mt-auto">
                         <Link
-                          href={`/projects/${proj.slug.current}/${west.slug?.current || ""}`}
+                          href={`/dholera-residential-plots/westwyn-county`}
                           className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-bold py-4 px-8 rounded-2xl hover:from-amber-500 hover:to-amber-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                         >
                           Explore Details

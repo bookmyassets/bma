@@ -390,7 +390,7 @@ export default function HeroCarousel() {
             {/* Plots Counter */}
             <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
               <div className="text-3xl md:text-5xl font-bold text-[#deae3c] mb-2 md:mb-4">
-                ₹ 9250/sq. yards
+                ₹ 9500
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
                 Price

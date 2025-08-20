@@ -7,17 +7,17 @@ const BrowseBlogs = () => {
     {
       id: 1,
       title: "Dholera International Airport – India’s Second Largest Airport and Its Impact on Growth",
-      link: "https://www.bookmyassets.com/blogs/dholera-international-airport",
+      link: "https://www.bookmyassets.com/dholera-sir-blogs/dholera-international-airport",
     },
     {
       id: 2,
       title: "How TATA Semiconductor Fab Dholera Impact Plot Prices?",
-      link: "https://www.bookmyassets.com/blogs/how-tata-semiconductor-fab-dholera-impact-plot-prices",
+      link: "https://www.bookmyassets.com/dholera-sir-blogs/how-tata-semiconductor-fab-dholera-impact-plot-prices",
     },
     {
       id: 3,
       title: "Factors That Will Affect Dholera Plot Prices in the Next 5 Years",
-      link: "https://www.bookmyassets.com/blogs/factors-affecting-dholera-plot-prices",
+      link: "https://www.bookmyassets.com/dholera-sir-blogs/factors-affecting-dholera-plot-prices",
     },
   ];
 

@@ -4,6 +4,7 @@ import {
   getPostBySlug,
   getblogs,
   getUpdates,
+  projectInfo,
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,13 +17,13 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
-          <h3 className="text-xl font-bold mb-4 text-blue-300">
+          <h3 className="text-xl font-bold mb-4 text-white">
             Latest Blogs
           </h3>
           <div className="space-y-8 max-h-[400px] overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
-              <Link key={item._id} href={`/dholera-sir-blogs/${item.slug.current}`}>
-                <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3 rounded-lg border border-gray-100 transition-all hover:shadow-md">
+              <Link key={item._id} href={`/about-dholera-sir/${item.slug.current}`}>
+                <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3  border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                       <Image
@@ -93,7 +94,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 // Trending Blog Item Component (updated)
 const TrendingBlogItem = ({ post }) => {
   return (
-    <Link href={`/blogs/${post.slug.current}`}>
+    <Link href={`/dholera-sir-blogs/${post.slug.current}`}>
       <div className="flex gap-4 items-center bg-white hover:bg-gray-50 p-4 rounded-lg border border-gray-100 transition-all hover:shadow-md">
         {post.mainImage && (
           <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
@@ -136,7 +137,7 @@ export default async function Post({ params }) {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
       getPostBySlug(slug, site),
       getblogs(0, 6), // Get 6 blogs for sidebar
-      getUpdates(slug, 3),
+      projectInfo(slug, 3),
     ]);
 
     if (!post) {
@@ -145,10 +146,10 @@ export default async function Post({ params }) {
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-2">Blog post not found</h1>
             <Link
-              href="/blogs"
+              href="/dholera-sir-updates"
               className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
             >
-              ← Back to Blogs
+              ← Back to Updates
             </Link>
           </div>
         </div>

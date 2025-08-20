@@ -111,7 +111,7 @@ export default function Dholera() {
   const getProjectLink = (project) => {
     // Extract project slug string safely
     const projectSlugStr = typeof project.slug === "object" ? project.slug.current : project.slug
-    return `/dholera-sir/${projectSlugStr}`
+    return `/about-dholera-sir/${projectSlugStr}`
   }
 
   // Project card component
