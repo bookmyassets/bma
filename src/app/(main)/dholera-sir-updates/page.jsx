@@ -39,11 +39,20 @@ export default async function page() {
 
   // Get the 3 most recently published posts for popular articles
   const popularArticles = [...safePosts]
-    .sort((a, b) => new Date(b.publishedAt || b._createdAt) - new Date(a.publishedAt || a._createdAt))
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt || b._createdAt) -
+        new Date(a.publishedAt || a._createdAt)
+    )
     .slice(0, 3);
 
   return (
     <>
+      <title>Dholera Latest News & Project Updates | Smart City Progress</title>
+      <meta
+        name="description"
+        content=" Discover the latest on Dholera SIR! Get real-time updates on airport, metro, expressways, and industrial projects to help you make smart investment choices."
+      />
       <div className="min-h-screen bg-white relative overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-4 pt-28 pb-16">
           <div className="flex flex-col lg:flex-row gap-8">
@@ -175,7 +184,10 @@ export default async function page() {
 
             {/* Sidebar (comes second on mobile) */}
             <div className="lg:w-1/3 order-2 lg:order-1">
-              <SidebarWithForm popularArticles={popularArticles} className="lg:sticky lg:top-24 space-y-6" />
+              <SidebarWithForm
+                popularArticles={popularArticles}
+                className="lg:sticky lg:top-24 space-y-6"
+              />
             </div>
           </div>
         </div>

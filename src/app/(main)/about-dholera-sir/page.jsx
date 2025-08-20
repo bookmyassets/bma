@@ -26,6 +26,11 @@ export default async function page() {
 
   return (
     <>
+    <title>About Dholera SIR | India's First Greenfield Smart City Explained</title>
+   <meta
+        name="description"
+        content="Discover Dholera SIR, India’s premier greenfield smart city! Get the latest on infrastructure, connectivity, and investment opportunities with BookMyAssets. Explore now!"
+      />
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section */}
         <div className="relative h-[50vh] bg-gradient-to-br from-[#FF9933] via-white to-[#138808] flex items-center justify-center overflow-hidden">

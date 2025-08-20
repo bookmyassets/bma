@@ -34,9 +34,13 @@ export default async function page() {
 
   return (
     <>
+      <title>Dholera Blog | Investment Tips, News & Smart City Insights</title>
+      <meta
+        name="description"
+        content="Stay ahead in Dholera SIR investments! Read expert blogs on development, market trends, and project reviews, all curated by BookMyAssets for you."
+      />
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Background decorative elements */}
-       
 
         <div className="relative z-10">
           {/* Hero Section */}
@@ -82,59 +86,6 @@ export default async function page() {
           <div className="max-w-7xl mx-auto px-4 pb-16">
             {safePosts.length > 0 ? (
               <>
-                {/* Featured Post */}
-                {safePosts[0] && (
-                  <div className="mb-16">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-                      Featured Article
-                    </h2>
-                    <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/20">
-                      <div className="grid lg:grid-cols-2 gap-0">
-                        <div className="relative h-64 lg:h-auto">
-                          {safePosts[0].mainImage ? (
-                            <Image
-                              src={urlFor(safePosts[0].mainImage)
-                                .width(800)
-                                .height(400)
-                                .url()}
-                              alt={
-                                safePosts[0].title || "Dholera SIR Blog Post"
-                              }
-                              width={800}
-                              height={400}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 flex items-center justify-center">
-                              <div className="text-6xl">📰</div>
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-8 lg:p-12 flex flex-col justify-center">
-                          <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-4 leading-tight">
-                            {safePosts[0].title}
-                          </h3>
-                          <p className="text-gray-600 text-lg mb-6 line-clamp-3">
-                            {safePosts[0].description ||
-                              "Discover the latest insights about Dholera SIR investment opportunities and market trends."}
-                          </p>
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm text-gray-500">
-                              By{" "}
-                              {typeof safePosts[0].author === "object"
-                                ? safePosts[0].author.name || "BookMyAssets"
-                                : safePosts[0].author}
-                            </span>
-                            <button className="bg-[#FF9933] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#e8851f] transition-colors">
-                              Read More
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
                 {/* All Posts Grid */}
                 <div>
                   <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">

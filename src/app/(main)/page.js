@@ -8,6 +8,12 @@ import WestWyn from './homeComponents/WestWyn'
 
 export default function page() {
   return (
+    <>
+    <title>Discover Investment-Ready Plots in Dholera Smart City | BookMyAssets</title>
+    <meta
+        name="description"
+        content="Secure your future with BookMyAssets! Hassle-free residential property investment with clear titles and N.A. NOC. Start your journey today!"
+      />
     <div>
        <Hero/>
        <Dholera/>
@@ -16,5 +22,6 @@ export default function page() {
        <WestWyn/>
        <FAQSection/>
     </div>
+    </>
   )
 }

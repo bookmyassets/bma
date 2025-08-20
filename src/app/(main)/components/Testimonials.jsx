@@ -121,7 +121,6 @@ const TestimonialPagination = () => {
 
         {/* Mobile Slider View */}
         {isMobile && (
-          
           <div className="relative px-4">
             <motion.div 
               key={`mobile-${currentMobileIndex}`}
@@ -164,21 +163,36 @@ const TestimonialPagination = () => {
                 </div>
               </div>
               
-              {/* Navigation Dots */}
-              <div className="flex justify-center space-x-2 mt-8">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentMobileIndex(index)}
-                    className={`w-3 h-3 rounded-full transition-colors ${currentMobileIndex === index ? 'bg-[#FDB913]' : 'bg-gray-300'}`}
-                  />
-                ))}
+              {/* Navigation Buttons for Mobile */}
+              <div className="flex justify-center space-x-4 mt-6">
+                <Button
+                  onClick={prevMobileSlide}
+                  className="bg-[#FDB913] hover:bg-[#e5a711] text-white rounded-full p-2"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                
+                {/* Navigation Dots */}
+                <div className="flex items-center space-x-2">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentMobileIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-colors ${currentMobileIndex === index ? 'bg-[#FDB913]' : 'bg-gray-300'}`}
+                    />
+                  ))}
+                </div>
+                
+                <Button
+                  onClick={nextMobileSlide}
+                  className="bg-[#FDB913] hover:bg-[#e5a711] text-white rounded-full p-2"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
               </div>
             </motion.div>
           </div>
         )}
-
-ye shi krna jaata
 
         {/* Desktop Grid View */}
         {!isMobile && (

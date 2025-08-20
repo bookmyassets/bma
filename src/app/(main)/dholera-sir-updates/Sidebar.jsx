@@ -1,6 +1,8 @@
-"use client"
+"use client";
+import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
+import ContactForm from "../components/Contactform";
 
 const formatDate = (dateString) => {
   if (!dateString) return "";
@@ -26,7 +28,25 @@ export default function SidebarWithForm({ popularArticles }) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
   const recaptchaWidgetId = useRef(null);
-const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+
+  const [formTitle, setFormTitle] = useState("");
+  const [formHeadline, setFormHeadline] = useState("");
+  const [buttonName, setButtonName] = useState("");
+  const [formType, setFormType] = useState("");
+
+  const openContactForm = (title, headline, btnName, type) => {
+    setFormTitle(title);
+    setFormHeadline(headline);
+    setButtonName(btnName);
+    setFormType(type);
+    setIsContactFormOpen(true);
+  };
+
+  const closeContactForm = () => {
+    setIsContactFormOpen(false);
+  };
 
   useEffect(() => {
     const loadRecaptcha = () => {
@@ -120,22 +140,25 @@ const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-        },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            source: "BookMyAssets",
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
-          source: "BookMyAssets Website",
-          tags: ["Dholera Investment", "Website Lead"],
-        }),
-      });
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: "BookMyAssets",
+            },
+            source: "BookMyAssets Website",
+            tags: ["Dholera Investment", "Website Lead"],
+          }),
+        }
+      );
 
       const responseText = await response.text();
 
@@ -195,11 +218,14 @@ const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
       try {
         // Check if reCAPTCHA widget is already rendered
         if (recaptchaWidgetId.current === null && recaptchaRef.current) {
-          recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
-          });
+          recaptchaWidgetId.current = window.grecaptcha.render(
+            recaptchaRef.current,
+            {
+              sitekey: siteKey,
+              callback: onRecaptchaSuccess,
+              theme: "dark",
+            }
+          );
         } else if (recaptchaWidgetId.current !== null) {
           // Reset and execute existing widget
           window.grecaptcha.reset(recaptchaWidgetId.current);
@@ -224,9 +250,8 @@ const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
           Get Free Dholera Investment Guide
         </h3>
         <p className="text-gray-600 text-sm mb-6">
-          Download our comprehensive guide covering investment
-          opportunities, infrastructure development, and future
-          prospects in Dholera SIR.
+          Download our comprehensive guide covering investment opportunities,
+          infrastructure development, and future prospects in Dholera SIR.
         </p>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
@@ -250,8 +275,8 @@ const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
           {errorMessage && (
             <p className="text-red-500 text-sm">{errorMessage}</p>
           )}
-          <div ref={recaptchaRef} ></div>
-          <button 
+          <div ref={recaptchaRef}></div>
+          <button
             type="submit"
             disabled={isLoading}
             className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
@@ -268,8 +293,14 @@ const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
         </h3>
         <div className="space-y-4">
           {popularArticles.map((article, index) => (
-            <article key={index} className="pb-4 border-b border-gray-200 last:border-b-0 last:pb-0">
-              <Link href={`/dholera-sir-updates/${article.slug.current}`} className="block group">
+            <article
+              key={index}
+              className="pb-4 border-b border-gray-200 last:border-b-0 last:pb-0"
+            >
+              <Link
+                href={`/dholera-sir-updates/${article.slug.current}`}
+                className="block group"
+              >
                 <h4 className="text-base font-semibold text-gray-800 mb-1 group-hover:text-[#deae3c] transition-colors">
                   {article.title || `Dholera Update ${index + 1}`}
                 </h4>
@@ -288,10 +319,20 @@ const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
           Schedule Investment Consultation
         </h3>
         <p className="text-gray-600 text-sm mb-6">
-          Ready to invest in Dholera SIR? Get personalized guidance from
-          our investment experts.
+          Ready to invest in Dholera SIR? Get personalized guidance from our
+          investment experts.
         </p>
-        <button href="tel:+918130371647" className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md">
+        <button
+          onClick={() =>
+            openContactForm(
+              "Get Free Advice from Dholera Investment Adviser",
+              "Please fill out the form to get exclusive details of WestWyn County. Fields marked with * are mandatory.",
+              "Enquire Now",
+              ""
+            )
+          }
+          className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md"
+        >
           Book Free Consultation
         </button>
       </div>
@@ -320,15 +361,35 @@ const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
         </form>
       </div> */}
 
+      {/* Form Popup */}
+      <AnimatePresence>
+        {isContactFormOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
+            <div className="w-full max-w-md">
+              <ContactForm
+                onClose={closeContactForm}
+                title={formTitle}
+                headline={formHeadline}
+                buttonName={buttonName}
+                /*  onAfterSubmit={handleAfterSubmit} */
+              />
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
       {/* Success Popup */}
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div id="contact-form-container" className="bg-white p-6 rounded-lg max-w-md w-full mx-4">
+          <div
+            id="contact-form-container"
+            className="bg-white p-6 rounded-lg max-w-md w-full mx-4"
+          >
             <h3 className="text-xl font-bold text-gray-900 mb-4">Thank You!</h3>
             <p className="text-gray-600 mb-4">
-              Your information has been submitted successfully. Our investment expert will contact you shortly.
+              Your information has been submitted successfully. Our investment
+              expert will contact you shortly.
             </p>
-            <button 
+            <button
               onClick={() => setShowPopup(false)}
               className="w-full bg-[#deae3c] text-gray-900 py-2 rounded-lg font-bold hover:bg-[#d0a235]"
             >

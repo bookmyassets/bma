@@ -120,23 +120,24 @@ export default function HeroCarousel() {
             // Start counters when section comes into view
             const sqYardsInterval = setInterval(() => {
               setSqYards((prev) => {
-                if (prev >= 2.66) {
+                if (prev >= 150) {
                   clearInterval(sqYardsInterval);
-                  return 2.66;
+                  return 150;
                 }
-                return parseFloat((prev + 0.05).toFixed(2));
+                /* return parseFloat((prev + 0.05).toFixed(2)); */
+                return prev + 2;
               });
-            }, 30);
+            }, 20);
 
             const plotsInterval = setInterval(() => {
               setPlots((prev) => {
-                if (prev >= 130) {
+                if (prev >= 9250) {
                   clearInterval(plotsInterval);
-                  return 130;
+                  return 9250;
                 }
                 return prev + 2;
               });
-            }, 25);
+            }, 1);
 
             const amenitiesInterval = setInterval(() => {
               setAmenities((prev) => {
@@ -165,6 +166,16 @@ export default function HeroCarousel() {
 
   return (
     <>
+    {/* <title>Residential Plots in Dholera SIR | Secure High-ROI Investments</title>
+    <meta
+        name="description"
+        content="Invest in AUDA-approved residential plots in Dholera SIR! Enjoy buy-back with high growth potential in India's smart city."
+      /> */}
+    <title>WestWyn County Dholera: Premium Residential Plots by BookMyAssets</title>
+    <meta
+        name="description"
+        content="Secure your future with premium residential plots in Dholera Smart City. Explore AUDA-approved options at WestWyn County. Book your dream plot today!"
+      />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}
@@ -205,7 +216,7 @@ export default function HeroCarousel() {
 
               {/* Acreage Information */}
               <div className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-bold">55</span>
+                <span className="text-2xl sm:text-3xl font-bold">2.66</span>
                 <span className="text-sm sm:text-base">Total Acres</span>
               </div>
             </div>
@@ -366,26 +377,26 @@ export default function HeroCarousel() {
             {/* Square Yards Counter */}
             <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
               <div className="text-3xl md:text-5xl font-bold text-[#deae3c] mb-2 md:mb-4">
-                {sqYards.toFixed(2)}
+                {sqYards/* .toFixed(2) */}
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                Acre
+                sq. Yards
               </div>
               <div className="text-sm md:text-base text-gray-600">
-                Premium Residential Project
+                Minimum plot size
               </div>
             </div>
 
             {/* Plots Counter */}
             <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
               <div className="text-3xl md:text-5xl font-bold text-[#deae3c] mb-2 md:mb-4">
-                {plots}
+                ₹ 9250/sq. yards
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                Plots
+                Price
               </div>
               <div className="text-sm md:text-base text-gray-600">
-                Available for Investment
+                per sq. yards
               </div>
             </div>
 
@@ -621,7 +632,7 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
-                onAfterSubmit={handleAfterSubmit}
+               /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>
           </div>
