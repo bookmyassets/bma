@@ -415,7 +415,7 @@ export default function HeroCarousel() {
             </div>
 
             {/* Right Column - Investment Benefits */}
-            <div className="w-full lg:w-1/2">
+            <div className="w-full  lg:w-1/2">
               <div className="space-y-4">
                 {[
                   {
@@ -441,7 +441,7 @@ export default function HeroCarousel() {
                 ].map((benefit, index) => (
                   <div
                     key={index}
-                    className="group border border-gray-200 rounded-xl p-6 bg-white hover:bg-black hover:border-[#deae3c] transition-all duration-300 hover:shadow-lg"
+                    className="group border border-gray-200 rounded-xl p-6 bg-white  transition-all duration-300 hover:shadow-lg"
                   >
                     <button
                       className="w-full flex justify-between items-center text-left focus:outline-none"
@@ -473,7 +473,7 @@ export default function HeroCarousel() {
                       }`}
                     >
                       <div className="pl-10">
-                        <p className="text-black hover:text-[#deae3c] leading-relaxed">
+                        <p className="text-black leading-relaxed">
                           {index === 0 &&
                             "Located on Fedra-Pipli State Highway, just 12 minutes from Ahmedabad-Dholera Expressway, Dholera International Airport, Metro, and industrial hubs, including the TATA Semiconductor Plant (25 minutes away) and Dedicated Freight Corridor."}
                           {index === 1 &&

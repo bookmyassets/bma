@@ -155,6 +155,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source:"/dholera-sir/latest-updates/dholera-international-airport-latest-news",
+        destination:"/dholera-sir-updates/dholera-international-airport-latest-news",
+        permanent:true
+      },
+
+      {
         source: '/blog',
         destination: '/blogs',
         permanent: true, 
