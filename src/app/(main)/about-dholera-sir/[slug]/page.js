@@ -17,7 +17,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
-          <h3 className="text-xl font-bold mb-4 text-blue-300">
+          <h3 className="text-xl font-bold mb-4 text-white">
             About Dholera SIR
           </h3>
           <div className=" overflow-y-auto">
