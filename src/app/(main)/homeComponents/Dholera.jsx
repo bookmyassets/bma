@@ -22,11 +22,11 @@ export default function DholeraSmartCity() {
             </h3>
             <p className="text-gray-600">
               Dholera Smart City is India’s first greenfield smart city,
-              designed with world-class infrastructure and unmatched growth
+              designed with world class infrastructure and unmatched growth
               potential. The Dholera project offers prime industrial,
               commercial, and residential opportunities backed by government
               support and rapid development. Invest today to be part of a
-              future-ready city built for innovation, sustainability, and
+              future ready city built for innovation, sustainability, and
               prosperity.
             </p>
           </div>
@@ -36,10 +36,13 @@ export default function DholeraSmartCity() {
               Dholera Project
             </h3>
             <p className="text-gray-600">
-              Located in Dholera SIR – India’s first Greenfield Smart City,
-              projects enjoy prime connectivity to the expressway, Metro, and
-              airport. With AUDA approvals, clear titles, gated security, and
-              modern amenities, they offer both lifestyle and investment value.
+              Dholera Smart City is designed to be a global hub of innovation
+              and infrastructure. It features the India's second largest
+              International Airport, seamless connectivity through the
+              Ahmedabad–Dholera Expressway, and iconic projects like the ABCD
+              Building, TATA’s ₹91,000 crore Semiconductor Plant, ReNew Power’s
+              green energy investment, and one of world’s largest
+              Solar Power Park.
             </p>
           </div>
 
@@ -52,7 +55,7 @@ export default function DholeraSmartCity() {
               district about 109 km by road (45 minutes via Ahmedabad
               Expressway). It is part of the Dholera Special Investment Region
               (SIR) under the Delhi–Mumbai Industrial Corridor (DMIC) project,
-              with excellent connectivity — Rajkot 170 km, Bhavnagar 65 km, and
+              with excellent connectivity to Rajkot 170 km, Bhavnagar 65 km, and
               Vadodara 130 km.
             </p>
           </div>
