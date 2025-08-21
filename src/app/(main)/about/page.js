@@ -83,12 +83,12 @@ const RealEstateLandingPage = () => {
       name: "BMA Developers",
       subtitle: "From Selling Projects to Creating Landmarks",
       description:
-        "BMA has been part of 5 successful projects that have been sold out, selling over 5,00,000 square yards of land in Dholera. We now don't just sell land, we build dreams.",
+        "BMA has been part of 5 successful projects that have been sold out, selling over 1,00,000 square yards of land in Dholera. We now don't just sell land, we build dreams.",
       icon: Building,
       color: "from-blue-500 to-blue-600",
       features: [
-        "5+ Successful Projects",
-        "5,00,000+ Sq Yards Sold",
+        "6 Successful Projects",
+        "1,00,000+ Sq Yards Sold",
         "Premium Communities",
         "WestWyn County Project",
       ],
@@ -125,7 +125,7 @@ const RealEstateLandingPage = () => {
       name: "Truliyo Digital",
       subtitle: "Marketing That Creates Trust, Online and Offline",
       description:
-        "Our in-house marketing and digital performance team that drives leads, creates brand visibility, and builds trust across borders. It's not just about running ads, it's about connecting the right investor with the right opportunity.",
+        "Our in house marketing and digital performance team that drives leads, creates brand visibility, and builds trust across borders. It's not just about running ads, it's about connecting the right investor with the right opportunity.",
       icon: Zap,
       color: "from-orange-500 to-orange-600",
       features: [
@@ -355,16 +355,6 @@ const RealEstateLandingPage = () => {
                     </p>
                   </div>
 
-                  {/* Mission Statement */}
-                  {/* <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 xl:p-8 border border-white/20">
-                  <h3 className="text-xl xl:text-2xl font-bold text-yellow-500 mb-4">
-                    Our Mission
-                  </h3>
-                  <p className="text-gray-200 leading-relaxed">
-                    To help people grow their money safely, confidently, and with maximum returns through strategic real estate investments in India's first greenfield smart city.
-                  </p>
-                </div> */}
-
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
@@ -467,37 +457,31 @@ const RealEstateLandingPage = () => {
 
                   <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-6 sm:p-8 border border-blue-200 flex-1 flex flex-col">
                     <h3 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4">
-                      Why Dholera?
+                      Our Mission
                     </h3>
-                    <p className="text-blue-800 leading-relaxed mb-4 flex-1">
-                      Because it's not just the future, it is{" "}
-                      <strong>your future</strong>.
-                    </p>
                     <div className="space-y-3">
                       <div className="flex items-center space-x-3">
                         <CheckCircle className="text-green-500" size={20} />
                         <span className="text-blue-800">
-                          India's first greenfield smart city
+                          To make property buying hassle-free, transparent, and legally secure.
+
                         </span>
                       </div>
                       <div className="flex items-center space-x-3">
                         <CheckCircle className="text-green-500" size={20} />
                         <span className="text-blue-800">
-                          SIR Act implemented
+                          To guide investors and channel partners with expert insights and dedicated support.
+
+
                         </span>
                       </div>
                       <div className="flex items-center space-x-3">
                         <CheckCircle className="text-green-500" size={20} />
                         <span className="text-blue-800">
-                          Government and industry backing
+                          To deliver long-term value through premium projects in India’s fastest-growing smart cities
                         </span>
                       </div>
-                      <div className="flex items-center space-x-3">
-                        <CheckCircle className="text-green-500" size={20} />
-                        <span className="text-blue-800">
-                          Better growth and returns potential
-                        </span>
-                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -689,7 +673,7 @@ const RealEstateLandingPage = () => {
                 <div className="h-1 w-16 bg-yellow-500 rounded"></div>
               </div>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                We go beyond just selling properties – we create investment
+                We go beyond just selling properties we create investment
                 opportunities that build your future.
               </p>
             </div>
@@ -707,7 +691,7 @@ const RealEstateLandingPage = () => {
                   icon: TrendingUp,
                   title: "Expert Market Insights",
                   description:
-                    "Our team provides data-driven insights to help you make informed investment decisions.",
+                    "Our team provides data driven insights to help you make informed investment decisions.",
                   color: "from-green-500 to-green-600",
                 },
                 {
@@ -728,7 +712,7 @@ const RealEstateLandingPage = () => {
                   icon: Award,
                   title: "Industry Recognition",
                   description:
-                    "Award-winning real estate consultancy with a proven track record of successful investments.",
+                    "Award winning real estate consultancy with a proven track record of successful investments.",
                   color: "from-yellow-500 to-yellow-600",
                 },
                 {
