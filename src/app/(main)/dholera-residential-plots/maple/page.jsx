@@ -2,46 +2,15 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import westwyn1 from "@/assests/westwyn-county/westwyn-gate-cover.webp";
-import westwyn2 from "@/assests/westwyn-county/westwyn-gate-cover-2.webp";
-import westwyn3 from "@/assests/westwyn-county/westwyn-gate-cover-3.webp";
+import westwyn1 from "@/assests/residential/Paradise-2-dholera-plan-layout.webp";
 import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import CostSheet from "../../components/costSheet";
 
 export default function HeroCarousel() {
-  const faqs = [
-    {
-      question: "What is cluster housing perumnas?",
-      answer:
-        "Cluster housing perumnas is a housing concept that consists of several houses in a gated cluster. Cluster housing perumnas offers comfortable, secure, and affordable housing with various complete and modern facilities.",
-      isOpen: true,
-    },
-    {
-      question: "Where is the location of cluster housing perumnas?",
-      answer: "Location details would go here...",
-      isOpen: false,
-    },
-    {
-      question:
-        "How much are the prices and types of houses in cluster housing perumnas?",
-      answer: "Pricing and house type information would go here...",
-      isOpen: false,
-    },
-    {
-      question: "What are the facilities provided in cluster housing perumnas?",
-      answer: "Facilities list would go here...",
-      isOpen: false,
-    },
-  ];
-
-  const images = [
-    { src: westwyn1, alt: "Westwyn County View 1" },
-    { src: westwyn2, alt: "Westwyn County View 2" },
-    { src: westwyn3, alt: "Westwyn County View 3" },
-  ];
+  const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openIndex, setOpenIndex] = useState(0);
@@ -109,68 +78,17 @@ export default function HeroCarousel() {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  // Auto-increment counters for section 3
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Start counters when section comes into view
-            const sqYardsInterval = setInterval(() => {
-              setSqYards((prev) => {
-                if (prev >= 150) {
-                  clearInterval(sqYardsInterval);
-                  return 150;
-                }
-                /* return parseFloat((prev + 0.05).toFixed(2)); */
-                return prev + 2;
-              });
-            }, 20);
-
-            const plotsInterval = setInterval(() => {
-              setPlots((prev) => {
-                if (prev >= 9250) {
-                  clearInterval(plotsInterval);
-                  return 9250;
-                }
-                return prev + 2;
-              });
-            }, 1);
-
-            const amenitiesInterval = setInterval(() => {
-              setAmenities((prev) => {
-                if (prev >= 15) {
-                  clearInterval(amenitiesInterval);
-                  return 15;
-                }
-                return prev + 1;
-              });
-            }, 60);
-
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    const countersSection = document.getElementById("counters-section");
-    if (countersSection) {
-      observer.observe(countersSection);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
-    {/* <title>Residential Plots in Dholera SIR | Secure High-ROI Investments</title>
+      {/* <title>Residential Plots in Dholera SIR | Secure High-ROI Investments</title>
     <meta
         name="description"
         content="Invest in AUDA-approved residential plots in Dholera SIR! Enjoy buy-back with high growth potential in India's smart city."
       /> */}
-    <title>WestWyn County Dholera: Premium Residential Plots by BookMyAssets</title>
-    <meta
+      <title>
+        WestWyn County Dholera: Premium Residential Plots by BookMyAssets
+      </title>
+      <meta
         name="description"
         content="Secure your future with premium residential plots in Dholera Smart City. Explore AUDA-approved options at WestWyn County. Book your dream plot today!"
       />
@@ -200,38 +118,34 @@ export default function HeroCarousel() {
         <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center px-4">
           {/* Main Title */}
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">
-            WestWyn County
+            Paradise 2
           </h1>
 
           {/* Property Details */}
           <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 sm:p-6 max-w-md w-full">
-            <div className="grid grid-cols-2 gap-4 text-white">
+            <div className="gap-4 text-white">
               {/* Plot Information */}
               <div className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-bold">130</span>
-                <span className="text-sm sm:text-base">Plots Available</span>
+                <span className="text-2xl sm:text-3xl font-bold">167</span>
+                <span className="text-sm sm:text-base">plots sold</span>
               </div>
 
               {/* Acreage Information */}
-              <div className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-bold">2.66</span>
-                <span className="text-sm sm:text-base">Total Acres</span>
-              </div>
             </div>
 
             {/* CTA Button */}
             <button
               onClick={() =>
                 openContactForm(
-                  "Westwyn County - Premium Plots",
-                  "Please fill out the form to get exclusive details of WestWyn County. Fields marked with * are mandatory.",
+                  "Paradise - Premium Plots",
+                  "Please fill out the form to get exclusive details of Paradise. Fields marked with * are mandatory.",
                   "Enquire Now",
                   ""
                 )
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
             >
-              Secure Your Spot at Westwyn County
+              Secure Your Spot at Paradise
             </button>
           </div>
         </div>
@@ -251,54 +165,6 @@ export default function HeroCarousel() {
         </div>
 
         {/* Navigation Arrows */}
-        <button
-          onClick={() =>
-            setCurrentIndex((prev) =>
-              prev === 0 ? images.length - 1 : prev - 1
-            )
-          }
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors"
-          aria-label="Previous slide"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 sm:h-6 sm:w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <button
-          onClick={() =>
-            setCurrentIndex((prev) =>
-              prev === images.length - 1 ? 0 : prev + 1
-            )
-          }
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors"
-          aria-label="Next slide"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 sm:h-6 sm:w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
       </div>
 
       {/* Section 2 - About */}
@@ -307,18 +173,21 @@ export default function HeroCarousel() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
-              About <br /> WestWyn County
+              About <br /> Paradise 2
             </h2>
           </div>
 
           {/* Right Section (60%) */}
           <div className="w-full md:w-3/5 pl-2 pr-2 space-y-6">
             <p className="text-base md:text-lg font-light leading-relaxed text-gray-600">
-              WestWyn County by BookMyAssets is a premium plotted development in
-              Dholera Smart City. Located on the Fedra–Pipli State Highway, our
-              project is just 12 minutes away from Dholera International
-              Airport. We offer smart amenities and secure investment
-              opportunities with a strategic location.
+              Paradise 2 is a premium plotting project located in Village Shela,
+              Tehsil Dholera, District Ahmedabad, right within the
+              fast-developing Dholera Smart City (Dholera SIR). Strategically
+              placed near the Ahmedabad-Dholera Expressway and the upcoming
+              Dholera International Airport, Paradise 2 is designed with modern
+              planning, future-ready infrastructure, and legally clear plots. It
+              offers an excellent opportunity for buyers seeking secure Dholera
+              residential plots in India’s First Greenfield Smart City.
             </p>
 
             {/* CTA Buttons */}
@@ -355,70 +224,11 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* New Section 3 - Auto-Incrementing Counters */}
-      <div
-        id="counters-section"
-        className="py-12 md:py-20 bg-gradient-to-r from-blue-50 to-indigo-100"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
-              WestWyn County by Numbers
-            </h2>
-            <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover the impressive scale and premium amenities that make
-              WestWyn County your ideal investment destination.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {/* Square Yards Counter */}
-            <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
-              <div className="text-3xl md:text-5xl font-bold text-[#deae3c] mb-2 md:mb-4">
-                {sqYards/* .toFixed(2) */}
-              </div>
-              <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                sq. Yards
-              </div>
-              <div className="text-sm md:text-base text-gray-600">
-                Minimum plot size
-              </div>
-            </div>
-
-            {/* Plots Counter */}
-            <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
-              <div className="text-3xl md:text-5xl font-bold text-[#deae3c] mb-2 md:mb-4">
-                ₹ 9500
-              </div>
-              <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                Price
-              </div>
-              <div className="text-sm md:text-base text-gray-600">
-                per sq. yards
-              </div>
-            </div>
-
-            {/* Amenities Counter */}
-            <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
-              <div className="text-3xl md:text-5xl font-bold text-[#deae3c] mb-2 md:mb-4">
-                {amenities}
-              </div>
-              <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                Amenities
-              </div>
-              <div className="text-sm md:text-base text-gray-600">
-                World-Class Facilities
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Section 4 - Why Invest in Dholera Forest Estate */}
       <div className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#deae3c] mb-12 md:mb-16">
-            Why Invest in WestWyn County?
+            Why Invest in Paradise?
           </h2>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
@@ -426,7 +236,7 @@ export default function HeroCarousel() {
             <div className="w-full lg:w-1/2">
               <div className="relative">
                 <Image
-                  src={westwyn3}
+                  src={westwyn1}
                   alt="Dholera Forest Estate Entrance"
                   className="w-full h-auto rounded-2xl shadow-2xl"
                 />
@@ -442,19 +252,19 @@ export default function HeroCarousel() {
                     icon: "📍",
                   },
                   {
-                    title: "Investment-Friendly",
+                    title: "High Growth Potential",
                     icon: "📈",
                   },
                   {
-                    title: "100% Government-Verified",
+                    title: "100 Percent Legal and Secure",
                     icon: "🌿",
                   },
                   {
-                    title: "High ROI Potential",
+                    title: "Premium Lifestyle Infrastructure",
                     icon: "✅",
                   },
                   {
-                    title: "Smart Infrastructure",
+                    title: "Investor Friendly Options",
                     icon: "🏆",
                   },
                 ].map((benefit, index) => (
@@ -494,15 +304,15 @@ export default function HeroCarousel() {
                       <div className="pl-10">
                         <p className="text-black leading-relaxed">
                           {index === 0 &&
-                            "Located on Fedra-Pipli State Highway, just 12 minutes from Ahmedabad-Dholera Expressway, Dholera International Airport, Metro, and industrial hubs, including the TATA Semiconductor Plant (25 minutes away) and Dedicated Freight Corridor."}
+                            " Inside Dholera, sir, with direct connectivity to the Ahmedabad Dholera Expressway, Dholera International Airport, and industrial hubs of Dholera Metro City."}
                           {index === 1 &&
-                            "Investment We offer registry-ready plots with flexible payment plans on Dholera residential plots. Our team ensures end-to-end assistance with resale support and buyback assistance*."}
+                            "Early investment in the Dholera Smart City project offers strong appreciation as infrastructure develops."}
                           {index === 2 &&
-                            "We offer immediate registry on Dholera plots with NA/NOC clearance and clear titles."}
+                            "NFully NA NOC approved, clear titles, and registry ready plots."}
                           {index === 3 &&
-                            "Early-stage entry in a developing future-ready city, with potential for 3-10x appreciation by 2030."}
+                            "Gated entry, internal roads, electrification, water supply, and landscaped green spaces."}
                           {index === 4 &&
-                            "9 meter and 12 meter internal roads, underground trunk infrastructure for wire cables, and water and drainage systems."}
+                            "Multiple plot sizes and flexible payment plans for every investor."}
                         </p>
                       </div>
                     </div>
@@ -514,10 +324,10 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      
       <div className="pt-4 pb-4">
         <CostSheet />
       </div>
+
       {/* Form */}
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
 
@@ -530,7 +340,7 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
-               /*  onAfterSubmit={handleAfterSubmit} */
+                /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>
           </div>
