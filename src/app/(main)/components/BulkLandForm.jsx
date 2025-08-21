@@ -213,7 +213,7 @@ export default function BulkLand({ title }) {
               {title}
             </h2>
             <p className="text-gray-300 mt-4 text-center">
-              Maximize your ROI with professional market insights
+              Scale Your Portfolio with High-Growth Land Opportunities
             </p>
             {showPopup ? (
               <div className="text-center py-8">
@@ -304,7 +304,7 @@ export default function BulkLand({ title }) {
                     disabled={isLoading}
                     className="w-full bg-yellow-600 shadow-md hover:bg-yellow-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
                   >
-                    {isLoading ? "Submitting..." : "Scale Your Portfolio with High-Growth Land Opportunities"}
+                    {isLoading ? "Submitting..." : "Submit"}
                   </button>
                 </div>
               </form>
