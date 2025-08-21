@@ -13,8 +13,7 @@ import {
   Layers,
   Train,
 } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
-import cityCenterMap from "@/assests/bulkLand/city-centre-bulk-land-map.webp"
+import cityCenterMap from "@/assests/bulkLand/city-centre-map.webp"
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 

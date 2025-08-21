@@ -11,12 +11,12 @@ import aboutDholera from "@/assests/dholeraSIR/about-dholera-sir.webp";
 import dholeraBlogs from "@/assests/dholeraSIR/dholera-blogs.webp";
 import dholeraUpdates from "@/assests/dholeraSIR/dholera-latest-update.webp";
 //Bulk Land
-import residential from "@/assests/bulkLand/residential-zone.webp";
-import hac from "@/assests/bulkLand/high-access-corridor.webp";
-import cityCenter from "@/assests/bulkLand/city-centre.webp";
-import industrial from "@/assests/bulkLand/industrial-zone.webp";
-import sport from "@/assests/bulkLand/recriation-sports-and-entertainment.webp";
-import knowledgeIT from "@/assests/bulkLand/knowledge-and-it.webp";
+import residential from "@/assests/bulkLand/residential-zone-cover.webp";
+import hac from "@/assests/bulkLand/high-access-corridor-cover.webp";
+import cityCenter from "@/assests/bulkLand/city-centre-cover.webp";
+import industrial from "@/assests/bulkLand/industrial-cover.webp";
+import sport from "@/assests/bulkLand/recreation-sports-map.webp";
+import knowledgeIT from "@/assests/bulkLand/knowledge-it-cover.webp";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);

@@ -7,7 +7,7 @@ import {
   BrainCircuit
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
-import knowledgeITMap from "@/assests/bulkLand/knowledge-it-bulk-land-map.webp"
+import knowledgeITMap from "@/assests/bulkLand/knowledge-it-map.webp"
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";

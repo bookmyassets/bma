@@ -18,9 +18,9 @@ export default function ContactForm({ onClose }) {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
-    // Load standard reCAPTCHA script
+    // Load reCAPTCHA script
     const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
+      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
         try {
           const script = document.createElement("script");
           script.src = "https://www.google.com/recaptcha/api.js";
@@ -29,14 +29,14 @@ export default function ContactForm({ onClose }) {
           script.onload = () => setRecaptchaLoaded(true);
           script.onerror = () => {
             console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true); // Still set as loaded so form submission can proceed as fallback
+            setRecaptchaLoaded(true); // Allow form submission without reCAPTCHA as fallback
           };
           document.head.appendChild(script);
         } catch (err) {
           console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true); // Still set as loaded as fallback
+          setRecaptchaLoaded(true);
         }
-      } else if (window.grecaptcha) {
+      } else if (window.grecaptcha || !siteKey) {
         setRecaptchaLoaded(true);
       }
     };
@@ -68,7 +68,7 @@ export default function ContactForm({ onClose }) {
         formElement.removeEventListener("click", handleClickInside);
       }
     };
-  }, []);
+  }, [siteKey]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,14 +77,15 @@ export default function ContactForm({ onClose }) {
   };
 
   const validateForm = () => {
-    if (!formData.fullName || !formData.phone) {
+    if (!formData.fullName.trim() || !formData.phone.trim()) {
       setErrorMessage("Please fill in all fields");
       return false;
     }
 
-    // Simple phone validation
-    if (!/^\d{10,15}$/.test(formData.phone)) {
-      setErrorMessage("Please enter a valid phone number (10-15 digits)");
+    // Phone validation - accept various formats
+    const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,15}$/;
+    if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
+      setErrorMessage("Please enter a valid phone number");
       return false;
     }
 
@@ -95,8 +96,10 @@ export default function ContactForm({ onClose }) {
     if (hoursPassed >= 24) {
       // Reset counter if 24 hours have passed
       setSubmissionCount(0);
-      localStorage.setItem("formSubmissionCount", "0");
-      localStorage.setItem("lastSubmissionTime", now.toString());
+      if (typeof window !== "undefined") {
+        localStorage.setItem("formSubmissionCount", "0");
+        localStorage.setItem("lastSubmissionTime", now.toString());
+      }
     } else if (submissionCount >= 3) {
       setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
       return false;
@@ -105,48 +108,102 @@ export default function ContactForm({ onClose }) {
     return true;
   };
 
-  const onRecaptchaSuccess = async (token) => {
+  const submitForm = async (recaptchaToken = null) => {
     try {
       const now = Date.now();
       
-      // Submit to our API endpoint
+      // Create the submission data for TeleCRM
+      const submissionData = {
+        fullName: formData.fullName.trim(),
+        phone: formData.phone.trim(),
+        source: "BookMyAssets",
+      };
+
+      // Submit to TeleCRM API
       const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
         },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          phone: formData.phone,
-          
-          source : "BookMyAssets",
-        }),
+        body: JSON.stringify(submissionData),
       });
 
-      // Handle potential empty response
-      const data = response.status !== 204 ? await response.json().catch(() => ({})) : {};
+      // Handle different response scenarios
+      let data = {};
+      if (response.status !== 204) {
+        try {
+          data = await response.json();
+        } catch (jsonError) {
+          console.log("Response is not JSON, proceeding...");
+        }
+      }
 
       if (response.ok) {
+        // Success - store locally for backup/tracking
+        if (typeof window !== "undefined") {
+          const submissions = JSON.parse(localStorage.getItem("contactSubmissions") || "[]");
+          submissions.push({
+            ...submissionData,
+            submissionId: `BMA_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+            timestamp: new Date().toISOString(),
+            status: "sent_to_telecrm",
+            id: Date.now()
+          });
+          localStorage.setItem("contactSubmissions", JSON.stringify(submissions));
+        }
+
         // Success handling
         setFormData({ fullName: "", phone: "" });
         setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
+        
+        // Update submission count
+        const newCount = submissionCount + 1;
+        setSubmissionCount(newCount);
+        if (typeof window !== "undefined") {
           localStorage.setItem("formSubmissionCount", newCount.toString());
           localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
+        }
 
+        // Auto close after 3 seconds
         setTimeout(() => {
           if (onClose) onClose();
-        }, 2000);
+        }, 3000);
+
       } else {
-        throw new Error(data.message || "Error submitting form");
+        // Handle API errors
+        const errorMessage = data.message || data.error || `API Error: ${response.status}`;
+        throw new Error(errorMessage);
       }
+
     } catch (error) {
-      console.error("Form submission error:", error);
-      setErrorMessage(error.message || "Error submitting form. Please try again.");
+      console.error("TeleCRM API submission error:", error);
+      
+      // Show user-friendly error messages
+      if (error.message.includes('Authorization') || error.message.includes('401')) {
+        setErrorMessage("Authentication error. Please contact support.");
+      } else if (error.message.includes('Network') || error.name === 'TypeError') {
+        setErrorMessage("Network error. Please check your connection and try again.");
+      } else if (error.message.includes('Rate limit')) {
+        setErrorMessage("Too many requests. Please try again later.");
+      } else {
+        setErrorMessage("Error submitting form. Please try again later.");
+      }
+      
+      // Store failed submission for retry later
+      if (typeof window !== "undefined") {
+        const failedSubmissions = JSON.parse(localStorage.getItem("failedSubmissions") || "[]");
+        failedSubmissions.push({
+          fullName: formData.fullName.trim(),
+          phone: formData.phone.trim(),
+          source: "BookMyAssets",
+          timestamp: new Date().toISOString(),
+          error: error.message,
+          retryCount: 0
+        });
+        localStorage.setItem("failedSubmissions", JSON.stringify(failedSubmissions));
+      }
+      
     } finally {
       setIsLoading(false);
       
@@ -161,6 +218,10 @@ export default function ContactForm({ onClose }) {
     }
   };
 
+  const onRecaptchaSuccess = (token) => {
+    submitForm(token);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -171,29 +232,39 @@ export default function ContactForm({ onClose }) {
       return;
     }
 
-    // If reCAPTCHA is loaded, render it in the ref
+    // If reCAPTCHA is configured and loaded
     if (window.grecaptcha && recaptchaLoaded && siteKey) {
       try {
-        // Check if reCAPTCHA widget is already rendered
+        // Render reCAPTCHA if not already rendered
         if (recaptchaWidgetId.current === null && recaptchaRef.current) {
           recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
             sitekey: siteKey,
             callback: onRecaptchaSuccess,
             theme: "dark",
+            size: "compact"
           });
-        } else if (recaptchaWidgetId.current !== null) {
-          // Reset and execute existing widget
+        }
+        
+        // Execute reCAPTCHA
+        if (recaptchaWidgetId.current !== null) {
           window.grecaptcha.reset(recaptchaWidgetId.current);
-          window.grecaptcha.execute(recaptchaWidgetId.current);
+          const token = await new Promise((resolve, reject) => {
+            window.grecaptcha.ready(() => {
+              window.grecaptcha.execute(recaptchaWidgetId.current, { action: 'submit' })
+                .then(resolve)
+                .catch(reject);
+            });
+          });
+          onRecaptchaSuccess(token);
         }
       } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
+        console.error("reCAPTCHA error:", error);
+        // Proceed without reCAPTCHA if there's an error
+        submitForm();
       }
     } else {
-      setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
-      setIsLoading(false);
+      // Submit without reCAPTCHA if not configured
+      submitForm();
     }
   };
 
@@ -218,7 +289,7 @@ export default function ContactForm({ onClose }) {
             e.stopPropagation();
             onClose?.();
           }}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none"
+          className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none transition-colors"
           aria-label="Close form"
         >
           <svg 
@@ -243,14 +314,14 @@ export default function ContactForm({ onClose }) {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="bg-black p-2 shadow-lg"
+            className="bg-black p-2 rounded-full shadow-lg"
           >
             <Image
               src={logo}
               alt="Logo"
               width={60}
               height={60}
-              className=""
+              className="rounded-full"
             />
           </motion.div>
         </div>
@@ -259,19 +330,24 @@ export default function ContactForm({ onClose }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-center mb-6 "
+          className="text-center mb-6 mt-8"
         >
-          <h2 className="text-3xl font-bold text-white mb-2"></h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Get In Touch</h2>
           <p className="text-gray-300 text-sm">
-           Get Expert Guidance on Dholera Investment
+            Get Expert Guidance on Dholera Investment
           </p>
         </motion.div>
 
         {showPopup ? (
-          <div className="text-center py-8">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-8"
+          >
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
+              transition={{ delay: 0.2 }}
               className="mb-4 inline-block"
             >
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
@@ -292,20 +368,28 @@ export default function ContactForm({ onClose }) {
               </div>
             </motion.div>
             <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
-            <p className="text-gray-300">
-              Your request has been submitted successfully. We'll contact you
-              shortly.
+            <p className="text-gray-300 text-center">
+              Your request has been submitted successfully. We'll contact you shortly.
             </p>
-          </div>
+          </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             {errorMessage && (
-              <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm"
+              >
                 {errorMessage}
-              </div>
+              </motion.div>
             )}
             
-            <div className="relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="relative"
+            >
               <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
               <input
                 name="fullName"
@@ -315,9 +399,14 @@ export default function ContactForm({ onClose }) {
                 required
                 className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
               />
-            </div>
+            </motion.div>
 
-            <div className="relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="relative"
+            >
               <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
               <input
                 name="phone"
@@ -325,25 +414,38 @@ export default function ContactForm({ onClose }) {
                 placeholder="Phone Number"
                 value={formData.phone}
                 onChange={handleChange}
-                minLength="10"
-                maxLength="15"
                 required
                 className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
               />
-            </div>
+            </motion.div>
 
-            {/* reCAPTCHA container - initially hidden but rendered when form is submitted */}
-            <div className="flex justify-center">
-              <div ref={recaptchaRef}></div>
-            </div>
+            {/* reCAPTCHA container */}
+            {siteKey && (
+              <div className="flex justify-center">
+                <div ref={recaptchaRef}></div>
+              </div>
+            )}
 
-            <button
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
               type="submit"
-              disabled={isLoading || !recaptchaLoaded}
-              className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+              disabled={isLoading}
+              className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
             >
-              {isLoading ? "Verifying..." : recaptchaLoaded ? "Book Consultation" : "Book Consultation"}
-            </button>
+              {isLoading ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                </span>
+              ) : (
+                "Book Consultation"
+              )}
+            </motion.button>
           </form>
         )}
       </motion.div>

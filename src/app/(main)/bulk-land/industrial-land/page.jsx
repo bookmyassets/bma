@@ -6,7 +6,7 @@ import {
   Network, Construction, Banknote, Ruler, Globe2
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
-import industrialMap from "@/assests/bulkLand/industrial-bulk-land-map.webp"
+import industrialMap from "@/assests/bulkLand/industrial-map.webp"
 import icon2 from "@/assests/svg/plug-and-plug-connection.svg";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";

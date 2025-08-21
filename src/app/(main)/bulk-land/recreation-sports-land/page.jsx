@@ -6,7 +6,7 @@ import {
   Users, Plane, Landmark, Layers, Train
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
-import recreationmap from "@/assests/bulkLand/recreation-sports-bulk-land-map.webp"
+import recreationmap from "@/assests/bulkLand/recreation-sports-map.webp"
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 

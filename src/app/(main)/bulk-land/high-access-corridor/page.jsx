@@ -15,8 +15,7 @@ import {
   Hospital,
   Home,
 } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
-import hacMap from "@/assests/bulkLand/high-access-corridor-bulk-land-map.webp"
+import hacMap from "@/assests/bulkLand/high-access-corridor-map.webp"
 import { TbGardenCart } from "react-icons/tb";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
