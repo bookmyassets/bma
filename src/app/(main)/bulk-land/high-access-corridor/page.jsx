@@ -1,6 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import banner from "@/assests/banner.webp";
+import icon from "@/assests/svg/building-and-house.svg";
+import icon2 from "@/assests/svg/human-resources.svg";
 import {
   Eye,
   Layers,
@@ -15,6 +17,7 @@ import {
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import hacMap from "@/assests/bulkLand/high-access-corridor-bulk-land-map.webp"
+import { TbGardenCart } from "react-icons/tb";
 
 export default function page() {
   return (
@@ -103,16 +106,18 @@ export default function page() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto p-4">
+      <div className="max-w-96 mx-auto p-4">
         <div className="relative flex justify-center items-center rounded-lg overflow-hidden shadow-lg mb-8">
           <Image
             src={hacMap}
             alt="High Access Corridor Zone Dholera SIR land plots"
             className="w-96 h-96"
             priority
-          />
-        </div>
+            />
 
+        </div>
+        </div>
+            <div className="max-w-6xl mx-auto p-4">
         {/* Benefits Grid */}
         <div>
           <p className="text-center text-3xl font-semibold mb-8">
@@ -121,7 +126,7 @@ export default function page() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
             {/* High Appreciation Potential */}
             <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <Eye className="w-16 h-16 text-blue-600" />
+              <Image src={icon} alt="Prime Visibility & Frontage" className="w-16 h-16 text-blue-600" />
               <p className="text-lg font-medium text-gray-800">
                 Prime Visibility & Frontage
               </p>
@@ -147,7 +152,7 @@ export default function page() {
         <div className="md:flex justify-center items-center pt-4 max-sm:space-y-4 md:space-x-8">
           {/* Community-Centric Planning */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-            <Footprints className="w-16 h-16 text-orange-600" />
+            <Image src={icon2} alt="High Footfall Potential" className="w-16 h-16 text-blue-600" />
             <p className="text-lg font-medium text-gray-800">
               High Footfall Potential
             </p>
@@ -172,7 +177,7 @@ export default function page() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Retail & Commercial Services */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-            <ShoppingBag className="w-16 h-16 text-blue-600" />
+            <TbGardenCart className="w-16 h-16 text-blue-600" />
             <p className="text-lg font-medium text-gray-800">
               Retail & Shopping Complexes
             </p>

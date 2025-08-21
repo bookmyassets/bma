@@ -84,7 +84,7 @@ export default function BMA() {
         </div>
 
         {/* Right Section (50%) */}
-        <div className="w-full md:w-3/5 pl-2 pr-2 space-y-6">
+        <div className="w-full md:w-3/5 pl-2 pr-2 space-y-2">
           <div className="">
             <p className="text-lg mb-2 "></p>
             <p className="text-gray-600 ">

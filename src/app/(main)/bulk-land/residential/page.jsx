@@ -104,7 +104,7 @@ export default function page() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto p-4">
+      <div className="max-w-96 mx-auto p-4">
         <div className="relative flex justify-center items-center rounded-lg overflow-hidden shadow-lg mb-8">
           <Image
             src={residentialMap}
@@ -113,7 +113,9 @@ export default function page() {
             priority
           />
         </div>
+        </div>
 
+      <div className="max-w-6xl mx-auto p-4">
         {/* Benefits Grid */}
         <div>
           <p className="text-center text-3xl font-semibold mb-8">
@@ -130,7 +132,7 @@ export default function page() {
 
             {/* Mixed-Use Flexibility */}
             <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <LayoutGrid className="w-16 h-16 text-green-600" />
+              <HomeIcon className="w-16 h-16 text-green-600" />
               <p className="text-lg font-medium text-gray-800">
                 Mixed-Use Flexibility
               </p>
