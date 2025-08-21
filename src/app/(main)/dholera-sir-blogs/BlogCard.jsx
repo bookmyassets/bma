@@ -14,7 +14,7 @@ export default function BlogCard({ post }) {
           {post.mainImage ? (
             <Image
               src={
-                urlFor(post.mainImage).width(800).height(400).url() ||
+                urlFor(post.mainImage).width(600).height(400).url() ||
                 "/placeholder.svg"
               }
               alt={post.title}

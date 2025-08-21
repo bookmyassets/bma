@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import residentialMap from "@/assests/bulkLand/residential-bulk-land-map.webp"
+import Table from "./table";
 
 export default function page() {
   return (
@@ -214,6 +215,10 @@ export default function page() {
             </p>
           </div>
         </div>
+      </div>
+      <div>
+        
+        <Table/>
       </div>
       <CommonForm title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
     </>

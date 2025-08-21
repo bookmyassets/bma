@@ -18,6 +18,7 @@ import {
 import CommonForm from "../../components/CommonForm";
 import hacMap from "@/assests/bulkLand/high-access-corridor-bulk-land-map.webp"
 import { TbGardenCart } from "react-icons/tb";
+import Table from "./table";
 
 export default function page() {
   return (
@@ -216,6 +217,9 @@ export default function page() {
             </p>
           </div>
         </div>
+      </div>
+      <div>
+        <Table/>
       </div>
       <CommonForm title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
     </>

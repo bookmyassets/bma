@@ -8,6 +8,7 @@ import {
 import CommonForm from "../../components/CommonForm";
 import industrialMap from "@/assests/bulkLand/industrial-bulk-land-map.webp"
 import icon2 from "@/assests/svg/plug-and-plug-connection.svg";
+import Table from "./table";
 
 export default function page() {
   return (
@@ -205,6 +206,9 @@ export default function page() {
             </p>
           </div>
         </div>
+      </div>
+      <div>
+        <Table/>
       </div>
       <CommonForm title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
     </>
