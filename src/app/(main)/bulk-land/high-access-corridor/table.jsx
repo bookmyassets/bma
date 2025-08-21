@@ -104,7 +104,7 @@ export default function Table() {
             className="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors duration-300"
             onClick={() => toggleLocation(index)}
           >
-            <h2 className="text-2xl  text-gray-900">
+            <h2 className="text-2xl max-sm:text-lg text-gray-900">
               {location.name}
             </h2>
             <span

@@ -4,6 +4,7 @@ import BlogCard from "./BlogCard";
 import hero from "@/assests/dholeraSIR.webp";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa6";
+import banner from "@/assests/banner.webp";
 
 export default async function page() {
   let posts = [];
@@ -26,45 +27,33 @@ export default async function page() {
 
   return (
     <>
-    <title>About Dholera SIR | India's First Greenfield Smart City Explained</title>
-   <meta
+      <title>
+        About Dholera SIR | India's First Greenfield Smart City Explained
+      </title>
+      <meta
         name="description"
         content="Discover Dholera SIR, India’s premier greenfield smart city! Get the latest on infrastructure, connectivity, and investment opportunities with BookMyAssets. Explore now!"
       />
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section */}
-        <div className="relative h-[50vh] bg-gradient-to-br from-[#FF9933] via-white to-[#138808] flex items-center justify-center overflow-hidden">
-          {/* Decorative blurred blobs */}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-[#FF9933] opacity-20 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
-          <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#138808] opacity-20 rounded-full blur-3xl translate-x-1/4 translate-y-1/4"></div>
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#000080] opacity-10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div
+          className="relative h-[50vh] flex items-center justify-center overflow-hidden bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${banner.src})`,
+          }}
+        >
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/40"></div>
 
           {/* Hero Content */}
           <div className="relative z-10 text-center px-4">
-            {/* Replace with actual Dholera SIR image */}
-            {/* <div className="mb-8">
-              <div className="w-48 h-48 mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl">
-                <Image
-                  src={hero}
-                  alt="Dholera SIR Logo"
-                  className="w-32 h-32 object-contain rounded-full"
-                />
-              </div>
-            </div> */}
-
-            <h1 className="text-6xl max-sm:pt-8 md:text-8xl font-bold text-blue-800 mb-4 drop-shadow-lg">
+            <h1 className="text-6xl max-sm:pt-8 md:text-8xl font-bold text-white mb-4 drop-shadow-lg">
               DHOLERA SIR
             </h1>
 
-            <h2 className="text-2xl md:text-3xl font-semibold text-blue-800 mb-8 drop-shadow-md">
+            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 drop-shadow-md">
               India's First Greenfield Smart City
             </h2>
-
-            {/* <div className="flex justify-center">
-              <button className="bg-white/20 backdrop-blur-sm text-white px-8 py-3 rounded-full font-semibold hover:bg-white/30 transition-all duration-300 shadow-lg border border-white/30">
-                Explore Opportunities
-              </button>
-            </div> */}
           </div>
         </div>
 
@@ -211,7 +200,7 @@ export default async function page() {
                       rel="noopener noreferrer"
                     >
                       <button className="flex justify-center items-center gap-2 w-full bg-white text-gray-800 py-2 px-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                        <FaWhatsapp className=""/> Get Free Investment Advice
+                        <FaWhatsapp className="" /> Get Free Investment Advice
                       </button>
                     </a>
                   </div>
