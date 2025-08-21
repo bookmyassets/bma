@@ -102,51 +102,52 @@ export default function BMA() {
             </p>
           </div>
 
-          <div id="counters-section" className="">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-2 gap-8 md:gap-10">
-                {/* Partners Counter */}
-                <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-28">
-                  <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
-                    {partners}+
-                  </div>
-                  <div className="text-base md:text-lg font-semibold text-gray-800">
-                    Partners
-                  </div>
-                </div>
+          <div id="counters-section" className="py-4">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+      
+      {/* Counter Item */}
+      <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+        <div className="text-[24px] font-bold text-[#deae3c] mb-2">
+          1 Lakh
+        </div>
+        <p className="text-sm md:text-base text-gray-700 font-medium text-center">
+          sq. yards Sold
+        </p>
+      </div>
 
-                {/* Plots Counter */}
-                <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-28">
-                  <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
-                    {plots}+
-                  </div>
-                  <div className="text-base md:text-lg font-semibold text-gray-800">
-                    Plots
-                  </div>
-                </div>
+      <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+        <div className="text-[24px] font-bold text-[#deae3c] mb-2">
+          1000
+        </div>
+        <p className="text-sm md:text-base text-gray-700 font-medium text-center">
+          Plots Sold
+        </p>
+      </div>
 
-                {/* Happy Customers Counter */}
-                <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-28">
-                  <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
-                    {customers}+
-                  </div>
-                  <div className="text-base md:text-lg font-semibold text-gray-800">
-                    Happy Customers
-                  </div>
-                </div>
+      <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+        <div className="text-[24px] font-bold text-[#deae3c] mb-2">
+          400
+        </div>
+        <p className="text-sm md:text-base text-gray-700 font-medium text-center">
+          Happy Customers
+        </p>
+      </div>
 
-                {/* Residential Projects Counter */}
-                <div className="flex flex-col justify-center items-center p-8 bg-white rounded-2xl shadow-lg h-28">
-                  <div className="text-3xl text-[#deae3c] mb-2 md:mb-4">
-                    {projects}+
-                  </div>
-                  <div className="text-base md:text-lg font-semibold text-gray-800">
-                    Residential Projects
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+        <div className="text-[24px] font-bold text-[#deae3c] mb-2">
+          7
+        </div>
+        <p className="text-sm md:text-base text-gray-700 font-medium text-center">
+          Total Residential Projects
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
 
           <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center">
             <Link
