@@ -112,28 +112,45 @@ export default function ContactForm({ onClose }) {
     try {
       const now = Date.now();
       
-      // Create the submission data for TeleCRM
+      // Create the submission data in the format TeleCRM expects
       const submissionData = {
-        fullName: formData.fullName.trim(),
-        phone: formData.phone.trim(),
+        name: formData.fullName.trim(),
+        mobile: formData.phone.trim(),
         source: "BookMyAssets",
+        // Add any other fields that TeleCRM might expect
+        email: "", // Empty email if not collected
+        message: "Lead from BookMyAssets contact form",
       };
 
-      // Submit to TeleCRM API
-      const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
+      // Get the API key and construct the correct endpoint
+      const apiKey = process.env.NEXT_PUBLIC_TELECRM_API_KEY;
+      if (!apiKey) {
+        throw new Error("TeleCRM API key not configured");
+      }
+
+      // Try the autoupdatelead endpoint based on the error URL pattern
+      const apiUrl = `https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead`;
+
+      console.log("Submitting to TeleCRM:", { url: apiUrl, data: submissionData });
+
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+          "Accept": "application/json",
+          // Try without Authorization header first, as the API key is in URL
         },
         body: JSON.stringify(submissionData),
       });
+
+      console.log("TeleCRM Response status:", response.status);
 
       // Handle different response scenarios
       let data = {};
       if (response.status !== 204) {
         try {
           data = await response.json();
+          console.log("TeleCRM Response data:", data);
         } catch (jsonError) {
           console.log("Response is not JSON, proceeding...");
         }
@@ -148,6 +165,7 @@ export default function ContactForm({ onClose }) {
             submissionId: `BMA_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
             timestamp: new Date().toISOString(),
             status: "sent_to_telecrm",
+            response: data,
             id: Date.now()
           });
           localStorage.setItem("contactSubmissions", JSON.stringify(submissions));
@@ -172,7 +190,14 @@ export default function ContactForm({ onClose }) {
 
       } else {
         // Handle API errors
-        const errorMessage = data.message || data.error || `API Error: ${response.status}`;
+        const errorMessage = data.message || data.error || data.msg || `API Error: ${response.status}`;
+        console.error("TeleCRM API Error Details:", {
+          status: response.status,
+          statusText: response.statusText,
+          data: data,
+          url: apiUrl,
+          sentData: submissionData
+        });
         throw new Error(errorMessage);
       }
 
@@ -180,11 +205,15 @@ export default function ContactForm({ onClose }) {
       console.error("TeleCRM API submission error:", error);
       
       // Show user-friendly error messages
-      if (error.message.includes('Authorization') || error.message.includes('401')) {
+      if (error.message.includes('API key not configured')) {
+        setErrorMessage("Configuration error. Please contact support.");
+      } else if (error.message.includes('INVALID_DATA') || error.message.includes('400')) {
+        setErrorMessage("Invalid data format. Please check your input and try again.");
+      } else if (error.message.includes('Authorization') || error.message.includes('401')) {
         setErrorMessage("Authentication error. Please contact support.");
       } else if (error.message.includes('Network') || error.name === 'TypeError') {
         setErrorMessage("Network error. Please check your connection and try again.");
-      } else if (error.message.includes('Rate limit')) {
+      } else if (error.message.includes('Rate limit') || error.message.includes('429')) {
         setErrorMessage("Too many requests. Please try again later.");
       } else {
         setErrorMessage("Error submitting form. Please try again later.");
@@ -194,8 +223,8 @@ export default function ContactForm({ onClose }) {
       if (typeof window !== "undefined") {
         const failedSubmissions = JSON.parse(localStorage.getItem("failedSubmissions") || "[]");
         failedSubmissions.push({
-          fullName: formData.fullName.trim(),
-          phone: formData.phone.trim(),
+          name: formData.fullName.trim(),
+          mobile: formData.phone.trim(),
           source: "BookMyAssets",
           timestamp: new Date().toISOString(),
           error: error.message,
