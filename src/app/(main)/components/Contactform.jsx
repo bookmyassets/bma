@@ -14,6 +14,7 @@ export default function ContactForm({ onClose }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
+  const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
@@ -150,8 +151,12 @@ export default function ContactForm({ onClose }) {
       setIsLoading(false);
       
       // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
+      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
+        try {
+          window.grecaptcha.reset(recaptchaWidgetId.current);
+        } catch (err) {
+          console.error("Error resetting reCAPTCHA:", err);
+        }
       }
     }
   };
@@ -167,17 +172,19 @@ export default function ContactForm({ onClose }) {
     }
 
     // If reCAPTCHA is loaded, render it in the ref
-    if (window.grecaptcha && recaptchaLoaded) {
+    if (window.grecaptcha && recaptchaLoaded && siteKey) {
       try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-          window.grecaptcha.render(recaptchaRef.current, {
+        // Check if reCAPTCHA widget is already rendered
+        if (recaptchaWidgetId.current === null && recaptchaRef.current) {
+          recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
             sitekey: siteKey,
             callback: onRecaptchaSuccess,
             theme: "dark",
           });
-        } else {
-          window.grecaptcha.reset();
-          window.grecaptcha.execute();
+        } else if (recaptchaWidgetId.current !== null) {
+          // Reset and execute existing widget
+          window.grecaptcha.reset(recaptchaWidgetId.current);
+          window.grecaptcha.execute(recaptchaWidgetId.current);
         }
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
