@@ -28,11 +28,11 @@ export default async function page() {
   return (
     <>
       <title>
-        About Dholera SIR | India's First Greenfield Smart City Explained
+        Dholera SIR | India's Largest Smart City & Investment Hub - BookMyAssets
       </title>
       <meta
         name="description"
-        content="Discover Dholera SIR, India’s premier greenfield smart city! Get the latest on infrastructure, connectivity, and investment opportunities with BookMyAssets. Explore now!"
+        content="Discover Dholera SIR - India's largest planned industrial and residential hub. Part of Delhi-Mumbai Industrial Corridor with world-class infrastructure, Tata semiconductor plant, and premium investment opportunities with BookMyAssets."
       />
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section */}
@@ -52,7 +52,7 @@ export default async function page() {
             </h1>
 
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 drop-shadow-md">
-              India's First Greenfield Smart City
+              India's Largest Planned Smart City
             </h2>
           </div>
         </div>
@@ -63,79 +63,271 @@ export default async function page() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
               {/* Main Content */}
               <div className="lg:col-span-3">
+                {/* Introduction Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
                   <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
-                    About Dholera SIR
+                    Introduction to Dholera SIR
                   </h2>
 
                   <div className="prose prose-lg text-gray-700 space-y-6">
                     <p>
-                      Dholera Special Investment Region (SIR) is India's first
-                      greenfield smart city, strategically located in Gujarat.
-                      Spanning over 920 square kilometers, it represents the
-                      future of urban development in India with world-class
-                      infrastructure and sustainable planning.
+                      <strong>Dholera Special Investment Region (DSIR)</strong>{" "}
+                      is India's largest planned industrial and residential hub.
+                      Located about 100 km from <strong>Ahmedabad</strong>, it
+                      forms a key part of the Delhi–Mumbai Industrial Corridor.
+                      Declared under the Gujarat Special Investment Region Act,
+                      the project is being implemented in phases to create a
+                      balanced mix of industries, housing, and urban services.
                     </p>
+                  </div>
+                </div>
 
-                    <div className="grid md:grid-cols-2 gap-6 my-8">
-                      <div className="bg-gradient-to-r from-[#FF9933]/10 to-[#138808]/10 p-6 rounded-xl">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                          Key Features
-                        </h3>
-                        <ul className="space-y-2 text-gray-700">
-                          <li>• World-class infrastructure</li>
-                          <li>• Smart governance systems</li>
-                          <li>• Sustainable development</li>
-                          <li>• Strategic location</li>
-                        </ul>
-                      </div>
+                {/* Vision Section */}
+                <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                    Vision of Dholera Smart City
+                  </h2>
 
-                      <div className="bg-gradient-to-r from-[#138808]/10 to-[#000080]/10 p-6 rounded-xl">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                          Investment Benefits
-                        </h3>
-                        <ul className="space-y-2 text-gray-700">
-                          <li>• High growth potential</li>
-                          <li>• Government support</li>
-                          <li>• Excellent connectivity</li>
-                          <li>• Modern amenities</li>
-                        </ul>
-                      </div>
-                    </div>
-
+                  <div className="prose prose-lg text-gray-700 space-y-6">
                     <p>
-                      Located near Ahmedabad and connected to major ports,
-                      Dholera SIR offers unparalleled investment opportunities
-                      in residential, commercial, and industrial sectors. The
-                      project is backed by the Gujarat government and follows
-                      international standards for urban planning and
-                      development.
+                      The vision for <strong>Dholera Smart City</strong> is
+                      driven by Prime Minister Narendra Modi, with coordinated
+                      efforts from both the central and state governments.
+                      Designed by Halcrow, internationally renowned for projects
+                      such as the Palm Jumeirah in Dubai, Dholera is India's
+                      first <strong>Greenfield Smart City</strong>.
                     </p>
 
-                    <div className="bg-gradient-to-r from-[#FF9933]/5 via-white/50 to-[#138808]/5 p-8 rounded-xl border-l-4 border-[#FF9933]">
-                      <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                        Why Invest in Dholera SIR?
+                    <div className="bg-gradient-to-r from-[#FF9933]/5 via-white/50 to-[#138808]/5 p-6 rounded-xl border-l-4 border-[#FF9933]">
+                      <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                        Smart Infrastructure Features
                       </h3>
-                      <p className="text-gray-700 mb-4">
-                        Dholera SIR presents a unique opportunity to be part of
-                        India's urban transformation. With planned
-                        infrastructure development, including metro
-                        connectivity, international airport, and smart
-                        utilities, it's positioned to become a major economic
-                        hub.
+                      <p className="text-gray-700">
+                        The planning integrates plug-and-play infrastructure,
+                        ensuring that utilities such as water, power, gas, and
+                        ICT are placed underground for immediate connectivity.
                       </p>
-                      <div className="flex flex-wrap gap-3">
-                        <span className="bg-[#deae3c] text-white px-4 py-2 rounded-full text-sm font-semibold">
-                          Smart Infrastructure
-                        </span>
-                        <span className="bg-[#deae3c] text-white px-4 py-2 rounded-full text-sm font-semibold">
-                          Strategic Location
-                        </span>
-                        <span className="bg-[#deae3c] text-white px-4 py-2 rounded-full text-sm font-semibold">
-                          Government Backed
-                        </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Infrastructure Section */}
+                <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                    Major Infrastructure Projects and Connectivity
+                  </h2>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
+                        <p className="text-gray-700">
+                          <strong>ABCD Building</strong> (Administrative and
+                          Business Centre of Dholera)
+                        </p>
+                      </div>
+                      <div className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
+                        <p className="text-gray-700">
+                          Activation Area with residential and commercial hubs
+                        </p>
+                      </div>
+                      <div className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
+                        <p className="text-gray-700">
+                          Water treatment and waste management facilities
+                        </p>
+                      </div>
+                      <div className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
+                        <p className="text-gray-700">
+                          World's largest single-location{" "}
+                          <strong>Dholera Solar Park</strong>
+                        </p>
                       </div>
                     </div>
+                    <div className="space-y-4">
+                      <div className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
+                        <p className="text-gray-700">
+                          Six-lane <strong>Ahmedabad–Dholera Expressway</strong>
+                        </p>
+                      </div>
+                      <div className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
+                        <p className="text-gray-700">
+                          <strong>Dholera International Airport</strong>{" "}
+                          (India's Second Largest)
+                        </p>
+                      </div>
+                      <div className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
+                        <p className="text-gray-700">
+                          Metro rail and freight corridors for faster movement
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Industries Section */}
+                <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                    Industries Investing Heavily in Dholera
+                  </h2>
+
+                  <p className="text-gray-700 mb-6">
+                    Dholera has already attracted large investments from reputed
+                    companies:
+                  </p>
+
+                  <div className="space-y-4">
+                    <div className="bg-gradient-to-r from-[#FF9933]/10 to-[#138808]/10 p-6 rounded-xl">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-xl font-semibold text-gray-800">
+                          Tata Group
+                        </h3>
+                        <span className="bg-[#deae3c] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          ₹91,000 CR
+                        </span>
+                      </div>
+                      <p className="text-gray-700">
+                        Tata group is setting up India’s first semiconductor and
+                        display fabrication plant
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-[#138808]/10 to-[#000080]/10 p-6 rounded-xl">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-xl font-semibold text-gray-800">
+                          ReNew Power & Global Players
+                        </h3>
+                        <span className="bg-[#deae3c] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          ₹1,200 CR
+                        </span>
+                      </div>
+                      <p className="text-gray-700">
+                        ReNew Power and other global players are investing in
+                        renewable energy projects
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-[#000080]/10 to-[#FF9933]/10 p-6 rounded-xl">
+                      <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                        Other Sectors
+                      </h3>
+                      <p className="text-gray-700">
+                        IT, aerospace, defense, and manufacturing companies are
+                        evaluating projects in the region
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Governance Section */}
+                <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                    Strong Governance and Investor-Friendly Administration
+                  </h2>
+
+                  <p className="text-gray-700 mb-6">
+                    The Dholera Special Investment Region Development Authority
+                    (DSIRDA) ensures smooth planning and administration. The
+                    governance model includes e-governance, single-window
+                    clearances, and transparent systems designed to support
+                    industries, investors, and residents.
+                  </p>
+                </div>
+
+                {/* Progress Section */}
+                <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                    Progress and Future Projects
+                  </h2>
+
+                  <div className=" gap-6">
+                    <div>
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <p className="text-gray-700">
+                            Phase-wise development is already underway, with trunk infrastructure in place
+                          </p>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <p className="text-gray-700">
+                           Dholera Expressway and Dholera International Airport construction progressing rapidly
+                          </p>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <p className="text-gray-700">
+                            Activation area completed to showcase residential and commercial viability
+                          </p>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <p className="text-gray-700">
+                            Upcoming projects include metro connectivity, expanded industrial clusters, and advanced township developments
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* BookMyAssets Section */}
+                <div className="bg-white rounded-2xl shadow-lg p-8">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                    Why Invest in Dholera with BookMyAssets
+                  </h2>
+
+                  <p className="text-gray-700 mb-6">
+                    BookMyAssets connects you to premium residential projects in{" "}
+                    <strong>Dholera, Gujarat,</strong> with long-term growth
+                    potential.
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full"></div>
+                        <p className="text-gray-700">
+                          100% legal and transparent transactions
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full"></div>
+                        <p className="text-gray-700">
+                          Hassle free payment process
+                        </p>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full"></div>
+                        <p className="text-gray-700">
+                          Government approved projects with clear documentation
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-[#deae3c] rounded-full"></div>
+                        <p className="text-gray-700">
+                          Expert support for investors and channel partners
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-[#FF9933]/5 via-white/50 to-[#138808]/5 p-6 rounded-xl border-l-4 border-[#FF9933] mt-6">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                      Early Mover Advantage
+                    </h3>
+                    <p className="text-gray-700">
+                      Get the early mover advantage in India's first and largest{" "}
+                      <strong>Smart City in Gujarat</strong>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -192,7 +384,7 @@ export default async function page() {
                     <h4 className="text-xl font-bold mb-3">Ready to Invest?</h4>
                     <p className="text-sm mb-4 opacity-90">
                       Get expert guidance on Dholera SIR investment
-                      opportunities.
+                      opportunities and early mover advantage.
                     </p>
                     <a
                       href="https://wa.me/918130371647"

@@ -35,7 +35,7 @@ export default function WestWyn() {
               <p className="text-lg mb-2 "></p>
               <p className="text-gray-600 ">
                 Westwyn County ensures high growth potential as part of Dholera
-                Smart City — India’s first and largest greenfield smart city.
+                Smart City India’s first and largest greenfield smart city.
                 The project offers government-approved planning, world-class
                 infrastructure, and long-term appreciation, along with modern
                 amenities such as landscaped gardens, wide internal roads, 24x7

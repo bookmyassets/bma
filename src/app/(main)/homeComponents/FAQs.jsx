@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "Why is Dholera Smart City the best investment option in India?",
     answer:
-      "The Dholera Smart City Project is part of the ambitious Dholera project in Gujarat, offering world-class infrastructure, government-backed mega projects, and high appreciation potential, making it one of the best investment options in India.",
+      "The Dholera Smart City Project is part of the ambitious Dholera project in Gujarat, offering world class infrastructure, government backed mega projects, and high appreciation potential, making it one of the best investment options in India.",
   },
   {
     question: "When will Dholera International Airport start operations?",
@@ -15,9 +15,9 @@ const faqs = [
       "The Dholera International Airport, a key milestone in the Dholera city development, is expected to start operations by December 2025, boosting passenger and cargo connectivity across India and abroad.",
   },
   {
-    question: "When is the Ahmedabad–Dholera Expressway inauguration?",
+    question: "When is the Ahmedabad Dholera Expressway inauguration?",
     answer:
-      "The Ahmedabad–Dholera Expressway, connecting Ahmedabad to Dholera Smart City in under an hour, is expected to be inaugurated by mid-2025, enhancing accessibility and investment appeal.",
+      "The Ahmedabad Dholera Expressway, connecting Ahmedabad to Dholera Smart City in under an hour, is expected to be inaugurated by mid-2025, enhancing accessibility and investment appeal.",
   },
   {
     question: "What legal documents are required to buy plots in Dholera?",
