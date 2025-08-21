@@ -16,6 +16,7 @@ import {
 import CommonForm from "../../components/CommonForm";
 import cityCenterMap from "@/assests/bulkLand/city-centre-bulk-land-map.webp"
 import Table from "./table";
+import BulkLand from "../../components/BulkLandForm";
 
 export default function page() {
   return (
@@ -40,7 +41,7 @@ export default function page() {
               City Centre Zone
             </h1>
             <p className="text-white text-lg font-light tracking-wider">
-              Where Smart Living Begins
+              Where Opportunities Multiply
             </p>
           </div>
         </div>
@@ -48,13 +49,13 @@ export default function page() {
         {/* Bottom Info Card */}
         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 z-10">
           <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200 p-4 md:p-6 mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-center">
               <div className="flex flex-col items-center">
                 <h3 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
                   Zone Area
                 </h3>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
-                  22 Sq. Km
+                  1678.045 sq. yards
                 </p>
               </div>
               <div className="flex flex-col items-center">
@@ -70,15 +71,7 @@ export default function page() {
                   Future Growth
                 </h3>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
-                  High Potential
-                </p>
-              </div>
-              <div className="flex flex-col items-center">
-                <h3 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
-                  Proximity
-                </h3>
-                <p className="text-gray-700 text-sm md:text-lg font-medium">
-                  To Main Metro
+                  High ROI
                 </p>
               </div>
             </div>
@@ -222,7 +215,7 @@ export default function page() {
               
               <Table/>
             </div>
-      <CommonForm title="Bulk Land Parcels Starting from Rs. 1.75 Cr."/>
+      <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr."/>
     </>
   );
 }
