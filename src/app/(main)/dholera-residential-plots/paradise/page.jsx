@@ -133,17 +133,13 @@ export default function HeroCarousel() {
 
   return (
     <>
-      {/* <title>Residential Plots in Dholera SIR | Secure High-ROI Investments</title>
-    <meta
-        name="description"
-        content="Invest in AUDA-approved residential plots in Dholera SIR! Enjoy buy-back with high growth potential in India's smart city."
-      /> */}
+     
       <title>
-        WestWyn County Dholera: Premium Residential Plots by BookMyAssets
+       Paradise Dholera – Premium Residential Plots for Smart Investment
       </title>
       <meta
         name="description"
-        content="Secure your future with premium residential plots in Dholera Smart City. Explore AUDA-approved options at WestWyn County. Book your dream plot today!"
+        content="Discover Invest in Paradise Dholera: premium residential plots with smart infrastructure, promising ROI, and excellent connectivity in Dholera SIR."
       />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">

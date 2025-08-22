@@ -86,11 +86,11 @@ export default function HeroCarousel() {
         content="Invest in AUDA-approved residential plots in Dholera SIR! Enjoy buy-back with high growth potential in India's smart city."
       /> */}
       <title>
-        WestWyn County Dholera: Premium Residential Plots by BookMyAssets
+         Maple Township Dholera: Smart Living Plots in Gujarat
       </title>
       <meta
         name="description"
-        content="Secure your future with premium residential plots in Dholera Smart City. Explore AUDA-approved options at WestWyn County. Book your dream plot today!"
+        content=" Discover your ideal plot in Maple Township Dholera! Embrace modern living with lush greenery and a prime location set for future growth."
       />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
@@ -118,7 +118,7 @@ export default function HeroCarousel() {
         <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center px-4">
           {/* Main Title */}
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">
-            Paradise 2
+            Maple
           </h1>
 
           {/* Property Details */}
@@ -137,7 +137,7 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Paradise - Premium Plots",
+                  "Maple - Premium Plots",
                   "Please fill out the form to get exclusive details of Paradise. Fields marked with * are mandatory.",
                   "Enquire Now",
                   ""
@@ -145,7 +145,7 @@ export default function HeroCarousel() {
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
             >
-              Secure Your Spot at Paradise
+              Secure Your Spot at Maple
             </button>
           </div>
         </div>
@@ -173,21 +173,22 @@ export default function HeroCarousel() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
-              About <br /> Paradise 2
+              About <br /> Maple
             </h2>
           </div>
 
           {/* Right Section (60%) */}
           <div className="w-full md:w-3/5 pl-2 pr-2 space-y-6">
             <p className="text-base md:text-lg font-light leading-relaxed text-gray-600">
-              Paradise 2 is a premium plotting project located in Village Shela,
-              Tehsil Dholera, District Ahmedabad, right within the
-              fast-developing Dholera Smart City (Dholera SIR). Strategically
-              placed near the Ahmedabad-Dholera Expressway and the upcoming
-              Dholera International Airport, Paradise 2 is designed with modern
-              planning, future-ready infrastructure, and legally clear plots. It
-              offers an excellent opportunity for buyers seeking secure Dholera
-              residential plots in India’s First Greenfield Smart City.
+              Maple Township is a premium plotting project located in Village
+              Gamph, Tehsil Dholera, District Ahmedabad, within the upcoming
+              Dholera Smart City (Dholera SIR). Positioned strategically near
+              the Ahmedabad-Dholera Expressway and close to the proposed Dholera
+              International Airport, Maple Township offers a modern lifestyle
+              with legally secure Dholera residential plots backed by clear
+              titles and approvals. Designed with investor trust and future
+              growth in mind, this township blends location advantage with
+              premium infrastructure inside India’s first Greenfield Smart City.
             </p>
 
             {/* CTA Buttons */}
@@ -252,19 +253,19 @@ export default function HeroCarousel() {
                     icon: "📍",
                   },
                   {
-                    title: "High Growth Potential",
+                    title: "High Appreciation Potential",
                     icon: "📈",
                   },
                   {
-                    title: "100 Percent Legal and Secure",
+                    title: "Safe and Legal",
                     icon: "🌿",
                   },
                   {
-                    title: "Premium Lifestyle Infrastructure",
+                    title: "Lifestyle Infrastructure",
                     icon: "✅",
                   },
                   {
-                    title: "Investor Friendly Options",
+                    title: "Investor Friendly",
                     icon: "🏆",
                   },
                 ].map((benefit, index) => (
@@ -304,15 +305,15 @@ export default function HeroCarousel() {
                       <div className="pl-10">
                         <p className="text-black leading-relaxed">
                           {index === 0 &&
-                            " Inside Dholera, sir, with direct connectivity to the Ahmedabad Dholera Expressway, Dholera International Airport, and industrial hubs of Dholera Metro City."}
+                            "Located inside Dholera Sir, ensuring excellent connectivity to the Ahmedabad-Dholera Expressway, Dholera International Airport, and industrial hubs of Dholera Metro City."}
                           {index === 1 &&
-                            "Early investment in the Dholera Smart City project offers strong appreciation as infrastructure develops."}
+                            "Early entry in the Dholera Smart City project ensures long-term value and strong ROI."}
                           {index === 2 &&
-                            "NFully NA NOC approved, clear titles, and registry ready plots."}
+                            "Plots are NA NOC approved, registry ready, and come with clear titles."}
                           {index === 3 &&
-                            "Gated entry, internal roads, electrification, water supply, and landscaped green spaces."}
+                            "Planned township with wide internal roads, electrification, water supply, drainage system, and landscaped green spaces."}
                           {index === 4 &&
-                            "Multiple plot sizes and flexible payment plans for every investor."}
+                            "Flexible plot sizes and easy payment options make it suitable for both investors and homebuyers."}
                         </p>
                       </div>
                     </div>
