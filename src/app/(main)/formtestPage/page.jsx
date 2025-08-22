@@ -8,7 +8,7 @@ export default function page() {
     <>
     <div className='space-y-12'>
         <p>Common Form</p>
-        <CommonForm/>
+        
         <p>Bulk Land Form</p>
         <BulkLand/>
         <p>Contact Form</p>
