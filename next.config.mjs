@@ -161,6 +161,16 @@ const nextConfig = {
         destination: '/dholera-sir-updates/:slug*', 
         permanent: true
       },
+      {
+        source: '/dholera-sir/:slug*',
+        destination: '/about-dholera-sir/:slug*', 
+        permanent: true
+      },
+      {
+        source: '/blogs/:slug*',
+        destination: '/dholera-sir-blogs/:slug*', 
+        permanent: true
+      },
 
       /* BEFORE SITE RESTRUCTURE SLUGS REDIRECTION */
       {
@@ -422,11 +432,6 @@ const nextConfig = {
       {
         source: '/projects/paradise-p2/paradise-p2',
         destination: '/dholera-residential-plots/paradise-2',
-        permanent: true,
-      },
-      {
-        source: '/careers',
-        destination: '/career',
         permanent: true,
       },
       {
