@@ -139,11 +139,11 @@ export default function HeroCarousel() {
         content="Invest in AUDA-approved residential plots in Dholera SIR! Enjoy buy-back with high growth potential in India's smart city."
       /> */}
       <title>
-        WestWyn County Dholera: Premium Residential Plots by BookMyAssets
+        Orchid Township Dholera | Exclusive Residential Plots
       </title>
       <meta
         name="description"
-        content="Secure your future with premium residential plots in Dholera Smart City. Explore AUDA-approved options at WestWyn County. Book your dream plot today!"
+        content="Explore Orchid Township in Dholera SIR! Find your ideal plot amidst innovative urban planning and smart infrastructure designed for future growth."
       />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">

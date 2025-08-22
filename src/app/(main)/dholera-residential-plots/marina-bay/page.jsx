@@ -85,10 +85,10 @@ export default function HeroCarousel() {
         name="description"
         content="Invest in AUDA-approved residential plots in Dholera SIR! Enjoy buy-back with high growth potential in India's smart city."
       /> */}
-      <title>Maple Township Dholera: Smart Living Plots in Gujarat</title>
+      <title>Marina Bay Dholera: Waterfront Living in Smart City</title>
       <meta
         name="description"
-        content=" Discover your ideal plot in Maple Township Dholera! Embrace modern living with lush greenery and a prime location set for future growth."
+        content="Discover the future of living at Marina Bay Dholera! Invest in a prime waterfront property in India's smart city, close to all essential amenities."
       />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
@@ -124,7 +124,7 @@ export default function HeroCarousel() {
             <div className="gap-4 text-white">
               {/* Plot Information */}
               <div className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-bold">167</span>
+                <span className="text-2xl sm:text-3xl font-bold">100</span>
                 <span className="text-sm sm:text-base">plots sold</span>
               </div>
 
@@ -135,15 +135,15 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Maple - Premium Plots",
-                  "Please fill out the form to get exclusive details of Paradise. Fields marked with * are mandatory.",
+                  "Marina Bay - Premium Plots",
+                  "Please fill out the form to get exclusive details of Marina Bay. Fields marked with * are mandatory.",
                   "Enquire Now",
                   ""
                 )
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
             >
-              Secure Your Spot at Maple
+              Secure Your Spot at Marina Bay
             </button>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function HeroCarousel() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
-              About <br /> Maple
+              About <br /> Marina Bay
             </h2>
           </div>
 
@@ -251,19 +251,19 @@ export default function HeroCarousel() {
                     icon: "📍",
                   },
                   {
-                    title: "High Appreciation Potential",
+                    title: "Strong Growth Potential",
                     icon: "📈",
                   },
                   {
-                    title: "Safe and Legal",
+                    title: "Safe and Legal Investment",
                     icon: "🌿",
                   },
                   {
-                    title: "Lifestyle Infrastructure",
+                    title: "Modern Infrastructure",
                     icon: "✅",
                   },
                   {
-                    title: "Investor Friendly",
+                    title: "Investor Friendly Options",
                     icon: "🏆",
                   },
                 ].map((benefit, index) => (
@@ -303,15 +303,15 @@ export default function HeroCarousel() {
                       <div className="pl-10">
                         <p className="text-black leading-relaxed">
                           {index === 0 &&
-                            "Located inside Dholera Sir, ensuring excellent connectivity to the Ahmedabad-Dholera Expressway, Dholera International Airport, and industrial hubs of Dholera Metro City."}
+                            "Positioned inside Dholera sir, with excellent access to the Ahmedabad-Dholera Expressway, Dholera International Airport, and industrial hubs of Dholera Metro City."}
                           {index === 1 &&
-                            "Early entry in the Dholera Smart City project ensures long-term value and strong ROI."}
+                            "Early entry in the Dholera Smart City project ensures significant appreciation as infrastructure matures."}
                           {index === 2 &&
-                            "Plots are NA NOC approved, registry ready, and come with clear titles."}
+                            "All plots are NA NOC approved, with clear titles and registry-ready documentation."}
                           {index === 3 &&
-                            "Planned township with wide internal roads, electrification, water supply, drainage system, and landscaped green spaces."}
+                            "Planned township with gated entry, wide internal roads, electrification, drainage, and landscaped green areas."}
                           {index === 4 &&
-                            "Flexible plot sizes and easy payment options make it suitable for both investors and homebuyers."}
+                            "Multiple plot sizes and convenient payment plans make Marina Bay attractive for both end users and investors."}
                         </p>
                       </div>
                     </div>
