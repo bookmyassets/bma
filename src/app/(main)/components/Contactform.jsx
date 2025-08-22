@@ -1,20 +1,22 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { FaUser, FaPhoneAlt } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import logo from "@/assests/Bmalogo.png";
 
-export default function ContactForm({ onClose }) {
+export default function ContactForm({ title = "Get In Touch", headline = "Get Expert Guidance on Dholera Investment", buttonName = "Book Consultation", onClose }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ fullName: "", phone: "" });
+  const [formData, setFormData] = useState({ 
+    fullName: "",  
+    phone: "" 
+  });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
-  const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
-  const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
@@ -45,12 +47,29 @@ export default function ContactForm({ onClose }) {
 
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
-      setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
-      );
-      setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
-      );
+      const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
+      const lastSubmissionTime = parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10);
+      
+      // Check if 24 hours have passed since the last submission
+      if (lastSubmissionTime) {
+        const timeDifference = Date.now() - lastSubmissionTime;
+        const hoursPassed = timeDifference / (1000 * 60 * 60);
+
+        if (hoursPassed >= 24) {
+          // Reset submission count after 24 hours
+          setSubmissionCount(0);
+          localStorage.setItem("formSubmissionCount", "0");
+          localStorage.setItem("lastSubmissionTime", Date.now().toString());
+        } else {
+          setSubmissionCount(storedCount);
+          // Check if limit reached
+          if (storedCount >= 20) {
+            setIsDisabled(true);
+          }
+        }
+      } else {
+        setSubmissionCount(storedCount);
+      }
     }
 
     // Prevent modal close when clicking inside
@@ -63,9 +82,17 @@ export default function ContactForm({ onClose }) {
       formElement.addEventListener("click", handleClickInside);
     }
 
+    // Cleanup function
     return () => {
       if (formElement) {
         formElement.removeEventListener("click", handleClickInside);
+      }
+      if (window.grecaptcha && recaptchaRef.current) {
+        try {
+          window.grecaptcha.reset();
+        } catch (e) {
+          console.log("reCAPTCHA cleanup error:", e);
+        }
       }
     };
   }, [siteKey]);
@@ -78,177 +105,107 @@ export default function ContactForm({ onClose }) {
 
   const validateForm = () => {
     if (!formData.fullName.trim() || !formData.phone.trim()) {
-      setErrorMessage("Please fill in all fields");
+      setErrorMessage("Please fill in all required fields");
       return false;
     }
 
-    // Phone validation - accept various formats
-    const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,15}$/;
-    if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
-      setErrorMessage("Please enter a valid phone number");
+    // Email validation (optional field)
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setErrorMessage("Please enter a valid email address");
+      return false;
+    }
+
+    // Phone validation - accept various formats (10-15 digits)
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+      setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
     // Check submission limits
-    const now = Date.now();
-    const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
-
-    if (hoursPassed >= 24) {
-      // Reset counter if 24 hours have passed
-      setSubmissionCount(0);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("formSubmissionCount", "0");
-        localStorage.setItem("lastSubmissionTime", now.toString());
-      }
-    } else if (submissionCount >= 3) {
+    if (submissionCount >= 3) {
       setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setIsDisabled(true);
       return false;
     }
 
     return true;
   };
 
-  const submitForm = async (recaptchaToken = null) => {
+  const onRecaptchaSuccess = async (token) => {
     try {
-      const now = Date.now();
-      
-      // Create the submission data in the format TeleCRM expects
-      const submissionData = {
-        name: formData.fullName.trim(),
-        mobile: formData.phone.trim(),
-        source: "BookMyAssets",
-        // Add any other fields that TeleCRM might expect
-        email: "", // Empty email if not collected
-        message: "Lead from BookMyAssets contact form",
-      };
-
-      // Get the API key and construct the correct endpoint
-      const apiKey = process.env.NEXT_PUBLIC_TELECRM_API_KEY;
-      if (!apiKey) {
-        throw new Error("TeleCRM API key not configured");
-      }
-
-      // Try the autoupdatelead endpoint based on the error URL pattern
-      const apiUrl = `https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead`;
-
-      console.log("Submitting to TeleCRM:", { url: apiUrl, data: submissionData });
-
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          // Try without Authorization header first, as the API key is in URL
-        },
-        body: JSON.stringify(submissionData),
-      });
-
-      console.log("TeleCRM Response status:", response.status);
-
-      // Handle different response scenarios
-      let data = {};
-      if (response.status !== 204) {
-        try {
-          data = await response.json();
-          console.log("TeleCRM Response data:", data);
-        } catch (jsonError) {
-          console.log("Response is not JSON, proceeding...");
+      // API Request using the new endpoint and format
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+          },
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: "BookMyAssets",
+            },
+            source: "BookMyAssets Website",
+            tags: ["Dholera Investment", "Website Lead"],
+            recaptchaToken: token,
+          }),
         }
-      }
+      );
 
+      // Store response text before parsing
+      const responseText = await response.text();
+      console.log("TeleCRM Response:", responseText);
+
+      // Check response status and handle accordingly
       if (response.ok) {
-        // Success - store locally for backup/tracking
-        if (typeof window !== "undefined") {
-          const submissions = JSON.parse(localStorage.getItem("contactSubmissions") || "[]");
-          submissions.push({
-            ...submissionData,
-            submissionId: `BMA_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-            timestamp: new Date().toISOString(),
-            status: "sent_to_telecrm",
-            response: data,
-            id: Date.now()
-          });
-          localStorage.setItem("contactSubmissions", JSON.stringify(submissions));
+        if (
+          responseText === "OK" ||
+          responseText.toLowerCase().includes("success")
+        ) {
+          // Success handling
+          setFormData({ fullName: "", phone: "" });
+          setShowPopup(true);
+
+          // Update submission count
+          const newCount = submissionCount + 1;
+          setSubmissionCount(newCount);
+          if (typeof window !== "undefined") {
+            localStorage.setItem("formSubmissionCount", newCount.toString());
+            localStorage.setItem("lastSubmissionTime", Date.now().toString());
+          }
+
+          // Auto close after 3 seconds
+          setTimeout(() => {
+            if (onClose) onClose();
+          }, 3000);
+
+        } else {
+          console.log("Response Text:", responseText);
+          setErrorMessage("Submission received but with unexpected response");
         }
-
-        // Success handling
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        
-        // Update submission count
-        const newCount = submissionCount + 1;
-        setSubmissionCount(newCount);
-        if (typeof window !== "undefined") {
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-        }
-
-        // Auto close after 3 seconds
-        setTimeout(() => {
-          if (onClose) onClose();
-        }, 3000);
-
       } else {
-        // Handle API errors
-        const errorMessage = data.message || data.error || data.msg || `API Error: ${response.status}`;
-        console.error("TeleCRM API Error Details:", {
-          status: response.status,
-          statusText: response.statusText,
-          data: data,
-          url: apiUrl,
-          sentData: submissionData
-        });
-        throw new Error(errorMessage);
+        console.error("Server Error:", responseText);
+        throw new Error(responseText || "Submission failed");
       }
 
     } catch (error) {
-      console.error("TeleCRM API submission error:", error);
-      
-      // Show user-friendly error messages
-      if (error.message.includes('API key not configured')) {
-        setErrorMessage("Configuration error. Please contact support.");
-      } else if (error.message.includes('INVALID_DATA') || error.message.includes('400')) {
-        setErrorMessage("Invalid data format. Please check your input and try again.");
-      } else if (error.message.includes('Authorization') || error.message.includes('401')) {
-        setErrorMessage("Authentication error. Please contact support.");
-      } else if (error.message.includes('Network') || error.name === 'TypeError') {
-        setErrorMessage("Network error. Please check your connection and try again.");
-      } else if (error.message.includes('Rate limit') || error.message.includes('429')) {
-        setErrorMessage("Too many requests. Please try again later.");
-      } else {
-        setErrorMessage("Error submitting form. Please try again later.");
-      }
-      
-      // Store failed submission for retry later
-      if (typeof window !== "undefined") {
-        const failedSubmissions = JSON.parse(localStorage.getItem("failedSubmissions") || "[]");
-        failedSubmissions.push({
-          name: formData.fullName.trim(),
-          mobile: formData.phone.trim(),
-          source: "BookMyAssets",
-          timestamp: new Date().toISOString(),
-          error: error.message,
-          retryCount: 0
-        });
-        localStorage.setItem("failedSubmissions", JSON.stringify(failedSubmissions));
-      }
-      
+      console.error("Error submitting form:", error);
+      setErrorMessage(`Error submitting form: ${error.message}`);
     } finally {
       setIsLoading(false);
       
       // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
+      if (window.grecaptcha && recaptchaRef.current) {
         try {
-          window.grecaptcha.reset(recaptchaWidgetId.current);
+          window.grecaptcha.reset();
         } catch (err) {
           console.error("Error resetting reCAPTCHA:", err);
         }
       }
     }
-  };
-
-  const onRecaptchaSuccess = (token) => {
-    submitForm(token);
   };
 
   const handleSubmit = async (e) => {
@@ -261,39 +218,29 @@ export default function ContactForm({ onClose }) {
       return;
     }
 
-    // If reCAPTCHA is configured and loaded
-    if (window.grecaptcha && recaptchaLoaded && siteKey) {
+    if (!recaptchaLoaded || !window.grecaptcha) {
+      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setIsLoading(false);
+      return;
+    }
+
+    // Render reCAPTCHA if not already rendered
+    if (!recaptchaRef.current.innerHTML) {
       try {
-        // Render reCAPTCHA if not already rendered
-        if (recaptchaWidgetId.current === null && recaptchaRef.current) {
-          recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
-            size: "compact"
-          });
-        }
-        
-        // Execute reCAPTCHA
-        if (recaptchaWidgetId.current !== null) {
-          window.grecaptcha.reset(recaptchaWidgetId.current);
-          const token = await new Promise((resolve, reject) => {
-            window.grecaptcha.ready(() => {
-              window.grecaptcha.execute(recaptchaWidgetId.current, { action: 'submit' })
-                .then(resolve)
-                .catch(reject);
-            });
-          });
-          onRecaptchaSuccess(token);
-        }
+        window.grecaptcha.render(recaptchaRef.current, {
+          sitekey: siteKey,
+          callback: onRecaptchaSuccess,
+          theme: "dark",
+          size: "compact"
+        });
       } catch (error) {
-        console.error("reCAPTCHA error:", error);
-        // Proceed without reCAPTCHA if there's an error
-        submitForm();
+        console.error("Error rendering reCAPTCHA:", error);
+        setErrorMessage("Error with verification. Please try again.");
+        setIsLoading(false);
       }
     } else {
-      // Submit without reCAPTCHA if not configured
-      submitForm();
+      // Execute existing reCAPTCHA
+      window.grecaptcha.execute();
     }
   };
 
@@ -361,9 +308,9 @@ export default function ContactForm({ onClose }) {
           transition={{ delay: 0.3 }}
           className="text-center mb-6 mt-8"
         >
-          <h2 className="text-2xl font-bold text-white mb-2">Get In Touch</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
           <p className="text-gray-300 text-sm">
-            Get Expert Guidance on Dholera Investment
+            {headline}
           </p>
         </motion.div>
 
@@ -401,6 +348,16 @@ export default function ContactForm({ onClose }) {
               Your request has been submitted successfully. We'll contact you shortly.
             </p>
           </motion.div>
+        ) : isDisabled ? (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-8"
+          >
+            <p className="text-center text-red-400 font-semibold">
+              You have reached the maximum submission limit. Try again after 24 hours.
+            </p>
+          </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             {errorMessage && (
@@ -422,7 +379,7 @@ export default function ContactForm({ onClose }) {
               <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
               <input
                 name="fullName"
-                placeholder="Full Name"
+                placeholder="Full Name *"
                 value={formData.fullName}
                 onChange={handleChange}
                 required
@@ -440,7 +397,7 @@ export default function ContactForm({ onClose }) {
               <input
                 name="phone"
                 type="tel"
-                placeholder="Phone Number"
+                placeholder="Phone Number *"
                 value={formData.phone}
                 onChange={handleChange}
                 required
@@ -460,8 +417,12 @@ export default function ContactForm({ onClose }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
               type="submit"
-              disabled={isLoading}
-              className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
+              disabled={isLoading || isDisabled || !recaptchaLoaded}
+              className={`w-full py-3 px-6 text-black rounded-lg font-semibold transition-all shadow-lg transform active:scale-95 ${
+                isLoading || isDisabled || !recaptchaLoaded
+                  ? "bg-gray-600 cursor-not-allowed opacity-70"
+                  : "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 hover:shadow-yellow-500/20 hover:scale-105"
+              }`}
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">
@@ -469,10 +430,10 @@ export default function ContactForm({ onClose }) {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Processing...
+                  Submitting...
                 </span>
               ) : (
-                "Book Consultation"
+                buttonName
               )}
             </motion.button>
           </form>
