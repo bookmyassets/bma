@@ -250,11 +250,13 @@ const RealEstateLandingPage = () => {
                   </div>
 
                   <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
-                    Invest in{" "}
-                    <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                      Tomorrow's
-                    </span>{" "}
-                    Smart City
+                    Step Into 
+                    <br/>
+                    <span className="bg-yellow-400 bg-clip-text text-transparent">
+                      India’s First Greenfield Smart City
+                    </span>{" "}<br/>
+                    Dholera with BookMyAssets
+
                   </h1>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
@@ -339,14 +341,15 @@ const RealEstateLandingPage = () => {
                       </span>
                     </div>
 
-                    <h1 className="text-4xl xl:text-5xl 2xl:text-6xl font-bold leading-tight">
-                      Invest in <br />
-                      <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                        Tomorrow's
-                      </span>
-                      <br />
-                      Smart City
-                    </h1>
+                    <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
+                    Step Into 
+                    <br/>
+                    <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                      India’s First Greenfield Smart City
+                    </span>{" "}
+                    Dholera with BookMyAssets
+
+                  </h1>
 
                     <p className="text-lg xl:text-xl text-gray-300 leading-relaxed">
                       Discover premium, legally verified plots in Dholera Smart

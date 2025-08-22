@@ -422,7 +422,7 @@ export default async function Post({ params }) {
                     alt={post.title}
                     width={1200}
                     height={675}
-                    className="w-full h-auto"
+                    className="w-full h-auto object-contain"
                     priority
                   />
                 </div>
