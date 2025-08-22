@@ -156,7 +156,7 @@ export default async function Post({ params }) {
       );
     }
 
-    const components = {
+      const components = {
     types: {
       image: ({ value }) => {
         if (!value?.asset?._ref) {
@@ -243,7 +243,7 @@ export default async function Post({ params }) {
         </Link>
       ),
       strong: ({ children }) => (
-        <strong className="font-bold text-gray-900 bg-gradient-to-r from-[#C69C21]/10 to-[#FDB913]/10 px-1 py-0.5 rounded">
+        <strong className="font-bold text-gray-900  px-1 py-0.5 rounded">
           {children}
         </strong>
       ),
@@ -282,7 +282,7 @@ export default async function Post({ params }) {
 
     block: {
       h1: ({ children }) => (
-        <h1 className="text-5xl font-black mt-8 mb-10 text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700 border-b-4 border-gradient-to-r from-[#C69C21] to-[#FDB913] pb-4">
+        <h1 className="text-5xl font-black mt-8 mb-10 text-transparent bg-clip-text from- border-b-4  pb-4">
           {children}
         </h1>
       ),
@@ -294,7 +294,7 @@ export default async function Post({ params }) {
       ),
       h3: ({ children }) => (
         <h3 className="text-3xl font-bold mt-12 mb-6 text-gray-800 flex items-center gap-3">
-          <div className="w-2 h-2 bg-[#C69C21] rounded-full"></div>
+          <div className="w-2 h-2  rounded-full"></div>
           {children}
         </h3>
       ),
@@ -339,13 +339,13 @@ export default async function Post({ params }) {
     listItem: {
       bullet: ({ children }) => (
         <li className="text-lg leading-relaxed text-gray-700 flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
-          <div className="w-2 h-2 bg-[#C69C21] rounded-full mt-3 flex-shrink-0"></div>
+          <div className="w-2 h-2 rounded-full mt-3 flex-shrink-0"></div>
           <div>{children}</div>
         </li>
       ),
       number: ({ children }) => (
         <li className="text-lg leading-relaxed text-gray-700 flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 relative counter-increment-list">
-          <div className="w-8 h-8 bg-gradient-to-r from-[#C69C21] to-[#FDB913] rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+          <div className="w-8 h-8  rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
             <span className="counter-content"></span>
           </div>
           <div>{children}</div>

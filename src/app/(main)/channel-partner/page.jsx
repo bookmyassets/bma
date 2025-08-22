@@ -87,7 +87,7 @@ export default function ChannelPartnerPage() {
                   and unclear paperwork, resulting in clients losing trust. At
                   BookMyAssets, we are changing that. We bring a broker first
                   culture with transparent processes, verified inventory, and
-                  on time commissions. so you can focus on closing sales without
+                  on time commissions. So you can focus on closing sales without
                   the setbacks.
                 </p>
               </div>
@@ -210,7 +210,7 @@ export default function ChannelPartnerPage() {
                         Training and Onboarding
                       </h3>
                       <p className="text-gray-600 text-sm">
-                        Regular updates, sales training, and insider knowledge
+                        Regular updates, sales training, and  insider knowledge <br/>
                         to help you close faster.
                       </p>
                     </div>
