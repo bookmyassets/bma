@@ -6,7 +6,7 @@ export default async function VideosPage() {
  
     const videos = [
   {
-    id: "zAcI2tX7iig?si=AIKkQe7Mqz4w2R5z",
+    id: "sYONhrTYBTg?si=L4n3VXlr5fMEwRXD",
     title: "[2025] PROGRESS: TATA Semiconductor Plant in Dholera",
     duration: "4:55"
   },
@@ -26,18 +26,23 @@ export default async function VideosPage() {
     duration: "unknown"
   },
   {
-    id: "oazaDlcEPtM?si=bwhGMkt1rL07qieb",
+    id: "NdH1zHVGTcQ?si=LigEXx48UYrV6AQL",
     title: "Ahmedabad-Dholera Expressway connectivity",
     duration: "unknown"
   },
   {
-    id: "zfMSlCTWG58?si=j3DAps573LkHozD3",
+    id: "fHLqa6YM1Aw?si=3KI9DjJa50IPpwF2",
     title: "100% Water Recycling at Dholera's Water Treatment Plant",
     duration: "unknown"
   },
   {
-    id: "-EtnTmJW28U?si=ELPbv4LXwHQFp-1Y",
+    id: "0lAocID2crU?si=SEzoRJFFoR4P4ce8",
     title: "WestWyn County - Premium Plots on Fedra-Pipli Highway, Dholera",
+    duration: "unknown"
+  },
+  {
+    id: "P0a8LCMQHqI?si=dPYMcwl7SLX62h4H",
+    title: "Dholera Activation Area Heart of India’s Billion-Dollar Future City",
     duration: "unknown"
   }
 ];

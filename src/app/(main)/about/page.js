@@ -250,13 +250,13 @@ const RealEstateLandingPage = () => {
                   </div>
 
                   <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
-                    Step Into 
-                    <br/>
+                    Step Into
+                    <br />
                     <span className="bg-yellow-400 bg-clip-text text-transparent">
                       India’s First Greenfield Smart City
-                    </span>{" "}<br/>
+                    </span>{" "}
+                    <br />
                     Dholera with BookMyAssets
-
                   </h1>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
@@ -342,14 +342,13 @@ const RealEstateLandingPage = () => {
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
-                    Step Into 
-                    <br/>
-                    <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                      India’s First Greenfield Smart City
-                    </span>{" "}
-                    Dholera with BookMyAssets
-
-                  </h1>
+                      Step Into
+                      <br />
+                      <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                        India’s First Greenfield Smart City
+                      </span>{" "}
+                      Dholera with BookMyAssets
+                    </h1>
 
                     <p className="text-lg xl:text-xl text-gray-300 leading-relaxed">
                       Discover premium, legally verified plots in Dholera Smart
@@ -439,23 +438,21 @@ const RealEstateLandingPage = () => {
                 <div className="space-y-8 flex flex-col">
                   <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 flex-1 flex flex-col">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-                      Our Story
+                      Our Vission
                     </h3>
                     <p className="text-gray-700 leading-relaxed mb-6 flex-1">
-                      At BMA Group of Companies (aka BookMyAssets), we believe
-                      that real estate is not just about land; it is about
-                      people, possibilities, and building a secure future for
-                      every investor.
+                      At BMA (Book My Assets), we are redefining real estate
+                      investment by making it transparent, secure, and growth
+                      driven. Specializing in AUDA approved projects in Dholera
+                      Smart City, India’s first greenfield smart city, we offer
+                      investors and brokers legally clear, registry ready plots
+                      with assured appreciation.
                     </p>
-                    <div className="bg-yellow-50 rounded-2xl p-4 sm:p-6 border-l-4 border-yellow-500">
-                      <h4 className="text-lg font-bold text-yellow-600 mb-2">
-                        Our Simple Goal
-                      </h4>
-                      <p className="text-gray-700">
-                        To help people grow their money safely, confidently, and
-                        with maximum returns.
-                      </p>
-                    </div>
+                    <p className="text-gray-700 leading-relaxed mb-6 flex-1">
+                      With a strong focus on trust, timely delivery, and an
+                      investor first approach, BMA bridges the gap between
+                      opportunity and reliability.
+                    </p>
                   </div>
 
                   <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-6 sm:p-8 border border-blue-200 flex-1 flex flex-col">
@@ -466,25 +463,24 @@ const RealEstateLandingPage = () => {
                       <div className="flex items-center space-x-3">
                         <CheckCircle className="text-green-500" size={20} />
                         <span className="text-blue-800">
-                          To make property buying hassle-free, transparent, and legally secure.
-
+                          To make property buying hassle-free, transparent, and
+                          legally secure.
                         </span>
                       </div>
                       <div className="flex items-center space-x-3">
                         <CheckCircle className="text-green-500" size={20} />
                         <span className="text-blue-800">
-                          To guide investors and channel partners with expert insights and dedicated support.
-
-
+                          To guide investors and channel partners with expert
+                          insights and dedicated support.
                         </span>
                       </div>
                       <div className="flex items-center space-x-3">
                         <CheckCircle className="text-green-500" size={20} />
                         <span className="text-blue-800">
-                          To deliver long-term value through premium projects in India’s fastest-growing smart cities
+                          To deliver long-term value through premium projects in
+                          India’s fastest-growing smart cities
                         </span>
                       </div>
-
                     </div>
                   </div>
                 </div>
