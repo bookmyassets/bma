@@ -5,6 +5,7 @@ import hero from "@/assests/dholeraSIR.webp";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa6";
 import banner from "@/assests/banner.webp";
+import LeadForm from "../components/LeadForm";
 
 export default async function page() {
   let posts = [];
@@ -223,7 +224,9 @@ export default async function page() {
                     </div>
                   </div>
                 </div>
-
+                <div>
+                  <LeadForm/>
+                </div>
                 {/* Governance Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
                   <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
