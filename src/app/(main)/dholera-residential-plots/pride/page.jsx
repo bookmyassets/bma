@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/residential/Paradise-2-dholera-plan-layout.webp";
-import bannerMob from "@/assests/residential/pride-hero-desktopview.webp";
+import banner from "@/assests/residential/pride-hero-desktopview.webp";
 import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence } from "framer-motion";
