@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/residential/Paradise-2-dholera-plan-layout.webp";
+import bannerMob from "@/assests/residential/pride-hero-desktopview.webp";
 import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence } from "framer-motion";
@@ -90,22 +91,18 @@ export default function HeroCarousel() {
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}
         <div className="relative w-full h-full">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                index === currentIndex ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="w-full h-full "
-                priority={index === 0} // Only prioritize first image
-              />
-            </div>
-          ))}
+          <div
+                        className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+                      >
+                        <Image
+                          src={banner}
+                          alt="maple"
+                          fill
+                          className="w-full h-full "
+                          priority // Only prioritize first image
+                        />
+                        
+                      </div>
         </div>
 
         {/* Overlay with Title and Details */}

@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import westwyn1 from "@/assests/residential/Paradise-2-dholera-plan-layout.webp";
+import westwyn1 from "@/assests/residential/Maple-Township-dholera-plan-layout.webp";
+import banner from "@/assests/residential/maple-hero-desktop.webp";
+import bannerMob from "@/assests/residential/maple-hero-mob.view-webp.webp";
 import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence } from "framer-motion";
@@ -10,7 +12,7 @@ import ContactForm from "../../components/Contactform";
 import CostSheet from "../../components/costSheet";
 
 export default function HeroCarousel() {
-  const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
+  
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openIndex, setOpenIndex] = useState(0);
@@ -68,16 +70,6 @@ export default function HeroCarousel() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Auto-rotate images every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [images.length]);
-
   return (
     <>
       {/* <title>Residential Plots in Dholera SIR | Secure High-ROI Investments</title>
@@ -96,22 +88,25 @@ export default function HeroCarousel() {
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}
         <div className="relative w-full h-full">
-          {images.map((image, index) => (
+          
             <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                index === currentIndex ? "opacity-100" : "opacity-0"
-              }`}
+              className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
             >
               <Image
-                src={image.src}
-                alt={image.alt}
+                src={banner}
+                alt="maple"
                 fill
-                className="w-full h-full "
-                priority={index === 0} // Only prioritize first image
+                className="w-full h-full max-sm:hidden"
+                priority // Only prioritize first image
+              />
+              <Image
+                src={bannerMob}
+                alt="maple"
+                fill
+                className="w-full h-full md:hidden"
+                priority // Only prioritize first image
               />
             </div>
-          ))}
         </div>
 
         {/* Overlay with Title and Details */}
@@ -149,22 +144,6 @@ export default function HeroCarousel() {
             </button>
           </div>
         </div>
-
-        {/* Navigation Dots */}
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex ? "bg-white w-6" : "bg-white/50"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Navigation Arrows */}
       </div>
 
       {/* Section 2 - About */}
