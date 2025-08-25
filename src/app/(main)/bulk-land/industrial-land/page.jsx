@@ -1,12 +1,21 @@
 import Image from "next/image";
 import React from "react";
-import banner from "@/assests/banner.webp";
+import banner from "@/assests/bulkLand/industrial zone-hero.webp";
+import bannerMob from "@/assests/bulkLand/industrial-hero-mob-webp.webp";
 import {
-  Factory, Truck, Wrench, Zap, School,
-  Network, Construction, Banknote, Ruler, Globe2
+  Factory,
+  Truck,
+  Wrench,
+  Zap,
+  School,
+  Network,
+  Construction,
+  Banknote,
+  Ruler,
+  Globe2,
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
-import industrialMap from "@/assests/bulkLand/industrial-map.webp"
+import industrialMap from "@/assests/bulkLand/industrial-map.webp";
 import icon2 from "@/assests/svg/plug-and-plug-connection.svg";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
@@ -19,7 +28,14 @@ export default function page() {
         <Image
           src={banner}
           alt="banner"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover max-sm:hidden"
+          fill
+          priority
+        />
+        <Image
+          src={bannerMob}
+          alt="banner"
+          className="h-full w-full object-cover md:hidden"
           fill
           priority
         />
@@ -98,8 +114,7 @@ export default function page() {
             priority
           />
         </div>
-
-        </div>
+      </div>
       <div className="max-w-6xl mx-auto p-4">
         {/* Benefits Grid */}
         <div>
@@ -168,9 +183,13 @@ export default function page() {
 
           {/* Hospitality & Food Services */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
-            <Image src={icon2} alt="Plug-and-Play Infrastructure" className="w-16 h-16 text-red-600" />
+            <Image
+              src={icon2}
+              alt="Plug-and-Play Infrastructure"
+              className="w-16 h-16 text-red-600"
+            />
             <p className="text-lg font-medium text-gray-800">
-              Plug-and-Play Infrastructure 
+              Plug-and-Play Infrastructure
             </p>
           </div>
 
@@ -178,7 +197,7 @@ export default function page() {
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
             <Banknote className="w-16 h-16 text-green-600" />
             <p className="text-lg font-medium text-gray-800">
-              High ROI & Incentives 
+              High ROI & Incentives
             </p>
           </div>
         </div>
@@ -201,7 +220,7 @@ export default function page() {
         </div>
       </div>
       <div>
-        <Table/>
+        <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
     </>

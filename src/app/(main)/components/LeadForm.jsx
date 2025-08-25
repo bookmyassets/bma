@@ -370,7 +370,7 @@ export default function LeadForm({ title }) {
                         Submitting...
                       </div>
                     ) : (
-                      "Talk to our BookMyAssets Expert"
+                      "Talk to BookMyAssets Expert"
                     )}
                   </button>
                 </div>

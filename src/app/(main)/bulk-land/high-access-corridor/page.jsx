@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import banner from "@/assests/banner.webp";
+import banner from "@/assests/bulkLand/HighAccess corridor-hero.webp";
+import bannerMob from "@/assests/bulkLand/high-access-hero-mob-webp.webp";
 import icon from "@/assests/svg/building-and-house.svg";
 import icon2 from "@/assests/svg/human-resources.svg";
 import {
@@ -28,7 +29,14 @@ export default function page() {
         <Image
           src={banner}
           alt="banner"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover max-sm:hidden"
+          fill
+          priority
+        />
+        <Image
+          src={bannerMob}
+          alt="banner"
+          className="h-full w-full object-cover md:hidden"
           fill
           priority
         />

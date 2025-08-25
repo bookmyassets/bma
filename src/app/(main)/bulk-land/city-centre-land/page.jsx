@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import banner from "@/assests/banner.webp";
+import banner from "@/assests/bulkLand/city-centre-cover.webp";
+import bannerMob from "@/assests/bulkLand/city-centre-cover.webp";
 import {
   ShoppingBag,
   Clapperboard,
@@ -25,7 +26,14 @@ export default function page() {
         <Image
           src={banner}
           alt="banner"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover max-sm:hidden"
+          fill
+          priority
+        />
+        <Image
+          src={bannerMob}
+          alt="banner"
+          className="h-full w-full object-cover md:hidden"
           fill
           priority
         />

@@ -1,13 +1,21 @@
 import Image from "next/image";
 import React from "react";
-import banner from "@/assests/banner.webp";
+import banner from "@/assests/bulkLand/Knowledge and it zone-hero.webp";
+import bannerMob from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp";
 import {
-  Cpu, FlaskConical, GraduationCap, Building2, Home,
-  Lightbulb, Globe2, Server, TrendingUp,
-  BrainCircuit
+  Cpu,
+  FlaskConical,
+  GraduationCap,
+  Building2,
+  Home,
+  Lightbulb,
+  Globe2,
+  Server,
+  TrendingUp,
+  BrainCircuit,
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
-import knowledgeITMap from "@/assests/bulkLand/knowledge-it-map.webp"
+import knowledgeITMap from "@/assests/bulkLand/knowledge-it-map.webp";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
@@ -20,7 +28,14 @@ export default function page() {
         <Image
           src={banner}
           alt="banner"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover max-sm:hidden"
+          fill
+          priority
+        />
+        <Image
+          src={bannerMob}
+          alt="banner"
+          className="h-full w-full object-cover md:hidden"
           fill
           priority
         />
@@ -43,7 +58,7 @@ export default function page() {
         {/* Bottom Info Card */}
         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 z-10">
           <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200 p-4 md:p-6 mx-auto">
-             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-center">
               <div className="flex flex-col items-center">
                 <h3 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
                   Zone Area
@@ -99,7 +114,7 @@ export default function page() {
             priority
           />
         </div>
-        </div>
+      </div>
 
       <div className="max-w-6xl mx-auto p-4">
         {/* Benefits Grid */}
@@ -202,7 +217,7 @@ export default function page() {
         </div>
       </div>
       <div>
-        <Table/>
+        <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
     </>

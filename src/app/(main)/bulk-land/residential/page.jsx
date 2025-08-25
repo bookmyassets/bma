@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import banner from "@/assests/banner.webp";
+import banner from "@/assests/bulkLand/residential plot-hero.webp";
+import bannerMob from "@/assests/bulkLand/residential-hero-mob.-webp.webp";
 import {
   TrendingUp,
   LayoutGrid,
@@ -25,12 +26,19 @@ export default function page() {
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image
-          src={banner}
-          alt="banner"
-          className="h-full w-full object-cover"
-          fill
-          priority
-        />
+                  src={banner}
+                  alt="banner"
+                  className="h-full w-full object-cover max-sm:hidden"
+                  fill
+                  priority
+                />
+                <Image
+                  src={bannerMob}
+                  alt="banner"
+                  className="h-full w-full object-cover md:hidden"
+                  fill
+                  priority
+                />
 
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>

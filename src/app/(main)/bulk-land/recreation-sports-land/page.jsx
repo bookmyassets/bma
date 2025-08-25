@@ -1,12 +1,21 @@
 import Image from "next/image";
 import React from "react";
-import banner from "@/assests/banner.webp";
+import banner from "@/assests/bulkLand/recreation-sports-entertainment-Zone-hero.webp";
+import bannerMob from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp";
 import {
- Trophy, FerrisWheel, Theater, BedDouble, HeartPulse,
-  Users, Plane, Landmark, Layers, Train
+  Trophy,
+  FerrisWheel,
+  Theater,
+  BedDouble,
+  HeartPulse,
+  Users,
+  Plane,
+  Landmark,
+  Layers,
+  Train,
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
-import recreationmap from "@/assests/bulkLand/recreation-sports-map.webp"
+import recreationmap from "@/assests/bulkLand/recreation-sports-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 
@@ -18,7 +27,14 @@ export default function page() {
         <Image
           src={banner}
           alt="banner"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover max-sm:hidden"
+          fill
+          priority
+        />
+        <Image
+          src={bannerMob}
+          alt="banner"
+          className="h-full w-full object-cover md:hidden"
           fill
           priority
         />
@@ -94,16 +110,16 @@ export default function page() {
             src={recreationmap}
             alt="recreation sports entertainment zone Dholera SIR land plots"
             className="w-96 h-96"
-            
-            />
-            </div>
+          />
         </div>
+      </div>
 
       <div className="max-w-6xl mx-auto p-4">
         {/* Benefits Grid */}
         <div>
           <p className="text-center text-3xl font-semibold mb-8">
-            Benefits of Buying Bulk Land in Recreation, Sports & Entertainment Zone Zone
+            Benefits of Buying Bulk Land in Recreation, Sports & Entertainment
+            Zone Zone
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
             {/* High Appreciation Potential */}
@@ -161,7 +177,7 @@ export default function page() {
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
             <Users className="w-16 h-16 text-blue-600" />
             <p className="text-lg font-medium text-gray-800">
-              High Footfall Potential 
+              High Footfall Potential
             </p>
           </div>
 
@@ -194,13 +210,13 @@ export default function page() {
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
             <Train className="w-16 h-16 text-orange-600" />
             <p className="text-lg font-medium text-gray-800">
-              Future-Ready Infrastructure 
+              Future-Ready Infrastructure
             </p>
           </div>
         </div>
       </div>
       <div>
-        <Table/>
+        <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
     </>
