@@ -16,7 +16,7 @@ import {
   HomeIcon,
 } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
-import residentialMap from "@/assests/bulkLand/residential-zone-map.webp"
+import residentialMap from "@/assests/bulkLand/residential-zone-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 
@@ -26,19 +26,19 @@ export default function page() {
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image
-                  src={banner}
-                  alt="banner"
-                  className="h-full w-full object-cover max-sm:hidden"
-                  fill
-                  priority
-                />
-                <Image
-                  src={bannerMob}
-                  alt="banner"
-                  className="h-full w-full object-cover md:hidden"
-                  fill
-                  priority
-                />
+          src={banner}
+          alt="banner"
+          className="h-full w-full object-cover max-sm:hidden"
+          fill
+          priority
+        />
+        <Image
+          src={bannerMob}
+          alt="banner"
+          className="h-full w-full object-cover md:hidden"
+          fill
+          priority
+        />
 
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
@@ -92,16 +92,15 @@ export default function page() {
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="text-center">
           <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-            The High Access Corridor in Dholera SIR is planned as a dynamic
-            mixed-use zone with high visibility and connectivity, ideal for
-            large-scale commercial, hospitality, and residential developments.
-            Designed for businesses that thrive on accessibility such as malls,
-            hotels, corporate offices, retail hubs, and high-density housing. It
-            serves as a vibrant economic artery within the smart city’s
-            masterplan. With prime frontage along major roads, modern
-            infrastructure, and flexible development permissions, this corridor
-            is positioned to become a landmark destination for commerce, living,
-            and leisure in Dholera.
+            The Residential Zone in Dholera SIR is designed to foster vibrant
+            living communities while integrating essential urban amenities.
+            Catering to homebuyers, real estate developers, and investors, it
+            allows for a variety of residential formats and supporting
+            facilities like schools, healthcare centers, retail spaces, and
+            recreational hubs. As a key component of Dholera’s smart city
+            masterplan, this zone ensures balanced growth by blending
+            high-quality housing with commercial and public infrastructure,
+            making it a hub for sustainable and future-ready living.
           </p>
         </div>
       </div>
@@ -115,7 +114,7 @@ export default function page() {
             priority
           />
         </div>
-        </div>
+      </div>
 
       <div className="max-w-6xl mx-auto p-4">
         {/* Benefits Grid */}
@@ -218,8 +217,7 @@ export default function page() {
         </div>
       </div>
       <div>
-        
-        <Table/>
+        <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
     </>

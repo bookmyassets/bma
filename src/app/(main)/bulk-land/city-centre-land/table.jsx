@@ -4,14 +4,12 @@ import React, { useState, useEffect, useRef } from "react";
 const locations = [
   {
     name: "City Center Projects Allowed on Road Below 25m",
-     text: `Restaurants, Food Plazas and 
+    text: `Restaurants, Food Plazas and 
 Food Streets; Neighbourhood 
 Retail Shop; Community Hall; 
 Health Club; Dispensary; Place 
 of Worship smaller than 
-1000sqm;`
-   
-  },
+1000sqm`},
   {
     name: "City Center Projects Allowed on Road 25m to Below 55m",
     text: `Multi‐level Parking; Office 

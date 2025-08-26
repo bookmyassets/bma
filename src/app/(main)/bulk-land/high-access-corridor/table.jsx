@@ -12,7 +12,7 @@ Neighbourhood Retail Shop;
 Place of Worship smaller than 
 1000sqm; Service and Repair 
 Shops smaller than 25sqm; 
-garden `,
+Garden `,
   },
   {
     name: "High Access Corridor Projects Allowed on Road 25m to Below 55m",

@@ -28,7 +28,7 @@ All uses in above`
   },
   {
     name: "Industrial Projects Allowed on Road 55m and Above",
-    text: `Truck terminal; and all uses 
+    text: `Truck terminal; All uses 
 in above`
   }
 ];

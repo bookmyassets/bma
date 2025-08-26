@@ -26,7 +26,7 @@ Retail; Restaurants, Food
 Plazas and Food Streets; 
 Cinema Hall/Multiplex; Multi
 storey Serviced Apartment; 
-and all use premises in (2) and 
+All use premises in (2) and 
 (3) except Villa/Bungalow 
 and terraced/Row House; 
 Petrol/CNG/LPG Pump 
