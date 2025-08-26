@@ -407,7 +407,7 @@ useEffect(() => {
                   <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div className="py-2">
                       <Link
-                        href="/careers"
+                        href="/career"
                         onClick={closeAllMenus}
                         className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors"
                       >
@@ -1082,7 +1082,7 @@ useEffect(() => {
               About Us
             </Link>
             <Link
-              href="/careers"
+              href="/career"
               onClick={closeAllMenus}
               className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
             >
