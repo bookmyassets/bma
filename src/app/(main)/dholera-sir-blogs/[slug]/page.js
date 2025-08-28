@@ -8,6 +8,7 @@ import {
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import BlogSchemaMarkup from "../BlogSchemaMarkup";
 
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
@@ -357,6 +358,22 @@ export default async function Post({ params }) {
   };
 
     return (
+      <>
+      <title>{post.title}</title>
+          <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
+          
+          {/* Additional SEO meta tags */}
+          <link rel="canonical" href={`https://bookmyassets.com/dholera-sir-blogs/${post.slug.current}`} />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          
+          {/* Preload critical resources */}
+          {post.mainImage && (
+            <link
+              rel="preload"
+              as="image"
+              href={urlFor(post.mainImage).width(1200).height(675).url()}
+            />
+          )}
       <div className="bg-white min-h-screen">
         <div className="bg-white shadow-sm sticky top-0 z-30" />
 
@@ -554,6 +571,7 @@ export default async function Post({ params }) {
           </div>
         </section>
       </div>
+      </>
     );
   } catch (error) {
     console.error("Error loading blog post:", slug, error);

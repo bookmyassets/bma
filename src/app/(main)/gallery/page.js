@@ -18,7 +18,6 @@ import sample13 from "@/assests/gallery/sir/Dholera Sewage Treatment Plant.webp"
 import sample14 from "@/assests/gallery/sir/Dholera Solar Power Plant 2.webp";
 import sample15 from "@/assests/gallery/sir/Dholera Solar Power Project.webp";
 
-
 export default function DholeraProgressPage() {
   const galleryImages = [
     { id: 1, src: sample1, alt: "Dholera Abcd building", caption: "Dholera Abcd building" },
