@@ -359,6 +359,9 @@ export default async function Post({ params }) {
 
     return (
       <>
+      <div>
+
+
       <title>{post.title}</title>
           <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
           
@@ -372,8 +375,9 @@ export default async function Post({ params }) {
               rel="preload"
               as="image"
               href={urlFor(post.mainImage).width(1200).height(675).url()}
-            />
+              />
           )}
+              </div>
       <div className="bg-white min-h-screen">
         <div className="bg-white shadow-sm sticky top-0 z-30" />
 
