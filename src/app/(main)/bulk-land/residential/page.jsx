@@ -15,7 +15,6 @@ import {
   Home,
   HomeIcon,
 } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
 import residentialMap from "@/assests/bulkLand/residential-zone-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";

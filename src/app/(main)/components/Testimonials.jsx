@@ -137,8 +137,7 @@ const TestimonialPagination = () => {
                     <Image 
                       src={testimonials[currentMobileIndex].avatar} 
                       alt={testimonials[currentMobileIndex].name}
-                      layout="fill"
-                      objectFit="cover"
+                      
                     />
                   </div>
                 </div>
