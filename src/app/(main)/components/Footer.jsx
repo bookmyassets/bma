@@ -57,7 +57,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/about">About us</Link></li>
               <li><Link href="/dholera-sir-blogs">Blog</Link></li>
-              <li><Link href="/careers">Careers</Link></li>
+              <li><Link href="/career">Careers</Link></li>
               <li><Link href="/bulk-land/residential">Bulk Land</Link></li>
               <li><Link href="/channel-partner">Channel Partner</Link></li>
             </ul>
