@@ -58,7 +58,7 @@ export default function Footer() {
               <li><Link href="/about">About us</Link></li>
               <li><Link href="/dholera-sir-blogs">Blog</Link></li>
               <li><Link href="/careers">Careers</Link></li>
-              <li><Link href="/bulk-land">Bulk Land</Link></li>
+              <li><Link href="/bulk-land/residential">Bulk Land</Link></li>
               <li><Link href="/channel-partner">Channel Partner</Link></li>
             </ul>
           </div>
