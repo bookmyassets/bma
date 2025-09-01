@@ -19,6 +19,7 @@ import knowledgeITMap from "@/assests/bulkLand/knowledge-it-map.webp";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
+import Interlink, { getKnowledgeITLinks } from "../Interlink";
 
 export default function page() {
   return (
@@ -220,6 +221,10 @@ export default function page() {
         <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <Interlink
+        properties={getKnowledgeITLinks()}
+        title="Explore Other Zones in Dholera SIR"
+      />
     </>
   );
 }

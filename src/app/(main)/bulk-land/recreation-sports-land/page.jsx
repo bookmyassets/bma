@@ -18,6 +18,7 @@ import CommonForm from "../../components/CommonForm";
 import recreationmap from "@/assests/bulkLand/recreation-sports-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
+import Interlink, { getSportLinks } from "../Interlink";
 
 export default function page() {
   return (
@@ -119,7 +120,7 @@ export default function page() {
         <div>
           <p className="text-center text-3xl font-semibold mb-8">
             Benefits of Buying Bulk Land in Recreation, Sports & Entertainment
-            Zone Zone
+            Zone
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
             {/* High Appreciation Potential */}
@@ -219,6 +220,10 @@ export default function page() {
         <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <Interlink
+        properties={getSportLinks()}
+        title="Explore Other Zones in Dholera SIR"
+      />
     </>
   );
 }

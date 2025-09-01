@@ -2,6 +2,8 @@
 import { useState } from "react";
 import ChannelPartnerForm from "./channelPartnerForm";
 
+import Image from "next/image";
+
 export default function ChannelPartnerPage() {
   return (
     <div className="min-h-screen bg-gray-50">
@@ -152,7 +154,7 @@ export default function ChannelPartnerPage() {
                       className="p-3 rounded-lg"
                       style={{ backgroundColor: "#deae3c", opacity: 1 }}
                     >
-                      <div className="w-6 h-6" >
+                      <div className="w-6 h-6" style={{ color: "#0d0d0d" }}>
                         🎧
                       </div>
                     </div>

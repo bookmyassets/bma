@@ -8,6 +8,7 @@ import {
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import BlogSchemaMarkup from "../BlogSchemaMarkup";
 
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {

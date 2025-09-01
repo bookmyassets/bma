@@ -109,7 +109,7 @@ export default function HeroCarousel() {
         <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center px-4">
           {/* Main Title */}
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">
-            Maple
+            Pride
           </h1>
 
           {/* Property Details */}

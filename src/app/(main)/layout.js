@@ -60,6 +60,13 @@ export default function RootLayout({ children }) {
                   font-family: "Inter", sans-serif;
                 }
               `}</style>
+             <noscript
+  dangerouslySetInnerHTML={{
+    __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJ55GJFP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>`
+  }}
+/>
+
         <Navbar />
         {children}
         <Footer />
