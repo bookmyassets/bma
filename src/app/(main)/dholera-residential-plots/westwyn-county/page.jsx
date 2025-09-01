@@ -216,7 +216,7 @@ export default function HeroCarousel() {
 
               {/* Acreage Information */}
               <div className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-bold">2.66</span>
+                <span className="text-2xl sm:text-3xl font-bold">6.10</span>
                 <span className="text-sm sm:text-base">Total Acres</span>
               </div>
             </div>
