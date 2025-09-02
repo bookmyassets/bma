@@ -847,17 +847,23 @@ const RealEstateLandingPage = () => {
                 strategic real estate investments in Dholera Smart City.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/918130371647">
+
                 <button className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                   <span>Schedule a Consultation</span>
                   <ArrowRight
                     className="group-hover:translate-x-1 transition-transform"
                     size={20}
-                  />
+                    />
                 </button>
+                    </a>
+                <a href="tel:+918130371647">
+
                 <button className="border-2 border-yellow-500 hover:bg-yellow-500 text-yellow-500 hover:text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                   <Phone size={20} />
                   <span>Call Us Now</span>
                 </button>
+                </a>
               </div>
             </div>
           </div>

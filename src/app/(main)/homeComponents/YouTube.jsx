@@ -6,9 +6,10 @@ export default function ShortsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentPlayingId, setCurrentPlayingId] = useState(null);
-  const [itemsPerView, setItemsPerView] = useState(3); // responsive per view
+  const [itemsPerView, setItemsPerView] = useState(3);
   const iframeRefs = useRef({});
   const autoScrollRef = useRef(null);
+  const [isYouTubeAPIReady, setIsYouTubeAPIReady] = useState(false);
 
   // Set window origin safely
   useEffect(() => {
@@ -32,6 +33,21 @@ export default function ShortsSection() {
     updateItemsPerView();
     window.addEventListener("resize", updateItemsPerView);
     return () => window.removeEventListener("resize", updateItemsPerView);
+  }, []);
+
+  // Lazy load YouTube API only when needed
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      tag.async = true;
+      tag.onload = () => setIsYouTubeAPIReady(true);
+      document.head.appendChild(tag);
+    } else {
+      setIsYouTubeAPIReady(true);
+    }
   }, []);
 
   const shortsData = useMemo(() => {
@@ -78,14 +94,14 @@ export default function ShortsSection() {
 
   // Auto scroll functionality
   useEffect(() => {
-    if (isVideoPlaying) return; // Don't auto-scroll if video is playing
+    if (isVideoPlaying) return;
 
     autoScrollRef.current = setInterval(() => {
       setCurrentIndex((prev) => {
         const next = prev + 1;
-        return next >= shortsData.length - itemsPerView ? 0 : next;
+        return next >= shortsData.length - itemsPerView + 1 ? 0 : next;
       });
-    }, 4000); // 4 seconds
+    }, 4000);
 
     return () => {
       if (autoScrollRef.current) {
@@ -114,12 +130,7 @@ export default function ShortsSection() {
 
   // YouTube API setup and listener
   useEffect(() => {
-    if (!window.YT) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.getElementsByTagName("script")[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    }
+    if (!isYouTubeAPIReady) return;
 
     const handleMessage = (event) => {
       if (!event.origin.includes("youtube.com")) return;
@@ -171,20 +182,20 @@ export default function ShortsSection() {
 
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, [currentPlayingId]);
+  }, [currentPlayingId, isYouTubeAPIReady]);
 
   // Navigation functions
   const goToNext = () => {
     setCurrentIndex((prev) => {
       const next = prev + 1;
-      return next >= shortsData.length - itemsPerView ? 0 : next;
+      return next >= shortsData.length - itemsPerView + 1 ? 0 : next;
     });
   };
 
   const goToPrev = () => {
     setCurrentIndex((prev) => {
       const next = prev - 1;
-      return next < 0 ? shortsData.length - itemsPerView : next;
+      return next < 0 ? Math.max(0, shortsData.length - itemsPerView) : next;
     });
   };
 
@@ -200,7 +211,7 @@ export default function ShortsSection() {
           Dholera in Motion
         </h2>
         <p className="text-center font-light text-white text-lg mb-6">
-          Witness real-time progress in the Dholera smart city project
+          Witness real-time progress in the Dholera smart city project
         </p>
 
         <div className="relative">
@@ -263,17 +274,20 @@ export default function ShortsSection() {
                   aria-roledescription="Short video"
                 >
                   <div className="bg-[#f3f2ef] rounded-2xl overflow-hidden shadow-xl p-3 h-[480px]">
-                    <iframe
-                      ref={(el) => {
-                        iframeRefs.current[index] = el;
-                      }}
-                      className="w-full h-[380px] rounded-xl"
-                      src={short.embedUrl}
-                      title={short.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                    />
+                    {/* Lazy loading placeholder */}
+                    <div className="w-full h-[380px] rounded-xl bg-gray-800 relative overflow-hidden">
+                      <iframe
+                        ref={(el) => {
+                          iframeRefs.current[index] = el;
+                        }}
+                        className="w-full h-full absolute inset-0"
+                        src={short.embedUrl}
+                        title={short.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    </div>
                     <div className="p-2 text-center">
                       <h3 className="text-gray-800 font-semibold text-lg line-clamp-2">
                         {short.title}
@@ -290,20 +304,20 @@ export default function ShortsSection() {
 
           {/* Dots Indicator */}
           <div className="flex justify-center mt-4 space-x-2">
-            {Array.from({ length: shortsData.length - itemsPerView + 1 }).map(
-              (_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    currentIndex === index
-                      ? "bg-[#deae3c] w-6"
-                      : "bg-white/30 hover:bg-white/50"
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              )
-            )}
+            {Array.from({ 
+              length: Math.max(1, shortsData.length - itemsPerView + 1) 
+            }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  currentIndex === index
+                    ? "bg-[#deae3c] w-6"
+                    : "bg-white/30 hover:bg-white/50"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

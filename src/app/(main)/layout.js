@@ -1,16 +1,16 @@
 "use client";
-import './globals.css'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import "./globals.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { initFacebookPixel, trackPageView } from "@/lib/fbpixel";
-import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
-import Script from 'next/script';
-import FloatingButtons from './components/whatsapp';
-import ContactNow from './components/Callus';
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import Script from "next/script";
+import FloatingButtons from "./components/whatsapp";
+import ContactNow from "./components/Callus";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function RootLayout({ children }) {
-
   const pathname = usePathname();
 
   const FACEBOOK_PIXEL_ID = "1147887730461644";
@@ -31,11 +31,14 @@ export default function RootLayout({ children }) {
           src="https://www.googletagmanager.com/gtag/js?id=G-M6ZWDM9CGE"
         />
 
-<Script>{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        <Script>
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MJ55GJFP')`};</Script>
+})(window,document,'script','dataLayer','GTM-MJ55GJFP')`}
+          ;
+        </Script>
         <Script
           id="google-analytics"
           strategy="afterInteractive"
@@ -57,27 +60,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     })(window, document, "clarity", "script", "rivub95ldd");
         `}
         </Script>
-     </head>
+      </head>
       <body>
+        <ScrollToTop/>
         <style jsx global>{`
-                @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800&display=swap");
-        
-                body {
-                  font-family: "Inter", sans-serif;
-                }
-              `}</style>
-             <noscript
-  dangerouslySetInnerHTML={{
-    __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJ55GJFP"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>`
-  }}
-/>
+          @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800&display=swap");
+
+          body {
+            font-family: "Lato", sans-serif;
+          }
+        `}</style>
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJ55GJFP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+          }}
+        />
 
         <Navbar />
         {children}
         <Footer />
-        <FloatingButtons/>
-        <ContactNow/>
+        <FloatingButtons />
+        <ContactNow />
       </body>
     </html>
   );
