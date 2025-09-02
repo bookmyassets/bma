@@ -74,7 +74,7 @@ export default function page() {
                   Key Permissions
                 </h3>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
-                  Residential Development
+                  Residential and Commercial Development
                 </p>
               </div>
               <div className="flex flex-col items-center">

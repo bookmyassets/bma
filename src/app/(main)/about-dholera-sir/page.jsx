@@ -47,8 +47,8 @@ export default async function page() {
           <div className="absolute inset-0 bg-black/40"></div>
 
           {/* Hero Content */}
-          <div className="relative z-10 text-center px-4">
-            <h1 className="text-6xl max-sm:pt-8 md:text-8xl font-bold text-white mb-4 drop-shadow-lg">
+          <div className="relative flex flex-col justify-center items-center z-10 text-center px-4">
+            <h1 className="text-6xl max-sm:pt-8 font-bold text-white mb-4 drop-shadow-lg">
               DHOLERA SIR
             </h1>
 

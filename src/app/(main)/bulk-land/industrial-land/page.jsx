@@ -73,7 +73,7 @@ export default function page() {
                   Key Permissions
                 </h3>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
-                  Residential Development
+                  Industrial Development
                 </p>
               </div>
               <div className="flex flex-col items-center">
@@ -169,7 +169,7 @@ export default function page() {
 
       <div className="max-w-6xl mx-auto pb-8 pt-12 p-4">
         <p className="text-center text-3xl font-semibold mb-8">
-          Types of Residential Projects Allowed
+          Types of Industrial Projects Allowed
         </p>
 
         {/* Project Types Grid */}
