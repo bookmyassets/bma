@@ -49,11 +49,11 @@ export default function FAQSection() {
               Frequently Asked Questions
             </h2>
             <p className="text-gray-600 mb-2">
-              Got questions about Dholera Smart City?
+              More Questions about Dholera Smart City?
             </p>
-            <p className="text-gray-600">
-              We’ve answered the most common ones here.
-            </p>
+            <div className="pt-4">
+              <a className="px-2 py-3 bg-[#deae3c] rounded-md" href="tel:+918130371647">Give Us A Missed Call.</a>
+            </div>
           </div>
 
           {/* Right Section (60%) */}
@@ -91,9 +91,7 @@ export default function FAQSection() {
                 </div>
               </div>
             ))}
-            <div className="pt-4">
-              <a className="px-2 py-3 bg-[#deae3c] rounded-md" href="tel:+918130371647">For more questions, give us a missed call.</a>
-            </div>
+            
           </div>
         </div>
       </div>

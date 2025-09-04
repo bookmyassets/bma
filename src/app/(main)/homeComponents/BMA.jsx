@@ -104,58 +104,56 @@ export default function BMA() {
           </div>
 
           <div id="counters-section" className="py-4">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
-      
-      {/* Counter Item */}
-      <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-        <div className="text-[24px] font-bold text-[#deae3c] mb-2">
-          1 Lakh
-        </div>
-        <p className="text-sm md:text-base text-gray-700 font-medium text-center">
-          sq. yards Sold
-        </p>
-      </div>
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+                  {/* Counter Item */}
+                  <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+                    <div className="text-[24px] font-bold text-[#deae3c] mb-2">
+                      1 Lakh
+                    </div>
+                    <p className="text-sm md:text-base text-gray-700 font-medium text-center">
+                      sq. yards Sold
+                    </p>
+                  </div>
 
-      <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-        <div className="text-[24px] font-bold text-[#deae3c] mb-2">
-          1000
-        </div>
-        <p className="text-sm md:text-base text-gray-700 font-medium text-center">
-          Plots Sold
-        </p>
-      </div>
+                  <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+                    <div className="text-[24px] font-bold text-[#deae3c] mb-2">
+                      1000
+                    </div>
+                    <p className="text-sm md:text-base text-gray-700 font-medium text-center">
+                      Plots Sold
+                    </p>
+                  </div>
 
-      <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-        <div className="text-[24px] font-bold text-[#deae3c] mb-2">
-          400
-        </div>
-        <p className="text-sm md:text-base text-gray-700 font-medium text-center">
-          Happy Customers
-        </p>
-      </div>
+                  <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+                    <div className="text-[24px] font-bold text-[#deae3c] mb-2">
+                      400
+                    </div>
+                    <p className="text-sm md:text-base text-gray-700 font-medium text-center">
+                      Happy Customers
+                    </p>
+                  </div>
 
-      <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-        <div className="text-[24px] font-bold text-[#deae3c] mb-2">
-          7
-        </div>
-        <p className="text-sm md:text-base text-gray-700 font-medium text-center">
-          Total Residential Projects
-        </p>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
-
+                  <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+                    <div className="text-[24px] font-bold text-[#deae3c] mb-2">
+                      7
+                    </div>
+                    <p className="text-sm md:text-base text-gray-700 font-medium text-center">
+                      Total Residential Projects
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center">
             <Link
               href="/about"
               className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
             >
-              About BMA
+              About Us
             </Link>
           </div>
         </div>
@@ -165,7 +163,7 @@ export default function BMA() {
         <p className="text-3xl text-center font-semibold"><span className="text-[#deae3c]">Dholera</span> in Motion See India's Smart City Revolution Live</p>
         <p className="text-center text-lg">Witness real-time progress in the dholera smart city project, where infrastructure like the ABCD Building Dholera and industrial zones are developing rapidly. </p>
       </div> */}
-      <LeadForm/>
+      <LeadForm />
     </div>
   );
 }
