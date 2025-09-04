@@ -149,8 +149,8 @@ export default function page() {
        <Hero openForm={() => setpopShowForm(true)} />
        <Dholera/>
        <BMA/>
-       <ShortsSection/>
        <WestWyn/>
+       <ShortsSection/>
        <FAQSection/>
     </div>
     {/* {showpopForm && (
