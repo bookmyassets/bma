@@ -10,6 +10,7 @@ import CommonForm from "../../components/CommonForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import CostSheet from "../../components/costSheet";
+import ActiveProjectsSection from "../ActiveProject";
 
 export default function HeroCarousel() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
@@ -333,6 +334,8 @@ export default function HeroCarousel() {
 
       {/* Form */}
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
+
+      <ActiveProjectsSection/>
 
       <AnimatePresence>
         {isContactFormOpen && (

@@ -12,6 +12,7 @@ import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
 import CostSheet from "../../components/costSheet";
+import SoldOutProjectsSection from "../SoldOutProjects";
 
 export default function HeroCarousel() {
   const faqs = [
@@ -623,6 +624,8 @@ export default function HeroCarousel() {
       <FAQSection />
       {/* Form */}
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
+
+      <SoldOutProjectsSection/>
 
       <AnimatePresence>
         {isContactFormOpen && (
