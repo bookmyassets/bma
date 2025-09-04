@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import BMAimage from "@/assests/BMA.webp";
+import LeadForm from "../components/LeadForm";
 
 export default function BMA() {
   // Counter states for new section 3
@@ -164,6 +165,7 @@ export default function BMA() {
         <p className="text-3xl text-center font-semibold"><span className="text-[#deae3c]">Dholera</span> in Motion See India's Smart City Revolution Live</p>
         <p className="text-center text-lg">Witness real-time progress in the dholera smart city project, where infrastructure like the ABCD Building Dholera and industrial zones are developing rapidly. </p>
       </div> */}
+      <LeadForm/>
     </div>
   );
 }

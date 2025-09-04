@@ -128,29 +128,7 @@ export default async function page() {
             )}
           </div>
 
-          {/* Newsletter Signup Section */}
-          {/* <div className="max-w-7xl mx-auto px-4 pb-16">
-            <div className="bg-gradient-to-r from-[#FF9933]/90 to-[#138808]/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 lg:p-12 text-center border border-white/20">
-              <h2 className="text-3xl font-bold text-white mb-4">
-                Stay Updated with Dholera SIR News
-              </h2>
-              <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-                Get the latest updates on investment opportunities,
-                infrastructure developments, and market insights delivered to
-                your inbox
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-1 px-6 py-3 rounded-xl border-none outline-none text-gray-800"
-                />
-                <button className="bg-white text-[#FF9933] px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap">
-                  Subscribe Now
-                </button>
-              </div>
-            </div>
-          </div> */}
+          
         </div>
       </div>
     </>

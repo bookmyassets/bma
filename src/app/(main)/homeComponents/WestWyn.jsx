@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import sample1 from "@/assests/westWyn.webp";
 import Link from "next/link";
-import LeadForm from "../components/LeadForm";
+
 
 export default function WestWyn() {
   return (
@@ -59,7 +59,7 @@ export default function WestWyn() {
           </div>
         </div>
       </div>
-      <LeadForm/>
+      
     </>
   );
 }
