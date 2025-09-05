@@ -7,12 +7,15 @@ import FormComponent from "./FormComponent";
 
 export default async function page() {
   let posts = [];
+  let fetchError = null;
+  
   try {
     const postsData = await getblogs();
     posts = Array.isArray(postsData) ? postsData : [];
     console.log("Posts data fetched:", posts.length);
   } catch (error) {
-    console.error("Error fetching project info:", error);
+    console.error("Error fetching blog posts:", error);
+    fetchError = error;
   }
 
   const safePosts = posts.map((post) => ({
@@ -71,13 +74,13 @@ export default async function page() {
                 {/* All Posts Grid */}
                 <div>
                   <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-                    Latest Articles
+                    Latest Articles ({safePosts.length})
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {safePosts.map((post, index) => (
                       <div
                         key={post._id}
-                        className={`transform hover:-translate-y-2 transition-all duration-300 ${index === 0 ? "lg:hidden" : ""}`}
+                        className="transform hover:-translate-y-2 transition-all duration-300"
                       >
                         <BlogCard post={post} />
                       </div>
@@ -88,15 +91,30 @@ export default async function page() {
             ) : (
               <div className="text-center py-20">
                 <div className="bg-white/95 backdrop-blur-sm p-12 rounded-2xl shadow-xl max-w-2xl mx-auto border border-white/20">
-                  <div className="text-6xl mb-6">📝</div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                    Blog Coming Soon!
-                  </h3>
-                  <p className="text-gray-600 text-lg mb-8">
-                    We're preparing valuable content about Dholera SIR
-                    investment opportunities. Stay tuned for expert insights and
-                    market analysis.
-                  </p>
+                  {fetchError ? (
+                    <>
+                      <div className="text-6xl mb-6">⚠️</div>
+                      <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                        Unable to Load Blogs
+                      </h3>
+                      <p className="text-gray-600 text-lg mb-8">
+                        We're experiencing some technical difficulties loading the blog posts. 
+                        Please try refreshing the page or contact support if the issue persists.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-6xl mb-6">📝</div>
+                      <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                        Blog Coming Soon!
+                      </h3>
+                      <p className="text-gray-600 text-lg mb-8">
+                        We're preparing valuable content about Dholera SIR
+                        investment opportunities. Stay tuned for expert insights and
+                        market analysis.
+                      </p>
+                    </>
+                  )}
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button className="bg-gradient-to-r from-[#FF9933] to-[#138808] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
                       Get Notified
@@ -109,8 +127,6 @@ export default async function page() {
               </div>
             )}
           </div>
-
-          
         </div>
       </div>
     </>

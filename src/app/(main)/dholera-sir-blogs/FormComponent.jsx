@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import BrochureDownload from "../components/BrochureDownload";
 import ContactForm from "../components/Contactform";
@@ -37,10 +37,16 @@ export default function FormComponent() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button onClick={openContactForm} className="bg-gradient-to-r from-[#FF9933] to-[#138808] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+            <button
+              onClick={openContactForm}
+              className="bg-gradient-to-r from-[#FF9933] to-[#138808] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+            >
               Get Free Consultation
             </button>
-            <button onClick={openBrochureForm} className="border-2 border-[#FF9933] text-[#FF9933] px-8 py-3 rounded-xl font-semibold hover:bg-[#FF9933] hover:text-white transition-all duration-300">
+            <button
+              onClick={openBrochureForm}
+              className="border-2 border-[#FF9933] text-[#FF9933] px-8 py-3 rounded-xl font-semibold hover:bg-[#FF9933] hover:text-white transition-all duration-300"
+            >
               Download Brochure
             </button>
           </div>
@@ -59,7 +65,7 @@ export default function FormComponent() {
         )}
       </AnimatePresence>
 
-<AnimatePresence>
+      <AnimatePresence>
         {isBrochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
