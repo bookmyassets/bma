@@ -16,7 +16,7 @@ export const getResidentialLinks = () => {
       title: "Industrial Zone",
       area: "28311.75 sq. yards",
       price: "85,00,000",
-      link: "/industrial"
+      link: "/bulk-land/industrial-land-land"
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ export const getResidentialLinks = () => {
       title: "City Centre Zone",
       area: "1678.045 sq. yards",
       price: "58,75,000",
-      link: "/city-centre"
+      link: "/bulk-land/city-centre-land"
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ export const getResidentialLinks = () => {
       title: "Knowledge & IT Zone",
       area: "3039.32 sq. yards",
       price: "72,25,000",
-      link: "/knowledge-it"
+      link: "/bulk-land/knowledge-it-land"
     },
     {
       id: 4,
@@ -40,7 +40,7 @@ export const getResidentialLinks = () => {
       title: "High Access Corridor Zone",
       area: "6091.41 sq. yards",
       price: "41,80,000",
-      link: "/high-access"
+      link: "/bulk-land/high-access-corridor"
     },
     {
       id: 5,
@@ -48,7 +48,7 @@ export const getResidentialLinks = () => {
       title: "Recreation, Sports & Entertainment Zone",
       area: "11120.45 sq. yards",
       price: "48,50,000",
-      link: "/sports"
+      link: "/bulk-land/recreation-sports-land"
     }
   ];
 };
@@ -62,7 +62,7 @@ export const getIndustrialLinks = () => {
       title: "Residential Zone",
       area: "24167.55 Sq. Yards",
       price: "45,00,000",
-      link: "/residential"
+      link: "/bulk-land/residential"
     },
     {
       id: 2,
@@ -70,7 +70,7 @@ export const getIndustrialLinks = () => {
       title: "City Centre Zone",
       area: "1678.045 sq. yards",
       price: "58,75,000",
-      link: "/city-centre"
+      link: "/bulk-land/city-centre-land"
     },
     {
       id: 3,
@@ -78,7 +78,7 @@ export const getIndustrialLinks = () => {
       title: "Knowledge & IT Zone",
       area: "3039.32 sq. yards",
       price: "72,25,000",
-      link: "/knowledge-it"
+      link: "/bulk-land/knowledge-it-land"
     },
     {
       id: 4,
@@ -86,7 +86,7 @@ export const getIndustrialLinks = () => {
       title: "High Access Corridor Zone",
       area: "6091.41 sq. yards",
       price: "41,80,000",
-      link: "/high-access"
+      link: "/bulk-land/high-access-corridor"
     },
     {
       id: 5,
@@ -94,7 +94,7 @@ export const getIndustrialLinks = () => {
       title: "Recreation, Sports & Entertainment Zone",
       area: "11120.45 sq. yards",
       price: "48,50,000",
-      link: "/sports"
+      link: "/bulk-land/recreation-sports-land"
     }
   ];
 };
@@ -108,7 +108,7 @@ export const getCityCenterLinks = () => {
       title: "Residential Zone",
       area: "24167.55 Sq. Yards",
       price: "45,00,000",
-      link: "/residential"
+      link: "/bulk-land/residential"
     },
     {
       id: 2,
@@ -116,7 +116,7 @@ export const getCityCenterLinks = () => {
       title: "Industrial Zone",
       area: "28311.75 sq. yards",
       price: "85,00,000",
-      link: "/industrial"
+      link: "/bulk-land/industrial-land"
     },
     {
       id: 3,
@@ -124,7 +124,7 @@ export const getCityCenterLinks = () => {
       title: "Knowledge & IT Zone",
       area: "3039.32 sq. yards",
       price: "72,25,000",
-      link: "/knowledge-it"
+      link: "/bulk-land/knowledge-it-land"
     },
     {
       id: 4,
@@ -132,7 +132,7 @@ export const getCityCenterLinks = () => {
       title: "High Access Corridor Zone",
       area: "6091.41 sq. yards",
       price: "41,80,000",
-      link: "/high-access"
+      link: "/bulk-land/high-access-corridor"
     },
     {
       id: 5,
@@ -140,7 +140,7 @@ export const getCityCenterLinks = () => {
       title: "Recreation, Sports & Entertainment Zone",
       area: "11120.45 sq. yards",
       price: "48,50,000",
-      link: "/sports"
+      link: "/bulk-land/recreation-sports-land"
     }
   ];
 };
@@ -154,7 +154,7 @@ export const getKnowledgeITLinks = () => {
       title: "Residential Zone",
       area: "24167.55 Sq. Yards",
       price: "45,00,000",
-      link: "/residential"
+      link: "/bulk-land/residential"
     },
     {
       id: 2,
@@ -162,7 +162,7 @@ export const getKnowledgeITLinks = () => {
       title: "Industrial Zone",
       area: "28311.75 sq. yards",
       price: "85,00,000",
-      link: "/industrial"
+      link: "/bulk-land/industrial-land"
     },
     {
       id: 3,
@@ -170,7 +170,7 @@ export const getKnowledgeITLinks = () => {
       title: "City Centre Zone",
       area: "1678.045 sq. yards",
       price: "58,75,000",
-      link: "/city-centre"
+      link: "/bulk-land/city-centre-land"
     },
     {
       id: 4,
@@ -178,7 +178,7 @@ export const getKnowledgeITLinks = () => {
       title: "High Access Corridor Zone",
       area: "6091.41 sq. yards",
       price: "41,80,000",
-      link: "/high-access"
+      link: "/bulk-land/high-access-corridor"
     },
     {
       id: 5,
@@ -186,7 +186,7 @@ export const getKnowledgeITLinks = () => {
       title: "Recreation, Sports & Entertainment Zone",
       area: "11120.45 sq. yards",
       price: "48,50,000",
-      link: "/sports"
+      link: "/bulk-land/recreation-sports-land"
     }
   ];
 };
@@ -200,7 +200,7 @@ export const getHACLinks = () => {
       title: "Residential Zone",
       area: "24167.55 Sq. Yards",
       price: "45,00,000",
-      link: "/residential"
+      link: "/bulk-land/residential"
     },
     {
       id: 2,
@@ -208,7 +208,7 @@ export const getHACLinks = () => {
       title: "Industrial Zone",
       area: "28311.75 sq. yards",
       price: "85,00,000",
-      link: "/industrial"
+      link: "/bulk-land/industrial-land"
     },
     {
       id: 3,
@@ -216,7 +216,7 @@ export const getHACLinks = () => {
       title: "City Centre Zone",
       area: "1678.045 sq. yards",
       price: "58,75,000",
-      link: "/city-centre"
+      link: "/bulk-land/city-centre-land"
     },
     {
       id: 4,
@@ -224,7 +224,7 @@ export const getHACLinks = () => {
       title: "Knowledge & IT Zone",
       area: "3039.32 sq. yards",
       price: "72,25,000",
-      link: "/knowledge-it"
+      link: "/bulk-land/knowledge-it-land"
     },
     {
       id: 5,
@@ -232,7 +232,7 @@ export const getHACLinks = () => {
       title: "Recreation, Sports & Entertainment Zone",
       area: "11120.45 sq. yards",
       price: "48,50,000",
-      link: "/sports"
+      link: "/bulk-land/recreation-sports-land"
     }
   ];
 };
@@ -246,7 +246,7 @@ export const getSportLinks = () => {
       title: "Residential Zone",
       area: "24167.55 Sq. Yards",
       price: "45,00,000",
-      link: "/residential"
+      link: "/bulk-land/residential"
     },
     {
       id: 2,
@@ -254,7 +254,7 @@ export const getSportLinks = () => {
       title: "Industrial Zone",
       area: "28311.75 sq. yards",
       price: "85,00,000",
-      link: "/industrial"
+      link: "/bulk-land/industrial-land"
     },
     {
       id: 3,
@@ -262,7 +262,7 @@ export const getSportLinks = () => {
       title: "City Centre Zone",
       area: "1678.045 sq. yards",
       price: "58,75,000",
-      link: "/city-centre"
+      link: "/bulk-land/city-centre-land"
     },
     {
       id: 4,
@@ -270,7 +270,7 @@ export const getSportLinks = () => {
       title: "Knowledge & IT Zone",
       area: "3039.32 sq. yards",
       price: "72,25,000",
-      link: "/knowledge-it"
+      link: "/bulk-land/knowledge-it-land"
     },
     {
       id: 5,
@@ -278,7 +278,7 @@ export const getSportLinks = () => {
       title: "High Access Corridor Zone",
       area: "6091.41 sq. yards",
       price: "41,80,000",
-      link: "/high-access"
+      link: "/bulk-land/high-access-corridor"
     }
   ];
 };

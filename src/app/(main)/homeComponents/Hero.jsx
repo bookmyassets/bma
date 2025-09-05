@@ -22,7 +22,7 @@ export default function Hero() {
           preload="auto"
           className="object-cover inset-0 w-full h-full z-0 md:hidden"
         >
-          <source src="/video/bma-home-portrait.mp4" type="video/mp4" />
+          <source src="/video/bma-home-portrait-video.webm" type="video/mp4" />
         </video>
       </div>
       
