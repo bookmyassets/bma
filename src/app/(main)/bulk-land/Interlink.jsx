@@ -16,7 +16,7 @@ export const getResidentialLinks = () => {
       title: "Industrial Zone",
       area: "28311.75 sq. yards",
       price: "85,00,000",
-      link: "/bulk-land/industrial-land-land"
+      link: "/bulk-land/industrial-land"
     },
     {
       id: 2,
