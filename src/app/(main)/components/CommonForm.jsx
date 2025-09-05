@@ -300,7 +300,7 @@ export default function CommonForm({ title }) {
                       placeholder="Enter your name"
                     />
                   </div>
-
+                
                   <div className="w-full">
                     <label
                       htmlFor="phone"

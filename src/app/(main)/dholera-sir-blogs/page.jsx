@@ -3,6 +3,7 @@ import React from "react";
 import BlogCard from "./BlogCard";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import FormComponent from "./FormComponent";
 
 export default async function page() {
   let posts = [];
@@ -60,26 +61,7 @@ export default async function page() {
             </div>
 
             {/* CTA Banner */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 mb-16 border border-white/20">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-                <div className="text-center lg:text-left">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-3">
-                    🚀 Ready to Invest in Dholera SIR?
-                  </h2>
-                  <p className="text-gray-600 text-lg">
-                    Get expert guidance and exclusive investment opportunities
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="bg-gradient-to-r from-[#FF9933] to-[#138808] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
-                    Get Free Consultation
-                  </button>
-                  <button className="border-2 border-[#FF9933] text-[#FF9933] px-8 py-3 rounded-xl font-semibold hover:bg-[#FF9933] hover:text-white transition-all duration-300">
-                    Download Brochure
-                  </button>
-                </div>
-              </div>
-            </div>
+            <FormComponent/>
           </div>
 
           {/* Blog Posts Section */}
