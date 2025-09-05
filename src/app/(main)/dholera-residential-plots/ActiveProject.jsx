@@ -91,7 +91,7 @@ const ActiveProjectsSection = () => {
                 </div>
 
                 {/* Project Details */}
-                <div className="p-6">
+                <div className="p-4">
                   <h3 className="text-xl font-bold mb-3 group-hover:text-yellow-600 transition-colors duration-300" style={{color: '#0d0d0d'}}>
                     {project.projectName}
                   </h3>
@@ -99,11 +99,6 @@ const ActiveProjectsSection = () => {
                   <div className="flex items-start gap-2 mb-3">
                     <MapPin className="w-4 h-4 mt-1 flex-shrink-0" style={{color: '#deae3c'}} />
                     <p className="text-gray-600 text-sm">{project.location}</p>
-                  </div>
-
-                  <div className="flex items-center gap-2 mb-4">
-                    <Clock className="w-4 h-4" style={{color: '#deae3c'}} />
-                    <p className="text-gray-600 text-sm">{project.constructionStatus}</p>
                   </div>
 
                   {/* CTA Button */}

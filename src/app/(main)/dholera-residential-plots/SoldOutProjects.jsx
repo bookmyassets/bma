@@ -139,16 +139,6 @@ const SoldOutProjectsSection = () => {
                     <p className="text-gray-600 text-sm">{project.location}</p>
                   </div>
 
-                  <div className="flex items-center gap-2 mb-4">
-                    <CheckCircle
-                      className="w-4 h-4"
-                      style={{ color: "#deae3c" }}
-                    />
-                    <p className="text-gray-600 text-sm">
-                      {project.constructionStatus}
-                    </p>
-                  </div>
-
                   {/* Success Indicator */}
                   {/* <div className="bg-gray-50 rounded-lg p-3 mb-4">
                     <div className="flex items-center justify-center gap-2">
