@@ -25,9 +25,9 @@ export default function WestWyn() {
 
         {/* Right Section (60%) */}
         <div className="w-full md:w-3/5 md:pl-24 md:pr-4  md:mt-0 ">
-          <h1 className="text-[32px] font-semibold text-black">
+          <h3 className="text-[32px] font-semibold text-black">
             Westwyn County
-          </h1>
+          </h3>
           <h2 className="text-xl font-semibold text-[#deae3c] ">
             Discover Premium Plots in Dholera's Prime Zone
           </h2>
