@@ -438,7 +438,7 @@ const RealEstateLandingPage = () => {
                 <div className="space-y-8 flex flex-col">
                   <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 flex-1 flex flex-col">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-                      Our Vission
+                      Our Vision
                     </h3>
                     <p className="text-gray-700 leading-relaxed mb-6 flex-1">
                       At BMA (Book My Assets), we are redefining real estate
