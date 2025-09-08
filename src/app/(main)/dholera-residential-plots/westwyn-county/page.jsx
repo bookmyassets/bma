@@ -49,6 +49,7 @@ export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openIndex, setOpenIndex] = useState(0);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
 
   // Counter states for new section 3
   const [sqYards, setSqYards] = useState(0);
@@ -71,6 +72,18 @@ export default function HeroCarousel() {
 
   const closeContactForm = () => {
     setIsContactFormOpen(false);
+  };
+
+  const openBrochureForm = (title, headline, btnName, type) => {
+    setFormTitle(title);
+    setFormHeadline(headline);
+    setButtonName(btnName);
+    setFormType(type);
+    setIsBrochureFormOpen(true);
+  };
+
+  const closeBrochureForm = () => {
+    setIsBrochureFormOpen(false);
   };
 
   const handleAfterSubmit = () => {
@@ -328,7 +341,7 @@ export default function HeroCarousel() {
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() =>
-                  openContactForm(
+                  openBrochureForm(
                     "Download Brochure",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Download Now",
@@ -643,15 +656,15 @@ export default function HeroCarousel() {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {isContactFormOpen && (
+        {isBrochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
             <div className="w-full max-w-md">
               <ContactForm
-                onClose={closeContactForm}
+                onClose={closeBrochureForm}
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
-                onAfterSubmit={handleAfterSubmit}
+                onSuccess={handleAfterSubmit}
               />
             </div>
           </div>

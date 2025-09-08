@@ -12,10 +12,10 @@ export default function page() {
 
   const [showpopForm, setpopShowForm] = useState(false);
 
-
   return (
     <>
     <title>Discover Investment-Ready Plots in Dholera Smart City | BookMyAssets</title>
+    
     <meta
         name="description"
         content="Secure your future with BookMyAssets! Hassle-free residential property investment with clear titles and N.A. NOC. Start your journey today!"

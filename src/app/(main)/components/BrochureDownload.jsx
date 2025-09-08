@@ -125,7 +125,7 @@ const onRecaptchaSuccess = async (token) => {
     const now = Date.now();
 
     const response = await fetch(
-      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+      "https://api.telecrm.in/enterprise/",
       {
         method: "POST",
         headers: {
@@ -138,7 +138,7 @@ const onRecaptchaSuccess = async (token) => {
             phone: formData.phone,
             source: source,
           },
-          source: "BookMyAssets Google Ads",
+          source: "BookMyAssets",
           tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
           recaptchaToken: token,
         }),
@@ -165,7 +165,7 @@ const onRecaptchaSuccess = async (token) => {
         const currentPath = pathname || window.location.pathname;
         
         // Push to thank-you route with return URL
-        router.push(`/more-info/thankyou`);
+        router.push(`/thankyou`);
       }, 2000);
     } else {
       throw new Error("Error submitting form");
