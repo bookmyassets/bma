@@ -112,7 +112,10 @@ export default function DholeraProgressPage() {
                 className="object-cover"
               />
               <div className="absolute inset-0  group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <h3 className="text-black text-xl font-bold mb-2">{image.alt}</h3>
+               <div className="bg-white p-4 text-center">
+              <h3 className="text-lg font-bold">{image.alt}</h3>
+            
+            </div>
                 
               </div>
             </div>
@@ -151,10 +154,10 @@ export default function DholeraProgressPage() {
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
-{/*             <div className="bg-white p-4 text-center">
+            <div className="bg-white p-4 text-center">
               <h3 className="text-lg font-bold">{selectedImage.alt}</h3>
               <p className="text-gray-600">{selectedImage.caption}</p>
-            </div> */}
+            </div>
           </div>
         </div>
       )}
