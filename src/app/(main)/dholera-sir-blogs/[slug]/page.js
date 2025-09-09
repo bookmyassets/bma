@@ -297,7 +297,7 @@ export default async function Post({ params }) {
       ),
       h3: ({ children }) => (
         <h3 className="text-3xl font-bold mt-12 mb-6 text-gray-800 flex items-center gap-3">
-          <div className="w-2 h-2  rounded-full"></div>
+          <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
           {children}
         </h3>
       ),

@@ -326,6 +326,8 @@ export default function LeadForm({ title }) {
                       placeholder="Enter your mobile number"
                     />
                   </div>
+                  
+                  </div>
 
                   <div>
                     <label
@@ -345,7 +347,6 @@ export default function LeadForm({ title }) {
                     />
                   </div>
 
-                  </div>
 
                 <div className="flex justify-center">
                   <div ref={recaptchaRef}></div>

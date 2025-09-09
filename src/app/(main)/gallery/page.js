@@ -29,32 +29,32 @@ import sample24 from "@/assests/gallery/sir/wtp-gallery-2.webp";
 
 export default function DholeraProgressPage() {
   const galleryImages = [
-    { id: 1, src: sample1, alt: "Dholera Abcd building", caption: "Dholera Abcd building" },
-    { id: 2, src: sample2, alt: "Dholera Abcd building auditorium", caption: "Dholera Abcd building auditorium" },
-    { id: 3, src: sample3, alt: "Dholera Abcd building  inside", caption: "Dholera Abcd building  inside" },
-    { id: 4, src: sample4, alt: "Dholera Ahmedabad Expressway After & Before Contruction (1)", caption: "Dholera Ahmedabad Expressway After & Before Contruction (1)" },
-    { id: 5, src: sample5, alt: "Dholera Ahmedabad Expressway After & Before Contruction (1)", caption: "Dholera Ahmedabad Expressway After & Before Contruction (1)" },
-    { id: 6, src: sample6, alt: "Dholera Ahmedabad Expressway Final", caption: "Dholera Ahmedabad Expressway Final" },
-    { id: 7, src: sample7, alt: "Dholera Ahmedabad Expressway Night view", caption: "Dholera Ahmedabad Expressway Night view" },
-    { id: 8, src: sample8, alt: "Dholera Canal Front Final View", caption: "Dholera Canal Front Final View" },
-    { id: 9, src: sample9, alt: "Dholera Cannel front view daytime & nighttime", caption: "Dholera Cannel front view daytime & nighttime" },
-    { id: 10, src: sample10, alt: "Dholera Common Effluent Treatement Plant 1", caption: "Dholera Common Effluent Treatement Plant 1" },
-    { id: 11, src: sample11, alt: "Dholera Common Effluent Treatement Plant", caption: "Dholera Common Effluent Treatement Plant 1" },
-    { id: 12, src: sample12, alt: "Dholera Sewage Treatment Plant outer view", caption: "Dholera Sewage Treatment Plant outer view" },
-    { id: 13, src: sample13, alt: "Dholera Sewage Treatment Plant", caption: "Dholera Sewage Treatment Plant" },
-    { id: 14, src: sample14, alt: "Dholera Solar Power Plant", caption: "Dholera Solar Power Plant" },
-    { id: 15, src: sample15, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 16, src: sample16, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 17, src: sample17, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 18, src: sample18, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 19, src: sample19, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 20, src: sample20, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 21, src: sample21, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 22, src: sample22, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 23, src: sample23, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-    { id: 24, src: sample24, alt: "Dholera Solar Power Plant 2", caption: "Dholera Solar Power Plant 2" },
-   
-  ];
+  { id: 1, src: sample1, alt: "Aerial view of ABCD Building in Dholera SIR", caption: "Aerial view of ABCD Building in Dholera SIR" },
+  { id: 2, src: sample2, alt: "Artificial river development in Dholera Smart City", caption: "Artificial river development in Dholera Smart City" },
+  { id: 3, src: sample3, alt: "Aerial view of Activation area in Dholera Smart City", caption: "Aerial view of Activation area in Dholera Smart City" },
+  { id: 4, src: sample4, alt: "Man-made riverfront in Dholera Smart City", caption: "Man-made riverfront in Dholera Smart City" },
+  { id: 5, src: sample5, alt: "Aerial view of Dholera Smart City roads with canal side walkway", caption: "Aerial view of Dholera Smart City roads with canal side walkway" },
+  { id: 6, src: sample6, alt: "Runway terminal of Dholera International Airport", caption: "Runway terminal of Dholera International Airport" },
+  { id: 7, src: sample7, alt: "Aerial view of Ahmedabad Dholera Expressway", caption: "Aerial view of Ahmedabad Dholera Expressway" },
+  { id: 8, src: sample8, alt: "Proposed metro rail infrastructure in Dholera Smart City planning", caption: "Proposed metro rail infrastructure in Dholera Smart City planning" },
+  { id: 9, src: sample9, alt: "ReNew solar cell manufacturing plant in Dholera Smart City", caption: "ReNew solar cell manufacturing plant in Dholera Smart City" },
+  { id: 10, src: sample10, alt: "Solar power infrastructure by ReNew power in Dholera Smart Industrial Region", caption: "Solar power infrastructure by ReNew power in Dholera Smart Industrial Region" },
+  { id: 11, src: sample11, alt: "Tata Power renewable solar energy park in Dholera Smart City", caption: "Tata Power renewable solar energy park in Dholera Smart City" },
+  { id: 12, src: sample12, alt: "World's largest solar park infrastructure in Dholera Smart City", caption: "World's largest solar park infrastructure in Dholera Smart City" },
+  { id: 13, src: sample13, alt: "Sustainable development with largest solar park in Dholera", caption: "Sustainable development with largest solar park in Dholera" },
+  { id: 14, src: sample14, alt: "Aerial view of Sardar Patel Ring Road in Ahmedabad", caption: "Aerial view of Sardar Patel Ring Road in Ahmedabad" },
+  { id: 15, src: sample15, alt: "Dholera Ring Road development promoting regional connectivity", caption: "Dholera Ring Road development promoting regional connectivity" },
+  { id: 16, src: sample16, alt: "TATA semiconductor plant construction update in Dholera SIR", caption: "TATA semiconductor plant construction update in Dholera SIR" },
+  { id: 17, src: sample17, alt: "TATA semiconductor hub development in Dholera SIR", caption: "TATA semiconductor hub development in Dholera SIR" },
+  { id: 18, src: sample18, alt: "TATA semiconductor plant latest update in Dholera SIR", caption: "TATA semiconductor plant latest update in Dholera SIR" },
+  { id: 19, src: sample19, alt: "TATA semiconductor front gate in Dholera Smart City", caption: "TATA semiconductor front gate in Dholera Smart City" },
+  { id: 20, src: sample20, alt: "Aerial view of Ahmedabad Dholera Bhavnagar toll gate", caption: "Aerial view of Ahmedabad Dholera Bhavnagar toll gate" },
+  { id: 21, src: sample21, alt: "High voltage Torrent Power substation in Dholera SIR", caption: "High voltage Torrent Power substation in Dholera SIR" },
+  { id: 22, src: sample22, alt: "Common effluent treatment plant in Dholera Smart City", caption: "Common effluent treatment plant in Dholera Smart City" },
+  { id: 23, src: sample23, alt: "Water treatment Plant in Dholera Smart City", caption: "Water treatment Plant in Dholera Smart City" },
+  { id: 24, src: sample24, alt: "Clean water supply through Water Treatment Plant in Dholera SIR", caption: "Clean water supply through Water Treatment Plant in Dholera SIR" },
+];
+
 
   const [selectedImage, setSelectedImage] = useState(null);
 
