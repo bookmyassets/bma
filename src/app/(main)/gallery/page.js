@@ -112,7 +112,7 @@ export default function DholeraProgressPage() {
                 className="object-cover"
               />
               <div className="absolute inset-0  group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                {/* <h3 className="text-black text-xl font-bold mb-2">{image.alt}</h3> */}
+                <h3 className="text-black text-xl font-bold mb-2">{image.alt}</h3>
                 
               </div>
             </div>
