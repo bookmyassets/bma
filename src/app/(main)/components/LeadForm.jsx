@@ -352,11 +352,11 @@ export default function LeadForm({ title }) {
                   <div ref={recaptchaRef}></div>
                 </div>
 
-                <div>
+                <div className="flex flex-col items-center">
                   <button
                     type="submit"
                     disabled={isLoading || isDisabled || !recaptchaLoaded}
-                    className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
+                    className={`w-auto font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
                       isLoading || isDisabled || !recaptchaLoaded
                         ? "bg-gray-600 cursor-not-allowed text-gray-400"
                         : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
