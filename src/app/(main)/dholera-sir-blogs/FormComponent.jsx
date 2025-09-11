@@ -26,32 +26,22 @@ export default function FormComponent() {
 
   return (
     <div>
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 mb-16 border border-white/20">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="text-center lg:text-left">
-            <h2 className="text-2xl font-bold text-gray-800 mb-3">
-              🚀 Ready to Invest in Dholera SIR?
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Get expert guidance and exclusive investment opportunities
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button
-              onClick={openContactForm}
-              className="bg-gradient-to-r from-[#FF9933] to-[#138808] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
-            >
-              Get Free Consultation
-            </button>
-            <button
-              onClick={openBrochureForm}
-              className="border-2 border-[#FF9933] text-[#FF9933] px-8 py-3 rounded-xl font-semibold hover:bg-[#FF9933] hover:text-white transition-all duration-300"
-            >
-              Download Brochure
-            </button>
-          </div>
-        </div>
-      </div>
+      <div className="flex m-2 flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <div className=" bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4">
+                <div className="text-center sm:text-left">
+                  <h3 className="text-lg font-semibold text-white mb-1">Ready to Invest?</h3>
+                  <p className="text-white/80 text-sm">Get expert guidance & exclusive opportunities</p>
+                </div>
+                <div className="flex gap-3">
+                  <button onClick={openContactForm} className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap">
+                    Free Consultation
+                  </button>
+                  <button onClick={openBrochureForm} className="border-2 border-white/30 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 whitespace-nowrap backdrop-blur-sm">
+                    Download Brochure
+                  </button>
+                </div>
+              </div>
+            </div>
 
       <AnimatePresence>
         {isContactFormOpen && (
