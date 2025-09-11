@@ -49,7 +49,7 @@ export default function FormComponent() {
             <ContactForm
               title=""
               buttonName="Talk To Investment Advisor"
-              onClose={() => setIsContactFormOpen(false)}
+              onClose={() => closeContactForm()}
             />
           </div>
         )}
@@ -61,7 +61,7 @@ export default function FormComponent() {
             <BrochureDownload
               title=""
               buttonName="Download Brochure"
-              onClose={() => setIsBrochureFormOpen(false)}
+              onClose={() => closeBrochureForm()}
             />
           </div>
         )}
