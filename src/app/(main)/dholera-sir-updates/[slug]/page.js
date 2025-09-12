@@ -51,7 +51,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 
           <div className="mt-6 pt-4 border-t border-gray-600">
             <Link href="/blogs">
-              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
+              <button className="w-full text-center rounded-xl text-black font-semibold bg-[#deae3c] hover:bg-[#f3bb39]  p-3 transition-colors">
                 Explore More
               </button>
             </Link>
@@ -60,18 +60,18 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 
         {/* Contact/CTA Card */}
         <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
-          <h4 className="font-bold text-lg mb-3 text-gray-900">Get In Touch</h4>
+          <h4 className="font-bold text-lg mb-3 text-black">Get In Touch</h4>
           <p className="text-gray-700 mb-4 text-sm">
             Interested in our insights? Contact our experts
           </p>
-          <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+          <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-black px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
             Contact Now
           </button>
         </div>
 
         {/* Newsletter Signup */}
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-          <h4 className="font-semibold text-gray-900 mb-3">Stay Updated</h4>
+          <h4 className="font-semibold text-black mb-3">Stay Updated</h4>
           <p className="text-gray-600 text-sm mb-4">
             Subscribe to get the latest updates and insights
           </p>
@@ -81,7 +81,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
               placeholder="Enter your email"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C69C21]"
             />
-            <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-white px-4 py-2 rounded-lg font-semibold transition-colors">
+            <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-black px-4 py-2 rounded-lg font-semibold transition-colors">
               Subscribe
             </button>
           </div>
@@ -548,7 +548,7 @@ export default async function Post({ params }) {
                 </h2>
                 <Link
                   href="/blogs"
-                  className="rounded-xl text-gray-800 font-semibold bg-[#d7b56d] px-4 py-2 hover:bg-[#c6a45d]"
+                  className="rounded-xl text-black font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
                 >
                   View all
                 </Link>
