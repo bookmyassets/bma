@@ -368,13 +368,13 @@ export default async function Post({ params }) {
 
       listItem: {
         bullet: ({ children }) => (
-          <li className="text-lg leading-relaxed text-gray-700 flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+          <li className="text-lg leading-relaxed text-gray-700 flex items-start gap-4 p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow duration-300">
             <div className="w-3 h-3 bg-gradient-to-r from-[#C69C21] to-[#FDB913] rounded-full mt-2 flex-shrink-0"></div>
             <div className="flex-1">{children}</div>
           </li>
         ),
         number: ({ children }) => (
-          <li className="text-lg leading-relaxed text-gray-700 flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 relative counter-increment-list">
+          <li className="text-lg leading-relaxed text-gray-700 flex items-start gap-4 p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow duration-300 relative counter-increment-list">
             <div className="w-3 h-3 bg-gradient-to-r from-[#C69C21] to-[#FDB913] rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               <span className="counter-content"></span>
             </div>
