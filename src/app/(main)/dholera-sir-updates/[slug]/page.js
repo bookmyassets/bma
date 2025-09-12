@@ -51,7 +51,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 
           <div className="mt-6 pt-4 border-t border-gray-600">
             <Link href="/blogs">
-              <button className="w-full text-center rounded-xl text-black font-semibold bg-[#deae3c] hover:bg-[#f3bb39]  p-3 transition-colors">
+              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39]  p-3 transition-colors">
                 Explore More
               </button>
             </Link>
@@ -64,7 +64,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           <p className="text-gray-700 mb-4 text-sm">
             Interested in our insights? Contact our experts
           </p>
-          <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-black px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+          <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
             Contact Now
           </button>
         </div>
@@ -81,7 +81,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
               placeholder="Enter your email"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C69C21]"
             />
-            <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-black px-4 py-2 rounded-lg font-semibold transition-colors">
+            <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-2 rounded-lg font-semibold transition-colors">
               Subscribe
             </button>
           </div>
