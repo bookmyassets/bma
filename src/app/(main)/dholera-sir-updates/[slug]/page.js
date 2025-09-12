@@ -81,7 +81,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
               placeholder="Enter your email"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C69C21]"
             />
-            <button className="w-full bg-[#C69C21] hover:bg-[#FDB913] text-white px-4 py-2 rounded-lg font-semibold transition-colors">
+            <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-white px-4 py-2 rounded-lg font-semibold transition-colors">
               Subscribe
             </button>
           </div>
@@ -624,7 +624,7 @@ export default async function Post({ params }) {
           <h1 className="text-2xl font-bold mb-2">Error loading blog post</h1>
           <p className="text-gray-600">Please try again later</p>
           <Link
-            href="/blogs"
+            href="/dholera-sir-updates"
             className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
           >
             ← Back to Blogs
