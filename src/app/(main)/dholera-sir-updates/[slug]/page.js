@@ -264,7 +264,7 @@ export default async function Post({ params }) {
           </strong>
         ),
         em: ({ children }) => (
-          <em className="italic text-gray-800 bg-gray-50 px-1 py-0.5 rounded">
+          <em className="italic text-gray-800 px-1 py-0.5 rounded">
             {children}
           </em>
         ),
