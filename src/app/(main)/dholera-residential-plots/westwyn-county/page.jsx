@@ -180,11 +180,6 @@ export default function HeroCarousel() {
 
   return (
     <>
-    {/* <title>Residential Plots in Dholera SIR | Secure High-ROI Investments</title>
-    <meta
-        name="description"
-        content="Invest in AUDA-approved residential plots in Dholera SIR! Enjoy buy-back with high growth potential in India's smart city."
-      /> */}
     <title>WestWyn County Dholera: Premium Residential Plots by BookMyAssets</title>
     <meta
         name="description"
@@ -532,12 +527,13 @@ export default function HeroCarousel() {
       </div>
 
       <ProjectAmenities />
+      
+      <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
       <div className="pt-4 pb-4">
         <CostSheet />
       </div>
       <FAQSection />
       {/* Form */}
-      <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
 
       <SoldOutProjectsSection/>
 

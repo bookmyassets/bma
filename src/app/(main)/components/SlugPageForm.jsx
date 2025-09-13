@@ -35,7 +35,7 @@ export default function SlugPageForm() {
     
     setDebugScroll(scrollPercent);
     
-    if (scrollPercent >= 10 && !hasTriggered) {
+    if (scrollPercent >= 30 && !hasTriggered) {
       setShowFormPopup(true);
       setHasTriggered(true);
     }
