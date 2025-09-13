@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import BlogSchemaMarkup from "../BlogSchemaMarkup";
+import SlugPageForm from "../../components/SlugPageForm";
 
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
@@ -135,6 +136,8 @@ export default async function Post({ params }) {
       </div>
     );
   }
+
+ 
 
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
@@ -511,7 +514,7 @@ export default async function Post({ params }) {
                 <div className="text-xl max-w-none">
                   <PortableText value={post.body} components={components} />
                 </div>
-
+ <SlugPageForm/>
                 {/* Tags */}
                 {post.tags && post.tags.length > 0 && (
                   <div className="mt-12 pt-6 border-t border-gray-200">
