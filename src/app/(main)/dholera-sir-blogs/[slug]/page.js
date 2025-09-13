@@ -51,7 +51,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           
           <div className="mt-6 pt-4 border-t border-gray-600">
             <Link href="/dholera-sir-updates">
-              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#c6a45d] p-3 transition-colors">
+              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors">
                 Explore More
               </button>
             </Link>
@@ -65,7 +65,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
             Interested in our insights? Contact our experts
           </p>
           <a href="tel:+918130371647" >
-          <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+          <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
 
             Contact Now
           </button>
@@ -552,8 +552,8 @@ export default async function Post({ params }) {
                 You might also like
               </h2>
               <Link
-                href="/blogs"
-                className="rounded-xl text-gray-800 font-semibold bg-[#d7b56d] px-4 py-2 hover:bg-[#c6a45d]"
+                href="/dholera-sir-updates"
+                className="rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
               >
                 View all
               </Link>
@@ -562,7 +562,7 @@ export default async function Post({ params }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedBlogs && relatedBlogs.length > 0
                 ? relatedBlogs.map((blog) => (
-                    <Link key={blog._id} href={`/dholera-sir-blogs/${blog.slug.current}`}>
+                    <Link key={blog._id} href={`/dholera-sir-updates/${blog.slug.current}`}>
                       <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
                         <div className="relative h-48 overflow-hidden">
                           {blog.mainImage ? (

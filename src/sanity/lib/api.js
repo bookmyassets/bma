@@ -46,7 +46,7 @@ export async function getblogs() {
 
 export async function getUpdates() {
   const query = `*[_type == "post" && "Updates" in categories[]->title && site == $site ]{
-    _id, title, slug, mainImage, publishedAt, body, author->{name, image}, categories[]->{title}
+    _id, title, slug, mainImage, publishedAt, _createdAt, body, author->{name, image}, categories[]->{title}
   }`;
   return await client.fetch(query, { site }, { cache: "no-store" });
 }

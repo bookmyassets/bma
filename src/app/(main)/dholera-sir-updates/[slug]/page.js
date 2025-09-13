@@ -22,7 +22,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
             {trendingBlogs?.slice(0, 4).map((item) => (
               <Link
                 key={item._id}
-                href={`/about-dholera-sir/${item.slug.current}`}
+                href={`/dholera-sir-blogs/${item.slug.current}`}
               >
                 <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3  border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
@@ -50,7 +50,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           </div>
 
           <div className="mt-6 pt-4 border-t border-gray-600">
-            <Link href="/blogs">
+            <Link href="/dholera-sir-blogs">
               <button className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39]  p-3 transition-colors">
                 Explore More
               </button>
@@ -79,7 +79,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C69C21]"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C69C21]"
             />
             <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-2 rounded-lg font-semibold transition-colors">
               Subscribe
@@ -94,7 +94,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 // Trending Blog Item Component (updated)
 const TrendingBlogItem = ({ post }) => {
   return (
-    <Link href={`/dholera-sir-blogs/${post.slug.current}`}>
+    <Link href={`/dholera-sir-updates/${post.slug.current}`}>
       <div className="flex gap-4 items-center bg-white hover:bg-gray-50 p-4 rounded-lg border border-gray-100 transition-all hover:shadow-md">
         {post.mainImage && (
           <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
@@ -439,10 +439,10 @@ export default async function Post({ params }) {
                             />
                           </svg>
                           <Link
-                            href="/blogs"
+                            href="/dholera-sir-updates"
                             className="ml-1 text-sm font-medium text-gray-500 hover:text-gray-700 md:ml-2"
                           >
-                            Blogs
+                            Updates
                           </Link>
                         </div>
                       </li>
@@ -547,8 +547,8 @@ export default async function Post({ params }) {
                   You might also like
                 </h2>
                 <Link
-                  href="/blogs"
-                  className="rounded-xl text-black font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
+                  href="/about-dholera-sir"
+                  className="rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
                 >
                   View all
                 </Link>
@@ -559,7 +559,7 @@ export default async function Post({ params }) {
                   ? relatedBlogs.map((blog) => (
                       <Link
                         key={blog._id}
-                        href={`/dholera-sir-updates/${blog.slug.current}`}
+                        href={`/about-dholera-sir/${blog.slug.current}`}
                       >
                         <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
                           <div className="relative h-48 overflow-hidden">
