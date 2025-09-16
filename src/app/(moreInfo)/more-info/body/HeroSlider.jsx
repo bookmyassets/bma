@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp"
-import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight, ChevronLeft, TrendingUp } from 'lucide-react';
 
 //images import
 import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
@@ -30,7 +30,7 @@ export default function LandingPage({ openForm }) {
   const [showThankYou, setShowThankYou] = useState(false);
   const recaptchaRef = useRef(null);
 
-   // Slider state
+  // Slider state
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
@@ -47,184 +47,184 @@ export default function LandingPage({ openForm }) {
     { src: imgM3, alt: "Dholera Mobile 3" }]
 
 
-    useEffect(() => {
-      // Load reCAPTCHA script
-      const loadRecaptcha = () => {
-        if (typeof window !== "undefined" && !window.grecaptcha) {
-          try {
-            const script = document.createElement("script");
-            script.src = "https://www.google.com/recaptcha/api.js";
-            script.async = true;
-            script.defer = true;
-            script.onload = () => setRecaptchaLoaded(true);
-            script.onerror = () => {
-              console.error("Failed to load reCAPTCHA script");
-              setRecaptchaLoaded(true); // Fallback
-            };
-            document.head.appendChild(script);
-          } catch (err) {
-            console.error("reCAPTCHA script loading error:", err);
+  useEffect(() => {
+    // Load reCAPTCHA script
+    const loadRecaptcha = () => {
+      if (typeof window !== "undefined" && !window.grecaptcha) {
+        try {
+          const script = document.createElement("script");
+          script.src = "https://www.google.com/recaptcha/api.js";
+          script.async = true;
+          script.defer = true;
+          script.onload = () => setRecaptchaLoaded(true);
+          script.onerror = () => {
+            console.error("Failed to load reCAPTCHA script");
             setRecaptchaLoaded(true); // Fallback
-          }
-        } else if (window.grecaptcha) {
-          setRecaptchaLoaded(true);
+          };
+          document.head.appendChild(script);
+        } catch (err) {
+          console.error("reCAPTCHA script loading error:", err);
+          setRecaptchaLoaded(true); // Fallback
         }
-      };
-  
-      loadRecaptcha();
-  
-      if (typeof window !== "undefined") {
-        setSubmissionCount(
-          parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
-        );
-        setLastSubmissionTime(
-          parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
-        );
+      } else if (window.grecaptcha) {
+        setRecaptchaLoaded(true);
       }
-  
-      // Handle Escape key press
-      const handleEscapeKey = (event) => {
-        if (event.key === "Escape") {
-          handleClose();
-        }
-      };
-  
-      document.addEventListener("keydown", handleEscapeKey);
-  
-      return () => {
-        document.removeEventListener("keydown", handleEscapeKey);
-      };
-    }, []);
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevData) => ({ ...prevData, [name]: value }));
-      setErrorMessage("");
     };
-  
-    const validateForm = () => {
-      if (!formData.fullName || !formData.phone) {
-        setErrorMessage("Please fill in all fields");
-        return false;
+
+    loadRecaptcha();
+
+    if (typeof window !== "undefined") {
+      setSubmissionCount(
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+      );
+      setLastSubmissionTime(
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+      );
+    }
+
+    // Handle Escape key press
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
+        handleClose();
       }
-  
-      if (!/^\d{10,15}$/.test(formData.phone)) {
-        setErrorMessage("Please enter a valid phone number (10-15 digits)");
-        return false;
-      }
-  
+    };
+
+    document.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrorMessage("");
+  };
+
+  const validateForm = () => {
+    if (!formData.fullName || !formData.phone) {
+      setErrorMessage("Please fill in all fields");
+      return false;
+    }
+
+    if (!/^\d{10,15}$/.test(formData.phone)) {
+      setErrorMessage("Please enter a valid phone number (10-15 digits)");
+      return false;
+    }
+
+    const now = Date.now();
+    const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
+
+    if (hoursPassed >= 24) {
+      setSubmissionCount(0);
+      localStorage.setItem("formSubmissionCount", "0");
+      localStorage.setItem("lastSubmissionTime", now.toString());
+    } else if (submissionCount >= 3) {
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours."
+      );
+      return false;
+    }
+
+    return true;
+  };
+
+  const onRecaptchaSuccess = async (token) => {
+    try {
       const now = Date.now();
-      const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
-  
-      if (hoursPassed >= 24) {
-        setSubmissionCount(0);
-        localStorage.setItem("formSubmissionCount", "0");
-        localStorage.setItem("lastSubmissionTime", now.toString());
-      } else if (submissionCount >= 3) {
-        setErrorMessage(
-          "You have reached the maximum submission limit. Try again after 24 hours."
-        );
-        return false;
-      }
-  
-      return true;
-    };
-  
-    const onRecaptchaSuccess = async (token) => {
-      try {
-        const now = Date.now();
-  
-        const response = await fetch(
-          "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+          },
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: source,
             },
-            body: JSON.stringify({
-              fields: {
-                name: formData.fullName,
-                phone: formData.phone,
-                source: source,
-              },
-              source: "BookMyAssets Google Ads",
-              tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-              recaptchaToken: token,
-            }),
-          }
-        );
-  
-        if (response.ok) {
-          setFormData({ fullName: "", phone: "" });
-          setShowPopup(true);
-          setSubmissionCount((prev) => {
-            const newCount = prev + 1;
-            localStorage.setItem("formSubmissionCount", newCount.toString());
-            localStorage.setItem("lastSubmissionTime", now.toString());
-            return newCount;
+            source: "BookMyAssets Google Ads",
+            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+            recaptchaToken: token,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        setFormData({ fullName: "", phone: "" });
+        setShowPopup(true);
+        setSubmissionCount((prev) => {
+          const newCount = prev + 1;
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", now.toString());
+          return newCount;
+        });
+
+        // Show thank you popup for 2 seconds
+        setShowThankYou(true);
+        setTimeout(() => {
+          setShowThankYou(false);
+          handleClose();
+
+          // Get current pathname for return URL
+          const currentPath = pathname || window.location.pathname;
+
+          // Push to thank-you route with return URL
+          router.push(`/more-info/thankyou`);
+        }, 2000);
+      } else {
+        throw new Error("Error submitting form");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setErrorMessage(
+        error.message || "Error submitting form. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+      if (window.grecaptcha && recaptchaRef.current) {
+        window.grecaptcha.reset(recaptchaRef.current);
+      }
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
+
+    if (!validateForm()) {
+      setIsLoading(false);
+      return;
+    }
+
+    // If reCAPTCHA is loaded, render it in the ref
+    if (window.grecaptcha && recaptchaLoaded) {
+      try {
+        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
+          window.grecaptcha.render(recaptchaRef.current, {
+            sitekey: siteKey,
+            callback: onRecaptchaSuccess,
+            theme: "dark",
           });
-  
-          // Show thank you popup for 2 seconds
-          setShowThankYou(true);
-          setTimeout(() => {
-            setShowThankYou(false);
-            handleClose();
-  
-            // Get current pathname for return URL
-            const currentPath = pathname || window.location.pathname;
-  
-            // Push to thank-you route with return URL
-            router.push(`/more-info/thankyou`);
-          }, 2000);
         } else {
-          throw new Error("Error submitting form");
+          window.grecaptcha.reset();
+          window.grecaptcha.execute();
         }
       } catch (error) {
-        console.error("Form submission error:", error);
-        setErrorMessage(
-          error.message || "Error submitting form. Please try again."
-        );
-      } finally {
-        setIsLoading(false);
-        if (window.grecaptcha && recaptchaRef.current) {
-          window.grecaptcha.reset(recaptchaRef.current);
-        }
-      }
-    };
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setIsLoading(true);
-      setErrorMessage("");
-  
-      if (!validateForm()) {
-        setIsLoading(false);
-        return;
-      }
-  
-      // If reCAPTCHA is loaded, render it in the ref
-      if (window.grecaptcha && recaptchaLoaded) {
-        try {
-          if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-            window.grecaptcha.render(recaptchaRef.current, {
-              sitekey: siteKey,
-              callback: onRecaptchaSuccess,
-              theme: "dark",
-            });
-          } else {
-            window.grecaptcha.reset();
-            window.grecaptcha.execute();
-          }
-        } catch (error) {
-          console.error("Error rendering reCAPTCHA:", error);
-          setErrorMessage("Error with verification. Please try again.");
-          setIsLoading(false);
-        }
-      } else {
-        setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
+        console.error("Error rendering reCAPTCHA:", error);
+        setErrorMessage("Error with verification. Please try again.");
         setIsLoading(false);
       }
-    };
+    } else {
+      setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
+      setIsLoading(false);
+    }
+  };
 
   // Animation variants
   const containerVariants = {
@@ -252,7 +252,7 @@ export default function LandingPage({ openForm }) {
 
   //Slider Logic
 
-   useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) =>
         prev === desktopImages.length - 1 ? 0 : prev + 1
@@ -288,17 +288,17 @@ export default function LandingPage({ openForm }) {
   };
 
 
-const [isDownload, setIsDownload] = useState(false);
+  const [isDownload, setIsDownload] = useState(false);
 
-const openBrochure = () => {
-  setIsDownload(true);
-}
+  const openBrochure = () => {
+    setIsDownload(true);
+  }
 
-const closeBrochure = () => {
-  setIsDownload(false);
-}
+  const closeBrochure = () => {
+    setIsDownload(false);
+  }
 
-  
+
   return (
     <div id="hero" className="relative min-h-screen bg-gray-100">
       {/* Thank You Overlay */}
@@ -365,16 +365,15 @@ const closeBrochure = () => {
         {/* Main Content Section - Takes most of the screen */}
         <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Left Side - Slider Section (60%) */}
-<div className="w-full lg:w-[60%] relative flex-1">
+          <div className="w-full lg:w-[60%] relative flex-1">
             {/* Desktop Slider */}
             <div className="absolute inset-0 hidden lg:block">
               <div className="relative w-full h-full overflow-hidden">
                 {desktopImages.map((image, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"
+                      }`}
                   >
                     <Image
                       src={image.src}
@@ -383,7 +382,7 @@ const closeBrochure = () => {
                       className=""
                       priority={index === 0}
                     />
-                    
+
                   </div>
                 ))}
                 {/* Navigation */}
@@ -412,9 +411,8 @@ const closeBrochure = () => {
               {mobileImages.map((image, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
                 >
                   <Image
                     src={image.src}
@@ -423,7 +421,7 @@ const closeBrochure = () => {
                     className="object-cover"
                     priority={index === 0}
                   />
-                  
+
                 </div>
               ))}
             </div>
@@ -445,10 +443,10 @@ const closeBrochure = () => {
                   className="mx-auto mb-3"
                 />
                 <h2 className="text-xl lg:text-2xl font-bold text-black mb-2">
-                  Send A Message!
+                  Know Today's Offer
                 </h2>
                 <p className="text-black text-sm lg:text-base">
-                  Get exclusive details about premium plots in Dholera
+                 Get exclusive offer on premium residential plots in Dholera
                 </p>
               </div>
 
@@ -592,7 +590,6 @@ const closeBrochure = () => {
                 </div>
                 <h3 className="text-sm font-semibold text-gray-800 mb-1">Land Size</h3>
                 <p className="text-lg font-bold text-[#deae3c]">150 Sq.Yd.</p>
-                <p className="text-xs text-gray-500">Perfect size for your home</p>
               </div>
 
               {/* Type */}
@@ -601,19 +598,16 @@ const closeBrochure = () => {
                   <MapPin className="w-4 h-4 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-gray-800 mb-1">Type</h3>
-                <p className="text-lg font-bold text-[#deae3c]">Plots</p>
-                <p className="text-xs text-gray-500">Residential plots available</p>
+                <p className="text-lg font-bold text-[#deae3c]">Residential Plots</p>
               </div>
 
               {/* Amenities */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
                 <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Wifi className="w-4 h-4 text-white" />
+                  <TrendingUp className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1">Amenities</h3>
-                <p className="text-sm font-bold text-[#deae3c]">Infrastructure &</p>
-                <p className="text-sm font-bold text-[#deae3c]">Connectivity</p>
-                <p className="text-xs text-gray-500">Modern facilities included</p>
+                <h3 className="text-sm font-semibold text-gray-800 mb-1">High ROI</h3>
+                <p className="text-sm font-bold text-[#deae3c]">5x in 5 yrs.</p>
               </div>
 
               {/* Price */}
@@ -642,7 +636,7 @@ const closeBrochure = () => {
         </div>
       </div>
       <AnimatePresence>
-{isDownload && (
+        {isDownload && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
               title="Get the Dholera Brochure"

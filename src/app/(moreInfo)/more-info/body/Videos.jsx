@@ -115,7 +115,7 @@ export default function Dholeravideos() {
             {/* Background with overlay */}
             <div className="max-w-7xl mx-auto px-4">
               <h2 className="text-center text-xl font-bold md:text-[32px] mb-2 text-black">
-                Dholera SIR project Video
+                Dholera Development Video
               </h2>
               <p className="text-center text-xl text-black mb-8">
                 Watch how India's first Greenfield Smart City is shaping the future.

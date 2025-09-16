@@ -3,8 +3,8 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/westwyn-county/westwyn-gate-cover.webp";
-import westwyn2 from "@/assests/westwyn-county/westwyn-gate-cover-2.webp";
-import westwyn3 from "@/assests/westwyn-county/westwyn-gate-cover-3.webp";
+import westwyn2 from "@/assests/westwyn-county/westwyn-1.webp";
+import westwyn3 from "@/assests/westwyn-county/westwyn-2.webp";
 import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence, motion } from "framer-motion";

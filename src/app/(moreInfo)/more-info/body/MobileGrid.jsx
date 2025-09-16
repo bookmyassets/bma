@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import { Home, MapPin, Wifi, IndianRupee, Download } from 'lucide-react';
+import { Home, MapPin, Wifi, IndianRupee, Download, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 import BrochureDownload from '../components/BrochureDownload';
 
@@ -24,7 +24,7 @@ export default function MobilePropertyGrid() {
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
             <Home className="w-3 h-3 text-[#deae3c]" />
           </div>
-          <h3 className="text-xs font-semibold text-white mb-1">Land Parcel</h3>
+          <h3 className="text-xs font-semibold text-white mb-1">Land Size</h3>
           <p className="text-sm font-bold text-white">150 Sq.Yd.</p>
         </div>
 
@@ -34,7 +34,7 @@ export default function MobilePropertyGrid() {
             <MapPin className="w-3 h-3 text-[#deae3c]" />
           </div>
           <h3 className="text-xs font-semibold text-white mb-1">Type</h3>
-          <p className="text-sm font-bold text-white">Plots</p>
+          <p className="text-sm font-bold text-white">Residential Plots</p>
         </div>
       </div>
 
@@ -43,11 +43,11 @@ export default function MobilePropertyGrid() {
         {/* Amenities */}
         <div className="p-3 text-center">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
-            <Wifi className="w-3 h-3 text-[#deae3c]" />
+            <TrendingUp className="w-3 h-3 text-[#deae3c]" />
           </div>
-          <h3 className="text-xs font-semibold text-white mb-1">Amenities</h3>
+          <h3 className="text-xs font-semibold text-white mb-1">High ROI</h3>
           <p className="text-xs font-bold text-white leading-tight">
-            Infrastructure & Connectivity
+            5x in 5yrs
           </p>
         </div>
 
@@ -72,7 +72,7 @@ export default function MobilePropertyGrid() {
 {isDownload && (
   <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
-              title=""
+              title="Get Dholera Brochure"
               buttonName="Download Brochure"
               onClose={() => closeBrochure()}
               />

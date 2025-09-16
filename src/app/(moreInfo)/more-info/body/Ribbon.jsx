@@ -200,10 +200,8 @@ export default function Ribbon() {
   return (
     <>
       <div className="bg-black border-t-8 border-t-[#deae3c] border-b-8 border-b-[#deae3c] py-4">
-
-
         <div className="pr-8 pl-8 pb-8   text-[#deae3c] flex justify-center items-center font-semibold italic text-xl md:text-3xl">
-          Book 200 sq. yards plot near Dholera International Airport for ₹15 lakh only
+         150 sq. yards plot for ₹15 lakh only
         </div>
         <div className="max-w-3xl mx-auto max-sm:pl-4 max-sm:pr-4 space-y-4">
           <div className="grid md:grid-cols-2 gap-2 max-sm:space-y-2">
@@ -288,7 +286,7 @@ export default function Ribbon() {
             disabled={isLoading}
             className="w-auto  py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
             >
-            {isLoading ? "Submitting..." : "Book Now"}
+            {isLoading ? "Submitting..." : "Get A Call Back"}
           </motion.button>
             </div>
         </div>
