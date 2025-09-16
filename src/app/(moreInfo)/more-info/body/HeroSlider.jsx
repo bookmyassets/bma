@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp"
-import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight } from 'lucide-react';
+import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight, ChevronLeft } from 'lucide-react';
 
 //images import
 import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
@@ -391,7 +391,7 @@ const closeBrochure = () => {
                   onClick={prevSlide}
                   className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
                 >
-                  <ChevronLast className="w-6 h-6" />
+                  <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button
                   onClick={nextSlide}
