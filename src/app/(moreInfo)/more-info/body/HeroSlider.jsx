@@ -380,7 +380,7 @@ const closeBrochure = () => {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-cover"
+                      className=""
                       priority={index === 0}
                     />
                     
