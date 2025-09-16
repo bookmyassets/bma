@@ -66,7 +66,7 @@ export default function MobilePropertyGrid() {
         <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-2">
           <Download className="w-3 h-3 text-[#deae3c]" />
         </div>
-        <h3 className="text-xs font-semibold text-white">Download Brochure</h3>
+        <h3 className="text-xs font-semibold text-white" onClick={openBrochure}>Download Brochure</h3>
       </div>
       <AnimatePresence>
 {isDownload && (

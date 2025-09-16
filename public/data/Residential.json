@@ -5,7 +5,8 @@
     "location": "Fedra-Pipli State Highway, Dholera, Gujarat",
     "image": "/assets/residential/westwyn.webp",
     "constructionStatus" : "Under Construction",
-    "status" : "ongoing"         
+    "status" : "ongoing",
+    "description" : "Premium township offering spacious residential plots with world class connectivity and modern planning."
   },
   {
     "projectName": "Orchid",
@@ -13,7 +14,8 @@
     "location": "Gamph, Dholera",
     "image": "/assets/residential/orchid-cover.webp",
     "constructionStatus" : "Under Construction",
-    "status" : "sold-out"
+    "status" : "sold-out",
+    "description" : "Peaceful residential project with smart amenities and direct connectivity to Ahmedabad Dholera Expressway."
   },
   {
     "projectName": "Paradise",
@@ -21,7 +23,8 @@
     "location": "Shela, Dholera",
     "image": "/assets/residential/paradise1.webp",
     "constructionStatus" : "Under Construction",
-    "status" : "sold-out"
+    "status" : "sold-out",
+    "description" : "Luxury plotted developments close to Dholera International Airport, designed for long term investors and smart living."
   },
   {
     "projectName": "Paradise 2",
@@ -29,7 +32,8 @@
     "location": "Shela, Dholera",
     "image": "/assets/residential/paradise2.webp",
     "constructionStatus" : "Under Construction",
-    "status" : "sold-out"
+    "status" : "sold-out",
+    "description" : "Luxury plotted developments close to Dholera International Airport, designed for long term investors and smart living."
   },
   {
     "projectName": "Maple Township",
@@ -37,7 +41,8 @@
     "location": "Gamph, Gujarat",
     "image": "/assets/residential/maple-township.webp",
     "constructionStatus" : "Under Construction",
-    "status" : "sold-out"
+    "status" : "sold-out",
+    "description" : "Affordable premium plots near the ABCD Building, Dholera, and Smart City Booking Centre, ideal for families and investors."
   },
   {
     "projectName": "Marina bay",
@@ -45,7 +50,8 @@
     "location": "Gamph, Dholera",
     "image": "/assets/residential/marina-bay.webp",
     "constructionStatus" : "Under Construction",
-    "status" : "sold-out"
+    "status" : "sold-out",
+    "description" : "A unique project inspired by coastal living, situated near Dholera Port and the Solar Power Plant, is ideal for future growth."
   },
   {
     "projectName": "Pride",
@@ -53,6 +59,7 @@
     "location": "Kasindra, Dholera",
     "image": "/assets/residential/maple-township.webp",
     "constructionStatus" : "Under Construction",
-    "status" : "sold-out"
+    "status" : "sold-out",
+    "description" : "Prestigious township with eco-friendly infrastructure and assured growth potential in Dholera Metro City."
   }
 ]

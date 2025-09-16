@@ -645,7 +645,7 @@ const closeBrochure = () => {
 {isDownload && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
-              title=""
+              title="Get the Dholera Brochure"
               buttonName="Download Brochure"
               onClose={() => closeBrochure()}
             />

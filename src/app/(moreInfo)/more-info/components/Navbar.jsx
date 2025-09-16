@@ -180,7 +180,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu section with Get in Touch dropdown */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-4 bg-white">
             <div className="relative">
               <button
                 className="text-white text-xl font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
@@ -253,6 +253,7 @@ export default function Navbar() {
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4">
+            
             <div className="flex flex-col space-y-4 font-semibold">
               {navItems.map(({ href, label }) => (
                 <button
