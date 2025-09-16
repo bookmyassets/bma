@@ -17,7 +17,7 @@ export default function AboutBMA() {
             </div>
             
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              At BookMyAssets, we specialize in AUDA & government-approved projects in Dholera Smart City. 
+              At BookMyAssets, we specialize in AUDA and government-approved projects in Dholera Smart City. 
               With transparent processes, legal security, and a high ROI focus, we make investing in 
               Dholera, Gujarat, simple, secure, and rewarding.
             </p>
