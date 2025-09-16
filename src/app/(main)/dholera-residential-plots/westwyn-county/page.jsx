@@ -527,7 +527,7 @@ export default function HeroCarousel() {
       </div>
 
       <ProjectAmenities />
-      
+
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
       <div className="pt-4 pb-4">
         <CostSheet />
@@ -561,7 +561,7 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
-                onSuccess={handleAfterSubmit}
+                onAfterSubmit={handleAfterSubmit} 
               />
             </div>
           </div>

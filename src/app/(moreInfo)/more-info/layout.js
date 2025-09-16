@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Navbar from "./components/Navbar";
 import "./globals.css";
@@ -52,6 +53,13 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body>
+        <style jsx global>{`
+          @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800&display=swap");
+
+          body {
+            font-family: "Lato", sans-serif;
+          }
+        `}</style>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WLDR8CDN"

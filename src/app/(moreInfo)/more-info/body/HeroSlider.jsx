@@ -1,252 +1,230 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { FaUser, FaPhoneAlt } from "react-icons/fa";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import "swiper/css";
-import "swiper/css/pagination";
-import logo from "@/assests/Bmalogo.png";
+import Image from "next/image";
+import logo from "@/assests/ad-page/dholera-govt-logo.webp"
+import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight } from 'lucide-react';
 
-export default function LandingPage({ img1, mimg1, openForm }) {
+//images import
+import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
+import img2 from "@/assests/ad-page/img2.webp";
+import img3 from "@/assests/ad-page/img3.webp";
+
+import imgM1 from "@/assests/ad-page/mob1.webp";
+import imgM2 from "@/assests/ad-page/mob2.webp";
+import imgM3 from "@/assests/ad-page/mob3.webp";
+import BrochureDownload from "../components/BrochureDownload";
+
+
+export default function LandingPage({ openForm }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ fullName: "", phone: "" });
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: ""
+  });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
-  const [showFormPopup, setShowFormPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const recaptchaRef = useRef(null);
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  useEffect(() => {
-    // Only run on client side
-    if (typeof window !== "undefined") {
-      // Check localStorage to see if popup was already shown
-      const popupShown = localStorage.getItem("popupShown");
+   // Slider state
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
-      if (!popupShown) {
-        const timer = setTimeout(() => {
-          openForm();
-          localStorage.setItem("popupShown", "true");
-        }, 2000); // 5 seconds
+  const desktopImages = [
+    { src: img1, alt: "Dholera Investment Opportunity 1" },
+    { src: img2, alt: "Dholera Investment Opportunity 2" },
+    { src: img3, alt: "Dholera Investment Opportunity 3" }
+  ];
 
-        const handleScroll = () => {
-          if (window.scrollY > window.innerHeight * 0.05) {
-            openForm();
-            localStorage.setItem("popupShown", "true");
-            window.removeEventListener("scroll", handleScroll);
-            clearTimeout(timer);
-          }
-        };
+  const mobileImages = [
+    { src: imgM1, alt: "Dholera Mobile 1" },
+    { src: imgM2, alt: "Dholera Mobile 2" },
+    { src: imgM3, alt: "Dholera Mobile 3" }]
 
-        window.addEventListener("scroll", handleScroll);
 
-        return () => {
-          window.removeEventListener("scroll", handleScroll);
-          clearTimeout(timer);
-        };
-      }
-    }
-  }, [openForm]);
-
-  const handleClose = () => {
-    if (onClose && typeof onClose === "function") {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
+    useEffect(() => {
+      // Load reCAPTCHA script
+      const loadRecaptcha = () => {
+        if (typeof window !== "undefined" && !window.grecaptcha) {
+          try {
+            const script = document.createElement("script");
+            script.src = "https://www.google.com/recaptcha/api.js";
+            script.async = true;
+            script.defer = true;
+            script.onload = () => setRecaptchaLoaded(true);
+            script.onerror = () => {
+              console.error("Failed to load reCAPTCHA script");
+              setRecaptchaLoaded(true); // Fallback
+            };
+            document.head.appendChild(script);
+          } catch (err) {
+            console.error("reCAPTCHA script loading error:", err);
             setRecaptchaLoaded(true); // Fallback
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true); // Fallback
+          }
+        } else if (window.grecaptcha) {
+          setRecaptchaLoaded(true);
         }
-      } else if (window.grecaptcha) {
-        setRecaptchaLoaded(true);
+      };
+  
+      loadRecaptcha();
+  
+      if (typeof window !== "undefined") {
+        setSubmissionCount(
+          parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        );
+        setLastSubmissionTime(
+          parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        );
       }
+  
+      // Handle Escape key press
+      const handleEscapeKey = (event) => {
+        if (event.key === "Escape") {
+          handleClose();
+        }
+      };
+  
+      document.addEventListener("keydown", handleEscapeKey);
+  
+      return () => {
+        document.removeEventListener("keydown", handleEscapeKey);
+      };
+    }, []);
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+      setErrorMessage("");
     };
-
-    loadRecaptcha();
-
-    if (typeof window !== "undefined") {
-      setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
-      );
-      setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
-      );
-    }
-
-    // Handle Escape key press
-    const handleEscapeKey = (event) => {
-      if (event.key === "Escape") {
-        handleClose();
+  
+    const validateForm = () => {
+      if (!formData.fullName || !formData.phone) {
+        setErrorMessage("Please fill in all fields");
+        return false;
       }
-    };
-
-    document.addEventListener("keydown", handleEscapeKey);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-    setErrorMessage("");
-  };
-
-  const validateForm = () => {
-    if (!formData.fullName || !formData.phone) {
-      setErrorMessage("Please fill in all fields");
-      return false;
-    }
-
-    if (!/^\d{10,15}$/.test(formData.phone)) {
-      setErrorMessage("Please enter a valid phone number (10-15 digits)");
-      return false;
-    }
-
-    const now = Date.now();
-    const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
-
-    if (hoursPassed >= 24) {
-      setSubmissionCount(0);
-      localStorage.setItem("formSubmissionCount", "0");
-      localStorage.setItem("lastSubmissionTime", now.toString());
-    } else if (submissionCount >= 30) {
-      setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
-      );
-      return false;
-    }
-
-    return true;
-  };
-
-  const onRecaptchaSuccess = async (token) => {
-    try {
+  
+      if (!/^\d{10,15}$/.test(formData.phone)) {
+        setErrorMessage("Please enter a valid phone number (10-15 digits)");
+        return false;
+      }
+  
       const now = Date.now();
-
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: "BookMyAssets Google Ads",
-            },
-            source: "BookMyAssets Google Ads",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-            recaptchaToken: token,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
-
-        // Show thank you popup for 2 seconds
-        setShowThankYou(true);
-        setTimeout(() => {
-          setShowThankYou(false);
-          setShowFormPopup(false);
-
-          // Get current pathname for return URL
-          const currentPath = pathname || window.location.pathname;
-
-          // Push to thank-you route with return URL
-          router.push(`/more-info/thankyou`);
-        }, 2000);
-      } else {
-        throw new Error("Error submitting form");
+      const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
+  
+      if (hoursPassed >= 24) {
+        setSubmissionCount(0);
+        localStorage.setItem("formSubmissionCount", "0");
+        localStorage.setItem("lastSubmissionTime", now.toString());
+      } else if (submissionCount >= 3) {
+        setErrorMessage(
+          "You have reached the maximum submission limit. Try again after 24 hours."
+        );
+        return false;
       }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setErrorMessage(
-        error.message || "Error submitting form. Please try again."
-      );
-    } finally {
-      setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
-      }
-    }
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage("");
-
-    if (!validateForm()) {
-      setIsLoading(false);
-      return;
-    }
-
-    // If reCAPTCHA is loaded, render it in the ref
-    if (window.grecaptcha && recaptchaLoaded) {
+  
+      return true;
+    };
+  
+    const onRecaptchaSuccess = async (token) => {
       try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
+        const now = Date.now();
+  
+        const response = await fetch(
+          "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+            },
+            body: JSON.stringify({
+              fields: {
+                name: formData.fullName,
+                phone: formData.phone,
+                source: source,
+              },
+              source: "BookMyAssets Google Ads",
+              tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+              recaptchaToken: token,
+            }),
+          }
+        );
+  
+        if (response.ok) {
+          setFormData({ fullName: "", phone: "" });
+          setShowPopup(true);
+          setSubmissionCount((prev) => {
+            const newCount = prev + 1;
+            localStorage.setItem("formSubmissionCount", newCount.toString());
+            localStorage.setItem("lastSubmissionTime", now.toString());
+            return newCount;
           });
+  
+          // Show thank you popup for 2 seconds
+          setShowThankYou(true);
+          setTimeout(() => {
+            setShowThankYou(false);
+            handleClose();
+  
+            // Get current pathname for return URL
+            const currentPath = pathname || window.location.pathname;
+  
+            // Push to thank-you route with return URL
+            router.push(`/more-info/thankyou`);
+          }, 2000);
         } else {
-          window.grecaptcha.reset();
-          window.grecaptcha.execute();
+          throw new Error("Error submitting form");
         }
       } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
+        console.error("Form submission error:", error);
+        setErrorMessage(
+          error.message || "Error submitting form. Please try again."
+        );
+      } finally {
+        setIsLoading(false);
+        if (window.grecaptcha && recaptchaRef.current) {
+          window.grecaptcha.reset(recaptchaRef.current);
+        }
+      }
+    };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setIsLoading(true);
+      setErrorMessage("");
+  
+      if (!validateForm()) {
+        setIsLoading(false);
+        return;
+      }
+  
+      // If reCAPTCHA is loaded, render it in the ref
+      if (window.grecaptcha && recaptchaLoaded) {
+        try {
+          if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
+            window.grecaptcha.render(recaptchaRef.current, {
+              sitekey: siteKey,
+              callback: onRecaptchaSuccess,
+              theme: "dark",
+            });
+          } else {
+            window.grecaptcha.reset();
+            window.grecaptcha.execute();
+          }
+        } catch (error) {
+          console.error("Error rendering reCAPTCHA:", error);
+          setErrorMessage("Error with verification. Please try again.");
+          setIsLoading(false);
+        }
+      } else {
+        setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
         setIsLoading(false);
       }
-    } else {
-      setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
-      setIsLoading(false);
-    }
-  };
-
-  // Handle backdrop click
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      setShowFormPopup(false);
-    }
-  };
-
-  // Prevent modal content click from closing modal
-  const handleModalContentClick = (e) => {
-    e.stopPropagation();
-  };
+    };
 
   // Animation variants
   const containerVariants = {
@@ -272,80 +250,58 @@ export default function LandingPage({ img1, mimg1, openForm }) {
     },
   };
 
-  const buttonVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.6,
-        duration: 0.5,
-      },
-    },
-    hover: {
-      scale: 1.05,
-      backgroundColor: "#FDB913",
-      color: "#000",
-      transition: { duration: 0.3 },
-    },
+  //Slider Logic
+
+   useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev === desktopImages.length - 1 ? 0 : prev + 1
+      );
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [desktopImages.length]);
+
+  // Touch handlers for swipe (mobile)
+  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
+  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      setCurrentSlide((prev) =>
+        prev === mobileImages.length - 1 ? 0 : prev + 1
+      );
+    } else if (touchEnd - touchStart > 50) {
+      setCurrentSlide((prev) =>
+        prev === 0 ? mobileImages.length - 1 : prev - 1
+      );
+    }
   };
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === desktopImages.length - 1 ? 0 : prev + 1
+    );
+  };
+  const prevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? desktopImages.length - 1 : prev - 1
+    );
+  };
+
+
+const [isDownload, setIsDownload] = useState(false);
+
+const openBrochure = () => {
+  setIsDownload(true);
+}
+
+const closeBrochure = () => {
+  setIsDownload(false);
+}
+
+  
   return (
-    <div id="hero" className="relative h-[75vh] md:h-[70vh]">
-      {/* Background Images */}
-      <div className="">
-        {/* Desktop Image */}
-        <div className="absolute inset-0 hidden lg:block">
-          <Image
-            src={img1}
-            alt="Investment Opportunity"
-            className="w-full"
-            priority
-          />
-          <div className="absolute inset-0 bg-black opacity-20"></div>
-        </div>
-
-        {/* Mobile Image */}
-        <div className="absolute inset-0 block lg:hidden">
-          <Image
-            src={mimg1}
-            alt="Investment Opportunity Mobile"
-            fill
-            className="w-full"
-            priority
-          />
-          <div className="absolute inset-0 "></div>
-        </div>
-
-        {/* Text Overlay - Bottom Left */}
-        <div className="absolute max-w-7xl mx-auto inset-0 z-10 font-semibold text-xl md:text-5xl text-gray-200 flex items-end justify-start">
-          <p className="text-left px-4 md:px-8 pb-8 md:pb-12 lg:pb-16">
-            Premium, Residential Plots <br /> in Dholera... <br /> WestWyn
-            County
-          </p>
-        </div>
-      </div>
-
-      {/* Contact Us Button - Bottom-Centered & Responsive */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center items-center pb-2 max-sm:pb-0">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          <motion.div variants={buttonVariants}>
-            <motion.button
-              whileHover="hover"
-              onClick={() => setShowFormPopup(true)}
-              className="font-semibold px-8 py-3 border border-white rounded-full bg-black text-yellow-400 hover:bg-yellow-400 hover:text-black text-sm md:text-base shadow-lg"
-            >
-              Contact Us
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Thank You Page */}
+    <div id="hero" className="relative min-h-screen bg-gray-100">
+      {/* Thank You Overlay */}
       <AnimatePresence>
         {showThankYou && (
           <motion.div
@@ -399,84 +355,105 @@ export default function LandingPage({ img1, mimg1, openForm }) {
               >
                 Your request has been submitted successfully.
               </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="text-md opacity-80 mt-2"
-              >
-                Redirecting you back...
-              </motion.p>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Form Popup */}
-      <AnimatePresence>
-        {showFormPopup && !showThankYou && (
-          <div
-            className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
-            onClick={handleBackdropClick}
-          >
-            <motion.div
-              id="hero-form-container"
-              initial={{ scale: 0.9, y: 50 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 50 }}
-              className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
-              onClick={handleModalContentClick}
-            >
-              {/* Close Button */}
-              <button
-                type="button"
-                onClick={() => setShowFormPopup(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full p-1 transition-all duration-200 hover:bg-gray-700 z-10"
-                aria-label="Close form"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
+      {/* Main Layout - Desktop */}
+      <div className="h-screen max-sm:h-[95vh] flex flex-col">
+        {/* Main Content Section - Takes most of the screen */}
+        <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+          {/* Left Side - Slider Section (60%) */}
+<div className="w-full lg:w-[60%] relative flex-1">
+            {/* Desktop Slider */}
+            <div className="absolute inset-0 hidden lg:block">
+              <div className="relative w-full h-full overflow-hidden">
+                {desktopImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover"
+                      priority={index === 0}
+                    />
+                    
+                  </div>
+                ))}
+                {/* Navigation */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
+                  <ChevronLast className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
 
-              {/* Logo */}
-              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="bg-black p-2 rounded-full shadow-lg"
+            {/* Mobile Slider */}
+            <div
+              className="absolute inset-0 block lg:hidden overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              {mobileImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
                 >
                   <Image
-                    src={logo}
-                    alt="Logo"
-                    width={60}
-                    height={60}
-                    className="rounded-full"
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
                   />
-                </motion.div>
+                  
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Side - Lead Form Section (40%) */}
+          <div className="w-full lg:w-[40%] bg-gray-100 flex items-center justify-center p-4 lg:p-6">
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="w-full max-w-md"
+            >
+              {/* Logo */}
+              <div className="text-center mb-6">
+                <Image
+                  src={logo}
+                  alt="BookMyAssets Logo"
+                  className="mx-auto mb-3"
+                />
+                <h2 className="text-xl lg:text-2xl font-bold text-black mb-2">
+                  Send A Message!
+                </h2>
+                <p className="text-black text-sm lg:text-base">
+                  Get exclusive details about premium plots in Dholera
+                </p>
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-center mb-6 pt-4"
-              ></motion.div>
-
               {showPopup ? (
-                <div className="text-center py-8">
+                <div className="text-center py-6">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -499,58 +476,85 @@ export default function LandingPage({ img1, mimg1, openForm }) {
                       </svg>
                     </div>
                   </motion.div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-xl font-bold text-black mb-2">
                     Thank You!
                   </h3>
-                  <p className="text-gray-300">
-                    Your request has been submitted successfully. We'll contact
-                    you shortly.
+                  <p className="text-gray-600 text-sm">
+                    Your request has been submitted successfully. We'll contact you shortly.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="space-y-4">
                   {errorMessage && (
-                    <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
+                    <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm">
                       {errorMessage}
                     </div>
                   )}
 
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="relative"
-                  >
-                    <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
-                    <input
-                      name="fullName"
-                      placeholder="Full Name"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      required
-                      className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
-                    />
-                  </motion.div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                      className="relative"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                      <input
+                        name="fullName"
+                        placeholder="Enter Name"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                      />
+                    </motion.div>
 
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="relative"
-                  >
-                    <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
-                    <input
-                      name="phone"
-                      type="tel"
-                      placeholder="Phone Number"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      minLength="10"
-                      maxLength="15"
-                      required
-                      className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
-                    />
-                  </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.7 }}
+                      className="relative"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                        />
+                      </svg>
+                      <input
+                        name="phone"
+                        type="tel"
+                        placeholder="Mobile No"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        minLength={10}
+                        maxLength={15}
+                        required
+                        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                      />
+                    </motion.div>
+                  </div>
 
                   {/* reCAPTCHA container */}
                   <div className="flex justify-center">
@@ -560,23 +564,91 @@ export default function LandingPage({ img1, mimg1, openForm }) {
                   <motion.button
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
+                    transition={{ delay: 1.0 }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    disabled={isLoading || !recaptchaLoaded}
-                    id="hero-form"
-                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    {isLoading
-                      ? "Verifying..."
-                      : recaptchaLoaded
-                        ? "Talk To Investment Advisor"
-                        : "Loading..."}
+                    {isLoading ? "Submitting..." : "Claim Offer"}
                   </motion.button>
-                </form>
+                </div>
               )}
             </motion.div>
+          </div>
+        </div>
+
+        {/* Bottom Stats Section - Compact */}
+        <div className="bg-white border-t border-gray-200 ">
+          <div className=" px-4">
+            {/* desktop view */}
+            <div className="grid max-sm:hidden md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+              {/* Land Parcel */}
+              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
+                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Home className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-800 mb-1">Land Size</h3>
+                <p className="text-lg font-bold text-[#deae3c]">150 Sq.Yd.</p>
+                <p className="text-xs text-gray-500">Perfect size for your home</p>
+              </div>
+
+              {/* Type */}
+              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
+                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <MapPin className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-800 mb-1">Type</h3>
+                <p className="text-lg font-bold text-[#deae3c]">Plots</p>
+                <p className="text-xs text-gray-500">Residential plots available</p>
+              </div>
+
+              {/* Amenities */}
+              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
+                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Wifi className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-800 mb-1">Amenities</h3>
+                <p className="text-sm font-bold text-[#deae3c]">Infrastructure &</p>
+                <p className="text-sm font-bold text-[#deae3c]">Connectivity</p>
+                <p className="text-xs text-gray-500">Modern facilities included</p>
+              </div>
+
+              {/* Price */}
+              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
+                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <IndianRupee className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-800 mb-1">Price</h3>
+                <p className="text-lg font-bold text-[#deae3c]">₹15 Lacs*</p>
+                <p className="text-xs text-gray-500">*Terms & conditions apply</p>
+              </div>
+
+              {/* Download Brochure */}
+              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
+                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Download className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-800 mb-1">Download Brochure</h3>
+                <button onClick={openBrochure} className="bg-[#deae3c] hover:bg-[#f3bb39] text-white font-semibold py-1 px-3 rounded-lg transition-colors duration-300 text-sm">
+                  Download Now
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <AnimatePresence>
+{isDownload && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
+            <BrochureDownload
+              title=""
+              buttonName="Download Brochure"
+              onClose={() => closeBrochure()}
+            />
           </div>
         )}
       </AnimatePresence>

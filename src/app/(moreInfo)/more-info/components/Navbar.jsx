@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation"; // Add these imports
-import logo from "@/assests/Bmalogo.png";
+import logo from "@/assests/bma-logo.png";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -25,20 +25,22 @@ export default function Navbar() {
 
   // Updated navigation handler
   const handleNavigation = (section) => {
-    setIsMenuOpen(false);
-    
-    // Check if we're on the main page
-    if (pathname === '/more-info') {
-      // If on main page, just scroll to section
-      const element = document.getElementById(section.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // If on different page, navigate to main page with hash
-      router.push(`/more-info${section}`);
+  setIsMenuOpen(false);
+
+  if (pathname === '/more-info') {
+    const element = document.getElementById(section.replace('#', ''));
+    if (element) {
+      const yOffset = -100; // jitna top space chahiye utna pixel (navbar height)
+      const y =
+        element.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
-  };
+  } else {
+    router.push(`/more-info${section}`);
+  }
+};
+
 
   const toggleGetInTouchDropdown = () => {
     setIsGetInTouchDropdownOpen(!isGetInTouchDropdownOpen);
@@ -72,16 +74,16 @@ export default function Navbar() {
   // Navigation items
   const navItems = [
     { href: "#hero", label: "Home" },
-    { href: "#about", label: "About Us" },
+    { href: "#dholera", label: "Dholera" },
     { href: "#westwyn-county", label: "Westwyn County" },
-    { href: "#WhyInvest", label: "Investment Benefits" },
-    { href: "#WhyDholera", label: "Mega Projects" },
-    { href: "#Testimonials", label: "Testimonials" },
-    { href: "#Faqs", label: "FAQ" },
+    /* { href: "#WhyInvest", label: "Investment Benefits" }, */
+    { href: "#ourProjects", label: "Our Projects" },
+    { href: "#Gallery", label: "Gallery" },
+    { href: "#about-us", label: "About Us" },
   ];
 
   return (
-    <nav className="bg-black text-[#e1b24c] fixed w-full z-50">
+    <nav className="bg-white h-20 fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -99,12 +101,12 @@ export default function Navbar() {
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8 text-lg font-semibold">
+          <div className="text-black  hidden md:flex items-center space-x-8">
             {navItems.map(({ href, label }) => (
               <button
                 key={label}
                 onClick={() => handleNavigation(href)}
-                className="hover:text-white transition duration-200"
+                className="hover:text-[#e1b24c] transition duration-200"
               >
                 {label}
               </button>
@@ -112,7 +114,7 @@ export default function Navbar() {
             
             <div ref={getInTouchRef} className="relative group">
               <button
-                className="text-[#FDB913] hover:text-white px-3 py-2 cursor-pointer flex items-center gap-1"
+                className="text-black px-3 py-2 cursor-pointer flex items-center gap-1"
                 onClick={toggleGetInTouchDropdown}
                 onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
                 onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
@@ -120,7 +122,7 @@ export default function Navbar() {
                 Get in Touch
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`h-4 w-4 text-[#FDB913] transition-transform duration-300 ${
+                  className={`h-4 w-4 text-black transition-transform duration-300 ${
                     isGetInTouchDropdownOpen ? "rotate-180" : ""
                   }`}
                   fill="none"

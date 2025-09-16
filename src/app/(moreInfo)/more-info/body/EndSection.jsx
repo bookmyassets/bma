@@ -17,7 +17,7 @@ export default function EndSection() {
   return (
     <>
       {/* Combined Row for Ready to Invest and Statistics - Reversed Order */}
-      <div className="w-full pt-4 pb-4 bg-gradient-to-r from-[#d7b36c] to-[#c4a055]">
+      <div className="w-full pt-4 pb-4 bg-gradient-to-r from-[#deae3c] to-[#c4a055]">
         <section className="max-w-7xl mx-auto px-4">
           {/* Ready to Invest Section - Now Second */}
           <div className=" p-6  rounded-lg text-black">
@@ -33,7 +33,7 @@ export default function EndSection() {
             <button
               
               onClick={openContactForm}
-              className=" bg-white text-[#d7b36c] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className=" bg-white text-[#deae3c] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               Enquire Now
             </button>
