@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { useRouter, usePathname } from "next/navigation"; // Add these imports
+import { useRouter, usePathname } from "next/navigation";
 import logo from "@/assests/bma-logo.png";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -12,8 +12,8 @@ export default function Navbar() {
   const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   
-  const router = useRouter(); // Add router hook
-  const pathname = usePathname(); // Add pathname hook
+  const router = useRouter();
+  const pathname = usePathname();
   
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -23,24 +23,20 @@ export default function Navbar() {
     setIsContactFormOpen(false);
   };
 
-  // Updated navigation handler
   const handleNavigation = (section) => {
-  setIsMenuOpen(false);
+    setIsMenuOpen(false);
 
-  if (pathname === '/more-info') {
-    const element = document.getElementById(section.replace('#', ''));
-    if (element) {
-      const yOffset = -100; // jitna top space chahiye utna pixel (navbar height)
-      const y =
-        element.getBoundingClientRect().top + window.scrollY + yOffset;
-
-      window.scrollTo({ top: y, behavior: 'smooth' });
+    if (pathname === '/more-info') {
+      const element = document.getElementById(section.replace('#', ''));
+      if (element) {
+        const yOffset = -100;
+        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    } else {
+      router.push(`/more-info${section}`);
     }
-  } else {
-    router.push(`/more-info${section}`);
-  }
-};
-
+  };
 
   const toggleGetInTouchDropdown = () => {
     setIsGetInTouchDropdownOpen(!isGetInTouchDropdownOpen);
@@ -101,7 +97,7 @@ export default function Navbar() {
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="text-black  hidden md:flex items-center space-x-8">
+          <div className="text-black hidden md:flex items-center space-x-8">
             {navItems.map(({ href, label }) => (
               <button
                 key={label}
@@ -180,22 +176,22 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu section with Get in Touch dropdown */}
-          <div className="md:hidden flex items-center gap-4 bg-white">
+          <div className="md:hidden flex items-center gap-4">
             <div className="relative">
               <button
-                className="text-white text-xl font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
+                className="text-black text-base font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
                 onClick={toggleGetInTouchDropdown}
               >
                 Get in Touch
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`h-4 w-4 text-white font-semibold transition-transform duration-300 ${
+                  className={`h-4 w-4 text-black transition-transform duration-300 ${
                     isGetInTouchDropdownOpen ? "rotate-180" : ""
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth="4"
+                  strokeWidth="2"
                 >
                   <path
                     strokeLinecap="round"
@@ -242,9 +238,9 @@ export default function Navbar() {
             </div>
             <button onClick={toggleMenu} ref={menuToggleRef}>
               {isMenuOpen ? (
-                <X className="h-6 w-6 text-[#FDB913]" />
+                <X className="h-6 w-6 text-black" />
               ) : (
-                <Menu className="h-6 w-6 text-[#FDB913]" />
+                <Menu className="h-6 w-6 text-black" />
               )}
             </button>
           </div>
@@ -252,14 +248,13 @@ export default function Navbar() {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            
+          <div className="md:hidden mt-4 pb-4 bg-white rounded-lg shadow-lg">
             <div className="flex flex-col space-y-4 font-semibold">
               {navItems.map(({ href, label }) => (
                 <button
                   key={label}
                   onClick={() => handleNavigation(href)}
-                  className="hover:text-white transition duration-200 text-left"
+                  className="text-black hover:text-[#e1b24c] transition duration-200 text-left px-4 py-2"
                 >
                   {label}
                 </button>
