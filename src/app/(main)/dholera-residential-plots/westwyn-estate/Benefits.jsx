@@ -91,7 +91,7 @@ export default function InvestmentBenefits() {
     },
     {
       title: "Connectivity to Mega Infrastructure",
-      icon: "🏆",
+      icon: "🏗️",
       description: "Close to Hebatpur Industrial Zone, Expressway and proposed Monorail.",
       body: "Minutes from the upcoming Dholera International Airport, Ahmedabad–Dholera Expressway, and proposed metro corridor, making it a future hub of connectivity in Dholera.",
       image:
@@ -99,7 +99,7 @@ export default function InvestmentBenefits() {
     },
     {
       title: "Government-Backed Smart City Growth",
-      icon: "🌿",
+      icon: "⚖️",
       description: "Part of the DMIC project, supported by the Central and State Governments.",
       body: "Part of Dholera Smart City under the Delhi–Mumbai Industrial Corridor (DMIC), a project supported by both Central and State Governments.",
       image:

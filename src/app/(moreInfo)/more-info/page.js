@@ -24,13 +24,12 @@ export default function Page() {
             openForm={() => setShowForm(true)}
           />
         </section>
-        {/* <Dholeravideos/> */}
-        <Ribbon/>
         <About />
         <ProjectSlider/>
         <Ribbon/>
         <Gallery/>
-        <AboutBMA/>
+        <Dholeravideos/>
+       {/*  <AboutBMA/> */}
         {/* <Westwyn />
         <Ammenties />
         <WhyDholera />

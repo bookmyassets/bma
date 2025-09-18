@@ -36,7 +36,7 @@ export default function InvestmentBenefits() {
     },
     {
       title: "Government-Verified",
-      icon: "🌿",
+      icon: "⚖️",
       description: "100% legal, clear titles, registry-ready",
       body: "We offer immediate registry on Dholera plots with NA/NOC clearance and clear titles. All our properties undergo thorough due diligence and are verified by relevant government authorities. This ensures complete legal security and peace of mind for our investors, with all necessary approvals and documentation in place."
     },
@@ -48,7 +48,13 @@ export default function InvestmentBenefits() {
     },
     {
       title: "Smart Infrastructure",
-      icon: "🏆",
+      icon: "🏗️",
+      description: "Metro city level planning with next-gen utilities.",
+      body: "9 meter and 12 meter internal roads, underground trunk infrastructure for wire cables, and water and drainage systems. The development features modern urban planning with smart city amenities including reliable power supply, efficient waste management, high-speed internet connectivity, and sustainable environmental practices that enhance quality of life."
+    },
+    {
+      title: "Smart Infrastructure",
+      icon: "🏗️",
       description: "Metro city level planning with next-gen utilities.",
       body: "9 meter and 12 meter internal roads, underground trunk infrastructure for wire cables, and water and drainage systems. The development features modern urban planning with smart city amenities including reliable power supply, efficient waste management, high-speed internet connectivity, and sustainable environmental practices that enhance quality of life."
     }
@@ -129,11 +135,11 @@ export default function InvestmentBenefits() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Why Invest in WestWyn County?
+            Why Invest with BookMyAssets?
           </motion.h2>
 
           {/* Desktop: 5 cards in a row, Mobile: 1 card per row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}

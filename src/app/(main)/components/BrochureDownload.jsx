@@ -29,6 +29,29 @@ export default function BrochureDownload({
   const router = useRouter();
   const pathname = usePathname();
 
+  // PDF download URL
+  const pdfUrl = "https://cdn.sanity.io/files/c3e1h345/projects/9f32c6d0d835cfc039e42a741e63894f87fd48ce.pdf";
+
+  // Function to download PDF
+  const downloadPDF = () => {
+    try {
+      // Create a temporary anchor element
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = 'brochure.pdf'; // You can customize the filename
+      link.target = '_blank';
+      
+      // Append to body, click, and remove
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+      // Fallback: open in new tab
+      window.open(pdfUrl, '_blank');
+    }
+  };
+
   // Handle close function
   const handleClose = () => {
     if (onClose && typeof onClose === 'function') {
@@ -119,7 +142,6 @@ export default function BrochureDownload({
     return true;
   };
 
-
 const onRecaptchaSuccess = async (token) => {
   try {
     const now = Date.now();
@@ -155,6 +177,9 @@ const onRecaptchaSuccess = async (token) => {
         return newCount;
       });
 
+      // Download PDF immediately after successful submission
+      downloadPDF();
+
       // Show thank you popup for 2 seconds
       setShowThankYou(true);
       setTimeout(() => {
@@ -165,7 +190,7 @@ const onRecaptchaSuccess = async (token) => {
         const currentPath = pathname || window.location.pathname;
         
         // Push to thank-you route with return URL
-        router.push(`/thankyou`);
+        router.push(`/more-info/thankyou`);
       }, 2000);
     } else {
       throw new Error("Error submitting form");
@@ -182,6 +207,7 @@ const onRecaptchaSuccess = async (token) => {
     }
   }
 };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -290,6 +316,14 @@ const onRecaptchaSuccess = async (token) => {
                 transition={{ delay: 0.8 }}
                 className="text-md opacity-80 mt-2"
               >
+                Your brochure is downloading...
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0 }}
+                className="text-sm opacity-70 mt-1"
+              >
                 Redirecting you back...
               </motion.p>
             </motion.div>
@@ -359,7 +393,7 @@ const onRecaptchaSuccess = async (token) => {
               className="text-center mb-6 pt-4"
             >
               <h2 className="text-3xl font-bold text-white mb-2">{title}</h2>
-              <p className="text-gray-300 text-sm">{subtitle}</p>
+              <p className="text-gray-300 text-sm">Only for first 10 users</p>
             </motion.div>
 
             {showPopup ? (
@@ -392,6 +426,9 @@ const onRecaptchaSuccess = async (token) => {
                 <p className="text-gray-300">
                   Your request has been submitted successfully. We'll contact
                   you shortly.
+                </p>
+                <p className="text-yellow-400 text-sm mt-2">
+                  Your brochure is downloading...
                 </p>
               </div>
             ) : (

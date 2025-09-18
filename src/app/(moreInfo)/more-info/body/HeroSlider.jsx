@@ -607,7 +607,7 @@ export default function LandingPage({ openForm }) {
                   <TrendingUp className="w-4 h-4 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-gray-800 mb-1">High ROI</h3>
-                <p className="text-sm font-bold text-[#deae3c]">5x in 5 yrs.</p>
+                <p className="text-lg font-bold text-[#deae3c]">5x in 5 yrs.</p>
               </div>
 
               {/* Price */}
