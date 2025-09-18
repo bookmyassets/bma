@@ -23,40 +23,40 @@ export default function InvestmentBenefits() {
 
   const benefits = [
     {
-      title: "Prime Location",
+      title: "Immediate Sale Registry",
       icon: "📍",
-      description: "Near Ahmedabad–Dholera Expressway, Dholera International Airport, and Dholera Port.",
-      body: "Located on Fedra-Pipli State Highway, just 12 minutes from Ahmedabad-Dholera Expressway, Dholera International Airport, Metro, and industrial hubs, including the TATA Semiconductor Plant (25 minutes away) and Dedicated Freight Corridor. This strategic positioning ensures excellent connectivity and access to major transportation networks, making it an ideal location for residential and commercial investments."
+      description: "Own your dream plot instantly with a quick, transparent registry process",
+      body: "BMA ensures immediate registration with clear documentation, so buyers don’t face delays or hidden legal issues. This transparency builds trust and gives you instant ownership security."
     },
     {
-      title: "Future-Ready Investment",
+      title: "High ROI Projects",
       icon: "📈",
-      description: "Part of India’s first Greenfield Smart City",
-      body: "We offer registry-ready plots with flexible payment plans on Dholera residential plots. Our team ensures end-to-end assistance with resale support and buyback assistance*. Our investment-friendly approach includes easy financing options, transparent pricing, and comprehensive documentation support to make your investment journey smooth and hassle-free."
+      description: "Invest in future-ready projects designed to deliver maximum returns.",
+      body: "Located in fast-growing zones like Dholera Smart City, BMA’s projects are strategically planned near major infrastructure, ensuring higher appreciation and strong ROI for long-term investors."
     },
     {
-      title: "Government-Verified",
+      title: "In-house Due Diligence Team",
       icon: "⚖️",
-      description: "100% legal, clear titles, registry-ready",
-      body: "We offer immediate registry on Dholera plots with NA/NOC clearance and clear titles. All our properties undergo thorough due diligence and are verified by relevant government authorities. This ensures complete legal security and peace of mind for our investors, with all necessary approvals and documentation in place."
+      description: "Every plot is verified by BMA’s expert in-house due diligence team.",
+      body: "BMA’s internal legal and technical experts conduct thorough due diligence on every project. This guarantees that the land you invest in is safe, approved, and free from disputes."
     },
     {
-      title: "High Growth Potential",
+      title: "Resale Support & Buyback Option",
       icon: "✅",
-      description: "Backed by Dholera Customs Port, Solar Power Plant, and ABCD Building.",
-      body: "Early-stage entry in a developing future-ready city, with potential for 3-10x appreciation by 2030. Dholera is India's first smart city and is poised to become a major economic hub. Investing now provides the opportunity to capitalize on the growth trajectory as infrastructure develops and property values increase significantly over time."
+      description: "Secure investment with guaranteed resale support and buyback options.",
+      body: "Investors enjoy flexibility with dedicated resale assistance and a buyback option from BMA. This ensures liquidity and gives confidence that your investment won’t get stuck."
     },
     {
-      title: "Smart Infrastructure",
+      title: "365 Days Site Visit Assistance",
       icon: "🏗️",
-      description: "Metro city level planning with next-gen utilities.",
-      body: "9 meter and 12 meter internal roads, underground trunk infrastructure for wire cables, and water and drainage systems. The development features modern urban planning with smart city amenities including reliable power supply, efficient waste management, high-speed internet connectivity, and sustainable environmental practices that enhance quality of life."
+      description: "Visit your property anytime with year-round site visit support.",
+      body: "BMA offers 365-day site visits so investors can personally check progress, infrastructure, and surroundings before and after purchase, adding to reliability and transparency."
     },
     {
-      title: "Smart Infrastructure",
+      title: "Government Approved AUDA Plots",
       icon: "🏗️",
-      description: "Metro city level planning with next-gen utilities.",
-      body: "9 meter and 12 meter internal roads, underground trunk infrastructure for wire cables, and water and drainage systems. The development features modern urban planning with smart city amenities including reliable power supply, efficient waste management, high-speed internet connectivity, and sustainable environmental practices that enhance quality of life."
+      description: "Invest in 100% safe, government-approved AUDA verified plots.",
+      body: "All plots are AUDA-approved with proper government verification. This ensures your investment is legally safe, future-ready, and eligible for planned development benefits in Dholera."
     }
   ];
 
