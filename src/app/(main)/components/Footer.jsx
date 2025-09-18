@@ -43,6 +43,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Residential</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/dholera-residential-plots/westwyn-county" className="hover:text-yellow-500">WestWyn County</Link></li>
+              <li><Link href="/dholera-residential-plots/westwyn-estate" className="hover:text-yellow-500">WestWyn Estate</Link></li>
               <li><Link href="/dholera-residential-plots/pride">Pride</Link></li>
               <li><Link href="/dholera-residential-plots/paradise">Paradise</Link></li>
               <li><Link href="/dholera-residential-plots/paradise-2">Paradise 2</Link></li>
