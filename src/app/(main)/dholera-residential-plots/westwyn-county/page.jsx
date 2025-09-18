@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/westwyn-county/westwyn-gate-cover.webp";

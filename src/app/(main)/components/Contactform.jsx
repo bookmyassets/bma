@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import logo from "@/assests/Bmalogo.png";
 
-export default function ContactForm({ title = "Get In Touch", headline = "Get Expert Guidance on Dholera Investment", buttonName = "Book Consultation", onClose }) {
+export default function ContactForm({ onClose, title = "Get In Touch", headline = "Get Expert Guidance on Dholera Investment", buttonName = "Book Consultation" }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ 
     fullName: "",  
@@ -72,21 +72,8 @@ export default function ContactForm({ title = "Get In Touch", headline = "Get Ex
       }
     }
 
-    // Prevent modal close when clicking inside
-    const handleClickInside = (e) => {
-      e.stopPropagation();
-    };
-
-    const formElement = document.getElementById("contact-form-container");
-    if (formElement) {
-      formElement.addEventListener("click", handleClickInside);
-    }
-
     // Cleanup function
     return () => {
-      if (formElement) {
-        formElement.removeEventListener("click", handleClickInside);
-      }
       if (window.grecaptcha && recaptchaRef.current) {
         try {
           window.grecaptcha.reset();
@@ -96,6 +83,26 @@ export default function ContactForm({ title = "Get In Touch", headline = "Get Ex
       }
     };
   }, [siteKey]);
+
+  // Handle close function
+  const handleClose = () => {
+    if (typeof onClose === 'function') {
+      onClose();
+    }
+  };
+
+  // Handle backdrop click
+  const handleBackdropClick = (e) => {
+    // Only close if clicking the backdrop, not the form content
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+
+  // Handle form container click (prevent closing)
+  const handleFormClick = (e) => {
+    e.stopPropagation();
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -179,7 +186,7 @@ export default function ContactForm({ title = "Get In Touch", headline = "Get Ex
 
           // Auto close after 3 seconds
           setTimeout(() => {
-            if (onClose) onClose();
+            handleClose();
           }, 3000);
 
         } else {
@@ -247,7 +254,7 @@ export default function ContactForm({ title = "Get In Touch", headline = "Get Ex
   return (
     <div
       className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
-      onClick={onClose}
+      onClick={handleBackdropClick}
     >
       <motion.div
         id="contact-form-container"
@@ -255,17 +262,13 @@ export default function ContactForm({ title = "Get In Touch", headline = "Get Ex
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 50 }}
         className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
-        onClick={(e) => e.stopPropagation()}
+        onClick={handleFormClick}
       >
         {/* Close Button */}
         <button
           type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onClose?.();
-          }}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none transition-colors"
+          onClick={handleClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none transition-colors z-10"
           aria-label="Close form"
         >
           <svg 

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function PopupForm() {
+export default function PopupScroll({title, subtitle}) {
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -20,16 +20,28 @@ export default function PopupForm() {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // Auto-popup after 5 seconds
-  useEffect(() => {
+   useEffect(() => {
     const sessionPopupShown = sessionStorage.getItem('popupShownThisSession');
     
     if (!sessionPopupShown) {
-      const timer = setTimeout(() => {
-        setShowFormPopup(true);
-        sessionStorage.setItem('popupShownThisSession', 'true');
-      }, 5000); // 5 seconds
+      const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercentage = (scrollTop / documentHeight) * 100;
 
-      return () => clearTimeout(timer);
+        // Trigger popup when user scrolls between 50-60%
+        if (scrollPercentage >= 50 && scrollPercentage <= 60) {
+          setShowFormPopup(true);
+          sessionStorage.setItem('popupShownThisSession', 'true');
+          window.removeEventListener('scroll', handleScroll);
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
     }
   }, []);
 
@@ -92,7 +104,7 @@ export default function PopupForm() {
   const onRecaptchaSuccess = async (token) => {
     try {
       const response = await fetch(
-         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -103,7 +115,6 @@ export default function PopupForm() {
             fields: {
               name: formData.fullName,
               phone: formData.mobileNumber,
-              email: formData.email,
               source: "BookMyAssets",
             },
             source: "BookMyAssets Popup",
@@ -114,7 +125,7 @@ export default function PopupForm() {
       );
 
       if (response.ok) {
-        setFormData({ fullName: "", mobileNumber: "", email: ""});
+        setFormData({ fullName: "", mobileNumber: ""});
         setShowThankYou(true);
         
         setTimeout(() => {
@@ -231,11 +242,11 @@ export default function PopupForm() {
                   >
                     ×
                   </button>
-                  <h1 className="text-2xl font-bold text-gray-800 mb-2">BookMyAssets</h1>
+                  <h1 className="text-2xl font-bold text-gray-800 mb-2">{title}</h1>
                   
                   {/* Section 2: Sub-heading CTA */}
                   <p className="text-lg text-gray-700 font-semibold">
-                    Secure Your Future with AUDA-Approved Plots in Dholera Smart City
+                   {subtitle}
                   </p>
                 </div>
 
@@ -277,21 +288,6 @@ export default function PopupForm() {
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
                         placeholder="Enter your mobile number"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
-                        Email ID
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                        placeholder="Enter your email address"
                       />
                     </div>
                   </div>

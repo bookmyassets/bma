@@ -1,35 +1,40 @@
 "use client";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
-import TestimonialPagination from "../components/Testimonials";
 
 const faqs = [
   {
-    question: "Why is Dholera Smart City the best investment option in India?",
+    question: "Where is WestWyn Estate located?",
     answer:
-      "The Dholera Smart City Project is part of the ambitious Dholera project in Gujarat, offering world class infrastructure, government backed mega projects, and high appreciation potential, making it one of the best investment options in India.",
+      "WestWyn Estate is located on State Highway, 0 km from Dholera SIR, close to TP 5, in the heart of Dholera’s fastest-growing corridor, and it is only 25 minutes away from the activation area.",
   },
   {
-    question: "When will Dholera International Airport start operations?",
+    question: "What is the price of WestWyn Estate?",
     answer:
-      "The Dholera International Airport, a key milestone in the Dholera city development, is expected to start operations by December 2025, boosting passenger and cargo connectivity across India and abroad.",
+      "WestWyn Estate in Dholera start from ₹10 Lakh, with plot size ranging between 170–250 per sq. yd.",
   },
   {
-    question: "When is the Ahmedabad Dholera Expressway inauguration?",
+    question: "Are the plots legally approved?",
     answer:
-      "The Ahmedabad Dholera Expressway, connecting Ahmedabad to Dholera Smart City in under an hour, is expected to be inaugurated by mid-2025, enhancing accessibility and investment appeal.",
+      "Yes, all plots are NA/NOC cleared, AUDA registered and title-cleared, ensuring a safe and transparent investment.",
   },
   {
-    question: "What legal documents are required to buy plots in Dholera?",
+    question: "What is the booking process?",
     answer:
-      "To buy plots in Dholera city, you need a sale deed, NA/NOC clearance, title deed, and valid identification proofs, ensuring secure ownership.",
+      "You can reserve your plot with a token amount of ₹50,000. After booking, clients get a free site visit. Once the payment is complete, we initiate the legal process and send the registry papers via speed post.",
   },
   {
-    question: "How much do I need to invest in Dholera Smart City?",
+    question: "Why should I invest in WestWyn Estate now?",
     answer:
-      "Investment in Dholera residential plots starts from around ₹8 lakhs, depending on plot size, location, and the stage of project development.",
+      "With the upcoming Dholera International Airport and the Tata Semiconductor Plant, Dholera is becoming India’s new Semiconductor hub. Land values are expected to rise rapidly, and residential demand is projected to grow quickly, making it a smart early Dholera SIR investment.",
+  },
+  {
+    question: "How can BookMyAssets help you invest?",
+    answer:
+      "BMA assists you with plot selection in Dholera, legal verification, and the complete booking process. Our experts guide you step-by-step to ensure a safe, hassle-free investment.",
   },
 ];
+
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -49,7 +54,7 @@ export default function FAQSection() {
               Frequently Asked Questions
             </h2>
             <p className="text-gray-600 mb-2">
-              More Questions about Dholera Smart City?
+              Got questions about WestWyn Estate?
             </p>
             <div className="pt-4">
               <a className="px-2 py-3 bg-[#deae3c] rounded-md" href="tel:+918130371647">Give Us A Missed Call</a>
@@ -91,12 +96,9 @@ export default function FAQSection() {
                 </div>
               </div>
             ))}
-            
           </div>
         </div>
       </div>
-
-      <TestimonialPagination />
     </>
   );
 }

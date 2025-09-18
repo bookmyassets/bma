@@ -58,7 +58,7 @@ export default function FAQSection() {
               Got questions about WestWyn County?
             </p>
             <p className="text-gray-600">
-              We’ve answered the most common ones here.
+              We’ve answered the most common ones here
             </p>
           </div>
 

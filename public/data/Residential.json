@@ -1,5 +1,14 @@
 [
   {
+    "projectName": "WestWyn Estate",
+    "link": "westwyn-estate",
+    "location": "Vadhela, Dholera, Gujarat",
+    "image": "/assets/residential/westwyn.webp",
+    "constructionStatus" : "Under Construction",
+    "status" : "ongoing",
+    "description" : "Invest in plots in Dholera at WestWyn Estate, 0 km from Dholera SIR, and close to proximity to the activation area at an unbeatable price."
+  },
+  {
     "projectName": "WestWyn County",
     "link": "westwyn-county",
     "location": "Fedra-Pipli State Highway, Dholera, Gujarat",

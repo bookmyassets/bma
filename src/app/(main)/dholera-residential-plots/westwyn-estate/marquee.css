@@ -1,0 +1,63 @@
+/* Container for the scrolling effect */
+.scrolling-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: black;
+  color: #deae3c;
+  padding: 10px 0;
+  white-space: nowrap; /* 👈 Prevent line breaks */
+}
+
+/* The scrolling text that moves */
+.scrolling-text h2 {
+  display: inline;
+  margin: 0 50px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #deae3c, #ffd700);
+  color: black;
+  padding: 6px 16px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(222, 174, 60, 0.6);
+  white-space: nowrap;
+}
+
+/* Animation for the continuous scroll */
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Headline style */
+.scrolling-text h2 {
+  display: inline; /* text inline */
+  margin: 0 50px;
+  font-size: 18px;
+}
+
+@keyframes pulse-border {
+  0% {
+    border-color: rgba(222, 174, 60, 0.6);
+    box-shadow: 0 0 0 0 rgba(222, 174, 60, 0.7);
+  }
+  50% {
+    border-color: rgba(222, 174, 60, 1);
+    box-shadow: 0 0 15px 4px rgba(222, 174, 60, 0.4);
+  }
+  100% {
+    border-color: rgba(222, 174, 60, 0.6);
+    box-shadow: 0 0 0 0 rgba(222, 174, 60, 0);
+  }
+}
+
+.pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+  border-width: 4px;
+  border-style: solid;
+  border-radius: 14px; 
+}
+
