@@ -163,7 +163,7 @@ const benefits = [
                 {/* Card Header */}
                 <div className="text-center mb-4">
                   <motion.div 
-                    className="text-3xl md:text-4xl mb-3"
+                    className="text-3xl md:text-4xl flex justify-center items-center mb-3"
                     whileHover={{ scale: 1.2 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
@@ -176,7 +176,7 @@ const benefits = [
 
                 {/* Description - Always Visible */}
                 <div className="mb-3">
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed text-center">
+                  <p className="text-sm md:text-base text-gray-600 line-clamp-3 text-center">
                     {benefit.description}
                   </p>
                 </div>
