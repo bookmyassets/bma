@@ -8,8 +8,9 @@ import PopupForm from "./components/PopUpForm";
 import Dholeravideos from "./body/Videos";
 import Ribbon from "./body/Ribbon";
 import ProjectSlider from "./projects/page";
-import Gallery from "./gallery/page";
+
 import AboutBMA from "./body/AboutBMA";
+import Gallery from "./gallery/page";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
