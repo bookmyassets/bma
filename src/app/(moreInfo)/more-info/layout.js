@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Navbar from "./components/Navbar";
 import "./globals.css";
@@ -15,6 +15,11 @@ export default function RootLayout({ children }) {
           src="https://www.googletagmanager.com/gtag/js?id=G-NWBLCWMLDF"
         />
         <Script />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17011995425"   /* google ads tag */
+        />
+        <Script />
 
         <Script
           id="google-analytics"
@@ -26,6 +31,20 @@ export default function RootLayout({ children }) {
               gtag('js', new Date());
 
               gtag('config', 'G-NWBLCWMLDF');
+            `,
+          }}
+        />
+        {/*  google ads tag */}
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}               
+  gtag('js', new Date());                               
+
+  gtag('config', 'AW-17011995425');
             `,
           }}
         />
@@ -61,8 +80,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }
         `}</style>
         <noscript>
-          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXSQ62G6"
-height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-TXSQ62G6"     /* GTM - BMA Landing Page */
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
         </noscript>
         <Navbar />
         {children}
