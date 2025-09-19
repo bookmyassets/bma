@@ -13,15 +13,19 @@ import {
   Users,
   Clock,
   Camera,
+  SquareDashed,
+  Gamepad2,
+  PersonStanding,
 } from "lucide-react";
 import { FaRoad } from "react-icons/fa6";
+import { FaRunning } from "react-icons/fa";
 
 const ProjectAmenities = () => {
   const [showAll, setShowAll] = useState(false);
 
   const amenities = [
     {
-      icon: <MapPin className="w-6 h-6" />,
+      icon: <SquareDashed className="w-6 h-6" />,
       title: "Project Boundary",
       color: "from-gray-500 to-gray-700",
     },
@@ -51,7 +55,7 @@ const ProjectAmenities = () => {
       color: "from-purple-400 to-pink-400",
     },
     {
-      icon: <Activity className="w-6 h-6" />,
+      icon: <Gamepad2 className="w-6 h-6" />,
       title: "Indoor Games & Gymnasium",
       color: "from-orange-500 to-red-500",
     },
@@ -66,12 +70,12 @@ const ProjectAmenities = () => {
       color: "from-yellow-600 to-yellow-800",
     },
     {
-      icon: <Heart className="w-6 h-6" />,
+      icon: <PersonStanding className="w-6 h-6" />,
       title: "Yoga Deck",
       color: "from-pink-500 to-rose-500",
     },
     {
-      icon: <Activity className="w-6 h-6" />,
+      icon: <FaRunning className="w-6 h-6" />,
       title: "Jogging Track",
       color: "from-green-500 to-emerald-500",
     },

@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { Plus, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  FileCheck,
+  TrendingUp,
+  Scale,
+  RefreshCcw,
+  CalendarCheck2,
+  ShieldCheck,
+} from "lucide-react";
 
 export default function InvestmentBenefits() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -21,44 +29,45 @@ export default function InvestmentBenefits() {
     setSelectedBenefit(null);
   };
 
-  const benefits = [
-    {
-      title: "Immediate Sale Registry",
-      icon: "📍",
-      description: "Own your dream plot instantly with a quick, transparent registry process",
-      body: "BMA ensures immediate registration with clear documentation, so buyers don’t face delays or hidden legal issues. This transparency builds trust and gives you instant ownership security."
-    },
-    {
-      title: "High ROI Projects",
-      icon: "📈",
-      description: "Invest in future-ready projects designed to deliver maximum returns.",
-      body: "Located in fast-growing zones like Dholera Smart City, BMA’s projects are strategically planned near major infrastructure, ensuring higher appreciation and strong ROI for long-term investors."
-    },
-    {
-      title: "In-house Due Diligence Team",
-      icon: "⚖️",
-      description: "Every plot is verified by BMA’s expert in-house due diligence team.",
-      body: "BMA’s internal legal and technical experts conduct thorough due diligence on every project. This guarantees that the land you invest in is safe, approved, and free from disputes."
-    },
-    {
-      title: "Resale Support & Buyback Option",
-      icon: "✅",
-      description: "Secure investment with guaranteed resale support and buyback options.",
-      body: "Investors enjoy flexibility with dedicated resale assistance and a buyback option from BMA. This ensures liquidity and gives confidence that your investment won’t get stuck."
-    },
-    {
-      title: "365 Days Site Visit Assistance",
-      icon: "🏗️",
-      description: "Visit your property anytime with year-round site visit support.",
-      body: "BMA offers 365-day site visits so investors can personally check progress, infrastructure, and surroundings before and after purchase, adding to reliability and transparency."
-    },
-    {
-      title: "Government Approved AUDA Plots",
-      icon: "🏗️",
-      description: "Invest in 100% safe, government-approved AUDA verified plots.",
-      body: "All plots are AUDA-approved with proper government verification. This ensures your investment is legally safe, future-ready, and eligible for planned development benefits in Dholera."
-    }
-  ];
+const benefits = [
+  {
+    title: "Immediate Sale Registry",
+    icon: <FileCheck className="w-6 h-6 text-blue-600" />,
+    description: "Own your dream plot instantly with a quick, transparent registry process",
+    body: "BMA ensures immediate registration with clear documentation, so buyers don’t face delays or hidden legal issues. This transparency builds trust and gives you instant ownership security."
+  },
+  {
+    title: "High ROI Projects",
+    icon: <TrendingUp className="w-6 h-6 text-green-600" />,
+    description: "Invest in future-ready projects designed to deliver maximum returns.",
+    body: "Located in fast-growing zones like Dholera Smart City, BMA’s projects are strategically planned near major infrastructure, ensuring higher appreciation and strong ROI for long-term investors."
+  },
+  {
+    title: "In-house Due Diligence Team",
+    icon: <Scale className="w-6 h-6 text-orange-600" />,
+    description: "Every plot is verified by BMA’s expert in-house due diligence team.",
+    body: "BMA’s internal legal and technical experts conduct thorough due diligence on every project. This guarantees that the land you invest in is safe, approved, and free from disputes."
+  },
+  {
+    title: "Resale Support & Buyback Option",
+    icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
+    description: "Secure investment with guaranteed resale support and buyback options.",
+    body: "Investors enjoy flexibility with dedicated resale assistance and a buyback option from BMA. This ensures liquidity and gives confidence that your investment won’t get stuck."
+  },
+  {
+    title: "365 Days Site Visit Assistance",
+    icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
+    description: "Visit your property anytime with year-round site visit support.",
+    body: "BMA offers 365-day site visits so investors can personally check progress, infrastructure, and surroundings before and after purchase, adding to reliability and transparency."
+  },
+  {
+    title: "Government Approved AUDA Plots",
+    icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
+    description: "Invest in 100% safe, government-approved AUDA verified plots.",
+    body: "All plots are AUDA-approved with proper government verification. This ensures your investment is legally safe, future-ready, and eligible for planned development benefits in Dholera."
+  }
+];
+
 
   // Animation variants
   const cardVariants = {
