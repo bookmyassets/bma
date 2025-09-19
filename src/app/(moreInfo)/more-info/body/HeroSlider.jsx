@@ -29,6 +29,8 @@ export default function LandingPage({ openForm }) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const recaptchaRef = useRef(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
 
   // Slider state
   const [currentSlide, setCurrentSlide] = useState(0);
