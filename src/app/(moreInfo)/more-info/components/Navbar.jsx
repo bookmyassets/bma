@@ -70,12 +70,11 @@ export default function Navbar() {
   // Navigation items
   const navItems = [
     { href: "#hero", label: "Home" },
-    { href: "#dholera", label: "Dholera" },
     { href: "#westwyn-county", label: "Westwyn County" },
     /* { href: "#WhyInvest", label: "Investment Benefits" }, */
     { href: "#ourProjects", label: "Our Projects" },
     { href: "#Gallery", label: "Gallery" },
-    { href: "#about-us", label: "About Us" },
+    { href: "#dholera", label: "Dholera" },
   ];
 
   return (

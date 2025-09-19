@@ -137,7 +137,7 @@ export default function BMA() {
 
                   <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
                     <div className="text-[24px] font-bold text-[#deae3c] mb-2">
-                      7
+                      8
                     </div>
                     <p className="text-sm md:text-base text-gray-700 font-medium text-center">
                       Total Residential Projects
