@@ -18,13 +18,13 @@ import ScrollingHeadline from "./Running";
 import "./marquee.css"
 
 //images import
-import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
-import img2 from "@/assests/ad-page/img2.webp";
-import img3 from "@/assests/ad-page/img3.webp";
+import img1 from "@/assests/residential/estate1.webp";
+import img2 from "@/assests/residential/estate2.webp";
+import img3 from "@/assests/residential/estate3.webp";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp"
-import imgM1 from "@/assests/ad-page/mob1.webp";
-import imgM2 from "@/assests/ad-page/mob2.webp";
-import imgM3 from "@/assests/ad-page/mob3.webp";
+import imgM1 from "@/assests/residential/estate1M.webp";
+import imgM2 from "@/assests/residential/estate2M.webp";
+import imgM3 from "@/assests/residential/estate3M.webp";
 import PopupScroll from "../../components/PopUpScroll";
 
 export default function HeroCarousel() {
@@ -257,7 +257,7 @@ export default function HeroCarousel() {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className=""
+                      className="object-cover"
                       priority={index === 0}
                     />
 
