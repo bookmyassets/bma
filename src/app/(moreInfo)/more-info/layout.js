@@ -62,7 +62,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         `}</style>
         <noscript>
           <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXSQ62G6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe>
+height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe>
         </noscript>
         <Navbar />
         {children}
