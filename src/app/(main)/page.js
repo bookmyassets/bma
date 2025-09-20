@@ -7,6 +7,7 @@ import ShortsSection from './homeComponents/YouTube'
 import FAQSection from './homeComponents/FAQs'
 import WestWyn from './homeComponents/WestWyn'
 import PopupForm from './components/PopUpForm'
+import LandingPage from './homeComponents/Hero2'
 
 export default function page() {
 
@@ -146,6 +147,7 @@ export default function page() {
         }}
       /> 
     <div>
+      {/*  <LandingPage openForm={() => setpopShowForm(true)} /> */}
        <Hero openForm={() => setpopShowForm(true)} />
        <Dholera/>
        <BMA/>
