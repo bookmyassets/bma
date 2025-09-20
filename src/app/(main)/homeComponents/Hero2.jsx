@@ -2,8 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import logo from "@/assests/navratri.jpg"
-import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight, ChevronLeft, TrendingUp } from 'lucide-react';
+import logo from "@/assests/festival-images/navratri.webp"
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 //images import
 import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
@@ -441,7 +441,7 @@ export default function LandingPage({ openForm }) {
                 <Image
                   src={logo}
                   alt="BookMyAssets Logo"
-                  className="mx-auto mb-3 h-24 w-24"
+                  className="mx-auto mb-3 "
                 />
                 <h2 className="text-xl lg:text-2xl font-bold text-black mb-2">
                   Know Today's Offer

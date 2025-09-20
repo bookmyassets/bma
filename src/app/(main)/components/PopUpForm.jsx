@@ -235,7 +235,7 @@ export default function PopupForm() {
                   
                   {/* Section 2: Sub-heading CTA */}
                   <p className="text-lg text-gray-700 font-semibold">
-                    Secure Your Future with AUDA-Approved Plots in Dholera Smart City
+                    Book Your Investor-Friendly Verified Plot Under 10 Lakh Today!
                   </p>
                 </div>
 
@@ -319,7 +319,7 @@ export default function PopupForm() {
                         Submitting...
                       </div>
                     ) : (
-                      "Submit"
+                      "Get A Call Back"   
                     )}
                   </button>
 

@@ -234,9 +234,9 @@ export default function LeadForm({ title }) {
             <h2 className="text-white text-2xl font-bold text-center">
               Be Part of India’s First Greenfield Smart City with BookMyAssets
             </h2>
-            <p className="text-gray-300 mt-2 text-xs text-center">
+            {/* <p className="text-gray-300 mt-2 text-xs text-center">
               Scale Your Portfolio with High-Growth Land Opportunities
-            </p>
+            </p> */}
             {showPopup ? (
               <div className="text-center py-8">
                 <motion.div

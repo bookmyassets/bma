@@ -53,7 +53,8 @@ export default function Navbar() {
     isResidentialMenuOpen ||
     isDholeraMenuOpen ||
     isBulkLandMenuOpen;
-  const textColor = shouldUseWhiteBackground ? "text-black" : "text-white";
+  const textColor = "text-black";
+  /* const textColor = shouldUseWhiteBackground ? "text-black" : "text-white"; */
 
   // Fetch residential projects from JSON when dropdown is opened
   useEffect(() => {
@@ -294,12 +295,15 @@ useEffect(() => {
   return (
     <>
       <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white`}
+      >
+     {/*  <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           shouldUseWhiteBackground
             ? "bg-white border-b border-gray-200/50 shadow-lg"
             : "bg-transparent"
         }`}
-      >
+      > */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}

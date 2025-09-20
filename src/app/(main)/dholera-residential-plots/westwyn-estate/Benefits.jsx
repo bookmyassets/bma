@@ -92,8 +92,8 @@ export default function InvestmentBenefits() {
     {
       title: "Connectivity to Mega Infrastructure",
       icon: "🏗️",
-      description: "Close to Hebatpur Industrial Zone, Expressway and proposed Monorail.",
-      body: "Minutes from the upcoming Dholera International Airport, Ahmedabad–Dholera Expressway, and proposed metro corridor, making it a future hub of connectivity in Dholera.",
+      description: "Close to Hebatpur Industrial Zone, Expressway and Proposed Monorail.",
+      body: "Minutes from the upcoming Dholera International Airport, Ahmedabad–Dholera Expressway, and proposed monorail, making it a future hub of connectivity in Dholera.",
       image:
         "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop&crop=center",
     },
