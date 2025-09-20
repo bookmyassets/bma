@@ -142,7 +142,7 @@ export default function BrochureDownload({
     return true;
   };
 
-const onRecaptchaSuccess = async () => {
+const onRecaptchaSuccess = async (token) => {
   try {
     const now = Date.now();
 
@@ -217,9 +217,9 @@ const onRecaptchaSuccess = async () => {
       setIsLoading(false);
       return;
     }
-onRecaptchaSuccess
+
     // If reCAPTCHA is loaded, render it in the ref
-   /*  if (window.grecaptcha && recaptchaLoaded) {
+    if (window.grecaptcha && recaptchaLoaded) {
       try {
         if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
           window.grecaptcha.render(recaptchaRef.current, {
@@ -239,7 +239,7 @@ onRecaptchaSuccess
     } else {
       setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
       setIsLoading(false);
-    } */
+    }
   };
 
   // Handle backdrop click
@@ -477,9 +477,9 @@ onRecaptchaSuccess
                 </motion.div>
 
                 {/* reCAPTCHA container */}
-                {/* <div className="flex justify-center">
+                <div className="flex justify-center">
                   <div ref={recaptchaRef}></div>
-                </div> */}
+                </div>
 
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
