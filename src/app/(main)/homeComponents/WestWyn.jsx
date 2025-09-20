@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import sample1 from "@/assests/westWyn.webp";
+import sample1 from "@/assests/residential/westwyn-county-hero-section-desktop.webp";
 import Link from "next/link";
 
 

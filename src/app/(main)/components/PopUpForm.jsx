@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assests/Bmalogo.png";
+import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 
 export default function PopupForm() {
@@ -186,173 +186,177 @@ export default function PopupForm() {
 
   return (
     <AnimatePresence>
-      {showFormPopup && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
-          onClick={handleBackdropClick}
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {showThankYou ? (
-              <div className="text-center">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="mb-6"
+  {showFormPopup && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
+      onClick={handleBackdropClick}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {showThankYou ? (
+          <div className="text-center">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="mb-6"
+            >
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-8 w-8 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                </motion.div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
-                <p className="text-gray-600">We will contact you shortly.</p>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
               </div>
-            ) : (
-              <>
-              <div className="absolute -top-14 left-1/2 transform -translate-x-1/2">
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              transition={{ delay: 0.2 }}
-                              className="bg-black p-2 rounded-lg shadow-lg"
-                            >
-                              <Image
-                                src={logo}
-                                alt="Logo"
-                                width={60}
-                                height={60}
-                                className="rounded-lg"
-                              />
-                            </motion.div>
-                          </div>
-                {/* Section 1: Heading */}
-                <div className="text-center mb-6">
-                  <button
-                    onClick={handlePopupClose}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
-                  >
-                    ×
-                  </button>
-                  <h1 className="text-2xl font-bold text-gray-800 mb-2">BookMyAssets</h1>
-                  
-                  {/* Section 2: Sub-heading CTA */}
-                  <p className="text-lg text-gray-700 font-semibold">
-                    Book Your Investor-Friendly Verified Plot Under 10 Lakh Today!
-                  </p>
+            </motion.div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
+            <p className="text-gray-600">We will contact you shortly.</p>
+          </div>
+        ) : (
+          <>
+            {/* Logo positioned in top left */}
+            <div className="absolute top-0 left-0">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="  shadow-lg"
+              >
+                <Image
+                  src={logo}
+                  alt="Logo"
+                  width={60}
+                  height={60}
+                  className="rounded-xl "
+                />
+              </motion.div>
+            </div>
+
+            {/* Close button */}
+            <button
+              onClick={handlePopupClose}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+            >
+              ×
+            </button>
+
+            {/* Section 1: Heading */}
+            <div className="text-center mb-6">
+              <h1 className="text-2xl font-bold text-gray-800 mb-2">BookMyAssets</h1>
+              
+              {/* Section 2: Sub-heading CTA */}
+              <p className="text-lg text-gray-700 font-semibold">
+                Book Your Investor-Friendly Verified Plot in Dholera under ₹10 Lakh Today!
+              </p>
+            </div>
+
+            {/* Section 3: Form Fields */}
+            <form onSubmit={handleSubmit}>
+              {errorMessage && (
+                <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm mb-4">
+                  {errorMessage}
+                </div>
+              )}
+
+              <div className="space-y-4 mb-6">
+                <div>
+                  <label htmlFor="fullName" className="block text-gray-700 text-sm font-medium mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    placeholder="Enter your full name"
+                  />
                 </div>
 
-                {/* Section 3: Form Fields */}
-                <form onSubmit={handleSubmit}>
-                  {errorMessage && (
-                    <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm mb-4">
-                      {errorMessage}
-                    </div>
-                  )}
+                <div>
+                  <label htmlFor="mobileNumber" className="block text-gray-700 text-sm font-medium mb-2">
+                    Mobile Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="mobileNumber"
+                    name="mobileNumber"
+                    value={formData.mobileNumber}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    placeholder="Enter your mobile number"
+                  />
+                </div>
 
-                  <div className="space-y-4 mb-6">
-                    <div>
-                      <label htmlFor="fullName" className="block text-gray-700 text-sm font-medium mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                        placeholder="Enter your full name"
-                      />
-                    </div>
+                <div>
+                  <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
+                    Email ID
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    placeholder="Enter your email address"
+                  />
+                </div>
+              </div>
 
-                    <div>
-                      <label htmlFor="mobileNumber" className="block text-gray-700 text-sm font-medium mb-2">
-                        Mobile Number *
-                      </label>
-                      <input
-                        type="tel"
-                        id="mobileNumber"
-                        name="mobileNumber"
-                        value={formData.mobileNumber}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                        placeholder="Enter your mobile number"
-                      />
-                    </div>
+              <div className="flex justify-center mb-4">
+                <div ref={recaptchaRef}></div>
+              </div>
 
-                    <div>
-                      <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
-                        Email ID
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                        placeholder="Enter your email address"
-                      />
-                    </div>
+              {/* Section 4: Submit Button with Tagline */}
+              <button
+                type="submit"
+                disabled={isLoading || !recaptchaLoaded}
+                className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
+                  isLoading || !recaptchaLoaded
+                    ? "bg-gray-400 cursor-not-allowed text-gray-600"
+                    : "bg-[#deae3c] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                }`}
+              >
+                {isLoading ? (
+                  <div className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Submitting...
                   </div>
+                ) : (
+                  "Get A Call Back"   
+                )}
+              </button>
 
-                  <div className="flex justify-center mb-4">
-                    <div ref={recaptchaRef}></div>
-                  </div>
-
-                  {/* Section 4: Submit Button with Tagline */}
-                  <button
-                    type="submit"
-                    disabled={isLoading || !recaptchaLoaded}
-                    className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
-                      isLoading || !recaptchaLoaded
-                        ? "bg-gray-400 cursor-not-allowed text-gray-600"
-                        : "bg-[#deae3c] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
-                    }`}
-                  >
-                    {isLoading ? (
-                      <div className="flex items-center justify-center">
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Submitting...
-                      </div>
-                    ) : (
-                      "Get A Call Back"   
-                    )}
-                  </button>
-
-                  {/* Section 5: Privacy Notice */}
-                  <div className="text-center mt-4">
-                    <p className="text-xs text-gray-500">
-                      We respect your privacy. Your details are safe with us.
-                    </p>
-                  </div>
-                </form>
-              </>
-            )}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+              {/* Section 5: Privacy Notice */}
+              <div className="text-center mt-4">
+                <p className="text-xs text-gray-500">
+                  We respect your privacy. Your details are safe with us.
+                </p>
+              </div>
+            </form>
+          </>
+        )}
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
   );
 }

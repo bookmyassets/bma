@@ -2,25 +2,24 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import logo from "@/assests/festival-images/navratri.webp"
-import { ChevronRight, ChevronLeft } from 'lucide-react';
+import logo from "@/assests/festival-images/navratri.webp";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import
-import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
-import img2 from "@/assests/ad-page/img2.webp";
+import img1 from "@/assests/hero1.webp";
+import img2 from "@/assests/hero2.webp";
 import img3 from "@/assests/ad-page/img3.webp";
 
-import imgM1 from "@/assests/ad-page/mob1.webp";
-import imgM2 from "@/assests/ad-page/mob2.webp";
+import imgM1 from "@/assests/hero_mob1.webp";
+import imgM2 from "@/assests/hero_mob2.webp";
 import imgM3 from "@/assests/ad-page/mob3.webp";
 import BrochureDownload from "../components/BrochureDownload";
-
 
 export default function LandingPage({ openForm }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
-    phone: ""
+    phone: "",
   });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -39,14 +38,14 @@ export default function LandingPage({ openForm }) {
   const desktopImages = [
     { src: img1, alt: "Dholera Investment Opportunity 1" },
     { src: img2, alt: "Dholera Investment Opportunity 2" },
-    { src: img3, alt: "Dholera Investment Opportunity 3" }
+    { src: img3, alt: "Dholera Investment Opportunity 3" },
   ];
 
   const mobileImages = [
     { src: imgM1, alt: "Dholera Mobile 1" },
     { src: imgM2, alt: "Dholera Mobile 2" },
-    { src: imgM3, alt: "Dholera Mobile 3" }]
-
+    { src: imgM3, alt: "Dholera Mobile 3" },
+  ];
 
   useEffect(() => {
     // Load reCAPTCHA script
@@ -288,20 +287,18 @@ export default function LandingPage({ openForm }) {
     );
   };
 
-
   const [isDownload, setIsDownload] = useState(false);
 
   const openBrochure = () => {
     setIsDownload(true);
-  }
+  };
 
   const closeBrochure = () => {
     setIsDownload(false);
-  }
-
+  };
 
   return (
-    <div id="hero" className="relative min-h-screen bg-gray-100">
+    <div id="hero" className="relative min-h-screen bg-white">
       {/* Thank You Overlay */}
       <AnimatePresence>
         {showThankYou && (
@@ -373,17 +370,17 @@ export default function LandingPage({ openForm }) {
                 {desktopImages.map((image, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"
-                      }`}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
                   >
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className=""
+                      className="object-cover pt-8"
                       priority={index === 0}
                     />
-
                   </div>
                 ))}
                 {/* Navigation */}
@@ -412,8 +409,9 @@ export default function LandingPage({ openForm }) {
               {mobileImages.map((image, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
                 >
                   <Image
                     src={image.src}
@@ -422,14 +420,13 @@ export default function LandingPage({ openForm }) {
                     className="object-cover"
                     priority={index === 0}
                   />
-
                 </div>
               ))}
             </div>
           </div>
 
           {/* Right Side - Lead Form Section (40%) */}
-          <div className="w-full lg:w-[40%] bg-gray-100 flex items-center justify-center p-4 lg:p-6">
+          <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -443,12 +440,46 @@ export default function LandingPage({ openForm }) {
                   alt="BookMyAssets Logo"
                   className="mx-auto mb-3 "
                 />
-                <h2 className="text-xl lg:text-2xl font-bold text-black mb-2">
-                  Know Today's Offer
-                </h2>
-                <p className="text-black text-sm lg:text-base">
-                 Get exclusive offer on premium residential plots in Dholera
-                </p>
+
+                <div className="relative">
+        <style jsx>{`
+         
+          
+          @keyframes textGlow {
+            0%, 100% { 
+              text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
+              color: black;
+            }
+            50% { 
+              text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8);
+              color: black;
+            }
+          }
+          
+          .flashy-blink {
+            animation: flashyBlink 3s infinite ease-in-out;
+            padding: 4px;
+            border-radius: 1rem;
+            border: 3px solid #deae3c;
+          }
+          
+          .glowing-text {
+            animation: textGlow 1s infinite ease-in-out;
+          }
+        `}</style>
+        
+        <div className="flashy-blink">
+          <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
+            Dholera's Biggest Offer till Date
+          </h2>
+          <p className="text-sm lg:text-base glowing-text">
+            Plots starting ₹10 Lakhs at 0 KM from Dholera SIR Boundary
+          </p>
+        </div>
+        
+        {/* Golden sparkle effects */}
+        
+      </div>
               </div>
 
               {showPopup ? (
@@ -479,7 +510,8 @@ export default function LandingPage({ openForm }) {
                     Thank You!
                   </h3>
                   <p className="text-gray-600 text-sm">
-                    Your request has been submitted successfully. We'll contact you shortly.
+                    Your request has been submitted successfully. We'll contact
+                    you shortly.
                   </p>
                 </div>
               ) : (
@@ -571,7 +603,7 @@ export default function LandingPage({ openForm }) {
                     disabled={isLoading}
                     className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? "Submitting..." : "Claim Offer"}
+                    {isLoading ? "Submitting..." : "Get A Call Back"}
                   </motion.button>
                 </div>
               )}
@@ -580,7 +612,6 @@ export default function LandingPage({ openForm }) {
         </div>
 
         {/* Bottom Stats Section - Compact */}
-       
       </div>
       <AnimatePresence>
         {isDownload && (
