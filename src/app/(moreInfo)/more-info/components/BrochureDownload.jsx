@@ -477,9 +477,9 @@ const onRecaptchaSuccess = async (token) => {
                 </motion.div>
 
                 {/* reCAPTCHA container */}
-                <div className="flex justify-center">
+                {/* <div className="flex justify-center">
                   <div ref={recaptchaRef}></div>
-                </div>
+                </div> */}
 
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
