@@ -292,7 +292,7 @@ export default function ProjectSlider() {
 
                         <button
                           onClick={() => openProjectForm(project)}
-                          className={`w-full font-bold py-2 px-4 rounded-lg transition-colors duration-300 mt-auto ${project.status?.toLowerCase() === "sold-out" ||
+                          className={`w-full trackerx font-bold py-2 px-4 rounded-lg transition-colors duration-300 mt-auto ${project.status?.toLowerCase() === "sold-out" ||
                               project.status?.toLowerCase() === "soldout"
                               ? "bg-gray-400 text-gray-600 cursor-not-allowed"
                               : "bg-[#deae3c] hover:bg-yellow-600 text-white"
