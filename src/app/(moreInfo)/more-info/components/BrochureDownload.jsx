@@ -142,7 +142,7 @@ export default function BrochureDownload({
     return true;
   };
 
-const onRecaptchaSuccess = async (token) => {
+const onRecaptchaSuccess = async () => {
   try {
     const now = Date.now();
 
@@ -217,9 +217,9 @@ const onRecaptchaSuccess = async (token) => {
       setIsLoading(false);
       return;
     }
-
+onRecaptchaSuccess
     // If reCAPTCHA is loaded, render it in the ref
-    if (window.grecaptcha && recaptchaLoaded) {
+   /*  if (window.grecaptcha && recaptchaLoaded) {
       try {
         if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
           window.grecaptcha.render(recaptchaRef.current, {
@@ -239,7 +239,7 @@ const onRecaptchaSuccess = async (token) => {
     } else {
       setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
       setIsLoading(false);
-    }
+    } */
   };
 
   // Handle backdrop click
