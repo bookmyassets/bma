@@ -338,7 +338,7 @@ const onRecaptchaSuccess = async (token) => {
           onClick={handleBackdropClick}
         >
           <motion.div
-            id="contact-form-container"
+           /*  id="contact-form-container" */
             initial={{ scale: 0.9, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 50 }}
@@ -432,7 +432,7 @@ const onRecaptchaSuccess = async (token) => {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5 trackerx">
+              <form onSubmit={handleSubmit} id="brochurex" className="space-y-5 trackerx">
                 {errorMessage && (
                   <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
                     {errorMessage}
