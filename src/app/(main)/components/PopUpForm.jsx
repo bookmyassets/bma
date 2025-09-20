@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assests/Bmalogo.png";
+import Image from "next/image";
 
 export default function PopupForm() {
   // Popup states
@@ -223,6 +225,22 @@ export default function PopupForm() {
               </div>
             ) : (
               <>
+              <div className="absolute -top-14 left-1/2 transform -translate-x-1/2">
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ delay: 0.2 }}
+                              className="bg-black p-2 rounded-lg shadow-lg"
+                            >
+                              <Image
+                                src={logo}
+                                alt="Logo"
+                                width={60}
+                                height={60}
+                                className="rounded-lg"
+                              />
+                            </motion.div>
+                          </div>
                 {/* Section 1: Heading */}
                 <div className="text-center mb-6">
                   <button
