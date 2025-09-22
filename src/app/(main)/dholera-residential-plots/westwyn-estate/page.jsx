@@ -255,7 +255,7 @@ export default function HeroCarousel() {
                       index === currentSlide ? "opacity-100" : "opacity-0"
                     }`}
                   >
-                    <img
+                    <Image
                       src={image.src}
                       alt={image.alt}
                       className="w-full h-full object-cover"
@@ -296,7 +296,7 @@ export default function HeroCarousel() {
                     index === currentSlide ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  <img
+                  <Image
                     src={image.src}
                     alt={image.alt}
                     className="w-full h-full object-cover"
