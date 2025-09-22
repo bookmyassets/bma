@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
-import CostSheet from "../../components/costSheet";
+import CostSheet from "./costSheet";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import InvestmentBenefits from "./Benefits";
 import WestWynAboutSection from "./About";
