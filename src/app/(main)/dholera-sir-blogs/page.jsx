@@ -46,7 +46,7 @@ export default async function page() {
       />
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}
-        <div className="relative min-h-[100vh] sm:min-h-[90vh] md:min-h-[80vh] lg:min-h-[70vh] xl:min-h-[70vh] flex items-center justify-center py-8 sm:py-12">
+        <div className="relative min-h-[90vh] md:min-h-[80vh] flex items-center justify-center py-8 sm:py-12">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
             <Image
