@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
-import CostSheet from "../costSheet2";
+import CostSheet from "../costsheet2";;
 import SoldOutProjectsSection from "../SoldOutProjects";
 
 export default function HeroCarousel() {

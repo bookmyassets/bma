@@ -397,7 +397,7 @@ export default function LandingPage({ openForm }) {
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
-                                <div className="absolute bottom-0 left-0 right-0 z-50">
+                                <div className="absolute bottom-0 left-0 right-0 z-20">
   <Running />
 </div>
 

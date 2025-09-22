@@ -10,7 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 
 import ActiveProjectsSection from "../ActiveProject";
-import CostSheet from "../costSheet2";
+import CostSheet from "../costsheet2";
 
 export default function HeroCarousel() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
