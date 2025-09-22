@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
-import CostSheet from "../../components/costSheet";
+import CostSheet from "../costSheet2";
 import SoldOutProjectsSection from "../SoldOutProjects";
 
 export default function HeroCarousel() {
@@ -528,8 +528,12 @@ export default function HeroCarousel() {
       <ProjectAmenities />
 
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
-      <div className="pt-4 pb-4">
-        <CostSheet />
+            <div className="pt-4 pb-4">
+        {/* <CostSheet /> */}
+
+        <CostSheet projectSlug="westwyn-county" 
+        showProjectSelector={false} 
+      />
       </div>
       <FAQSection />
       {/* Form */}

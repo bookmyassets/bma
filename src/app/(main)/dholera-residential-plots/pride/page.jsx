@@ -10,7 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 
 import ActiveProjectsSection from "../ActiveProject";
-import CostSheet from "../costSheet";
+import CostSheet from "../costSheet2";
 
 export default function HeroCarousel() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
@@ -318,8 +318,12 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      <div className="pt-4 pb-4">
-        <CostSheet/>
+            <div className="pt-4 pb-4">
+        {/* <CostSheet /> */}
+
+        <CostSheet projectSlug="pride" 
+        showProjectSelector={false} 
+      />
       </div>
 
       {/* Form */}

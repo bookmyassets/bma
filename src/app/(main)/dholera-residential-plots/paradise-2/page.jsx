@@ -9,8 +9,9 @@ import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
-import CostSheet from "../costSheet";
+
 import ActiveProjectsSection from "../ActiveProject";
+import CostSheet from "../costsheet2";
 
 export default function HeroCarousel() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
@@ -329,9 +330,13 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      <div className="pt-4 pb-4">
-        <CostSheet />
-      </div>
+            <div className="pt-4 pb-4">
+              {/* <CostSheet /> */}
+      
+              <CostSheet projectSlug="paradise-2" 
+              showProjectSelector={false} 
+            />
+            </div>
 
       {/* Form */}
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />

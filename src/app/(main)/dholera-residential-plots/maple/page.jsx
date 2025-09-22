@@ -9,8 +9,9 @@ import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
-import CostSheet from "../costSheet";
+
 import ActiveProjectsSection from "../ActiveProject";
+import CostSheet from "../costsheet2";
 
 export default function HeroCarousel() {
   
@@ -305,8 +306,12 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      <div className="pt-4 pb-4">
-        <CostSheet />
+           <div className="pt-4 pb-4">
+        {/* <CostSheet /> */}
+
+        <CostSheet projectSlug="maple" 
+        showProjectSelector={false} 
+      />
       </div>
 
       {/* Form */}

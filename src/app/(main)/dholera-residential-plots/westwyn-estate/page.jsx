@@ -10,7 +10,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
-import CostSheet from "./costSheet";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import InvestmentBenefits from "./Benefits";
 import WestWynAboutSection from "./About";
@@ -19,11 +18,12 @@ import WestWynAboutSection from "./About";
 import img1 from "@/assests/residential/estate1.webp";
 import img2 from "@/assests/residential/estate2.webp";
 import img3 from "@/assests/residential/estate3.webp";
-import logo from "@/assests/ad-page/dholera-govt-logo.webp"
+import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import imgM1 from "@/assests/residential/estate1M.webp";
 import imgM2 from "@/assests/residential/estate2M.webp";
 import imgM3 from "@/assests/residential/estate3M.webp";
 import PopupScroll from "../../components/PopUpScroll";
+import CostSheet from "../costsheet2";
 
 
 export default function HeroCarousel() {
@@ -81,13 +81,14 @@ export default function HeroCarousel() {
   const desktopImages = [
     { src: img1, alt: "Dholera Investment Opportunity 1" },
     { src: img2, alt: "Dholera Investment Opportunity 2" },
-    { src: img3, alt: "Dholera Investment Opportunity 3" }
+    { src: img3, alt: "Dholera Investment Opportunity 3" },
   ];
 
   const mobileImages = [
     { src: imgM1, alt: "Dholera Mobile 1" },
     { src: imgM2, alt: "Dholera Mobile 2" },
-    { src: imgM3, alt: "Dholera Mobile 3" }]
+    { src: imgM3, alt: "Dholera Mobile 3" },
+  ];
 
   const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
   const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
@@ -238,7 +239,9 @@ export default function HeroCarousel() {
         content="Invest in plots in Dholera at WestWyn Estate, 0 km from Dholera SIR, and close to proximity to the activation area at an unbeatable price."
       />
       {/* Hero Section with Carousel */}
-      <div className="h-screen flex flex-col"> {/* Removed pt-12 */}
+      <div className="h-screen flex flex-col">
+        {" "}
+        {/* Removed pt-12 */}
         {/* Main Content Section */}
         <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Left Side - Slider Section (60%) */}
@@ -262,7 +265,7 @@ export default function HeroCarousel() {
                     />
                   </div>
                 ))}
-                
+
                 {/* Navigation */}
                 <button
                   onClick={prevSlide}
@@ -278,7 +281,6 @@ export default function HeroCarousel() {
                 </button>
 
                 {/* Marquee at bottom of carousel */}
-
               </div>
             </div>
 
@@ -303,9 +305,8 @@ export default function HeroCarousel() {
                   />
                 </div>
               ))}
-              
-              {/* Marquee at bottom of mobile carousel */}
 
+              {/* Marquee at bottom of mobile carousel */}
             </div>
           </div>
 
@@ -335,14 +336,21 @@ export default function HeroCarousel() {
                 className="space-y-4"
               >
                 {/* Primary CTA - Unbeatable Price */}
-                <button onClick={openContactForm} className="relative w-full bg-[#deae3c] hover:bg-opacity-90 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 overflow-hidden group">
+                <button
+                  onClick={openContactForm}
+                  className="relative w-full bg-[#deae3c] hover:bg-opacity-90 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 overflow-hidden group"
+                >
                   {/* Animated background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
                   {/* Content */}
                   <div className="relative z-10">
                     <div className="text-sm lg:text-xl font-extrabold mb-1 leading-tight">
-                      Unbeatable Price in Dholera: <span className="text-lg"><br />Plots Under ₹10 Lakhs | 0 km from Dholera SIR</span>
+                      Unbeatable Price in Dholera:{" "}
+                      <span className="text-lg">
+                        <br />
+                        Plots Under ₹10 Lakhs | 0 km from Dholera SIR
+                      </span>
                     </div>
                   </div>
 
@@ -364,27 +372,21 @@ export default function HeroCarousel() {
                         Navratri Special: Flat 5% Off for 9 Days Only
                       </div>
                     </div>
-
-
                   </a>
                 </button>
               </motion.div>
             </motion.div>
           </div>
         </div>
-
         {/* Bottom Stats Section - Compact */}
-
       </div>
 
       <div className="pt-4 pb-4">
-
         {/* Section 2 - About */}
         <WestWynAboutSection />
       </div>
 
       <div className="pt-4 pb-4">
-
         {/* Section 4 - Why Invest in Dholera Forest Estate */}
         <InvestmentBenefits />
       </div>
@@ -393,16 +395,25 @@ export default function HeroCarousel() {
       <ProjectAmenities />
 
       <div className="pt-4 pb-4">
-        <CostSheet />
+        {/* <CostSheet /> */}
+
+        <CostSheet projectSlug="westwyn-estate" 
+        showProjectSelector={false} 
+      />
       </div>
       <FAQSection />
       {/* Form */}
 
       <SoldOutProjectsSection />
-      <PopupScroll title={<>
-        Navratri Special: <br />
-        Flat 5% off on Dholera Plots
-      </>} subtitle="(Hurry Offer valid for 9 days only)" />
+      <PopupScroll
+        title={
+          <>
+            Navratri Special: <br />
+            Flat 5% off on Dholera Plots
+          </>
+        }
+        subtitle="(Hurry Offer valid for 9 days only)"
+      />
       <AnimatePresence>
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
@@ -412,7 +423,7 @@ export default function HeroCarousel() {
                 title="Unbeatable Price in Dholera"
                 headline="Plots starting 10 Lakh at 0 km from Dholera SIR "
                 buttonName="Book Now"
-              /*  onAfterSubmit={handleAfterSubmit} */
+                /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>
           </div>
