@@ -240,8 +240,7 @@ const WestWynAboutSection = () => {
                     <span className="text-white">by Numbers</span>
                   </h3>
                   <p className="text-gray-300">
-                    Discover the impressive scale and premium amenities that
-                    make WestWyn Estate your ideal investment destination.
+                    Designed for investors who value scale, location, and returns
                   </p>
                 </div>
 
