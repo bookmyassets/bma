@@ -9,7 +9,7 @@ import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
-import CostSheet from "../../components/costSheet";
+import CostSheet from "../costSheet";
 import ActiveProjectsSection from "../ActiveProject";
 
 export default function HeroCarousel() {

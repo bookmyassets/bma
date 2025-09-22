@@ -19,7 +19,7 @@ export default function CostSheet() {
     plotNo: '',
     plc: '',
     plotAreaYards: '',
-    basePlotPriceYards: 6250, // Base price without PLC
+    basePlotPriceYards: 6700, // Base price without PLC
     plotAreaFeet: '',
     totalPaymentYards: '',
     maintenanceRate: 500, // Default maintenance rate
