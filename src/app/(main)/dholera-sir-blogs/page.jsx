@@ -71,7 +71,7 @@ export default async function page() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
+              <p className="text-base  text-white/90 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
                 Expert insights, market analysis, and investment opportunities
                 in India's most promising smart city
               </p>
