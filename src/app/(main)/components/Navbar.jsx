@@ -96,7 +96,7 @@ export default function Navbar() {
         // Mock data for Bulk Land projects - replace with actual API call or JSON file
         const mockBulkLandProjects = [
           {
-            projectName: "Residential Plots",
+            projectName: "Residential Zone",
             location: "Prime locations across Gujarat",
             image: residential, // Required size: 400x500px
             link: "/residential",

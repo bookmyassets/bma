@@ -257,7 +257,7 @@ export default function PopupForm() {
               
               {/* Section 2: Sub-heading CTA */}
               <p className="text-lg text-gray-700 font-semibold">
-                Book Your Investor-Friendly Verified Plot in Dholera under ₹10 Lakh Today!
+                Book your Registry Ready Verified Plot in Dholera under ₹10 Lakh Today!
               </p>
             </div>
 

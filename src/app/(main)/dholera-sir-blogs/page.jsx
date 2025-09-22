@@ -4,12 +4,12 @@ import BlogCard from "./BlogCard";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import FormComponent from "./FormComponent";
-import hero from "@/assests/sir-hero.webp"
+import hero from "@/assests/sir-hero.webp";
 
 export default async function page() {
   let posts = [];
   let fetchError = null;
-  
+
   try {
     const postsData = await getblogs();
     posts = Array.isArray(postsData) ? postsData : [];
@@ -45,8 +45,8 @@ export default async function page() {
         content="Stay ahead in Dholera SIR investments! Read expert blogs on development, market trends, and project reviews, all curated by BookMyAssets for you."
       />
       <div className="min-h-screen bg-white relative overflow-hidden">
-        {/* Enhanced Hero Section */}
-        <div className="relative h-[70vh] flex items-center justify-center">
+        {/* Enhanced Hero Section - Responsive Height */}
+        <div className="relative min-h-[100vh] sm:min-h-[90vh] md:min-h-[80vh] lg:min-h-[70vh] xl:min-h-[70vh] flex items-center justify-center py-8 sm:py-12">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
             <Image
@@ -61,73 +61,52 @@ export default async function page() {
           </div>
 
           {/* Hero Content */}
-          <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-            <div className="mb-8">
-              <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 text-center">
+            <div className="mb-6 sm:mb-8">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Dholera SIR
                 <span className="block bg-gradient-to-r from-orange-400 to-green-400 bg-clip-text text-transparent">
                   Investment Blog
                 </span>
               </h1>
-              
+
               {/* Subtitle */}
-              <p className="text-lg p-2 md:text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Expert insights, market analysis, and investment opportunities in India's most promising smart city
+              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
+                Expert insights, market analysis, and investment opportunities
+                in India's most promising smart city
               </p>
             </div>
 
-            <div className="relative z-10 mt-8">
-          <div className="max-w-7xl  mx-auto px-4">
-            <FormComponent/>
-          </div>
-        </div>
-
-            {/* CTA Section */}
-            {/* <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4">
-                <div className="text-center sm:text-left">
-                  <h3 className="text-lg font-semibold text-white mb-1">Ready to Invest?</h3>
-                  <p className="text-white/80 text-sm">Get expert guidance & exclusive opportunities</p>
-                </div>
-                <div className="flex gap-3">
-                  <button className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap">
-                    Free Consultation
-                  </button>
-                  <button className="border-2 border-white/30 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 whitespace-nowrap backdrop-blur-sm">
-                    Download Brochure
-                  </button>
-                </div>
+            {/* Form Component - Responsive */}
+            <div className="relative z-10 w-full max-w-4xl mx-auto px-2 sm:px-4">
+              <div className="transform scale-90 sm:scale-95 md:scale-100">
+                <FormComponent />
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
-
-        {/* Form Component Section */}
-{/*         <div className="relative z-10 -mt-16">
-          <div className="max-w-7xl mx-auto px-4">
-            <FormComponent/>
-          </div>
-        </div> */}
 
         {/* Blog Posts Section */}
         <div className="relative z-10">
-          <div className="max-w-7xl mx-auto px-4 py-16">
+          <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
             {safePosts.length > 0 ? (
               <>
                 {/* All Posts Grid */}
                 <div>
-                  <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <div className="text-center mb-8 sm:mb-12">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                       Latest Investment Insights
                     </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                      Stay updated with expert analysis and market trends from Dholera SIR
+                    <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+                      Stay updated with expert analysis and market trends from
+                      Dholera SIR
                     </p>
                     <div className="mt-2 text-sm text-gray-500">
-                      {safePosts.length} Article{safePosts.length !== 1 ? 's' : ''} Available
+                      {safePosts.length} Article
+                      {safePosts.length !== 1 ? "s" : ""} Available
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {safePosts.map((post, index) => (
                       <div
                         key={post._id}
@@ -140,35 +119,38 @@ export default async function page() {
                 </div>
               </>
             ) : (
-              <div className="text-center py-20">
-                <div className="bg-white/95 backdrop-blur-sm p-12 rounded-2xl shadow-xl max-w-2xl mx-auto border border-gray-200">
+              <div className="text-center py-12 sm:py-20">
+                <div className="bg-white/95 backdrop-blur-sm p-8 sm:p-12 rounded-2xl shadow-xl max-w-2xl mx-auto border border-gray-200">
                   {fetchError ? (
                     <>
-                      <div className="text-6xl mb-6">⚠️</div>
-                      <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                      <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">⚠️</div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
                         Unable to Load Blogs
                       </h3>
-                      <p className="text-gray-600 text-lg mb-8">
-                        We're experiencing some technical difficulties loading the blog posts. 
-                        Please try refreshing the page or contact support if the issue persists.
+                      <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 px-4">
+                        We're experiencing some technical difficulties loading
+                        the blog posts. Please try refreshing the page or
+                        contact support if the issue persists.
                       </p>
                     </>
                   ) : (
                     <>
-                      <div className="text-6xl mb-6">📝</div>
-                      <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                      <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">📝</div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
                         Expert Content Coming Soon!
                       </h3>
-                      <p className="text-gray-600 text-lg mb-8">
-                        We're preparing comprehensive investment guides, market analysis, and expert insights about Dholera SIR opportunities. Stay tuned!
+                      <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 px-4">
+                        We're preparing comprehensive investment guides, market
+                        analysis, and expert insights about Dholera SIR
+                        opportunities. Stay tuned!
                       </p>
                     </>
                   )}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button className="bg-gradient-to-r from-orange-500 to-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
+                    <button className="bg-gradient-to-r from-orange-500 to-green-600 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-sm sm:text-base">
                       Get Notified
                     </button>
-                    <button className="border-2 border-orange-500 text-orange-600 px-8 py-3 rounded-xl font-semibold hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    <button className="border-2 border-orange-500 text-orange-600 px-6 sm:px-8 py-3 rounded-xl font-semibold hover:bg-orange-500 hover:text-white transition-all duration-300 text-sm sm:text-base">
                       Explore Projects
                     </button>
                   </div>
