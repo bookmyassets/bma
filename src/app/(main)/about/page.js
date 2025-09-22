@@ -18,6 +18,7 @@ import {
   Award,
   CheckCircle,
 } from "lucide-react";
+import Link from "next/link";
 
 const RealEstateLandingPage = () => {
   const [counts, setCounts] = useState({
