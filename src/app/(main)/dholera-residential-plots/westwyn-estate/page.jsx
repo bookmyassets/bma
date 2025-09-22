@@ -24,7 +24,6 @@ import imgM1 from "@/assests/residential/estate1M.webp";
 import imgM2 from "@/assests/residential/estate2M.webp";
 import imgM3 from "@/assests/residential/estate3M.webp";
 import PopupScroll from "../../components/PopUpScroll";
-import Running from "./Running";
 
 
 export default function HeroCarousel() {
@@ -306,11 +305,7 @@ export default function HeroCarousel() {
               ))}
               
               {/* Marquee at bottom of mobile carousel */}
-              <div className="absolute bottom-0 left-0 right-0 z-30">
-                <Running 
-                  title="🎉 Dholera's Biggest Offer - Plots under ₹10 Lakhs! 🏡"
-                />
-              </div>
+
             </div>
           </div>
 
