@@ -199,7 +199,7 @@ export default function HeroCarousel() {
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
             >
-              Secure Your Spot at Paradise
+              Book Your Plot In Dholera under ₹10 Lakhs
             </button>
           </div>
         </div>

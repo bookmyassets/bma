@@ -14,6 +14,7 @@ import imgM1 from "@/assests/hero_mob1.webp";
 import imgM2 from "@/assests/hero_mob2.webp";
 import imgM3 from "@/assests/ad-page/mob3.webp";
 import BrochureDownload from "../components/BrochureDownload";
+import Running from "./Running";
 
 export default function LandingPage({ openForm }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -396,6 +397,10 @@ export default function LandingPage({ openForm }) {
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
+                                <div className="absolute bottom-0 left-0 right-0 z-50">
+  <Running />
+</div>
+
               </div>
             </div>
 
@@ -473,7 +478,7 @@ export default function LandingPage({ openForm }) {
             Dholera's Biggest Offer till Date
           </h2>
           <p className="text-sm lg:text-base glowing-text">
-            Plots starting ₹10 Lakhs at 0 KM from Dholera SIR Boundary
+            Plots under ₹10 Lakhs - 0 KM from Dholera SIR Boundary
           </p>
         </div>
         

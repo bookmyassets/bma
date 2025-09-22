@@ -45,19 +45,9 @@ const ProjectAmenities = () => {
       color: "from-red-500 to-red-700",
     },
     {
-      icon: <Waves className="w-6 h-6" />,
-      title: "Swimming Pool",
-      color: "from-blue-400 to-blue-600",
-    },
-    {
       icon: <Baby className="w-6 h-6" />,
       title: "Kids Play Area",
       color: "from-purple-400 to-pink-400",
-    },
-    {
-      icon: <Gamepad2 className="w-6 h-6" />,
-      title: "Indoor Games & Gymnasium",
-      color: "from-orange-500 to-red-500",
     },
     {
       icon: <Wifi className="w-6 h-6" />,
@@ -105,11 +95,11 @@ const ProjectAmenities = () => {
         {/* Header Section */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 text-gray-900">
-            Premium Amenities
+            Project Features
           </h2>
           <div className="w-20 h-1 bg-amber-500 mx-auto mb-6"></div>
           <p className="text-xl max-w-5xl mx-auto text-gray-600 leading-relaxed">
-            At WestWyn Estate, we offer more than just plots – we provide a complete lifestyle. Key amenities include:
+            At WestWyn Estate, we offer more than just plots – we provide a complete lifestyle. Key features include:
           </p>
         </div>
 

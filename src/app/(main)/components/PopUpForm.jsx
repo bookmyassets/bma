@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assests/bma-logo-black.png";
+import logo from "@/assests/bma-logo2.png";
 import Image from "next/image";
 
 export default function PopupForm() {
@@ -226,22 +226,22 @@ export default function PopupForm() {
         ) : (
           <>
             {/* Logo positioned in top left */}
-            <div className="absolute top-0 left-0">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="  shadow-lg"
-              >
-                <Image
-                  src={logo}
-                  alt="Logo"
-                  width={60}
-                  height={60}
-                  className="rounded-xl "
-                />
-              </motion.div>
-            </div>
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="rounded-lg shadow-lg"
+                      >
+                        <Image
+                          src={logo}
+                          alt="Logo"
+                          width={60}
+                          height={60}
+                          className="rounded-lg"
+                        />
+                      </motion.div>
+                    </div>
 
             {/* Close button */}
             <button
@@ -253,11 +253,9 @@ export default function PopupForm() {
 
             {/* Section 1: Heading */}
             <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold text-gray-800 mb-2">BookMyAssets</h1>
-              
               {/* Section 2: Sub-heading CTA */}
               <p className="text-lg text-gray-700 font-semibold">
-                Book your Registry Ready Verified Plot in Dholera under ₹10 Lakh Today!
+                Registry Ready Plot in Dholera under ₹10 Lakhs
               </p>
             </div>
 
@@ -299,21 +297,6 @@ export default function PopupForm() {
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
                     placeholder="Enter your mobile number"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
-                    Email ID
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                    placeholder="Enter your email address"
                   />
                 </div>
               </div>

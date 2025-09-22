@@ -7,10 +7,10 @@ export default function DholeraSmartCity() {
         {/* Left Section (40%) */}
         <div className="w-full md:w-2/5 pl-2 pr-2">
           <h1 className="text-[32px] font-semibold text-black mb-4">
-            Secure Your Future in Dholera
+            India's First SemiConductor Hub 
           </h1>
           <h2 className="text-xl font-semibold text-[#deae3c] mb-8">
-            India’s #1 Smart City Investment Hub
+            Goldmine for Investors
           </h2>
         </div>
 

@@ -1,0 +1,63 @@
+.scrolling-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: black;
+  padding: 8px 0;
+  position: relative;
+}
+
+.scrolling-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll 8s linear infinite;
+  color: #deae3c;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.scrolling-text h2 {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #deae3c, #ffd700);
+  color: black;
+  padding: 8px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(222, 174, 60, 0.6);
+  white-space: nowrap;
+  margin: 0;
+  
+  /* Add sequential animation for the boxes */
+  opacity: 0;
+  animation: appear 1s ease-in-out forwards;
+}
+
+.scrolling-text h2:nth-child(1) {
+  animation-delay: 0s; /* First box appears immediately */
+}
+
+.scrolling-text h2:nth-child(2) {
+  animation-delay: 1s; /* Second box appears after 1 second */
+}
+
+.scrolling-text h2:nth-child(3) {
+  animation-delay: 2s; /* Third box appears after 2 seconds */
+}
+
+/* More boxes can follow this pattern */
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateX(50px); /* Make the boxes slide in */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* Box is fully visible */
+  }
+}

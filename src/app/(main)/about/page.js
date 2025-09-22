@@ -277,18 +277,23 @@ const RealEstateLandingPage = () => {
               </div> */}
 
                 {/* CTA Buttons */}
+                
                 <div className="flex flex-col gap-4">
+                  <Link href="/dholera-residential-plots/westwyn-estate">
                   <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                     <span>Explore Properties</span>
                     <ArrowRight
                       className="group-hover:translate-x-1 transition-transform"
                       size={20}
-                    />
+                      />
                   </button>
+                      </Link>
+                      <Link href="https://www.youtube.com/@BookMyAssets">
                   <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
                     <Play size={20} />
                     <span>Watch Video</span>
                   </button>
+                      </Link>
                 </div>
               </div>
 

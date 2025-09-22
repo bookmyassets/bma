@@ -2,6 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import ContactForm from "../../components/Contactform";
 import BrochureDownload from "../../components/BrochureDownload";
+import { FaWhatsapp } from "react-icons/fa6";
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({
@@ -155,8 +156,7 @@ const WestWynAboutSection = () => {
           </h2>
 
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Premium plotted development in Dholera Smart City with strategic
-            location and world-class amenities
+            Premium plotted development in Dholera Smart City with strategic location and high ROI potential
           </p>
         </div>
 
@@ -219,25 +219,7 @@ const WestWynAboutSection = () => {
 
                   <a href="https://wa.me/918130371647">
                 <button className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                  </svg>
+                  <FaWhatsapp/>
                   Book Site Visit
                 </button>
                       </a>
@@ -253,9 +235,9 @@ const WestWynAboutSection = () => {
             >
               <div className="p-4 md:p-10">
                 <div className="text-center mb-10">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#deae3c] mb-4">
                     WestWyn Estate{" "}
-                    <span className="text-[#deae3c]">by Numbers</span>
+                    <span className="text-white">by Numbers</span>
                   </h3>
                   <p className="text-gray-300">
                     Discover the impressive scale and premium amenities that

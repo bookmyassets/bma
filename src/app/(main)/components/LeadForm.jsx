@@ -371,7 +371,7 @@ export default function LeadForm({ title }) {
                         Submitting...
                       </div>
                     ) : (
-                      "Talk to BookMyAssets Expert"
+                      "Talk to Dholera Expert"
                     )}
                   </button>
                 </div>

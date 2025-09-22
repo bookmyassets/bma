@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/westwyn-county/westwyn-gate-cover.webp";
 import westwyn2 from "@/assests/westwyn-county/westwyn-1.webp";
 import westwyn3 from "@/assests/westwyn-county/westwyn-2.webp";
-import { Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus, Minus, ChevronLeft, ChevronRight, Scroll } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
@@ -14,8 +14,6 @@ import CostSheet from "./costSheet";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import InvestmentBenefits from "./Benefits";
 import WestWynAboutSection from "./About";
-import ScrollingHeadline from "./Running";
-import "./marquee.css"
 
 //images import
 import img1 from "@/assests/residential/estate1.webp";
@@ -26,6 +24,8 @@ import imgM1 from "@/assests/residential/estate1M.webp";
 import imgM2 from "@/assests/residential/estate2M.webp";
 import imgM3 from "@/assests/residential/estate3M.webp";
 import PopupScroll from "../../components/PopUpScroll";
+import Running from "./Running";
+
 
 export default function HeroCarousel() {
   const faqs = [
@@ -239,43 +239,47 @@ export default function HeroCarousel() {
         content="Invest in plots in Dholera at WestWyn Estate, 0 km from Dholera SIR, and close to proximity to the activation area at an unbeatable price."
       />
       {/* Hero Section with Carousel */}
-      <div className="h-screen max-sm:h-[95vh] flex flex-col">
-        {/* Main Content Section - Takes most of the screen */}
+      <div className="h-screen flex flex-col"> {/* Removed pt-12 */}
+        {/* Main Content Section */}
         <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Left Side - Slider Section (60%) */}
           <div className="w-full lg:w-[60%] relative flex-1">
+            {/* Marquee overlay on slider for mobile - removed */}
+
             {/* Desktop Slider */}
             <div className="absolute inset-0 hidden lg:block">
               <div className="relative w-full h-full overflow-hidden">
                 {desktopImages.map((image, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"
-                      }`}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
                   >
-                    <Image
+                    <img
                       src={image.src}
                       alt={image.alt}
-                      fill
-                      className="object-cover"
-                      priority={index === 0}
+                      className="w-full h-full object-cover"
                     />
-
                   </div>
                 ))}
+                
                 {/* Navigation */}
                 <button
                   onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
+
+                {/* Marquee at bottom of carousel */}
+
               </div>
             </div>
 
@@ -289,19 +293,24 @@ export default function HeroCarousel() {
               {mobileImages.map((image, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
                 >
-                  <Image
+                  <img
                     src={image.src}
                     alt={image.alt}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
+                    className="w-full h-full object-cover"
                   />
-
                 </div>
               ))}
+              
+              {/* Marquee at bottom of mobile carousel */}
+              <div className="absolute bottom-0 left-0 right-0 z-30">
+                <Running 
+                  title="🎉 Dholera's Biggest Offer - Plots under ₹10 Lakhs! 🏡"
+                />
+              </div>
             </div>
           </div>
 
@@ -338,7 +347,7 @@ export default function HeroCarousel() {
                   {/* Content */}
                   <div className="relative z-10">
                     <div className="text-sm lg:text-xl font-extrabold mb-1 leading-tight">
-                      Unbeatable Price in Dholera: <span className="text-lg"><br />Plots starting ₹10 Lakh at 0 km from Dholera SIR</span>
+                      Unbeatable Price in Dholera: <span className="text-lg"><br />Plots Under ₹10 Lakhs | 0 km from Dholera SIR</span>
                     </div>
                   </div>
 
@@ -385,7 +394,7 @@ export default function HeroCarousel() {
         <InvestmentBenefits />
       </div>
 
-      <CommonForm title="Get Plots Starting from ₹10 Lakhs at 0 KM from Dholera SIR " />
+      <CommonForm title="Get Plots Under from ₹10 Lakhs at 0 KM from Dholera SIR " />
       <ProjectAmenities />
 
       <div className="pt-4 pb-4">

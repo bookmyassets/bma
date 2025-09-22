@@ -223,7 +223,7 @@ export default function InvestmentBenefits() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Why Invest in WestWyn Estate?
+          Why WestWyn Estate?
         </motion.h2>
 
         {/* Desktop: Dynamic Image Display */}
