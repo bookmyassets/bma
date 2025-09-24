@@ -5,6 +5,13 @@ import bg from "@/assests/bg-image.webp"
 
 const locations = [
   {
+    name: "WestWyn Estate",
+    coordinates: "22°41'50.2\"N 72°21'18.8\"E",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4446.080350950581!2d72.03348757600405!3d22.14718747979702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f33007987615f%3A0x28c9c473efaffc7c!2sWestWyn%20Estate!5e1!3m2!1sen!2sin!4v1758699694665!5m2!1sen!2sin",
+    link: "https://maps.app.goo.gl/k85B4pyzUZ9yzpZM9",
+  },
+  {
     name: "WestWyn County",
     coordinates: "22°41'50.2\"N 72°21'18.8\"E",
     mapSrc:

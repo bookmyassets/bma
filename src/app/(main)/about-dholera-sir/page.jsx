@@ -6,6 +6,52 @@ import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa6";
 import banner from "@/assests/banner.webp";
 import LeadForm from "../components/LeadForm";
+import BulkLandCard from "./BlogCard";
+import residential from "@/assests/bulkLand/residential-hero-mob.-webp.webp";
+import hac from "@/assests/bulkLand/high-access-hero-mob-webp.webp";
+import industrial from "@/assests/bulkLand/industrial-hero-mob-webp.webp";
+import cityCentre from "@/assests/bulkLand/city-centre-cover.webp";
+import knowledge from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp"
+import recreation from "@/assests/bulkLand/recreation-sports-entertainment-Zone-hero.webp"
+
+const bulkLand = [
+  {
+    _id: "1",
+    title: "Residential Land",
+    link: "/bulk-land/residential",
+    image: residential
+  },
+  {
+    _id: "2",
+    title: "High Access Corridor",
+    link: "/bulk-land/high-access-corridor", 
+    image: hac
+  },
+  {
+    _id: "3",
+    title: "Industrial Land",
+    link: "/bulk-land/industrial-land",
+    image: industrial
+  },
+  {
+    _id: "4",
+    title: "City Centre",
+    link: "/bulk-land/city-centre-land",
+    image: cityCentre
+  },
+  {
+    _id: "5",
+    title: "Knowledge and IT Zone",
+    link: "/bulk-land/knowledge-and-it-zone",
+    image: knowledge
+  },
+  {
+    _id: "6",
+    title: "Recreation Sports and Entertainment",
+    link: "/bulk-land/recreation-sports-land",
+    image: recreation
+  }
+];
 
 export default async function page() {
   let posts = [];
@@ -337,70 +383,70 @@ export default async function page() {
 
               {/* Sticky Sidebar */}
               <div className="lg:col-span-1">
-                <div className="sticky top-8">
-                  <div className="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
-                      Latest Updates
-                    </h3>
+      <div className="sticky top-8">
+        <div className="bg-white rounded-2xl shadow-lg p-6">
+          <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
+            Explore Bulk Land Options
+          </h3>
 
-                    {safePosts.length > 0 ? (
-                      <div className="space-y-4 max-h-[70vh] overflow-y-auto custom-scrollbar">
-                        {safePosts.map((post) => (
-                          <div
-                            key={post._id}
-                            className="border-b border-gray-100 pb-4 last:border-b-0"
-                          >
-                            <BlogCard post={post} compact={true} />
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="text-center py-8">
-                        <div className="w-16 h-16 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-4">
-                          <svg
-                            className="w-8 h-8 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3v6m0 0l-3-3m3 3l3-3"
-                            />
-                          </svg>
-                        </div>
-                        <h4 className="text-lg font-semibold text-gray-800 mb-2">
-                          No Updates Available
-                        </h4>
-                        <p className="text-gray-600 text-sm">
-                          Check back soon for the latest information about
-                          Dholera SIR investment opportunities.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Contact CTA */}
-                  <div className="bg-[#deae3c] rounded-2xl p-4 mt-6 text-white">
-                    <h4 className="text-xl font-bold mb-3">Ready to Invest?</h4>
-                    <p className="text-sm mb-4 opacity-90">
-                      Get expert guidance on Dholera SIR investment
-                      opportunities and early mover advantage.
-                    </p>
-                    <a
-                      href="https://wa.me/918130371647"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <button className="flex justify-center items-center gap-2 w-full bg-white text-gray-800 py-2 px-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                        <FaWhatsapp className="" /> Get Free Investment Advice
-                      </button>
-                    </a>
-                  </div>
+          {bulkLand.length > 0 ? (
+            <div className="space-y-4 max-h-[70vh] overflow-y-auto custom-scrollbar">
+              {bulkLand.map((landItem) => (
+                <div
+                  key={landItem._id}
+                  className="border-b border-gray-100 pb-4 last:border-b-0"
+                >
+                  <BulkLandCard landItem={landItem} compact={true} />
                 </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3v6m0 0l-3-3m3 3l3-3"
+                  />
+                </svg>
               </div>
+              <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                No Land Options Available
+              </h4>
+              <p className="text-gray-600 text-sm">
+                Check back soon for the latest bulk land investment 
+                opportunities in Dholera SIR.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Contact CTA */}
+        <div className="bg-[#deae3c] rounded-2xl p-4 mt-6 text-white">
+          <h4 className="text-xl font-bold mb-3">Ready to Invest?</h4>
+          <p className="text-sm mb-4 opacity-90">
+            Get expert guidance on Dholera SIR bulk land investment
+            opportunities and early mover advantage.
+          </p>
+          <a
+            href="https://wa.me/918130371647"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="flex justify-center items-center gap-2 w-full bg-white text-gray-800 py-2 px-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              <FaWhatsapp className="" /> Get Free Investment Advice
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
             </div>
           </div>
         </div>
