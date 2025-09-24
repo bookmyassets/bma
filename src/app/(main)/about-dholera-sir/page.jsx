@@ -66,7 +66,7 @@ export default async function page() {
               <div className="lg:col-span-3">
                 {/* Introduction Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
                     Introduction to Dholera SIR
                   </h2>
 
@@ -85,7 +85,7 @@ export default async function page() {
 
                 {/* Vision Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
                     Vision of Dholera Smart City
                   </h2>
 
@@ -99,7 +99,7 @@ export default async function page() {
                       first <strong>Greenfield Smart City</strong>.
                     </p>
 
-                    <div className="bg-gradient-to-r from-[#FF9933]/5 via-white/50 to-[#138808]/5 p-6 rounded-xl border-l-4 border-[#FF9933]">
+                    <div className="bg-gradient-to-r from-[#deae3c]/5 via-white/50 to-[#138808]/5 p-6 rounded-xl border-l-4 border-[#deae3c]">
                       <h3 className="text-xl font-semibold text-gray-800 mb-3">
                         Smart Infrastructure Features
                       </h3>
@@ -114,7 +114,7 @@ export default async function page() {
 
                 {/* Infrastructure Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
                     Major Infrastructure Projects and Connectivity
                   </h2>
 
@@ -173,7 +173,7 @@ export default async function page() {
 
                 {/* Industries Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
                     Industries Investing Heavily in Dholera
                   </h2>
 
@@ -183,7 +183,7 @@ export default async function page() {
                   </p>
 
                   <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-[#FF9933]/10 to-[#138808]/10 p-6 rounded-xl">
+                    <div className="bg-gradient-to-r from-[#deae3c]/10 to-[#138808]/10 p-6 rounded-xl">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="text-xl font-semibold text-gray-800">
                           Tata Group
@@ -213,7 +213,7 @@ export default async function page() {
                       </p>
                     </div>
 
-                    <div className="bg-gradient-to-r from-[#000080]/10 to-[#FF9933]/10 p-6 rounded-xl">
+                    <div className="bg-gradient-to-r from-[#000080]/10 to-[#deae3c]/10 p-6 rounded-xl">
                       <h3 className="text-xl font-semibold text-gray-800 mb-3">
                         Other Sectors
                       </h3>
@@ -229,7 +229,7 @@ export default async function page() {
                 </div>
                 {/* Governance Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
                     Strong Governance and Investor-Friendly Administration
                   </h2>
 
@@ -244,7 +244,7 @@ export default async function page() {
 
                 {/* Progress Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
                     Progress and Future Projects
                   </h2>
 
@@ -252,25 +252,25 @@ export default async function page() {
                     <div>
                       <div className="space-y-3">
                         <div className="flex items-center space-x-3">
-                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
                             Phase-wise development is already underway, with trunk infrastructure in place
                           </p>
                         </div>
                         <div className="flex items-center space-x-3">
-                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
                            Dholera Expressway and Dholera International Airport construction progressing rapidly
                           </p>
                         </div>
                         <div className="flex items-center space-x-3">
-                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
                             Activation area completed to showcase residential and commercial viability
                           </p>
                         </div>
                         <div className="flex items-center space-x-3">
-                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
                             Upcoming projects include metro connectivity, expanded industrial clusters, and advanced township developments
                           </p>
@@ -282,7 +282,7 @@ export default async function page() {
 
                 {/* BookMyAssets Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
                     Why Invest in Dholera with BookMyAssets
                   </h2>
 
@@ -323,7 +323,7 @@ export default async function page() {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-[#FF9933]/5 via-white/50 to-[#138808]/5 p-6 rounded-xl border-l-4 border-[#FF9933] mt-6">
+                  <div className="bg-gradient-to-r from-[#deae3c]/5 via-white/50 to-[#138808]/5 p-6 rounded-xl border-l-4 border-[#deae3c] mt-6">
                     <h3 className="text-xl font-semibold text-gray-800 mb-3">
                       Early Mover Advantage
                     </h3>
@@ -339,7 +339,7 @@ export default async function page() {
               <div className="lg:col-span-1">
                 <div className="sticky top-8">
                   <div className="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9933] pb-4">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
                       Latest Updates
                     </h3>
 
@@ -356,7 +356,7 @@ export default async function page() {
                       </div>
                     ) : (
                       <div className="text-center py-8">
-                        <div className="w-16 h-16 bg-gradient-to-r from-[#FF9933] to-[#138808] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div className="w-16 h-16 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-4">
                           <svg
                             className="w-8 h-8 text-white"
                             fill="none"
