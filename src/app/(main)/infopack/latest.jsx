@@ -347,56 +347,61 @@ export default async function Info() {
           </div>
 
           <div className="max-w-7xl mx-auto">
-            {subProjectInventory.length > 0 ? (
-              subProjectInventory.map((west, index) => (
-                <div
-                  key={index}
-                  className="bg-white/95 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 border border-amber-200/50 mb-8"
-                >
-                  <div className="flex flex-col lg:flex-row h-full">
-                    {/* Enhanced image container */}
-                    <div className="lg:w-1/2 h-64 lg:h-auto relative overflow-hidden">
-                      <Image
-                        src={urlFor(west.mainImage)?.url() || ""}
-                        alt={west.title}
-                        fill
-                        className="object-cover transition-transform duration-700 hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
-                    </div>
+  {subProjectInventory.length > 0 ? (
+    subProjectInventory
+      .filter((project) => 
+        project.title.includes('WestWyn County') ||
+        project.slug?.current === 'westwyn-county'
+      )
+      .map((west, index) => (
+        <div
+          key={index}
+          className="bg-white/95 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 border border-amber-200/50 mb-8"
+        >
+          <div className="flex flex-col lg:flex-row h-full">
+            {/* Enhanced image container */}
+            <div className="lg:w-1/2 h-64 lg:h-auto relative overflow-hidden">
+              <Image
+                src={urlFor(west.mainImage)?.url() || ""}
+                alt={west.title}
+                fill
+                className="object-cover transition-transform duration-700 hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
+            </div>
 
-                    {/* Enhanced content section with truncated content */}
-                    <div className="lg:w-1/2 p-8 flex flex-col justify-center">
-                      <h3 className="font-black text-3xl md:text-4xl mb-6 text-gray-800 leading-tight">
-                        {west.title}
-                      </h3>
-                      <div className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed line-clamp-4">
-                        <PortableText value={west.body} />
-                      </div>
-
-                      {/* Enhanced read more button */}
-                      <div className="mt-auto">
-                        <Link
-                          href={`/dholera-residential-plots/westwyn-county`}
-                          className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-bold py-4 px-8 rounded-2xl hover:from-amber-500 hover:to-amber-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                        >
-                          Explore Details
-                          <span className="text-xl">→</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="col-span-full text-center p-12 bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-amber-200/50">
-                <p className="text-gray-700 text-xl font-medium">
-                  New projects coming soon. Stay tuned for exciting
-                  opportunities!
-                </p>
+            {/* Enhanced content section with truncated content */}
+            <div className="lg:w-1/2 p-8 flex flex-col justify-center">
+              <h3 className="font-black text-3xl md:text-4xl mb-6 text-gray-800 leading-tight">
+                {west.title}
+              </h3>
+              <div className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed line-clamp-4">
+                <PortableText value={west.body} />
               </div>
-            )}
+
+              {/* Enhanced read more button */}
+              <div className="mt-auto">
+                <Link
+                  href={`/dholera-residential-plots/westwyn-county`}
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-bold py-4 px-8 rounded-2xl hover:from-amber-500 hover:to-amber-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  Explore Details
+                  <span className="text-xl">→</span>
+                </Link>
+              </div>
+            </div>
           </div>
+        </div>
+      ))
+  ) : (
+    <div className="col-span-full text-center p-12 bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-amber-200/50">
+      <p className="text-gray-700 text-xl font-medium">
+        Westwyn County project information coming soon. Stay tuned for exciting
+        opportunities!
+      </p>
+    </div>
+  )}
+</div>
         </section>
 
         {/* Enhanced Dholera Section */}

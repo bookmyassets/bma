@@ -1,39 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import residential from "@/assests/bulkLand/residential-hero-mob.-webp.webp";
 
-const bulkLand = [
-  {
-    title: "Residential Land",
-    link: "/bulk-land/residential",
-    image: residential
-  },
-  {
-    title: "High Access Corridor",
-    link: "/bulk-land/high-access-corridor",
-    image: "/src/assests/bulkLand/residential plot-hero.webp"
-  },
-  {
-    title: "Industrial Land",
-    link: "/bulk-land/industrial-land",
-    image: "/src/assests/bulkLand/residential plot-hero.webp"
-  },
-  {
-    title: "City Centre",
-    link: "/bulk-land/city-centre-land",
-    image: "/src/assests/bulkLand/residential plot-hero.webp"
-  },
-  {
-    title: "Knowledge and IT Zone",
-    link: "/bulk-land/knowledge-and-it-zone",
-    image: "/src/assests/bulkLand/residential plot-hero.webp"
-  },
-  {
-    title: "Recreation Sports and Entertainment",
-    link: "/bulk-land/recreation-sports-land",
-    image: "/src/assests/bulkLand/residential plot-hero.webp"
-  }
-];
+
+
 
 export default function BulkLandCard({ landItem }) {
   return (
