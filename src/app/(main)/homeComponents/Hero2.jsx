@@ -147,7 +147,7 @@ export default function LandingPage({ openForm }) {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: source,
+              source: "BookMyAssets",
             },
             source: "BookMyAssets Google Ads",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
@@ -397,10 +397,9 @@ export default function LandingPage({ openForm }) {
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
-                                <div className="absolute bottom-0 left-0 right-0 z-20">
-  <Running />
-</div>
-
+                <div className="absolute bottom-0 left-0 right-0 z-20">
+                  <Running />
+                </div>
               </div>
             </div>
 
@@ -427,9 +426,9 @@ export default function LandingPage({ openForm }) {
                   />
                 </div>
               ))}
-                                <div className="absolute bottom-0 left-0 right-0 z-50">
-  <Running />
-</div>
+              <div className="absolute bottom-0 left-0 right-0 z-50">
+                <Running />
+              </div>
             </div>
           </div>
 
@@ -450,44 +449,44 @@ export default function LandingPage({ openForm }) {
                 />
 
                 <div className="relative">
-        <style jsx>{`
-         
-          
-          @keyframes textGlow {
-            0%, 100% { 
-              text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
-              color: black;
-            }
-            50% { 
-              text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8);
-              color: black;
-            }
-          }
-          
-          .flashy-blink {
-            animation: flashyBlink 3s infinite ease-in-out;
-            padding: 4px;
-            border-radius: 1rem;
-            border: 3px solid #deae3c;
-          }
-          
-          .glowing-text {
-            animation: textGlow 1s infinite ease-in-out;
-          }
-        `}</style>
-        
-        <div className="flashy-blink">
-          <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
-            Dholera's Biggest Offer till Date
-          </h2>
-          <p className="text-sm lg:text-base glowing-text">
-            Plots under ₹10 Lakhs - 0 KM from Dholera SIR Boundary
-          </p>
-        </div>
-        
-        {/* Golden sparkle effects */}
-        
-      </div>
+                  <style jsx>{`
+                    @keyframes textGlow {
+                      0%,
+                      100% {
+                        text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
+                        color: black;
+                      }
+                      50% {
+                        text-shadow:
+                          0 0 20px rgba(255, 255, 255, 1),
+                          0 0 30px rgba(255, 255, 255, 0.8);
+                        color: black;
+                      }
+                    }
+
+                    .flashy-blink {
+                      animation: flashyBlink 3s infinite ease-in-out;
+                      padding: 4px;
+                      border-radius: 1rem;
+                      border: 3px solid #deae3c;
+                    }
+
+                    .glowing-text {
+                      animation: textGlow 1s infinite ease-in-out;
+                    }
+                  `}</style>
+
+                  <div className="flashy-blink">
+                    <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
+                      Dholera's Biggest Offer till Date
+                    </h2>
+                    <p className="text-sm lg:text-base glowing-text">
+                      Plots under ₹10 Lakhs - 0 KM from Dholera SIR Boundary
+                    </p>
+                  </div>
+
+                  {/* Golden sparkle effects */}
+                </div>
               </div>
 
               {showPopup ? (
