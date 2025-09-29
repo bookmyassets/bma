@@ -230,7 +230,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");
       let pageWidth = doc.internal.pageSize.getWidth();
-      const head = `${projectName} - Cost Estimate`;
+      const head = `Cost Estimate - ${projectName}`;
       let text = doc.getTextWidth(head);
       let xPosition = (pageWidth - text) / 2;
       doc.text(head, xPosition, 48);

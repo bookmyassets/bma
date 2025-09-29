@@ -241,13 +241,9 @@ export default function HeroCarousel() {
       {/* Hero Section with Carousel */}
       <div className="h-screen flex flex-col">
         {" "}
-        {/* Removed pt-12 */}
-        {/* Main Content Section */}
         <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Left Side - Slider Section (60%) */}
           <div className="w-full lg:w-[60%] relative flex-1">
-            {/* Marquee overlay on slider for mobile - removed */}
-
             {/* Desktop Slider */}
             <div className="absolute inset-0 hidden lg:block">
               <div className="relative w-full h-full overflow-hidden">
