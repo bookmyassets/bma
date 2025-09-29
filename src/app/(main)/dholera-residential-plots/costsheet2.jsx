@@ -174,7 +174,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
       const totalPayment = formData.plotAreaYards * plotPrice;
       const chargeAmount = formData.plotAreaYards * formData.chargeRate;
       const totalCharges =
-        chargeAmount + parseFloat(formData.legalFee) + parseFloat(formData.oneTimeMaintenance);
+        chargeAmount + parseFloat(formData.legalFee) /* + parseFloat(formData.oneTimeMaintenance) */;
       const plotTotalPayment = totalPayment + totalCharges;
       const plotAreaFeet = formData.plotAreaYards * 9;
 
@@ -192,7 +192,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
     formData.basePlotPriceYards,
     formData.plc,
     formData.chargeRate,
-    formData.oneTimeMaintenance,
+    /* formData.oneTimeMaintenance, */
     formData.legalFee,
   ]);
 
@@ -212,7 +212,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
       chargeRate,
       chargeAmount,
       chargeName,
-      oneTimeMaintenance,
+      /* oneTimeMaintenance, */
       legalFee,
       totalCharges,
       plotTotalPayment,
@@ -241,7 +241,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
       const formattedPricePerYard = formatIndianNumber(plotPriceWithPLC);
       const formattedTotalPaymentYards = formatIndianNumber(totalPaymentYards);
       const formattedChargeAmount = formatIndianNumber(chargeAmount);
-      const formattedOneTimeMaintenance = formatIndianNumber(oneTimeMaintenance);
+     /*  const formattedOneTimeMaintenance = formatIndianNumber(oneTimeMaintenance); */
       const formattedLegalFee = formatIndianNumber(legalFee);
       const formattedTotalCharges = formatIndianNumber(totalCharges);
       const formattedPlotTotalPayment = formatIndianNumber(plotTotalPayment);
@@ -299,7 +299,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
             `Rs. ${formattedChargeAmount}`,
           ],
           ["Legal Fee (Per Sale Deed)", `Rs. ${formattedLegalFee}`],
-          ["Maintenance For 3 years", `Rs. ${formattedOneTimeMaintenance}`],
+          /* ["Maintenance For 3 years", `Rs. ${formattedOneTimeMaintenance}`], */
           ["Total Charges", `Rs. ${formattedTotalCharges}`],
           ["Plot Total Payment", `Rs. ${formattedPlotTotalPayment}`],
         ],
