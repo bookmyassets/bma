@@ -574,7 +574,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
                 />
               </td>
             </tr>
-            <tr className="border-b">
+            {/* <tr className="border-b">
               <td className="p-2 font-semibold">
                 One Time Maintenance(for 3 years)
               </td>
@@ -587,7 +587,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
                   className="border p-2 w-full rounded"
                 />
               </td>
-            </tr>
+            </tr> */}
             <tr className="border-b">
               <td className="p-2 font-semibold">Total Charges</td>
               <td className="p-2">
