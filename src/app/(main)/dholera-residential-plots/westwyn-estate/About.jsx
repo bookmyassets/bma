@@ -22,7 +22,7 @@ const WestWynAboutSection = () => {
   // Animation for counters
   useEffect(() => {
     const animateCounters = () => {
-      const targets = { plotSize: 170, price: 10, amenities: 5 };
+      const targets = { plotSize: 151, price: 10, amenities: 5 };
       const duration = 2000;
       const steps = 60;
       const stepTime = duration / steps;
@@ -258,7 +258,7 @@ const WestWynAboutSection = () => {
 
                     <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
                       <div className="text-xl md:text-3xl  font-bold text-[#deae3c] mb-3">
-                        ₹ {counters.price.toLocaleString()} Lakh
+                        ₹ {counters.price.toLocaleString()} Lakhs
                       </div>
                       <div className="text-gray-300 text-sm">
                         Starting Price

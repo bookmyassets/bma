@@ -232,7 +232,7 @@ export default function LeadForm({ title }) {
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-white text-2xl font-bold text-center">
-             Own Your Investor Friendly Plot in Dholera - Starting under ₹10 Lakh Only
+             Own Your Investor Friendly Plot in Dholera - Starting under ₹10 Lakhs Only
             </h2>
             {/* <p className="text-gray-300 mt-2 text-xs text-center">
               Scale Your Portfolio with High-Growth Land Opportunities

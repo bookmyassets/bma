@@ -354,22 +354,7 @@ export default function HeroCarousel() {
                   <div className="absolute inset-0 rounded-xl bg-[#deae3c] opacity-30 animate-pulse"></div>
                 </button>
 
-                {/* Secondary CTA - Navratri Special */}
-
-                <button className="relative w-full bg-black text-[#deae3c] border-2 border-[#deae3c] pulse-border font-bold py-4 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all overflow-hidden group">
-                  <a href="tel:+918130371647">
-                    {/* Animated background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#deae3c] to-transparent opacity-0 group-hover:opacity-10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                    <div className="absolute inset-0 rounded-xl  border-[#deae3c] opacity-50"></div>
-
-                    {/* Content */}
-                    <div className="relative z-10">
-                      <div className="text-sm lg:text-lg font-extrabold leading-tight">
-                        Navratri Special: Flat 5% Off for 9 Days Only
-                      </div>
-                    </div>
-                  </a>
-                </button>
+           
               </motion.div>
             </motion.div>
           </div>

@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import logo from "@/assests/festival-images/navratri.webp";
+import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import

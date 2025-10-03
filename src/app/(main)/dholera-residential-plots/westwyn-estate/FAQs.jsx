@@ -11,7 +11,7 @@ const faqs = [
   {
     question: "What is the price of WestWyn Estate?",
     answer:
-      "WestWyn Estate in Dholera start from ₹10 Lakh, with plot size ranging between 170–250 per sq. yd.",
+      "WestWyn Estate in Dholera start from ₹10 Lakhs, with plot size ranging between 151 and 198 per sq. yd.",
   },
   {
     question: "Are the plots legally approved?",
