@@ -4,45 +4,45 @@ import bg from "@/assests/bg-image.webp"
 
 export default async function VideosPage() {
  
-    const videos = [
+const videos = [
   {
-    id: "sYONhrTYBTg?si=L4n3VXlr5fMEwRXD",
+    id: "sYONhrTYBTg",
     title: "[2025] PROGRESS: TATA Semiconductor Plant in Dholera",
     duration: "4:55"
   },
   {
-    id: "G5Ms2tm4Ugo?si=YirL0HYi4QpdbnVu",
+    id: "G5Ms2tm4Ugo",
     title: "Dholera's Heart: Man-Made River Front in Activation Area",
     duration: "6:30"
   },
   {
-    id: "7-GxVQoTOpE?si=ogpKMjhGJlUCaCJM",
+    id: "7-GxVQoTOpE",
     title: "ReNew's Massive Solar Cell Manufacturing Plant",
     duration: "unknown"
   },
   {
-    id: "naVwT2D5wIo?si=WyDRWX0nweM-CzX0",
+    id: "naVwT2D5wIo",
     title: "CURRENT UPDATE: Dholera International Airport to be Functional in 2026",
     duration: "unknown"
   },
   {
-    id: "NdH1zHVGTcQ?si=LigEXx48UYrV6AQL",
+    id: "NdH1zHVGTcQ",
     title: "Ahmedabad-Dholera Expressway connectivity",
     duration: "unknown"
   },
   {
-    id: "fHLqa6YM1Aw?si=3KI9DjJa50IPpwF2",
+    id: "fHLqa6YM1Aw",
     title: "100% Water Recycling at Dholera's Water Treatment Plant",
     duration: "unknown"
   },
   {
-    id: "0lAocID2crU?si=SEzoRJFFoR4P4ce8",
+    id: "0lAocID2crU",
     title: "WestWyn County - Premium Plots on Fedra-Pipli Highway, Dholera",
     duration: "unknown"
   },
   {
-    id: "P0a8LCMQHqI?si=dPYMcwl7SLX62h4H",
-    title: "Dholera Activation Area Heart of India’s Billion-Dollar Future City",
+    id: "P0a8LCMQHqI",
+    title: "Dholera Activation Area Heart of India's Billion-Dollar Future City",
     duration: "unknown"
   }
 ];
