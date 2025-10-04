@@ -11,6 +11,7 @@ import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import CostSheet from "../costsheet2";
 import ActiveProjectsSection from "../ActiveProject";
+import BrochureDownload from "../../components/BrochureDownload";
 
 export default function HeroCarousel() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
@@ -410,12 +411,14 @@ export default function HeroCarousel() {
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
             <div className="w-full max-w-md">
-              <ContactForm
+              <BrochureDownload
                 onClose={closeContactForm}
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
                 onAfterSubmit={handleAfterSubmit}
+              link="https://cdn.sanity.io/files/c3e1h345/projects/3c478ed13facaf28fffdf55e47a6eb0c0ba1b075.pdf"
+
               />
             </div>
           </div>

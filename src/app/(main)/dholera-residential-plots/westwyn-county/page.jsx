@@ -12,6 +12,7 @@ import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
 import CostSheet from "../costsheet2";;
 import SoldOutProjectsSection from "../SoldOutProjects";
+import BrochureDownload from "../../components/BrochureDownload";
 
 export default function HeroCarousel() {
   const faqs = [
@@ -559,12 +560,13 @@ export default function HeroCarousel() {
         {isBrochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
             <div className="w-full max-w-md">
-              <ContactForm
+              <BrochureDownload
                 onClose={closeBrochureForm}
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
                 onAfterSubmit={handleAfterSubmit} 
+                link="https://cdn.sanity.io/files/c3e1h345/projects/9f32c6d0d835cfc039e42a741e63894f87fd48ce.pdf"
               />
             </div>
           </div>

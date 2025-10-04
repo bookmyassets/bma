@@ -14,6 +14,7 @@ export default function BrochureDownload({
   thankYouTitle = "Thank You!",
   thankYouMessage = "Your request has been submitted successfully.",
   source = "BookMyAssets",
+  link,
   ids
 }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +31,7 @@ export default function BrochureDownload({
   const pathname = usePathname();
 
   // PDF download URL
-  const pdfUrl = "https://cdn.sanity.io/files/c3e1h345/projects/9f32c6d0d835cfc039e42a741e63894f87fd48ce.pdf";
+  const pdfUrl = link;
 
   // Function to download PDF
   const downloadPDF = () => {
