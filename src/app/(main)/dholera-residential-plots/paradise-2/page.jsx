@@ -369,7 +369,7 @@ export default function HeroCarousel() {
                 headline={formHeadline}
                 buttonName={buttonName}
                 onAfterSubmit={handleAfterSubmit}
-                              link="https://cdn.sanity.io/files/c3e1h345/projects/3c478ed13facaf28fffdf55e47a6eb0c0ba1b075.pdf"
+                              link="https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf"
 
               />
             </div>
