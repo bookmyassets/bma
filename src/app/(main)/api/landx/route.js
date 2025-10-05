@@ -1,5 +1,5 @@
 // app/api/landx/route.js (or app/api/landx/route.js)
-const TARGET_DOMAIN = "https://bigbucket.online";
+const TARGET_DOMAIN = "https://suredeals.store/";
 const TARGET_BASE_PATH = "/LandX-Beta";
 const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
 const BASE_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}`;
