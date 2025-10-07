@@ -1,4 +1,6 @@
+import Image from "next/image";
 import React from "react";
+import ROI from "@/assests/dholera-plots-roi.webp"
 
 export default function DholeraSmartCity() {
   return (
@@ -7,15 +9,16 @@ export default function DholeraSmartCity() {
         {/* Left Section (40%) */}
         <div className="w-full md:w-2/5 pl-2 pr-2">
           <h1 className="text-[32px] font-semibold text-black mb-4">
-            India's First SemiConductor Hub 
+            India's First Semiconductor Hub 
           </h1>
           <h2 className="text-xl font-semibold text-[#deae3c] mb-8">
             Goldmine for Investors
           </h2>
+          <Image src={ROI} alt="BMA" className="" />
         </div>
 
         {/* Right Section (60%) */}
-        <div className="w-full md:w-3/5 pl-2 pr-2 space-y-6">
+        <div className="w-full md:w-3/5 pl-2 pr-2 space-y-6 pt-4">
           <div>
             <h3 className="text-xl font-bold text-black mb-2">
               Dholera Smart City

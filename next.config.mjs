@@ -53,19 +53,19 @@ const nextConfig = {
       // Handle CSS, JS, and image files
       {
         source: "/css/:path*",
-        destination: "https://suredeals.store/LandX-Beta/css/:path*",
+        destination: "https://dholeratimes.co.in/LandX-Beta/css/:path*",
       },
       {
         source: "/js/:path*",
-        destination: "https://suredeals.store/LandX-Beta/js/:path*",
+        destination: "https://dholeratimes.co.in/LandX-Beta/js/:path*",
       },
       {
         source: "/images/:path*",
-        destination: "https://suredeals.store/LandX-Beta/images/:path*",
+        destination: "https://dholeratimes.co.in/LandX-Beta/images/:path*",
       },
       {
         source: "/img/:path*",
-        destination: "https://suredeals.store/LandX-Beta/img/:path*",
+        destination: "https://dholeratimes.co.in/LandX-Beta/img/:path*",
       },
       {
         source: "/uploads/pdfs/:path*",
