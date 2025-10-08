@@ -388,6 +388,9 @@ export default async function Post({ params }) {
       <>
         <div>
           <title>{post.title}</title>
+          <meta name="description" content={post.metaDescription} />
+          <meta name="keywords" content={post.keywords} />
+          <meta name="publisher" content="BookMyAssets" />
           <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
 
           {/* Additional SEO meta tags */}
