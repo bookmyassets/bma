@@ -368,9 +368,9 @@ export default async function Post({ params }) {
 
 
       <title>{post.title}</title>
-       <meta name="description" content={post.metaDescription} />
+      <meta name="description" content={post.metaDescription} />
           <meta name="keywords" content={post.keywords} />
-          <meta name="publisher" content="BookMyAssets" />
+          <meta name="publisher" content="Dholera Insider" />
           <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
           
           {/* Additional SEO meta tags */}
@@ -484,7 +484,7 @@ export default async function Post({ params }) {
               )}
 
               {/* Article Content */}
-              <div className="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+              <div className="bg-white rounded-xl shadow-2xl border border-gray-200">
                 <div className="text-xl max-w-none">
                   <PortableText value={post.body} components={components} />
                 </div>

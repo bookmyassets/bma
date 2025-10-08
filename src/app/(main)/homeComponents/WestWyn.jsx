@@ -1,8 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import sample1 from "@/assests/residential/westwyn-county-hero-section-desktop.webp";
+import sample1 from "@/assests/residential/westwyn-estate.webp";
 import Link from "next/link";
-
 
 export default function WestWyn() {
   return (
@@ -26,40 +25,39 @@ export default function WestWyn() {
         {/* Right Section (60%) */}
         <div className="w-full md:w-3/5 md:pl-24 md:pr-4  md:mt-0 ">
           <h3 className="text-[32px] font-semibold text-black">
-            Westwyn County
+            Westwyn Estate
           </h3>
           <h2 className="text-xl font-semibold text-[#deae3c] ">
-            Discover Premium Plots in Dholera's Prime Zone
+            The Next Chapter in Dholera’s Growth Story
           </h2>
           <div className="space-y-6 pt-4">
             <div className="">
               <p className="text-lg mb-2 "></p>
               <p className="text-gray-600 ">
-                Westwyn County ensures high growth potential as part of Dholera
-                Smart City India’s first and largest greenfield smart city.
-                The project offers government-approved planning, world-class
-                infrastructure, and long-term appreciation, along with modern
-                amenities such as landscaped gardens, wide internal roads, 24x7
-                power supply, and drainage system, gated security, and sports
-                facilities. Strategically located near Fedra, Pipli Highway, and
-                the upcoming Dholera International Airport, and backed by strong
-                investor interest including the Tata Semiconductor Plant,
-                Westwyn County stands as a secure and future-ready investment
-                opportunity.
+                After the success of WestWyn County, BookMyAssets proudly
+                introduces WestWyn Estate - a new benchmark in trust,
+                transparency, and value-driven development. Strategically
+                located on the Vadhela–Navda Highway, right at the entrance of
+                Dholera SIR (0 KM) and near TP5, WestWyn Estate offers unmatched
+                connectivity and high appreciation potential. Each plot is
+                registry-ready, NA / NOC approved, and title clear, plan pass
+                ensuring a secure and future-ready investment. Whether you’re
+                investing for long-term returns or planning your dream space in
+                Dholera Smart City, WestWyn Estate by
+                BookMyAssets places you at the heart of opportunity and growth.
               </p>
             </div>
           </div>
           <div className="md:pt-12 max-sm:hidden">
             <Link
-              href="/dholera-residential-plots/westwyn-county"
+              href="/dholera-residential-plots/westwyn-estate"
               className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
             >
-              About WestWyn County
+              About WestWyn Estate
             </Link>
           </div>
         </div>
       </div>
-      
     </>
   );
 }
