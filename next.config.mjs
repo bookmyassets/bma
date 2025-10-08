@@ -505,6 +505,21 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/blogs/why-invest-in-dholera-india-first-greenfield-smart-city',
+        destination: '/dholera-sir-blogs/invest-in-dholera-sir-projects',
+        permanent: true,
+      },
+      {
+        source: '/blogs/first-smart-city-dholera',
+        destination: '/dholera-sir-blogs/impact-of-tata-semiconductor-plant-on-land-value-in-dholera',
+        permanent: true,
+      },
+      {
+        source: '/blogs/dholera-ahmedabad-expressway',
+        destination: '/dholera-sir-blogs/dholera-ahmedabad-expressway',
+        permanent: true,
+      },
+      {
         source: '/projects/sitemap.xml',
         destination: '/sitemap.html',
         permanent: true,
