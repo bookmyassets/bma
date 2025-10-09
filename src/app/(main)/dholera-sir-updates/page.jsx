@@ -1,6 +1,5 @@
 import { getUpdates } from "@/sanity/lib/api";
 import React from "react";
-import BlogCard from "./BlogCard";
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";

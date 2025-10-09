@@ -20,11 +20,11 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
           <h3 className="text-xl font-bold mb-4 text-white">
-            Latest Updates
+            About Dholera SIR
           </h3>
           <div className=" overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
-              <Link key={item._id} href={`/dholera-sir-updates/${item.slug.current}`}>
+              <Link key={item._id} href={`/about-dholera-sir/${item.slug.current}`}>
                 <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3 border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
@@ -398,7 +398,7 @@ export default async function Post({ params }) {
 
       <title>{post.title}</title>
        <meta name="description" content={post.metaDescription} />
-          <meta name="keywords" content={post.keywords} />
+         <meta name="keywords" content={post.keywords} />
           <meta name="publisher" content="BookMyAssets" />
           <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
           

@@ -3,7 +3,6 @@ import { urlFor } from "@/sanity/lib/image";
 import {
   getPostBySlug,
   getblogs,
-  getUpdates,
   projectInfo,
 } from "@/sanity/lib/api";
 import Link from "next/link";
@@ -389,7 +388,7 @@ export default async function Post({ params }) {
         <div>
           <title>{post.title}</title>
           <meta name="description" content={post.metaDescription} />
-          <meta name="keywords" content={post.keywords} />
+          <meta name="keywords" content={post.keywords?.join(', ')} />
           <meta name="publisher" content="BookMyAssets" />
           <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
 
