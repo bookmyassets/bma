@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import banner from "@/assests/bulkLand/city-centre-cover.webp";
-import bannerMob from "@/assests/bulkLand/city-centre-cover.webp";
+import banner from "@/assests/bulkLand/citycentre-hero-desktop.webp";
+import bannerMob from "@/assests/bulkLand/citycentre-hero-mob.webp";
 import {
   ShoppingBag,
   Clapperboard,
