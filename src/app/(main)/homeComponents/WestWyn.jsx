@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function WestWyn() {
   return (
     <>
-      <div className="flex flex-col max-sm:flex-col-reverse max-w-7xl mx-auto pt-8 md:flex-row md:pt-20 px-4 py-12 gap-8 overflow-hidden">
+      <div className="flex flex-col max-sm:flex-col-reverse max-w-7xl mx-auto pt-8 md:flex-row px-4 py-12 gap-8 overflow-hidden">
         {/* Left Section (40%) */}
         <div className="w-full md:w-2/5 max-w-2xl mx-auto md:pt-4 pl-4 pr-4">
           <div className="w-full h-full">

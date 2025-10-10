@@ -5,7 +5,7 @@ import ROI from "@/assests/dholera-plots-roi.webp"
 export default function DholeraSmartCity() {
   return (
     <div className="bg-white">
-      <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 gap-6 md:gap-12 max-w-7xl mx-auto">
         {/* Left Section (40%) */}
         <div className="w-full md:w-2/5 pl-2 pr-2">
           <h1 className="text-[32px] font-semibold text-black mb-4">

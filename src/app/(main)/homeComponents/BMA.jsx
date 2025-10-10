@@ -74,7 +74,7 @@ export default function BMA() {
 
   return (
     <div className="bg-[#f9f9f9] ">
-      <div className="flex flex-col pt-8 md:pt-20 md:flex-row px-4 md:px-8 py-12 gap-6 md:gap-12 max-w-7xl mx-auto overflow-hidden">
+      <div className="flex flex-col  md:flex-row px-4 md:px-8 py-12 gap-6 md:gap-12 max-w-7xl mx-auto overflow-hidden">
         {/* Left Section (40%) */}
         <div className="w-full md:w-2/5 pl-2 pr-2">
           <h2 className="text-xl font-semibold text-black ">Why Invest With</h2>
