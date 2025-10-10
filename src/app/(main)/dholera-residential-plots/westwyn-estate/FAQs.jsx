@@ -31,7 +31,7 @@ const faqs = [
   {
     question: "How can BookMyAssets help you invest?",
     answer:
-      "BMA assists you with plot selection in Dholera, legal verification, and the complete booking process. Our experts guide you step-by-step to ensure a safe, hassle-free investment.",
+      "BookMyAssets assists you with plot selection in Dholera, legal verification, and the complete booking process. Our experts guide you step-by-step to ensure a safe, hassle-free investment.",
   },
 ];
 
