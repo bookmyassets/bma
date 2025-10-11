@@ -5,7 +5,7 @@ const Running = () => {
   return (
     <div className="scrolling-container">
       <div className="scrolling-text">
-        <h2>Registry Ready Plots in Dholera Under ₹10 Lakhs*</h2>
+        <h2>This Diwali Get A Free 5gm Gold Coin on Buying 200 sq yd Plot</h2>
       </div>
     </div>
   );
