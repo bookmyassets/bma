@@ -7,6 +7,7 @@ import logo from "@/assests/festival-images/dholera-diwali.webp"
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import
+//import img1 from "@/assests/diwali-offer-banner.webp";
 import img1 from "@/assests/hero1.webp";
 import img2 from "@/assests/hero2.webp";
 import img3 from "@/assests/ad-page/img3.webp";
@@ -427,7 +428,7 @@ export default function LandingPage({ openForm }) {
                   />
                 </div>
               ))}
-              <div className="absolute bottom-0 left-0 right-0 z-50">
+              <div className="absolute bottom-0 left-0 right-0">
                 <Running />
               </div>
             </div>

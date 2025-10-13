@@ -451,7 +451,7 @@ useEffect(() => {
                 className={`p-2 rounded-md transition-colors duration-300 ${
                   shouldUseWhiteBackground
                     ? "text-black hover:bg-gray-100"
-                    : "text-white hover:bg-white/10"
+                    : " hover:bg-white/10"
                 }`}
               >
                 <svg
