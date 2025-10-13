@@ -84,11 +84,11 @@ const RealEstateLandingPage = () => {
       name: "BMA Developers",
       subtitle: "From Selling Projects to Creating Landmarks",
       description:
-        "BMA has been part of 5 successful projects that have been sold out, selling over 1,00,000 square yards of land in Dholera. We now don't just sell land, we build dreams.",
+        "BMA has been part of 6 successful projects that have been sold out, selling over 1,00,000 square yards of land in Dholera. We now don't just sell land, we build dreams.",
       icon: Building,
       color: "from-blue-500 to-blue-600",
       features: [
-        "6 Successful Projects",
+        "8 Successful Projects",
         "1,00,000+ Sq Yards Sold",
         "Premium Communities",
         "WestWyn County Project",
@@ -262,7 +262,7 @@ const RealEstateLandingPage = () => {
 
                   <p className="text-lg text-gray-300 leading-relaxed">
                     Discover premium, legally verified plots in Dholera Smart
-                    City. We don't just offer land—we offer a vision of the
+                    City. We don't just offer land-we offer a vision of the
                     future.
                   </p>
                 </div>
@@ -358,7 +358,7 @@ const RealEstateLandingPage = () => {
 
                     <p className="text-lg xl:text-xl text-gray-300 leading-relaxed">
                       Discover premium, legally verified plots in Dholera Smart
-                      City. We don't just offer land—we offer a vision of the
+                      City. We don't just offer land-we offer a vision of the
                       future.
                     </p>
                   </div>
@@ -419,11 +419,11 @@ const RealEstateLandingPage = () => {
         {/* About Us Section */}
         <div
           ref={aboutRef}
-          className="py-20 bg-gradient-to-br from-gray-50 to-white"
+          className="py-12 bg-gradient-to-br from-gray-50 to-white"
         >
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
+              <div className="text-center mb-8">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   About Us
                 </h2>
@@ -432,7 +432,7 @@ const RealEstateLandingPage = () => {
                   <Star className="mx-4 text-yellow-500" size={24} />
                   <div className="h-1 w-16 bg-yellow-500 rounded"></div>
                 </div>
-                <p className="text-lg sm:text-xl text-yellow-600 font-bold mb-4">
+                <p className="text-lg  text-yellow-600 font-bold mb-4">
                   Focused on Your Growth. Driven by Your Trust.
                 </p>
               </div>
@@ -540,9 +540,9 @@ const RealEstateLandingPage = () => {
         </div>
 
         {/* BMA Group Companies Section */}
-        <div ref={companiesRef} className="py-20 bg-white">
+        <div ref={companiesRef} className="py-12 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 BMA Group of Companies
               </h2>
@@ -551,7 +551,7 @@ const RealEstateLandingPage = () => {
                 <Star className="mx-4 text-yellow-500" size={24} />
                 <div className="h-1 w-16 bg-yellow-500 rounded"></div>
               </div>
-              <p className="text-xl text-black max-w-4xl mx-auto">
+              <p className="text-xl text-black max-w-5xl mx-auto">
                 Four strong arms, each one created to serve you better, faster,
                 and smarter in your real estate investment journey.
               </p>
@@ -568,7 +568,7 @@ const RealEstateLandingPage = () => {
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  <div className="bg-gray-900 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:border-yellow-500 transition-all duration-500 h-full">
+                  <div className="bg-gray-900 backdrop-blur-xl rounded-3xl p-6 border border-white/20 hover:border-yellow-500 transition-all duration-500 h-full">
                     <div className="flex items-center space-x-4 mb-6">
                       <div
                         className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${company.color} flex items-center justify-center group-hover:rotate-12 transition-transform duration-300`}
@@ -613,9 +613,9 @@ const RealEstateLandingPage = () => {
         </div>
 
         {/* Milestones Section - Glassmorphism Design */}
-        <div className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="py-12 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Our Milestones
               </h2>
@@ -670,9 +670,9 @@ const RealEstateLandingPage = () => {
         </div>
 
         {/* Why Choose Us Section - Cards with Hover Effects */}
-        <div ref={featuresRef} className="py-20 bg-gray-900">
+        <div ref={featuresRef} className="py-12 bg-gray-900">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8">
               <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
                 Why Choose Us?
               </h2>
@@ -681,7 +681,7 @@ const RealEstateLandingPage = () => {
                 <Star className="mx-4 text-yellow-500" size={24} />
                 <div className="h-1 w-16 bg-yellow-500 rounded"></div>
               </div>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-300 max-w-4xl mx-auto">
                 We go beyond just selling properties we create investment
                 opportunities that build your future.
               </p>
@@ -741,7 +741,7 @@ const RealEstateLandingPage = () => {
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:border-yellow-500 transition-all duration-300 h-full">
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-yellow-500 transition-all duration-300 h-full">
                     <div
                       className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6`}
                     >
@@ -763,7 +763,7 @@ const RealEstateLandingPage = () => {
         {/* Testimonials Section */}
         <div
           ref={testimonialsRef}
-          className="py-20 bg-gradient-to-br from-gray-50 to-gray-100"
+          className="py-12 bg-gradient-to-br from-gray-50 to-gray-100"
         >
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
@@ -775,7 +775,7 @@ const RealEstateLandingPage = () => {
                 <Star className="mx-4 text-yellow-500" size={24} />
                 <div className="h-1 w-16 bg-yellow-500 rounded"></div>
               </div>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 max-w-4xl mx-auto">
                 Don't just take our word for it. Here's what our investors have
                 to say about their experience with us.
               </p>
@@ -846,9 +846,9 @@ const RealEstateLandingPage = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="py-20 bg-white">
+        <div className="py-12 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-6xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
                 Ready to Invest in Your Future?
               </h2>

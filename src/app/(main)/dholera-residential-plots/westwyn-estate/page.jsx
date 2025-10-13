@@ -372,7 +372,7 @@ export default function HeroCarousel() {
         <InvestmentBenefits />
       </div>
 
-      <CommonForm title="Get Plots Under from ₹10 Lakhs at 0 KM from Dholera SIR " />
+      <CommonForm title="Get Plots Under ₹10 Lakhs at 0 KM from Dholera SIR " />
       <ProjectAmenities />
 
       <div className="pt-4 pb-4">

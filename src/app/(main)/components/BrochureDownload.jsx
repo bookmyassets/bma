@@ -394,7 +394,6 @@ const onRecaptchaSuccess = async (token) => {
               className="text-center mb-6 pt-4"
             >
               <h2 className="text-3xl font-bold text-white mb-2">{title}</h2>
-              <p className="text-gray-300 text-sm">Only for first 10 users</p>
             </motion.div>
 
             {showPopup ? (

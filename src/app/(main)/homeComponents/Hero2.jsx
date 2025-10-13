@@ -7,12 +7,13 @@ import logo from "@/assests/festival-images/dholera-diwali.webp"
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import
-//import img1 from "@/assests/diwali-offer-banner.webp";
-import img1 from "@/assests/hero1.webp";
+import img1 from "@/assests/diwali-offer-banner.webp";
+//import img1 from "@/assests/hero1.webp";
 import img2 from "@/assests/hero2.webp";
 import img3 from "@/assests/ad-page/img3.webp";
 
-import imgM1 from "@/assests/hero_mob1.webp";
+//import imgM1 from "@/assests/hero_mob1.webp";
+import imgM1 from "@/assests/diwali-estate-mobile-banner.webp";
 import imgM2 from "@/assests/hero_mob2.webp";
 import imgM3 from "@/assests/ad-page/mob3.webp";
 import BrochureDownload from "../components/BrochureDownload";
