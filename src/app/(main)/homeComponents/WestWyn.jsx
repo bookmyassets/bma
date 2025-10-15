@@ -17,7 +17,7 @@ export default function WestWyn() {
               href="/dholera-residential-plots/westwyn-county"
               className="text-lg hover:bg-[#deae3c] hover:text-white p-4 border-2 border-[#deae3c] rounded-lg bg-black text-[#deae3c]"
             >
-              About WestWyn County
+              About WestWyn Estate
             </a>
           </div>
         </div>
