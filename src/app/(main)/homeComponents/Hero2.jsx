@@ -463,9 +463,7 @@ export default function LandingPage({ openForm }) {
                   alt="BookMyAssets Logo"
                   className="max-sm:hidden mx-auto mb-3 "
                 />
-                <div className="md:hidden absolute bottom-0 left-0 right-0">
-                <Running />
-              </div>
+                
                 <div className="relative">
                   <style jsx>{`
                     @keyframes textGlow {
@@ -633,6 +631,9 @@ export default function LandingPage({ openForm }) {
                 </div>
               )}
             </motion.div>
+            <div className="md:hidden absolute bottom-0 left-0 right-0">
+                <Running />
+              </div>
           </div>
         </div>
 

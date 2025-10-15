@@ -274,7 +274,7 @@ export default function CostSheet({
         ],
         theme: "grid",
         styles: {
-          fontSize: 12,
+          fontSize: 11,
           cellPadding: 3,
           lineWidth: 0.5,
           lineColor: [0, 0, 0],
@@ -334,29 +334,29 @@ export default function CostSheet({
       finalY = doc.lastAutoTable.finalY;
 
       doc.setFontSize(10);
-      doc.text("Terms & Conditions:", 15, finalY + 4);
+      doc.text("Terms & Conditions:", 15, finalY + 6);
       doc.setFontSize(9);
       const terms = [
         "1. The booking amount is Rs. 50,000.",
         "2. You can request a refund within 30 days, and the payment will be returned to you within 7 days.",
-        "3. This is a system-generated document and does not require a signature.",
-        "4. The plot price and charges are subject to change without prior notice.",
-        "5. Maintenance charges are one-time and non-refundable.",
-        "6. Legal fees cover documentation and registration expenses.",
-        "7. The final payment must be completed within the stipulated period.",
-        "8. Full payment is to be completed within 30 days.",
-        "9. For registry, stamp duty is 4.9% for females and 5.9% for males.",
-        "10. Preferred Location Charge (PLC) will be added where necessary.",
-        "11. Late Payment Charges :",
-        "a.  Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
-        "b.  Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
+        "3. The plot price and charges are subject to change without prior notice.",
+        /* `4. ${chargeName} are one-time and non-refundable.`, */
+        "4. Maintenance Charge are one-time and non-refundable.",
+        "5. Legal fees cover documentation and registration expenses.",
+        "6. The full & final payment must be completed within the stipulated period, i.e., within 30 days.",
+        "7. For registry, stamp duty is 4.9% for females and 5.9% for males.",
+        "8. Preferred Location Charge (PLC) will be added where necessary.",
+        "9. Late Payment Charges :",
+        "a. Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
+        "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
+        "10. This is a system-generated document and does not require a signature.",
       ];
 
       terms.forEach((term, index) => {
-        // Indent sub-points a/b a bit more
-        const isSubPoint = term.startsWith("a.") || term.startsWith("b.");
+        // Indent sub-points (a., b., c., etc.)
+        const isSubPoint = /^[a-z]\./.test(term.trim());
         const xPos = isSubPoint ? 25 : 15; // add indentation for sub-points
-        doc.text(term, xPos, finalY + 12 + index * 5);
+        doc.text(term.trim(), xPos, finalY + 12 + index * 5);
       });
 
       let date = new Date().toLocaleDateString();
