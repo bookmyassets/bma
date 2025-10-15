@@ -347,7 +347,11 @@ const submitToCRM = async () => {
         "7. The final payment must be completed within the stipulated period.",
         "8. Full payment is to be completed within 30 days.",
         "9. For registry, stamp duty is 4.9% for females and 5.9% for males.",
-        "10. Preferred Location Charge (PLC) will be added where necessary."
+        "10. Preferred Location Charge (PLC) will be added where necessary.",
+        "11.Late Payment Charges :",
+
+            "a.  ₹250/- per sq yard if payment is made after 30 days and within 60 days",
+            "b.  ₹500/- per sq yard if payment is made after 60 days and within 90 days"
       ];
 
       terms.forEach((term, index) => {

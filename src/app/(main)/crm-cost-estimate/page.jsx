@@ -179,7 +179,7 @@ export default function CostSheet() {
       doc.setFontSize(14);
       doc.text("Terms & Conditions:", 15, finalY + 8);
       doc.setFontSize(9);
-      const terms = [
+      /* const terms = [
         "1. The booking amount is Rs. 50,000.",
         "2. You can request a refund within 30 days, and the payment will be returned to you within 7 days.",
         "3. The plot price and charges are subject to change without prior notice.",
@@ -192,7 +192,27 @@ export default function CostSheet() {
 
       terms.forEach((term, index) => {
         doc.text(term, 15, finalY + 18 + index * 5);
-      });
+      }); */
+        const terms = [
+        "1. The booking amount is Rs. 50,000.",
+        "2. You can request a refund within 30 days, and the payment will be returned to you within 7 days.",
+        "3. The plot price and charges are subject to change without prior notice.",
+        "4. Maintenance charges, as decided, will be collected separately.",
+        "5. Legal fees cover documentation required for registration purposes.",
+        "6. The full payment must be completed within the stipulated period, i.e., within 30 days.",
+        "7. For registry, stamp duty is 4.9% for females and 5.9% for males.	",
+        "8. This is a system-generated document and does not require a signature.",
+        "9. Late Payment Charges :",
+  "a.  Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
+  "b.  Rs. 500/- per sq yard if payment is made after 60 days and within 90 days"
+];
+
+terms.forEach((term, index) => {
+  // Indent sub-points a/b a bit more
+  const isSubPoint = term.startsWith("a.") || term.startsWith("b.");
+  const xPos = isSubPoint ? 25 : 15; // add indentation for sub-points
+  doc.text(term, xPos, finalY + 18 + index * 5);
+});
 
       let date = new Date().toLocaleDateString();
       pageWidth = doc.internal.pageSize.getWidth();

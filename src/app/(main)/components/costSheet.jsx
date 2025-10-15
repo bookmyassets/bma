@@ -347,8 +347,8 @@ const submitToCRM = async () => {
         "7. The final payment must be completed within the stipulated period.",
         "8. Full payment is to be completed within 30 days.",
         "9. For registry, stamp duty is 4.9% for females and 5.9% for males.",
-        "10. Preferred Location Charge (PLC) will be added where necessary."
-      ];
+        "10. Preferred Location Charge (PLC) will be added where necessary.",
+];
 
       terms.forEach((term, index) => {
         doc.text(term, 15, finalY + 18 + index * 5);

@@ -19,53 +19,56 @@ const projectConfigs = {
     basePrice: 6250,
     chargeType: "developement",
     chargeRate: 500,
-    chargeName: "Development Charge"
+    chargeName: "Development Charge",
   },
   "WestWyn County": {
     basePrice: 9500,
     chargeType: "maintenance",
     chargeRate: 500,
-    chargeName: "Maintenance Charge"
+    chargeName: "Maintenance Charge",
   },
-  "Orchid": {
-    basePrice:6700,
-    chargeType: "maintenance",
-    chargeRate: 100,
-    chargeName: "Maintenance Charge"
-  },
-  "Paradise": {
+  Orchid: {
     basePrice: 6700,
     chargeType: "maintenance",
     chargeRate: 100,
-    chargeName: "Maintenance Charge"
+    chargeName: "Maintenance Charge",
+  },
+  Paradise: {
+    basePrice: 6700,
+    chargeType: "maintenance",
+    chargeRate: 100,
+    chargeName: "Maintenance Charge",
   },
   "Paradise 2": {
     basePrice: 6700,
     chargeType: "maintenance",
     chargeRate: 100,
-    chargeName: "Maintenance Charge"
+    chargeName: "Maintenance Charge",
   },
   "Maple Township": {
-    basePrice:6700,
-    chargeType: "maintenance",
-    chargeRate: 100,
-    chargeName: "Maintenance Charge"
-  },
-  "Marina bay": {
-    basePrice:6700,
-    chargeType: "maintenance",
-    chargeRate: 100,
-    chargeName: "Maintenance Charge"
-  },
-  "Pride": {
     basePrice: 6700,
     chargeType: "maintenance",
     chargeRate: 100,
-    chargeName: "Maintenance Charge"
-  }
+    chargeName: "Maintenance Charge",
+  },
+  "Marina bay": {
+    basePrice: 6700,
+    chargeType: "maintenance",
+    chargeRate: 100,
+    chargeName: "Maintenance Charge",
+  },
+  Pride: {
+    basePrice: 6700,
+    chargeType: "maintenance",
+    chargeRate: 100,
+    chargeName: "Maintenance Charge",
+  },
 };
 
-export default function CostSheet({ projectSlug = null, showProjectSelector = true }) {
+export default function CostSheet({
+  projectSlug = null,
+  showProjectSelector = true,
+}) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -99,33 +102,33 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
   const fetchProjects = async () => {
     try {
       setProjectsLoading(true);
-      const response = await fetch('/data/Residential.json');
+      const response = await fetch("/data/Residential.json");
       if (!response.ok) {
-        throw new Error('Failed to fetch projects');
+        throw new Error("Failed to fetch projects");
       }
       const projects = await response.json();
       setAvailableProjects(projects);
-      
+
       // Set default project if slug is provided
       if (projectSlug) {
-        const project = projects.find(p => p.link === projectSlug);
+        const project = projects.find((p) => p.link === projectSlug);
         if (project) {
           setCurrentProject(project);
           const config = projectConfigs[project.projectName];
-          
-          setFormData(prev => ({
+
+          setFormData((prev) => ({
             ...prev,
             projectName: project.projectName,
             basePlotPriceYards: config?.basePrice || 9250,
             chargeRate: config?.chargeRate || 500,
             chargeName: config?.chargeName || "Maintenance Charge",
-            chargeType: config?.chargeType || "maintenance"
+            chargeType: config?.chargeType || "maintenance",
           }));
         }
       }
     } catch (error) {
-      console.error('Error fetching projects:', error);
-      setProjectsError('Failed to load projects');
+      console.error("Error fetching projects:", error);
+      setProjectsError("Failed to load projects");
     } finally {
       setProjectsLoading(false);
     }
@@ -138,24 +141,26 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name === "projectName") {
-      const selectedProject = availableProjects.find(p => p.projectName === value);
+      const selectedProject = availableProjects.find(
+        (p) => p.projectName === value
+      );
       const config = projectConfigs[value];
-      
+
       if (config) {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
           [name]: value,
           basePlotPriceYards: config.basePrice,
           chargeRate: config.chargeRate,
           chargeName: config.chargeName,
-          chargeType: config.chargeType
+          chargeType: config.chargeType,
         }));
       } else {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
-          [name]: value
+          [name]: value,
         }));
       }
       setCurrentProject(selectedProject);
@@ -174,7 +179,10 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
       const totalPayment = formData.plotAreaYards * plotPrice;
       const chargeAmount = formData.plotAreaYards * formData.chargeRate;
       const totalCharges =
-        chargeAmount + parseFloat(formData.legalFee) /* + parseFloat(formData.oneTimeMaintenance) */;
+        chargeAmount +
+        parseFloat(
+          formData.legalFee
+        ); /* + parseFloat(formData.oneTimeMaintenance) */
       const plotTotalPayment = totalPayment + totalCharges;
       const plotAreaFeet = formData.plotAreaYards * 9;
 
@@ -241,7 +249,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
       const formattedPricePerYard = formatIndianNumber(plotPriceWithPLC);
       const formattedTotalPaymentYards = formatIndianNumber(totalPaymentYards);
       const formattedChargeAmount = formatIndianNumber(chargeAmount);
-     /*  const formattedOneTimeMaintenance = formatIndianNumber(oneTimeMaintenance); */
+      /*  const formattedOneTimeMaintenance = formatIndianNumber(oneTimeMaintenance); */
       const formattedLegalFee = formatIndianNumber(legalFee);
       const formattedTotalCharges = formatIndianNumber(totalCharges);
       const formattedPlotTotalPayment = formatIndianNumber(plotTotalPayment);
@@ -326,7 +334,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
       finalY = doc.lastAutoTable.finalY;
 
       doc.setFontSize(10);
-      doc.text("Terms & Conditions:", 15, finalY + 6);
+      doc.text("Terms & Conditions:", 15, finalY + 4);
       doc.setFontSize(9);
       const terms = [
         "1. The booking amount is Rs. 50,000.",
@@ -339,10 +347,16 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
         "8. Full payment is to be completed within 30 days.",
         "9. For registry, stamp duty is 4.9% for females and 5.9% for males.",
         "10. Preferred Location Charge (PLC) will be added where necessary.",
+        "11. Late Payment Charges :",
+        "a.  Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
+        "b.  Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
       ];
 
       terms.forEach((term, index) => {
-        doc.text(term, 15, finalY + 18 + index * 5);
+        // Indent sub-points a/b a bit more
+        const isSubPoint = term.startsWith("a.") || term.startsWith("b.");
+        const xPos = isSubPoint ? 25 : 15; // add indentation for sub-points
+        doc.text(term, xPos, finalY + 12 + index * 5);
       });
 
       let date = new Date().toLocaleDateString();
@@ -368,7 +382,9 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
   return (
     <div className="max-w-3xl mx-auto bg-white shadow-xl shadow-gray-500 rounded-lg p-6">
       <p className="text-center text-3xl font-bold text-gray-700 mb-4">
-        {currentProject ? `${currentProject.projectName} - Cost Estimate` : 'Cost Estimate'}
+        {currentProject
+          ? `${currentProject.projectName} - Cost Estimate`
+          : "Cost Estimate"}
       </p>
 
       <form>
@@ -410,7 +426,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
                 />
               </td>
             </tr>
-            
+
             {showProjectSelector && (
               <tr className="border-b">
                 <td className="p-2 font-semibold">Project Name</td>
@@ -442,7 +458,7 @@ export default function CostSheet({ projectSlug = null, showProjectSelector = tr
                 </td>
               </tr>
             )}
-            
+
             <tr className="border-b">
               <td className="p-2 font-semibold">Plot No</td>
               <td className="p-2">

@@ -7,16 +7,17 @@ import logo from "@/assests/festival-images/dholera-diwali2.webp"
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import
-import img1 from "@/assests/diwali-offer-desktop-banner.webp";
 //import img1 from "@/assests/hero1.webp";
 //import img2 from "@/assests/hero2.webp";
-import img2 from "@/assests/dholera-diwali-banner2.webp";
-import img3 from "@/assests/ad-page/img3.webp";
+import img1 from "@/assests/diwali-offer-desktop-banner.webp";
+import img2 from "@/assests/dholera-offer-desktop-banner-2.webp";
+//import img3 from "@/assests/ad-page/img3.webp";
+import img3 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
 
 //import imgM1 from "@/assests/hero_mob1.webp";
-import imgM1 from "@/assests/dholera-offer-mobile-banner.webp";
 //import imgM2 from "@/assests/hero_mob2.webp";
-import imgM2 from "@/assests/dholera-diwali-mobile-banner2.webp";
+import imgM1 from "@/assests/dholera-offer-mobile-banner.webp";
+import imgM2 from "@/assests/diwali-offer-mobile-banner-2.webp";
 import imgM3 from "@/assests/ad-page/mob3.webp";
 import BrochureDownload from "../components/BrochureDownload";
 import Running from "./Running";
@@ -48,8 +49,8 @@ export default function LandingPage({ openForm }) {
   ];
 
   const mobileImages = [
-    { src: imgM1, alt: "Dholera Mobile 1" },
     { src: imgM2, alt: "Dholera Mobile 2" },
+    { src: imgM1, alt: "Dholera Mobile 1" },
     { src: imgM3, alt: "Dholera Mobile 3" },
   ];
 
@@ -465,9 +466,6 @@ export default function LandingPage({ openForm }) {
                 <div className="md:hidden absolute bottom-0 left-0 right-0">
                 <Running />
               </div>
-                
-
-
                 <div className="relative">
                   <style jsx>{`
                     @keyframes textGlow {
