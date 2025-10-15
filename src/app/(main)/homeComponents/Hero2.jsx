@@ -12,13 +12,13 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 import img1 from "@/assests/diwali-offer-desktop-banner.webp";
 import img2 from "@/assests/dholera-offer-desktop-banner-2.webp";
 //import img3 from "@/assests/ad-page/img3.webp";
-import img3 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
+import img3 from "@/assests/residential/estate1.webp";
 
 //import imgM1 from "@/assests/hero_mob1.webp";
 //import imgM2 from "@/assests/hero_mob2.webp";
 import imgM1 from "@/assests/dholera-offer-mobile-banner.webp";
 import imgM2 from "@/assests/diwali-offer-mobile-banner-2.webp";
-import imgM3 from "@/assests/ad-page/mob3.webp";
+import imgM3 from "@/assests/residential/estate1M.webp";
 import BrochureDownload from "../components/BrochureDownload";
 import Running from "./Running";
 
