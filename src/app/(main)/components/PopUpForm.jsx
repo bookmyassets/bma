@@ -29,7 +29,7 @@ export default function PopupForm() {
       const timer = setTimeout(() => {
         setShowFormPopup(true);
         sessionStorage.setItem('popupShownThisSession', 'true');
-      }, 5000); // 5 seconds
+      }, 8000); // 5 seconds
 
       return () => clearTimeout(timer);
     }
