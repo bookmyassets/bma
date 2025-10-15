@@ -14,7 +14,7 @@ import img2 from "@/assests/dholera-diwali-banner2.webp";
 import img3 from "@/assests/ad-page/img3.webp";
 
 //import imgM1 from "@/assests/hero_mob1.webp";
-import imgM1 from "@/assests/diwali-estate-mobile-banner.webp";
+import imgM1 from "@/assests/dholera-offer-mobile-banner.webp";
 //import imgM2 from "@/assests/hero_mob2.webp";
 import imgM2 from "@/assests/dholera-diwali-mobile-banner2.webp";
 import imgM3 from "@/assests/ad-page/mob3.webp";
@@ -402,7 +402,7 @@ export default function LandingPage({ openForm }) {
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
-                <div className="absolute bottom-0 left-0 right-0 z-20">
+                <div className="max-sm:hidden absolute bottom-0 left-0 right-0 z-20">
                   <Running />
                 </div>
               </div>
@@ -426,7 +426,7 @@ export default function LandingPage({ openForm }) {
                     src={image.src}
                     alt={image.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover pt-16"
                     priority={index === 0}
                   />
                 </div>
@@ -443,10 +443,8 @@ export default function LandingPage({ openForm }) {
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
-              <div className="absolute bottom-0 left-0 right-0">
-                <Running />
-              </div>
             </div>
+              
           </div>
 
           {/* Right Side - Lead Form Section (40%) */}
@@ -462,8 +460,13 @@ export default function LandingPage({ openForm }) {
                 <Image
                   src={logo}
                   alt="BookMyAssets Logo"
-                  className="mx-auto mb-3 "
+                  className="max-sm:hidden mx-auto mb-3 "
                 />
+                <div className="absolute bottom-0 left-0 right-0">
+                <Running />
+              </div>
+                
+
 
                 <div className="relative">
                   <style jsx>{`
