@@ -427,7 +427,7 @@ export default function LandingPage({ openForm }) {
                     src={image.src}
                     alt={image.alt}
                     fill
-                    className="object-cover pt-16"
+                    className="object-cover pt-12"
                     priority={index === 0}
                   />
                 </div>
