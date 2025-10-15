@@ -163,7 +163,7 @@ export default function BMA() {
         <p className="text-3xl text-center font-semibold"><span className="text-[#deae3c]">Dholera</span> in Motion See India's Smart City Revolution Live</p>
         <p className="text-center text-lg">Witness real-time progress in the dholera smart city project, where infrastructure like the ABCD Building Dholera and industrial zones are developing rapidly. </p>
       </div> */}
-      <LeadForm title="Own Your Investor-Friendly Plot in Dholera - Starting under ₹10 Lakhs Only" />
+      <LeadForm title="Registry-Ready Plots 0KM from Dholera SIR under ₹10 Lakhs" />
     </div>
   );
 }
