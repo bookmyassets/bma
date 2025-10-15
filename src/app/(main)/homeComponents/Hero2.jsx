@@ -462,7 +462,7 @@ export default function LandingPage({ openForm }) {
                   alt="BookMyAssets Logo"
                   className="max-sm:hidden mx-auto mb-3 "
                 />
-                <div className="absolute bottom-0 left-0 right-0">
+                <div className="md:hidden absolute bottom-0 left-0 right-0">
                 <Running />
               </div>
                 
