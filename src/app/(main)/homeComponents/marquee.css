@@ -36,6 +36,11 @@
   opacity: 0;
   animation: appear 1s ease-in-out forwards;
 }
+@media (max-width: 600px) {
+  .scrolling-text h2 {
+    font-size: 12px;
+  }
+}
 
 .scrolling-text h2:nth-child(1) {
   animation-delay: 0s; /* First box appears immediately */

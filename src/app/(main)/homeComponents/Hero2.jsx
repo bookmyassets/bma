@@ -7,7 +7,7 @@ import logo from "@/assests/festival-images/dholera-diwali2.webp"
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import
-import img1 from "@/assests/diwali-offer-banner.webp";
+import img1 from "@/assests/diwali-offer-desktop-banner.webp";
 //import img1 from "@/assests/hero1.webp";
 //import img2 from "@/assests/hero2.webp";
 import img2 from "@/assests/dholera-diwali-banner2.webp";
@@ -367,7 +367,7 @@ export default function LandingPage({ openForm }) {
       {/* Main Layout - Desktop */}
       <div className="h-screen max-sm:h-[95vh] flex flex-col">
         {/* Main Content Section - Takes most of the screen */}
-        <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+        <div className="flex-1 flex flex-col lg:flex-row ">
           {/* Left Side - Slider Section (60%) */}
           <div className="w-full lg:w-[60%] relative flex-1">
             {/* Desktop Slider */}
@@ -431,6 +431,18 @@ export default function LandingPage({ openForm }) {
                   />
                 </div>
               ))}
+              <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
               <div className="absolute bottom-0 left-0 right-0">
                 <Running />
               </div>
