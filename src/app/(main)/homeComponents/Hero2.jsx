@@ -367,278 +367,284 @@ export default function LandingPage({ openForm }) {
 
       {/* Main Layout - Desktop */}
       <div className="h-screen max-sm:h-[95vh] flex flex-col">
-        {/* Main Content Section - Takes most of the screen */}
-        <div className="flex-1 flex flex-col lg:flex-row ">
-          {/* Left Side - Slider Section (60%) */}
-          <div className="w-full lg:w-[60%] relative flex-1">
-            {/* Desktop Slider */}
-            <div className="absolute inset-0 hidden lg:block">
-              <div className="relative w-full h-full overflow-hidden">
-                {desktopImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="pt-8 "
-                      priority={index === 0}
-                    />
-                  </div>
-                ))}
-                {/* Navigation */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-                <div className="max-sm:hidden absolute bottom-0 left-0 right-0 z-20">
-                  <Running />
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Slider */}
+  {/* Main Content Section - Takes most of the screen */}
+  <div className="flex-1 flex flex-col lg:flex-row">
+    {/* Left Side - Slider Section (60%) */}
+    <div className="w-full lg:w-[60%] relative flex-1 min-h-0">
+      {/* Desktop Slider */}
+      <div className="absolute inset-0 hidden lg:block">
+        <div className="relative w-full h-full">
+          {desktopImages.map((image, index) => (
             <div
-              className="absolute inset-0 block lg:hidden overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
             >
-              {mobileImages.map((image, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover pt-12"
-                    priority={index === 0}
-                  />
-                </div>
-              ))}
-              <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-            </div>
-              
-          </div>
-
-          {/* Right Side - Lead Form Section (40%) */}
-          <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="w-full max-w-md"
-            >
-              {/* Logo */}
-              <div className="text-center mb-6">
+              <div className="relative w-full h-full pt-8">
                 <Image
-                  src={logo}
-                  alt="BookMyAssets Logo"
-                  className="max-sm:hidden mx-auto mb-3 "
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-contain"
+                  sizes="60vw"
+                  priority={index === 0}
                 />
-                
-                <div className="relative">
-                  <style jsx>{`
-                    @keyframes textGlow {
-                      0%,
-                      100% {
-                        text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
-                        color: black;
-                      }
-                      50% {
-                        text-shadow:
-                          0 0 20px rgba(255, 255, 255, 1),
-                          0 0 30px rgba(255, 255, 255, 0.8);
-                        color: black;
-                      }
-                    }
-
-                    .flashy-blink {
-                      animation: flashyBlink 3s infinite ease-in-out;
-                      padding: 4px;
-                      border-radius: 1rem;
-                      border: 3px solid #deae3c;
-                    }
-
-                    .glowing-text {
-                      animation: textGlow 1s infinite ease-in-out;
-                    }
-                  `}</style>
-
-                  <div className="flashy-blink">
-                    <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
-                      Dholera's Biggest Offer till Date
-                    </h2>
-                    <p className="text-sm lg:text-base glowing-text">
-                      Plots under ₹10 Lakhs - 0 KM from Dholera SIR Boundary
-                    </p>
-                  </div>
-
-                  {/* Golden sparkle effects */}
-                </div>
               </div>
+            </div>
+          ))}
+          {/* Navigation */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+          <div className="max-sm:hidden absolute bottom-0 left-0 right-0 z-20">
+            <Running />
+          </div>
+        </div>
+      </div>
 
-              {showPopup ? (
-                <div className="text-center py-6">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="mb-4 inline-block"
-                  >
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-10 w-10 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-black mb-2">
-                    Thank You!
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Your request has been submitted successfully. We'll contact
-                    you shortly.
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {errorMessage && (
-                    <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm">
-                      {errorMessage}
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6 }}
-                      className="relative"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
-                      <input
-                        name="fullName"
-                        placeholder="Enter Name"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        required
-                        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
-                      />
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.7 }}
-                      className="relative"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                        />
-                      </svg>
-                      <input
-                        name="phone"
-                        type="tel"
-                        placeholder="Mobile No"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        minLength={10}
-                        maxLength={15}
-                        required
-                        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
-                      />
-                    </motion.div>
-                  </div>
-
-                  {/* reCAPTCHA container */}
-                  <div className="flex justify-center">
-                    <div ref={recaptchaRef}></div>
-                  </div>
-
-                  <motion.button
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.0 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="button"
-                    onClick={handleSubmit}
-                    disabled={isLoading}
-                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? "Submitting..." : "Get A Call Back"}
-                  </motion.button>
-                </div>
-              )}
-            </motion.div>
-            <div className="md:hidden absolute bottom-0 left-0 right-0">
-                <Running />
+      {/* Mobile Slider */}
+      <div
+        className="absolute inset-0 block lg:hidden"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className="relative w-full h-full">
+          {mobileImages.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <div className="relative w-full h-full pt-12">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                  priority={index === 0}
+                />
               </div>
+            </div>
+          ))}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {/* Right Side - Lead Form Section (40%) */}
+    <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6 overflow-y-auto">
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+        className="w-full max-w-md"
+      >
+        {/* Logo */}
+        <div className="text-center mb-6">
+          <div className="max-sm:hidden mx-auto mb-3 relative h-16 w-auto">
+            <Image
+              src={logo}
+              alt="BookMyAssets Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
+          
+          <div className="relative">
+            <style jsx>{`
+              @keyframes textGlow {
+                0%,
+                100% {
+                  text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
+                  color: black;
+                }
+                50% {
+                  text-shadow:
+                    0 0 20px rgba(255, 255, 255, 1),
+                    0 0 30px rgba(255, 255, 255, 0.8);
+                  color: black;
+                }
+              }
+
+              .flashy-blink {
+                animation: flashyBlink 3s infinite ease-in-out;
+                padding: 4px;
+                border-radius: 1rem;
+                border: 3px solid #deae3c;
+              }
+
+              .glowing-text {
+                animation: textGlow 1s infinite ease-in-out;
+              }
+            `}</style>
+
+            <div className="flashy-blink">
+              <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
+                Dholera's Biggest Offer till Date
+              </h2>
+              <p className="text-sm lg:text-base glowing-text">
+                Plots under ₹10 Lakhs - 0 KM from Dholera SIR Boundary
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Stats Section - Compact */}
+        {showPopup ? (
+          <div className="text-center py-6">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="mb-4 inline-block"
+            >
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-10 w-10 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+            </motion.div>
+            <h3 className="text-xl font-bold text-black mb-2">
+              Thank You!
+            </h3>
+            <p className="text-gray-600 text-sm">
+              Your request has been submitted successfully. We'll contact
+              you shortly.
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {errorMessage && (
+              <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm">
+                {errorMessage}
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 gap-2">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="relative"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                <input
+                  name="fullName"
+                  placeholder="Enter Name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="relative"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                <input
+                  name="phone"
+                  type="tel"
+                  placeholder="Mobile No"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  minLength={10}
+                  maxLength={15}
+                  required
+                  className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                />
+              </motion.div>
+            </div>
+
+            {/* reCAPTCHA container */}
+            <div className="flex justify-center">
+              <div ref={recaptchaRef}></div>
+            </div>
+
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="button"
+              onClick={handleSubmit}
+              disabled={isLoading}
+              className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {isLoading ? "Submitting..." : "Get A Call Back"}
+            </motion.button>
+          </div>
+        )}
+      </motion.div>
+      <div className="md:hidden absolute bottom-0 left-0 right-0">
+        <Running />
       </div>
+    </div>
+  </div>
+</div>
       <AnimatePresence>
         {isDownload && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
