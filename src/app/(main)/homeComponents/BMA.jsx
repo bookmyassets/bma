@@ -98,7 +98,7 @@ export default function BMA() {
               over 6 successful project units delivered. At BookMyAssets, our
               focus is on building trust driven investments and establishing
               ourselves as the most reliable brand in real estate through our
-              strong ecosystem — Truliyo Digital, BMA Developers, BMA Allied
+              strong ecosystem: Truliyo Digital, BMA Developers, BMA Allied
               Services, and our extensive BMA Channel Partners network.
             </p>
           </div>

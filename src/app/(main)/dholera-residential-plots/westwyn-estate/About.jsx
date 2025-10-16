@@ -23,7 +23,7 @@ const WestWynAboutSection = () => {
   useEffect(() => {
     const animateCounters = () => {
       const targets = { plotSize: 151, price: 10, amenities: 5 };
-      const duration = 2000;
+      const duration =100;
       const steps = 60;
       const stepTime = duration / steps;
 

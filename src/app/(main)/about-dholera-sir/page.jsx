@@ -197,7 +197,7 @@ export default async function page() {
                       <div className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
                         <p className="text-gray-700">
-                          Six-lane <strong>Ahmedabad–Dholera Expressway</strong>
+                          Four-lane <strong>Ahmedabad–Dholera Expressway</strong>
                         </p>
                       </div>
                       <div className="flex items-start space-x-3">
@@ -247,7 +247,7 @@ export default async function page() {
                     <div className="bg-gradient-to-r from-[#138808]/10 to-[#000080]/10 p-6 rounded-xl">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="text-xl font-semibold text-gray-800">
-                          ReNew Power & Global Players
+                          ReNew Power
                         </h3>
                         <span className="bg-[#deae3c] text-white px-3 py-1 rounded-full text-sm font-semibold">
                           ₹1,200 CR
