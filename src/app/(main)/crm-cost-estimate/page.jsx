@@ -2,19 +2,18 @@
 import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
-
 import icon from "@/assests/pdfIcon.webp";
 
 // Local projects array
 const PROJECTS = [
-  { id: 1, title: "WestWyn Estate" },
-  { id: 2, title: "WestWyn County" },
-  { id: 3, title: "Paradise" },
-  { id: 4, title: "Paradise 2" },
-  { id: 5, title: "Orchid" },
-  { id: 6, title: "Marina Bay" },
-  { id: 7, title: "Maple Township" },
-  { id: 8, title: "Pride" },
+  { id: 1, title: "WestWyn Estate", ctype:"D" },
+  { id: 2, title: "WestWyn County", ctype:"M" },
+  { id: 3, title: "Paradise", ctype:"M" },
+  { id: 4, title: "Paradise 2", ctype:"M" },
+  { id: 5, title: "Orchid", ctype:"M" },
+  { id: 6, title: "Marina Bay", ctype:"M" },
+  { id: 7, title: "Maple Township", ctype:"M" },
+  { id: 8, title: "Pride", ctype:"M" },
 ];
 
 function formatIndianNumber(value) {
@@ -78,10 +77,14 @@ export default function CostSheet() {
       plotTotalPayment,
     } = formData;
 
+    // Find the selected project to get its ctype
+    const selectedProject = PROJECTS.find(p => p.title === projectName);
+    const chargeType = selectedProject?.ctype === "D" ? "Development charges" : "Maintenance charges";
+
     let startY = 40;
 
     const img = new Image();
-    img.src = icon.src;
+    img.src = icon.src; // Replace with your actual icon path
     img.crossOrigin = "anonymous";
 
     img.onload = () => {
@@ -180,20 +183,19 @@ export default function CostSheet() {
         "1. The booking amount is Rs. 50,000.",
         "2. You can request a refund within 30 days, and the payment will be returned to you within 7 days.",
         "3. The plot price and charges are subject to change without prior notice.",
-        "4. Maintenance charges, as decided, will be collected separately.",
+        `4. ${chargeType}, as decided, will be collected separately.`,
         "5. Legal fees cover documentation required for registration purposes.",
         "6. The full payment must be completed within the stipulated period, i.e., within 30 days.",
-        "7. For registry, stamp duty is 4.9% for females and 5.9% for males.	",
-        "8. This is a system-generated document and does not require a signature.",
+        "7. For registry, stamp duty is 4.9% for females and 5.9% for males.",
+        "8. This is a system-generated document and does not require a signature.",
         "9. Late Payment Charges :",
         "a.  Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
         "b.  Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
       ];
 
       terms.forEach((term, index) => {
-        // Indent sub-points a/b a bit more
         const isSubPoint = term.startsWith("a.") || term.startsWith("b.");
-        const xPos = isSubPoint ? 25 : 15; // add indentation for sub-points
+        const xPos = isSubPoint ? 25 : 15;
         doc.text(term, xPos, finalY + 18 + index * 5);
       });
 
