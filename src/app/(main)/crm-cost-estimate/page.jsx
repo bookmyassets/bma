@@ -183,7 +183,8 @@ export default function CostSheet() {
         "1. The booking amount is Rs. 50,000.",
         "2. You can request a refund within 30 days, and the payment will be returned to you within 7 days.",
         "3. The plot price and charges are subject to change without prior notice.",
-        `4. ${chargeType}, as decided, will be collected separately.`,
+        "4.  Maintenance Charges, as decided, will be collected separately.",
+        /* `4. ${chargeType}, as decided, will be collected separately.`, */
         "5. Legal fees cover documentation required for registration purposes.",
         "6. The full payment must be completed within the stipulated period, i.e., within 30 days.",
         "7. For registry, stamp duty is 4.9% for females and 5.9% for males.",
