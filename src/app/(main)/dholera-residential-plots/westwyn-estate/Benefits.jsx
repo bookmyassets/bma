@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import img from "@/assests/strategic-location-dholera.webp"
+import Image from "next/image";
 
 export default function InvestmentBenefits() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -87,7 +89,7 @@ export default function InvestmentBenefits() {
         "Situated 0 km from Dholera SIR on the state highway, right at the city’s growth center.",
       body: "Strategically positioned on Navda Highway, 0 km from Dholera SIR and close to TP 5, ensuring you are at the heart of the region's fastest development zone. Just 25 minutes away from the activation area.",
       image:
-        "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=600&fit=crop&crop=center",
+        img,
     },
     {
       title: "Connectivity to Mega Infrastructure",
@@ -95,7 +97,7 @@ export default function InvestmentBenefits() {
       description: "Close to Hebatpur Industrial Zone, Expressway and Proposed Monorail.",
       body: "Minutes from the upcoming Dholera International Airport, Ahmedabad–Dholera Expressway, and proposed monorail, making it a future hub of connectivity in Dholera.",
       image:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop&crop=center",
+        img,
     },
     {
       title: "Government-Backed Smart City Growth",
@@ -103,7 +105,7 @@ export default function InvestmentBenefits() {
       description: "Part of the DMIC project, supported by the Central and State Governments.",
       body: "Part of Dholera Smart City under the Delhi–Mumbai Industrial Corridor (DMIC), a project supported by both Central and State Governments.",
       image:
-        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop&crop=center",
+        img,
     },
     {
       title: "Secure & Approved Investment",
@@ -111,7 +113,7 @@ export default function InvestmentBenefits() {
       description: "NA/NOC cleared, AUDA-registered, and title-clear plots for safe ownership.",
       body: "NA/NOC cleared, AUDA-registered, and title-clear plots in Dholera, ensuring complete legal transparency and a safe investment.",
       image:
-        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop&crop=center",
+        img,
     },
     {
       title: "High Appreciation Potential",
@@ -120,7 +122,7 @@ export default function InvestmentBenefits() {
         "Early buyers benefit from rising demand in India’s upcoming semiconductor hub.",
       body: "Early investors benefit from rapid value growth as residential, industrial, and commercial projects shape the region. This makes it a smart Dholera SIR investment opportunity.",
       image:
-        "https://images.unsplash.com/photo-1590479773265-7464e5d48118?w=800&h=600&fit=crop&crop=center",
+        img,
     },
   ];
 
@@ -235,7 +237,7 @@ export default function InvestmentBenefits() {
             initial="hidden"
             animate="visible"
           >
-            <img
+            <Image
               src={benefits[hoveredBenefit].image}
               alt={benefits[hoveredBenefit].title}
               className="w-full h-full object-cover "
@@ -243,12 +245,10 @@ export default function InvestmentBenefits() {
             {/* Image overlay with benefit title */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent">
               <div className="absolute bottom-4 left-4 text-white">
-                <p className="text-lg md:text-xl font-semibold">
+                <p className="text-lg md:text-xl text-center font-semibold">
                   {benefits[hoveredBenefit].title}
                 </p>
-                <p className="text-sm md:text-base opacity-90">
-                  {benefits[hoveredBenefit].description}
-                </p>
+                
               </div>
             </div>
           </motion.div>
@@ -273,7 +273,7 @@ export default function InvestmentBenefits() {
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <img
+                  <Image
                     src={benefits[hoveredBenefit].image}
                     alt={benefits[hoveredBenefit].title}
                     className="w-full h-full object-cover"
@@ -308,14 +308,6 @@ export default function InvestmentBenefits() {
                           {benefits[hoveredBenefit].title}
                         </h3>
                       </motion.div>
-                      <motion.p
-                        className="text-sm opacity-90 leading-relaxed"
-                        initial={{ y: 10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.3 }}
-                      >
-                        {benefits[hoveredBenefit].description}
-                      </motion.p>
                     </motion.div>
                   </motion.div>
                 </motion.div>
@@ -477,7 +469,7 @@ export default function InvestmentBenefits() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 }}
                   >
-                    <img
+                    <Image
                       src={selectedBenefit.image}
                       alt={selectedBenefit.title}
                       className="w-full h-full object-cover"

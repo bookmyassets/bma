@@ -2,23 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import logo from "@/assests/festival-images/dholera-diwali2.webp";
-//import logo from "@/assests/ad-page/dholera-govt-logo.webp";
+import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import { ChevronRight, ChevronLeft } from "lucide-react";
-
-//images import
-/* import img1 from "@/assests/hero1.webp";
-import img2 from "@/assests/hero2.webp";
-//import img1 from "@/assests/diwali-offer-desktop-banner.webp";
-//import img2 from "@/assests/dholera-offer-desktop-banner-2.webp";
-import img3 from "@/assests/ad-page/img3.webp";
-//import img3 from "@/assests/residential/estate1.webp";
-
-import imgM1 from "@/assests/ad-page/mob1.webp";
-import imgM2 from "@/assests/ad-page/mob2.webp";
-//import imgM1 from "@/assests/dholera-offer-mobile-banner.webp";
-//import imgM3 from "@/assests/residential/estate1M.webp";
-//import imgM2 from "@/assests/diwali-offer-mobile-banner-2.webp"; */
 
 //images import
 import img1 from "@/assests/hero1.webp";
@@ -58,8 +43,8 @@ export default function LandingPage({ openForm }) {
   ];
 
   const mobileImages = [
-    { src: imgM2, alt: "Dholera Mobile 2" },
     { src: imgM1, alt: "Dholera Mobile 1" },
+    { src: imgM2, alt: "Dholera Mobile 2" },
     { src: imgM3, alt: "Dholera Mobile 3" },
   ];
 
@@ -377,12 +362,12 @@ export default function LandingPage({ openForm }) {
       {/* Main Layout - Desktop */}
       <div className="h-screen max-sm:h-[95vh] flex flex-col">
         {/* Main Content Section - Takes most of the screen */}
-        <div className="flex-1 flex flex-col lg:flex-row">
+        <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Left Side - Slider Section (60%) */}
-          <div className="w-full lg:w-[60%] relative flex-1 min-h-0">
+          <div className="w-full lg:w-[60%] relative flex-1">
             {/* Desktop Slider */}
             <div className="absolute inset-0 hidden lg:block">
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full overflow-hidden">
                 {desktopImages.map((image, index) => (
                   <div
                     key={index}
@@ -390,16 +375,13 @@ export default function LandingPage({ openForm }) {
                       index === currentSlide ? "opacity-100" : "opacity-0"
                     }`}
                   >
-                    <div className="relative w-full h-full ">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        className="object-contain"
-                        sizes="60vw"
-                        priority={index === 0}
-                      />
-                    </div>
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-contain pt-16"
+                      priority={index === 0}
+                    />
                   </div>
                 ))}
                 {/* Navigation */}
@@ -415,7 +397,7 @@ export default function LandingPage({ openForm }) {
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
-                <div className="max-sm:hidden absolute bottom-0 left-0 right-0 z-20">
+                <div className="absolute bottom-0 left-0 right-0 z-20">
                   <Running />
                 </div>
               </div>
@@ -423,33 +405,26 @@ export default function LandingPage({ openForm }) {
 
             {/* Mobile Slider */}
             <div
-              className="absolute inset-0 block lg:hidden"
+              className="absolute inset-0 block lg:hidden overflow-hidden"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              <div className="relative w-full h-full">
-                {mobileImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
-                  > 
-                    <div className="relative w-full h-fu">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        className="object-contain"
-                        sizes="100vw"
-                        priority={index === 0}
-                      />
-                    </div>
-                  </div>
-                ))}
-
-                <button
+              {mobileImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-contain pt-16"
+                    priority={index === 0}
+                  />
+                  <button
                   onClick={prevSlide}
                   className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
                 >
@@ -461,15 +436,17 @@ export default function LandingPage({ openForm }) {
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
-                <div className="md:hidden absolute bottom-0 left-0 right-0">
-              <Running />
-            </div>
+                </div>
+                
+              ))}
+              <div className="absolute bottom-0 left-0 right-0 z-50">
+                <Running />
               </div>
             </div>
           </div>
 
           {/* Right Side - Lead Form Section (40%) */}
-          <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6 overflow-y-auto">
+          <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -478,13 +455,11 @@ export default function LandingPage({ openForm }) {
             >
               {/* Logo */}
               <div className="text-center mb-6">
-                <div className="text-center mb-6">
                 <Image
                   src={logo}
                   alt="BookMyAssets Logo"
-                  className="max-sm:hidden mx-auto mb-3 "
+                  className="mx-auto mb-3 "
                 />
-                </div>
 
                 <div className="relative">
                   <style jsx>{`
@@ -522,6 +497,8 @@ export default function LandingPage({ openForm }) {
                       Plots under ₹10 Lakhs - 0 KM from Dholera SIR Boundary
                     </p>
                   </div>
+
+                  {/* Golden sparkle effects */}
                 </div>
               </div>
 
@@ -651,9 +628,10 @@ export default function LandingPage({ openForm }) {
                 </div>
               )}
             </motion.div>
-            
           </div>
         </div>
+
+        {/* Bottom Stats Section - Compact */}
       </div>
       <AnimatePresence>
         {isDownload && (

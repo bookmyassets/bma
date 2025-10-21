@@ -7,7 +7,7 @@ import ShortsSection from './homeComponents/YouTube'
 import FAQSection from './homeComponents/FAQs'
 import WestWyn from './homeComponents/WestWyn'
 import PopupForm from './components/PopUpForm'
-import LandingPage from './homeComponents/Hero2'
+import LandingPage from './homeComponents/Hero3'
 
 export default function page() {
 
