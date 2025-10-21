@@ -439,7 +439,7 @@ export default function LandingPage({ openForm }) {
                 </div>
                 
               ))}
-              <div className="absolute bottom-0 left-0 right-0 z-50">
+              <div className="absolute bottom-0 left-0 right-0 z-20">
                 <Running />
               </div>
             </div>
