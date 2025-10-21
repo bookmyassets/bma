@@ -252,12 +252,19 @@ export default function PopupForm() {
             </button>
 
             {/* Section 1: Heading */}
-            <div className="text-center mb-6">
               {/* Section 2: Sub-heading CTA */}
+            {/* <div className="text-center mb-6">
               <p className="text-2xl text-gray-700 font-semibold">Special Diwali Offer</p>
               <p className="text-lg text-gray-700 font-semibold">
                 Free 5gm Gold Coin on Dholera Plots
              </p>
+            </div> */}
+
+            <div className="text-center mb-6">
+              {/* Section 2: Sub-heading CTA */}
+              <p className="text-lg text-gray-700 font-semibold">
+                Registry Ready Plots in Dholera under ₹10 Lakhs
+              </p>
             </div>
 
             {/* Section 3: Form Fields */}
