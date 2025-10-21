@@ -379,7 +379,7 @@ export default function LandingPage({ openForm }) {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-contain pt-16"
+                      className="object-contain pt-8"
                       priority={index === 0}
                     />
                   </div>
@@ -458,7 +458,7 @@ export default function LandingPage({ openForm }) {
                 <Image
                   src={logo}
                   alt="BookMyAssets Logo"
-                  className="mx-auto mb-3 "
+                  className="mx-auto mb-3 max-sm:hidden"
                 />
 
                 <div className="relative">
