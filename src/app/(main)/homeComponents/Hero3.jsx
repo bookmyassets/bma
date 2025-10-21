@@ -12,7 +12,7 @@ import img3 from "@/assests/ad-page/img3.webp";
 
 import imgM1 from "@/assests/hero_mob1.webp";
 import imgM2 from "@/assests/hero_mob2.webp";
-import imgM3 from "@/assests/ad-page/mob3.webp";
+import imgM3 from "@/assests/ad-page/mob1.webp";
 import BrochureDownload from "../components/BrochureDownload";
 import Running from "./Running";
 
