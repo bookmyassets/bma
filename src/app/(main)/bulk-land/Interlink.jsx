@@ -2,7 +2,7 @@ import React from 'react'
 import Image from "next/image";
 import residential from "@/assests/bulkLand/residential-hero-mob.-webp.webp"
 import industial from "@/assests/bulkLand/industrial-hero-mob-webp.webp"
-import cityCenter from "@/assests/bulkLand/city-centre-cover.webp"
+import cityCenter from "@/assests/bulkLand/citycentre-hero-mob.webp"
 import knowledgeIT from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp"
 import HAC from "@/assests/bulkLand/high-access-hero-mob-webp.webp"
 import sport from "@/assests/bulkLand/sport-hero-mob-webp.webp"
