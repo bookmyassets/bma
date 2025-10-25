@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import img from "@/assests/strategic-location-dholera.webp"
+import infra from "@/assests/residential/dholera-strong-connectivity.webp"
+import govtSupport from "@/assests/residential/government-support-dholera.webp"
+import safe from "@/assests/residential/safe-investment.webp"
+import growth from "@/assests/residential/exceptional-growth.webp"
 import Image from "next/image";
 
 export default function InvestmentBenefits() {
@@ -97,7 +101,7 @@ export default function InvestmentBenefits() {
       description: "Close to Hebatpur Industrial Zone, Expressway and Proposed Monorail.",
       body: "Minutes from the upcoming Dholera International Airport, Ahmedabad–Dholera Expressway, and proposed monorail, making it a future hub of connectivity in Dholera.",
       image:
-        img,
+        infra,
     },
     {
       title: "Government-Backed Smart City Growth",
@@ -105,7 +109,7 @@ export default function InvestmentBenefits() {
       description: "Part of the DMIC project, supported by the Central and State Governments.",
       body: "Part of Dholera Smart City under the Delhi–Mumbai Industrial Corridor (DMIC), a project supported by both Central and State Governments.",
       image:
-        img,
+        govtSupport,
     },
     {
       title: "Secure & Approved Investment",
@@ -113,7 +117,7 @@ export default function InvestmentBenefits() {
       description: "NA/NOC cleared, AUDA-registered, and title-clear plots for safe ownership.",
       body: "NA/NOC cleared, AUDA-registered, and title-clear plots in Dholera, ensuring complete legal transparency and a safe investment.",
       image:
-        img,
+        safe,
     },
     {
       title: "High Appreciation Potential",
@@ -122,7 +126,7 @@ export default function InvestmentBenefits() {
         "Early buyers benefit from rising demand in India’s upcoming semiconductor hub.",
       body: "Early investors benefit from rapid value growth as residential, industrial, and commercial projects shape the region. This makes it a smart Dholera SIR investment opportunity.",
       image:
-        img,
+        growth,
     },
   ];
 

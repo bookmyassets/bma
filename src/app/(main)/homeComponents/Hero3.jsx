@@ -367,7 +367,7 @@ export default function LandingPage({ openForm }) {
           <div className="w-full lg:w-[60%] relative flex-1">
             {/* Desktop Slider */}
             <div className="absolute inset-0 hidden lg:block">
-              <div className="relative w-full h-full overflow-hidden">
+              <div className="relative w-full h-[100vh] overflow-hidden">
                 {desktopImages.map((image, index) => (
                   <div
                     key={index}
@@ -379,7 +379,7 @@ export default function LandingPage({ openForm }) {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-contain pt-8"
+                      className="object-cover pt-8"
                       priority={index === 0}
                     />
                   </div>
@@ -405,7 +405,7 @@ export default function LandingPage({ openForm }) {
 
             {/* Mobile Slider */}
             <div
-              className="absolute inset-0 block lg:hidden overflow-hidden"
+              className="absolute inset-0 w-[100vw] block lg:hidden overflow-hidden"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
@@ -421,7 +421,7 @@ export default function LandingPage({ openForm }) {
                     src={image.src}
                     alt={image.alt}
                     fill
-                    className="object-contain pt-16"
+                    className="object-cover pt-16 w-[100vw]"
                     priority={index === 0}
                   />
                   <button
