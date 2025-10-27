@@ -340,16 +340,15 @@ export default function CostSheet({
         "1. The booking amount is Rs. 50,000.",
         "2. You can request a refund within 30 days, and the payment will be returned to you within 7 days.",
         "3. The plot price and charges are subject to change without prior notice.",
-        /* `4. ${chargeName} are one-time and non-refundable.`, */
-        "4. Maintenance Charges are one-time and non-refundable.",
-        "5. Legal fees cover documentation and registration expenses.",
-        "6. The full & final payment must be completed within the stipulated period, i.e., within 30 days.",
+        "4.  Maintenance Charges, as decided, will be collected separately.",
+        /* `4. ${chargeType}, as decided, will be collected separately.`, */
+        "5. Legal fees cover documentation required for registration purposes.",
+        "6. The full payment must be completed within the stipulated period, i.e., within 30 days.",
         "7. For registry, stamp duty is 4.9% for females and 5.9% for males.",
-        "8. Preferred Location Charge (PLC) will be added where necessary.",
+        "8. This is a system-generated document and does not require a signature.",
         "9. Late Payment Charges :",
-        "a. Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
-        "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
-        "10. This is a system-generated document and does not require a signature.",
+        "a.  Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
+        "b.  Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
       ];
 
       terms.forEach((term, index) => {

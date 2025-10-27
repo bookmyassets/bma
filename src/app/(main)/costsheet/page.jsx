@@ -80,7 +80,9 @@ export default function CostSheet() {
       const totalPayment = formData.plotAreaYards * plotPrice;
       const maintenance = formData.plotAreaYards * formData.maintenanceRate;
       const totalCharges =
-        maintenance + parseFloat(formData.legalFee) + parseFloat(formData.oneTimeMaintenance);
+        maintenance +
+        parseFloat(formData.legalFee) +
+        parseFloat(formData.oneTimeMaintenance);
       const plotTotalPayment = totalPayment + totalCharges;
       const plotAreaFeet = formData.plotAreaYards * 9;
 
@@ -239,16 +241,17 @@ export default function CostSheet() {
       const terms = [
         "1. The booking amount is Rs. 50,000.",
         "2. You can request a refund within 30 days, and the payment will be returned to you within 7 days.",
-        "3. This is a system-generated document and does not require a signature.",
-        "4. The plot price and charges are subject to change without prior notice.",
-        "5. Maintenance charges are one-time and non-refundable.",
-        "6. Legal fees cover documentation and registration expenses.",
-        "7. The final payment must be completed within the stipulated period.",
-        "8. Full payment is to be completed within 30 days.",
-        "9. For registry, stamp duty is 4.9% for females and 5.9% for males.",
-        "10. Preferred Location Charge (PLC) will be added where necessary.",
+        "3. The plot price and charges are subject to change without prior notice.",
+        "4.  Maintenance Charges, as decided, will be collected separately.",
+        /* `4. ${chargeType}, as decided, will be collected separately.`, */
+        "5. Legal fees cover documentation required for registration purposes.",
+        "6. The full payment must be completed within the stipulated period, i.e., within 30 days.",
+        "7. For registry, stamp duty is 4.9% for females and 5.9% for males.",
+        "8. This is a system-generated document and does not require a signature.",
+        "9. Late Payment Charges :",
+        "a.  Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
+        "b.  Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
       ];
-
       terms.forEach((term, index) => {
         doc.text(term, 15, finalY + 18 + index * 5);
       });
@@ -535,7 +538,7 @@ export default function CostSheet() {
         >
           Generate PDF
         </button>
-        </form>
+      </form>
     </div>
   );
 }
