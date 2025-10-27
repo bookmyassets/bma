@@ -10,6 +10,8 @@ import Link from "next/link";
 import Image from "next/image";
 import BlogSchemaMarkup from "../BlogSchemaMarkup";
 import SlugPageForm from "../../components/SlugPageForm";
+import InfoPopup from "../../components/SidePop";
+
 
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
@@ -72,6 +74,8 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           </button>
           </a>
         </div>
+        
+        <InfoPopup/>
 
         {/* Newsletter Signup */}
         {/* <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
@@ -416,7 +420,7 @@ export default async function Post({ params }) {
           )}
               </div>
       <div className="bg-white min-h-screen">
-        <div className="bg-white shadow-sm sticky top-0 z-30" />
+        <div className="bg-white shadow-sm sticky top-0 z-20" />
 
         <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
           <div className="flex flex-col lg:flex-row gap-10">
