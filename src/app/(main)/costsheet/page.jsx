@@ -236,7 +236,7 @@ export default function CostSheet() {
       finalY = doc.lastAutoTable.finalY;
 
       doc.setFontSize(10);
-      doc.text("Terms & Conditions:", 15, finalY + 8);
+      doc.text("Terms & Conditions:", 15, finalY + 5);
       doc.setFontSize(9);
       const terms = [
         "1. The booking amount is Rs. 50,000.",
@@ -252,8 +252,11 @@ export default function CostSheet() {
         "a.  Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
         "b.  Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
       ];
-      terms.forEach((term, index) => {
-        doc.text(term, 15, finalY + 18 + index * 5);
+    terms.forEach((term, index) => {
+        // Indent sub-points (a., b., c., etc.)
+        const isSubPoint = /^[a-z]\./.test(term.trim());
+        const xPos = isSubPoint ? 25 : 15; // add indentation for sub-points
+        doc.text(term.trim(), xPos, finalY + 12 + index * 5);
       });
 
       let date = new Date().toLocaleDateString();
