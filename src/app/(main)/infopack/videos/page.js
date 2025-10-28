@@ -3,7 +3,7 @@ import Link from "next/link";
 import bg from "@/assests/bg-image.webp"
 
 export default async function VideosPage() {
- 
+
 const videos = [
   {
     id: "sYONhrTYBTg",
