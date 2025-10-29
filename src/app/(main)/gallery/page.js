@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import hero from "@/assests/news.webp";
+import hero from "@/assests/gallery/bg-gallery-pc.png";
 import sample1 from "@/assests/gallery/sir/abcd-gallery.webp";
-import sample2 from "@/assests/gallery/sir/activation-gallery.webp";
-import sample3 from "@/assests/gallery/sir/activation-gallery-2.webp";
+import sample2 from "@/assests/gallery/sir/dholera-sir.webp";
+import sample3 from "@/assests/gallery/sir/sppr2.webp";
 import sample4 from "@/assests/gallery/sir/activation-road-2-gallery.webp";
 import sample5 from "@/assests/gallery/sir/activation-road-gallery.webp";
 import sample6 from "@/assests/gallery/sir/airport-gallery.webp";
@@ -30,8 +30,8 @@ import sample24 from "@/assests/gallery/sir/wtp-gallery-2.webp";
 export default function DholeraProgressPage() {
   const galleryImages = [
   { id: 1, src: sample1, alt: "Aerial view of ABCD Building in Dholera SIR", caption: "Aerial view of ABCD Building in Dholera SIR" },
-  { id: 2, src: sample2, alt: "Artificial river development in Dholera Smart City", caption: "Artificial river development in Dholera Smart City" },
-  { id: 3, src: sample3, alt: "Aerial view of Activation area in Dholera Smart City", caption: "Aerial view of Activation area in Dholera Smart City" },
+  { id: 2, src: sample2, alt: "Artificial river development in Dholera Smart City", caption: "Man-Made Riverfront in Dholera SIR" },
+  { id: 3, src: sample3, alt: "Aerial view of Activation area in Dholera Smart City", caption: "Bhavnagar Ring-Road" },
   { id: 4, src: sample4, alt: "Man-made riverfront in Dholera Smart City", caption: "Man-made riverfront in Dholera Smart City" },
   { id: 5, src: sample5, alt: "Aerial view of Dholera Smart City roads with canal side walkway", caption: "Aerial view of Dholera Smart City roads with canal side walkway" },
   { id: 6, src: sample6, alt: "Runway terminal of Dholera International Airport", caption: "Runway terminal of Dholera International Airport" },
@@ -72,12 +72,12 @@ export default function DholeraProgressPage() {
       <meta name="robots" content="index, dofollow"/>
 
       {/* Hero Section with Enhanced Overlay */}
-      <div className="relative h-[50vh] overflow-hidden">
+      <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
         <Image
           src={hero}
           alt="Dholera SIR Progress"
           fill
-          className="object-cover"
+          className="object-cover max-sm:pt-20"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 flex items-center justify-center">
