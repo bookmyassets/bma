@@ -347,7 +347,7 @@ const Interlink = ({ properties, title = "Related Properties" }) => {
         <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4">
           {title}
         </h2>
-        <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 max-w-2xl mx-auto">
           Explore other investment opportunities in Dholera SIR
         </p>
       </div>
