@@ -439,7 +439,33 @@ export default function InvestmentBenefits() {
                       >
                         {benefit.description}
                       </motion.div>
+
+                      {/* Click to expand indicator */}
+                      <motion.div
+                        className="flex items-center justify-center gap-2 text-xs text-[#deae3c] font-medium mt-4 pt-3 border-t border-gray-200"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                      >
+                        <span>Click to learn more</span>
+                        <motion.svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ repeat: Infinity, duration: 1.5 }}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </motion.svg>
+                      </motion.div>
                     </motion.div>
+                    
                   );
                 })}
             </AnimatePresence>
