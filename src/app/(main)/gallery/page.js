@@ -81,7 +81,7 @@ export default function DholeraProgressPage() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 flex items-center justify-center">
-          <div className="text-center px-6 py-10 max-w-4xl">
+          <div className="text-center px-6 py-10 max-w-5xl">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
               Dholera SIR Progress in Every Frame
             </h1>

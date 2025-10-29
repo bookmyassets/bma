@@ -1059,9 +1059,6 @@ useEffect(() => {
                             <div className="text-black font-medium text-sm">
                               {project.projectName}
                             </div>
-                            <div className="text-xs text-gray-500 mt-1">
-                              {project.location}
-                            </div>
                           </div>
                         </Link>
                       ))}
