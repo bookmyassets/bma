@@ -31,7 +31,7 @@ export default function DholeraProgressPage() {
   const galleryImages = [
   { id: 1, src: sample1, alt: "Aerial view of ABCD Building in Dholera SIR", caption: "Aerial view of ABCD Building in Dholera SIR" },
   { id: 2, src: sample2, alt: "Artificial river development in Dholera Smart City", caption: "Man-Made Riverfront in Dholera SIR" },
-  { id: 3, src: sample3, alt: "Aerial view of Activation area in Dholera Smart City", caption: "Bhavnagar Ring-Road" },
+  { id: 3, src: sample3, alt: "Aerial view of Activation area in Dholera Smart City", caption: "Adhelai circle- (last point of dholera)" },
   { id: 4, src: sample4, alt: "Man-made riverfront in Dholera Smart City", caption: "Man-made riverfront in Dholera Smart City" },
   { id: 5, src: sample5, alt: "Aerial view of Dholera Smart City roads with canal side walkway", caption: "Aerial view of Dholera Smart City roads with canal side walkway" },
   { id: 6, src: sample6, alt: "Runway terminal of Dholera International Airport", caption: "Runway terminal of Dholera International Airport" },
