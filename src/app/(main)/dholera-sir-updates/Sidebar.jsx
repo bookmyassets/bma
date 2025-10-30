@@ -137,71 +137,74 @@ export default function SidebarWithForm({ popularArticles }) {
     }
     return true;
   };
-
-  const onRecaptchaSuccess = async (token) => {
-    try {
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+const onRecaptchaSuccess = async (token) => {
+  try {
+    const response = await fetch(
+       "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+        },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            source: "BookMyAssets",
           },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: "BookMyAssets",
-            },
-            source: "BookMyAssets Website",
-            tags: ["Dholera Investment", "Website Lead"],
-          }),
-        }
-      );
-
-      const responseText = await response.text();
-
-      if (response.ok) {
-        // Success handling
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          if (typeof window !== "undefined") {
-            localStorage.setItem("formSubmissionCount", newCount.toString());
-            localStorage.setItem("lastSubmissionTime", Date.now().toString());
-          }
-          return newCount;
-        });
-      } else {
-        // Parse response as JSON if possible, otherwise use text
-        let errorData;
-        try {
-          errorData = JSON.parse(responseText);
-        } catch {
-          errorData = { message: responseText };
-        }
-        throw new Error(errorData.message || "Error submitting form");
+          source: "BookMyAssets Website",
+          tags: ["Dholera Investment", "Website Lead"],
+        }),
       }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setErrorMessage(
-        error.message || "Error submitting form. Please try again."
-      );
-    } finally {
-      setIsLoading(false);
+    );
 
-      // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
-        try {
-          window.grecaptcha.reset(recaptchaWidgetId.current);
-        } catch (err) {
-          console.error("Error resetting reCAPTCHA:", err);
+    const responseText = await response.text();
+
+    if (response.ok) {
+      // Success handling
+      setFormData({ fullName: "", phone: "" });
+      setShowPopup(true);
+      setSubmissionCount((prev) => {
+        const newCount = prev + 1;
+        if (typeof window !== "undefined") {
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", Date.now().toString());
         }
+        return newCount;
+      });
+      
+      // Call handleAfterSubmit after successful submission
+      handleAfterSubmit();
+      
+    } else {
+      // Parse response as JSON if possible, otherwise use text
+      let errorData;
+      try {
+        errorData = JSON.parse(responseText);
+      } catch {
+        errorData = { message: responseText };
+      }
+      throw new Error(errorData.message || "Error submitting form");
+    }
+  } catch (error) {
+    console.error("Form submission error:", error);
+    setErrorMessage(
+      error.message || "Error submitting form. Please try again."
+    );
+  } finally {
+    setIsLoading(false);
+
+    // Reset reCAPTCHA
+    if (window.grecaptcha && recaptchaWidgetId.current !== null) {
+      try {
+        window.grecaptcha.reset(recaptchaWidgetId.current);
+      } catch (err) {
+        console.error("Error resetting reCAPTCHA:", err);
       }
     }
-  };
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -304,7 +307,6 @@ export default function SidebarWithForm({ popularArticles }) {
           <button
             type="submit"
             disabled={isLoading}
-            onAfterSubmit={handleAfterSubmit}
             className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? "Processing..." : "Get Free Guide"}
