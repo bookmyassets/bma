@@ -242,6 +242,31 @@ export default function SidebarWithForm({ popularArticles }) {
     }
   };
 
+  const handleAfterSubmit = () => {
+    console.log("Form submitted successfully, type:", formType);
+
+    if (formType === "brochure") {
+      try {
+        console.log("Initiating brochure download");
+
+        // Using setTimeout to ensure the popup closes before download starts
+        setTimeout(() => {
+          const link = document.createElement("a");
+          link.href = "https://shorturl.at/Dv00M";
+          link.target = "_blank";
+          link.download = "brochure.pdf"; // Add download attribute
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          console.log("Download link clicked");
+        }, 300);
+      } catch (error) {
+        console.error("Error downloading brochure:", error);
+        window.open("https://shorturl.at/Dv00M", "_blank");
+      }
+    }
+  };
+
   return (
     <aside className="lg:sticky lg:top-24 space-y-6">
       {/* Get Our Free Guide Widget */}
@@ -279,9 +304,10 @@ export default function SidebarWithForm({ popularArticles }) {
           <button
             type="submit"
             disabled={isLoading}
+            onAfterSubmit={handleAfterSubmit}
             className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? "Processing..." : "Download Free Guide"}
+            {isLoading ? "Processing..." : "Get Free Guide"}
           </button>
         </form>
       </div>

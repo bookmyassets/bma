@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import logo from "@/assests/Bmalogo.png";
+import logo from "@/assests/bma-logo2.png";
 
 export default function ContactForm({ onClose, title = "Get In Touch", headline = "Get Expert Guidance on Dholera Investment", buttonName = "Book Consultation" }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -261,7 +261,7 @@ export default function ContactForm({ onClose, title = "Get In Touch", headline 
         initial={{ scale: 0.9, y: 50 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 50 }}
-        className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
+        className="bg-white p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
         onClick={handleFormClick}
       >
         {/* Close Button */}
@@ -288,22 +288,22 @@ export default function ContactForm({ onClose, title = "Get In Touch", headline 
         </button>
 
         {/* Logo */}
-        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="bg-black p-2 rounded-full shadow-lg"
-          >
-            <Image
-              src={logo}
-              alt="Logo"
-              width={60}
-              height={60}
-              className="rounded-full"
-            />
-          </motion.div>
-        </div>
+        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 0.2 }}
+                                className="rounded-lg shadow-lg"
+                              >
+                                <Image
+                                  src={logo}
+                                  alt="Logo"
+                                  width={60}
+                                  height={60}
+                                  className="rounded-lg"
+                                />
+                              </motion.div>
+                            </div>
 
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -311,8 +311,8 @@ export default function ContactForm({ onClose, title = "Get In Touch", headline 
           transition={{ delay: 0.3 }}
           className="text-center mb-6 mt-8"
         >
-          <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
-          <p className="text-gray-300 text-sm">
+          <h2 className="text-2xl font-bold text-gray-700 mb-2">{title}</h2>
+          <p className="text-gray-700 text-sm">
             {headline}
           </p>
         </motion.div>
