@@ -1,31 +1,43 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 
-export default function ExitPopup({title = "Wait! Before You Go...", subtitle = "Get exclusive updates"}) {
+export default function ExitPopup({
+  title = "Wait! Before You Go...",
+  subtitle = "Get exclusive updates",
+  mobileStrategy = "scroll" // Options: "scroll", "time", "back", "all"
+}) {
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "", 
-    mobileNumber: "", 
-    email: "", 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    mobileNumber: "",
+    email: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [popupShown, setPopupShown] = useState(false);
-  
-  // Exit intent detection
+
+  // Detect if device is mobile
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) || window.innerWidth < 768;
+  };
+
+  // Desktop exit intent detection
   useEffect(() => {
+    if (isMobile()) return;
+
     const handleExitIntent = (e) => {
       if (e.clientY <= 0 && !popupShown) {
         setShowFormPopup(true);
         setPopupShown(true);
-        document.removeEventListener('mouseleave', handleExitIntent);
       }
     };
 
     const handleKeyDown = (e) => {
-      if ((e.ctrlKey && e.key === 'w') || (e.altKey && e.key === 'F4')) {
+      if ((e.ctrlKey && e.key === "w") || (e.altKey && e.key === "F4")) {
         if (!popupShown) {
           e.preventDefault();
           setShowFormPopup(true);
@@ -34,47 +46,90 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
       }
     };
 
-    document.addEventListener('mouseleave', handleExitIntent);
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("mouseleave", handleExitIntent);
+    document.addEventListener("keydown", handleKeyDown);
 
-    // Mobile swipe detection
-    let touchStartY = 0;
-    const handleTouchStart = (e) => {
-      touchStartY = e.changedTouches[0].screenY;
+    return () => {
+      document.removeEventListener("mouseleave", handleExitIntent);
+      document.removeEventListener("keydown", handleKeyDown);
     };
+  }, [popupShown]);
 
-    const handleTouchEnd = (e) => {
-      const touchEndY = e.changedTouches[0].screenY;
-      if (touchStartY - touchEndY > 100 && window.innerHeight - touchStartY < 50) {
-        if (!popupShown) {
-          setShowFormPopup(true);
-          setPopupShown(true);
-        }
+  // Mobile: Back button detection
+  useEffect(() => {
+    if (!isMobile() || (mobileStrategy !== "back" && mobileStrategy !== "all")) return;
+
+    // Push a state to history
+    window.history.pushState(null, "", window.location.href);
+
+    const handlePopState = () => {
+      if (!popupShown) {
+        setShowFormPopup(true);
+        setPopupShown(true);
+        // Push state again to keep user on page
+        window.history.pushState(null, "", window.location.href);
       }
     };
 
-    document.addEventListener('touchstart', handleTouchStart);
-    document.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
-      document.removeEventListener('mouseleave', handleExitIntent);
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener("popstate", handlePopState);
     };
-  }, [popupShown]);
+  }, [popupShown, mobileStrategy]);
+
+  // Mobile: Scroll-based detection
+  useEffect(() => {
+    if (!isMobile() || (mobileStrategy !== "scroll" && mobileStrategy !== "all")) return;
+
+    const handleScroll = () => {
+      if (popupShown) return;
+
+      const scrollPercent =
+        (window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight)) *
+        100;
+
+      // Show popup when user scrolls 50% down
+      if (scrollPercent > 50) {
+        setShowFormPopup(true);
+        setPopupShown(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [popupShown, mobileStrategy]);
+
+  // Mobile: Time-based detection
+  useEffect(() => {
+    if (!isMobile() || (mobileStrategy !== "time" && mobileStrategy !== "all")) return;
+
+    // Show popup after 15 seconds on mobile
+    const timer = setTimeout(() => {
+      if (!popupShown) {
+        setShowFormPopup(true);
+        setPopupShown(true);
+      }
+    }, 15000);
+
+    return () => clearTimeout(timer);
+  }, [popupShown, mobileStrategy]);
 
   // Escape key handler
   useEffect(() => {
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape' && showFormPopup) {
+      if (event.key === "Escape" && showFormPopup) {
         handlePopupClose();
       }
     };
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [showFormPopup]);
 
@@ -95,7 +150,7 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
     }
@@ -115,12 +170,13 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
 
     // Simulate API call (replace with your actual API)
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       // Success
+      console.log("Form submitted:", formData);
       setFormData({ fullName: "", mobileNumber: "", email: "" });
       setShowThankYou(true);
-      
+
       setTimeout(() => {
         setShowThankYou(false);
         setShowFormPopup(false);
@@ -151,11 +207,11 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
       onClick={handleBackdropClick}
     >
       <div
-        className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl relative transform transition-all animate-scale-in"
+        className="bg-white rounded-xl p-6 md:p-8 max-w-md w-full shadow-2xl relative transform transition-all animate-scale-in max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {showThankYou ? (
-          <div className="text-center">
+          <div className="text-center py-4">
             <div className="mb-6 animate-scale-in">
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
                 <svg
@@ -165,11 +221,18 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">
+              Thank You!
+            </h3>
             <p className="text-gray-600">We will contact you shortly.</p>
           </div>
         ) : (
@@ -177,13 +240,17 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
             <div className="text-center mb-6">
               <button
                 onClick={handlePopupClose}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl transition-colors"
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl leading-none transition-colors w-8 h-8 flex items-center justify-center"
                 aria-label="Close popup"
               >
                 ×
               </button>
-              <h1 className="text-2xl font-bold text-gray-800 mb-2">{title}</h1>
-              <p className="text-lg text-gray-700 font-semibold">{subtitle}</p>
+              <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 pr-8">
+                {title}
+              </h1>
+              <p className="text-base md:text-lg text-gray-700 font-semibold">
+                {subtitle}
+              </p>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -195,7 +262,10 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
 
               <div className="space-y-4 mb-6">
                 <div>
-                  <label htmlFor="fullName" className="block text-gray-700 text-sm font-medium mb-2">
+                  <label
+                    htmlFor="fullName"
+                    className="block text-gray-700 text-sm font-medium mb-2"
+                  >
                     Full Name *
                   </label>
                   <input
@@ -205,13 +275,16 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-base"
                     placeholder="Enter your full name"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="mobileNumber" className="block text-gray-700 text-sm font-medium mb-2">
+                  <label
+                    htmlFor="mobileNumber"
+                    className="block text-gray-700 text-sm font-medium mb-2"
+                  >
                     Mobile Number *
                   </label>
                   <input
@@ -221,13 +294,16 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
                     value={formData.mobileNumber}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-base"
                     placeholder="Enter your mobile number"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-gray-700 text-sm font-medium mb-2"
+                  >
                     Email (Optional)
                   </label>
                   <input
@@ -236,7 +312,7 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-base"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -245,7 +321,7 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
+                className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 text-base ${
                   isLoading
                     ? "bg-gray-400 cursor-not-allowed text-gray-600"
                     : "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
@@ -253,9 +329,25 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
               >
                 {isLoading ? (
                   <div className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Submitting...
                   </div>
@@ -276,19 +368,29 @@ export default function ExitPopup({title = "Wait! Before You Go...", subtitle = 
 
       <style jsx>{`
         @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
-        
+
         @keyframes scale-in {
-          from { transform: scale(0.9); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
+          from {
+            transform: scale(0.9);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
         }
-        
+
         .animate-fade-in {
           animation: fade-in 0.3s ease-out;
         }
-        
+
         .animate-scale-in {
           animation: scale-in 0.3s ease-out;
         }

@@ -11,6 +11,7 @@ import Image from "next/image";
 import BlogSchemaMarkup from "../BlogSchemaMarkup";
 import SlugPageForm from "../../components/SlugPageForm";
 import InfoPopup from "../../components/SidePop";
+import ExitPopup from "../../components/ExitForm";
 
 
 // Right Sidebar Component
@@ -615,6 +616,7 @@ export default async function Post({ params }) {
             </div>
           </div>
         </section>
+        <ExitPopup/>
       </div>
       </>
     );
