@@ -149,7 +149,7 @@ export default function HeroCarousel() {
         // Using setTimeout to ensure the popup closes before download starts
         setTimeout(() => {
           const link = document.createElement("a");
-          link.href = "https://shorturl.at/Dv00M";
+          link.href = "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf";
           link.target = "_blank";
           link.download = "brochure.pdf"; // Add download attribute
           document.body.appendChild(link);
@@ -159,7 +159,7 @@ export default function HeroCarousel() {
         }, 300);
       } catch (error) {
         console.error("Error downloading brochure:", error);
-        window.open("https://shorturl.at/Dv00M", "_blank");
+        window.open("https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf", "_blank");
       }
     }
   };
