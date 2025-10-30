@@ -248,7 +248,7 @@ const onRecaptchaSuccess = async (token) => {
   const handleAfterSubmit = () => {
     console.log("Form submitted successfully, type:", formType);
 
-    if (formType === "brochure") {
+    
       try {
         console.log("Initiating brochure download");
 
@@ -267,7 +267,7 @@ const onRecaptchaSuccess = async (token) => {
         console.error("Error downloading brochure:", error);
         window.open("https://shorturl.at/Dv00M", "_blank");
       }
-    }
+    
   };
 
   return (
