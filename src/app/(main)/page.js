@@ -153,7 +153,7 @@ export default function page() {
        <Dholera/>
        <BMA/>
        <WestWyn/>
-       <ShortsSection/>
+     {/*   <ShortsSection/> */}
        <FAQSection/>
     </div>
     {/* {showpopForm && (
