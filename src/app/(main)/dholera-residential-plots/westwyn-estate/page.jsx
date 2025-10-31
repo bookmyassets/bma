@@ -399,13 +399,8 @@ export default function HeroCarousel() {
 
       <SoldOutProjectsSection />
       <PopupScroll
-        title={
-          <>
-            Navratri Special: <br />
-            Flat 5% off on Dholera Plots
-          </>
-        }
-        subtitle="(Hurry Offer valid for 9 days only)"
+        title="Get Verified Project Details"
+       
       />
       <AnimatePresence>
         {isContactFormOpen && (

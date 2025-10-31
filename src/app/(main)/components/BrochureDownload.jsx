@@ -4,7 +4,7 @@ import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/Bmalogo.png";
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation";
 
 export default function BrochureDownload({
   onClose,
@@ -15,7 +15,7 @@ export default function BrochureDownload({
   thankYouMessage = "Your request has been submitted successfully.",
   source = "BookMyAssets",
   link,
-  ids
+  ids,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
@@ -37,25 +37,25 @@ export default function BrochureDownload({
   const downloadPDF = () => {
     try {
       // Create a temporary anchor element
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = pdfUrl;
-      link.download = 'brochure.pdf'; // You can customize the filename
-      link.target = '_blank';
-      
+      link.download = "brochure.pdf"; // You can customize the filename
+      link.target = "_blank";
+
       // Append to body, click, and remove
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      console.error('Error downloading PDF:', error);
+      console.error("Error downloading PDF:", error);
       // Fallback: open in new tab
-      window.open(pdfUrl, '_blank');
+      window.open(pdfUrl, "_blank");
     }
   };
 
   // Handle close function
   const handleClose = () => {
-    if (onClose && typeof onClose === 'function') {
+    if (onClose && typeof onClose === "function") {
       onClose();
     }
   };
@@ -97,15 +97,15 @@ export default function BrochureDownload({
 
     // Handle Escape key press
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         handleClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
 
@@ -143,71 +143,71 @@ export default function BrochureDownload({
     return true;
   };
 
-const onRecaptchaSuccess = async (token) => {
-  try {
-    const now = Date.now();
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const now = Date.now();
 
-    const response = await fetch(
-      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-        },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            source: source,
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
-          source: "BookMyAssets",
-          tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-          recaptchaToken: token,
-        }),
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: source,
+            },
+            source: "BookMyAssets",
+            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+            recaptchaToken: token,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        setFormData({ fullName: "", phone: "" });
+        setShowPopup(true);
+        setSubmissionCount((prev) => {
+          const newCount = prev + 1;
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", now.toString());
+          return newCount;
+        });
+
+        // Download PDF immediately after successful submission
+        downloadPDF();
+
+        // Show thank you popup for 2 seconds
+        setShowThankYou(true);
+        setTimeout(() => {
+          setShowThankYou(false);
+          handleClose();
+
+          // Get current pathname for return URL
+          const currentPath = pathname || window.location.pathname;
+
+          // Push to thank-you route with return URL
+          router.push(`/more-info/thankyou`);
+        }, 2000);
+      } else {
+        throw new Error("Error submitting form");
       }
-    );
-
-    if (response.ok) {
-      setFormData({ fullName: "", phone: "" });
-      setShowPopup(true);
-      setSubmissionCount((prev) => {
-        const newCount = prev + 1;
-        localStorage.setItem("formSubmissionCount", newCount.toString());
-        localStorage.setItem("lastSubmissionTime", now.toString());
-        return newCount;
-      });
-
-      // Download PDF immediately after successful submission
-      downloadPDF();
-
-      // Show thank you popup for 2 seconds
-      setShowThankYou(true);
-      setTimeout(() => {
-        setShowThankYou(false);
-        handleClose();
-
-        // Get current pathname for return URL
-        const currentPath = pathname || window.location.pathname;
-        
-        // Push to thank-you route with return URL
-        router.push(`/more-info/thankyou`);
-      }, 2000);
-    } else {
-      throw new Error("Error submitting form");
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setErrorMessage(
+        error.message || "Error submitting form. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+      if (window.grecaptcha && recaptchaRef.current) {
+        window.grecaptcha.reset(recaptchaRef.current);
+      }
     }
-  } catch (error) {
-    console.error("Form submission error:", error);
-    setErrorMessage(
-      error.message || "Error submitting form. Please try again."
-    );
-  } finally {
-    setIsLoading(false);
-    if (window.grecaptcha && recaptchaRef.current) {
-      window.grecaptcha.reset(recaptchaRef.current);
-    }
-  }
-};
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -343,7 +343,7 @@ const onRecaptchaSuccess = async (token) => {
             initial={{ scale: 0.9, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 50 }}
-            className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative"
+            className="bg-gradient-to-br from-gray-900 to-black p-16 rounded-xl shadow-2xl border border-gray-700 max-w-lg w-full relative"
             onClick={handleModalContentClick}
           >
             {/* Close Button */}
@@ -370,19 +370,19 @@ const onRecaptchaSuccess = async (token) => {
             </button>
 
             {/* Logo */}
-            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
+            <div className="absolute -top-10 pt-12  left-1/2 transform -translate-x-1/2">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="bg-black p-2 rounded-full shadow-lg"
+                className="rounded-lg shadow-lg"
               >
                 <Image
                   src={logo}
                   alt="Logo"
                   width={60}
                   height={60}
-                  className="rounded-full"
+                  className="rounded-lg"
                 />
               </motion.div>
             </div>
@@ -391,7 +391,7 @@ const onRecaptchaSuccess = async (token) => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-center mb-6 pt-4"
+              className="text-center mb-6 pt-6"
             >
               <h2 className="text-3xl font-bold text-white mb-2">{title}</h2>
             </motion.div>

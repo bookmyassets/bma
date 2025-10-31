@@ -11,19 +11,19 @@ const WestWynAboutSection = () => {
     amenities: 0,
   });
 
-    const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-    const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
   // New state for brochure form
   const [formTitle, setFormTitle] = useState("");
   const [formHeadline, setFormHeadline] = useState("");
   const [buttonName, setButtonName] = useState("");
-    const [formType, setFormType] = useState("");
-  
+  const [formType, setFormType] = useState("");
+
   // Animation for counters
   useEffect(() => {
     const animateCounters = () => {
       const targets = { plotSize: 151, price: 10, amenities: 5 };
-      const duration =100;
+      const duration = 100;
       const steps = 60;
       const stepTime = duration / steps;
 
@@ -156,7 +156,8 @@ const WestWynAboutSection = () => {
           </h2>
 
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Premium plotted development in Dholera Smart City with strategic location and high ROI potential
+            Premium plotted development in Dholera Smart City with strategic
+            location and high ROI potential
           </p>
         </div>
 
@@ -200,7 +201,10 @@ const WestWynAboutSection = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button onClick={openBrochureForm} className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={openBrochureForm}
+                  className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
+                >
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -217,12 +221,12 @@ const WestWynAboutSection = () => {
                   Download Brochure
                 </button>
 
-                  <a href="https://wa.me/918130371647">
-                <button className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaWhatsapp/>
-                  Book Site Visit
-                </button>
-                      </a>
+                <a href="https://wa.me/918130371647">
+                  <button className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                    <FaWhatsapp />
+                    Book Site Visit
+                  </button>
+                </a>
               </div>
             </div>
           </div>
@@ -240,7 +244,8 @@ const WestWynAboutSection = () => {
                     <span className="text-white">by Numbers</span>
                   </h3>
                   <p className="text-gray-300">
-                    Designed for investors who value scale, location, and returns
+                    Designed for investors who value scale, location, and
+                    returns
                   </p>
                 </div>
 
@@ -276,18 +281,17 @@ const WestWynAboutSection = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
-      
+
       <AnimatePresence>
         {isBrochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
             <div className="w-full max-w-md">
               <BrochureDownload
                 onClose={closeBrochureForm}
-                title="Get the Brochure"
+                title="Get Verified Project Details"
                 headline="Plots starting 10 Lakh at 0 km from Dholera SIR "
                 buttonName="Download Now"
                 onAfterSubmit={handleAfterSubmit}

@@ -336,7 +336,7 @@ export default function BulkLand({ title }) {
                         : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-md"
                     }`}
                   >
-                    {isLoading ? "Submitting..." : "Submit"}
+                    {isLoading ? "Submitting..." : "Get Plot Details"}
                   </button>
                 </div>
               </form>

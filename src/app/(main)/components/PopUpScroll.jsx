@@ -315,7 +315,7 @@ export default function PopupScroll({title, subtitle}) {
                         Submitting...
                       </div>
                     ) : (
-                      "Submit"
+                      "Get Plot Details"
                     )}
                   </button>
 

@@ -16,6 +16,15 @@ const PROJECTS = [
   { id: 8, title: "Pride", ctype:"M" },
 ];
 
+// Salutation options
+const SALUTATIONS = [
+  { value: "Mr.", label: "Mr." },
+  { value: "Ms.", label: "Ms." },
+  { value: "Mrs.", label: "Mrs." },
+  { value: "Dr.", label: "Dr." },
+  { value: "Master", label: "Master" },
+];
+
 function formatIndianNumber(value) {
   return parseFloat(value).toLocaleString("en-IN", {
     minimumFractionDigits: 2,
@@ -23,11 +32,31 @@ function formatIndianNumber(value) {
   });
 }
 
+// Function to format date as "31st October 2025"
+function formatBookingDate(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = date.toLocaleString('en-IN', { month: 'long' });
+  const year = date.getFullYear();
+  
+  // Add ordinal suffix to day
+  const getOrdinalSuffix = (day) => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+  
+  return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
+}
+
 export default function CostSheet() {
   const [formData, setFormData] = useState({
+    salutation: "Mr.",
     name: "",
-    phone: "",
-    email: "",
     plotNo: "",
     projectName: "",
     plotAreaYards: "",
@@ -36,6 +65,8 @@ export default function CostSheet() {
     totalPayment: "",
     legalFee: 20000,
     plotTotalPayment: 0,
+    bookingDate: new Date().toISOString().split('T')[0], // Default to today's date
+    associateName: "",
   });
 
   const handleChange = (e) => {
@@ -65,9 +96,8 @@ export default function CostSheet() {
     const doc = new jsPDF();
 
     const {
+      salutation,
       name,
-      phone,
-      email,
       plotNo,
       projectName,
       plotAreaYards,
@@ -75,6 +105,8 @@ export default function CostSheet() {
       totalPayment,
       legalFee,
       plotTotalPayment,
+      bookingDate,
+      associateName,
     } = formData;
 
     // Find the selected project to get its ctype
@@ -104,12 +136,18 @@ export default function CostSheet() {
       const formattedLegalFee = formatIndianNumber(legalFee);
       const formattedPlotTotalPayment = formatIndianNumber(plotTotalPayment);
 
+      // Format booking date as "31st October 2025"
+      const formattedBookingDate = formatBookingDate(bookingDate);
+
+      // Combine salutation and name
+      const fullName = `${salutation} ${name}`.trim();
+
       autoTable(doc, {
         startY: startY,
         body: [
-          ["Name", name],
-          ["Phone", phone],
-          ["Email", email],
+          ["Name", fullName],
+          ["Booking Date", formattedBookingDate],
+          ["Associate Name", associateName],
           ["Project Name", projectName],
           ["Plot No", plotNo],
           ["Plot Area (Sq. Yards)", plotAreaYards],
@@ -229,6 +267,23 @@ export default function CostSheet() {
         <table className="w-full border-collapse">
           <tbody>
             <tr className="border-b">
+              <td className="p-2 font-semibold">Salutation</td>
+              <td className="p-2">
+                <select
+                  name="salutation"
+                  value={formData.salutation}
+                  onChange={handleChange}
+                  className="border p-2 w-full rounded"
+                >
+                  {SALUTATIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr className="border-b">
               <td className="p-2 font-semibold">Name</td>
               <td className="p-2">
                 <input
@@ -237,30 +292,32 @@ export default function CostSheet() {
                   value={formData.name}
                   onChange={handleChange}
                   className="border p-2 w-full rounded"
+                  placeholder="Enter full name"
                 />
               </td>
             </tr>
             <tr className="border-b">
-              <td className="p-2 font-semibold">Phone Number</td>
+              <td className="p-2 font-semibold">Booking Date</td>
               <td className="p-2">
                 <input
-                  type="number"
-                  name="phone"
-                  value={formData.phone}
+                  type="date"
+                  name="bookingDate"
+                  value={formData.bookingDate}
                   onChange={handleChange}
                   className="border p-2 w-full rounded"
                 />
               </td>
             </tr>
             <tr className="border-b">
-              <td className="p-2 font-semibold">Email</td>
+              <td className="p-2 font-semibold">Associate Name</td>
               <td className="p-2">
                 <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
+                  type="text"
+                  name="associateName"
+                  value={formData.associateName}
                   onChange={handleChange}
                   className="border p-2 w-full rounded"
+                  placeholder="Enter associate name"
                 />
               </td>
             </tr>

@@ -5,6 +5,15 @@ import autoTable from "jspdf-autotable";
 import icon from "@/assests/pdfIcon.webp";
 import { getAllSubProjects } from "@/sanity/lib/api";
 
+// Salutation options
+const SALUTATIONS = [
+  { value: "Mr.", label: "Mr." },
+  { value: "Ms.", label: "Ms." },
+  { value: "Mrs.", label: "Mrs." },
+  { value: "Dr.", label: "Dr." },
+  { value: "Master", label: "Master" },
+];
+
 function formatIndianNumber(value) {
   return parseFloat(value).toLocaleString("en-IN", {
     minimumFractionDigits: 2,
@@ -14,6 +23,7 @@ function formatIndianNumber(value) {
 
 export default function CostSheet() {
   const [formData, setFormData] = useState({
+    salutation: "Mr.",
     name: "",
     phone: "",
     email: "",
@@ -108,6 +118,7 @@ export default function CostSheet() {
     const doc = new jsPDF();
 
     const {
+      salutation,
       name,
       phone,
       email,
@@ -155,11 +166,13 @@ export default function CostSheet() {
       const formattedLegalFee = formatIndianNumber(legalFee);
       const formattedTotalCharges = formatIndianNumber(totalCharges);
       const formattedPlotTotalPayment = formatIndianNumber(plotTotalPayment);
+      // Combine salutation and name
+      const fullName = `${salutation} ${name}`.trim();
 
       autoTable(doc, {
         startY: startY,
         body: [
-          ["Name", name],
+          ["Name", fullName],
           ["Phone", phone],
           ["Email", email],
           ["Project Name", projectName],
@@ -288,6 +301,23 @@ export default function CostSheet() {
         <table className="w-full border-collapse">
           <tbody>
             <tr className="border-b">
+              <td className="p-2 font-semibold">Salutation</td>
+              <td className="p-2">
+                <select
+                  name="salutation"
+                  value={formData.salutation}
+                  onChange={handleChange}
+                  className="border p-2 w-full rounded"
+                >
+                  {SALUTATIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr className="border-b">
               <td className="p-2 font-semibold">Name</td>
               <td className="p-2">
                 <input
@@ -296,6 +326,7 @@ export default function CostSheet() {
                   value={formData.name}
                   onChange={handleChange}
                   className="border p-2 w-full rounded"
+                  placeholder="Enter full name"
                 />
               </td>
             </tr>
