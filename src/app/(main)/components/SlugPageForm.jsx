@@ -275,21 +275,21 @@ export default function SlugPageForm() {
                       ×
                     </button>
                     <div className="absolute -top-9 pt-10  left-1/2 transform -translate-x-1/2">
-                                          <motion.div
-                                            initial={{ scale: 0 }}
-                                            animate={{ scale: 1 }}
-                                            transition={{ delay: 0.2 }}
-                                            className="rounded-lg "
-                                          >
-                                            <Image
-                                              src={logo}
-                                              alt="Logo"
-                                              width={60}
-                                              height={60}
-                                              className="rounded-lg"
-                                            />
-                                          </motion.div>
-                                        </div>
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="rounded-lg "
+                      >
+                        <Image
+                          src={logo}
+                          alt="Logo"
+                          width={60}
+                          height={60}
+                          className="rounded-lg"
+                        />
+                      </motion.div>
+                    </div>
 
                     {/* Section 2: Sub-heading CTA */}
                     <p className="text-lg text-gray-700 pt-8 font-semibold">
