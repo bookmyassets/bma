@@ -3,9 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import logo from "@/assests/bma-logo2.png";
+import logo from "@/assests/bma-logo-black.png";
 
-export default function ContactForm({ onClose, title = "Get In Touch", headline = "Get Expert Guidance on Dholera Investment", buttonName = "Book Consultation" }) {
+export default function ContactForm({ onClose, title = "Get In Touch", buttonName = "Book Consultation" }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ 
     fullName: "",  
@@ -288,12 +288,12 @@ export default function ContactForm({ onClose, title = "Get In Touch", headline 
         </button>
 
         {/* Logo */}
-        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
                               <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
                                 transition={{ delay: 0.2 }}
-                                className="rounded-lg shadow-lg"
+                                className="rounded-lg "
                               >
                                 <Image
                                   src={logo}
@@ -312,9 +312,7 @@ export default function ContactForm({ onClose, title = "Get In Touch", headline 
           className="text-center mb-6 mt-8"
         >
           <h2 className="text-2xl font-bold text-gray-700 mb-2">{title}</h2>
-          <p className="text-gray-700 text-sm">
-            {headline}
-          </p>
+         
         </motion.div>
 
         {showPopup ? (

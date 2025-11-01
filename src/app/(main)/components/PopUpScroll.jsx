@@ -2,45 +2,50 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaUser } from "react-icons/fa6";
 
-export default function PopupScroll({title, subtitle}) {
+export default function PopupScroll({ title, subtitle }) {
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "", 
-    mobileNumber: "", 
-    email: "", 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    mobileNumber: "",
+    email: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  
+
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // Auto-popup after 5 seconds
-   useEffect(() => {
-    const sessionPopupShown = sessionStorage.getItem('popupShownThisSession');
-    
+  useEffect(() => {
+    const sessionPopupShown = sessionStorage.getItem("popupShownThisSession");
+
     if (!sessionPopupShown) {
       const handleScroll = () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const documentHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
         const scrollPercentage = (scrollTop / documentHeight) * 100;
 
         // Trigger popup when user scrolls between 50-60%
         if (scrollPercentage >= 50 && scrollPercentage <= 60) {
           setShowFormPopup(true);
-          sessionStorage.setItem('popupShownThisSession', 'true');
-          window.removeEventListener('scroll', handleScroll);
+          sessionStorage.setItem("popupShownThisSession", "true");
+          window.removeEventListener("scroll", handleScroll);
         }
       };
 
-      window.addEventListener('scroll', handleScroll);
-      
+      window.addEventListener("scroll", handleScroll);
+
       return () => {
-        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener("scroll", handleScroll);
       };
     }
   }, []);
@@ -65,14 +70,14 @@ export default function PopupScroll({title, subtitle}) {
 
     // Escape key handler
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape' && showFormPopup) {
+      if (event.key === "Escape" && showFormPopup) {
         handlePopupClose();
       }
     };
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [showFormPopup, siteKey]);
 
@@ -93,7 +98,7 @@ export default function PopupScroll({title, subtitle}) {
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
     }
@@ -125,9 +130,9 @@ export default function PopupScroll({title, subtitle}) {
       );
 
       if (response.ok) {
-        setFormData({ fullName: "", mobileNumber: ""});
+        setFormData({ fullName: "", mobileNumber: "" });
         setShowThankYou(true);
-        
+
         setTimeout(() => {
           setShowThankYou(false);
           setShowFormPopup(false);
@@ -161,7 +166,9 @@ export default function PopupScroll({title, subtitle}) {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page."
+      );
       setIsLoading(false);
       return;
     }
@@ -225,11 +232,18 @@ export default function PopupScroll({title, subtitle}) {
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                   </div>
                 </motion.div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                  Thank You!
+                </h3>
                 <p className="text-gray-600">We will contact you shortly.</p>
               </div>
             ) : (
@@ -242,11 +256,13 @@ export default function PopupScroll({title, subtitle}) {
                   >
                     ×
                   </button>
-                  <h1 className="text-2xl font-bold text-gray-800 mb-2">{title}</h1>
-                  
+                  <h1 className="text-2xl font-bold text-gray-800 mb-2">
+                    {title}
+                  </h1>
+
                   {/* Section 2: Sub-heading CTA */}
                   <p className="text-lg text-gray-700 font-semibold">
-                   {subtitle}
+                    {subtitle}
                   </p>
                 </div>
 
@@ -259,37 +275,40 @@ export default function PopupScroll({title, subtitle}) {
                   )}
 
                   <div className="space-y-4 mb-6">
-                    <div>
-                      <label htmlFor="fullName" className="block text-gray-700 text-sm font-medium mb-2">
-                        Full Name *
-                      </label>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="relative"
+                    >
+                      <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
                       <input
-                        type="text"
-                        id="fullName"
                         name="fullName"
+                        placeholder="Full Name *"
                         value={formData.fullName}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                        placeholder="Enter your full name"
+                        className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
                       />
-                    </div>
+                    </motion.div>
 
-                    <div>
-                      <label htmlFor="mobileNumber" className="block text-gray-700 text-sm font-medium mb-2">
-                        Mobile Number *
-                      </label>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="relative"
+                    >
+                      <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
                       <input
+                        name="phone"
                         type="tel"
-                        id="mobileNumber"
-                        name="mobileNumber"
-                        value={formData.mobileNumber}
+                        placeholder="Phone Number *"
+                        value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                        placeholder="Enter your mobile number"
+                        className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
                       />
-                    </div>
+                    </motion.div>
                   </div>
 
                   <div className="flex justify-center mb-4">
@@ -308,9 +327,25 @@ export default function PopupScroll({title, subtitle}) {
                   >
                     {isLoading ? (
                       <div className="flex items-center justify-center">
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <svg
+                          className="animate-spin -ml-1 mr-3 h-5 w-5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
                         </svg>
                         Submitting...
                       </div>

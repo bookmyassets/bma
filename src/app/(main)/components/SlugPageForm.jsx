@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assests/bma-logo2.png";
+import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 
 export default function SlugPageForm() {
@@ -232,7 +232,7 @@ export default function SlugPageForm() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl relative"
+              className="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl relative"
               onClick={(e) => e.stopPropagation()}
             >
               {showThankYou ? (
@@ -274,12 +274,12 @@ export default function SlugPageForm() {
                     >
                       ×
                     </button>
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                    <div className="absolute -top-9 pt-10  left-1/2 transform -translate-x-1/2">
                                           <motion.div
                                             initial={{ scale: 0 }}
                                             animate={{ scale: 1 }}
                                             transition={{ delay: 0.2 }}
-                                            className="rounded-lg shadow-lg"
+                                            className="rounded-lg "
                                           >
                                             <Image
                                               src={logo}
@@ -292,7 +292,7 @@ export default function SlugPageForm() {
                                         </div>
 
                     {/* Section 2: Sub-heading CTA */}
-                    <p className="text-lg text-gray-700 font-semibold">
+                    <p className="text-lg text-gray-700 pt-8 font-semibold">
                       Get Title - Clear Plots Under ₹ 10 Lakhs
                     </p>
                   </div>
@@ -305,7 +305,7 @@ export default function SlugPageForm() {
                       </div>
                     )}
 
-                    <div className="space-y-4 mb-6">
+                    <div className="space-y-5 mb-6">
                       <div>
                         <label
                           htmlFor="fullName"

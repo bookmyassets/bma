@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assests/Bmalogo.png";
+import logo from "@/assests/bma-logo-black.png";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function BrochureDownload({
@@ -343,14 +343,14 @@ export default function BrochureDownload({
             initial={{ scale: 0.9, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 50 }}
-            className="bg-gradient-to-br from-gray-900 to-black p-16 rounded-xl shadow-2xl border border-gray-700 max-w-lg w-full relative"
+            className="bg-white p-16 rounded-xl shadow-2xl border border-gray-700 max-w-lg w-full relative"
             onClick={handleModalContentClick}
           >
             {/* Close Button */}
             <button
               type="button"
               onClick={handleClose}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full p-1 transition-all duration-200 hover:bg-gray-700 z-10"
+              className="absolute top-4 right-4 text-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full p-1 transition-all duration-200 hover:bg-gray-700 z-10"
               aria-label="Close form"
             >
               <svg
@@ -375,7 +375,7 @@ export default function BrochureDownload({
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="rounded-lg shadow-lg"
+                className="rounded-lg "
               >
                 <Image
                   src={logo}
@@ -393,7 +393,7 @@ export default function BrochureDownload({
               transition={{ delay: 0.3 }}
               className="text-center mb-6 pt-6"
             >
-              <h2 className="text-3xl font-bold text-white mb-2">{title}</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">{title}</h2>
             </motion.div>
 
             {showPopup ? (
