@@ -178,9 +178,9 @@ export default function HeroCarousel() {
               <button
                 onClick={() =>
                   openContactForm(
-                    "Download Brochure",
+                    "Get Verified Project Details",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
-                    "Download Now",
+                    "Get Plot Details",
                     "brochure"
                   )
                 }
