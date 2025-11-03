@@ -19,6 +19,10 @@ import {
   CheckCircle,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import c1 from "@/assests/testimonials/sanchit-mishra.webp"
+import c2 from "@/assests/testimonials/janvi-goel.webp"
+import c3 from "@/assests/testimonials/mohan-kumar.webp"
 
 const RealEstateLandingPage = () => {
   const [counts, setCounts] = useState({
@@ -59,14 +63,16 @@ const RealEstateLandingPage = () => {
       comment:
         "BookMyAssets made my investment journey seamless. Their expert guidance helped me find the perfect plot in Dholera.",
       rating: 5,
+      image:c3
     },
     {
       id: 2,
-      name: "Jatin Saini",
+      name: "Sanchit Mishra",
       role: "First-time Buyer",
       comment:
         "As a first-time investor, I was nervous, but the team at BookMyAssets walked me through the entire process with patience and expertise.",
       rating: 5,
+      image:c1
     },
     {
       id: 3,
@@ -75,6 +81,7 @@ const RealEstateLandingPage = () => {
       comment:
         "The investment opportunities in Dholera through BookMyAssets have significantly boosted my portfolio. Highly recommended!",
       rating: 5,
+      image:c2
     },
   ];
 
@@ -793,14 +800,13 @@ const RealEstateLandingPage = () => {
                   <div className="w-full md:w-1/3 mb-8 md:mb-0 md:pr-8">
                     <div className="relative">
                       <div className="w-32 h-32 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 mx-auto flex items-center justify-center text-white text-4xl font-bold">
-                        {testimonials[testimonialIndex].name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
+                        <Image
+                          src={testimonials[testimonialIndex].image}
+                          alt={testimonials[testimonialIndex].name}
+                          className="rounded-full"
+                        />
                       </div>
-                      <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white px-4 py-1 rounded-full text-sm font-bold">
-                        {testimonials[testimonialIndex].role}
-                      </div>
+
                     </div>
                   </div>
                   <div className="w-full md:w-2/3">
