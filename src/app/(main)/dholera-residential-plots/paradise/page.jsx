@@ -12,6 +12,7 @@ import ContactForm from "../../components/Contactform";
 import CostSheet from "../costsheet2";
 import ActiveProjectsSection from "../ActiveProject";
 import BrochureDownload from "../../components/BrochureDownload";
+import { FaWhatsapp } from "react-icons/fa6";
 
 export default function HeroCarousel() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
@@ -137,9 +138,8 @@ export default function HeroCarousel() {
 
   return (
     <>
-     
       <title>
-       Paradise Dholera – Premium Residential Plots for Smart Investment
+        Paradise Dholera – Premium Residential Plots for Smart Investment
       </title>
       <meta
         name="description"
@@ -149,24 +149,22 @@ export default function HeroCarousel() {
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}
         <div className="relative w-full h-full">
-          <div
-                        className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-                      >
-                        <Image
-                          src={banner}
-                          alt="maple"
-                          fill
-                          className="w-full h-full max-sm:hidden"
-                          priority // Only prioritize first image
-                        />
-                        <Image
-                          src={bannerMob}
-                          alt="maple"
-                          fill
-                          className="w-full h-full md:hidden"
-                          priority // Only prioritize first image
-                        />
-                      </div>
+          <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
+            <Image
+              src={banner}
+              alt="maple"
+              fill
+              className="w-full h-full max-sm:hidden"
+              priority // Only prioritize first image
+            />
+            <Image
+              src={bannerMob}
+              alt="maple"
+              fill
+              className="w-full h-full md:hidden"
+              priority // Only prioritize first image
+            />
+          </div>
         </div>
 
         {/* Overlay with Title and Details */}
@@ -261,19 +259,12 @@ export default function HeroCarousel() {
                 Download Brochure
               </button>
 
-              <button
-                onClick={() =>
-                  openContactForm(
-                    "Book Free Site Visit",
-                    "Fill the form below to schedule a site visit. Fields marked with * are mandatory.",
-                    "Submit",
-                    "siteVisit"
-                  )
-                }
-                className="px-6 py-3 hover:bg-[#deae3c] bg-white border-[#deae3c] border-2 text-[#deae3c] hover:text-black   font-medium rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 ease-in-out"
-              >
-                Book Free Site Visit
-              </button>
+              <a href="https://wa.me/918130371647">
+                <button className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                  <FaWhatsapp />
+                  Book Site Visit
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -382,15 +373,13 @@ export default function HeroCarousel() {
       <div className="pt-4 pb-4">
         {/* <CostSheet /> */}
 
-        <CostSheet projectSlug="paradise" 
-        showProjectSelector={false} 
-      />
+        <CostSheet projectSlug="paradise" showProjectSelector={false} />
       </div>
 
       {/* Form */}
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
 
-      <ActiveProjectsSection/>
+      <ActiveProjectsSection />
 
       <AnimatePresence>
         {isContactFormOpen && (
@@ -417,8 +406,7 @@ export default function HeroCarousel() {
                 headline={formHeadline}
                 buttonName={buttonName}
                 onAfterSubmit={handleAfterSubmit}
-              link="https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf"
-
+                link="https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf"
               />
             </div>
           </div>
