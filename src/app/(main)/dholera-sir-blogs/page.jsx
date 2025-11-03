@@ -5,6 +5,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import FormComponent from "./FormComponent";
 import hero from "@/assests/sir-hero.webp";
+import heroM from "@/assests/blog-hero-banner.webp";
 
 export default async function page() {
   let posts = [];
@@ -46,14 +47,21 @@ export default async function page() {
       />
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}
-        <div className="relative min-h-[90vh] md:min-h-[80vh] flex items-center justify-center py-8 sm:py-12">
+        <div className="relative min-h-[60vh] md:min-h-[80vh] flex items-center justify-center py-8 sm:py-12">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
             <Image
               src={hero}
               alt="Dholera SIR Development"
               fill
-              className="object-cover"
+              className="object-cover max-sm:hidden"
+              priority
+            />
+            <Image
+              src={heroM}
+              alt="Dholera SIR Development"
+              fill
+              className=" md:hidden"
               priority
             />
             {/* Gradient Overlay for better text readability */}

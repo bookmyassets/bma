@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import westwyn1 from "@/assests/westwyn-county/westwyn-gate-cover.webp";
+import westwyn1 from "@/assests/westwyn-county/westwyn-3.webp";
 import westwyn2 from "@/assests/westwyn-county/westwyn-1.webp";
 import westwyn3 from "@/assests/westwyn-county/westwyn-2.webp";
 import { Plus, Minus } from "lucide-react";
@@ -200,7 +200,7 @@ export default function HeroCarousel() {
                 src={image.src}
                 alt={image.alt}
                 fill
-                className="w-full h-full "
+                className="w-full h-full object-cover"
                 priority={index === 0} // Only prioritize first image
               />
             </div>
