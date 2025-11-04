@@ -12,6 +12,7 @@ import ContactForm from "../../components/Contactform";
 import CostSheet from "../costsheet2";
 import ActiveProjectsSection from "../ActiveProject";
 import BrochureDownload from "../../components/BrochureDownload";
+import { FaWhatsapp } from "react-icons/fa6";
 
 export default function HeroCarousel() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];

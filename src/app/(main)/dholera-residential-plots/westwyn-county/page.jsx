@@ -10,9 +10,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
-import CostSheet from "../costsheet2";;
+import CostSheet from "../costsheet2";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import BrochureDownload from "../../components/BrochureDownload";
+import { FaWhatsapp } from "react-icons/fa6";
 
 export default function HeroCarousel() {
   const faqs = [
@@ -180,8 +181,10 @@ export default function HeroCarousel() {
 
   return (
     <>
-    <title>WestWyn County Dholera: Premium Residential Plots by BookMyAssets</title>
-    <meta
+      <title>
+        WestWyn County Dholera: Premium Residential Plots by BookMyAssets
+      </title>
+      <meta
         name="description"
         content="Secure your future with premium residential plots in Dholera Smart City. Explore AUDA-approved options at WestWyn County. Book your dream plot today!"
       />
@@ -348,21 +351,13 @@ export default function HeroCarousel() {
                 Download Brochure
               </button>
 
-              <button
-                onClick={() =>
-                  openContactForm(
-                    "Book Free Site Visit",
-                    "Fill the form below to schedule a site visit. Fields marked with * are mandatory.",
-                    "Submit",
-                    "siteVisit"
-                  )
-                }
-                className="px-6 py-3 hover:bg-[#deae3c] bg-white border-[#deae3c] border-2 text-[#deae3c] hover:text-black   font-medium rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 ease-in-out"
-              >
-                Book Free Site Visit
-              </button>
+              <a href="https://wa.me/918130371647">
+                <button className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                  <FaWhatsapp />
+                  Book Site Visit
+                </button>
+              </a>
             </div>
-            
           </div>
         </div>
       </div>
@@ -387,7 +382,7 @@ export default function HeroCarousel() {
             {/* Square Yards Counter */}
             <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
               <div className="text-3xl md:text-5xl font-bold text-[#deae3c] mb-2 md:mb-4">
-                {sqYards/* .toFixed(2) */}
+                {sqYards /* .toFixed(2) */}
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
                 sq. Yards
@@ -529,17 +524,15 @@ export default function HeroCarousel() {
       <ProjectAmenities />
 
       <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
-            <div className="pt-4 pb-4">
+      <div className="pt-4 pb-4">
         {/* <CostSheet /> */}
 
-        <CostSheet projectSlug="westwyn-county" 
-        showProjectSelector={false} 
-      />
+        <CostSheet projectSlug="westwyn-county" showProjectSelector={false} />
       </div>
       <FAQSection />
       {/* Form */}
 
-      <SoldOutProjectsSection/>
+      <SoldOutProjectsSection />
 
       <AnimatePresence>
         {isContactFormOpen && (
@@ -550,7 +543,7 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
-               /*  onAfterSubmit={handleAfterSubmit} */
+                /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>
           </div>
@@ -565,7 +558,7 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
-                onAfterSubmit={handleAfterSubmit} 
+                onAfterSubmit={handleAfterSubmit}
                 link="https://cdn.sanity.io/files/c3e1h345/projects/9f32c6d0d835cfc039e42a741e63894f87fd48ce.pdf"
               />
             </div>
