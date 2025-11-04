@@ -280,6 +280,7 @@ export default function ShortsSection() {
                         src={`https://www.youtube.com/embed/${short.youtubeId}?enablejsapi=1`}
                         title={short.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
                         loading="lazy"
                       />
