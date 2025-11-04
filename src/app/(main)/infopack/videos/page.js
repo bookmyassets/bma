@@ -107,6 +107,7 @@ export default async function VideosPage() {
                     src={`https://www.youtube.com/embed/${video.id}`}
                     title={video.title || `YouTube Video ${index + 1}`}
                     frameBorder="0"
+                    referrerpolicy="strict-origin-when-cross-origin"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   ></iframe>
