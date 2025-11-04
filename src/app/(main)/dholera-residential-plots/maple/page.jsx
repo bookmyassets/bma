@@ -129,9 +129,9 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Maple - Premium Plots",
-                  "Please fill out the form to get exclusive details of Paradise. Fields marked with * are mandatory.",
-                  "Enquire Now",
+                  "Title Clear Plots Under ₹10 Lakhs",
+                  "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
+                  "Get A Call Back",
                   ""
                 )
               }

@@ -193,9 +193,9 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Orchid - Premium Plots",
+                  "Title Clear Plots Under ₹10 Lakhs",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
-                  "Enquire Now",
+                  "Get A Call Back",
                   ""
                 )
               }

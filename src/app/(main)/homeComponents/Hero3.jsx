@@ -149,7 +149,7 @@ export default function LandingPage({ openForm }) {
               phone: formData.phone,
               source: "BookMyAssets",
             },
-            source: "BookMyAssets Google Ads",
+            source: "BookMyAssets",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
@@ -250,8 +250,6 @@ export default function LandingPage({ openForm }) {
       },
     },
   };
-
-  //Slider Logic
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -405,7 +403,7 @@ export default function LandingPage({ openForm }) {
 
             {/* Mobile Slider */}
             <div
-              className="absolute inset-0 w-[100vw] block lg:hidden overflow-hidden"
+              className="absolute inset-0 block lg:hidden overflow-hidden"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
@@ -420,25 +418,25 @@ export default function LandingPage({ openForm }) {
                   <Image
                     src={image.src}
                     alt={image.alt}
-                    fill
-                    className="object-cover pt-16 w-[100vw]"
+                    
+                    className="object-contain"
                     priority={index === 0}
                   />
-                  <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
                 </div>
-                
               ))}
+              {/* Navigation buttons for mobile */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
               <div className="absolute bottom-0 left-0 right-0 z-20">
                 <Running />
               </div>

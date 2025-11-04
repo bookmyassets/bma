@@ -326,6 +326,7 @@ const RealEstateLandingPage = () => {
                           title="YouTube Shorts Video"
                           className="w-full h-full rounded-2xl"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          referrerPolicy="strict-origin-when-cross-origin"
                           allowFullScreen
                         ></iframe>
                       </div>
@@ -411,6 +412,7 @@ const RealEstateLandingPage = () => {
                             title="YouTube Shorts Video"
                             className="w-full h-full rounded-2xl"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            referrerPolicy="strict-origin-when-cross-origin"
                             allowFullScreen
                           ></iframe>
                         </div>

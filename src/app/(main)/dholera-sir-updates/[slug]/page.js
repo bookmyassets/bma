@@ -67,24 +67,6 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
             Contact Now
           </button>
         </div>
-
-        {/* Newsletter Signup */}
-        <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-          <h4 className="font-semibold text-black mb-3">Stay Updated</h4>
-          <p className="text-gray-600 text-sm mb-4">
-            Subscribe to get the latest updates and insights
-          </p>
-          <div className="space-y-3">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C69C21]"
-            />
-            <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-2 rounded-lg font-semibold transition-colors">
-              Subscribe
-            </button>
-          </div>
-        </div>
       </div>
     </aside>
   );

@@ -293,7 +293,7 @@ const WestWynAboutSection = () => {
                 onClose={closeBrochureForm}
                 title="Get Verified Project Details"
                 headline="Plots starting 10 Lakh at 0 km from Dholera SIR "
-                buttonName="Download Now"
+                buttonName="Get Project Details"
                 onAfterSubmit={handleAfterSubmit}
                 link="https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf"
               />

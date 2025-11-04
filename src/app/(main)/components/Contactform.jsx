@@ -5,11 +5,15 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import logo from "@/assests/bma-logo-black.png";
 
-export default function ContactForm({ onClose, title = "Get In Touch", buttonName = "Book Consultation" }) {
+export default function ContactForm({
+  onClose,
+  title = "Get In Touch",
+  buttonName = "Book Consultation",
+}) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "",  
-    phone: "" 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
   });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -47,9 +51,15 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
 
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
-      const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
-      const lastSubmissionTime = parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10);
-      
+      const storedCount = parseInt(
+        localStorage.getItem("formSubmissionCount") || "0",
+        10
+      );
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("lastSubmissionTime") || "0",
+        10
+      );
+
       // Check if 24 hours have passed since the last submission
       if (lastSubmissionTime) {
         const timeDifference = Date.now() - lastSubmissionTime;
@@ -86,7 +96,7 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
 
   // Handle close function
   const handleClose = () => {
-    if (typeof onClose === 'function') {
+    if (typeof onClose === "function") {
       onClose();
     }
   };
@@ -123,14 +133,16 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
     }
 
     // Phone validation - accept various formats (10-15 digits)
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
     // Check submission limits
     if (submissionCount >= 3) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours."
+      );
       setIsDisabled(true);
       return false;
     }
@@ -188,7 +200,6 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
           setTimeout(() => {
             handleClose();
           }, 3000);
-
         } else {
           console.log("Response Text:", responseText);
           setErrorMessage("Submission received but with unexpected response");
@@ -197,13 +208,12 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
         console.error("Server Error:", responseText);
         throw new Error(responseText || "Submission failed");
       }
-
     } catch (error) {
       console.error("Error submitting form:", error);
       setErrorMessage(`Error submitting form: ${error.message}`);
     } finally {
       setIsLoading(false);
-      
+
       // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         try {
@@ -226,7 +236,9 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page."
+      );
       setIsLoading(false);
       return;
     }
@@ -238,7 +250,7 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
           theme: "dark",
-          size: "compact"
+          size: "compact",
         });
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
@@ -271,39 +283,39 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
           className="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none transition-colors z-10"
           aria-label="Close form"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-6" 
-            fill="none" 
-            viewBox="0 0 24 24" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M6 18L18 6M6 6l12 12" 
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
             />
           </svg>
         </button>
 
         {/* Logo */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: 0.2 }}
-                                className="rounded-lg "
-                              >
-                                <Image
-                                  src={logo}
-                                  alt="Logo"
-                                  width={60}
-                                  height={60}
-                                  className="rounded-lg"
-                                />
-                              </motion.div>
-                            </div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="rounded-lg "
+          >
+            <Image
+              src={logo}
+              alt="Logo"
+              width={60}
+              height={60}
+              className="rounded-lg"
+            />
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -312,11 +324,10 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
           className="text-center mb-6 mt-8"
         >
           <h2 className="text-2xl font-bold text-gray-700 mb-2">{title}</h2>
-         
         </motion.div>
 
         {showPopup ? (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-8"
@@ -346,23 +357,25 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
             </motion.div>
             <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
             <p className="text-gray-300 text-center">
-              Your request has been submitted successfully. We'll contact you shortly.
+              Your request has been submitted successfully. We'll contact you
+              shortly.
             </p>
           </motion.div>
         ) : isDisabled ? (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-8"
           >
             <p className="text-center text-red-400 font-semibold">
-              You have reached the maximum submission limit. Try again after 24 hours.
+              You have reached the maximum submission limit. Try again after 24
+              hours.
             </p>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             {errorMessage && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm"
@@ -370,8 +383,8 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
                 {errorMessage}
               </motion.div>
             )}
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
@@ -388,7 +401,7 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
               />
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
@@ -427,9 +440,25 @@ export default function ContactForm({ onClose, title = "Get In Touch", buttonNam
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-black"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Submitting...
                 </span>

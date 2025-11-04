@@ -1,9 +1,14 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import westwyn1 from "@/assests/westwyn-county/westwyn-3.webp";
 import westwyn2 from "@/assests/westwyn-county/westwyn-1.webp";
 import westwyn3 from "@/assests/westwyn-county/westwyn-2.webp";
+import westwynmob1 from "@/assests/westwyn-county/westwyn-county-mob1.webp";
+import westwynmob2 from "@/assests/westwyn-county/westwyn-county-mob2.webp";
+import westwynmob3 from "@/assests/westwyn-county/westwyn-county-mob3.webp";
+import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import { Plus, Minus } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,6 +19,7 @@ import CostSheet from "../costsheet2";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
+
 
 export default function HeroCarousel() {
   const faqs = [
@@ -41,18 +47,18 @@ export default function HeroCarousel() {
     },
   ];
 
-  const images = [
-    { src: westwyn1, alt: "Westwyn County View 1" },
-    { src: westwyn2, alt: "Westwyn County View 2" },
-    { src: westwyn3, alt: "Westwyn County View 3" },
+  const desktopImages = [
+    { src: westwyn1, alt: "Dholera Investment Opportunity 1" },
+    { src: westwyn2, alt: "Dholera Investment Opportunity 2" },
+    { src: westwyn3, alt: "Dholera Investment Opportunity 3" },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [openIndex, setOpenIndex] = useState(0);
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
+  const mobileImages = [
+    { src: westwynmob1, alt: "Dholera Mobile 1" },
+    { src: westwynmob2, alt: "Dholera Mobile 2" },
+    { src: westwynmob3, alt: "Dholera Mobile 3" },
+  ];
 
-  // Counter states for new section 3
   const [sqYards, setSqYards] = useState(0);
   const [plots, setPlots] = useState(0);
   const [amenities, setAmenities] = useState(0);
@@ -62,6 +68,15 @@ export default function HeroCarousel() {
   const [formHeadline, setFormHeadline] = useState("");
   const [buttonName, setButtonName] = useState("");
   const [formType, setFormType] = useState("");
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [openIndex, setOpenIndex] = useState(0);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
+
+  // Touch handlers for swipe
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   const openContactForm = (title, headline, btnName, type) => {
     setFormTitle(title);
@@ -94,12 +109,11 @@ export default function HeroCarousel() {
       try {
         console.log("Initiating brochure download");
 
-        // Using setTimeout to ensure the popup closes before download starts
         setTimeout(() => {
           const link = document.createElement("a");
           link.href = "https://shorturl.at/Dv00M";
           link.target = "_blank";
-          link.download = "brochure.pdf"; // Add download attribute
+          link.download = "brochure.pdf";
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -119,12 +133,39 @@ export default function HeroCarousel() {
   // Auto-rotate images every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      setCurrentSlide((prev) =>
+        prev === desktopImages.length - 1 ? 0 : prev + 1
       );
     }, 5000);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [desktopImages.length]);
+
+  // Touch handlers for swipe (mobile)
+  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
+  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      setCurrentSlide((prev) =>
+        prev === mobileImages.length - 1 ? 0 : prev + 1
+      );
+    } else if (touchEnd - touchStart > 50) {
+      setCurrentSlide((prev) =>
+        prev === 0 ? mobileImages.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === desktopImages.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? desktopImages.length - 1 : prev - 1
+    );
+  };
 
   // Auto-increment counters for section 3
   useEffect(() => {
@@ -132,14 +173,12 @@ export default function HeroCarousel() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Start counters when section comes into view
             const sqYardsInterval = setInterval(() => {
               setSqYards((prev) => {
                 if (prev >= 150) {
                   clearInterval(sqYardsInterval);
                   return 150;
                 }
-                /* return parseFloat((prev + 0.05).toFixed(2)); */
                 return prev + 2;
               });
             }, 20);
@@ -181,138 +220,195 @@ export default function HeroCarousel() {
 
   return (
     <>
-      <title>
-        WestWyn County Dholera: Premium Residential Plots by BookMyAssets
-      </title>
-      <meta
-        name="description"
-        content="Secure your future with premium residential plots in Dholera Smart City. Explore AUDA-approved options at WestWyn County. Book your dream plot today!"
-      />
-      {/* Hero Section with Carousel */}
-      <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
-        {/* Carousel Images */}
-        <div className="relative w-full h-full">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                index === currentIndex ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="w-full h-full object-cover"
-                priority={index === 0} // Only prioritize first image
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Overlay with Title and Details */}
-        <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center px-4">
-          {/* Main Title */}
-          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">
-            WestWyn County
-          </h1>
-
-          {/* Property Details */}
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 sm:p-6 max-w-md w-full">
-            <div className="grid grid-cols-2 gap-4 text-white">
-              {/* Plot Information */}
-              <div className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-bold">130</span>
-                <span className="text-sm sm:text-base">Plots Available</span>
+      {/* Hero Section with Carousel - Matching Hero3 Design */}
+      <div id="hero" className="relative min-h-screen bg-white">
+        <div className="h-screen max-sm:h-[95vh] flex flex-col">
+          {/* Main Content Section */}
+          <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+            {/* Left Side - Slider Section (60%) */}
+            <div className="w-full lg:w-[60%] relative flex-1">
+              {/* Desktop Slider */}
+              <div className="absolute inset-0 hidden lg:block">
+                <div className="relative w-full h-[100vh] overflow-hidden">
+                  {desktopImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                        index === currentSlide ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        className="object-contain pt-8"
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+                  {/* Navigation */}
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+               
+                </div>
               </div>
 
-              {/* Acreage Information */}
-              <div className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-bold">6.10</span>
-                <span className="text-sm sm:text-base">Total Acres</span>
+              {/* Mobile Slider */}
+              <div
+                className="absolute inset-0 block lg:hidden overflow-hidden"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {mobileImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-contain"
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
+                {/* Navigation buttons for mobile */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+           
               </div>
             </div>
 
-            {/* CTA Button */}
-            <button
-              onClick={() =>
-                openContactForm(
-                  "Westwyn County - Premium Plots",
-                  "Please fill out the form to get exclusive details of WestWyn County. Fields marked with * are mandatory.",
-                  "Enquire Now",
-                  ""
-                )
-              }
-              className="mt-4 bg-[#deae3c] hover:bg-[#eab308] text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
-            >
-              Secure Your Spot at Westwyn County
-            </button>
+            {/* Right Side - Lead Form Section (40%) */}
+            <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6">
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="w-full max-w-md"
+              >
+                {/* Logo */}
+                <div className="text-center mb-6">
+                  <Image
+                    src={logo}
+                    alt="BookMyAssets Logo"
+                    className="mx-auto mb-3 max-sm:hidden"
+                  />
+
+                  <div className="relative">
+                    <style jsx>{`
+                      @keyframes textGlow {
+                        0%,
+                        100% {
+                          text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
+                          color: black;
+                        }
+                        50% {
+                          text-shadow:
+                            0 0 20px rgba(255, 255, 255, 1),
+                            0 0 30px rgba(255, 255, 255, 0.8);
+                          color: black;
+                        }
+                      }
+
+                      .flashy-blink {
+                        animation: flashyBlink 3s infinite ease-in-out;
+                        padding: 4px;
+                        border-radius: 1rem;
+                        border: 3px solid #deae3c;
+                      }
+
+                      .glowing-text {
+                        animation: textGlow 1s infinite ease-in-out;
+                      }
+                    `}</style>
+
+                    <div className="flashy-blink">
+                      <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
+                        WestWyn County - Premium Plots
+                      </h2>
+                      <p className="text-sm lg:text-base glowing-text">
+                        Get Residential Plots on - Fedra-Pipli State Highway
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.9, duration: 0.5 }}
+                  className="space-y-4"
+                >
+                  {/* Primary CTA */}
+                  <motion.button
+                    onClick={() =>
+                      openContactForm(
+                        "Get Exclusive Pricing",
+                        "Fill the form to get the best prices",
+                        "Get Pricing",
+                        "contact"
+                      )
+                    }
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.0 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold"
+                  >
+                    Unbeatable Price in Dholera
+                  </motion.button>
+
+                  {/* Secondary CTA */}
+                  <motion.button
+                    onClick={() =>
+                      openBrochureForm(
+                        "Get Verified Project Details",
+                        "Please fill out the form to download our brochure",
+                        "Get Project Details",
+                        "brochure"
+                      )
+                    }
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.1 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full py-3 px-6 bg-white border-2 border-yellow-500 text-yellow-600 rounded-lg hover:bg-yellow-50 transition-all shadow-md font-semibold"
+                  >
+                    Download Brochure
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
-
-        {/* Navigation Dots */}
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex ? "bg-white w-6" : "bg-white/50"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={() =>
-            setCurrentIndex((prev) =>
-              prev === 0 ? images.length - 1 : prev - 1
-            )
-          }
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors"
-          aria-label="Previous slide"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 sm:h-6 sm:w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <button
-          onClick={() =>
-            setCurrentIndex((prev) =>
-              prev === images.length - 1 ? 0 : prev + 1
-            )
-          }
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors"
-          aria-label="Next slide"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 sm:h-6 sm:w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
       </div>
 
       {/* Section 2 - About */}
@@ -340,9 +436,9 @@ export default function HeroCarousel() {
               <button
                 onClick={() =>
                   openBrochureForm(
-                    "Download Brochure",
+                    "Get Verified Project Details",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
-                    "Download Now",
+                    "Get Project Details",
                     "brochure"
                   )
                 }
@@ -382,7 +478,7 @@ export default function HeroCarousel() {
             {/* Square Yards Counter */}
             <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
               <div className="text-3xl md:text-5xl font-bold text-[#deae3c] mb-2 md:mb-4">
-                {sqYards /* .toFixed(2) */}
+                {sqYards}
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
                 sq. Yards
@@ -441,7 +537,7 @@ export default function HeroCarousel() {
             </div>
 
             {/* Right Column - Investment Benefits */}
-            <div className="w-full  lg:w-1/2">
+            <div className="w-full lg:w-1/2">
               <div className="space-y-4">
                 {[
                   {
@@ -467,7 +563,7 @@ export default function HeroCarousel() {
                 ].map((benefit, index) => (
                   <div
                     key={index}
-                    className="group border border-gray-200 rounded-xl p-6 bg-white  transition-all duration-300 hover:shadow-lg"
+                    className="group border border-gray-200 rounded-xl p-6 bg-white transition-all duration-300 hover:shadow-lg"
                   >
                     <button
                       className="w-full flex justify-between items-center text-left focus:outline-none"
@@ -523,14 +619,11 @@ export default function HeroCarousel() {
 
       <ProjectAmenities />
 
-      <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
+      <CommonForm title="Claim Your Spot in Gujarat's Next Investment Hub" />
       <div className="pt-4 pb-4">
-        {/* <CostSheet /> */}
-
         <CostSheet projectSlug="westwyn-county" showProjectSelector={false} />
       </div>
       <FAQSection />
-      {/* Form */}
 
       <SoldOutProjectsSection />
 
@@ -543,7 +636,6 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
-                /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>
           </div>
