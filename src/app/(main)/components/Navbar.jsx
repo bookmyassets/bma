@@ -425,6 +425,13 @@ useEffect(() => {
                         Channel Partner
                       </Link>
                       <Link
+                        href="/dholera-events"
+                        onClick={closeAllMenus}
+                        className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors"
+                      >
+                        Events
+                      </Link>
+                      <Link
                         href="/gallery"
                         onClick={closeAllMenus}
                         className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors"
@@ -1095,6 +1102,13 @@ useEffect(() => {
               className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
             >
               Channel Partner
+            </Link>
+            <Link
+              href="/dholera-events"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+            >
+              Events
             </Link>
             <Link
               href="/gallery"

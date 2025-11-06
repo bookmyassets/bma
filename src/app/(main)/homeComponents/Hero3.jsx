@@ -419,7 +419,7 @@ export default function LandingPage({ openForm }) {
                     src={image.src}
                     alt={image.alt}
                     
-                    className="object-contain"
+                    className="object-contain pt-16"
                     priority={index === 0}
                   />
                 </div>
