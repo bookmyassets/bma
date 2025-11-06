@@ -65,94 +65,98 @@ export default function page() {
 
   return (
     <>
-     <section
-  className="py-20 relative overflow-hidden"
-  style={{ backgroundColor: "#0d0d0d" }}
->
-  <div className="absolute inset-0">
-    <div
-      className="absolute inset-0"
-      style={{ backgroundColor: "black" }}
-    ></div>
-  </div>
-  <div className="container mx-auto px-6 pt-10 relative z-10">
-    <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-      {/* Content */}
-      <div>
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-white">
-          Dholera : <span style={{ color: "#deae3c" }}>Now or Never</span>
-        </h1>
-        <p className="text-xl mb-8 text-gray-200">
-          Join our sessions, webinars, and on-ground events to explore
-          India's emerging smart city opportunities.
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
-            <span className="font-semibold text-white">
-              ✓ Personalized Consultation
-            </span>
-          </div>
-          <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
-            <span className="font-semibold text-white">
-              ✓ Verified Location and Venue Assitance
-            </span>
-          </div>
-          <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
-            <span className="font-semibold text-white">
-              ✓ Connect With Verified Dholera Advisiors
-            </span>
-          </div>
-          <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
-            <span className="font-semibold text-white">
-              ✓ Meet Industry Leaders
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Hero Image Placeholder */}
-      <div
-        className="rounded-2xl p-8 text-center shadow-2xl"
-        style={{ backgroundColor: "#deae3c" }}
+      <section
+        className="py-20 relative overflow-hidden"
+        style={{ backgroundColor: "#0d0d0d" }}
       >
-        <div className="text-6xl mb-4 text-white flex justify-center">
-          <FaCalendarAlt />
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0"
+            style={{ backgroundColor: "black" }}
+          ></div>
         </div>
-        <h3
-          className="text-2xl font-bold mb-2"
-          style={{ color: "#0d0d0d" }}
-        >
-          Dholera Events
-        </h3>
-        <p style={{ color: "#0d0d0d" }} className="opacity-80">
-          Check the Event Calendar
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+        <div className="container mx-auto px-6 pt-10 relative z-10">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            {/* Content */}
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-white">
+                Dholera : <span style={{ color: "#deae3c" }}>Now or Never</span>
+              </h1>
+              <p className="text-xl mb-8 text-gray-200">
+                Join our sessions, webinars, and on-ground events to explore
+                India's emerging smart city opportunities.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
+                  <span className="font-semibold text-white">
+                    ✓ Personalized Consultation
+                  </span>
+                </div>
+                <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
+                  <span className="font-semibold text-white">
+                    ✓ Verified Location and Venue Assitance
+                  </span>
+                </div>
+                <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
+                  <span className="font-semibold text-white">
+                    ✓ Connect With Verified Dholera Advisiors
+                  </span>
+                </div>
+                <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
+                  <span className="font-semibold text-white">
+                    ✓ Meet Industry Leaders
+                  </span>
+                </div>
+              </div>
+            </div>
 
-{/* White Section with Event Details - Overlaps the dark section */}
-<div className="relative -mt-16 z-20 ">
-  <div className="container mx-auto px-6">
-    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg">
-      <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div>
-          <p className="text-sm text-gray-600 mb-1">Event Name</p>
-          <p className="font-semibold text-gray-900">Dholera : Now or Never</p>
+            {/* Hero Image Placeholder */}
+            <div
+              className="rounded-2xl p-8 text-center shadow-2xl"
+              style={{ backgroundColor: "#deae3c" }}
+            >
+              <div className="text-6xl mb-4 text-white flex justify-center">
+                <FaCalendarAlt />
+              </div>
+              <h3
+                className="text-2xl font-bold mb-2"
+                style={{ color: "#0d0d0d" }}
+              >
+                Dholera Events
+              </h3>
+              <p style={{ color: "#0d0d0d" }} className="opacity-80">
+                Check the Event Calendar
+              </p>
+            </div>
+          </div>
         </div>
-        <div>
-          <p className="text-sm text-gray-600 mb-1">Event Date</p>
-          <p className="font-semibold text-gray-900">15th November 2025</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-600 mb-1">Event Location</p>
-          <p className="font-semibold text-gray-900">Chandigarh</p>
+      </section>
+
+      {/* White Section with Event Details - Overlaps the dark section */}
+      <div className="relative -mt-16 z-20 ">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg">
+            <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <p className="text-sm text-gray-600 mb-1">Event Name</p>
+                <p className="font-semibold text-gray-900">
+                  Dholera : Now or Never
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 mb-1">Event Date</p>
+                <p className="font-semibold text-gray-900">
+                  15th November 2025
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 mb-1">Event Location</p>
+                <p className="font-semibold text-gray-900">Chandigarh</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
       {/* Upcoming Events */}
       <div className="py-8">
@@ -160,8 +164,8 @@ export default function page() {
           <p className="text-center text-3xl font-semibold mb-6">
             Upcoming Event
           </p>
-          <div className="flex gap-4">
-            <div className="w-[60%] bg-gray-100 p-4 rounded-lg">
+          <div className="md:flex gap-4">
+            <div className="md:w-[60%] bg-gray-100 p-4 rounded-lg">
               {/* About the Event */}
               <div className="mb-6 pt-4">
                 <h2 className="text-2xl font-bold text-gray-800 mb-3">
@@ -196,7 +200,7 @@ export default function page() {
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">Dates:</span>{" "}
-                    15th - 16th November
+                    15th November
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">Time:</span>{" "}
@@ -215,14 +219,14 @@ export default function page() {
                 </ul>
               </div>
             </div>
-            <div className="w-[40%]  p-4 rounded-lg">
+            <div className="md:w-[40%]  p-4 rounded-lg">
               <EventForm />
             </div>
           </div>
         </div>
       </div>
       <div className="max-w-7xl mx-auto p-4">
-        <div className="flex bg-gray-100 p-4 rounded-lg">
+        <div className="md:flex bg-gray-100 p-4 rounded-lg">
           {/* Why Attend */}
           <div className="mb-6  pt-4">
             <h2 className="text-2xl font-bold text-gray-800 mb-3">
