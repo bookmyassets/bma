@@ -135,7 +135,7 @@ export default function page() {
 {/* White Section with Event Details - Overlaps the dark section */}
 <div className="relative -mt-16 z-20 ">
   <div className="container mx-auto px-6">
-    <div className="max-w-4xl mx-auto bg-white rounded-xl ">
+    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg">
       <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
           <p className="text-sm text-gray-600 mb-1">Event Name</p>
