@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import EventForm from "./eventForm";
 import { FaCalendar, FaCalendarAlt } from "react-icons/fa";
+import DholeraEventSection from "./Eventdetails";
 
 export default function page() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -226,96 +227,7 @@ export default function page() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto p-4">
-        <div className="md:flex bg-gray-100 p-4 rounded-lg">
-          {/* Why Attend */}
-          <div className="mb-6  pt-4">
-            <h2 className="text-2xl font-bold text-gray-800 mb-3">
-              Why Attend
-            </h2>
-            <p className="text-gray-600 mb-2">
-              Gain valuable insights from experts on:
-            </p>
-            <ul className="space-y-1 text-gray-600 ml-4">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>
-                  Dholera's infrastructure, policy, and industrial landscape
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Documentation and due diligence essentials</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Access to verified, government-approved inventory</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Key Takeaways */}
-          <div className="mb-6 pt-4">
-            <h2 className="text-2xl font-bold text-gray-800 mb-3">
-              Key Takeaways
-            </h2>
-            <ul className="space-y-2 text-gray-600 ml-4">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>
-                  Understand how Dholera's growth momentum can create long-term
-                  value.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>
-                  Explore upcoming infrastructure developments and policy
-                  initiatives.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>
-                  Network with leading professionals, channel partners, and
-                  advisors.
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Learn from on-ground experts and industry speakers.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Who Should Attend */}
-          <div className="pt-4">
-            <h2 className="text-2xl font-bold text-gray-800 mb-3">
-              Who Should Attend
-            </h2>
-            <ul className="space-y-2 text-gray-600 ml-4">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>
-                  Individual investors exploring secure land opportunities
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>
-                  Channel partners and real estate advisors seeking verified
-                  projects
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>
-                  Professionals looking to understand India's next growth
-                  corridor
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
+       <DholeraEventSection/>
       </div>
 
       {/* Past Events */}

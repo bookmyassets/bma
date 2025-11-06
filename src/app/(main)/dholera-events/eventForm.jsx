@@ -90,7 +90,7 @@ export default function EventForm() {
   };
 
   const validateForm = () => {
-    if (!formData.fullName.trim() || !formData.phone.trim() || !formData.email.trim() || !formData.profession || !formData.experience) {
+    if (!formData.fullName.trim() || !formData.phone.trim() ) {
       setErrorMessage("Please fill in all required fields");
       return false;
     }
@@ -213,7 +213,7 @@ export default function EventForm() {
         window.grecaptcha.render(recaptchaRef.current, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
-          theme: "light",
+          theme: "dark",
           size: "compact"
         });
       } catch (error) {
