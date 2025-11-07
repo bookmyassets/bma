@@ -241,7 +241,7 @@ export default function HeroCarousel() {
                         src={image.src}
                         alt={image.alt}
                         fill
-                        className="object-contain pt-8"
+                        className="object-cover pt-8"
                         priority={index === 0}
                       />
                     </div>
@@ -281,7 +281,7 @@ export default function HeroCarousel() {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-contain"
+                      className=" pt-16"
                       priority={index === 0}
                     />
                   </div>
