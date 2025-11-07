@@ -288,8 +288,6 @@ export default function EventForm() {
             />
           </div>
 
- 
-
           {/* reCAPTCHA */}
           <div className="flex justify-center">
             <div ref={recaptchaRef}></div>
@@ -305,7 +303,7 @@ export default function EventForm() {
                 : "bg-[#be9233] hover:bg-[#dbaf51] hover:shadow-lg active:scale-95"
             }`}
           >
-            {isLoading ? "Booking Event Slot..." : "Book Event Slot"}
+            {isLoading ? "Confirming Registration..." : "Register Now"}
           </button>
         </form>
       )}

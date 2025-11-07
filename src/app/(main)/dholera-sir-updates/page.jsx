@@ -71,7 +71,7 @@ export default async function page() {
               {safePosts.length > 0 ? (
                 <div className="space-y-8">
                   {/* Featured Blog Post */}
-                  <article className="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
+                  {/* <article className="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
                     <Link
                       href={`/dholera-sir-updates/${safePosts[0].slug.current}`}
                     >
@@ -117,11 +117,11 @@ export default async function page() {
                         </div>
                       </div>
                     </Link>
-                  </article>
+                  </article> */}
 
                   {/* Smaller Blog Posts Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {safePosts.slice(1).map((post, index) => (
+                    {safePosts.slice(0).map((post, index) => (
                       <article
                         key={post._id}
                         className="bg-[#0d0d0d] rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.03]"
@@ -129,7 +129,7 @@ export default async function page() {
                         <Link
                           href={`/dholera-sir-updates/${post.slug.current}`}
                         >
-                          <div className="h-32 bg-gray-200 flex items-center justify-center overflow-hidden">
+                          <div className=" bg-gray-200 flex items-center justify-center overflow-hidden">
                             {post.mainImage ? (
                               <Image
                                 src={urlFor(post.mainImage)
@@ -142,19 +142,26 @@ export default async function page() {
                                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                               />
                             ) : (
-                              <div className="w-full h-full bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 flex items-center justify-center">
+                              <div className="w-full h-48 bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 flex items-center justify-center">
                                 <div className="text-6xl">📰</div>
                               </div>
                             )}
                           </div>
                           <div className="p-4 text-white hover:text-[#deae3c] transition-colors duration-300">
-                            <h3 className="text-lg font-semibold mb-2 cursor-pointer">
+                            <h3 className="text-lg font-semibold mb-2 cursor-pointer line-clamp-2">
                               {post.title ||
                                 `Dholera Investment Guide ${index + 2}`}
                             </h3>
-                            <p className="text-sm">
-                              {formatDate(post.publishedAt || post._createdAt)}
-                            </p>
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm text-gray-400">
+                                {formatDate(
+                                  post.publishedAt || post._createdAt
+                                )}
+                              </p>
+                              <button className="font-medium hover:underline text-[#deae3c]">
+                                Read More →
+                              </button>
+                            </div>
                           </div>
                         </Link>
                       </article>

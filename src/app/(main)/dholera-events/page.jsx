@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import EventForm from "./eventForm";
-import { FaCalendar, FaCalendarAlt } from "react-icons/fa";
 import DholeraEventSection from "./Eventdetails";
+import { TrendingUp, MapPin, FileText, CheckCircle } from 'lucide-react';
+
 
 export default function page() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -67,7 +68,7 @@ export default function page() {
   return (
     <>
       <section
-        className="py-20 relative overflow-hidden"
+        className="py-20 md:py-40 relative overflow-hidden"
         style={{ backgroundColor: "#0d0d0d" }}
       >
         <div className="absolute inset-0">
@@ -77,7 +78,7 @@ export default function page() {
           ></div>
         </div>
         <div className="container mx-auto px-6 pt-10 relative z-10">
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-7xl mx-auto  gap-12 items-center">
             {/* Content */}
             <div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-white">
@@ -86,47 +87,6 @@ export default function page() {
               <p className="text-xl mb-8 text-gray-200">
                 Join our sessions, webinars, and on-ground events to explore
                 India's emerging smart city opportunities.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
-                  <span className="font-semibold text-white">
-                    ✓ Personalized Consultation
-                  </span>
-                </div>
-                <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
-                  <span className="font-semibold text-white">
-                    ✓ Verified Location and Venue Assitance
-                  </span>
-                </div>
-                <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
-                  <span className="font-semibold text-white">
-                    ✓ Connect With Verified Dholera Advisiors
-                  </span>
-                </div>
-                <div className="bg-white bg-opacity-10 backdrop-blur-sm px-6 py-3 rounded-full">
-                  <span className="font-semibold text-white">
-                    ✓ Meet Industry Leaders
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Hero Image Placeholder */}
-            <div
-              className="rounded-2xl p-8 text-center shadow-2xl"
-              style={{ backgroundColor: "#deae3c" }}
-            >
-              <div className="text-6xl mb-4 text-white flex justify-center">
-                <FaCalendarAlt />
-              </div>
-              <h3
-                className="text-2xl font-bold mb-2"
-                style={{ color: "#0d0d0d" }}
-              >
-                Dholera Events
-              </h3>
-              <p style={{ color: "#0d0d0d" }} className="opacity-80">
-                Check the Event Calendar
               </p>
             </div>
           </div>
@@ -158,6 +118,47 @@ export default function page() {
           </div>
         </div>
       </div>
+      <div className="w-full px-4 py-12 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-4 gap-3 md:gap-6">
+          <div className="flex flex-col items-center text-center">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3" style={{ backgroundColor: '#deae3c' }}>
+              <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-black" />
+            </div>
+            <p className="text-xs md:text-base font-medium text-black leading-tight">
+              Investment Options<br />₹10L–₹10Cr
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center text-center">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3" style={{ backgroundColor: '#deae3c' }}>
+              <MapPin className="w-6 h-6 md:w-8 md:h-8 text-black" />
+            </div>
+            <p className="text-xs md:text-base font-medium text-black leading-tight">
+            Chandigarh Only <br />Booking Offer
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center text-center">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3" style={{ backgroundColor: '#deae3c' }}>
+              <FileText className="w-6 h-6 md:w-8 md:h-8 text-black" />
+            </div>
+            <p className="text-xs md:text-base font-medium text-black leading-tight">
+              Registry Ready<br />Plots
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center text-center">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3" style={{ backgroundColor: '#deae3c' }}>
+              <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-black" />
+            </div>
+            <p className="text-xs md:text-base font-medium text-black leading-tight">
+              Government<br />Approved
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
       {/* Upcoming Events */}
       <div className="py-8">
@@ -177,12 +178,15 @@ export default function page() {
                     What's Happening:
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    Dholera: Now or Never is a one-day investor meetup hosted by
-                    BookMyAssets, designed for professionals and investors
-                    seeking clarity on Dholera's rapid growth and long-term
-                    potential. The session highlights the city's evolving
-                    infrastructure, strong policy framework, and the industrial
-                    investments that are shaping its future.
+                    Dholera: Now or Never is a one-day investor meet for
+                    individual investors, channel partners, and real-estate
+                    advisors seeking clarity on Dholera’s rapid growth and
+                    long-term potential. Attend to gain expert insights on
+                    Dholera’s growth roadmap, review due-diligence-backed and
+                    title-cleared opportunities. Also, access exclusive
+                    Chandigarh-only on-spot booking offers. Investment slabs
+                    range from ₹10 Lakh to ₹10 Crore. Register now to lock your
+                    spot.
                   </p>
                 </div>
               </div>
@@ -208,8 +212,14 @@ export default function page() {
                     11:00 AM - 8:00 PM
                   </li>
                   <li>
-                    <span className="font-semibold text-gray-700">Venue:</span>{" "}
-                    Mercure Hotel, Tribune Chowk, Chandigarh
+                    <a href="https://maps.app.goo.gl/EHmkHhfuSgs3L8vDA">
+                      <span className="font-semibold text-gray-700">
+                        Venue:
+                      </span>{" "}
+                      <span className="text-blue-400">
+                        Mercure Hotel, Chandigarh
+                      </span>
+                    </a>
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">
@@ -227,7 +237,7 @@ export default function page() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto p-4">
-       <DholeraEventSection/>
+        <DholeraEventSection />
       </div>
 
       {/* Past Events */}
