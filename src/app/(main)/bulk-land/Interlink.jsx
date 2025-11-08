@@ -286,9 +286,9 @@ export const getSportLinks = () => {
 // Property Card Component - Next.js compatible
 const PropertyCard = ({ image, title, area, price, link }) => {
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 group flex flex-col h-full">
       {/* Image Section */}
-      <div className="relative h-48 md:h-56 overflow-hidden">
+      <div className="relative h-48 md:h-56 overflow-hidden flex-shrink-0">
         <Image 
           src={image} 
           alt={title}
@@ -299,32 +299,25 @@ const PropertyCard = ({ image, title, area, price, link }) => {
       </div>
       
       {/* Content Section */}
-      <div className="p-4 md:p-6">
+      <div className="p-4 md:p-6 flex flex-col flex-grow">
         {/* Title */}
-        <h3 className="text-lg  font-bold text-gray-800 mb-3 line-clamp-2">
+        <h3 className="text-lg font-bold text-gray-800 mb-3 line-clamp-2">
           {title}
         </h3>
         
         {/* Area */}
-        <div className="flex items-center mb-3">
-          <span className="text-sm  text-gray-600 font-medium">
+        <div className="flex items-center mb-4 flex-grow">
+          <span className="text-sm text-gray-600 font-medium">
             Area: <span className="text-gray-800 font-semibold">{area}</span>
           </span>
         </div>
         
-        {/* Price */}
-        {/* <div className="flex items-center mb-4">
-          <span className="text-lg  font-bold text-gray-900">
-            ₹{price}
-          </span>
-        </div> */}
-        
-        {/* Read More Button */}
+        {/* Read More Button - Now always at bottom */}
         <a 
           href={link}
-          className="w-full flex items-center justify-between px-4 py-2 md:py-3 rounded-lg border-2 border-[#deae3c] text-[#deae3c] font-semibold hover:bg-[#deae3c] hover:text-white transition-all duration-300 group"
+          className="w-full flex items-center justify-between px-4 py-2 md:py-3 rounded-lg border-2 border-[#deae3c] text-[#deae3c] font-semibold hover:bg-[#deae3c] hover:text-white transition-all duration-300 group mt-auto"
         >
-          <span className="text-sm ">Read More</span>
+          <span className="text-sm">Read More</span>
           <svg className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
