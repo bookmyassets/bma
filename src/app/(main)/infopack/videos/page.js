@@ -7,46 +7,52 @@ export default async function VideosPage() {
   
  const videos = [
   {
-    id: "sYONhrTYBTg",
+    id: "6_BYJo1_HFU",
     title: "[2025] PROGRESS: TATA Semiconductor Plant in Dholera",
     duration: "4:55"
   },
   {
-    id: "G5Ms2tm4Ugo",
+    id: "QS6W_4hCn2g",
     title: "Dholera's Heart: Man-Made River Front in Activation Area",
     duration: "6:30"
   },
   {
-    id: "7-GxVQoTOpE",
+    id: "3iiF6Oix5Fc",
     title: "ReNew's Massive Solar Cell Manufacturing Plant",
     duration: "unknown"
   },
   {
-    id: "naVwT2D5wIo",
+    id: "RITjLu6hRxc",
     title: "CURRENT UPDATE: Dholera International Airport to be Functional in 2026",
     duration: "unknown"
   },
   {
-    id: "NdH1zHVGTcQ",
+    id: "5DaF8tljkkU",
     title: "Ahmedabad-Dholera Expressway connectivity",
     duration: "unknown"
   },
   {
-    id: "fHLqa6YM1Aw",
+    id: "5we0e_XlTjA",
     title: "100% Water Recycling at Dholera's Water Treatment Plant",
     duration: "unknown"
   },
   {
-    id: "0lAocID2crU",
+    id: "Ql4EVnwIne4",
     title: "WestWyn County - Premium Plots on Fedra-Pipli Highway, Dholera",
     duration: "unknown"
   },
   {
-    id: "P0a8LCMQHqI",
-    title: "Dholera Activation Area Heart of India's Billion-Dollar Future City",
+    id: "3u8yJ5XYNns",
+    title: "Dholera Activation Area Heart of India's Billion-Dollar Future City (ABCD Building)",
+    duration: "unknown"
+  },
+  {
+    id: "1LdHVJR_yBQ",
+    title: "WestWyn Estate",
     duration: "unknown"
   }
 ];
+
 
   if (videos.length === 0) {
     return (
@@ -123,7 +129,7 @@ export default async function VideosPage() {
 
               <div className="p-5">
                 {video.title && (
-                  <h3 className="text-lg font-bold text-gray-800 group-hover:text-[#d8b66d] transition-colors">
+                  <h3 className="text-lg font-bold text-gray-800 group-hover:text-[#deae3c] transition-colors">
                     {video.title}
                   </h3>
                 )}
