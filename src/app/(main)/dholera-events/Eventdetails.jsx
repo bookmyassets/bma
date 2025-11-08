@@ -16,26 +16,29 @@ export default function DholeraEventSection() {
                 Why Attend
               </h2>
             </div>
-            <p className="text-gray-600 mb-4 leading-relaxed">
-              Gain valuable insights from experts on:
-            </p>
             <div className="space-y-3">
               <div className="flex gap-3">
                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p className="text-gray-700 leading-relaxed">
-                  Dholera's infrastructure, policy, and industrial landscape
+                  Expert insights on Dholera’s infrastructure, policy and industrial roadmap.
                 </p>
               </div>
               <div className="flex gap-3">
                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p className="text-gray-700 leading-relaxed">
-                  Documentation and due diligence essentials
+                  Clear guidance on documentation and due-diligence essentials for secure purchases.
                 </p>
               </div>
               <div className="flex gap-3">
                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p className="text-gray-700 leading-relaxed">
-                  Access to verified, government-approved inventory
+                  Access to verified, government-approved, title-cleared inventory.
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-gray-700 leading-relaxed">
+                  Exclusive Chandigarh-only on-spot booking window with special offers.
                 </p>
               </div>
             </div>

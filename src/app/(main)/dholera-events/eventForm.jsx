@@ -230,7 +230,7 @@ export default function EventForm() {
   return (
     <div className="bg-white p-8 rounded-xl shadow-2xl border border-gray-200 sticky top-8">
       <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-        Dholera : Now or Never
+        Now or Never - Get Chandigarh’s Exclusive Offer
       </h3>
 
       {showPopup && (
