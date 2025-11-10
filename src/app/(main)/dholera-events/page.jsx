@@ -4,7 +4,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import EventForm from "./eventForm";
 import DholeraEventSection from "./Eventdetails";
 import { TrendingUp, MapPin, FileText, CheckCircle } from 'lucide-react';
-
+import eventHero from "@/assests/bma-events/bma-dholera-events-desktop-banner.webp"
+import eventHeroM from "@/assests/bma-events/bma-dholera-events-mobile-banner.webp"
+import Image from "next/image";
 
 export default function page() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -67,31 +69,37 @@ export default function page() {
 
   return (
     <>
-      <section
-        className="py-20 md:py-40 relative overflow-hidden"
-        style={{ backgroundColor: "#0d0d0d" }}
-      >
-        <div className="absolute inset-0">
-          <div
-            className="absolute inset-0"
-            style={{ backgroundColor: "black" }}
-          ></div>
-        </div>
-        <div className="container mx-auto px-6 pt-10 relative z-10">
-          <div className="max-w-7xl mx-auto  gap-12 items-center">
-            {/* Content */}
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-white">
-                Dholera : <span style={{ color: "#deae3c" }}>Now or Never</span>
-              </h1>
-              <p className="text-xl mb-8 text-gray-200">
-                Join our sessions, webinars, and on-ground events to explore
-                India's emerging smart city opportunities.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+     <section
+  className="relative overflow-hidden bg-[#0d0d0d] py-20 md:py-40"
+>
+  {/* Background Overlay */}
+  <div className="absolute inset-0 bg-black opacity-80"></div>
+
+  <div className="container mx-auto px-6 relative z-10">
+    {/* Desktop Banner */}
+    <div className="hidden md:block">
+      <Image
+        src={eventHero}
+        alt="Dholera Event - Desktop Banner"
+        width={1600}
+        height={500}
+        className="w-full h-[500px] object-cover"
+      />
+    </div>
+
+    {/* Mobile Banner */}
+    <div className="block md:hidden">
+      <Image
+        src={eventHeroM}
+        alt="Dholera Event - Mobile Banner"
+        width={450}
+        height={550}
+        className="w-full h-[550px] object-cover"
+      />
+    </div>
+  </div>
+</section>
+
 
       {/* White Section with Event Details - Overlaps the dark section */}
       <div className="relative -mt-16 z-20 ">
