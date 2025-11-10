@@ -526,54 +526,67 @@ export default async function Post({ params }) {
           {/* Related Articles Section */}
           <section className="bg-gray-50 py-12 mt-4">
             <div className="max-w-7xl mx-auto px-4">
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  You might also like
-                </h2>
-                <Link
-                  href="/about-dholera-sir"
-                  className="rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
-                >
-                  View all
-                </Link>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedBlogs && relatedBlogs.length > 0
                   ? relatedBlogs.map((blog) => (
                       <Link
                         key={blog._id}
                         href={`/about-dholera-sir/${blog.slug.current}`}
                       >
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
-                          <div className="relative h-48 overflow-hidden">
+                        <div className="bg-white rounded-xl shadow-md overflow-hidden h-full hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 border border-gray-200">
+                          {/* Blog Image */}
+                          <div className="relative h-52">
                             {blog.mainImage ? (
                               <Image
                                 src={urlFor(blog.mainImage)
-                                  .width(400)
-                                  .height(250)
+                                  .width(1200)
+                                  .height(675)
                                   .url()}
                                 alt={blog.title}
-                                width={400}
-                                height={250}
-                                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                                fill
+                                className="object-cover"
                               />
                             ) : (
-                              <div className="w-full h-full bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center">
-                                <span className="text-gray-400">No image</span>
+                              <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21] flex items-center justify-center">
+                                <span className="text-white text-sm">
+                                  No image
+                                </span>
                               </div>
                             )}
                           </div>
-                          <div className="p-5">
-                            <h3 className="font-bold text-lg mb-2 text-gray-900 line-clamp-2">
+
+                          {/* Content */}
+                          <div className="p-6 flex flex-col">
+                            <h3 className="text-xl font-bold mb-3 text-black group-hover:text-[#C69C21] line-clamp-2 transition-colors">
                               {blog.title}
                             </h3>
-                            <p className="text-gray-700 mb-4 line-clamp-3">
-                              {blog.description}
-                            </p>
-                            <span className="hover:text-[#C69C21] text-[#FDB913] p-1 rounded-xl font-semibold bg-gray-800 inline-flex items-center">
-                              Read more
-                            </span>
+
+                            {blog.description && (
+                              <p className="text-gray-700 mb-4 line-clamp-3 flex-grow">
+                                {blog.description}
+                              </p>
+                            )}
+
+                            {/* Footer with "Read More" */}
+                            <div className="border-t border-gray-200 pt-4 mt-auto">
+                              <div className="flex justify-between items-center text-sm">
+                                {blog.publishedAt && (
+                                  <p className="text-sm text-gray-400">
+                                    {new Date(
+                                      blog.publishedAt
+                                    ).toLocaleDateString("en-US", {
+                                      year: "numeric",
+                                      month: "short",
+                                      day: "numeric",
+                                    })}
+                                  </p>
+                                )}
+                                <span className="font-medium text-[#deae3c] group-hover:underline">
+                                  Read More →
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </Link>
@@ -583,19 +596,25 @@ export default async function Post({ params }) {
                       .map((_, i) => (
                         <div
                           key={i}
-                          className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200"
+                          className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 h-full"
                         >
-                          <div className="h-48 bg-gradient-to-r from-gray-100 to-gray-200"></div>
+                          <div className="h-52 bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse"></div>
                           <div className="p-6">
-                            <div className="h-4 bg-gray-200 rounded w-1/4 mb-3"></div>
-                            <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
-                            <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                            <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                            <div className="h-6 bg-gray-200 rounded w-3/4 mb-3 animate-pulse"></div>
+                            <div className="h-4 bg-gray-200 rounded w-full mb-2 animate-pulse"></div>
+                            <div className="h-4 bg-gray-200 rounded w-2/3 mb-4 animate-pulse"></div>
+                            <div className="border-t border-gray-200 pt-4 mt-6">
+                              <div className="flex justify-between">
+                                <div className="h-4 bg-gray-200 rounded w-1/4 animate-pulse"></div>
+                                <div className="h-4 bg-gray-200 rounded w-1/5 animate-pulse"></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       ))}
               </div>
             </div>
+
           </section>
         </div>
       </>
