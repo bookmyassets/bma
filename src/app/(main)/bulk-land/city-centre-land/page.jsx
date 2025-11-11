@@ -97,7 +97,7 @@ export default function page() {
             hospitality, corporate offices, and civic institutions, along with
             high-density residential and mixed-use projects. As the focal point
             of Dholera’s master plan, the City Centre offers maximum visibility,
-            footfall, and prestige — making it the prime location for businesses
+            footfall, and prestige - making it the prime location for businesses
             and investors seeking a landmark presence in India’s first
             greenfield smart city.
           </p>

@@ -69,9 +69,9 @@ export default function page() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#0d0d0d]">
+      <section className="relative overflow-hidden max-sm:bg-[#0d0d0d]">
         {/* Background Overlay */}
-        <div className="absolute inset-0 bg-black opacity-80"></div>
+        <div className="absolute inset-0  opacity-80"></div>
 
         <div className="container pt-8 mx-auto px-6 relative z-10">
           {/* Desktop Banner */}
@@ -91,7 +91,7 @@ export default function page() {
               alt="Dholera Event - Mobile Banner"
               width={450}
               height={550}
-              className="w-full h-auto object-contain"
+              className="w-full h-auto object-cover"
               priority
             />
           </div>
