@@ -117,7 +117,7 @@ export default function page() {
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Location</p>
                 <a href="https://maps.app.goo.gl/EHmkHhfuSgs3L8vDA">
-                      <span className="text-blue-400">
+                      <span className="text-[#deae3c]">
                         Mercure Hotel, Chandigarh
                       </span>
                     </a>

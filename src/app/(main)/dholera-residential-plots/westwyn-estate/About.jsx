@@ -155,7 +155,7 @@ const WestWynAboutSection = () => {
             About <span className="text-[#deae3c]">WestWyn Estate</span>
           </h2>
 
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
             Premium plotted development in Dholera Smart City with strategic
             location and high ROI potential
           </p>
