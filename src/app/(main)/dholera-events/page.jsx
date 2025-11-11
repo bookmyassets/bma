@@ -3,9 +3,9 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import EventForm from "./eventForm";
 import DholeraEventSection from "./Eventdetails";
-import { TrendingUp, MapPin, FileText, CheckCircle } from 'lucide-react';
-import eventHero from "@/assests/bma-events/bma-dholera-events-desktop-banner.webp"
-import eventHeroM from "@/assests/bma-events/bma-dholera-events-mobile-banner.webp"
+import { TrendingUp, MapPin, FileText, CheckCircle } from "lucide-react";
+import eventHero from "@/assests/bma-events/bma-dholera-events-desktop-banner.webp";
+import eventHeroM from "@/assests/bma-events/bma-dholera-events-mobile-banner.webp";
 import Image from "next/image";
 
 export default function page() {
@@ -69,38 +69,34 @@ export default function page() {
 
   return (
     <>
-     <section
-  className="relative overflow-hidden bg-[#0d0d0d] py-20 md:py-40"
->
-  {/* Background Overlay */}
-  <div className="absolute inset-0 bg-black opacity-80"></div>
+      <section className="relative overflow-hidden bg-[#0d0d0d]">
+        {/* Background Overlay */}
+        <div className="absolute inset-0 bg-black opacity-80"></div>
 
-  <div className="container mx-auto px-6 relative z-10">
-    {/* Desktop Banner */}
-    <div className="hidden md:block">
-      <Image
-        src={eventHero}
-        alt="Dholera Event - Desktop Banner"
-        width={1600}
-        height={500}
-        className="w-full h-[500px] object-cover"
-      />
-    </div>
+        <div className="container pt-8 mx-auto px-6 relative z-10">
+          {/* Desktop Banner */}
+          <div className="hidden md:block">
+            <Image
+              src={eventHero}
+              alt="Dholera Event - Desktop Banner"
+              className="w-full h-auto object-contain"
+              priority
+            />
+          </div>
 
-    {/* Mobile Banner */}
-    <div className="block md:hidden">
-      <Image
-        src={eventHeroM}
-        alt="Dholera Event - Mobile Banner"
-        width={450}
-        height={550}
-        className="w-full h-[550px] object-cover"
-      />
-    </div>
-  </div>
-</section>
-
-
+          {/* Mobile Banner */}
+          <div className="block md:hidden">
+            <Image
+              src={eventHeroM}
+              alt="Dholera Event - Mobile Banner"
+              width={450}
+              height={550}
+              className="w-full h-auto object-contain"
+              priority
+            />
+          </div>
+        </div>
+      </section>
       {/* White Section with Event Details - Overlaps the dark section */}
       <div className="relative -mt-16 z-20 ">
         <div className="container mx-auto px-6">
@@ -127,46 +123,65 @@ export default function page() {
         </div>
       </div>
       <div className="w-full px-4 py-12 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-4 gap-3 md:gap-6">
-          <div className="flex flex-col items-center text-center">
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3" style={{ backgroundColor: '#deae3c' }}>
-              <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-black" />
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-4 gap-3 md:gap-6">
+            <div className="flex flex-col items-center text-center">
+              <div
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3"
+                style={{ backgroundColor: "#deae3c" }}
+              >
+                <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-black" />
+              </div>
+              <p className="text-xs md:text-base font-medium text-black leading-tight">
+                Investment Options
+                <br />
+                ₹10L–₹10Cr
+              </p>
             </div>
-            <p className="text-xs md:text-base font-medium text-black leading-tight">
-              Investment Options<br />₹10L–₹10Cr
-            </p>
-          </div>
 
-          <div className="flex flex-col items-center text-center">
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3" style={{ backgroundColor: '#deae3c' }}>
-              <MapPin className="w-6 h-6 md:w-8 md:h-8 text-black" />
+            <div className="flex flex-col items-center text-center">
+              <div
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3"
+                style={{ backgroundColor: "#deae3c" }}
+              >
+                <MapPin className="w-6 h-6 md:w-8 md:h-8 text-black" />
+              </div>
+              <p className="text-xs md:text-base font-medium text-black leading-tight">
+                Chandigarh Only <br />
+                Booking Offer
+              </p>
             </div>
-            <p className="text-xs md:text-base font-medium text-black leading-tight">
-            Chandigarh Only <br />Booking Offer
-            </p>
-          </div>
 
-          <div className="flex flex-col items-center text-center">
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3" style={{ backgroundColor: '#deae3c' }}>
-              <FileText className="w-6 h-6 md:w-8 md:h-8 text-black" />
+            <div className="flex flex-col items-center text-center">
+              <div
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3"
+                style={{ backgroundColor: "#deae3c" }}
+              >
+                <FileText className="w-6 h-6 md:w-8 md:h-8 text-black" />
+              </div>
+              <p className="text-xs md:text-base font-medium text-black leading-tight">
+                Registry Ready
+                <br />
+                Plots
+              </p>
             </div>
-            <p className="text-xs md:text-base font-medium text-black leading-tight">
-              Registry Ready<br />Plots
-            </p>
-          </div>
 
-          <div className="flex flex-col items-center text-center">
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3" style={{ backgroundColor: '#deae3c' }}>
-              <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-black" />
+            <div className="flex flex-col items-center text-center">
+              <div
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3"
+                style={{ backgroundColor: "#deae3c" }}
+              >
+                <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-black" />
+              </div>
+              <p className="text-xs md:text-base font-medium text-black leading-tight">
+                Government
+                <br />
+                Approved
+              </p>
             </div>
-            <p className="text-xs md:text-base font-medium text-black leading-tight">
-              Government<br />Approved
-            </p>
           </div>
         </div>
       </div>
-    </div>
 
       {/* Upcoming Events */}
       <div className="py-8">
