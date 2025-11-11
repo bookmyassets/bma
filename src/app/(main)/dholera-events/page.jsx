@@ -101,7 +101,7 @@ export default function page() {
       <div className="relative -mt-16 z-20 ">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg">
-            <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 gap-6 max-sm:flex-col flex sm:justify-between sm:items-center">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Name</p>
                 <p className="font-semibold text-gray-900">
@@ -116,7 +116,7 @@ export default function page() {
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Location</p>
-                <p className="font-semibold text-gray-900">Chandigarh</p>
+                <p className="font-semibold text-gray-900">Mercure Hotel, Chandigarh</p>
               </div>
             </div>
           </div>
