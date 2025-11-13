@@ -325,6 +325,85 @@ export default function page() {
           </div>
         </div>
       </div>
+    {/* Past Events */}
+      <div className="py-8 hidden">
+        <div className="max-w-7xl mx-auto px-4">
+          <p className="text-center text-3xl font-semibold mb-6">Past Event</p>
+          <div className="relative">
+            {/* Carousel Container */}
+            <div className="overflow-hidden">
+              <div
+                className="flex gap-4 transition-transform duration-300 ease-in-out"
+                style={{
+                  transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
+                }}
+              >
+                {pastEvents.map((event) => (
+                  <div
+                    key={event.id}
+                    className="flex-shrink-0 w-[calc(25%-12px)]"
+                  >
+                    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                      <img
+                        src={event.image}
+                        alt={event.name}
+                        className="w-full h-48 object-cover"
+                      />
+                      <div className="p-4">
+                        <h3 className="font-semibold text-lg mb-2 line-clamp-2">
+                          {event.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm">{event.date}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Buttons - Only show if more than 4 events */}
+            {pastEvents.length > itemsPerPage && (
+              <>
+                <button
+                  onClick={handlePrev}
+                  disabled={currentIndex === 0}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={currentIndex === maxIndex}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Event Description Section */}
+      <div className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#deae3c' }}>
+              Dholera: Now or Never
+            </h2>
+            <p className="text-lg leading-relaxed text-black mb-4">
+              Dholera: Now or Never is a one-day real estate event for investors, channel partners, and advisors exploring Dholera's rapid growth and future potential. As one of the key{' '}
+              <span className="font-semibold" style={{ color: '#deae3c' }}>real estate current events</span>, it offers expert insights, verified opportunities, and practical{' '}
+              <span className="font-semibold" style={{ color: '#deae3c' }}>real estate event ideas</span> for professionals.
+            </p>
+            <p className="text-lg leading-relaxed text-black">
+              Join this exclusive{' '}
+              <span className="font-semibold" style={{ color: '#deae3c' }}>real estate broker event</span> to understand Dholera's development roadmap and explore registry-ready options backed by due diligence. This{' '}
+              <span className="font-semibold" style={{ color: '#deae3c' }}>real estate event invitation</span> is open to all looking to learn and connect with industry experts in Chandigarh. Register now to be part of the discussion shaping Dholera's future.
+            </p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
