@@ -26,15 +26,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-
-<meta name="facebook-domain-verification" content="6dgioemr9ldkch8vjbshuxe5g66y85"  />
+        <meta
+          name="facebook-domain-verification"
+          content="6dgioemr9ldkch8vjbshuxe5g66y85"
+        />
 
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-M6ZWDM9CGE"
         />
 
-        <Script>
+        <Script strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -54,7 +56,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             `,
           }}
         />
-        <Script type="text/javascript">
+        <Script type="text/javascript" strategy="lazyOnload">
           {`
                (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -65,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </Script>
       </head>
       <body>
-        <ScrollToTop/>
+        <ScrollToTop />
         <style jsx global>{`
           @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800&display=swap");
 

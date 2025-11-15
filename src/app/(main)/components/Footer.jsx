@@ -24,17 +24,17 @@ export default function Footer() {
               />
             </Link>
             <div className="space-y-2 text-sm">
-              <a className="flex items-center gap-2" href="tel:+918130371647"><FaPhone className=' rotate-90' /> +91 81 30 37 16 47</a>
-              <a className="flex items-center gap-2" href="mailto:info@bookmyassets.com"><FaEnvelope /> info@bookmyassets.com</a>
-              <a className="flex items-center gap-2" href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7"><FaMapMarkerAlt /> 620, 6th Floor, JMD Megapolis,<br /> Sector 48, Gurugram, Haryana 122001</a>
+              <a className="flex items-center gap-2" aria-label='BookMyAssets Phone' href="tel:+918130371647"><FaPhone className=' rotate-90' /> +91 81 30 37 16 47</a>
+              <a className="flex items-center gap-2" aria-label='BookMyAssets Email' href="mailto:info@bookmyassets.com"><FaEnvelope /> info@bookmyassets.com</a>
+              <a className="flex items-center gap-2" aria-label='BookMyAssets Google Maps Location' href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7"><FaMapMarkerAlt /> 620, 6th Floor, JMD Megapolis,<br /> Sector 48, Gurugram, Haryana 122001</a>
             </div>
             {/* Social Icons */}
             <div className="flex gap-4 text-xl mt-4">
-              <Link href="https://www.facebook.com/profile.php?id=61574896794632"><FaFacebook className="text-blue-600" /></Link>
-              <Link href="https://www.instagram.com/bookmyassets/"><FaInstagram className="text-pink-500" /></Link>
-              <Link href="https://x.com/BookMyAssets"><FaXTwitter className="text-black" /></Link>
-              <Link href="https://www.linkedin.com/company/bookmyassetss/"><FaLinkedin className="text-blue-700" /></Link>
-              <Link href="https://www.youtube.com/@BookMyAssets"><FaYoutube className="text-red-600" /></Link>
+              <Link aria-label='Visit Facebook Page of BookMyAssets' href="https://www.facebook.com/profile.php?id=61574896794632"><FaFacebook className="text-blue-600" /></Link>
+              <Link aria-label='Visit Instagram Account of BookMyAssets' href="https://www.instagram.com/bookmyassets/"><FaInstagram className="text-pink-500" /></Link>
+              <Link aria-label='Visit X handle of BookMyAssets' href="https://x.com/BookMyAssets"><FaXTwitter className="text-black" /></Link>
+              <Link aria-label='Visit LinkedIn Profile of BookMyAssets' href="https://www.linkedin.com/company/bookmyassetss/"><FaLinkedin className="text-blue-700" /></Link>
+              <Link aria-label='Visit YouTube Channel of BookMyAssets' href="https://www.youtube.com/@BookMyAssets"><FaYoutube className="text-red-600" /></Link>
             </div>
           </div>
 

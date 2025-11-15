@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
@@ -35,6 +35,10 @@ export default function LandingPage({ openForm }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  
+  // Use refs to avoid forced reflows
+  const slideContainerRef = useRef(null);
+  const animationFrameRef = useRef(null);
 
   const desktopImages = [
     { src: img1, alt: "Dholera Investment Opportunity 1" },
@@ -60,12 +64,12 @@ export default function LandingPage({ openForm }) {
           script.onload = () => setRecaptchaLoaded(true);
           script.onerror = () => {
             console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true); // Fallback
+            setRecaptchaLoaded(true);
           };
           document.head.appendChild(script);
         } catch (err) {
           console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true); // Fallback
+          setRecaptchaLoaded(true);
         }
       } else if (window.grecaptcha) {
         setRecaptchaLoaded(true);
@@ -94,14 +98,17 @@ export default function LandingPage({ openForm }) {
 
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
     setErrorMessage("");
-  };
+  }, []);
 
   const validateForm = () => {
     if (!formData.fullName || !formData.phone) {
@@ -170,13 +177,11 @@ export default function LandingPage({ openForm }) {
         setShowThankYou(true);
         setTimeout(() => {
           setShowThankYou(false);
-          handleClose();
-
-          // Get current pathname for return URL
-          const currentPath = pathname || window.location.pathname;
-
-          // Push to thank-you route with return URL
-          router.push(`/thankyou`);
+          
+          // Use router if available, otherwise fallback to window.location
+          if (typeof window !== "undefined") {
+            window.location.href = "/thankyou";
+          }
         }, 2000);
       } else {
         throw new Error("Error submitting form");
@@ -193,6 +198,7 @@ export default function LandingPage({ openForm }) {
       }
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -203,7 +209,6 @@ export default function LandingPage({ openForm }) {
       return;
     }
 
-    // If reCAPTCHA is loaded, render it in the ref
     if (window.grecaptcha && recaptchaLoaded) {
       try {
         if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
@@ -227,74 +232,75 @@ export default function LandingPage({ openForm }) {
     }
   };
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
+  // Optimized slider transition using requestAnimationFrame
+  const transitionSlide = useCallback((nextSlide) => {
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+    
+    animationFrameRef.current = requestAnimationFrame(() => {
+      setCurrentSlide(nextSlide);
+    });
+  }, []);
 
-  const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
+  // Auto-advance slider
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) =>
+      transitionSlide((prev) =>
         prev === desktopImages.length - 1 ? 0 : prev + 1
       );
     }, 5000);
     return () => clearInterval(interval);
-  }, [desktopImages.length]);
+  }, [desktopImages.length, transitionSlide]);
 
-  // Touch handlers for swipe (mobile)
-  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
-  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 50) {
-      setCurrentSlide((prev) =>
+  // Optimized touch handlers
+  const handleTouchStart = useCallback((e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  }, []);
+
+  const handleTouchMove = useCallback((e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    const swipeThreshold = 50;
+    if (touchStart - touchEnd > swipeThreshold) {
+      transitionSlide((prev) =>
         prev === mobileImages.length - 1 ? 0 : prev + 1
       );
-    } else if (touchEnd - touchStart > 50) {
-      setCurrentSlide((prev) =>
+    } else if (touchEnd - touchStart > swipeThreshold) {
+      transitionSlide((prev) =>
         prev === 0 ? mobileImages.length - 1 : prev - 1
       );
     }
-  };
+  }, [touchStart, touchEnd, mobileImages.length, transitionSlide]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) =>
+  const nextSlide = useCallback(() => {
+    transitionSlide((prev) =>
       prev === desktopImages.length - 1 ? 0 : prev + 1
     );
-  };
-  const prevSlide = () => {
-    setCurrentSlide((prev) =>
+  }, [desktopImages.length, transitionSlide]);
+
+  const prevSlide = useCallback(() => {
+    transitionSlide((prev) =>
       prev === 0 ? desktopImages.length - 1 : prev - 1
     );
-  };
+  }, [desktopImages.length, transitionSlide]);
 
   const [isDownload, setIsDownload] = useState(false);
 
-  const openBrochure = () => {
+  const openBrochure = useCallback(() => {
     setIsDownload(true);
-  };
+  }, []);
 
-  const closeBrochure = () => {
+  const closeBrochure = useCallback(() => {
     setIsDownload(false);
-  };
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setShowPopup(false);
+    setShowThankYou(false);
+  }, []);
 
   return (
     <div id="hero" className="relative min-h-screen bg-white">
@@ -359,19 +365,24 @@ export default function LandingPage({ openForm }) {
 
       {/* Main Layout - Desktop */}
       <div className="h-screen max-sm:h-[95vh] flex flex-col">
-        {/* Main Content Section - Takes most of the screen */}
+        {/* Main Content Section */}
         <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Left Side - Slider Section (60%) */}
           <div className="w-full lg:w-[60%] relative flex-1">
-            {/* Desktop Slider */}
+            {/* Desktop Slider - Optimized with transform instead of opacity */}
             <div className="absolute inset-0 hidden lg:block">
-              <div className="relative w-full h-[100vh] overflow-hidden">
+              <div 
+                ref={slideContainerRef}
+                className="relative w-full h-[100vh] overflow-hidden"
+              >
                 {desktopImages.map((image, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
+                    className="absolute inset-0 transition-opacity duration-1000 ease-in-out will-change-[opacity]"
+                    style={{
+                      opacity: index === currentSlide ? 1 : 0,
+                      pointerEvents: index === currentSlide ? 'auto' : 'none'
+                    }}
                   >
                     <Image
                       src={image.src}
@@ -379,19 +390,23 @@ export default function LandingPage({ openForm }) {
                       fill
                       className="object-cover pt-8"
                       priority={index === 0}
+                      quality={85}
+                      loading={index === 0 ? "eager" : "lazy"}
                     />
                   </div>
                 ))}
                 {/* Navigation */}
                 <button
                   onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  aria-label="Previous slide"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  aria-label="Next slide"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
@@ -401,7 +416,7 @@ export default function LandingPage({ openForm }) {
               </div>
             </div>
 
-            {/* Mobile Slider */}
+            {/* Mobile Slider - Optimized */}
             <div
               className="absolute inset-0 block lg:hidden overflow-hidden"
               onTouchStart={handleTouchStart}
@@ -411,28 +426,33 @@ export default function LandingPage({ openForm }) {
               {mobileImages.map((image, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
+                  className="absolute inset-0 transition-opacity duration-700 ease-in-out will-change-[opacity]"
+                  style={{
+                    opacity: index === currentSlide ? 1 : 0,
+                    pointerEvents: index === currentSlide ? 'auto' : 'none'
+                  }}
                 >
                   <Image
                     src={image.src}
                     alt={image.alt}
-                    
+                    fill
                     className="object-contain pt-16"
                     priority={index === 0}
+                    quality={85}
+                    loading={index === 0 ? "eager" : "lazy"}
                   />
                 </div>
               ))}
-              {/* Navigation buttons for mobile */}
               <button
                 onClick={prevSlide}
+                aria-label="Previous slide"
                 className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
               <button
                 onClick={nextSlide}
+                aria-label="Next slide"
                 className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
               >
                 <ChevronRight className="w-6 h-6" />
@@ -495,8 +515,6 @@ export default function LandingPage({ openForm }) {
                       Plots under ₹10 Lakhs - 0 KM from Dholera SIR Boundary
                     </p>
                   </div>
-
-                  {/* Golden sparkle effects */}
                 </div>
               </div>
 
@@ -628,16 +646,15 @@ export default function LandingPage({ openForm }) {
             </motion.div>
           </div>
         </div>
-
-        {/* Bottom Stats Section - Compact */}
       </div>
+
       <AnimatePresence>
         {isDownload && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
               title="Get the Dholera Brochure"
               buttonName="Download Brochure"
-              onClose={() => closeBrochure()}
+              onClose={closeBrochure}
             />
           </div>
         )}

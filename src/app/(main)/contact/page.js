@@ -357,6 +357,7 @@ const ContactPage = () => {
                   <a
                     href="mailto:info@bookmyassets.com"
                     className="text-blue-600 hover:underline"
+                    aria-label='BookMyAssets Email'
                   >
                     info@bookmyassets.com
                   </a>
@@ -382,6 +383,7 @@ const ContactPage = () => {
                   <a
                     href="tel:+918130371647"
                     className="text-blue-600 hover:underline"
+                    aria-label='BookMyAssets Phone'
                   >
                     +91 81 30 37 1647
                   </a>
@@ -391,6 +393,7 @@ const ContactPage = () => {
                   <a
                     href="https://www.facebook.com/share/1AXGEEX1M8/"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    aria-label='Visit Facebook Page of BookMyAssets'
                   >
                     <span className="sr-only">Facebook</span>
                     <svg
@@ -404,6 +407,7 @@ const ContactPage = () => {
                   <a
                     href="https://x.com/BookMyAssets"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    aria-label='Visit X handle of BookMyAssets'
                   >
                     <span className="sr-only">Twitter</span>
                     <svg
@@ -417,6 +421,7 @@ const ContactPage = () => {
                   <a
                     href="https://www.linkedin.com/company/bookmyassetss"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    aria-label='Visit LinkedIn Profile of BookMyAssets'
                   >
                     <span className="sr-only">LinkedIn</span>
                     <svg
@@ -430,6 +435,7 @@ const ContactPage = () => {
                   <a
                     href="https://www.instagram.com/bookmyassets/"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    aria-label='Visit Instagram Account of BookMyAssets'
                   >
                     <span className="sr-only">Instagram</span>
                     <svg
@@ -443,6 +449,7 @@ const ContactPage = () => {
                   <a
                     href="https://www.youtube.com/@BookMyAssets"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    aria-label='Visit YouTube Channel of BookMyAssets'
                   >
                     <span className="sr-only">YouTube</span>
                     <svg
