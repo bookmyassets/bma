@@ -133,7 +133,7 @@ export default async function Post({ params }) {
       );
     }
 
-    const components = {
+     const components = {
       types: {
        image: ({ value }) => {
          if (!value?.asset) return null;
@@ -327,7 +327,7 @@ export default async function Post({ params }) {
           </blockquote>
         ),
         centerAlign: ({ children }) => (
-          <p className="mb-8 text-gray-700 leading-loose text-lg text-center py-6 rounded-xl">
+          <p className="mb-8 text-gray-700 leading-loose text-lg text-center bg-gray-50 py-6 rounded-xl">
             {children}
           </p>
         ),
@@ -484,7 +484,7 @@ export default async function Post({ params }) {
               )}
 
               {/* Article Content */}
-              <div className="bg-white rounded-xl shadow-2xl border border-gray-200">
+              <div className="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
                 <div className="text-xl max-w-none">
                   <PortableText value={post.body} components={components} />
                 </div>
