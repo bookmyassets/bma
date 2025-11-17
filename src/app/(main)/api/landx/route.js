@@ -1,4 +1,4 @@
-// app/api/landx/route.js (or app/api/landx/route.js)
+// app/api/landx/route.js
 const TARGET_DOMAIN = "https://dholeratimes.co.in/";
 const TARGET_BASE_PATH = "/LandX-Beta";
 const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
@@ -41,12 +41,30 @@ function extractSetCookies(response) {
   return setCookieHeaders;
 }
 
-// Check if path is a PDF request
-function isPdfRequest(path) {
+// Check if path is a static file request
+function isStaticFileRequest(path) {
   const decodedPath = decodeURIComponent(path);
-  return decodedPath.includes('uploads/pdfs/') || 
-         decodedPath.toLowerCase().endsWith('.pdf') ||
-         decodedPath.includes('generate_pdf.php'); // This will catch dashboard.php/generate_pdf.php too
+  const staticFileExtensions = ['.pdf', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.css', '.js', '.woff', '.woff2', '.ttf', '.eot', '.webp'];
+  const staticFilePaths = ['uploads/', 'assets/', 'css/', 'js/', 'fonts/'];
+  
+  // Check by file extension
+  const hasStaticExtension = staticFileExtensions.some(ext => 
+    decodedPath.toLowerCase().endsWith(ext)
+  );
+  
+  // Check by path pattern
+  const hasStaticPath = staticFilePaths.some(staticPath => 
+    decodedPath.includes(staticPath)
+  );
+  
+  return hasStaticExtension || hasStaticPath || decodedPath.includes('generate_pdf.php');
+}
+
+// Check if path is a binary file (images, PDFs, fonts, etc.)
+function isBinaryFile(path) {
+  const decodedPath = decodeURIComponent(path);
+  const binaryExtensions = ['.pdf', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot'];
+  return binaryExtensions.some(ext => decodedPath.toLowerCase().endsWith(ext));
 }
 
 // Standardized URL construction
@@ -59,17 +77,24 @@ function constructTargetUrl(path) {
 
   const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
 
-  // Handle PDF requests - Fixed logic
-  if (isPdfRequest(path)) {
+  // Handle static file requests
+  if (isStaticFileRequest(path)) {
     if (cleanPath.includes('uploads/pdfs/')) {
       // Extract filename without re-encoding
-      const pdfFilename = cleanPath.split('uploads/pdfs/')[1];
-      return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${pdfFilename}`;
+      const filename = cleanPath.split('uploads/pdfs/')[1];
+      return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${filename}`;
+    } else if (cleanPath.includes('uploads/images/')) {
+      // Handle images from uploads folder
+      const filename = cleanPath.split('uploads/images/')[1];
+      return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/images/${filename}`;
     } else if (cleanPath.includes('generate_pdf.php')) {
       // Handle generate_pdf.php with parameters
       return `${BASE_URL}/${cleanPath}`;
-    } else if (cleanPath.toLowerCase().endsWith('.pdf')) {
-      // Direct PDF file access
+    } else if (isBinaryFile(cleanPath)) {
+      // Direct binary file access (images, PDFs, fonts)
+      return `${BASE_URL}/${cleanPath}`;
+    } else if (cleanPath.includes('assets/') || cleanPath.includes('css/') || cleanPath.includes('js/') || cleanPath.includes('fonts/')) {
+      // Other static assets
       return `${BASE_URL}/${cleanPath}`;
     }
   }
@@ -83,6 +108,152 @@ function constructTargetUrl(path) {
   }
 
   return `${BASE_URL}/${cleanPath}`;
+}
+
+// Enhanced static file handler for single uploads folder
+async function handleStaticFileRequest(requestedPath, req) {
+  console.log(`Static File Request - Original path: ${requestedPath}`);
+  
+  let targetUrl;
+  let filename = 'file';
+  let contentType = 'application/octet-stream';
+  
+  try {
+    const decodedPath = decodeURIComponent(requestedPath);
+    console.log(`Static File Request - Decoded path: ${decodedPath}`);
+    
+    // Determine content type based on file extension
+    if (decodedPath.toLowerCase().endsWith('.png')) {
+      contentType = 'image/png';
+    } else if (decodedPath.toLowerCase().endsWith('.jpg') || decodedPath.toLowerCase().endsWith('.jpeg')) {
+      contentType = 'image/jpeg';
+    } else if (decodedPath.toLowerCase().endsWith('.gif')) {
+      contentType = 'image/gif';
+    } else if (decodedPath.toLowerCase().endsWith('.svg')) {
+      contentType = 'image/svg+xml';
+    } else if (decodedPath.toLowerCase().endsWith('.pdf')) {
+      contentType = 'application/pdf';
+    } else if (decodedPath.toLowerCase().endsWith('.webp')) {
+      contentType = 'image/webp';
+    }
+    
+    filename = decodedPath.split('/').pop() || filename;
+    
+    // Handle different types of static file requests
+    if (decodedPath.includes('generate_pdf.php')) {
+      // Handle PDF generation
+      const generatePdfMatch = decodedPath.match(/generate_pdf\.php(\?.*)?$/);
+      if (generatePdfMatch) {
+        const pdfPath = `generate_pdf.php${generatePdfMatch[1] || ''}`;
+        targetUrl = `${BASE_URL}/${pdfPath}`;
+        
+        const urlParams = new URLSearchParams(generatePdfMatch[1]?.substring(1) || '');
+        const index = urlParams.get('index');
+        filename = index ? `document_${index}.pdf` : 'generated_document.pdf';
+        contentType = 'application/pdf';
+      }
+    } else if (decodedPath.includes('uploads/')) {
+      // All files (PDFs and images) are in the same uploads folder
+      const uploadsMatch = decodedPath.match(/uploads\/(.+)$/);
+      if (uploadsMatch) {
+        const filePath = uploadsMatch[1];
+        targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/${filePath}`;
+        
+        console.log(`Uploads file - Path: ${filePath}`);
+        console.log(`Uploads target URL: ${targetUrl}`);
+      } else {
+        // Fallback
+        const pathParts = decodedPath.split('uploads/');
+        const filePath = pathParts[1];
+        targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/${filePath}`;
+      }
+    } else {
+      // Direct file access
+      const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
+      targetUrl = `${BASE_URL}/${cleanPath}`;
+    }
+
+    console.log(`Fetching static file from: ${targetUrl}`);
+    console.log(`Content-Type: ${contentType}, Filename: ${filename}`);
+    
+    // Enhanced headers for authentication
+    const targetHeaders = {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'User-Agent': commonHeaders['User-Agent'],
+      'Accept': '*/*' // Accept all file types
+    };
+    
+    // Forward all cookies for authentication
+    forwardCookies(req, targetHeaders);
+    
+    // Add referer for session continuity
+    targetHeaders.Referer = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
+    
+    const fileResponse = await fetch(targetUrl, {
+      headers: targetHeaders,
+      redirect: 'manual'
+    });
+    
+    console.log(`Static File Response status: ${fileResponse.status}`);
+    
+    // Handle redirects for authenticated file access
+    if (fileResponse.status === 302 || fileResponse.status === 301) {
+      const location = fileResponse.headers.get('location');
+      if (location && location.includes('login.php')) {
+        console.log('File access requires login');
+        return new Response('Authentication required', { status: 401 });
+      }
+    }
+    
+    if (!fileResponse.ok) {
+      console.error(`Static file fetch failed: ${fileResponse.status} - ${fileResponse.statusText}`);
+      
+      if (fileResponse.status === 404) {
+        return new Response('File not found', { status: 404 });
+      }
+      
+      return new Response(`File Error: ${fileResponse.statusText}`, { status: fileResponse.status });
+    }
+
+    // Get the response as array buffer for binary files
+    const fileBuffer = await fileResponse.arrayBuffer();
+    
+    // Use the actual content type from response
+    const actualContentType = fileResponse.headers.get('content-type') || contentType;
+    
+    console.log(`File fetched successfully - Size: ${fileBuffer.byteLength} bytes, Type: ${actualContentType}`);
+
+    // Return the file with proper headers
+    const responseHeaders = {
+      'Content-Type': actualContentType,
+      'Cache-Control': 'public, max-age=86400',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Cookie',
+      'X-Content-Type-Options': 'nosniff',
+      'Content-Length': fileBuffer.byteLength.toString(),
+      'Content-Disposition': `inline; filename="${filename}"`
+    };
+
+    // Forward any authentication cookies
+    const setCookies = extractSetCookies(fileResponse);
+    if (setCookies.length > 0) {
+      responseHeaders['Set-Cookie'] = setCookies;
+    }
+
+    return new Response(fileBuffer, {
+      status: fileResponse.status,
+      headers: responseHeaders
+    });
+    
+  } catch (error) {
+    console.error('Static file fetch error:', error);
+    return new Response(`File fetch error: ${error.message}`, { 
+      status: 500,
+      headers: { 'Content-Type': 'text/plain' }
+    });
+  }
 }
 
 // Enhanced HTML content modifier
@@ -131,23 +302,42 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
       )}"`;
     })
     
-
+    // src attributes - FIXED: Don't proxy images and other static assets
     .replace(/src="([^"]*?)"/g, (match, src) => {
       if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//')) {
         return match;
       }
-      return `src="${BASE_URL}/${src.startsWith('/') ? src.slice(1) : src}"`;
+      
+      // Check if it's a static file (image, etc.)
+      const fullSrc = src.startsWith('/') ? src.slice(1) : (currentPath ? `${currentPath}/${src}` : src);
+      if (isStaticFileRequest(fullSrc)) {
+        // Direct link to static file
+        return `src="${BASE_URL}/${fullSrc}"`;
+      }
+      
+      // Proxy other src files
+      return `src="/api/${apiRoute}?path=${encodeURIComponent(fullSrc)}"`;
     })
     
+    // CSS url() references - FIXED: Don't proxy static assets in CSS
     .replace(/url\(["']?([^"')]*?)["']?\)/g, (match, url) => {
       if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('//')) {
         return match;
       }
-      return `url("${BASE_URL}/${url.startsWith('/') ? url.slice(1) : url}")`;
+      
+      // Check if it's a static file
+      const fullUrl = url.startsWith('/') ? url.slice(1) : (currentPath ? `${currentPath}/${url}` : url);
+      if (isStaticFileRequest(fullUrl)) {
+        // Direct link to static file in CSS
+        return `url("${BASE_URL}/${fullUrl}")`;
+      }
+      
+      // Proxy other URLs
+      return `url("/api/${apiRoute}?path=${encodeURIComponent(fullUrl)}")`;
     });
 
+  // JavaScript modifications (keep as before)
   modifiedHtml = modifiedHtml
-    //fetch/XHR requests in JavaScript
     .replace(/(fetch|axios|jQuery\.ajax|XMLHttpRequest|\.post|\.get)\(['"]([^'"]*?)['"]/g, 
       (match, method, url) => {
         if (url.startsWith('http') || url.startsWith('//')) return match;
@@ -160,7 +350,6 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
         return match;
       })
     
-    // Form submissions in JavaScript
     .replace(/(\.action|formAction|\.submit|\.url)\s*=\s*['"]([^'"]*?)['"]/g,
       (match, prop, url) => {
         if (url.startsWith('http') || url.startsWith('//')) return match;
@@ -173,156 +362,11 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
   if (!modifiedHtml.includes('<base href="')) {
     modifiedHtml = modifiedHtml.replace(
       /<head>/i, 
-      '<head>\n<base href="${BASE_URL}/">'
+      `<head>\n<base href="${BASE_URL}/">`
     );
   }
 
   return modifiedHtml;
-}
-
-// PDF-specific handler - Fixed version
-async function handlePdfRequest(requestedPath, req) {
-  console.log(`PDF Request - Original path: ${requestedPath}`);
-  
-  let targetUrl;
-  let filename = 'document.pdf';
-  
-  try {
-    const decodedPath = decodeURIComponent(requestedPath);
-    console.log(`PDF Request - Decoded path: ${decodedPath}`);
-    
-    // Fix: Handle the dashboard.php/generate_pdf.php case
-    if (decodedPath.includes('generate_pdf.php')) {
-      // Extract just the generate_pdf.php part with parameters
-      const generatePdfMatch = decodedPath.match(/generate_pdf\.php(\?.*)?$/);
-      if (generatePdfMatch) {
-        const pdfPath = `generate_pdf.php${generatePdfMatch[1] || ''}`;
-        targetUrl = `${BASE_URL}/${pdfPath}`;
-        
-        // Extract filename from URL parameters if available
-        const urlParams = new URLSearchParams(generatePdfMatch[1]?.substring(1) || '');
-        const index = urlParams.get('index');
-        filename = index ? `document_${index}.pdf` : 'generated_document.pdf';
-      } else {
-        console.error('Invalid generate_pdf.php path structure');
-        return new Response('Invalid PDF generation path', { status: 400 });
-      }
-    } else if (decodedPath.includes('uploads/pdfs/')) {
-      // Extract filename from uploads/pdfs/ path
-      const pathParts = decodedPath.split('uploads/pdfs/');
-      const pdfFilename = pathParts[1];
-      
-      if (!pdfFilename) {
-        console.error('No PDF filename found in path');
-        return new Response('Invalid PDF path', { status: 400 });
-      }
-      
-      filename = pdfFilename;
-      targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${pdfFilename}`;
-    } else if (decodedPath.toLowerCase().endsWith('.pdf')) {
-      // Direct PDF access
-      filename = decodedPath.split('/').pop();
-      const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
-      targetUrl = `${BASE_URL}/${cleanPath}`;
-    } else {
-      console.error('Not a valid PDF request');
-      return new Response('Not a PDF request', { status: 400 });
-    }
-
-    console.log(`Fetching PDF from: ${targetUrl}`);
-    
-    // Forward cookies for authentication
-    const targetHeaders = {
-      'Cache-Control': 'no-cache',
-      'Pragma': 'no-cache',
-      'User-Agent': commonHeaders['User-Agent'],
-      'Accept': 'application/pdf,*/*'
-    };
-    
-    forwardCookies(req, targetHeaders);
-    
-    const pdfResponse = await fetch(targetUrl, {
-      headers: targetHeaders
-    });
-    
-    console.log(`PDF Response status: ${pdfResponse.status}`);
-    console.log(`PDF Response content-type: ${pdfResponse.headers.get('content-type')}`);
-    
-    if (!pdfResponse.ok) {
-      console.error(`PDF fetch failed: ${pdfResponse.status} - ${pdfResponse.statusText}`);
-      
-      // If it's a 404 or authentication issue, don't redirect to dashboard
-      if (pdfResponse.status === 404) {
-        return new Response('PDF not found', { status: 404 });
-      }
-      
-      // For other errors, return the actual error
-      const errorText = await pdfResponse.text();
-      console.error('PDF Error response:', errorText.substring(0, 500));
-      return new Response(`PDF Error: ${pdfResponse.statusText}`, { status: pdfResponse.status });
-    }
-
-    // Get the response as array buffer for better handling
-    const pdfBuffer = await pdfResponse.arrayBuffer();
-    
-    // Check if response is actually a PDF by examining content
-    const contentType = pdfResponse.headers.get('content-type') || '';
-    console.log(`PDF Content-Type: ${contentType}`);
-    console.log(`PDF Buffer size: ${pdfBuffer.byteLength} bytes`);
-    
-    // Check PDF magic number (PDF files start with %PDF)
-    const firstBytes = new Uint8Array(pdfBuffer.slice(0, 4));
-    const pdfMagic = String.fromCharCode(...firstBytes);
-    console.log(`PDF Magic bytes: ${pdfMagic}`);
-    
-    if (!contentType.includes('application/pdf') && !pdfMagic.startsWith('%PDF')) {
-      // If it's HTML (likely a login page or error), log it
-      if (contentType.includes('text/html')) {
-        const htmlContent = new TextDecoder().decode(pdfBuffer);
-        console.log('Received HTML instead of PDF:', htmlContent.substring(0, 500));
-        
-        // Return error instead of redirecting
-        return new Response('PDF access denied - authentication may be required', { 
-          status: 403,
-          headers: { 'Content-Type': 'text/plain' }
-        });
-      } else {
-        console.log('Received non-PDF content:', contentType);
-        return new Response('Invalid PDF content received', { 
-          status: 400,
-          headers: { 'Content-Type': 'text/plain' }
-        });
-      }
-    }
-
-    // Return the PDF with proper headers for visibility
-    return new Response(pdfBuffer, {
-      status: pdfResponse.status,
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `inline; filename="${filename}"`,
-        'Cache-Control': 'no-store, no-cache, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'X-Content-Type-Options': 'nosniff',
-        'Content-Length': pdfBuffer.byteLength.toString(),
-        // Forward any authentication cookies
-        ...Object.fromEntries(
-          extractSetCookies(pdfResponse).map(cookie => ['Set-Cookie', cookie])
-        )
-      }
-    });
-    
-  } catch (error) {
-    console.error('PDF fetch error:', error);
-    return new Response(`PDF fetch error: ${error.message}`, { 
-      status: 500,
-      headers: { 'Content-Type': 'text/plain' }
-    });
-  }
 }
 
 // Main request handler
@@ -333,13 +377,13 @@ async function handleRequest(req, method = 'GET') {
 
     console.log(`${method} request for path: ${requestedPath}`);
 
-    // Handle PDF requests - Updated check
-    if (isPdfRequest(requestedPath)) {
-      console.log('Detected PDF request');
-      return handlePdfRequest(requestedPath, req);
+    // Handle static file requests (PDFs, images, CSS, JS, fonts)
+    if (isStaticFileRequest(requestedPath)) {
+      console.log('Detected static file request');
+      return handleStaticFileRequest(requestedPath, req);
     }
 
-    // Handle non-PDF requests
+    // Handle non-static requests (HTML, PHP, etc.)
     const targetUrl = constructTargetUrl(requestedPath);
     const targetHeaders = { ...commonHeaders };
     
@@ -368,7 +412,7 @@ async function handleRequest(req, method = 'GET') {
       redirect: 'manual'
     });
 
-    // Handle redirects
+    // Handle redirects (same as before)
     if (response.status >= 300 && response.status < 400) {
       const location = response.headers.get('location');
       if (location) {

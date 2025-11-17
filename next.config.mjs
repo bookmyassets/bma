@@ -68,14 +68,15 @@ const nextConfig = {
         destination: "https://dholeratimes.co.in/LandX-Beta/img/:path*",
       },
       {
-        source: "/uploads/pdfs/:path*",
-        destination: "/api/landx?path=uploads/pdfs/:path*",
-      },
+  source: "/uploads/:path*",
+  destination: "/api/landx?path=uploads/:path*",
+},
       // Default landx access - should be last
       {
         source: "/landx",
         destination: "/api/landx",
       },
+      
       {
         source: "/landx/:path*",
         destination: "/api/landx?path=:path*",
