@@ -1,16 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
- async rewrites() {
+  async rewrites() {
     return [
       // Handle favicon specifically
       {
         source: "/favicon.ico",
         destination: "/api/landx?path=/favicon.ico",
-      },
-      // Test the basic API route first
-      {
-        source: "/test-api",
-        destination: "/api/landx?path=dashboard.php",
       },
       // Direct access to specific PHP files with explicit handling
       {
@@ -50,7 +45,7 @@ const nextConfig = {
         source: "/admin.php",
         destination: "/api/landx?path=admin.php",
       },
-      // Handle CSS, JS, and image files
+      // Handle CSS, JS, and image files - UPDATED
       {
         source: "/css/:path*",
         destination: "https://dholeratimes.co.in/LandX-Beta/css/:path*",
@@ -59,24 +54,29 @@ const nextConfig = {
         source: "/js/:path*",
         destination: "https://dholeratimes.co.in/LandX-Beta/js/:path*",
       },
+      // Updated image routes to go through proxy for uploaded images
       {
         source: "/images/:path*",
-        destination: "https://dholeratimes.co.in/LandX-Beta/images/:path*",
+        destination: "/api/landx?path=images/:path*",
       },
       {
         source: "/img/:path*",
-        destination: "https://dholeratimes.co.in/LandX-Beta/img/:path*",
+        destination: "/api/landx?path=img/:path*",
       },
       {
-  source: "/uploads/:path*",
-  destination: "/api/landx?path=uploads/:path*",
-},
+        source: "/uploads/pdfs/:path*",
+        destination: "/api/landx?path=uploads/pdfs/:path*",
+      },
+      // Add uploads/images route
+      {
+        source: "/uploads/images/:path*",
+        destination: "/api/landx?path=uploads/images/:path*",
+      },
       // Default landx access - should be last
       {
         source: "/landx",
         destination: "/api/landx",
       },
-      
       {
         source: "/landx/:path*",
         destination: "/api/landx?path=:path*",
@@ -111,10 +111,10 @@ const nextConfig = {
         source: "/api/landx",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
-          { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS" },
+          { key: "Access-Control-Allow-Methods", value: "GET,POST,PUT,DELETE,OPTIONS" },
           {
             key: "Access-Control-Allow-Headers",
-            value: "X-Requested-With, Content-Type",
+            value: "X-Requested-With, Content-Type, Authorization",
           },
         ],
       },
@@ -123,7 +123,16 @@ const nextConfig = {
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "Access-Control-Expose-Headers", value: "*" },
-          { key: "Cache-Control", value: "no-store, max-age=0" },
+          { key: "Cache-Control", value: "public, max-age=86400" },
+        ],
+      },
+      // Add headers for images
+      {
+        source: "/uploads/images/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Expose-Headers", value: "*" },
+          { key: "Cache-Control", value: "public, max-age=86400" },
         ],
       },
     ];
