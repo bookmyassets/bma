@@ -45,7 +45,8 @@ const nextConfig = {
         source: "/admin.php",
         destination: "/api/landx?path=admin.php",
       },
-      // Handle CSS, JS, and image files - UPDATED
+      
+      // Handle CSS, JS files
       {
         source: "/css/:path*",
         destination: "https://dholeratimes.co.in/LandX-Beta/css/:path*",
@@ -63,15 +64,12 @@ const nextConfig = {
         source: "/img/:path*",
         destination: "/api/landx?path=img/:path*",
       },
+      // CRITICAL FIX: Direct uploads to the target server, bypassing proxy for file access
       {
         source: "/uploads/pdfs/:path*",
-        destination: "/api/landx?path=uploads/pdfs/:path*",
+        destination: "https://dholeratimes.co.in/LandX-Beta/uploads/pdfs/:path*",
       },
-      // Add uploads/images route
-      {
-        source: "/uploads/images/:path*",
-        destination: "/api/landx?path=uploads/images/:path*",
-      },
+      
       // Default landx access - should be last
       {
         source: "/landx",
@@ -118,21 +116,14 @@ const nextConfig = {
           },
         ],
       },
+      // CRITICAL: Add CORS headers for uploaded files
       {
-        source: "/uploads/pdfs/:path*",
+        source: "/uploads/:path*",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
-          { key: "Access-Control-Expose-Headers", value: "*" },
-          { key: "Cache-Control", value: "public, max-age=86400" },
-        ],
-      },
-      // Add headers for images
-      {
-        source: "/uploads/images/:path*",
-        headers: [
-          { key: "Access-Control-Allow-Origin", value: "*" },
-          { key: "Access-Control-Expose-Headers", value: "*" },
-          { key: "Cache-Control", value: "public, max-age=86400" },
+          { key: "Access-Control-Allow-Methods", value: "GET, POST, OPTIONS" },
+          { key: "Access-Control-Allow-Headers", value: "Content-Type, Authorization" },
+          { key: "Cache-Control", value: "public, max-age=31536000" },
         ],
       },
     ];

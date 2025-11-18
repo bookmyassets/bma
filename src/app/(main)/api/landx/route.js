@@ -1,7 +1,7 @@
 const TARGET_DOMAIN = "https://dholeratimes.co.in/";
 const TARGET_BASE_PATH = "/LandX-Beta";
 const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
-const BASE_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH.replace(/\/$/, '')}`; // Remove trailing slash
+const BASE_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH.replace(/\/$/, '')}`;
 
 // Get the current API route name dynamically
 function getCurrentApiRoute(req) {
@@ -62,20 +62,18 @@ function isUploadedFileRequest(path) {
   return decodedPath.includes('uploads/pdfs/');
 }
 
-// Standardized URL construction
 function constructTargetUrl(path) {
   const decodedPath = decodeURIComponent(path);
-
+  
   if (!decodedPath || decodedPath === '/') {
     return TARGET_URL;
   }
 
   const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
 
-  // Handle uploaded files (both PDFs and images from uploads/pdfs folder)
-  if (isUploadedFileRequest(path)) {
-    const filename = cleanPath.split('uploads/pdfs/')[1];
-    return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${filename}`;
+  // Handle uploads/pdfs files (both images and PDFs)
+  if (cleanPath.includes('uploads/pdfs/')) {
+    return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/${cleanPath}`;
   }
 
   // Handle PDF generation
@@ -83,17 +81,18 @@ function constructTargetUrl(path) {
     return `${BASE_URL}/${cleanPath}`;
   }
 
-  // Handle other existing cases
+  // Handle favicon
   if (cleanPath === 'favicon.ico') {
     return `${TARGET_DOMAIN}/favicon.ico`;
   }
+
+  // Handle PHP files
   if (cleanPath.endsWith('.php')) {
     return `${BASE_URL}/${cleanPath}`;
   }
 
   return `${BASE_URL}/${cleanPath}`;
 }
-
 // Enhanced HTML content modifier
 function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
   // Normalize currentPath
@@ -140,19 +139,11 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
       )}"`;
     })
     
-    // Image sources - FIXED: Route all uploaded files through proxy
+
     .replace(/src="([^"]*?)"/g, (match, src) => {
       if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//')) {
         return match;
       }
-      
-      // If it's an uploaded file in uploads/pdfs folder, route through proxy
-      if (src.includes('uploads/pdfs/')) {
-        return `src="/api/${apiRoute}?path=${encodeURIComponent(
-          src.startsWith('/') ? src.slice(1) : src
-        )}"`;
-      }
-      
       return `src="${BASE_URL}/${src.startsWith('/') ? src.slice(1) : src}"`;
     })
     
@@ -197,7 +188,6 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
   return modifiedHtml;
 }
 
-// Uploaded file handler - COMPLETE CORRECTED VERSION
 async function handleUploadedFileRequest(requestedPath, req) {
   console.log(`Uploaded File Request - Original path: ${requestedPath}`);
   
@@ -205,41 +195,60 @@ async function handleUploadedFileRequest(requestedPath, req) {
     const decodedPath = decodeURIComponent(requestedPath);
     console.log(`Uploaded File Request - Decoded path: ${decodedPath}`);
     
+    // Extract filename from uploads/pdfs path
     if (!decodedPath.includes('uploads/pdfs/')) {
       return new Response('Not a valid uploaded file request', { status: 400 });
     }
-
-    const pathParts = decodedPath.split('uploads/pdfs/');
-    const fileFilename = pathParts[1];
     
-    if (!fileFilename) {
+    // Get everything after 'uploads/pdfs/'
+    const pathParts = decodedPath.split('uploads/pdfs/');
+    const fileFilename = pathParts[pathParts.length - 1];
+    
+    if (!fileFilename || fileFilename.trim() === '') {
       return new Response('No filename found in path', { status: 400 });
     }
     
     const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${fileFilename}`;
     console.log(`Fetching Uploaded File from: ${targetUrl}`);
-    
-    // Prepare headers
+
     const targetHeaders = {
       'User-Agent': commonHeaders['User-Agent'],
       'Accept': '*/*',
+      'Accept-Encoding': 'identity', 
+      'Cache-Control': 'no-cache',
     };
-    
-    // Forward cookies
-    forwardCookies(req, targetHeaders);
-    console.log('Forwarded Cookies:', targetHeaders.Cookie ? 'Yes' : 'No');
-    
-    // Fetch the file
+
+    const cookieHeader = req.headers.get("cookie");
+    if (cookieHeader) {
+      targetHeaders["Cookie"] = cookieHeader;
+      console.log('Forwarded Cookies:', 'Yes');
+    } else {
+      console.log('WARNING: No cookies to forward - authentication may fail');
+    }
+
+    targetHeaders.Referer = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
+
     const fileResponse = await fetch(targetUrl, {
-      headers: targetHeaders
+      headers: targetHeaders,
+      redirect: 'manual'
     });
 
     console.log('Response Status:', fileResponse.status);
     console.log('Response Content-Type:', fileResponse.headers.get('content-type'));
-    console.log('Response Content-Length:', fileResponse.headers.get('content-length'));
     
+    if (fileResponse.status === 302 || fileResponse.status === 301) {
+      const location = fileResponse.headers.get('location');
+      console.error('REDIRECT DETECTED - Likely authentication issue:', location);
+      return new Response('Authentication required - please log in', { 
+        status: 401,
+        headers: { 'Content-Type': 'text/plain' }
+      });
+    }
+
     if (!fileResponse.ok) {
       console.error(`File fetch failed: ${fileResponse.status}`);
+      const errorText = await fileResponse.text();
+      console.error('Error response:', errorText.substring(0, 200));
       return new Response(`File fetch failed: ${fileResponse.status}`, { 
         status: fileResponse.status 
       });
@@ -254,16 +263,34 @@ async function handleUploadedFileRequest(requestedPath, req) {
       return new Response('File is empty on server', { status: 404 });
     }
 
-    // Determine content type
+    // FIXED: Better content type detection
     let contentType = fileResponse.headers.get('content-type');
-    if (!contentType || contentType.includes('text/html')) {
-      // Fallback to extension-based content type
-      if (fileFilename.toLowerCase().endsWith('.pdf')) {
+    
+    // Check if we got HTML instead of the file
+    if (contentType && contentType.includes('text/html')) {
+      const htmlCheck = new TextDecoder().decode(fileBuffer.slice(0, 100));
+      if (htmlCheck.includes('<!DOCTYPE') || htmlCheck.includes('<html')) {
+        console.error('Received HTML instead of file - authentication issue');
+        return new Response('Authentication required to access file', {
+          status: 401,
+          headers: { 'Content-Type': 'text/plain' }
+        });
+      }
+    }
+    
+    // Fallback to extension-based content type
+    if (!contentType || contentType.includes('text/html') || contentType === 'application/octet-stream') {
+      const lowerFilename = fileFilename.toLowerCase();
+      if (lowerFilename.endsWith('.pdf')) {
         contentType = 'application/pdf';
-      } else if (fileFilename.toLowerCase().endsWith('.jpg') || fileFilename.toLowerCase().endsWith('.jpeg')) {
+      } else if (lowerFilename.endsWith('.jpg') || lowerFilename.endsWith('.jpeg')) {
         contentType = 'image/jpeg';
-      } else if (fileFilename.toLowerCase().endsWith('.png')) {
+      } else if (lowerFilename.endsWith('.png')) {
         contentType = 'image/png';
+      } else if (lowerFilename.endsWith('.gif')) {
+        contentType = 'image/gif';
+      } else if (lowerFilename.endsWith('.webp')) {
+        contentType = 'image/webp';
       } else {
         contentType = 'application/octet-stream';
       }
@@ -280,18 +307,20 @@ async function handleUploadedFileRequest(requestedPath, req) {
         'Cache-Control': 'public, max-age=3600',
         'Access-Control-Allow-Origin': '*',
         'Content-Length': fileBuffer.byteLength.toString(),
+        'Accept-Ranges': 'bytes',
       }
     });
-    
+
   } catch (error) {
     console.error('File fetch error:', error);
     return new Response(`File fetch error: ${error.message}`, { 
-      status: 500
+      status: 500 
     });
   }
 }
 
-// PDF generation handler (separate from file access)
+
+// PDF generation handler
 async function handlePdfGenerationRequest(requestedPath, req) {
   console.log(`PDF Generation Request - Original path: ${requestedPath}`);
   
@@ -403,7 +432,7 @@ async function handlePdfGenerationRequest(requestedPath, req) {
   }
 }
 
-// Main request handler - UPDATED
+// Main request handler
 async function handleRequest(req, method = 'GET') {
   try {
     const { searchParams } = new URL(req.url);
@@ -411,7 +440,7 @@ async function handleRequest(req, method = 'GET') {
 
     console.log(`${method} request for path: ${requestedPath}`);
 
-    // Handle uploaded files (both PDFs and images from uploads/pdfs folder)
+    // Handle uploaded files 
     if (isUploadedFileRequest(requestedPath)) {
       console.log('Detected uploaded file request');
       return handleUploadedFileRequest(requestedPath, req);
