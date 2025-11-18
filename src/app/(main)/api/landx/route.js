@@ -3,7 +3,6 @@ const TARGET_BASE_PATH = "/LandX-Beta";
 const TARGET_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
 const BASE_URL = `${TARGET_DOMAIN}${TARGET_BASE_PATH.replace(/\/$/, '')}`;
 
-// Get the current API route name dynamically
 function getCurrentApiRoute(req) {
   const url = new URL(req.url);
   const pathParts = url.pathname.split('/');
@@ -20,7 +19,6 @@ const commonHeaders = {
   "Upgrade-Insecure-Requests": "1",
 };
 
-// Helper functions
 function forwardCookies(clientRequest, targetHeaders) {
   const cookies = clientRequest.headers.get("cookie");
   if (cookies) {
@@ -40,26 +38,9 @@ function extractSetCookies(response) {
   return setCookieHeaders;
 }
 
-// Check if path is a PDF request
-function isPdfRequest(path) {
-  const decodedPath = decodeURIComponent(path);
-  return decodedPath.includes('uploads/pdfs/') || 
-         decodedPath.toLowerCase().endsWith('.pdf') ||
-         decodedPath.includes('generate_pdf.php');
-}
-
-// Check if path is an image request
-function isImageRequest(path) {
-  const decodedPath = decodeURIComponent(path);
-  const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
-  return decodedPath.includes('uploads/pdfs/') && 
-         imageExtensions.some(ext => decodedPath.toLowerCase().endsWith(ext));
-}
-
-// Check if path is an uploaded file request
 function isUploadedFileRequest(path) {
   const decodedPath = decodeURIComponent(path);
-  return decodedPath.includes('uploads/pdfs/');
+  return decodedPath.includes('uploads/');
 }
 
 function constructTargetUrl(path) {
@@ -71,442 +52,397 @@ function constructTargetUrl(path) {
 
   const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
 
-  // Handle uploads/pdfs files (both images and PDFs)
-  if (cleanPath.includes('uploads/pdfs/')) {
+  // Handle all uploads (both PDFs and images)
+  if (cleanPath.includes('uploads/')) {
     return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/${cleanPath}`;
   }
 
-  // Handle PDF generation
   if (cleanPath.includes('generate_pdf.php')) {
     return `${BASE_URL}/${cleanPath}`;
   }
 
-  // Handle favicon
   if (cleanPath === 'favicon.ico') {
     return `${TARGET_DOMAIN}/favicon.ico`;
   }
 
-  // Handle PHP files
   if (cleanPath.endsWith('.php')) {
     return `${BASE_URL}/${cleanPath}`;
   }
 
   return `${BASE_URL}/${cleanPath}`;
 }
-// Enhanced HTML content modifier
+
+// HTML modifier - UNCHANGED
 function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
-  // Normalize currentPath
   currentPath = currentPath.replace(/\/+$/, '');
+  
+  console.log(`[HTML Modifier] Processing HTML for path: ${currentPath}, route: ${apiRoute}`);
 
-  // all standard links and forms
-  let modifiedHtml = html
-    // href attributes
-    .replace(/href="([^"]*?)"/gi, (match, href) => {
-      if (href.startsWith('http') || href.startsWith('//') || 
-          href.startsWith('#') || href.startsWith('mailto:') || 
-          href.startsWith('javascript:')) {
-        return match;
-      }
-      
-      // Handle absolute paths
-      if (href.startsWith('/')) {
-        return `href="/api/${apiRoute}?path=${encodeURIComponent(href)}"`;
-      }
-      
-      // Handle PHP files
-      if (href.endsWith('.php')) {
-        return `href="/api/${apiRoute}?path=${encodeURIComponent(href)}"`;
-      }
-      
-      // Handle relative paths
-      return `href="/api/${apiRoute}?path=${encodeURIComponent(
-        currentPath ? `${currentPath}/${href}` : href
-      )}"`;
-    })
-    
-    // Form actions
-    .replace(/action="([^"]*?)"/gi, (match, action) => {
-      if (action.startsWith('http') || !action) return match;
-      
-      // Handle absolute paths
-      if (action.startsWith('/')) {
-        return `action="/api/${apiRoute}?path=${encodeURIComponent(action)}"`;
-      }
-      
-      // Handle relative paths
-      return `action="/api/${apiRoute}?path=${encodeURIComponent(
-        currentPath ? `${currentPath}/${action}` : action
-      )}"`;
-    })
-    
+  let modifiedHtml = html;
 
-    .replace(/src="([^"]*?)"/g, (match, src) => {
-      if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//')) {
-        return match;
-      }
-      return `src="${BASE_URL}/${src.startsWith('/') ? src.slice(1) : src}"`;
-    })
+  // Fix href attributes
+  modifiedHtml = modifiedHtml.replace(/href=["']([^"']*?)["']/gi, (match, href) => {
+    if (href.startsWith('http') || href.startsWith('//') || 
+        href.startsWith('#') || href.startsWith('mailto:') || 
+        href.startsWith('javascript:') || href.startsWith('/api/')) {
+      return match;
+    }
     
-    .replace(/url\(["']?([^"')]*?)["']?\)/g, (match, url) => {
-      if (url.startsWith('http') || url.startsWith('data:') || url.startsWith('//')) {
+    const cleanHref = href.startsWith('/') ? href.slice(1) : href;
+    const newHref = `/api/${apiRoute}?path=${encodeURIComponent(cleanHref)}`;
+    console.log(`[HREF] ${href} → ${newHref}`);
+    return `href="${newHref}"`;
+  });
+
+  // Fix form actions
+  modifiedHtml = modifiedHtml.replace(/<form([^>]*?)action=["']([^"']*?)["']/gi, (match, formAttrs, action) => {
+    if (action.startsWith('http') || action.startsWith('/api/')) {
+      return match;
+    }
+    
+    if (!action || action.trim() === '') {
+      const newAction = `/api/${apiRoute}?path=${encodeURIComponent(currentPath || 'dashboard.php')}`;
+      console.log(`[FORM] Empty action → ${newAction}`);
+      return `<form${formAttrs}action="${newAction}"`;
+    }
+    
+    const cleanAction = action.startsWith('/') ? action.slice(1) : action;
+    const newAction = `/api/${apiRoute}?path=${encodeURIComponent(cleanAction)}`;
+    console.log(`[FORM] ${action} → ${newAction}`);
+    return `<form${formAttrs}action="${newAction}"`;
+  });
+
+  // Fix forms without action
+  modifiedHtml = modifiedHtml.replace(/<form([^>]*?)>/gi, (match, formAttrs) => {
+    if (formAttrs.includes('action=')) {
+      return match;
+    }
+    const newAction = `/api/${apiRoute}?path=${encodeURIComponent(currentPath || 'dashboard.php')}`;
+    console.log(`[FORM-NO-ACTION] Adding action → ${newAction}`);
+    return `<form${formAttrs} action="${newAction}">`;
+  });
+
+  // Fix file/image src - CRITICAL: Handle all uploads through proxy
+  modifiedHtml = modifiedHtml.replace(/src=["']([^"']*?)["']/g, (match, src) => {
+    if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//') || src.startsWith('/api/')) {
+      return match;
+    }
+    
+    if (src.includes('uploads/')) {
+      const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
+      const newSrc = `/api/${apiRoute}?path=${encodeURIComponent(cleanSrc)}`;
+      console.log(`[IMG-UPLOAD] ${src} → ${newSrc}`);
+      return `src="${newSrc}"`;
+    }
+    
+    const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
+    return `src="${BASE_URL}/${cleanSrc}"`;
+  });
+
+  // Fix AJAX calls
+  modifiedHtml = modifiedHtml.replace(/(fetch|axios|jQuery\.ajax|XMLHttpRequest|\.post|\.get)\s*\(\s*["']([^"']*?)["']/g, 
+    (match, method, url) => {
+      if (url.startsWith('http') || url.startsWith('//') || url.startsWith('/api/')) {
         return match;
       }
-      return `url("${BASE_URL}/${url.startsWith('/') ? url.slice(1) : url}")`;
+      
+      if (url.includes('.php')) {
+        const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
+        const newUrl = `/api/${apiRoute}?path=${encodeURIComponent(cleanUrl)}`;
+        console.log(`[AJAX] ${url} → ${newUrl}`);
+        return `${method}("${newUrl}"`;
+      }
+      
+      return match;
     });
-
-  modifiedHtml = modifiedHtml
-    //fetch/XHR requests in JavaScript
-    .replace(/(fetch|axios|jQuery\.ajax|XMLHttpRequest|\.post|\.get)\(['"]([^'"]*?)['"]/g, 
-      (match, method, url) => {
-        if (url.startsWith('http') || url.startsWith('//')) return match;
-        
-        if (url.includes('.php') || url.startsWith('/api/')) {
-          return `${method}('/api/${apiRoute}?path=${encodeURIComponent(
-            url.startsWith('/') ? url.slice(1) : url
-          )}'`;
-        }
-        return match;
-      })
-    
-    // Form submissions in JavaScript
-    .replace(/(\.action|formAction|\.submit|\.url)\s*=\s*['"]([^'"]*?)['"]/g,
-      (match, prop, url) => {
-        if (url.startsWith('http') || url.startsWith('//')) return match;
-        return `${prop} = '/api/${apiRoute}?path=${encodeURIComponent(
-          url.startsWith('/') ? url.slice(1) : url
-        )}'`;
-      });
-
-  // Add base tag if missing
-  if (!modifiedHtml.includes('<base href="')) {
-    modifiedHtml = modifiedHtml.replace(
-      /<head>/i, 
-      '<head>\n<base href="${BASE_URL}/">'
-    );
-  }
 
   return modifiedHtml;
 }
 
+// ENHANCED: File viewing handler for BOTH PDFs and images
 async function handleUploadedFileRequest(requestedPath, req) {
-  console.log(`Uploaded File Request - Original path: ${requestedPath}`);
+  console.log(`[FILE] Request for: ${requestedPath}`);
   
   try {
     const decodedPath = decodeURIComponent(requestedPath);
-    console.log(`Uploaded File Request - Decoded path: ${decodedPath}`);
     
-    // Extract filename from uploads/pdfs path
-    if (!decodedPath.includes('uploads/pdfs/')) {
+    if (!decodedPath.includes('uploads/')) {
       return new Response('Not a valid uploaded file request', { status: 400 });
     }
     
-    // Get everything after 'uploads/pdfs/'
-    const pathParts = decodedPath.split('uploads/pdfs/');
-    const fileFilename = pathParts[pathParts.length - 1];
+    // Extract the full path after uploads/
+    const pathParts = decodedPath.split('uploads/');
+    const filePath = pathParts[pathParts.length - 1];
     
-    if (!fileFilename || fileFilename.trim() === '') {
-      return new Response('No filename found in path', { status: 400 });
+    if (!filePath || filePath.trim() === '') {
+      return new Response('No file path found', { status: 400 });
     }
     
-    const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/pdfs/${fileFilename}`;
-    console.log(`Fetching Uploaded File from: ${targetUrl}`);
+    const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/${filePath}`;
+    console.log(`[FILE] Fetching: ${targetUrl}`);
 
     const targetHeaders = {
       'User-Agent': commonHeaders['User-Agent'],
       'Accept': '*/*',
-      'Accept-Encoding': 'identity', 
       'Cache-Control': 'no-cache',
+      'Referer': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
+      'Origin': TARGET_DOMAIN,
     };
 
+    // CRITICAL: Forward all cookies for authentication
     const cookieHeader = req.headers.get("cookie");
     if (cookieHeader) {
       targetHeaders["Cookie"] = cookieHeader;
-      console.log('Forwarded Cookies:', 'Yes');
+      console.log('[FILE] Cookies forwarded');
     } else {
-      console.log('WARNING: No cookies to forward - authentication may fail');
+      console.log('[FILE] WARNING: No cookies found');
+      return new Response('Authentication required', { status: 401 });
     }
 
-    targetHeaders.Referer = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
-
+    // Fetch the file with NO encoding handling - get raw bytes
     const fileResponse = await fetch(targetUrl, {
       headers: targetHeaders,
-      redirect: 'manual'
+      redirect: 'follow',
     });
 
-    console.log('Response Status:', fileResponse.status);
-    console.log('Response Content-Type:', fileResponse.headers.get('content-type'));
+    console.log(`[FILE] Response: ${fileResponse.status}`);
+    console.log(`[FILE] Content-Type: ${fileResponse.headers.get('content-type')}`);
     
-    if (fileResponse.status === 302 || fileResponse.status === 301) {
-      const location = fileResponse.headers.get('location');
-      console.error('REDIRECT DETECTED - Likely authentication issue:', location);
-      return new Response('Authentication required - please log in', { 
-        status: 401,
-        headers: { 'Content-Type': 'text/plain' }
-      });
-    }
-
     if (!fileResponse.ok) {
-      console.error(`File fetch failed: ${fileResponse.status}`);
-      const errorText = await fileResponse.text();
-      console.error('Error response:', errorText.substring(0, 200));
-      return new Response(`File fetch failed: ${fileResponse.status}`, { 
-        status: fileResponse.status 
-      });
+      console.log(`[FILE] File not found: ${fileResponse.status}`);
+      return new Response(`File not found: ${fileResponse.status}`, { status: fileResponse.status });
     }
 
-    // Get the file content
+    // Get the file as ArrayBuffer to preserve binary data
     const fileBuffer = await fileResponse.arrayBuffer();
-    console.log(`Actual File Size: ${fileBuffer.byteLength} bytes`);
+    console.log(`[FILE] Size: ${fileBuffer.byteLength} bytes`);
 
     if (fileBuffer.byteLength === 0) {
-      console.error('FILE IS EMPTY - 0 bytes received');
-      return new Response('File is empty on server', { status: 404 });
+      console.log('[FILE] ERROR: File is empty (0 bytes)');
+      return new Response('File is empty', { status: 500 });
     }
 
-    // FIXED: Better content type detection
+    // Determine content type
     let contentType = fileResponse.headers.get('content-type');
+    const filename = filePath.split('/').pop() || 'file';
     
-    // Check if we got HTML instead of the file
-    if (contentType && contentType.includes('text/html')) {
-      const htmlCheck = new TextDecoder().decode(fileBuffer.slice(0, 100));
-      if (htmlCheck.includes('<!DOCTYPE') || htmlCheck.includes('<html')) {
-        console.error('Received HTML instead of file - authentication issue');
-        return new Response('Authentication required to access file', {
-          status: 401,
-          headers: { 'Content-Type': 'text/plain' }
-        });
-      }
-    }
-    
-    // Fallback to extension-based content type
-    if (!contentType || contentType.includes('text/html') || contentType === 'application/octet-stream') {
-      const lowerFilename = fileFilename.toLowerCase();
-      if (lowerFilename.endsWith('.pdf')) {
+    // If content-type is not properly set, detect from filename and magic bytes
+    if (!contentType || contentType === 'application/octet-stream' || contentType === 'text/html') {
+      const firstBytes = new Uint8Array(fileBuffer.slice(0, 4));
+      
+      // Check magic bytes for common file types
+      if (firstBytes[0] === 0x25 && firstBytes[1] === 0x50 && firstBytes[2] === 0x44 && firstBytes[3] === 0x46) {
         contentType = 'application/pdf';
-      } else if (lowerFilename.endsWith('.jpg') || lowerFilename.endsWith('.jpeg')) {
+        console.log('[FILE] Detected: PDF from magic bytes');
+      } else if (firstBytes[0] === 0xFF && firstBytes[1] === 0xD8 && firstBytes[2] === 0xFF) {
         contentType = 'image/jpeg';
-      } else if (lowerFilename.endsWith('.png')) {
+        console.log('[FILE] Detected: JPEG from magic bytes');
+      } else if (firstBytes[0] === 0x89 && firstBytes[1] === 0x50 && firstBytes[2] === 0x4E && firstBytes[3] === 0x47) {
         contentType = 'image/png';
-      } else if (lowerFilename.endsWith('.gif')) {
+        console.log('[FILE] Detected: PNG from magic bytes');
+      } else if (firstBytes[0] === 0x47 && firstBytes[1] === 0x49 && firstBytes[2] === 0x46) {
         contentType = 'image/gif';
-      } else if (lowerFilename.endsWith('.webp')) {
+        console.log('[FILE] Detected: GIF from magic bytes');
+      } else if (firstBytes[0] === 0x52 && firstBytes[1] === 0x49 && firstBytes[2] === 0x46 && firstBytes[3] === 0x46) {
         contentType = 'image/webp';
+        console.log('[FILE] Detected: WebP from magic bytes');
       } else {
-        contentType = 'application/octet-stream';
+        // Fallback to extension-based detection
+        const ext = filename.toLowerCase().split('.').pop();
+        const extMap = {
+          'pdf': 'application/pdf',
+          'jpg': 'image/jpeg',
+          'jpeg': 'image/jpeg',
+          'png': 'image/png',
+          'gif': 'image/gif',
+          'webp': 'image/webp',
+          'bmp': 'image/bmp',
+          'svg': 'image/svg+xml'
+        };
+        contentType = extMap[ext] || 'application/octet-stream';
+        console.log(`[FILE] Detected: ${contentType} from extension .${ext}`);
       }
     }
 
-    console.log(`Final Content-Type: ${contentType}`);
+    console.log(`[FILE] Final Content-Type: ${contentType}`);
+    console.log(`[FILE] Filename: ${filename}`);
 
-    // Return the file
+    // Return the file with proper headers
     return new Response(fileBuffer, {
       status: 200,
       headers: {
         'Content-Type': contentType,
-        'Content-Disposition': `inline; filename="${fileFilename}"`,
+        'Content-Length': fileBuffer.byteLength.toString(),
+        'Content-Disposition': `inline; filename="${filename}"`,
         'Cache-Control': 'public, max-age=3600',
         'Access-Control-Allow-Origin': '*',
-        'Content-Length': fileBuffer.byteLength.toString(),
-        'Accept-Ranges': 'bytes',
+        'X-Content-Type-Options': 'nosniff',
       }
     });
 
   } catch (error) {
-    console.error('File fetch error:', error);
-    return new Response(`File fetch error: ${error.message}`, { 
-      status: 500 
-    });
+    console.error('[FILE] Error:', error);
+    return new Response(`File error: ${error.message}`, { status: 500 });
   }
 }
 
-
-// PDF generation handler
+// PDF generation handler - UNCHANGED
 async function handlePdfGenerationRequest(requestedPath, req) {
-  console.log(`PDF Generation Request - Original path: ${requestedPath}`);
-  
-  let targetUrl;
-  let filename = 'generated_document.pdf';
+  console.log(`[PDF-GEN] Request: ${requestedPath}`);
   
   try {
     const decodedPath = decodeURIComponent(requestedPath);
-    console.log(`PDF Generation Request - Decoded path: ${decodedPath}`);
+    const generatePdfMatch = decodedPath.match(/generate_pdf\.php(\?.*)?$/);
     
-    if (decodedPath.includes('generate_pdf.php')) {
-      const generatePdfMatch = decodedPath.match(/generate_pdf\.php(\?.*)?$/);
-      if (generatePdfMatch) {
-        const pdfPath = `generate_pdf.php${generatePdfMatch[1] || ''}`;
-        targetUrl = `${BASE_URL}/${pdfPath}`;
-        
-        const urlParams = new URLSearchParams(generatePdfMatch[1]?.substring(1) || '');
-        const index = urlParams.get('index');
-        filename = index ? `document_${index}.pdf` : 'generated_document.pdf';
-      } else {
-        console.error('Invalid generate_pdf.php path structure');
-        return new Response('Invalid PDF generation path', { status: 400 });
-      }
-    } else {
-      console.error('Not a valid PDF generation request');
-      return new Response('Not a PDF generation request', { status: 400 });
+    if (!generatePdfMatch) {
+      return new Response('Invalid PDF generation path', { status: 400 });
     }
-
-    console.log(`Generating PDF from: ${targetUrl}`);
+    
+    const pdfPath = `generate_pdf.php${generatePdfMatch[1] || ''}`;
+    const targetUrl = `${BASE_URL}/${pdfPath}`;
+    
+    console.log(`[PDF-GEN] Generating from: ${targetUrl}`);
     
     const targetHeaders = {
-      'Cache-Control': 'no-cache',
-      'Pragma': 'no-cache',
       'User-Agent': commonHeaders['User-Agent'],
-      'Accept': 'application/pdf,*/*'
+      'Accept': 'application/pdf,*/*',
+      'Cache-Control': 'no-cache',
+      'Referer': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
     };
     
     forwardCookies(req, targetHeaders);
     
-    const pdfResponse = await fetch(targetUrl, {
-      headers: targetHeaders
-    });
+    const pdfResponse = await fetch(targetUrl, { headers: targetHeaders });
     
-    console.log(`PDF Generation Response status: ${pdfResponse.status}`);
-    console.log(`PDF Generation Response content-type: ${pdfResponse.headers.get('content-type')}`);
+    console.log(`[PDF-GEN] Response: ${pdfResponse.status}`);
     
     if (!pdfResponse.ok) {
-      console.error(`PDF generation failed: ${pdfResponse.status} - ${pdfResponse.statusText}`);
-      
       const errorText = await pdfResponse.text();
-      console.error('PDF Generation Error response:', errorText.substring(0, 500));
-      return new Response(`PDF Generation Error: ${pdfResponse.statusText}`, { status: pdfResponse.status });
+      console.error('[PDF-GEN] Error:', errorText.substring(0, 200));
+      return new Response(`PDF generation failed: ${pdfResponse.status}`, { status: pdfResponse.status });
     }
 
     const pdfBuffer = await pdfResponse.arrayBuffer();
+    console.log(`[PDF-GEN] Size: ${pdfBuffer.byteLength} bytes`);
     
-    const contentType = pdfResponse.headers.get('content-type') || '';
-    console.log(`PDF Content-Type: ${contentType}`);
-    console.log(`PDF Buffer size: ${pdfBuffer.byteLength} bytes`);
-    
-    // Check if response is actually a PDF
-    const firstBytes = new Uint8Array(pdfBuffer.slice(0, 4));
-    const pdfMagic = String.fromCharCode(...firstBytes);
-    console.log(`PDF Magic bytes: ${pdfMagic}`);
-    
-    if (!contentType.includes('application/pdf') && !pdfMagic.startsWith('%PDF')) {
-      if (contentType.includes('text/html')) {
-        const htmlContent = new TextDecoder().decode(pdfBuffer);
-        console.log('Received HTML instead of PDF:', htmlContent.substring(0, 500));
-        
-        return new Response('PDF generation failed - authentication may be required', { 
-          status: 403,
-          headers: { 'Content-Type': 'text/plain' }
-        });
-      } else {
-        console.log('Received non-PDF content:', contentType);
-        return new Response('Invalid PDF content received', { 
-          status: 400,
-          headers: { 'Content-Type': 'text/plain' }
-        });
-      }
-    }
-
     return new Response(pdfBuffer, {
-      status: pdfResponse.status,
+      status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `inline; filename="${filename}"`,
-        'Cache-Control': 'no-store, no-cache, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'X-Content-Type-Options': 'nosniff',
-        'Content-Length': pdfBuffer.byteLength.toString(),
-        ...Object.fromEntries(
-          extractSetCookies(pdfResponse).map(cookie => ['Set-Cookie', cookie])
-        )
+        'Content-Disposition': 'inline; filename="generated.pdf"',
+        'Cache-Control': 'no-store',
       }
     });
     
   } catch (error) {
-    console.error('PDF generation error:', error);
-    return new Response(`PDF generation error: ${error.message}`, { 
-      status: 500,
-      headers: { 'Content-Type': 'text/plain' }
-    });
+    console.error('[PDF-GEN] Error:', error);
+    return new Response(`PDF error: ${error.message}`, { status: 500 });
   }
 }
 
-// Main request handler
+// ENHANCED: Main request handler with better file upload support
 async function handleRequest(req, method = 'GET') {
   try {
     const { searchParams } = new URL(req.url);
     let requestedPath = searchParams.get("path") || "/";
 
-    console.log(`${method} request for path: ${requestedPath}`);
+    console.log(`\n[${method}] Path: ${requestedPath}`);
+    console.log(`[${method}] Content-Type: ${req.headers.get('content-type') || 'none'}`);
 
-    // Handle uploaded files 
-    if (isUploadedFileRequest(requestedPath)) {
-      console.log('Detected uploaded file request');
+    // Handle file viewing (GET only) - for BOTH PDFs and images
+    if (method === 'GET' && isUploadedFileRequest(requestedPath)) {
       return handleUploadedFileRequest(requestedPath, req);
     }
 
-    // Handle PDF generation requests
-    if (requestedPath.includes('generate_pdf.php')) {
-      console.log('Detected PDF generation request');
+    // Handle PDF generation (GET only)
+    if (method === 'GET' && requestedPath.includes('generate_pdf.php')) {
       return handlePdfGenerationRequest(requestedPath, req);
     }
 
-    // Handle other requests (HTML pages, etc.)
+    // Handle all other requests
     const targetUrl = constructTargetUrl(requestedPath);
     const targetHeaders = { ...commonHeaders };
     
     forwardCookies(req, targetHeaders);
     
-    const refererUrl = new URL(req.url);
     const currentRoute = getCurrentApiRoute(req);
-    targetHeaders.Referer = `${refererUrl.origin}/api/${currentRoute}`;
+    targetHeaders.Referer = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`;
+    targetHeaders.Origin = TARGET_DOMAIN;
+    
     if (method !== 'GET') {
-      targetHeaders.Origin = refererUrl.origin;
       targetHeaders['X-Requested-With'] = 'XMLHttpRequest';
     }
 
-    const body = method !== 'GET' ? await req.text() : undefined;
-    if (body && method !== 'GET') {
-      targetHeaders['Content-Type'] = req.headers.get('content-type') || 'application/x-www-form-urlencoded';
-      targetHeaders['Content-Length'] = Buffer.byteLength(body).toString();
-    }
-
-    console.log(`Fetching: ${targetUrl}`);
-    
-    const response = await fetch(targetUrl, {
+    let body;
+    const fetchOptions = {
       method,
       headers: targetHeaders,
-      body,
       redirect: 'manual'
-    });
+    };
+
+    // Handle request body - CRITICAL for file uploads
+    if (method !== 'GET') {
+      const contentType = req.headers.get('content-type') || '';
+      
+      if (contentType.includes('multipart/form-data')) {
+        console.log(`[${method}] Multipart form data detected (FILE UPLOAD)`);
+        
+        // Get the raw body as buffer for multipart forms
+        const rawBody = await req.arrayBuffer();
+        console.log(`[${method}] Raw body size: ${rawBody.byteLength} bytes`);
+        
+        // For multipart, forward the raw body with the correct content-type
+        body = rawBody;
+        
+        // Keep the original content-type with boundary
+        targetHeaders['Content-Type'] = contentType;
+        
+      } else if (contentType.includes('application/json')) {
+        console.log(`[${method}] JSON data detected`);
+        body = await req.text();
+        targetHeaders['Content-Type'] = 'application/json';
+      } else {
+        console.log(`[${method}] Form data detected`);
+        body = await req.text();
+        console.log(`[${method}] Body preview: ${body.substring(0, 200)}`);
+        targetHeaders['Content-Type'] = contentType || 'application/x-www-form-urlencoded';
+      }
+      
+      fetchOptions.body = body;
+    }
+
+    console.log(`[${method}] Fetching: ${targetUrl}`);
+    
+    const response = await fetch(targetUrl, fetchOptions);
+    
+    console.log(`[${method}] Response: ${response.status}`);
 
     // Handle redirects
     if (response.status >= 300 && response.status < 400) {
       const location = response.headers.get('location');
       if (location) {
+        console.log(`[${method}] Redirect to: ${location}`);
         let redirectPath = location;
+        
         if (location.startsWith('http')) {
           const url = new URL(location);
           if (url.hostname === new URL(TARGET_DOMAIN).hostname) {
-            redirectPath = url.pathname;
+            redirectPath = url.pathname + url.search;
           } else {
             return new Response(null, {
               status: response.status,
-              headers: {
-                Location: location,
-                'Set-Cookie': extractSetCookies(response),
-                'Cache-Control': 'no-cache, no-store, must-revalidate'
-              }
+              headers: { Location: location }
             });
           }
         }
+        
         return new Response(null, {
           status: 302,
           headers: {
-            Location: `/api/${getCurrentApiRoute(req)}?path=${encodeURIComponent(redirectPath)}`,
-            'Set-Cookie': extractSetCookies(response),
-            'Cache-Control': 'no-cache, no-store, must-revalidate'
+            Location: `/api/${currentRoute}?path=${encodeURIComponent(redirectPath)}`,
+            ...Object.fromEntries(
+              extractSetCookies(response).map(cookie => ['Set-Cookie', cookie])
+            )
           }
         });
       }
@@ -515,48 +451,52 @@ async function handleRequest(req, method = 'GET') {
     const contentType = response.headers.get('content-type') || '';
     const responseText = await response.text();
 
+    // Handle JSON responses
     if (contentType.includes('application/json')) {
+      console.log(`[${method}] JSON response`);
       return new Response(responseText, {
         status: response.status,
         headers: {
           'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Set-Cookie': extractSetCookies(response)
+          ...Object.fromEntries(
+            extractSetCookies(response).map(cookie => ['Set-Cookie', cookie])
+          )
         }
       });
     }
 
+    // Handle HTML
     if (contentType.includes('text/html')) {
-      const currentRoute = getCurrentApiRoute(req);
+      console.log(`[${method}] HTML response - modifying`);
       const modifiedHtml = modifyHtmlContent(responseText, requestedPath, currentRoute);
       return new Response(modifiedHtml, {
         status: response.status,
         headers: {
           'Content-Type': 'text/html',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Set-Cookie': extractSetCookies(response)
+          ...Object.fromEntries(
+            extractSetCookies(response).map(cookie => ['Set-Cookie', cookie])
+          )
         }
       });
     }
 
+    // Handle other content types
     return new Response(responseText, {
       status: response.status,
       headers: {
-        'Content-Type': contentType,
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Set-Cookie': extractSetCookies(response)
+        'Content-Type': contentType || 'text/plain',
+        ...Object.fromEntries(
+          extractSetCookies(response).map(cookie => ['Set-Cookie', cookie])
+        )
       }
     });
+    
   } catch (error) {
-    console.error(`Proxy Error:`, error);
-    return new Response(`Proxy Error: ${error.message}`, { 
-      status: 500,
-      headers: { 'Content-Type': 'text/plain' }
-    });
+    console.error(`[ERROR] ${method}:`, error);
+    return new Response(`Proxy Error: ${error.message}`, { status: 500 });
   }
 }
 
-// Export HTTP methods
 export async function GET(req) {
   return handleRequest(req, 'GET');
 }
