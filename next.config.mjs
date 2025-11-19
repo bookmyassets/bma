@@ -65,11 +65,11 @@ const nextConfig = {
         destination: "/api/landx?path=img/:path*",
       },
 
-       // CRITICAL: Catch API uploads requests and route to landx
-    {
-  source: "/uploads/pdfs/:path*",
-  destination: "/api/landx?path=uploads/pdfs/:path*",
-},
+      // CRITICAL: Catch API uploads requests and route to landx
+      {
+        source: "/uploads/pdfs/:path*",
+        destination: "/api/landx?path=uploads/pdfs/:path*",
+      },
 
       // Default landx access - should be last
       {
@@ -120,7 +120,7 @@ const nextConfig = {
           },
         ],
       },
-     /*  // CRITICAL: Add CORS headers for uploaded files
+      /*  // CRITICAL: Add CORS headers for uploaded files
       {
         source: "/uploads/pdfs/:path*",
         headers: [
