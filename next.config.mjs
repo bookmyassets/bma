@@ -45,7 +45,7 @@ const nextConfig = {
         source: "/admin.php",
         destination: "/api/landx?path=admin.php",
       },
-      
+
       // Handle CSS, JS files
       {
         source: "/css/:path*",
@@ -64,12 +64,13 @@ const nextConfig = {
         source: "/img/:path*",
         destination: "/api/landx?path=img/:path*",
       },
-      // CRITICAL FIX: Direct uploads to the target server, bypassing proxy for file access
-      {
-        source: "/uploads/pdfs/:path*",
-        destination: "https://dholeratimes.co.in/LandX-Beta/uploads/pdfs/:path*",
-      },
-      
+
+       // CRITICAL: Catch API uploads requests and route to landx
+    {
+  source: "/uploads/pdfs/:path*",
+  destination: "/api/landx?path=uploads/pdfs/:path*",
+},
+
       // Default landx access - should be last
       {
         source: "/landx",
@@ -109,23 +110,29 @@ const nextConfig = {
         source: "/api/landx",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
-          { key: "Access-Control-Allow-Methods", value: "GET,POST,PUT,DELETE,OPTIONS" },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,POST,PUT,DELETE,OPTIONS",
+          },
           {
             key: "Access-Control-Allow-Headers",
             value: "X-Requested-With, Content-Type, Authorization",
           },
         ],
       },
-      // CRITICAL: Add CORS headers for uploaded files
+     /*  // CRITICAL: Add CORS headers for uploaded files
       {
-        source: "/uploads/:path*",
+        source: "/uploads/pdfs/:path*",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "Access-Control-Allow-Methods", value: "GET, POST, OPTIONS" },
-          { key: "Access-Control-Allow-Headers", value: "Content-Type, Authorization" },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, Authorization",
+          },
           { key: "Cache-Control", value: "public, max-age=31536000" },
         ],
-      },
+      }, */
     ];
   },
 
@@ -143,13 +150,13 @@ const nextConfig = {
   },
 
   images: {
-    domains: ['cdn.sanity.io'], 
+    domains: ["cdn.sanity.io"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-        port: '',
-        pathname: '/images/**',
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        port: "",
+        pathname: "/images/**",
       },
     ],
   },
@@ -158,384 +165,384 @@ const nextConfig = {
       /* REDIRECTIONS AFTER RESTRUCTURE */
 
       {
-        source: '/dholera-sir/latest-updates/:slug*',
-        destination: '/dholera-sir-updates/:slug*', 
-        permanent: true
+        source: "/dholera-sir/latest-updates/:slug*",
+        destination: "/dholera-sir-updates/:slug*",
+        permanent: true,
       },
       {
-        source: '/dholera-sir/:slug*',
-        destination: '/about-dholera-sir/:slug*', 
-        permanent: true
+        source: "/dholera-sir/:slug*",
+        destination: "/about-dholera-sir/:slug*",
+        permanent: true,
       },
       {
-        source: '/blogs/:slug*',
-        destination: '/dholera-sir-blogs/:slug*', 
-        permanent: true
+        source: "/blogs/:slug*",
+        destination: "/dholera-sir-blogs/:slug*",
+        permanent: true,
       },
 
       /* BEFORE SITE RESTRUCTURE SLUGS REDIRECTION */
       {
-        source:"/dholera-sir/latest-updates/dholera-international-airport-latest-news",
-        destination:"/dholera-sir-updates/dholera-international-airport-latest-news",
-        permanent:true
+        source:
+          "/dholera-sir/latest-updates/dholera-international-airport-latest-news",
+        destination:
+          "/dholera-sir-updates/dholera-international-airport-latest-news",
+        permanent: true,
       },
 
       {
-        source: '/blog',
-        destination: '/dholera-sir-blogs',
-        permanent: true, 
-      },
-      {
-        source: '/contact-us',
-        destination: '/contact',
-        permanent: true, 
-      },
-      {
-        source: '/about-us',
-        destination: '/about',
-        permanent: true, 
-      },
-      {
-        source: '/projects/paradise-2',
-        destination: '/dholera-residential-plots/paradise-2',
-        permanent: true,
-      },
-      {
-        source: '/projects/paradise-1',
-        destination: '/dholera-residential-plots/paradise',
+        source: "/blog",
+        destination: "/dholera-sir-blogs",
         permanent: true,
       },
       {
-        source: '/pages/about',
-        destination: '/about',
+        source: "/contact-us",
+        destination: "/contact",
         permanent: true,
       },
       {
-        source: '/projects/dholera/westwyn-c',
-        destination: '/dholera-residential-plots/westwyn-county',
+        source: "/about-us",
+        destination: "/about",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/paradise-2",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/projects/maple',
-        destination: '/dholera-residential-plots/maple',
+        source: "/projects/paradise-1",
+        destination: "/dholera-residential-plots/paradise",
         permanent: true,
       },
       {
-        source: '/projects/marina-bay',
-        destination: '/dholera-residential-plots/marina-bay',
+        source: "/pages/about",
+        destination: "/about",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township-ot',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/dholera/westwyn-c",
+        destination: "/dholera-residential-plots/westwyn-county",
         permanent: true,
       },
       {
-        source: '/projects/paradise-p2',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/orchid-township",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/paradise-1/paradise-p1',
-        destination: '/dholera-residential-plots/paradise',
+        source: "/projects/maple",
+        destination: "/dholera-residential-plots/maple",
         permanent: true,
       },
       {
-        source: '/projects/paradise-1/maple-township-mt',
-        destination: '/dholera-residential-plots/paradise',
+        source: "/projects/marina-bay",
+        destination: "/dholera-residential-plots/marina-bay",
         permanent: true,
       },
       {
-        source: '/projects/paradise-1/marina-bay-mb',
-        destination: '/dholera-residential-plots/paradise',
+        source: "/projects/orchid-township-ot",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/paradise-1/paradise-p2',
-        destination: '/dholera-residential-plots/paradise',
+        source: "/projects/paradise-p2",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/projects/paradise-1/orchid-township-ot',
-        destination: '/dholera-residential-plots/paradise',
+        source: "/projects/paradise-1/paradise-p1",
+        destination: "/dholera-residential-plots/paradise",
         permanent: true,
       },
       {
-        source: '/projects/paradise-1/westwyn-c',
-        destination: '/dholera-residential-plots/paradise',
+        source: "/projects/paradise-1/maple-township-mt",
+        destination: "/dholera-residential-plots/paradise",
         permanent: true,
       },
       {
-        source: '/projects/paradise-2/paradise-p1',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/paradise-1/marina-bay-mb",
+        destination: "/dholera-residential-plots/paradise",
         permanent: true,
       },
       {
-        source: '/projects/paradise-2/maple-township-mt',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/paradise-1/paradise-p2",
+        destination: "/dholera-residential-plots/paradise",
         permanent: true,
       },
       {
-        source: '/projects/paradise-2/marina-bay-mb',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/paradise-1/orchid-township-ot",
+        destination: "/dholera-residential-plots/paradise",
         permanent: true,
       },
       {
-        source: '/projects/paradise-2/paradise-p2',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/paradise-1/westwyn-c",
+        destination: "/dholera-residential-plots/paradise",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township/maple-township-mt',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/paradise-2/paradise-p1",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township/marina-bay-mb',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/paradise-2/maple-township-mt",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township/paradise-p2',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/paradise-2/marina-bay-mb",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township/orchid-township-ot',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/paradise-2/paradise-p2",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township/westwyn-c',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/orchid-township/maple-township-mt",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/maple/paradise-p1',
-        destination: '/dholera-residential-plots/maple',
+        source: "/projects/orchid-township/marina-bay-mb",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/maple/maple-township-mt',
-        destination: '/dholera-residential-plots/maple',
+        source: "/projects/orchid-township/paradise-p2",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/maple/marina-bay-mb',
-        destination: '/dholera-residential-plots/maple',
+        source: "/projects/orchid-township/orchid-township-ot",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/maple/paradise-p2',
-        destination: '/dholera-residential-plots/maple',
+        source: "/projects/orchid-township/westwyn-c",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/maple/orchid-township-ot',
-        destination: '/dholera-residential-plots/maple',
+        source: "/projects/maple/paradise-p1",
+        destination: "/dholera-residential-plots/maple",
         permanent: true,
       },
       {
-        source: '/projects/maple/westwyn-c',
-        destination: '/dholera-residential-plots/maple',
+        source: "/projects/maple/maple-township-mt",
+        destination: "/dholera-residential-plots/maple",
         permanent: true,
       },
       {
-        source: '/projects/marina-bay/paradise-p1',
-        destination: '/dholera-residential-plots/marina-bay',
+        source: "/projects/maple/marina-bay-mb",
+        destination: "/dholera-residential-plots/maple",
         permanent: true,
       },
       {
-        source: '/projects/marina-bay/maple-township-mt',
-        destination: '/dholera-residential-plots/marina-bay',
+        source: "/projects/maple/paradise-p2",
+        destination: "/dholera-residential-plots/maple",
         permanent: true,
       },
       {
-        source: '/projects/marina-bay/marina-bay-mb',
-        destination: '/dholera-residential-plots/marina-bay',
+        source: "/projects/maple/orchid-township-ot",
+        destination: "/dholera-residential-plots/maple",
         permanent: true,
       },
       {
-        source: '/projects/marina-bay/paradise-p2',
-        destination: '/dholera-residential-plots/marina-bay',
+        source: "/projects/maple/westwyn-c",
+        destination: "/dholera-residential-plots/maple",
         permanent: true,
       },
       {
-        source: '/projects/marina-bay/orchid-township-ot',
-        destination: '/dholera-residential-plots/marina-bay',
+        source: "/projects/marina-bay/paradise-p1",
+        destination: "/dholera-residential-plots/marina-bay",
         permanent: true,
       },
       {
-        source: '/projects/marina-bay/westwyn-c',
-        destination: '/dholera-residential-plots/marina-bay',
+        source: "/projects/marina-bay/maple-township-mt",
+        destination: "/dholera-residential-plots/marina-bay",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township-ot/paradise-p1',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/marina-bay/marina-bay-mb",
+        destination: "/dholera-residential-plots/marina-bay",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township-ot/maple-township-mt',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/marina-bay/paradise-p2",
+        destination: "/dholera-residential-plots/marina-bay",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township-ot/marina-bay-mb',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/marina-bay/orchid-township-ot",
+        destination: "/dholera-residential-plots/marina-bay",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township-ot/paradise-p2',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/marina-bay/westwyn-c",
+        destination: "/dholera-residential-plots/marina-bay",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township-ot/westwyn-c',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/orchid-township-ot/paradise-p1",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/paradise-p2/paradise-p1',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/orchid-township-ot/maple-township-mt",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/paradise-p2/maple-township-mt',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/orchid-township-ot/marina-bay-mb",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/paradise-p2/marina-bay-mb',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/orchid-township-ot/paradise-p2",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/paradise-p2/orchid-township-ot',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/orchid-township-ot/westwyn-c",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/projects/paradise-p2/westwyn-c',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/paradise-p2/paradise-p1",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/projects/orchid-township-ot/orchid-township-ot',
-        destination: '/dholera-residential-plots/orchid',
+        source: "/projects/paradise-p2/maple-township-mt",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/projects/paradise-p2/paradise-p2',
-        destination: '/dholera-residential-plots/paradise-2',
+        source: "/projects/paradise-p2/marina-bay-mb",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/dholera/abcd-building',
-        destination: '/about-dholera-sir/abcd-building-dholera',
+        source: "/projects/paradise-p2/orchid-township-ot",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/carrers',
-        destination: '/career',
+        source: "/projects/paradise-p2/westwyn-c",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/copyright',
-        destination: '/policies/copyright',
+        source: "/projects/orchid-township-ot/orchid-township-ot",
+        destination: "/dholera-residential-plots/orchid",
         permanent: true,
       },
       {
-        source: '/terms-of-use',
-        destination: '/policies/terms',
+        source: "/projects/paradise-p2/paradise-p2",
+        destination: "/dholera-residential-plots/paradise-2",
         permanent: true,
       },
       {
-        source: '/pages/Blogs',
-        destination: '/dholera-sir-blogs',
+        source: "/dholera/abcd-building",
+        destination: "/about-dholera-sir/abcd-building-dholera",
         permanent: true,
       },
       {
-        source: '/pages/about',
-        destination: '/about',
+        source: "/carrers",
+        destination: "/career",
         permanent: true,
       },
       {
-        source: '/pages/properties',
-        destination: '/projects',
+        source: "/copyright",
+        destination: "/policies/copyright",
         permanent: true,
       },
       {
-        source: '/pages/contact',
-        destination: '/contact',
+        source: "/terms-of-use",
+        destination: "/policies/terms",
         permanent: true,
       },
       {
-        source: '/pages/Events',
-        destination: '/events',
+        source: "/pages/Blogs",
+        destination: "/dholera-sir-blogs",
         permanent: true,
       },
       {
-        source: '/privacy-policy',
-        destination: '/policies/privacy',
+        source: "/pages/about",
+        destination: "/about",
         permanent: true,
       },
       {
-        source: '/blogs/latest-update',
-        destination: '/dholera-sir-updates',
+        source: "/pages/properties",
+        destination: "/projects",
         permanent: true,
       },
       {
-        source: '/blogs/sitemap.html',
-        destination: '/sitemap.html',
+        source: "/pages/contact",
+        destination: "/contact",
         permanent: true,
       },
       {
-        source: '/projects/sitemap.html',
-        destination: '/sitemap.html',
+        source: "/pages/Events",
+        destination: "/events",
         permanent: true,
       },
       {
-        source: '/blogs/sitemap.xml',
-        destination: '/sitemap.html',
+        source: "/privacy-policy",
+        destination: "/policies/privacy",
         permanent: true,
       },
       {
-        source: '/blogs/why-invest-in-dholera-india-first-greenfield-smart-city',
-        destination: '/dholera-sir-blogs/invest-in-dholera-sir-projects',
+        source: "/blogs/latest-update",
+        destination: "/dholera-sir-updates",
         permanent: true,
       },
       {
-        source: '/blogs/first-smart-city-dholera',
-        destination: '/dholera-sir-blogs/impact-of-tata-semiconductor-plant-on-land-value-in-dholera',
+        source: "/blogs/sitemap.html",
+        destination: "/sitemap.html",
         permanent: true,
       },
       {
-        source: '/blogs/dholera-ahmedabad-expressway',
-        destination: '/dholera-sir-blogs/dholera-ahmedabad-expressway',
+        source: "/projects/sitemap.html",
+        destination: "/sitemap.html",
         permanent: true,
       },
       {
-        source: '/projects/sitemap.xml',
-        destination: '/sitemap.html',
+        source: "/blogs/sitemap.xml",
+        destination: "/sitemap.html",
         permanent: true,
       },
       {
         source:
-          "/dholera-sir/latest-updates/sitemap.html",
-        destination:
-          "/sitemap.html",
+          "/blogs/why-invest-in-dholera-india-first-greenfield-smart-city",
+        destination: "/dholera-sir-blogs/invest-in-dholera-sir-projects",
         permanent: true,
       },
-      
+      {
+        source: "/blogs/first-smart-city-dholera",
+        destination:
+          "/dholera-sir-blogs/impact-of-tata-semiconductor-plant-on-land-value-in-dholera",
+        permanent: true,
+      },
+      {
+        source: "/blogs/dholera-ahmedabad-expressway",
+        destination: "/dholera-sir-blogs/dholera-ahmedabad-expressway",
+        permanent: true,
+      },
+      {
+        source: "/projects/sitemap.xml",
+        destination: "/sitemap.html",
+        permanent: true,
+      },
+      {
+        source: "/dholera-sir/latest-updates/sitemap.html",
+        destination: "/sitemap.html",
+        permanent: true,
+      },
     ];
   },
-
 };
 
 export default nextConfig;
