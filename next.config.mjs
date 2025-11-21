@@ -25,9 +25,15 @@ const nextConfig = {
         destination: "/api/landx?path=login.php",
       },
       {
-        source: "/dashboard.php",
+        source: "/LandX-Beta/dashboard.php",
         destination: "/api/landx?path=dashboard.php",
       },
+    // next.config.js
+/* {
+  source: "/LandX-Beta/dashboard.php?filters%5B5%5D=&filters%5B6%5D=&filters%5B7%5D=&filters%5B12%5D=&filters%5B13%5D=&filters%5B19%5D=Available",
+  destination: "/api/landx?path=dashboard.php?filters%5B5%5D=&filters%5B6%5D=&filters%5B7%5D=&filters%5B12%5D=&filters%5B13%5D=&filters%5B19%5D=Available",
+}
+, */
       {
         source: "/api.php",
         destination: "/api/landx?path=api.php",
@@ -77,8 +83,12 @@ const nextConfig = {
         destination: "/api/landx",
       },
       {
-        source: "/landx/:path*",
-        destination: "/api/landx?path=:path*",
+        source: '/LandX-Beta/:path*',
+        destination: '/api/landx?path=:path*',
+      },
+      {
+        source: '/LandX-Beta/dashboard.php:path*',
+        destination: '/api/landx?path=dashboard.php:path*',
       },
     ];
   },

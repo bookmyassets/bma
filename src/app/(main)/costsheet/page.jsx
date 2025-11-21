@@ -488,7 +488,7 @@ export default function CostSheet() {
               </td>
             </tr>
             <tr className="border-b">
-              <td className="p-2 font-semibold">Maintenance Charge Rate</td>
+              <td className="p-2 font-semibold">Development Charge</td>
               <td className="p-2">
                 <select
                   name="maintenanceRate"
@@ -503,7 +503,7 @@ export default function CostSheet() {
             </tr>
             <tr className="border-b">
               <td className="p-2 font-semibold">
-                Maintenance Charge ({formData.maintenanceRate} x Size)
+                Development Charge({formData.maintenanceRate} x Size)
               </td>
               <td className="p-2">
                 <input

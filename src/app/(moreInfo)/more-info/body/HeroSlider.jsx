@@ -2,8 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-//import logo from "@/assests/ad-page/dholera-govt-logo.webp"
-import logo from "@/assests/festival-images/dholera-diwali.webp"
+import logo from "@/assests/ad-page/dholera-govt-logo.webp"
+/* import logo from "@/assests/festival-images/dholera-diwali.webp" */
 import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight, ChevronLeft, TrendingUp } from 'lucide-react';
 
 //images import

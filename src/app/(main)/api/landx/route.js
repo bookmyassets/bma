@@ -11,12 +11,11 @@ function getCurrentApiRoute(req) {
 }
 
 const commonHeaders = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
   Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
   "Accept-Language": "en-US,en;q=0.9",
   "Accept-Encoding": "gzip, deflate, br",
   Connection: "keep-alive",
-  "Upgrade-Insecure-Requests": "1",
 };
 
 function forwardCookies(clientRequest, targetHeaders) {
@@ -38,21 +37,9 @@ function extractSetCookies(response) {
   return setCookieHeaders;
 }
 
-// Enhanced file type detection
-function getFileType(path) {
-  const decodedPath = decodeURIComponent(path);
-  const filename = decodedPath.split('/').pop() || '';
-  const ext = filename.toLowerCase().split('.').pop();
-  
-  if (ext === 'pdf') return 'pdf';
-  if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'].includes(ext)) return 'image';
-  if (['php', 'html'].includes(ext)) return 'page';
-  return 'other';
-}
-
 function isUploadedFileRequest(path) {
   const decodedPath = decodeURIComponent(path);
-  return decodedPath.includes('uploads/');
+  return decodedPath.includes('uploads/pdfs/');
 }
 
 function constructTargetUrl(path) {
@@ -64,6 +51,7 @@ function constructTargetUrl(path) {
 
   const cleanPath = decodedPath.startsWith('/') ? decodedPath.slice(1) : decodedPath;
 
+  // Handle uploads - construct full path
   if (cleanPath.includes('uploads/')) {
     return `${TARGET_DOMAIN}${TARGET_BASE_PATH}/${cleanPath}`;
   }
@@ -83,16 +71,15 @@ function constructTargetUrl(path) {
   return `${BASE_URL}/${cleanPath}`;
 }
 
-// HTML modifier - UNCHANGED
-// Enhanced HTML modifier - FIX FILE URLS
+// HTML modifier with enhanced upload handling
 function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
   currentPath = currentPath.replace(/\/+$/, '');
   
-  console.log(`[HTML Modifier] Processing HTML for path: ${currentPath}, route: ${apiRoute}`);
+  console.log(`[HTML] Processing for path: ${currentPath}, route: ${apiRoute}`);
 
   let modifiedHtml = html;
 
-  // CRITICAL FIX: Fix ALL href attributes for uploads
+  // Fix href attributes
   modifiedHtml = modifiedHtml.replace(/href=["']([^"']*?)["']/gi, (match, href) => {
     if (href.startsWith('http') || href.startsWith('//') || 
         href.startsWith('#') || href.startsWith('mailto:') || 
@@ -100,34 +87,31 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
       return match;
     }
     
-    // SPECIAL HANDLING: If it's an uploads file, ensure it goes through landx API
     if (href.includes('uploads/')) {
       const cleanHref = href.startsWith('/') ? href.slice(1) : href;
       const newHref = `/api/${apiRoute}?path=${encodeURIComponent(cleanHref)}`;
-      console.log(`[HREF-UPLOAD] ${href} → ${newHref}`);
       return `href="${newHref}"`;
     }
     
     const cleanHref = href.startsWith('/') ? href.slice(1) : href;
     const newHref = `/api/${apiRoute}?path=${encodeURIComponent(cleanHref)}`;
-    console.log(`[HREF] ${href} → ${newHref}`);
     return `href="${newHref}"`;
   });
 
-  // CRITICAL FIX: Fix ALL src attributes for uploads (images, etc.)
+  // Fix src attributes for images, scripts, etc.
   modifiedHtml = modifiedHtml.replace(/src=["']([^"']*?)["']/g, (match, src) => {
     if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('//') || src.startsWith('/api/')) {
       return match;
     }
     
-    // SPECIAL HANDLING: If it's an uploads file, ensure it goes through landx API
+    // Route uploads through proxy
     if (src.includes('uploads/')) {
       const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
       const newSrc = `/api/${apiRoute}?path=${encodeURIComponent(cleanSrc)}`;
-      console.log(`[SRC-UPLOAD] ${src} → ${newSrc}`);
       return `src="${newSrc}"`;
     }
     
+    // Direct reference for other assets
     const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
     return `src="${BASE_URL}/${cleanSrc}"`;
   });
@@ -140,13 +124,11 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
     
     if (!action || action.trim() === '') {
       const newAction = `/api/${apiRoute}?path=${encodeURIComponent(currentPath || 'dashboard.php')}`;
-      console.log(`[FORM] Empty action → ${newAction}`);
       return `<form${formAttrs}action="${newAction}"`;
     }
     
     const cleanAction = action.startsWith('/') ? action.slice(1) : action;
     const newAction = `/api/${apiRoute}?path=${encodeURIComponent(cleanAction)}`;
-    console.log(`[FORM] ${action} → ${newAction}`);
     return `<form${formAttrs}action="${newAction}"`;
   });
 
@@ -156,7 +138,6 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
       return match;
     }
     const newAction = `/api/${apiRoute}?path=${encodeURIComponent(currentPath || 'dashboard.php')}`;
-    console.log(`[FORM-NO-ACTION] Adding action → ${newAction}`);
     return `<form${formAttrs} action="${newAction}">`;
   });
 
@@ -185,86 +166,115 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
       if (url.includes('.php')) {
         const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
         const newUrl = `/api/${apiRoute}?path=${encodeURIComponent(cleanUrl)}`;
-        console.log(`[AJAX] ${url} → ${newUrl}`);
         return `${method}("${newUrl}"`;
       }
       
       return match;
     });
 
-  // Add JavaScript to intercept dynamic file loading
-  const fileInterceptorScript = `
+  // Enhanced dynamic content interceptor
+  const interceptorScript = `
 <script>
-// Intercept dynamic file loading
-document.addEventListener('DOMContentLoaded', function() {
-  // Fix any dynamically set image src that points to uploads
+(function() {
+  'use strict';
+  
+  const API_ROUTE = '${apiRoute}';
+  
+  function fixUploadUrl(url) {
+    if (!url || url.startsWith('http') || url.startsWith('data:') || 
+        url.startsWith('//') || url.includes('/api/')) {
+      return url;
+    }
+    
+    if (url.includes('uploads/')) {
+      const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
+      return '/api/' + API_ROUTE + '?path=' + encodeURIComponent(cleanUrl);
+    }
+    
+    return url;
+  }
+  
+  // Intercept dynamic content
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       mutation.addedNodes.forEach(function(node) {
-        if (node.nodeType === 1) { // Element node
-          // Fix img tags
-          if (node.tagName === 'IMG' && node.src && node.src.includes('uploads/') && !node.src.includes('/api/landx')) {
-            const originalSrc = node.src;
-            const cleanSrc = originalSrc.startsWith('/') ? originalSrc.slice(1) : originalSrc;
-            node.src = '/api/landx?path=' + encodeURIComponent(cleanSrc);
-            console.log('[JS-INTERCEPT] Fixed image src:', originalSrc, '→', node.src);
+        if (node.nodeType === 1) {
+          // Fix images
+          if (node.tagName === 'IMG' && node.src) {
+            const fixedSrc = fixUploadUrl(node.src);
+            if (fixedSrc !== node.src) {
+              node.src = fixedSrc;
+            }
           }
           
-          // Fix anchor tags
+          // Fix links
+          if (node.tagName === 'A' && node.href) {
+            const fixedHref = fixUploadUrl(node.getAttribute('href'));
+            if (fixedHref !== node.getAttribute('href')) {
+              node.href = fixedHref;
+            }
+          }
+          
+          // Fix nested elements
+          const images = node.querySelectorAll ? node.querySelectorAll('img[src*="uploads/"]') : [];
+          images.forEach(function(img) {
+            img.src = fixUploadUrl(img.src);
+          });
+          
           const links = node.querySelectorAll ? node.querySelectorAll('a[href*="uploads/"]') : [];
           links.forEach(function(link) {
-            if (link.href && !link.href.includes('/api/landx')) {
-              const originalHref = link.getAttribute('href');
-              const cleanHref = originalHref.startsWith('/') ? originalHref.slice(1) : originalHref;
-              link.href = '/api/landx?path=' + encodeURIComponent(cleanHref);
-              console.log('[JS-INTERCEPT] Fixed link href:', originalHref, '→', link.href);
-            }
+            link.href = fixUploadUrl(link.getAttribute('href'));
           });
         }
       });
     });
   });
   
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
+  document.addEventListener('DOMContentLoaded', function() {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['src', 'href']
+    });
   });
-});
+})();
 </script>`;
 
-  // Insert the interceptor script
+  // Insert interceptor
   if (modifiedHtml.includes('</head>')) {
-    modifiedHtml = modifiedHtml.replace('</head>', fileInterceptorScript + '\n</head>');
+    modifiedHtml = modifiedHtml.replace('</head>', interceptorScript + '\n</head>');
   } else if (modifiedHtml.includes('<body')) {
-    modifiedHtml = modifiedHtml.replace(/<body([^>]*)>/, '<body$1>' + fileInterceptorScript);
+    modifiedHtml = modifiedHtml.replace(/<body([^>]*)>/, '<body$1>' + interceptorScript);
   }
 
   return modifiedHtml;
 }
 
-// COMPREHENSIVE FILE HANDLER - WORKS FOR ALL FILE TYPES
+// UNIFIED FILE HANDLER - handles all file types
 async function handleFileRequest(requestedPath, req) {
-  console.log(`[FILE] Handling file request: ${requestedPath}`);
+  console.log(`[FILE] Request: ${requestedPath}`);
   
   try {
     const decodedPath = decodeURIComponent(requestedPath);
     
     if (!decodedPath.includes('uploads/')) {
+      console.log('[FILE] Not an uploads request');
       return new Response('Not a valid file request', { status: 400 });
     }
     
-    // Extract the full path after uploads/
-    const pathParts = decodedPath.split('uploads/');
-    const filePath = pathParts[pathParts.length - 1];
+    // Extract file path after 'uploads/'
+    const uploadsIndex = decodedPath.indexOf('uploads/');
+    const filePath = decodedPath.substring(uploadsIndex + 8); // 'uploads/'.length = 8
     
     if (!filePath || filePath.trim() === '') {
+      console.log('[FILE] Empty file path');
       return new Response('No file path found', { status: 400 });
     }
     
     const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/${filePath}`;
-    console.log(`[FILE] Fetching from: ${targetUrl}`);
+    console.log(`[FILE] Fetching: ${targetUrl}`);
 
-    // Prepare headers with authentication
     const targetHeaders = {
       'User-Agent': commonHeaders['User-Agent'],
       'Accept': '*/*',
@@ -272,299 +282,95 @@ async function handleFileRequest(requestedPath, req) {
       'Referer': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
     };
 
-    // CRITICAL: Forward ALL cookies for authentication
+    // Forward cookies for authentication
     const cookieHeader = req.headers.get("cookie");
     if (cookieHeader) {
       targetHeaders["Cookie"] = cookieHeader;
-      console.log('[FILE] Cookies forwarded for authentication');
-    } else {
-      console.log('[FILE] WARNING: No cookies found - authentication may fail');
     }
 
-    // Fetch the file with proper error handling
-    console.log(`[FILE] Making file request to target server...`);
     const fileResponse = await fetch(targetUrl, {
       headers: targetHeaders,
-      redirect: 'follow' // Follow redirects for files
+      redirect: 'follow'
     });
 
-    console.log(`[FILE] Response status: ${fileResponse.status}`);
-    console.log(`[FILE] Response content-type: ${fileResponse.headers.get('content-type')}`);
+    console.log(`[FILE] Status: ${fileResponse.status}`);
     
-    // Handle different response scenarios
     if (!fileResponse.ok) {
       if (fileResponse.status === 404) {
-        console.log(`[FILE] File not found on server: ${targetUrl}`);
-        return new Response('File not found on server', { status: 404 });
-      } else if (fileResponse.status === 403) {
-        console.log(`[FILE] Access forbidden - authentication required`);
+        return new Response('File not found', { status: 404 });
+      } else if (fileResponse.status === 403 || fileResponse.status === 401) {
         return new Response('Authentication required', { status: 401 });
-      } else {
-        console.log(`[FILE] Server error: ${fileResponse.status}`);
-        return new Response(`Server error: ${fileResponse.status}`, { 
-          status: fileResponse.status 
-        });
       }
+      return new Response(`Server error: ${fileResponse.status}`, { status: fileResponse.status });
     }
 
-    // Get the file content as ArrayBuffer (preserves binary data)
     const fileBuffer = await fileResponse.arrayBuffer();
-    console.log(`[FILE] File size received: ${fileBuffer.byteLength} bytes`);
+    console.log(`[FILE] Size: ${fileBuffer.byteLength} bytes`);
 
-    // Check if file is empty
     if (fileBuffer.byteLength === 0) {
-      console.log('[FILE] ERROR: File is empty (0 bytes)');
-      return new Response('File is empty on server', { status: 500 });
+      return new Response('File is empty', { status: 500 });
     }
 
-    // Determine content type
+    // Detect content type
     let contentType = fileResponse.headers.get('content-type');
     const filename = filePath.split('/').pop() || 'file';
-    const fileExtension = filename.toLowerCase().split('.').pop();
+    const ext = filename.toLowerCase().split('.').pop();
     
-    console.log(`[FILE] Original content-type: ${contentType}`);
-    console.log(`[FILE] File extension: ${fileExtension}`);
-    console.log(`[FILE] Filename: ${filename}`);
-
-    // If content-type is not properly set, detect it
+    // Magic byte detection if content-type is generic
     if (!contentType || contentType === 'application/octet-stream' || contentType === 'text/plain') {
       const firstBytes = new Uint8Array(fileBuffer.slice(0, 8));
-      const hexString = Array.from(firstBytes).map(b => b.toString(16).padStart(2, '0')).join(' ');
-      console.log(`[FILE] First 8 bytes (hex): ${hexString}`);
       
-      // Magic number detection for common file types
+      // Check magic bytes
       if (firstBytes[0] === 0xFF && firstBytes[1] === 0xD8 && firstBytes[2] === 0xFF) {
         contentType = 'image/jpeg';
-        console.log('[FILE] Detected: JPEG image from magic bytes');
       } else if (firstBytes[0] === 0x89 && firstBytes[1] === 0x50 && firstBytes[2] === 0x4E && firstBytes[3] === 0x47) {
         contentType = 'image/png';
-        console.log('[FILE] Detected: PNG image from magic bytes');
       } else if (firstBytes[0] === 0x47 && firstBytes[1] === 0x49 && firstBytes[2] === 0x46) {
         contentType = 'image/gif';
-        console.log('[FILE] Detected: GIF image from magic bytes');
       } else if (firstBytes[0] === 0x52 && firstBytes[1] === 0x49 && firstBytes[2] === 0x46 && firstBytes[3] === 0x46) {
         contentType = 'image/webp';
-        console.log('[FILE] Detected: WebP image from magic bytes');
       } else if (firstBytes[0] === 0x25 && firstBytes[1] === 0x50 && firstBytes[2] === 0x44 && firstBytes[3] === 0x46) {
         contentType = 'application/pdf';
-        console.log('[FILE] Detected: PDF from magic bytes');
       } else {
-        // Fallback to extension-based detection
-        const extensionMap = {
-          'jpg': 'image/jpeg',
-          'jpeg': 'image/jpeg',
-          'png': 'image/png',
-          'gif': 'image/gif',
-          'webp': 'image/webp',
-          'bmp': 'image/bmp',
-          'svg': 'image/svg+xml',
-          'pdf': 'application/pdf',
-          'txt': 'text/plain',
-          'html': 'text/html',
-          'htm': 'text/html'
+        // Fallback to extension
+        const mimeMap = {
+          'jpg': 'image/jpeg', 'jpeg': 'image/jpeg', 'png': 'image/png',
+          'gif': 'image/gif', 'webp': 'image/webp', 'svg': 'image/svg+xml',
+          'pdf': 'application/pdf', 'txt': 'text/plain', 'html': 'text/html'
         };
-        contentType = extensionMap[fileExtension] || 'application/octet-stream';
-        console.log(`[FILE] Detected: ${contentType} from file extension`);
+        contentType = mimeMap[ext] || 'application/octet-stream';
       }
     }
 
-    // Check if we received HTML instead of the actual file (common auth issue)
+    // Check if we received HTML instead of file (auth issue)
     if (contentType.includes('text/html')) {
       const textContent = new TextDecoder().decode(fileBuffer.slice(0, 500));
       if (textContent.includes('<!DOCTYPE') || textContent.includes('<html') || textContent.includes('login')) {
-        console.log('[FILE] ERROR: Received HTML instead of file - authentication issue');
-        console.log('[FILE] HTML preview:', textContent.substring(0, 200));
-        return new Response('Authentication required to access this file', {
-          status: 401,
-          headers: { 'Content-Type': 'text/plain' }
-        });
+        return new Response('Authentication required', { status: 401 });
       }
     }
 
-    console.log(`[FILE] Final content-type: ${contentType}`);
-    console.log(`[FILE] Successfully fetched file, returning ${fileBuffer.byteLength} bytes`);
+    console.log(`[FILE] Serving ${contentType}: ${filename}`);
 
-    // Return the file with appropriate headers
     return new Response(fileBuffer, {
       status: 200,
       headers: {
         'Content-Type': contentType,
         'Content-Length': fileBuffer.byteLength.toString(),
         'Content-Disposition': `inline; filename="${filename}"`,
-        'Cache-Control': 'public, max-age=86400', // Cache for 1 day
+        'Cache-Control': 'public, max-age=86400',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'X-Content-Type-Options': 'nosniff',
       }
     });
 
   } catch (error) {
     console.error('[FILE] Error:', error);
-    return new Response(`File error: ${error.message}`, { 
-      status: 500,
-      headers: { 'Content-Type': 'text/plain' }
-    });
+    return new Response(`File error: ${error.message}`, { status: 500 });
   }
 }
 
-// CONDITIONAL HANDLER: Handle images specifically
-async function handleImageRequest(requestedPath, req) {
-  console.log(`[IMAGE] Handling image request: ${requestedPath}`);
-  
-  try {
-    const decodedPath = decodeURIComponent(requestedPath);
-    const pathParts = decodedPath.split('uploads/');
-    const filePath = pathParts[pathParts.length - 1];
-    
-    const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/${filePath}`;
-    console.log(`[IMAGE] Fetching from: ${targetUrl}`);
-
-    const targetHeaders = {
-      'User-Agent': commonHeaders['User-Agent'],
-      'Accept': 'image/*,*/*',
-      'Cache-Control': 'no-cache',
-      'Referer': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
-    };
-
-    // Forward cookies
-    const cookieHeader = req.headers.get("cookie");
-    if (cookieHeader) {
-      targetHeaders["Cookie"] = cookieHeader;
-    }
-
-    console.log(`[IMAGE] Making direct image request...`);
-    const imageResponse = await fetch(targetUrl, {
-      headers: targetHeaders,
-    });
-
-    console.log(`[IMAGE] Response status: ${imageResponse.status}`);
-    
-    if (!imageResponse.ok) {
-      console.log(`[IMAGE] Failed to fetch image: ${imageResponse.status}`);
-      return new Response('Image not found', { status: imageResponse.status });
-    }
-
-    // Get image as buffer
-    const imageBuffer = await imageResponse.arrayBuffer();
-    console.log(`[IMAGE] Image size: ${imageBuffer.byteLength} bytes`);
-
-    if (imageBuffer.byteLength === 0) {
-      console.log('[IMAGE] ERROR: Image is empty');
-      return new Response('Image is empty', { status: 500 });
-    }
-
-    // Get content type from response or detect from magic bytes
-    let contentType = imageResponse.headers.get('content-type');
-    const firstBytes = new Uint8Array(imageBuffer.slice(0, 4));
-    
-    // Magic byte detection for images
-    if (!contentType || !contentType.startsWith('image/')) {
-      if (firstBytes[0] === 0xFF && firstBytes[1] === 0xD8 && firstBytes[2] === 0xFF) {
-        contentType = 'image/jpeg';
-      } else if (firstBytes[0] === 0x89 && firstBytes[1] === 0x50 && firstBytes[2] === 0x4E && firstBytes[3] === 0x47) {
-        contentType = 'image/png';
-      } else if (firstBytes[0] === 0x47 && firstBytes[1] === 0x49 && firstBytes[2] === 0x46) {
-        contentType = 'image/gif';
-      } else if (firstBytes[0] === 0x52 && firstBytes[1] === 0x49 && firstBytes[2] === 0x46 && firstBytes[3] === 0x46) {
-        contentType = 'image/webp';
-      } else {
-        contentType = 'image/jpeg'; // Default fallback
-      }
-      console.log(`[IMAGE] Detected content type: ${contentType}`);
-    }
-
-    console.log(`[IMAGE] Successfully fetched image, returning with ${contentType}`);
-
-    return new Response(imageBuffer, {
-      status: 200,
-      headers: {
-        'Content-Type': contentType,
-        'Content-Length': imageBuffer.byteLength.toString(),
-        'Cache-Control': 'public, max-age=86400',
-        'Access-Control-Allow-Origin': '*',
-      }
-    });
-
-  } catch (error) {
-    console.error('[IMAGE] Error:', error);
-    return new Response(`Image error: ${error.message}`, { status: 500 });
-  }
-}
-
-// CONDITIONAL HANDLER: Handle PDFs specifically
-async function handlePdfRequest(requestedPath, req) {
-  console.log(`[PDF] Handling PDF request: ${requestedPath}`);
-  
-  try {
-    const decodedPath = decodeURIComponent(requestedPath);
-    const pathParts = decodedPath.split('uploads/');
-    const filePath = pathParts[pathParts.length - 1];
-    
-    const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/${filePath}`;
-    console.log(`[PDF] Fetching from: ${targetUrl}`);
-
-    const targetHeaders = {
-      'User-Agent': commonHeaders['User-Agent'],
-      'Accept': 'application/pdf,*/*',
-      'Cache-Control': 'no-cache',
-      'Referer': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
-    };
-
-    // Forward cookies
-    const cookieHeader = req.headers.get("cookie");
-    if (cookieHeader) {
-      targetHeaders["Cookie"] = cookieHeader;
-    }
-
-    console.log(`[PDF] Making direct PDF request...`);
-    const pdfResponse = await fetch(targetUrl, {
-      headers: targetHeaders,
-    });
-
-    console.log(`[PDF] Response status: ${pdfResponse.status}`);
-    
-    if (!pdfResponse.ok) {
-      console.log(`[PDF] Failed to fetch PDF: ${pdfResponse.status}`);
-      return new Response('PDF not found', { status: pdfResponse.status });
-    }
-
-    const pdfBuffer = await pdfResponse.arrayBuffer();
-    console.log(`[PDF] PDF size: ${pdfBuffer.byteLength} bytes`);
-
-    if (pdfBuffer.byteLength === 0) {
-      console.log('[PDF] ERROR: PDF is empty');
-      return new Response('PDF is empty', { status: 500 });
-    }
-
-    // Verify it's actually a PDF
-    const firstBytes = new Uint8Array(pdfBuffer.slice(0, 4));
-    const pdfMagic = String.fromCharCode(...firstBytes);
-    
-    if (!pdfMagic.startsWith('%PDF')) {
-      console.log('[PDF] WARNING: File does not appear to be a valid PDF');
-      // Still return it but log the issue
-    }
-
-    console.log(`[PDF] Successfully fetched PDF, returning with application/pdf`);
-
-    return new Response(pdfBuffer, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Length': pdfBuffer.byteLength.toString(),
-        'Cache-Control': 'public, max-age=3600',
-        'Access-Control-Allow-Origin': '*',
-      }
-    });
-
-  } catch (error) {
-    console.error('[PDF] Error:', error);
-    return new Response(`PDF error: ${error.message}`, { status: 500 });
-  }
-}
-
-// PDF generation handler - UNCHANGED
+// PDF generation handler
 async function handlePdfGenerationRequest(requestedPath, req) {
   console.log(`[PDF-GEN] Request: ${requestedPath}`);
   
@@ -579,7 +385,7 @@ async function handlePdfGenerationRequest(requestedPath, req) {
     const pdfPath = `generate_pdf.php${generatePdfMatch[1] || ''}`;
     const targetUrl = `${BASE_URL}/${pdfPath}`;
     
-    console.log(`[PDF-GEN] Generating from: ${targetUrl}`);
+    console.log(`[PDF-GEN] Generating: ${targetUrl}`);
     
     const targetHeaders = {
       'User-Agent': commonHeaders['User-Agent'],
@@ -592,16 +398,11 @@ async function handlePdfGenerationRequest(requestedPath, req) {
     
     const pdfResponse = await fetch(targetUrl, { headers: targetHeaders });
     
-    console.log(`[PDF-GEN] Response: ${pdfResponse.status}`);
-    
     if (!pdfResponse.ok) {
-      const errorText = await pdfResponse.text();
-      console.error('[PDF-GEN] Error:', errorText.substring(0, 200));
       return new Response(`PDF generation failed: ${pdfResponse.status}`, { status: pdfResponse.status });
     }
 
     const pdfBuffer = await pdfResponse.arrayBuffer();
-    console.log(`[PDF-GEN] Size: ${pdfBuffer.byteLength} bytes`);
     
     return new Response(pdfBuffer, {
       status: 200,
@@ -618,27 +419,53 @@ async function handlePdfGenerationRequest(requestedPath, req) {
   }
 }
 
-// MAIN REQUEST HANDLER with conditional routing
+// MAIN REQUEST HANDLER
 async function handleRequest(req, method = 'GET') {
   try {
-    const { searchParams } = new URL(req.url);
-    let requestedPath = searchParams.get("path") || "/";
+    const url = new URL(req.url);
+    const { searchParams } = url;
+    let requestedPath = searchParams.get("path") || "";
 
-    console.log(`\n[${method}] Path: ${requestedPath}`);
-    console.log(`[${method}] Content-Type: ${req.headers.get('content-type') || 'none'}`);
-
-    // In handleRequest function, replace the conditional routing section with:
-if (method === 'GET' && isUploadedFileRequest(requestedPath)) {
-  console.log(`[ROUTER] File request detected: ${requestedPath}`);
-  return await handleFileRequest(requestedPath, req);
-}
-
-    // Handle PDF generation
-    if (method === 'GET' && requestedPath.includes('generate_pdf.php')) {
-      return handlePdfGenerationRequest(requestedPath, req);
+    // If no path param, try to extract from URL pathname
+    if (!requestedPath) {
+      const pathname = url.pathname;
+      const landxBetaMatch = pathname.match(/\/LandX-Beta\/(.+)/);
+      if (landxBetaMatch) {
+        requestedPath = landxBetaMatch[1];
+      } else {
+        requestedPath = "dashboard.php"; // Default fallback
+      }
     }
 
-    // Handle all other requests (PHP pages, etc.)
+    // IMPORTANT: Add all other query params to the path
+    // Remove 'path' param and append rest to requestedPath
+    const otherParams = new URLSearchParams();
+    for (const [key, value] of searchParams.entries()) {
+      if (key !== 'path') {
+        otherParams.append(key, value);
+      }
+    }
+    
+    // If there are other params, append them to requestedPath
+    if (otherParams.toString()) {
+      const separator = requestedPath.includes('?') ? '&' : '?';
+      requestedPath = requestedPath + separator + otherParams.toString();
+    }
+
+    console.log(`\n[${method}] Final Path: ${requestedPath}`);
+
+    // ROUTING PRIORITY:
+    // 1. File uploads (GET only)
+    if (method === 'GET' && requestedPath && isUploadedFileRequest(requestedPath)) {
+      return await handleFileRequest(requestedPath, req);
+    }
+
+    // 2. PDF generation (GET only)
+    if (method === 'GET' && requestedPath && requestedPath.includes('generate_pdf.php')) {
+      return await handlePdfGenerationRequest(requestedPath, req);
+    }
+
+    // 3. All other requests (PHP pages, form submissions, etc.)
     const targetUrl = constructTargetUrl(requestedPath);
     const targetHeaders = { ...commonHeaders };
     
@@ -652,41 +479,38 @@ if (method === 'GET' && isUploadedFileRequest(requestedPath)) {
       targetHeaders['X-Requested-With'] = 'XMLHttpRequest';
     }
 
-    let body;
     const fetchOptions = {
       method,
       headers: targetHeaders,
       redirect: 'manual'
     };
 
-    // Handle request body
-    if (method !== 'GET') {
+    // Handle request body for POST/PUT/DELETE
+    if (method !== 'GET' && method !== 'HEAD') {
       const contentType = req.headers.get('content-type') || '';
       
       if (contentType.includes('multipart/form-data')) {
-        console.log(`[${method}] Multipart form data detected (FILE UPLOAD)`);
-        const rawBody = await req.arrayBuffer();
-        console.log(`[${method}] Raw body size: ${rawBody.byteLength} bytes`);
-        body = rawBody;
-        targetHeaders['Content-Type'] = contentType;
+        console.log(`[${method}] Multipart form (file upload)`);
+        const formData = await req.formData();
+        fetchOptions.body = formData;
+        // Don't set Content-Type - let fetch set it with boundary
+        delete targetHeaders['Content-Type'];
       } else if (contentType.includes('application/json')) {
-        console.log(`[${method}] JSON data detected`);
-        body = await req.text();
+        console.log(`[${method}] JSON data`);
+        fetchOptions.body = await req.text();
         targetHeaders['Content-Type'] = 'application/json';
       } else {
-        console.log(`[${method}] Form data detected`);
-        body = await req.text();
+        console.log(`[${method}] Form data`);
+        fetchOptions.body = await req.text();
         targetHeaders['Content-Type'] = contentType || 'application/x-www-form-urlencoded';
       }
-      
-      fetchOptions.body = body;
     }
 
     console.log(`[${method}] Fetching: ${targetUrl}`);
     const response = await fetch(targetUrl, fetchOptions);
     console.log(`[${method}] Response: ${response.status}`);
 
-    // Handle redirects and responses (same as before)
+    // Handle redirects
     if (response.status >= 300 && response.status < 400) {
       const location = response.headers.get('location');
       if (location) {
@@ -712,6 +536,7 @@ if (method === 'GET' && isUploadedFileRequest(requestedPath)) {
     const contentType = response.headers.get('content-type') || '';
     const responseText = await response.text();
 
+    // Handle JSON responses
     if (contentType.includes('application/json')) {
       return new Response(responseText, {
         status: response.status,
@@ -722,6 +547,7 @@ if (method === 'GET' && isUploadedFileRequest(requestedPath)) {
       });
     }
 
+    // Handle HTML responses
     if (contentType.includes('text/html')) {
       const modifiedHtml = modifyHtmlContent(responseText, requestedPath, currentRoute);
       return new Response(modifiedHtml, {
@@ -733,6 +559,7 @@ if (method === 'GET' && isUploadedFileRequest(requestedPath)) {
       });
     }
 
+    // Handle other responses
     return new Response(responseText, {
       status: response.status,
       headers: {
@@ -747,60 +574,8 @@ if (method === 'GET' && isUploadedFileRequest(requestedPath)) {
   }
 }
 
-// Generic fallback handler for other file types
-async function handleGenericFileRequest(requestedPath, req) {
-  console.log(`[GENERIC] Handling file request: ${requestedPath}`);
-  
-  try {
-    const decodedPath = decodeURIComponent(requestedPath);
-    const pathParts = decodedPath.split('uploads/');
-    const filePath = pathParts[pathParts.length - 1];
-    
-    const targetUrl = `${TARGET_DOMAIN}${TARGET_BASE_PATH}/uploads/${filePath}`;
-    console.log(`[GENERIC] Fetching from: ${targetUrl}`);
-
-    const targetHeaders = {
-      'User-Agent': commonHeaders['User-Agent'],
-      'Accept': '*/*',
-      'Cache-Control': 'no-cache',
-      'Referer': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
-    };
-
-    const cookieHeader = req.headers.get("cookie");
-    if (cookieHeader) {
-      targetHeaders["Cookie"] = cookieHeader;
-    }
-
-    const fileResponse = await fetch(targetUrl, { headers: targetHeaders });
-    console.log(`[GENERIC] Response status: ${fileResponse.status}`);
-
-    if (!fileResponse.ok) {
-      return new Response('File not found', { status: fileResponse.status });
-    }
-
-    const fileBuffer = await fileResponse.arrayBuffer();
-    console.log(`[GENERIC] File size: ${fileBuffer.byteLength} bytes`);
-
-    let contentType = fileResponse.headers.get('content-type') || 'application/octet-stream';
-
-    return new Response(fileBuffer, {
-      status: 200,
-      headers: {
-        'Content-Type': contentType,
-        'Content-Length': fileBuffer.byteLength.toString(),
-        'Cache-Control': 'public, max-age=3600',
-      }
-    });
-
-  } catch (error) {
-    console.error('[GENERIC] Error:', error);
-    return new Response(`File error: ${error.message}`, { status: 500 });
-  }
-}
-
-// Add this to your API route for testing
+// Export HTTP methods
 export async function OPTIONS(req) {
-  // Handle preflight requests for file access
   return new Response(null, {
     status: 200,
     headers: {
