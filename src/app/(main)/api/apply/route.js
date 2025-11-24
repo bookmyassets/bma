@@ -79,6 +79,7 @@ export async function POST(request) {
     const formValues = {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
+      candidateLocation : formData.get("candidateLocation"),
       email: formData.get("email"),
       phone: formData.get("phone") || "",
       gender: formData.get("gender") || "",
@@ -199,7 +200,7 @@ async function uploadResume(drive, resumeFile, tempFilePath, folderId, namePrefi
 }
 
 async function saveToSheet(sheets, { 
-  jobTitle, firstName, lastName, email, 
+  jobTitle, firstName, lastName,candidateLocation, email, 
   phone, gender, currentCompany, resumeLink, experience, currentCTC
 }) {
   try {
@@ -213,6 +214,7 @@ async function saveToSheet(sheets, {
           jobTitle,
           firstName,
           lastName,
+          candidateLocation,
           email,
           phone,
           gender,

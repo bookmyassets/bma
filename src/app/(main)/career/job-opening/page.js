@@ -17,6 +17,7 @@ import {
   FaMars,
   FaVenus,
 } from "react-icons/fa";
+import { FaLocationArrow } from "react-icons/fa6";
 
 export default function Posting() {
   const [currentView, setCurrentView] = useState("jobListings");
@@ -29,17 +30,20 @@ export default function Posting() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-  
+
     try {
       const res = await fetch("/api/apply", {
         method: "POST",
         body: formData,
       });
-  
+
       const data = await res.json();
       if (res.ok) {
         setSubmitSuccess(true);
-        setStatus({ type: "success", message: "Application submitted successfully!" });
+        setStatus({
+          type: "success",
+          message: "Application submitted successfully!",
+        });
       } else {
         throw new Error(data.message || "Something went wrong.");
       }
@@ -47,7 +51,6 @@ export default function Posting() {
       setStatus({ type: "error", message: err.message });
     }
   };
-  
 
   const jobListings = [
     {
@@ -192,13 +195,22 @@ export default function Posting() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-
- 
-        <title>Exciting Job Openings at Book My Assets | Apply Now for Career Opportunities</title>
-        <meta name="description" content="Explore current job openings at Book My Assets. We're hiring Portfolio Managers, Field Executives, and Sales Executives. Apply today and start your career with us!" />
-        <meta name="keywords" content="Book My Assets careers, job openings Gurgaon, Portfolio Manager job, Field Executive sales job, Sales Executive video conferencing, asset management jobs, real estate careers, Book My Assets hiring" />
-        <link rel="canonical" href="https://www.bookmyassets.com/career/job-opening" />
-  
+      <title>
+        Exciting Job Openings at Book My Assets | Apply Now for Career
+        Opportunities
+      </title>
+      <meta
+        name="description"
+        content="Explore current job openings at Book My Assets. We're hiring Portfolio Managers, Field Executives, and Sales Executives. Apply today and start your career with us!"
+      />
+      <meta
+        name="keywords"
+        content="Book My Assets careers, job openings Gurgaon, Portfolio Manager job, Field Executive sales job, Sales Executive video conferencing, asset management jobs, real estate careers, Book My Assets hiring"
+      />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/career/job-opening"
+      />
 
       {/* Banner */}
       <div
@@ -228,7 +240,9 @@ export default function Posting() {
                   className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transition-transform hover:scale-[1.02] hover:shadow-xl"
                 >
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-5 border-b border-gray-200">
-                    <h3 className="text-2xl font-bold text-white">{job.title}</h3>
+                    <h3 className="text-2xl font-bold text-white">
+                      {job.title}
+                    </h3>
                     <p className="text-sm text-blue-100 mt-2 flex items-center">
                       <FaBuilding className="inline mr-2" />{" "}
                       {job.company || "Book My Assets"}
@@ -239,28 +253,38 @@ export default function Posting() {
                   </div>
 
                   <div className="p-6">
-                    <p className="text-gray-700 mb-5 text-lg">{job.description}</p>
+                    <p className="text-gray-700 mb-5 text-lg">
+                      {job.description}
+                    </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                       <div className="flex items-start">
                         <FaFileAlt className="mt-1 mr-2 text-indigo-600" />
                         <div>
-                          <h4 className="font-bold text-gray-800">Qualifications:</h4>
+                          <h4 className="font-bold text-gray-800">
+                            Qualifications:
+                          </h4>
                           <p className="text-gray-700">{job.qualifications}</p>
                         </div>
                       </div>
                       <div className="flex items-start">
                         <FaBriefcase className="mt-1 mr-2 text-indigo-600" />
                         <div>
-                          <h4 className="font-bold text-gray-800">No Of Openings:</h4>
-                          <p className="text-gray-700">{job.numberOfOpenings}</p>
+                          <h4 className="font-bold text-gray-800">
+                            No Of Openings:
+                          </h4>
+                          <p className="text-gray-700">
+                            {job.numberOfOpenings}
+                          </p>
                         </div>
                       </div>
 
                       <div className="flex items-start">
                         <FaUser className="mt-1 mr-2 text-indigo-600" />
                         <div>
-                          <h4 className="font-bold text-gray-800">Experience:</h4>
+                          <h4 className="font-bold text-gray-800">
+                            Experience:
+                          </h4>
                           <p className="text-gray-700">{job.experience}</p>
                         </div>
                       </div>
@@ -276,7 +300,9 @@ export default function Posting() {
                       <div className="flex items-start">
                         <FaClock className="mt-1 mr-2 text-indigo-600" />
                         <div>
-                          <h4 className="font-bold text-gray-800">Working Hours:</h4>
+                          <h4 className="font-bold text-gray-800">
+                            Working Hours:
+                          </h4>
                           <p className="text-gray-700">{job.workingHours}</p>
                         </div>
                       </div>
@@ -284,7 +310,9 @@ export default function Posting() {
                       <div className="flex items-start">
                         <FaCalendarAlt className="mt-1 mr-2 text-indigo-600" />
                         <div>
-                          <h4 className="font-bold text-gray-800">Working Days:</h4>
+                          <h4 className="font-bold text-gray-800">
+                            Working Days:
+                          </h4>
                           <p className="text-gray-700">{job.workingDays}</p>
                         </div>
                       </div>
@@ -307,7 +335,10 @@ export default function Posting() {
                       </h4>
                       <ul className="grid grid-cols-2 gap-2">
                         {job.skills.map((skill, index) => (
-                          <li key={index} className="text-gray-700 flex items-center">
+                          <li
+                            key={index}
+                            className="text-gray-700 flex items-center"
+                          >
                             <span className="h-2 w-2 rounded-full bg-indigo-500 mr-2"></span>
                             {skill}
                           </li>
@@ -443,22 +474,39 @@ export default function Posting() {
                     />
                   </div>
                 </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="Gender"
-                    className="block text-sm font-medium text-gray-700 flex items-center"
-                  >
-                    <FaMars className="mr-2 text-indigo-600" /> 
-                    <FaVenus className="mr-2 text-indigo-600" /> Gender
-                  </label>
-                  <input
-                    type="text"
-                    name="gender"
-                    id="gender"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                    placeholder="Male/Female"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="Gender"
+                      className="block text-sm font-medium text-gray-700 flex items-center"
+                    >
+                      <FaMars className="mr-2 text-indigo-600" />
+                      <FaVenus className="mr-2 text-indigo-600" /> Gender
+                    </label>
+                    <input
+                      type="text"
+                      name="gender"
+                      id="gender"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                      placeholder="Male/Female"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="Candidate Location"
+                      className="block text-sm font-medium text-gray-700 flex items-center"
+                    >
+                      <FaLocationArrow className="mr-2 text-indigo-600" />{" "}
+                      Current Location
+                    </label>
+                    <input
+                      type="text"
+                      name="candidateLocation"
+                      id="candidateLocation"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                      placeholder="Candidate Location"
+                    />
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <label
@@ -500,7 +548,7 @@ export default function Posting() {
                     className="block text-sm font-medium text-gray-700 flex items-center"
                   >
                     <FaFileAlt className="mr-2 text-indigo-600" />
-                     Current CTC
+                    Current CTC
                   </label>
                   <input
                     type="text"

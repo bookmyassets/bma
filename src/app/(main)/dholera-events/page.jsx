@@ -7,6 +7,7 @@ import { TrendingUp, MapPin, FileText, CheckCircle } from "lucide-react";
 import eventHero from "@/assests/bma-events/bma-dholera-events-desktop-banner.webp";
 import eventHeroM from "@/assests/bma-events/bma-dholera-events-mobile-banner.webp";
 import Image from "next/image";
+import ImageGallery from "./Image";
 
 export default function page() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -110,17 +111,13 @@ export default function page() {
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Date</p>
-                <p className="font-semibold text-gray-900">
-                  15th November 2025
-                </p>
+                <p className="font-semibold text-gray-900">TBA</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Location</p>
-                <a href="https://maps.app.goo.gl/EHmkHhfuSgs3L8vDA">
-                      <span className="text-[#deae3c]">
-                        Mercure Hotel, Chandigarh
-                      </span>
-                    </a>
+                <a href="https://maps.app.goo.gl/oZHMZEpNRPMw33Q88">
+                  <span className="text-[#deae3c]">TBD</span>
+                </a>
               </div>
             </div>
           </div>
@@ -151,8 +148,7 @@ export default function page() {
                 <MapPin className="w-6 h-6 md:w-8 md:h-8 text-black" />
               </div>
               <p className="text-xs md:text-base font-medium text-black leading-tight">
-                Chandigarh Only <br />
-                Booking Offer
+                TBD
               </p>
             </div>
 
@@ -205,15 +201,23 @@ export default function page() {
                     What's Happening:
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    Dholera: Now or Never is a one-day investor meet for
-                    individual investors, channel partners, and real-estate
-                    advisors seeking clarity on Dholera’s rapid growth and
-                    long-term potential. Attend to gain expert insights on
-                    Dholera’s growth roadmap, review due-diligence-backed and
-                    title-cleared opportunities. Also, access exclusive
-                    Chandigarh-only on-spot booking offers. Investment slabs
-                    range from ₹10 Lakh to ₹10 Crore. Register now to lock your
-                    spot.
+                    <p className="leading-relaxed text-black mb-4">
+                      Dholera: Now or Never is a one-day real estate event for
+                      investors, channel partners, and advisors exploring
+                      Dholera's rapid growth and future potential. As one of the
+                      key real estate current events, it offers
+                      expert insights, verified opportunities, and practical{" "}
+                      real estate event ideas for professionals.
+                    </p>
+                    <p className="leading-relaxed text-black">
+                      Join this exclusive real estate broker event{" "}
+                      to understand Dholera's development roadmap and explore
+                      registry-ready options backed by due diligence. This{" "}
+                      real estate event invitation is open to all
+                      looking to learn and connect with industry experts in
+                      Chandigarh. Register now to be part of the discussion
+                      shaping Dholera's future.
+                    </p>
                   </p>
                 </div>
               </div>
@@ -232,20 +236,18 @@ export default function page() {
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">Dates:</span>{" "}
-                    15th November
+                    TBA
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">Time:</span>{" "}
-                    11:00 AM - 8:00 PM
+                    TBA
                   </li>
                   <li>
-                    <a href="https://maps.app.goo.gl/EHmkHhfuSgs3L8vDA">
+                    <a href="https://maps.app.goo.gl/oZHMZEpNRPMw33Q88">
                       <span className="font-semibold text-gray-700">
                         Venue:
                       </span>{" "}
-                      <span className="text-blue-400">
-                        Mercure Hotel, Chandigarh
-                      </span>
+                      <span className="text-blue-400">TBD</span>
                     </a>
                   </li>
                   <li>
@@ -325,7 +327,7 @@ export default function page() {
           </div>
         </div>
       </div>
-    {/* Past Events */}
+      {/* Past Events */}
       <div className="py-8 hidden">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-center text-3xl font-semibold mb-6">Past Event</p>
@@ -383,26 +385,8 @@ export default function page() {
           </div>
         </div>
       </div>
-
-      {/* Event Description Section */}
-      <div className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#deae3c' }}>
-              Dholera: Now or Never
-            </h2>
-            <p className="text-lg leading-relaxed text-black mb-4">
-              Dholera: Now or Never is a one-day real estate event for investors, channel partners, and advisors exploring Dholera's rapid growth and future potential. As one of the key{' '}
-              <span className="font-semibold" style={{ color: '#deae3c' }}>real estate current events</span>, it offers expert insights, verified opportunities, and practical{' '}
-              <span className="font-semibold" style={{ color: '#deae3c' }}>real estate event ideas</span> for professionals.
-            </p>
-            <p className="text-lg leading-relaxed text-black">
-              Join this exclusive{' '}
-              <span className="font-semibold" style={{ color: '#deae3c' }}>real estate broker event</span> to understand Dholera's development roadmap and explore registry-ready options backed by due diligence. This{' '}
-              <span className="font-semibold" style={{ color: '#deae3c' }}>real estate event invitation</span> is open to all looking to learn and connect with industry experts in Chandigarh. Register now to be part of the discussion shaping Dholera's future.
-            </p>
-          </div>
-        </div>
+      <div>
+        <ImageGallery/>
       </div>
     </>
   );
