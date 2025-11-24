@@ -376,46 +376,85 @@ async function handlePdfGenerationRequest(requestedPath, req) {
   
   try {
     const decodedPath = decodeURIComponent(requestedPath);
-    const generatePdfMatch = decodedPath.match(/generate_pdf\.php(\?.*)?$/);
+    
+    // Improved regex to capture both file types and query strings
+    const generatePdfMatch = decodedPath.match(/(generate_pdf(?:|_non_brand))\.php(\?.*)?$/);
     
     if (!generatePdfMatch) {
       return new Response('Invalid PDF generation path', { status: 400 });
     }
     
-    const pdfPath = `generate_pdf.php${generatePdfMatch[1] || ''}`;
-    const targetUrl = `${BASE_URL}/${pdfPath}`;
+    const pdfFileName = generatePdfMatch[1] + '.php';
+    const queryString = generatePdfMatch[2] || '';
+    const targetUrl = `${BASE_URL}/${pdfFileName}${queryString}`;
     
-    console.log(`[PDF-GEN] Generating: ${targetUrl}`);
+    console.log(`[PDF-GEN] Generating from: ${targetUrl}`);
     
+    // Enhanced headers for PDF generation
     const targetHeaders = {
       'User-Agent': commonHeaders['User-Agent'],
-      'Accept': 'application/pdf,*/*',
-      'Cache-Control': 'no-cache',
+      'Accept': 'application/pdf, */*',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
       'Referer': `${TARGET_DOMAIN}${TARGET_BASE_PATH}/dashboard.php`,
+      'Origin': TARGET_DOMAIN,
     };
     
+    // Forward cookies and potentially other headers
     forwardCookies(req, targetHeaders);
     
-    const pdfResponse = await fetch(targetUrl, { headers: targetHeaders });
+    // Add timeout and better error handling for fetch
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+    
+    const pdfResponse = await fetch(targetUrl, { 
+      headers: targetHeaders,
+      signal: controller.signal
+    });
+    
+    clearTimeout(timeoutId);
     
     if (!pdfResponse.ok) {
-      return new Response(`PDF generation failed: ${pdfResponse.status}`, { status: pdfResponse.status });
+      const errorText = await pdfResponse.text();
+      console.error(`[PDF-GEN] Server error ${pdfResponse.status}:`, errorText.substring(0, 500));
+      return new Response(`PDF generation failed: ${pdfResponse.status} ${pdfResponse.statusText}`, { 
+        status: pdfResponse.status 
+      });
+    }
+
+    // Validate that we actually got a PDF
+    const contentType = pdfResponse.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/pdf')) {
+      const bodyPreview = await pdfResponse.text();
+      console.error('[PDF-GEN] Response is not PDF:', bodyPreview.substring(0, 500));
+      return new Response('Server did not return a PDF', { status: 500 });
     }
 
     const pdfBuffer = await pdfResponse.arrayBuffer();
     
+    // Enhanced response headers
     return new Response(pdfBuffer, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'inline; filename="generated.pdf"',
-        'Cache-Control': 'no-store',
+        'Content-Length': pdfBuffer.byteLength.toString(),
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'X-Content-Type-Options': 'nosniff',
       }
     });
     
   } catch (error) {
     console.error('[PDF-GEN] Error:', error);
-    return new Response(`PDF error: ${error.message}`, { status: 500 });
+    
+    if (error.name === 'AbortError') {
+      return new Response('PDF generation timeout', { status: 504 });
+    }
+    
+    return new Response(`PDF generation error: ${error.message}`, { status: 500 });
   }
 }
 
@@ -462,6 +501,10 @@ async function handleRequest(req, method = 'GET') {
 
     // 2. PDF generation (GET only)
     if (method === 'GET' && requestedPath && requestedPath.includes('generate_pdf.php')) {
+      return await handlePdfGenerationRequest(requestedPath, req);
+    }
+
+    if (method === 'GET' && requestedPath && requestedPath.includes('generate_pdf_non_brand.php')) {
       return await handlePdfGenerationRequest(requestedPath, req);
     }
 

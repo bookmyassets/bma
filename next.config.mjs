@@ -42,6 +42,10 @@ const nextConfig = {
         source: "/generate_pdf.php",
         destination: "/api/landx?path=generate_pdf.php",
       },
+      {
+        source: "/generate_pdf_non_brand.php",
+        destination: "/api/landx?path=generate_pdf_non_brand.php",
+      },
       // Handle other common PHP files
       {
         source: "/index.php",
