@@ -1,6 +1,19 @@
 "use client";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import Image from "next/image";
+import img1 from "@/assests/bma-events/event-gallery/event-1.webp"
+import img2 from "@/assests/bma-events/event-gallery/event-2.webp"
+import img3 from "@/assests/bma-events/event-gallery/event-3.webp"
+import img4 from "@/assests/bma-events/event-gallery/event-4.webp"
+import img5 from "@/assests/bma-events/event-gallery/event-5.webp"
+import img6 from "@/assests/bma-events/event-gallery/event-6.webp"
+import img7 from "@/assests/bma-events/event-gallery/event-7.webp"
+import img8 from "@/assests/bma-events/event-gallery/event-8.webp"
+import img9 from "@/assests/bma-events/event-gallery/event-9.webp"
+import img10 from "@/assests/bma-events/event-gallery/event-10.webp"
+import img11 from "@/assests/bma-events/event-gallery/event-11.webp"
+import img12 from "@/assests/bma-events/event-gallery/event-12.webp"
 
 export default function ImageGallery() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -8,53 +21,63 @@ export default function ImageGallery() {
   const galleryImages = [
     {
       id: 1,
-      url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
+      url: img1,
       alt: "Event gathering 1"
     },
     {
       id: 2,
-      url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop",
+      url: img2,
       alt: "Event gathering 2"
     },
     {
       id: 3,
-      url: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&h=600&fit=crop",
+      url: img3,
       alt: "Event gathering 3"
     },
     {
       id: 4,
-      url: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop",
+      url: img4,
       alt: "Event gathering 4"
     },
     {
       id: 5,
-      url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=600&fit=crop",
+      url: img5,
       alt: "Event gathering 5"
     },
     {
       id: 6,
-      url: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=600&fit=crop",
+      url: img6,
       alt: "Event gathering 6"
     },
     {
       id: 7,
-      url: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop",
+      url: img7,
       alt: "Event gathering 7"
     },
     {
       id: 8,
-      url: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=600&fit=crop",
+      url: img8,
       alt: "Event gathering 8"
     },
     {
       id: 9,
-      url: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&h=600&fit=crop",
+      url: img9,
       alt: "Event gathering 9"
     },
     {
       id: 10,
-      url: "https://images.unsplash.com/photo-1464047736614-af63643285bf?w=800&h=600&fit=crop",
+      url: img10,
       alt: "Event gathering 10"
+    },
+    {
+      id: 11,
+      url: img11,
+      alt: "Event gathering 11"
+    },
+    {
+      id: 12,
+      url: img12,
+      alt: "Event gathering 12"
     }
   ];
 
@@ -81,21 +104,23 @@ export default function ImageGallery() {
 
   return (
     <div className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4">
         <h2 className="text-center text-3xl font-semibold mb-8">Event Gallery</h2>
         
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {galleryImages.map((image) => (
             <div
               key={image.id}
               className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
               onClick={() => openLightbox(image)}
             >
-              <img
+              <Image
                 src={image.url}
                 alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                fill
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300"></div>
             </div>
@@ -122,11 +147,14 @@ export default function ImageGallery() {
             </button>
 
             {/* Image */}
-            <div className="max-w-5xl max-h-[90vh] flex items-center justify-center">
-              <img
+            <div className="relative max-w-3xl w-full h-[90vh]">
+              <Image
                 src={selectedImage.url}
                 alt={selectedImage.alt}
-                className="max-w-full max-h-full object-contain rounded-lg"
+                fill
+                sizes="100vw"
+                className="object-contain rounded-lg"
+                priority
               />
             </div>
 
