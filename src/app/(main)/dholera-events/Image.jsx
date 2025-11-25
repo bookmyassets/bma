@@ -147,13 +147,13 @@ export default function ImageGallery() {
             </button>
 
             {/* Image */}
-            <div className="relative max-w-3xl w-full h-[90vh]">
+            <div className="relative max-w-3xl w-[750px] h-[500px]">
               <Image
                 src={selectedImage.url}
                 alt={selectedImage.alt}
                 fill
                 sizes="100vw"
-                className="object-contain rounded-lg"
+                className="object-contain rounded-lg w-[750px] h-[500px]"
                 priority
               />
             </div>
