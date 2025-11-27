@@ -122,7 +122,7 @@ const TestimonialPagination = () => {
         {/* Mobile Slider View */}
         {isMobile && (
           <div className="relative px-4">
-            <motion.div 
+            <motion.div
               key={`mobile-${currentMobileIndex}`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -134,14 +134,13 @@ const TestimonialPagination = () => {
                 {/* Avatar */}
                 <div className="flex justify-center -mt-16 mb-4">
                   <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#FDB913]">
-                    <Image 
-                      src={testimonials[currentMobileIndex].avatar} 
+                    <Image
+                      src={testimonials[currentMobileIndex].avatar}
                       alt={testimonials[currentMobileIndex].name}
-                      
                     />
                   </div>
                 </div>
-                
+
                 {/* Name and Location */}
                 <div className="text-center mb-4">
                   <h3 className="text-xl font-bold text-gray-800">
@@ -151,17 +150,21 @@ const TestimonialPagination = () => {
                     {testimonials[currentMobileIndex].location}
                   </p>
                 </div>
-                
+
                 {/* Quote */}
                 <div className="relative">
-                  <div className="absolute -top-6 left-0 text-5xl text-[#FDB913] opacity-20">“</div>
+                  <div className="absolute -top-6 left-0 text-5xl text-[#FDB913] opacity-20">
+                    “
+                  </div>
                   <p className="text-gray-600 italic text-center px-2">
                     {testimonials[currentMobileIndex].quote}
                   </p>
-                  <div className="absolute -bottom-6 right-0 text-5xl text-[#FDB913] opacity-20">”</div>
+                  <div className="absolute -bottom-6 right-0 text-5xl text-[#FDB913] opacity-20">
+                    ”
+                  </div>
                 </div>
               </div>
-              
+
               {/* Navigation Buttons for Mobile */}
               <div className="flex justify-center space-x-4 mt-6">
                 <Button
@@ -170,18 +173,18 @@ const TestimonialPagination = () => {
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </Button>
-                
+
                 {/* Navigation Dots */}
                 <div className="flex items-center space-x-2">
                   {testimonials.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentMobileIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-colors ${currentMobileIndex === index ? 'bg-[#FDB913]' : 'bg-gray-300'}`}
+                      className={`w-3 h-3 rounded-full transition-colors ${currentMobileIndex === index ? "bg-[#FDB913]" : "bg-gray-300"}`}
                     />
                   ))}
                 </div>
-                
+
                 <Button
                   onClick={nextMobileSlide}
                   className="bg-[#FDB913] hover:bg-[#e5a711] text-white rounded-full p-2"
@@ -229,8 +232,8 @@ const TestimonialPagination = () => {
                       <Image
                         src={testimonial.avatar}
                         alt={testimonial.name}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: "cover" }}
                       />
                     </div>
                   </div>

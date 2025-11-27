@@ -386,8 +386,7 @@ export default function LandingPage({ openForm }) {
                   >
                     <Image
                       src={image.src}
-                      alt={image.alt}
-                      fill
+                      alt={image.alt} 
                       className="object-cover pt-8"
                       priority={index === 0}
                       quality={85}
@@ -435,7 +434,6 @@ export default function LandingPage({ openForm }) {
                   <Image
                     src={image.src}
                     alt={image.alt}
-                    fill
                     className="object-contain pt-16"
                     priority={index === 0}
                     quality={85}
