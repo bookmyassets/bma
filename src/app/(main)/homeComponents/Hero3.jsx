@@ -389,6 +389,7 @@ export default function LandingPage({ openForm }) {
                       alt={image.alt} 
                       className="object-cover pt-8"
                       priority={index === 0}
+                      fill
                       quality={85}
                       loading={index === 0 ? "eager" : "lazy"}
                     />
