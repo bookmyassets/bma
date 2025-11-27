@@ -2,18 +2,18 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
-import img1 from "@/assests/bma-events/event-gallery/event-1.webp"
-import img2 from "@/assests/bma-events/event-gallery/event-2.webp"
-import img3 from "@/assests/bma-events/event-gallery/event-3.webp"
-import img4 from "@/assests/bma-events/event-gallery/event-4.webp"
-import img5 from "@/assests/bma-events/event-gallery/event-5.webp"
-import img6 from "@/assests/bma-events/event-gallery/event-6.webp"
-import img7 from "@/assests/bma-events/event-gallery/event-7.webp"
-import img8 from "@/assests/bma-events/event-gallery/event-8.webp"
-import img9 from "@/assests/bma-events/event-gallery/event-9.webp"
-import img10 from "@/assests/bma-events/event-gallery/event-10.webp"
-import img11 from "@/assests/bma-events/event-gallery/event-11.webp"
-import img12 from "@/assests/bma-events/event-gallery/event-12.webp"
+/* import img1 from "@/assests/bma-events/event-gallery/event-1.webp" */
+import img1 from "@/assests/bma-events/event-gallery/event-2.webp"
+import img2 from "@/assests/bma-events/event-gallery/event-3.webp"
+/* import img4 from "@/assests/bma-events/event-gallery/event-4.webp" */
+/* import img5 from "@/assests/bma-events/event-gallery/event-5.webp"
+import img6 from "@/assests/bma-events/event-gallery/event-6.webp" */
+import img3 from "@/assests/bma-events/event-gallery/event-7.webp"
+import img4 from "@/assests/bma-events/event-gallery/event-8.webp"
+import img5 from "@/assests/bma-events/event-gallery/event-9.webp"
+import img6 from "@/assests/bma-events/event-gallery/event-10.webp"
+/* import img11 from "@/assests/bma-events/event-gallery/event-11.webp"
+import img12 from "@/assests/bma-events/event-gallery/event-12.webp" */
 
 export default function ImageGallery() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -49,7 +49,7 @@ export default function ImageGallery() {
       url: img6,
       alt: "Event gathering 6"
     },
-    {
+   /*  {
       id: 7,
       url: img7,
       alt: "Event gathering 7"
@@ -78,7 +78,7 @@ export default function ImageGallery() {
       id: 12,
       url: img12,
       alt: "Event gathering 12"
-    }
+    } */
   ];
 
   const openLightbox = (image) => {
@@ -108,7 +108,7 @@ export default function ImageGallery() {
         <h2 className="text-center text-3xl font-semibold mb-8">Event Gallery</h2>
         
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {galleryImages.map((image) => (
             <div
               key={image.id}
