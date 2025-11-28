@@ -8,6 +8,7 @@ import FAQSection from './homeComponents/FAQs'
 import WestWyn from './homeComponents/WestWyn'
 import PopupForm from './components/PopUpForm'
 import LandingPage from './homeComponents/Hero3'
+import LatestUpdates from './homeComponents/Latest'
 
 export default function page() {
 
@@ -153,6 +154,7 @@ export default function page() {
        <Dholera/>
        <BMA/>
        <WestWyn/>
+       <LatestUpdates/>
        <ShortsSection/>
        <FAQSection/>
     </div>
