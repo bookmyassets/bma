@@ -16,7 +16,7 @@ const RelatedBlogCard = ({ item, type }) => {
       {/* Mobile: Horizontal Layout | Desktop: Vertical Layout */}
       <div className="flex flex-row md:flex-col h-full">
         {/* Image */}
-        <div className="relative w-32 h-32 md:w-full md:h-64 flex-shrink-0">
+        <div className="relative w-32 h-32 md:w-full md:h-48 flex-shrink-0">
           {item.mainImage ? (
             <Image
               src={`${urlFor(item.mainImage).url()}`}
@@ -38,7 +38,7 @@ const RelatedBlogCard = ({ item, type }) => {
             className="w-full px-4 py-2 transition-all font-semibold border-white hover:bg-[#deae3c] bg-black hover:text-black text-lg md:text-base text-[#deae3c] h-full flex flex-col justify-between space-y-2 md:space-y-3"
           >
             {/* Title */}
-            <h3 className="text-base md:text-xl font-semibold line-clamp-2 md:line-clamp-2 md:h-14">
+            <h3 className="text-base md:text-lg font-semibold line-clamp-2 md:line-clamp-2 md:h-14">
               {item.title}
             </h3>
 
