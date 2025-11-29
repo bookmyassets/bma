@@ -592,8 +592,8 @@ export default function LandingPage({ openForm }) {
                 <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
                   <Home className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1">Land Size</h3>
-                <p className="text-lg font-bold text-[#deae3c]">150 Sq.Yd.</p>
+                <h3 className="text-sm font-semibold text-gray-800 mb-1">Plot Size from</h3>
+                <p className="text-lg font-bold text-[#deae3c]">@150 Sq.Yd.</p>
               </div>
 
               {/* Type */}
@@ -620,7 +620,7 @@ export default function LandingPage({ openForm }) {
                   <IndianRupee className="w-4 h-4 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-gray-800 mb-1">Price</h3>
-                <p className="text-lg font-bold text-[#deae3c]">₹15 Lacs*</p>
+                <p className="text-lg font-bold text-[#deae3c]">₹10 Lacs*</p>
                 <p className="text-xs text-gray-500">*Terms & conditions apply</p>
               </div>
 

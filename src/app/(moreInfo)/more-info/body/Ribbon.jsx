@@ -201,7 +201,7 @@ export default function Ribbon() {
     <>
       <div className="bg-black border-t-8 border-t-[#deae3c] border-b-8 border-b-[#deae3c] py-4">
         <div className="pr-8 pl-8 pb-8   text-[#deae3c] flex justify-center items-center font-semibold italic text-xl md:text-3xl">
-         150 sq. yards plot for ₹15 lakh only
+         150 sq. yards plot for ₹10 lakh only
         </div>
         <div className="max-w-3xl mx-auto max-sm:pl-4 max-sm:pr-4 space-y-4">
           <div className="grid md:grid-cols-2 gap-2 max-sm:space-y-2">
