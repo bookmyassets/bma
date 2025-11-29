@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Navbar from "./components/Navbar";
 import "./globals.css";
@@ -20,6 +20,11 @@ export default function RootLayout({ children }) {
           src="https://www.googletagmanager.com/gtag/js?id=AW-17011995425"
         />
         <Script />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=GT-T5PQ3QDN"
+        />
+        <Script />
 
         <Script
           id="google-analytics"
@@ -34,7 +39,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-{/* GTM - BMA Landing Page GTM only */}
+        {/* GTM - BMA Landing Page GTM only */}
         <Script type="text/javascript">
           {`
            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -99,6 +104,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`
+             window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'GT-T5PQ3QDN');
+          `}
+        </Script>
         <Navbar />
         {children}
         <Footer />
