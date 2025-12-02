@@ -11,6 +11,7 @@ Disallow: /infopack/
 Disallow: /infopack/locations
 Disallow: /infopack/videos
 Disallow: /infopack/inventory
+Disallow: /about-us
 noindex : /projects/maple-township-mt/paradise-p2
 noindex : /projects/marina-bay-mb/maple-township-mt
 noindex : /projects/marina-bay-mb/sitemap.html
@@ -25,5 +26,6 @@ noindex : /projects/marina-bay-mb/paradise-p1
 noindex : /projects/maple-township-mt/infrastructure-development
 noindex : /projects/dholera/sitemap.html
 noindex : /projects/dholera/sitemap.html
+noindex : /about-dholera-sir/dholera-customs-port-update
 
 Sitemap : https://www.bookmyassets.com/sitemap.xml

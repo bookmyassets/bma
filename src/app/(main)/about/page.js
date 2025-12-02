@@ -232,6 +232,10 @@ const RealEstateLandingPage = () => {
         name="description"
         content="Join BMA Group in Dholera Smart City for reliable real estate services. We provide legally verified plots and end-to-end investment support for smart growth."
       />
+       <link
+            rel="canonical"
+            href="https://www.bookmyassets.com/about"
+          />
       <div className="bg-white">
         {/* Hero Section - Fixed Layout */}
         <div className="relative min-h-screen bg-gray-900 overflow-hidden">

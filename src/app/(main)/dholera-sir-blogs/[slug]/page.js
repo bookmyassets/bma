@@ -405,7 +405,7 @@ export default async function Post({ params }) {
           {/* Additional SEO meta tags */}
           <link
             rel="canonical"
-            href={`https://bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+            href={`https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 

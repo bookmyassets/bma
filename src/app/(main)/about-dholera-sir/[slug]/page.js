@@ -374,7 +374,7 @@ export default async function Post({ params }) {
           <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
           
           {/* Additional SEO meta tags */}
-          <link rel="canonical" href={`https://bookmyassets.com/about-dholera-sir/${post.slug.current}`} />
+          <link rel="canonical" href={`https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           
           {/* Preload critical resources */}
