@@ -23,6 +23,11 @@ import Interlink, { getSportLinks } from "../Interlink";
 export default function page() {
   return (
     <>
+    <title>Buy bulk recreation sports land in Dholera SIR With BookMyAssets</title>
+    <meta
+      name="description"
+      content="Explore premium bulk land in Dholera SIR for sale. In India’s first smart city Dholera Gujarat."
+    />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image

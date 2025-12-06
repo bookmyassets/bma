@@ -7,6 +7,11 @@ import Image from "next/image";
 export default function ChannelPartnerPage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <title>Become a Channel partner with BookMyAssets Earn on Dholera Plots</title>
+      <meta
+        name="description"
+        content="Partner with BookMyAssets for Dholera smart city project. Verified plots, clean paperwork and full support to start selling fast."
+      />
       {/* Hero Section */}
       <section
         className="py-20 relative overflow-hidden"

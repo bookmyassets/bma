@@ -24,6 +24,11 @@ import Interlink, { getKnowledgeITLinks } from "../Interlink";
 export default function page() {
   return (
     <>
+    <title>Knowledge & IT Zone in Dholera SIR | BookMyAssets</title>
+    <meta
+      name="description"
+      content="Explore IT and Knowledge Zone land in Dholera with verified papers and strong long term development potential."
+    />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image

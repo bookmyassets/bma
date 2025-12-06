@@ -70,7 +70,15 @@ export default function DholeraProgressPage() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-200">
              <link rel="canonical" href="https://www.dholeratimes.com/gallery/dholera-sir-progress" />
       <meta name="robots" content="index, dofollow"/>
-
+      <title>Dholera Smart City Site Photos & Project Visual</title>
+      <meta
+        name="description"
+        content="Explore Dholera SIR images, site photos and verified residential plot visuals from Book My Assets."
+      />
+      <link
+            rel="canonical"
+            href={`https://www.bookmyassets.com/gallery`}
+          />
       {/* Hero Section with Enhanced Overlay */}
       <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
         <Image

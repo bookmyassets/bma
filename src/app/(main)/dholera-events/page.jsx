@@ -70,6 +70,12 @@ export default function page() {
 
   return (
     <>
+<title>Dholera Events & Updates | Latest News & Announcements by BookMy Assets</title>
+    <meta
+      name="description"
+      content="Stay updated with the latest Dholera events, news, project launches and smart city activities. Get official updates and insights from BookMyAssets."
+    />
+    
       <section className="relative overflow-hidden max-sm:bg-[#0d0d0d]">
         {/* Background Overlay */}
         <div className="absolute inset-0  opacity-80"></div>

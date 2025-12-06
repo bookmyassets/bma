@@ -25,6 +25,11 @@ import Interlink, { getHACLinks } from "../Interlink";
 export default function page() {
   return (
     <>
+     <title>High Access Corridor in Dholera SIR by BookMyAssets</title>
+    <meta
+      name="description"
+      content="Invest in bulk land at Dholera High Access Corridor with verified documents and high growth prospects."
+    />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image

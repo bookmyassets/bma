@@ -85,11 +85,11 @@ export default function HeroCarousel() {
 
   return (
     <>
-      {/*  <title>Maple Township Dholera: Smart Living Plots in Gujarat</title>
+       <title>Buy Pride the Premium Residentail plots in Dholera with BookMyAssets</title>
       <meta
         name="description"
-        content=" Discover your ideal plot in Maple Township Dholera! Embrace modern living with lush greenery and a prime location set for future growth."
-      /> */}
+        content="Invest in residentail plotting project located in Dholera,a rapidly developing Smart City in Gujarat."
+      />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}

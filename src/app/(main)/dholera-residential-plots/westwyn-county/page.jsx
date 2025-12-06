@@ -220,6 +220,11 @@ export default function HeroCarousel() {
 
   return (
     <>
+    <title>Westwyn County Dholera SIR | Smart Residential Plots by BookMyAssets</title>
+    <meta
+      name="description"
+      content="Discover Smart Residential Plots in Dholera With Great connectivity, smart infrastructure & high ROI."
+    />
       {/* Hero Section with Carousel - Matching Hero3 Design */}
       <div id="hero" className="relative min-h-screen bg-white">
         <div className="h-screen max-sm:h-[95vh] flex flex-col">

@@ -22,6 +22,13 @@ import Interlink, { getCityCenterLinks } from "../Interlink";
 export default function page() {
   return (
     <>
+
+<title>Invest in Bulk Land City Centre in Dholera SIR | BookMyAssets</title>
+    <meta
+      name="description"
+      content="Find investor friendly bulk land in Dholera City Centre with full support and clean paperwork."
+    />
+
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image

@@ -24,6 +24,13 @@ import Interlink, { getResidentialLinks } from "../Interlink";
 export default function page() {
   return (
     <>
+
+<title>Residential Bulk Land for Sale | Dholera SIR smart Investment</title>
+    <meta
+      name="description"
+      content="Buy bulk residential land in Dholera SIR. Best for long-term investors. High ROI, prime locations & future-ready infrastructure."
+    />
+
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image

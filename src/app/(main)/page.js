@@ -22,7 +22,10 @@ export default function page() {
         name="description"
         content="Secure your future with BookMyAssets! Hassle-free residential property investment with clear titles and N.A. NOC. Start your journey today!"
       />
-
+   <link
+            rel="canonical"
+            href={`https://www.bookmyassets.com/`}
+          />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
