@@ -4,14 +4,14 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* Assets */
-import dholeraMapM from "@/assests/InteractiveMap/dholera-map-3.png";
-import metro from "@/assests/InteractiveMap/metro.png";
-import abcd from "@/assests/InteractiveMap/abcd-building.png";
-import dia from "@/assests/InteractiveMap/dholera-international-airport.png";
-import expressway from "@/assests/InteractiveMap/expressway.png";
-import renew from "@/assests/InteractiveMap/ReNew-power.png";
-import solarPark from "@/assests/InteractiveMap/solar-park.png";
-import tata from "@/assests/InteractiveMap/tata-semicon.png";
+import dholeraMapM from "@/assests/interactiveMap/dholera-map-3.png";
+import metro from "@/assests/interactiveMap/metro.png";
+import abcd from "@/assests/interactiveMap/abcd-building.png";
+import dia from "@/assests/interactiveMap/dholera-international-airport.png";
+import expressway from "@/assests/interactiveMap/expressway.png";
+import renew from "@/assests/interactiveMap/ReNew-power.png";
+import solarPark from "@/assests/interactiveMap/solar-park.png";
+import tata from "@/assests/interactiveMap/tata-semicon.png";
 
 export default function InteractiveMap() {
   const [imageLoaded, setImageLoaded] = useState(false);
