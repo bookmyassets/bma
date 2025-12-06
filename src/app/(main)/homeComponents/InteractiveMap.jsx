@@ -13,6 +13,7 @@ import renew from "@/assests/interactiveMap/ReNew-power.png";
 import solarPark from "@/assests/interactiveMap/solar-park.png";
 import tata from "@/assests/interactiveMap/tata-semicon.png";
 
+
 export default function InteractiveMap() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
