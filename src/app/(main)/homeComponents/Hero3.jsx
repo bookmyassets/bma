@@ -511,7 +511,7 @@ export default function LandingPage({ openForm }) {
                       Dholera's Biggest Offer till Date
                     </h2>
                     <p className="text-sm lg:text-base glowing-text">
-                      Plots under ₹10 Lakhs - 0 KM from Dholera SIR Boundary
+                      Plots under ₹10 Lakh - 0 KM from Dholera SIR Boundary
                     </p>
                   </div>
                 </div>

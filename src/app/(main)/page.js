@@ -8,6 +8,7 @@ import FAQSection from './homeComponents/FAQs'
 import WestWyn from './homeComponents/WestWyn'
 import PopupForm from './components/PopUpForm'
 import LandingPage from './homeComponents/Hero3'
+import InteractiveMap from './homeComponents/InteractiveMap'
 
 export default function page() {
 
@@ -78,7 +79,7 @@ export default function page() {
             logo: "https://www.bookmyassets.com/assets/images/logo.png",
             image:
               "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout.d8188d06.webp&w=640&q=75",
-            priceRange: "from ₹10 Lakhs",
+            priceRange: "from ₹10 Lakh",
             telephone: "+91 81 30 37 16 47",
             address: {
               "@type": "PostalAddress",
@@ -153,7 +154,10 @@ export default function page() {
        <Dholera/>
        <BMA/>
        <WestWyn/>
- 
+       <div>
+
+       <InteractiveMap/>
+       </div>
        <ShortsSection/>
        <FAQSection/>
     </div>

@@ -357,7 +357,7 @@ export default function HeroCarousel() {
                       Unbeatable Price in Dholera:{" "}
                       <span className="text-lg">
                         <br />
-                        Plots Under ₹10 Lakhs | 0 km from Dholera SIR
+                        Plots Under ₹10 Lakh | 0 km from Dholera SIR
                       </span>
                     </div>
                   </div>
@@ -384,7 +384,7 @@ export default function HeroCarousel() {
         <InvestmentBenefits />
       </div>
 
-      <CommonForm title="Get Plots Under ₹10 Lakhs at 0 KM from Dholera SIR " />
+      <CommonForm title="Get Plots Under ₹10 Lakh at 0 KM from Dholera SIR " />
       <ProjectAmenities />
 
       <div className="pt-4 pb-4">

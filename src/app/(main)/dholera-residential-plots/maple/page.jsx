@@ -129,7 +129,7 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Title Clear Plots Under ₹10 Lakhs",
+                  "Title Clear Plots Under ₹10 Lakh",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
                   "Get A Call Back",
                   ""
@@ -137,7 +137,7 @@ export default function HeroCarousel() {
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
             >
-              Book Your Plot In Dholera under ₹10 Lakhs
+              Book Your Plot In Dholera under ₹10 Lakh
             </button>
           </div>
         </div>
