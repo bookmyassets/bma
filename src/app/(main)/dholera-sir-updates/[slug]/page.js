@@ -8,6 +8,8 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import BlogSchemaMarkup from "../BlogSchemaMarkup";
+import { FaFacebook,  FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
 
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
@@ -454,18 +456,52 @@ export default async function Post({ params }) {
 
                 {/* Article Header */}
                 <div className="mb-8">
-                  {post.categories && post.categories.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {post.categories.map((category) => (
-                        <span
-                          key={category._id || category.title}
-                          className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
-                        >
-                          {category.title}
-                        </span>
-                      ))}
+                  <div className="flex justify-between items-center">
+                    {post.categories && post.categories.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {post.categories.map((category) => (
+                          <span
+                            key={category._id || category.title}
+                            className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
+                          >
+                            {category.title}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="flex space-x-2 pr-2">
+                      {/* WhatsApp */}
+                      <Link
+                        href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/${post.slug.current}`}
+                      >
+                        <FaWhatsapp className="text-green-500 w-5 h-5" />
+                      </Link>
+
+                      {/* Facebook */}
+                      <Link
+                        href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/${post.slug.current}`}
+                      >
+                        <FaFacebook className="text-blue-500 w-5 h-5" />
+                      </Link>
+
+                      {/* Instagram - Note: Direct sharing not supported */}
+                      {/* Instagram doesn't support web URL sharing. Users need to manually share */}
+
+                      {/* LinkedIn */}
+                      <Link
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/${post.slug.current}`}
+                      >
+                        <FaLinkedin className="text-blue-800 w-5 h-5" />
+                      </Link>
+
+                      {/* Twitter/X */}
+                      <Link
+                        href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/${post.slug.current}`}
+                      >
+                        <FaXTwitter className=" w-5 h-5" />
+                      </Link>
                     </div>
-                  )}
+                  </div>
 
                   <h1 className="text-4xl font-bold text-gray-900 mb-4">
                     {post.title}
