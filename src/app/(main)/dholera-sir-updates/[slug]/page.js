@@ -472,14 +472,14 @@ export default async function Post({ params }) {
                     <div className="flex space-x-2 pr-2">
                       {/* WhatsApp */}
                       <Link
-                        href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/${post.slug.current}`}
+                        href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
                       >
                         <FaWhatsapp className="text-green-500 w-5 h-5" />
                       </Link>
 
                       {/* Facebook */}
                       <Link
-                        href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/${post.slug.current}`}
+                        href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
                       >
                         <FaFacebook className="text-blue-500 w-5 h-5" />
                       </Link>
@@ -489,14 +489,14 @@ export default async function Post({ params }) {
 
                       {/* LinkedIn */}
                       <Link
-                        href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/${post.slug.current}`}
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
                       >
                         <FaLinkedin className="text-blue-800 w-5 h-5" />
                       </Link>
 
                       {/* Twitter/X */}
                       <Link
-                        href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/${post.slug.current}`}
+                        href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
                       >
                         <FaXTwitter className=" w-5 h-5" />
                       </Link>
