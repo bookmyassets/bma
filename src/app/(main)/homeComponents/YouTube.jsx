@@ -269,9 +269,9 @@ export default function ShortsSection() {
                   role="group"
                   aria-roledescription="Short video"
                 >
-                  <div className="bg-[#f3f2ef] rounded-2xl overflow-hidden shadow-xl p-3 h-[480px]">
+                  <div className="bg-[#f3f2ef] rounded-2xl overflow-hidden shadow-xl p-3 h-[280px]">
                     {/* Lazy loading placeholder */}
-                    <div className="w-full h-[380px] rounded-xl bg-gray-800 relative overflow-hidden">
+                    <div className="w-full h-[200px] rounded-xl bg-gray-800 relative overflow-hidden">
                       <iframe
                         ref={(el) => {
                           iframeRefs.current[index] = el;

@@ -9,6 +9,8 @@ import WestWyn from './homeComponents/WestWyn'
 import PopupForm from './components/PopUpForm'
 import LandingPage from './homeComponents/Hero3'
 import InteractiveMap from './homeComponents/InteractiveMap'
+import Groundzero from './homeComponents/GroundZero'
+
 
 export default function page() {
 
@@ -162,6 +164,7 @@ export default function page() {
        <InteractiveMap/>
        </div>
        <ShortsSection/>
+       <Groundzero/>
        <FAQSection/>
     </div>
     {/* {showpopForm && (
