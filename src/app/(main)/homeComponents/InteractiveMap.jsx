@@ -47,12 +47,11 @@ export default function InteractiveMap() {
       title: "Dholera Monorail",
       coords: [343, 201, 376, 236],
       desktopCoords: [825, 131, 863, 167],
-      description: "109 km long Monorail connecting Dholera to Ahmedabad Express",
+      description: "109 km long Monorail along Dholera Ahmedabad Expressway",
       details: [
-        "Approved in August 2024",
-        "Construction begins in 2025",
-        "Expected completion: 2027",
-        "Will connect Dholera International Airport to Ahmedabad"
+        "Approved in August 2025",
+        "Construction begins in 2026",
+        "Expected completion: 2029",
       ],
       videoId: null
     },
@@ -63,10 +62,9 @@ export default function InteractiveMap() {
       desktopCoords: [941, 172, 979, 211],
       description: "Greenfield International Airport Project",
       details: [
-        "6,000+ acres land acquisition completed",
-        "Phase 1 capacity: 30 million passengers annually",
-        "Strategic location near Delhi-Mumbai Industrial Corridor",
-        "Expected operational by 2027-28"
+        "India's Second Largest Airport",
+        "Spread Across 1400+ hectares",
+        "Construction work to be Completed in December 2025"
       ],
       videoId: "RITjLu6hRxc"
     },
@@ -77,8 +75,7 @@ export default function InteractiveMap() {
       desktopCoords: [820, 217, 858, 254],
       description: "Expressway connecting Dholera to major industrial hubs",
       details: [
-        "8-lane access controlled expressway",
-        "Connects to NH-48 and Delhi-Mumbai Expressway",
+        "109km Expressway, cuts Travel Time to Under 45 minutes",
         "Reduces travel time to Ahmedabad by 40%",
         "Critical logistics corridor for industries"
       ],
@@ -91,10 +88,9 @@ export default function InteractiveMap() {
       desktopCoords: [728, 278, 764, 316],
       description: "Administrative and Business Centre Development",
       details: [
-        "Government administrative headquarters",
+        "One Stop Hub for all Administrative & Construction",
         "Smart city command and control centre",
-        "Commercial office spaces for MNCs",
-        "Integrated with smart utilities"
+        "Real Time Control of Roads & Electricity",
       ],
       videoId: "3u8yJ5XYNns"
     },
@@ -105,10 +101,9 @@ export default function InteractiveMap() {
       desktopCoords: [766, 325, 804, 367],
       description: "Tata Semiconductor Manufacturing Facility",
       details: [
-        "₹91,000 crore investment",
-        "Advanced chip manufacturing plant",
-        "Will create 20,000+ direct and indirect jobs",
-        "First semiconductor fab in Gujarat"
+        "₹91,000 Crore Investment",
+        "Will create 20,000+ Direct and Indirect Jobs",
+        "First semiconductor fab in India"
       ],
       videoId: "6_BYJo1_HFU"
     },
@@ -117,12 +112,12 @@ export default function InteractiveMap() {
       title: "ReNew Power Plant",
       coords: [319, 455, 355, 492],
       desktopCoords: [811, 367, 849, 406],
-      description: "ReNew Solar Cell Manufacturing Facility",
+      description: "ReNew Solar Cell & Module Manufacturing Plant",
       details: [
         "₹1,200 crore investment",
-        "Solar module & cell manufacturing",
-        "2.5 GW annual production capacity",
-        "Currently employs 500+ skilled workers"
+        "Solar Module & Cell Manufacturing",
+        "2.5 GW Solar Cell Manufacturing",
+        "Currently Employs 1000+ Professionals"
       ],
       videoId: "3iiF6Oix5Fc"
     },
@@ -133,10 +128,9 @@ export default function InteractiveMap() {
       desktopCoords: [855, 457, 893, 495],
       description: "Dholera Solar Energy Park",
       details: [
-        "5,000 MW solar power generation capacity",
-        "One of Asia's largest solar parks",
-        "Power for entire Dholera SIR",
-        "Green energy for industrial and residential use"
+        "5,000 MW Solar Power Generation Capacity",
+        "Asia's Largest Solar Park",
+        "Currently Operating at 400MW Capacity in 1650 acres",
       ],
       videoId: null
     },
