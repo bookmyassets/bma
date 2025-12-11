@@ -10,11 +10,24 @@ import Image from "next/image";
 import BlogSchemaMarkup from "../BlogSchemaMarkup";
 import { FaFacebook,  FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
+import SlugPageForm from "../../components/SlugPageForm";
 
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   return (
-    <aside className="lg:w-1/3">
+    <aside className="lg:w-1/3 space-y-4 pt-4">
+
+       <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
+        <h4 className="font-bold text-lg mb-3 text-gray-900">Get My Guide</h4>
+        <p className="text-gray-700 mb-4 text-sm">
+          Learn which sectors are driving growth in Dholera.
+        </p>
+        <a href="tel:+918130371647">
+          <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+            Book a Free Visit Site Now
+          </button>
+        </a>
+      </div>
       <div className="sticky top-24 space-y-6">
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
@@ -59,16 +72,6 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           </div>
         </div>
 
-        {/* Contact/CTA Card */}
-        <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
-          <h4 className="font-bold text-lg mb-3 text-black">Get In Touch</h4>
-          <p className="text-gray-700 mb-4 text-sm">
-            Interested in our insights? Contact our experts
-          </p>
-          <button className="w-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
-            Contact Now
-          </button>
-        </div>
       </div>
     </aside>
   );
@@ -392,6 +395,7 @@ export default async function Post({ params }) {
             />
           )}
         </div>
+        <SlugPageForm title="Explore the Latest Development in Dholera" button="Talk To A Dholera Expert"/>
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30" />
 

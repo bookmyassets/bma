@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-logo2.png";
 import Image from "next/image";
 
-export default function PopupForm() {
+export default function PopupForm({title}) {
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -263,7 +263,7 @@ export default function PopupForm() {
             <div className="text-center mb-6">
               {/* Section 2: Sub-heading CTA */}
               <p className="text-lg text-gray-700 font-semibold">
-                Registry Ready Plots in Dholera under ₹10 Lakh
+                {title}
               </p>
             </div>
 
@@ -332,7 +332,7 @@ export default function PopupForm() {
                     Submitting...
                   </div>
                 ) : (
-                  "Get A Call Back"   
+                  "Get Dholera Details"   
                 )}
               </button>
 

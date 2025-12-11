@@ -12,13 +12,25 @@ import BlogSchemaMarkup from "../BlogSchemaMarkup";
 import SlugPageForm from "../../components/SlugPageForm";
 import InfoPopup from "../../components/SidePop";
 import ExitPopup from "../../components/ExitForm";
-import { FaFacebook,  FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 
+//
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   return (
-    <aside className="lg:w-1/3">
+    <aside className="lg:w-1/3 space-y-4 pt-4">
+      <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
+        <h4 className="font-bold text-lg mb-3 text-gray-900">Get My Guide</h4>
+        <p className="text-gray-700 mb-4 text-sm">
+          Learn which sectors are driving growth in Dholera.
+        </p>
+        <a href="tel:+918130371647">
+          <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+            Book a Free Visit Site Now
+          </button>
+        </a>
+      </div>
       <div className="sticky top-24 space-y-6">
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
@@ -66,17 +78,6 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         </div>
 
         {/* Contact/CTA Card */}
-        <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
-          <h4 className="font-bold text-lg mb-3 text-gray-900">Get In Touch</h4>
-          <p className="text-gray-700 mb-4 text-sm">
-            Interested in our insights? Contact our experts
-          </p>
-          <a href="tel:+918130371647">
-            <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
-              Contact Now
-            </button>
-          </a>
-        </div>
 
         <InfoPopup />
 
@@ -555,7 +556,7 @@ export default async function Post({ params }) {
                   <div className="text-xl max-w-none">
                     <PortableText value={post.body} components={components} />
                   </div>
-                  <SlugPageForm />
+                  <SlugPageForm title="Find Most Stable Areas, and Returns in Dholera" button="Show Me How" />
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
                     <div className="mt-12 pt-6 border-t border-gray-200">

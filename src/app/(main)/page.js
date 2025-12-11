@@ -175,7 +175,7 @@ export default function page() {
           className="font-medium"
         />
         )} */}
-        <PopupForm/>
+        <PopupForm title="Identify the best investment-ready locations in Dholera."/>
     </>
   )
 }

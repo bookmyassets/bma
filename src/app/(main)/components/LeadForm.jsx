@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./about.css";
 
-export default function LeadForm({ title }) {
+export default function LeadForm({ title, button }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ 
     fullName: "", 
@@ -232,7 +232,7 @@ export default function LeadForm({ title }) {
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-white text-2xl font-bold text-center">
-             Registry-Ready Plots 0KM from Dholera SIR under ₹10 Lakhs
+             {title}
             </h2>
             {/* <p className="text-gray-300 mt-2 text-xs text-center">
               Scale Your Portfolio with High-Growth Land Opportunities
@@ -371,7 +371,7 @@ export default function LeadForm({ title }) {
                         Submitting...
                       </div>
                     ) : (
-                      "Talk to Dholera Expert"
+                      button
                     )}
                   </button>
                 </div>

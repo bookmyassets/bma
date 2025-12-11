@@ -624,7 +624,7 @@ export default function HeroCarousel() {
 
       <ProjectAmenities />
 
-      <CommonForm title="Claim Your Spot in Gujarat's Next Investment Hub" />
+      <CommonForm title="Understand How Infrastructure is Shaping Growth in Dholera." />
       <div className="pt-4 pb-4">
         <CostSheet projectSlug="westwyn-county" showProjectSelector={false} />
       </div>

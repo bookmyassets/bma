@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 
-export default function SlugPageForm() {
+export default function SlugPageForm({title, button}) {
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -293,7 +293,7 @@ export default function SlugPageForm() {
 
                     {/* Section 2: Sub-heading CTA */}
                     <p className="text-lg text-gray-700 pt-8 font-semibold">
-                      Get Title - Clear Plots Under ₹ 10 Lakhs
+                      {title}
                     </p>
                   </div>
 
@@ -384,7 +384,7 @@ export default function SlugPageForm() {
                           Submitting...
                         </div>
                       ) : (
-                        "Get a Call Back"
+                        button
                       )}
                     </button>
 

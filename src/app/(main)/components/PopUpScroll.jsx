@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 
-export default function PopupScroll({ title, subtitle }) {
+export default function PopupScroll({ title }) {
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -259,11 +259,6 @@ export default function PopupScroll({ title, subtitle }) {
                   <h1 className="text-2xl font-bold text-gray-800 mb-2">
                     {title}
                   </h1>
-
-                  {/* Section 2: Sub-heading CTA */}
-                  <p className="text-lg text-gray-700 font-semibold">
-                    {subtitle}
-                  </p>
                 </div>
 
                 {/* Section 3: Form Fields */}
