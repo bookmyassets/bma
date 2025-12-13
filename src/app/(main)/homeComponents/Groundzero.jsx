@@ -160,10 +160,10 @@ export default function Groundzero() {
     <>
       <div className='py-12 bg-white min-h-[480px]'>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className='text-3xl md:text-4xl text-center font-bold text-gray-800 mb-4'>
+          <p className='text-xl md:text-4xl text-center font-bold text-gray-800 mb-4'>
             BookMyAssets on Ground Zero
           </p>
-          <p className='text-gray-600 text-center mb-12 max-w-3xl mx-auto'>
+          <p className='text-gray-600 text-sm md:text-lg text-center mb-12 max-w-5xl mx-auto'>
             Explore our exclusive collection of premium properties and development sites in Dholera Smart City
           </p>
           

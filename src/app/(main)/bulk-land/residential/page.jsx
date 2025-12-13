@@ -19,17 +19,18 @@ import residentialMap from "@/assests/bulkLand/residential-zone-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getResidentialLinks } from "../Interlink";
-
+import FAQSection from "./FAQs";
 
 export default function page() {
   return (
     <>
-
-<title>Residential Bulk Land for Sale | Dholera SIR smart Investment</title>
-    <meta
-      name="description"
-      content="Buy bulk residential land in Dholera SIR. Best for long-term investors. High ROI, prime locations & future-ready infrastructure."
-    />
+      <title>
+        Residential Bulk Land for Sale | Dholera SIR smart Investment
+      </title>
+      <meta
+        name="description"
+        content="Buy bulk residential land in Dholera SIR. Best for long-term investors. High ROI, prime locations & future-ready infrastructure."
+      />
 
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
@@ -228,10 +229,14 @@ export default function page() {
         <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <div>
+        <FAQSection/>
+      </div>
       <Interlink
-        properties={getResidentialLinks()} 
+        properties={getResidentialLinks()}
         title="Explore Other Zones in Dholera SIR"
       />
+
     </>
   );
 }

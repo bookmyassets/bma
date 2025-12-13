@@ -19,15 +19,18 @@ import recreationmap from "@/assests/bulkLand/recreation-sports-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getSportLinks } from "../Interlink";
+import FAQSection from "./FAQs";
 
 export default function page() {
   return (
     <>
-    <title>Buy bulk recreation sports land in Dholera SIR With BookMyAssets</title>
-    <meta
-      name="description"
-      content="Explore premium bulk land in Dholera SIR for sale. In India’s first smart city Dholera Gujarat."
-    />
+      <title>
+        Buy bulk recreation sports land in Dholera SIR With BookMyAssets
+      </title>
+      <meta
+        name="description"
+        content="Explore premium bulk land in Dholera SIR for sale. In India’s first smart city Dholera Gujarat."
+      />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image
@@ -225,6 +228,9 @@ export default function page() {
         <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <div>
+        <FAQSection/>
+      </div>
       <Interlink
         properties={getSportLinks()}
         title="Explore Other Zones in Dholera SIR"

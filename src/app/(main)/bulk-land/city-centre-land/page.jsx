@@ -14,20 +14,22 @@ import {
   Layers,
   Train,
 } from "lucide-react";
-import cityCenterMap from "@/assests/bulkLand/city-centre-map.webp"
+import cityCenterMap from "@/assests/bulkLand/city-centre-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getCityCenterLinks } from "../Interlink";
+import FAQSection from "./FAQs";
 
 export default function page() {
   return (
     <>
-
-<title>Invest in Bulk Land City Centre in Dholera SIR | BookMyAssets</title>
-    <meta
-      name="description"
-      content="Find investor friendly bulk land in Dholera City Centre with full support and clean paperwork."
-    />
+      <title>
+        Invest in Bulk Land City Centre in Dholera SIR | BookMyAssets
+      </title>
+      <meta
+        name="description"
+        content="Find investor friendly bulk land in Dholera City Centre with full support and clean paperwork."
+      />
 
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
@@ -120,7 +122,7 @@ export default function page() {
             priority
           />
         </div>
-        </div>
+      </div>
 
       <div className="max-w-6xl mx-auto p-4">
         {/* Benefits Grid */}
@@ -152,26 +154,24 @@ export default function page() {
                 Corporate & Administrative Offices
               </p>
             </div>
-
-            
           </div>
         </div>
         <div className="md:flex justify-center items-center pt-4 max-sm:space-y-4 md:space-x-8">
           {/* Community-Centric Planning */}
-            <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <Landmark className="w-16 h-16 text-orange-600" />
-              <p className="text-lg font-medium text-gray-800">
-                Cultural & Civic Spaces
-              </p>
-            </div>
+          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+            <Landmark className="w-16 h-16 text-orange-600" />
+            <p className="text-lg font-medium text-gray-800">
+              Cultural & Civic Spaces
+            </p>
+          </div>
 
-            {/* Government-Backed Development */}
-            <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <Building className="w-16 h-16 text-red-600" />
-              <p className="text-lg font-medium text-gray-800">
-                Residential & Mixed-Use Living
-              </p>
-            </div>
+          {/* Government-Backed Development */}
+          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+            <Building className="w-16 h-16 text-red-600" />
+            <p className="text-lg font-medium text-gray-800">
+              Residential & Mixed-Use Living
+            </p>
+          </div>
         </div>
       </div>
 
@@ -205,8 +205,6 @@ export default function page() {
               Prestige & Landmark Value
             </p>
           </div>
-
-          
         </div>
         <div className="md:flex justify-center items-center max-sm:space-y-4 md:space-x-8 pt-4">
           {/* Education & Community Facilities */}
@@ -227,10 +225,12 @@ export default function page() {
         </div>
       </div>
       <div>
-              
-              <Table/>
-            </div>
-      <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr."/>
+        <Table />
+      </div>
+      <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <div>
+        <FAQSection/>
+      </div>
       <Interlink
         properties={getCityCenterLinks()}
         title="Explore Other Zones in Dholera SIR"

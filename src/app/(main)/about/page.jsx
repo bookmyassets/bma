@@ -17,12 +17,14 @@ import {
   Zap,
   Award,
   CheckCircle,
+  ArrowDown,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import c1 from "@/assests/testimonials/sanchit-mishra.webp"
-import c2 from "@/assests/testimonials/janvi-goel.webp"
-import c3 from "@/assests/testimonials/mohan-kumar.webp"
+import c1 from "@/assests/testimonials/sanchit-mishra.webp";
+import c2 from "@/assests/testimonials/janvi-goel.webp";
+import c3 from "@/assests/testimonials/mohan-kumar.webp";
+import BookMyAssets from "./OneYear";
 
 const RealEstateLandingPage = () => {
   const [counts, setCounts] = useState({
@@ -63,7 +65,7 @@ const RealEstateLandingPage = () => {
       comment:
         "BookMyAssets made my investment journey seamless. Their expert guidance helped me find the perfect plot in Dholera.",
       rating: 5,
-      image:c3
+      image: c3,
     },
     {
       id: 2,
@@ -72,7 +74,7 @@ const RealEstateLandingPage = () => {
       comment:
         "As a first-time investor, I was nervous, but the team at BookMyAssets walked me through the entire process with patience and expertise.",
       rating: 5,
-      image:c1
+      image: c1,
     },
     {
       id: 3,
@@ -81,7 +83,7 @@ const RealEstateLandingPage = () => {
       comment:
         "The investment opportunities in Dholera through BookMyAssets have significantly boosted my portfolio. Highly recommended!",
       rating: 5,
-      image:c2
+      image: c2,
     },
   ];
 
@@ -232,10 +234,7 @@ const RealEstateLandingPage = () => {
         name="description"
         content="Join BMA Group in Dholera Smart City for reliable real estate services. We provide legally verified plots and end-to-end investment support for smart growth."
       />
-       <link
-            rel="canonical"
-            href="https://www.bookmyassets.com/about"
-          />
+      <link rel="canonical" href="https://www.bookmyassets.com/about" />
       <div className="bg-white">
         {/* Hero Section - Fixed Layout */}
         <div className="relative min-h-screen bg-gray-900 overflow-hidden">
@@ -254,7 +253,7 @@ const RealEstateLandingPage = () => {
                 }`}
               >
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-2 pt-16">
+                  <div className="flex items-center space-x-2 pt-4">
                     <div className="h-1 w-12 bg-yellow-500 rounded"></div>
                     <span className="text-yellow-500 font-medium tracking-wide text-sm">
                       BMA GROUP OF COMPANIES
@@ -262,50 +261,41 @@ const RealEstateLandingPage = () => {
                   </div>
 
                   <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
-                    Step Into
+                    Year One: Just the Beginning
                     <br />
-                    <span className="bg-yellow-400 bg-clip-text text-transparent">
+                    {/* <span className="bg-yellow-400 bg-clip-text text-transparent">
                       India’s First Greenfield Smart City
                     </span>{" "}
                     <br />
-                    Dholera with BookMyAssets
+                    Dholera with BookMyAssets */}
                   </h1>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    Discover premium, legally verified plots in Dholera Smart
+                   {/*  Discover premium, legally verified plots in Dholera Smart
                     City. We don't just offer land-we offer a vision of the
-                    future.
+                    future. */}
+                    Celebrating one year of turning raw belief into Dholera's boldest success story
                   </p>
                 </div>
 
-                {/* Mission Statement */}
-                {/*               <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                <h3 className="text-xl font-bold text-yellow-500 mb-4">
-                  Our Mission
-                </h3>
-                <p className="text-gray-200 leading-relaxed">
-                  To help people grow their money safely, confidently, and with maximum returns through strategic real estate investments in India's first greenfield smart city.
-                </p>
-              </div> */}
-
                 {/* CTA Buttons */}
-                
+
                 <div className="flex flex-col gap-4">
                   <Link href="/dholera-residential-plots/westwyn-estate">
-                  <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
-                    <span>Explore Properties</span>
-                    <ArrowRight
-                      className="group-hover:translate-x-1 transition-transform"
-                      size={20}
+                    <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                      <span>Scroll Down to View More</span>
+                      <ArrowDown
+                        className="group-hover:translate-x-1 transition-transform"
+                        size={20}
                       />
-                  </button>
-                      </Link>
-                      <Link href="https://www.youtube.com/@BookMyAssets">
-                  <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
-                    <Play size={20} />
-                    <span>Watch Video</span>
-                  </button>
-                      </Link>
+                    </button>
+                  </Link>
+                  <Link href="https://www.youtube.com/@BookMyAssets">
+                    <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                      <Play size={20} />
+                      <span>Watch Video</span>
+                    </button>
+                  </Link>
                 </div>
               </div>
 
@@ -317,17 +307,20 @@ const RealEstateLandingPage = () => {
                     : "translate-y-10 opacity-0"
                 }`}
               >
-                <div
-                  className="w-full max-w-xs"
-                  style={{ aspectRatio: "9/16", height: "400px" }}
-                >
-                  <div className="relative h-full">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
-                    <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20 h-full">
+                <div className="w-full max-w-md px-4">
+                  <div
+                    className="relative w-full"
+                    style={{ paddingBottom: "56.25%" }}
+                  >
+                    {/* Animated background glow */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse -z-10"></div>
+
+                    {/* Glass container */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-3 border border-white/20">
                       <div className="h-full rounded-2xl overflow-hidden">
                         <iframe
-                          src="https://www.youtube.com/embed/NzvDr2GyL9Y?si=YpXIPEx8AsODmara?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
-                          title="YouTube Shorts Video"
+                          src="https://www.youtube.com/embed/b6WzvRbsU5I?si=4vAneOtfsagJs4cH"
+                          title="YouTube Video"
                           className="w-full h-full rounded-2xl"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           referrerPolicy="strict-origin-when-cross-origin"
@@ -339,6 +332,10 @@ const RealEstateLandingPage = () => {
                 </div>
               </div>
             </div>
+
+            {/* <div className="lg:hidden">
+                <BookMyAssets/>
+            </div> */}
 
             {/* Desktop View - Side by Side */}
             <div className="hidden lg:flex lg:items-center lg:justify-center min-h-screen pt-8">
@@ -360,60 +357,65 @@ const RealEstateLandingPage = () => {
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
-                      Step Into
+                      Year One: Just the Beginning
                       <br />
-                      <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                      {/* <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
                         India’s First Greenfield Smart City
                       </span>{" "}
-                      Dholera with BookMyAssets
+                      Dholera with BookMyAssets */}
                     </h1>
 
                     <p className="text-lg xl:text-xl text-gray-300 leading-relaxed">
-                      Discover premium, legally verified plots in Dholera Smart
+                      {/* Discover premium, legally verified plots in Dholera Smart
                       City. We don't just offer land-we offer a vision of the
-                      future.
+                      future. */}
+                      Celebrating one year of turning raw belief into Dholera's boldest success story
+
                     </p>
                   </div>
 
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/dholera-residential-plots/westwyn-estate">
-                    <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
-                      <span>Explore Properties</span>
-                      <ArrowRight
-                        className="group-hover:translate-x-1 transition-transform"
-                        size={20}
+                    <Link href="/dholera-residential-plots/westwyn-estate">
+                      <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Scroll Down to View More</span>
+                        <ArrowDown
+                          className="group-hover:translate-x-1 transition-transform"
+                          size={20}
                         />
-                    </button>
-                        </Link>
-                       <Link href="https://www.youtube.com/@BookMyAssets">
-                    <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
-                      <Play size={20} />
-                      <span>Watch Video</span>
-                    </button>
-                        </Link>
+                      </button>
+                    </Link>
+                    <Link href="https://www.youtube.com/@BookMyAssets">
+                      <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                        <Play size={20} />
+                        <span>Watch Video</span>
+                      </button>
+                    </Link>
                   </div>
                 </div>
 
                 {/* Right Content - YouTube Shorts Video */}
                 <div className="flex items-center justify-center">
                   <div
-                    className={`w-full max-w-sm transform transition-all duration-1000 delay-500 ${
+                    className={`w-full max-w-4xl transform transition-all duration-1000 delay-500 ${
                       isVisible.hero
                         ? "translate-x-0 opacity-100"
                         : "translate-x-20 opacity-0"
                     }`}
                   >
                     <div
-                      className="relative"
-                      style={{ aspectRatio: "9/16", height: "600px" }}
+                      className="relative w-full"
+                      style={{ paddingBottom: "56.25%" }}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
-                      <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/20 h-full">
+                      {/* Animated background glow */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse -z-10"></div>
+
+                      {/* Glass container */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-3 md:p-6 border border-white/20">
                         <div className="h-full rounded-2xl overflow-hidden">
                           <iframe
-                            src="https://www.youtube.com/embed/NzvDr2GyL9Y?si=YpXIPEx8AsODmara?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0"
-                            title="YouTube Shorts Video"
+                            src="https://www.youtube.com/embed/b6WzvRbsU5I?si=4vAneOtfsagJs4cH"
+                            title="YouTube Video"
                             className="w-full h-full rounded-2xl"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             referrerPolicy="strict-origin-when-cross-origin"
@@ -429,6 +431,9 @@ const RealEstateLandingPage = () => {
           </div>
         </div>
 
+        <div className="">
+          <BookMyAssets />
+        </div>
         {/* About Us Section */}
         <div
           ref={aboutRef}
@@ -812,7 +817,6 @@ const RealEstateLandingPage = () => {
                           className="rounded-full"
                         />
                       </div>
-
                     </div>
                   </div>
                   <div className="w-full md:w-2/3">
@@ -870,21 +874,19 @@ const RealEstateLandingPage = () => {
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="https://wa.me/918130371647">
-
-                <button className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
-                  <span>Schedule a Consultation</span>
-                  <ArrowRight
-                    className="group-hover:translate-x-1 transition-transform"
-                    size={20}
+                  <button className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                    <span>Schedule a Consultation</span>
+                    <ArrowRight
+                      className="group-hover:translate-x-1 transition-transform"
+                      size={20}
                     />
-                </button>
-                    </a>
+                  </button>
+                </a>
                 <a href="tel:+918130371647">
-
-                <button className="border-2 border-yellow-500 hover:bg-yellow-500 text-yellow-500 hover:text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
-                  <Phone size={20} />
-                  <span>Call Us Now</span>
-                </button>
+                  <button className="border-2 border-yellow-500 hover:bg-yellow-500 text-yellow-500 hover:text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                    <Phone size={20} />
+                    <span>Call Us Now</span>
+                  </button>
                 </a>
               </div>
             </div>

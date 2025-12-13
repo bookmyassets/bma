@@ -16,20 +16,21 @@ import {
   Hospital,
   Home,
 } from "lucide-react";
-import hacMap from "@/assests/bulkLand/high-access-corridor-map.webp"
+import hacMap from "@/assests/bulkLand/high-access-corridor-map.webp";
 import { TbGardenCart } from "react-icons/tb";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getHACLinks } from "../Interlink";
+import FAQSection from "./FAQs";
 
 export default function page() {
   return (
     <>
-     <title>High Access Corridor in Dholera SIR by BookMyAssets</title>
-    <meta
-      name="description"
-      content="Invest in bulk land at Dholera High Access Corridor with verified documents and high growth prospects."
-    />
+      <title>High Access Corridor in Dholera SIR by BookMyAssets</title>
+      <meta
+        name="description"
+        content="Invest in bulk land at Dholera High Access Corridor with verified documents and high growth prospects."
+      />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image
@@ -104,11 +105,11 @@ export default function page() {
             large-scale commercial, hospitality, and residential developments.
             Designed for businesses that thrive on accessibility such as malls,
             hotels, corporate offices, retail hubs, and high-density housing. It
-            serves as a vibrant economic artery within the smart city’s
-            masterplan. With prime frontage along major roads, modern
-            infrastructure, and flexible development permissions, this corridor
-            is positioned to become a landmark destination for commerce, living,
-            and leisure in Dholera.
+            serves as a vibrant economic artery within the smart city’s master
+            plan. With prime frontage along major roads, modern infrastructure,
+            and flexible development permissions, this corridor is positioned to
+            become a landmark destination for commerce, living, and leisure in
+            Dholera.
           </p>
         </div>
       </div>
@@ -120,11 +121,10 @@ export default function page() {
             alt="High Access Corridor Zone Dholera SIR land plots"
             className="w-96 h-96"
             priority
-            />
-
+          />
         </div>
-        </div>
-            <div className="max-w-6xl mx-auto p-4">
+      </div>
+      <div className="max-w-6xl mx-auto p-4">
         {/* Benefits Grid */}
         <div>
           <p className="text-center text-3xl font-semibold mb-8">
@@ -133,7 +133,11 @@ export default function page() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
             {/* High Appreciation Potential */}
             <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <Image src={icon} alt="Prime Visibility & Frontage" className="w-16 h-16 text-blue-600" />
+              <Image
+                src={icon}
+                alt="Prime Visibility & Frontage"
+                className="w-16 h-16 text-blue-600"
+              />
               <p className="text-lg font-medium text-gray-800">
                 Prime Visibility & Frontage
               </p>
@@ -159,7 +163,11 @@ export default function page() {
         <div className="md:flex justify-center items-center pt-4 max-sm:space-y-4 md:space-x-8">
           {/* Community-Centric Planning */}
           <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-            <Image src={icon2} alt="High Footfall Potential" className="w-16 h-16 text-blue-600" />
+            <Image
+              src={icon2}
+              alt="High Footfall Potential"
+              className="w-16 h-16 text-blue-600"
+            />
             <p className="text-lg font-medium text-gray-800">
               High Footfall Potential
             </p>
@@ -225,9 +233,12 @@ export default function page() {
         </div>
       </div>
       <div>
-        <Table/>
+        <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <div>
+        <FAQSection/>
+      </div>
       <Interlink
         properties={getHACLinks()}
         title="Explore Other Zones in Dholera SIR"

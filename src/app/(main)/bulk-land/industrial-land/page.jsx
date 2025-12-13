@@ -20,15 +20,16 @@ import icon2 from "@/assests/svg/plug-and-plug-connection.svg";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getIndustrialLinks } from "../Interlink";
+import FAQSection from "./FAQs";
 
 export default function page() {
   return (
     <>
-    <title>Industrial Zone in Dholera SIR | BookMyAssets</title>
-    <meta
-      name="description"
-      content="Industrial land in Dholera designed for factories, warehouses and long term growth."
-    />
+      <title>Industrial Zone in Dholera SIR | BookMyAssets</title>
+      <meta
+        name="description"
+        content="Industrial land in Dholera designed for factories, warehouses and long term growth."
+      />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image
@@ -106,7 +107,7 @@ export default function page() {
             backbone of Dholera’s economic masterplan, this zone enables global
             and domestic companies to establish operations in a world-class
             industrial ecosystem supported by smart utilities, reliable power,
-            and modern logistics networks.
+            and modern logistics networks
           </p>
         </div>
       </div>
@@ -229,6 +230,7 @@ export default function page() {
         <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <FAQSection/>
       <Interlink
         properties={getIndustrialLinks()}
         title="Explore Other Zones in Dholera SIR"

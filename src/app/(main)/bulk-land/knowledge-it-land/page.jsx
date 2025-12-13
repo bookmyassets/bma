@@ -20,15 +20,16 @@ import { TbBuildingSkyscraper } from "react-icons/tb";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getKnowledgeITLinks } from "../Interlink";
+import FAQSection from "./FAQs";
 
 export default function page() {
   return (
     <>
-    <title>Knowledge & IT Zone in Dholera SIR | BookMyAssets</title>
-    <meta
-      name="description"
-      content="Explore IT and Knowledge Zone land in Dholera with verified papers and strong long term development potential."
-    />
+      <title>Knowledge & IT Zone in Dholera SIR | BookMyAssets</title>
+      <meta
+        name="description"
+        content="Explore IT and Knowledge Zone land in Dholera with verified papers and strong long term development potential."
+      />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image
@@ -226,6 +227,7 @@ export default function page() {
         <Table />
       </div>
       <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <FAQSection/>
       <Interlink
         properties={getKnowledgeITLinks()}
         title="Explore Other Zones in Dholera SIR"
