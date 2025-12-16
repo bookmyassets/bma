@@ -19,7 +19,7 @@ import CostSheet from "../costsheet2";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
-
+import PopupScroll from "../../components/PopUpScroll";
 
 export default function HeroCarousel() {
   const faqs = [
@@ -111,7 +111,7 @@ export default function HeroCarousel() {
 
         setTimeout(() => {
           const link = document.createElement("a");
-          link.href = "https://shorturl.at/Dv00M";
+          link.href = "https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf";
           link.target = "_blank";
           link.download = "brochure.pdf";
           document.body.appendChild(link);
@@ -121,7 +121,7 @@ export default function HeroCarousel() {
         }, 300);
       } catch (error) {
         console.error("Error downloading brochure:", error);
-        window.open("https://shorturl.at/Dv00M", "_blank");
+        window.open("https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf", "_blank");
       }
     }
   };
@@ -220,11 +220,13 @@ export default function HeroCarousel() {
 
   return (
     <>
-    <title>Westwyn County Dholera SIR | Smart Residential Plots by BookMyAssets</title>
-    <meta
-      name="description"
-      content="Discover Smart Residential Plots in Dholera With Great connectivity, smart infrastructure & high ROI."
-    />
+      <title>
+        Westwyn County Dholera SIR | Smart Residential Plots by BookMyAssets
+      </title>
+      <meta
+        name="description"
+        content="Discover Smart Residential Plots in Dholera With Great connectivity, smart infrastructure & high ROI."
+      />
       {/* Hero Section with Carousel - Matching Hero3 Design */}
       <div id="hero" className="relative min-h-screen bg-white">
         <div className="h-screen max-sm:h-[95vh] flex flex-col">
@@ -264,7 +266,6 @@ export default function HeroCarousel() {
                   >
                     <ChevronRight className="w-6 h-6" />
                   </button>
-               
                 </div>
               </div>
 
@@ -304,7 +305,6 @@ export default function HeroCarousel() {
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
-           
               </div>
             </div>
 
@@ -522,7 +522,11 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* Section 4 - Why Invest in Dholera Forest Estate */}
+      <div className="md:hidden">
+        <CommonForm title="Understand How Infrastructure is Shaping Growth in Dholera." />
+      </div>
+
+      {/* Section 4 - Why Invest in WestWyn Estate */}
       <div className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#deae3c] mb-12 md:mb-16">
@@ -623,13 +627,14 @@ export default function HeroCarousel() {
       </div>
 
       <ProjectAmenities />
-
-      <CommonForm title="Understand How Infrastructure is Shaping Growth in Dholera." />
+      <div className="max-sm:hidden">
+        <CommonForm title="Understand How Infrastructure is Shaping Growth in Dholera." />
+      </div>
       <div className="pt-4 pb-4">
         <CostSheet projectSlug="westwyn-county" showProjectSelector={false} />
       </div>
       <FAQSection />
-
+ <PopupScroll title="Get Verified Project Details" />
       <SoldOutProjectsSection />
 
       <AnimatePresence>
@@ -656,7 +661,7 @@ export default function HeroCarousel() {
                 headline={formHeadline}
                 buttonName={buttonName}
                 onAfterSubmit={handleAfterSubmit}
-                link="https://cdn.sanity.io/files/c3e1h345/projects/9f32c6d0d835cfc039e42a741e63894f87fd48ce.pdf"
+                link="https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf"
               />
             </div>
           </div>

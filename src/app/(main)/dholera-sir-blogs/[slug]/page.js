@@ -14,6 +14,7 @@ import InfoPopup from "../../components/SidePop";
 import ExitPopup from "../../components/ExitForm";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
+import "./blogPage.css";
 
 //
 // Right Sidebar Component
@@ -606,92 +607,310 @@ export default async function Post({ params }) {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {relatedBlogs && relatedBlogs.length > 0
-                  ? relatedBlogs.map((blog) => (
-                      <Link
-                        key={blog._id}
-                        href={`/dholera-sir-updates/${blog.slug.current}`}
-                        className="group"
-                      >
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden h-full hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 border border-gray-200">
-                          {/* Blog Image */}
-                          <div className="relative h-52">
-                            {blog.mainImage ? (
-                              <Image
-                                src={urlFor(blog.mainImage)
-                                  .width(1200)
-                                  .height(675)
-                                  .url()}
-                                alt={blog.title}
-                                fill
-                                className="object-cover"
-                              />
-                            ) : (
-                              <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21] flex items-center justify-center">
-                                <span className="text-white text-sm">
-                                  No image
-                                </span>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Content */}
-                          <div className="p-6 flex flex-col">
-                            <h3 className="text-xl font-bold mb-3 text-black group-hover:text-[#C69C21] line-clamp-2 transition-colors">
-                              {blog.title}
-                            </h3>
-
-                            {blog.description && (
-                              <p className="text-gray-700 mb-4 line-clamp-3 flex-grow">
-                                {blog.description}
-                              </p>
-                            )}
-
-                            {/* Footer with "Read More" */}
-                            <div className="border-t border-gray-200 pt-4 mt-auto">
-                              <div className="flex justify-between items-center text-sm">
-                                {blog.publishedAt && (
-                                  <p className="text-sm text-gray-400">
-                                    {new Date(
-                                      blog.publishedAt
-                                    ).toLocaleDateString("en-US", {
-                                      year: "numeric",
-                                      month: "short",
-                                      day: "numeric",
-                                    })}
-                                  </p>
-                                )}
-                                <span className="font-medium text-[#deae3c] group-hover:underline">
-                                  Read More →
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    ))
-                  : Array(3)
-                      .fill(0)
-                      .map((_, i) => (
+              <div className=" gap-6">
+                {relatedBlogs && relatedBlogs.length > 0 ? (
+                  <>
+                    {/* Mobile Slider with Improved Design */}
+                    <div className="md:hidden -mx-4 px-4">
+                      <div className="relative">
                         <div
-                          key={i}
-                          className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 h-full"
+                          className="flex gap-4 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide"
+                          style={{
+                            scrollbarWidth: "none",
+                            msOverflowStyle: "none",
+                          }}
                         >
-                          <div className="h-52 bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse"></div>
-                          <div className="p-6">
-                            <div className="h-6 bg-gray-200 rounded w-3/4 mb-3 animate-pulse"></div>
-                            <div className="h-4 bg-gray-200 rounded w-full mb-2 animate-pulse"></div>
-                            <div className="h-4 bg-gray-200 rounded w-2/3 mb-4 animate-pulse"></div>
-                            <div className="border-t border-gray-200 pt-4 mt-6">
-                              <div className="flex justify-between">
-                                <div className="h-4 bg-gray-200 rounded w-1/4 animate-pulse"></div>
-                                <div className="h-4 bg-gray-200 rounded w-1/5 animate-pulse"></div>
+                          {relatedBlogs.map((blog, index) => (
+                            <Link
+                              key={blog._id}
+                              href={`/dholera-sir-updates/${blog.slug.current}`}
+                              className="group snap-start flex-shrink-0 first:ml-0"
+                              style={{ width: "calc(100vw - 3rem)" }}
+                            >
+                              <div className="bg-white rounded-2xl shadow-lg overflow-hidden h-full hover:shadow-2xl transition-all duration-500 border border-gray-100 relative">
+                                {/* Image Section */}
+                                <div className="relative h-48 overflow-hidden">
+                                  {blog.mainImage ? (
+                                    <>
+                                      <Image
+                                        src={urlFor(blog.mainImage)
+                                          .width(1200)
+                                          .height(675)
+                                          .url()}
+                                        alt={blog.title}
+                                        fill
+                                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                                      />
+                                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                    </>
+                                  ) : (
+                                    <div className="w-full h-full bg-gradient-to-br from-[#FDB913] via-[#E5A622] to-[#C69C21] flex items-center justify-center relative overflow-hidden">
+                                      <div className="absolute inset-0 opacity-10">
+                                        <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-20 -translate-y-20" />
+                                        <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full translate-x-16 translate-y-16" />
+                                      </div>
+                                      <span className="text-white/80 text-sm font-medium relative z-10">
+                                        No image
+                                      </span>
+                                    </div>
+                                  )}
+
+                                  {/* Category Badge (if you have categories) */}
+                                  {blog.category && (
+                                    <div className="absolute top-4 left-4 z-10">
+                                      <span className="bg-white/95 backdrop-blur-sm text-[#C69C21] px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                                        {blog.category}
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Content Section */}
+                                <div className="p-5">
+                                  <h3 className="text-lg font-bold mb-2.5 text-gray-900 group-hover:text-[#C69C21] line-clamp-2 transition-colors duration-300 leading-snug">
+                                    {blog.title}
+                                  </h3>
+
+                                  {blog.description && (
+                                    <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                                      {blog.description}
+                                    </p>
+                                  )}
+
+                                  {/* Footer */}
+                                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                                    {blog.publishedAt && (
+                                      <div className="flex items-center gap-1.5 text-gray-400">
+                                        <svg
+                                          className="w-3.5 h-3.5"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                          />
+                                        </svg>
+                                        <span className="text-xs font-medium">
+                                          {new Date(
+                                            blog.publishedAt
+                                          ).toLocaleDateString("en-US", {
+                                            month: "short",
+                                            day: "numeric",
+                                          })}
+                                        </span>
+                                      </div>
+                                    )}
+                                    <div className="flex items-center gap-1.5 text-[#C69C21] font-semibold text-sm group-hover:gap-2.5 transition-all duration-300">
+                                      <span>Read More</span>
+                                      <svg
+                                        className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                      </svg>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Hover Accent Line */}
+                                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FDB913] via-[#E5A622] to-[#C69C21] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+
+                        {/* Scroll Indicator Dots */}
+                        <div className="flex justify-center gap-2 mt-2">
+                          {relatedBlogs.map((_, index) => (
+                            <div
+                              key={index}
+                              className="w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Desktop Grid Layout with Enhanced Design */}
+                    <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {relatedBlogs.map((blog) => (
+                        <Link
+                          key={blog._id}
+                          href={`/dholera-sir-updates/${blog.slug.current}`}
+                          className="group"
+                        >
+                          <div className="bg-white rounded-2xl shadow-lg overflow-hidden h-full w-full hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 flex flex-col relative">
+                            {/* Image Section */}
+                            <div className="relative h-56 overflow-hidden">
+                              {blog.mainImage ? (
+                                <>
+                                  <Image
+                                    src={urlFor(blog.mainImage)
+                                      .width(1200)
+                                      .height(675)
+                                      .url()}
+                                    alt={blog.title}
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                </>
+                              ) : (
+                                <div className="h-full bg-gradient-to-br from-[#FDB913] via-[#E5A622] to-[#C69C21] flex items-center justify-center relative overflow-hidden">
+                                  <div className="absolute inset-0 opacity-10">
+                                    <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-32 -translate-y-32" />
+                                    <div className="absolute bottom-0 right-0 w-48 h-48 bg-white rounded-full translate-x-24 translate-y-24" />
+                                  </div>
+                                  <span className="text-white/80 text-base font-medium relative z-10">
+                                    No image available
+                                  </span>
+                                </div>
+                              )}
+
+                              {/* Category Badge */}
+                              {blog.category && (
+                                <div className="absolute top-4 left-4 z-10">
+                                  <span className="bg-white/95 backdrop-blur-sm text-[#C69C21] px-4 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+                                    {blog.category}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Content Section */}
+                            <div className="p-6 flex flex-col flex-grow">
+                              <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-[#C69C21] line-clamp-2 transition-colors duration-300 leading-tight">
+                                {blog.title}
+                              </h3>
+
+                              {blog.description && (
+                                <p className="text-gray-600 text-sm mb-5 line-clamp-3 flex-grow leading-relaxed">
+                                  {blog.description}
+                                </p>
+                              )}
+
+                              {/* Footer */}
+                              <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100">
+                                {blog.publishedAt && (
+                                  <div className="flex items-center gap-2 text-gray-400">
+                                    <svg
+                                      className="w-4 h-4"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                      />
+                                    </svg>
+                                    <span className="text-sm font-medium">
+                                      {new Date(
+                                        blog.publishedAt
+                                      ).toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                      })}
+                                    </span>
+                                  </div>
+                                )}
+                                <div className="flex items-center gap-2 text-[#C69C21] font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+                                  <span>Read More</span>
+                                  <svg
+                                    className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Hover Accent Line */}
+                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FDB913] via-[#E5A622] to-[#C69C21] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  // Enhanced Loading Skeleton
+                  <>
+                    {/* Mobile Skeleton */}
+                    <div className="md:hidden -mx-4 px-4">
+                      <div className="flex gap-4 overflow-x-auto pb-6">
+                        {Array(3)
+                          .fill(0)
+                          .map((_, i) => (
+                            <div
+                              key={i}
+                              className="flex-shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+                              style={{ width: "calc(100vw - 3rem)" }}
+                            >
+                              <div
+                                className="h-48 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse bg-[length:200%_100%]"
+                                style={{ animation: "shimmer 2s infinite" }}
+                              />
+                              <div className="p-5">
+                                <div className="h-5 bg-gray-200 rounded-lg w-3/4 mb-3 animate-pulse" />
+                                <div className="h-4 bg-gray-200 rounded-lg w-full mb-2 animate-pulse" />
+                                <div className="h-4 bg-gray-200 rounded-lg w-2/3 mb-4 animate-pulse" />
+                                <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                                  <div className="h-4 bg-gray-200 rounded-lg w-20 animate-pulse" />
+                                  <div className="h-4 bg-gray-200 rounded-lg w-24 animate-pulse" />
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+
+                    {/* Desktop Skeleton */}
+                    <div className="hidden  gap-6">
+                      {Array(3)
+                        .fill(0)
+                        .map((_, i) => (
+                          <div
+                            key={i}
+                            className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+                          >
+                            <div className="h-56 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
+                            <div className="p-6">
+                              <div className="h-6 bg-gray-200 rounded-lg w-3/4 mb-3 animate-pulse" />
+                              <div className="h-4 bg-gray-200 rounded-lg w-full mb-2 animate-pulse" />
+                              <div className="h-4 bg-gray-200 rounded-lg w-5/6 mb-2 animate-pulse" />
+                              <div className="h-4 bg-gray-200 rounded-lg w-2/3 mb-5 animate-pulse" />
+                              <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                                <div className="h-4 bg-gray-200 rounded-lg w-24 animate-pulse" />
+                                <div className="h-4 bg-gray-200 rounded-lg w-28 animate-pulse" />
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </section>
