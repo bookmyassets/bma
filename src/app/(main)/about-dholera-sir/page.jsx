@@ -270,8 +270,8 @@ export default async function page() {
                     </div>
                   </div>
                 </div>
-                <div>
-                  <LeadForm/>
+                <div className="mb-8">
+                  <LeadForm title="Want to Minimize Risk and Maximize High ROI on Dholera Plots?"  button="Connect Today"/>
                 </div>
                 {/* Governance Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">

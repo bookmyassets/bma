@@ -19,12 +19,26 @@ export default function InfoPopup() {
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % messages.length);
+  let interval;
+  let timeout;
+  
+  if (!open) {
+    // Popup is closed, set timeout to reopen after 5 seconds
+    timeout = setTimeout(() => {
       setOpen(true);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+    }, 5000);
+  } else {
+    // Popup is open, rotate messages every 8 seconds
+    interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % messages.length);
+    }, 8000);
+  }
+  
+  return () => {
+    if (interval) clearInterval(interval);
+    if (timeout) clearTimeout(timeout);
+  };
+}, [open]);
 
   return (
     <>

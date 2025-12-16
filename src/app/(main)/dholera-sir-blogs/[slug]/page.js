@@ -556,7 +556,10 @@ export default async function Post({ params }) {
                   <div className="text-xl max-w-none">
                     <PortableText value={post.body} components={components} />
                   </div>
-                  <SlugPageForm title="Find Most Stable Areas, and Returns in Dholera" button="Show Me How" />
+                  <SlugPageForm
+                    title="Find Most Stable Areas, and Returns in Dholera"
+                    button="Show Me How"
+                  />
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
                     <div className="mt-12 pt-6 border-t border-gray-200">

@@ -25,7 +25,6 @@ import imgM3 from "@/assests/residential/estate3M.webp";
 import PopupScroll from "../../components/PopUpScroll";
 import CostSheet from "../costsheet2";
 
-
 export default function HeroCarousel() {
   const faqs = [
     {
@@ -149,7 +148,8 @@ export default function HeroCarousel() {
         // Using setTimeout to ensure the popup closes before download starts
         setTimeout(() => {
           const link = document.createElement("a");
-          link.href = "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf";
+          link.href =
+            "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf";
           link.target = "_blank";
           link.download = "brochure.pdf"; // Add download attribute
           document.body.appendChild(link);
@@ -159,7 +159,10 @@ export default function HeroCarousel() {
         }, 300);
       } catch (error) {
         console.error("Error downloading brochure:", error);
-        window.open("https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf", "_blank");
+        window.open(
+          "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf",
+          "_blank"
+        );
       }
     }
   };
@@ -300,17 +303,17 @@ export default function HeroCarousel() {
                     className="w-full h-full object-cover"
                   />
                   <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
                 </div>
               ))}
 
@@ -365,8 +368,6 @@ export default function HeroCarousel() {
                   {/* Pulse animation */}
                   <div className="absolute inset-0 rounded-xl bg-[#deae3c] opacity-30 animate-pulse"></div>
                 </button>
-
-           
               </motion.div>
             </motion.div>
           </div>
@@ -379,29 +380,30 @@ export default function HeroCarousel() {
         <WestWynAboutSection />
       </div>
 
+      <div className="md:hidden">
+        <CommonForm title="Get Plots Under ₹10 Lakh at 0 KM from Dholera SIR " />
+      </div>
+
       <div className="pt-4 pb-4">
         {/* Section 4 - Why Invest in Dholera Forest Estate */}
         <InvestmentBenefits />
       </div>
 
-      <CommonForm title="Get Plots Under ₹10 Lakh at 0 KM from Dholera SIR " />
+      <div className="max-sm:hidden">
+        <CommonForm title="Get Plots Under ₹10 Lakh at 0 KM from Dholera SIR " />
+      </div>
       <ProjectAmenities />
 
       <div className="pt-4 pb-4">
         {/* <CostSheet /> */}
 
-        <CostSheet projectSlug="westwyn-estate" 
-        showProjectSelector={false} 
-      />
+        <CostSheet projectSlug="westwyn-estate" showProjectSelector={false} />
       </div>
       <FAQSection />
       {/* Form */}
 
       <SoldOutProjectsSection />
-      <PopupScroll
-        title="Get Verified Project Details"
-       
-      />
+      <PopupScroll title="Get Verified Project Details" />
       <AnimatePresence>
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
