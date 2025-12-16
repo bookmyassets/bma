@@ -169,31 +169,34 @@ export default function BrochureDownload({
       );
 
       if (response.ok) {
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
+  setFormData({ fullName: "", phone: "" });
+  setShowPopup(true);
+  setSubmissionCount((prev) => {
+    const newCount = prev + 1;
+    localStorage.setItem("formSubmissionCount", newCount.toString());
+    localStorage.setItem("lastSubmissionTime", now.toString());
+    return newCount;
+  });
 
-        // Download PDF immediately after successful submission
-        downloadPDF();
+  // Download PDF immediately after successful submission
+  downloadPDF();
 
-        // Show thank you popup for 2 seconds
-        setShowThankYou(true);
-        setTimeout(() => {
-          setShowThankYou(false);
-          handleClose();
+  // Show thank you popup for 2 seconds
+  setShowThankYou(true);
+  setTimeout(() => {
+    setShowThankYou(false);
+    handleClose();
 
-          // Get current pathname for return URL
-          const currentPath = pathname || window.location.pathname;
-
-          // Push to thank-you route with return URL
-          router.push(`/more-info/thankyou`);
-        }, 2000);
-      } else {
+    // Get current pathname for return URL
+    const currentPath = window.location.pathname;
+    
+    // Encode the return URL as a query parameter
+    const returnUrl = encodeURIComponent(currentPath);
+    
+    // Push to thank-you route with return URL parameter
+    router.push(`/more-info/thank-you?return=${returnUrl}`);
+  }, 2000);
+}else {
         throw new Error("Error submitting form");
       }
     } catch (error) {
