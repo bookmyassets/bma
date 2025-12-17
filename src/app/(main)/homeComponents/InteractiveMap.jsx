@@ -2,6 +2,8 @@ import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import dholeraMapM from "@/assests/interactiveMap/dholera-map-3.png";
 import dholeraMapD from "@/assests/interactiveMap/mapResize.webp";
+import solarPark from "@/assests/interactiveMap/solar-park-img.png"
+import monorail from "@/assests/interactiveMap/monorail-img.png"
 
 export default function InteractiveMap() {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -53,7 +55,8 @@ export default function InteractiveMap() {
         "Construction begins in 2026",
         "Expected completion: 2029",
       ],
-      videoId: null
+      image: monorail, // Use image instead of video
+      type: "image"
     },
     {
       id: "airport",
@@ -66,7 +69,8 @@ export default function InteractiveMap() {
         "Spread Across 1400+ hectares",
         "Construction work to be Completed in December 2025"
       ],
-      videoId: "RITjLu6hRxc"
+      videoId: "RITjLu6hRxc",
+      type: "video"
     },
     {
       id: "expressway",
@@ -79,7 +83,8 @@ export default function InteractiveMap() {
         "Reduces travel time to Ahmedabad by 40%",
         "Critical logistics corridor for industries"
       ],
-      videoId: "5DaF8tljkkU"
+      videoId: "5DaF8tljkkU",
+      type: "video"
     },
     {
       id: "abcd",
@@ -92,7 +97,8 @@ export default function InteractiveMap() {
         "Smart city command and control centre",
         "Real Time Control of Roads & Electricity",
       ],
-      videoId: "3u8yJ5XYNns"
+      videoId: "3u8yJ5XYNns",
+      type: "video"
     },
     {
       id: "tata",
@@ -105,7 +111,8 @@ export default function InteractiveMap() {
         "Will create 20,000+ Direct and Indirect Jobs",
         "First semiconductor fab in India"
       ],
-      videoId: "6_BYJo1_HFU"
+      videoId: "6_BYJo1_HFU",
+      type: "video"
     },
     {
       id: "renew",
@@ -119,7 +126,8 @@ export default function InteractiveMap() {
         "2.5 GW Solar Cell Manufacturing",
         "Currently Employs 1000+ Professionals"
       ],
-      videoId: "3iiF6Oix5Fc"
+      videoId: "3iiF6Oix5Fc",
+      type: "video"
     },
     {
       id: "solar",
@@ -132,7 +140,8 @@ export default function InteractiveMap() {
         "Asia's Largest Solar Park",
         "Currently Operating at 400MW Capacity in 1650 acres",
       ],
-      videoId: null
+      image: solarPark, // Use image instead of video
+      type: "image"
     },
   ];
 
@@ -359,8 +368,8 @@ export default function InteractiveMap() {
 
                 {/* Scrollable content */}
                 <div className="overflow-y-auto flex-1">
-                  {/* Video Embed (if available) */}
-                  {getAreaVideo(selectedArea.id) && (
+                  {/* Video Embed or Image based on type */}
+                  {selectedArea.type === "video" && getAreaVideo(selectedArea.id) && (
                     <div className="p-4 pb-0">
                       <div className="aspect-video relative overflow-hidden rounded-lg">
                         <iframe
@@ -376,6 +385,19 @@ export default function InteractiveMap() {
                       <p className="text-sm text-gray-600 mt-2 text-center">
                         {getAreaVideo(selectedArea.id).title}
                       </p>
+                    </div>
+                  )}
+
+                  {/* Image for solar and monorail */}
+                  {selectedArea.type === "image" && selectedArea.image && (
+                    <div className="p-4 pb-0">
+                      <div className="aspect-video relative overflow-hidden rounded-lg">
+                        <Image
+                          src={selectedArea.image}
+                          alt={selectedArea.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
                   )}
 
@@ -402,14 +424,6 @@ export default function InteractiveMap() {
                           </li>
                         ))}
                       </ul>
-                    </div>
-
-                    {/* Status Badge */}
-                    <div className="pt-4 border-t border-gray-200">
-                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-medium">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                        Active Project • Under Development
-                      </div>
                     </div>
                   </div>
                 </div>
