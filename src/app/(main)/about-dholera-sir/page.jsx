@@ -1,12 +1,13 @@
 import { projectInfo } from "@/sanity/lib/api";
-import React from "react";
-import BlogCard from "./BlogCard";
+import React from "react"; 
 import hero from "@/assests/dholeraSIR.webp";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa6";
 import banner from "@/assests/banner.webp";
+import BlogCard from "./BlogCard";  // Keep this for any individual blog cards
+import BlogSlider from "./BlogSlider";  // Add this for the slider
+import BulkLandCard from "./BulkLandCard";  // Changed from "./BlogCard" to "./BulkLandCard";
 import LeadForm from "../components/LeadForm";
-import BulkLandCard from "./BlogCard";
 import residential from "@/assests/bulkLand/residential-hero-mob.-webp.webp";
 import hac from "@/assests/bulkLand/high-access-hero-mob-webp.webp";
 import industrial from "@/assests/bulkLand/industrial-hero-mob-webp.webp";
@@ -215,6 +216,11 @@ export default async function page() {
                       </div>
                     </div>
                   </div>
+                </div>
+                
+                {/* fetch blogs */}
+                <div>
+                     <BlogSlider posts={safePosts}/>  
                 </div>
 
                 {/* Industries Section */}

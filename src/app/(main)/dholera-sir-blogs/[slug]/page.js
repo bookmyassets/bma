@@ -82,23 +82,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 
         <InfoPopup />
 
-        {/* Newsletter Signup */}
-        {/* <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-          <h4 className="font-semibold text-gray-900 mb-3">Stay Updated</h4>
-          <p className="text-gray-600 text-sm mb-4">
-            Subscribe to get the latest updates and insights
-          </p>
-          <div className="space-y-3">
-            <input 
-              type="email" 
-              placeholder="Enter your email"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C69C21]"
-            />
-            <button className="w-full bg-[#C69C21] hover:bg-[#FDB913] text-white px-4 py-2 rounded-lg font-semibold transition-colors">
-              Subscribe
-            </button>
-          </div>
-        </div> */}
+        
       </div>
     </aside>
   );
@@ -208,68 +192,69 @@ export default async function Post({ params }) {
           );
         },
 
-       table: ({ value }) => {
-  if (!value?.rows || !Array.isArray(value.rows)) {
-    console.log('No table data or invalid structure:', value);
-    return null;
-  }
+        table: ({ value }) => {
+          if (!value?.rows || !Array.isArray(value.rows)) {
+            console.log("No table data or invalid structure:", value);
+            return null;
+          }
 
-  // Check if this is a Sanity table structure
-  const rows = value.rows || [];
-  
-  return (
-    <div className="overflow-x-auto my-12 bg-white rounded-2xl shadow-lg border border-gray-100">
-      <table className="min-w-full">
-        <tbody>
-          {rows.map((row, i) => {
-            // Handle both possible Sanity table structures
-            const cells = row.cells || row;
-            
-            if (!cells || !Array.isArray(cells)) {
-              return null;
-            }
+          // Check if this is a Sanity table structure
+          const rows = value.rows || [];
 
-            return (
-              <tr
-                key={i}
-                className={`hover:bg-gray-50 transition-colors duration-200 ${
-                  i === 0
-                    ? "bg-gradient-to-r from-teal-400/10 to-teal-600/10 font-semibold"
-                    : i % 2 === 0
-                      ? "bg-gray-50/50"
-                      : "bg-white"
-                }`}
-              >
-                {cells.map((cell, j) => {
-                  // Handle cell content - could be string or rich text
-                  const cellContent = typeof cell === 'string' 
-                    ? cell 
-                    : cell?.text || cell?.value || '';
-                  
-                  return (
-                    <td
-                      key={j}
-                      className="px-6 py-4 text-gray-700 border-b border-gray-100 last:border-r-0"
-                    >
-                      {cellContent}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-},
-htmlTableBlock: ({ value }) => {
-        if (!value?.html) return null;
+          return (
+            <div className="overflow-x-auto my-12 bg-white rounded-2xl shadow-lg border border-gray-100">
+              <table className="min-w-full">
+                <tbody>
+                  {rows.map((row, i) => {
+                    // Handle both possible Sanity table structures
+                    const cells = row.cells || row;
 
-        return (
-          <div className="my-8 overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
-            <div
-              className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-white 
+                    if (!cells || !Array.isArray(cells)) {
+                      return null;
+                    }
+
+                    return (
+                      <tr
+                        key={i}
+                        className={`hover:bg-gray-50 transition-colors duration-200 ${
+                          i === 0
+                            ? "bg-gradient-to-r from-teal-400/10 to-teal-600/10 font-semibold"
+                            : i % 2 === 0
+                              ? "bg-gray-50/50"
+                              : "bg-white"
+                        }`}
+                      >
+                        {cells.map((cell, j) => {
+                          // Handle cell content - could be string or rich text
+                          const cellContent =
+                            typeof cell === "string"
+                              ? cell
+                              : cell?.text || cell?.value || "";
+
+                          return (
+                            <td
+                              key={j}
+                              className="px-6 py-4 text-gray-700 border-b border-gray-100 last:border-r-0"
+                            >
+                              {cellContent}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          );
+        },
+        htmlTableBlock: ({ value }) => {
+          if (!value?.html) return null;
+
+          return (
+            <div className="my-8 overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+              <div
+                className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-white 
               [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700 
               [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
               [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
@@ -277,11 +262,11 @@ htmlTableBlock: ({ value }) => {
               [&_tr:hover]:bg-gray-50/50
               [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
               [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
-              dangerouslySetInnerHTML={{ __html: value.html }}
-            />
-          </div>
-        );
-      },
+                dangerouslySetInnerHTML={{ __html: value.html }}
+              />
+            </div>
+          );
+        },
 
         code: ({ value }) => (
           <div className="my-8 bg-gradient-to-br from-gray-900 to-black rounded-2xl p-1 shadow-2xl">
