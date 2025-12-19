@@ -7,7 +7,19 @@ const nextConfig = {
         source: "/favicon.ico",
         destination: "/api/landx?path=/favicon.ico",
       },
-      // Direct access to specific PHP files with explicit handling
+      
+      // CRITICAL: Handle dashboard.php with ANY query parameters
+      {
+        source: "/LandX-Beta/dashboard.php",
+        
+        destination: "/api/landx?path=dashboard.php",
+      },
+      {
+        source: "/LandX-Beta/dashboard.php",
+        destination: "/api/landx?path=dashboard.php",
+      },
+      
+      // Direct access to PHP files
       {
         source: "/logout.php",
         destination: "/api/landx?path=logout.php",
@@ -25,28 +37,25 @@ const nextConfig = {
         destination: "/api/landx?path=login.php",
       },
       {
-        source: "/LandX-Beta/dashboard.php",
-        destination: "/api/landx?path=dashboard.php",
-      },
-    // next.config.js
-/* {
-  source: "/LandX-Beta/dashboard.php?filters%5B5%5D=&filters%5B6%5D=&filters%5B7%5D=&filters%5B12%5D=&filters%5B13%5D=&filters%5B19%5D=Available",
-  destination: "/api/landx?path=dashboard.php?filters%5B5%5D=&filters%5B6%5D=&filters%5B7%5D=&filters%5B12%5D=&filters%5B13%5D=&filters%5B19%5D=Available",
-}
-, */
-      {
         source: "/api.php",
         destination: "/api/landx?path=api.php",
       },
+      
+      // PDF generation endpoints
       {
         source: "/generate_pdf.php",
         destination: "/api/landx?path=generate_pdf.php",
       },
       {
+        source: "/generate_pdf_filtered.php",
+        destination: "/api/landx?path=generate_pdf_filtered.php",
+      },
+      {
         source: "/generate_pdf_non_brand.php",
         destination: "/api/landx?path=generate_pdf_non_brand.php",
       },
-      // Handle other common PHP files
+      
+      // Other PHP files
       {
         source: "/index.php",
         destination: "/api/landx?path=index.php",
@@ -56,7 +65,7 @@ const nextConfig = {
         destination: "/api/landx?path=admin.php",
       },
 
-      // Handle CSS, JS files
+      // Static assets - go directly to target
       {
         source: "/css/:path*",
         destination: "https://dholeratimes.co.in/LandX-Beta/css/:path*",
@@ -65,7 +74,8 @@ const nextConfig = {
         source: "/js/:path*",
         destination: "https://dholeratimes.co.in/LandX-Beta/js/:path*",
       },
-      // Updated image routes to go through proxy for uploaded images
+      
+      // Images through proxy
       {
         source: "/images/:path*",
         destination: "/api/landx?path=images/:path*",
@@ -75,24 +85,24 @@ const nextConfig = {
         destination: "/api/landx?path=img/:path*",
       },
 
-      // CRITICAL: Catch API uploads requests and route to landx
+      // Uploads handling
+      {
+        source: "/uploads/:path*",
+        destination: "/api/landx?path=uploads/:path*",
+      },
       {
         source: "/uploads/pdfs/:path*",
         destination: "/api/landx?path=uploads/pdfs/:path*",
       },
 
-      // Default landx access - should be last
+      // General pattern - should be LAST
       {
         source: "/landx",
         destination: "/api/landx",
       },
       {
-        source: '/LandX-Beta/:path*',
-        destination: '/api/landx?path=:path*',
-      },
-      {
-        source: '/LandX-Beta/dashboard.php:path*',
-        destination: '/api/landx?path=dashboard.php:path*',
+        source: "/LandX-Beta/:path*",
+        destination: "/api/landx?path=:path*",
       },
     ];
   },

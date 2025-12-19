@@ -11,7 +11,7 @@ export default function DholeraSmartCity() {
           <h1 className="text-[32px] font-semibold text-black mb-4">
             India's First Semiconductor Hub 
           </h1>
-          <h2 className="text-xl font-semibold text-[#deae3c] mb-8">
+          <h2 className="text-xl font-semibold text-[#B3000C] mb-8">
             Goldmine for Investors
           </h2>
           <Image src={ROI} alt="BMA" className="" />

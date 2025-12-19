@@ -355,7 +355,7 @@ export default function InteractiveMap() {
               <div className="flex flex-col h-full">
                 {/* Header with close button */}
                 <div className="relative h-12 bg-black flex items-center justify-between px-4 flex-shrink-0">
-                  <h3 className="text-[#deae4c] font-bold text-lg truncate pr-10">
+                  <h3 className="text-[#B3000C] font-bold text-lg truncate pr-10">
                     {selectedArea.title}
                   </h3>
                   <button

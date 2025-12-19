@@ -17,7 +17,7 @@ export default function WestWyn() {
           <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center md:hidden">
             <a
               href="/dholera-residential-plots/westwyn-county"
-              className="text-lg hover:bg-[#deae3c] hover:text-white p-4 border-2 border-[#deae3c] rounded-lg bg-black text-[#deae3c]"
+              className="text-lg  text-white p-4 border-2 border-[#B3000C] rounded-lg bg-[#B3000C] "
             >
               About WestWyn Estate
             </a>
@@ -29,7 +29,7 @@ export default function WestWyn() {
           <h3 className="text-[32px] font-semibold text-black">
             Westwyn Estate
           </h3>
-          <h2 className="text-xl font-semibold text-[#deae3c] ">
+          <h2 className="text-xl font-semibold text-[#B3000C] ">
             The Next Chapter in Dholera’s Growth Story
           </h2>
           <div className="space-y-6 pt-4">
@@ -53,7 +53,7 @@ export default function WestWyn() {
           <div className="md:pt-12 max-sm:hidden">
             <Link
               href="/dholera-residential-plots/westwyn-estate"
-              className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
+              className="bg-[#B3000C] text-white px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
             >
               About WestWyn Estate
             </Link>

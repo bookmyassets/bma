@@ -64,6 +64,9 @@ function constructTargetUrl(path) {
   if (cleanPath.includes("generate_pdf.php")) {
     return `${BASE_URL}/${cleanPath}`;
   }
+  if (cleanPath.includes("generate_pdf_filtered.php")) {
+    return `${BASE_URL}/${cleanPath}`;
+  }
 
   if (cleanPath === "favicon.ico") {
     return `${TARGET_DOMAIN}/favicon.ico`;
@@ -463,8 +466,8 @@ async function handlePdfGenerationRequest(requestedPath, req) {
 
     // Improved regex to capture both file types and query strings
     const generatePdfMatch = decodedPath.match(
-      /(generate_pdf(?:|_non_brand))\.php(\?.*)?$/
-    );
+  /(generate_pdf(?:_non_brand|_filtered)?|generate_pdf_filtered)\.php(\?.*)?$/i
+);
 
     if (!generatePdfMatch) {
       return new Response("Invalid PDF generation path", { status: 400 });
@@ -653,10 +656,19 @@ async function handleRequest(req, method = "GET") {
     if (
       method === "GET" &&
       requestedPath &&
+      requestedPath.includes("generate_filtered_pdf.php")
+    ) {
+      return await handlePdfGenerationRequest(requestedPath, req);
+    }
+
+    if (
+      method === "GET" &&
+      requestedPath &&
       requestedPath.includes("generate_pdf_non_brand.php")
     ) {
       return await handlePdfGenerationRequest(requestedPath, req);
     }
+
 
     // 3. All other requests (PHP pages, form submissions, etc.)
     const targetUrl = constructTargetUrl(requestedPath);

@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import logo from "@/assests/ad-page/dholera-govt-logo.webp";
+import logo from "@/assests/festival-images/dholera-christmas.webp";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import
@@ -15,6 +15,7 @@ import imgM2 from "@/assests/hero_mob2.webp";
 import imgM3 from "@/assests/ad-page/mob1.webp";
 import BrochureDownload from "../components/BrochureDownload";
 import Running from "./Running";
+import Snowfall from "./Snowfall";
 
 export default function LandingPage({ openForm }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,24 +34,44 @@ export default function LandingPage({ openForm }) {
 
   // Slider state
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  
-  // Use refs to avoid forced reflows
-  const slideContainerRef = useRef(null);
-  const animationFrameRef = useRef(null);
+  const [touchStart, setTouchStart] = useState(null);
 
-  const desktopImages = [
-    { src: img1, alt: "Dholera Investment Opportunity 1" },
-    { src: img2, alt: "Dholera Investment Opportunity 2" },
-    { src: img3, alt: "Dholera Investment Opportunity 3" },
-  ];
+  // Detect mobile once
+  const [isMobile, setIsMobile] = useState(false);
 
-  const mobileImages = [
-    { src: imgM1, alt: "Dholera Mobile 1" },
-    { src: imgM2, alt: "Dholera Mobile 2" },
-    { src: imgM3, alt: "Dholera Mobile 3" },
-  ];
+  const slideIntervalRef = useRef(null);
+  const isTransitioningRef = useRef(false);
+
+  // Memoize image arrays
+  const desktopImages = useMemo(
+    () => [
+      { src: img1, alt: "Dholera Investment Opportunity 1" },
+      { src: img2, alt: "Dholera Investment Opportunity 2" },
+      { src: img3, alt: "Dholera Investment Opportunity 3" },
+    ],
+    []
+  );
+
+  const mobileImages = useMemo(
+    () => [
+      { src: imgM1, alt: "Dholera Mobile 1" },
+      { src: imgM2, alt: "Dholera Mobile 2" },
+      { src: imgM3, alt: "Dholera Mobile 3" },
+    ],
+    []
+  );
+
+  // Detect mobile device once on mount
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 1024);
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     // Load reCAPTCHA script
@@ -98,8 +119,8 @@ export default function LandingPage({ openForm }) {
 
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
+      if (slideIntervalRef.current) {
+        clearInterval(slideIntervalRef.current);
       }
     };
   }, []);
@@ -110,7 +131,7 @@ export default function LandingPage({ openForm }) {
     setErrorMessage("");
   }, []);
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     if (!formData.fullName || !formData.phone) {
       setErrorMessage("Please fill in all fields");
       return false;
@@ -136,156 +157,199 @@ export default function LandingPage({ openForm }) {
     }
 
     return true;
-  };
+  }, [formData, lastSubmissionTime, submissionCount]);
 
-  const onRecaptchaSuccess = async (token) => {
-    try {
-      const now = Date.now();
-
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: "BookMyAssets",
-            },
-            source: "BookMyAssets",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-            recaptchaToken: token,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
-
-        // Show thank you popup for 2 seconds
-        setShowThankYou(true);
-        setTimeout(() => {
-          setShowThankYou(false);
-          
-          // Use router if available, otherwise fallback to window.location
-          if (typeof window !== "undefined") {
-            window.location.href = "/thankyou";
-          }
-        }, 2000);
-      } else {
-        throw new Error("Error submitting form");
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setErrorMessage(
-        error.message || "Error submitting form. Please try again."
-      );
-    } finally {
-      setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
-      }
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage("");
-
-    if (!validateForm()) {
-      setIsLoading(false);
-      return;
-    }
-
-    if (window.grecaptcha && recaptchaLoaded) {
+  const onRecaptchaSuccess = useCallback(
+    async (token) => {
       try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
+        const now = Date.now();
+
+        const response = await fetch(
+          "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+            },
+            body: JSON.stringify({
+              fields: {
+                name: formData.fullName,
+                phone: formData.phone,
+                source: "BookMyAssets",
+              },
+              source: "BookMyAssets",
+              tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+              recaptchaToken: token,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          setFormData({ fullName: "", phone: "" });
+          setShowPopup(true);
+          setSubmissionCount((prev) => {
+            const newCount = prev + 1;
+            localStorage.setItem("formSubmissionCount", newCount.toString());
+            localStorage.setItem("lastSubmissionTime", now.toString());
+            return newCount;
           });
+
+          // Show thank you popup for 2 seconds
+          setShowThankYou(true);
+          setTimeout(() => {
+            setShowThankYou(false);
+
+            // Use router if available, otherwise fallback to window.location
+            if (typeof window !== "undefined") {
+              window.location.href = "/thankyou";
+            }
+          }, 2000);
         } else {
-          window.grecaptcha.reset();
-          window.grecaptcha.execute();
+          throw new Error("Error submitting form");
         }
       } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
+        console.error("Form submission error:", error);
+        setErrorMessage(
+          error.message || "Error submitting form. Please try again."
+        );
+      } finally {
+        setIsLoading(false);
+        if (window.grecaptcha && recaptchaRef.current) {
+          window.grecaptcha.reset(recaptchaRef.current);
+        }
+      }
+    },
+    [formData]
+  );
+
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setIsLoading(true);
+      setErrorMessage("");
+
+      if (!validateForm()) {
+        setIsLoading(false);
+        return;
+      }
+
+      if (window.grecaptcha && recaptchaLoaded) {
+        try {
+          if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
+            window.grecaptcha.render(recaptchaRef.current, {
+              sitekey: siteKey,
+              callback: onRecaptchaSuccess,
+              theme: "dark",
+            });
+          } else {
+            window.grecaptcha.reset();
+            window.grecaptcha.execute();
+          }
+        } catch (error) {
+          console.error("Error rendering reCAPTCHA:", error);
+          setErrorMessage("Error with verification. Please try again.");
+          setIsLoading(false);
+        }
+      } else {
+        setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
         setIsLoading(false);
       }
-    } else {
-      setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
-      setIsLoading(false);
-    }
-  };
+    },
+    [validateForm, recaptchaLoaded, siteKey, onRecaptchaSuccess]
+  );
 
-  // Optimized slider transition using requestAnimationFrame
-  const transitionSlide = useCallback((nextSlide) => {
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-    
-    animationFrameRef.current = requestAnimationFrame(() => {
-      setCurrentSlide(nextSlide);
-    });
+  // Optimized slide transition
+  const transitionToSlide = useCallback((nextSlide) => {
+    if (isTransitioningRef.current) return;
+
+    isTransitioningRef.current = true;
+    setCurrentSlide(nextSlide);
+
+    setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 300);
   }, []);
 
-  // Auto-advance slider
+  // Auto-advance slider with cleanup
   useEffect(() => {
-    const interval = setInterval(() => {
-      transitionSlide((prev) =>
-        prev === desktopImages.length - 1 ? 0 : prev + 1
-      );
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [desktopImages.length, transitionSlide]);
+    const imageCount = isMobile ? mobileImages.length : desktopImages.length;
 
-  // Optimized touch handlers
+    slideIntervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev === imageCount - 1 ? 0 : prev + 1));
+    }, 5000);
+
+    return () => {
+      if (slideIntervalRef.current) {
+        clearInterval(slideIntervalRef.current);
+      }
+    };
+  }, [isMobile, desktopImages.length, mobileImages.length]);
+
+  // Optimized touch handlers - only for mobile
   const handleTouchStart = useCallback((e) => {
     setTouchStart(e.targetTouches[0].clientX);
   }, []);
 
-  const handleTouchMove = useCallback((e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  }, []);
+  const handleTouchEnd = useCallback(
+    (e) => {
+      if (touchStart === null) return;
 
-  const handleTouchEnd = useCallback(() => {
-    const swipeThreshold = 50;
-    if (touchStart - touchEnd > swipeThreshold) {
-      transitionSlide((prev) =>
-        prev === mobileImages.length - 1 ? 0 : prev + 1
-      );
-    } else if (touchEnd - touchStart > swipeThreshold) {
-      transitionSlide((prev) =>
-        prev === 0 ? mobileImages.length - 1 : prev - 1
-      );
-    }
-  }, [touchStart, touchEnd, mobileImages.length, transitionSlide]);
+      const touchEnd = e.changedTouches[0].clientX;
+      const diff = touchStart - touchEnd;
+      const swipeThreshold = 50;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        const imageCount = isMobile
+          ? mobileImages.length
+          : desktopImages.length;
+
+        if (diff > 0) {
+          // Swipe left
+          transitionToSlide(
+            currentSlide === imageCount - 1 ? 0 : currentSlide + 1
+          );
+        } else {
+          // Swipe right
+          transitionToSlide(
+            currentSlide === 0 ? imageCount - 1 : currentSlide - 1
+          );
+        }
+      }
+
+      setTouchStart(null);
+    },
+    [
+      touchStart,
+      currentSlide,
+      isMobile,
+      mobileImages.length,
+      desktopImages.length,
+      transitionToSlide,
+    ]
+  );
 
   const nextSlide = useCallback(() => {
-    transitionSlide((prev) =>
-      prev === desktopImages.length - 1 ? 0 : prev + 1
-    );
-  }, [desktopImages.length, transitionSlide]);
+    const imageCount = isMobile ? mobileImages.length : desktopImages.length;
+    transitionToSlide(currentSlide === imageCount - 1 ? 0 : currentSlide + 1);
+  }, [
+    currentSlide,
+    isMobile,
+    mobileImages.length,
+    desktopImages.length,
+    transitionToSlide,
+  ]);
 
   const prevSlide = useCallback(() => {
-    transitionSlide((prev) =>
-      prev === 0 ? desktopImages.length - 1 : prev - 1
-    );
-  }, [desktopImages.length, transitionSlide]);
+    const imageCount = isMobile ? mobileImages.length : desktopImages.length;
+    transitionToSlide(currentSlide === 0 ? imageCount - 1 : currentSlide - 1);
+  }, [
+    currentSlide,
+    isMobile,
+    mobileImages.length,
+    desktopImages.length,
+    transitionToSlide,
+  ]);
 
   const [isDownload, setIsDownload] = useState(false);
 
@@ -302,8 +366,14 @@ export default function LandingPage({ openForm }) {
     setShowThankYou(false);
   }, []);
 
+  // Choose images based on device
+  const images = isMobile ? mobileImages : desktopImages;
+
   return (
     <div id="hero" className="relative min-h-screen bg-white">
+      {/* Reduced snowflake count for mobile */}
+      <Snowfall snowflakeCount={isMobile ? 20 : 50} />
+
       {/* Thank You Overlay */}
       <AnimatePresence>
         {showThankYou && (
@@ -363,171 +433,103 @@ export default function LandingPage({ openForm }) {
         )}
       </AnimatePresence>
 
-      {/* Main Layout - Desktop */}
+      {/* Main Layout */}
       <div className="h-screen max-sm:h-[95vh] flex flex-col">
         {/* Main Content Section */}
         <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Left Side - Slider Section (60%) */}
           <div className="w-full lg:w-[60%] relative flex-1">
-            {/* Desktop Slider - Optimized with transform instead of opacity */}
-            <div className="absolute inset-0 hidden lg:block">
-              <div 
-                ref={slideContainerRef}
-                className="relative w-full h-[100vh] overflow-hidden"
-              >
-                {desktopImages.map((image, index) => (
+            {/* Unified Slider - Single implementation */}
+            <div
+              className="absolute inset-0"
+              onTouchStart={isMobile ? handleTouchStart : undefined}
+              onTouchEnd={isMobile ? handleTouchEnd : undefined}
+            >
+              <div className="relative w-full h-full overflow-hidden">
+                {images.map((image, index) => (
                   <div
                     key={index}
-                    className="absolute inset-0 transition-opacity duration-1000 ease-in-out will-change-[opacity]"
+                    className="absolute inset-0 transition-opacity duration-700 ease-in-out"
                     style={{
                       opacity: index === currentSlide ? 1 : 0,
-                      pointerEvents: index === currentSlide ? 'auto' : 'none'
+                      pointerEvents: index === currentSlide ? "auto" : "none",
+                      willChange: index === currentSlide ? "opacity" : "auto",
                     }}
                   >
                     <Image
                       src={image.src}
-                      alt={image.alt} 
-                      className="object-cover pt-8"
+                      alt={image.alt}
+                      className={`object-cover ${isMobile ? "pt-16" : "pt-8"}`}
                       priority={index === 0}
                       fill
-                      quality={85}
+                      quality={isMobile ? 75 : 85}
                       loading={index === 0 ? "eager" : "lazy"}
+                      sizes={isMobile ? "100vw" : "60vw"}
                     />
                   </div>
                 ))}
-                {/* Navigation */}
+
+                {/* Navigation Buttons */}
                 <button
                   onClick={prevSlide}
                   aria-label="Previous slide"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors touch-manipulation"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button
                   onClick={nextSlide}
                   aria-label="Next slide"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors touch-manipulation"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
-                <div className="absolute bottom-0 left-0 right-0 z-20">
+
+                {/* Running component */}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 z-20 ${isMobile ? "max-sm:hidden" : ""}`}
+                >
                   <Running />
                 </div>
-              </div>
-            </div>
-
-            {/* Mobile Slider - Optimized */}
-            <div
-              className="absolute inset-0 block lg:hidden overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              {mobileImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="absolute inset-0 transition-opacity duration-700 ease-in-out will-change-[opacity]"
-                  style={{
-                    opacity: index === currentSlide ? 1 : 0,
-                    pointerEvents: index === currentSlide ? 'auto' : 'none'
-                  }}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    className="object-contain pt-16"
-                    priority={index === 0}
-                    quality={85}
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                </div>
-              ))}
-              <button
-                onClick={prevSlide}
-                aria-label="Previous slide"
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
-                onClick={nextSlide}
-                aria-label="Next slide"
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-              <div className="absolute bottom-0 left-0 right-0 z-20">
-                <Running />
               </div>
             </div>
           </div>
 
           {/* Right Side - Lead Form Section (40%) */}
-          <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6">
+          <div className="w-full lg:w-[40%] bg-gradient-to-tl from-[#030712] via-[#09090b] to-[#020617] flex items-center justify-center p-4 lg:p-6">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="w-full max-w-md"
+              className="w-full max-w-xl"
             >
               {/* Logo */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-2">
                 <Image
                   src={logo}
                   alt="BookMyAssets Logo"
-                  className="mx-auto mb-3 max-sm:hidden"
+                  className="mx-auto mb-3 w-72 "
                 />
-
                 <div className="relative">
-                  <style jsx>{`
-                    @keyframes textGlow {
-                      0%,
-                      100% {
-                        text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
-                        color: black;
-                      }
-                      50% {
-                        text-shadow:
-                          0 0 20px rgba(255, 255, 255, 1),
-                          0 0 30px rgba(255, 255, 255, 0.8);
-                        color: black;
-                      }
-                    }
-
-                    .flashy-blink {
-                      animation: flashyBlink 3s infinite ease-in-out;
-                      padding: 4px;
-                      border-radius: 1rem;
-                      border: 3px solid #deae3c;
-                    }
-
-                    .glowing-text {
-                      animation: textGlow 1s infinite ease-in-out;
-                    }
-                  `}</style>
-
-                  <div className="flashy-blink">
-                    <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
-                      Dholera's Biggest Offer till Date
-                    </h2>
-                    <p className="text-sm lg:text-base glowing-text">
-                      Plots under ₹10 Lakh - 0 KM from Dholera SIR Boundary
+                  <div>
+                    <p className="text-lg animate-pulse text-white font-bold">
+                      Registry-Ready Plots under ₹10 Lakh
                     </p>
                   </div>
                 </div>
               </div>
 
               {showPopup ? (
-                <div className="text-center py-6">
+                <div className="text-center py-4 bg-gradient-to-br from-[#2C3E14]/20 to-transparent rounded-xl p-6">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     className="mb-4 inline-block"
                   >
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#2C3E14] to-[#3d5420] rounded-full flex items-center justify-center mx-auto shadow-lg shadow-[#2C3E14]/50">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-10 w-10 text-white"
+                        className="h-10 w-10 text-[#FFD53B]"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -535,29 +537,28 @@ export default function LandingPage({ openForm }) {
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          strokeWidth={2}
+                          strokeWidth={3}
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
                     </div>
                   </motion.div>
-                  <h3 className="text-xl font-bold text-black mb-2">
+                  <h3 className="text-2xl font-bold text-[#E6A20B] mb-2">
                     Thank You!
                   </h3>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-gray-300 text-sm">
                     Your request has been submitted successfully. We'll contact
                     you shortly.
                   </p>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-4 bg-gradient-to-br from-[#2C3E14]/10 to-transparent rounded-xl p-6 backdrop-blur-sm">
                   {errorMessage && (
-                    <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm">
+                    <div className="p-3 bg-gradient-to-r from-[#B3000C]/30 to-[#B3000C]/20 border-2 border-[#B3000C] text-white rounded-lg text-sm font-medium shadow-lg shadow-[#B3000C]/20">
                       {errorMessage}
                     </div>
                   )}
-
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-3">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -566,7 +567,7 @@ export default function LandingPage({ openForm }) {
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#B3000C] h-5 w-5 z-10"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -584,10 +585,9 @@ export default function LandingPage({ openForm }) {
                         value={formData.fullName}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                        className="w-full p-3 pl-11 bg-[#2a2a2a]/80 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:bg-[#2a2a2a] border-2 border-[#3a3a3a] hover:border-[#B3000C] transition-all text-sm placeholder-gray-400 shadow-inner"
                       />
                     </motion.div>
-
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -596,7 +596,7 @@ export default function LandingPage({ openForm }) {
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#B3000C] h-5 w-5 z-10"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -617,28 +617,28 @@ export default function LandingPage({ openForm }) {
                         minLength={10}
                         maxLength={15}
                         required
-                        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                        className="w-full p-3 pl-11 bg-[#2a2a2a]/80 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:bg-[#2a2a2a] border-2 border-[#3a3a3a] hover:border-[#B3000C] transition-all text-sm placeholder-gray-400 shadow-inner"
                       />
                     </motion.div>
                   </div>
-
                   {/* reCAPTCHA container */}
-                  <div className="flex justify-center">
+                  <div className="flex justify-center py-2">
                     <div ref={recaptchaRef}></div>
                   </div>
-
                   <motion.button
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.0 }}
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.03, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     type="button"
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full py-4 px-6 bg-white text-[#B3000C] rounded-lg transition-all duration-300  font-bold text-base disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden touch-manipulation"
                   >
-                    {isLoading ? "Submitting..." : "Get A Call Back"}
+                    <span className="relative z-10">
+                      {isLoading ? "Submitting..." : "Get A Call Back"}
+                    </span>
                   </motion.button>
                 </div>
               )}

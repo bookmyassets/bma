@@ -12,6 +12,7 @@ import InteractiveMap from './homeComponents/InteractiveMap'
 import Groundzero from './homeComponents/Groundzero'
 
 
+
 export default function page() {
 
   const [showpopForm, setpopShowForm] = useState(false);
@@ -166,6 +167,7 @@ export default function page() {
        <ShortsSection/>
        <Groundzero/>
        <FAQSection/>
+       {/* <ImageMapFormOverlay/> */}
     </div>
     {/* {showpopForm && (
         <PopupForm
@@ -176,6 +178,8 @@ export default function page() {
         />
         )} */}
         <PopupForm title="Identify the best investment-ready locations in Dholera."/>
+
+
     </>
   )
 }

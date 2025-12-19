@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import logo from "@/assests/bma-logo.png";
+/* import logo from "@/assests/bma-logo.png"; */
+import logo from "@/assests/festival-images/bma-christmas-logo.webp";
 import Image from "next/image";
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -294,8 +295,11 @@ useEffect(() => {
 
   return (
     <>
-      <nav
+      {/* <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white`}
+      > */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#101010]`}
       >
      {/*  <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -311,8 +315,8 @@ useEffect(() => {
               <Link href="/" onClick={closeAllMenus}>
                 <Image
                   src={logo}
-                  height={75}
-                  width={75}
+                  height={85}
+                  width={85}
                   alt="logo"
                   className="p-1"
                 />
@@ -320,11 +324,11 @@ useEffect(() => {
             </div>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center space-x-12">
+            <div className="hidden md:flex items-center space-x-12 ">
               {/* Residential Dropdown */}
               <div className="relative group dropdown-container">
                 <button
-                  className={`font-medium transition-colors duration-300 hover:text-yellow-500 flex items-center ${textColor}`}
+                  className={`font-medium transition-colors duration-300 text-white hover:text-yellow-500 flex items-center ${textColor}`}
                   onClick={toggleResidentialMenu}
                 >
                   Residential
@@ -347,7 +351,7 @@ useEffect(() => {
               {/* Bulk Land Dropdown */}
               <div className="relative group dropdown-container">
                 <button
-                  className={`font-medium transition-colors duration-300 hover:text-yellow-500 flex items-center ${textColor}`}
+                  className={`font-medium transition-colors duration-300 text-white hover:text-yellow-500 flex items-center ${textColor}`}
                   onClick={toggleBulkLandMenu}
                 >
                   Bulk Land
@@ -370,7 +374,7 @@ useEffect(() => {
               {/* Dholera SIR Dropdown */}
               <div className="relative group dropdown-container">
                 <button
-                  className={`font-medium transition-colors duration-300 hover:text-yellow-500 flex items-center ${textColor}`}
+                  className={`font-medium transition-colors duration-300 text-white hover:text-yellow-500 flex items-center ${textColor}`}
                   onClick={toggleDholeraMenu}
                 >
                   Dholera SIR
@@ -394,7 +398,7 @@ useEffect(() => {
               <div className="flex items-center space-x-6">
                 <Link
                   href="/contact"
-                  className="bg-[#deae3c] text-black px-6 py-2 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
+                  className="bg-[#B3000C] text-white px-6 py-2 rounded-md font-medium hover:bg-[#99000a] transition duration-300 shadow-md"
                 >
                   Contact Us
                 </Link>
@@ -405,43 +409,43 @@ useEffect(() => {
                     className={`font-medium transition-colors duration-300 hover:text-yellow-500 ${textColor}`}
                   >
                     <Menu
-                      className={`inline-block mr-1 h-8 w-8 p-1 rounded-sm ${shouldUseWhiteBackground ? "bg-gray-100 text-black" : "bg-white text-black"}`}
+                      className={`inline-block mr-1 h-8 w-8 p-1 rounded-sm ${shouldUseWhiteBackground ? "bg-[#101010] text-white" : "bg-[#101010] text-white"}`}
                     />
                   </button>
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-[#101010]  rounded-lg shadow-xl border border-[#101010] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div className="py-2">
                       <Link
                         href="/career"
                         onClick={closeAllMenus}
-                        className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors"
+                        className="block px-4 py-3 text-white hover:bg-[#101010] hover:text-[#B3000C] transition-colors"
                       >
                         Careers
                       </Link>
                       <Link
                         href="/channel-partner"
                         onClick={closeAllMenus}
-                        className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors"
+                        className="block px-4 py-3 text-white hover:bg-[#101010] hover:text-[#B3000C] transition-colors"
                       >
                         Channel Partner
                       </Link>
                       <Link
                         href="/dholera-events"
                         onClick={closeAllMenus}
-                        className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors"
+                        className="block px-4 py-3 text-white hover:bg-[#101010] hover:text-[#B3000C] transition-colors"
                       >
                         Events
                       </Link>
                       <Link
                         href="/gallery"
                         onClick={closeAllMenus}
-                        className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors"
+                        className="block px-4 py-3 text-white hover:bg-[#101010] hover:text-[#B3000C] transition-colors"
                       >
                         Gallery
                       </Link>
                       <Link
                         href="/about"
                         onClick={closeAllMenus}
-                        className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors"
+                        className="block px-4 py-3 text-white hover:bg-[#101010] hover:text-[#B3000C] transition-colors"
                       >
                         About
                       </Link>
@@ -457,7 +461,7 @@ useEffect(() => {
                 onClick={toggleMobileMenu}
                 className={`p-2 rounded-md transition-colors duration-300 ${
                   shouldUseWhiteBackground
-                    ? "text-black hover:bg-gray-100"
+                    ? "text-white hover:bg-[#101010]"
                     : " hover:bg-white/10"
                 }`}
               >
@@ -465,7 +469,7 @@ useEffect(() => {
                   className={`h-6 w-6 transition-transform duration-300 ${isMobileMenuOpen ? "rotate-90" : ""}`}
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  stroke="white"
                 >
                   {isMobileMenuOpen ? (
                     <path
@@ -491,14 +495,14 @@ useEffect(() => {
 
       {/* Residential Dropdown Menu */}
       {isResidentialMenuOpen && (
-        <div className="residential-dropdown hidden md:flex fixed left-0 top-20 w-screen h-[calc(100vh-5rem)] bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300">
+        <div className="residential-dropdown hidden md:flex fixed left-0 top-20 w-screen h-[calc(100vh-5rem)] bg-[#101010] shadow-2xl border-t border-[#101010] z-40 animate-in slide-in-from-top-4 duration-300">
           {/* Left Side - Title */}
-          <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-gray-50 to-white">
+          <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-[#101010]">
             <div>
-              <h3 className="text-5xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl font-light text-white leading-tight">
                 Residential <br /> Projects
               </h3>
-              <p className="text-gray-600 mt-4 text-xl">
+              <p className="text-white mt-4 text-xl">
                 Discover premium residential developments with <br />
                 world-class amenities
               </p>
@@ -507,7 +511,7 @@ useEffect(() => {
               <Link
                 href="/residential"
                 onClick={closeAllMenus}
-                className="inline-block bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-600 hover:text-white transition duration-200 shadow-md"
+                className="inline-block bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-[#B3000C] hover:text-white transition duration-200 shadow-md"
               >
                 View All Projects
               </Link>
@@ -659,14 +663,14 @@ useEffect(() => {
 
       {/* Bulk Land Dropdown Menu */}
       {isBulkLandMenuOpen && (
-        <div className="bulk-land-dropdown hidden md:flex fixed left-0 top-20 w-screen h-[calc(100vh-5rem)] bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300">
+        <div className="bulk-land-dropdown hidden md:flex fixed left-0 top-20 w-screen h-[calc(100vh-5rem)] bg-[#101010] shadow-2xl border-t border-[#101010] z-40 animate-in slide-in-from-top-4 duration-300">
           {/* Left Side - Title */}
-          <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-orange-50 to-white">
+          <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-[#101010]">
             <div>
-              <h3 className="text-5xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl font-light text-white leading-tight">
                 Bulk Land <br /> Opportunities
               </h3>
-              <p className="text-gray-600 mt-4 text-xl">
+              <p className="text-white mt-4 text-xl">
                 Strategic land parcels for <br />
                 commercial and industrial development
               </p>
@@ -736,14 +740,14 @@ useEffect(() => {
 
       {/* Dholera SIR Dropdown Menu */}
       {isDholeraMenuOpen && (
-        <div className="dholera-dropdown hidden md:flex fixed left-0 top-20 w-screen h-[calc(100vh-5rem)] bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300">
+        <div className="dholera-dropdown hidden md:flex fixed left-0 top-20 w-screen h-[calc(100vh-5rem)] bg-[#101010] shadow-2xl border-t border-[#101010] z-40 animate-in slide-in-from-top-4 duration-300">
           {/* Left Side - Title */}
-          <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-blue-50 to-white">
+          <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-[#101010]">
             <div>
-              <h3 className="text-5xl font-light text-gray-900 leading-tight">
+              <h3 className="text-5xl font-light text-white leading-tight">
                 DHOLERA SIR
               </h3>
-              <p className="text-gray-600 mt-4 text-xl">
+              <p className="text-white mt-4 text-xl">
                 India's first planned smart city with futuristic infrastructure
               </p>
             </div>
@@ -838,7 +842,7 @@ useEffect(() => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-30 md:hidden transition-all duration-300 ${
+        className={`fixed inset-0 z-30  md:hidden transition-all duration-300 ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
@@ -848,12 +852,12 @@ useEffect(() => {
         ></div> */}
 
         <div
-          className={`relative z-50 bg-white h-full w-full transition-all duration-300 overflow-y-auto ${
+          className={`relative z-50 bg-[#101010] h-full w-full transition-all duration-300 overflow-y-auto ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-800">Menu</h2>
+            <h2 className="text-lg font-semibold text-white">Menu</h2>
             <button
               onClick={closeAllMenus}
               className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
@@ -879,7 +883,7 @@ useEffect(() => {
             <div className="border-b border-gray-100 pb-2">
               <button
                 onClick={toggleResidentialMenu}
-                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-3 "
+                className="flex items-center justify-between w-full text-left font-medium text-white hover:text-yellow-500 py-3 "
               >
                 <span>Residential</span>
                 <svg
@@ -925,7 +929,7 @@ useEffect(() => {
                             />
                           </div>
                           <div className="flex-1">
-                            <div className="text-black font-medium text-sm">
+                            <div className="text-white font-medium text-sm">
                               {project.projectName}
                             </div>
                             <div className="text-xs text-gray-500 mt-1">
@@ -941,10 +945,10 @@ useEffect(() => {
             </div>
 
             {/* Mobile Bulk Land Dropdown */}
-            <div className="border-b border-gray-100 pb-2">
+            <div className="border-b border-[#101010] pb-2">
               <button
                 onClick={toggleBulkLandMenu}
-                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-orange-500 py-3 transition-colors"
+                className="flex items-center justify-between w-full text-left font-medium text-white hover:text-orange-500 py-3 transition-colors"
               >
                 <span>Bulk Land</span>
                 <svg
@@ -992,7 +996,7 @@ useEffect(() => {
                             />
                           </div>
                           <div className="flex-1">
-                            <div className="text-black font-medium text-sm">
+                            <div className="text-white font-medium text-sm">
                               {project.projectName}
                             </div>
                             <div className="text-xs text-gray-500 mt-1">
@@ -1011,7 +1015,7 @@ useEffect(() => {
             <div className="border-b border-gray-100 pb-2">
               <button
                 onClick={toggleDholeraMenu}
-                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-blue-500 py-3 transition-colors"
+                className="flex items-center justify-between w-full text-left font-medium text-white hover:text-blue-500 py-3 transition-colors"
               >
                 <span>Dholera SIR</span>
                 <svg
@@ -1063,7 +1067,7 @@ useEffect(() => {
                             />
                           </div>
                           <div className="flex-1">
-                            <div className="text-black font-medium text-sm">
+                            <div className="text-white font-medium text-sm">
                               {project.projectName}
                             </div>
                           </div>
@@ -1078,42 +1082,42 @@ useEffect(() => {
             <Link
               href="/contact"
               onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+              className="block font-medium text-white hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
             >
               Contact Us
             </Link>
             <Link
               href="/about"
               onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+              className="block font-medium text-white hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
             >
               About Us
             </Link>
             <Link
               href="/career"
               onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+              className="block font-medium text-white hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
             >
               Careers
             </Link>
             <Link
               href="/channel-partner"
               onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+              className="block font-medium text-white hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
             >
               Channel Partner
             </Link>
             <Link
               href="/dholera-events"
               onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+              className="block font-medium text-white hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
             >
               Events
             </Link>
             <Link
               href="/gallery"
               onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 transition-colors"
+              className="block font-medium text-white hover:text-yellow-500 py-3 transition-colors"
             >
               Gallery
             </Link>

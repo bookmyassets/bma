@@ -1,0 +1,608 @@
+// ============================================  
+// RESILIENT REVERSE PROXY FOR DOMAIN A → DOMAIN B  
+// ============================================  
+
+const CONFIG = {  
+  target: {  
+    domain: "https://dholeratimes.co.in",  
+    basePath: "/LandX-Beta",  
+    defaultPage: "dashboard.php",  
+  },  
+  timeout: 60000,  
+  debug: true,  
+  interceptAjax: true, // CRITICAL: Intercept AJAX calls  
+};  
+
+const BASE_URL = `${CONFIG.target.domain}${CONFIG.target.basePath}`;  
+
+// ============================================  
+// SMART PATH CLASSIFIER  
+// ============================================  
+class PathClassifier {  
+  static classify(path) {  
+    const decodedPath = decodeURIComponent(path).toLowerCase();  
+    
+    return {  
+      isUpload: decodedPath.includes('uploads/'),  
+      isPhp: decodedPath.endsWith('.php') || decodedPath.includes('.php?'),  
+      isPdf: decodedPath.endsWith('.pdf'),  
+      isImage: /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(decodedPath),  
+      isCss: decodedPath.endsWith('.css'),  
+      isJs: decodedPath.endsWith('.js'),  
+      isStatic: /\.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$/i.test(decodedPath),  
+      isGeneratePdf: decodedPath.includes('generate_pdf'),  
+      hasQuery: decodedPath.includes('?'),  
+    };  
+  }  
+}  
+
+// ============================================  
+// URL REWRITER - WITH AJAX INTERCEPTION  
+// ============================================  
+class UrlRewriter {  
+  constructor(apiRoute) {  
+    this.apiRoute = apiRoute;  
+    this.proxyBase = `/api/${apiRoute}?path=`;  
+  }  
+
+  rewriteUrl(originalUrl, context = 'href') {  
+    // Skip external URLs  
+    if (  
+      originalUrl.startsWith('http://') ||  
+      originalUrl.startsWith('https://') ||  
+      originalUrl.startsWith('//') ||  
+      originalUrl.startsWith('data:') ||  
+      originalUrl.startsWith('mailto:') ||  
+      originalUrl.startsWith('tel:') ||  
+      originalUrl.startsWith('javascript:') ||  
+      originalUrl.startsWith('#') ||  
+      originalUrl.includes('/api/') ||  
+      originalUrl.trim() === ''  
+    ) {  
+      return originalUrl;  
+    }  
+
+    let cleanUrl = originalUrl;  
+    if (cleanUrl.startsWith('/')) {  
+      cleanUrl = cleanUrl.substring(1);  
+    }  
+
+    const classification = PathClassifier.classify(cleanUrl);  
+    
+    // ALWAYS proxy PHP files (including AJAX endpoints)  
+    if (classification.isPhp || classification.isGeneratePdf || classification.isUpload) {  
+      return this.proxyBase + encodeURIComponent(cleanUrl);  
+    }  
+    
+    // For static assets, use direct URL  
+    return `${BASE_URL}/${cleanUrl}`;  
+  }  
+
+  rewriteHtml(html, currentPath = '') {  
+    let modifiedHtml = html;  
+
+    // 1. Rewrite all URLs in HTML  
+    modifiedHtml = modifiedHtml.replace(  
+      /(href|src|action)=["']([^"']*)["']/gi,  
+      (match, attr, value) => `${attr}="${this.rewriteUrl(value, attr)}"`  
+    );  
+
+    // 2. Handle forms without action  
+    modifiedHtml = modifiedHtml.replace(  
+      /<form([^>]*)>/gi,  
+      (match, formAttrs) => {  
+        if (formAttrs.includes('action=')) return match;  
+        const action = currentPath || CONFIG.target.defaultPage;  
+        return `<form${formAttrs} action="${this.proxyBase}${encodeURIComponent(action)}">`;  
+      }  
+    );  
+
+    // 3. Rewrite CSS URLs  
+    modifiedHtml = modifiedHtml.replace(  
+      /url\(["']?([^"')]*)["']?\)/gi,  
+      (match, url) => `url("${this.rewriteUrl(url, 'css')}")`  
+    );  
+
+    // 4. Add base tag  
+    if (!modifiedHtml.includes('<base')) {  
+      modifiedHtml = modifiedHtml.replace(  
+        /<head>/i,  
+        `<head><base href="${BASE_URL}/">`  
+      );  
+    }  
+
+    // 5. ADD CRITICAL: INTERCEPT JAVASCRIPT AJAX CALLS  
+    if (CONFIG.interceptAjax) {  
+      modifiedHtml = this.addAjaxInterceptor(modifiedHtml);  
+    }  
+
+    return modifiedHtml;  
+  }  
+
+  addAjaxInterceptor(html) {  
+    const interceptorScript = `  
+    <script>  
+    (function() {  
+      'use strict';  
+      const PROXY_BASE = '/api/${this.apiRoute}?path=';  
+      const TARGET_BASE = '${BASE_URL}';  
+      
+      // Helper to check if URL needs proxying  
+      function needsProxy(url) {  
+        if (!url || url.startsWith('http') || url.startsWith('data:') ||   
+            url.startsWith('//') || url.includes('/api/')) {  
+          return false;  
+        }  
+        return url.includes('.php') || url.includes('uploads/');  
+      }  
+      
+      // Convert URL to proxy URL  
+      function toProxyUrl(url) {  
+        if (!needsProxy(url)) return url;  
+        let cleanUrl = url.startsWith('/') ? url.substring(1) : url;  
+        return PROXY_BASE + encodeURIComponent(cleanUrl);  
+      }  
+      
+      // ========== INTERCEPT FETCH ==========  
+      const originalFetch = window.fetch;  
+      window.fetch = function(resource, init) {  
+        if (typeof resource === 'string' && needsProxy(resource)) {  
+          const proxiedResource = toProxyUrl(resource);  
+          console.log('[Proxy] Intercepted fetch:', resource, '->', proxiedResource);  
+          return originalFetch.call(this, proxiedResource, init);  
+        }  
+        return originalFetch.apply(this, arguments);  
+      };  
+      
+      // ========== INTERCEPT XMLHttpRequest ==========  
+      const originalOpen = XMLHttpRequest.prototype.open;  
+      XMLHttpRequest.prototype.open = function(method, url, async, user, password) {  
+        if (needsProxy(url)) {  
+          const proxiedUrl = toProxyUrl(url);  
+          console.log('[Proxy] Intercepted XHR:', url, '->', proxiedUrl);  
+          arguments[1] = proxiedUrl;  
+        }  
+        return originalOpen.apply(this, arguments);  
+      };  
+      
+      // ========== INTERCEPT JQUERY AJAX ==========  
+      if (window.jQuery) {  
+        const originalAjax = jQuery.ajax;  
+        jQuery.ajax = function(url, options) {  
+          if (typeof url === 'string' && needsProxy(url)) {  
+            const proxiedUrl = toProxyUrl(url);  
+            console.log('[Proxy] Intercepted jQuery.ajax:', url, '->', proxiedUrl);  
+            arguments[0] = proxiedUrl;  
+          } else if (typeof url === 'object' && url.url && needsProxy(url.url)) {  
+            url.url = toProxyUrl(url.url);  
+            console.log('[Proxy] Intercepted jQuery.ajax object:', url.url);  
+          }  
+          return originalAjax.apply(this, arguments);  
+        };  
+      }  
+      
+      // ========== INTERCEPT FORM SUBMISSIONS ==========  
+      document.addEventListener('submit', function(e) {  
+        const form = e.target;  
+        if (form.tagName === 'FORM' && form.action) {  
+          const action = form.getAttribute('action');  
+          if (needsProxy(action)) {  
+            const proxiedAction = toProxyUrl(action);  
+            console.log('[Proxy] Intercepted form:', action, '->', proxiedAction);  
+            form.action = proxiedAction;  
+          }  
+        }  
+      }, true);  
+      
+      // ========== INTERCEPT CLICK EVENTS FOR PHP LINKS ==========  
+      document.addEventListener('click', function(e) {  
+        let target = e.target;  
+        while (target && target.tagName !== 'A') {  
+          target = target.parentElement;  
+        }  
+        if (target && target.href && needsProxy(target.href)) {  
+          const proxiedHref = toProxyUrl(target.getAttribute('href'));  
+          target.href = proxiedHref;  
+        }  
+      }, true);  
+      
+      // ========== FIX DYNAMICALLY ADDED CONTENT ==========  
+      const observer = new MutationObserver(function(mutations) {  
+        mutations.forEach(function(mutation) {  
+          mutation.addedNodes.forEach(function(node) {  
+            if (node.nodeType === 1) {  
+              // Fix all links  
+              const links = node.querySelectorAll ? node.querySelectorAll('a[href*=".php"], a[href*="uploads/"]') : [];  
+              links.forEach(function(link) {  
+                const href = link.getAttribute('href');  
+                if (href && needsProxy(href)) {  
+                  link.href = toProxyUrl(href);  
+                }  
+              });  
+              
+              // Fix all forms  
+              const forms = node.querySelectorAll ? node.querySelectorAll('form[action*=".php"]') : [];  
+              forms.forEach(function(form) {  
+                const action = form.getAttribute('action');  
+                if (action && needsProxy(action)) {  
+                  form.action = toProxyUrl(action);  
+                }  
+              });  
+              
+              // Fix all images  
+              const images = node.querySelectorAll ? node.querySelectorAll('img[src*="uploads/"]') : [];  
+              images.forEach(function(img) {  
+                const src = img.getAttribute('src');  
+                if (src && needsProxy(src)) {  
+                  img.src = toProxyUrl(src);  
+                }  
+              });  
+            }  
+          });  
+        });  
+      });  
+      
+      observer.observe(document.body, {  
+        childList: true,  
+        subtree: true,  
+        attributes: true,  
+        attributeFilter: ['href', 'src', 'action']  
+      });  
+      
+      console.log('[Proxy] AJAX interceptor loaded successfully');  
+    })();  
+    </script>`;  
+
+    // Insert interceptor before closing body tag  
+    if (html.includes('</body>')) {  
+      return html.replace('</body>', interceptorScript + '</body>');  
+    } else {  
+      return html + interceptorScript;  
+    }  
+  }  
+}  
+
+// ============================================  
+// LOGGING  
+// ============================================  
+const log = (level, message, data = null) => {  
+  if (!CONFIG.debug && level === 'DEBUG') return;  
+  const timestamp = new Date().toISOString();  
+  console.log(`[${timestamp}] [${level}]`, message, data || '');  
+};  
+
+// ============================================  
+// MAIN PROXY HANDLER  
+// ============================================  
+async function handleRequest(request) {  
+  const url = new URL(request.url);  
+  const apiRoute = url.pathname.split('/')[2] || 'landx';  
+  const rewriter = new UrlRewriter(apiRoute);  
+
+  log('INFO', `Request: ${request.method} ${url.pathname}${url.search}`);  
+
+  try {  
+    // Extract path from query parameter or URL  
+    let targetPath = url.searchParams.get('path') || CONFIG.target.defaultPage;  
+    
+    // Preserve all query parameters  
+    const allParams = new URLSearchParams();  
+    for (const [key, value] of url.searchParams.entries()) {  
+      if (key !== 'path') {  
+        allParams.append(key, value);  
+      }  
+    }  
+
+    // Append other parameters to target path  
+    if (allParams.toString()) {  
+      const separator = targetPath.includes('?') ? '&' : '?';  
+      targetPath = targetPath + separator + allParams.toString();  
+    }  
+
+    log('DEBUG', `Target path: ${targetPath}`);  
+
+    // Classify the request  
+    const classification = PathClassifier.classify(targetPath);  
+    log('DEBUG', 'Path classification:', classification);  
+
+    // SPECIAL HANDLERS  
+    if (classification.isUpload) {  
+      return await handleUploadRequest(targetPath, request);  
+    }  
+
+    if (classification.isGeneratePdf) {  
+      return await handlePdfGeneration(targetPath, request);  
+    }  
+
+    // GENERAL REQUEST HANDLER  
+    const targetUrl = `${BASE_URL}/${targetPath.startsWith('/') ? targetPath.substring(1) : targetPath}`;  
+    log('DEBUG', `Fetching: ${targetUrl}`);  
+
+    // Prepare headers  
+    const headers = new Headers();  
+    
+    // Forward essential headers  
+    const forwardHeaders = [  
+      'accept',  
+      'accept-language',  
+      'accept-encoding',  
+      'referer',  
+      'user-agent',  
+      'content-type',  
+      'authorization',  
+      'origin',  
+      'cookie',  
+    ];  
+
+    for (const header of forwardHeaders) {  
+      const value = request.headers.get(header);  
+      if (value) headers.set(header, value);  
+    }  
+
+    // Ensure referer and origin are set  
+    if (!headers.has('referer')) {  
+      headers.set('referer', `${BASE_URL}/`);  
+    }  
+    if (!headers.has('origin')) {  
+      headers.set('origin', CONFIG.target.domain);  
+    }  
+
+    // For non-GET requests  
+    if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method)) {  
+      headers.set('x-requested-with', 'XMLHttpRequest');  
+    }  
+
+    // Prepare fetch options  
+    const fetchOptions = {  
+      method: request.method,  
+      headers: headers,  
+      redirect: 'manual',  
+    };  
+
+    // Handle request body  
+    if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method)) {  
+      const contentType = request.headers.get('content-type') || '';  
+      
+      if (contentType.includes('multipart/form-data')) {  
+        const formData = await request.formData();  
+        fetchOptions.body = formData;  
+        headers.delete('content-type');  
+      } else {  
+        fetchOptions.body = await request.text();  
+      }  
+    }  
+
+    // Fetch with timeout  
+    const controller = new AbortController();  
+    const timeoutId = setTimeout(() => controller.abort(), CONFIG.timeout);  
+    fetchOptions.signal = controller.signal;  
+
+    const response = await fetch(targetUrl, fetchOptions);  
+    clearTimeout(timeoutId);  
+
+    log('INFO', `Response: ${response.status}`);  
+
+    // Handle redirects  
+    if (response.status >= 300 && response.status < 400) {  
+      const location = response.headers.get('location');  
+      if (location) {  
+        return handleRedirect(location, response, apiRoute);  
+      }  
+    }  
+
+    // Get content type  
+    const contentType = response.headers.get('content-type') || '';  
+    const responseHeaders = new Headers();  
+
+    // Forward set-cookie headers  
+    const setCookie = response.headers.get('set-cookie');  
+    if (setCookie) {  
+      responseHeaders.set('set-cookie', setCookie);  
+    }  
+
+    // Handle different content types  
+    if (contentType.includes('text/html')) {  
+      const html = await response.text();  
+      const modifiedHtml = rewriter.rewriteHtml(html, targetPath);  
+      
+      responseHeaders.set('content-type', 'text/html; charset=utf-8');  
+      return new Response(modifiedHtml, {  
+        status: response.status,  
+        headers: responseHeaders,  
+      });  
+    } else if (contentType.includes('application/json')) {  
+      const json = await response.text();  
+      responseHeaders.set('content-type', 'application/json');  
+      return new Response(json, {  
+        status: response.status,  
+        headers: responseHeaders,  
+      });  
+    } else {  
+      // Pass through other content types  
+      const buffer = await response.arrayBuffer();  
+      
+      if (contentType) {  
+        responseHeaders.set('content-type', contentType);  
+      }  
+      
+      responseHeaders.set('content-length', buffer.byteLength.toString());  
+      
+      const contentDisposition = response.headers.get('content-disposition');  
+      if (contentDisposition) {  
+        responseHeaders.set('content-disposition', contentDisposition);  
+      }  
+
+      return new Response(buffer, {  
+        status: response.status,  
+        headers: responseHeaders,  
+      });  
+    }  
+  } catch (error) {  
+    log('ERROR', 'Proxy error:', error.message);  
+    return new Response(`Proxy Error: ${error.message}`, { status: 500 });  
+  }  
+}  
+
+// ============================================  
+// SPECIALIZED HANDLERS  
+// ============================================  
+async function handleUploadRequest(path, request) {  
+  log('INFO', `Handling upload request: ${path}`);  
+  
+  const uploadsIndex = path.toLowerCase().indexOf('uploads/');  
+  if (uploadsIndex === -1) {  
+    return new Response('Invalid upload path', { status: 400 });  
+  }  
+
+  const filePath = path.substring(uploadsIndex);  
+  const targetUrl = `${BASE_URL}/${filePath}`;  
+  log('DEBUG', `Fetching upload: ${targetUrl}`);  
+
+  const headers = new Headers();  
+  headers.set('user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');  
+  headers.set('accept', '*/*');  
+  headers.set('referer', `${BASE_URL}/`);  
+
+  const cookies = request.headers.get('cookie');  
+  if (cookies) headers.set('cookie', cookies);  
+
+  try {  
+    const response = await fetch(targetUrl, { headers });  
+
+    if (!response.ok) {  
+      return new Response(`Upload fetch failed: ${response.status}`, {  
+        status: response.status,  
+      });  
+    }  
+
+    const buffer = await response.arrayBuffer();  
+    const contentType = response.headers.get('content-type') || 'application/octet-stream';  
+
+    return new Response(buffer, {  
+      headers: {  
+        'content-type': contentType,  
+        'content-length': buffer.byteLength.toString(),  
+        'cache-control': 'public, max-age=86400',  
+      },  
+    });  
+  } catch (error) {  
+    log('ERROR', 'Upload handler error:', error);  
+    return new Response(`Upload error: ${error.message}`, { status: 500 });  
+  }  
+}  
+
+async function handlePdfGeneration(path, request) {  
+  log('INFO', `Handling PDF generation: ${path}`);  
+  
+  const targetUrl = `${BASE_URL}/${path.startsWith('/') ? path.substring(1) : path}`;  
+  log('DEBUG', `PDF target: ${targetUrl}`);  
+
+  const headers = new Headers();  
+  headers.set('user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');  
+  headers.set('accept', 'application/pdf, */*');  
+  headers.set('referer', `${BASE_URL}/`);  
+  headers.set('origin', CONFIG.target.domain);  
+
+  const cookies = request.headers.get('cookie');  
+  if (cookies) headers.set('cookie', cookies);  
+
+  try {  
+    const controller = new AbortController();  
+    const timeoutId = setTimeout(() => controller.abort(), 30000);  
+
+    const response = await fetch(targetUrl, {  
+      headers,  
+      signal: controller.signal,  
+    });  
+
+    clearTimeout(timeoutId);  
+
+    if (!response.ok) {  
+      return new Response(`PDF generation failed: ${response.status}`, {  
+        status: response.status,  
+      });  
+    }  
+
+    const buffer = await response.arrayBuffer();  
+    
+    let filename = 'document.pdf';  
+    const contentDisposition = response.headers.get('content-disposition');  
+    if (contentDisposition && contentDisposition.includes('filename=')) {  
+      const match = contentDisposition.match(/filename=["']?([^"']+)["']?/);  
+      if (match && match[1]) filename = match[1];  
+    }  
+
+    return new Response(buffer, {  
+      headers: {  
+        'content-type': 'application/pdf',  
+        'content-disposition': `inline; filename="${filename}"`,  
+        'content-length': buffer.byteLength.toString(),  
+        'cache-control': 'no-store, no-cache, must-revalidate',  
+      },  
+    });  
+  } catch (error) {  
+    log('ERROR', 'PDF generation error:', error);  
+    return new Response(`PDF error: ${error.message}`, { status: 500 });  
+  }  
+}  
+
+function handleRedirect(location, originalResponse, apiRoute) {  
+  log('DEBUG', `Handling redirect: ${location}`);  
+
+  const headers = new Headers();  
+
+  let newLocation = location;  
+  if (location.startsWith(BASE_URL)) {  
+    const path = location.replace(BASE_URL, '').replace(/^\//, '');  
+    newLocation = `/api/${apiRoute}?path=${encodeURIComponent(path)}`;  
+  } else if (location.startsWith('/')) {  
+    const path = location.replace(/^\//, '');  
+    newLocation = `/api/${apiRoute}?path=${encodeURIComponent(path)}`;  
+  }  
+
+  headers.set('location', newLocation);  
+
+  const setCookie = originalResponse.headers.get('set-cookie');  
+  if (setCookie) {  
+    headers.set('set-cookie', setCookie);  
+  }  
+
+  return new Response(null, {  
+    status: originalResponse.status,  
+    headers: headers,  
+  });  
+}  
+
+// ============================================  
+// EXPORTS  
+// ============================================  
+export async function OPTIONS(request) {  
+  const headers = {  
+    'access-control-allow-origin': '*',  
+    'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH',  
+    'access-control-allow-headers': 'Content-Type, Authorization, Cookie, X-Requested-With',  
+    'access-control-allow-credentials': 'true',  
+  };  
+
+  return new Response(null, { headers });  
+}  
+
+export async function GET(request) {  
+  return handleRequest(request);  
+}  
+
+export async function POST(request) {  
+  return handleRequest(request);  
+}  
+
+export async function PUT(request) {  
+  return handleRequest(request);  
+}  
+
+export async function DELETE(request) {  
+  return handleRequest(request);  
+}  
+
+export async function PATCH(request) {  
+  return handleRequest(request);  
+}

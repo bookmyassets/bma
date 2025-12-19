@@ -35,7 +35,7 @@ const RelatedBlogCard = ({ item, type }) => {
         <div className="flex flex-col flex-grow max-sm:w-32 max-sm:h-32">
           <Link
             href={slug}
-            className="w-full px-4 py-2 transition-all font-semibold border-white hover:bg-[#deae3c] bg-black hover:text-black text-lg md:text-base text-[#deae3c] h-full flex flex-col justify-between space-y-2 md:space-y-3"
+            className="w-full px-4 py-2 transition-all font-semibold border-white hover:bg-[#B3000C] bg-white hover:text-white text-lg md:text-base text-[#B3000C] h-full flex flex-col justify-between space-y-2 md:space-y-3"
           >
             {/* Title */}
             <h3 className="text-base md:text-lg font-semibold line-clamp-2 md:line-clamp-2 md:h-14">
@@ -43,7 +43,7 @@ const RelatedBlogCard = ({ item, type }) => {
             </h3>
 
             {/* Meta info */}
-            <div className="text-xs md:text-sm text-gray-400">
+            <div className="text-xs md:text-sm text-[#B3000C] hover:text-white">
               <time>
                 {new Date(item.publishedAt || item._createdAt).toLocaleDateString("en-US", {
                   day: "numeric",
@@ -51,8 +51,8 @@ const RelatedBlogCard = ({ item, type }) => {
                   year: "numeric",
                 })}
               </time>
-              <div>
-                <span className="font-medium text-white">BookMyAssets</span>
+              <div className="">
+                <span className="font-medium  ">BookMyAssets</span>
               </div>
             </div>
 
