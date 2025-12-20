@@ -463,7 +463,7 @@ async function handlePdfGenerationRequest(requestedPath, req) {
 
     // Improved regex to capture both file types and query strings
     const generatePdfMatch = decodedPath.match(
-      /(generate_pdf(?:_non_brand|_filtered)?|generate_pdf_filtered)\.php(\?.*)?$/i
+      /(generate_pdf(?:|_non_brand))\.php(\?.*)?$/
     );
 
     if (!generatePdfMatch) {
@@ -530,7 +530,7 @@ async function handlePdfGenerationRequest(requestedPath, req) {
 
     // Extract filename from server response OR generate one based on parameters
     let filename = "document.pdf";
-
+    
     // Option 1: Check server's Content-Disposition header
     const serverDisposition = pdfResponse.headers.get("content-disposition");
     if (serverDisposition && serverDisposition.includes("filename=")) {
@@ -540,37 +540,29 @@ async function handlePdfGenerationRequest(requestedPath, req) {
         console.log(`[PDF-GEN] Using server filename: ${filename}`);
       }
     }
-
+    
     // Option 2: Generate filename based on query parameters
     if (filename === "document.pdf") {
       // Try to extract from query parameters
       const urlObj = new URL(targetUrl);
       const searchParams = urlObj.searchParams;
-
+      
       // Common parameter names that might contain filename info
-      const possibleFilenameParams = [
-        "filename",
-        "file_name",
-        "name",
-        "title",
-        "report_name",
-      ];
+      const possibleFilenameParams = ['filename', 'file_name', 'name', 'title', 'report_name'];
       for (const param of possibleFilenameParams) {
         if (searchParams.has(param)) {
           const paramValue = searchParams.get(param);
-          filename = paramValue.endsWith(".pdf")
-            ? paramValue
-            : `${paramValue}.pdf`;
+          filename = paramValue.endsWith('.pdf') ? paramValue : `${paramValue}.pdf`;
           console.log(`[PDF-GEN] Using parameter filename: ${filename}`);
           break;
         }
       }
-
+      
       // Option 3: Generate based on date/time
       if (filename === "document.pdf") {
         const now = new Date();
-        const dateStr = now.toISOString().slice(0, 10).replace(/-/g, "");
-        const timeStr = now.toTimeString().slice(0, 8).replace(/:/g, "");
+        const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
+        const timeStr = now.toTimeString().slice(0, 8).replace(/:/g, '');
         filename = `report_${dateStr}_${timeStr}.pdf`;
         console.log(`[PDF-GEN] Using generated filename: ${filename}`);
       }
@@ -666,14 +658,6 @@ async function handleRequest(req, method = "GET") {
       return await handlePdfGenerationRequest(requestedPath, req);
     }
 
-    if (
-      method === "GET" &&
-      requestedPath &&
-      requestedPath.includes("generate_pdf_filtered.php")
-    ) {
-      return await handlePdfGenerationRequest(requestedPath, req);
-    }
-
     // 3. All other requests (PHP pages, form submissions, etc.)
     const targetUrl = constructTargetUrl(requestedPath);
     const targetHeaders = { ...commonHeaders };
@@ -695,7 +679,6 @@ async function handleRequest(req, method = "GET") {
     };
 
     // Handle request body for POST/PUT/DELETE
-    // try using images reagrding content header
     if (method !== "GET" && method !== "HEAD") {
       const contentType = req.headers.get("content-type") || "";
 

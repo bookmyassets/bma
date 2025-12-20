@@ -8,11 +8,13 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 //images import
 import img1 from "@/assests/hero1.webp";
 import img2 from "@/assests/hero2.webp";
-import img3 from "@/assests/ad-page/img3.webp";
+/* import img3 from "@/assests/ad-page/img3.webp"; */
+import img3 from "@/assests/festival-images/westwyn-county-dholera-christmas-offer.webp"
 
 import imgM1 from "@/assests/hero_mob1.webp";
 import imgM2 from "@/assests/hero_mob2.webp";
-import imgM3 from "@/assests/ad-page/mob1.webp";
+/* import imgM3 from "@/assests/ad-page/mob1.webp"; */
+import imgM3 from "@/assests/festival-images/westwyn-county-dholera-christmas-offer-mobile.webp"
 import BrochureDownload from "../components/BrochureDownload";
 import Running from "./Running";
 import Snowfall from "./Snowfall";
@@ -496,7 +498,7 @@ export default function LandingPage({ openForm }) {
           </div>
 
           {/* Right Side - Lead Form Section (40%) */}
-          <div className="w-full lg:w-[40%] bg-gradient-to-tl from-[#030712] via-[#09090b] to-[#020617] flex items-center justify-center p-4 lg:p-6">
+          <div className="w-full lg:w-[40%] bg-gradient-to-b from-[#0b1d3a] to-black flex items-center justify-center p-4 lg:p-6">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -508,7 +510,7 @@ export default function LandingPage({ openForm }) {
                 <Image
                   src={logo}
                   alt="BookMyAssets Logo"
-                  className="mx-auto mb-3 w-72 "
+                  className="mx-auto mb-3 max-sm:w-72 "
                 />
                 <div className="relative">
                   <div>
