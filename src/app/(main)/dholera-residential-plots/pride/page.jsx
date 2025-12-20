@@ -128,9 +128,9 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Title Clear Plots Under ₹10 Lakh",
-                  "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
-                  "Get A Call Back",
+                  "Missed Pride? Explore plots under ₹10 lakh at Westwyn Estate",
+                    "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
+                    "Get Plot Details",
                   ""
                 )
               }
@@ -187,9 +187,10 @@ export default function HeroCarousel() {
               <button
                 onClick={() =>
                   openContactForm(
-                    "Get Verified Project Details",
+                    
+                    "Get details on WestWyn Estate",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
-                    "Get Plot Details",
+                    "Download Brochure",
                     "brochure"
                   )
                 }
@@ -316,7 +317,7 @@ export default function HeroCarousel() {
       </div>
 
       {/* Form */}
-      <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
+      <CommonForm title="Pride is sold out. Want to invest in more projects like this?" button="Talk to our Team" />
 
       <ActiveProjectsSection />
 

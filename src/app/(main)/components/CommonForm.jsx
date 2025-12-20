@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./about.css";
 
-export default function CommonForm({ title }) {
+export default function CommonForm({ title, button }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ 
     fullName: "", 
@@ -333,7 +333,7 @@ export default function CommonForm({ title }) {
                         : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-md"
                     }`}
                   >
-                    {isLoading ? "Submitting..." : "Get A Call Back"}
+                    {isLoading ? "Submitting..." : button}
                   </button>
                 </div>
               </form>

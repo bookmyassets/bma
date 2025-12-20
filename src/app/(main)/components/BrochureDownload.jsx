@@ -343,7 +343,7 @@ export default function BrochureDownload({
             initial={{ scale: 0.9, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 50 }}
-            className="bg-white p-8 md:p-16 rounded-xl shadow-2xl border border-gray-700 max-w-lg w-full relative"
+            className="bg-white p-12 md:p-10 rounded-xl shadow-2xl border border-gray-700 max-w-xl w-full relative"
             onClick={handleModalContentClick}
           >
             {/* Close Button */}

@@ -121,7 +121,7 @@ export default function HeroCarousel() {
         <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center px-4">
           {/* Main Title */}
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">
-            Maple
+            Marina Bay
           </h1>
 
           {/* Property Details */}
@@ -140,7 +140,7 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                openContactForm(
-                  "Title Clear Plots Under ₹10 Lakh",
+                  "Missed Marina Bay? Explore plots under ₹10 lakh at Westwyn Estate",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
                   "Get A Call Back",
                   ""
@@ -199,9 +199,9 @@ export default function HeroCarousel() {
               <button
                 onClick={() =>
                   openContactForm(
-                    "Get Verified Project Details",
+                    "Get details on WestWyn Estate",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
-                    "Get Plot Details",
+                    "Download Brochure",
                     "brochure"
                   )
                 }
@@ -328,7 +328,7 @@ export default function HeroCarousel() {
       </div>
 
       {/* Form */}
-      <CommonForm title="Claim Your Spot in Gujarat’s Next Investment Hub" />
+      <CommonForm title="Marina Bay is sold out. Want to invest in more projects like this?" button="Talk to our Team" />
 
       <ActiveProjectsSection />
 

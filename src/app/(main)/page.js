@@ -10,6 +10,7 @@ import PopupForm from './components/PopUpForm'
 import LandingPage from './homeComponents/Hero3'
 import InteractiveMap from './homeComponents/InteractiveMap'
 import Groundzero from './homeComponents/Groundzero'
+import DholeraPopupForm from './components/DynamicForm'
 
 
 
@@ -177,8 +178,8 @@ export default function page() {
           className="font-medium"
         />
         )} */}
-        <PopupForm title="Identify the best investment-ready locations in Dholera."/>
-
+        <PopupForm title="Best investment-ready locations in Dholera"/>
+{/* <DholeraPopupForm/> */}
 
     </>
   )

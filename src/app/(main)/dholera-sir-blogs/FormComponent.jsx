@@ -47,8 +47,8 @@ export default function FormComponent() {
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <ContactForm
-              title="Ready to Explore Dholera?"
-              buttonName="Talk To Investment Advisor"
+              title="Expert Consultation - Ready to Explore Dholera?"
+              buttonName="Talk to an Expert"
               onClose={() => closeContactForm()}
             />
           </div>
@@ -59,7 +59,7 @@ export default function FormComponent() {
         {isBrochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
-              title="Access Verified Dholera Plots"
+              title="Get more details on Dholera Plots"
               buttonName="Download Brochure"
               onClose={() => closeBrochureForm()}
             />

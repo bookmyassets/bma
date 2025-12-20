@@ -14,10 +14,7 @@ const nextConfig = {
         
         destination: "/api/landx?path=dashboard.php",
       },
-      {
-        source: "/LandX-Beta/dashboard.php",
-        destination: "/api/landx?path=dashboard.php",
-      },
+      
       
       // Direct access to PHP files
       {

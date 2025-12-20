@@ -291,9 +291,9 @@ const WestWynAboutSection = () => {
             <div className="w-full max-w-md">
               <BrochureDownload
                 onClose={closeBrochureForm}
-                title="Get Verified Project Details"
+                title="Want Verified Project Details?"
                 headline="Plots starting 10 Lakh at 0 km from Dholera SIR "
-                buttonName="Get Project Details"
+                buttonName="Get Brochure"
                 onAfterSubmit={handleAfterSubmit}
                 link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"
               />

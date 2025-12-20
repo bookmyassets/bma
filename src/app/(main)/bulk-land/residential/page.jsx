@@ -228,7 +228,7 @@ export default function page() {
       <div>
         <Table />
       </div>
-      <BulkLand title="Bulk Land Parcels Starting from Rs. 1.75 Cr." />
+      <BulkLand title="Want to invest in high growth bulk land parcels starting ₹1.75 CR" />
       <div>
         <FAQSection/>
       </div>

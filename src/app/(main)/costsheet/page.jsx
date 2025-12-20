@@ -89,7 +89,7 @@ export default function CostSheet() {
       const plotPrice = plotPriceWithPLC;
       const totalPayment = formData.plotAreaYards * plotPrice;
       const maintenance = formData.plotAreaYards * formData.maintenanceRate;
-      const ifmsCharge = formData.plotAreaYards * 100; // IFMS = 100 * size
+      const ifmsCharge = formData.plotAreaYards * 0; // IFMS = 100 * size
       const totalCharges =
         maintenance +
         parseFloat(formData.legalFee) +

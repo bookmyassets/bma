@@ -381,7 +381,7 @@ export default function HeroCarousel() {
       </div>
 
       <div className="md:hidden">
-        <CommonForm title="Get Plots Under ₹10 Lakh at 0 KM from Dholera SIR " />
+        <CommonForm title="Want to verify plot documents before booking?" button="Connect with an Expert" />
       </div>
 
       <div className="pt-4 pb-4">
@@ -390,7 +390,7 @@ export default function HeroCarousel() {
       </div>
 
       <div className="max-sm:hidden">
-        <CommonForm title="Get Plots Under ₹10 Lakh at 0 KM from Dholera SIR " />
+        <CommonForm title="Want to verify plot documents before booking?" button="Connect with an Expert" />
       </div>
       <ProjectAmenities />
 
@@ -410,9 +410,9 @@ export default function HeroCarousel() {
             <div className="w-full max-w-md">
               <ContactForm
                 onClose={closeContactForm}
-                title="Unbeatable Price in Dholera"
+                title="Best value plots in Dholera"
                 headline="Plots starting 10 Lakh at 0 km from Dholera SIR "
-                buttonName="Book Now"
+                buttonName="Book a Site Visit"
                 /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>

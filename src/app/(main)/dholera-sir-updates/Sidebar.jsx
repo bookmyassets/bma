@@ -275,7 +275,7 @@ const onRecaptchaSuccess = async (token) => {
       {/* Get Our Free Guide Widget */}
       <div className="bg-[#f9f9f9] rounded-xl shadow-sm p-6 border border-gray-200">
         <h3 className="text-xl font-bold text-gray-900 mb-4">
-          Get Free Dholera Investment Guide
+         Get Free Advice from Dholera Investment Advise
         </h3>
         <p className="text-gray-600 text-sm mb-6">
           Download our comprehensive guide covering investment opportunities,
@@ -309,7 +309,7 @@ const onRecaptchaSuccess = async (token) => {
             disabled={isLoading}
             className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? "Processing..." : "Get Free Guide"}
+            {isLoading ? "Processing..." : "Enquire Now"}
           </button>
         </form>
       </div>

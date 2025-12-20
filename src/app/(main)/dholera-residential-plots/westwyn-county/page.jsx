@@ -523,7 +523,7 @@ export default function HeroCarousel() {
       </div>
 
       <div className="md:hidden">
-        <CommonForm title="Understand How Infrastructure is Shaping Growth in Dholera." />
+        <CommonForm title="Invest on Dholera’s widest road:Fedra-Pipli Highway" button="Talk to an Advisor" />
       </div>
 
       {/* Section 4 - Why Invest in WestWyn Estate */}
@@ -628,7 +628,7 @@ export default function HeroCarousel() {
 
       <ProjectAmenities />
       <div className="max-sm:hidden">
-        <CommonForm title="Understand How Infrastructure is Shaping Growth in Dholera." />
+        <CommonForm title="Invest on Dholera’s widest road:Fedra-Pipli Highway" button="Talk to an Advisor" />
       </div>
       <div className="pt-4 pb-4">
         <CostSheet projectSlug="westwyn-county" showProjectSelector={false} />
