@@ -76,7 +76,7 @@ function constructTargetUrl(path) {
   return `${BASE_URL}/${cleanPath}`;
 }
 
-// HTML modifier with enhanced upload handling
+// HTML modifier with enhanced upload handling AND filter support
 function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
   currentPath = currentPath.replace(/\/+$/, "");
 
@@ -212,7 +212,7 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
     }
   );
 
-  // Enhanced dynamic content interceptor
+  // Enhanced dynamic content interceptor WITH FILTER SUPPORT
   const interceptorScript = `
 <script>
 (function() {
@@ -224,6 +224,29 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
     if (!url || url.startsWith('http') || url.startsWith('data:') || 
         url.startsWith('//') || url.includes('/api/')) {
       return url;
+    }
+    
+    if (url.includes('uploads/')) {
+      const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
+      return '/api/' + API_ROUTE + '?path=' + encodeURIComponent(cleanUrl);
+    }
+    
+    return url;
+  }
+  
+  function fixUrl(url, type = 'default') {
+    if (!url || url.startsWith('http') || url.startsWith('data:') || 
+        url.startsWith('//') || url.includes('/api/')) return url;
+    
+    // Handle dashboard.php with query parameters
+    if (url.includes('dashboard.php?')) {
+      const urlObj = new URL(url, window.location.origin);
+      const params = urlObj.searchParams;
+      let newUrl = '/api/' + API_ROUTE + '?path=dashboard.php';
+      params.forEach((value, key) => {
+        newUrl += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(value);
+      });
+      return newUrl;
     }
     
     if (url.includes('uploads/')) {
@@ -247,10 +270,11 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
             }
           }
           
-          // Fix links
+          // Fix links (including dashboard links with params)
           if (node.tagName === 'A' && node.href) {
-            const fixedHref = fixUploadUrl(node.getAttribute('href'));
-            if (fixedHref !== node.getAttribute('href')) {
+            const originalHref = node.getAttribute('href');
+            const fixedHref = fixUrl(originalHref);
+            if (fixedHref !== originalHref) {
               node.href = fixedHref;
             }
           }
@@ -265,6 +289,13 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
           links.forEach(function(link) {
             link.href = fixUploadUrl(link.getAttribute('href'));
           });
+          
+          // Fix dashboard links with query params
+          const dashboardLinks = node.querySelectorAll ? node.querySelectorAll('a[href*="dashboard.php"]') : [];
+          dashboardLinks.forEach(function(link) {
+            const originalHref = link.getAttribute('href');
+            link.href = fixUrl(originalHref);
+          });
         }
       });
     });
@@ -277,6 +308,46 @@ function modifyHtmlContent(html, currentPath = "", apiRoute = "landx") {
       attributes: true,
       attributeFilter: ['src', 'href']
     });
+    
+    // Override filter functions if they exist
+    if (typeof window.applyColumnFilter !== 'undefined') {
+      window.applyColumnFilter = function() {
+        const filters = {};
+        document.querySelectorAll('.column-filter').forEach(function(select) {
+          if (select.value) {
+            filters[select.dataset.column] = select.value;
+          }
+        });
+        const params = new URLSearchParams();
+        Object.keys(filters).forEach(function(key) {
+          params.append('filters[' + key + ']', filters[key]);
+        });
+        window.location.href = '/api/' + API_ROUTE + '?path=dashboard.php&' + params.toString();
+      };
+    }
+    
+    if (typeof window.clearAllFilters !== 'undefined') {
+      window.clearAllFilters = function() {
+        window.location.href = '/api/' + API_ROUTE + '?path=dashboard.php';
+      };
+    }
+    
+    if (typeof window.exportFilteredToPDF !== 'undefined') {
+      window.exportFilteredToPDF = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterParams = new URLSearchParams();
+        urlParams.forEach(function(value, key) {
+          if (key !== 'path') filterParams.append(key, value);
+        });
+        document.getElementById('loadingOverlay').classList.remove('hidden');
+        const pdfUrl = '/api/' + API_ROUTE + '?path=generate_pdf_filtered.php' + 
+                      (filterParams.toString() ? '&' + filterParams.toString() : '');
+        window.open(pdfUrl, '_blank');
+        setTimeout(function() {
+          document.getElementById('loadingOverlay').classList.add('hidden');
+        }, 1000);
+      };
+    }
   });
 })();
 </script>`;
@@ -461,9 +532,9 @@ async function handlePdfGenerationRequest(requestedPath, req) {
   try {
     const decodedPath = decodeURIComponent(requestedPath);
 
-    // Improved regex to capture both file types and query strings
+    // Improved regex to capture both file types and query strings (including filtered PDFs)
     const generatePdfMatch = decodedPath.match(
-      /(generate_pdf(?:|_non_brand))\.php(\?.*)?$/
+      /(generate_pdf(?:|_non_brand|_filtered))\.php(\?.*)?$/i
     );
 
     if (!generatePdfMatch) {
@@ -530,7 +601,7 @@ async function handlePdfGenerationRequest(requestedPath, req) {
 
     // Extract filename from server response OR generate one based on parameters
     let filename = "document.pdf";
-    
+
     // Option 1: Check server's Content-Disposition header
     const serverDisposition = pdfResponse.headers.get("content-disposition");
     if (serverDisposition && serverDisposition.includes("filename=")) {
@@ -540,29 +611,37 @@ async function handlePdfGenerationRequest(requestedPath, req) {
         console.log(`[PDF-GEN] Using server filename: ${filename}`);
       }
     }
-    
+
     // Option 2: Generate filename based on query parameters
     if (filename === "document.pdf") {
       // Try to extract from query parameters
       const urlObj = new URL(targetUrl);
       const searchParams = urlObj.searchParams;
-      
+
       // Common parameter names that might contain filename info
-      const possibleFilenameParams = ['filename', 'file_name', 'name', 'title', 'report_name'];
+      const possibleFilenameParams = [
+        "filename",
+        "file_name",
+        "name",
+        "title",
+        "report_name",
+      ];
       for (const param of possibleFilenameParams) {
         if (searchParams.has(param)) {
           const paramValue = searchParams.get(param);
-          filename = paramValue.endsWith('.pdf') ? paramValue : `${paramValue}.pdf`;
+          filename = paramValue.endsWith(".pdf")
+            ? paramValue
+            : `${paramValue}.pdf`;
           console.log(`[PDF-GEN] Using parameter filename: ${filename}`);
           break;
         }
       }
-      
+
       // Option 3: Generate based on date/time
       if (filename === "document.pdf") {
         const now = new Date();
-        const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
-        const timeStr = now.toTimeString().slice(0, 8).replace(/:/g, '');
+        const dateStr = now.toISOString().slice(0, 10).replace(/-/g, "");
+        const timeStr = now.toTimeString().slice(0, 8).replace(/:/g, "");
         filename = `report_${dateStr}_${timeStr}.pdf`;
         console.log(`[PDF-GEN] Using generated filename: ${filename}`);
       }
@@ -579,8 +658,6 @@ async function handlePdfGenerationRequest(requestedPath, req) {
         Pragma: "no-cache",
         Expires: "0",
         "X-Content-Type-Options": "nosniff",
-        // Forward server's filename if available
-        ...(serverDisposition ? {} : {}),
       },
     });
   } catch (error) {
@@ -641,19 +718,11 @@ async function handleRequest(req, method = "GET") {
       return await handleFileRequest(requestedPath, req);
     }
 
-    // 2. PDF generation (GET only)
+    // 2. PDF generation (GET only) - supports filtered PDFs
     if (
       method === "GET" &&
       requestedPath &&
-      requestedPath.includes("generate_pdf.php")
-    ) {
-      return await handlePdfGenerationRequest(requestedPath, req);
-    }
-
-    if (
-      method === "GET" &&
-      requestedPath &&
-      requestedPath.includes("generate_pdf_non_brand.php")
+      requestedPath.includes("generate_pdf")
     ) {
       return await handlePdfGenerationRequest(requestedPath, req);
     }
