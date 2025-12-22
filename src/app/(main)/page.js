@@ -178,8 +178,8 @@ export default function page() {
           className="font-medium"
         />
         )} */}
-        <PopupForm title="Best investment-ready locations in Dholera"/>
-{/* <DholeraPopupForm/> */}
+        {/* <PopupForm title="Best investment-ready locations in Dholera"/> */}
+<DholeraPopupForm/>
 
     </>
   )
