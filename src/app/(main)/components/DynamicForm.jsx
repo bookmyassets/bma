@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { X, Check } from "lucide-react";
-/* import img from "@/assests/homepage/form-img.png"; */
 import img from "@/assests/festival-images/christmas-form-offer.webp";
 import Image from "next/image";
 
@@ -29,149 +28,140 @@ export default function DholeraPopupForm() {
     }
   }, []);
 
-  // Escape key handler
+  // Load reCAPTCHA and handle escape key
   useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape" && showPopup) {
+    const loadRecaptcha = () => {
+      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
+        const script = document.createElement("script");
+        script.src = "https://www.google.com/recaptcha/api.js";
+        script.async = true;
+        script.defer = true;
+        script.onload = () => setRecaptchaLoaded(true);
+        script.onerror = () => setRecaptchaLoaded(true);
+        document.head.appendChild(script);
+      } else if (window.grecaptcha || !siteKey) {
+        setRecaptchaLoaded(true);
+      }
+    };
+
+    loadRecaptcha();
+
+    // Escape key handler
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape" && showPopup) {
         setShowPopup(false);
       }
     };
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [showPopup]);
+    document.addEventListener("keydown", handleEscapeKey);
 
-   // Load reCAPTCHA
-    useEffect(() => {
-      const loadRecaptcha = () => {
-        if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => setRecaptchaLoaded(true);
-          document.head.appendChild(script);
-        } else if (window.grecaptcha || !siteKey) {
-          setRecaptchaLoaded(true);
-        }
-      };
-  
-      loadRecaptcha();
-  
-      // Escape key handler
-      const handleEscapeKey = (event) => {
-        if (event.key === 'Escape' && showFormPopup) {
-          handlePopupClose();
-        }
-      };
-      document.addEventListener('keydown', handleEscapeKey);
-  
-      return () => {
-        document.removeEventListener('keydown', handleEscapeKey);
-      };
-    }, [showPopup, siteKey]);
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevData) => ({ ...prevData, [name]: value }));
-      setErrorMessage("");
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
     };
-  
-    const validateForm = () => {
-      if (!formData.fullName.trim() || !formData.mobileNumber.trim()) {
-        setErrorMessage("Please fill in all required fields");
-        return false;
-      }
-  
-      if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
-        setErrorMessage("Please enter a valid mobile number (10-15 digits)");
-        return false;
-      }
-  
-      return true;
-    };
-  
-    const onRecaptchaSuccess = async (token) => {
-      try {
-        const response = await fetch(
-           "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+  }, [showPopup, siteKey]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrorMessage("");
+  };
+
+  const validateForm = () => {
+    if (!formData.fullName.trim() || !formData.mobileNumber.trim()) {
+      setErrorMessage("Please fill in all required fields");
+      return false;
+    }
+
+    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
+      setErrorMessage("Please enter a valid mobile number (10-15 digits)");
+      return false;
+    }
+
+    return true;
+  };
+
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+          },
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.mobileNumber,
+              source: "BookMyAssets christmas",
             },
-            body: JSON.stringify({
-              fields: {
-                name: formData.fullName,
-                phone: formData.mobileNumber,
-                source: "BookMyAssets christmas",
-              },
-              source: "BookMyAssets christmas Popup",
-              tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
-              recaptchaToken: token,
-            }),
-          }
-        );
-  
-        if (response.ok) {
-          setFormData({ fullName: "", mobileNumber: ""});
-          setShowThankYou(true);
-          
-          setTimeout(() => {
-            setShowThankYou(false);
-            setShowFormPopup(false);
-          }, 3000);
-        } else {
-          throw new Error("Error submitting form");
+            source: "BookMyAssets christmas Popup",
+            tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
+            recaptchaToken: token,
+          }),
         }
-      } catch (error) {
-        console.error("Form submission error:", error);
-        setErrorMessage("Error submitting form. Please try again.");
-      } finally {
-        setIsLoading(false);
-        if (window.grecaptcha && recaptchaRef.current) {
-          try {
-            window.grecaptcha.reset();
-          } catch (err) {
-            console.error("Error resetting reCAPTCHA:", err);
-          }
-        }
+      );
+
+      if (response.ok) {
+        setFormData({ fullName: "", mobileNumber: "" });
+        setShowThankYou(true);
+
+        setTimeout(() => {
+          setShowThankYou(false);
+          setShowPopup(false);
+        }, 3000);
+      } else {
+        throw new Error("Error submitting form");
       }
-    };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setIsLoading(true);
-      setErrorMessage("");
-  
-      if (!validateForm()) {
-        setIsLoading(false);
-        return;
-      }
-  
-      if (!recaptchaLoaded || !window.grecaptcha) {
-        setErrorMessage("Security verification not loaded. Please refresh the page.");
-        setIsLoading(false);
-        return;
-      }
-  
-      if (!recaptchaRef.current.innerHTML) {
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setErrorMessage("Error submitting form. Please try again.");
+    } finally {
+      setIsLoading(false);
+      if (window.grecaptcha && recaptchaRef.current) {
         try {
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "light",
-          });
-        } catch (error) {
-          console.error("Error rendering reCAPTCHA:", error);
-          setErrorMessage("Error with verification. Please try again.");
-          setIsLoading(false);
+          window.grecaptcha.reset();
+        } catch (err) {
+          console.error("Error resetting reCAPTCHA:", err);
         }
+      }
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
+
+    if (!validateForm()) {
+      setIsLoading(false);
+      return;
+    }
+
+    if (!recaptchaLoaded || !window.grecaptcha) {
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page."
+      );
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      if (!recaptchaRef.current.innerHTML) {
+        window.grecaptcha.render(recaptchaRef.current, {
+          sitekey: siteKey,
+          callback: onRecaptchaSuccess,
+          theme: "light",
+        });
       } else {
         window.grecaptcha.execute();
       }
-    };
+    } catch (error) {
+      console.error("Error with reCAPTCHA:", error);
+      setErrorMessage("Error with verification. Please try again.");
+      setIsLoading(false);
+    }
+  };
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -187,9 +177,7 @@ export default function DholeraPopupForm() {
             className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in"
             onClick={handleBackdropClick}
           >
-            {/* Main container with equal height sections */}
             <div className="flex flex-col md:flex-row items-center justify-center max-w-4xl w-full">
-              {/* Image container - fixed aspect ratio */}
               <div className="w-full md:w-auto flex-shrink-0">
                 <div
                   className="relative overflow-hidden rounded-l-lg shadow-xl"
@@ -210,9 +198,8 @@ export default function DholeraPopupForm() {
                 </div>
               </div>
 
-              {/* Form container - matches image height */}
               <div
-                className="bg-white rounded-r-lg p-6 md:p-8 shadow-2xl relative transform transition-all animate-scale-in w-full max-w-[450px]"
+                className="bg-white rounded-r-lg p-6 shadow-2xl relative transform transition-all animate-scale-in w-full max-w-[450px]"
                 style={{
                   minHeight: "350px",
                   height: "350px",
@@ -246,7 +233,6 @@ export default function DholeraPopupForm() {
                       <X className="h-5 w-5 md:h-6 md:w-6" />
                     </button>
 
-                    {/* Scrollable form area */}
                     <div className="h-full overflow-y-auto pr-2 -mr-2">
                       <div className="space-y-4 pb-2">
                         {errorMessage && (
@@ -268,7 +254,7 @@ export default function DholeraPopupForm() {
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleChange}
-                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
+                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:border-transparent transition-all text-sm md:text-base"
                             placeholder="Enter your full name"
                           />
                         </div>
@@ -286,10 +272,16 @@ export default function DholeraPopupForm() {
                             name="mobileNumber"
                             value={formData.mobileNumber}
                             onChange={handleChange}
-                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
+                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:border-transparent transition-all text-sm md:text-base"
                             placeholder="Enter your mobile number"
                           />
                         </div>
+
+                        {/* Hidden reCAPTCHA container */}
+                        <div
+                          ref={recaptchaRef}
+                          className="flex justify-center"
+                        ></div>
 
                         <button
                           onClick={handleSubmit}
@@ -341,8 +333,6 @@ export default function DholeraPopupForm() {
           </div>
         )}
 
-        {/* Popup Form */}
-
         <style jsx>{`
           @keyframes fade-in {
             from {
@@ -372,146 +362,146 @@ export default function DholeraPopupForm() {
       </div>
 
       <div className="md:hidden">
-        <div className="">
-          <div className="">
-            {showPopup && (
-              <div
-                className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in"
-                onClick={handleBackdropClick}
-              >
-                <div className="flex flex-col items-center w-full">
-                  <div className="relative max-w-[450px] w-full">
-                    <Image
-                      src={img}
-                      alt="The Future of India's Urban and Industrial Growth - Dholera"
-                      className="w-full h-auto shadow-xl"
-                      style={{ maxWidth: "450px", aspectRatio: "450/350" }}
-                    />
-                    <button
-                      onClick={() => setShowPopup(false)}
-                      className="absolute top-3 z-50 right-3 md:top-4 md:right-4 text-red-900 hover:text-gray-600 transition-colors"
-                      aria-label="Close popup"
-                    >
-                      <X className="h-5 w-5 md:h-6 md:w-6" />
-                    </button>
-                  </div>
-                  <div
-                    className="bg-white p-6 md:p-8 max-w-[450px] w-full shadow-2xl relative transform transition-all animate-scale-in"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {showThankYou ? (
-                      <div className="text-center py-6 md:py-8">
-                        <div className="w-16 h-16 md:w-20 md:h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 animate-scale-in">
-                          <Check
-                            className="h-8 w-8 md:h-10 md:w-10 text-white"
-                            strokeWidth={3}
-                          />
-                        </div>
-                        <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 md:mb-3">
-                          Thank You!
-                        </h3>
-                        <p className="text-sm md:text-base text-gray-600">
-                          Our team will contact you shortly with exclusive
-                          Dholera investment details.
-                        </p>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="space-y-4">
-                          {errorMessage && (
-                            <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs md:text-sm">
-                              {errorMessage}
-                            </div>
-                          )}
-
-                          <div className="flex justify-center items-center gap-4">
-                            <div>
-                              <label
-                                htmlFor="fullName"
-                                className="block text-gray-700 text-sm font-semibold mb-2"
-                              >
-                                Full Name *
-                              </label>
-                              <input
-                                type="text"
-                                id="fullName"
-                                name="fullName"
-                                value={formData.fullName}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
-                                placeholder="Enter your full name"
-                              />
-                            </div>
-
-                            <div>
-                              <label
-                                htmlFor="mobileNumber"
-                                className="block text-gray-700 text-sm font-semibold mb-2"
-                              >
-                                Mobile Number *
-                              </label>
-                              <input
-                                type="tel"
-                                id="mobileNumber"
-                                name="mobileNumber"
-                                value={formData.mobileNumber}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
-                                placeholder="Enter your mobile number"
-                              />
-                            </div>
-                          </div>
-
-                          <button
-                            onClick={handleSubmit}
-                            disabled={isLoading}
-                            className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base ${
-                              isLoading
-                                ? "bg-gray-400 cursor-not-allowed text-[#B3000C]"
-                                : "bg-white text-[#B3000C] shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                            }`}
-                          >
-                            {isLoading ? (
-                              <div className="flex items-center justify-center">
-                                <svg
-                                  className="animate-spin h-4 w-4 md:h-5 md:w-5 mr-2 md:mr-3"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <circle
-                                    className="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    strokeWidth="4"
-                                  ></circle>
-                                  <path
-                                    className="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                  ></path>
-                                </svg>
-                                Submitting...
-                              </div>
-                            ) : (
-                              "Get Investment Details"
-                            )}
-                          </button>
-
-                          <p className="text-xs text-center text-gray-500 mt-3">
-                            🔒 Your details are safe and secure with us
-                          </p>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
+        {showPopup && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in"
+            onClick={handleBackdropClick}
+          >
+            <div className="flex flex-col items-center w-full">
+              <div className="relative max-w-[450px] w-full">
+                <Image
+                  src={img}
+                  alt="The Future of India's Urban and Industrial Growth - Dholera"
+                  className="w-full h-auto shadow-xl"
+                  style={{ maxWidth: "450px", aspectRatio: "450/350" }}
+                />
+                <button
+                  onClick={() => setShowPopup(false)}
+                  className="absolute top-3 z-50 right-3 md:top-4 md:right-4 text-red-900 hover:text-gray-600 transition-colors"
+                  aria-label="Close popup"
+                >
+                  <X className="h-5 w-5 md:h-6 md:w-6" />
+                </button>
               </div>
-            )}
+              <div
+                className="bg-white p-6 md:p-8 max-w-[450px] w-full shadow-2xl relative transform transition-all animate-scale-in"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {showThankYou ? (
+                  <div className="text-center py-6 md:py-8">
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 animate-scale-in">
+                      <Check
+                        className="h-8 w-8 md:h-10 md:w-10 text-white"
+                        strokeWidth={3}
+                      />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 md:mb-3">
+                      Thank You!
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-600">
+                      Our team will contact you shortly with exclusive Dholera
+                      investment details.
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="space-y-4">
+                      {errorMessage && (
+                        <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs md:text-sm">
+                          {errorMessage}
+                        </div>
+                      )}
+
+                      <div>
+                        <label
+                          htmlFor="fullName-mobile"
+                          className="block text-gray-700 text-sm font-semibold mb-2"
+                        >
+                          Full Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="fullName-mobile"
+                          name="fullName"
+                          value={formData.fullName}
+                          onChange={handleChange}
+                          className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:border-transparent transition-all text-sm md:text-base"
+                          placeholder="Enter your full name"
+                        />
+                      </div>
+
+                      <div>
+                        <label
+                          htmlFor="mobileNumber-mobile"
+                          className="block text-gray-700 text-sm font-semibold mb-2"
+                        >
+                          Mobile Number *
+                        </label>
+                        <input
+                          type="tel"
+                          id="mobileNumber-mobile"
+                          name="mobileNumber"
+                          value={formData.mobileNumber}
+                          onChange={handleChange}
+                          className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:border-transparent transition-all text-sm md:text-base"
+                          placeholder="Enter your mobile number"
+                        />
+                      </div>
+
+                      {/* Hidden reCAPTCHA container */}
+                      <div
+                        ref={recaptchaRef}
+                        className="flex justify-center"
+                      ></div>
+
+                      <button
+                        onClick={handleSubmit}
+                        disabled={isLoading}
+                        className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base border-2 border-[#B3000C] ${
+                          isLoading
+                            ? "bg-gray-400 cursor-not-allowed text-[#B3000C]"
+                            : "bg-white text-[#B3000C] shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                        }`}
+                      >
+                        {isLoading ? (
+                          <div className="flex items-center justify-center">
+                            <svg
+                              className="animate-spin h-4 w-4 md:h-5 md:w-5 mr-2 md:mr-3"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              ></circle>
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              ></path>
+                            </svg>
+                            Submitting...
+                          </div>
+                        ) : (
+                          "Get Investment Details"
+                        )}
+                      </button>
+
+                      <p className="text-xs text-center text-gray-500 mt-3">
+                        🔒 Your details are safe and secure with us
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );
