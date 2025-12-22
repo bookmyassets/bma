@@ -83,11 +83,6 @@ export default function DholeraPopupForm() {
         return false;
       }
   
-      if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-        setErrorMessage("Please enter a valid email address");
-        return false;
-      }
-  
       if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
         setErrorMessage("Please enter a valid mobile number (10-15 digits)");
         return false;
@@ -110,8 +105,7 @@ export default function DholeraPopupForm() {
               fields: {
                 name: formData.fullName,
                 phone: formData.mobileNumber,
-                email: formData.email,
-                source: "BookMyAssets",
+                source: "BookMyAssets christmas",
               },
               source: "BookMyAssets christmas Popup",
               tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
@@ -121,7 +115,7 @@ export default function DholeraPopupForm() {
         );
   
         if (response.ok) {
-          setFormData({ fullName: "", mobileNumber: "", email: ""});
+          setFormData({ fullName: "", mobileNumber: ""});
           setShowThankYou(true);
           
           setTimeout(() => {
