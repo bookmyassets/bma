@@ -11,7 +11,9 @@ export default function DholeraPopupForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  const recaptchaRef = useRef(null);
+  const recaptchaRefDesktop = useRef(null);
+  const recaptchaRefMobile = useRef(null);
+  const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // Auto-popup after 3 seconds
@@ -48,14 +50,14 @@ export default function DholeraPopupForm() {
 
     // Escape key handler
     const handleEscapeKey = (event) => {
-      if (event.key === "Escape" && showPopup) {
+      if (event.key === 'Escape' && showPopup) {
         setShowPopup(false);
       }
     };
-    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener('keydown', handleEscapeKey);
     };
   }, [showPopup, siteKey]);
 
@@ -71,7 +73,7 @@ export default function DholeraPopupForm() {
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
+    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
     }
@@ -82,7 +84,7 @@ export default function DholeraPopupForm() {
   const onRecaptchaSuccess = async (token) => {
     try {
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -105,7 +107,7 @@ export default function DholeraPopupForm() {
       if (response.ok) {
         setFormData({ fullName: "", mobileNumber: "" });
         setShowThankYou(true);
-
+        
         setTimeout(() => {
           setShowThankYou(false);
           setShowPopup(false);
@@ -118,9 +120,9 @@ export default function DholeraPopupForm() {
       setErrorMessage("Error submitting form. Please try again.");
     } finally {
       setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
+      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
         try {
-          window.grecaptcha.reset();
+          window.grecaptcha.reset(recaptchaWidgetId.current);
         } catch (err) {
           console.error("Error resetting reCAPTCHA:", err);
         }
@@ -128,7 +130,7 @@ export default function DholeraPopupForm() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, isMobile = false) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage("");
@@ -139,22 +141,22 @@ export default function DholeraPopupForm() {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage(
-        "Security verification not loaded. Please refresh the page."
-      );
+      setErrorMessage("Security verification not loaded. Please refresh the page.");
       setIsLoading(false);
       return;
     }
 
+    const recaptchaContainer = isMobile ? recaptchaRefMobile.current : recaptchaRefDesktop.current;
+
     try {
-      if (!recaptchaRef.current.innerHTML) {
-        window.grecaptcha.render(recaptchaRef.current, {
+      if (!recaptchaContainer.innerHTML || recaptchaWidgetId.current === null) {
+        recaptchaWidgetId.current = window.grecaptcha.render(recaptchaContainer, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
           theme: "light",
         });
       } else {
-        window.grecaptcha.execute();
+        window.grecaptcha.execute(recaptchaWidgetId.current);
       }
     } catch (error) {
       console.error("Error with reCAPTCHA:", error);
@@ -199,7 +201,7 @@ export default function DholeraPopupForm() {
               </div>
 
               <div
-                className="bg-white rounded-r-lg p-6 shadow-2xl relative transform transition-all animate-scale-in w-full max-w-[450px]"
+                className="bg-white rounded-r-lg p-6 md:p-8 shadow-2xl relative transform transition-all animate-scale-in w-full max-w-[450px]"
                 style={{
                   minHeight: "350px",
                   height: "350px",
@@ -254,7 +256,7 @@ export default function DholeraPopupForm() {
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleChange}
-                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:border-transparent transition-all text-sm md:text-base"
+                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
                             placeholder="Enter your full name"
                           />
                         </div>
@@ -272,19 +274,16 @@ export default function DholeraPopupForm() {
                             name="mobileNumber"
                             value={formData.mobileNumber}
                             onChange={handleChange}
-                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:border-transparent transition-all text-sm md:text-base"
+                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
                             placeholder="Enter your mobile number"
                           />
                         </div>
 
-                        {/* Hidden reCAPTCHA container */}
-                        <div
-                          ref={recaptchaRef}
-                          className="flex justify-center"
-                        ></div>
+                        {/* Hidden reCAPTCHA container for desktop */}
+                        <div ref={recaptchaRefDesktop} className="flex justify-center"></div>
 
                         <button
-                          onClick={handleSubmit}
+                          onClick={(e) => handleSubmit(e, false)}
                           disabled={isLoading}
                           className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base ${
                             isLoading
@@ -399,8 +398,8 @@ export default function DholeraPopupForm() {
                       Thank You!
                     </h3>
                     <p className="text-sm md:text-base text-gray-600">
-                      Our team will contact you shortly with exclusive Dholera
-                      investment details.
+                      Our team will contact you shortly with exclusive
+                      Dholera investment details.
                     </p>
                   </div>
                 ) : (
@@ -425,7 +424,7 @@ export default function DholeraPopupForm() {
                           name="fullName"
                           value={formData.fullName}
                           onChange={handleChange}
-                          className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:border-transparent transition-all text-sm md:text-base"
+                          className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
                           placeholder="Enter your full name"
                         />
                       </div>
@@ -443,19 +442,16 @@ export default function DholeraPopupForm() {
                           name="mobileNumber"
                           value={formData.mobileNumber}
                           onChange={handleChange}
-                          className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:border-transparent transition-all text-sm md:text-base"
+                          className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
                           placeholder="Enter your mobile number"
                         />
                       </div>
 
-                      {/* Hidden reCAPTCHA container */}
-                      <div
-                        ref={recaptchaRef}
-                        className="flex justify-center"
-                      ></div>
+                      {/* Hidden reCAPTCHA container for mobile */}
+                      <div ref={recaptchaRefMobile} className="flex justify-center"></div>
 
                       <button
-                        onClick={handleSubmit}
+                        onClick={(e) => handleSubmit(e, true)}
                         disabled={isLoading}
                         className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base border-2 border-[#B3000C] ${
                           isLoading
