@@ -8,11 +8,13 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 //images import
 import img1 from "@/assests/hero1.webp";
 import img2 from "@/assests/hero2.webp";
-import img3 from "@/assests/ad-page/img3.webp";
+import img3 from "@/assests/festival-images/westwyn-county-dholera-christmas-offer.webp";
+/* import img3 from "@/assests/ad-page/img3.webp"; */
 
 import imgM1 from "@/assests/hero_mob1.webp";
 import imgM2 from "@/assests/hero_mob2.webp";
-import imgM3 from "@/assests/ad-page/mob1.webp";
+import imgM3 from "@/assests/festival-images/westwyn-county-dholera-christmas-offer-mobile.webp";
+/* import imgM3 from "@/assests/ad-page/mob1.webp"; */
 import BrochureDownload from "../components/BrochureDownload";
 import Running from "./Running";
 import Snowfall from "./Snowfall";
@@ -114,18 +116,18 @@ export default function LandingPage({ openForm }) {
   // Memoize image arrays
   const desktopImages = useMemo(
     () => [
+      { src: img3, alt: "Dholera Investment Opportunity 3" },
       { src: img1, alt: "Dholera Investment Opportunity 1" },
       { src: img2, alt: "Dholera Investment Opportunity 2" },
-      { src: img3, alt: "Dholera Investment Opportunity 3" },
     ],
     []
   );
 
   const mobileImages = useMemo(
     () => [
+      { src: imgM3, alt: "Dholera Mobile 3" }, 
       { src: imgM1, alt: "Dholera Mobile 1" },
       { src: imgM2, alt: "Dholera Mobile 2" },
-      { src: imgM3, alt: "Dholera Mobile 3" },
     ],
     []
   );
