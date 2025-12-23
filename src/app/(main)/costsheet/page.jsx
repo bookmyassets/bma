@@ -31,13 +31,13 @@ export default function CostSheet() {
     projectName: "",
     plc: "",
     plotAreaYards: "",
-    basePlotPriceYards: 9250,
+    basePlotPriceYards: 11000,
     plotAreaFeet: "",
     totalPaymentYards: "",
     legalFee: 20000,
     maintenanceRate: 500,
     maintenanceCharge: 0,
-    ifms: 0, // IFMS charge (100 * size)
+    ifms: 100, // IFMS charge (100 * size)
     totalCharges: 0,
     plotTotalPayment: 0,
   });
@@ -89,7 +89,7 @@ export default function CostSheet() {
       const plotPrice = plotPriceWithPLC;
       const totalPayment = formData.plotAreaYards * plotPrice;
       const maintenance = formData.plotAreaYards * formData.maintenanceRate;
-      const ifmsCharge = formData.plotAreaYards * 0; // IFMS = 100 * size
+      const ifmsCharge = formData.plotAreaYards * 100; // IFMS = 100 * size
       const totalCharges =
         maintenance +
         parseFloat(formData.legalFee) +
