@@ -8,13 +8,13 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 //images import
 import img1 from "@/assests/hero1.webp";
 import img2 from "@/assests/hero2.webp";
-import img3 from "@/assests/festival-images/westwyn-county-dholera-christmas-offer.webp";
-/* import img3 from "@/assests/ad-page/img3.webp"; */
+/* import img3 from "@/assests/festival-images/westwyn-county-dholera-christmas-offer.webp"; */
+import img3 from "@/assests/ad-page/img3.webp";
 
 import imgM1 from "@/assests/hero_mob1.webp";
 import imgM2 from "@/assests/hero_mob2.webp";
-import imgM3 from "@/assests/festival-images/westwyn-county-dholera-christmas-offer-mobile.webp";
-/* import imgM3 from "@/assests/ad-page/mob1.webp"; */
+/* import imgM3 from "@/assests/festival-images/westwyn-county-dholera-christmas-offer-mobile.webp"; */
+import imgM3 from "@/assests/ad-page/mob1.webp";
 import BrochureDownload from "../components/BrochureDownload";
 import Running from "./Running";
 import Snowfall from "./Snowfall";

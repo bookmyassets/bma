@@ -22,13 +22,13 @@ function formatIndianNumber(value) {
 // Project-specific configurations
 const projectConfigs = {
   "WestWyn Estate": {
-    basePrice: 6250,
+    basePrice: 6500,
     chargeType: "developement",
     chargeRate: 500,
     chargeName: "Development Charge",
   },
   "WestWyn County": {
-    basePrice: 9500,
+    basePrice: 11000,
     chargeType: "maintenance",
     chargeRate: 500,
     chargeName: "Maintenance Charge",
