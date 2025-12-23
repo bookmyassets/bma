@@ -34,7 +34,6 @@ export default async function page() {
     console.log("Posts data fetched:", posts.length);
   } catch (error) {
     console.error("Error fetching blog posts:", error);
-    fetchError = error;
   }
 
   const safePosts = posts.map((post) => ({
