@@ -557,7 +557,7 @@ export default async function Post({ params }) {
       },
     };
 
-    const TableOfContent = ({ headings }) => {
+const TableOfContent = ({ headings }) => {
       const validHeadings =
         headings?.filter((heading) => {
           const text = heading.children?.[0]?.text;
@@ -567,7 +567,7 @@ export default async function Post({ params }) {
       if (validHeadings.length === 0) return null;
 
       return (
-        <div className="my-8 p-6 bg-gradient-to-br from-[#deae3c] to-[#FDB913] rounded-2xl shadow-lg border border-[#deae3c]">
+        <div className="my-8 p-6 bg-gradient-to-br from-[#C69C21]/5 to-[#FDB913]/10 rounded-2xl shadow-lg border border-[#C69C21]/20">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
             Table of Contents
           </h2>
@@ -585,7 +585,7 @@ export default async function Post({ params }) {
                 >
                   <a
                     href={`#${URLFormatter(text)}`}
-                    className="text-[#deae3c] hover:text-[#FDB913] hover:underline transition-colors duration-200 flex items-start gap-2 group"
+                    className="text-[#C69C21] hover:text-[#FDB913] hover:underline transition-colors duration-200 flex items-start gap-2 group"
                   >
                     <span className="w-1.5 h-1.5 bg-[#C69C21] rounded-full mt-2 flex-shrink-0 group-hover:scale-125 transition-transform"></span>
                     <span className="text-sm leading-relaxed">{text}</span>
@@ -597,7 +597,6 @@ export default async function Post({ params }) {
         </div>
       );
     };
-
     return (
       <>
         <div>
