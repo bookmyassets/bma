@@ -23,9 +23,18 @@ export default async function page() {
   try {
     const postsData = await getUpdates();
     posts = Array.isArray(postsData) ? postsData : [];
+    
+    // Sort by publishedAt date (newest first)
+    posts.sort((a, b) => {
+      const dateA = new Date(a.publishedAt || a._createdAt || 0);
+      const dateB = new Date(b.publishedAt || b._createdAt || 0);
+      return dateB - dateA; // Descending order (newest first)
+    });
+    
     console.log("Posts data fetched:", posts.length);
   } catch (error) {
-    console.error("Error fetching project info:", error);
+    console.error("Error fetching blog posts:", error);
+    fetchError = error;
   }
 
   const safePosts = posts.map((post) => ({
