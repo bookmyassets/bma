@@ -296,9 +296,9 @@ export default function InteractiveMap() {
       <div className={`mx-auto ${isMobile ? 'max-w-md' : 'max-w-6xl'}`}>
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             8 Mega Projects Powering
-          </h1>
+          </h2>
           <h2 className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-4">Dholera</h2>
           <div className="flex flex-wrap justify-center items-center gap-4 text-sm md:text-base text-gray-600">
             <div className="flex items-center">
