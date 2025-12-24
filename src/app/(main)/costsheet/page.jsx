@@ -37,7 +37,8 @@ export default function CostSheet() {
     legalFee: 20000,
     maintenanceRate: 500,
     maintenanceCharge: 0,
-    ifms: 100, // IFMS charge (100 * size)
+    ifmsRate: 100, // IFMS rate per yard
+    ifms: 0, // IFMS charge (rate * size)
     totalCharges: 0,
     plotTotalPayment: 0,
   });
@@ -89,7 +90,7 @@ export default function CostSheet() {
       const plotPrice = plotPriceWithPLC;
       const totalPayment = formData.plotAreaYards * plotPrice;
       const maintenance = formData.plotAreaYards * formData.maintenanceRate;
-      const ifmsCharge = formData.plotAreaYards * 100; // IFMS = 100 * size
+      const ifmsCharge = formData.plotAreaYards * formData.ifmsRate;
       const totalCharges =
         maintenance +
         parseFloat(formData.legalFee) +
@@ -112,6 +113,7 @@ export default function CostSheet() {
     formData.basePlotPriceYards,
     formData.plc,
     formData.maintenanceRate,
+    formData.ifmsRate,
     formData.legalFee,
   ]);
 
@@ -131,6 +133,7 @@ export default function CostSheet() {
       totalPaymentYards,
       maintenanceRate,
       maintenanceCharge,
+      ifmsRate,
       ifms,
       legalFee,
       totalCharges,
@@ -222,7 +225,7 @@ export default function CostSheet() {
             `Rs. ${formattedMaintenanceCharge}`,
           ],
           ["Legal Fee (Per Sale Deed)", `Rs. ${formattedLegalFee}`],
-          ["IFMS (100 x Size)", `Rs. ${formattedIfms}`],
+          ["IFMS (${ifmsRate} x Size)", `Rs. ${formattedIfms}`],
           ["Total Charges", `Rs. ${formattedTotalCharges}`],
           ["Plot Total Payment", `Rs. ${formattedPlotTotalPayment}`],
         ],
@@ -487,7 +490,7 @@ export default function CostSheet() {
               </td>
             </tr>
             <tr className="border-b">
-              <td className="p-2 font-semibold">Development Charge</td>
+              <td className="p-2 font-semibold">Development Charge Rate</td>
               <td className="p-2">
                 <select
                   name="maintenanceRate"
@@ -502,7 +505,7 @@ export default function CostSheet() {
             </tr>
             <tr className="border-b">
               <td className="p-2 font-semibold">
-                Development Charge({formData.maintenanceRate} x Size)
+                Development Charge ({formData.maintenanceRate} x Size)
               </td>
               <td className="p-2">
                 <input
@@ -526,7 +529,19 @@ export default function CostSheet() {
               </td>
             </tr>
             <tr className="border-b">
-              <td className="p-2 font-semibold">IFMS (100 x Size)</td>
+              <td className="p-2 font-semibold">IFMS Rate</td>
+              <td className="p-2">
+                <input
+                  type="number"
+                  name="ifmsRate"
+                  value={formData.ifmsRate}
+                  onChange={handleChange}
+                  className="border p-2 w-full rounded"
+                />
+              </td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-2 font-semibold">IFMS ({formData.ifmsRate} x Size)</td>
               <td className="p-2">
                 <input
                   type="text"
