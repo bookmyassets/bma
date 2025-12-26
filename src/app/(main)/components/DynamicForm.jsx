@@ -197,6 +197,7 @@ export default function DholeraPopupForm() {
                     className="object-cover w-full h-full"
                     fill
                     sizes="(max-width: 768px) 90vw, 450px"
+                    fetchPriority = "high"
                   />
                 </div>
               </div>

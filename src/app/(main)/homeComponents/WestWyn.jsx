@@ -16,7 +16,7 @@ export default function WestWyn() {
           </div>
           <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center md:hidden">
             <a
-              href="/dholera-residential-plots/westwyn-county"
+              href="/dholera-residential-plots/westwyn-estate"
               className="text-lg  text-white p-4 border-2 border-[#B3000C] rounded-lg bg-[#B3000C] "
             >
               About WestWyn Estate

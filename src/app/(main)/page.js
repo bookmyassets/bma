@@ -1,35 +1,31 @@
-"use client"
-import React, { useState } from 'react'
-import Hero from './homeComponents/Hero'
-import Dholera from './homeComponents/Dholera'
-import BMA from './homeComponents/BMA'
-import ShortsSection from './homeComponents/YouTube'
-import FAQSection from './homeComponents/FAQs'
-import WestWyn from './homeComponents/WestWyn'
-import PopupForm from './components/PopUpForm'
-import LandingPage from './homeComponents/Hero3'
-import InteractiveMap from './homeComponents/InteractiveMap'
-import Groundzero from './homeComponents/Groundzero'
-import DholeraPopupForm from './components/DynamicForm'
-
-
+"use client";
+import React, { useState } from "react";
+import Hero from "./homeComponents/Hero";
+import Dholera from "./homeComponents/Dholera";
+import BMA from "./homeComponents/BMA";
+import ShortsSection from "./homeComponents/YouTube";
+import FAQSection from "./homeComponents/FAQs";
+import WestWyn from "./homeComponents/WestWyn";
+import PopupForm from "./components/PopUpForm";
+import LandingPage from "./homeComponents/Hero3";
+import InteractiveMap from "./homeComponents/InteractiveMap";
+import Groundzero from "./homeComponents/Groundzero";
+import DholeraPopupForm from "./components/DynamicForm";
 
 export default function page() {
-
   const [showpopForm, setpopShowForm] = useState(false);
 
   return (
     <>
-    <title>Discover Investment-Ready Plots in Dholera Smart City | BookMyAssets</title>
-    
-    <meta
+      <title>
+        Discover Investment-Ready Plots in Dholera Smart City | BookMyAssets
+      </title>
+
+      <meta
         name="description"
         content="Secure your future with BookMyAssets! Hassle-free residential property investment with clear titles and N.A. NOC. Start your journey today!"
       />
-   <link
-            rel="canonical"
-            href={`https://www.bookmyassets.com/`}
-          />
+      <link rel="canonical" href={`https://www.bookmyassets.com/`} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -94,7 +90,7 @@ export default function page() {
               addressLocality: "Gurgaon",
               addressRegion: "Haryana",
               postalCode: "122001",
-              addressCountry: "IN", 
+              addressCountry: "IN",
             },
             areaServed: {
               "@type": "Place",
@@ -123,7 +119,7 @@ export default function page() {
                 name: "When will Dholera International Airport start operations?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text:       "The Dholera International Airport, a key milestone in the Dholera city development, is expected to start operations by December 2025, boosting passenger and cargo connectivity across India and abroad.",
+                  text: "The Dholera International Airport, a key milestone in the Dholera city development, is expected to start operations by December 2025, boosting passenger and cargo connectivity across India and abroad.",
                 },
               },
               {
@@ -153,24 +149,23 @@ export default function page() {
             ],
           }),
         }}
-      /> 
-      
-    <div>
-       <LandingPage openForm={() => setpopShowForm(true)} />
-       {/* <Hero openForm={() => setpopShowForm(true)} /> */}
-       <Dholera/>
-       <BMA/>
-       <WestWyn/>
-       <div>
+      />
 
-       <InteractiveMap/>
-       </div>
-       <ShortsSection/>
-       <Groundzero/>
-       <FAQSection/>
-       {/* <ImageMapFormOverlay/> */}
-    </div>
-    {/* {showpopForm && (
+      <div>
+        <LandingPage openForm={() => setpopShowForm(true)} />
+        {/* <Hero openForm={() => setpopShowForm(true)} /> */}
+        <Dholera />
+        <BMA />
+        <WestWyn />
+        <div>
+          <InteractiveMap />
+        </div>
+        <ShortsSection />
+        <Groundzero />
+        <FAQSection />
+        {/* <ImageMapFormOverlay/> */}
+      </div>
+      {/* {showpopForm && (
         <PopupForm
           onClose={() => setpopShowForm(false)}
           title={`Dholera – India’s Safest Investment`}
@@ -178,9 +173,8 @@ export default function page() {
           className="font-medium"
         />
         )} */}
-        {/* <PopupForm title="Best investment-ready locations in Dholera"/> */}
-<DholeraPopupForm/>
-
+      {/* <PopupForm title="Best investment-ready locations in Dholera"/> */}
+      <DholeraPopupForm />
     </>
-  )
+  );
 }

@@ -536,6 +536,7 @@ export default function LandingPage({ openForm }) {
                       quality={isMobile ? 75 : 85}
                       loading={index === 0 ? "eager" : "lazy"}
                       sizes={isMobile ? "100vw" : "60vw"}
+                      fetchPriority = "high"
                     />
                   </div>
                 ))}
