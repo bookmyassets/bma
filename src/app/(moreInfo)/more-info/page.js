@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import LandingPage from "./body/HeroSlider";
 import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
 import mimg1 from "@/assests/landing/heroMobile.webp";
-import About from "./body/About";
 import PopupForm from "./components/PopUpForm";
 import Dholeravideos from "./body/Videos";
 import Ribbon from "./body/Ribbon";
 import ProjectSlider from "./projects/page";
-
-import AboutBMA from "./body/AboutBMA";
 import Gallery from "./gallery/page";
+import AboutBMA from "./body/About_BMA";
+import DholeraLandingPage from "./body/DholeraSIR";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -25,7 +24,8 @@ export default function Page() {
             openForm={() => setShowForm(true)}
           />
         </section>
-        <About />
+        <DholeraLandingPage/>
+        <AboutBMA/>
         <ProjectSlider/>
         <Ribbon/>
         <Gallery/>

@@ -10,7 +10,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-export default function InvestmentBenefits() {
+export default function AboutBMA() {
   const [openIndex, setOpenIndex] = useState(null);
   const [selectedBenefit, setSelectedBenefit] = useState(null);
   const [showModal, setShowModal] = useState(false);
