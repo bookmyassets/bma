@@ -1,0 +1,14 @@
+/* Add to your global CSS or as inline styles */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Disable body scroll when component is active */
+body.no-scroll {
+  overflow: hidden;
+}

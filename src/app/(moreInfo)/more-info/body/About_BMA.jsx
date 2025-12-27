@@ -148,7 +148,7 @@ const benefits = [
           </motion.h2>
 
           {/* Desktop: 5 cards in a row, Mobile: 1 card per row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
@@ -157,7 +157,7 @@ const benefits = [
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
-                onClick={() => openModal(benefit, index)}
+                /* onClick={() => openModal(benefit, index)} */
                 transition={{ delay: index * 0.1 }}
               >
                 {/* Card Header */}
@@ -176,34 +176,13 @@ const benefits = [
 
                 {/* Description - Always Visible */}
                 <div className="mb-3">
-                  <p className="text-sm md:text-base text-gray-600 line-clamp-3 text-center">
+                 {/*  <p className="text-sm md:text-base text-gray-600 line-clamp-3 text-center">
                     {benefit.description}
+                  </p> */}
+                  <p className="text-sm md:text-base text-black  text-center">
+                    {benefit.body}
                   </p>
                 </div>
-
-                {/* Expand Button */}
-                <button
-                  className="w-full focus:outline-none"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFAQ(index);
-                  }}
-                  aria-expanded={openIndex === index}
-                  aria-controls={`benefit-${index}`}
-                >
-                  <div className="flex justify-center">
-                    <motion.div 
-                      className="p-2 rounded-full bg-gray-100 group-hover:bg-[#deae3c]/10 transition-colors duration-300"
-                      variants={iconVariants}
-                      whileHover="hover"
-                    >
-                      
-                        <Plus className="w-4 h-4 text-gray-400 group-hover:text-[#deae3c]" onClick={() => openModal(benefit, index)} />
-                     
-                    </motion.div>
-                  </div>
-                </button>
-
                 {/* Expandable Content */}
                 
               </motion.div>
@@ -282,21 +261,7 @@ const benefits = [
                   </p>
                 </motion.div>
                 
-                <motion.div 
-                  className="mt-6 flex justify-end"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  <motion.button
-                    onClick={closeModal}
-                    className="bg-[#deae3c] hover:bg-[#c9992a] text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Close
-                  </motion.button>
-                </motion.div>
+                
               </div>
             </motion.div>
           </motion.div>

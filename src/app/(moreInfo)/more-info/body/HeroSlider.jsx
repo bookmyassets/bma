@@ -7,14 +7,15 @@ import logo from "@/assests/ad-page/dholera-govt-logo.webp"
 import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight, ChevronLeft, TrendingUp } from 'lucide-react';
 
 //images import
-import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
-import img2 from "@/assests/ad-page/img2.webp";
-import img3 from "@/assests/ad-page/img3.webp";
+import img1 from "@/assests/ad-page/hero/dholera-activation-area-banner.webp";
+import img2 from "@/assests/ad-page/hero/dholera-activation-area-banner2.webp";
+import img3 from "@/assests/ad-page/hero/dholera-activation-area-banner3.webp";
 
-import imgM1 from "@/assests/ad-page/mob1.webp";
-import imgM2 from "@/assests/ad-page/mob2.webp";
-import imgM3 from "@/assests/ad-page/mob3.webp";
+import imgM1 from "@/assests/ad-page/hero/dholera-activation-area-mobile1.webp";
+import imgM2 from "@/assests/ad-page/hero/dholera-activation-area-mobile2.webp";
+import imgM3 from "@/assests/ad-page/hero/dholera-activation-area-mobile3.webp";
 import BrochureDownload from "../components/BrochureDownload";
+import MobilePropertyGrid from "./MobileGrid";
 
 
 export default function LandingPage({ openForm }) {
@@ -639,6 +640,7 @@ export default function LandingPage({ openForm }) {
           </div>
         </div>
       </div>
+            <MobilePropertyGrid/>
       <AnimatePresence>
         {isDownload && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">

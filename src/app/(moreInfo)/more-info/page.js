@@ -10,6 +10,8 @@ import ProjectSlider from "./projects/page";
 import Gallery from "./gallery/page";
 import AboutBMA from "./body/About_BMA";
 import DholeraLandingPage from "./body/DholeraSIR";
+import MegaIndustries from "./body/MegaIndustries";
+import WestWyn from "./body/WestWyn";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -24,9 +26,16 @@ export default function Page() {
             openForm={() => setShowForm(true)}
           />
         </section>
-        <DholeraLandingPage/>
+        {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
+        <DholeraLandingPage/>    
+        {/* Mega Industries crousel */}
+        <MegaIndustries/>
+        {/* Westwyn Estate */}
+{/*         <ProjectSlider/> */}
+        <WestWyn/>
+        {/* About BookMyAssets */}
         <AboutBMA/>
-        <ProjectSlider/>
+        {/* Lead Form */}
         <Ribbon/>
         <Gallery/>
         <Dholeravideos/>

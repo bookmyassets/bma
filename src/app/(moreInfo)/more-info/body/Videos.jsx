@@ -108,7 +108,7 @@ export default function Dholeravideos() {
 
   return (
     <>
-      <MobilePropertyGrid/>
+      
       <div className="bg-white" id="dholera">
         <div className="space-y-4">
           <div className="relative pt-8">
