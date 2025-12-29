@@ -501,7 +501,7 @@ export default function LandingPage({ openForm }) {
                   </p>
                 </div>
               ) : (
-                <form id="">
+                <form id="lead-form-1">
 
                 <div className="space-y-4">
                   {errorMessage && (
@@ -591,7 +591,7 @@ export default function LandingPage({ openForm }) {
                     id="lead-form-1"
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="w-full class2 py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {isLoading ? "Submitting..." : "Claim Offer"}
                   </motion.button>
