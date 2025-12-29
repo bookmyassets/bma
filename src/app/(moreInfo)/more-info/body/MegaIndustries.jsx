@@ -50,26 +50,28 @@ export default function MegaIndustries() {
         }
       `}</style>
       <div className="relative">
-       
         <div className=" max-w-7xl mx-auto pt-8">
           <div className="text-center">
             <h3 className="text-[28px] font-bold text-[#151f28]">
-              Mega Industries Investment in Dholera SIR
+              Global Giants Building in Dholera
             </h3>
             <div className="w-24 h-1 mt-4 mb-4 bg-yellow-600 mx-auto"></div>
           </div>
 
           <div className="bg-gray-50 p-8 rounded-lg">
             <p className=" leading-relaxed">
-              Dholera Smart City is emerging as an industrial powerhouse in
-              Gujarat. The Tata Semiconductor Plant is boosting India’s
-              electronics sector, while renewable energy hubs are making Dholera
-              SIR a leader in green energy. The Ahmedabad Dholera Expressway and
-              Dholera International Airport is unlocking global connectivity.
-              Alongside, activation areas, town planning schemes, and water
-              treatment projects ensure sustainable urban development making
-              property in Dholera Smart City one of the best investment choices
-              in India.
+              Dholera has secured commitments from India's most trusted
+              industrial leaders and global technology giants. Tata Electronics
+              is establishing India's first semiconductor fabrication plant,
+              while Intel has signed strategic partnership MoUs for technology
+              collaboration. Tokyo Electron has opened operations to support
+              semiconductor manufacturing. Reliance Industries, Adani Group,
+              ReNew Power, Tata Power, Inox Air Products, and Jabil are building
+              critical infrastructure spanning renewable energy, industrial
+              gases, and advanced electronics manufacturing. When the world's
+              leading corporations choose one location, they are not just
+              investing capital but they are signaling confidence in India's
+              next industrial capital.
             </p>
             {/* <p className="text-lg leading-relaxed">
             <span className="font-semibold">
@@ -100,7 +102,7 @@ export default function MegaIndustries() {
                   <Image
                     src={company.logo}
                     alt={company.name}
-                  /*   width={160}
+                    /*   width={160}
                     height={80} */
                     className="object-contain w-40 h-28 "
                   />

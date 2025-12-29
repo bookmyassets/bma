@@ -1,7 +1,7 @@
 import React from "react";
 import ProjectsSection from "./MajorProjects";
-import abcd from "@/assests/ad-page/abcd-building-dholera-about-section.webp"
-import bma_dholera from "@/assests/ad-page/bookmyassets-dholera.webp"
+import abcd from "@/assests/ad-page/abcd-building-dholera-about-section.webp";
+import bma_dholera from "@/assests/ad-page/bookmyassets-dholera.webp";
 import Image from "next/image";
 
 export default function DholeraLandingPage() {
@@ -19,20 +19,20 @@ export default function DholeraLandingPage() {
             </h1>
             <div className="space-y-4 text-lg leading-relaxed">
               <p>
-                Dholera Smart City is India's first Greenfield Smart City,
-                planned under the Delhi–Mumbai Industrial Corridor (DMIC) in
-                Gujarat. Located about 100 km from Ahmedabad, Dholera is
+                Dholera Smart City is India’s first Greenfield Smart City,
+                strategically positioned under the Delhi–Mumbai Industrial
+                Corridor (DMIC). Located 100 km from Ahmedabad, Dholera is
                 designed as a future-ready industrial and urban hub with
                 world-class infrastructure.
               </p>
               <p>
-                The city features planned zones, wide roads, underground
-                utilities, renewable energy integration, and smart governance
-                systems. With major projects like Dholera International Airport,
-                Dholera Solar Park, and industrial activation areas underway,
-                Dholera Smart City India is positioned as one of the most
-                promising upcoming cities in India for long-term growth and
-                development.
+                Spanning 922.5 sq km, Dholera features planned industrial zones,
+                100m-wide roads, underground utilities, renewable energy
+                integration, and IoT-enabled smart governance. With major
+                projects like Dholera International Airport, Asia’s largest
+                Solar Park, and industrial activation areas underway, Dholera
+                Smart City is positioned as India’s most promising emerging city
+                for sustainable growth and industrial development.
               </p>
             </div>
           </div>
@@ -48,10 +48,8 @@ export default function DholeraLandingPage() {
 
       {/* Section 2: Major Companies & Projects */}
       <section>
-        <ProjectsSection/>
+        <ProjectsSection />
       </section>
-
-      
     </div>
   );
 }

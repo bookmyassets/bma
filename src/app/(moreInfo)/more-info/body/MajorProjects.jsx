@@ -6,47 +6,87 @@ import mapM from "@/assests/ad-page/dholera-map-1.webp"
 const projects = [
   {
     id: 1,
-    name: "Tata Semiconductor",
-    youtubeId: "sYONhrTYBTg",
-    content:
-      "The Tata Semiconductor fab is one of the most significant developments in Dholera, strengthening India's semiconductor manufacturing ecosystem. This state-of-the-art facility represents a major investment in India's technology infrastructure and positions Dholera as a key player in the global semiconductor supply chain.",
+    name: "Ahmedabad–Dholera Expressway",
+    youtubeId: "NdH1zHVGTcQ",
+    points: [
+      "109 km, six-lane access-controlled expressway reducing Ahmedabad–Dholera travel time to under 45 minutes",
+      "Critical logistics corridor under the Delhi–Mumbai Industrial Corridor (DMIC)",
+      "Approved for future monorail integration to enhance industrial and passenger connectivity",
+    ],
   },
   {
     id: 2,
-    name: "ReNew Power Solar Park",
-    youtubeId: "129oXwderKU",
-    content:
-      "Renewable energy leaders like ReNew Power are part of the massive Dholera Solar Park, one of the largest in the world. This project demonstrates Dholera's commitment to sustainable development and clean energy, contributing significantly to India's renewable energy targets.",
+    name: "Dholera International Airport",
+    youtubeId: "PuLWU9DYV_c",
+    points: [
+      "India’s second-largest airport spanning over 1,400 hectares with passenger and cargo operations",
+      "Designed as a global aviation hub supporting Dholera’s industrial ecosystem",
+      "Phase 1 construction completion expected in early 2026",
+    ],
   },
   {
     id: 3,
-    name: "Dholera International Airport",
-    youtubeId: "PuLWU9DYV_c",
-    content:
-      "The Dholera International Airport, currently under development, will enhance global connectivity and support industrial cargo movement. This strategic infrastructure project will serve as a major gateway for both passengers and freight, facilitating international trade and tourism.",
+    name: "ABCD Building – City Control Center",
+    youtubeId: "faSgawUZWeY",
+    points: [
+      "One-stop administrative hub for industrial approvals and construction coordination",
+      "Houses the Smart City Command & Control Centre for real-time governance",
+      "Centralized monitoring of roads, electricity, traffic, utilities, and city infrastructure",
+    ],
   },
   {
     id: 4,
-    name: "ABCD Building - City Control Center",
-    youtubeId: "faSgawUZWeY",
-    content:
-      "The ABCD Building serves as the brain of Dholera, housing the city's command and control center. This smart infrastructure hub manages the city's operations, from utilities to security, showcasing the integration of technology in urban planning.",
+    name: "ReNew Solar Park – Manufacturing Facility",
+    youtubeId: "129oXwderKU",
+    points: [
+      "₹1,200 crore investment in solar module and cell manufacturing",
+      "2.5 GW solar cell manufacturing capacity supporting India’s renewable energy goals",
+      "Employs 1,000+ professionals with expanding production operations",
+    ],
   },
   {
     id: 5,
-    name: "Dholera-Ahmedabad Expressway",
-    youtubeId: "NdH1zHVGTcQ",
-    content:
-      "The Dholera-Ahmedabad Expressway provides seamless connectivity between the smart city and Gujarat's largest metropolitan area. This six-lane expressway significantly reduces travel time and facilitates the movement of goods and people.",
+    name: "Tata Electronics Semiconductor Fab",
+    youtubeId: "sYONhrTYBTg",
+    points: [
+      "₹91,000 crore investment establishing India’s first semiconductor fabrication plant",
+      "Expected to generate 20,000+ direct and indirect jobs",
+      "Global collaborations with Intel, Tokyo Electron, and PSMC for advanced technology",
+    ],
   },
   {
     id: 6,
-    name: "Water Treatment Plant",
+    name: "Dholera Solar Park",
     youtubeId: "fHLqa6YM1Aw",
-    content:
-      "The Water Treatment Plant ensures sustainable water management for the entire Dholera Special Investment Region. This advanced facility uses cutting-edge technology to provide clean, treated water to residential, commercial, and industrial areas.",
+    points: [
+      "Asia’s largest solar park with a planned capacity of 5,000 MW (5 GW)",
+      "1,200+ MW already operational powering industrial infrastructure",
+      "Ensures sustainable and uninterrupted renewable energy supply",
+    ],
+  },
+  {
+    id: 7,
+    name: "Water Treatment Plant (WTP)",
+    youtubeId: "fHLqa6YM1Aw",
+    points: [
+      "50 MLD capacity, scalable up to 150 MLD for future demand",
+      "Piped water network with Mass Balancing Reservoirs and ESRs",
+      "Reliable water supply across industrial, residential, and commercial zones",
+    ],
+  },
+  {
+    id: 8,
+    name: "Activation Area – Phase 1",
+    youtubeId: "fHLqa6YM1Aw",
+    points: [
+      "22.5 sq km plug-and-play industrial zone with 95% infrastructure completion",
+      "Underground utilities, IoT-enabled monitoring, and smart traffic systems",
+      "Man-made riverfront canal with fully developed roads, water, drainage, and power networks",
+    ],
   },
 ];
+
+
 
 function DesktopDesign() {
   const [selectedProject, setSelectedProject] = useState(projects[0]);
@@ -123,8 +163,10 @@ function DesktopDesign() {
               <h3 className="text-2xl font-bold text-gray-800 mb-3">
                 {selectedProject.name}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {selectedProject.content}
+              <p className="text-gray-600 leading-relaxed px-6">
+                {selectedProject.points.map((point, index) => (
+    <li key={index}>{point}</li>
+  ))}
               </p>
             </div>
           </div>
@@ -195,211 +237,7 @@ function DesktopDesign() {
   );
 }
 
-// Design 1: Card-Based Swipeable Layout
-function Design1() {
-  const [selectedProject, setSelectedProject] = useState(projects[0]);
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  return (
-    <div className="md:hidden bg-black">
-      <div className="p-4 pt-6">
-        <h2 className="text-3xl font-bold text-center mb-2 text-[#deae3c]">
-          Major Projects
-        </h2>
-        <p className="text-center text-gray-400 text-sm mb-6">
-          Swipe to explore Dholera's developments
-        </p>
-
-        {/* Featured Video Card */}
-        <div className="bg-black rounded-3xl overflow-hidden shadow-2xl mb-6">
-          <div className="relative aspect-video bg-black">
-            {isPlaying ? (
-              <iframe
-                className=""
-                src={`https://www.youtube.com/embed/${selectedProject.youtubeId}?autoplay=1`}
-                title={selectedProject.name}
-                frameBorder="0"
-                allow="autoplay"
-                allowFullScreen
-              />
-            ) : (
-              <div
-                className="relative  cursor-pointer group"
-                onClick={() => setIsPlaying(true)}
-              >
-                <img
-                  src={`https://img.youtube.com/vi/${selectedProject.youtubeId}/maxresdefault.jpg`}
-                  alt={selectedProject.name}
-                  className=" object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="bg-[#deae3c] text-white px-3 py-1 rounded-full text-xs font-semibold inline-block mb-2">
-                    #{selectedProject.id}
-                  </div>
-                  <h3 className="text-white text-xl font-bold">
-                    {selectedProject.name}
-                  </h3>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-[#deae3c] rounded-full p-4 shadow-lg group-active:scale-95 transition-transform">
-                    <svg
-                      className="w-8 h-8 text-white ml-1"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="p-5">
-            <p className="text-gray-300 text-sm leading-relaxed">
-              {selectedProject.content}
-            </p>
-          </div>
-        </div>
-
-        {/* Horizontal Scroll Project Pills */}
-        <div className="overflow-x-auto pb-4 -mx-4 px-4">
-          <div className="flex space-x-3 min-w-max">
-            {projects.map((project) => (
-              <button
-                key={project.id}
-                onClick={() => {
-                  setSelectedProject(project);
-                  setIsPlaying(false);
-                }}
-                className={`flex-shrink-0 px-5 py-3 rounded-full font-semibold text-sm transition-all ${
-                  selectedProject.id === project.id
-                    ? "bg-[#deae3c] text-white shadow-lg"
-                    : "bg-gray-800 text-gray-300"
-                }`}
-              >
-                {project.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Design 2: Stacked Cards with Expand
-function Design2() {
-  const [expandedId, setExpandedId] = useState(null);
-  const [playingId, setPlayingId] = useState(null);
-
-  return (
-    <div className="md:hidden bg-white">
-      <div className="p-4 pt-6">
-        <h2 className="text-3xl font-bold text-center mb-2 text-[#deae3c]">
-          Major Projects in Dholera
-        </h2>
-        <p className="text-center text-gray-400 text-sm mb-6">
-          Tap to explore each project
-        </p>
-
-        <div className="space-y-4">
-          {projects.map((project) => {
-            const isExpanded = expandedId === project.id;
-            const isPlaying = playingId === project.id;
-
-            return (
-              <div
-                key={project.id}
-                className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-xl"
-              >
-                <button
-                  onClick={() => setExpandedId(isExpanded ? null : project.id)}
-                  className="w-full text-left"
-                >
-                  <div className="p-4 flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-[#deae3c] rounded-full flex items-center justify-center text-white font-bold">
-                        {project.id}
-                      </div>
-                      <h3 className="text-white font-semibold text-base">
-                        {project.name}
-                      </h3>
-                    </div>
-                    <svg
-                      className={`w-5 h-5 text-[#deae3c] transition-transform ${
-                        isExpanded ? "rotate-180" : ""
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
-                </button>
-
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    isExpanded ? "max-h-[600px]" : "max-h-0"
-                  }`}
-                >
-                  <div className="px-4 pb-4">
-                    <div className="bg-black rounded-xl overflow-hidden mb-3">
-                      <div className="relative aspect-video">
-                        {isPlaying ? (
-                          <iframe
-                            className=""
-                            src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1`}
-                            title={project.name}
-                            frameBorder="0"
-                            allow="autoplay"
-                            allowFullScreen
-                          />
-                        ) : (
-                          <div
-                            onClick={() => setPlayingId(project.id)}
-                            className="relative  cursor-pointer group"
-                          >
-                            <img
-                              src={`https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`}
-                              alt={project.name}
-                              className=" object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/40"></div>
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="bg-[#deae3c] rounded-full p-3">
-                                <svg
-                                  className="w-6 h-6 text-white ml-0.5"
-                                  fill="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path d="M8 5v14l11-7z" />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <p className="text-gray-300 text-sm leading-relaxed">
-                      {project.content}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // Design 3: Instagram Stories Style
 function Design3() {
@@ -496,8 +334,10 @@ function Design3() {
               )}
             </div>
             <div className="p-6">
-              <p className="text-gray-300 text-sm leading-relaxed">
-                {currentProject.content}
+              <p className="text-gray-300 text-sm leading-relaxed ">
+                {currentProject.points.map((point, index) => (
+    <li key={index}>{point}</li>
+  ))}
               </p>
             </div>
           </div>
@@ -549,53 +389,20 @@ function Design3() {
 
 // Main Component with Design Selector
 export default function MobileDesignShowcase() {
-  const [selectedDesign, setSelectedDesign] = useState(1);
+  const [selectedDesign, setSelectedDesign] = useState(3);
 
   return (
     <div className="" id="major-projects">
       {/* Design Selector */}
-      <div className="bg-gray-900 md:hidden p-4 sticky top-0 border-b border-gray-700">
-        <div className="flex gap-2  justify-center">
-          <button
-            onClick={() => setSelectedDesign(1)}
-            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-              selectedDesign === 1
-                ? "bg-[#deae3c] text-white"
-                : "bg-gray-800 text-gray-400"
-            }`}
-          >
-            Card Swipe
-          </button>
-          <button   
-            onClick={() => setSelectedDesign(2)}
-            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-              selectedDesign === 2
-                ? "bg-[#deae3c] text-white"
-                : "bg-gray-800 text-gray-400"
-            }`}
-          >
-            Accordion
-          </button>
-          <button
-            onClick={() => setSelectedDesign(3)}
-            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-              selectedDesign === 3
-                ? "bg-[#deae3c] text-white"
-                : "bg-gray-800 text-gray-400"
-            }`}
-          >
-            Stories
-          </button>
-        </div>
-      </div>
+      
 
       {/* Render Selected Design */}
-      {selectedDesign === 1 && <Design1 />}
-      {selectedDesign === 2 && <Design2 />}
       {selectedDesign === 3 && <Design3 />}
       <DesktopDesign />
 
-        <p className="text-2xl md:text-3xl pt-8 font-semibold bg-gray-100 pb-4 text-center">Dholera Map</p>
+        <p className="text-2xl md:text-3xl pt-8 font-semibold bg-gray-100 pb-4 text-center">The Complete Dholera Blueprint</p>
+        <p className="text-lg md:text-xl pt-8 font-semibold bg-gray-100 pb-4 text-center">India's first and largest Special Investment Region with dedicated industrial, residential, and commercial zones designed for seamless growth.
+</p>
       <div className="p-4 bg-gray-100 flex justify-center">
         <Image
           src={mapM}

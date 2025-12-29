@@ -18,6 +18,8 @@ import {
   PersonStanding,
 } from "lucide-react";
 
+import { MapPin, Route, Factory, Plane, Clock } from "lucide-react";
+
 import { FaRoad } from "react-icons/fa6";
 
 export default function WestWyn() {
@@ -35,12 +37,39 @@ export default function WestWyn() {
     { label: "Yoga Deck", icon: Leaf },
     { label: "Senior Citizen Zone", icon: PersonStanding }, // SAFE
   ];
+  const location = [
+    {
+      label: "0 km from Dholera SIR Boundary",
+      icon: MapPin,
+    },
+    {
+      label: "5 Minutes from Dholera–Ahmedabad Expressway",
+      icon: Route,
+    },
+    {
+      label: "20 Minutes from Activation Area",
+      icon: Clock,
+    },
+    {
+      label: "20 Minutes from Tata Semiconductor Plant",
+      icon: Factory,
+    },
+    {
+      label: "30 Minutes from Dholera International Airport",
+      icon: Plane,
+    },
+  ];
 
   const sections = [
     {
       title: "About WestWyn Estate",
-      content:
-        "WestWyn Estate redefines luxury living with contemporary architecture and world-class design. Nestled in a prime location, it offers spacious residences crafted for comfort and elegance. Experience a lifestyle where sophistication meets serenity in every corner.",
+      content: `WestWyn Estate is strategically positioned at the epicenter of Dholera's rapid transformation: 0 kilometers from the SIR boundary, offering unmatched proximity to every major infrastructure milestone.
+
+This is not just about buying land. It is about securing the only location in Dholera that delivers all four critical advantages: prime connectivity to industrial and infrastructure projects, immediate possession and registry, verified legal documentation, and accessible entry below ₹10 lakh.
+
+While other projects force you to choose between location, affordability or instant ownership, WestWyn Estate is the only project offering the complete package. AUDA-approved plots with clear titles, ready for immediate registry, positioned at Dholera's most connected intersection, with high appreciation potential at an entry point most investors can access.
+
+This is your opportunity to own premium land at Dholera's industrial core before production begins and demand surges.`,
       image: img1,
     },
     {
@@ -50,8 +79,7 @@ export default function WestWyn() {
     },
     {
       title: "Location Advantage",
-      content:
-        "Strategically positioned with excellent connectivity to business hubs, schools, and hospitals. Quick access to major highways and metro stations ensures seamless commuting. Surrounded by retail centers and entertainment options, everything you need is within reach.",
+      content: location,
       image: img3,
     },
   ];
@@ -63,9 +91,9 @@ export default function WestWyn() {
         <div className="max-w-7xl mx-auto px-8 py-12">
           {/* Header */}
           <div className="mb-16">
-            <h1 className="text-5xl font-bold text-center text-black mb-4">
-              WestWyn Estate
-            </h1>
+            <h2 className="text-5xl font-bold text-center text-black mb-4">
+              WestWyn Estate - Investment Goldmine of Dholera
+            </h2>
           </div>
 
           {/* Tab Navigation */}
@@ -106,9 +134,13 @@ export default function WestWyn() {
               <h2 className="text-4xl font-bold text-black mb-6">
                 {sections[activeSection].title}
               </h2>
-              {sections[activeSection].title === "Amenities" ? (
+              {sections[activeSection].title === "Amenities" ||
+              sections[activeSection].title === "Location Advantage" ? (
                 <div className="grid grid-cols-2 gap-x-10 gap-y-8 mt-6">
-                  {essentials.map(({ label, icon: Icon }) => (
+                  {(sections[activeSection].title === "Amenities"
+                    ? essentials
+                    : location
+                  ).map(({ label, icon: Icon }) => (
                     <div key={label} className="flex items-center gap-4">
                       <Icon
                         size={28}
@@ -122,7 +154,7 @@ export default function WestWyn() {
                   ))}
                 </div>
               ) : (
-                <p className="text-xl text-gray-700 leading-relaxed">
+                <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
                   {sections[activeSection].content}
                 </p>
               )}
@@ -190,19 +222,23 @@ export default function WestWyn() {
             <h2 className="text-2xl font-bold text-black mb-4">
               {sections[activeSection].title}
             </h2>
-            {sections[activeSection].title === "Amenities" ? (
-              <div className="grid grid-cols-2 gap-x-6 gap-y-5 mt-4 mb-6">
-                {essentials.map(({ label, icon: Icon }) => (
-                  <div key={label} className="flex items-center gap-3">
-                    <Icon size={22} strokeWidth={1.5} className="text-black" />
-                    <span className="text-sm font-medium text-gray-800">
+            {sections[activeSection].title === "Amenities" ||
+            sections[activeSection].title === "Location Advantage" ? (
+              <div className="grid grid-cols-2 gap-x-10 gap-y-8 mt-6">
+                {(sections[activeSection].title === "Amenities"
+                  ? essentials
+                  : location
+                ).map(({ label, icon: Icon }) => (
+                  <div key={label} className="flex items-center gap-4">
+                    <Icon size={28} strokeWidth={1.5} className="text-black" />
+                    <span className="text-lg font-medium text-gray-800">
                       {label}
                     </span>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-base text-gray-700 leading-relaxed mb-6">
+              <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
                 {sections[activeSection].content}
               </p>
             )}
