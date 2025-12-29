@@ -178,6 +178,7 @@ export default function LandingPage({ openForm }) {
         
         // Navigate after delay
         setTimeout(() => {
+          setShowThankYou(false); // Hide the overlay before navigation
           console.log("Navigating to thank you page..."); // Debug log
           router.push('/more-info/thankyou');
         }, 2000);
@@ -196,7 +197,7 @@ export default function LandingPage({ openForm }) {
         window.grecaptcha.reset(recaptchaRef.current);
       }
     }
-    
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -231,6 +232,29 @@ export default function LandingPage({ openForm }) {
     }
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
 
   //Slider Logic
 
@@ -637,4 +661,4 @@ export default function LandingPage({ openForm }) {
       </AnimatePresence>
     </div>
   );
-}}
+}
