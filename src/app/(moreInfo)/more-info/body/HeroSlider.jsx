@@ -138,12 +138,13 @@ export default function LandingPage({ openForm }) {
     return true;
   };
 
+
   const onRecaptchaSuccess = async (token) => {
     try {
       const now = Date.now();
 
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+          "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -165,7 +166,6 @@ export default function LandingPage({ openForm }) {
 
       if (response.ok) {
         setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
         setSubmissionCount((prev) => {
           const newCount = prev + 1;
           localStorage.setItem("formSubmissionCount", newCount.toString());
@@ -173,17 +173,13 @@ export default function LandingPage({ openForm }) {
           return newCount;
         });
 
-        // Show thank you popup for 2 seconds
+        // Show thank you popup
         setShowThankYou(true);
+        
+        // Navigate after delay
         setTimeout(() => {
-          setShowThankYou(false);
-          handleClose();
-
-          // Get current pathname for return URL
-          const currentPath = pathname || window.location.pathname;
-
-          // Push to thank-you route with return URL
-          router.push(`/more-info/thankyou`);
+          console.log("Navigating to thank you page..."); // Debug log
+          router.push('/more-info/thankyou');
         }, 2000);
       } else {
         throw new Error("Error submitting form");
@@ -193,13 +189,14 @@ export default function LandingPage({ openForm }) {
       setErrorMessage(
         error.message || "Error submitting form. Please try again."
       );
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
       if (window.grecaptcha && recaptchaRef.current) {
         window.grecaptcha.reset(recaptchaRef.current);
       }
     }
-  };
+    
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -234,29 +231,6 @@ export default function LandingPage({ openForm }) {
     }
   };
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
 
   //Slider Logic
 
@@ -663,4 +637,4 @@ export default function LandingPage({ openForm }) {
       </AnimatePresence>
     </div>
   );
-}
+}}
