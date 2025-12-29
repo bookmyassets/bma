@@ -486,12 +486,15 @@ export default function LandingPage({ openForm }) {
                   </p>
                 </div>
               ) : (
+                <form id="lead-form-1">
+
                 <div className="space-y-4">
                   {errorMessage && (
                     <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm">
                       {errorMessage}
                     </div>
                   )}
+
 
                   <div className="grid grid-cols-2 gap-2">
                     <motion.div
@@ -578,6 +581,8 @@ export default function LandingPage({ openForm }) {
                     {isLoading ? "Submitting..." : "Claim Offer"}
                   </motion.button>
                 </div>
+                </form>
+                
               )}
             </motion.div>
           </div>
