@@ -5,6 +5,7 @@ import Image from "next/image";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp"
 /* import logo from "@/assests/festival-images/dholera-diwali.webp" */
 import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight, ChevronLeft, TrendingUp } from 'lucide-react';
+import { useRouter, usePathname } from "next/navigation";
 
 //images import
 import img1 from "@/assests/ad-page/hero/dholera-activation-area-banner.webp";
@@ -19,6 +20,9 @@ import MobilePropertyGrid from "./MobileGrid";
 
 
 export default function LandingPage({ openForm }) {
+
+    const router = useRouter();
+  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
