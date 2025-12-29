@@ -70,14 +70,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </Script> */}
         <Script type="text/javascript">
           {`
-           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+           <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-ND5WPPD5');
+})(window,document,'script','dataLayer','GTM-W9VC529X');</script>
            `}
         </Script>
-        
 
         {/* Clarity */}
         <Script type="text/javascript">
@@ -130,10 +129,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </Script> */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-ND5WPPD5"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-W9VC529X"
             height="0"
             width="0"
-            style={{display: "none",visibility:"hidden"}}
+            style="display:none;visibility:hidden"
           ></iframe>
         </noscript>
         <Navbar />
