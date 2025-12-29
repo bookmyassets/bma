@@ -136,7 +136,7 @@ const benefits = [
 
   return (
     <>
-      <div className="pt-8 py-4 bg-gray-50" id='westwyn-county'>
+      <div className="pt-8 py-4 bg-gray-50" id='why-bma' >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 
             className="text-2xl md:text-[32px] lg:text-[40px] font-semibold text-center text-[#deae3c] mb-12 md:mb-16"

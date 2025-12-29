@@ -57,7 +57,7 @@ export default function WestWyn() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-white">
+    <div className="w-full min-h-screen bg-white" id="westwyn-estate">
       {/* Desktop Layout */}
       <div className="hidden lg:block">
         <div className="max-w-7xl mx-auto px-8 py-12">

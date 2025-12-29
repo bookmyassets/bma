@@ -109,7 +109,7 @@ export default function Dholeravideos() {
   return (
     <>
       
-      <div className="bg-white" id="dholera">
+      <div className="bg-white" id="videos">
         <div className="space-y-4">
           <div className="relative pt-8">
             {/* Background with overlay */}

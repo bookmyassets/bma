@@ -71,10 +71,12 @@ export default function Navbar() {
   const navItems = [
     { href: "#hero", label: "Home" },
     { href: "#dholera", label: "Dholera" },
+    { href: "#major-projects", label: "Major Projects" },
     { href: "#westwyn-estate", label: "Westwyn Estate" },
     /* { href: "#WhyInvest", label: "Investment Benefits" }, */
-    { href: "#ourProjects", label: "Our Projects" },
+    { href: "#why-bma", label: "Why BMA" },
     { href: "#Gallery", label: "Gallery" },
+    { href: "#videos", label: "Dholera Live" },
   ];
 
   return (

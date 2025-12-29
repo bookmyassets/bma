@@ -552,7 +552,7 @@ export default function MobileDesignShowcase() {
   const [selectedDesign, setSelectedDesign] = useState(1);
 
   return (
-    <div className="">
+    <div className="" id="major-projects">
       {/* Design Selector */}
       <div className="bg-gray-900 md:hidden p-4 sticky top-0 border-b border-gray-700">
         <div className="flex gap-2  justify-center">
