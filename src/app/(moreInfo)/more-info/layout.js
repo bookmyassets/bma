@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <Script
+        {/* <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-NWBLCWMLDF"
         />
@@ -24,9 +24,9 @@ export default function RootLayout({ children }) {
           async
           src="https://www.googletagmanager.com/gtag/js?id=GT-T5PQ3QDN"
         />
-        <Script />
+        <Script /> */}
 
-        <Script
+        {/*  <Script
           id="google-analytics"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-        {/* GTM - BMA Landing Page GTM only */}
+       //BMA Landing page GTM only
         <Script type="text/javascript">
           {`
            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -58,7 +58,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            })(window,document,'script','dataLayer','GTM-WLDR8CDN');
            `}
         </Script>
-        {/* GTM - AW tag */}
+       BMA Adwords tag
         <Script type="text/javascript">
           {`
               window.dataLayer = window.dataLayer || [];
@@ -67,7 +67,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   gtag('config', 'AW-17011995425');
                 `}
+        </Script> */}
+        <Script type="text/javascript">
+          {`
+           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-ND5WPPD5');
+           `}
         </Script>
+        <script></script>
+
+        {/* Clarity */}
         <Script type="text/javascript">
           {`
                       
@@ -88,7 +100,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-family: "Lato", sans-serif;
           }
         `}</style>
-        <noscript>
+
+        {/* GTM Scripts */}
+        {/* <noscript>
+
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-TXSQ62G6"
             height="0"
@@ -97,22 +112,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           ></iframe>
         </noscript>
         <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WLDR8CDN"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
+        <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-WLDR8CDN"
+        height="0"
+        width="0"
+        style={{ display: "none", visibility: "hidden" }}
+        ></iframe>
         </noscript>
         <Script id="google-tag-manager" strategy="afterInteractive">
-          {`
-             window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'GT-T5PQ3QDN');
-          `}
-        </Script>
+        {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'GT-T5PQ3QDN');
+        `}
+        </Script> */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-ND5WPPD5"
+            height="0"
+            width="0"
+            style={{display: "none",visibility:"hidden"}}
+          ></iframe>
+        </noscript>
         <Navbar />
         {children}
         <Footer />
