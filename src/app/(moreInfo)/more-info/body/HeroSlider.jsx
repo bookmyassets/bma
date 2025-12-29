@@ -11,10 +11,16 @@ import { useRouter, usePathname } from "next/navigation";
 import img1 from "@/assests/ad-page/hero/dholera-activation-area-banner.webp";
 import img2 from "@/assests/ad-page/hero/dholera-activation-area-banner2.webp";
 import img3 from "@/assests/ad-page/hero/dholera-activation-area-banner3.webp";
+import img4 from "@/assests/ad-page/hero/dholera-international-airport-landing-page-desktop.webp";
+import img5 from "@/assests/ad-page/hero/dholera-tata-semiconductor-plant-landing-page-desktop.webp";
+import img6 from "@/assests/ad-page/hero/dholera-tata-solar-park-landing-page-desktop.webp";
 
 import imgM1 from "@/assests/ad-page/hero/dholera-activation-area-mobile1.webp";
 import imgM2 from "@/assests/ad-page/hero/dholera-activation-area-mobile2.webp";
 import imgM3 from "@/assests/ad-page/hero/dholera-activation-area-mobile3.webp";
+import imgM4 from "@/assests/ad-page/hero/dholera-international-airport-landing-page-mobile.webp";
+import imgM5 from "@/assests/ad-page/hero/dholera-tata-semiconductor-plant-landing-page-mobile.webp";
+import imgM6 from "@/assests/ad-page/hero/dholera-tata-solar-park-landing-page-mobile.webp";
 import BrochureDownload from "../components/BrochureDownload";
 import MobilePropertyGrid from "./MobileGrid";
 
@@ -46,13 +52,20 @@ export default function LandingPage({ openForm }) {
   const desktopImages = [
     { src: img1, alt: "Dholera Investment Opportunity 1" },
     { src: img2, alt: "Dholera Investment Opportunity 2" },
-    { src: img3, alt: "Dholera Investment Opportunity 3" }
+    { src: img3, alt: "Dholera Investment Opportunity 3" },
+    { src: img4, alt: "Dholera Investment Opportunity 3" },
+    { src: img5, alt: "Dholera Investment Opportunity 3" },
+    { src: img6, alt: "Dholera Investment Opportunity 3" },
   ];
 
   const mobileImages = [
     { src: imgM1, alt: "Dholera Mobile 1" },
     { src: imgM2, alt: "Dholera Mobile 2" },
-    { src: imgM3, alt: "Dholera Mobile 3" }]
+    { src: imgM3, alt: "Dholera Mobile 3" },
+    { src: imgM4, alt: "Dholera Mobile 3" },
+    { src: imgM5, alt: "Dholera Mobile 3" },
+    { src: imgM6, alt: "Dholera Mobile 3" },
+  ]
 
 
   useEffect(() => {

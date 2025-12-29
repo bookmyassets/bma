@@ -1,170 +1,227 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useState } from "react";
+import img1 from "@/assests/ad-page/estate/westwyn-estate-dholera-residential-plots-1.webp";
+import img2 from "@/assests/ad-page/estate/westwyn-estate-dholera-residential-plots-2.webp";
+import img3 from "@/assests/ad-page/estate/westwyn-estate-dholera-smart-city-map.webp";
+import Image from "next/image";
+import {
+  Fence,
+  Building2,
+  Road,
+  Cctv,
+  Baby,
+  Car,
+  Users,
+  Droplets,
+  Zap,
+  Leaf,
+  Footprints,
+  PersonStanding,
+} from "lucide-react";
+
+import { FaRoad } from "react-icons/fa6";
 
 export default function WestWyn() {
-  const wrapRef = useRef(null);
   const [activeSection, setActiveSection] = useState(0);
 
-  const sections = useMemo(
-    () => [
-      {
-        title: "About WestWyn Estate",
-        content:
-          "WestWyn Estate redefines luxury living with contemporary architecture and world-class design. Nestled in a prime location, it offers spacious residences crafted for comfort and elegance. Experience a lifestyle where sophistication meets serenity in every corner.",
-        image:
-          "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
-      },
-      {
-        title: "Amenities",
-        content:
-          "Indulge in premium amenities including a state-of-the-art fitness center, infinity pool, and landscaped gardens. Enjoy clubhouse facilities, children's play area, and 24/7 security. Every feature is designed to elevate your living experience to extraordinary heights.",
-        image:
-          "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80",
-      },
-      {
-        title: "Location Advantage",
-        content:
-          "Strategically positioned with excellent connectivity to business hubs, schools, and hospitals. Quick access to major highways and metro stations ensures seamless commuting. Surrounded by retail centers and entertainment options, everything you need is within reach.",
-        image:
-          "https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=800&q=80",
-      },
-    ],
-    []
-  );
+  const essentials = [
+    { label: "Project Boundary", icon: Fence },
+    { label: "Gated Community", icon: Building2 },
+    { label: "Internal Roads", icon: FaRoad },
+    { label: "24/7 Security & CCTV", icon: Cctv },
+    { label: "Kids Play Area", icon: Baby }, // FIXED
+    { label: "EV Charging Station", icon: Car },
+    { label: "App-Based Society Management", icon: Users },
+    { label: "Power & Water Supply", icon: Zap },
+    { label: "Yoga Deck", icon: Leaf },
+    { label: "Senior Citizen Zone", icon: PersonStanding }, // SAFE
+  ];
 
-  useEffect(() => {
-    let rafId = 0;
-
-    const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
-
-    const updateFromScroll = () => {
-      if (!wrapRef.current) return;
-
-      const rect = wrapRef.current.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-
-      // progress: 0 when wrapper top hits top of viewport, 1 after 1 screen, etc
-      const progress = -rect.top / vh;
-
-      // Use rounding so each "screen" feels like a step, but still works with fast scroll
-      const nextIndex = clamp(Math.round(progress), 0, sections.length - 1);
-
-      setActiveSection((prev) => (prev === nextIndex ? prev : nextIndex));
-    };
-
-    const onScroll = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updateFromScroll);
-    };
-
-    const onResize = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updateFromScroll);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-
-    // initial sync
-    updateFromScroll();
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
-  }, [sections.length]);
-
-  const scrollToSection = (index) => {
-    if (!wrapRef.current) return;
-
-    const vh = window.innerHeight || 1;
-    const top =
-      window.scrollY + wrapRef.current.getBoundingClientRect().top + index * vh;
-
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    window.scrollTo({
-      top,
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-    });
-  };
+  const sections = [
+    {
+      title: "About WestWyn Estate",
+      content:
+        "WestWyn Estate redefines luxury living with contemporary architecture and world-class design. Nestled in a prime location, it offers spacious residences crafted for comfort and elegance. Experience a lifestyle where sophistication meets serenity in every corner.",
+      image: img1,
+    },
+    {
+      title: "Amenities",
+      content: essentials,
+      image: img2,
+    },
+    {
+      title: "Location Advantage",
+      content:
+        "Strategically positioned with excellent connectivity to business hubs, schools, and hospitals. Quick access to major highways and metro stations ensures seamless commuting. Surrounded by retail centers and entertainment options, everything you need is within reach.",
+      image: img3,
+    },
+  ];
 
   return (
-    <div className="w-full">
-      {/* This wrapper creates the scrollable "timeline" */}
-      <section
-        ref={wrapRef}
-        className="relative bg-gray-100"
-        style={{ height: `${sections.length * 100}vh` }}
-      >
-        {/* This stays pinned while wrapper scrolls */}
-        <div className="sticky top-0 min-h-screen flex items-center py-16 px-4">
-          <div className="max-w-7xl mx-auto w-full">
-            {/* Tabs */}
-            <div className="flex justify-center gap-2 mb-12 flex-wrap">
-              {sections.map((section, index) => (
-                <button
-                  key={section.title}
-                  onClick={() => scrollToSection(index)}
-                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                    activeSection === index
-                      ? "bg-amber-500 text-black shadow-lg shadow-amber-500/50 scale-105"
-                      : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                  }`}
-                >
-                  {section.title}
-                </button>
-              ))}
+    <div className="w-full min-h-screen bg-white">
+      {/* Desktop Layout */}
+      <div className="hidden lg:block">
+        <div className="max-w-7xl mx-auto px-8 py-12">
+          {/* Header */}
+          <div className="mb-16">
+            <h1 className="text-5xl font-bold text-center text-black mb-4">
+              WestWyn Estate
+            </h1>
+          </div>
+
+          {/* Tab Navigation */}
+          <div className="flex gap-4 mb-12 border-b border-gray-200">
+            {sections.map((section, index) => (
+              <button
+                key={section.title}
+                onClick={() => setActiveSection(index)}
+                className={`pb-4 px-6 font-semibold transition-all relative ${
+                  activeSection === index
+                    ? "text-black"
+                    : "text-gray-400 hover:text-gray-600"
+                }`}
+              >
+                {section.title}
+                {activeSection === index && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Content Grid */}
+          <div className="grid grid-cols-2 gap-16 items-start">
+            {/* Image */}
+            <div className="sticky top-8">
+              <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-xl">
+                <Image
+                  src={sections[activeSection].image}
+                  alt={sections[activeSection].title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
 
-            {/* Content */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Image */}
-              <div className="order-2 md:order-1">
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl aspect-[4/3]">
-                  <img
-                    src={sections[activeSection].image}
-                    alt={sections[activeSection].title}
-                    className="w-full h-full object-cover transition-all duration-700"
-                    key={activeSection}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                </div>
-              </div>
-
-              {/* Text */}
-              <div className="order-1 md:order-2">
-                <div className="min-h-[300px] flex flex-col justify-center px-4">
-                  <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 leading-tight transition-all duration-500">
-                    {sections[activeSection].title}
-                  </h2>
-                  <p className="text-lg leading-relaxed transition-all duration-500">
-                    {sections[activeSection].content}
-                  </p>
-
-                  {/* Progress */}
-                  <div className="mt-8 flex items-center gap-2">
-                    {sections.map((_, i) => (
-                      <div
-                        key={i}
-                        className={`h-1 rounded-full transition-all duration-300 ${
-                          i === activeSection
-                            ? "w-12 bg-amber-500"
-                            : "w-6 bg-slate-600"
-                        }`}
+            {/* Text Content */}
+            <div className="py-8">
+              <h2 className="text-4xl font-bold text-black mb-6">
+                {sections[activeSection].title}
+              </h2>
+              {sections[activeSection].title === "Amenities" ? (
+                <div className="grid grid-cols-2 gap-x-10 gap-y-8 mt-6">
+                  {essentials.map(({ label, icon: Icon }) => (
+                    <div key={label} className="flex items-center gap-4">
+                      <Icon
+                        size={28}
+                        strokeWidth={1.5}
+                        className="text-black"
                       />
-                    ))}
-                  </div>
+                      <span className="text-lg font-medium text-gray-800">
+                        {label}
+                      </span>
+                    </div>
+                  ))}
                 </div>
+              ) : (
+                <p className="text-xl text-gray-700 leading-relaxed">
+                  {sections[activeSection].content}
+                </p>
+              )}
+
+              {/* Section Indicators */}
+              <div className="flex gap-3 mt-12">
+                {sections.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveSection(i)}
+                    className={`h-2 rounded-full transition-all ${
+                      i === activeSection
+                        ? "w-16 bg-gray-900"
+                        : "w-8 bg-gray-300 hover:bg-gray-400"
+                    }`}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden">
+        <div className="px-4 py-8">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl text-center font-bold text-black mb-2">
+              WestWyn Estate
+            </h1>
+          </div>
+
+          {/* Tab Navigation */}
+
+          {/* Image */}
+          <div className="mb-6">
+            <div className="aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src={sections[activeSection].image}
+                alt={sections[activeSection].title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
+            {sections.map((section, index) => (
+              <button
+                key={section.title}
+                onClick={() => setActiveSection(index)}
+                className={`px-5 py-2.5 rounded-full font-medium whitespace-nowrap transition-all ${
+                  activeSection === index
+                    ? "bg-gray-900 text-white"
+                    : "bg-gray-100 text-gray-600"
+                }`}
+              >
+                {section.title}
+              </button>
+            ))}
+          </div>
+
+          {/* Content */}
+          <div>
+            <h2 className="text-2xl font-bold text-black mb-4">
+              {sections[activeSection].title}
+            </h2>
+            {sections[activeSection].title === "Amenities" ? (
+              <div className="grid grid-cols-2 gap-x-6 gap-y-5 mt-4 mb-6">
+                {essentials.map(({ label, icon: Icon }) => (
+                  <div key={label} className="flex items-center gap-3">
+                    <Icon size={22} strokeWidth={1.5} className="text-black" />
+                    <span className="text-sm font-medium text-gray-800">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-base text-gray-700 leading-relaxed mb-6">
+                {sections[activeSection].content}
+              </p>
+            )}
+
+            {/* Section Indicators */}
+            <div className="flex gap-2 justify-center">
+              {sections.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveSection(i)}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === activeSection ? "w-12 bg-gray-900" : "w-6 bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
