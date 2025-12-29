@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function DholeraLandingPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" id="dholera">
       {/* Section 1: About Dholera */}
       <section className="grid md:grid-cols-2">
         <div className="bg-black text-white p-8 md:p-12 lg:p-16 flex items-center">
