@@ -9,14 +9,18 @@ export default function Ribbon() {
     phone: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const recaptchaRef = useRef(null);
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const router = useRouter();
-  const pathname = usePathname();
+  const [showPopup, setShowPopup] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  
+  const recaptchaRef = useRef(null);
+  const recaptchaWidgetId = useRef(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     // Load reCAPTCHA script
@@ -30,18 +34,18 @@ export default function Ribbon() {
           script.onload = () => setRecaptchaLoaded(true);
           script.onerror = () => {
             console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true); // Fallback
+            setRecaptchaLoaded(true);
           };
           document.head.appendChild(script);
         } catch (err) {
           console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true); // Fallback
+          setRecaptchaLoaded(true);
         }
       } else if (window.grecaptcha) {
         setRecaptchaLoaded(true);
       }
     };
-
+    
     loadRecaptcha();
 
     if (typeof window !== "undefined") {
@@ -53,19 +57,25 @@ export default function Ribbon() {
       );
     }
 
-    // Handle Escape key press
     const handleEscapeKey = (event) => {
       if (event.key === "Escape") {
         handleClose();
       }
     };
-
+    
     document.addEventListener("keydown", handleEscapeKey);
-
+    
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
+
+  const handleClose = () => {
+    setShowPopup(false);
+    setShowThankYou(false);
+    setFormData({ fullName: "", phone: "" });
+    setErrorMessage("");
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,7 +88,7 @@ export default function Ribbon() {
       setErrorMessage("Please fill in all fields");
       return false;
     }
-
+    
     if (!/^\d{10,15}$/.test(formData.phone)) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
@@ -86,7 +96,7 @@ export default function Ribbon() {
 
     const now = Date.now();
     const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
-
+    
     if (hoursPassed >= 24) {
       setSubmissionCount(0);
       localStorage.setItem("formSubmissionCount", "0");
@@ -97,16 +107,15 @@ export default function Ribbon() {
       );
       return false;
     }
-
+    
     return true;
   };
 
   const onRecaptchaSuccess = async (token) => {
     try {
       const now = Date.now();
-
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -128,6 +137,7 @@ export default function Ribbon() {
       if (response.ok) {
         setFormData({ fullName: "", phone: "" });
         setShowPopup(true);
+        
         setSubmissionCount((prev) => {
           const newCount = prev + 1;
           localStorage.setItem("formSubmissionCount", newCount.toString());
@@ -136,21 +146,17 @@ export default function Ribbon() {
         });
 
         window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "lead_form_hero",
-      });
+        window.dataLayer.push({
+          event: "lead_form_hero",
+        });
 
-        // Show thank you popup for 2 seconds
         setShowThankYou(true);
+        
         setTimeout(() => {
           setShowThankYou(false);
           handleClose();
-
-          // Get current pathname for return URL
           const currentPath = pathname || window.location.pathname;
-
-          // Push to thank-you route with return URL
-          router.push(`/more-info/thankyou`);
+          router.push("/more-info/thankyou");
         }, 2000);
       } else {
         throw new Error("Error submitting form");
@@ -162,11 +168,12 @@ export default function Ribbon() {
       );
     } finally {
       setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
+      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
+        window.grecaptcha.reset(recaptchaWidgetId.current);
       }
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -177,18 +184,17 @@ export default function Ribbon() {
       return;
     }
 
-    // If reCAPTCHA is loaded, render it in the ref
     if (window.grecaptcha && recaptchaLoaded) {
       try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-          window.grecaptcha.render(recaptchaRef.current, {
+        if (recaptchaWidgetId.current === null && recaptchaRef.current) {
+          recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
             sitekey: siteKey,
             callback: onRecaptchaSuccess,
             theme: "dark",
           });
-        } else {
-          window.grecaptcha.reset();
-          window.grecaptcha.execute();
+        } else if (recaptchaWidgetId.current !== null) {
+          window.grecaptcha.reset(recaptchaWidgetId.current);
+          window.grecaptcha.execute(recaptchaWidgetId.current);
         }
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
@@ -204,9 +210,10 @@ export default function Ribbon() {
   return (
     <>
       <div className="bg-black border-t-8 border-t-[#deae3c] border-b-8 border-b-[#deae3c] py-4">
-        <div className="pr-8 pl-8 pb-8   text-[#deae3c] flex justify-center items-center font-semibold italic text-xl md:text-3xl">
-         150 sq. yards plot for ₹10 lakh only
+        <div className="pr-8 pl-8 pb-8 text-[#deae3c] flex justify-center items-center font-semibold italic text-xl md:text-3xl">
+          150 sq. yards plot for ₹10 lakh only
         </div>
+        
         <div className="max-w-3xl mx-auto max-sm:pl-4 max-sm:pr-4 space-y-4">
           <div className="grid md:grid-cols-2 gap-2 max-sm:space-y-2">
             <motion.div
@@ -238,7 +245,7 @@ export default function Ribbon() {
                 className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
               />
             </motion.div>
-
+            
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -273,28 +280,46 @@ export default function Ribbon() {
             </motion.div>
           </div>
 
-          {/* reCAPTCHA container */}
+          {errorMessage && (
+            <div className="text-red-500 text-center text-sm font-medium">
+              {errorMessage}
+            </div>
+          )}
+
           <div className="flex justify-center">
             <div ref={recaptchaRef}></div>
           </div>
-<div className="flex justify-center items-center">
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            type="button"
-            id="ribbion-form"
-            onClick={handleSubmit}
-            disabled={isLoading}
-            className="w-auto  py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+          <div className="flex justify-center items-center">
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="button"
+              id="ribbion-form"
+              onClick={handleSubmit}
+              disabled={isLoading}
+              className="w-auto py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
             >
-            {isLoading ? "Submitting..." : "Get A Call Back"}
-          </motion.button>
-            </div>
+              {isLoading ? "Submitting..." : "Get A Call Back"}
+            </motion.button>
+          </div>
         </div>
+
+        {showThankYou && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          >
+            <div className="bg-white p-8 rounded-lg shadow-xl text-center">
+              <h3 className="text-2xl font-bold text-green-600 mb-2">Thank You!</h3>
+              <p className="text-gray-700">Your submission was successful.</p>
+            </div>
+          </motion.div>
+        )}
       </div>
     </>
   );
