@@ -186,6 +186,12 @@ export default function LandingPage({ openForm }) {
           return newCount;
         });
 
+        // Push event to Google Tag Manager
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "lead_form_hero",
+      });
+
         // Show thank you popup
         setShowThankYou(true);
         
@@ -195,6 +201,8 @@ export default function LandingPage({ openForm }) {
           console.log("Navigating to thank you page..."); // Debug log
           router.push('/more-info/thankyou');
         }, 2000);
+
+
       } else {
         throw new Error("Error submitting form");
       }
