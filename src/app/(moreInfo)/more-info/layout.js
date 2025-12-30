@@ -70,7 +70,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </Script> */}
         <Script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=GT-GTM-ND5WPPD5"
+          src="https://www.googletagmanager.com/gtag/js?id=GT-ND5WPPD5"
         />
         <Script />
         <Script type="text/javascript">
