@@ -4,6 +4,20 @@ import Link from "next/link";
 import { MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin, PhoneCall } from "lucide-react";
 
 const Footer = () => {
+
+  const handleCallClick = () => {
+    // 🔥 Google Tag Manager event
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "click_to_call",
+      lead_type: "phone",
+      device: "mobile",
+    });
+
+    // 📞 Call trigger
+    window.location.href = "tel:+918130371647";
+  };
+
   return (
     <footer id="footer" className="bg-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -102,7 +116,7 @@ const Footer = () => {
                   info@bookmyassets.com
                 </a>
               </li>
-              <li className="flex items-center">
+              <li className="flex items-center" onClick={handleCallClick}>
                 <div className="flex-shrink-0 text-yellow-500 mr-3">
                   <PhoneCall size={18} />
                 </div>

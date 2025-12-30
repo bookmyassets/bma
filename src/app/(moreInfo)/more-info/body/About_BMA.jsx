@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, X } from 'lucide-react';
+import { MapPin, Plus, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileCheck,
@@ -31,42 +31,55 @@ export default function AboutBMA() {
 
 const benefits = [
   {
-    title: "Immediate Sale Registry",
-    icon: <FileCheck className="w-6 h-6 text-blue-600" />,
-    description: "Own your dream plot instantly with a quick, transparent registry process",
-    body: "BMA ensures immediate registration with clear documentation, so buyers don’t face delays or hidden legal issues. This transparency builds trust and gives you instant ownership security."
+    title: "Prime Location Projects",
+    icon: <MapPin className="w-6 h-6 text-indigo-600" />,
+    description:
+      "Strategically selected projects near major infrastructure for maximum growth.",
+    body:
+      "BookMyAssets specializes in curating investment opportunities at Dholera’s most strategic locations. Our projects are chosen for proximity to expressways, airports, and industrial hubs, ensuring superior connectivity and appreciation potential. We focus on locations that balance prime positioning with affordable entry points, so investors gain long-term growth without compromising on budget. Every project is evaluated for future infrastructure impact and sustained value creation."
   },
   {
-    title: "High ROI Projects",
-    icon: <TrendingUp className="w-6 h-6 text-green-600" />,
-    description: "Invest in future-ready projects designed to deliver maximum returns.",
-    body: "Located in fast-growing zones like Dholera Smart City, BMA’s projects are strategically planned near major infrastructure, ensuring higher appreciation and strong ROI for long-term investors."
+    title: "Immediate Sale Registry",
+    icon: <FileCheck className="w-6 h-6 text-blue-600" />,
+    description:
+      "Verified documentation and instant registry with no delays or uncertainty.",
+    body:
+      "BookMyAssets ensures immediate registration with clear and verified documentation, eliminating delays and hidden legal risks. Unlike projects with pending approvals or unclear timelines, our properties are registry-ready from day one. There are no waiting periods, no surprises, and no ambiguity—only straightforward ownership that provides peace of mind the moment you invest."
   },
   {
     title: "In-house Due Diligence Team",
     icon: <Scale className="w-6 h-6 text-orange-600" />,
-    description: "Every plot is verified by BMA’s expert in-house due diligence team.",
-    body: "BMA’s internal legal and technical experts conduct thorough due diligence on every project. This guarantees that the land you invest in is safe, approved, and free from disputes."
+    description:
+      "Every project is vetted by internal legal and technical experts.",
+    body:
+      "BookMyAssets’ in-house legal and technical professionals conduct comprehensive due diligence before any project is offered to investors. We verify land titles, government approvals, NOCs, and historical records to ensure the property is legally sound and dispute-free. This rigorous verification process removes complexity for investors and ensures your capital is protected through professional scrutiny."
   },
   {
     title: "Resale Support & Buyback Option",
     icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
-    description: "Secure investment with guaranteed resale support and buyback options.",
-    body: "Investors enjoy flexibility with dedicated resale assistance and a buyback option from BMA. This ensures liquidity and gives confidence that your investment won’t get stuck."
+    description:
+      "Flexible exit options with resale assistance and buyback assurance.",
+    body:
+      "Investors benefit from dedicated resale support and a buyback option from BookMyAssets, ensuring liquidity and financial flexibility. Whether market conditions evolve or personal goals change, our structured exit support protects your investment. Our resale network helps connect buyers, while the buyback option provides an added safety net—demonstrating our commitment beyond the initial sale."
   },
   {
     title: "365 Days Site Visit Assistance",
     icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
-    description: "Visit your property anytime with year-round site visit support.",
-    body: "BMA offers 365-day site visits so investors can personally check progress, infrastructure, and surroundings before and after purchase, adding to reliability and transparency."
+    description:
+      "Visit your plot anytime with complete transparency and on-ground access.",
+    body:
+      "BookMyAssets offers 365-day site visit assistance so investors can personally verify development progress, infrastructure, and surroundings at any stage. We believe land investment decisions should be based on ground reality, not just brochures. This year-round access reinforces transparency, builds trust, and allows you to monitor the evolution of your investment with confidence."
   },
   {
     title: "Government Approved AUDA Plots",
     icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
-    description: "Invest in 100% safe, government-approved AUDA verified plots.",
-    body: "All plots are AUDA-approved with proper government verification. This ensures your investment is legally safe, future-ready, and eligible for planned development benefits in Dholera."
+    description:
+      "Legally secure plots approved under AUDA and the Dholera master plan.",
+    body:
+      "All plots offered by BookMyAssets are AUDA-approved and backed by proper government verification. AUDA approval confirms compliance with regulatory norms and inclusion in Dholera’s official master plan. This safeguards your investment from legal complications, ensures access to planned infrastructure, and aligns your property with smart city development benefits."
   }
 ];
+
 
 
   // Animation variants

@@ -136,9 +136,8 @@ const onRecaptchaSuccess = async (token) => {
           fields: {
             name: formData.fullName,
             phone: formData.phone,
-            source: source,
+            source: "BookMyAssets Google Ads",
           },
-          source: "BookMyAssets Google Ads",
           tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
           recaptchaToken: token,
         }),
@@ -153,6 +152,11 @@ const onRecaptchaSuccess = async (token) => {
         localStorage.setItem("formSubmissionCount", newCount.toString());
         localStorage.setItem("lastSubmissionTime", now.toString());
         return newCount;
+      });
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "lead_form_hero",
       });
 
       // Show thank you popup for 2 seconds

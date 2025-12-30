@@ -57,7 +57,7 @@ const projects = [
   {
     id: 6,
     name: "Dholera Solar Park",
-    youtubeId: "fHLqa6YM1Aw",
+    youtubeId: "EQMyWv3hMuk",
     points: [
       "Asia’s largest solar park with a planned capacity of 5,000 MW (5 GW)",
       "1,200+ MW already operational powering industrial infrastructure",
@@ -76,8 +76,8 @@ const projects = [
   },
   {
     id: 8,
-    name: "Activation Area – Phase 1",
-    youtubeId: "fHLqa6YM1Aw",
+    name: "Activation Area",
+    youtubeId: "P0a8LCMQHqI",
     points: [
       "22.5 sq km plug-and-play industrial zone with 95% infrastructure completion",
       "Underground utilities, IoT-enabled monitoring, and smart traffic systems",
@@ -184,53 +184,53 @@ function DesktopDesign() {
             Discover the groundbreaking developments shaping India's first
             Greenfield Smart City
           </p>
-          <div className="space-y-3">
-            {projects.map((project) => (
-              <button
-                key={project.id}
-                onClick={() => handleProjectClick(project)}
-                className={`w-full text-left p-4 md:p-5 rounded-xl transition-all duration-300 transform hover:scale-102 ${
-                  selectedProject.id === project.id
-                    ? "bg-gradient-to-r from-[#deae3c] to-[#c49a2f] text-white shadow-xl scale-102"
-                    : "bg-gray-800 hover:bg-gray-700 text-white shadow-md hover:shadow-lg"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
-                        selectedProject.id === project.id
-                          ? "bg-white text-[#deae3c]"
-                          : "bg-[#deae3c] text-white"
-                      }`}
-                    >
-                      {project.id}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-base md:text-lg">
-                        {project.name}
-                      </h4>
-                    </div>
-                  </div>
-                  <svg
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      selectedProject.id === project.id ? "rotate-90" : ""
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-              </button>
-            ))}
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+  {projects.map((project) => (
+    <button
+      key={project.id}
+      onClick={() => handleProjectClick(project)}
+      className={`w-full text-left p-4 md:p-5 rounded-xl transition-all duration-300 transform hover:scale-102 ${
+        selectedProject.id === project.id
+          ? "bg-gradient-to-r from-[#deae3c] to-[#c49a2f] text-white shadow-xl scale-102"
+          : "bg-gray-800 hover:bg-gray-700 text-white shadow-md hover:shadow-lg"
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <div
+            className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
+              selectedProject.id === project.id
+                ? "bg-white text-[#deae3c]"
+                : "bg-[#deae3c] text-white"
+            }`}
+          >
+            {project.id}
           </div>
+          <div>
+            <h4 className="font-semibold text-base md:text-lg">
+              {project.name}
+            </h4>
+          </div>
+        </div>
+        <svg
+          className={`w-5 h-5 transition-transform duration-300 ${
+            selectedProject.id === project.id ? "rotate-90" : ""
+          }`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </div>
+    </button>
+  ))}
+</div>
         </div>
       </div>
     </div>
