@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import mapD from "@/assests/ad-page/dholera-map-2.webp"
-import mapM from "@/assests/ad-page/dholera-map-1.webp"
+import mapD from "@/assests/ad-page/dholera-map-2.webp";
+import mapM from "@/assests/ad-page/dholera-map-1.webp";
 
 const projects = [
   {
@@ -36,7 +36,7 @@ const projects = [
   },
   {
     id: 4,
-    name: "ReNew Solar Park – Manufacturing Facility",
+    name: "ReNew Power – Manufacturing Facility",
     youtubeId: "129oXwderKU",
     points: [
       "₹1,200 crore investment in solar module and cell manufacturing",
@@ -85,8 +85,6 @@ const projects = [
     ],
   },
 ];
-
-
 
 function DesktopDesign() {
   const [selectedProject, setSelectedProject] = useState(projects[0]);
@@ -165,8 +163,8 @@ function DesktopDesign() {
               </h3>
               <p className="text-gray-600 leading-relaxed px-6">
                 {selectedProject.points.map((point, index) => (
-    <li key={index}>{point}</li>
-  ))}
+                  <li key={index}>{point}</li>
+                ))}
               </p>
             </div>
           </div>
@@ -184,60 +182,58 @@ function DesktopDesign() {
             Discover the groundbreaking developments shaping India's first
             Greenfield Smart City
           </p>
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-  {projects.map((project) => (
-    <button
-      key={project.id}
-      onClick={() => handleProjectClick(project)}
-      className={`w-full text-left p-4 md:p-5 rounded-xl transition-all duration-300 transform hover:scale-102 ${
-        selectedProject.id === project.id
-          ? "bg-gradient-to-r from-[#deae3c] to-[#c49a2f] text-white shadow-xl scale-102"
-          : "bg-gray-800 hover:bg-gray-700 text-white shadow-md hover:shadow-lg"
-      }`}
-    >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <div
-            className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
-              selectedProject.id === project.id
-                ? "bg-white text-[#deae3c]"
-                : "bg-[#deae3c] text-white"
-            }`}
-          >
-            {project.id}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {projects.map((project) => (
+              <button
+                key={project.id}
+                onClick={() => handleProjectClick(project)}
+                className={`w-full text-left p-4 md:p-5 rounded-xl transition-all duration-300 transform hover:scale-102 ${
+                  selectedProject.id === project.id
+                    ? "bg-gradient-to-r from-[#deae3c] to-[#c49a2f] text-white shadow-xl scale-102"
+                    : "bg-gray-800 hover:bg-gray-700 text-white shadow-md hover:shadow-lg"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
+                        selectedProject.id === project.id
+                          ? "bg-white text-[#deae3c]"
+                          : "bg-[#deae3c] text-white"
+                      }`}
+                    >
+                      {project.id}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-base md:text-lg">
+                        {project.name}
+                      </h4>
+                    </div>
+                  </div>
+                  <svg
+                    className={`w-5 h-5 transition-transform duration-300 ${
+                      selectedProject.id === project.id ? "rotate-90" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </button>
+            ))}
           </div>
-          <div>
-            <h4 className="font-semibold text-base md:text-lg">
-              {project.name}
-            </h4>
-          </div>
-        </div>
-        <svg
-          className={`w-5 h-5 transition-transform duration-300 ${
-            selectedProject.id === project.id ? "rotate-90" : ""
-          }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </div>
-    </button>
-  ))}
-</div>
         </div>
       </div>
     </div>
   );
 }
-
-
 
 // Design 3: Instagram Stories Style
 function Design3() {
@@ -336,8 +332,8 @@ function Design3() {
             <div className="p-6">
               <p className="text-gray-300 text-sm leading-relaxed ">
                 {currentProject.points.map((point, index) => (
-    <li key={index}>{point}</li>
-  ))}
+                  <li key={index}>{point}</li>
+                ))}
               </p>
             </div>
           </div>
@@ -394,26 +390,25 @@ export default function MobileDesignShowcase() {
   return (
     <div className="" id="major-projects">
       {/* Design Selector */}
-      
 
       {/* Render Selected Design */}
       {selectedDesign === 3 && <Design3 />}
       <DesktopDesign />
 
-        <p className="text-2xl md:text-3xl pt-8 font-semibold bg-gray-100 pb-4 text-center">The Complete Dholera Blueprint</p>
-        <p className="text-lg md:text-xl pt-8 font-semibold bg-gray-100 pb-4 text-center">India's first and largest Special Investment Region with dedicated industrial, residential, and commercial zones designed for seamless growth.
-</p>
-      <div className="p-4 bg-gray-100 flex justify-center">
-        <Image
-          src={mapM}
-          alt="Map"
-          className="md:hidden  rounded-2xl"
-        />
-        <Image
-          src={mapD}
-          alt="Map"
-          className="max-sm:hidden  rounded-2xl"
-        />
+      <div className="bg-gray-100">
+        <p className="text-2xl md:text-3xl pt-8 font-semibold    text-center">
+          The Complete Dholera Blueprint
+        </p>
+        <div className="w-24 h-1 mt-4 mb-4 bg-[#deae3c] mx-auto"></div>
+        <p className="text-lg md:text-xl mb-4 text-center">
+          India's first and largest Special Investment Region with dedicated
+          industrial, residential, and commercial zones designed for seamless
+          growth.
+        </p>
+        <div className="p-4 flex justify-center">
+          <Image src={mapM} alt="Map" className="md:hidden  rounded-2xl" />
+          <Image src={mapD} alt="Map" className="max-sm:hidden  rounded-2xl" />
+        </div>
       </div>
     </div>
   );

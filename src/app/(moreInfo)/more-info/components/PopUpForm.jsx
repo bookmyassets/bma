@@ -1,149 +1,70 @@
+"use client";
 import { useState, useEffect, useRef } from "react";
-import { FaUser, FaPhoneAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
-import Image from "next/image";
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assests/Bmalogo.png";
-import { useRouter, usePathname } from "next/navigation"
+import logo from "@/assests/bma-logo2.png";
+import Image from "next/image";
 
-export default function PopupForm({
-  onClose,
-  title,
-  thankYouTitle = "Thank You!",
-  thankYouMessage = "Your request has been submitted successfully.",
-  source = "BookMyAssets google ads",
-}) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ fullName: "", phone: "" });
+export default function PopupForm({title}) {
+  // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
-  const [showSubmissionSuccess, setShowSubmissionSuccess] = useState(false);
-  const [submissionCount, setSubmissionCount] = useState(0);
-  const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [formData, setFormData] = useState({ 
+    fullName: "", 
+    mobileNumber: "", 
+    email: "", 
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const router = useRouter();
-  const pathname = usePathname();
-  const [showForm, setShowForm] = useState(false);
 
-  const [timeLeft, setTimeLeft] = useState(1800);
-
+  // Auto-popup after 5 seconds
   useEffect(() => {
-    let timer;
+    const sessionPopupShown = sessionStorage.getItem('popupShownThisSession');
+    
+    if (!sessionPopupShown) {
+      const timer = setTimeout(() => {
+        setShowFormPopup(true);
+        sessionStorage.setItem('popupShownThisSession', 'true');
+      }, 5000); // 5 seconds
 
-    if (showForm) {
-      setTimeLeft(1800);
-
-      timer = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            clearInterval(timer);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+      return () => clearTimeout(timer);
     }
+  }, []);
 
-    return () => clearInterval(timer); // Cleanup
-  }, [showForm]);
-
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const secs = (seconds % 60).toString().padStart(2, "0");
-    return `${mins}:${secs}`;
-  };
-
-  const [wasTriggered, setWasTriggered] = useState(false);
-
-  // Parse title to extract price and time info
-  const parseTitle = (title) => {
-    const priceMatch = title.match(/₹([0-9,]+)/);
-    const timeMatch = title.match(/(\d+:\d+:\d+)/);
-    const price = priceMatch ? `₹${priceMatch[1]}` : "₹9250";
-    const timeLeft = timeMatch ? timeMatch[1] : null;
-
-    return {
-      price,
-      timeLeft,
-      mainText: "For This WEEK",
-      subText: ""
-    };
-  };
-
-  const titleInfo = parseTitle(title);
-
-useEffect(() => {
-  if (wasTriggered || submissionCount > 0) return;
-
-  const timer = setTimeout(() => {
-    if (!wasTriggered && !showThankYou && submissionCount === 0) {
-      setShowFormPopup(true);
-      setWasTriggered(true);
-    }
-  }, 100); 
-
-  return () => clearTimeout(timer);
-}, [wasTriggered, submissionCount]);
-
-  // Handle close function
-  const handleClose = () => {
-    if (onClose && typeof onClose === 'function') {
-      onClose();
-    }
-  };
-
+  // Load reCAPTCHA
   useEffect(() => {
-    // Load reCAPTCHA script
     const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true); // Fallback
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true); // Fallback
-        }
-      } else if (window.grecaptcha) {
+      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
+        const script = document.createElement("script");
+        script.src = "https://www.google.com/recaptcha/api.js";
+        script.async = true;
+        script.defer = true;
+        script.onload = () => setRecaptchaLoaded(true);
+        script.onerror = () => setRecaptchaLoaded(true);
+        document.head.appendChild(script);
+      } else if (window.grecaptcha || !siteKey) {
         setRecaptchaLoaded(true);
       }
     };
 
     loadRecaptcha();
 
-    if (typeof window !== "undefined") {
-      setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
-      );
-      setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
-      );
-    }
-
-    // Handle Escape key press
+    // Escape key handler
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
-        handleClose();
+      if (event.key === 'Escape' && showFormPopup) {
+        handlePopupClose();
       }
     };
-
     document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
     };
-  }, []);
+  }, [showFormPopup, siteKey]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -152,27 +73,18 @@ useEffect(() => {
   };
 
   const validateForm = () => {
-    if (!formData.fullName || !formData.phone) {
-      setErrorMessage("Please fill in all fields");
+    if (!formData.fullName.trim() || !formData.mobileNumber.trim()) {
+      setErrorMessage("Please fill in all required fields");
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.phone)) {
-      setErrorMessage("Please enter a valid phone number (10-15 digits)");
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setErrorMessage("Please enter a valid email address");
       return false;
     }
 
-    const now = Date.now();
-    const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
-
-    if (hoursPassed >= 24) {
-      setSubmissionCount(0);
-      localStorage.setItem("formSubmissionCount", "0");
-      localStorage.setItem("lastSubmissionTime", now.toString());
-    } else if (submissionCount >= 3) {
-      setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
-      );
+    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
+      setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
     }
 
@@ -181,10 +93,8 @@ useEffect(() => {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      const now = Date.now();
-
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -194,45 +104,39 @@ useEffect(() => {
           body: JSON.stringify({
             fields: {
               name: formData.fullName,
-              phone: formData.phone,
-              source: source,
+              phone: formData.mobileNumber,
+              email: formData.email,
+              source: "BookMyAssets Google Ads",
             },
-            source: "BookMyAssets Google Ads",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+            source: "BookMyAssets Popup",
+            tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
         }
       );
 
       if (response.ok) {
-        setFormData({ fullName: "", phone: "" });
-        setShowSubmissionSuccess(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
-
-        // Show thank you popup for 2 seconds
+        setFormData({ fullName: "", mobileNumber: "", email: ""});
         setShowThankYou(true);
+        
         setTimeout(() => {
           setShowThankYou(false);
-          handleClose();
-          router.push(`/more-info/thankyou`);
+          setShowFormPopup(false);
         }, 3000);
       } else {
         throw new Error("Error submitting form");
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      setErrorMessage(
-        error.message || "Error submitting form. Please try again."
-      );
+      setErrorMessage("Error submitting form. Please try again.");
     } finally {
       setIsLoading(false);
       if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
+        try {
+          window.grecaptcha.reset();
+        } catch (err) {
+          console.error("Error resetting reCAPTCHA:", err);
+        }
       }
     }
   };
@@ -247,329 +151,203 @@ useEffect(() => {
       return;
     }
 
-    // If reCAPTCHA is loaded, render it in the ref
-    if (window.grecaptcha && recaptchaLoaded) {
+    if (!recaptchaLoaded || !window.grecaptcha) {
+      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!recaptchaRef.current.innerHTML) {
       try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
-          });
-        } else {
-          window.grecaptcha.reset();
-          window.grecaptcha.execute();
-        }
+        window.grecaptcha.render(recaptchaRef.current, {
+          sitekey: siteKey,
+          callback: onRecaptchaSuccess,
+          theme: "light",
+        });
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
         setErrorMessage("Error with verification. Please try again.");
         setIsLoading(false);
       }
     } else {
-      setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
-      setIsLoading(false);
+      window.grecaptcha.execute();
     }
   };
 
-  // Handle backdrop click
+  const handlePopupClose = () => {
+    setShowFormPopup(false);
+  };
+
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      handleClose();
+      handlePopupClose();
     }
-  };
-
-  // Prevent modal content click from closing modal
-  const handleModalContentClick = (e) => {
-    e.stopPropagation();
   };
 
   return (
-    <>
-      {/* Thank You Page */}
-      <AnimatePresence>
-        {showThankYou && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-gray-900 flex justify-center items-center z-[1001]"
-          >
+    <AnimatePresence>
+  {showFormPopup && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
+      onClick={handleBackdropClick}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {showThankYou ? (
+          <div className="text-center">
             <motion.div
-              initial={{ scale: 0.5, y: 50 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.5, y: 50 }}
-              className="text-center text-white px-8"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="mb-6"
             >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="mb-6"
-              >
-                <div className="w-24 h-24 bg-[#FDB913] rounded-full flex items-center justify-center mx-auto">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-12 w-12 text-black"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={3}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-              </motion.div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="text-4xl md:text-6xl font-bold mb-4"
-              >
-                {thankYouTitle}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="text-lg md:text-xl"
-              >
-                {thankYouMessage}
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="text-md opacity-80 mt-2"
-              >
-                Redirecting you back...
-              </motion.p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Form Modal */}
-      {showFormPopup && !showThankYou && (
-        <div
-          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 p-4 z-[1000]"
-          onClick={handleBackdropClick}
-        >
-          <motion.div
-            id="contact-form-container"
-            initial={{ scale: 0.9, y: 50, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.9, y: 50, opacity: 0 }}
-            className="bg-gray-900 rounded-2xl shadow-2xl max-w-lg w-full relative overflow-visible border border-[#FDB913]"
-            onClick={handleModalContentClick}
-          >
-            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20">
-              <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="bg-black p-4 rounded-full shadow-2xl border-4 border-white relative"
-              >
-                <Image
-                  src={logo}
-                  alt="Logo"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                {/* Shine effect */}
-                <div className="absolute top-2 left-2 w-4 h-4 bg-white opacity-40 rounded-full blur-sm"></div>
-              </motion.div>
-            </div>
-
-            {/* Header Section with Gradient Background */}
-            <div className="bg-black text-white p-6 pb-8 pt-12 relative rounded-t-2xl">
-              {/* Close Button */}
-              <button
-                type="button"
-                onClick={handleClose}
-                className="absolute top-4 right-4 text-white/80 hover:text-[#FDB913] focus:outline-none focus:ring-2 focus:ring-[#FDB913]/50 rounded-full p-2 transition-all duration-200 hover:bg-gray-800 z-10"
-                aria-label="Close form"
-              >
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-8 w-8 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
+              </div>
+            </motion.div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
+            <p className="text-gray-600">We will contact you shortly.</p>
+          </div>
+        ) : (
+          <>
+            {/* Logo positioned in top left */}
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="rounded-lg shadow-lg"
+                      >
+                        <Image
+                          src={logo}
+                          alt="Logo"
+                          width={60}
+                          height={60}
+                          className="rounded-lg"
+                        />
+                      </motion.div>
+                    </div>
+
+            {/* Close button */}
+            <button
+              onClick={handlePopupClose}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+            >
+              ×
+            </button>
+
+            {/* Section 1: Heading */}
+              {/* Section 2: Sub-heading CTA */}
+            {/* <div className="text-center mb-6">
+              <p className="text-2xl text-gray-700 font-semibold">Special Diwali Offer</p>
+              <p className="text-lg text-gray-700 font-semibold">
+                Free 5gm Gold Coin on Dholera Plots
+             </p>
+            </div> */}
+
+            <div className="text-center mb-6">
+              {/* Section 2: Sub-heading CTA */}
+              <p className="text-lg text-gray-700 font-semibold">
+                {title}
+              </p>
+            </div>
+
+            {/* Section 3: Form Fields */}
+            <form onSubmit={handleSubmit}>
+              {errorMessage && (
+                <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm mb-4">
+                  {errorMessage}
+                </div>
+              )}
+
+              <div className="space-y-4 mb-6">
+                <div>
+                  <label htmlFor="fullName" className="block text-gray-700 text-sm font-medium mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="mobileNumber" className="block text-gray-700 text-sm font-medium mb-2">
+                    Mobile Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="mobileNumber"
+                    name="mobileNumber"
+                    value={formData.mobileNumber}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                    placeholder="Enter your mobile number"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-center mb-4">
+                <div ref={recaptchaRef}></div>
+              </div>
+
+              {/* Section 4: Submit Button with Tagline */}
+              <button
+                type="submit"
+                disabled={isLoading || !recaptchaLoaded}
+                className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
+                  isLoading || !recaptchaLoaded
+                    ? "bg-gray-400 cursor-not-allowed text-gray-600"
+                    : "bg-[#deae3c] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                }`}
+              >
+                {isLoading ? (
+                  <div className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Submitting...
+                  </div>
+                ) : (
+                  "Get Dholera Details"   
+                )}
               </button>
 
-              {/* Content Section */}
-              <div className="text-center">
-                {/* Exclusive Deal Section */}
-                <div className="mb-3">
-                  <span className="bg-[#FDB913] text-black px-3 py-1 rounded-full text-sm font-bold inline-flex items-center gap-2">
-                    <FaClock className="text-xs" />
-                    Inaugural Offer
-                  </span>
-                </div>
-
-                <h2 className="text-2xl md:text-3xl font-bold mb-1 leading-tight text-[#FDB913]">
-                  {titleInfo.mainText}
-                </h2>
-
-                {titleInfo.price && (
-                  <div className="flex flex-col items-center gap-1 mb-2">
-                    <div className="text-2xl line-through text-gray-400">
-                      ₹9500/sq. yard
-                    </div>
-                    <div className="text-3xl md:text-4xl font-black text-white">
-                      {titleInfo.price}/sq. yard
-                    </div>
-                  </div>
-                )}
-
-                <p className="text-white/90 text-lg">
-                  {titleInfo.subText}
+              {/* Section 5: Privacy Notice */}
+              <div className="text-center mt-4">
+                <p className="text-xs text-gray-500">
+                  We respect your privacy. Your details are safe with us.
                 </p>
-
-                {titleInfo.timeLeft && (
-                  <div className="bg-[#FDB913] text-black px-4 py-2 rounded-lg inline-flex items-center gap-2 font-bold mb-6">
-                    <FaClock className="text-sm" />
-                    {formatTime(timeLeft)} left!
-                  </div>
-                )}
               </div>
-            </div>
-
-            {/* Form Section */}
-            <div className="p-6 bg-white rounded-b-2xl">
-              {showSubmissionSuccess ? (
-                <div className="text-center py-8">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="mb-4 inline-block"
-                  >
-                    <div className="w-16 h-16 bg-[#FDB913] rounded-full flex items-center justify-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-10 w-10 text-black"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                  </motion.div>
-                  <h3 className="text-2xl font-bold text-[#FDB913] mb-2">
-                    Thank You!
-                  </h3>
-                  <p className="text-gray-800">
-                    Your request has been submitted successfully. We'll contact
-                    you shortly.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {errorMessage && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm"
-                    >
-                      {errorMessage}
-                    </motion.div>
-                  )}
-
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="relative"
-                  >
-                    <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#FDB913]" />
-                    <input
-                      name="fullName"
-                      placeholder="Enter your full name"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      required
-                      className="w-full p-3 pl-12 bg-gray-900 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FDB913] border border-gray-600 hover:border-[#FDB913] transition-colors"
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="relative"
-                  >
-                    <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#FDB913]" />
-                    <input
-                      name="phone"
-                      type="tel"
-                      placeholder="Enter your phone number"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      minLength="10"
-                      maxLength="15"
-                      required
-                      className="w-full p-3 pl-12 bg-gray-900 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FDB913] border border-gray-600 hover:border-[#FDB913] transition-colors"
-                    />
-                  </motion.div>
-
-                  {/* reCAPTCHA container */}
-                  <div className="flex justify-center">
-                    <div ref={recaptchaRef}></div>
-                  </div>
-
-                  <motion.button
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    id="popup"
-                    disabled={isLoading || !recaptchaLoaded}
-                    className="w-full py-4 px-6 bg-[#FDB913] text-black rounded-xl hover:bg-[#FDB913]/90 transition-all shadow-lg hover:shadow-[#FDB913]/25 font-bold text-lg disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  >
-                    {isLoading ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
-                        Verifying...
-                      </>
-                    ) : recaptchaLoaded ? (
-                      <>
-                        Talk To Investment Advisor
-                      </>
-                    ) : (
-                      "Loading..."
-                    )}
-                  </motion.button>
-
-                  <p className="text-xs text-gray-400 text-center">
-                    By submitting, you agree to receive calls/WhatsApp messages about our services
-                  </p>
-                </form>
-              )}
-            </div>
-          </motion.div>
-        </div>
-      )}
-    </>
+            </form>
+          </>
+        )}
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
   );
 }

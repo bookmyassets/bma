@@ -55,7 +55,7 @@ export default function MegaIndustries() {
             <h3 className="text-[28px] font-bold text-[#151f28]">
               Global Giants Building in Dholera
             </h3>
-            <div className="w-24 h-1 mt-4 mb-4 bg-yellow-600 mx-auto"></div>
+            <div className="w-24 h-1 mt-4 mb-4 bg-[#deae3c] mx-auto"></div>
           </div>
 
           <div className="bg-gray-50 p-8 rounded-lg">

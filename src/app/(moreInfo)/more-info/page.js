@@ -36,7 +36,7 @@ export default function Page() {
         {/* About BookMyAssets */}
         <AboutBMA/>
         {/* Lead Form */}
-        <Ribbon/>
+        <Ribbon />
         <Gallery/>
         <Dholeravideos/>
        {/*  <AboutBMA/> */}
@@ -47,6 +47,7 @@ export default function Page() {
         <TestimonialPagination />
         <FAQSection />
         <EndSection /> */}
+        <PopupForm/>
       </div>
 
       {showForm && (

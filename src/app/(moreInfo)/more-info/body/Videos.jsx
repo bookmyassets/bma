@@ -6,34 +6,20 @@ import MobilePropertyGrid from "./MobileGrid";
 const videos = [
   {
     id: 1,
-    title: "Dholera ReNew Power ",
-    youtubeId: "129oXwderKU?si=fo8yWs7W68oZOvOI",
+    title: "Dholera Recap",
+    youtubeId: "7XXb9IsHfqE?si=dAGd0bmx2URgdLf2",
   },
   {
     id: 2,
-    title: "Brain Of Dholera - ABCD Building",
-    youtubeId: "faSgawUZWeY?si=JEFIBEHDiyVyTdxw",
+    title: "Top 5 Infrastructure Projects in Dholera",
+    youtubeId: "7sDjRg2YxJE?si=ibQa2suEahioK8IM",
   },
   {
     id: 3,
-    title: "Dholera International Airport",
-    youtubeId: "PuLWU9DYV_c?si=EYBDcbyoczqk-uJv",
+    title: "Dholera Smart City",
+    youtubeId: "hSc-pwOCu6Q?si=vdlRKEgrRHTV-Id_",
   },
-  {
-    id: 4,
-    title: "Dholera - Ahmedabad Expressway",
-    youtubeId: "NdH1zHVGTcQ?si=qj1PkQrL_xf9Gu6F",
-  },
-  {
-    id: 5,
-    title: "Dholera Semiconductor - TATA Semicon",
-    youtubeId: "sYONhrTYBTg?si=1VKFB5TJrTXTqukw",
-  },
-  {
-    id: 6,
-    title: "Water Treatment Plant - Dholera ",
-    youtubeId: "fHLqa6YM1Aw?si=lExr-wqgURFrX7kJ",
-  }
+  
 ];
 
 export default function Dholeravideos() {
@@ -114,7 +100,7 @@ export default function Dholeravideos() {
           <div className="relative pt-8">
             {/* Background with overlay */}
             <div className="max-w-7xl mx-auto px-4">
-              <h2 className="text-center text-xl font-bold md:text-[32px] mb-2 text-black">
+              <h2 className="text-center text-xl font-bold md:text-[32px] mb-2 text-[#deae3c]">
                 Dholera Development Live
               </h2>
               <p className="text-center text-xl text-black mb-8">
@@ -124,7 +110,7 @@ export default function Dholeravideos() {
               {/* Video Slider Container */}
               <div className="relative">
                 {/* Navigation Buttons */}
-                <button
+                {/* <button
                   onClick={prevSlide}
                   className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[#deae3c] hover:bg-[#c49a2f] text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 md:block hidden"
                   disabled={totalSlides <= 1}
@@ -138,7 +124,7 @@ export default function Dholeravideos() {
                   disabled={totalSlides <= 1}
                 >
                   <FaChevronRight className="w-5 h-5" />
-                </button>
+                </button> */}
 
                 {/* Videos Grid */}
                 <div className="overflow-hidden rounded-xl">

@@ -92,7 +92,7 @@ This is your opportunity to own premium land at Dholera's industrial core before
           {/* Header */}
           <div className="mb-16">
             <h2 className="text-5xl font-bold text-center text-black mb-4">
-              WestWyn Estate - Investment Goldmine of Dholera
+              <span className="text-[#deae3c]">WestWyn Estate</span> - Investment Goldmine of Dholera
             </h2>
           </div>
 
@@ -104,13 +104,13 @@ This is your opportunity to own premium land at Dholera's industrial core before
                 onClick={() => setActiveSection(index)}
                 className={`pb-4 px-6 font-semibold transition-all relative ${
                   activeSection === index
-                    ? "text-black"
+                    ? "text-[#deae3c]"
                     : "text-gray-400 hover:text-gray-600"
                 }`}
               >
                 {section.title}
                 {activeSection === index && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#deae3c]" />
                 )}
               </button>
             ))}
@@ -183,7 +183,7 @@ This is your opportunity to own premium land at Dholera's industrial core before
         <div className="px-4 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl text-center font-bold text-black mb-2">
+            <h1 className="text-3xl text-center font-bold text-[#deae3c] mb-2">
               WestWyn Estate
             </h1>
           </div>
@@ -208,7 +208,7 @@ This is your opportunity to own premium land at Dholera's industrial core before
                 onClick={() => setActiveSection(index)}
                 className={`px-5 py-2.5 rounded-full font-medium whitespace-nowrap transition-all ${
                   activeSection === index
-                    ? "bg-gray-900 text-white"
+                    ? "bg-black text-[#deae3c]"
                     : "bg-gray-100 text-gray-600"
                 }`}
               >
