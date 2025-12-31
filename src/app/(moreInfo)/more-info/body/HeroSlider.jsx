@@ -470,11 +470,9 @@ export default function LandingPage({ openForm }) {
                   className="mx-auto mb-3"
                 />
                 <h2 className="text-xl lg:text-2xl font-bold text-black mb-2">
-                  Know Today's Offer
+                  Registry-Ready Plots under ₹10 Lakh
                 </h2>
-                <p className="text-black text-sm lg:text-base">
-                 Get exclusive offer on premium residential plots in Dholera
-                </p>
+                
               </div>
 
               {showPopup ? (
@@ -601,7 +599,7 @@ export default function LandingPage({ openForm }) {
                     disabled={isLoading}
                     className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? "Submitting..." : "Claim Offer"}
+                    {isLoading ? "Submitting..." : "Get Details"}
                   </motion.button>
                 </div>
                 </form>
