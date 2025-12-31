@@ -1,77 +1,10 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import BMAimage from "@/assests/BMA.webp";
-import LeadForm from "../components/LeadForm";
 import LeadFormhomepage from "../components/HomePageForm";
 
 export default function BMA() {
-  // Counter states for new section 3
-  const [partners, setPartners] = useState(0);
-  const [plots, setPlots] = useState(0);
-  const [customers, setCustomers] = useState(0);
-  const [projects, setProjects] = useState(0);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const partnersInterval = setInterval(() => {
-              setPartners((prev) => {
-                if (prev >= 50) {
-                  clearInterval(partnersInterval);
-                  return 50;
-                }
-                return prev + 1;
-              });
-            }, 3);
-
-            const plotsInterval = setInterval(() => {
-              setPlots((prev) => {
-                if (prev >= 1000) {
-                  clearInterval(plotsInterval);
-                  return 1000;
-                }
-                return prev + 10;
-              });
-            }, 2);
-
-            const customersInterval = setInterval(() => {
-              setCustomers((prev) => {
-                if (prev >= 400) {
-                  clearInterval(customersInterval);
-                  return 400;
-                }
-                return prev + 5;
-              });
-            }, 3);
-
-            const projects = setInterval(() => {
-              setProjects((prev) => {
-                if (prev >= 5) {
-                  clearInterval(projects);
-                  return 5;
-                }
-                return prev + 1;
-              });
-            }, 25);
-
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    const countersSection = document.getElementById("counters-section");
-    if (countersSection) {
-      observer.observe(countersSection);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <div className="bg-[#f9f9f9] ">

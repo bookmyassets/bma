@@ -662,7 +662,7 @@ export default function LandingPage({ openForm }) {
                           value={formData.fullName}
                           onChange={handleChange}
                           required
-                          className="w-full p-3 pl-11 bg-[#2a2a2a]/80 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:bg-[#2a2a2a] border-2 border-[#3a3a3a] hover:border-[#B3000C] transition-all text-sm placeholder-gray-400 shadow-inner"
+                          className="w-full p-3 pl-11 bg-[#2a2a2a]/80 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:bg-[#2a2a2a] border-2 border-[#3a3a3a] hover:border-[#B3000C] transition-all text-sm placeholder-gray-400 shadow-inner"
                         />
                       </motion.div>
                       <motion.div
@@ -694,7 +694,7 @@ export default function LandingPage({ openForm }) {
                           minLength={10}
                           maxLength={15}
                           required
-                          className="w-full p-3 pl-11 bg-[#2a2a2a]/80 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:bg-[#2a2a2a] border-2 border-[#3a3a3a] hover:border-[#B3000C] transition-all text-sm placeholder-gray-400 shadow-inner"
+                          className="w-full p-3 pl-11 bg-[#2a2a2a]/80 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B3000C] focus:bg-[#2a2a2a] border-2 border-[#3a3a3a] hover:border-[#B3000C] transition-all text-sm placeholder-gray-400 shadow-inner"
                         />
                       </motion.div>
                     </div>
@@ -711,7 +711,7 @@ export default function LandingPage({ openForm }) {
                       type="button"
                       onClick={handleSubmit}
                       disabled={isLoading}
-                      className="w-full py-4 px-6 bg-white text-[#B3000C] rounded-lg transition-all duration-300 font-bold text-base disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden touch-manipulation"
+                      className="w-full py-4 px-6 bg-white text-[#B3000C] rounded-xl transition-all duration-300 font-bold text-base disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden touch-manipulation"
                     >
                       <span className="relative z-10">
                         {isLoading ? "Submitting..." : "Get A Call Back"}

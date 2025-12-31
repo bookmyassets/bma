@@ -1,12 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import Hero from "./homeComponents/Hero";
 import Dholera from "./homeComponents/Dholera";
 import BMA from "./homeComponents/BMA";
 import ShortsSection from "./homeComponents/YouTube";
 import FAQSection from "./homeComponents/FAQs";
 import WestWyn from "./homeComponents/WestWyn";
-import PopupForm from "./components/PopUpForm";
 import LandingPage from "./homeComponents/Hero3";
 import InteractiveMap from "./homeComponents/InteractiveMap";
 import Groundzero from "./homeComponents/Groundzero";
@@ -163,7 +161,7 @@ export default function page() {
         <ShortsSection />
         <Groundzero />
         <FAQSection />
-        {/* <ImageMapFormOverlay/> */}
+
       </div>
       {/* {showpopForm && (
         <PopupForm
