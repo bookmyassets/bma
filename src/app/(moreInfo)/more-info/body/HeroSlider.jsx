@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp"
 /* import logo from "@/assests/festival-images/dholera-diwali.webp" */
-import { Home, MapPin, Wifi, IndianRupee, Download, ChevronLast, ChevronRight, ChevronLeft, TrendingUp } from 'lucide-react';
+import { Home, CheckCircle, CalendarCheck, Download, ChevronRight, ChevronLeft, FileCheck } from 'lucide-react';
 import { useRouter, usePathname } from "next/navigation";
 
 //images import
@@ -610,7 +610,7 @@ export default function LandingPage({ openForm }) {
         </div>
 
         {/* Bottom Stats Section - Compact */}
-        <div className="bg-white border-t border-gray-200 ">
+        <div className="bg-white border-t border-gray-200 py-4">
           <div className=" px-4">
             {/* desktop view */}
             <div className="grid max-sm:hidden md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-gray-200">
@@ -619,36 +619,36 @@ export default function LandingPage({ openForm }) {
                 <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
                   <Home className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1">Plot Size from</h3>
-                <p className="text-lg font-bold text-[#deae3c]">@150 Sq.Yd.</p>
+                <h3 className="text-lg font-semibold flex items-center justify-center text-[#deae3c]">Immediate Possession</h3>
+                <p className="text-lg font-bold text-[#deae3c]"></p>
               </div>
 
               {/* Type */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
                 <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <MapPin className="w-4 h-4 text-white" />
+                  <CheckCircle className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1">Type</h3>
-                <p className="text-lg font-bold text-[#deae3c]">Residential Plots</p>
+                <h3 className="text-lg font-semibold flex items-center justify-center text-[#deae3c]">Government Approved</h3>
+                <p className="text-lg font-bold text-[#deae3c]"></p>
               </div>
 
               {/* Amenities */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
                 <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <TrendingUp className="w-4 h-4 text-white" />
+                  <CalendarCheck className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1">High ROI</h3>
-                <p className="text-lg font-bold text-[#deae3c]">5x in 5 yrs.</p>
+                <h3 className="text-lg font-semibold flex items-center justify-center text-[#deae3c]">365 Days Site Visit</h3>
+                <p className="text-lg font-bold text-[#deae3c]"></p>
               </div>
 
               {/* Price */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
                 <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <IndianRupee className="w-4 h-4 text-white" />
+                  <FileCheck className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1">Price</h3>
-                <p className="text-lg font-bold text-[#deae3c]">₹10 Lacs*</p>
-                <p className="text-xs text-gray-500">*Terms & conditions apply</p>
+                <h3 className="text-lg font-semibold flex items-center justify-center text-[#deae3c]">Due Diligence</h3>
+                <p className="text-lg font-bold text-[#deae3c]"></p>
+                <p className="text-xs text-gray-500"></p>
               </div>
 
               {/* Download Brochure */}
@@ -656,9 +656,9 @@ export default function LandingPage({ openForm }) {
                 <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
                   <Download className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1">Download Brochure</h3>
+                <h3 className="text-sm font-semibold text-gray-800 mb-1"></h3>
                 <button onClick={openBrochure} className="bg-[#deae3c] hover:bg-[#f3bb39] text-white font-semibold py-1 px-3 rounded-lg transition-colors duration-300 text-sm">
-                  Download Now
+                  Download Brochure
                 </button>
               </div>
             </div>

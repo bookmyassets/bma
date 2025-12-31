@@ -1,5 +1,11 @@
 import { AnimatePresence } from 'framer-motion';
-import { Home, MapPin, Wifi, IndianRupee, Download, TrendingUp } from 'lucide-react';
+import { 
+  Home,           // For "Immediate Possession"
+  CheckCircle,    // For "Government Approved"
+  CalendarCheck,       // For "365 Days Site Visit"
+  FileCheck,      // For "Due Diligence"
+  Download,        // For "Download Brochure"
+} from 'lucide-react';
 import { useState } from 'react';
 import BrochureDownload from '../components/BrochureDownload';
 
@@ -24,17 +30,17 @@ export default function MobilePropertyGrid() {
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
             <Home className="w-3 h-3 text-[#deae3c]" />
           </div>
-          <h3 className="text-xs font-semibold text-white mb-1">Land Size</h3>
-          <p className="text-sm font-bold text-white">150 Sq.Yd.</p>
+          <h3 className="text-xs font-semibold text-white mb-1"> </h3>
+          <p className="text-sm font-bold text-white">Immediate Possesion</p>
         </div>
 
         {/* Type */}
         <div className="p-3 text-center">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
-            <MapPin className="w-3 h-3 text-[#deae3c]" />
+            <CheckCircle className="w-3 h-3 text-[#deae3c]" />
           </div>
-          <h3 className="text-xs font-semibold text-white mb-1">Type</h3>
-          <p className="text-sm font-bold text-white">Residential Plots</p>
+          <h3 className="text-xs font-semibold text-white mb-1"></h3>
+          <p className="text-sm font-bold text-white">Government Approved</p>
         </div>
       </div>
 
@@ -43,21 +49,21 @@ export default function MobilePropertyGrid() {
         {/* Amenities */}
         <div className="p-3 text-center">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
-            <TrendingUp className="w-3 h-3 text-[#deae3c]" />
+            <CalendarCheck className="w-3 h-3 text-[#deae3c]" />
           </div>
-          <h3 className="text-xs font-semibold text-white mb-1">High ROI</h3>
-          <p className="text-xs font-bold text-white leading-tight">
-            5x in 5yrs
+          <h3 className="text-xs font-semibold text-white mb-1"> </h3>
+          <p className="text-sm font-bold text-white leading-tight">
+            365 Days Site Visit
           </p>
         </div>
 
         {/* Price */}
         <div className="p-3 text-center">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
-            <IndianRupee className="w-3 h-3 text-[#deae3c]" />
+            <FileCheck className="w-3 h-3 text-[#deae3c]" />
           </div>
-          <h3 className="text-xs font-semibold text-white mb-1">Price</h3>
-          <p className="text-sm font-bold text-white">₹ 15 Lacs*</p>
+          <h3 className="text-xs font-semibold text-white mb-1"></h3>
+          <p className="text-sm font-bold text-white">Due Diligence</p>
         </div>
       </div>
 
