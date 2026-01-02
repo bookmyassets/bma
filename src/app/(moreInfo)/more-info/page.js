@@ -12,12 +12,18 @@ import AboutBMA from "./body/About_BMA";
 import DholeraLandingPage from "./body/DholeraSIR";
 import MegaIndustries from "./body/MegaIndustries";
 import WestWyn from "./body/WestWyn";
+import TestimonialPagination from "./components/Testimonials";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
 
   return (
     <>
+    <title>Dholera Smart City Plots | Verified Projects with BMA</title>
+    <meta
+        name="description"
+        content="Explore Dholera Smart City investment opportunities with BookMyAssets. Verified plots, major projects, and expert guidance for long-term growth."
+      />
       <div>
         <section>
           <LandingPage
@@ -39,6 +45,7 @@ export default function Page() {
         <Ribbon />
         <Gallery/>
         <Dholeravideos/>
+        <TestimonialPagination/>
        {/*  <AboutBMA/> */}
         {/* <Westwyn />
         <Ammenties />
