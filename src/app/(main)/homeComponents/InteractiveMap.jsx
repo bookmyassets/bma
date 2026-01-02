@@ -133,7 +133,7 @@ export default function InteractiveMap() {
       id: "solar",
       title: "Solar Energy Park",
       coords: [367, 562, 403, 597],
-      desktopCoords: [855, 457, 893, 495],
+      desktopCoords: [851,436,893,473],
       description: "Dholera Solar Energy Park",
       details: [
         "5,000 MW Solar Power Generation Capacity",
