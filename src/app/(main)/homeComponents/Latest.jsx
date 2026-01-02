@@ -7,9 +7,10 @@ import { urlFor } from "@/sanity/lib/image";
 
 // Related Blog Card Component
 const RelatedBlogCard = ({ item, type }) => {
-  const slug = type === 'blog' 
-    ? `/dholera-sir-blogs/${item.slug?.current || '#'}`
-    : `/dholera-sir-updates/${item.slug?.current || '#'}`;
+  const slug =
+    type === "blog"
+      ? `/dholera-sir-blogs/${item.slug?.current || "#"}`
+      : `/dholera-sir-updates/${item.slug?.current || "#"}`;
 
   return (
     <div className="bg-white rounded-lg shadow-2xl  overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105 md:flex-col">
@@ -26,7 +27,9 @@ const RelatedBlogCard = ({ item, type }) => {
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400 text-xs md:text-base">No image</span>
+              <span className="text-gray-400 text-xs md:text-base">
+                No image
+              </span>
             </div>
           )}
         </div>
@@ -35,7 +38,7 @@ const RelatedBlogCard = ({ item, type }) => {
         <div className="flex flex-col flex-grow max-sm:w-32 max-sm:h-32">
           <Link
             href={slug}
-            className="w-full px-4 py-2 transition-all font-semibold border-white hover:bg-[#B3000C] bg-white hover:text-white text-lg md:text-base text-[#B3000C] h-full flex flex-col justify-between space-y-2 md:space-y-3"
+            className="w-full px-4 py-2 transition-all font-semibold border-white hover:bg-[#deae3c] bg-black hover:text-black text-lg md:text-base text-[#deae3c] h-full flex flex-col justify-between space-y-2 md:space-y-3"
           >
             {/* Title */}
             <h3 className="text-base md:text-lg font-semibold line-clamp-2 md:line-clamp-2 md:h-14">
@@ -43,16 +46,18 @@ const RelatedBlogCard = ({ item, type }) => {
             </h3>
 
             {/* Meta info */}
-            <div className="text-xs md:text-sm text-[#B3000C] hover:text-white">
+            <div className="text-xs md:text-sm text-gray-400">
               <time>
-                {new Date(item.publishedAt || item._createdAt).toLocaleDateString("en-US", {
+                {new Date(
+                  item.publishedAt || item._createdAt
+                ).toLocaleDateString("en-US", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
                 })}
               </time>
-              <div className="">
-                <span className="font-medium  ">BookMyAssets</span>
+              <div>
+                <span className="font-medium text-white">BookMyAssets</span>
               </div>
             </div>
 
@@ -92,16 +97,17 @@ export default function LatestUpdates() {
     const fetchContent = async () => {
       try {
         setLoading(true);
-        
+
         // Fetch both blogs and updates in parallel
         const [blogsData, updatesData] = await Promise.allSettled([
           getblogs(),
-          getUpdates()
+          getUpdates(),
         ]);
 
         // Handle the results
-        const blogs = blogsData.status === 'fulfilled' ? blogsData.value : [];
-        const updates = updatesData.status === 'fulfilled' ? updatesData.value : [];
+        const blogs = blogsData.status === "fulfilled" ? blogsData.value : [];
+        const updates =
+          updatesData.status === "fulfilled" ? updatesData.value : [];
 
         console.log("Blogs fetched:", blogs?.length || 0);
         console.log("Updates fetched:", updates?.length || 0);
@@ -111,11 +117,11 @@ export default function LatestUpdates() {
 
         // Add blogs with type identifier
         if (blogs && Array.isArray(blogs)) {
-          blogs.forEach(post => {
+          blogs.forEach((post) => {
             if (post && post._id) {
               combined.push({
                 ...post,
-                type: 'blog',
+                type: "blog",
                 author: post.author || "BookMyAssets",
                 mainImage: post.mainImage || null,
                 slug: post.slug || { current: "#" },
@@ -127,11 +133,11 @@ export default function LatestUpdates() {
 
         // Add updates with type identifier
         if (updates && Array.isArray(updates)) {
-          updates.forEach(post => {
+          updates.forEach((post) => {
             if (post && post._id) {
               combined.push({
                 ...post,
-                type: 'update',
+                type: "update",
                 author: post.author || "BookMyAssets",
                 mainImage: post.mainImage || null,
                 slug: post.slug || { current: "#" },
@@ -145,7 +151,7 @@ export default function LatestUpdates() {
 
         // Sort by date (most recent first) and take only 4
         const latest4 = combined
-          .filter(item => item.publishedAt) // Filter out items without dates
+          .filter((item) => item.publishedAt) // Filter out items without dates
           .sort((a, b) => {
             const dateA = new Date(a.publishedAt);
             const dateB = new Date(b.publishedAt);
@@ -153,12 +159,15 @@ export default function LatestUpdates() {
           })
           .slice(0, 4);
 
-        console.log("Latest 4 items:", latest4.map(item => ({
-          title: item.title,
-          type: item.type,
-          date: item.publishedAt,
-          id: item._id
-        })));
+        console.log(
+          "Latest 4 items:",
+          latest4.map((item) => ({
+            title: item.title,
+            type: item.type,
+            date: item.publishedAt,
+            id: item._id,
+          }))
+        );
 
         setContent(latest4);
       } catch (err) {
@@ -196,10 +205,10 @@ export default function LatestUpdates() {
               .map((_, i) => <BlogSkeleton key={i} />)
           : content.length > 0
             ? content.map((item) => (
-                <RelatedBlogCard 
-                  key={`${item.type}-${item._id}`} 
-                  item={item} 
-                  type={item.type} 
+                <RelatedBlogCard
+                  key={`${item.type}-${item._id}`}
+                  item={item}
+                  type={item.type}
                 />
               ))
             : Array(4)

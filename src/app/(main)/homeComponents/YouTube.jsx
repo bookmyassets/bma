@@ -203,7 +203,7 @@ export default function ShortsSection() {
       aria-label="YouTube Shorts Carousel"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl text-[#B3000C] font-bold text-center mb-2">
+        <h2 className="text-3xl md:text-4xl text-[#deae3c] font-bold text-center mb-2">
           Dholera in Motion
         </h2>
         <p className="text-center font-light text-white text-lg mb-6">
@@ -306,7 +306,7 @@ export default function ShortsSection() {
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   currentIndex === index
-                    ? "bg-[#B3000C] w-6"
+                    ? "bg-[#deae3c] w-6"
                     : "bg-white/30 hover:bg-white/50"
                 }`}
                 aria-label={`Go to slide ${index + 1}`}

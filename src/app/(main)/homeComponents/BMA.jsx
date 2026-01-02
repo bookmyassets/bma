@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import BMAimage from "@/assests/BMA.webp";
 import LeadFormhomepage from "../components/HomePageForm";
+import LeadForm from "../components/LeadForm";
 
 export default function BMA() {
 
@@ -12,7 +13,7 @@ export default function BMA() {
         {/* Left Section (40%) */}
         <div className="w-full md:w-2/5 pl-2 pr-2">
           <h2 className="text-xl font-semibold text-black ">Why Invest With</h2>
-          <h2 className="text-[32px] font-semibold text-[#B3000C]">
+          <h2 className="text-[32px] font-semibold text-[#deae3c]">
             BookMyAssets
           </h2>
           <Image src={BMAimage} alt="BMA" className="pt-8" />
@@ -43,7 +44,7 @@ export default function BMA() {
                 <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                   {/* Counter Item */}
                   <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-                    <div className="text-[24px] font-bold text-[#B3000C] mb-2">
+                    <div className="text-[24px] font-bold text-[#deae3c] mb-2">
                       1 Lakh
                     </div>
                     <p className="text-sm md:text-base text-gray-700 font-medium text-center">
@@ -52,7 +53,7 @@ export default function BMA() {
                   </div>
 
                   <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-                    <div className="text-[24px] font-bold text-[#B3000C] mb-2">
+                    <div className="text-[24px] font-bold text-[#deae3c] mb-2">
                       1000
                     </div>
                     <p className="text-sm md:text-base text-gray-700 font-medium text-center">
@@ -61,7 +62,7 @@ export default function BMA() {
                   </div>
 
                   <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-                    <div className="text-[24px] font-bold text-[#B3000C] mb-2">
+                    <div className="text-[24px] font-bold text-[#deae3c] mb-2">
                       400
                     </div>
                     <p className="text-sm md:text-base text-gray-700 font-medium text-center">
@@ -70,7 +71,7 @@ export default function BMA() {
                   </div>
 
                   <div className="flex flex-col justify-center items-center p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-                    <div className="text-[24px] font-bold text-[#B3000C] mb-2">
+                    <div className="text-[24px] font-bold text-[#deae3c] mb-2">
                       8
                     </div>
                     <p className="text-sm md:text-base text-gray-700 font-medium text-center">
@@ -85,7 +86,7 @@ export default function BMA() {
           <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center">
             <Link
               href="/about"
-              className="bg-[#B3000C] text-white px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
+              className="bg-[#deae3c] text-white px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
             >
               About Us
             </Link>
@@ -94,10 +95,10 @@ export default function BMA() {
       </div>
 
       {/* <div className="space-y-4">
-        <p className="text-3xl text-center font-semibold"><span className="text-[#B3000C]">Dholera</span> in Motion See India's Smart City Revolution Live</p>
+        <p className="text-3xl text-center font-semibold"><span className="text-[#deae3c]">Dholera</span> in Motion See India's Smart City Revolution Live</p>
         <p className="text-center text-lg">Witness real-time progress in the dholera smart city project, where infrastructure like the ABCD Building Dholera and industrial zones are developing rapidly. </p>
       </div> */}
-      <LeadFormhomepage title="Want to buy plots in Dholera but don’t know how?"  button="Talk to an Expert"/>
+      <LeadForm title="Want to buy plots in Dholera but don’t know how?"  button="Talk to an Expert"/>
     </div>
   );
 }
