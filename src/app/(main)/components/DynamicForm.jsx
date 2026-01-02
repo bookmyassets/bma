@@ -289,8 +289,8 @@ export default function DholeraPopupForm() {
                           disabled={isLoading}
                           className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base ${
                             isLoading
-                              ? "bg-gray-400 cursor-not-allowed border-[#B3000C] border-2 text-[#B3000C]"
-                              : "bg-white text-[#B3000C] border-[#B3000C] border-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                              ? "bg-gray-400 cursor-not-allowed border-[#deae3c] border-2 text-[#deae3c]"
+                              : "bg-[#deae3c] text-white border-[#deae3c] border-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                           }`}
                         >
                           {isLoading ? (
@@ -455,10 +455,10 @@ export default function DholeraPopupForm() {
                       <button
                         onClick={(e) => handleSubmit(e, true)}
                         disabled={isLoading}
-                        className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base border-2 border-[#B3000C] ${
+                        className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base border-2 border-[#deae3c] ${
                           isLoading
-                            ? "bg-gray-400 cursor-not-allowed text-[#B3000C]"
-                            : "bg-white text-[#B3000C] shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                            ? "bg-gray-400 cursor-not-allowed text-[#deae3c]"
+                            : "bg-white text-[#deae3c] shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                         }`}
                       >
                         {isLoading ? (
