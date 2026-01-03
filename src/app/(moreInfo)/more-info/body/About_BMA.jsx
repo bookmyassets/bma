@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { MapPin, Plus, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from "react";
+import { MapPin, Plus, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FileCheck,
   TrendingUp,
@@ -20,7 +20,7 @@ export default function AboutBMA() {
   };
 
   const openModal = (benefit, index) => {
-    setSelectedBenefit({...benefit, index});
+    setSelectedBenefit({ ...benefit, index });
     setShowModal(true);
   };
 
@@ -29,112 +29,93 @@ export default function AboutBMA() {
     setSelectedBenefit(null);
   };
 
-const benefits = [
-  {
-    title: "Prime Location Projects",
-    icon: <MapPin className="w-6 h-6 text-indigo-600" />,
-    description:
-      "Strategically selected projects near major infrastructure for maximum growth.",
-    body:
-      "BookMyAssets specializes in curating investment opportunities at Dholera’s most strategic locations. Our projects are chosen for proximity to expressways, airports, and industrial hubs, ensuring superior connectivity and appreciation potential. We focus on locations that balance prime positioning with affordable entry points, so investors gain long-term growth without compromising on budget. Every project is evaluated for future infrastructure impact and sustained value creation."
-  },
-  {
-    title: "Immediate Sale Registry",
-    icon: <FileCheck className="w-6 h-6 text-blue-600" />,
-    description:
-      "Verified documentation and instant registry with no delays or uncertainty.",
-    body:
-      "BookMyAssets ensures immediate registration with clear and verified documentation, eliminating delays and hidden legal risks. Unlike projects with pending approvals or unclear timelines, our properties are registry-ready from day one. There are no waiting periods, no surprises, and no ambiguity—only straightforward ownership that provides peace of mind the moment you invest."
-  },
-  {
-    title: "In-house Due Diligence Team",
-    icon: <Scale className="w-6 h-6 text-orange-600" />,
-    description:
-      "Every project is vetted by internal legal and technical experts.",
-    body:
-      "BookMyAssets’ in-house legal and technical professionals conduct comprehensive due diligence before any project is offered to investors. We verify land titles, government approvals, NOCs, and historical records to ensure the property is legally sound and dispute-free. This rigorous verification process removes complexity for investors and ensures your capital is protected through professional scrutiny."
-  },
-  {
-    title: "Resale Support & Buyback Option",
-    icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
-    description:
-      "Flexible exit options with resale assistance and buyback assurance.",
-    body:
-      "Investors benefit from dedicated resale support and a buyback option from BookMyAssets, ensuring liquidity and financial flexibility. Whether market conditions evolve or personal goals change, our structured exit support protects your investment. Our resale network helps connect buyers, while the buyback option provides an added safety net—demonstrating our commitment beyond the initial sale."
-  },
-  {
-    title: "365 Days Site Visit Assistance",
-    icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
-    description:
-      "Visit your plot anytime with complete transparency and on-ground access.",
-    body:
-      "BookMyAssets offers 365-day site visit assistance so investors can personally verify development progress, infrastructure, and surroundings at any stage. We believe land investment decisions should be based on ground reality, not just brochures. This year-round access reinforces transparency, builds trust, and allows you to monitor the evolution of your investment with confidence."
-  },
-  {
-    title: "Government Approved AUDA Plots",
-    icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
-    description:
-      "Legally secure plots approved under AUDA and the Dholera master plan.",
-    body:
-      "All plots offered by BookMyAssets are AUDA-approved and backed by proper government verification. AUDA approval confirms compliance with regulatory norms and inclusion in Dholera’s official master plan. This safeguards your investment from legal complications, ensures access to planned infrastructure, and aligns your property with smart city development benefits."
-  }
-];
-
-
+  const benefits = [
+    {
+      title: "Prime Location Projects",
+      icon: <MapPin className="w-6 h-6 text-indigo-600" />,
+      body: "We specialize in curating investment opportunities at Dholera's most strategic locations near expressways, airports, and industrial hubs. We identify locations that combine connectivity advantages with affordable entry points, so you don't compromise between prime positioning and budget.",
+    },
+    {
+      title: "Resale Support & Buyback Option",
+      icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
+      body: "Investors enjoy flexibility with dedicated resale assistance and a buyback option from BookMyAssets, ensuring liquidity and confidence that your investment won't get stuck. Our resale network connects you with buyers, while our buyback guarantee offers a safety net beyond the sale.",
+    },
+    {
+      title: "In-house Due Diligence Team",
+      icon: <Scale className="w-6 h-6 text-orange-600" />,
+      body: "Our internal legal and technical experts conduct thorough due diligence on every project. We verify title clearances, government approvals, NOC documentation, and land records before presenting any opportunity. This means you are investing in legally sound properties backed by professional verification.",
+    },
+    {
+      title: "Immediate Sale Registry",
+      icon: <FileCheck className="w-6 h-6 text-blue-600" />,
+      body: "We ensure immediate registration with clear documentation, so buyers don't face delays or hidden legal issues. Unlike projects with pending approvals, our properties come with verified paperwork ready for registry from day one.",
+    },
+    {
+      title: "365 Days Site Visit Assistance",
+      icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
+      body: "Our year-round site visit support means you can validate your investment decision at any time, demonstrating our confidence in our projects and commitment to complete transparency.",
+    },
+    {
+      title: "Government Approved AUDA Plots",
+      icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
+      body: "All plots are AUDA-approved with proper government verification. AUDA approval means your property meets all regulatory requirements and is part of Dholera's official master plan.",
+    },
+  ];
 
   // Animation variants
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
+        ease: "easeOut",
+      },
     },
     hover: {
       scale: 1.03,
-      boxShadow: "0 10px 25px -5px rgba(222, 174, 60, 0.1), 0 8px 10px -6px rgba(222, 174, 60, 0.1)",
+      boxShadow:
+        "0 10px 25px -5px rgba(222, 174, 60, 0.1), 0 8px 10px -6px rgba(222, 174, 60, 0.1)",
       transition: {
         duration: 0.3,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const modalOverlayVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: {
-        duration: 0.3
-      }
-    }
+        duration: 0.3,
+      },
+    },
   };
 
   const modalContentVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.8,
-      y: 50
+      y: 50,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
       y: 0,
       transition: {
         duration: 0.4,
-        ease: "easeOut"
-      }
+        ease: "easeOut",
+      },
     },
     exit: {
       opacity: 0,
       scale: 0.8,
       transition: {
-        duration: 0.3
-      }
-    }
+        duration: 0.3,
+      },
+    },
   };
 
   const iconVariants = {
@@ -142,22 +123,22 @@ const benefits = [
       rotate: 180,
       transition: {
         duration: 0.4,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   return (
     <>
-      <div className="pt-8 py-4 bg-gray-50" id='why-bma' >
+      <div className="pt-8 py-4 bg-gray-50" id="why-bma">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 
+          <motion.h2
             className="text-2xl md:text-[32px] lg:text-[40px] font-semibold text-center text-[#deae3c] mb-12 md:mb-16"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Why Invest with BookMyAssets?
+            Why Trust BookMyAssets?
           </motion.h2>
 
           {/* Desktop: 5 cards in a row, Mobile: 1 card per row */}
@@ -175,7 +156,7 @@ const benefits = [
               >
                 {/* Card Header */}
                 <div className="text-center mb-4">
-                  <motion.div 
+                  <motion.div
                     className="text-3xl md:text-4xl flex justify-center items-center mb-3"
                     whileHover={{ scale: 1.2 }}
                     transition={{ type: "spring", stiffness: 300 }}
@@ -189,7 +170,7 @@ const benefits = [
 
                 {/* Description - Always Visible */}
                 <div className="mb-3">
-                 {/*  <p className="text-sm md:text-base text-gray-600 line-clamp-3 text-center">
+                  {/*  <p className="text-sm md:text-base text-gray-600 line-clamp-3 text-center">
                     {benefit.description}
                   </p> */}
                   <p className="text-sm md:text-base text-black  text-center">
@@ -197,7 +178,6 @@ const benefits = [
                   </p>
                 </div>
                 {/* Expandable Content */}
-                
               </motion.div>
             ))}
           </div>
@@ -224,7 +204,7 @@ const benefits = [
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
                   <div className="flex items-center">
-                    <motion.div 
+                    <motion.div
                       className="text-3xl mr-3"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -232,7 +212,7 @@ const benefits = [
                     >
                       {selectedBenefit.icon}
                     </motion.div>
-                    <motion.h3 
+                    <motion.h3
                       className="text-xl font-semibold text-gray-800"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -250,31 +230,27 @@ const benefits = [
                     <X className="w-6 h-6" />
                   </motion.button>
                 </div>
-                
-                <motion.div 
+
+                <motion.div
                   className="mb-4"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <p className="text-gray-600">
-                    {selectedBenefit.description}
-                  </p>
+                  <p className="text-gray-600">{selectedBenefit.description}</p>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   className="border-t border-gray-200 pt-4"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <h4 className="font-medium text-gray-800 mb-2">Detailed Information:</h4>
-                  <p className="text-gray-600">
-                    {selectedBenefit.body}
-                  </p>
+                  <h4 className="font-medium text-gray-800 mb-2">
+                    Detailed Information:
+                  </h4>
+                  <p className="text-gray-600">{selectedBenefit.body}</p>
                 </motion.div>
-                
-                
               </div>
             </motion.div>
           </motion.div>
