@@ -495,7 +495,7 @@ export default function BrochureDownload({
                   {isLoading
                     ? "Verifying..."
                     : recaptchaLoaded
-                      ? buttonName
+                      ? "Get A Call Back"
                       : "Loading..."}
                 </motion.button>
               </form>

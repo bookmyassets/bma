@@ -318,7 +318,7 @@ export default function DholeraPopupForm() {
                               Submitting...
                             </div>
                           ) : (
-                            "Get Investment Details"
+                            "Get A Call Back"
                           )}
                         </button>
 
