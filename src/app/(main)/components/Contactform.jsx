@@ -463,7 +463,7 @@ export default function ContactForm({
               Submitting...
             </span>
           ) : (
-            buttonName
+            "Get A Call Back"
           )}
         </motion.button>
       </form>
