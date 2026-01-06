@@ -8,7 +8,8 @@ import WestWyn from "./homeComponents/WestWyn";
 import LandingPage from "./homeComponents/Hero3";
 import InteractiveMap from "./homeComponents/InteractiveMap";
 import Groundzero from "./homeComponents/Groundzero";
-import DholeraPopupForm from "./components/DynamicForm";
+import PopupForm from "./components/PopUpForm";
+
 
 export default function page() {
   const [showpopForm, setpopShowForm] = useState(false);
@@ -171,8 +172,7 @@ export default function page() {
           className="font-medium"
         />
         )} */}
-      {/* <PopupForm title="Best investment-ready locations in Dholera"/> */}
-      <DholeraPopupForm />
+      <PopupForm title="Best investment-ready locations in Dholera"/>
     </>
   );
 }
