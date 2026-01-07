@@ -2,26 +2,21 @@
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { initFacebookPixel, trackPageView } from "@/lib/fbpixel";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+
 import Script from "next/script";
 import FloatingButtons from "./components/whatsapp";
 import ContactNow from "./components/Callus";
 import ScrollToTop from "./components/ScrollToTop";
+import { Lato } from "next/font/google";
+
+const lato = Lato({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  weight : "400"
+});
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname();
-
-  const FACEBOOK_PIXEL_ID = "1147887730461644";
-  useEffect(() => {
-    initFacebookPixel(FACEBOOK_PIXEL_ID);
-    trackPageView();
-  }, []);
-
-  useEffect(() => {
-    trackPageView();
-  }, [pathname]);
 
   return (
     <html lang="en">
@@ -50,8 +45,6 @@ fbq('track', 'PageView');`}
           ;
         </Script>
 
-      
-    
         <Script type="text/javascript">
           {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -84,15 +77,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         `}
         </Script>
       </head>
-      <body>
+      <body className={lato.className}>
         <ScrollToTop />
-        <style jsx global>{`
+        {/* <style jsx global>{`
           @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800&display=swap");
 
           body {
             font-family: "Lato", sans-serif;
           }
-        `}</style>
+        `}</style> */}
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CXXQ9DJ"
