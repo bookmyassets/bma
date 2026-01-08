@@ -371,7 +371,7 @@ export default function LeadForm({ title, button }) {
                         Submitting...
                       </div>
                     ) : (
-                      button
+                      "Get A Call Back"
                     )}
                   </button>
                 </div>
