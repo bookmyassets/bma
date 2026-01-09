@@ -1,57 +1,58 @@
 import { projectInfo } from "@/sanity/lib/api";
-import React from "react"; 
+import React from "react";
 import hero from "@/assests/dholeraSIR.webp";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa6";
 import banner from "@/assests/banner.webp";
-import BlogCard from "./BlogCard";  // Keep this for any individual blog cards
-import BlogSlider from "./BlogSlider";  // Add this for the slider
-import BulkLandCard from "./BulkLandCard";  // Changed from "./BlogCard" to "./BulkLandCard";
+import BlogCard from "./BlogCard"; // Keep this for any individual blog cards
+import BlogSlider from "./BlogSlider"; // Add this for the slider
+import BulkLandCard from "./BulkLandCard"; // Changed from "./BlogCard" to "./BulkLandCard";
 import LeadForm from "../components/LeadForm";
 import residential from "@/assests/bulkLand/residential-hero-mob.-webp.webp";
 import hac from "@/assests/bulkLand/high-access-hero-mob-webp.webp";
 import industrial from "@/assests/bulkLand/industrial-hero-mob-webp.webp";
 import cityCentre from "@/assests/bulkLand/city-centre-cover.webp";
-import knowledge from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp"
-import recreation from "@/assests/bulkLand/recreation-sports-entertainment-Zone-hero.webp"
+import knowledge from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp";
+import recreation from "@/assests/bulkLand/recreation-sports-entertainment-Zone-hero.webp";
+import Link from "next/link";
 
 const bulkLand = [
   {
     _id: "1",
     title: "Residential Land",
     link: "/bulk-land/residential",
-    image: residential
+    image: residential,
   },
   {
     _id: "2",
     title: "High Access Corridor",
-    link: "/bulk-land/high-access-corridor", 
-    image: hac
+    link: "/bulk-land/high-access-corridor",
+    image: hac,
   },
   {
     _id: "3",
     title: "Industrial Land",
     link: "/bulk-land/industrial-land",
-    image: industrial
+    image: industrial,
   },
   {
     _id: "4",
     title: "City Centre",
     link: "/bulk-land/city-centre-land",
-    image: cityCentre
+    image: cityCentre,
   },
   {
     _id: "5",
     title: "Knowledge and IT Zone",
     link: "/bulk-land/knowledge-and-it-zone",
-    image: knowledge
+    image: knowledge,
   },
   {
     _id: "6",
     title: "Recreation Sports and Entertainment",
     link: "/bulk-land/recreation-sports-land",
-    image: recreation
-  }
+    image: recreation,
+  },
 ];
 
 export default async function page() {
@@ -119,7 +120,12 @@ export default async function page() {
 
                   <div className="prose prose-lg text-gray-700 space-y-6">
                     <p>
-                      <strong>Dholera Special Investment Region (DSIR)</strong>{" "}
+                      <strong>
+                        {" "}
+                        <Link href="/dholera-sir-blogs/investment-in-dholera-smart-city">
+                          Dholera Special Investment Region (DSIR)
+                        </Link>
+                      </strong>{" "}
                       is India's largest planned industrial and residential hub.
                       Located about 100 km from <strong>Ahmedabad</strong>, it
                       forms a key part of the Delhi–Mumbai Industrial Corridor.
@@ -138,12 +144,18 @@ export default async function page() {
 
                   <div className="prose prose-lg text-gray-700 space-y-6">
                     <p>
-                      The vision for <strong>Dholera Smart City</strong> is
-                      driven by Prime Minister Narendra Modi, with coordinated
-                      efforts from both the central and state governments.
-                      Designed by Halcrow, internationally renowned for projects
-                      such as the Palm Jumeirah in Dubai, Dholera is India's
-                      first <strong>Greenfield Smart City</strong>.
+                      The vision for{" "}
+                      <strong>
+                        {" "}
+                        <Link href="/dholera-sir-blogs/invest-in-dholera-sir-projects">
+                          Dholera Smart City{" "}
+                        </Link>{" "}
+                      </strong>{" "}
+                      is driven by Prime Minister Narendra Modi, with
+                      coordinated efforts from both the central and state
+                      governments. Designed by Halcrow, internationally renowned
+                      for projects such as the Palm Jumeirah in Dubai, Dholera
+                      is India's first <strong>Greenfield Smart City</strong>.
                     </p>
 
                     <div className="bg-gradient-to-r from-[#deae3c]/5 via-white/50 to-[#138808]/5 p-6 rounded-xl border-l-4 border-[#deae3c]">
@@ -151,7 +163,11 @@ export default async function page() {
                         Smart Infrastructure Features
                       </h3>
                       <p className="text-gray-700">
-                        The planning integrates plug-and-play infrastructure,
+                        The planning integrates{" "}
+                        <Link href="/dholera-sir-blogs/plug-and-play-infrastructure-in-dholera">
+                          {" "}
+                          plug-and-play infrastructure,
+                        </Link>
                         ensuring that utilities such as water, power, gas, and
                         ICT are placed underground for immediate connectivity.
                       </p>
@@ -190,7 +206,11 @@ export default async function page() {
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
                         <p className="text-gray-700">
                           World's largest single-location{" "}
-                          <strong>Dholera Solar Park</strong>
+                          <strong>
+                            <Link href="/dholera-sir-blogs/dholera-solar-power-project">
+                              Dholera Solar Park{" "}
+                            </Link>{" "}
+                          </strong>
                         </p>
                       </div>
                     </div>
@@ -198,29 +218,39 @@ export default async function page() {
                       <div className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
                         <p className="text-gray-700">
-                          Four-lane <strong>Ahmedabad–Dholera Expressway</strong>
+                          Four-lane{" "}
+                          <strong>
+                            {" "}
+                            <Link href="/dholera-sir-blogs/dholera-ahmedabad-expressway">
+                              Ahmedabad–Dholera Expressway
+                            </Link>{" "}
+                          </strong>
                         </p>
                       </div>
                       <div className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
                         <p className="text-gray-700">
-                          <strong>Dholera International Airport</strong>{" "}
+                          <strong>
+                            <Link href="/dholera-sir-blogs/dholera-international-airport">
+                              Dholera International Airport
+                            </Link>{" "}
+                          </strong>{" "}
                           (India's Second Largest)
                         </p>
                       </div>
                       <div className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
                         <p className="text-gray-700">
-                          Metro rail and freight corridors for faster movement
+                          <Link href="/dholera-sir-blogs/ahmedabad-dholera-monorail-project-2025">Metro rail</Link> and freight corridors for faster movement
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
-                
+
                 {/* fetch blogs */}
                 <div>
-                     <BlogSlider posts={safePosts}/>  
+                  <BlogSlider posts={safePosts} />
                 </div>
 
                 {/* Industries Section */}
@@ -230,8 +260,8 @@ export default async function page() {
                   </h2>
 
                   <p className="text-gray-700 mb-6">
-                    Dholera has already attracted large investments from reputed
-                    companies:
+                    Dholera has already attracted large <Link href="/dholera-sir-blogs/companies-invested-in-dholera">investments from reputed
+                    companies </Link>:
                   </p>
 
                   <div className="space-y-4">
@@ -245,7 +275,7 @@ export default async function page() {
                         </span>
                       </div>
                       <p className="text-gray-700">
-                        Tata group is setting up India’s first semiconductor and
+                        Tata group is setting up <Link href="/dholera-sir-blogs/tata-semiconductor-dholera-timeline-2024-2028">India’s first semiconductor </Link>  and
                         display fabrication plant
                       </p>
                     </div>
@@ -277,7 +307,10 @@ export default async function page() {
                   </div>
                 </div>
                 <div className="mb-8">
-                  <LeadForm title="Want to buy plots in Dholera but don’t know how?"  button="Talk to an Expert"/>
+                  <LeadForm
+                    title="Want to buy plots in Dholera but don’t know how?"
+                    button="Talk to an Expert"
+                  />
                 </div>
                 {/* Governance Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
@@ -286,7 +319,7 @@ export default async function page() {
                   </h2>
 
                   <p className="text-gray-700 mb-6">
-                    The Dholera Special Investment Region Development Authority
+                    The <Link href="/dholera-sir-blogs/dholera-2025-development-infrastructure-progress">Dholera Special Investment Region Development Authority </Link> 
                     (DSIRDA) ensures smooth planning and administration. The
                     governance model includes e-governance, single-window
                     clearances, and transparent systems designed to support
@@ -306,25 +339,30 @@ export default async function page() {
                         <div className="flex items-center space-x-3">
                           <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
-                            Phase-wise development is already underway, with trunk infrastructure in place
+                            Phase-wise development is already underway, with
+                            trunk infrastructure in place
                           </p>
                         </div>
                         <div className="flex items-center space-x-3">
                           <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
-                           Dholera Expressway and Dholera International Airport construction progressing rapidly
+                            Dholera Expressway and Dholera International Airport
+                            construction progressing rapidly
                           </p>
                         </div>
                         <div className="flex items-center space-x-3">
                           <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
-                            Activation area completed to showcase residential and commercial viability
+                            <Link href="/about-dholera-sir/abcd-building-dholera">Activation area</Link> completed to showcase residential
+                            and commercial viability
                           </p>
                         </div>
                         <div className="flex items-center space-x-3">
                           <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
-                            Upcoming projects include metro connectivity, expanded industrial clusters, and advanced township developments
+                            Upcoming projects include metro connectivity,
+                            expanded industrial clusters, and advanced township
+                            developments
                           </p>
                         </div>
                       </div>
@@ -339,7 +377,7 @@ export default async function page() {
                   </h2>
 
                   <p className="text-gray-700 mb-6">
-                    BookMyAssets connects you to premium residential projects in{" "}
+                    <Link href="/contact"> BookMyAssets</Link> connects you to premium residential projects in{" "}
                     <strong>Dholera, Gujarat,</strong> with long-term growth
                     potential.
                   </p>
@@ -389,70 +427,70 @@ export default async function page() {
 
               {/* Sticky Sidebar */}
               <div className="lg:col-span-1">
-      <div className="sticky top-8">
-        <div className="bg-white rounded-2xl shadow-lg p-6">
-          <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
-            Explore Bulk Land Options
-          </h3>
+                <div className="sticky top-8">
+                  <div className="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-[#deae3c] pb-4">
+                      Explore Bulk Land Options
+                    </h3>
 
-          {bulkLand.length > 0 ? (
-            <div className="space-y-4 max-h-[70vh] overflow-y-auto custom-scrollbar">
-              {bulkLand.map((landItem) => (
-                <div
-                  key={landItem._id}
-                  className="border-b border-gray-100 pb-4 last:border-b-0"
-                >
-                  <BulkLandCard landItem={landItem} compact={true} />
+                    {bulkLand.length > 0 ? (
+                      <div className="space-y-4 max-h-[70vh] overflow-y-auto custom-scrollbar">
+                        {bulkLand.map((landItem) => (
+                          <div
+                            key={landItem._id}
+                            className="border-b border-gray-100 pb-4 last:border-b-0"
+                          >
+                            <BulkLandCard landItem={landItem} compact={true} />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-8">
+                        <div className="w-16 h-16 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-4">
+                          <svg
+                            className="w-8 h-8 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3v6m0 0l-3-3m3 3l3-3"
+                            />
+                          </svg>
+                        </div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                          No Land Options Available
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          Check back soon for the latest bulk land investment
+                          opportunities in Dholera SIR.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Contact CTA */}
+                  <div className="bg-[#deae3c] rounded-2xl p-4 mt-6 text-white">
+                    <h4 className="text-xl font-bold mb-3">Ready to Invest?</h4>
+                    <p className="text-sm mb-4 opacity-90">
+                      Get expert guidance on Dholera SIR bulk land investment
+                      opportunities and early mover advantage.
+                    </p>
+                    <a
+                      href="https://wa.me/918130371647"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button className="flex justify-center items-center gap-2 w-full bg-white text-gray-800 py-2 px-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        <FaWhatsapp className="" /> Get Free Investment Advice
+                      </button>
+                    </a>
+                  </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3v6m0 0l-3-3m3 3l3-3"
-                  />
-                </svg>
               </div>
-              <h4 className="text-lg font-semibold text-gray-800 mb-2">
-                No Land Options Available
-              </h4>
-              <p className="text-gray-600 text-sm">
-                Check back soon for the latest bulk land investment 
-                opportunities in Dholera SIR.
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Contact CTA */}
-        <div className="bg-[#deae3c] rounded-2xl p-4 mt-6 text-white">
-          <h4 className="text-xl font-bold mb-3">Ready to Invest?</h4>
-          <p className="text-sm mb-4 opacity-90">
-            Get expert guidance on Dholera SIR bulk land investment
-            opportunities and early mover advantage.
-          </p>
-          <a
-            href="https://wa.me/918130371647"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button className="flex justify-center items-center gap-2 w-full bg-white text-gray-800 py-2 px-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              <FaWhatsapp className="" /> Get Free Investment Advice
-            </button>
-          </a>
-        </div>
-      </div>
-    </div>
             </div>
           </div>
         </div>
