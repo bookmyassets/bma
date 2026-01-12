@@ -54,7 +54,7 @@ export default function Page() {
         <TestimonialPagination />
         <FAQSection />
         <EndSection /> */}
-        <PopupForm/>
+        <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
       </div>
 
       {showForm && (
