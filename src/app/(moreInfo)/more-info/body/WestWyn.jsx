@@ -183,9 +183,9 @@ This is your opportunity to own premium land at Dholera's industrial core before
         <div className="px-4 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl text-center font-bold text-[#deae3c] mb-2">
+            <h2 className="text-3xl text-center font-bold text-[#deae3c] mb-2">
               WestWyn Estate
-            </h1>
+            </h2>
           </div>
 
           {/* Tab Navigation */}

@@ -469,7 +469,7 @@ export default function LandingPage({ openForm }) {
               <div className="relative">
                 <div className="flashy-blink">
                   <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
-                    Dholera's Biggest Offer till Date
+                   WestWyn Estate
                   </h2>
                   <p className="text-sm lg:text-base glowing-text">
                     Plots under ₹10 Lakh - 0 KM from Dholera SIR Boundary

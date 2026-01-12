@@ -599,7 +599,7 @@ export default function LandingPage({ openForm }) {
                     disabled={isLoading}
                     className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? "Submitting..." : "Get Details"}
+                    {isLoading ? "Submitting..." : "Get A Call Back"}
                   </motion.button>
                 </div>
                 </form>

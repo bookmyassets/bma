@@ -15,7 +15,7 @@ export default function DholeraLandingPage() {
               className="text-4xl md:text-5xl font-bold mb-6"
               style={{ color: "#deae3c" }}
             >
-              About Dholera
+              Dholera Smart City
             </h1>
             <div className="space-y-4 text-lg leading-relaxed">
               <p>
