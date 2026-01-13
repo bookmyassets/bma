@@ -777,6 +777,8 @@ export default async function Post({ params }) {
                   <SlugPageForm
                     title="Find Most Stable Areas, and Returns in Dholera"
                     button="Show Me How"
+                    project={post.title}
+
                   />
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (

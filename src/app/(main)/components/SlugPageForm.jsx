@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 
-export default function SlugPageForm({title, button}) {
+export default function SlugPageForm({title, button, project}) {
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -19,6 +19,7 @@ export default function SlugPageForm({title, button}) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [hasTriggered, setHasTriggered] = useState(false);
   const [debugScroll, setDebugScroll] = useState(0); // Add this for debugging
+  
 
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -137,6 +138,12 @@ export default function SlugPageForm({title, button}) {
           setShowThankYou(false);
           setShowFormPopup(false);
         }, 3000);
+
+         window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead_form",
+            page_name:project
+          });
       } else {
         throw new Error("Error submitting form");
       }

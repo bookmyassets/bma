@@ -172,7 +172,7 @@ export default function page() {
           className="font-medium"
         />
         )} */}
-      <PopupForm title="Best investment-ready locations in Dholera"/>
+      <PopupForm title="Best investment-ready locations in Dholera" project="Home-Page"/>
     </>
   );
 }

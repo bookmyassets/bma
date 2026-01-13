@@ -164,6 +164,11 @@ export default function BulkLand({ title }) {
             localStorage.setItem("formSubmissionCount", newCount.toString());
             localStorage.setItem("lastSubmissionTime", Date.now().toString());
           }
+           window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead_form",
+            page_name:project
+          });
 
         } else {
           console.log("Response Text:", responseText);

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-logo2.png";
 import Image from "next/image";
 
-export default function PopupForm({title}) {
+export default function PopupForm({title , project}) {
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -123,6 +123,13 @@ export default function PopupForm({title}) {
           setShowThankYou(false);
           setShowFormPopup(false);
         }, 3000);
+
+        window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead_form",
+            page_name:project
+          });
+
       } else {
         throw new Error("Error submitting form");
       }

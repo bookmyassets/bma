@@ -600,7 +600,7 @@ const TableOfContent = ({ headings }) => {
     return (
       <>
         <div>
-          <title>{post.title}</title>
+          <title>{post.metaTitle}</title>
           <meta name="description" content={post.metaDescription} />
           <meta name="keywords" content={post.keywords?.join(", ")} />
           <meta name="publisher" content="BookMyAssets" />
@@ -625,6 +625,7 @@ const TableOfContent = ({ headings }) => {
         <SlugPageForm
           title="Explore the Latest Development in Dholera"
           button="Talk To A Dholera Expert"
+          project={post.title}
         />
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30" />
