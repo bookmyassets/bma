@@ -76,6 +76,7 @@ export default function HeroCarousel() {
   const [showPopup, setShowPopup] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [eventVar, setEventVar] = useState("");
 
   const desktopImages = [
     { src: img1, alt: "Dholera Investment Opportunity 1" },
@@ -114,12 +115,13 @@ export default function HeroCarousel() {
     );
   };
 
-  const openContactForm = (title, headline, btnName, type) => {
+  const openContactForm = (title, headline, btnName, type, project) => {
     setFormTitle(title);
     setFormHeadline(headline);
     setButtonName(btnName);
     setFormType(type);
     setIsContactFormOpen(true);
+    setEventVar(project);
   };
 
   const closeContactForm = () => {
@@ -413,6 +415,7 @@ export default function HeroCarousel() {
                 title="Best value plots in Dholera"
                 headline="Plots starting 10 Lakh at 0 km from Dholera SIR "
                 buttonName="Book a Site Visit"
+                project="WestWyn Estate"
                 /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>

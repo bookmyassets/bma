@@ -9,6 +9,7 @@ export default function ContactForm({
   onClose,
   title = "Get In Touch",
   buttonName = "Book Consultation",
+  project
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -195,6 +196,13 @@ export default function ContactForm({
             localStorage.setItem("formSubmissionCount", newCount.toString());
             localStorage.setItem("lastSubmissionTime", Date.now().toString());
           }
+
+          /* Google Tag */
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead_form",
+            page_name : project,
+          });
 
           // Auto close after 3 seconds
           setTimeout(() => {

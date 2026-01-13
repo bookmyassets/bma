@@ -154,7 +154,7 @@ export default function LeadForm({ title }) {
           responseText.toLowerCase().includes("success")
         ) {
           // Success handling
-          setFormData({ fullName: "", mobileNumber: "", email: "", city: "", interestedAs: "" });
+          setFormData({ fullName: "", mobileNumber: "", email: "",  });
           setShowPopup(true);
 
           // Update submission count

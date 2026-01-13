@@ -34,6 +34,19 @@ const faqs = [
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
+ const handleCallClick = () => {
+    //  Google Tag Manager event
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "call_click_Faq",
+      lead_type: "phone",
+      device: "all",
+    });
+
+    // 📞 Call trigger
+    window.location.href = "tel:+918130371647";
+  };
+
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -52,7 +65,7 @@ export default function FAQSection() {
               More Questions about Dholera Smart City?
             </p>
             <div className="pt-4">
-              <a className="px-2 py-3 bg-[#deae3c] text-white rounded-md" href="tel:+918130371647">Give Us A Missed Call</a>
+              <a className="px-2 py-3 bg-[#deae3c] text-white rounded-md" onClick={handleCallClick} >Give Us A Missed Call</a>
             </div>
           </div>
 

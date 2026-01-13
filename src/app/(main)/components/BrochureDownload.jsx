@@ -178,6 +178,11 @@ export default function BrochureDownload({
           return newCount;
         });
 
+         window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "brochure_lead_form",
+          });
+
         // Download PDF immediately after successful submission
         downloadPDF();
 

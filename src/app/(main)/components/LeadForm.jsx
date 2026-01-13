@@ -6,10 +6,10 @@ import "./about.css";
 
 export default function LeadForm({ title, button }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "", 
-    mobileNumber: "", 
-    email: "", 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    mobileNumber: "",
+    email: "",
   });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -47,9 +47,15 @@ export default function LeadForm({ title, button }) {
 
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
-      const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
-      const lastSubmissionTime = parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10);
-      
+      const storedCount = parseInt(
+        localStorage.getItem("formSubmissionCount") || "0",
+        10
+      );
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("lastSubmissionTime") || "0",
+        10
+      );
+
       // Check if 24 hours have passed since the last submission
       if (lastSubmissionTime) {
         const timeDifference = Date.now() - lastSubmissionTime;
@@ -103,14 +109,16 @@ export default function LeadForm({ title, button }) {
     }
 
     // Phone validation - accept various formats (10-15 digits)
-    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
     }
 
     // Check submission limits
     if (submissionCount >= 20) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours."
+      );
       setIsDisabled(true);
       return false;
     }
@@ -154,7 +162,7 @@ export default function LeadForm({ title, button }) {
           responseText.toLowerCase().includes("success")
         ) {
           // Success handling
-          setFormData({ fullName: "", mobileNumber: "", email: "", city: "", interestedAs: "" });
+          setFormData({ fullName: "", mobileNumber: "", email: "" });
           setShowPopup(true);
 
           // Update submission count
@@ -165,6 +173,12 @@ export default function LeadForm({ title, button }) {
             localStorage.setItem("lastSubmissionTime", Date.now().toString());
           }
 
+          /* Google Tag */
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead_form_other",
+          });
+
         } else {
           console.log("Response Text:", responseText);
           setErrorMessage("Submission received but with unexpected response");
@@ -173,13 +187,12 @@ export default function LeadForm({ title, button }) {
         console.error("Server Error:", responseText);
         throw new Error(responseText || "Submission failed");
       }
-
     } catch (error) {
       console.error("Error submitting form:", error);
       setErrorMessage(`Error submitting form: ${error.message}`);
     } finally {
       setIsLoading(false);
-      
+
       // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         try {
@@ -202,7 +215,9 @@ export default function LeadForm({ title, button }) {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page."
+      );
       setIsLoading(false);
       return;
     }
@@ -232,7 +247,7 @@ export default function LeadForm({ title, button }) {
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-white text-2xl font-bold text-center">
-             {title}
+              {title}
             </h2>
             {/* <p className="text-gray-300 mt-2 text-xs text-center">
               Scale Your Portfolio with High-Growth Land Opportunities
@@ -272,13 +287,14 @@ export default function LeadForm({ title, button }) {
             ) : isDisabled ? (
               <div className="text-center py-8">
                 <p className="text-center text-red-400 font-semibold">
-                  You have reached the maximum submission limit. Try again after 24 hours.
+                  You have reached the maximum submission limit. Try again after
+                  24 hours.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="mt-8 space-y-4">
                 {errorMessage && (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm"
@@ -286,7 +302,7 @@ export default function LeadForm({ title, button }) {
                     {errorMessage}
                   </motion.div>
                 )}
-                
+
                 {/* Form Fields */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -326,27 +342,25 @@ export default function LeadForm({ title, button }) {
                       placeholder="Enter your mobile number"
                     />
                   </div>
-                  
-                  </div>
+                </div>
 
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-white text-sm font-medium mb-2"
-                    >
-                      Email ID
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
-                      placeholder="Enter your email address"
-                    />
-                  </div>
-
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-white text-sm font-medium mb-2"
+                  >
+                    Email ID
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
+                    placeholder="Enter your email address"
+                  />
+                </div>
 
                 <div className="flex justify-center">
                   <div ref={recaptchaRef}></div>
@@ -364,9 +378,25 @@ export default function LeadForm({ title, button }) {
                   >
                     {isLoading ? (
                       <div className="flex items-center justify-center">
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <svg
+                          className="animate-spin -ml-1 mr-3 h-5 w-5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
                         </svg>
                         Submitting...
                       </div>

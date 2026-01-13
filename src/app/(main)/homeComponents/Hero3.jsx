@@ -17,11 +17,11 @@ import Running from "./Running";
 // Memoized slider image component to prevent unnecessary re-renders
 const SliderImage = memo(({ src, alt, isActive, priority, className }) => (
   <div
-    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${className || ''}`}
+    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${className || ""}`}
     style={{
       opacity: isActive ? 1 : 0,
-      pointerEvents: isActive ? 'auto' : 'none',
-      willChange: isActive ? 'opacity' : 'auto'
+      pointerEvents: isActive ? "auto" : "none",
+      willChange: isActive ? "opacity" : "auto",
     }}
   >
     <Image
@@ -37,52 +37,88 @@ const SliderImage = memo(({ src, alt, isActive, priority, className }) => (
   </div>
 ));
 
-SliderImage.displayName = 'SliderImage';
+SliderImage.displayName = "SliderImage";
 
 // Memoized navigation button
 const NavButton = memo(({ onClick, direction, ariaLabel }) => (
   <button
     onClick={onClick}
     aria-label={ariaLabel}
-    className={`absolute ${direction === 'left' ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors touch-manipulation`}
+    className={`absolute ${direction === "left" ? "left-4" : "right-4"} top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors touch-manipulation`}
     type="button"
   >
-    {direction === 'left' ? <ChevronLeft className="w-6 h-6" /> : <ChevronRight className="w-6 h-6" />}
+    {direction === "left" ? (
+      <ChevronLeft className="w-6 h-6" />
+    ) : (
+      <ChevronRight className="w-6 h-6" />
+    )}
   </button>
 ));
 
-NavButton.displayName = 'NavButton';
+NavButton.displayName = "NavButton";
 
 // Memoized form input component
-const FormInput = memo(({ name, type = "text", placeholder, value, onChange, icon: Icon, ...props }) => (
-  <div className="relative">
-    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-500 pointer-events-none">
-      <Icon />
+const FormInput = memo(
+  ({
+    name,
+    type = "text",
+    placeholder,
+    value,
+    onChange,
+    icon: Icon,
+    ...props
+  }) => (
+    <div className="relative">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-500 pointer-events-none">
+        <Icon />
+      </div>
+      <input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+        {...props}
+      />
     </div>
-    <input
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
-      {...props}
-    />
-  </div>
-));
+  )
+);
 
-FormInput.displayName = 'FormInput';
+FormInput.displayName = "FormInput";
 
 // Icon components
 const UserIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    className="w-4 h-4"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+    />
   </svg>
 );
 
 const PhoneIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    className="w-4 h-4"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+    />
   </svg>
 );
 
@@ -105,7 +141,7 @@ export default function LandingPage({ openForm }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  
+
   // Use refs to avoid forced reflows
   const slideContainerRef = useRef(null);
   const animationFrameRef = useRef(null);
@@ -213,7 +249,7 @@ export default function LandingPage({ openForm }) {
       const now = Date.now();
 
       const response = await fetch(
-         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -243,11 +279,17 @@ export default function LandingPage({ openForm }) {
           return newCount;
         });
 
+        /* Google Tag */
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "lead_form_hero",
+        });
+
         // Show thank you popup for 2 seconds
         setShowThankYou(true);
         setTimeout(() => {
           setShowThankYou(false);
-          
+
           // Use router if available, otherwise fallback to window.location
           if (typeof window !== "undefined") {
             window.location.href = "/thankyou";
@@ -307,7 +349,7 @@ export default function LandingPage({ openForm }) {
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
     }
-    
+
     animationFrameRef.current = requestAnimationFrame(() => {
       setCurrentSlide(nextSlide);
     });
@@ -366,18 +408,26 @@ export default function LandingPage({ openForm }) {
     <div className="h-screen max-sm:h-[95vh] flex flex-col">
       <style jsx>{`
         @keyframes textGlow {
-          0%, 100% {
+          0%,
+          100% {
             text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
             color: black;
           }
           50% {
-            text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8);
+            text-shadow:
+              0 0 20px rgba(255, 255, 255, 1),
+              0 0 30px rgba(255, 255, 255, 0.8);
             color: black;
           }
         }
         @keyframes flashyBlink {
-          0%, 100% { border-color: #deae3c; }
-          50% { border-color: rgba(222, 174, 60, 0.3); }
+          0%,
+          100% {
+            border-color: #deae3c;
+          }
+          50% {
+            border-color: rgba(222, 174, 60, 0.3);
+          }
         }
         .flashy-blink {
           animation: flashyBlink 3s infinite ease-in-out;
@@ -385,8 +435,8 @@ export default function LandingPage({ openForm }) {
           border-radius: 1rem;
           border: 3px solid #deae3c;
         }
-        .glowing-text { 
-          animation: textGlow 1s infinite ease-in-out; 
+        .glowing-text {
+          animation: textGlow 1s infinite ease-in-out;
         }
       `}</style>
 
@@ -396,7 +446,7 @@ export default function LandingPage({ openForm }) {
         <div className="w-full lg:w-[60%] relative flex-1">
           {/* Desktop Slider */}
           <div className="absolute inset-0 hidden lg:block">
-            <div 
+            <div
               ref={slideContainerRef}
               className="relative w-full h-[100vh] overflow-hidden"
             >
@@ -411,8 +461,16 @@ export default function LandingPage({ openForm }) {
                 />
               ))}
               {/* Navigation */}
-              <NavButton onClick={prevSlide} direction="left" ariaLabel="Previous slide" />
-              <NavButton onClick={nextSlide} direction="right" ariaLabel="Next slide" />
+              <NavButton
+                onClick={prevSlide}
+                direction="left"
+                ariaLabel="Previous slide"
+              />
+              <NavButton
+                onClick={nextSlide}
+                direction="right"
+                ariaLabel="Next slide"
+              />
               <div className="absolute bottom-0 left-0 right-0 z-20">
                 <Running />
               </div>
@@ -432,7 +490,7 @@ export default function LandingPage({ openForm }) {
                 className="absolute inset-0 transition-opacity duration-700 ease-in-out will-change-[opacity]"
                 style={{
                   opacity: index === currentSlide ? 1 : 0,
-                  pointerEvents: index === currentSlide ? 'auto' : 'none'
+                  pointerEvents: index === currentSlide ? "auto" : "none",
                 }}
               >
                 <Image
@@ -446,8 +504,16 @@ export default function LandingPage({ openForm }) {
                 />
               </div>
             ))}
-            <NavButton onClick={prevSlide} direction="left" ariaLabel="Previous slide" />
-            <NavButton onClick={nextSlide} direction="right" ariaLabel="Next slide" />
+            <NavButton
+              onClick={prevSlide}
+              direction="left"
+              ariaLabel="Previous slide"
+            />
+            <NavButton
+              onClick={nextSlide}
+              direction="right"
+              ariaLabel="Next slide"
+            />
             <div className="absolute bottom-0 left-0 right-0 z-20">
               <Running />
             </div>
@@ -469,7 +535,7 @@ export default function LandingPage({ openForm }) {
               <div className="relative">
                 <div className="flashy-blink">
                   <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
-                   WestWyn Estate
+                    WestWyn Estate
                   </h2>
                   <p className="text-sm lg:text-base glowing-text">
                     Plots under ₹10 Lakh - 0 KM from Dholera SIR Boundary

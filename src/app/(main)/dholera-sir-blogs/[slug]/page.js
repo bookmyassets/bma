@@ -615,7 +615,7 @@ export default async function Post({ params }) {
     return (
       <>
         <div>
-          <title>{post.title}</title>
+          <title>{post.metaTitle}</title>
           <meta name="description" content={post.metaDescription} />
           <meta name="keywords" content={post.keywords} />
           <meta name="publisher" content="BookMyAssets" />

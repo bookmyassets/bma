@@ -31,6 +31,8 @@ export default function HeroCarousel() {
   const [formHeadline, setFormHeadline] = useState("");
   const [buttonName, setButtonName] = useState("");
   const [formType, setFormType] = useState("");
+    const [eventVar, setEventVar] = useState("");
+  
 
   const openContactForm = (title, headline, btnName, type) => {
     setFormTitle(title);
@@ -38,6 +40,7 @@ export default function HeroCarousel() {
     setButtonName(btnName);
     setFormType(type);
     setIsContactFormOpen(true);
+    setEventVar(project);
   };
 
   const closeContactForm = () => {
@@ -330,6 +333,7 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
+                project="Pride"
                 /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>

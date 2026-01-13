@@ -73,17 +73,20 @@ export default function HeroCarousel() {
   const [openIndex, setOpenIndex] = useState(0);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
+    const [eventVar, setEventVar] = useState("");
+  
 
   // Touch handlers for swipe
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  const openContactForm = (title, headline, btnName, type) => {
+  const openContactForm = (title, headline, btnName, type,project) => {
     setFormTitle(title);
     setFormHeadline(headline);
     setButtonName(btnName);
     setFormType(type);
     setIsContactFormOpen(true);
+    setEventVar(project)
   };
 
   const closeContactForm = () => {
@@ -646,6 +649,7 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
+                project="WestWyn County"
               />
             </div>
           </div>
