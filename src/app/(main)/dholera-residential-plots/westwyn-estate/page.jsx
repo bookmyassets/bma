@@ -238,6 +238,36 @@ export default function HeroCarousel() {
 
   return (
     <>
+
+<script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Corporation",
+            name: "BookMyAssets",
+            alternateName: "BMA",
+            url: "https://www.bookmyassets.com/",
+            logo: "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FBmalogo.ab09adfe.png&w=96&q=75",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "620, JMD Megapolis, Sohna Rd, Sector 48,",
+              addressLocality: "Gurgaon",
+              addressRegion: "Haryana",
+              postalCode: "122001",
+              addressCountry: "IN",
+            },
+            sameAs: [
+              "https://www.facebook.com/people/Bookmyassets/61556534554379/",
+              "https://www.instagram.com/bookmyassets/",
+              "https://www.youtube.com/@BookMyAssets",
+              "https://x.com/BookMyAssets",
+              "https://www.linkedin.com/company/bookmyassetss",
+            ],
+          }),
+        }}
+      />
+
       <title>WestWyn Estate – Secure Plots Near Dholera SIR</title>
       <meta
         name="description"
