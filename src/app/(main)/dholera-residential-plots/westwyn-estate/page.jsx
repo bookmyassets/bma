@@ -238,8 +238,7 @@ export default function HeroCarousel() {
 
   return (
     <>
-
-<script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -413,7 +412,10 @@ export default function HeroCarousel() {
       </div>
 
       <div className="md:hidden">
-        <CommonForm title="Want to verify plot documents before booking?" button="Connect with an Expert" />
+        <CommonForm
+          title="Want to verify plot documents before booking?"
+          button="Connect with an Expert"
+        />
       </div>
 
       <div className="pt-4 pb-4">
@@ -422,7 +424,10 @@ export default function HeroCarousel() {
       </div>
 
       <div className="max-sm:hidden">
-        <CommonForm title="Want to verify plot documents before booking?" button="Connect with an Expert" />
+        <CommonForm
+          title="Want to verify plot documents before booking?"
+          button="Connect with an Expert"
+        />
       </div>
       <ProjectAmenities />
 
