@@ -12,21 +12,21 @@ Disallow: /infopack/locations
 Disallow: /infopack/videos
 Disallow: /infopack/inventory
 Disallow: /about-us
-noindex : /projects/maple-township-mt/paradise-p2
-noindex : /projects/marina-bay-mb/maple-township-mt
-noindex : /projects/marina-bay-mb/sitemap.html
-noindex : /projects/maple-township-mt/orchid-township-ot
-noindex : /projects/marina-bay-mb/orchid-township-ot
-noindex : /projects/marina-bay-mb/paradise-p2
-noindex : /projects/maple-township-mt/marina-bay-mb
-noindex : /projects/maple-township-mt/sitemap.html
-noindex : /projects/maple-township-mt/paradise-p1
-noindex : /projects/paradise-p1/sitemap.html
-noindex : /projects/marina-bay-mb/paradise-p1
-noindex : /projects/maple-township-mt/infrastructure-development
-noindex : /projects/dholera/sitemap.html
-noindex : /projects/dholera/sitemap.html
-noindex : /about-dholera-sir/dholera-customs-port-update
+nofollow : /projects/maple-township-mt/paradise-p2
+nofollow : /projects/marina-bay-mb/maple-township-mt
+nofollow : /projects/marina-bay-mb/sitemap.html
+nofollow : /projects/maple-township-mt/orchid-township-ot
+nofollow : /projects/marina-bay-mb/orchid-township-ot
+nofollow : /projects/marina-bay-mb/paradise-p2
+nofollow : /projects/maple-township-mt/marina-bay-mb
+nofollow : /projects/maple-township-mt/sitemap.html
+nofollow : /projects/maple-township-mt/paradise-p1
+nofollow : /projects/paradise-p1/sitemap.html
+nofollow : /projects/marina-bay-mb/paradise-p1
+nofollow : /projects/maple-township-mt/infrastructure-development
+nofollow : /projects/dholera/sitemap.html
+nofollow : /projects/dholera/sitemap.html
+nofollow : /about-dholera-sir/dholera-customs-port-update
 nofollow : /projects/dholera/westwyn-county-wc
 nofollow : /projects/dholera
 
