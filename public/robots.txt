@@ -27,5 +27,7 @@ noindex : /projects/maple-township-mt/infrastructure-development
 noindex : /projects/dholera/sitemap.html
 noindex : /projects/dholera/sitemap.html
 noindex : /about-dholera-sir/dholera-customs-port-update
+nofollow : /projects/dholera/westwyn-county-wc
+nofollow : /projects/dholera
 
 Sitemap : https://www.bookmyassets.com/sitemap.xml
