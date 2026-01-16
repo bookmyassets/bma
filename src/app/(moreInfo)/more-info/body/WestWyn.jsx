@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import img1 from "@/assests/ad-page/estate/westwyn-estate-dholera-residential-plots-1.webp";
-import img2 from "@/assests/ad-page/estate/westwyn-estate-dholera-residential-plots-2.webp";
+import img2 from "@/assests/ad-page/estate/westwyn-estate-dholera-amenities.webp";
 import img3 from "@/assests/ad-page/estate/westwyn-estate-dholera-smart-city-map.webp";
 import Image from "next/image";
 import {
