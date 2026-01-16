@@ -2,11 +2,11 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assests/bma-logo2.png";
 import Image from "next/image";
+import logo from "@/assests/bma-logo2.png";
 
-export default function PopupForm({ title }) {
-  // Popup states
+
+export default function PopupForm({ title, sectionId }) {
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [formData, setFormData] = useState({
@@ -17,15 +17,15 @@ export default function PopupForm({ title }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  // Auto-popup after 5 seconds
+  // Auto-popup after 5 seconds only if sectionId is "major-projects"
   useEffect(() => {
     const sessionPopupShown = sessionStorage.getItem("popupShownThisSession");
 
-    if (!sessionPopupShown) {
+    // Only show popup if section is "major-projects" and hasn't been shown this session
+    if (sectionId === "major-projects" && !sessionPopupShown) {
       const timer = setTimeout(() => {
         setShowFormPopup(true);
         sessionStorage.setItem("popupShownThisSession", "true");
@@ -33,7 +33,7 @@ export default function PopupForm({ title }) {
 
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [sectionId]);
 
   // Load reCAPTCHA
   useEffect(() => {
@@ -50,17 +50,14 @@ export default function PopupForm({ title }) {
         setRecaptchaLoaded(true);
       }
     };
-
     loadRecaptcha();
 
-    // Escape key handler
     const handleEscapeKey = (event) => {
       if (event.key === "Escape" && showFormPopup) {
         handlePopupClose();
       }
     };
     document.addEventListener("keydown", handleEscapeKey);
-
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     };
@@ -77,17 +74,14 @@ export default function PopupForm({ title }) {
       setErrorMessage("Please fill in all required fields");
       return false;
     }
-
     if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       setErrorMessage("Please enter a valid email address");
       return false;
     }
-
     if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
     }
-
     return true;
   };
 
@@ -118,7 +112,6 @@ export default function PopupForm({ title }) {
       if (response.ok) {
         setFormData({ fullName: "", mobileNumber: "", email: "" });
         setShowThankYou(true);
-
         setTimeout(() => {
           setShowThankYou(false);
           setShowFormPopup(false);
@@ -238,13 +231,12 @@ export default function PopupForm({ title }) {
               </div>
             ) : (
               <>
-                {/* Logo positioned in top left */}
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="rounded-lg shadow-lg"
+                    className="rounded-lg shadow-lg bg-blue-500 w-16 h-16 flex items-center justify-center"
                   >
                     <Image
                       src={logo}
@@ -256,7 +248,6 @@ export default function PopupForm({ title }) {
                   </motion.div>
                 </div>
 
-                {/* Close button */}
                 <button
                   onClick={handlePopupClose}
                   className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
@@ -264,21 +255,10 @@ export default function PopupForm({ title }) {
                   ×
                 </button>
 
-                {/* Section 1: Heading */}
-                {/* Section 2: Sub-heading CTA */}
-                {/* <div className="text-center mb-6">
-              <p className="text-2xl text-gray-700 font-semibold">Special Diwali Offer</p>
-              <p className="text-lg text-gray-700 font-semibold">
-                Free 5gm Gold Coin on Dholera Plots
-             </p>
-            </div> */}
-
-                <div className="text-center mb-6">
-                  {/* Section 2: Sub-heading CTA */}
+                <div className="text-center mb-6 mt-4">
                   <p className="text-lg text-gray-700 font-semibold">{title}</p>
                 </div>
 
-                {/* Section 3: Form Fields */}
                 <form onSubmit={handleSubmit}>
                   {errorMessage && (
                     <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm mb-4">
@@ -330,7 +310,6 @@ export default function PopupForm({ title }) {
                     <div ref={recaptchaRef}></div>
                   </div>
 
-                  {/* Section 4: Submit Button with Tagline */}
                   <button
                     type="submit"
                     disabled={isLoading || !recaptchaLoaded}
@@ -369,7 +348,6 @@ export default function PopupForm({ title }) {
                     )}
                   </button>
 
-                  {/* Section 5: Privacy Notice */}
                   <div className="text-center mt-4">
                     <p className="text-xs text-gray-500">
                       We respect your privacy. Your details are safe with us.

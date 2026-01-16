@@ -29,38 +29,39 @@ export default function AboutBMA() {
     setSelectedBenefit(null);
   };
 
-  const benefits = [
-    {
-      title: "Prime Location Projects",
-      icon: <MapPin className="w-6 h-6 text-indigo-600" />,
-      body: "We specialize in curating investment opportunities at Dholera's most strategic locations near expressways, airports, and industrial hubs. We identify locations that combine connectivity advantages with affordable entry points, so you don't compromise between prime positioning and budget.",
-    },
-    {
-      title: "Resale Support & Buyback Option",
-      icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
-      body: "Investors enjoy flexibility with dedicated resale assistance and a buyback option from BookMyAssets, ensuring liquidity and confidence that your investment won't get stuck. Our resale network connects you with buyers, while our buyback guarantee offers a safety net beyond the sale.",
-    },
-    {
-      title: "In-house Due Diligence Team",
-      icon: <Scale className="w-6 h-6 text-orange-600" />,
-      body: "Our internal legal and technical experts conduct thorough due diligence on every project. We verify title clearances, government approvals, NOC documentation, and land records before presenting any opportunity. This means you are investing in legally sound properties backed by professional verification.",
-    },
-    {
-      title: "Immediate Sale Registry",
-      icon: <FileCheck className="w-6 h-6 text-blue-600" />,
-      body: "We ensure immediate registration with clear documentation, so buyers don't face delays or hidden legal issues. Unlike projects with pending approvals, our properties come with verified paperwork ready for registry from day one.",
-    },
-    {
-      title: "365 Days Site Visit Assistance",
-      icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
-      body: "Our year-round site visit support means you can validate your investment decision at any time, demonstrating our confidence in our projects and commitment to complete transparency.",
-    },
-    {
-      title: "Government Approved AUDA Plots",
-      icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
-      body: "All plots are AUDA-approved with proper government verification. AUDA approval means your property meets all regulatory requirements and is part of Dholera's official master plan.",
-    },
-  ];
+const benefits = [
+  {
+    title: "Prime Location Projects",
+    icon: <MapPin className="w-6 h-6 text-indigo-600" />,
+    body: "We curate investment opportunities in Dholera’s most strategically positioned zones near expressways, airports, and major industrial hubs. Each location is carefully selected to offer strong connectivity while maintaining reasonable entry pricing, ensuring optimal long-term value.",
+  },
+  {
+    title: "Resale Support & Buyback Option",
+    icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
+    body: "Our structured resale assistance and buyback option provide investors with enhanced liquidity and exit flexibility. Supported by BookMyAssets’ active investor network, this ensures confidence that your investment remains marketable when required.",
+  },
+  {
+    title: "In-house Due Diligence Team",
+    icon: <Scale className="w-6 h-6 text-orange-600" />,
+    body: "Every project undergoes comprehensive legal and technical verification by our in-house experts. Title checks, government approvals, NOCs, and land records are thoroughly validated before any opportunity is introduced to investors.",
+  },
+  {
+    title: "Immediate Sale Registry",
+    icon: <FileCheck className="w-6 h-6 text-blue-600" />,
+    body: "All properties are offered with complete and verified documentation, enabling immediate sale registration. This eliminates uncertainty, approval delays, and post-purchase legal complications for buyers.",
+  },
+  {
+    title: "365 Days Site Visit Assistance",
+    icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
+    body: "We provide year-round site visit assistance, allowing investors to physically verify projects at their convenience. This approach reflects our commitment to transparency and informed decision-making.",
+  },
+  {
+    title: "Government Approved AUDA Plots",
+    icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
+    body: "All plots are AUDA-approved and fully aligned with Dholera’s official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
+  },
+];
+
 
   // Animation variants
   const cardVariants = {

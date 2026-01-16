@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import mapD from "@/assests/ad-page/dholera-map-2.webp";
 import mapM from "@/assests/ad-page/dholera-map-1.webp";
+import PopupForm from "../components/PopUpForm";
 
 const projects = [
   {
@@ -10,8 +11,8 @@ const projects = [
     youtubeId: "NdH1zHVGTcQ",
     points: [
       "109 km, six-lane access-controlled expressway reducing Ahmedabad–Dholera travel time to under 45 minutes",
-      "Critical logistics corridor under the Delhi–Mumbai Industrial Corridor (DMIC)",
-      "Approved for future monorail integration to enhance industrial and passenger connectivity",
+      "Strategic logistics corridor under the Delhi–Mumbai Industrial Corridor (DMIC), strengthening regional supply chains",
+      "Approved for future monorail integration to improve industrial and passenger mobility along the corridor",
     ],
   },
   {
@@ -19,9 +20,9 @@ const projects = [
     name: "Dholera International Airport",
     youtubeId: "PuLWU9DYV_c",
     points: [
-      "India’s second-largest airport spanning over 1,400 hectares with passenger and cargo operations",
-      "Designed as a global aviation hub supporting Dholera’s industrial ecosystem",
-      "Phase 1 construction completion expected in early 2026",
+      "India’s second-largest airport spread across 1,400+ hectares with passenger and cargo operations",
+      "Planned as a global aviation hub to support Dholera’s industrial and manufacturing ecosystem",
+      "Phase 1 construction targeted for completion in early 2026",
     ],
   },
   {
@@ -29,9 +30,9 @@ const projects = [
     name: "ABCD Building – City Control Center",
     youtubeId: "faSgawUZWeY",
     points: [
-      "One-stop administrative hub for industrial approvals and construction coordination",
-      "Houses the Smart City Command & Control Centre for real-time governance",
-      "Centralized monitoring of roads, electricity, traffic, utilities, and city infrastructure",
+      "Centralized administrative hub for industrial approvals, planning, and construction coordination",
+      "Home to the Smart City Command & Control Centre enabling real-time city governance",
+      "Integrated monitoring of roads, power, traffic, utilities, and core urban infrastructure",
     ],
   },
   {
@@ -39,9 +40,9 @@ const projects = [
     name: "ReNew Power – Manufacturing Facility",
     youtubeId: "129oXwderKU",
     points: [
-      "₹1,200 crore investment in solar module and cell manufacturing",
-      "2.5 GW solar cell manufacturing capacity supporting India’s renewable energy goals",
-      "Employs 1,000+ professionals with expanding production operations",
+      "₹1,200 crore investment in advanced solar module and solar cell manufacturing",
+      "2.5 GW solar cell manufacturing capacity supporting India’s renewable energy targets",
+      "Employment generation for 1,000+ professionals with scope for future expansion",
     ],
   },
   {
@@ -49,9 +50,9 @@ const projects = [
     name: "Tata Electronics Semiconductor Fab",
     youtubeId: "sYONhrTYBTg",
     points: [
-      "₹91,000 crore investment establishing India’s first semiconductor fabrication plant",
-      "Expected to generate 20,000+ direct and indirect jobs",
-      "Global collaborations with Intel, Tokyo Electron, and PSMC for advanced technology",
+      "₹91,000 crore investment establishing India’s first semiconductor fabrication facility",
+      "Projected to generate over 20,000 direct and indirect employment opportunities",
+      "Global technology partnerships with Intel, Tokyo Electron, and PSMC for advanced chip manufacturing",
     ],
   },
   {
@@ -59,9 +60,9 @@ const projects = [
     name: "Dholera Solar Park",
     youtubeId: "EQMyWv3hMuk",
     points: [
-      "Asia’s largest solar park with a planned capacity of 5,000 MW (5 GW)",
-      "1,200+ MW already operational powering industrial infrastructure",
-      "Ensures sustainable and uninterrupted renewable energy supply",
+      "Asia’s largest solar park with a planned generation capacity of 5,000 MW (5 GW)",
+      "More than 1,200 MW already operational, supplying power to industrial infrastructure",
+      "Ensures long-term, sustainable, and uninterrupted renewable energy availability",
     ],
   },
   {
@@ -69,9 +70,9 @@ const projects = [
     name: "Water Treatment Plant (WTP)",
     youtubeId: "fHLqa6YM1Aw",
     points: [
-      "50 MLD capacity, scalable up to 150 MLD for future demand",
-      "Piped water network with Mass Balancing Reservoirs and ESRs",
-      "Reliable water supply across industrial, residential, and commercial zones",
+      "50 MLD water treatment capacity with scalability up to 150 MLD for future requirements",
+      "Integrated piped water distribution supported by reservoirs and elevated service reservoirs (ESRs)",
+      "Provides reliable water supply to industrial, residential, and commercial zones",
     ],
   },
   {
@@ -79,9 +80,9 @@ const projects = [
     name: "Activation Area",
     youtubeId: "P0a8LCMQHqI",
     points: [
-      "22.5 sq km plug-and-play industrial zone with 95% infrastructure completion",
-      "Underground utilities, IoT-enabled monitoring, and smart traffic systems",
-      "Man-made riverfront canal with fully developed roads, water, drainage, and power networks",
+      "22.5 sq km plug-and-play industrial zone with approximately 95% infrastructure completion",
+      "Fully underground utilities with IoT-enabled monitoring and smart traffic management systems",
+      "Developed road network, drainage, power grids, and a landscaped man-made riverfront canal",
     ],
   },
 ];
@@ -143,14 +144,18 @@ function DesktopDesign() {
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all duration-300"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-[#deae3c] rounded-full p-5 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <svg
-                        className="w-10 h-10 text-white ml-1"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+                    <div className="relative group cursor-pointer">
+                      {/* Red YouTube background */}
+                      <div className="bg-red-600 rounded-xl w-16 h-11 flex items-center justify-center shadow-lg group-hover:bg-red-700 transition-colors">
+                        {/* White play triangle */}
+                        <svg
+                          className="w-8 h-8 text-white ml-0.5"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -169,7 +174,7 @@ function DesktopDesign() {
             </div>
           </div>
         </div>
-
+                <PopupForm title="Invest in India's First Semiconductor City" sectionId="major-projects"/>
         {/* Right Side - Project List */}
         <div className="order-1 md:order-2 bg-black p-6 md:p-8">
           <h2
@@ -257,6 +262,8 @@ function Design3() {
       <h2 className="text-3xl font-bold text-center mb-2 pt-4 text-[#deae3c]">
         Major Projects
       </h2>
+                <PopupForm title="Invest in India's First Semiconductor City" sectionId="major-projects"/>
+
       {/* Progress Bars */}
       <div className="flex gap-1 p-4 pb-2">
         {projects.map((_, idx) => (
@@ -316,14 +323,18 @@ function Design3() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-[#deae3c] rounded-full p-5 shadow-lg">
-                      <svg
-                        className="w-10 h-10 text-white ml-1"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+                    <div className="relative group cursor-pointer">
+                      {/* Red YouTube background */}
+                      <div className="bg-red-600 rounded-xl w-16 h-11 flex items-center justify-center shadow-lg group-hover:bg-red-700 transition-colors">
+                        {/* White play triangle */}
+                        <svg
+                          className="w-6 h-6 text-white ml-0.5"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -400,10 +411,14 @@ export default function MobileDesignShowcase() {
           The Complete Dholera Blueprint
         </p>
         <div className="w-24 h-1 mt-4 mb-4 bg-[#deae3c] mx-auto"></div>
-        <p className="text-lg md:text-xl mb-4 text-center">
-          India's first and largest Special Investment Region with dedicated
-          industrial, residential, and commercial zones designed for seamless
-          growth.
+        <p className="text-lg mb-4 text-center max-w-4xl mx-auto">
+          India’s first Special Investment Region planned with clearly defined
+          industrial, residential, commercial, and logistics zones. The master
+          plan is divided into Town Planning (TP) schemes and sub-TP zones to
+          ensure phased, structured development. This zoning framework allows
+          seamless coordination between infrastructure rollout, industrial
+          activation, and urban livability, answering common questions such as
+          Dholera Project details and the latest update on Dholera Smart City.
         </p>
         <div className="p-4 flex justify-center">
           <Image src={mapM} alt="Map" className="md:hidden  rounded-2xl" />

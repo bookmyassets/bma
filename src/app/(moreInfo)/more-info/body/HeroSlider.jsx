@@ -671,7 +671,7 @@ export default function LandingPage({ openForm }) {
         {isDownload && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
-              title="Get the Dholera Brochure"
+              title="Dholera Is Growing Fast - Are You Still on the Outside?"
               buttonName="Download Brochure"
               onClose={() => closeBrochure()}
             />

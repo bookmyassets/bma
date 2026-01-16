@@ -19,20 +19,22 @@ export default function DholeraLandingPage() {
             </h1>
             <div className="space-y-4 text-lg leading-relaxed">
               <p>
-                Dholera Smart City is India’s first Greenfield Smart City,
+                Dholera Smart City is India’s first greenfield smart city,
                 strategically positioned under the Delhi–Mumbai Industrial
-                Corridor (DMIC). Located 100 km from Ahmedabad, Dholera is
-                designed as a future-ready industrial and urban hub with
-                world-class infrastructure.
+                Corridor (DMIC). Located about 100 km from Ahmedabad, Dholera
+                City is designed as a future-ready industrial and urban hub with
+                world-class infrastructure, positioning it among the most
+                ambitious examples of a smart city in Gujarat.
               </p>
               <p>
                 Spanning 922.5 sq km, Dholera features planned industrial zones,
                 100m-wide roads, underground utilities, renewable energy
                 integration, and IoT-enabled smart governance. With major
-                projects like Dholera International Airport, Asia’s largest
-                Solar Park, and industrial activation areas underway, Dholera
-                Smart City is positioned as India’s most promising emerging city
-                for sustainable growth and industrial development.
+                projects such as Dholera International Airport, Asia’s largest
+                Solar Park, and multiple industrial activation areas underway,
+                this Dholera Smart City update highlights why the region is
+                viewed as India’s most promising emerging city for sustainable
+                growth and industrial development.
               </p>
             </div>
           </div>

@@ -63,13 +63,11 @@ export default function WestWyn() {
   const sections = [
     {
       title: "About WestWyn Estate",
-      content: `WestWyn Estate is strategically positioned at the epicenter of Dholera's rapid transformation: 0 kilometers from the SIR boundary, offering unmatched proximity to every major infrastructure milestone.
+      content: `WestWyn Estate is strategically positioned at the epicenter of Dholera’s rapid transformation, located directly at the SIR boundary. This project offers unmatched proximity to major infrastructure milestones, making it one of the most accessible residential plot developments in the region.
 
-This is not just about buying land. It is about securing the only location in Dholera that delivers all four critical advantages: prime connectivity to industrial and infrastructure projects, immediate possession and registry, verified legal documentation, and accessible entry below ₹10 lakh.
+      This is not just about buying land. It is about securing a location that combines prime connectivity, immediate possession with registry, verified legal documentation, and an accessible entry point aligned with prevailing Dholera Smart City Plot Price expectations.
 
-While other projects force you to choose between location, affordability or instant ownership, WestWyn Estate is the only project offering the complete package. AUDA-approved plots with clear titles, ready for immediate registry, positioned at Dholera's most connected intersection, with high appreciation potential at an entry point most investors can access.
-
-This is your opportunity to own premium land at Dholera's industrial core before production begins and demand surges.`,
+      `,
       image: img1,
     },
     {

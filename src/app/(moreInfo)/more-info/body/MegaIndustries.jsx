@@ -59,19 +59,13 @@ export default function MegaIndustries() {
           </div>
 
           <div className="bg-gray-50 p-8 rounded-lg">
-            <p className=" leading-relaxed">
-              Dholera has secured commitments from India's most trusted
+            <p className="text-lg leading-relaxed">
+              Dholera has secured commitments from India’s most trusted
               industrial leaders and global technology giants. Tata Electronics
-              is establishing India's first semiconductor fabrication plant,
-              while Intel has signed strategic partnership MoUs for technology
+              is establishing India’s first semiconductor fabrication plant,
+              while Intel has signed strategic MoUs for technology
               collaboration. Tokyo Electron has opened operations to support
-              semiconductor manufacturing. Reliance Industries, Adani Group,
-              ReNew Power, Tata Power, Inox Air Products, and Jabil are building
-              critical infrastructure spanning renewable energy, industrial
-              gases, and advanced electronics manufacturing. When the world's
-              leading corporations choose one location, they are not just
-              investing capital but they are signaling confidence in India's
-              next industrial capital.
+              semiconductor manufacturing.
             </p>
             {/* <p className="text-lg leading-relaxed">
             <span className="font-semibold">
