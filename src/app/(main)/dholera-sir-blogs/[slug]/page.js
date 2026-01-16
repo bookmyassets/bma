@@ -10,7 +10,6 @@ import Link from "next/link";
 import Image from "next/image";
 import BlogSchemaMarkup from "../BlogSchemaMarkup";
 import SlugPageForm from "../../components/SlugPageForm";
-import InfoPopup from "../../components/SidePop";
 import ExitPopup from "../../components/ExitForm";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
@@ -119,7 +118,6 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 
         {/* Contact/CTA Card */}
 
-        <InfoPopup />
       </div>
     </aside>
   );
