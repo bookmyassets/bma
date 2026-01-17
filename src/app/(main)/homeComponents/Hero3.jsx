@@ -5,13 +5,13 @@ import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import
-import img1 from "@/assests/hero1.webp";
-import img2 from "@/assests/hero2.webp";
-import img3 from "@/assests/ad-page/img3.webp";
+import img1 from "@/assests/homepage/hero/westwyn-estate-dholera-residential-plots-desktop.webp";
+import img2 from "@/assests/homepage/hero/dholera-international-airport-desktop.webp";
+import img3 from "@/assests/homepage/hero/silk-route-park-dholera-desktop.webp";
 
-import imgM1 from "@/assests/hero_mob1.webp";
-import imgM2 from "@/assests/hero_mob2.webp";
-import imgM3 from "@/assests/ad-page/mob1.webp";
+import imgM1 from "@/assests/homepage/hero/westwyn-estate-dholera-residential-plots-mobile.webp";
+import imgM2 from "@/assests/homepage/hero/dholera-international-airport-mobile.webp";
+import imgM3 from "@/assests/homepage/hero/silk-route-park-dholera-mobile.webp";
 import Running from "./Running";
 
 // Memoized slider image component to prevent unnecessary re-renders
