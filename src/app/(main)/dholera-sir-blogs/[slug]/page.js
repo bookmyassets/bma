@@ -117,7 +117,6 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         </div>
 
         {/* Contact/CTA Card */}
-
       </div>
     </aside>
   );
@@ -366,7 +365,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -391,7 +390,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -416,7 +415,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -441,7 +440,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -466,7 +465,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -491,7 +490,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -570,13 +569,20 @@ export default async function Post({ params }) {
     };
 
     const TableOfContent = ({ headings }) => {
+      // Filter for valid headings with text content
       const validHeadings =
         headings?.filter((heading) => {
           const text = heading.children?.[0]?.text;
           return text && text.trim().length > 0;
         }) || [];
 
-      if (validHeadings.length === 0) return null;
+      // Filter for only h1 and h2 headings
+      const h1h2Headings = validHeadings.filter((heading) => {
+        return heading.style === "h1" || heading.style === "h2";
+      });
+
+      // Hide TOC if no h1 or h2 headings exist
+      if (h1h2Headings.length === 0) return null;
 
       return (
         <div className="my-8 p-6 bg-gradient-to-br from-[#C69C21]/5 to-[#FDB913]/10 rounded-2xl shadow-lg border border-[#C69C21]/20">
@@ -776,7 +782,6 @@ export default async function Post({ params }) {
                     title="Find Most Stable Areas, and Returns in Dholera"
                     button="Show Me How"
                     project={post.title}
-
                   />
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
@@ -913,7 +918,7 @@ export default async function Post({ params }) {
                                         </svg>
                                         <span className="text-xs font-medium">
                                           {new Date(
-                                            blog.publishedAt
+                                            blog.publishedAt,
                                           ).toLocaleDateString("en-US", {
                                             month: "short",
                                             day: "numeric",
@@ -1036,7 +1041,7 @@ export default async function Post({ params }) {
                                     </svg>
                                     <span className="text-sm font-medium">
                                       {new Date(
-                                        blog.publishedAt
+                                        blog.publishedAt,
                                       ).toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "short",

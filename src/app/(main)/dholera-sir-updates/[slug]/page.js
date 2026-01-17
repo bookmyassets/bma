@@ -557,14 +557,21 @@ export default async function Post({ params }) {
       },
     };
 
-const TableOfContent = ({ headings }) => {
+ const TableOfContent = ({ headings }) => {
+      // Filter for valid headings with text content
       const validHeadings =
         headings?.filter((heading) => {
           const text = heading.children?.[0]?.text;
           return text && text.trim().length > 0;
         }) || [];
 
-      if (validHeadings.length === 0) return null;
+      // Filter for only h1 and h2 headings
+      const h1h2Headings = validHeadings.filter((heading) => {
+        return heading.style === "h1" || heading.style === "h2";
+      });
+
+      // Hide TOC if no h1 or h2 headings exist
+      if (h1h2Headings.length === 0) return null;
 
       return (
         <div className="my-8 p-6 bg-gradient-to-br from-[#C69C21]/5 to-[#FDB913]/10 rounded-2xl shadow-lg border border-[#C69C21]/20">
