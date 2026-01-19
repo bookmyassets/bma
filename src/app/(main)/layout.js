@@ -8,7 +8,7 @@ import FloatingButtons from "./components/whatsapp";
 import ContactNow from "./components/Callus";
 import ScrollToTop from "./components/ScrollToTop";
 import { Lato } from "next/font/google";
-import RagePopup from "./components/RageClickFOrm";
+import RagePopup from "./components/RageClickForm";
 
 const lato = Lato({
   subsets: ["latin"],
