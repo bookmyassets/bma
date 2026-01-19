@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import React from "react";
 
 export default function ExitPopup({
@@ -17,6 +17,10 @@ export default function ExitPopup({
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [popupShown, setPopupShown] = useState(false);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const recaptchaRef = useRef(null);
+  const recaptchaWidgetId = useRef(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // Detect if device is mobile
   const isMobile = () => {
@@ -24,6 +28,25 @@ export default function ExitPopup({
       navigator.userAgent
     ) || window.innerWidth < 768;
   };
+
+  // Load reCAPTCHA script
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
+        const script = document.createElement("script");
+        script.src = "https://www.google.com/recaptcha/api.js";
+        script.async = true;
+        script.defer = true;
+        script.onload = () => setRecaptchaLoaded(true);
+        script.onerror = () => setRecaptchaLoaded(true);
+        document.head.appendChild(script);
+      } else if (window.grecaptcha || !siteKey) {
+        setRecaptchaLoaded(true);
+      }
+    };
+
+    loadRecaptcha();
+  }, [siteKey]);
 
   // Desktop exit intent detection
   useEffect(() => {
@@ -59,14 +82,12 @@ export default function ExitPopup({
   useEffect(() => {
     if (!isMobile() || (mobileStrategy !== "back" && mobileStrategy !== "all")) return;
 
-    // Push a state to history
     window.history.pushState(null, "", window.location.href);
 
     const handlePopState = () => {
       if (!popupShown) {
         setShowFormPopup(true);
         setPopupShown(true);
-        // Push state again to keep user on page
         window.history.pushState(null, "", window.location.href);
       }
     };
@@ -90,7 +111,6 @@ export default function ExitPopup({
           (document.documentElement.scrollHeight - window.innerHeight)) *
         100;
 
-      // Show popup when user scrolls 50% down
       if (scrollPercent > 50) {
         setShowFormPopup(true);
         setPopupShown(true);
@@ -108,7 +128,6 @@ export default function ExitPopup({
   useEffect(() => {
     if (!isMobile() || (mobileStrategy !== "time" && mobileStrategy !== "all")) return;
 
-    // Show popup after 15 seconds on mobile
     const timer = setTimeout(() => {
       if (!popupShown) {
         setShowFormPopup(true);
@@ -158,6 +177,56 @@ export default function ExitPopup({
     return true;
   };
 
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const response = await fetch(
+         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+          },
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.mobileNumber,
+              email: formData.email || undefined,
+              source: "BookMyAssets Exit Popup",
+            },
+            source: "BookMyAssets Exit Popup",
+            tags: ["Exit Intent", "Popup Lead", "BookMyAssets"],
+            recaptchaToken: token,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        setFormData({ fullName: "", mobileNumber: "", email: "" });
+        setShowThankYou(true);
+
+        setTimeout(() => {
+          setShowThankYou(false);
+          setShowFormPopup(false);
+        }, 3000);
+      } else {
+        throw new Error("Error submitting form");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setErrorMessage("Error submitting form. Please try again.");
+    } finally {
+      setIsLoading(false);
+      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
+        try {
+          window.grecaptcha.reset(recaptchaWidgetId.current);
+        } catch (err) {
+          console.error("Error resetting reCAPTCHA:", err);
+        }
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -168,23 +237,25 @@ export default function ExitPopup({
       return;
     }
 
-    // Simulate API call (replace with your actual API)
+    if (!recaptchaLoaded || !window.grecaptcha) {
+      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // Success
-      console.log("Form submitted:", formData);
-      setFormData({ fullName: "", mobileNumber: "", email: "" });
-      setShowThankYou(true);
-
-      setTimeout(() => {
-        setShowThankYou(false);
-        setShowFormPopup(false);
-      }, 3000);
+      if (!recaptchaRef.current.innerHTML || recaptchaWidgetId.current === null) {
+        recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
+          sitekey: siteKey,
+          callback: onRecaptchaSuccess,
+          theme: "light",
+        });
+      } else {
+        window.grecaptcha.execute(recaptchaWidgetId.current);
+      }
     } catch (error) {
-      console.error("Form submission error:", error);
-      setErrorMessage("Error submitting form. Please try again.");
-    } finally {
+      console.error("Error with reCAPTCHA:", error);
+      setErrorMessage("Error with verification. Please try again.");
       setIsLoading(false);
     }
   };
@@ -233,7 +304,9 @@ export default function ExitPopup({
             <h3 className="text-2xl font-bold text-gray-800 mb-2">
               Thank You!
             </h3>
-            <p className="text-gray-600">We will contact you shortly.</p>
+            <p className="text-gray-600">
+              Our team will contact you shortly with exclusive details.
+            </p>
           </div>
         ) : (
           <>
@@ -253,7 +326,7 @@ export default function ExitPopup({
               </p>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <div>
               {errorMessage && (
                 <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm mb-4">
                   {errorMessage}
@@ -274,7 +347,6 @@ export default function ExitPopup({
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
-                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-base"
                     placeholder="Enter your full name"
                   />
@@ -293,7 +365,6 @@ export default function ExitPopup({
                     name="mobileNumber"
                     value={formData.mobileNumber}
                     onChange={handleChange}
-                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-base"
                     placeholder="Enter your mobile number"
                   />
@@ -318,8 +389,11 @@ export default function ExitPopup({
                 </div>
               </div>
 
+              {/* Hidden reCAPTCHA container */}
+              <div ref={recaptchaRef} className="flex justify-center mb-4"></div>
+
               <button
-                type="submit"
+                onClick={handleSubmit}
                 disabled={isLoading}
                 className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 text-base ${
                   isLoading
@@ -361,7 +435,7 @@ export default function ExitPopup({
                   🔒 We respect your privacy. Your details are safe with us.
                 </p>
               </div>
-            </form>
+            </div>
           </>
         )}
       </div>
