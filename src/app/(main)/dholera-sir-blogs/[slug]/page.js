@@ -780,7 +780,7 @@ export default async function Post({ params }) {
                     <PortableText value={post.body} components={components} />
                   </div>
                   <SlugPageForm
-                    title={post.formTitle?.title}
+                    title={post.title?.formTitle}
                     project={post.title}
                   />
                   {/* Tags */}
