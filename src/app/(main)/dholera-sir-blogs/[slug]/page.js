@@ -14,7 +14,6 @@ import ExitPopup from "../../components/ExitForm";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import "./blogPage.css";
-import DholeraPopupForm from "../../components/DynamicForm";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -779,10 +778,11 @@ export default async function Post({ params }) {
                   <div className="text-xl max-w-none">
                     <PortableText value={post.body} components={components} />
                   </div>
-                  {/* <SlugPageForm
-                    title={post.formTitle}
+                  <SlugPageForm
+                    title="Find Most Stable Areas, and Returns in Dholera"
+                    button="Show Me How"
                     project={post.title}
-                  /> */}
+                  />
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
                     <div className="mt-12 pt-6 border-t border-gray-200">
@@ -964,8 +964,6 @@ export default async function Post({ params }) {
                       </div>
                     </div>
 
-                      <DholeraPopupForm title={post.title}/>
-                      
                     {/* Desktop Grid Layout with Enhanced Design */}
                     <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {relatedBlogs.map((blog) => (
