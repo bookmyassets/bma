@@ -2,10 +2,10 @@
 import { useState, useEffect, useRef } from "react";
 import { X, Check } from "lucide-react";
 /* import img from "@/assests/festival-images/christmas-form-offer.webp"; */
-import img from "@/assests/homepage/form-img.png"
+import img from "@/assests/homepage/form-img.png";
 import Image from "next/image";
 
-export default function DholeraPopupForm() {
+export default function DholeraPopupForm(title) {
   const [showPopup, setShowPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", mobileNumber: "" });
@@ -51,14 +51,14 @@ export default function DholeraPopupForm() {
 
     // Escape key handler
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape' && showPopup) {
+      if (event.key === "Escape" && showPopup) {
         setShowPopup(false);
       }
     };
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [showPopup, siteKey]);
 
@@ -74,7 +74,7 @@ export default function DholeraPopupForm() {
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
     }
@@ -85,7 +85,7 @@ export default function DholeraPopupForm() {
   const onRecaptchaSuccess = async (token) => {
     try {
       const response = await fetch(
-         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -102,13 +102,13 @@ export default function DholeraPopupForm() {
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
         setFormData({ fullName: "", mobileNumber: "" });
         setShowThankYou(true);
-        
+
         setTimeout(() => {
           setShowThankYou(false);
           setShowPopup(false);
@@ -142,20 +142,27 @@ export default function DholeraPopupForm() {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
       setIsLoading(false);
       return;
     }
 
-    const recaptchaContainer = isMobile ? recaptchaRefMobile.current : recaptchaRefDesktop.current;
+    const recaptchaContainer = isMobile
+      ? recaptchaRefMobile.current
+      : recaptchaRefDesktop.current;
 
     try {
       if (!recaptchaContainer.innerHTML || recaptchaWidgetId.current === null) {
-        recaptchaWidgetId.current = window.grecaptcha.render(recaptchaContainer, {
-          sitekey: siteKey,
-          callback: onRecaptchaSuccess,
-          theme: "light",
-        });
+        recaptchaWidgetId.current = window.grecaptcha.render(
+          recaptchaContainer,
+          {
+            sitekey: siteKey,
+            callback: onRecaptchaSuccess,
+            theme: "light",
+          },
+        );
       } else {
         window.grecaptcha.execute(recaptchaWidgetId.current);
       }
@@ -197,9 +204,15 @@ export default function DholeraPopupForm() {
                     className="object-cover w-full h-full"
                     fill
                     sizes="(max-width: 768px) 90vw, 450px"
-                    fetchPriority = "high"
+                    fetchPriority="high"
                   />
                 </div>
+              </div>
+
+              <div className="text-center mb-6 mt-12 sm:mt-8">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-700 mb-2">
+                  {title}
+                </h2>
               </div>
 
               <div
@@ -282,7 +295,10 @@ export default function DholeraPopupForm() {
                         </div>
 
                         {/* Hidden reCAPTCHA container for desktop */}
-                        <div ref={recaptchaRefDesktop} className="flex justify-center"></div>
+                        <div
+                          ref={recaptchaRefDesktop}
+                          className="flex justify-center"
+                        ></div>
 
                         <button
                           onClick={(e) => handleSubmit(e, false)}
@@ -400,8 +416,8 @@ export default function DholeraPopupForm() {
                       Thank You!
                     </h3>
                     <p className="text-sm md:text-base text-gray-600">
-                      Our team will contact you shortly with exclusive
-                      Dholera investment details.
+                      Our team will contact you shortly with exclusive Dholera
+                      investment details.
                     </p>
                   </div>
                 ) : (
@@ -450,7 +466,10 @@ export default function DholeraPopupForm() {
                       </div>
 
                       {/* Hidden reCAPTCHA container for mobile */}
-                      <div ref={recaptchaRefMobile} className="flex justify-center"></div>
+                      <div
+                        ref={recaptchaRefMobile}
+                        className="flex justify-center"
+                      ></div>
 
                       <button
                         onClick={(e) => handleSubmit(e, true)}

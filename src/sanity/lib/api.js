@@ -105,7 +105,7 @@ export async function getEvents() {
 /* Fetch single post by slug */
 export async function getPostBySlug(slug) {
   const query = `*[_type == "post" && slug.current == $slug && site == $site][0]{
-    _id, title, metaTitle, metaDescription, "keywords": keywords, slug,
+    _id, title, metaTitle, metaDescription, formTitle, "keywords": keywords, slug,
     mainImage { asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, alt, caption, url },
     publishedAt, _createdAt,
     body[]{ ..., _type=="image"=>{..., asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, "url": url }, markDefs[]{..., _type=="link"=>{"href":@.href}} },
