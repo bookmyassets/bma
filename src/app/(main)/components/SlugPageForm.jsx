@@ -6,6 +6,12 @@ import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 
 export default function SlugPageForm({title, project}) {
+
+  const getTitleText = () => {
+    if (typeof title === 'string') return title;
+    if (title && typeof title === 'object') return title.title || '';
+    return '';
+  };
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -300,8 +306,8 @@ export default function SlugPageForm({title, project}) {
 
                     {/* Section 2: Sub-heading CTA */}
                     <p className="text-lg text-gray-700 pt-8 font-semibold">
-                      {title}
-                    </p>
+    {getTitleText()}
+  </p>
                   </div>
 
                   {/* Section 3: Form Fields */}

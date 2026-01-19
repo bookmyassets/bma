@@ -779,10 +779,10 @@ export default async function Post({ params }) {
                   <div className="text-xl max-w-none">
                     <PortableText value={post.body} components={components} />
                   </div>
-                  <SlugPageForm
-                    title={post.title?.formTitle}
+                  {/* <SlugPageForm
+                    title={post.formTitle}
                     project={post.title}
-                  />
+                  /> */}
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
                     <div className="mt-12 pt-6 border-t border-gray-200">
