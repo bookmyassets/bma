@@ -8,7 +8,7 @@ const projects = [
   {
     id: 1,
     name: "Ahmedabad–Dholera Expressway",
-    youtubeId: "NdH1zHVGTcQ",
+    youtubeId: "56wD3aJIEuA",
     points: [
       "109 km, six-lane access-controlled expressway reducing Ahmedabad–Dholera travel time to under 45 minutes",
       "Strategic logistics corridor under the Delhi–Mumbai Industrial Corridor (DMIC), strengthening regional supply chains",
@@ -18,7 +18,7 @@ const projects = [
   {
     id: 2,
     name: "Dholera International Airport",
-    youtubeId: "PuLWU9DYV_c",
+    youtubeId: "Aih4UJppDbM",
     points: [
       "India’s second-largest airport spread across 1,400+ hectares with passenger and cargo operations",
       "Planned as a global aviation hub to support Dholera’s industrial and manufacturing ecosystem",
@@ -28,7 +28,7 @@ const projects = [
   {
     id: 3,
     name: "ABCD Building – City Control Center",
-    youtubeId: "faSgawUZWeY",
+    youtubeId: "jF2U2IWF3yk",
     points: [
       "Centralized administrative hub for industrial approvals, planning, and construction coordination",
       "Home to the Smart City Command & Control Centre enabling real-time city governance",
@@ -38,7 +38,7 @@ const projects = [
   {
     id: 4,
     name: "ReNew Power – Manufacturing Facility",
-    youtubeId: "129oXwderKU",
+    youtubeId: "_PU0sn6taHQ",
     points: [
       "₹1,200 crore investment in advanced solar module and solar cell manufacturing",
       "2.5 GW solar cell manufacturing capacity supporting India’s renewable energy targets",
@@ -48,7 +48,7 @@ const projects = [
   {
     id: 5,
     name: "Tata Electronics Semiconductor Fab",
-    youtubeId: "sYONhrTYBTg",
+    youtubeId: "KxGgxO_GBPY",
     points: [
       "₹91,000 crore investment establishing India’s first semiconductor fabrication facility",
       "Projected to generate over 20,000 direct and indirect employment opportunities",
@@ -58,7 +58,7 @@ const projects = [
   {
     id: 6,
     name: "Dholera Solar Park",
-    youtubeId: "EQMyWv3hMuk",
+    youtubeId: "v3NNSMaVHb0",
     points: [
       "Asia’s largest solar park with a planned generation capacity of 5,000 MW (5 GW)",
       "More than 1,200 MW already operational, supplying power to industrial infrastructure",
@@ -68,7 +68,7 @@ const projects = [
   {
     id: 7,
     name: "Water Treatment Plant (WTP)",
-    youtubeId: "fHLqa6YM1Aw",
+    youtubeId: "z40FYyoaU-Y",
     points: [
       "50 MLD water treatment capacity with scalability up to 150 MLD for future requirements",
       "Integrated piped water distribution supported by reservoirs and elevated service reservoirs (ESRs)",
@@ -78,7 +78,7 @@ const projects = [
   {
     id: 8,
     name: "Activation Area",
-    youtubeId: "P0a8LCMQHqI",
+    youtubeId: "RP9hDShgxhU",
     points: [
       "22.5 sq km plug-and-play industrial zone with approximately 95% infrastructure completion",
       "Fully underground utilities with IoT-enabled monitoring and smart traffic management systems",
@@ -114,52 +114,18 @@ function DesktopDesign() {
         <div className="order-2 md:order-1 bg-white p-6 md:p-8">
           <div className="bg-gray-100 rounded-xl overflow-hidden shadow-2xl md:sticky md:top-4">
             <div className="relative aspect-video w-full bg-gray-900">
-              {isPlaying ? (
-                <>
-                  {isLoading && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
-                      <div className="w-12 h-12 rounded-full border-4 border-gray-700 border-t-[#deae3c] animate-spin"></div>
-                    </div>
-                  )}
-                  <iframe
-                    className="w-full h-full"
-                    src={`https://www.youtube.com/embed/${selectedProject.youtubeId}?autoplay=1`}
-                    title={selectedProject.name}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    onLoad={handleLoad}
-                  />
-                </>
-              ) : (
-                <div
-                  className="relative w-full h-full cursor-pointer group"
-                  onClick={handlePlay}
-                >
-                  <img
-                    src={`https://img.youtube.com/vi/${selectedProject.youtubeId}/maxresdefault.jpg`}
-                    alt={selectedProject.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all duration-300"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative group cursor-pointer">
-                      {/* Red YouTube background */}
-                      <div className="bg-red-600 rounded-xl w-16 h-11 flex items-center justify-center shadow-lg group-hover:bg-red-700 transition-colors">
-                        {/* White play triangle */}
-                        <svg
-                          className="w-8 h-8 text-white ml-0.5"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
+              <>
+                <iframe
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${selectedProject.youtubeId}?autoplay=1`}
+                  title={selectedProject.name}
+                  frameBorder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  onLoad={handleLoad}
+                />
+              </>
             </div>
 
             <div className="p-6 bg-white border-t border-gray-200">
@@ -174,7 +140,10 @@ function DesktopDesign() {
             </div>
           </div>
         </div>
-                <PopupForm title="Invest in India's First Semiconductor City" sectionId="major-projects"/>
+        <PopupForm
+          title="Invest in India's First Semiconductor City"
+          sectionId="major-projects"
+        />
         {/* Right Side - Project List */}
         <div className="order-1 md:order-2 bg-black p-6 md:p-8">
           <h2
@@ -262,7 +231,10 @@ function Design3() {
       <h2 className="text-3xl font-bold text-center mb-2 pt-4 text-[#deae3c]">
         Major Projects
       </h2>
-                <PopupForm title="Invest in India's First Semiconductor City" sectionId="major-projects"/>
+      <PopupForm
+        title="Invest in India's First Semiconductor City"
+        sectionId="major-projects"
+      />
 
       {/* Progress Bars */}
       <div className="flex gap-1 p-4 pb-2">

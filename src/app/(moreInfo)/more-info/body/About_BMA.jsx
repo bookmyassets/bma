@@ -29,39 +29,38 @@ export default function AboutBMA() {
     setSelectedBenefit(null);
   };
 
-const benefits = [
-  {
-    title: "Prime Location Projects",
-    icon: <MapPin className="w-6 h-6 text-indigo-600" />,
-    body: "We curate investment opportunities in Dholera’s most strategically positioned zones near expressways, airports, and major industrial hubs. Each location is carefully selected to offer strong connectivity while maintaining reasonable entry pricing, ensuring optimal long-term value.",
-  },
-  {
-    title: "Resale Support & Buyback Option",
-    icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
-    body: "Our structured resale assistance and buyback option provide investors with enhanced liquidity and exit flexibility. Supported by BookMyAssets’ active investor network, this ensures confidence that your investment remains marketable when required.",
-  },
-  {
-    title: "In-house Due Diligence Team",
-    icon: <Scale className="w-6 h-6 text-orange-600" />,
-    body: "Every project undergoes comprehensive legal and technical verification by our in-house experts. Title checks, government approvals, NOCs, and land records are thoroughly validated before any opportunity is introduced to investors.",
-  },
-  {
-    title: "Immediate Sale Registry",
-    icon: <FileCheck className="w-6 h-6 text-blue-600" />,
-    body: "All properties are offered with complete and verified documentation, enabling immediate sale registration. This eliminates uncertainty, approval delays, and post-purchase legal complications for buyers.",
-  },
-  {
-    title: "365 Days Site Visit Assistance",
-    icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
-    body: "We provide year-round site visit assistance, allowing investors to physically verify projects at their convenience. This approach reflects our commitment to transparency and informed decision-making.",
-  },
-  {
-    title: "Government Approved AUDA Plots",
-    icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
-    body: "All plots are AUDA-approved and fully aligned with Dholera’s official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
-  },
-];
-
+  const benefits = [
+    {
+      title: "Prime Location Projects",
+      icon: <MapPin className="w-6 h-6 text-indigo-600" />,
+      body: "We curate investment opportunities in Dholera’s most strategically positioned zones near expressways, airports, and major industrial hubs. Each location is carefully selected to offer strong connectivity while maintaining reasonable entry pricing, ensuring optimal long-term value.",
+    },
+    {
+      title: "Resale Support & Buyback Option",
+      icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
+      body: "Our structured resale assistance and buyback option provide investors with enhanced liquidity and exit flexibility. Supported by BookMyAssets’ active investor network, this ensures confidence that your investment remains marketable when required.",
+    },
+    {
+      title: "In-house Due Diligence Team",
+      icon: <Scale className="w-6 h-6 text-orange-600" />,
+      body: "Every project undergoes comprehensive legal and technical verification by our in-house experts. Title checks, government approvals, NOCs, and land records are thoroughly validated before any opportunity is introduced to investors.",
+    },
+    {
+      title: "Immediate Sale Registry",
+      icon: <FileCheck className="w-6 h-6 text-blue-600" />,
+      body: "All properties are offered with complete and verified documentation, enabling immediate sale registration. This eliminates uncertainty, approval delays, and post-purchase legal complications for buyers.",
+    },
+    {
+      title: "365 Days Site Visit Assistance",
+      icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
+      body: "We provide year-round site visit assistance, allowing investors to physically verify projects at their convenience. This approach reflects our commitment to transparency and informed decision-making.",
+    },
+    {
+      title: "Government Approved AUDA Plots",
+      icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
+      body: "All plots are AUDA-approved and fully aligned with Dholera’s official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
+    },
+  ];
 
   // Animation variants
   const cardVariants = {
@@ -143,38 +142,33 @@ const benefits = [
           </motion.h2>
 
           {/* Desktop: 5 cards in a row, Mobile: 1 card per row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
-                className="group border border-gray-200 rounded-xl p-4 md:p-5 bg-white cursor-pointer"
+                className="group border-2 border-gray-300 rounded-2xl p-6 md:p-8 bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:border-[#deae3c]"
                 variants={cardVariants}
                 initial="hidden"
                 animate="visible"
-                whileHover="hover"
-                /* onClick={() => openModal(benefit, index)} */
                 transition={{ delay: index * 0.1 }}
               >
                 {/* Card Header */}
-                <div className="text-center mb-4">
+                <div className="text-center mb-6">
                   <motion.div
-                    className="text-3xl md:text-4xl flex justify-center items-center mb-3"
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex justify-center items-center border-2 border-gray-200 group-hover:border-[#deae3c] transition-all duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 200 }}
                   >
-                    {benefit.icon}
+                    <div className="scale-125">{benefit.icon}</div>
                   </motion.div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-800 group-hover:text-[#deae3c] transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#deae3c] transition-colors duration-300 leading-snug">
                     {benefit.title}
                   </h3>
                 </div>
 
                 {/* Description - Always Visible */}
                 <div className="mb-3">
-                  {/*  <p className="text-sm md:text-base text-gray-600 line-clamp-3 text-center">
-                    {benefit.description}
-                  </p> */}
-                  <p className="text-sm md:text-base text-black  text-center">
+                  <p className="text-base md:text-lg text-gray-700 leading-relaxed text-center">
                     {benefit.body}
                   </p>
                 </div>

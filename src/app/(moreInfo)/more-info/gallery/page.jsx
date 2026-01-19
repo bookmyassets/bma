@@ -16,16 +16,16 @@ import sample21 from "@/assests/gallery/sir/torant-gallery.webp";
 import sample19 from "@/assests/gallery/sir/tata-gate-gallery.webp";
 
 const galleryItems = [
-  { id: 1, title: "ABCD Gallery", image: sample1 },
-  { id: 2, title: "Activation Gallery", image: sample3 },
-  { id: 3, title: "Airport Gallery", image: sample6 },
-  { id: 4, title: "Renew Gallery", image: sample10 },
-  { id: 5, title: "Solar Gallery", image: sample11 },
-  { id: 6, title: "SPRR Gallery", image: sample15 },
-  { id: 7, title: "Toll Gallery", image: sample20 },
-  { id: 8, title: "Water Treatment", image: sample24 },
-  { id: 9, title: "Torant Gallery", image: sample21 },
-  { id: 10, title: "Tata Gate", image: sample19 },
+  { id: 1, title: "ABCD Building", image: sample1 },
+  { id: 2, title: "Activation Area", image: sample3 },
+  { id: 3, title: "Dholera International Airport", image: sample6 },
+  { id: 4, title: "Renew Power Plant", image: sample10 },
+  { id: 5, title: "Solar Park", image: sample11 },
+  { id: 6, title: "Sardar Patel Ring Road", image: sample15 },
+  { id: 7, title: "Ahmedabad Dholera Expressway Toll", image: sample20 },
+  { id: 8, title: "Water Treatment Plant", image: sample24 },
+  { id: 9, title: "Torant Power", image: sample21 },
+  { id: 10, title: "Tata Semiconductor", image: sample19 },
 ];
 
 export default function Gallery() {
@@ -61,8 +61,8 @@ export default function Gallery() {
           </div>
           <div className="col-lg-12">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {galleryItems.map((item, index) => (
-                <div key={item.id} className="relative group cursor-pointer" onClick={() => openLightbox(index)}>
+               {galleryItems.map((item, index) => (
+                <div key={item.id} className="group cursor-pointer" onClick={() => openLightbox(index)}>
                   <div className="overflow-hidden rounded-lg border-2 border-[#deae3c]">
                     <Image
                       src={item.image}
@@ -70,12 +70,7 @@ export default function Gallery() {
                       className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center transition-all duration-300">
-                    <div className="text-white opacity-0 group-hover:opacity-100 text-center p-2">
-                      <p className="font-semibold">{item.title}</p>
-                      <p className="text-sm">Click to view</p>
-                    </div>
-                  </div>
+                  <p className="mt-2 text-center font-semibold text-gray-800">{item.title}</p>
                 </div>
               ))}
             </div>
