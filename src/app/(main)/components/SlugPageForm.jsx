@@ -110,7 +110,7 @@ export default function SlugPageForm({title, project}) {
   const onRecaptchaSuccess = async (token) => {
     try {
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://telead",
         {
           method: "POST",
           headers: {
