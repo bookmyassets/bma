@@ -8,6 +8,7 @@ import FloatingButtons from "./components/whatsapp";
 import ContactNow from "./components/Callus";
 import ScrollToTop from "./components/ScrollToTop";
 import { Lato } from "next/font/google";
+import RagePopup from "./components/RageClickFOrm";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -105,6 +106,7 @@ src="https://www.facebook.com/tr?id=672210205737825&ev=PageView&noscript=1"
         <Footer />
         <FloatingButtons />
         <ContactNow />
+        <RagePopup/>
       </body>
     </html>
   );
