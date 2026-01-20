@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 
 export default function RagePopup({
-  title = "Wait! Before You Go...",
+  title = "Get Registry Ready Plots under ₹10 Lakh",
   subtitle = "Get exclusive updates",
   clickThreshold = 5, // Number of clicks to trigger popup
   timeWindow = 2000 // Time window in ms for clicks to count as "rage"
