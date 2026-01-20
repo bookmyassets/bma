@@ -164,14 +164,7 @@ export default function page() {
         <FAQSection />
 
       </div>
-      {/* {showpopForm && (
-        <PopupForm
-          onClose={() => setpopShowForm(false)}
-          title={`Dholera – India’s Safest Investment`}
-          buttonName="Limited Plots – Booking Closing Soon"
-          className="font-medium"
-        />
-        )} */}
+      
       <PopupForm title="Best investment-ready locations in Dholera" project="Home-Page"/>
     </>
   );

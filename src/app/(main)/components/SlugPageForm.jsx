@@ -4,7 +4,7 @@ import { X, Check } from "lucide-react";
 import img from "@/assests/homepage/form-img.png";
 import Image from "next/image";
 
-export default function DholeraPopupForm({ title, formTitle }) {
+export default function SlugPageForm({ title, formTitle }) {
   // Use title prop if provided, otherwise fall back to formTitle
   const displayTitle = title || formTitle;
   const [showPopup, setShowPopup] = useState(false);
