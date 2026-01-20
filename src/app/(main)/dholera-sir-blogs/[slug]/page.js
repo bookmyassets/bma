@@ -680,7 +680,6 @@ export default async function Post({ params }) {
                             className="ml-1 text-sm font-medium text-gray-500 hover:text-gray-700 md:ml-2"
                           >
                             Blogs
-                            {post.formTitle}
                           </Link>
                         </div>
                       </li>
