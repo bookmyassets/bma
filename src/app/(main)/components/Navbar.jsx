@@ -327,7 +327,7 @@ useEffect(() => {
                   className={`font-medium transition-colors duration-300 hover:text-yellow-500 flex items-center ${textColor}`}
                   onClick={toggleResidentialMenu}
                 >
-                  Residential
+                 Our Residential Projects
                   <svg
                     className={`w-4 h-4 ml-1 transition-transform ${isResidentialMenuOpen ? "rotate-180" : ""}`}
                     fill="none"
@@ -350,7 +350,7 @@ useEffect(() => {
                   className={`font-medium transition-colors duration-300 hover:text-yellow-500 flex items-center ${textColor}`}
                   onClick={toggleBulkLandMenu}
                 >
-                  Bulk Land
+                  Bulk Land Projects
                   <svg
                     className={`w-4 h-4 ml-1 transition-transform ${isBulkLandMenuOpen ? "rotate-180" : ""}`}
                     fill="none"
@@ -496,7 +496,7 @@ useEffect(() => {
           <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-gray-50 to-white">
             <div>
               <h3 className="text-5xl font-light text-gray-900 leading-tight">
-                Residential <br /> Projects
+                  Residential <br /> Projects
               </h3>
               <p className="text-gray-600 mt-4 text-xl">
                 Discover premium residential developments with <br />
@@ -881,7 +881,7 @@ useEffect(() => {
                 onClick={toggleResidentialMenu}
                 className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-3 "
               >
-                <span>Residential</span>
+                <span>Our Residential Projects</span>
                 <svg
                   className={`w-5 h-5 transition-transform ${isResidentialMenuOpen ? "rotate-180" : ""}`}
                   fill="none"
@@ -946,7 +946,7 @@ useEffect(() => {
                 onClick={toggleBulkLandMenu}
                 className="flex items-center justify-between w-full text-left font-medium text-black hover:text-orange-500 py-3 transition-colors"
               >
-                <span>Bulk Land</span>
+                <span>Bulk Land Projects</span>
                 <svg
                   className={`w-5 h-5 transition-transform ${isBulkLandMenuOpen ? "rotate-180" : ""}`}
                   fill="none"
