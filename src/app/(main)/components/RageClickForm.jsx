@@ -5,7 +5,8 @@ import React from "react";
 export default function RagePopup({
   title = "Wait! Before You Go...",
   subtitle = "Get exclusive updates",
-  mobileStrategy = "scroll" // Options: "scroll", "time", "back", "all"
+  clickThreshold = 5, // Number of clicks to trigger popup
+  timeWindow = 2000 // Time window in ms for clicks to count as "rage"
 }) {
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -24,13 +25,6 @@ export default function RagePopup({
   // Rage click detection
   const clickCount = useRef(0);
   const clickTimer = useRef(null);
-
-  // Detect if device is mobile
-  const isMobile = () => {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ) || window.innerWidth < 768;
-  };
 
   // Load reCAPTCHA script
   useEffect(() => {
@@ -51,7 +45,7 @@ export default function RagePopup({
     loadRecaptcha();
   }, [siteKey]);
 
-  // Rage click detection - 5+ clicks in 2 seconds
+  // ONLY rage click detection - multiple rapid clicks
   useEffect(() => {
     const handleRageClick = () => {
       if (popupShown) return;
@@ -63,18 +57,18 @@ export default function RagePopup({
         clearTimeout(clickTimer.current);
       }
 
-      // Check if 5 or more clicks
-      if (clickCount.current >= 5) {
+      // Check if threshold reached (default 5 clicks)
+      if (clickCount.current >= clickThreshold) {
         setShowFormPopup(true);
         setPopupShown(true);
         clickCount.current = 0;
         return;
       }
 
-      // Reset click count after 2 seconds of no clicks
+      // Reset click count after time window (default 2 seconds)
       clickTimer.current = setTimeout(() => {
         clickCount.current = 0;
-      }, 2000);
+      }, timeWindow);
     };
 
     document.addEventListener("click", handleRageClick);
@@ -85,97 +79,7 @@ export default function RagePopup({
         clearTimeout(clickTimer.current);
       }
     };
-  }, [popupShown]);
-
-  // Desktop exit intent detection
-  useEffect(() => {
-    if (isMobile()) return;
-
-    const handleExitIntent = (e) => {
-      if (e.clientY <= 0 && !popupShown) {
-        setShowFormPopup(true);
-        setPopupShown(true);
-      }
-    };
-
-    const handleKeyDown = (e) => {
-      if ((e.ctrlKey && e.key === "w") || (e.altKey && e.key === "F4")) {
-        if (!popupShown) {
-          e.preventDefault();
-          setShowFormPopup(true);
-          setPopupShown(true);
-        }
-      }
-    };
-
-    document.addEventListener("mouseleave", handleExitIntent);
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("mouseleave", handleExitIntent);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [popupShown]);
-
-  // Mobile: Back button detection
-  useEffect(() => {
-    if (!isMobile() || (mobileStrategy !== "back" && mobileStrategy !== "all")) return;
-
-    window.history.pushState(null, "", window.location.href);
-
-    const handlePopState = () => {
-      if (!popupShown) {
-        setShowFormPopup(true);
-        setPopupShown(true);
-        window.history.pushState(null, "", window.location.href);
-      }
-    };
-
-    window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, [popupShown, mobileStrategy]);
-
-  // Mobile: Scroll-based detection
-  useEffect(() => {
-    if (!isMobile() || (mobileStrategy !== "scroll" && mobileStrategy !== "all")) return;
-
-    const handleScroll = () => {
-      if (popupShown) return;
-
-      const scrollPercent =
-        (window.scrollY /
-          (document.documentElement.scrollHeight - window.innerHeight)) *
-        100;
-
-      if (scrollPercent > 50) {
-        setShowFormPopup(true);
-        setPopupShown(true);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [popupShown, mobileStrategy]);
-
-  // Mobile: Time-based detection
-  useEffect(() => {
-    if (!isMobile() || (mobileStrategy !== "time" && mobileStrategy !== "all")) return;
-
-    const timer = setTimeout(() => {
-      if (!popupShown) {
-        setShowFormPopup(true);
-        setPopupShown(true);
-      }
-    }, 15000);
-
-    return () => clearTimeout(timer);
-  }, [popupShown, mobileStrategy]);
+  }, [popupShown, clickThreshold, timeWindow]);
 
   // Escape key handler
   useEffect(() => {
@@ -203,7 +107,6 @@ export default function RagePopup({
       return false;
     }
 
-
     if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
@@ -226,7 +129,7 @@ export default function RagePopup({
             fields: {
               name: formData.fullName,
               phone: formData.mobileNumber,
-              source: "BookMyAssets Exit Popup",
+              source: "BookMyAssets Rage clicks",
             },
             source: "BookMyAssets Exit Popup",
             tags: ["Exit Intent", "Popup Lead", "BookMyAssets"],
@@ -403,7 +306,6 @@ export default function RagePopup({
                     placeholder="Enter your mobile number"
                   />
                 </div>
-
               </div>
 
               {/* Hidden reCAPTCHA container */}
