@@ -151,6 +151,8 @@ const TrendingBlogItem = ({ post }) => {
   );
 };
 
+
+
 export default async function Post({ params }) {
   const { slug } = await params;
   const site = "bookmyassets";
@@ -678,6 +680,7 @@ export default async function Post({ params }) {
                             className="ml-1 text-sm font-medium text-gray-500 hover:text-gray-700 md:ml-2"
                           >
                             Blogs
+                            {post.formTitle}
                           </Link>
                         </div>
                       </li>
@@ -779,10 +782,11 @@ export default async function Post({ params }) {
                     <PortableText value={post.body} components={components} />
                   </div>
                   <SlugPageForm
-                    title="Find Most Stable Areas, and Returns in Dholera"
+                    title={post.formTitle}
                     button="Show Me How"
                     project={post.title}
                   />
+                  
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
                     <div className="mt-12 pt-6 border-t border-gray-200">

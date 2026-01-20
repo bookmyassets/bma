@@ -1,57 +1,38 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assests/bma-logo-black.png";
+import { X, Check } from "lucide-react";
+import img from "@/assests/homepage/form-img.png";
 import Image from "next/image";
 
-export default function SlugPageForm({title, button, project}) {
-  // Popup states
-  const [showFormPopup, setShowFormPopup] = useState(false);
+export default function DholeraPopupForm({ title, formTitle }) {
+  // Use title prop if provided, otherwise fall back to formTitle
+  const displayTitle = title || formTitle;
+  const [showPopup, setShowPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    mobileNumber: "",
-    email: "",
-  });
+  const [formData, setFormData] = useState({ fullName: "", mobileNumber: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
-  const [debugScroll, setDebugScroll] = useState(0); // Add this for debugging
-  
-
-  const recaptchaRef = useRef(null);
+  const recaptchaRefDesktop = useRef(null);
+  const recaptchaRefMobile = useRef(null);
+  const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
+  // Auto-popup after 3 seconds
   useEffect(() => {
-    const handleScroll = () => {
-      if (hasTriggered) return;
+    const hasShown = sessionStorage.getItem("popupShown");
 
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
+    if (!hasShown) {
+      const timer = setTimeout(() => {
+        setShowPopup(true);
+        sessionStorage.setItem("popupShown", "true");
+      }, 3000);
 
-      // Better calculation to avoid division by zero
-      const scrollableDistance = Math.max(documentHeight - windowHeight, 1);
-      const scrollPercent = (scrollPosition / scrollableDistance) * 100;
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
-      setDebugScroll(scrollPercent);
-
-      if (scrollPercent >= 30 && !hasTriggered) {
-        setShowFormPopup(true);
-        setHasTriggered(true);
-      }
-    };
-
-    // Initial check in case user refreshes mid-scroll
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasTriggered]);
-
-  // Load reCAPTCHA
+  // Load reCAPTCHA and handle escape key
   useEffect(() => {
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
@@ -71,8 +52,8 @@ export default function SlugPageForm({title, button, project}) {
 
     // Escape key handler
     const handleEscapeKey = (event) => {
-      if (event.key === "Escape" && showFormPopup) {
-        handlePopupClose();
+      if (event.key === "Escape" && showPopup) {
+        setShowPopup(false);
       }
     };
     document.addEventListener("keydown", handleEscapeKey);
@@ -80,7 +61,7 @@ export default function SlugPageForm({title, button, project}) {
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [showFormPopup, siteKey]);
+  }, [showPopup, siteKey]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -91,11 +72,6 @@ export default function SlugPageForm({title, button, project}) {
   const validateForm = () => {
     if (!formData.fullName.trim() || !formData.mobileNumber.trim()) {
       setErrorMessage("Please fill in all required fields");
-      return false;
-    }
-
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
       return false;
     }
 
@@ -121,13 +97,13 @@ export default function SlugPageForm({title, button, project}) {
             fields: {
               name: formData.fullName,
               phone: formData.mobileNumber,
-              source: "BookMyAssets",
+              source: "BookMyAssets Blogs",
             },
-            source: "BookMyAssets Popup",
+            source: "BookMyAssets christmas Popup",
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -136,14 +112,8 @@ export default function SlugPageForm({title, button, project}) {
 
         setTimeout(() => {
           setShowThankYou(false);
-          setShowFormPopup(false);
+          setShowPopup(false);
         }, 3000);
-
-         window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "lead_form",
-            page_name:project
-          });
       } else {
         throw new Error("Error submitting form");
       }
@@ -152,9 +122,9 @@ export default function SlugPageForm({title, button, project}) {
       setErrorMessage("Error submitting form. Please try again.");
     } finally {
       setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
+      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
         try {
-          window.grecaptcha.reset();
+          window.grecaptcha.reset(recaptchaWidgetId.current);
         } catch (err) {
           console.error("Error resetting reCAPTCHA:", err);
         }
@@ -162,7 +132,7 @@ export default function SlugPageForm({title, button, project}) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, isMobile = false) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage("");
@@ -174,240 +144,354 @@ export default function SlugPageForm({title, button, project}) {
 
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page."
+        "Security verification not loaded. Please refresh the page.",
       );
       setIsLoading(false);
       return;
     }
 
-    if (!recaptchaRef.current.innerHTML) {
-      try {
-        window.grecaptcha.render(recaptchaRef.current, {
-          sitekey: siteKey,
-          callback: onRecaptchaSuccess,
-          theme: "light",
-        });
-      } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
-      }
-    } else {
-      window.grecaptcha.execute();
-    }
-  };
+    const recaptchaContainer = isMobile
+      ? recaptchaRefMobile.current
+      : recaptchaRefDesktop.current;
 
-  const handlePopupClose = () => {
-    setShowFormPopup(false);
+    try {
+      if (!recaptchaContainer.innerHTML || recaptchaWidgetId.current === null) {
+        recaptchaWidgetId.current = window.grecaptcha.render(
+          recaptchaContainer,
+          {
+            sitekey: siteKey,
+            callback: onRecaptchaSuccess,
+            theme: "light",
+          },
+        );
+      } else {
+        window.grecaptcha.execute(recaptchaWidgetId.current);
+      }
+    } catch (error) {
+      console.error("Error with reCAPTCHA:", error);
+      setErrorMessage("Error with verification. Please try again.");
+      setIsLoading(false);
+    }
   };
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      handlePopupClose();
+      setShowPopup(false);
     }
   };
 
-  // Debug component to show scroll percentage
-  /* const DebugInfo = () => (
-    <div style={{
-      position: 'fixed',
-      top: '10px',
-      right: '10px',
-      background: 'rgba(0,0,0,0.7)',
-      color: 'white',
-      padding: '10px',
-      borderRadius: '5px',
-      zIndex: 1000,
-      fontSize: '14px'
-    }}>
-      Scroll: {debugScroll.toFixed(2)}%
-    </div>
-  ); */
-
   return (
     <>
-      <AnimatePresence>
-        {showFormPopup && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
+      <div className="max-sm:hidden">
+        {showPopup && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in"
             onClick={handleBackdropClick}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {showThankYou ? (
-                <div className="text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="mb-6"
-                  >
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-8 w-8 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                  </motion.div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                    Thank You!
-                  </h3>
-                  <p className="text-gray-600">We will contact you shortly.</p>
-                </div>
-              ) : (
-                <>
-                  {/* Section 1: Heading */}
-                  <div className="text-center mb-6">
-                    <button
-                      onClick={handlePopupClose}
-                      className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
-                    >
-                      ×
-                    </button>
-                    <div className="absolute -top-9 pt-10  left-1/2 transform -translate-x-1/2">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="rounded-lg "
-                      >
-                        <Image
-                          src={logo}
-                          alt="Logo"
-                          width={60}
-                          height={60}
-                          className="rounded-lg"
-                        />
-                      </motion.div>
-                    </div>
+            <div className="flex flex-col md:flex-row items-center justify-center max-w-4xl w-full">
 
-                    {/* Section 2: Sub-heading CTA */}
-                    <p className="text-lg text-gray-700 pt-8 font-semibold">
-                      {title}
+
+              <div
+                className="bg-white rounded-lg p-6 md:p-8 shadow-2xl relative transform transition-all animate-scale-in w-full max-w-[450px]"
+                
+                onClick={(e) => e.stopPropagation()}
+              >
+                {showThankYou ? (
+                  <div className="text-center py-6 md:py-8 h-full flex flex-col items-center justify-center">
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 animate-scale-in">
+                      <Check
+                        className="h-8 w-8 md:h-10 md:w-10 text-white"
+                        strokeWidth={3}
+                      />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 md:mb-3">
+                      Thank You!
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-600">
+                      Our team will contact you shortly with exclusive Dholera
+                      investment details.
                     </p>
                   </div>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setShowPopup(false)}
+                      className="absolute top-3 right-3 md:top-4 md:right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                      aria-label="Close popup"
+                    >
+                      <X className="h-5 w-5 md:h-6 md:w-6" />
+                    </button>
 
-                  {/* Section 3: Form Fields */}
-                  <form onSubmit={handleSubmit}>
-                    {errorMessage && (
-                      <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm mb-4">
-                        {errorMessage}
+                    <div className="h-full overflow-y-auto pr-2 -mr-2">
+                      <div className="space-y-4 pb-2">
+                        {/* Dynamic Form Title */}
+                        <div className="text-center mb-4">
+                          <h2 className="text-xl sm:text-2xl font-bold text-gray-700">
+                            {displayTitle || "Get Investment Details"}
+                          </h2>
+                        </div>
+
+                        {errorMessage && (
+                          <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs md:text-sm">
+                            {errorMessage}
+                          </div>
+                        )}
+
+                        <div>
+                          <label
+                            htmlFor="fullName"
+                            className="block text-gray-700 text-sm font-semibold mb-2"
+                          >
+                            Full Name *
+                          </label>
+                          <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
+                            placeholder="Enter your full name"
+                          />
+                        </div>
+
+                        <div>
+                          <label
+                            htmlFor="mobileNumber"
+                            className="block text-gray-700 text-sm font-semibold mb-2"
+                          >
+                            Mobile Number *
+                          </label>
+                          <input
+                            type="tel"
+                            id="mobileNumber"
+                            name="mobileNumber"
+                            value={formData.mobileNumber}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
+                            placeholder="Enter your mobile number"
+                          />
+                        </div>
+
+                        {/* Hidden reCAPTCHA container for desktop */}
+                        <div
+                          ref={recaptchaRefDesktop}
+                          className="flex justify-center"
+                        ></div>
+
+                        <button
+                          onClick={(e) => handleSubmit(e, false)}
+                          disabled={isLoading}
+                          className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base ${
+                            isLoading
+                              ? "bg-gray-400 cursor-not-allowed border-[#deae3c] border-2 text-[#deae3c]"
+                              : "bg-[#deae3c] text-white border-[#deae3c] border-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                          }`}
+                        >
+                          {isLoading ? (
+                            <div className="flex items-center justify-center">
+                              <svg
+                                className="animate-spin h-4 w-4 md:h-5 md:w-5 mr-2 md:mr-3"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle
+                                  className="opacity-25"
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                ></circle>
+                                <path
+                                  className="opacity-75"
+                                  fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
+                              </svg>
+                              Submitting...
+                            </div>
+                          ) : (
+                            "Get A Call Back"
+                          )}
+                        </button>
+
+                        <p className="text-xs text-center text-gray-500 mt-3">
+                          🔒 Your details are safe and secure with us
+                        </p>
                       </div>
-                    )}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
-                    <div className="space-y-5 mb-6">
+        <style jsx>{`
+          @keyframes fade-in {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          @keyframes scale-in {
+            from {
+              transform: scale(0.9);
+              opacity: 0;
+            }
+            to {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+          .animate-fade-in {
+            animation: fade-in 0.3s ease-out;
+          }
+          .animate-scale-in {
+            animation: scale-in 0.3s ease-out;
+          }
+        `}</style>
+      </div>
+
+      <div className="md:hidden">
+        {showPopup && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in"
+            onClick={handleBackdropClick}
+          >
+            <div className="">
+              
+              <div
+                className="bg-white p-6 md:p-8 max-w-[450px] w-full shadow-2xl relative transform transition-all animate-scale-in"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {showThankYou ? (
+                  <div className="text-center py-6 md:py-8">
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 animate-scale-in">
+                      <Check
+                        className="h-8 w-8 md:h-10 md:w-10 text-white"
+                        strokeWidth={3}
+                      />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 md:mb-3">
+                      Thank You!
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-600">
+                      Our team will contact you shortly with exclusive Dholera
+                      investment details.
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    {/* Dynamic Form Title for Mobile */}
+                    <div className="text-center mb-4">
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-700">
+                        {displayTitle || "Get Investment Details"}
+                      </h2>
+                    </div>
+
+                    <div className="space-y-4">
+                      {errorMessage && (
+                        <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs md:text-sm">
+                          {errorMessage}
+                        </div>
+                      )}
+
                       <div>
                         <label
-                          htmlFor="fullName"
-                          className="block text-gray-700 text-sm font-medium mb-2"
+                          htmlFor="fullName-mobile"
+                          className="block text-gray-700 text-sm font-semibold mb-2"
                         >
                           Full Name *
                         </label>
                         <input
                           type="text"
-                          id="fullName"
+                          id="fullName-mobile"
                           name="fullName"
                           value={formData.fullName}
                           onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                          className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
                           placeholder="Enter your full name"
                         />
                       </div>
 
                       <div>
                         <label
-                          htmlFor="mobileNumber"
-                          className="block text-gray-700 text-sm font-medium mb-2"
+                          htmlFor="mobileNumber-mobile"
+                          className="block text-gray-700 text-sm font-semibold mb-2"
                         >
                           Mobile Number *
                         </label>
                         <input
                           type="tel"
-                          id="mobileNumber"
+                          id="mobileNumber-mobile"
                           name="mobileNumber"
                           value={formData.mobileNumber}
                           onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                          className="w-full px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-sm md:text-base"
                           placeholder="Enter your mobile number"
                         />
                       </div>
-                    </div>
 
-                    <div className="flex justify-center mb-4">
-                      <div ref={recaptchaRef}></div>
-                    </div>
+                      {/* Hidden reCAPTCHA container for mobile */}
+                      <div
+                        ref={recaptchaRefMobile}
+                        className="flex justify-center"
+                      ></div>
 
-                    {/* Section 4: Submit Button with Tagline */}
-                    <button
-                      type="submit"
-                      disabled={isLoading || !recaptchaLoaded}
-                      className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
-                        isLoading || !recaptchaLoaded
-                          ? "bg-gray-400 cursor-not-allowed text-gray-600"
-                          : "bg-[#deae3c] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
-                      }`}
-                    >
-                      {isLoading ? (
-                        <div className="flex items-center justify-center">
-                          <svg
-                            className="animate-spin -ml-1 mr-3 h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            ></circle>
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            ></path>
-                          </svg>
-                          Submitting...
-                        </div>
-                      ) : (
-                        "Get A Call Back"
-                      )}
-                    </button>
+                      <button
+                        onClick={(e) => handleSubmit(e, true)}
+                        disabled={isLoading}
+                        className={`w-full font-bold py-2.5 md:py-3 px-6 rounded-lg transition-all duration-300 text-sm md:text-base border-2 border-[#deae3c] ${
+                          isLoading
+                            ? "bg-gray-400 cursor-not-allowed text-[#deae3c]"
+                            : "bg-white text-[#deae3c] shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                        }`}
+                      >
+                        {isLoading ? (
+                          <div className="flex items-center justify-center">
+                            <svg
+                              className="animate-spin h-4 w-4 md:h-5 md:w-5 mr-2 md:mr-3"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              ></circle>
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              ></path>
+                            </svg>
+                            Submitting...
+                          </div>
+                        ) : (
+                          "Get Investment Details"
+                        )}
+                      </button>
 
-                    {/* Section 5: Privacy Notice */}
-                    <div className="text-center mt-4">
-                      <p className="text-xs text-gray-500">
-                        We respect your privacy. Your details are safe with us.
+                      <p className="text-xs text-center text-gray-500 mt-3">
+                        🔒 Your details are safe and secure with us
                       </p>
                     </div>
-                  </form>
-                </>
-              )}
-            </motion.div>
-          </motion.div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
+      </div>
     </>
   );
 }
