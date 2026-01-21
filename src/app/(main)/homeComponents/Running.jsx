@@ -17,7 +17,8 @@ const Running = () => {
         className={`scrolling-text ${animate ? 'animated' : ''}`}
         aria-live="off"
       >
-        <h2>Registry Ready Plots in Dholera Under ₹10 Lakh</h2>
+        <h2>₹26,000 off on booking amount till 26 January</h2>
+        {/* <h2>Registry Ready Plots in Dholera Under ₹10 Lakh</h2> */}
       </div>
     </div>
   );
