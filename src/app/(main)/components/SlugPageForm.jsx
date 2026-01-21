@@ -477,7 +477,7 @@ export default function SlugPageForm({ title, formTitle }) {
                             Submitting...
                           </div>
                         ) : (
-                          "Get Investment Details"
+                          "Get A Call Back"
                         )}
                       </button>
 
