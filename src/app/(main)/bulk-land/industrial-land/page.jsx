@@ -21,6 +21,7 @@ import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getIndustrialLinks } from "../Interlink";
 import FAQSection from "./FAQs";
+import IndustrialZoneCards from "./Cards";
 
 export default function page() {
   return (
@@ -122,109 +123,8 @@ export default function page() {
           />
         </div>
       </div>
-      <div className="max-w-6xl mx-auto p-4">
-        {/* Benefits Grid */}
-        <div>
-          <p className="text-center text-3xl font-semibold mb-8">
-            Benefits of Buying Bulk Land in Industrial Zones
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
-            {/* High Appreciation Potential */}
-            <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <Factory className="w-16 h-16 text-blue-600" />
-              <p className="text-lg font-medium text-gray-800">
-                Manufacturing & Heavy Industries
-              </p>
-            </div>
-
-            {/* Mixed-Use Flexibility */}
-            <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <Truck className="w-16 h-16 text-green-600" />
-              <p className="text-lg font-medium text-gray-800">
-                Warehousing & Logistics
-              </p>
-            </div>
-
-            {/* Plug & Play Infrastructure */}
-            <div className=" flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <Wrench className="w-16 h-16 text-purple-600" />
-              <p className="text-lg font-medium text-gray-800">
-                Light & Medium Industries
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="md:flex justify-center items-center pt-4 max-sm:space-y-4 md:space-x-8">
-          {/* Community-Centric Planning */}
-          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-            <Zap className="w-16 h-16 text-orange-600" />
-            <p className="text-lg font-medium text-gray-800">
-              Utilities & Support Services
-            </p>
-          </div>
-
-          {/* Government-Backed Development */}
-          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-            <School className="w-16 h-16 text-red-600" />
-            <p className="text-lg font-medium text-gray-800">
-              Institutional & Ancillary Facilities
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-6xl mx-auto pb-8 pt-12 p-4">
-        <p className="text-center text-3xl font-semibold mb-8">
-          Types of Industrial Projects Allowed
-        </p>
-
-        {/* Project Types Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Retail & Commercial Services */}
-          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-            <Network className="w-16 h-16 text-blue-600" />
-            <p className="text-lg font-medium text-gray-800">
-              Strategic Connectivity
-            </p>
-          </div>
-
-          {/* Hospitality & Food Services */}
-          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
-            <Image
-              src={icon2}
-              alt="Plug-and-Play Infrastructure"
-              className="w-16 h-16 text-red-600"
-            />
-            <p className="text-lg font-medium text-gray-800">
-              Plug-and-Play Infrastructure
-            </p>
-          </div>
-
-          {/* Healthcare & Wellness */}
-          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-            <Banknote className="w-16 h-16 text-green-600" />
-            <p className="text-lg font-medium text-gray-800">
-              High ROI & Incentives
-            </p>
-          </div>
-        </div>
-        <div className="md:flex justify-center items-center pt-4 max-sm:space-y-4 md:space-x-8">
-          {/* Education & Community Facilities */}
-          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-            <Ruler className="w-16 h-16 text-purple-600" />
-            <p className="text-lg font-medium text-gray-800">
-              Scalable Land Parcels
-            </p>
-          </div>
-
-          {/* Residential & Housing Projects */}
-          <div className="flex flex-col items-center text-center space-y-4 p-6 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
-            <Globe2 className="w-16 h-16 text-orange-600" />
-            <p className="text-lg font-medium text-gray-800">
-              Global Investment Magnet
-            </p>
-          </div>
-        </div>
+      <div>
+        <IndustrialZoneCards/>
       </div>
       <div>
         <Table />
