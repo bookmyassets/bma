@@ -137,6 +137,11 @@ export default function PopupScroll({ title }) {
           setShowThankYou(false);
           setShowFormPopup(false);
         }, 3000);
+
+        window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead_form",
+          });
       } else {
         throw new Error("Error submitting form");
       }
