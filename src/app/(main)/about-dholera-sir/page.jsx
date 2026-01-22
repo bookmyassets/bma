@@ -127,7 +127,7 @@ export default async function page() {
                         </Link>
                       </strong>{" "}
                       is India's largest planned industrial and residential hub.
-                      Located about 100 km from <strong>Ahmedabad</strong>, it
+                      Located about 100 km from Ahmedabad, it
                       forms a key part of the Delhi–Mumbai Industrial Corridor.
                       Declared under the Gujarat Special Investment Region Act,
                       the project is being implemented in phases to create a
@@ -155,7 +155,7 @@ export default async function page() {
                       coordinated efforts from both the central and state
                       governments. Designed by Halcrow, internationally renowned
                       for projects such as the Palm Jumeirah in Dubai, Dholera
-                      is India's first <strong>Greenfield Smart City</strong>.
+                      is India's First Greenfield Smart City.
                     </p>
 
                     <div className="bg-gradient-to-r from-[#deae3c]/5 via-white/50 to-[#138808]/5 p-6 rounded-xl border-l-4 border-[#deae3c]">
@@ -164,7 +164,7 @@ export default async function page() {
                       </h3>
                       <p className="text-gray-700">
                         The planning integrates{" "}
-                        <Link href="/dholera-sir-blogs/plug-and-play-infrastructure-in-dholera">
+                        <Link className="font-semibold" href="/dholera-sir-blogs/plug-and-play-infrastructure-in-dholera">
                           {" "}
                           plug-and-play infrastructure,
                         </Link>
@@ -241,7 +241,7 @@ export default async function page() {
                       <div className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-2"></div>
                         <p className="text-gray-700">
-                          <Link href="/dholera-sir-blogs/ahmedabad-dholera-monorail-project-2025">Metro rail</Link> and freight corridors for faster movement
+                          <Link className="font-semibold" href="/dholera-sir-blogs/ahmedabad-dholera-monorail-project-2025">Metro rail</Link> and freight corridors for faster movement
                         </p>
                       </div>
                     </div>
@@ -260,7 +260,7 @@ export default async function page() {
                   </h2>
 
                   <p className="text-gray-700 mb-6">
-                    Dholera has already attracted large <Link href="/dholera-sir-blogs/companies-invested-in-dholera">investments from reputed
+                    Dholera has already attracted large <Link className="font-semibold" href="/dholera-sir-blogs/companies-invested-in-dholera">investments from reputed
                     companies </Link>:
                   </p>
 
@@ -275,7 +275,7 @@ export default async function page() {
                         </span>
                       </div>
                       <p className="text-gray-700">
-                        Tata group is setting up <Link href="/dholera-sir-blogs/tata-semiconductor-dholera-timeline-2024-2028">India’s first semiconductor </Link>  and
+                        Tata group is setting up <Link className="font-semibold" href="/dholera-sir-blogs/tata-semiconductor-dholera-timeline-2024-2028">India’s first semiconductor </Link>  and
                         display fabrication plant
                       </p>
                     </div>
@@ -319,7 +319,7 @@ export default async function page() {
                   </h2>
 
                   <p className="text-gray-700 mb-6">
-                    The <Link href="/dholera-sir-blogs/dholera-2025-development-infrastructure-progress">Dholera Special Investment Region Development Authority </Link> 
+                    The <Link className="font-semibold" href="/dholera-sir-blogs/dholera-2025-development-infrastructure-progress">Dholera Special Investment Region Development Authority </Link> 
                     (DSIRDA) ensures smooth planning and administration. The
                     governance model includes e-governance, single-window
                     clearances, and transparent systems designed to support
@@ -353,7 +353,7 @@ export default async function page() {
                         <div className="flex items-center space-x-3">
                           <div className="w-3 h-3 bg-[#deae3c] rounded-full"></div>
                           <p className="text-gray-700">
-                            <Link href="/about-dholera-sir/abcd-building-dholera">Activation area</Link> completed to showcase residential
+                            <Link className="font-semibold" href="/about-dholera-sir/abcd-building-dholera">Activation area</Link> completed to showcase residential
                             and commercial viability
                           </p>
                         </div>
@@ -377,7 +377,7 @@ export default async function page() {
                   </h2>
 
                   <p className="text-gray-700 mb-6">
-                    <Link href="/contact"> BookMyAssets</Link> connects you to premium residential projects in{" "}
+                    <Link className="font-semibold" href="/contact"> BookMyAssets</Link> connects you to premium residential projects in{" "}
                     <strong>Dholera, Gujarat,</strong> with long-term growth
                     potential.
                   </p>
