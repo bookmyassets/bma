@@ -56,7 +56,7 @@ const extractHeadings = (body) => {
 };
 
 // Right Sidebar Component
-const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
+const RightSidebar = ({ trendingBlogs }) => {
   return (
     <aside className="lg:w-1/3 space-y-4 pt-4">
       <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
@@ -74,7 +74,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
           <h3 className="text-xl font-bold mb-4 text-white">
-            Updates on Dholera SIR
+            Latest News on Dholera SIR
           </h3>
           <div className=" overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
@@ -150,8 +150,6 @@ const TrendingBlogItem = ({ post }) => {
     </Link>
   );
 };
-
-
 
 export default async function Post({ params }) {
   const { slug } = await params;
@@ -785,7 +783,7 @@ export default async function Post({ params }) {
                     button="Show Me How"
                     project={post.title}
                   />
-                  
+
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
                     <div className="mt-12 pt-6 border-t border-gray-200">
