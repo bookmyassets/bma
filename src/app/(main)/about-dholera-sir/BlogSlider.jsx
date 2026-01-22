@@ -9,20 +9,32 @@ import { urlFor } from "@/sanity/lib/image";
 export default function BlogSlider({ posts = [] }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const cardsPerPage = 3;
   const totalPages = Math.ceil(posts.length / cardsPerPage);
 
-  // Auto-slide every 4 seconds
+  // Auto-slide every 4 seconds - only on desktop
   useEffect(() => {
-    if (!isAutoPlaying || totalPages <= 1) return;
+    if (isMobile || !isAutoPlaying || totalPages <= 1) return;
 
     const interval = setInterval(() => {
       setCurrentPage((prev) => (prev + 1) % totalPages);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, totalPages]);
+  }, [isAutoPlaying, totalPages, isMobile]);
 
   const goToPage = (page) => {
     setCurrentPage(page);
@@ -47,16 +59,108 @@ export default function BlogSlider({ posts = [] }) {
     );
   }
 
+  // For mobile: show all posts in a single column
+  if (isMobile) {
+    return (
+      <div className="mb-8">
+        {/* Mobile: Show all posts in a single column */}
+        <div className="flex flex-col gap-6">
+          {posts.map((post, index) => (
+            <div
+              key={post._id}
+              className="transform hover:-translate-y-1 transition-all duration-300"
+              style={{
+                animation: `fadeIn 0.5s ease-in ${index * 0.1}s both`,
+              }}
+            >
+              <Link
+                href={`/about-dholera-sir/${post.slug.current}`}
+                className="group block h-full"
+              >
+                <div className="bg-white rounded-xl shadow-md overflow-hidden h-full hover:shadow-xl transition-all duration-300 border border-gray-200">
+                  {/* Blog Post Image */}
+                  <div className="relative h-48">
+                    {post.mainImage ? (
+                      <Image
+                        src={
+                          urlFor(post.mainImage)
+                            .width(1200)
+                            .height(400)
+                            .url() || "/placeholder.svg"
+                        }
+                        alt={post.title || "Blog post"}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21] flex items-center justify-center">
+                        <span className="text-white text-4xl font-bold opacity-20">
+                          BMA
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5">
+                    <h2 className="text-lg font-bold mb-2 text-black group-hover:text-[#C69C21] transition-colors line-clamp-2">
+                      {post.title}
+                    </h2>
+
+                    {post.excerpt && (
+                      <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                    )}
+
+                    {/* Footer */}
+                    <div className="border-t border-gray-200 pt-3 mt-auto">
+                      <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center">
+                          <span className="inline-block w-2 h-2 rounded-full bg-[#FDB913] mr-2"></span>
+                          <span className="text-black font-medium">
+                            Read More
+                          </span>
+                        </div>
+                        <span className="text-[#C69C21] font-medium group-hover:translate-x-1 transition-transform inline-block">
+                          &rarr;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        <style jsx>{`
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  // Desktop: Show slider with 3 posts per page
   const currentPosts = posts.slice(
     currentPage * cardsPerPage,
-    (currentPage + 1) * cardsPerPage
+    (currentPage + 1) * cardsPerPage,
   );
 
   return (
     <div className="mb-8">
       <div className="relative">
-        {/* Grid Container */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* Desktop Grid Container */}
+        <div className="hidden md:grid grid-cols-3 gap-6 lg:gap-8">
           {currentPosts.map((post, index) => (
             <div
               key={post._id}
@@ -131,14 +235,14 @@ export default function BlogSlider({ posts = [] }) {
           <>
             <button
               onClick={goToPrevious}
-              className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden lg:block"
+              className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden md:block"
               aria-label="Previous page"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={goToNext}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden lg:block"
+              className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden md:block"
               aria-label="Next page"
             >
               <ChevronRight className="w-6 h-6" />
@@ -166,8 +270,8 @@ export default function BlogSlider({ posts = [] }) {
             ))}
           </div>
 
-          {/* Mobile Navigation Buttons */}
-          <div className="flex gap-3 lg:hidden">
+          {/* Mobile Navigation Buttons (Hidden since we're not showing slider on mobile) */}
+          <div className="flex gap-3 md:hidden">
             <button
               onClick={goToPrevious}
               className="bg-white rounded-full p-2 shadow-md hover:bg-[#deae3c] hover:text-white transition-all duration-300"
@@ -183,7 +287,6 @@ export default function BlogSlider({ posts = [] }) {
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
-
         </div>
       )}
 
