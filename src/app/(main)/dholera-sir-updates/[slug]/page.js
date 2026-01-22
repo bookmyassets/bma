@@ -1,6 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import { getPostBySlug, getblogs, projectInfo } from "@/sanity/lib/api";
+import { getPostBySlug, getUpdates, getblogs, projectInfo } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 import BlogSchemaMarkup from "../BlogSchemaMarkup";
@@ -66,12 +66,12 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
       <div className="sticky top-24 space-y-6">
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
-          <h3 className="text-xl font-bold mb-4 text-white">Latest Blogs</h3>
+          <h3 className="text-xl font-bold mb-4 text-white">Latest Updates</h3>
           <div className="space-y-8 max-h-[400px] overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
               <Link
                 key={item._id}
-                href={`/dholera-sir-blogs/${item.slug.current}`}
+                href={`/dholera-sir-Updates/${item.slug.current}`}
               >
                 <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3  border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
@@ -155,8 +155,8 @@ export default async function Post({ params }) {
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
       getPostBySlug(slug, site),
-      getblogs(0, 6), // Get 6 blogs for sidebar
-      projectInfo(slug, 3),
+      getUpdates(0, 6), // Get 6 blogs for sidebar
+      getblogs(slug, 3),
     ]);
 
     if (!post) {
@@ -354,7 +354,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -366,7 +366,7 @@ export default async function Post({ params }) {
           return (
             <h1
               id={id}
-              className="text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-2xl md:text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -379,7 +379,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -391,7 +391,7 @@ export default async function Post({ params }) {
           return (
             <h2
               id={id}
-              className="text-4xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-2xl md:text-3xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-3 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -404,7 +404,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -416,7 +416,7 @@ export default async function Post({ params }) {
           return (
             <h3
               id={id}
-              className="text-3xl font-bold mt-8 mb-5 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-xl md:text-2xl font-bold mt-8 mb-5 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -429,7 +429,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -441,7 +441,7 @@ export default async function Post({ params }) {
           return (
             <h4
               id={id}
-              className="text-2xl font-semibold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
+              className="text-lg md:text-2xl font-semibold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -454,7 +454,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -466,7 +466,7 @@ export default async function Post({ params }) {
           return (
             <h5
               id={id}
-              className="text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
+              className="text-lg md:text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -479,7 +479,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -822,7 +822,7 @@ export default async function Post({ params }) {
                           {relatedBlogs.map((blog, index) => (
                             <Link
                               key={blog._id}
-                              href={`/about-dholera-sir/${blog.slug.current}`}
+                              href={`/dholera-sir-updates/${blog.slug.current}`}
                               className="group snap-start flex-shrink-0 first:ml-0"
                               style={{ width: "calc(100vw - 3rem)" }}
                             >
@@ -946,7 +946,7 @@ export default async function Post({ params }) {
                       {relatedBlogs.map((blog) => (
                         <Link
                           key={blog._id}
-                          href={`/about-dholera-sir/${blog.slug.current}`}
+                          href={`/dholera-sir-blogs/${blog.slug.current}`}
                           className="group"
                         >
                           <div className="bg-white rounded-2xl shadow-lg overflow-hidden h-full w-full hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 flex flex-col relative">

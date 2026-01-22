@@ -74,13 +74,13 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
           <h3 className="text-xl font-bold mb-4 text-white">
-            About Dholera SIR
+            Updates on Dholera SIR
           </h3>
           <div className=" overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
               <Link
                 key={item._id}
-                href={`/about-dholera-sir/${item.slug.current}`}
+                href={`/dholera-sir-updates/${item.slug.current}`}
               >
                 <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3 border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
@@ -168,8 +168,8 @@ export default async function Post({ params }) {
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
       getPostBySlug(slug, site),
-      projectInfo(0, 6), // Get 6 blogs for sidebar
-      getUpdates(slug, 3),
+      getUpdates(0, 6), // Get 6 blogs for sidebar
+      getblogs(slug, 3),
     ]);
 
     if (!post) {
@@ -379,7 +379,7 @@ export default async function Post({ params }) {
           return (
             <h1
               id={id}
-              className="text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-2xl md:text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -404,7 +404,7 @@ export default async function Post({ params }) {
           return (
             <h2
               id={id}
-              className="text-4xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-2xl md:text-3xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-3 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -429,7 +429,7 @@ export default async function Post({ params }) {
           return (
             <h3
               id={id}
-              className="text-3xl font-bold mt-8 mb-5 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-xl md:text-2xl font-bold mt-8 mb-5 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -454,7 +454,7 @@ export default async function Post({ params }) {
           return (
             <h4
               id={id}
-              className="text-2xl font-semibold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
+              className="text-lg md:text-2xl font-semibold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -479,7 +479,7 @@ export default async function Post({ params }) {
           return (
             <h5
               id={id}
-              className="text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
+              className="text-lg md:text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -754,7 +754,7 @@ export default async function Post({ params }) {
                     </div>
                   </div>
 
-                  <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                  <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
                     {post.title}
                   </h1>
                 </div>
@@ -825,7 +825,7 @@ export default async function Post({ params }) {
                   You might also like
                 </h2>
                 <Link
-                  href="/dholera-sir-updates"
+                  href="/dholera-sir-blogs"
                   className="rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
                 >
                   View all
@@ -848,7 +848,7 @@ export default async function Post({ params }) {
                           {relatedBlogs.map((blog, index) => (
                             <Link
                               key={blog._id}
-                              href={`/dholera-sir-updates/${blog.slug.current}`}
+                              href={`/dholera-sir-blogs/${blog.slug.current}`}
                               className="group snap-start flex-shrink-0 first:ml-0"
                               style={{ width: "calc(100vw - 3rem)" }}
                             >
@@ -972,7 +972,7 @@ export default async function Post({ params }) {
                       {relatedBlogs.map((blog) => (
                         <Link
                           key={blog._id}
-                          href={`/dholera-sir-updates/${blog.slug.current}`}
+                          href={`/dholera-sir-blogs/${blog.slug.current}`}
                           className="group"
                         >
                           <div className="bg-white rounded-2xl shadow-lg overflow-hidden h-full w-full hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 flex flex-col relative">

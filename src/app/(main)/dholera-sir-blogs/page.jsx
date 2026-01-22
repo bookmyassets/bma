@@ -84,12 +84,6 @@ export default async function page() {
                   Investment Blog
                 </span>
               </h1>
-
-              {/* Subtitle */}
-              <p className="text-base  text-white/90 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
-                Expert insights, market analysis, and investment opportunities
-                in India's most promising smart city
-              </p>
             </div>
 
             {/* Form Component - Responsive */}
@@ -112,10 +106,6 @@ export default async function page() {
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                       Latest Investment Insights
                     </h2>
-                    <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                      Stay updated with expert analysis and market trends from
-                      Dholera SIR
-                    </p>
                     <div className="mt-2 text-sm text-gray-500">
                       {safePosts.length} Article
                       {safePosts.length !== 1 ? "s" : ""} Available

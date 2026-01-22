@@ -331,7 +331,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -343,7 +343,7 @@ export default async function Post({ params }) {
           return (
             <h1
               id={id}
-              className="text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-2xl md:text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -356,7 +356,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -368,7 +368,7 @@ export default async function Post({ params }) {
           return (
             <h2
               id={id}
-              className="text-4xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-2xl md:text-3xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-3 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -381,7 +381,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -393,7 +393,7 @@ export default async function Post({ params }) {
           return (
             <h3
               id={id}
-              className="text-3xl font-bold mt-8 mb-5 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="text-xl md:text-2xl font-bold mt-8 mb-5 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -406,7 +406,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -418,7 +418,7 @@ export default async function Post({ params }) {
           return (
             <h4
               id={id}
-              className="text-2xl font-semibold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
+              className="text-lg md:text-2xl font-semibold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -431,7 +431,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
@@ -443,7 +443,7 @@ export default async function Post({ params }) {
           return (
             <h5
               id={id}
-              className="text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
+              className="text-lg md:text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
               {children}
@@ -456,7 +456,7 @@ export default async function Post({ params }) {
             if (Array.isArray(children)) {
               return children
                 .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || ""
+                  typeof child === "string" ? child : child?.props?.text || "",
                 )
                 .join("");
             }
