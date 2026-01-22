@@ -42,6 +42,13 @@ const RealEstateLandingPage = () => {
     about: false,
     companies: false,
   });
+  // Scroll down function
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
 
   const featuresRef = useRef(null);
   const propertiesRef = useRef(null);
@@ -281,7 +288,7 @@ const RealEstateLandingPage = () => {
                 {/* CTA Buttons */}
 
                 <div className="flex flex-col gap-4">
-                  <Link href="/dholera-residential-plots/westwyn-estate">
+                  <div onClick={handleScrollDown}>
                     <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                       <span>Scroll Down to View More</span>
                       <ArrowDown
@@ -289,7 +296,7 @@ const RealEstateLandingPage = () => {
                         size={20}
                       />
                     </button>
-                  </Link>
+                  </div>
                   <Link href="https://www.youtube.com/@BookMyAssets">
                     <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
                       <Play size={20} />
@@ -376,7 +383,7 @@ const RealEstateLandingPage = () => {
 
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/dholera-residential-plots/westwyn-estate">
+                    <div onClick={handleScrollDown}>
                       <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                         <span>Scroll Down to View More</span>
                         <ArrowDown
@@ -384,7 +391,7 @@ const RealEstateLandingPage = () => {
                           size={20}
                         />
                       </button>
-                    </Link>
+                    </div>
                     <Link href="https://www.youtube.com/@BookMyAssets">
                       <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
                         <Play size={20} />

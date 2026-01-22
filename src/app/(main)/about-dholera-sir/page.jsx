@@ -96,11 +96,11 @@ export default async function page() {
 
           {/* Hero Content */}
           <div className="relative flex flex-col justify-center items-center z-10 text-center px-4">
-            <h1 className="text-6xl max-sm:pt-8 font-bold text-white mb-4 drop-shadow-lg">
+            <h1 className="text-3xl md:text-6xl max-sm:pt-8 font-bold text-white mb-4 drop-shadow-lg">
               DHOLERA SIR
             </h1>
 
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 drop-shadow-md">
+            <h2 className="text-xl md:text-3xl font-semibold text-white mb-8 drop-shadow-md">
               India's Largest Planned Smart City
             </h2>
           </div>
