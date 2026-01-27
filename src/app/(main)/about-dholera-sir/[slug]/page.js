@@ -582,6 +582,14 @@ export default async function Post({ params }) {
       );
     };
 
+     const formattedDate = new Date(
+          post.publishedAt || post._createdAt,
+        ).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
+
     return (
       <>
         <div>
