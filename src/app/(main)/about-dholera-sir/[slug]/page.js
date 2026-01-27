@@ -534,7 +534,7 @@ export default async function Post({ params }) {
       },
     };
 
-   const TableOfContent = ({ headings }) => {
+    const TableOfContent = ({ headings }) => {
       // Filter for valid headings with text content
       const validHeadings =
         headings?.filter((heading) => {
@@ -582,13 +582,13 @@ export default async function Post({ params }) {
       );
     };
 
-     const formattedDate = new Date(
-          post.publishedAt || post._createdAt,
-        ).toLocaleDateString("en-US", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        });
+    const formattedDate = new Date(
+      post.publishedAt || post._createdAt,
+    ).toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
 
     return (
       <>
