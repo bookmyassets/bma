@@ -273,7 +273,7 @@ export default function HeroCarousel() {
         content="Invest in plots in Dholera at WestWyn Estate, 0 km from Dholera SIR, and close to proximity to the activation area at an unbeatable price."
       />
       {/* Hero Section with Carousel */}
-      <div className="h-screen flex flex-col">
+      <div className="h-screen max-sm:h-[87vh] flex flex-col">
         {" "}
         <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Left Side - Slider Section (60%) */}

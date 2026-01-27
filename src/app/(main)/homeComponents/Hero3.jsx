@@ -405,7 +405,7 @@ export default function LandingPage({ openForm }) {
   }, []);
 
   return (
-    <div className="h-screen max-sm:h-[95vh] flex flex-col">
+    <div className="h-screen max-sm:h-[87vh] flex flex-col">
       <style jsx>{`
         @keyframes textGlow {
           0%,
@@ -496,7 +496,7 @@ export default function LandingPage({ openForm }) {
                 <Image
                   src={image.src}
                   alt={image.alt}
-                  className="object-contain pt-16"
+                  className="object-cover pt-16"
                   priority={index === 0}
                   quality={85}
                   loading={index === 0 ? "eager" : "lazy"}

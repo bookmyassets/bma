@@ -59,7 +59,7 @@ const SoldOutProjectsSection = () => {
             className="text-3xl md:text-4xl font-bold mb-4"
             style={{ color: "#0d0d0d" }}
           >
-            Our Success Stories
+            Our Successful Projects
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Explore our successful projects that have been completely sold out -

@@ -16,28 +16,33 @@ export default function InteractiveMap() {
 
   const videos = [
     {
-      id: "6_BYJo1_HFU",
-      title: "[2025] PROGRESS: TATA Semiconductor Plant in Dholera",
+      id: "KxGgxO_GBPY",
+      title: "[2026] PROGRESS: TATA Semiconductor Plant in Dholera",
       duration: "4:55"
     },
     {
-      id: "3iiF6Oix5Fc",
+      id: "_PU0sn6taHQ",
       title: "ReNew's Solar Cell Manufacturing Plant",
       duration: "unknown"
     },
     {
-      id: "RITjLu6hRxc",
+      id: "Aih4UJppDbM",
       title: "Dholera International Airport",
       duration: "unknown"
     },
     {
-      id: "5DaF8tljkkU",
+      id: "56wD3aJIEuA",
       title: "Ahmedabad-Dholera Expressway",
       duration: "unknown"
     },
     {
-      id: "3u8yJ5XYNns",
+      id: "jF2U2IWF3yk",
       title: "ABCD Building",
+      duration: "unknown"
+    },
+    {
+      id: "v3NNSMaVHb0",
+      title: "Dholera Solar Park",
       duration: "unknown"
     },
   ];
@@ -69,7 +74,7 @@ export default function InteractiveMap() {
         "Spread Across 1400+ hectares",
         "Construction work to be Completed in December 2025"
       ],
-      videoId: "RITjLu6hRxc",
+      videoId: "Aih4UJppDbM",
       type: "video"
     },
     {
@@ -83,7 +88,7 @@ export default function InteractiveMap() {
         "Reduces travel time to Ahmedabad by 40%",
         "Critical logistics corridor for industries"
       ],
-      videoId: "5DaF8tljkkU",
+      videoId: "56wD3aJIEuA",
       type: "video"
     },
     {
@@ -97,7 +102,7 @@ export default function InteractiveMap() {
         "Smart city command and control centre",
         "Real Time Control of Roads & Electricity",
       ],
-      videoId: "3u8yJ5XYNns",
+      videoId: "jF2U2IWF3yk",
       type: "video"
     },
     {
@@ -111,7 +116,7 @@ export default function InteractiveMap() {
         "Will create 20,000+ Direct and Indirect Jobs",
         "First semiconductor fab in India"
       ],
-      videoId: "6_BYJo1_HFU",
+      videoId: "KxGgxO_GBPY",
       type: "video"
     },
     {
@@ -126,7 +131,7 @@ export default function InteractiveMap() {
         "2.5 GW Solar Cell Manufacturing",
         "Currently Employs 1000+ Professionals"
       ],
-      videoId: "3iiF6Oix5Fc",
+      videoId: "_PU0sn6taHQ",
       type: "video"
     },
     {
@@ -140,8 +145,8 @@ export default function InteractiveMap() {
         "Asia's Largest Solar Park",
         "Currently Operating at 400MW Capacity in 1650 acres",
       ],
-      image: solarPark, // Use image instead of video
-      type: "image"
+      videoId: "v3NNSMaVHb0", // Use image instead of video
+      type: "video"
     },
   ];
 

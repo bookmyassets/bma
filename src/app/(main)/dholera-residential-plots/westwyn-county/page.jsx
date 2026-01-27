@@ -20,6 +20,7 @@ import SoldOutProjectsSection from "../SoldOutProjects";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
 import PopupScroll from "../../components/PopUpScroll";
+import ActiveProjectsSection from "../ActiveProject";
 
 export default function HeroCarousel() {
   const faqs = [
@@ -73,20 +74,19 @@ export default function HeroCarousel() {
   const [openIndex, setOpenIndex] = useState(0);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-    const [eventVar, setEventVar] = useState("");
-  
+  const [eventVar, setEventVar] = useState("");
 
   // Touch handlers for swipe
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  const openContactForm = (title, headline, btnName, type,project) => {
+  const openContactForm = (title, headline, btnName, type, project) => {
     setFormTitle(title);
     setFormHeadline(headline);
     setButtonName(btnName);
     setFormType(type);
     setIsContactFormOpen(true);
-    setEventVar(project)
+    setEventVar(project);
   };
 
   const closeContactForm = () => {
@@ -114,7 +114,8 @@ export default function HeroCarousel() {
 
         setTimeout(() => {
           const link = document.createElement("a");
-          link.href = "https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf";
+          link.href =
+            "https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf";
           link.target = "_blank";
           link.download = "brochure.pdf";
           document.body.appendChild(link);
@@ -124,7 +125,10 @@ export default function HeroCarousel() {
         }, 300);
       } catch (error) {
         console.error("Error downloading brochure:", error);
-        window.open("https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf", "_blank");
+        window.open(
+          "https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf",
+          "_blank",
+        );
       }
     }
   };
@@ -137,7 +141,7 @@ export default function HeroCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) =>
-        prev === desktopImages.length - 1 ? 0 : prev + 1
+        prev === desktopImages.length - 1 ? 0 : prev + 1,
       );
     }, 5000);
     return () => clearInterval(interval);
@@ -149,24 +153,24 @@ export default function HeroCarousel() {
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
       setCurrentSlide((prev) =>
-        prev === mobileImages.length - 1 ? 0 : prev + 1
+        prev === mobileImages.length - 1 ? 0 : prev + 1,
       );
     } else if (touchEnd - touchStart > 50) {
       setCurrentSlide((prev) =>
-        prev === 0 ? mobileImages.length - 1 : prev - 1
+        prev === 0 ? mobileImages.length - 1 : prev - 1,
       );
     }
   };
 
   const nextSlide = () => {
     setCurrentSlide((prev) =>
-      prev === desktopImages.length - 1 ? 0 : prev + 1
+      prev === desktopImages.length - 1 ? 0 : prev + 1,
     );
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) =>
-      prev === 0 ? desktopImages.length - 1 : prev - 1
+      prev === 0 ? desktopImages.length - 1 : prev - 1,
     );
   };
 
@@ -210,7 +214,7 @@ export default function HeroCarousel() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     const countersSection = document.getElementById("counters-section");
@@ -232,14 +236,14 @@ export default function HeroCarousel() {
       />
       {/* Hero Section with Carousel - Matching Hero3 Design */}
       <div id="hero" className="relative min-h-screen bg-white">
-        <div className="h-screen max-sm:h-[95vh] flex flex-col">
+        <div className="h-screen max-sm:h-[87vh] flex flex-col">
           {/* Main Content Section */}
           <div className="flex-1 flex flex-col lg:flex-row min-h-0">
             {/* Left Side - Slider Section (60%) */}
             <div className="w-full lg:w-[60%] relative flex-1">
               {/* Desktop Slider */}
               <div className="absolute inset-0 hidden lg:block">
-                <div className="relative w-full h-[100vh] overflow-hidden">
+                <div className="relative w-full md:h-[100vh] overflow-hidden">
                   {desktopImages.map((image, index) => (
                     <div
                       key={index}
@@ -282,7 +286,7 @@ export default function HeroCarousel() {
                 {mobileImages.map((image, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    className={`absolute inset-0 transition-opacity duration-700  ease-in-out ${
                       index === currentSlide ? "opacity-100" : "opacity-0"
                     }`}
                   >
@@ -290,7 +294,7 @@ export default function HeroCarousel() {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className=" pt-16"
+                      className="object-cover pt-16"
                       priority={index === 0}
                     />
                   </div>
@@ -380,7 +384,7 @@ export default function HeroCarousel() {
                         "Get Exclusive Pricing",
                         "Fill the form to get the best prices",
                         "Get Pricing",
-                        "contact"
+                        "contact",
                       )
                     }
                     initial={{ opacity: 0, y: 20 }}
@@ -400,7 +404,7 @@ export default function HeroCarousel() {
                         "Get Verified Project Details",
                         "Please fill out the form to download our brochure",
                         "Get Project Details",
-                        "brochure"
+                        "brochure",
                       )
                     }
                     initial={{ opacity: 0, y: 20 }}
@@ -425,7 +429,7 @@ export default function HeroCarousel() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
-              About <br /> WestWyn County
+              About <span className="max-sm:hidden"><br /></span> WestWyn County
             </h2>
           </div>
 
@@ -447,7 +451,7 @@ export default function HeroCarousel() {
                     "Get Verified Project Details",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Get Project Details",
-                    "brochure"
+                    "brochure",
                   )
                 }
                 className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
@@ -526,7 +530,10 @@ export default function HeroCarousel() {
       </div>
 
       <div className="md:hidden">
-        <CommonForm title="Invest on Dholera’s widest road:Fedra-Pipli Highway" button="Talk to an Advisor" />
+        <CommonForm
+          title="Invest on Dholera’s widest road:Fedra-Pipli Highway"
+          button="Talk to an Advisor"
+        />
       </div>
 
       {/* Section 4 - Why Invest in WestWyn Estate */}
@@ -631,14 +638,18 @@ export default function HeroCarousel() {
 
       <ProjectAmenities />
       <div className="max-sm:hidden">
-        <CommonForm title="Invest on Dholera’s widest road:Fedra-Pipli Highway" button="Talk to an Advisor" />
+        <CommonForm
+          title="Invest on Dholera’s widest road:Fedra-Pipli Highway"
+          button="Talk to an Advisor"
+        />
       </div>
       <div className="pt-4 pb-4">
         <CostSheet projectSlug="westwyn-county" showProjectSelector={false} />
       </div>
       <FAQSection />
- <PopupScroll title="Get Verified Project Details" />
-      <SoldOutProjectsSection />
+      <PopupScroll title="Get Verified Project Details" />
+      {/* <SoldOutProjectsSection /> */}
+      <ActiveProjectsSection />
 
       <AnimatePresence>
         {isContactFormOpen && (

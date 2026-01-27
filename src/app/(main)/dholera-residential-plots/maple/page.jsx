@@ -151,7 +151,7 @@ export default function HeroCarousel() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
-              About <br /> Maple
+              About <span className="max-sm:hidden"><br /></span> Maple
             </h2>
           </div>
 
