@@ -74,7 +74,7 @@ export default function InteractiveMap() {
     },
     {
       id: "expressway",
-      title: "Fedra-Pipil State Highway",
+      title: "Dholera - Ahmedabad Expressway",
       coords: [330, 289, 366, 325],
       desktopCoords: [820, 217, 858, 254],
       description: "Expressway connecting Dholera to major industrial hubs",
