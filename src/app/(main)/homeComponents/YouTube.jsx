@@ -50,43 +50,58 @@ export default function ShortsSection() {
     }
   }, []);
 
-  const shortsData = useMemo(() => {
-    if (!origin) return [];
-    return [
-      { id: 1, title: "Dholera ReNew Power", youtubeId: "129oXwderKU" },
-      {
-        id: 2,
-        title: "Brain Of Dholera - ABCD Building",
-        youtubeId: "faSgawUZWeY",
-      },
-      {
-        id: 3,
-        title: "Dholera International Airport",
-        youtubeId: "PuLWU9DYV_c",
-      },
-      {
-        id: 4,
-        title: "Dholera - Ahmedabad Expressway",
-        youtubeId: "NdH1zHVGTcQ",
-      },
-      {
-        id: 5,
-        title: "Dholera Semiconductor - TATA Semicon",
-        youtubeId: "sYONhrTYBTg",
-      },
-      {
-        id: 6,
-        title: "Water Treatment Plant - Dholera",
-        youtubeId: "fHLqa6YM1Aw",
-      },
-      {
-        id: 7,
-        title: "WestWyn County - Premium Residential Plots in Dholera",
-        youtubeId: "0lAocID2crU",
-      },
-      { id: 8, title: "Dholera Activation Area", youtubeId: "P0a8LCMQHqI" },
-    ];
-  }, [origin]);
+const shortsData = useMemo(() => {
+  if (!origin) return [];
+  return [
+    {
+      id: 1,
+      title: "Dholera ReNew Solar Plant",
+      youtubeId: "_PU0sn6taHQ",
+    },
+    {
+      id: 2,
+      title: "Brain of Dholera – ABCD Building",
+      youtubeId: "jF2U2IWF3yk",
+    },
+    {
+      id: 3,
+      title: "Dholera International Airport",
+      youtubeId: "Aih4UJppDbM",
+    },
+    {
+      id: 4,
+      title: "Ahmedabad – Dholera Expressway",
+      youtubeId: "56wD3aJIEuA",
+    },
+    {
+      id: 5,
+      title: "Tata Semiconductor Plant – Dholera",
+      youtubeId: "KxGgxO_GBPY",
+    },
+    {
+      id: 6,
+      title: "Water Treatment Plant – Dholera",
+      youtubeId: "z40FYyoaU-Y",
+    },
+    {
+      id: 7,
+      title: "WestWyn County – Premium Plots",
+      youtubeId: "iQfeBBp3g0E",
+    },
+    {
+      id: 8,
+      title: "Dholera Activation Area",
+      youtubeId: "RP9hDShgxhU",
+    },
+    {
+      id: 9,
+      title: "Dholera Solar Park",
+      youtubeId: "v3NNSMaVHb0",
+    }
+  ];
+}, [origin]);
+
+
 
   // Auto scroll functionality
   useEffect(() => {

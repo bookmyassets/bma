@@ -5,53 +5,64 @@ import { FaMapMarkerAlt, FaVideo, FaBuilding } from "react-icons/fa";
 
 export default async function VideosPage() {
   
- const videos = [
+const videos = [
   {
-    id: "6_BYJo1_HFU",
-    title: "[2025] PROGRESS: TATA Semiconductor Plant in Dholera",
-    duration: "4:55"
-  },
-  {
-    id: "QS6W_4hCn2g",
-    title: "Dholera's Heart: Man-Made River Front in Activation Area",
-    duration: "6:30"
-  },
-  {
-    id: "3iiF6Oix5Fc",
-    title: "ReNew's Massive Solar Cell Manufacturing Plant",
+    id: "iQfeBBp3g0E",
+    title: "WestWyn County - Premium Plots in Dholera",
     duration: "unknown"
   },
   {
-    id: "RITjLu6hRxc",
-    title: "CURRENT UPDATE: Dholera International Airport to be Functional in 2026",
+    id: "iU3-vwDOS00",
+    title: "WestWyn Estate - Residential Project in Dholera",
     duration: "unknown"
   },
   {
-    id: "5DaF8tljkkU",
-    title: "Ahmedabad-Dholera Expressway connectivity",
+    id: "_PU0sn6taHQ",
+    title: "ReNew Solar Manufacturing Plant in Dholera",
     duration: "unknown"
   },
   {
-    id: "5we0e_XlTjA",
-    title: "100% Water Recycling at Dholera's Water Treatment Plant",
+    id: "Aih4UJppDbM",
+    title: "Dholera International Airport – Latest Update",
     duration: "unknown"
   },
   {
-    id: "Ql4EVnwIne4",
-    title: "WestWyn County - Premium Plots on Fedra-Pipli Highway, Dholera",
+    id: "RP9hDShgxhU",
+    title: "Dholera Activation Area – India's Future City",
     duration: "unknown"
   },
   {
-    id: "3u8yJ5XYNns",
-    title: "Dholera Activation Area Heart of India's Billion-Dollar Future City (ABCD Building)",
+    id: "V2kemXoi4Cg",
+    title: "Tata’s Hotel Project in Dholera",
     duration: "unknown"
   },
   {
-    id: "1LdHVJR_yBQ",
-    title: "WestWyn Estate",
+    id: "56wD3aJIEuA",
+    title: "Ahmedabad–Dholera Expressway Connectivity",
+    duration: "unknown"
+  },
+  {
+    id: "jF2U2IWF3yk",
+    title: "ABCD Building – Dholera Activation Area",
+    duration: "unknown"
+  },
+  {
+    id: "z40FYyoaU-Y",
+    title: "100% Water Recycling – Dholera Water Treatment Plant",
+    duration: "unknown"
+  },
+  {
+    id: "KxGgxO_GBPY",
+    title: "Tata Semiconductor Plant – Dholera SIR",
+    duration: "unknown"
+  },
+  {
+    id: "v3NNSMaVHb0",
+    title: "Dholera Solar Park – Renewable Energy Hub",
     duration: "unknown"
   }
 ];
+
 
 
   if (videos.length === 0) {

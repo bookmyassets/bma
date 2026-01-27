@@ -245,7 +245,7 @@ export default function PopupForm({ title, project }) {
 
                 <div className="text-center mb-6 space-y-8">
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
-                    <motion.div
+                    <div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.2 }}
@@ -258,7 +258,7 @@ export default function PopupForm({ title, project }) {
                         height={60}
                         className="rounded-lg"
                       />
-                    </motion.div>
+                    </div>
                   </div>
                   <button
                     onClick={handlePopupClose}
