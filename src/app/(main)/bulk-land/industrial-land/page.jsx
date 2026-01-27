@@ -66,13 +66,13 @@ export default function page() {
         {/* Bottom Info Card */}
         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 z-10">
           <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200 p-4 md:p-6 mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-center">
+            <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-6 text-center">
               <div className="flex flex-col items-center">
                 <h3 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
                   Zone Area
                 </h3>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
-                  28311.75 sq. yards
+                  28311.75<span className="md:hidden"><br /></span> sq. yards
                 </p>
               </div>
               <div className="flex flex-col items-center">

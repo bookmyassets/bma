@@ -255,7 +255,7 @@ export default function RagePopup({
           </div>
         ) : (
           <>
-            <div className="text-center mb-6 space-y-4">
+            <div className="text-center mb-6 space-y-12">
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
                     <div
                       initial={{ scale: 0 }}
@@ -274,7 +274,7 @@ export default function RagePopup({
                   </div>
                   <button
                     onClick={handlePopupClose}
-                    className="absolute -top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl "
+                    className="absolute -top-12 right-4 text-gray-400 hover:text-gray-600 text-3xl "
                   >
                     ×
                   </button>
