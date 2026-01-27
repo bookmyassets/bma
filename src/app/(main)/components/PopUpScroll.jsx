@@ -4,6 +4,8 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
+import logo from "@/assests/bma-logo-black.png";
+import Image from "next/image";
 
 export default function PopupScroll({ title }) {
   // Popup states
@@ -126,7 +128,7 @@ export default function PopupScroll({ title }) {
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -139,9 +141,9 @@ export default function PopupScroll({ title }) {
         }, 3000);
 
         window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "lead_form",
-          });
+        window.dataLayer.push({
+          event: "lead_form",
+        });
       } else {
         throw new Error("Error submitting form");
       }
@@ -172,7 +174,7 @@ export default function PopupScroll({ title }) {
 
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page."
+        "Security verification not loaded. Please refresh the page.",
       );
       setIsLoading(false);
       return;
@@ -219,7 +221,7 @@ export default function PopupScroll({ title }) {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl relative"
+            className="bg-white rounded-xl p-8 pt-12 max-w-md w-full shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             {showThankYou ? (
@@ -254,16 +256,32 @@ export default function PopupScroll({ title }) {
             ) : (
               <>
                 {/* Section 1: Heading */}
-                <div className="text-center mb-6">
+                <div className="text-center mb-6 space-y-4">
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="rounded-lg "
+                    >
+                      <Image
+                        src={logo}
+                        alt="Logo"
+                        width={60}
+                        height={60}
+                        className="rounded-lg"
+                      />
+                    </motion.div>
+                  </div>
                   <button
                     onClick={handlePopupClose}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+                    className="absolute -top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl "
                   >
                     ×
                   </button>
-                  <h1 className="text-2xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
                     {title}
-                  </h1>
+                  </h3>
                 </div>
 
                 {/* Section 3: Form Fields */}

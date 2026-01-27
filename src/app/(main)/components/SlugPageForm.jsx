@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { X, Check } from "lucide-react";
-import img from "@/assests/homepage/form-img.png";
+import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 
 export default function SlugPageForm({ title, formTitle }) {
@@ -116,10 +116,10 @@ export default function SlugPageForm({ title, formTitle }) {
         }, 3000);
 
         window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "lead_form",
-            page_name:project
-          });
+        window.dataLayer.push({
+          event: "lead_form",
+          page_name: project,
+        });
       } else {
         throw new Error("Error submitting form");
       }
@@ -186,6 +186,10 @@ export default function SlugPageForm({ title, formTitle }) {
     }
   };
 
+ const handlePopupClose = () => {
+    setShowPopup(false);
+  };
+
   return (
     <>
       <div className="max-sm:hidden">
@@ -195,11 +199,8 @@ export default function SlugPageForm({ title, formTitle }) {
             onClick={handleBackdropClick}
           >
             <div className="flex flex-col md:flex-row items-center justify-center max-w-4xl w-full">
-
-
               <div
                 className="bg-white rounded-lg p-6 md:p-8 shadow-2xl relative transform transition-all animate-scale-in w-full max-w-[450px]"
-                
                 onClick={(e) => e.stopPropagation()}
               >
                 {showThankYou ? (
@@ -231,11 +232,23 @@ export default function SlugPageForm({ title, formTitle }) {
                     <div className="h-full overflow-y-auto pr-2 -mr-2">
                       <div className="space-y-4 pb-2">
                         {/* Dynamic Form Title */}
-                        <div className="text-center mb-4">
-                          <h2 className="text-xl sm:text-2xl font-bold text-gray-700">
-                            {displayTitle || "Get Investment Details"}
-                          </h2>
+                        <div className="text-center mb-6 space-y-8">
+                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+                        <div className="rounded-lg ">
+                          <Image
+                            src={logo}
+                            alt="Logo"
+                            width={60}
+                            height={60}
+                            className="rounded-lg"
+                          />
                         </div>
+                      </div>
+                      <h2 className="text-xl mb-2 font-bold text-gray-700">
+                        {displayTitle || "Get Investment Details"}
+                      </h2>
+                      
+                    </div>
 
                         {errorMessage && (
                           <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs md:text-sm">
@@ -366,13 +379,12 @@ export default function SlugPageForm({ title, formTitle }) {
       <div className="md:hidden">
         {showPopup && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in"
+            className="fixed inset-0 bg-black  bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in"
             onClick={handleBackdropClick}
           >
-            <div className="">
-              
+            <div>
               <div
-                className="bg-white p-6 md:p-8 max-w-[450px] w-full shadow-2xl relative transform transition-all animate-scale-in"
+                className="bg-white p-6 md:p-8 rounded-lg max-w-[450px] w-full shadow-2xl relative transform transition-all animate-scale-in"
                 onClick={(e) => e.stopPropagation()}
               >
                 {showThankYou ? (
@@ -394,10 +406,27 @@ export default function SlugPageForm({ title, formTitle }) {
                 ) : (
                   <>
                     {/* Dynamic Form Title for Mobile */}
-                    <div className="text-center mb-4">
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-700">
+                    <div className="text-center mb-6 space-y-8">
+                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+                        <div className="rounded-lg ">
+                          <Image
+                            src={logo}
+                            alt="Logo"
+                            width={60}
+                            height={60}
+                            className="rounded-lg"
+                          />
+                        </div>
+                      </div>
+                      <h2 className="text-xl mb-2 font-bold text-gray-700">
                         {displayTitle || "Get Investment Details"}
                       </h2>
+                      <button
+                        onClick={handlePopupClose}
+                        className="absolute -top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl "
+                      >
+                        ×
+                      </button>
                     </div>
 
                     <div className="space-y-4">

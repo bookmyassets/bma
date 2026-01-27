@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import React from "react";
+import logo from "@/assests/bma-logo-black.png";
+import Image from "next/image";
 
 export default function RagePopup({
   title = "Get Registry Ready Plots under ₹10 Lakh",
@@ -221,7 +223,7 @@ export default function RagePopup({
       onClick={handleBackdropClick}
     >
       <div
-        className="bg-white rounded-xl p-6 md:p-8 max-w-md w-full shadow-2xl relative transform transition-all animate-scale-in max-h-[90vh] overflow-y-auto"
+        className="bg-white rounded-xl p-6 md:p-6 max-w-lg w-full shadow-2xl relative transform transition-all animate-scale-in max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {showThankYou ? (
@@ -253,21 +255,33 @@ export default function RagePopup({
           </div>
         ) : (
           <>
-            <div className="text-center mb-6">
-              <button
-                onClick={handlePopupClose}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl leading-none transition-colors w-8 h-8 flex items-center justify-center"
-                aria-label="Close popup"
-              >
-                ×
-              </button>
-              <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 pr-8">
-                {title}
-              </h1>
-              <p className="text-base md:text-lg text-gray-700 font-semibold">
-                {subtitle}
-              </p>
-            </div>
+            <div className="text-center mb-6 space-y-4">
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="rounded-lg "
+                    >
+                      <Image
+                        src={logo}
+                        alt="Logo"
+                        width={60}
+                        height={60}
+                        className="rounded-lg"
+                      />
+                    </motion.div>
+                  </div>
+                  <button
+                    onClick={handlePopupClose}
+                    className="absolute -top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl "
+                  >
+                    ×
+                  </button>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                    {title}
+                  </h3>
+                </div>
 
             <div>
               {errorMessage && (
