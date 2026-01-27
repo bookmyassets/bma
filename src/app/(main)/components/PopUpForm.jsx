@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-logo2.png";
 import Image from "next/image";
 
-export default function PopupForm({title, stitle, subTitle , project}) {
+export default function PopupForm({title , project}) {
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -205,7 +205,7 @@ export default function PopupForm({title, stitle, subTitle , project}) {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-white rounded-xl p-10 max-w-lg w-full shadow-2xl relative"
+        className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl relative"
         onClick={(e) => e.stopPropagation()}
       >
         {showThankYou ? (
@@ -269,14 +269,8 @@ export default function PopupForm({title, stitle, subTitle , project}) {
 
             <div className="text-center mb-6">
               {/* Section 2: Sub-heading CTA */}
-              <p className="text-2xl text-gray-700 font-semibold">
-                {title}
-              </p>
               <p className="text-lg text-gray-700 font-semibold">
-                {stitle}
-              </p>
-              <p className="text-xs text-gray-500 font-semibold">
-                {subTitle}
+                {title}
               </p>
             </div>
 

@@ -165,7 +165,7 @@ export default function page() {
 
       </div>
       
-      <PopupForm title="Republic Day Offer" stitle="₹26,000 off on booking amount" subTitle="Hurry. Offer valid till 26 January only." project="Home-Page"/>
+      <PopupForm title="Best investment-ready locations in Dholera" project="Home-Page"/>
     </>
   );
 }
