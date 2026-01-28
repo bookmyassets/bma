@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef, useCallback, memo } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
@@ -12,16 +13,20 @@ import img3 from "@/assests/homepage/hero/silk-route-park-dholera-desktop.webp";
 import imgM1 from "@/assests/homepage/hero/westwyn-estate-dholera-residential-plots-mobile.webp";
 import imgM2 from "@/assests/homepage/hero/dholera-international-airport-mobile.webp";
 import imgM3 from "@/assests/homepage/hero/silk-route-park-dholera-mobile.webp";
-import Running from "./Running";
 
-// Memoized slider image component to prevent unnecessary re-renders
+// Lazy load non-critical component
+const Running = dynamic(() => import("./Running"), {
+  ssr: false,
+  loading: () => <div className="h-12" />,
+});
+
+// Memoized slider image component - OPTIMIZED
 const SliderImage = memo(({ src, alt, isActive, priority, className }) => (
   <div
     className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${className || ""}`}
     style={{
       opacity: isActive ? 1 : 0,
       pointerEvents: isActive ? "auto" : "none",
-      willChange: isActive ? "opacity" : "auto",
     }}
   >
     <Image
@@ -29,10 +34,10 @@ const SliderImage = memo(({ src, alt, isActive, priority, className }) => (
       alt={alt}
       className="object-cover"
       fill
-      quality={85}
-      loading="lazy"
-      placeholder="blur"
-      fetchPriority="high"
+      quality={isActive ? 85 : 50}
+      loading={priority ? "eager" : "lazy"}
+      priority={priority}
+      sizes="(max-width: 1024px) 100vw, 60vw"
     />
   </div>
 ));
@@ -95,6 +100,7 @@ const UserIcon = () => (
     viewBox="0 0 24 24"
     stroke="currentColor"
     className="w-4 h-4"
+    aria-hidden="true"
   >
     <path
       strokeLinecap="round"
@@ -112,6 +118,7 @@ const PhoneIcon = () => (
     viewBox="0 0 24 24"
     stroke="currentColor"
     className="w-4 h-4"
+    aria-hidden="true"
   >
     <path
       strokeLinecap="round"
@@ -141,26 +148,37 @@ export default function LandingPage({ openForm }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isClient, setIsClient] = useState(false);
 
-  // Use refs to avoid forced reflows
   const slideContainerRef = useRef(null);
   const animationFrameRef = useRef(null);
 
   const desktopImages = [
-    { src: img1, alt: "Dholera Investment Opportunity 1" },
-    { src: img2, alt: "Dholera Investment Opportunity 2" },
-    { src: img3, alt: "Dholera Investment Opportunity 3" },
+    {
+      src: img1,
+      alt: "Westwyn Estate Dholera Residential Plots - Premium Investment Opportunity",
+    },
+    {
+      src: img2,
+      alt: "Dholera International Airport - Smart City Infrastructure Development",
+    },
+    { src: img3, alt: "Silk Route Park Dholera - Modern Urban Development" },
   ];
 
   const mobileImages = [
-    { src: imgM1, alt: "Dholera Mobile 1" },
-    { src: imgM2, alt: "Dholera Mobile 2" },
-    { src: imgM3, alt: "Dholera Mobile 3" },
+    {
+      src: imgM1,
+      alt: "Westwyn Estate Dholera - Affordable Residential Plots",
+    },
+    { src: imgM2, alt: "Dholera Airport - Future Growth Hub" },
+    { src: imgM3, alt: "Silk Route Park - Smart City Living" },
   ];
 
   useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
+    setIsClient(true);
+
+    // Defer reCAPTCHA loading
+    const loadRecaptchaTimeout = setTimeout(() => {
       if (typeof window !== "undefined" && !window.grecaptcha) {
         try {
           const script = document.createElement("script");
@@ -180,9 +198,7 @@ export default function LandingPage({ openForm }) {
       } else if (window.grecaptcha) {
         setRecaptchaLoaded(true);
       }
-    };
-
-    loadRecaptcha();
+    }, 2000); // Delay reCAPTCHA load by 2 seconds
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
@@ -193,7 +209,6 @@ export default function LandingPage({ openForm }) {
       );
     }
 
-    // Handle Escape key press
     const handleEscapeKey = (event) => {
       if (event.key === "Escape") {
         handleClose();
@@ -203,6 +218,7 @@ export default function LandingPage({ openForm }) {
     document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
+      clearTimeout(loadRecaptchaTimeout);
       document.removeEventListener("keydown", handleEscapeKey);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -285,12 +301,9 @@ export default function LandingPage({ openForm }) {
           event: "lead_form_hero",
         });
 
-        // Show thank you popup for 2 seconds
         setShowThankYou(true);
         setTimeout(() => {
           setShowThankYou(false);
-
-          // Use router if available, otherwise fallback to window.location
           if (typeof window !== "undefined") {
             window.location.href = "/thankyou";
           }
@@ -344,7 +357,6 @@ export default function LandingPage({ openForm }) {
     }
   };
 
-  // Optimized slider transition using requestAnimationFrame
   const transitionSlide = useCallback((nextSlide) => {
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
@@ -355,17 +367,18 @@ export default function LandingPage({ openForm }) {
     });
   }, []);
 
-  // Auto-advance slider
+  // Auto-advance slider - only after component mounts
   useEffect(() => {
+    if (!isClient) return;
+
     const interval = setInterval(() => {
       transitionSlide((prev) =>
         prev === desktopImages.length - 1 ? 0 : prev + 1,
       );
     }, 5000);
     return () => clearInterval(interval);
-  }, [desktopImages.length, transitionSlide]);
+  }, [desktopImages.length, transitionSlide, isClient]);
 
-  // Optimized touch handlers
   const handleTouchStart = useCallback((e) => {
     setTouchStart(e.targetTouches[0].clientX);
   }, []);
@@ -405,7 +418,8 @@ export default function LandingPage({ openForm }) {
   }, []);
 
   return (
-    <div className="h-screen max-sm:h-[87vh] flex flex-col">
+    <>
+      {/* Inline critical CSS */}
       <style jsx>{`
         @keyframes textGlow {
           0%,
@@ -440,27 +454,77 @@ export default function LandingPage({ openForm }) {
         }
       `}</style>
 
-      {/* Main Content Section */}
-      <div className="flex-1 flex flex-col lg:flex-row min-h-0">
-        {/* Left Side - Desktop Slider Section (60%) */}
-        <div className="w-full lg:w-[60%] relative flex-1">
-          {/* Desktop Slider */}
-          <div className="absolute inset-0 hidden lg:block">
-            <div
-              ref={slideContainerRef}
-              className="relative w-full h-[100vh] overflow-hidden"
-            >
-              {desktopImages.map((image, index) => (
-                <SliderImage
-                  key={`desktop-${index}`}
-                  src={image.src}
-                  alt={image.alt}
-                  isActive={index === currentSlide}
-                  className="pt-8"
-                  fetchPriority="high"
+      <div className="h-screen max-sm:h-[87vh] flex flex-col">
+        {/* Main Content Section */}
+        <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+          {/* Left Side - Desktop Slider Section (60%) */}
+          <section
+            className="w-full lg:w-[60%] relative flex-1"
+            aria-label="Property showcase"
+          >
+            {/* Desktop Slider */}
+            <div className="absolute inset-0 hidden lg:block">
+              <div
+                ref={slideContainerRef}
+                className="relative w-full h-[100vh] overflow-hidden"
+                role="region"
+                aria-label="Image carousel"
+              >
+                {desktopImages.map((image, index) => (
+                  <SliderImage
+                    key={`desktop-${index}`}
+                    src={image.src}
+                    alt={image.alt}
+                    isActive={index === currentSlide}
+                    priority={index === 0}
+                    className="pt-8"
+                  />
+                ))}
+                {/* Navigation */}
+                <NavButton
+                  onClick={prevSlide}
+                  direction="left"
+                  ariaLabel="Previous slide"
                 />
+                <NavButton
+                  onClick={nextSlide}
+                  direction="right"
+                  ariaLabel="Next slide"
+                />
+                <div className="absolute bottom-0 left-0 right-0 z-20">
+                  <Running />
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Slider */}
+            <div
+              className="absolute inset-0 block lg:hidden overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              role="region"
+              aria-label="Mobile image carousel"
+            >
+              {mobileImages.map((image, index) => (
+                <div
+                  key={`mobile-${index}`}
+                  className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                  style={{
+                    opacity: index === currentSlide ? 1 : 0,
+                    pointerEvents: index === currentSlide ? "auto" : "none",
+                  }}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    className="object-cover pt-16"
+                    quality={index === 0 ? 85 : 50}
+                    fetchPriority="high"
+                    sizes="100vw"
+                  />
+                </div>
               ))}
-              {/* Navigation */}
               <NavButton
                 onClick={prevSlide}
                 direction="left"
@@ -475,155 +539,124 @@ export default function LandingPage({ openForm }) {
                 <Running />
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Mobile Slider */}
-          <div
-            className="absolute inset-0 block lg:hidden overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+          {/* Right Side - Lead Form Section (40%) */}
+          <section
+            className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6"
+            aria-label="Contact form"
           >
-            {mobileImages.map((image, index) => (
-              <div
-                key={`mobile-${index}`}
-                className="absolute inset-0 transition-opacity duration-700 ease-in-out will-change-[opacity]"
-                style={{
-                  opacity: index === currentSlide ? 1 : 0,
-                  pointerEvents: index === currentSlide ? "auto" : "none",
-                }}
-              >
+            <div className="w-full max-w-md">
+              {/* Logo */}
+              <div className="text-center mb-6">
                 <Image
-                  src={image.src}
-                  alt={image.alt}
-                  className="object-cover pt-16"
-                  quality={100}
-                  loading={index === 0 ? "eager" : "lazy"}
+                  src={logo}
+                  alt="BookMyAssets - Dholera Property Investment"
+                  className="mx-auto mb-3 max-sm:hidden"
                   fetchPriority="high"
-                  fill
+                  height={120}
                 />
+
+                <div className="relative">
+                  <div className="flashy-blink">
+                    <h1 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
+                      Dholera Plots under ₹10 Lakh
+                    </h1>
+                    <p className="text-sm lg:text-base glowing-text">
+                      0 KM from Dholera SIR Boundary
+                    </p>
+                  </div>
+                </div>
               </div>
-            ))}
-            <NavButton
-              onClick={prevSlide}
-              direction="left"
-              ariaLabel="Previous slide"
-            />
-            <NavButton
-              onClick={nextSlide}
-              direction="right"
-              ariaLabel="Next slide"
-            />
-            <div className="absolute bottom-0 left-0 right-0 z-20">
-              <Running />
-            </div>
-          </div>
-        </div>
 
-        {/* Right Side - Lead Form Section (40%) */}
-        <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6">
-          <div className="w-full max-w-md">
-            {/* Logo */}
-            <div className="text-center mb-6">
-              <Image
-                src={logo}
-                alt="BookMyAssets Logo"
-                className="mx-auto mb-3 max-sm:hidden"
-                fetchPriority="low"
-              />
-
-              <div className="relative">
-                <div className="flashy-blink">
-                  <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
-                    Dholera Plots under ₹10 Lakh
+              {showPopup ? (
+                <div
+                  className="text-center py-6"
+                  role="alert"
+                  aria-live="polite"
+                >
+                  <div className="mb-4 inline-block">
+                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-10 w-10 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <h2 className="text-xl font-bold text-black mb-2">
+                    Thank You!
                   </h2>
-                  <p className="text-sm lg:text-base glowing-text">
-                    0 KM from Dholera SIR Boundary
+                  <p className="text-gray-600 text-sm">
+                    Your request has been submitted successfully. We'll contact
+                    you shortly.
                   </p>
                 </div>
-              </div>
-            </div>
-
-            {showPopup ? (
-              <div className="text-center py-6">
-                <div className="mb-4 inline-block">
-                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-10 w-10 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {errorMessage && (
+                    <div
+                      className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm"
+                      role="alert"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                      {errorMessage}
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-2 gap-2 items-center">
+                    <FormInput
+                      name="fullName"
+                      placeholder="Enter Name"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      icon={UserIcon}
+                      required
+                      autoComplete="name"
+                      aria-label="Full Name"
+                    />
+                    <FormInput
+                      name="phone"
+                      type="tel"
+                      placeholder="Mobile No"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      icon={PhoneIcon}
+                      minLength={10}
+                      maxLength={15}
+                      required
+                      autoComplete="tel"
+                      aria-label="Phone Number"
+                    />
                   </div>
-                </div>
-                <h3 className="text-xl font-bold text-black mb-2">
-                  Thank You!
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Your request has been submitted successfully. We'll contact
-                  you shortly.
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {errorMessage && (
-                  <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm">
-                    {errorMessage}
+
+                  {/* reCAPTCHA container */}
+                  <div className="flex justify-center">
+                    <div ref={recaptchaRef}></div>
                   </div>
-                )}
 
-                <div className="grid grid-cols-2 gap-2 items-center">
-                  <FormInput
-                    name="fullName"
-                    placeholder="Enter Name"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    icon={UserIcon}
-                    required
-                    autoComplete="name"
-                    aria-label="Full Name"
-                  />
-                  <FormInput
-                    name="phone"
-                    type="tel"
-                    placeholder="Mobile No"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    icon={PhoneIcon}
-                    minLength={10}
-                    maxLength={15}
-                    required
-                    autoComplete="tel"
-                    aria-label="Phone Number"
-                  />
-                </div>
-
-                {/* reCAPTCHA container */}
-                <div className="flex justify-center">
-                  <div ref={recaptchaRef}></div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={isLoading}
-                  className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed touch-manipulation"
-                >
-                  {isLoading ? "Submitting..." : "Get A Call Back"}
-                </button>
-              </div>
-            )}
-          </div>
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed touch-manipulation"
+                  >
+                    {isLoading ? "Submitting..." : "Get A Call Back"}
+                  </button>
+                </form>
+              )}
+            </div>
+          </section>
         </div>
       </div>
-    </div>
+    </>
   );
 }
