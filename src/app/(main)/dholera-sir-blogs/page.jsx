@@ -12,20 +12,20 @@ export default async function page() {
   let fetchError = null;
 
   try {
-  const postsData = await getblogs();
-  posts = Array.isArray(postsData) ? postsData : [];
-  
-  // Sort by publishedAt date (newest first)
-  posts.sort((a, b) => {
-    const dateA = new Date(a.publishedAt || a._createdAt || 0);
-    const dateB = new Date(b.publishedAt || b._createdAt || 0);
-    return dateB - dateA; // Descending order (newest first)
-  });
-  
-  console.log("Posts data fetched:", posts.length);
-} catch (error) {
-  console.error("Error fetching blog posts:", error);
-}
+    const postsData = await getblogs();
+    posts = Array.isArray(postsData) ? postsData : [];
+
+    // Sort by publishedAt date (newest first)
+    posts.sort((a, b) => {
+      const dateA = new Date(a.publishedAt || a._createdAt || 0);
+      const dateB = new Date(b.publishedAt || b._createdAt || 0);
+      return dateB - dateA; // Descending order (newest first)
+    });
+
+    console.log("Posts data fetched:", posts.length);
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+  }
 
   const safePosts = posts.map((post) => ({
     ...post,
@@ -54,7 +54,7 @@ export default async function page() {
       />
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}
-        <div className="relative min-h-[60vh] md:min-h-[80vh] flex items-center justify-center py-8 sm:py-12">
+        <div className="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center py-8 sm:py-12">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
             <Image
@@ -77,7 +77,7 @@ export default async function page() {
 
           {/* Hero Content */}
           <div className="relative z-10 w-full max-w-7xl mx-auto px-4 text-center">
-            <div className="mb-6 sm:mb-8">
+            <div className="mb-6 sm:mb-8 max-sm:pt-12">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Dholera SIR
                 <span className="block bg-[#deae3c] bg-clip-text text-transparent">
@@ -128,7 +128,9 @@ export default async function page() {
                 <div className="bg-white/95 backdrop-blur-sm p-8 sm:p-12 rounded-2xl shadow-xl max-w-2xl mx-auto border border-gray-200">
                   {fetchError ? (
                     <>
-                      <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">⚠️</div>
+                      <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">
+                        ⚠️
+                      </div>
                       <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
                         Unable to Load Blogs
                       </h3>
@@ -140,7 +142,9 @@ export default async function page() {
                     </>
                   ) : (
                     <>
-                      <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">📝</div>
+                      <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">
+                        📝
+                      </div>
                       <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
                         Expert Content Coming Soon!
                       </h3>

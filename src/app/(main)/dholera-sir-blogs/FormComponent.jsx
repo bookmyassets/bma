@@ -27,21 +27,31 @@ export default function FormComponent() {
   return (
     <div>
       <div className="flex m-2 flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <div className=" bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4">
-                <div className="text-center sm:text-left">
-                  <h3 className="text-lg font-semibold text-white mb-1">Ready to Invest?</h3>
-                  <p className="text-white/80 text-sm">Get expert guidance & exclusive opportunities</p>
-                </div>
-                <div className="flex gap-3">
-                  <button onClick={openContactForm} className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap">
-                    Free Consultation
-                  </button>
-                  <button onClick={openBrochureForm} className="border-2 border-white/30 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 whitespace-nowrap backdrop-blur-sm">
-                    Download Brochure
-                  </button>
-                </div>
-              </div>
-            </div>
+        <div className=" bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4">
+          <div className="text-center sm:text-left">
+            <h3 className="text-lg font-semibold text-white mb-1">
+              Ready to Invest?
+            </h3>
+            <p className="text-white/80 text-sm">
+              Get expert guidance & exclusive opportunities
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={openContactForm}
+              className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap"
+            >
+              Free Consultation
+            </button>
+            <button
+              onClick={openBrochureForm}
+              className="border-2 border-white/30 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 whitespace-nowrap backdrop-blur-sm"
+            >
+              Download Brochure
+            </button>
+          </div>
+        </div>
+      </div>
 
       <AnimatePresence>
         {isContactFormOpen && (
