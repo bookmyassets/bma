@@ -535,9 +535,6 @@ export default function LandingPage({ openForm }) {
                 direction="right"
                 ariaLabel="Next slide"
               />
-              <div className="absolute bottom-0 left-0 right-0 z-20">
-                <Running />
-              </div>
             </div>
           </section>
 
