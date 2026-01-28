@@ -28,11 +28,11 @@ const SliderImage = memo(({ src, alt, isActive, priority, className }) => (
       src={src}
       alt={alt}
       className="object-cover"
-      priority={priority}
       fill
       quality={85}
-      loading={priority ? "eager" : "lazy"}
+      loading="lazy"
       placeholder="blur"
+      fetchPriority="high"
     />
   </div>
 ));
@@ -82,7 +82,7 @@ const FormInput = memo(
         {...props}
       />
     </div>
-  )
+  ),
 );
 
 FormInput.displayName = "FormInput";
@@ -186,10 +186,10 @@ export default function LandingPage({ openForm }) {
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
 
@@ -236,7 +236,7 @@ export default function LandingPage({ openForm }) {
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       return false;
     }
@@ -266,7 +266,7 @@ export default function LandingPage({ openForm }) {
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -301,7 +301,7 @@ export default function LandingPage({ openForm }) {
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(
-        error.message || "Error submitting form. Please try again."
+        error.message || "Error submitting form. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -359,7 +359,7 @@ export default function LandingPage({ openForm }) {
   useEffect(() => {
     const interval = setInterval(() => {
       transitionSlide((prev) =>
-        prev === desktopImages.length - 1 ? 0 : prev + 1
+        prev === desktopImages.length - 1 ? 0 : prev + 1,
       );
     }, 5000);
     return () => clearInterval(interval);
@@ -378,24 +378,24 @@ export default function LandingPage({ openForm }) {
     const swipeThreshold = 50;
     if (touchStart - touchEnd > swipeThreshold) {
       transitionSlide((prev) =>
-        prev === mobileImages.length - 1 ? 0 : prev + 1
+        prev === mobileImages.length - 1 ? 0 : prev + 1,
       );
     } else if (touchEnd - touchStart > swipeThreshold) {
       transitionSlide((prev) =>
-        prev === 0 ? mobileImages.length - 1 : prev - 1
+        prev === 0 ? mobileImages.length - 1 : prev - 1,
       );
     }
   }, [touchStart, touchEnd, mobileImages.length, transitionSlide]);
 
   const nextSlide = useCallback(() => {
     transitionSlide((prev) =>
-      prev === desktopImages.length - 1 ? 0 : prev + 1
+      prev === desktopImages.length - 1 ? 0 : prev + 1,
     );
   }, [desktopImages.length, transitionSlide]);
 
   const prevSlide = useCallback(() => {
     transitionSlide((prev) =>
-      prev === 0 ? desktopImages.length - 1 : prev - 1
+      prev === 0 ? desktopImages.length - 1 : prev - 1,
     );
   }, [desktopImages.length, transitionSlide]);
 
@@ -456,8 +456,8 @@ export default function LandingPage({ openForm }) {
                   src={image.src}
                   alt={image.alt}
                   isActive={index === currentSlide}
-                  priority={index === 0}
                   className="pt-8"
+                  fetchPriority="high"
                 />
               ))}
               {/* Navigation */}
@@ -497,9 +497,9 @@ export default function LandingPage({ openForm }) {
                   src={image.src}
                   alt={image.alt}
                   className="object-cover pt-16"
-                  priority={index === 0}
-                  quality={85}
+                  quality={100}
                   loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority="high"
                   fill
                 />
               </div>
@@ -515,8 +515,8 @@ export default function LandingPage({ openForm }) {
               ariaLabel="Next slide"
             />
             <div className="absolute bottom-0 left-0 right-0 z-20">
-                <Running />
-              </div>
+              <Running />
+            </div>
           </div>
         </div>
 
@@ -529,13 +529,13 @@ export default function LandingPage({ openForm }) {
                 src={logo}
                 alt="BookMyAssets Logo"
                 className="mx-auto mb-3 max-sm:hidden"
-                priority
+                fetchPriority="low"
               />
 
               <div className="relative">
                 <div className="flashy-blink">
                   <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
-                   Dholera Plots under ₹10 Lakh
+                    Dholera Plots under ₹10 Lakh
                   </h2>
                   <p className="text-sm lg:text-base glowing-text">
                     0 KM from Dholera SIR Boundary

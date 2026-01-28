@@ -109,8 +109,8 @@ export default function LatestUpdates() {
         const updates =
           updatesData.status === "fulfilled" ? updatesData.value : [];
 
-        console.log("Blogs fetched:", blogs?.length || 0);
-        console.log("Updates fetched:", updates?.length || 0);
+      /*   console.log("Blogs fetched:", blogs?.length || 0);
+        console.log("Updates fetched:", updates?.length || 0); */
 
         // Normalize and combine data
         const combined = [];
@@ -146,8 +146,8 @@ export default function LatestUpdates() {
             }
           });
         }
-
-        console.log("Combined content:", combined.length);
+/* 
+        console.log("Combined content:", combined.length); */
 
         // Sort by date (most recent first) and take only 4
         const latest4 = combined
@@ -159,7 +159,7 @@ export default function LatestUpdates() {
           })
           .slice(0, 4);
 
-        console.log(
+        /* console.log(
           "Latest 4 items:",
           latest4.map((item) => ({
             title: item.title,
@@ -167,11 +167,11 @@ export default function LatestUpdates() {
             date: item.publishedAt,
             id: item._id,
           }))
-        );
+        ); */
 
         setContent(latest4);
       } catch (err) {
-        console.error("Error fetching content:", err);
+        /* console.error("Error fetching content:", err); */
         setError(err.message || "Failed to load content");
       } finally {
         setLoading(false);
