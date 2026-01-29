@@ -4,28 +4,42 @@ import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import your images
-import sample1 from "@/assests/gallery/sir/abcd-gallery.webp";
-import sample3 from "@/assests/gallery/sir/activation-gallery-2.webp";
-import sample6 from "@/assests/gallery/sir/airport-gallery.webp";
-import sample10 from "@/assests/gallery/sir/renew-gallery.webp";
-import sample11 from "@/assests/gallery/sir/solar-2-gallery.webp";
-import sample15 from "@/assests/gallery/sir/sprr-gallery.webp";
-import sample20 from "@/assests/gallery/sir/toll-gallery.webp";
-import sample24 from "@/assests/gallery/sir/wtp-gallery-2.webp";
-import sample21 from "@/assests/gallery/sir/torant-gallery.webp";
-import sample19 from "@/assests/gallery/sir/tata-gate-gallery.webp";
+import abcd from "@/assests/gallery/sir/abcd.webp";
+import activationZone from "@/assests/gallery/sir/Activation_zone.webp";
+import airportCargo from "@/assests/gallery/sir/Airport_cargo.webp";
+import dholeraBoard from "@/assests/gallery/sir/Dholera_board.webp";
+import expressway from "@/assests/gallery/sir/expressway.webp";
+import expresswayBoard from "@/assests/gallery/sir/expressway_board.webp";
+import expresswayNight from "@/assests/gallery/sir/expressway_night_view.webp";
+import renew from "@/assests/gallery/sir/Renew.webp";
+import riverFront from "@/assests/gallery/sir/River_front.webp";
+import runway from "@/assests/gallery/sir/Runway.webp";
+import silkRoute from "@/assests/gallery/sir/Silk_route.webp";
+import solar from "@/assests/gallery/sir/Solar.webp";
+import solarBoard from "@/assests/gallery/sir/Solar_board.webp";
+import tata from "@/assests/gallery/sir/TATA.webp";
+import tataGate from "@/assests/gallery/sir/tata_gate.webp";
+import tataNight from "@/assests/gallery/sir/TATA_night_view.webp";
+import tataRenew from "@/assests/gallery/sir/tata_renew.webp";
 
 const galleryItems = [
-  { id: 1, title: "ABCD Building", image: sample1 },
-  { id: 2, title: "Activation Area", image: sample3 },
-  { id: 3, title: "Dholera International Airport", image: sample6 },
-  { id: 4, title: "Renew Power Plant", image: sample10 },
-  { id: 5, title: "Solar Park", image: sample11 },
-  { id: 6, title: "Sardar Patel Ring Road", image: sample15 },
-  { id: 7, title: "Ahmedabad Dholera Expressway Toll", image: sample20 },
-  { id: 8, title: "Water Treatment Plant", image: sample24 },
-  { id: 9, title: "Torant Power", image: sample21 },
-  { id: 10, title: "Tata Semiconductor", image: sample19 },
+  { id: 1, src: abcd, alt: "ABCD Building in Dholera SIR", caption: "ABCD Building – Administrative hub of Dholera SIR" },
+  { id: 2, src: activationZone, alt: "Activation Zone Dholera SIR", caption: "Activation Zone – First development phase of Dholera" },
+  { id: 3, src: airportCargo, alt: "Dholera Airport Cargo Terminal", caption: "Cargo terminal at Dholera International Airport" },
+  { id: 4, src: dholeraBoard, alt: "Dholera Smart City Entry Board", caption: "Official Dholera Smart City signage" },
+  { id: 5, src: expressway, alt: "Ahmedabad Dholera Expressway", caption: "High-speed Ahmedabad–Dholera Expressway" },
+  { id: 6, src: expresswayBoard, alt: "Expressway Direction Board", caption: "Ahmedabad–Dholera Expressway signage" },
+  { id: 7, src: expresswayNight, alt: "Dholera Expressway Night View", caption: "Night view of expressway infrastructure" },
+  { id: 8, src: renew, alt: "ReNew Power Project Dholera", caption: "ReNew Power renewable energy project" },
+  { id: 9, src: riverFront, alt: "Riverfront Development Dholera", caption: "Planned riverfront in Dholera Smart City" },
+  { id: 10, src: runway, alt: "Dholera Airport Runway", caption: "Runway construction at Dholera International Airport" },
+  { id: 11, src: silkRoute, alt: "Silk Route Connectivity Dholera", caption: "Strategic Silk Route industrial corridor" },
+  { id: 12, src: solar, alt: "Solar Power Plant Dholera", caption: "Large-scale solar energy infrastructure" },
+  { id: 13, src: solarBoard, alt: "Solar Project Information Board", caption: "Solar park project signage" },
+  { id: 14, src: tata, alt: "TATA Semiconductor Plant Dholera", caption: "TATA semiconductor manufacturing facility" },
+  { id: 15, src: tataGate, alt: "TATA Semiconductor Main Gate", caption: "Front gate of TATA semiconductor campus" },
+  { id: 16, src: tataNight, alt: "TATA Plant Night View", caption: "Night view of TATA semiconductor project" },
+  { id: 17, src: tataRenew, alt: "TATA & ReNew Power Collaboration", caption: "Renewable energy integration with TATA plant" },
 ];
 
 export default function Gallery() {
@@ -65,12 +79,12 @@ export default function Gallery() {
                 <div key={item.id} className="group cursor-pointer" onClick={() => openLightbox(index)}>
                   <div className="overflow-hidden rounded-lg border-2 border-[#deae3c]">
                     <Image
-                      src={item.image}
-                      alt={item.title}
+                      src={item.src}
+                      alt={item.alt}
                       className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <p className="mt-2 text-center font-semibold text-gray-800">{item.title}</p>
+                  <p className="mt-2 text-center font-semibold text-gray-800">{item.alt}</p>
                 </div>
               ))}
             </div>

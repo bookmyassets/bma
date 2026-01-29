@@ -386,22 +386,7 @@ export default function ContactForm({
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: 0.2 }}
-                                className="rounded-lg shadow-lg"
-                              >
-                                <Image
-                                  src={logo}
-                                  alt="Logo"
-                                  width={60}
-                                  height={60}
-                                  className="rounded-lg"
-                                />
-                              </motion.div>
-                            </div>
+         
             {errorMessage && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}

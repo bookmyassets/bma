@@ -794,6 +794,15 @@ export default async function page() {
             </div>
           </section>
         </div>
+
+        {/* Footer Keywords Section */}
+        {/* <div className="bg-gray-100 py-6 mt-8">
+          <div className="max-w-7xl mx-auto px-4">
+            <p className="text-xs text-gray-600 text-center">
+              Keywords: Dholera, Dholera Smart City, ABCD Building Dholera, Investment in Dholera Smart City, Monorail News, Semiconductor Manufacturing Unit in India, Dholera Solar Park, Plug-and-Play Infrastructure, Dholera Special Investment Region, Dholera SIR Smart City, Ahmedabad Dholera Expressway, Dholera International Airport
+            </p>
+          </div>
+        </div> */}
       </div>
     </>
   );

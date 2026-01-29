@@ -2,58 +2,45 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import hero from "@/assests/gallery/bg-gallery-pc.png";
-import sample1 from "@/assests/gallery/sir/abcd-gallery.webp";
-import sample2 from "@/assests/gallery/sir/dholera-sir.webp";
-import sample3 from "@/assests/gallery/sir/sppr2.webp";
-import sample4 from "@/assests/gallery/sir/activation-road-2-gallery.webp";
-import sample5 from "@/assests/gallery/sir/activation-road-gallery.webp";
-import sample6 from "@/assests/gallery/sir/airport-gallery.webp";
-import sample7 from "@/assests/gallery/sir/butterfly-gallery.webp";
-import sample8 from "@/assests/gallery/sir/expressway-gallery.webp";
-import sample9 from "@/assests/gallery/sir/renew-2-gallery.webp";
-import sample10 from "@/assests/gallery/sir/renew-gallery.webp";
-import sample11 from "@/assests/gallery/sir/solar-2-gallery.webp";
-import sample12 from "@/assests/gallery/sir/solar-3-gallery.webp";
-import sample13 from "@/assests/gallery/sir/solar-gallery.webp";
-import sample14 from "@/assests/gallery/sir/spr-gallery.webp";
-import sample15 from "@/assests/gallery/sir/sprr-gallery.webp";
-import sample16 from "@/assests/gallery/sir/tata-2-gallery.webp";
-import sample17 from "@/assests/gallery/sir/tata-gallery.webp";
-import sample18 from "@/assests/gallery/sir/tata-gallery-1.webp";
-import sample19 from "@/assests/gallery/sir/tata-gate-gallery.webp";
-import sample20 from "@/assests/gallery/sir/toll-gallery.webp";
-import sample21 from "@/assests/gallery/sir/torant-gallery.webp";
-import sample22 from "@/assests/gallery/sir/torrent-gallery.webp";
-import sample23 from "@/assests/gallery/sir/wtp-gallery.webp";
-import sample24 from "@/assests/gallery/sir/wtp-gallery-2.webp";
+import abcd from "@/assests/gallery/sir/abcd.webp";
+import activationZone from "@/assests/gallery/sir/Activation_zone.webp";
+import airportCargo from "@/assests/gallery/sir/Airport_cargo.webp";
+import dholeraBoard from "@/assests/gallery/sir/Dholera_board.webp";
+import expressway from "@/assests/gallery/sir/expressway.webp";
+import expresswayBoard from "@/assests/gallery/sir/expressway_board.webp";
+import expresswayNight from "@/assests/gallery/sir/expressway_night_view.webp";
+import renew from "@/assests/gallery/sir/Renew.webp";
+import riverFront from "@/assests/gallery/sir/River_front.webp";
+import runway from "@/assests/gallery/sir/Runway.webp";
+import silkRoute from "@/assests/gallery/sir/Silk_route.webp";
+import solar from "@/assests/gallery/sir/Solar.webp";
+import solarBoard from "@/assests/gallery/sir/Solar_board.webp";
+import tata from "@/assests/gallery/sir/TATA.webp";
+import tataGate from "@/assests/gallery/sir/tata_gate.webp";
+import tataNight from "@/assests/gallery/sir/TATA_night_view.webp";
+import tataRenew from "@/assests/gallery/sir/tata_renew.webp";
 
 export default function DholeraProgressPage() {
-  const galleryImages = [
-  { id: 1, src: sample1, alt: "Aerial view of ABCD Building in Dholera SIR", caption: "Aerial view of ABCD Building in Dholera SIR" },
-  { id: 2, src: sample2, alt: "Artificial river development in Dholera Smart City", caption: "Man-Made Riverfront in Dholera SIR" },
-  { id: 3, src: sample3, alt: "Aerial view of Activation area in Dholera Smart City", caption: "Adhelai circle- (last point of dholera)" },
-  { id: 4, src: sample4, alt: "Man-made riverfront in Dholera Smart City", caption: "Man-made riverfront in Dholera Smart City" },
-  { id: 5, src: sample5, alt: "Aerial view of Dholera Smart City roads with canal side walkway", caption: "Aerial view of Dholera Smart City roads with canal side walkway" },
-  { id: 6, src: sample6, alt: "Runway terminal of Dholera International Airport", caption: "Runway terminal of Dholera International Airport" },
-  { id: 7, src: sample7, alt: "Aerial view of Ahmedabad Dholera Expressway", caption: "Aerial view of Ahmedabad Dholera Expressway" },
-  { id: 8, src: sample8, alt: "Proposed metro rail infrastructure in Dholera Smart City planning", caption: "Proposed metro rail infrastructure in Dholera Smart City planning" },
-  { id: 9, src: sample9, alt: "ReNew solar cell manufacturing plant in Dholera Smart City", caption: "ReNew solar cell manufacturing plant in Dholera Smart City" },
-  { id: 10, src: sample10, alt: "Solar power infrastructure by ReNew power in Dholera Smart Industrial Region", caption: "Solar power infrastructure by ReNew power in Dholera Smart Industrial Region" },
-  { id: 11, src: sample11, alt: "Tata Power renewable solar energy park in Dholera Smart City", caption: "Tata Power renewable solar energy park in Dholera Smart City" },
-  { id: 12, src: sample12, alt: "World's largest solar park infrastructure in Dholera Smart City", caption: "World's largest solar park infrastructure in Dholera Smart City" },
-  { id: 13, src: sample13, alt: "Sustainable development with largest solar park in Dholera", caption: "Sustainable development with largest solar park in Dholera" },
-  { id: 14, src: sample14, alt: "Aerial view of Sardar Patel Ring Road in Ahmedabad", caption: "Aerial view of Sardar Patel Ring Road in Ahmedabad" },
-  { id: 15, src: sample15, alt: "Dholera Ring Road development promoting regional connectivity", caption: "Dholera Ring Road development promoting regional connectivity" },
-  { id: 16, src: sample16, alt: "TATA semiconductor plant construction update in Dholera SIR", caption: "TATA semiconductor plant construction update in Dholera SIR" },
-  { id: 17, src: sample17, alt: "TATA semiconductor hub development in Dholera SIR", caption: "TATA semiconductor hub development in Dholera SIR" },
-  { id: 18, src: sample18, alt: "TATA semiconductor plant latest update in Dholera SIR", caption: "TATA semiconductor plant latest update in Dholera SIR" },
-  { id: 19, src: sample19, alt: "TATA semiconductor front gate in Dholera Smart City", caption: "TATA semiconductor front gate in Dholera Smart City" },
-  { id: 20, src: sample20, alt: "Aerial view of Ahmedabad Dholera Bhavnagar toll gate", caption: "Aerial view of Ahmedabad Dholera Bhavnagar toll gate" },
-  { id: 21, src: sample21, alt: "High voltage Torrent Power substation in Dholera SIR", caption: "High voltage Torrent Power substation in Dholera SIR" },
-  { id: 22, src: sample22, alt: "Common effluent treatment plant in Dholera Smart City", caption: "Common effluent treatment plant in Dholera Smart City" },
-  { id: 23, src: sample23, alt: "Water treatment Plant in Dholera Smart City", caption: "Water treatment Plant in Dholera Smart City" },
-  { id: 24, src: sample24, alt: "Clean water supply through Water Treatment Plant in Dholera SIR", caption: "Clean water supply through Water Treatment Plant in Dholera SIR" },
+const galleryImages = [
+  { id: 1, src: abcd, alt: "ABCD Building in Dholera SIR", caption: "ABCD Building – Administrative hub of Dholera SIR" },
+  { id: 2, src: activationZone, alt: "Activation Zone Dholera SIR", caption: "Activation Zone – First development phase of Dholera" },
+  { id: 3, src: airportCargo, alt: "Dholera Airport Cargo Terminal", caption: "Cargo terminal at Dholera International Airport" },
+  { id: 4, src: dholeraBoard, alt: "Dholera Smart City Entry Board", caption: "Official Dholera Smart City signage" },
+  { id: 5, src: expressway, alt: "Ahmedabad Dholera Expressway", caption: "High-speed Ahmedabad–Dholera Expressway" },
+  { id: 6, src: expresswayBoard, alt: "Expressway Direction Board", caption: "Ahmedabad–Dholera Expressway signage" },
+  { id: 7, src: expresswayNight, alt: "Dholera Expressway Night View", caption: "Night view of expressway infrastructure" },
+  { id: 8, src: renew, alt: "ReNew Power Project Dholera", caption: "ReNew Power renewable energy project" },
+  { id: 9, src: riverFront, alt: "Riverfront Development Dholera", caption: "Planned riverfront in Dholera Smart City" },
+  { id: 10, src: runway, alt: "Dholera Airport Runway", caption: "Runway construction at Dholera International Airport" },
+  { id: 11, src: silkRoute, alt: "Silk Route Connectivity Dholera", caption: "Strategic Silk Route industrial corridor" },
+  { id: 12, src: solar, alt: "Solar Power Plant Dholera", caption: "Large-scale solar energy infrastructure" },
+  { id: 13, src: solarBoard, alt: "Solar Project Information Board", caption: "Solar park project signage" },
+  { id: 14, src: tata, alt: "TATA Semiconductor Plant Dholera", caption: "TATA semiconductor manufacturing facility" },
+  { id: 15, src: tataGate, alt: "TATA Semiconductor Main Gate", caption: "Front gate of TATA semiconductor campus" },
+  { id: 16, src: tataNight, alt: "TATA Plant Night View", caption: "Night view of TATA semiconductor project" },
+  { id: 17, src: tataRenew, alt: "TATA & ReNew Power Collaboration", caption: "Renewable energy integration with TATA plant" },
 ];
+
 
 
   const [selectedImage, setSelectedImage] = useState(null);
