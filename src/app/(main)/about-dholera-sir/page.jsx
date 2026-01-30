@@ -115,6 +115,9 @@ export default async function page() {
           <section className="mb-8">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-black text-white rounded-xl p-6 md:p-7">
+                <div className="inline-block bg-[#deae3c] text-black px-4 py-2 rounded-lg text-sm font-bold mb-4">
+                  VISION
+                </div>
                 <h3 className="text-xl md:text-2xl font-bold mb-4">
                   Vision of Dholera Smart City
                 </h3>
