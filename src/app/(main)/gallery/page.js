@@ -21,27 +21,110 @@ import tataNight from "@/assests/gallery/sir/TATA_night_view.webp";
 import tataRenew from "@/assests/gallery/sir/tata_renew.webp";
 
 export default function DholeraProgressPage() {
-const galleryImages = [
-  { id: 1, src: abcd, alt: "ABCD Building in Dholera SIR", caption: "ABCD Building – Administrative hub of Dholera SIR" },
-  { id: 2, src: activationZone, alt: "Activation Zone Dholera SIR", caption: "Activation Zone – First development phase of Dholera" },
-  { id: 3, src: airportCargo, alt: "Dholera Airport Cargo Terminal", caption: "Cargo terminal at Dholera International Airport" },
-  { id: 4, src: dholeraBoard, alt: "Dholera Smart City Entry Board", caption: "Official Dholera Smart City signage" },
-  { id: 5, src: expressway, alt: "Ahmedabad Dholera Expressway", caption: "High-speed Ahmedabad–Dholera Expressway" },
-  { id: 6, src: expresswayBoard, alt: "Expressway Direction Board", caption: "Ahmedabad–Dholera Expressway signage" },
-  { id: 7, src: expresswayNight, alt: "Dholera Expressway Night View", caption: "Night view of expressway infrastructure" },
-  { id: 8, src: renew, alt: "ReNew Power Project Dholera", caption: "ReNew Power renewable energy project" },
-  { id: 9, src: riverFront, alt: "Riverfront Development Dholera", caption: "Planned riverfront in Dholera Smart City" },
-  { id: 10, src: runway, alt: "Dholera Airport Runway", caption: "Runway construction at Dholera International Airport" },
-  { id: 11, src: silkRoute, alt: "Silk Route Connectivity Dholera", caption: "Strategic Silk Route industrial corridor" },
-  { id: 12, src: solar, alt: "Solar Power Plant Dholera", caption: "Large-scale solar energy infrastructure" },
-  { id: 13, src: solarBoard, alt: "Solar Project Information Board", caption: "Solar park project signage" },
-  { id: 14, src: tata, alt: "TATA Semiconductor Plant Dholera", caption: "TATA semiconductor manufacturing facility" },
-  { id: 15, src: tataGate, alt: "TATA Semiconductor Main Gate", caption: "Front gate of TATA semiconductor campus" },
-  { id: 16, src: tataNight, alt: "TATA Plant Night View", caption: "Night view of TATA semiconductor project" },
-  { id: 17, src: tataRenew, alt: "TATA & ReNew Power Collaboration", caption: "Renewable energy integration with TATA plant" },
-];
-
-
+  const galleryImages = [
+    {
+      id: 1,
+      src: abcd,
+      alt: "ABCD Building in Dholera SIR",
+      caption: "ABCD Building – Administrative hub of Dholera SIR",
+    },
+    {
+      id: 2,
+      src: activationZone,
+      alt: "Activation Zone Dholera SIR",
+      caption: "Activation Zone – First development phase of Dholera",
+    },
+    {
+      id: 3,
+      src: airportCargo,
+      alt: "Dholera Airport Cargo Terminal",
+      caption: "Cargo terminal at Dholera International Airport",
+    },
+    {
+      id: 4,
+      src: dholeraBoard,
+      alt: "Dholera Smart City Entry Board",
+      caption: "Official Dholera Smart City signage",
+    },
+    {
+      id: 5,
+      src: expressway,
+      alt: "Ahmedabad Dholera Expressway",
+      caption: "High-speed Ahmedabad–Dholera Expressway",
+    },
+    {
+      id: 6,
+      src: expresswayBoard,
+      alt: "Expressway Direction Board",
+      caption: "Ahmedabad–Dholera Expressway signage",
+    },
+    {
+      id: 7,
+      src: expresswayNight,
+      alt: "Dholera Expressway Night View",
+      caption: "Night view of expressway infrastructure",
+    },
+    {
+      id: 8,
+      src: renew,
+      alt: "ReNew Power Project Dholera",
+      caption: "ReNew Power renewable energy project",
+    },
+    {
+      id: 9,
+      src: riverFront,
+      alt: "Riverfront Development Dholera",
+      caption: "Planned riverfront in Dholera Smart City",
+    },
+    {
+      id: 10,
+      src: runway,
+      alt: "Dholera Airport Runway",
+      caption: "Runway construction at Dholera International Airport",
+    },
+    {
+      id: 11,
+      src: silkRoute,
+      alt: "Silk Route Connectivity Dholera",
+      caption: "Strategic Silk Route industrial corridor",
+    },
+    {
+      id: 12,
+      src: solar,
+      alt: "Solar Power Plant Dholera",
+      caption: "Large-scale solar energy infrastructure",
+    },
+    {
+      id: 13,
+      src: solarBoard,
+      alt: "Solar Project Information Board",
+      caption: "Solar park project signage",
+    },
+    {
+      id: 14,
+      src: tata,
+      alt: "TATA Semiconductor Plant Dholera",
+      caption: "TATA semiconductor manufacturing facility",
+    },
+    {
+      id: 15,
+      src: tataGate,
+      alt: "TATA Semiconductor Main Gate",
+      caption: "Front gate of TATA semiconductor campus",
+    },
+    {
+      id: 16,
+      src: tataNight,
+      alt: "TATA Plant Night View",
+      caption: "Night view of TATA semiconductor project",
+    },
+    {
+      id: 17,
+      src: tataRenew,
+      alt: "TATA & ReNew Power Collaboration",
+      caption: "Renewable energy integration with TATA plant",
+    },
+  ];
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -55,17 +138,18 @@ const galleryImages = [
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-200">
-             <link rel="canonical" href="https://www.dholeratimes.com/gallery/dholera-sir-progress" />
-      <meta name="robots" content="index, dofollow"/>
+      <link
+        rel="canonical"
+        href="https://www.dholeratimes.com/gallery/dholera-sir-progress"
+      />
+      <meta name="robots" content="index, dofollow" />
       <title>Dholera Smart City Site Photos & Project Visual</title>
       <meta
         name="description"
         content="Explore Dholera SIR images, site photos and verified residential plot visuals from Book My Assets."
       />
-      <link
-            rel="canonical"
-            href={`https://www.bookmyassets.com/gallery`}
-          />
+      <link rel="canonical" href={`https://www.bookmyassets.com/gallery`} />
+      
       {/* Hero Section with Enhanced Overlay */}
       <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
         <Image
@@ -97,39 +181,35 @@ const galleryImages = [
           {galleryImages.map((image) => (
             <div
               key={image.id}
-              className="group relative overflow-hidden rounded-xl transition-all duration-300 shadow-2xl h-80 cursor-pointer"
+              className="group relative overflow-hidden rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl cursor-pointer bg-white"
               onClick={() => openPopup(image)}
             >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0  group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-               <div className="bg-white p-4 text-center">
-              <h3 className="text-lg font-bold">{image.alt}</h3>
-            
-            </div>
-                
+              {/* Image Container */}
+              <div className="relative h-64 overflow-hidden">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              
+              {/* Caption */}
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold text-gray-800 mb-2">{image.alt}</h3>
+                <p className="text-sm text-gray-600">{image.caption}</p>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Navigation with Category Tags */}
-        {/* <div className="mt-16 flex flex-wrap justify-center gap-3">
-          <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full cursor-pointer hover:bg-blue-200 transition-colors font-medium">All Images</span>
-          <span className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-200 transition-colors font-medium">Infrastructure</span>
-          <span className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-200 transition-colors font-medium">Transportation</span>
-          <span className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-200 transition-colors font-medium">Urban Planning</span>
-        </div> */}
       </div>
 
-      {/* Image Popup */}
+     {/* Image Popup */}
       {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50" 
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
           onClick={closePopup}
         >
           <div className="relative max-w-4xl max-h-[90vh] mx-4">

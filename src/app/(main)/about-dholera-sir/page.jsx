@@ -70,30 +70,6 @@ export default async function page() {
           </div>
         </div>
 
-        {/* Stats Bar */}
-        {/* <div className="bg-black text-white py-6">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center border-r border-[#deae3c]/30 last:border-r-0">
-                <div className="text-3xl font-bold text-[#deae3c] mb-2">920</div>
-                <div className="text-sm text-white/80">sq. km Area</div>
-              </div>
-              <div className="text-center border-r border-[#deae3c]/30 last:border-r-0">
-                <div className="text-3xl font-bold text-[#deae3c] mb-2">₹2L Cr+</div>
-                <div className="text-sm text-white/80">Investments</div>
-              </div>
-              <div className="text-center border-r border-[#deae3c]/30 last:border-r-0">
-                <div className="text-3xl font-bold text-[#deae3c] mb-2">100 km</div>
-                <div className="text-sm text-white/80">From Ahmedabad</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-[#deae3c] mb-2">#1</div>
-                <div className="text-sm text-white/80">Smart City India</div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
         {/* Main Content Section */}
         <div className="max-w-7xl mx-auto px-4 py-8">
           {/* Introduction Section */}
@@ -120,7 +96,7 @@ export default async function page() {
                   strategically located about 100 km from Ahmedabad in Gujarat.
                   Planned as a global-scale industrial and urban hub, Dholera is
                   a key node of the{" "}
-                  <strong>Delhi–Mumbai Industrial Corridor (DMIC)</strong> and
+                  <strong>Delhi-Mumbai Industrial Corridor (DMIC)</strong> and
                   is being developed under the Gujarat Special Investment Region
                   Act.
                 </p>
@@ -356,7 +332,7 @@ export default async function page() {
               <div className="border-2 border-black rounded-xl overflow-hidden">
                 <div className="bg-[#deae3c] p-5">
                   <h3 className="text-xl md:text-2xl font-bold text-black">
-                    Halcrow (UK) – The Urban Visionaries
+                    Halcrow (UK) - The Urban Visionaries
                   </h3>
                   <p className="text-black/80 mt-1 text-sm">
                     Master Planning Excellence
@@ -405,7 +381,7 @@ export default async function page() {
                         <div className="flex items-start gap-2">
                           <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
                           <p className="text-gray-700 text-sm">
-                            "Live–Work–Play" urban philosophy
+                            "Live-Work-Play" urban philosophy
                           </p>
                         </div>
                       </div>
@@ -418,7 +394,7 @@ export default async function page() {
               <div className="border-2 border-black rounded-xl overflow-hidden">
                 <div className="bg-black p-5">
                   <h3 className="text-xl md:text-2xl font-bold text-white">
-                    AECOM (USA) – Infrastructure Design & Program Management
+                    AECOM (USA) - Infrastructure Design & Program Management
                   </h3>
                 </div>
                 <div className="p-6 bg-white">
@@ -469,7 +445,7 @@ export default async function page() {
               <div className="border-2 border-[#deae3c] rounded-xl overflow-hidden">
                 <div className="bg-[#deae3c] p-5">
                   <h3 className="text-xl md:text-2xl font-bold text-black">
-                    Wipro, IBM & Cisco – The Digital Brain of Dholera
+                    Wipro, IBM & Cisco - The Digital Brain of Dholera
                   </h3>
                 </div>
                 <div className="p-6 bg-white">
@@ -548,7 +524,7 @@ export default async function page() {
                     href="/dholera-sir-blogs/dholera-ahmedabad-expressway"
                     className="hover:text-[#deae3c]"
                   >
-                    Ahmedabad–Dholera Expressway
+                    Ahmedabad-Dholera Expressway
                   </Link>
                 </h4>
                 <p className="text-gray-700 text-sm">
@@ -622,7 +598,7 @@ export default async function page() {
                 Dholera Smart City is entering a major growth phase with
                 large-scale industrial investments and{" "}
                 <Link href="/dholera-sir-blogs/dholera-second-wave-real-estate-growth">
-                  strategic developments in 2025–2026.
+                  strategic developments in 2025-2026.
                 </Link>
               </p>
             </div>
@@ -632,7 +608,7 @@ export default async function page() {
               <div className="bg-white hover:bg-gradient-to-br hover:from-[#6B46C1] hover:to-[#553C9A] text-black hover:text-white rounded-lg p-5 border-2 border-black hover:border-[#6B46C1] transition-all duration-300 group">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="text-lg font-bold">
-                    Tata–Intel Collaboration
+                    Tata-Intel Collaboration
                   </h4>
                   <span className="bg-[#deae3c] text-black px-3 py-1 rounded-full text-xs font-bold">
                     $14 billion
@@ -764,7 +740,7 @@ export default async function page() {
               <div className="bg-white hover:bg-gradient-to-br hover:from-[#0052A5] hover:to-[#003A75] text-black hover:text-white rounded-lg p-5 border-2 border-black hover:border-[#0052A5] transition-all duration-300 group">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="text-lg font-bold">
-                    India–UAE Trade Alliance
+                    India-UAE Trade Alliance
                   </h4>
                   <span className="bg-[#deae3c] text-black px-3 py-1 rounded-full text-xs font-bold">
                     $200 billion

@@ -318,7 +318,7 @@ export default function ExitPopup({
               >
                 ×
               </button>
-              <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 pr-8">
+              <h1 className="text-xl md:text-3xl font-bold text-gray-800 mb-2 pr-8">
                 {title}
               </h1>
               <p className="text-base md:text-lg text-gray-700 font-semibold">

@@ -105,11 +105,20 @@ const ProjectAmenities = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center">
-          <h4 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#0d0d0d" }}>
+          <h4
+            className="text-4xl md:text-5xl font-bold mb-6"
+            style={{ color: "#0d0d0d" }}
+          >
             Project Features
           </h4>
-          <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: "#deae3c" }}></div>
-          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: "#0d0d0d" }}>
+          <div
+            className="w-24 h-1 mx-auto mb-6"
+            style={{ backgroundColor: "#deae3c" }}
+          ></div>
+          <p
+            className="text-xl max-w-3xl mx-auto leading-relaxed"
+            style={{ color: "#0d0d0d" }}
+          >
             At WestWyn Estate, we offer more than just plots – we provide a
             complete lifestyle. Key features include:
           </p>
@@ -119,14 +128,14 @@ const ProjectAmenities = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pt-4">
           {amenities.map((amenity, index) => {
             const isFlipped = flippedCard === index;
-            
+
             // For mobile, hide items beyond index 5 when showAll is false
             const shouldShowOnMobile = showAll || index < 6;
-            
+
             return (
               <div
                 key={index}
-                className={`relative ${shouldShowOnMobile ? 'block' : 'hidden'} md:block`}
+                className={`relative ${shouldShowOnMobile ? "block" : "hidden"} md:block`}
                 style={{ perspective: "1000px", minHeight: "16rem" }}
               >
                 <div
@@ -134,12 +143,12 @@ const ProjectAmenities = () => {
                   style={{
                     transformStyle: "preserve-3d",
                     transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                    height: "100%"
+                    height: "100%",
                   }}
                   onClick={() => toggleFlip(index)}
                   tabIndex={0}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
                       toggleFlip(index);
                     }
@@ -150,10 +159,15 @@ const ProjectAmenities = () => {
                     className="absolute inset-0 bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-[#deae3c] transition-all duration-300 hover:shadow-xl flex flex-col items-center justify-center"
                     style={{ backfaceVisibility: "hidden", height: "100%" }}
                   >
-                    <div className={`flex items-center justify-center w-12 h-12 bg-gradient-to-br ${amenity.color} rounded-2xl mb-6 transition-transform duration-300 hover:scale-110`}>
+                    <div
+                      className={`flex items-center justify-center w-12 h-12 bg-gradient-to-br ${amenity.color} rounded-2xl mb-6 transition-transform duration-300 hover:scale-110`}
+                    >
                       <div className="text-white">{amenity.icon}</div>
                     </div>
-                    <h3 className="text-lg text-center font-medium mb-3" style={{ color: "#0d0d0d" }}>
+                    <h3
+                      className="text-lg text-center font-medium mb-3"
+                      style={{ color: "#0d0d0d" }}
+                    >
                       {amenity.title}
                     </h3>
                   </div>
@@ -164,13 +178,11 @@ const ProjectAmenities = () => {
                     style={{
                       backfaceVisibility: "hidden",
                       transform: "rotateY(180deg)",
-                      height: "100%"
+                      height: "100%",
                     }}
                   >
                     <div className="text-white mb-4">{amenity.icon}</div>
-                    <h3 className="text-lg font-bold text-white mb-4">
-                      {amenity.title}
-                    </h3>
+
                     <p className="text-white text-sm leading-relaxed mb-4">
                       {amenity.description}
                     </p>

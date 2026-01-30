@@ -246,7 +246,7 @@ export default function LeadForm({ title, button }) {
       <section className="py-8 bg-black rounded-lg">
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-white text-2xl font-bold text-center">
+            <h2 className="text-white text-xl md:text-3xl font-bold text-center">
               {title}
             </h2>
             {/* <p className="text-gray-300 mt-2 text-xs text-center">

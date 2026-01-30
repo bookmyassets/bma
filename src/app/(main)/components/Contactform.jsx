@@ -331,7 +331,7 @@ export default function ContactForm({
           transition={{ delay: 0.3 }}
           className="text-center mb-6 mt-12 sm:mt-8"
         >
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-700 mb-2">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-700 mb-2">
             {title}
           </h2>
         </motion.div>

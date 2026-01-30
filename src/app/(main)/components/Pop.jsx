@@ -413,20 +413,9 @@ export default function Popup({
                   </span>
                 </div> */}
 
-                <h2 className="text-3xl md:text-4xl font-bold mb-1 leading-tight text-[#FDB913]">
+                <h2 className="text-xl md:text-3xl font-bold mb-1 leading-tight text-[#FDB913]">
                   {titleInfo.mainText}
                 </h2>
-
-                {/* {titleInfo.price && (
-                  <div className="flex flex-col items-center gap-1 mb-2">
-                    <div className="text-2xl line-through text-gray-400">
-                      ₹9500/sq. yard
-                    </div>
-                    <div className="text-3xl md:text-4xl font-black text-white">
-                      {titleInfo.price}/sq. yard
-                    </div>
-                  </div>
-                )} */}
 
                 <p className="text-white/90 text-xl">
                   {titleInfo.subText}

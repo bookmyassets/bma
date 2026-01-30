@@ -54,7 +54,7 @@ export default async function page() {
       />
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}
-        <div className="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center py-8 sm:py-12">
+        <div className="relative md:min-h-[60vh] flex items-center justify-center py-8 sm:py-12">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
             <Image
@@ -76,7 +76,7 @@ export default async function page() {
           </div>
 
           {/* Hero Content */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 text-center">
+          <div className="relative pt-4 z-10 w-full max-w-7xl mx-auto px-4 text-center">
             <div className="mb-6 sm:mb-8 max-sm:pt-12">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Dholera SIR
