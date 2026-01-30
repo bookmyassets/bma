@@ -115,10 +115,7 @@ export default async function page() {
           <section className="mb-8">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-black text-white rounded-xl p-6 md:p-7">
-                <div className="inline-block bg-[#deae3c] text-black px-4 py-2 rounded-lg text-sm font-bold mb-4">
-                  VISION
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                <h3 className="text-xl md:text-2xl font-bold mb-4">
                   Vision of Dholera Smart City
                 </h3>
                 <p className="text-white/90 text-base leading-relaxed mb-4">
@@ -165,7 +162,7 @@ export default async function page() {
                 <div className="inline-block bg-black text-white px-4 py-2 rounded-lg text-sm font-bold mb-4">
                   GOVERNANCE
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                <h3 className="text-xl md:text-2xl font-bold mb-4">
                   Strong Administration
                 </h3>
                 <p className="text-black/90 text-base leading-relaxed mb-4">
@@ -186,7 +183,7 @@ export default async function page() {
           {/* Smart City Features */}
           <section className="mb-8">
             <div className="text-center mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-black mb-3">
+              <h2 className="text-xl md:text-2xl font-bold text-black mb-3">
                 What Makes Dholera a Smart City?
               </h2>
               <div className="w-24 h-1 bg-[#deae3c] mx-auto mb-3"></div>
@@ -279,7 +276,7 @@ export default async function page() {
                 <div className="inline-block bg-[#deae3c] text-black px-4 py-2 rounded-lg text-sm font-bold mb-4">
                   SEMICONDUCTOR HUB
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                <h2 className="text-xl md:text-2xl font-bold mb-4">
                   India's Semiconductor Manufacturing Ecosystem
                 </h2>
                 <p className="text-white/90 text-base mb-6 leading-relaxed">
@@ -332,7 +329,7 @@ export default async function page() {
               <div className="border-2 border-black rounded-xl overflow-hidden">
                 <div className="bg-[#deae3c] p-5">
                   <h3 className="text-xl md:text-2xl font-bold text-black">
-                    Halcrow (UK) - The Urban Visionaries
+                    Halcrow - The Urban Visionaries
                   </h3>
                   <p className="text-black/80 mt-1 text-sm">
                     Master Planning Excellence
@@ -344,7 +341,7 @@ export default async function page() {
                       <h4 className="text-lg font-bold mb-3 text-black">
                         Why Halcrow Matters
                       </h4>
-                      <p className="text-gray-700 mb-3 text-sm">
+                      <p className="text-gray-700 mb-3 ">
                         Halcrow, now part of CH2M Hill / Jacobs, is the master
                         planner of Dholera Smart City. They bring experience
                         from 70+ countries, delivering complex infrastructure
@@ -359,28 +356,28 @@ export default async function page() {
                       <div className="space-y-2">
                         <div className="flex items-start gap-2">
                           <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
-                          <p className="text-gray-700 text-sm">
+                          <p className="text-gray-700">
                             920 sq. km integrated land-use planning
                           </p>
                         </div>
                         <div className="flex items-start gap-2">
                           <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
                           <Link href="/dholera-sir-blogs/dholera-appreciation-reality">
-                            <p className="text-gray-700 text-sm">
+                            <p className="text-gray-700">
                               Town Planning Schemes TP 1 to TP 6
                             </p>
                           </Link>
                         </div>
                         <div className="flex items-start gap-2">
                           <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
-                          <p className="text-gray-700 text-sm">
+                          <p className="text-gray-700">
                             Zone-wise classification: Industrial, Residential,
                             Commercial, IT/ITeS
                           </p>
                         </div>
                         <div className="flex items-start gap-2">
                           <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
-                          <p className="text-gray-700 text-sm">
+                          <p className="text-gray-700">
                             "Live-Work-Play" urban philosophy
                           </p>
                         </div>
@@ -394,7 +391,7 @@ export default async function page() {
               <div className="border-2 border-black rounded-xl overflow-hidden">
                 <div className="bg-black p-5">
                   <h3 className="text-xl md:text-2xl font-bold text-white">
-                    AECOM (USA) - Infrastructure Design & Program Management
+                    AECOM - Infrastructure Design & Program Management
                   </h3>
                 </div>
                 <div className="p-6 bg-white">
@@ -402,13 +399,13 @@ export default async function page() {
                     <div className="space-y-2">
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
-                        <p className="text-gray-700 text-sm">
+                        <p className="text-gray-700">
                           72 km internal road network (18 m to 70 m wide)
                         </p>
                       </div>
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
-                        <p className="text-gray-700 text-sm">
+                        <p className="text-gray-700">
                           Complete trunk infrastructure (roads, drainage, water
                           & STPs)
                         </p>
@@ -417,13 +414,13 @@ export default async function page() {
                     <div className="space-y-2">
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
-                        <p className="text-gray-700 text-sm">
+                        <p className="text-gray-700">
                           India's first city-scale underground utility corridor
                         </p>
                       </div>
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 bg-[#deae3c] rounded-full mt-1.5"></div>
-                        <p className="text-gray-700 text-sm">
+                        <p className="text-gray-700">
                           BIM and GIS-based planning systems
                         </p>
                       </div>
@@ -434,7 +431,7 @@ export default async function page() {
                       "Dholera is becoming the role model for future Indian
                       cities."
                     </p>
-                    <p className="text-gray-600 mt-1 text-sm">
+                    <p className="text-gray-600 mt-1">
                       — Jagdish Salgaonkar, Senior VP, AECOM
                     </p>
                   </div>
@@ -454,7 +451,7 @@ export default async function page() {
                       <h4 className="text-lg font-bold mb-2 text-[#deae3c] group-hover:text-[#deae3c]">
                         Wipro
                       </h4>
-                      <p className="text-gray-700 group-hover:text-white/90 text-sm">
+                      <p className="text-gray-700 group-hover:text-white/90">
                         ICT consulting & smart platform integration
                       </p>
                     </div>
@@ -462,7 +459,7 @@ export default async function page() {
                       <h4 className="text-lg font-bold mb-2 text-[#deae3c] group-hover:text-[#deae3c]">
                         Cisco
                       </h4>
-                      <p className="text-gray-700 group-hover:text-white/90 text-sm">
+                      <p className="text-gray-700 group-hover:text-white/90">
                         ICT master plan, IoT & smart networking
                       </p>
                     </div>
@@ -470,7 +467,7 @@ export default async function page() {
                       <h4 className="text-lg font-bold mb-2 text-[#deae3c] group-hover:text-[#deae3c]">
                         IBM
                       </h4>
-                      <p className="text-gray-700 group-hover:text-white/90 text-sm">
+                      <p className="text-gray-700 group-hover:text-white/90">
                         Data analytics, AI-driven governance & city operations
                       </p>
                     </div>
@@ -587,10 +584,10 @@ export default async function page() {
           {/* Investment Landscape Section - WHITE CARDS WITH BRAND COLOR HOVER */}
           <section id="investment" className="mb-8">
             <div className="text-center mb-6">
-              <div className="inline-block bg-[#deae3c] text-black px-4 py-2 rounded-full text-xs font-bold mb-3 uppercase tracking-wider">
+              <div className="inline-block bg-[#deae3c] text-black px-4 py-2 rounded-full text-sm md:text-lg font-bold mb-3 uppercase tracking-wider">
                 2025-2026 GROWTH PHASE
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-black mb-3">
+              <h2 className="text-xl md:text-3xl font-bold text-black mb-3">
                 Major Investments in Dholera Smart City
               </h2>
               <div className="w-24 h-1 bg-[#deae3c] mx-auto mb-3"></div>
