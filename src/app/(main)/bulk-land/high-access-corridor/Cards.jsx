@@ -17,6 +17,14 @@ export default function HighAccessCorridorCards() {
   const [activeBenefit, setActiveBenefit] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
 
+  const handleBenefitFlip = (id) => {
+    setActiveBenefit(activeBenefit === id ? null : id);
+  };
+
+  const handleProjectFlip = (id) => {
+    setActiveProject(activeProject === id ? null : id);
+  };
+
   const benefits = [
     {
       id: "visibility",
@@ -65,8 +73,7 @@ export default function HighAccessCorridorCards() {
       icon: ShoppingBag,
       color: "blue",
       title: "Retail & Shopping Complexes",
-      description:
-        "Suitable for malls, local shops, food plazas, and markets.",
+      description: "Suitable for malls, local shops, food plazas, and markets.",
     },
     {
       id: "hospitality",
@@ -110,116 +117,126 @@ export default function HighAccessCorridorCards() {
     red: { bg: "bg-red-50", icon: "text-red-600" },
   };
 
-  const FlipCard = ({ item, activeId, onToggle }) => {
-    const Icon = item.icon;
-    const isFlipped = activeId === item.id;
-    const colors = colorClasses[item.color];
-
-    return (
-      <div
-        className="relative h-44 cursor-pointer w-56"
-        style={{ perspective: "1000px" }}
-        onClick={() => onToggle(item.id)}
-      >
-        <div
-          className="relative w-full h-full transition-transform duration-700"
-          style={{
-            transformStyle: "preserve-3d",
-            transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-          }}
-        >
-          <div
-            className={`absolute w-full h-full flex flex-col items-center justify-center text-center space-y-3 p-6 ${colors.bg} rounded-xl shadow-sm hover:shadow-md transition-all`}
-            style={{ backfaceVisibility: "hidden" }}
-          >
-            <Icon className={`w-12 h-12 ${colors.icon}`} />
-            <p className="text-sm font-semibold text-gray-800 leading-tight">
-              {item.title}
-            </p>
-          </div>
-
-          <div
-            className={`absolute w-full h-full flex items-center justify-center p-6 ${colors.bg} rounded-xl shadow-sm hover:shadow-md transition-all`}
-            style={{
-              backfaceVisibility: "hidden",
-              transform: "rotateY(180deg)",
-            }}
-          >
-            <p className="text-sm text-gray-700 text-center leading-relaxed">
-              {item.description}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="max-w-5xl mx-auto p-8 bg-white">
-      <div className="mb-10">
-        <h2 className="text-center text-2xl font-bold mb-8 text-gray-900">
-          Benefits of Buying Land in This Zone
-        </h2>
+      <div className="p-4">
+        {/* Benefits Section */}
+        <div className="mb-8">
+          <p className="text-center text-3xl font-semibold mb-8">
+            Benefits of Buying Land in This Zone
+          </p>
 
-        <div className="flex flex-col items-center gap-8">
-          <div className="flex justify-center gap-8 w-full flex-wrap">
-            {benefits.slice(0, 3).map((b) => (
-              <FlipCard
-                key={b.id}
-                item={b}
-                activeId={activeBenefit}
-                onToggle={(id) =>
-                  setActiveBenefit(activeBenefit === id ? null : id)
-                }
-              />
-            ))}
-          </div>
+          <div className={`flex flex-wrap justify-center gap-8 pt-4`}>
+            {benefits.map((benefit) => {
+              const Icon = benefit.icon;
+              const isFlipped = activeBenefit === benefit.id;
+              const colors = colorClasses[benefit.color];
 
-          <div className="flex justify-center gap-8 w-full flex-wrap">
-            {benefits.slice(3, 5).map((b) => (
-              <FlipCard
-                key={b.id}
-                item={b}
-                activeId={activeBenefit}
-                onToggle={(id) =>
-                  setActiveBenefit(activeBenefit === id ? null : id)
-                }
-              />
-            ))}
+              return (
+                <div
+                  key={benefit.id}
+                  className="relative h-48 sm:h-64 cursor-pointer w-full sm:w-5/12 md:w-64"
+                  style={{ perspective: "1000px" }}
+                  onClick={() => handleBenefitFlip(benefit.id)}
+                >
+                  <div
+                    className="relative w-full h-full transition-transform duration-700"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transform: isFlipped
+                        ? "rotateY(180deg)"
+                        : "rotateY(0deg)",
+                    }}
+                  >
+                    {/* Front of card */}
+                    <div
+                      className={`absolute w-full h-full flex flex-col items-center justify-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors`}
+                      style={{ backfaceVisibility: "hidden" }}
+                    >
+                      <Icon
+                        className={`w-12 h-12 sm:w-16 sm:h-16 ${colors.icon}`}
+                      />
+                      <p className="text-base sm:text-lg font-medium text-gray-800">
+                        {benefit.title}
+                      </p>
+                    </div>
+
+                    {/* Back of card */}
+                    <div
+                      className={`absolute w-full h-full flex items-center justify-center p-6 ${colors.bg} ${colors.hover} rounded-lg transition-colors`}
+                      style={{
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    >
+                      <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
+                        {benefit.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
 
-      <div className="pt-2">
-        <h2 className="text-center text-2xl font-bold mb-8 text-gray-900">
-          Types of Projects Allowed
-        </h2>
+        {/* Projects Section */}
+        <div className="pb-8 pt-4">
+          <p className="text-center text-3xl font-semibold mb-8">
+            Types of Projects Allowed
+          </p>
 
-        <div className="flex flex-col items-center gap-8">
-          <div className="flex justify-center gap-8 w-full flex-wrap">
-            {projects.slice(0, 3).map((p) => (
-              <FlipCard
-                key={p.id}
-                item={p}
-                activeId={activeProject}
-                onToggle={(id) =>
-                  setActiveProject(activeProject === id ? null : id)
-                }
-              />
-            ))}
-          </div>
+          <div className={`flex flex-wrap justify-center gap-8`}>
+            {projects.map((project) => {
+              const Icon = project.icon;
+              const isFlipped = activeProject === project.id;
+              const colors = colorClasses[project.color];
 
-          <div className="flex justify-center gap-8 w-full flex-wrap">
-            {projects.slice(3, 5).map((p) => (
-              <FlipCard
-                key={p.id}
-                item={p}
-                activeId={activeProject}
-                onToggle={(id) =>
-                  setActiveProject(activeProject === id ? null : id)
-                }
-              />
-            ))}
+              return (
+                <div
+                  key={project.id}
+                  className="relative h-48 sm:h-64 cursor-pointer w-full sm:w-5/12 md:w-64"
+                  style={{ perspective: "1000px" }}
+                  onClick={() => handleProjectFlip(project.id)}
+                >
+                  <div
+                    className="relative w-full h-full transition-transform duration-700"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transform: isFlipped
+                        ? "rotateY(180deg)"
+                        : "rotateY(0deg)",
+                    }}
+                  >
+                    {/* Front of card */}
+                    <div
+                      className={`absolute w-full h-full flex flex-col items-center justify-center text-center space-y-4 p-6 ${colors.bg} rounded-lg ${colors.hover} transition-colors`}
+                      style={{ backfaceVisibility: "hidden" }}
+                    >
+                      <Icon
+                        className={`w-12 h-12 sm:w-16 sm:h-16 ${colors.icon}`}
+                      />
+                      <p className="text-base sm:text-lg font-medium text-gray-800">
+                        {project.title}
+                      </p>
+                    </div>
+
+                    {/* Back of card */}
+                    <div
+                      className={`absolute w-full h-full flex items-center justify-center p-6 ${colors.bg} ${colors.hover} rounded-lg transition-colors`}
+                      style={{
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    >
+                      <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
