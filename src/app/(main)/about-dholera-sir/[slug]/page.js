@@ -692,7 +692,7 @@ export default async function Post({ params }) {
                     </div>
                   )}
 
-                  <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                  <h1 className="text-2xl md:text-4xl  font-bold text-gray-900 mb-4">
                     {post.title}
                   </h1>
 

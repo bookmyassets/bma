@@ -248,56 +248,54 @@ export default function Navbar() {
   };
 
   // Close dropdowns when clicking outside or on scroll
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (window.innerWidth < 768) return; // ignore clicks outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (window.innerWidth < 768) return; // ignore clicks outside on mobile
 
-    if (
-      !event.target.closest(".dropdown-container") &&
-      !event.target.closest(".residential-dropdown") &&
-      !event.target.closest(".dholera-dropdown") &&
-      !event.target.closest(".bulk-land-dropdown")
-    ) {
+      if (
+        !event.target.closest(".dropdown-container") &&
+        !event.target.closest(".residential-dropdown") &&
+        !event.target.closest(".dholera-dropdown") &&
+        !event.target.closest(".bulk-land-dropdown")
+      ) {
+        setIsResidentialMenuOpen(false);
+        setIsDholeraMenuOpen(false);
+        setIsBulkLandMenuOpen(false);
+      }
+    };
+
+    const handleScroll = () => {
+      if (window.innerWidth < 768) return; // ignore scroll on mobile
       setIsResidentialMenuOpen(false);
       setIsDholeraMenuOpen(false);
       setIsBulkLandMenuOpen(false);
-    }
-  };
+    };
 
-  const handleScroll = () => {
-    if (window.innerWidth < 768) return; // ignore scroll on mobile
-    setIsResidentialMenuOpen(false);
-    setIsDholeraMenuOpen(false);
-    setIsBulkLandMenuOpen(false);
-  };
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setIsResidentialMenuOpen(false);
+        setIsDholeraMenuOpen(false);
+        setIsBulkLandMenuOpen(false);
+      }
+    };
 
-  const handleEscape = (event) => {
-    if (event.key === "Escape") {
-      setIsResidentialMenuOpen(false);
-      setIsDholeraMenuOpen(false);
-      setIsBulkLandMenuOpen(false);
-    }
-  };
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("keydown", handleEscape);
 
-  document.addEventListener("mousedown", handleClickOutside);
-  window.addEventListener("scroll", handleScroll);
-  document.addEventListener("keydown", handleEscape);
-
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-    window.removeEventListener("scroll", handleScroll);
-    document.removeEventListener("keydown", handleEscape);
-  };
-}, []);
-
-
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white`}
       >
-     {/*  <nav
+        {/*  <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           shouldUseWhiteBackground
             ? "bg-white border-b border-gray-200/50 shadow-lg"
@@ -327,7 +325,7 @@ useEffect(() => {
                   className={`font-medium transition-colors duration-300 hover:text-yellow-500 flex items-center ${textColor}`}
                   onClick={toggleResidentialMenu}
                 >
-                 Our Residential Projects
+                  Our Residential Projects
                   <svg
                     className={`w-4 h-4 ml-1 transition-transform ${isResidentialMenuOpen ? "rotate-180" : ""}`}
                     fill="none"
@@ -496,14 +494,14 @@ useEffect(() => {
           <div className="w-1/3 flex flex-col justify-between p-8 lg:p-12 h-full bg-gradient-to-br from-gray-50 to-white">
             <div>
               <h3 className="text-5xl font-light text-gray-900 leading-tight">
-                  Residential <br /> Projects
+                Residential <br /> Projects
               </h3>
               <p className="text-gray-600 mt-4 text-xl">
                 Discover premium residential developments with <br />
                 world-class amenities
               </p>
             </div>
-{/*             <div className="mt-auto">
+            {/*             <div className="mt-auto">
               <Link
                 href="/residential"
                 onClick={closeAllMenus}
@@ -913,22 +911,69 @@ useEffect(() => {
                           key={index}
                           href={`/dholera-residential-plots/${project.link}`}
                           onClick={closeAllMenus}
-                          className="flex items-center py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+                          className={`flex items-center py-3 px-2 rounded-lg transition-colors ${
+                            project.status === "sold-out"
+                              ? "opacity-60 cursor-not-allowed bg-gray-50"
+                              : "hover:bg-gray-50"
+                          }`}
                         >
-                          <div className="w-12 h-12 rounded-lg overflow-hidden mr-3 flex-shrink-0">
+                          <div className="w-12 h-12 rounded-lg overflow-hidden mr-3 flex-shrink-0 relative">
                             <Image
                               src={project.image}
                               alt={project.projectName}
                               width={48}
                               height={48}
-                              className="object-cover w-full h-full"
+                              className={`object-cover w-full h-full ${
+                                project.status === "sold-out" ? "grayscale" : ""
+                              }`}
                             />
+                            {project.status === "sold-out" && (
+                              <div className="absolute inset-0 bg-red-500/20 flex items-center justify-center">
+                                <span className="text-[8px] font-bold text-red-600 bg-white/90 px-1 rounded">
+                                  SOLD
+                                </span>
+                              </div>
+                            )}
                           </div>
                           <div className="flex-1">
-                            <div className="text-black font-medium text-sm">
-                              {project.projectName}
+                            <div className="flex items-center gap-2">
+                              <div
+                                className={`font-medium text-sm ${
+                                  project.status === "sold-out"
+                                    ? "text-gray-500"
+                                    : "text-black"
+                                }`}
+                              >
+                                {project.projectName}
+                              </div>
+                              {project.status === "sold-out" && (
+                                <span className="text-[9px] font-semibold text-red-600 bg-red-50 px-1.5 py-0.5 rounded-full">
+                                  SOLD OUT
+                                </span>
+                              )}
+                              {project.status === "ongoing" && (
+                                <span className="text-[9px] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full">
+                                  ONGOING
+                                </span>
+                              )}
+                              {project.status === "upcoming" && (
+                                <span className="text-[9px] font-semibold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded-full">
+                                  UPCOMING
+                                </span>
+                              )}
+                              {project.status === "limited" && (
+                                <span className="text-[9px] font-semibold text-orange-600 bg-orange-50 px-1.5 py-0.5 rounded-full">
+                                  LIMITED
+                                </span>
+                              )}
                             </div>
-                            <div className="text-xs text-gray-500 mt-1">
+                            <div
+                              className={`text-xs mt-1 ${
+                                project.status === "sold-out"
+                                  ? "text-gray-400"
+                                  : "text-gray-500"
+                              }`}
+                            >
                               {project.location}
                             </div>
                           </div>

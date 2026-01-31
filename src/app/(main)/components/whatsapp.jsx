@@ -24,7 +24,7 @@ const FloatingButtons = () => {
       device: "mobile",
     });
 
-    window.open("https://wa.me/918130371647", "_blank");
+    window.open("https://wa.me/918130371647?text=Hi%20I%20need%20a%20call%20back", "_blank");
   };
 
   return (

@@ -39,7 +39,7 @@ export default async function page() {
       />
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <div className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-cover bg-center">
+        <div className="relative h-[65vh] flex items-center justify-center overflow-hidden bg-cover bg-center">
           <Image
             src={banner}
             alt="banner"
@@ -50,7 +50,7 @@ export default async function page() {
           <Image
             src={bannerMob}
             alt="banner"
-            className="h-full w-full object-cover md:hidden pt-16"
+            className="h-full w-full object-cover md:hidden pt-20"
             fill
             priority
           />

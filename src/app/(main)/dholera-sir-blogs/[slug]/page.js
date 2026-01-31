@@ -868,7 +868,7 @@ export default async function Post({ params }) {
             <div className="max-w-7xl mx-auto px-4">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-bold text-gray-900">
-                  You might also like
+                  Our Latest Blogs
                 </h2>
                 <Link
                   href="/dholera-sir-blogs"
