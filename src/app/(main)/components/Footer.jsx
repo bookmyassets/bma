@@ -30,7 +30,7 @@ export default function Footer() {
             </div>
             {/* Social Icons */}
             <div className="flex gap-4 text-xl mt-4">
-              <Link aria-label='Visit Facebook Page of BookMyAssets' href="https://www.facebook.com/profile.php?id=61574896794632"><FaFacebook className="text-blue-600" /></Link>
+              <Link aria-label='Visit Facebook Page of BookMyAssets' href="https://www.facebook.com/profile.php?id=61583265159985"><FaFacebook className="text-blue-600" /></Link>
               <Link aria-label='Visit Instagram Account of BookMyAssets' href="https://www.instagram.com/bookmyassets/"><FaInstagram className="text-pink-500" /></Link>
               <Link aria-label='Visit X handle of BookMyAssets' href="https://x.com/BookMyAssets"><FaXTwitter className="text-black" /></Link>
               <Link aria-label='Visit LinkedIn Profile of BookMyAssets' href="https://www.linkedin.com/company/bookmyassetss/"><FaLinkedin className="text-blue-700" /></Link>
