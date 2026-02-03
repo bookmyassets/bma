@@ -37,47 +37,29 @@ export default async function page() {
         name="description"
         content="Discover Dholera SIR - India's largest planned industrial and residential hub. Part of Delhi-Mumbai Industrial Corridor with world-class infrastructure, Tata semiconductor plant, and premium investment opportunities with BookMyAssets."
       />
-      <div className="min-h-screen bg-white">
+      <div className="bg-white">
         {/* Hero Section */}
-        <div className="relative h-[65vh] flex items-center justify-center overflow-hidden bg-cover bg-center">
-          <Image
-            src={banner}
-            alt="banner"
-            className="h-full w-full object-cover max-sm:hidden pt-16"
-            fill
-            priority
-          />
-          <Image
-            src={bannerMob}
-            alt="banner"
-            className="h-full w-full object-cover md:hidden pt-20"
-            fill
-            priority
-          />
-
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
-
-          {/* Hero Content */}
-          <div className="relative flex flex-col justify-center items-center z-10 text-center px-4 -space-y-2">
-            <h1 className="text-3xl md:text-4xl pt-8 font-bold text-white mb-4 drop-shadow-lg">
-              DHOLERA SMART CITY
-            </h1>
-
-            <h2 className="text-lg md:text-xl font-semibold text-white mb-4 drop-shadow-md">
-              India’s First Semiconductor Hub
-            </h2>
+        <div className=" pt-16">
+          <div className="md:relative md:h-[65vh] overflow-hidden shadow-lg">
+            <Image
+              src={banner}
+              alt="banner"
+              className="w-full md:h-full h-auto object-contain md:object-cover"
+              quality={85}
+              priority
+              sizes="100vw"
+            />
           </div>
         </div>
 
         {/* Main Content Section */}
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           {/* Introduction Section */}
           <section className="mb-8">
             <div className="text-center mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-black mb-3">
+              <h1 className="text-2xl md:text-3xl font-bold text-black mb-3">
                 What is Dholera SIR?
-              </h2>
+              </h1>
               <div className="w-24 h-1 bg-[#deae3c] mx-auto"></div>
             </div>
 
@@ -762,86 +744,97 @@ export default async function page() {
           </div>
 
           {/* BookMyAssets Section */}
-         <section className="mb-8">
-  <div className="bg-gradient-to-br from-[#deae3c] via-[#d4a435] to-[#c89a2e] rounded-2xl p-8 md:p-12 shadow-2xl">
-    {/* Header */}
-    <div className="text-center mb-10">
-      <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">
-        Why Invest in Dholera with BookMyAssets
-      </h2>
-      <div className="w-32 h-1.5 bg-white/90 mx-auto rounded-full shadow-md"></div>
-    </div>
+          <section className="mb-8">
+            <div className="bg-gradient-to-br from-[#deae3c] via-[#d4a435] to-[#c89a2e] rounded-2xl p-8 md:p-12 shadow-2xl">
+              {/* Header */}
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">
+                  Why Invest in Dholera with BookMyAssets
+                </h2>
+                <div className="w-32 h-1.5 bg-white/90 mx-auto rounded-full shadow-md"></div>
+              </div>
 
-    {/* Introduction Text */}
-    <p className="text-lg md:text-xl text-center mb-10 max-w-4xl mx-auto text-white leading-relaxed">
-      <Link className="font-bold underline hover:text-black transition-colors" href="/contact">
-        BookMyAssets
-      </Link>{" "}
-      connects you to premium residential projects in{" "}
-      <strong>Dholera, Gujarat,</strong> with exceptional long-term growth potential.
-    </p>
-
-    {/* Feature Grid */}
-    <div className="grid md:grid-cols-2 gap-6 mb-10">
-      {[
-        {
-          title: "100% Legal & Transparent",
-          description: "All transactions are fully legal and transparent",
-          icon: "✓"
-        },
-        {
-          title: "Hassle-Free Process",
-          description: "Smooth and easy payment procedures",
-          icon: "✓"
-        },
-        {
-          title: "Government Approved",
-          description: "Projects with clear documentation and approvals",
-          icon: "✓"
-        },
-        {
-          title: "Expert Support",
-          description: "Dedicated support for investors and channel partners",
-          icon: "✓"
-        }
-      ].map((feature, index) => (
-        <div 
-          key={index}
-          className="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-        >
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-[#deae3c] to-[#c89a2e] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
-              <span className="text-white text-2xl font-bold">{feature.icon}</span>
-            </div>
-            <div>
-              <h4 className="text-xl font-bold mb-2 text-gray-900">
-                {feature.title}
-              </h4>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {feature.description}
+              {/* Introduction Text */}
+              <p className="text-lg md:text-xl text-center mb-10 max-w-4xl mx-auto text-white leading-relaxed">
+                <Link
+                  className="font-bold underline hover:text-black transition-colors"
+                  href="/contact"
+                >
+                  BookMyAssets
+                </Link>{" "}
+                connects you to premium residential projects in{" "}
+                <strong>Dholera, Gujarat,</strong> with exceptional long-term
+                growth potential.
               </p>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
 
-    {/* Call-to-Action Box */}
-    <div className="bg-gradient-to-r from-gray-900 to-black text-white rounded-xl p-8 text-center shadow-2xl border-2 border-white/10">
-      <div className="inline-block bg-[#deae3c] text-black px-4 py-1 rounded-full text-sm font-bold mb-4">
-        EXCLUSIVE OPPORTUNITY
-      </div>
-      <h3 className="text-2xl md:text-3xl font-bold mb-4">
-        Early Mover Advantage
-      </h3>
-      <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
-        Secure your position in India's first and largest{" "}
-        <strong className="text-[#deae3c]">Smart City in Gujarat</strong>
-        {" "}— where innovation meets opportunity
-      </p>
-    </div>
-  </div>
-</section>
+              {/* Feature Grid */}
+              <div className="grid md:grid-cols-2 gap-6 mb-10">
+                {[
+                  {
+                    title: "100% Legal & Transparent",
+                    description:
+                      "All transactions are fully legal and transparent",
+                    icon: "✓",
+                  },
+                  {
+                    title: "Hassle-Free Process",
+                    description: "Smooth and easy payment procedures",
+                    icon: "✓",
+                  },
+                  {
+                    title: "Government Approved",
+                    description:
+                      "Projects with clear documentation and approvals",
+                    icon: "✓",
+                  },
+                  {
+                    title: "Expert Support",
+                    description:
+                      "Dedicated support for investors and channel partners",
+                    icon: "✓",
+                  },
+                ].map((feature, index) => (
+                  <div
+                    key={index}
+                    className="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#deae3c] to-[#c89a2e] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                        <span className="text-white text-2xl font-bold">
+                          {feature.icon}
+                        </span>
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-bold mb-2 text-gray-900">
+                          {feature.title}
+                        </h4>
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Call-to-Action Box */}
+              <div className="bg-gradient-to-r from-gray-900 to-black text-white rounded-xl p-8 text-center shadow-2xl border-2 border-white/10">
+                <div className="inline-block bg-[#deae3c] text-black px-4 py-1 rounded-full text-sm font-bold mb-4">
+                  EXCLUSIVE OPPORTUNITY
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                  Early Mover Advantage
+                </h3>
+                <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
+                  Secure your position in India's first and largest{" "}
+                  <strong className="text-[#deae3c]">
+                    Smart City in Gujarat
+                  </strong>{" "}
+                  — where innovation meets opportunity
+                </p>
+              </div>
+            </div>
+          </section>
 
           {/* Final Statement Section */}
           <section>

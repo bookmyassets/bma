@@ -95,23 +95,23 @@ export default function HeroCarousel() {
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
       setCurrentSlide((prev) =>
-        prev === mobileImages.length - 1 ? 0 : prev + 1
+        prev === mobileImages.length - 1 ? 0 : prev + 1,
       );
     } else if (touchEnd - touchStart > 50) {
       setCurrentSlide((prev) =>
-        prev === 0 ? mobileImages.length - 1 : prev - 1
+        prev === 0 ? mobileImages.length - 1 : prev - 1,
       );
     }
   };
 
   const nextSlide = () => {
     setCurrentSlide((prev) =>
-      prev === desktopImages.length - 1 ? 0 : prev + 1
+      prev === desktopImages.length - 1 ? 0 : prev + 1,
     );
   };
   const prevSlide = () => {
     setCurrentSlide((prev) =>
-      prev === 0 ? desktopImages.length - 1 : prev - 1
+      prev === 0 ? desktopImages.length - 1 : prev - 1,
     );
   };
 
@@ -163,7 +163,7 @@ export default function HeroCarousel() {
         console.error("Error downloading brochure:", error);
         window.open(
           "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf",
-          "_blank"
+          "_blank",
         );
       }
     }
@@ -177,7 +177,7 @@ export default function HeroCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1,
       );
     }, 5000);
     return () => clearInterval(interval);
@@ -225,7 +225,7 @@ export default function HeroCarousel() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     const countersSection = document.getElementById("counters-section");
@@ -273,138 +273,202 @@ export default function HeroCarousel() {
         content="Invest in plots in Dholera at WestWyn Estate, 0 km from Dholera SIR, and close to proximity to the activation area at an unbeatable price."
       />
       {/* Hero Section with Carousel */}
-      <div className="h-screen max-sm:h-[90vh] flex flex-col">
-        {" "}
-        <div className="flex-1 flex flex-col lg:flex-row min-h-0">
-          {/* Left Side - Slider Section (60%) */}
-          <div className="w-full lg:w-[60%] relative flex-1">
-            {/* Desktop Slider */}
-            <div className="absolute inset-0 hidden lg:block">
-              <div className="relative w-full h-full overflow-hidden">
-                {desktopImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-
-                {/* Navigation */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-
-                {/* Marquee at bottom of carousel */}
-              </div>
-            </div>
-
-            {/* Mobile Slider */}
-            <div
-              className="absolute inset-0 block lg:hidden overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              {mobileImages.map((image, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover"
-                  />
-                  <button
-                    onClick={prevSlide}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                </div>
-              ))}
-
-              {/* Marquee at bottom of mobile carousel */}
-            </div>
-          </div>
-
-          {/* Right Side - Lead Form Section (40%) */}
-
-          <div className="w-full lg:w-[40%] bg-gray-100 flex items-center justify-center p-4 lg:p-6">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="w-full max-w-md"
-            >
-              {/* Logo Section */}
-              <div className="text-center mb-4 lg:mb-6 h-auto w-auto">
-                <Image
-                  src={logo}
-                  alt="BookMyAssets Logo"
-                  className="mx-auto mb-2 lg:mb-3 h-8 sm:h-10 md:h-12 lg:h-auto w-auto"
-                />
-              </div>
-
-              {/* CTA Buttons Container */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.9, duration: 0.5 }}
-                className="space-y-4"
-              >
-                {/* Primary CTA - Unbeatable Price */}
-                <button
-                  onClick={openContactForm}
-                  className="relative w-full bg-[#deae3c] hover:bg-opacity-90 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 overflow-hidden group"
-                >
-                  {/* Animated background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <div className="text-sm lg:text-xl font-extrabold mb-1 leading-tight">
-                      Unbeatable Price in Dholera:{" "}
-                      <span className="text-lg">
-                        <br />
-                        Plots Under ₹10 Lakh | 0 km from Dholera SIR
-                      </span>
+      <div id="hero" className="relative min-h-screen bg-white">
+              <div className="h-screen max-sm:h-[90vh] flex flex-col">
+                {/* Main Content Section */}
+                <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+                  {/* Left Side - Slider Section (60%) */}
+                  <div className="w-full lg:w-[60%] relative flex-1">
+                    {/* Desktop Slider */}
+                    <div className="absolute inset-0 hidden lg:block">
+                      <div className="relative w-full md:h-[100vh] overflow-hidden">
+                        {desktopImages.map((image, index) => (
+                          <div
+                            key={index}
+                            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                              index === currentSlide ? "opacity-100" : "opacity-0"
+                            }`}
+                          >
+                            <Image
+                              src={image.src}
+                              alt={image.alt}
+                              fill
+                              className="max-sm:object-cover pt-8"
+                              priority={index === 0}
+                            />
+                          </div>
+                        ))}
+                        {/* Navigation */}
+                        <button
+                          onClick={prevSlide}
+                          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                        >
+                          <ChevronLeft className="w-6 h-6" />
+                        </button>
+                        <button
+                          onClick={nextSlide}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                        >
+                          <ChevronRight className="w-6 h-6" />
+                        </button>
+                      </div>
+                    </div>
+      
+                    {/* Mobile Slider */}
+                    <div
+                      className="absolute inset-0 block lg:hidden overflow-hidden"
+                      onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
+                      role="region"
+                      aria-label="Mobile image carousel"
+                    >
+                      {desktopImages.map((image, index) => (
+                        <div
+                          key={`mobile-${index}`}
+                          className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                          style={{
+                            opacity: index === currentSlide ? 1 : 0,
+                            pointerEvents: index === currentSlide ? "auto" : "none",
+                          }}
+                        >
+                          <div className="mb-10 overflow-hidden shadow-lg pt-20">
+                            <Image
+                              src={image.src}
+                              alt={image.alt}
+                              width={1200}
+                              height={675}
+                              className="w-full h-auto object-contain"
+                              quality={85}
+                              fetchPriority={index === 0 ? "high" : "low"}
+                              sizes="100vw"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                      {/* Navigation buttons for mobile */}
+                      <button
+                        onClick={prevSlide}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                      >
+                        <ChevronLeft className="w-6 h-6" />
+                      </button>
+                      <button
+                        onClick={nextSlide}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                      >
+                        <ChevronRight className="w-6 h-6" />
+                      </button>
                     </div>
                   </div>
-
-                  {/* Pulse animation */}
-                  <div className="absolute inset-0 rounded-xl bg-[#deae3c] opacity-30 animate-pulse"></div>
-                </button>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-        {/* Bottom Stats Section - Compact */}
-      </div>
+      
+                  {/* Right Side - Lead Form Section (40%) */}
+                  <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6">
+                    <motion.div
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5, duration: 0.8 }}
+                      className="w-full max-w-md"
+                    >
+                      {/* Logo */}
+                      <div className="text-center mb-6">
+                        <Image
+                          src={logo}
+                          alt="BookMyAssets Logo"
+                          className="mx-auto mb-3"
+                        />
+      
+                        <div className="relative">
+                          <style jsx>{`
+                            @keyframes textGlow {
+                              0%,
+                              100% {
+                                text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
+                                color: black;
+                              }
+                              50% {
+                                text-shadow:
+                                  0 0 20px rgba(255, 255, 255, 1),
+                                  0 0 30px rgba(255, 255, 255, 0.8);
+                                color: black;
+                              }
+                            }
+      
+                            .flashy-blink {
+                              animation: flashyBlink 3s infinite ease-in-out;
+                              padding: 4px;
+                              border-radius: 1rem;
+                              border: 3px solid #deae3c;
+                            }
+      
+                            .glowing-text {
+                              animation: textGlow 1s infinite ease-in-out;
+                            }
+                          `}</style>
+      
+                          <div className="flashy-blink">
+                            <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
+                              WestWyn Estate - Premium Residential Plots
+                            </h2>
+                            <p className="text-sm lg:text-base glowing-text">
+                              Get Residential Plots Under ₹10 Lakh | 0 km from SIR
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+      
+                      {/* CTA Buttons */}
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.9, duration: 0.5 }}
+                        className="space-y-4"
+                      >
+                        {/* Primary CTA */}
+                        <motion.button
+                          onClick={() =>
+                            openContactForm(
+                              "Get Exclusive Pricing",
+                              "Fill the form to get the best prices",
+                              "Get Pricing",
+                              "contact",
+                            )
+                          }
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.0 }}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold"
+                        >
+                          Unbeatable Price in Dholera
+                        </motion.button>
+      
+                        {/* Secondary CTA */}
+                        <motion.button
+                          onClick={() =>
+                            openBrochureForm(
+                              "Get Verified Project Details",
+                              "Please fill out the form to download our brochure",
+                              "Get Project Details",
+                              "brochure",
+                            )
+                          }
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.1 }}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="w-full py-3 px-6 bg-white border-2 border-yellow-500 text-yellow-600 rounded-lg hover:bg-yellow-50 transition-all shadow-md font-semibold"
+                        >
+                          Download Brochure
+                        </motion.button>
+                      </motion.div>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
       <div className="pt-4 pb-4">
         {/* Section 2 - About */}

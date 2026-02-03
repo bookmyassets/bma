@@ -10,7 +10,6 @@ import InteractiveMap from "./homeComponents/InteractiveMap";
 import Groundzero from "./homeComponents/Groundzero";
 import PopupForm from "./components/PopUpForm";
 
-
 export default function page() {
   const [showpopForm, setpopShowForm] = useState(false);
 
@@ -23,6 +22,10 @@ export default function page() {
       <meta
         name="description"
         content="Secure your future with BookMyAssets! Hassle-free residential property investment with clear titles and N.A. NOC. Start your journey today!"
+      />
+      <meta
+        name="keywords"
+        content="Dholera Smart City, Dholera plots, plots in Dholera, Dholera SIR plots, Dholera land investment, Dholera Smart City investment, residential plots in Dholera, industrial plots in Dholera, Dholera real estate, Dholera investment opportunities, BookMyAssets, Gujarat smart city plots, DMIC corridor, Investments in Dholera Smart City, dholera latest news, Dholera International Airport, Dholera Solar Park,  Ahmedabad Dholera Expressway, Dholera SIR, Dholera plot prices,Dholera Smart City Project"
       />
       <link rel="canonical" href={`https://www.bookmyassets.com/`} />
       <script
@@ -162,10 +165,12 @@ export default function page() {
         <ShortsSection />
         <Groundzero />
         <FAQSection />
-
       </div>
-      
-      <PopupForm title="Best investment-ready locations in Dholera" project="Home-Page"/>
+
+      <PopupForm
+        title="Best investment-ready locations in Dholera"
+        project="Home-Page"
+      />
     </>
   );
 }

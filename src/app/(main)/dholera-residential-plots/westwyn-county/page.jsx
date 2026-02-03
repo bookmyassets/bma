@@ -282,21 +282,30 @@ export default function HeroCarousel() {
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
+                role="region"
+                aria-label="Mobile image carousel"
               >
-                {mobileImages.map((image, index) => (
+                {desktopImages.map((image, index) => (
                   <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-700  ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
+                    key={`mobile-${index}`}
+                    className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                    style={{
+                      opacity: index === currentSlide ? 1 : 0,
+                      pointerEvents: index === currentSlide ? "auto" : "none",
+                    }}
                   >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover pt-16"
-                      priority={index === 0}
-                    />
+                    <div className="mb-10 overflow-hidden shadow-lg pt-20">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={1200}
+                        height={675}
+                        className="w-full h-auto object-contain"
+                        quality={85}
+                        fetchPriority={index === 0 ? "high" : "low"}
+                        sizes="100vw"
+                      />
+                    </div>
                   </div>
                 ))}
                 {/* Navigation buttons for mobile */}
@@ -328,7 +337,7 @@ export default function HeroCarousel() {
                   <Image
                     src={logo}
                     alt="BookMyAssets Logo"
-                    className="mx-auto mb-3 max-sm:hidden"
+                    className="mx-auto mb-3"
                   />
 
                   <div className="relative">
@@ -429,7 +438,11 @@ export default function HeroCarousel() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
-              About <span className="max-sm:hidden"><br /></span> WestWyn County
+              About{" "}
+              <span className="max-sm:hidden">
+                <br />
+              </span>{" "}
+              WestWyn County
             </h2>
           </div>
 

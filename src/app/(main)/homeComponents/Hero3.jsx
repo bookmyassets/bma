@@ -34,10 +34,9 @@ const SliderImage = memo(({ src, alt, isActive, priority, className }) => (
       alt={alt}
       className="object-cover"
       fill
-      quality={isActive ? 85 : 50}
+      quality={85}
       loading={priority ? "eager" : "lazy"}
       priority={priority}
-      sizes="(max-width: 1024px) 100vw, 60vw"
     />
   </div>
 ));
@@ -506,7 +505,7 @@ export default function LandingPage({ openForm }) {
               role="region"
               aria-label="Mobile image carousel"
             >
-              {mobileImages.map((image, index) => (
+              {desktopImages.map((image, index) => (
                 <div
                   key={`mobile-${index}`}
                   className="absolute inset-0 transition-opacity duration-700 ease-in-out"
@@ -515,14 +514,18 @@ export default function LandingPage({ openForm }) {
                     pointerEvents: index === currentSlide ? "auto" : "none",
                   }}
                 >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    className="object-cover pt-16"
-                    quality={index === 0 ? 85 : 50}
-                    fetchPriority="high"
-                    sizes="100vw"
-                  />
+                  <div className="mb-10 overflow-hidden shadow-lg pt-20">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={1200}
+                      height={675}
+                      className="w-full h-auto object-contain"
+                      quality={85}
+                      fetchPriority={index === 0 ? "high" : "low"}
+                      sizes="100vw"
+                    />
+                  </div>
                 </div>
               ))}
               <NavButton
@@ -549,7 +552,7 @@ export default function LandingPage({ openForm }) {
                 <Image
                   src={logo}
                   alt="BookMyAssets - Dholera Property Investment"
-                  className="mx-auto mb-3 max-sm:hidden"
+                  className="mx-auto mb-3 "
                   fetchPriority="high"
                   height={120}
                 />

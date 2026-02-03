@@ -293,7 +293,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all  duration-300 bg-white`}
       >
         {/*  <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -450,7 +450,7 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            <div className="md:hidden ">
               <button
                 onClick={toggleMobileMenu}
                 className={`p-2 rounded-md transition-colors duration-300 ${
@@ -836,7 +836,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-30 md:hidden transition-all duration-300 ${
+        className={`fixed inset-0 z-30 md:hidden  transition-all duration-300 ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >

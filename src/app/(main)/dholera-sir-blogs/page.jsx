@@ -54,45 +54,22 @@ export default async function page() {
       />
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}
-        <div className="relative md:min-h-[60vh] flex items-center justify-center py-8 sm:py-12">
-          {/* Background Image with Overlay */}
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={hero}
-              alt="Dholera SIR Development"
-              fill
-              className="object-cover max-sm:hidden"
-              priority
-            />
-            <Image
-              src={heroM}
-              alt="Dholera SIR Development"
-              fill
-              className=" md:hidden"
-              priority
-            />
-            {/* Gradient Overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60"></div>
-          </div>
-
-          {/* Hero Content */}
-          <div className="relative pt-4 z-10 w-full max-w-7xl mx-auto px-4 text-center">
-            <div className="mb-6 sm:mb-8 max-sm:pt-12">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-                Dholera SIR
-                <span className="block bg-[#deae3c] bg-clip-text text-transparent">
-                  Investment Blog
-                </span>
-              </h1>
-            </div>
-
-            {/* Form Component - Responsive */}
-            <div className="relative z-10 w-full max-w-4xl mx-auto px-2 sm:px-4">
-              <div className="transform scale-90 sm:scale-95 md:scale-100">
-                <FormComponent />
-              </div>
+        <div className="bg-white">
+          {/* Hero Section */}
+          <div className="pt-16 md:pt-20">
+            <div className="md:relative md:h-[60vh] overflow-hidden shadow-lg">
+              <Image
+                src={hero}
+                alt="Dholera SIR Development"
+                className="w-full md:h-[60vh] h-auto object-contain md:object-cover"
+                quality={100}
+                priority
+                sizes="100vw"
+              />
             </div>
           </div>
+
+          
         </div>
 
         {/* Blog Posts Section */}
