@@ -4,7 +4,7 @@ import BlogCard from "./BlogCard";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import FormComponent from "./FormComponent";
-import hero from "@/assests/sir-hero.webp";
+import hero from "@/assests/sir-hero2.webp";
 import heroM from "@/assests/blog-hero-banner.webp";
 
 export default async function page() {

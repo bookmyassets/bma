@@ -9,6 +9,9 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 import img1 from "@/assests/homepage/hero/westwyn-estate-dholera-residential-plots-desktop.webp";
 import img2 from "@/assests/homepage/hero/dholera-international-airport-desktop.webp";
 import img3 from "@/assests/homepage/hero/silk-route-park-dholera-desktop.webp";
+import img4 from "@/assests/homepage/hero/expressway_hero.webp";
+import img5 from "@/assests/homepage/hero/river_front_hero.webp";
+import img6 from "@/assests/homepage/hero/tata_gate_hero.webp";
 
 import imgM1 from "@/assests/homepage/hero/westwyn-estate-dholera-residential-plots-mobile.webp";
 import imgM2 from "@/assests/homepage/hero/dholera-international-airport-mobile.webp";
@@ -162,6 +165,9 @@ export default function LandingPage({ openForm }) {
       alt: "Dholera International Airport - Smart City Infrastructure Development",
     },
     { src: img3, alt: "Silk Route Park Dholera - Modern Urban Development" },
+    { src: img4, alt: "Dholera Ahmedabad Expressway" },
+    { src: img5, alt: "River Front" },
+    { src: img6, alt: "Tata Semicon" },
   ];
 
   const mobileImages = [
@@ -419,242 +425,244 @@ export default function LandingPage({ openForm }) {
   return (
     <>
       {/* Inline critical CSS */}
-      <style jsx>{`
-        @keyframes textGlow {
-          0%,
-          100% {
-            text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
-            color: black;
-          }
-          50% {
-            text-shadow:
-              0 0 20px rgba(255, 255, 255, 1),
-              0 0 30px rgba(255, 255, 255, 0.8);
-            color: black;
-          }
-        }
-        @keyframes flashyBlink {
-          0%,
-          100% {
-            border-color: #deae3c;
-          }
-          50% {
-            border-color: rgba(222, 174, 60, 0.3);
-          }
-        }
-        .flashy-blink {
-          animation: flashyBlink 3s infinite ease-in-out;
-          padding: 4px;
-          border-radius: 1rem;
-          border: 3px solid #deae3c;
-        }
-        .glowing-text {
-          animation: textGlow 1s infinite ease-in-out;
-        }
-      `}</style>
+      <div id="hero" className="relative min-h-screen bg-white">
+        <div className="h-screen max-sm:h-auto flex flex-col">
+          {/* Main Content Section */}
+          <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+            {/* Left Side - Slider Section (60%) */}
+            <div className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[50vh]">
+              {/* Desktop Slider */}
+              <div className="absolute inset-0 hidden lg:block">
+                <div className="relative w-full h-full overflow-hidden">
+                  {desktopImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                        index === currentSlide ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        className="md:object-contain md:pt-8"
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+                  {/* Navigation */}
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                  <div className="absolute bottom-0 left-0 right-0 z-20">
+                    <Running />
+                  </div>
+                </div>
+              </div>
 
-      <div className="h-screen max-sm:h-[87vh] flex flex-col">
-        {/* Main Content Section */}
-        <div className="flex-1 flex flex-col lg:flex-row min-h-0">
-          {/* Left Side - Desktop Slider Section (60%) */}
-          <section
-            className="w-full lg:w-[60%] relative flex-1"
-            aria-label="Property showcase"
-          >
-            {/* Desktop Slider */}
-            <div className="absolute inset-0 hidden lg:block">
+              {/* Mobile Slider */}
               <div
-                ref={slideContainerRef}
-                className="relative w-full h-[100vh] overflow-hidden"
+                className="absolute inset-0 block lg:hidden overflow-hidden"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
                 role="region"
-                aria-label="Image carousel"
+                aria-label="Mobile image carousel"
               >
                 {desktopImages.map((image, index) => (
-                  <SliderImage
-                    key={`desktop-${index}`}
-                    src={image.src}
-                    alt={image.alt}
-                    isActive={index === currentSlide}
-                    priority={index === 0}
-                    className="pt-8"
-                  />
+                  <div
+                    key={`mobile-${index}`}
+                    className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                    style={{
+                      opacity: index === currentSlide ? 1 : 0,
+                      pointerEvents: index === currentSlide ? "auto" : "none",
+                    }}
+                  >
+                    <div className="h-full flex items-center justify-center px-1 pt-16 pb-4">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={1200}
+                        height={675}
+                        className="w-full h-auto object-contain rounded-lg shadow-lg"
+                        quality={85}
+                        fetchPriority={index === 0 ? "high" : "low"}
+                        sizes="100vw"
+                      />
+                    </div>
+                  </div>
                 ))}
-                {/* Navigation */}
-                <NavButton
+                {/* Navigation buttons for mobile */}
+                <button
                   onClick={prevSlide}
-                  direction="left"
-                  ariaLabel="Previous slide"
-                />
-                <NavButton
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
                   onClick={nextSlide}
-                  direction="right"
-                  ariaLabel="Next slide"
-                />
-                <div className="absolute bottom-0 left-0 right-0 z-20">
-                  <Running />
-                </div>
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
               </div>
             </div>
 
-            {/* Mobile Slider */}
-            <div
-              className="absolute inset-0 block lg:hidden overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              role="region"
-              aria-label="Mobile image carousel"
-            >
-              {desktopImages.map((image, index) => (
-                <div
-                  key={`mobile-${index}`}
-                  className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-                  style={{
-                    opacity: index === currentSlide ? 1 : 0,
-                    pointerEvents: index === currentSlide ? "auto" : "none",
-                  }}
-                >
-                  <div className="mb-10 overflow-hidden shadow-lg pt-20">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      width={1200}
-                      height={675}
-                      className="w-full h-auto object-contain"
-                      quality={85}
-                      fetchPriority={index === 0 ? "high" : "low"}
-                      sizes="100vw"
-                    />
+            {/* Right Side - Lead Form Section (40%) */}
+            <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 sm:p-6 lg:p-8">
+              <div
+                className="w-full max-w-md"
+              >
+                {/* Logo */}
+                <div className="text-center mb-4 sm:mb-6 max-sm:space-y-6">
+                  <Image
+                    src={logo}
+                    alt="BookMyAssets - Dholera Property Investment"
+                    className="mx-auto mb-2 sm:mb-3"
+                    fetchPriority="high"
+                    height={120}
+                  />
+
+                  <div className="relative max-sm:space-y-8">
+                    <style jsx>{`
+                      @keyframes textGlow {
+                        0%,
+                        100% {
+                          text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
+                          color: black;
+                        }
+                        50% {
+                          text-shadow:
+                            0 0 20px rgba(255, 255, 255, 1),
+                            0 0 30px rgba(255, 255, 255, 0.8);
+                          color: black;
+                        }
+                      }
+
+                      .flashy-blink {
+                        animation: flashyBlink 3s infinite ease-in-out;
+                        padding: 4px;
+                        border-radius: 1rem;
+                        border: 3px solid #deae3c;
+                      }
+
+                      .glowing-text {
+                        animation: textGlow 1s infinite ease-in-out;
+                      }
+                    `}</style>
+
+                    <div className="flashy-blink">
+                      <h1 className="text-xl sm:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 glowing-text px-2">
+                        Dholera Plots under ₹10 Lakh
+                      </h1>
+                      <p className="text-sm md:text-base glowing-text px-2">
+                        0 KM from Dholera SIR Boundary
+                      </p>
+                    </div>
                   </div>
                 </div>
-              ))}
-              <NavButton
-                onClick={prevSlide}
-                direction="left"
-                ariaLabel="Previous slide"
-              />
-              <NavButton
-                onClick={nextSlide}
-                direction="right"
-                ariaLabel="Next slide"
-              />
-            </div>
-          </section>
 
-          {/* Right Side - Lead Form Section (40%) */}
-          <section
-            className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6"
-            aria-label="Contact form"
-          >
-            <div className="w-full max-w-md">
-              {/* Logo */}
-              <div className="text-center mb-6">
-                <Image
-                  src={logo}
-                  alt="BookMyAssets - Dholera Property Investment"
-                  className="mx-auto mb-3 "
-                  fetchPriority="high"
-                  height={120}
-                />
-
-                <div className="relative">
-                  <div className="flashy-blink">
-                    <h1 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
-                      Dholera Plots under ₹10 Lakh
-                    </h1>
-                    <p className="text-sm lg:text-base glowing-text">
-                      0 KM from Dholera SIR Boundary
+                {showPopup ? (
+                  <div
+                    className="text-center py-6"
+                    role="alert"
+                    aria-live="polite"
+                  >
+                    <div className="mb-4 inline-block">
+                      <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-10 w-10 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <h2 className="text-xl font-bold text-black mb-2">
+                      Thank You!
+                    </h2>
+                    <p className="text-gray-600 text-sm">
+                      Your request has been submitted successfully. We'll
+                      contact you shortly.
                     </p>
                   </div>
-                </div>
-              </div>
-
-              {showPopup ? (
-                <div
-                  className="text-center py-6"
-                  role="alert"
-                  aria-live="polite"
-                >
-                  <div className="mb-4 inline-block">
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-10 w-10 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <h2 className="text-xl font-bold text-black mb-2">
-                    Thank You!
-                  </h2>
-                  <p className="text-gray-600 text-sm">
-                    Your request has been submitted successfully. We'll contact
-                    you shortly.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {errorMessage && (
-                    <div
-                      className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm"
-                      role="alert"
-                    >
-                      {errorMessage}
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-2 gap-2 items-center">
-                    <FormInput
-                      name="fullName"
-                      placeholder="Enter Name"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      icon={UserIcon}
-                      required
-                      autoComplete="name"
-                      aria-label="Full Name"
-                    />
-                    <FormInput
-                      name="phone"
-                      type="tel"
-                      placeholder="Mobile No"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      icon={PhoneIcon}
-                      minLength={10}
-                      maxLength={15}
-                      required
-                      autoComplete="tel"
-                      aria-label="Phone Number"
-                    />
-                  </div>
-
-                  {/* reCAPTCHA container */}
-                  <div className="flex justify-center">
-                    <div ref={recaptchaRef}></div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed touch-manipulation"
+                ) : (
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
                   >
-                    {isLoading ? "Submitting..." : "Get A Call Back"}
-                  </button>
-                </form>
-              )}
+                    {errorMessage && (
+                      <div
+                        className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm"
+                        role="alert"
+                      >
+                        {errorMessage}
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-2 gap-2 items-center">
+                      <FormInput
+                        name="fullName"
+                        placeholder="Enter Name"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        icon={UserIcon}
+                        required
+                        autoComplete="name"
+                        aria-label="Full Name"
+                      />
+                      <FormInput
+                        name="phone"
+                        type="tel"
+                        placeholder="Mobile No"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        icon={PhoneIcon}
+                        minLength={10}
+                        maxLength={15}
+                        required
+                        autoComplete="tel"
+                        aria-label="Phone Number"
+                      />
+                    </div>
+
+                    {/* reCAPTCHA container */}
+                    <div className="flex justify-center">
+                      <div ref={recaptchaRef}></div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-sm sm:text-base rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed touch-manipulation"
+                    >
+                      {isLoading ? "Submitting..." : "Get A Call Back"}
+                    </button>
+                  </form>
+                )}
+              </div>
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </>
