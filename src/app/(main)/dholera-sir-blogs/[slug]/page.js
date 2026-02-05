@@ -191,13 +191,16 @@ export default async function Post({ params }) {
         image: ({ value }) => {
           if (!value?.asset) return null;
 
-          const imageUrl = value.asset.url || urlFor(value).width(1200).url();
+          const imageUrl =
+            value.asset.url || urlFor(value).width(1200).height(800).url();
 
           const imageNode = (
             <img
               src={imageUrl}
               alt={value.alt || ""}
-              className="w-full rounded-lg my-6"
+              className="w-full h-auto aspect-[3/2] rounded-lg my-6"
+              width={1200}
+              height={800}
               loading="lazy"
             />
           );
@@ -807,13 +810,13 @@ export default async function Post({ params }) {
 
                 {/* Featured Image */}
                 {post.mainImage && (
-                  <div className="mb-10 overflow-hidden rounded-xl shadow-lg">
+                  <div className="mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
                     <Image
-                      src={urlFor(post.mainImage).width(1200).height(675).url()}
+                      src={urlFor(post.mainImage).width(1200).height(800).url()}
                       alt={post.title}
                       width={1200}
-                      height={675}
-                      className="w-full h-auto object-contain"
+                      height={800}
+                      className="w-full h-auto aspect-[3/2]"
                       priority
                     />
                   </div>

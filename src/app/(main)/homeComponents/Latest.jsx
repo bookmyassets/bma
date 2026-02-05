@@ -13,58 +13,65 @@ const RelatedBlogCard = ({ item, type }) => {
       : `/dholera-sir-updates/${item.slug?.current || "#"}`;
 
   return (
-    <div className="bg-white rounded-lg shadow-2xl  overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105 md:flex-col">
-      {/* Mobile: Horizontal Layout | Desktop: Vertical Layout */}
-      <div className="flex flex-row md:flex-col h-full">
+    <div className="flex-shrink-0 w-56 md:w-72 mx-3 snap-center cursor-pointer transform transition-all duration-300 hover:scale-100 md:hover:scale-105 ">
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-shadow duration-300">
         {/* Image */}
-        <div className="relative w-32 h-32 md:w-full md:h-48 flex-shrink-0">
+        <div className="relative w-full h-36 md:h-48">
           {item.mainImage ? (
             <Image
               src={`${urlFor(item.mainImage).url()}`}
               alt={item.title}
               fill
-              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
+              className="aspect-video"
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400 text-xs md:text-base">
-                No image
-              </span>
+              <span className="text-gray-400">No image</span>
             </div>
           )}
         </div>
 
         {/* Content */}
-        <div className="flex flex-col flex-grow max-sm:w-32 max-sm:h-32">
-          <Link
-            href={slug}
-            className="w-full px-4 py-2 transition-all font-semibold border-white hover:bg-[#deae3c] bg-black hover:text-black text-lg md:text-base text-[#deae3c] h-full flex flex-col justify-between space-y-2 md:space-y-3"
-          >
+        <div className="p-4">
+          <Link href={slug} className="block">
             {/* Title */}
-            <h3 className="text-base md:text-lg font-semibold line-clamp-2 md:line-clamp-2 md:h-14">
+            <h3 className="text-base font-semibold text-gray-800 line-clamp-2 mb-2 hover:text-[#deae3c] transition-colors duration-300">
               {item.title}
             </h3>
 
             {/* Meta info */}
-            <div className="text-xs md:text-sm text-gray-400">
-              <time>
+            <div className="text-xs text-gray-500 mb-3">
+              <time className="block mb-1">
                 {new Date(
-                  item.publishedAt || item._createdAt
+                  item.publishedAt || item._createdAt,
                 ).toLocaleDateString("en-US", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
                 })}
               </time>
-              <div>
-                <span className="font-medium text-white">BookMyAssets</span>
-              </div>
+              <span className="font-medium">BookMyAssets</span>
             </div>
-
+            {/* 16/9 */}
             {/* CTA */}
-            <div className="underline underline-offset-4 text-sm md:text-lg">
+            <span className="text-[#deae3c] hover:text-[#deae4c] text-sm font-medium inline-flex items-center group">
               Read More
-            </div>
+              <svg
+                className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </span>
           </Link>
         </div>
       </div>
@@ -74,15 +81,14 @@ const RelatedBlogCard = ({ item, type }) => {
 
 // Loading skeleton component
 const BlogSkeleton = () => (
-  <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-    {/* Mobile: Horizontal | Desktop: Vertical */}
-    <div className="flex flex-row md:flex-col">
-      <div className="w-32 h-32 md:w-full md:h-48 bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse flex-shrink-0"></div>
-      <div className="p-4 md:p-6 flex-grow">
-        <div className="h-3 md:h-4 bg-gray-200 rounded w-1/4 mb-2 md:mb-3 animate-pulse"></div>
-        <div className="h-4 md:h-6 bg-gray-200 rounded w-3/4 mb-2 md:mb-3 animate-pulse"></div>
-        <div className="h-3 md:h-4 bg-gray-200 rounded w-full mb-2 animate-pulse"></div>
-        <div className="h-3 md:h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
+  <div className="flex-shrink-0 w-64 md:w-80 mx-3 snap-center">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+      <div className="w-full h-48 md:h-56 bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse"></div>
+      <div className="p-4">
+        <div className="h-4 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>
+        <div className="h-4 bg-gray-200 rounded w-full mb-3 animate-pulse"></div>
+        <div className="h-3 bg-gray-200 rounded w-1/2 mb-2 animate-pulse"></div>
+        <div className="h-3 bg-gray-200 rounded w-1/3 animate-pulse"></div>
       </div>
     </div>
   </div>
@@ -92,30 +98,31 @@ export default function LatestUpdates() {
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+  const sliderRef = React.useRef(null);
+  const autoPlayIntervalRef = React.useRef(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const fetchContent = async () => {
       try {
         setLoading(true);
 
-        // Fetch both blogs and updates in parallel
         const [blogsData, updatesData] = await Promise.allSettled([
           getblogs(),
           getUpdates(),
         ]);
 
-        // Handle the results
         const blogs = blogsData.status === "fulfilled" ? blogsData.value : [];
         const updates =
           updatesData.status === "fulfilled" ? updatesData.value : [];
 
-      /*   console.log("Blogs fetched:", blogs?.length || 0);
-        console.log("Updates fetched:", updates?.length || 0); */
-
-        // Normalize and combine data
         const combined = [];
 
-        // Add blogs with type identifier
         if (blogs && Array.isArray(blogs)) {
           blogs.forEach((post) => {
             if (post && post._id) {
@@ -131,7 +138,6 @@ export default function LatestUpdates() {
           });
         }
 
-        // Add updates with type identifier
         if (updates && Array.isArray(updates)) {
           updates.forEach((post) => {
             if (post && post._id) {
@@ -146,32 +152,18 @@ export default function LatestUpdates() {
             }
           });
         }
-/* 
-        console.log("Combined content:", combined.length); */
 
-        // Sort by date (most recent first) and take only 4
         const latest4 = combined
-          .filter((item) => item.publishedAt) // Filter out items without dates
+          .filter((item) => item.publishedAt)
           .sort((a, b) => {
             const dateA = new Date(a.publishedAt);
             const dateB = new Date(b.publishedAt);
-            return dateB - dateA; // Most recent first
+            return dateB - dateA;
           })
           .slice(0, 4);
 
-        /* console.log(
-          "Latest 4 items:",
-          latest4.map((item) => ({
-            title: item.title,
-            type: item.type,
-            date: item.publishedAt,
-            id: item._id,
-          }))
-        ); */
-
         setContent(latest4);
       } catch (err) {
-        /* console.error("Error fetching content:", err); */
         setError(err.message || "Failed to load content");
       } finally {
         setLoading(false);
@@ -181,40 +173,194 @@ export default function LatestUpdates() {
     fetchContent();
   }, []);
 
+  // Scroll to current index
+  useEffect(() => {
+    if (sliderRef.current && isClient) {
+      const cardWidth = window.innerWidth < 768 ? 256 + 24 : 320 + 24;
+      sliderRef.current.scrollTo({
+        left: currentIndex * cardWidth,
+        behavior: "smooth",
+      });
+    }
+  }, [currentIndex, isClient]);
+
+  // Auto slide
+  useEffect(() => {
+    if (autoPlayIntervalRef.current) {
+      clearInterval(autoPlayIntervalRef.current);
+    }
+
+    if (!loading && content.length > 0) {
+      autoPlayIntervalRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev === content.length - 1 ? 0 : prev + 1));
+      }, 4000);
+    }
+
+    return () => {
+      if (autoPlayIntervalRef.current) {
+        clearInterval(autoPlayIntervalRef.current);
+      }
+    };
+  }, [loading, content.length]);
+
+  const handleArrowClick = (direction) => {
+    if (autoPlayIntervalRef.current) {
+      clearInterval(autoPlayIntervalRef.current);
+    }
+
+    if (direction === "prev") {
+      setCurrentIndex((prev) => (prev === 0 ? content.length - 1 : prev - 1));
+    } else {
+      setCurrentIndex((prev) => (prev === content.length - 1 ? 0 : prev + 1));
+    }
+
+    setTimeout(() => {
+      autoPlayIntervalRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev === content.length - 1 ? 0 : prev + 1));
+      }, 4000);
+    }, 10000);
+  };
+
+  const handleDotClick = (index) => {
+    if (autoPlayIntervalRef.current) {
+      clearInterval(autoPlayIntervalRef.current);
+    }
+
+    setCurrentIndex(index);
+
+    setTimeout(() => {
+      autoPlayIntervalRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev === content.length - 1 ? 0 : prev + 1));
+      }, 4000);
+    }, 10000);
+  };
+
   if (error) {
     return (
-      <div className="max-w-7xl mx-auto py-4 md:py-16 px-4">
-        <p className="text-[28px] font-semibold mb-6">Featured Content</p>
-        <div className="text-center text-red-500">
-          <p>Error loading content. Please try again later.</p>
-          <p className="text-sm">{error}</p>
+      <div className="py-12 bg-white min-h-[480px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-xl md:text-4xl text-center font-bold text-gray-800 mb-4">
+            Featured Content
+          </p>
+          <div className="text-center text-red-500">
+            <p>Error loading content. Please try again later.</p>
+            <p className="text-sm">{error}</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-4 md:py-16 px-4">
-      <p className="text-[28px] font-semibold mb-6 text-center">
-        Featured Content
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {loading
-          ? Array(4)
-              .fill(0)
-              .map((_, i) => <BlogSkeleton key={i} />)
-          : content.length > 0
-            ? content.map((item) => (
-                <RelatedBlogCard
-                  key={`${item.type}-${item._id}`}
-                  item={item}
-                  type={item.type}
+    <>
+      <div className="py-12 bg-white min-h-[480px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-xl md:text-4xl text-center font-bold text-gray-800 mb-4">
+            Featured Content
+          </p>
+          <p className="text-gray-600 text-sm md:text-lg text-center mb-12 max-w-5xl mx-auto">
+            Stay updated with the latest insights and developments from
+            BookMyAssets
+          </p>
+
+          {/* Slider Container */}
+          <div className="relative">
+            <div
+              ref={sliderRef}
+              className="flex overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide"
+            >
+              {loading
+                ? Array(4)
+                    .fill(0)
+                    .map((_, i) => <BlogSkeleton key={i} />)
+                : content.length > 0
+                  ? content.map((item) => (
+                      <RelatedBlogCard
+                        key={`${item.type}-${item._id}`}
+                        item={item}
+                        type={item.type}
+                      />
+                    ))
+                  : Array(4)
+                      .fill(0)
+                      .map((_, i) => <BlogSkeleton key={i} />)}
+            </div>
+
+            {/* Navigation Arrows */}
+            {isClient && !loading && content.length > 0 && (
+              <>
+                <button
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg hidden md:flex items-center justify-center z-10 transition-all duration-300 hover:scale-110"
+                  onClick={() => handleArrowClick("prev")}
+                  aria-label="Previous slide"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg hidden md:flex items-center justify-center z-10 transition-all duration-300 hover:scale-110"
+                  onClick={() => handleArrowClick("next")}
+                  aria-label="Next slide"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Dots Indicator */}
+          {!loading && content.length > 0 && (
+            <div className="flex justify-center mt-8 space-x-3">
+              {content.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                    currentIndex === index
+                      ? "bg-blue-600 scale-125"
+                      : "bg-gray-300 hover:bg-gray-400"
+                  }`}
+                  onClick={() => handleDotClick(index)}
+                  aria-label={`Go to slide ${index + 1}`}
                 />
-              ))
-            : Array(4)
-                .fill(0)
-                .map((_, i) => <BlogSkeleton key={i} />)}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* Custom CSS */}
+      <style jsx global>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+    </>
   );
 }

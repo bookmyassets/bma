@@ -1,6 +1,11 @@
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import { getPostBySlug, getUpdates, getblogs, projectInfo } from "@/sanity/lib/api";
+import {
+  getPostBySlug,
+  getUpdates,
+  getblogs,
+  projectInfo,
+} from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 import BlogSchemaMarkup from "../BlogSchemaMarkup";
@@ -180,13 +185,16 @@ export default async function Post({ params }) {
         image: ({ value }) => {
           if (!value?.asset) return null;
 
-          const imageUrl = value.asset.url || urlFor(value).width(1200).url();
+          const imageUrl =
+            value.asset.url || urlFor(value).width(1200).height(800).url();
 
           const imageNode = (
             <img
               src={imageUrl}
               alt={value.alt || ""}
-              className="w-full rounded-lg my-6"
+              className="w-full h-auto aspect-[3/2] rounded-lg my-6"
+              width={1200}
+              height={800}
               loading="lazy"
             />
           );
@@ -557,7 +565,7 @@ export default async function Post({ params }) {
       },
     };
 
- const TableOfContent = ({ headings }) => {
+    const TableOfContent = ({ headings }) => {
       // Filter for valid headings with text content
       const validHeadings =
         headings?.filter((heading) => {
@@ -800,13 +808,13 @@ export default async function Post({ params }) {
 
                 {/* Featured Image */}
                 {post.mainImage && (
-                  <div className="mb-10 overflow-hidden rounded-xl shadow-lg">
+                  <div className="mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
                     <Image
-                      src={urlFor(post.mainImage).width(1200).height(675).url()}
+                      src={urlFor(post.mainImage).width(1200).height(800).url()}
                       alt={post.title}
                       width={1200}
-                      height={675}
-                      className="w-full h-auto"
+                      height={800}
+                      className="w-full h-auto aspect-[3/2]"
                       priority
                     />
                   </div>
@@ -860,16 +868,16 @@ export default async function Post({ params }) {
                     {/* Mobile Slider with Improved Design */}
                     <div className="md:hidden -mx-4 px-4">
                       <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Our Latest Blogs
-                </h2>
-                <Link
-                  href="/dholera-sir-blogs"
-                  className="rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
-                >
-                  View all
-                </Link>
-              </div>
+                        <h2 className="text-2xl font-bold text-gray-900">
+                          Our Latest Blogs
+                        </h2>
+                        <Link
+                          href="/dholera-sir-blogs"
+                          className="rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
+                        >
+                          View all
+                        </Link>
+                      </div>
                       <div className="relative">
                         <div
                           className="flex gap-4 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide"
@@ -878,7 +886,6 @@ export default async function Post({ params }) {
                             msOverflowStyle: "none",
                           }}
                         >
-                          
                           {relatedBlogs.map((blog, index) => (
                             <Link
                               key={blog._id}
@@ -955,7 +962,7 @@ export default async function Post({ params }) {
                                         </svg>
                                         <span className="text-xs font-medium">
                                           {new Date(
-                                            blog.publishedAt
+                                            blog.publishedAt,
                                           ).toLocaleDateString("en-US", {
                                             month: "short",
                                             day: "numeric",
@@ -1078,7 +1085,7 @@ export default async function Post({ params }) {
                                     </svg>
                                     <span className="text-sm font-medium">
                                       {new Date(
-                                        blog.publishedAt
+                                        blog.publishedAt,
                                       ).toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "short",
