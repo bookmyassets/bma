@@ -54,22 +54,30 @@ export default async function page() {
       />
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}
-        <div className="bg-white">
-          {/* Hero Section */}
+        <div className="bg-white relative">
           <div className="pt-16 md:pt-20">
-            <div className="md:relative md:h-[60vh] overflow-hidden shadow-lg">
+            <div className="relative md:h-[60vh] overflow-hidden shadow-lg">
+              {/* Hero Image */}
               <Image
                 src={hero}
                 alt="Dholera SIR Development"
-                className="w-full md:h-[60vh] h-auto object-contain md:object-cover"
+                className="w-full h-auto md:h-[60vh] object-contain md:object-cover"
                 quality={100}
                 priority
                 sizes="100vw"
               />
+
+              {/* Black Overlay */}
+              <div className="absolute inset-0 bg-black/60"></div>
+
+              {/* Text Content */}
+              <div className="absolute inset-0 z-10 flex items-center justify-center px-4 text-center">
+                <h1 className="text-2xl md:text-5xl font-bold text-white leading-tight">
+                  Dholera Smart City Blogs
+                </h1>
+              </div>
             </div>
           </div>
-
-          
         </div>
 
         {/* Blog Posts Section */}
@@ -79,15 +87,6 @@ export default async function page() {
               <>
                 {/* All Posts Grid */}
                 <div>
-                  <div className="text-center mb-8 sm:mb-12">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                      Latest Investment Insights
-                    </h2>
-                    <div className="mt-2 text-sm text-gray-500">
-                      {safePosts.length} Article
-                      {safePosts.length !== 1 ? "s" : ""} Available
-                    </div>
-                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {safePosts.map((post, index) => (
                       <div
