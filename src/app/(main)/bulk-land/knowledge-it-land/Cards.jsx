@@ -139,7 +139,7 @@ export default function KnowledgeITZoneCards() {
         {/* Benefits Section */}
         <div className="mb-8">
           <p className="text-center text-3xl font-semibold mb-8">
-            Benefits of Buying Land in This Zone
+            Benefits of Buying Land in Knowledge IT Zone
           </p>
 
           <div className={`flex flex-wrap justify-center gap-8 pt-4`}>

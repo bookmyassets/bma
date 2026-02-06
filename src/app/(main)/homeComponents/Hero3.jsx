@@ -170,15 +170,6 @@ export default function LandingPage({ openForm }) {
     { src: img6, alt: "Tata Semicon" },
   ];
 
-  const mobileImages = [
-    {
-      src: imgM1,
-      alt: "Westwyn Estate Dholera - Affordable Residential Plots",
-    },
-    { src: imgM2, alt: "Dholera Airport - Future Growth Hub" },
-    { src: imgM3, alt: "Silk Route Park - Smart City Living" },
-  ];
-
   useEffect(() => {
     setIsClient(true);
 
@@ -396,14 +387,14 @@ export default function LandingPage({ openForm }) {
     const swipeThreshold = 50;
     if (touchStart - touchEnd > swipeThreshold) {
       transitionSlide((prev) =>
-        prev === mobileImages.length - 1 ? 0 : prev + 1,
+        prev === desktopImages.length - 1 ? 0 : prev + 1,
       );
     } else if (touchEnd - touchStart > swipeThreshold) {
       transitionSlide((prev) =>
-        prev === 0 ? mobileImages.length - 1 : prev - 1,
+        prev === 0 ? desktopImages.length - 1 : prev - 1,
       );
     }
-  }, [touchStart, touchEnd, mobileImages.length, transitionSlide]);
+  }, [touchStart, touchEnd, desktopImages.length, transitionSlide]);
 
   const nextSlide = useCallback(() => {
     transitionSlide((prev) =>
@@ -426,9 +417,9 @@ export default function LandingPage({ openForm }) {
     <>
       {/* Inline critical CSS */}
       <div id="hero" className="relative min-h-screen bg-white">
-        <div className="h-screen max-sm:h-auto flex flex-col">
+        <div className="h-screen max-sm:h-[80vh] flex flex-col">
           {/* Main Content Section */}
-          <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+          <div className="flex-1 flex flex-col lg:flex-row md:min-h-0">
             {/* Left Side - Slider Section (60%) */}
             <div className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[50vh]">
               {/* Desktop Slider */}
@@ -520,7 +511,7 @@ export default function LandingPage({ openForm }) {
             </div>
 
             {/* Right Side - Lead Form Section (40%) */}
-            <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 sm:p-6 lg:p-8">
+            <div className="w-full lg:w-[40%] bg-white flex md:items-center md:justify-center p-4 sm:p-6 lg:p-8">
               <div
                 className="w-full max-w-md"
               >
@@ -609,7 +600,7 @@ export default function LandingPage({ openForm }) {
                 ) : (
                   <form
                     onSubmit={handleSubmit}
-                    className="space-y-4"
+                    className="space-y-1"
                   >
                     {errorMessage && (
                       <div

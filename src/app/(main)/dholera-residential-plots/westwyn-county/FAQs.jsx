@@ -54,12 +54,20 @@ export default function FAQSection() {
             <h2 className="text-[32px] font-semibold text-black mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-600 mb-2">
+             <p className="text-gray-600 mb-2">
               Got questions about WestWyn County?
             </p>
-            <p className="text-gray-600">
+            <div className="pt-4">
+              <a
+                className="px-2 py-3 bg-[#deae3c] rounded-md"
+                href="tel:+918130371647"
+              >
+                Give Us A Missed Call
+              </a>
+            </div>
+            {/* <p className="text-gray-600">
               We’ve answered the most common ones here
-            </p>
+            </p> */}
           </div>
 
           {/* Right Section (60%) */}

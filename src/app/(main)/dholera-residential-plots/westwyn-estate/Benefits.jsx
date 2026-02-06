@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import img from "@/assests/strategic-location-dholera.webp"
-import infra from "@/assests/residential/dholera-strong-connectivity.webp"
-import govtSupport from "@/assests/residential/government-support-dholera.webp"
-import safe from "@/assests/residential/safe-investment.webp"
-import growth from "@/assests/residential/exceptional-growth.webp"
+import img from "@/assests/strategic-location-dholera.webp";
+import infra from "@/assests/residential/dholera-strong-connectivity.webp";
+import govtSupport from "@/assests/residential/government-support-dholera.webp";
+import safe from "@/assests/residential/safe-investment.webp";
+import growth from "@/assests/residential/exceptional-growth.webp";
 import Image from "next/image";
 
 export default function InvestmentBenefits() {
@@ -58,7 +58,7 @@ export default function InvestmentBenefits() {
       setHoveredBenefit((prev) => (prev + 1) % benefits.length);
     } else if (isRightSwipe) {
       setHoveredBenefit(
-        (prev) => (prev - 1 + benefits.length) % benefits.length
+        (prev) => (prev - 1 + benefits.length) % benefits.length,
       );
     }
 
@@ -92,32 +92,31 @@ export default function InvestmentBenefits() {
       description:
         "Situated 0 km from Dholera SIR on the state highway, right at the city’s growth center.",
       body: "Strategically positioned on Navda Highway, 0 km from Dholera SIR and close to TP 5, ensuring you are at the heart of the region's fastest development zone. Just 25 minutes away from the activation area.",
-      image:
-        img,
+      image: img,
     },
     {
       title: "Connectivity to Mega Infrastructure",
       icon: "🏗️",
-      description: "Close to Hebatpur Industrial Zone, Expressway and Proposed Monorail.",
+      description:
+        "Close to Hebatpur Industrial Zone, Expressway and Proposed Monorail.",
       body: "Minutes from the upcoming Dholera International Airport, Ahmedabad–Dholera Expressway, and proposed monorail, making it a future hub of connectivity in Dholera.",
-      image:
-        infra,
+      image: infra,
     },
     {
       title: "Government-Backed Smart City Growth",
       icon: "⚖️",
-      description: "Part of the DMIC project, supported by the Central and State Governments.",
+      description:
+        "Part of the DMIC project, supported by the Central and State Governments.",
       body: "Part of Dholera Smart City under the Delhi–Mumbai Industrial Corridor (DMIC), a project supported by both Central and State Governments.",
-      image:
-        govtSupport,
+      image: govtSupport,
     },
     {
       title: "Secure & Approved Investment",
       icon: "📈",
-      description: "NA/NOC cleared, AUDA-registered, and title-clear plots for safe ownership.",
+      description:
+        "NA/NOC cleared, AUDA-registered, and title-clear plots for safe ownership.",
       body: "NA/NOC cleared, AUDA-registered, and title-clear plots in Dholera, ensuring complete legal transparency and a safe investment.",
-      image:
-        safe,
+      image: safe,
     },
     {
       title: "High Appreciation Potential",
@@ -125,8 +124,7 @@ export default function InvestmentBenefits() {
       description:
         "Early buyers benefit from rising demand in India’s upcoming semiconductor hub.",
       body: "Early investors benefit from rapid value growth as residential, industrial, and commercial projects shape the region. This makes it a smart Dholera SIR investment opportunity.",
-      image:
-        growth,
+      image: growth,
     },
   ];
 
@@ -252,7 +250,6 @@ export default function InvestmentBenefits() {
                 <p className="text-lg md:text-xl text-center font-semibold">
                   {benefits[hoveredBenefit].title}
                 </p>
-                
               </div>
             </div>
           </motion.div>
@@ -339,7 +336,7 @@ export default function InvestmentBenefits() {
               className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all duration-300"
               onClick={() =>
                 updateHoveredBenefit(
-                  hoveredBenefit > 0 ? hoveredBenefit - 1 : benefits.length - 1
+                  hoveredBenefit > 0 ? hoveredBenefit - 1 : benefits.length - 1,
                 )
               }
             >
@@ -361,7 +358,7 @@ export default function InvestmentBenefits() {
               className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all duration-300"
               onClick={() =>
                 updateHoveredBenefit(
-                  hoveredBenefit < benefits.length - 1 ? hoveredBenefit + 1 : 0
+                  hoveredBenefit < benefits.length - 1 ? hoveredBenefit + 1 : 0,
                 )
               }
             >
@@ -394,78 +391,77 @@ export default function InvestmentBenefits() {
               ) // all cards on desktop
                 .map((benefit, displayIndex) => {
                   const originalIndex = benefits.findIndex(
-                    (b) => b.title === benefit.title
+                    (b) => b.title === benefit.title,
                   );
                   const isHighlighted = hoveredBenefit === originalIndex;
 
                   return (
                     <motion.div
-                      key={benefit.title}
-                      layout
-                      className={`group border-2 rounded-xl p-4 md:p-5 bg-white cursor-pointer transition-all duration-300 
-            ${
-              isHighlighted
-                ? "border-[#deae3c] bg-[#deae3c]/5 transform scale-105"
-                : "border-gray-200 hover:border-[#deae3c]/30"
-            }`}
-                      variants={cardVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="hidden"
-                      whileHover="hover"
-                      onClick={() => openModal(benefit, originalIndex)}
-                      onMouseEnter={() =>
-                        !isMobile && setHoveredBenefit(originalIndex)
-                      }
-                    >
-                      <div className="text-center mb-4">
-                        <motion.div
-                          className="text-3xl md:text-4xl mb-3"
-                          whileHover={{ scale: 1.2 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          {benefit.icon}
-                        </motion.div>
-                        <h3 className="text-lg md:text-xl font-semibold text-[#deae3c]">
-                          {benefit.title}
-                        </h3>
-                      </div>
+  key={benefit.title}
+  layout
+  className={`group border-2 rounded-xl p-4 md:p-5 bg-white cursor-pointer transition-all duration-300 flex flex-col
+    ${
+      isHighlighted
+        ? "border-[#deae3c] bg-[#deae3c]/5 transform scale-105"
+        : "border-gray-200 hover:border-[#deae3c]/30"
+    }`}
+  variants={cardVariants}
+  initial="hidden"
+  animate="visible"
+  exit="hidden"
+  whileHover="hover"
+  onClick={() => openModal(benefit, originalIndex)}
+  onMouseEnter={() => !isMobile && setHoveredBenefit(originalIndex)}
+>
+  {/* Icon and Title Section */}
+  <div className="text-center mb-4">
+    <motion.div
+      className="text-3xl md:text-4xl mb-3"
+      whileHover={{ scale: 1.2 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      {benefit.icon}
+    </motion.div>
+    <h3 className="text-lg md:text-xl font-semibold text-[#deae3c]">
+      {benefit.title}
+    </h3>
+  </div>
 
-                      <motion.div
-                        className="mb-4 text-sm text-gray-600 text-center"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        {benefit.description}
-                      </motion.div>
+  {/* Description Section - Takes up available space */}
+  <motion.div
+    className="flex-grow mb-4 text-sm text-gray-600 text-center"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.4 }}
+  >
+    {benefit.description}
+  </motion.div>
 
-                      {/* Click to expand indicator */}
-                      <motion.div
-                        className="flex items-center justify-center gap-2 text-xs text-[#deae3c] font-medium mt-4 pt-3 border-t border-gray-200"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 }}
-                      >
-                        <span>Click to learn more</span>
-                        <motion.svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ repeat: Infinity, duration: 1.5 }}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </motion.svg>
-                      </motion.div>
-                    </motion.div>
-                    
+  {/* Click to learn more - Always at bottom */}
+  <motion.div
+    className="flex items-center justify-center gap-2 text-xs text-[#deae3c] font-medium pt-3 border-t border-gray-200 mt-auto"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5 }}
+  >
+    <span>Click to learn more</span>
+    <motion.svg
+      className="w-4 h-4"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      animate={{ x: [0, 4, 0] }}
+      transition={{ repeat: Infinity, duration: 1.5 }}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 5l7 7-7 7"
+      />
+    </motion.svg>
+  </motion.div>
+</motion.div>
                   );
                 })}
             </AnimatePresence>
