@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import ROI from "@/assests/dholera-plots-roi.webp"
+import ROI from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp"
 
 export default function DholeraSmartCity() {
   return (
