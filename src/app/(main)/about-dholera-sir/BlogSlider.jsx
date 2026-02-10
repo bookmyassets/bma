@@ -204,10 +204,7 @@ export default function BlogSlider({ posts = [] }) {
 
                     {/* Footer with "Read More" */}
                     <div className="border-t border-gray-200 pt-4 mt-auto">
-                      <div className="flex justify-between text-sm">
-                        <p className="text-sm text-gray-400">
-                          {formatDate(post.publishedAt || post._createdAt)}
-                        </p>
+                      <div className=" text-right">
                         <button className="font-medium hover:underline text-[#deae3c]">
                           Read More →
                         </button>
