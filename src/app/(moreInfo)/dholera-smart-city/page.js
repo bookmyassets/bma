@@ -33,15 +33,15 @@ export default function Page() {
           />
         </section>
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
-        <DholeraLandingPage/>    
+        <WestWyn/>
         <Ribbon /> 
 
         {/* Mega Industries crousel */}
         <MegaIndustries/>
         {/* Westwyn Estate */}
 {/*         <ProjectSlider/> */}
-        <WestWyn/>
         {/* About BookMyAssets */}
+        <DholeraLandingPage/>    
         <AboutBMA/>
         {/* Lead Form */}
         <Gallery/>

@@ -138,7 +138,6 @@ export default function LandingPage({ openForm }) {
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  const [showThankYou, setShowThankYou] = useState(false);
   const [submittedName, setSubmittedName] = useState(""); // Store submitted name
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -257,7 +256,6 @@ export default function LandingPage({ openForm }) {
     try {
       const now = Date.now();
 
-      // Store the name before clearing form data
       setSubmittedName(formData.fullName);
 
       const response = await fetch(
@@ -295,14 +293,6 @@ export default function LandingPage({ openForm }) {
         window.dataLayer.push({
           event: "lead_form_hero",
         });
-
-        setShowThankYou(true);
-        setTimeout(() => {
-          setShowThankYou(false);
-          if (typeof window !== "undefined") {
-            window.location.href = "/thankyou";
-          }
-        }, 2000);
       } else {
         throw new Error("Error submitting form");
       }
@@ -409,7 +399,6 @@ export default function LandingPage({ openForm }) {
 
   const handleClose = useCallback(() => {
     setShowPopup(false);
-    setShowThankYou(false);
   }, []);
 
   return (

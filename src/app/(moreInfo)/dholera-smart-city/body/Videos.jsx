@@ -85,10 +85,10 @@ export default function Dholeravideos() {
       <div className="space-y-4">
         <div className="relative pt-8">
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-center text-xl font-bold md:text-[32px] mb-2 text-[#deae3c]">
+            <h2 className="text-center text-2xl font-bold md:text-[32px] mb-2 text-[#deae3c]">
              Popular Videos About Dholera on YouTube
             </h2>
-            <p className="text-center text-xl text-black mb-8">
+            <p className="text-center text-black mb-8">
               Watch our expert videos covering infrastructure updates, major companies investing in Dholera, investment safety checklists, and more.
             </p>
 
@@ -163,7 +163,7 @@ export default function Dholeravideos() {
                 </div>
               </div>
 
-              <div className="flex justify-center mt-6 md:hidden">
+              <div className="flex justify-center mt-6 md:hidden py-4">
                 <button
                   onClick={prevSlide}
                   className="bg-[#deae3c] hover:bg-[#c49a2f] text-white p-3 rounded-full shadow-lg transition-all duration-300 mx-2"
@@ -179,22 +179,6 @@ export default function Dholeravideos() {
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
-
-              {totalSlides > 1 && (
-                <div className="flex justify-center space-x-2 mt-8">
-                  {Array.from({ length: totalSlides }, (_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        currentSlide === index 
-                        ? 'bg-[#deae3c] scale-125' 
-                        : 'bg-gray-300 hover:bg-gray-400'
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         </div>
