@@ -607,7 +607,9 @@ export default function LandingPage({ openForm }) {
                       <span
                         className={`text-xs sm:text-sm font-semibold ${showPopup ? "text-yellow-600" : "text-gray-400"}`}
                       >
-                        Free Consultation
+                        {!showPopup
+                        ? "Free consultation"
+                        : `Free consultation booked`}
                       </span>
                     </div>
                   </div>
