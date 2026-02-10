@@ -13,10 +13,6 @@ import img4 from "@/assests/homepage/hero/expressway_hero.webp";
 import img5 from "@/assests/homepage/hero/river_front_hero.webp";
 import img6 from "@/assests/homepage/hero/tata_gate_hero.webp";
 
-import imgM1 from "@/assests/homepage/hero/westwyn-estate-dholera-residential-plots-mobile.webp";
-import imgM2 from "@/assests/homepage/hero/dholera-international-airport-mobile.webp";
-import imgM3 from "@/assests/homepage/hero/silk-route-park-dholera-mobile.webp";
-
 // Lazy load non-critical component
 const Running = dynamic(() => import("./Running"), {
   ssr: false,
@@ -143,6 +139,7 @@ export default function LandingPage({ openForm }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [submittedName, setSubmittedName] = useState(""); // Store submitted name
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
@@ -260,6 +257,9 @@ export default function LandingPage({ openForm }) {
     try {
       const now = Date.now();
 
+      // Store the name before clearing form data
+      setSubmittedName(formData.fullName);
+
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
@@ -282,7 +282,6 @@ export default function LandingPage({ openForm }) {
       );
 
       if (response.ok) {
-        setFormData({ fullName: "", phone: "" });
         setShowPopup(true);
         setSubmissionCount((prev) => {
           const newCount = prev + 1;
@@ -417,11 +416,11 @@ export default function LandingPage({ openForm }) {
     <>
       {/* Inline critical CSS */}
       <div id="hero" className="relative min-h-screen bg-white">
-        <div className="h-screen max-sm:h-[80vh] flex flex-col">
+        <div className="h-screen max-sm:h-[70vh] flex flex-col">
           {/* Main Content Section */}
           <div className="flex-1 flex flex-col lg:flex-row md:min-h-0">
             {/* Left Side - Slider Section (60%) */}
-            <div className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[50vh]">
+            <div className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[40vh]">
               {/* Desktop Slider */}
               <div className="absolute inset-0 hidden lg:block">
                 <div className="relative w-full h-full overflow-hidden">
@@ -512,9 +511,7 @@ export default function LandingPage({ openForm }) {
 
             {/* Right Side - Lead Form Section (40%) */}
             <div className="w-full lg:w-[40%] bg-white flex md:items-center md:justify-center p-4 sm:p-6 lg:p-8">
-              <div
-                className="w-full max-w-md"
-              >
+              <div className="w-full max-w-md">
                 {/* Logo */}
                 <div className="text-center mb-4 sm:mb-6 max-sm:space-y-6">
                   <Image
@@ -564,6 +561,78 @@ export default function LandingPage({ openForm }) {
                   </div>
                 </div>
 
+                {/* Two-Step Progress Indicator */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-center gap-2 sm:gap-4">
+                    {/* Step 1 */}
+                    <div className="flex items-center gap-2">
+                      <div
+                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${
+                          !showPopup
+                            ? "bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg"
+                            : "bg-green-500 text-white"
+                        }`}
+                      >
+                        {showPopup ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 sm:h-6 sm:w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={3}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        ) : (
+                          "1"
+                        )}
+                      </div>
+                      <span
+                        className={`text-xs sm:text-sm font-semibold ${!showPopup ? "text-yellow-600" : "text-green-600"}`}
+                      >
+                        Submit Details
+                      </span>
+                    </div>
+
+                    {/* Connector Line */}
+                    <div
+                      className={`h-0.5 w-8 sm:w-12 transition-all ${showPopup ? "bg-green-500" : "bg-gray-300"}`}
+                    ></div>
+
+                    {/* Step 2 */}
+                    <div className="flex items-center gap-2">
+                      <div
+                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${
+                          showPopup
+                            ? "bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg"
+                            : "bg-gray-200 text-gray-500"
+                        }`}
+                      >
+                        2
+                      </div>
+                      <span
+                        className={`text-xs sm:text-sm font-semibold ${showPopup ? "text-yellow-600" : "text-gray-400"}`}
+                      >
+                        Free Consultation
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Step Description */}
+                  <div className="text-center mt-3">
+                    <p className="text-xs sm:text-sm text-gray-600 font-medium">
+                      {!showPopup
+                        ? "Fill the form to get started"
+                        : `Free consultation booked ${submittedName} in 24 hours`}
+                    </p>
+                  </div>
+                </div>
+
                 {showPopup ? (
                   <div
                     className="text-center py-6"
@@ -592,16 +661,16 @@ export default function LandingPage({ openForm }) {
                     <h2 className="text-xl font-bold text-black mb-2">
                       Thank You!
                     </h2>
-                    <p className="text-gray-600 text-sm">
-                      Your request has been submitted successfully. We'll
-                      contact you shortly.
+                    <p className="text-gray-600 text-sm mb-1">
+                      Your request has been submitted successfully.
+                    </p>
+                    <p className="text-yellow-600 text-sm font-semibold">
+                      Our expert will contact you within 24 hours for your free
+                      consultation.
                     </p>
                   </div>
                 ) : (
-                  <form
-                    onSubmit={handleSubmit}
-                    className="space-y-1"
-                  >
+                  <form onSubmit={handleSubmit} className="space-y-1">
                     {errorMessage && (
                       <div
                         className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm"
