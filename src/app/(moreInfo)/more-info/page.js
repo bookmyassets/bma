@@ -24,7 +24,7 @@ export default function Page() {
         name="description"
         content="Explore Dholera Smart City investment opportunities with BookMyAssets. Verified plots, major projects, and expert guidance for long-term growth."
       />
-      <div>
+      <div className="overflow-hidden">
         <section>
           <LandingPage
             img1={img1}

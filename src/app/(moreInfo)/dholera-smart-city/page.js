@@ -24,7 +24,7 @@ export default function Page() {
         name="description"
         content="Explore Dholera Smart City investment opportunities with BookMyAssets. Verified plots, major projects, and expert guidance for long-term growth."
       />
-      <div>
+      <div className="overflow-hidden">
         <section>
           <LandingPage
             img1={img1}
@@ -47,14 +47,6 @@ export default function Page() {
         <Gallery/>
         <Dholeravideos/>
         <TestimonialPagination/>
-       {/*  <AboutBMA/> */}
-        {/* <Westwyn />
-        <Ammenties />
-        <WhyDholera />
-        <WhyInvest />
-        <TestimonialPagination />
-        <FAQSection />
-        <EndSection /> */}
         <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
       </div>
 
