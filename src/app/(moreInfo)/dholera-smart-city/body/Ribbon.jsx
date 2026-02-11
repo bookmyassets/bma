@@ -213,7 +213,7 @@ export default function Ribbon() {
   {/* Header */}
   <div className="text-center px-6 mb-6">
     <h2 className="text-[#deae3c] font-bold text-xl md:text-2xl mb-2">
-      Thinking of Buying in Dholera? Get the Complete Plot Guide Now
+      Verified plots under ₹10 Lakh only, 5 Minute from the Expressway
     </h2>
     <p className="text-white text-base"></p>
   </div>

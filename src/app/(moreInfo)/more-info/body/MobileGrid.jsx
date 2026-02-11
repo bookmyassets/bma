@@ -78,8 +78,8 @@ export default function MobilePropertyGrid() {
 {isDownload && (
   <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
-              title="Get Dholera Brochure"
-              buttonName="Download Brochure"
+              title="Want Verified Project Details?"
+              buttonName="Get A Call Back"
               onClose={() => closeBrochure()}
               />
           </div>

@@ -23,12 +23,6 @@ import img4 from "@/assests/ad-page/hero/dholera-international-airport-landing-p
 import img5 from "@/assests/ad-page/hero/dholera-tata-semiconductor-plant-landing-page-desktop.webp";
 import img6 from "@/assests/ad-page/hero/dholera-tata-solar-park-landing-page-desktop.webp";
 
-import imgM1 from "@/assests/ad-page/hero/dholera-activation-area-mobile1.webp";
-import imgM2 from "@/assests/ad-page/hero/dholera-activation-area-mobile2.webp";
-import imgM3 from "@/assests/ad-page/hero/dholera-activation-area-mobile3.webp";
-import imgM4 from "@/assests/ad-page/hero/dholera-international-airport-landing-page-mobile.webp";
-import imgM5 from "@/assests/ad-page/hero/dholera-tata-semiconductor-plant-landing-page-mobile.webp";
-import imgM6 from "@/assests/ad-page/hero/dholera-tata-solar-park-landing-page-mobile.webp";
 import BrochureDownload from "../components/BrochureDownload";
 import MobilePropertyGrid from "./MobileGrid";
 
@@ -61,15 +55,6 @@ export default function LandingPage({ openForm }) {
     { src: img4, alt: "Dholera Investment Opportunity 3" },
     { src: img5, alt: "Dholera Investment Opportunity 3" },
     { src: img6, alt: "Dholera Investment Opportunity 3" },
-  ];
-
-  const mobileImages = [
-    { src: imgM1, alt: "Dholera Mobile 1" },
-    { src: imgM2, alt: "Dholera Mobile 2" },
-    { src: imgM3, alt: "Dholera Mobile 3" },
-    { src: imgM4, alt: "Dholera Mobile 3" },
-    { src: imgM5, alt: "Dholera Mobile 3" },
-    { src: imgM6, alt: "Dholera Mobile 3" },
   ];
 
   useEffect(() => {
@@ -202,7 +187,7 @@ export default function LandingPage({ openForm }) {
         setTimeout(() => {
           setShowThankYou(false); // Hide the overlay before navigation
           console.log("Navigating to thank you page..."); // Debug log
-          router.push("/dholera-smart-city/thankyou");
+          router.push("/more-info/thankyou");
         }, 2000);
       } else {
         throw new Error("Error submitting form");
@@ -387,11 +372,11 @@ export default function LandingPage({ openForm }) {
       </AnimatePresence>
 
       {/* Main Layout - Desktop */}
-      <div className="min-h-screen max-sm:h-[70vh] flex flex-col">
-        {/* Main Content Section - Takes most of the screen */}
-        <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+      <div className="h-screen max-sm:h-[95vh] flex flex-col">
+        {/* Main Content Section */}
+        <div className="flex-1 flex flex-col lg:flex-row md:min-h-0">
           {/* Left Side - Slider Section (60%) */}
-          <div className="w-full lg:w-[60%] relative flex-1 min-h-[40vh]">
+          <div className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[40vh]">
             {/* Desktop Slider */}
             <div className="absolute inset-0 hidden lg:block">
               <div className="relative w-full h-full overflow-hidden">
@@ -701,8 +686,8 @@ export default function LandingPage({ openForm }) {
         {isDownload && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
-              title="Dholera Is Growing Fast - Are You Still on the Outside?"
-              buttonName="Download Brochure"
+              title="Want Verified Project Details?"
+              buttonName="Get A Call Back"
               onClose={() => closeBrochure()}
             />
           </div>

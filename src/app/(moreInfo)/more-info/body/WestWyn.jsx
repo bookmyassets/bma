@@ -90,7 +90,8 @@ export default function WestWyn() {
           {/* Header */}
           <div className="mb-16">
             <h2 className="text-5xl font-bold text-center text-black mb-4">
-              <span className="text-[#deae3c]">WestWyn Estate</span> - Investment Goldmine of Dholera
+              <span className="text-[#deae3c]">WestWyn Estate</span> -
+              Investment Goldmine of Dholera
             </h2>
           </div>
 
@@ -118,11 +119,11 @@ export default function WestWyn() {
           <div className="grid grid-cols-2 gap-16 items-start">
             {/* Image */}
             <div className="sticky top-8">
-              <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-xl">
+              <div className="rounded-lg overflow-hidden shadow-xl max-w-[800px]">
                 <Image
                   src={sections[activeSection].image}
                   alt={sections[activeSection].title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain max-h-[600px]"
                 />
               </div>
             </div>
@@ -190,14 +191,14 @@ export default function WestWyn() {
 
           {/* Image */}
           <div className="mb-6">
-            <div className="aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
-              <Image
-                src={sections[activeSection].image}
-                alt={sections[activeSection].title}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
+  <div className="rounded-lg overflow-hidden shadow-lg">
+    <Image
+      src={sections[activeSection].image}
+      alt={sections[activeSection].title}
+      className="w-full h-auto object-contain max-h-[500px]"
+    />
+  </div>
+</div>
 
           <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
             {sections.map((section, index) => (
