@@ -3,7 +3,6 @@ import { MapPin, Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FileCheck,
-  TrendingUp,
   Scale,
   RefreshCcw,
   CalendarCheck2,
@@ -33,32 +32,32 @@ export default function AboutBMA() {
     {
       title: "Prime Location Projects",
       icon: <MapPin className="w-6 h-6 text-indigo-600" />,
-      body: "We curate investment opportunities in Dholera’s most strategically positioned zones near expressways, airports, and major industrial hubs. Each location is carefully selected to offer strong connectivity while maintaining reasonable entry pricing, ensuring optimal long-term value.",
+      body: "We curate opportunities in Dholera's most strategic zones near expressways, airports, and industrial hubs. Each location offers strong connectivity while maintaining reasonable pricing for optimal long-term value.",
     },
     {
       title: "Resale Support & Buyback Option",
       icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
-      body: "Our structured resale assistance and buyback option provide investors with enhanced liquidity and exit flexibility. Supported by BookMyAssets’ active investor network, this ensures confidence that your investment remains marketable when required.",
+      body: "Our structured resale assistance and buyback option provide enhanced liquidity and exit flexibility. Supported by BookMyAssets' active network, your investment remains marketable when required.",
     },
     {
       title: "In-house Due Diligence Team",
       icon: <Scale className="w-6 h-6 text-orange-600" />,
-      body: "Every project undergoes comprehensive legal and technical verification by our in-house experts. Title checks, government approvals, NOCs, and land records are thoroughly validated before any opportunity is introduced to investors.",
+      body: "Every project undergoes comprehensive legal and technical verification by our experts. Title checks, government approvals, NOCs, and land records are thoroughly validated before any opportunity reaches investors.",
     },
     {
       title: "Immediate Sale Registry",
       icon: <FileCheck className="w-6 h-6 text-blue-600" />,
-      body: "All properties are offered with complete and verified documentation, enabling immediate sale registration. This eliminates uncertainty, approval delays, and post-purchase legal complications for buyers.",
+      body: "All properties come with complete documentation, enabling immediate sale registration. This eliminates uncertainty, approval delays, and post-purchase legal complications.",
     },
     {
       title: "365 Days Site Visit Assistance",
       icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
-      body: "We provide year-round site visit assistance, allowing investors to physically verify projects at their convenience. This approach reflects our commitment to transparency and informed decision-making.",
+      body: "We provide year-round site visit assistance, allowing you to physically verify projects at your convenience. This reflects our commitment to transparency and informed decision-making.",
     },
     {
       title: "Government Approved AUDA Plots",
       icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
-      body: "All plots are AUDA-approved and fully aligned with Dholera’s official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
+      body: "All plots are AUDA-approved and aligned with Dholera's official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
     },
   ];
 
@@ -131,7 +130,7 @@ export default function AboutBMA() {
   return (
     <>
       <div className="pt-8 py-4 bg-gray-50" id="why-bma">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 ">
           <motion.h2
             className="text-2xl md:text-[32px] lg:text-[40px] font-semibold text-center text-[#deae3c] mb-12 md:mb-16"
             initial={{ opacity: 0, y: -20 }}
@@ -146,7 +145,7 @@ export default function AboutBMA() {
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
-                className="group border-2 border-gray-300 rounded-2xl p-6 md:p-8 bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:border-[#deae3c]"
+                className="group border-2 border-gray-300 rounded-2xl p-2 md:p-4 bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:border-[#deae3c]"
                 variants={cardVariants}
                 initial="hidden"
                 animate="visible"
@@ -155,20 +154,20 @@ export default function AboutBMA() {
                 {/* Card Header */}
                 <div className="text-center mb-6">
                   <motion.div
-                    className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex justify-center items-center border-2 border-gray-200 group-hover:border-[#deae3c] transition-all duration-300"
+                    className="w-10 md:w-16 h-10 md:h-16 mx-auto mb-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex justify-center items-center border-2 border-gray-200 group-hover:border-[#deae3c] transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 200 }}
                   >
                     <div className="scale-125">{benefit.icon}</div>
                   </motion.div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#deae3c] transition-colors duration-300 leading-snug">
+                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#deae3c] transition-colors duration-300 leading-snug">
                     {benefit.title}
                   </h3>
                 </div>
 
                 {/* Description - Always Visible */}
                 <div className="mb-3">
-                  <p className="text-base md:text-lg text-gray-700 leading-relaxed text-center">
+                  <p className="text-base text-gray-700 text-center">
                     {benefit.body}
                   </p>
                 </div>

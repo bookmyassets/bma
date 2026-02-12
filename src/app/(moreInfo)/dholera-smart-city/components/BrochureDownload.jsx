@@ -190,7 +190,7 @@ const onRecaptchaSuccess = async (token) => {
         const currentPath = pathname || window.location.pathname;
         
         // Push to thank-you route with return URL
-        router.push(`/dholera-smart-city/thankyou`);
+        router.push(`/more-info/thankyou`);
       }, 2000);
     } else {
       throw new Error("Error submitting form");
@@ -392,8 +392,7 @@ const onRecaptchaSuccess = async (token) => {
               transition={{ delay: 0.3 }}
               className="text-center mb-6 pt-4"
             >
-              <h2 className="text-3xl font-bold text-white mb-2">{title}</h2>
-              <p className="text-gray-300 text-sm">Only for first 10 users</p>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">{title}</h2>
             </motion.div>
 
             {showPopup ? (

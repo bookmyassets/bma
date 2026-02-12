@@ -13,14 +13,15 @@ import DholeraLandingPage from "./body/DholeraSIR";
 import MegaIndustries from "./body/MegaIndustries";
 import WestWyn from "./body/WestWyn";
 import TestimonialPagination from "./components/Testimonials";
+import ImageZoom from "./components/ImageZoom";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
 
   return (
     <>
-    <title>Dholera Smart City Plots | Verified Projects with BMA</title>
-    <meta
+      <title>Dholera Smart City Plots | Verified Projects with BMA</title>
+      <meta
         name="description"
         content="Explore Dholera Smart City investment opportunities with BookMyAssets. Verified plots, major projects, and expert guidance for long-term growth."
       />
@@ -33,20 +34,20 @@ export default function Page() {
           />
         </section>
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
-        <DholeraLandingPage/>    
+        <DholeraLandingPage />
         {/* Mega Industries crousel */}
-        <MegaIndustries/>
+        <MegaIndustries />
         {/* Westwyn Estate */}
-{/*         <ProjectSlider/> */}
-        <WestWyn/>
+        {/*         <ProjectSlider/> */}
+        <WestWyn />
         {/* About BookMyAssets */}
-        <AboutBMA/>
+        <AboutBMA />
         {/* Lead Form */}
         <Ribbon />
-        <Gallery/>
-        <Dholeravideos/>
-        <TestimonialPagination/>
-       {/*  <AboutBMA/> */}
+        <Gallery />
+        <Dholeravideos />
+        <TestimonialPagination />
+        {/*  <AboutBMA/> */}
         {/* <Westwyn />
         <Ammenties />
         <WhyDholera />

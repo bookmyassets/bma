@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import mapD from "@/assests/ad-page/dholera-map-2.webp";
 import mapM from "@/assests/ad-page/dholera-map-1.webp";
 import PopupForm from "../components/PopUpForm";
-import Ribbon from "./Ribbon";
+import ImageZoom from "../components/ImageZoom";
 
 const projects = [
   {
@@ -228,146 +228,142 @@ function Design3() {
   };
 
   return (
-    <>
-      <div className="md:hidden bg-black flex flex-col">
-        <h2 className="text-3xl font-bold text-center mb-2 pt-4 text-[#deae3c]">
-          Major Projects
-        </h2>
-        <PopupForm
-          title="Invest in India's First Semiconductor City"
-          sectionId="major-projects"
-        />
+    <div className="md:hidden bg-black flex flex-col">
+      <h2 className="text-xl font-bold text-center mb-2 pt-4 text-[#deae3c]">
+        Major Projects
+      </h2>
+      <PopupForm
+        title="Invest in India's First Semiconductor City"
+        sectionId="major-projects"
+      />
 
-        {/* Progress Bars */}
-        <div className="flex gap-1 p-4 pb-2">
-          {projects.map((_, idx) => (
+      {/* Progress Bars */}
+      <div className="flex gap-1 p-4 pb-2">
+        {projects.map((_, idx) => (
+          <div
+            key={idx}
+            className="h-1 bg-gray-700 rounded-full flex-1 overflow-hidden"
+          >
             <div
-              key={idx}
-              className="h-1 bg-gray-700 rounded-full flex-1 overflow-hidden"
-            >
-              <div
-                className={`h-full bg-[#deae3c] transition-all duration-300 ${
-                  idx === currentIndex
+              className={`h-full bg-[#deae3c] transition-all duration-300 ${
+                idx === currentIndex
+                  ? "w-full"
+                  : idx < currentIndex
                     ? "w-full"
-                    : idx < currentIndex
-                      ? "w-full"
-                      : "w-0"
-                }`}
-              />
-            </div>
-          ))}
-        </div>
+                    : "w-0"
+              }`}
+            />
+          </div>
+        ))}
+      </div>
 
-        {/* Header */}
-        <div className="px-4 py-2">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-[#deae3c] to-[#c49a2f] rounded-full flex items-center justify-center text-white font-bold text-lg">
-              {currentProject.id}
-            </div>
-            <div>
-              <h3 className="text-white font-semibold">
-                {currentProject.name}
-              </h3>
-              <p className="text-gray-400 text-xs">Dholera Smart City</p>
-            </div>
+      {/* Header */}
+      <div className="px-4 py-2">
+        <div className="flex items-center space-x-3">
+          <div className="w-12 h-12 bg-gradient-to-br from-[#deae3c] to-[#c49a2f] rounded-full flex items-center justify-center text-white font-bold">
+            {currentProject.id}
+          </div>
+          <div>
+            <h3 className="text-white font-semibold">{currentProject.name}</h3>
+            <p className="text-gray-400 text-xs">Dholera Smart City</p>
           </div>
         </div>
+      </div>
 
-        {/* Main Content */}
-        <div className="flex-1 flex items-center justify-center px-4">
-          <div className="w-full max-w-md">
-            <div className="bg-gray-900 rounded-3xl overflow-hidden shadow-2xl">
-              <div className="relative aspect-video bg-white">
-                {isPlaying ? (
-                  <iframe
-                    className=""
-                    src={`https://www.youtube.com/embed/${currentProject.youtubeId}?autoplay=1`}
-                    title={currentProject.name}
-                    frameBorder="0"
-                    allow="autoplay"
-                    allowFullScreen
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center px-4">
+        <div className="w-full max-w-md">
+          <div className="bg-gray-900 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-[16/9] bg-white">
+              {isPlaying ? (
+                <iframe
+                  className=""
+                  src={`https://www.youtube.com/embed/${currentProject.youtubeId}?autoplay=1`}
+                  title={currentProject.name}
+                  frameBorder="0"
+                  allow="autoplay"
+                  allowFullScreen
+                />
+              ) : (
+                <div
+                  onClick={() => setIsPlaying(true)}
+                  className="relative  cursor-pointer"
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${currentProject.youtubeId}/maxresdefault.jpg`}
+                    alt={currentProject.name}
+                    className=" object-cover"
                   />
-                ) : (
-                  <div
-                    onClick={() => setIsPlaying(true)}
-                    className="relative  cursor-pointer"
-                  >
-                    <img
-                      src={`https://img.youtube.com/vi/${currentProject.youtubeId}/maxresdefault.jpg`}
-                      alt={currentProject.name}
-                      className=" object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="relative group cursor-pointer">
-                        {/* Red YouTube background */}
-                        <div className="bg-red-600 rounded-xl w-16 h-11 flex items-center justify-center shadow-lg group-hover:bg-red-700 transition-colors">
-                          {/* White play triangle */}
-                          <svg
-                            className="w-6 h-6 text-white ml-0.5"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative group cursor-pointer">
+                      {/* Red YouTube background */}
+                      <div className="bg-red-600 rounded-xl w-16 h-11 flex items-center justify-center shadow-lg group-hover:bg-red-700 transition-colors">
+                        {/* White play triangle */}
+                        <svg
+                          className="w-6 h-6 text-white ml-0.5"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
                       </div>
                     </div>
                   </div>
-                )}
-              </div>
-              <div className="p-6">
-                <p className="text-gray-300 text-sm leading-relaxed ">
-                  {currentProject.points.map((point, index) => (
-                    <li key={index}>{point}</li>
-                  ))}
-                </p>
-              </div>
+                </div>
+              )}
+            </div>
+            <div className="p-6">
+              <p className="text-gray-300 text-sm leading-relaxed ">
+                {currentProject.points.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </p>
             </div>
           </div>
         </div>
-
-        {/* Navigation Buttons */}
-        <div className="p-4 flex justify-center gap-4">
-          <button
-            onClick={prevProject}
-            className="bg-gray-800 text-white p-4 rounded-full shadow-lg active:scale-95 transition-transform"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-          <button
-            onClick={nextProject}
-            className="bg-[#deae3c] text-white p-4 rounded-full shadow-lg active:scale-95 transition-transform"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </div>
       </div>
-    </>
+
+      {/* Navigation Buttons */}
+      <div className="p-4 flex justify-center gap-4">
+        <button
+          onClick={prevProject}
+          className="bg-gray-800 text-white p-4 rounded-full shadow-lg active:scale-95 transition-transform"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+        <button
+          onClick={nextProject}
+          className="bg-[#deae3c] text-white p-4 rounded-full shadow-lg active:scale-95 transition-transform"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -383,14 +379,12 @@ export default function MobileDesignShowcase() {
       {selectedDesign === 3 && <Design3 />}
       <DesktopDesign />
 
-      <Ribbon />
-
       <div className="bg-gray-100">
-        <p className="text-2xl md:text-3xl pt-8 font-semibold    text-center">
+        <p className="text-xl md:text-3xl pt-8 font-semibold text-center">
           The Complete Dholera Blueprint
         </p>
         <div className="w-24 h-1 mt-4 mb-4 bg-[#deae3c] mx-auto"></div>
-        <p className="text-lg mb-4 text-center max-w-4xl mx-auto">
+        <p className=" mb-4  max-w-4xl mx-auto px-8 text-left">
           India’s first Special Investment Region planned with clearly defined
           industrial, residential, commercial, and logistics zones. The master
           plan is divided into Town Planning (TP) schemes and sub-TP zones to
@@ -400,8 +394,7 @@ export default function MobileDesignShowcase() {
           Dholera Project details and the latest update on Dholera Smart City.
         </p>
         <div className="p-4 flex justify-center">
-          <Image src={mapM} alt="Map" className="md:hidden  rounded-2xl" />
-          <Image src={mapD} alt="Map" className="max-sm:hidden  rounded-2xl" />
+          <ImageZoom/>
         </div>
       </div>
     </div>

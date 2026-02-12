@@ -89,7 +89,7 @@ export default function WestWyn() {
         <div className="max-w-7xl mx-auto px-8 py-12">
           {/* Header */}
           <div className="mb-16">
-            <h2 className="text-5xl font-bold text-center text-black mb-4">
+            <h2 className="text-3xl font-bold text-center text-black mb-4">
               <span className="text-[#deae3c]">WestWyn Estate</span> -
               Investment Goldmine of Dholera
             </h2>
@@ -130,7 +130,7 @@ export default function WestWyn() {
 
             {/* Text Content */}
             <div className="py-8">
-              <h2 className="text-4xl font-bold text-black mb-6">
+              <h2 className="text-xl font-bold text-black mb-6">
                 {sections[activeSection].title}
               </h2>
               {sections[activeSection].title === "Amenities" ||
@@ -153,7 +153,7 @@ export default function WestWyn() {
                   ))}
                 </div>
               ) : (
-                <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
+                <p className=" text-gray-700 leading-relaxed whitespace-pre-line">
                   {sections[activeSection].content}
                 </p>
               )}
@@ -182,7 +182,7 @@ export default function WestWyn() {
         <div className="px-4 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h2 className="text-3xl text-center font-bold text-[#deae3c] mb-2">
+            <h2 className="text-xl md:text-3xl text-center font-bold text-[#deae3c] mb-2">
               WestWyn Estate
             </h2>
           </div>
@@ -191,14 +191,14 @@ export default function WestWyn() {
 
           {/* Image */}
           <div className="mb-6">
-  <div className="rounded-lg overflow-hidden shadow-lg">
-    <Image
-      src={sections[activeSection].image}
-      alt={sections[activeSection].title}
-      className="w-full h-auto object-contain max-h-[500px]"
-    />
-  </div>
-</div>
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src={sections[activeSection].image}
+                alt={sections[activeSection].title}
+                className="w-full h-auto object-contain max-h-[500px]"
+              />
+            </div>
+          </div>
 
           <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
             {sections.map((section, index) => (
@@ -218,7 +218,7 @@ export default function WestWyn() {
 
           {/* Content */}
           <div>
-            <h2 className="text-2xl font-bold text-black mb-4">
+            <h2 className=" text-lg md:text-xl font-bold text-black mb-4">
               {sections[activeSection].title}
             </h2>
             {sections[activeSection].title === "Amenities" ||
@@ -237,7 +237,7 @@ export default function WestWyn() {
                 ))}
               </div>
             ) : (
-              <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
+              <p className=" text-gray-700 leading-relaxed whitespace-pre-line">
                 {sections[activeSection].content}
               </p>
             )}

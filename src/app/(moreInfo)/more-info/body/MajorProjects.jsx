@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import mapD from "@/assests/ad-page/dholera-map-2.webp";
 import mapM from "@/assests/ad-page/dholera-map-1.webp";
 import PopupForm from "../components/PopUpForm";
+import ImageZoom from "../components/ImageZoom";
 
 const projects = [
   {
@@ -228,7 +229,7 @@ function Design3() {
 
   return (
     <div className="md:hidden bg-black flex flex-col">
-      <h2 className="text-3xl font-bold text-center mb-2 pt-4 text-[#deae3c]">
+      <h2 className="text-xl font-bold text-center mb-2 pt-4 text-[#deae3c]">
         Major Projects
       </h2>
       <PopupForm
@@ -259,7 +260,7 @@ function Design3() {
       {/* Header */}
       <div className="px-4 py-2">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-[#deae3c] to-[#c49a2f] rounded-full flex items-center justify-center text-white font-bold text-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-[#deae3c] to-[#c49a2f] rounded-full flex items-center justify-center text-white font-bold">
             {currentProject.id}
           </div>
           <div>
@@ -273,7 +274,7 @@ function Design3() {
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="w-full max-w-md">
           <div className="bg-gray-900 rounded-3xl overflow-hidden shadow-2xl">
-            <div className="relative aspect-video bg-white">
+            <div className="relative aspect-[16/9] bg-white">
               {isPlaying ? (
                 <iframe
                   className=""
@@ -379,11 +380,11 @@ export default function MobileDesignShowcase() {
       <DesktopDesign />
 
       <div className="bg-gray-100">
-        <p className="text-2xl md:text-3xl pt-8 font-semibold    text-center">
+        <p className="text-xl md:text-3xl pt-8 font-semibold text-center">
           The Complete Dholera Blueprint
         </p>
         <div className="w-24 h-1 mt-4 mb-4 bg-[#deae3c] mx-auto"></div>
-        <p className="text-lg mb-4 text-center max-w-4xl mx-auto">
+        <p className=" mb-4  max-w-4xl mx-auto px-8 text-left">
           India’s first Special Investment Region planned with clearly defined
           industrial, residential, commercial, and logistics zones. The master
           plan is divided into Town Planning (TP) schemes and sub-TP zones to
@@ -393,8 +394,7 @@ export default function MobileDesignShowcase() {
           Dholera Project details and the latest update on Dholera Smart City.
         </p>
         <div className="p-4 flex justify-center">
-          <Image src={mapM} alt="Map" className="md:hidden  rounded-2xl" />
-          <Image src={mapD} alt="Map" className="max-sm:hidden  rounded-2xl" />
+          <ImageZoom/>
         </div>
       </div>
     </div>

@@ -52,14 +52,14 @@ export default function MegaIndustries() {
       <div className="relative">
         <div className=" max-w-7xl mx-auto pt-8">
           <div className="text-center">
-            <h3 className="text-[28px] font-bold text-[#151f28]">
+            <h3 className="text-xl md:text-[28px] font-bold text-[#151f28]">
               Global Giants Building in Dholera
             </h3>
             <div className="w-24 h-1 mt-4 mb-4 bg-[#deae3c] mx-auto"></div>
           </div>
 
-          <div className="bg-gray-50 p-8 rounded-lg">
-            <p className="text-lg leading-relaxed">
+          <div className="bg-gray-50 px-8 rounded-lg">
+            <p className="md:text-lg leading-relaxed">
               Dholera has secured commitments from India’s most trusted
               industrial leaders and global technology giants. Tata Electronics
               is establishing India’s first semiconductor fabrication plant,

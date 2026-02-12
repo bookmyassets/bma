@@ -475,7 +475,7 @@ export default function LandingPage({ openForm }) {
                 <Image
                   src={logo}
                   alt="BookMyAssets Logo"
-                  className="mx-auto mb-3"
+                  className="mx-auto mb-3 md:h-auto md:w-80"
                 />
                 <h2 className="text-xl lg:text-2xl font-bold text-black mb-2">
                   Registry-Ready Plots under ₹10 Lakh

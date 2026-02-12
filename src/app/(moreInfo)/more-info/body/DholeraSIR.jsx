@@ -6,18 +6,18 @@ import Image from "next/image";
 
 export default function DholeraLandingPage() {
   return (
-    <div className="min-h-screen bg-white" id="dholera">
+    <div className=" bg-white" id="dholera">
       {/* Section 1: About Dholera */}
       <section className="grid md:grid-cols-2">
         <div className="bg-black text-white p-8 md:p-12 lg:p-16 flex items-center">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <h1
-              className="text-4xl md:text-5xl font-bold mb-6"
+              className="text-xl md:text-3xl font-bold mb-6"
               style={{ color: "#deae3c" }}
             >
               Dholera Smart City
             </h1>
-            <div className="space-y-4 text-lg leading-relaxed">
+            <div className="space-y-4 leading-relaxed">
               <p>
                 Dholera Smart City is India’s first greenfield smart city,
                 strategically positioned under the Delhi–Mumbai Industrial
@@ -39,12 +39,12 @@ export default function DholeraLandingPage() {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center bg-gray-100 p-8">
+        <div className="flex items-center justify-center  bg-gray-100 p-8">
           <Image
             src={abcd}
             alt="Dholera Smart City"
-            className="w-full max-w-md rounded-xl h-auto object-cover shadow-2xl"
-          />
+            className=" h-96 aspect-[3/4] rounded-xl shadow-2xl w-72 object-contain "
+          /> 
         </div>
       </section>
 
