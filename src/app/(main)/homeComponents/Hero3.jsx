@@ -425,7 +425,8 @@ export default function LandingPage({ openForm }) {
                         alt={image.alt}
                         fill
                         className="md:object-contain md:pt-8"
-                        priority={index === 0}
+                        priority 
+                        fetchPriority="high"
                       />
                     </div>
                   ))}
@@ -474,7 +475,8 @@ export default function LandingPage({ openForm }) {
                         height={675}
                         className="w-full h-auto object-contain rounded-lg shadow-lg"
                         quality={85}
-                        fetchPriority={index === 0 ? "high" : "low"}
+                        priority 
+                        fetchPriority="high"
                         sizes="100vw"
                       />
                     </div>

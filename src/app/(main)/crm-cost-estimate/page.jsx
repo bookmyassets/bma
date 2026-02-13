@@ -6,14 +6,14 @@ import icon from "@/assests/pdfIcon.webp";
 
 // Local projects array
 const PROJECTS = [
-  { id: 1, title: "WestWyn Estate", ctype:"D" },
-  { id: 2, title: "WestWyn County", ctype:"M" },
-  { id: 3, title: "Paradise", ctype:"M" },
-  { id: 4, title: "Paradise 2", ctype:"M" },
-  { id: 5, title: "Orchid", ctype:"M" },
-  { id: 6, title: "Marina Bay", ctype:"M" },
-  { id: 7, title: "Maple Township", ctype:"M" },
-  { id: 8, title: "Pride", ctype:"M" },
+  { id: 1, title: "WestWyn Estate", ctype: "D" },
+  { id: 2, title: "WestWyn County", ctype: "M" },
+  { id: 3, title: "Paradise", ctype: "M" },
+  { id: 4, title: "Paradise 2", ctype: "M" },
+  { id: 5, title: "Orchid", ctype: "M" },
+  { id: 6, title: "Marina Bay", ctype: "M" },
+  { id: 7, title: "Maple Township", ctype: "M" },
+  { id: 8, title: "Pride", ctype: "M" },
 ];
 
 // Salutation options
@@ -36,20 +36,24 @@ function formatIndianNumber(value) {
 function formatBookingDate(dateString) {
   const date = new Date(dateString);
   const day = date.getDate();
-  const month = date.toLocaleString('en-IN', { month: 'long' });
+  const month = date.toLocaleString("en-IN", { month: "long" });
   const year = date.getFullYear();
-  
+
   // Add ordinal suffix to day
   const getOrdinalSuffix = (day) => {
-    if (day > 3 && day < 21) return 'th';
+    if (day > 3 && day < 21) return "th";
     switch (day % 10) {
-      case 1: return 'st';
-      case 2: return 'nd';
-      case 3: return 'rd';
-      default: return 'th';
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
     }
   };
-  
+
   return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
 }
 
@@ -65,7 +69,7 @@ export default function CostSheet() {
     totalPayment: "",
     legalFee: 20000,
     plotTotalPayment: 0,
-    bookingDate: new Date().toISOString().split('T')[0], // Default to today's date
+    bookingDate: new Date().toISOString().split("T")[0], // Default to today's date
     associateName: "",
   });
 
@@ -92,7 +96,9 @@ export default function CostSheet() {
     }
   }, [formData.plotAreaYards, formData.basePlotPriceYards, formData.legalFee]);
 
-  const generatePDF = () => {
+  const generatePDF = async () => {
+    const { jsPDF } = await import("jspdf");
+    const autoTable = (await import("jspdf-autotable")).default;
     const doc = new jsPDF();
 
     const {
@@ -110,8 +116,11 @@ export default function CostSheet() {
     } = formData;
 
     // Find the selected project to get its ctype
-    const selectedProject = PROJECTS.find(p => p.title === projectName);
-    const chargeType = selectedProject?.ctype === "D" ? "Development charges" : "Maintenance charges";
+    const selectedProject = PROJECTS.find((p) => p.title === projectName);
+    const chargeType =
+      selectedProject?.ctype === "D"
+        ? "Development charges"
+        : "Maintenance charges";
 
     let startY = 40;
 
@@ -247,7 +256,7 @@ export default function CostSheet() {
       doc.text(
         text,
         pageWidth - textWidth - 15,
-        doc.internal.pageSize.height - 5
+        doc.internal.pageSize.height - 5,
       );
 
       doc.save(`${projectName || "Plot"}_Cost_Estimate.pdf`);

@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
+
+
 const nextConfig = {
+
+  /* LandX Proxy Start */
   async rewrites() {
     return [
       // Handle favicon specifically
@@ -170,6 +174,8 @@ const nextConfig = {
     pagesBufferLength: 2,
   },
 
+  /* LandX Proxy Close */
+
   images: {
     domains: ["cdn.sanity.io"],
     remotePatterns: [
@@ -181,6 +187,9 @@ const nextConfig = {
       },
     ],
   },
+
+  /* Website Redirects SEO */
+
   async redirects() {
     return [
       /* REDIRECTIONS AFTER RESTRUCTURE */
@@ -564,6 +573,7 @@ const nextConfig = {
       },
     ];
   },
+
 };
 
 export default nextConfig;

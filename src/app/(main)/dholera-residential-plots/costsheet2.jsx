@@ -1,7 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
 import icon from "@/assests/pdfIcon.webp";
 
 const SALUTATIONS = [
@@ -211,7 +209,9 @@ export default function CostSheet({
     formData.legalFee,
   ]);
 
-  const generatePDF = () => {
+  const generatePDF = async () => {
+    const { jsPDF } = await import("jspdf");
+    const autoTable = (await import("jspdf-autotable")).default;
     const doc = new jsPDF();
 
     const {
