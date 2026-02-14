@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import mapD from "@/assests/ad-page/dholera-map-2.webp";
-import mapM from "@/assests/ad-page/dholera-map-1.webp";
+import mapD from "@/assests/ad-page/dholera-sir-latest-map-2026-desktop-v2.webp";
+import mapM from "@/assests/ad-page/dholera-sir-latest-map-2026-mobile-v2.webp";
 
 export default function ImageZoom() {
   const imgRefMobile = useRef(null);
@@ -19,7 +19,7 @@ export default function ImageZoom() {
 
       const initZoom = () => {
         if (!img.complete || img.naturalWidth === 0) {
-          setTimeout(initZoom, 100);
+          setTimeout(initZoom, 200);
           return;
         }
 
@@ -109,8 +109,8 @@ export default function ImageZoom() {
           position: absolute;
           border: 3px solid #fff;
           box-shadow: 0 0 15px rgba(0,0,0,0.5);
-          width: 150px;
-          height: 150px;
+          width: 250px;
+          height: 250px;
           cursor: none;
           pointer-events: none;
           display: none;
