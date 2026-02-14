@@ -23,14 +23,21 @@ export default function BlogCard({ post }) {
         <div className="relative h-52">
           {post.mainImage ? (
             <Image
-              src={
-                urlFor(post.mainImage).width(1200).height(675).url() ||
-                "/placeholder.svg"
-              }
-              alt={post.title}
-              fill
-              className="object-cover"
-            />
+  src={
+    urlFor(post.mainImage)
+      .width(600)
+      .height(338)
+      .auto("format")
+      .quality(60)
+      .url() || "/placeholder.svg"
+  }
+  alt={post.title}
+  fill
+  sizes="(max-width: 768px) 100vw, 33vw"
+  className="object-cover"
+  loading="lazy"
+/>
+
           ) : (
             <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21]"></div>
           )}

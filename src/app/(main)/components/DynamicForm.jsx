@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { X, Check } from "lucide-react";
-/* import img from "@/assests/festival-images/christmas-form-offer.webp"; */
 import img from "@/assests/homepage/form-img.png";
 import Image from "next/image";
 

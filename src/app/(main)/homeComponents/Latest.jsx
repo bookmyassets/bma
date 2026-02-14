@@ -19,12 +19,17 @@ const RelatedBlogCard = ({ item, type }) => {
         <div className="relative w-full h-36 md:h-48">
           {item.mainImage ? (
             <Image
-              src={`${urlFor(item.mainImage).url()}`}
+              src={urlFor(item.mainImage)
+                .width(800)
+                .height(450)
+                .format("webp")
+                .quality(60)
+                .url()}
               alt={item.title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               loading="lazy"
-              className="aspect-video"
+              className="aspect-video object-cover"
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">

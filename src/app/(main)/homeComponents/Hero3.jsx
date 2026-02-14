@@ -19,29 +19,6 @@ const Running = dynamic(() => import("./Running"), {
   loading: () => <div className="h-12" />,
 });
 
-// Memoized slider image component - OPTIMIZED
-const SliderImage = memo(({ src, alt, isActive, priority, className }) => (
-  <div
-    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${className || ""}`}
-    style={{
-      opacity: isActive ? 1 : 0,
-      pointerEvents: isActive ? "auto" : "none",
-    }}
-  >
-    <Image
-      src={src}
-      alt={alt}
-      className="object-cover"
-      fill
-      quality={85}
-      loading={priority ? "eager" : "lazy"}
-      priority={priority}
-    />
-  </div>
-));
-
-SliderImage.displayName = "SliderImage";
-
 // Memoized navigation button
 const NavButton = memo(({ onClick, direction, ariaLabel }) => (
   <button
@@ -424,12 +401,15 @@ export default function LandingPage({ openForm }) {
                         src={image.src}
                         alt={image.alt}
                         fill
+                        sizes="100vw"
                         className="md:object-contain md:pt-8"
-                        priority 
-                        fetchPriority="high"
+                        priority={index === 0}
+                        fetchPriority={index === 0 ? "high" : "auto"}
+                        quality={60}
                       />
                     </div>
                   ))}
+
                   {/* Navigation */}
                   <button
                     onClick={prevSlide}
@@ -474,14 +454,15 @@ export default function LandingPage({ openForm }) {
                         width={1200}
                         height={675}
                         className="w-full h-auto object-contain rounded-lg shadow-lg"
-                        quality={85}
-                        priority 
-                        fetchPriority="high"
+                        quality={60}
+                        priority={index === 0}
+                        fetchPriority={index === 0 ? "high" : "auto"}
                         sizes="100vw"
                       />
                     </div>
                   </div>
                 ))}
+
                 {/* Navigation buttons for mobile */}
                 <button
                   onClick={prevSlide}
@@ -610,8 +591,8 @@ export default function LandingPage({ openForm }) {
                         className={`text-xs sm:text-sm font-semibold ${showPopup ? "text-yellow-600" : "text-gray-400"}`}
                       >
                         {!showPopup
-                        ? "Free consultation"
-                        : `Free consultation booked`}
+                          ? "Free consultation"
+                          : `Free consultation booked`}
                       </span>
                     </div>
                   </div>

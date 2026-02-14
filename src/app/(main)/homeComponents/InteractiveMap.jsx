@@ -339,7 +339,7 @@ export default function InteractiveMap() {
         {/* Instruction */}
         <p className="text-center text-gray-600 mt-6 text-lg font-medium">
           <span className="inline-block w-3 h-3 rounded-full animate-pulse mr-2"></span>
-          {isMobile ? 'Tap' : 'Click'} on highlighted areas to explore details
+          {isMobile ? 'Tap' : 'Click'} on icons to explore details
         </p>
 
         {/* 🧩 Modal for Project Details */}

@@ -1,10 +1,7 @@
 import { projectInfo } from "@/sanity/lib/api";
 import React from "react";
-import { FaWhatsapp } from "react-icons/fa6";
 import banner from "@/assests/about-dholera-sir-desktop-banner.webp";
-import bannerMob from "@/assests/about-dholera-sir-mobile-banner.webp";
 import BlogSlider from "./BlogSlider";
-import BulkLandCard from "./BulkLandCard";
 import LeadForm from "../components/LeadForm";
 import Link from "next/link";
 import Image from "next/image";

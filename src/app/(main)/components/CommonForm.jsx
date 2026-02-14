@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion } from "framer-motion";
-import "./about.css";
 
 export default function CommonForm({ title, button }) {
   const [isLoading, setIsLoading] = useState(false);

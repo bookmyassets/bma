@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion } from "framer-motion";
-import "./about.css";
+
 
 export default function BulkLand({ title }) {
   const [isLoading, setIsLoading] = useState(false);

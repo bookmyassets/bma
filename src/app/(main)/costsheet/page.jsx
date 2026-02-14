@@ -120,7 +120,9 @@ export default function CostSheet() {
     formData.legalFee,
   ]);
 
-  const generateMainPDF = () => {
+  const generateMainPDF = async () => {
+    const { jsPDF } = await import("jspdf");
+    const autoTable = (await import("jspdf-autotable")).default;
     const doc = new jsPDF();
     const {
       salutation,

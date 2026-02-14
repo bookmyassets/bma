@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from "react";
-import './marquee.css';
+
 
 const Running = () => {
   const [animate, setAnimate] = useState(false);
@@ -12,15 +12,20 @@ const Running = () => {
   }, []);
 
   return (
-    <div className="scrolling-container" role="marquee" aria-label="Promotional banner">
-      <div 
-        className={`scrolling-text ${animate ? 'animated' : ''}`}
-        aria-live="off"
-      >
-        {/* <h2>₹26,000 off on booking amount till 26 January</h2> */}
-        <h2>Registry Ready Plots in Dholera Under ₹10 Lakh</h2>
-      </div>
-    </div>
+
+    <>
+
+
+
+    <div className="w-full overflow-hidden bg-black py-2 relative">
+  <div className="whitespace-nowrap text-[#deae3c] animate-marquee">
+    <h2 className="inline-block text-white bg-[#deae3c] px-5 py-2 rounded-lg shadow-lg text-[20px] font-semibold">
+      Registry Ready Plots in Dholera Under ₹10 Lakh
+    </h2>
+  </div>
+</div>
+
+        </>
   );
 };
 
