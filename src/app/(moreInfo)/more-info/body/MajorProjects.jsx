@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import mapD from "@/assests/ad-page/dholera-map-2.webp";
-import mapM from "@/assests/ad-page/dholera-map-1.webp";
+import mapD from "@/assests/ad-page/dholera-sir-latest-map-2026-desktop-v2.webp";
+import mapM from "@/assests/ad-page/dholera-sir-latest-map-2026-mobile-v2.webp";
 import PopupForm from "../components/PopUpForm";
 import ImageZoom from "../components/ImageZoom";
 
