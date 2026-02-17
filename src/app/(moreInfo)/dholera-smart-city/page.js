@@ -19,10 +19,15 @@ export default function Page() {
 
   return (
     <>
-    <title>Dholera Smart City Plots | Verified Projects with BMA</title>
-    <meta
+      <title>Invest in Dholera Smart City Plots with BookMyAssets</title>
+      <meta
         name="description"
-        content="Explore Dholera Smart City investment opportunities with BookMyAssets. Verified plots, major projects, and expert guidance for long-term growth."
+        content="Explore premium plots in Dholera smart city with legal verification, prime connectivity, and high growth potential. Book your plot with BookMyAssets now."
+      />
+
+      <meta
+        name="keywords"
+        content="Dholera Smart City, Dholera plots, plots in Dholera, Dholera SIR plots, Dholera land investment, Dholera Smart City investment, residential plots in Dholera, industrial plots in Dholera, Dholera real estate, Dholera investment opportunities, dholerainsider, Gujarat smart city plots, DMIC corridor, Investments in Dholera Smart City, dholera latest news, Dholera International Airport, Dholera Solar Park,  Ahmedabad Dholera Expressway, Dholera SIR, Dholera plot prices, Dholera Smart City Projects"
       />
       <div className="overflow-hidden">
         <section>
@@ -33,20 +38,20 @@ export default function Page() {
           />
         </section>
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
-        <WestWyn/>
-        <Ribbon /> 
+        <WestWyn />
+        <Ribbon />
 
         {/* Mega Industries crousel */}
-        <MegaIndustries/>
+        <MegaIndustries />
         {/* Westwyn Estate */}
-{/*         <ProjectSlider/> */}
+        {/*         <ProjectSlider/> */}
         {/* About BookMyAssets */}
-        <DholeraLandingPage/>    
-        <AboutBMA/>
+        <DholeraLandingPage />
+        <AboutBMA />
         {/* Lead Form */}
-        <Gallery/>
-        <Dholeravideos/>
-        <TestimonialPagination/>
+        <Gallery />
+        <Dholeravideos />
+        <TestimonialPagination />
         <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
       </div>
 
