@@ -20,10 +20,14 @@ export default function Page() {
 
   return (
     <>
-      <title>Dholera Smart City Plots | Verified Projects with BMA</title>
+      <title>Get Verified Dholera Smart City Plots with BookMyAssets</title>
       <meta
         name="description"
-        content="Explore Dholera Smart City investment opportunities with BookMyAssets. Verified plots, major projects, and expert guidance for long-term growth."
+        content="Secure your Dholera Smart City plot today. Verified AUDA-approved land, future-ready infrastructure, and expert assistance from BookMyAssets."
+      />
+      <meta
+        name="keywords"
+        content="Dholera Smart City, Dholera plots, plots in Dholera, Dholera SIR plots, Dholera land investment, Dholera Smart City investment, residential plots in Dholera, industrial plots in Dholera, Dholera real estate, Dholera investment opportunities, dholerainsider, Gujarat smart city plots, DMIC corridor, Investments in Dholera Smart City, dholera latest news, Dholera International Airport, Dholera Solar Park,  Ahmedabad Dholera Expressway, Dholera SIR, Dholera plot prices, Dholera Smart City Projects"
       />
       <div className="overflow-hidden">
         <section>
