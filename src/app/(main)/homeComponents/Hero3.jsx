@@ -140,7 +140,7 @@ export default function LandingPage({ openForm }) {
     { src: img3, alt: "Silk Route Park Dholera - Modern Urban Development" },
     { src: img4, alt: "Dholera Ahmedabad Expressway" },
     { src: img5, alt: "River Front" },
-    { src: img6, alt: "Tata Semicon" },2
+    { src: img6, alt: "Tata Semicon" },
   ];
 
   useEffect(() => {
@@ -236,7 +236,7 @@ export default function LandingPage({ openForm }) {
       setSubmittedName(formData.fullName);
 
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        
         {
           method: "POST",
           headers: {
