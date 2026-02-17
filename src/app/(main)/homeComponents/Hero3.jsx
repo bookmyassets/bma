@@ -6,12 +6,12 @@ import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 //images import
-import img1 from "@/assests/homepage/hero/westwyn-estate-dholera-residential-plots-desktop.webp";
-import img2 from "@/assests/homepage/hero/dholera-international-airport-desktop.webp";
-import img3 from "@/assests/homepage/hero/silk-route-park-dholera-desktop.webp";
-import img4 from "@/assests/homepage/hero/expressway_hero.webp";
-import img5 from "@/assests/homepage/hero/river_front_hero.webp";
-import img6 from "@/assests/homepage/hero/tata_gate_hero.webp";
+import img1 from "@/assests/homepage/hero2/westwyn-estate-dholera-residential-plots-desktop.webp";
+import img2 from "@/assests/homepage/hero2/dholera-international-airport-desktop.webp";
+import img3 from "@/assests/homepage/hero2/silk-route-park-dholera-desktop.webp";
+import img4 from "@/assests/homepage/hero2/expressway_hero.webp";
+import img5 from "@/assests/homepage/hero2/river_front_hero.webp";
+import img6 from "@/assests/homepage/hero2/tata_gate_hero.webp";
 
 // Lazy load non-critical component
 const Running = dynamic(() => import("./Running"), {
@@ -140,7 +140,7 @@ export default function LandingPage({ openForm }) {
     { src: img3, alt: "Silk Route Park Dholera - Modern Urban Development" },
     { src: img4, alt: "Dholera Ahmedabad Expressway" },
     { src: img5, alt: "River Front" },
-    { src: img6, alt: "Tata Semicon" },
+    { src: img6, alt: "Tata Semicon" },2
   ];
 
   useEffect(() => {
@@ -452,7 +452,7 @@ export default function LandingPage({ openForm }) {
                         src={image.src}
                         alt={image.alt}
                         width={1200}
-                        height={675}
+                        height={800}
                         className="w-full h-auto object-contain rounded-lg shadow-lg"
                         quality={60}
                         priority={index === 0}
