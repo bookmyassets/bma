@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect, useRef, useCallback, memo } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
