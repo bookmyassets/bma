@@ -2,19 +2,6 @@ import Image from "next/image";
 import React from "react";
 import banner from "@/assests/bulkLand/recreation-sports-entertainment-Zone-hero.webp";
 import bannerMob from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp";
-import {
-  Trophy,
-  FerrisWheel,
-  Theater,
-  BedDouble,
-  HeartPulse,
-  Users,
-  Plane,
-  Landmark,
-  Layers,
-  Train,
-} from "lucide-react";
-import CommonForm from "../../components/CommonForm";
 import recreationmap from "@/assests/bulkLand/recreation-sports-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
@@ -130,7 +117,7 @@ export default function page() {
       <div>
         <Table />
       </div>
-      <BulkLand title="Want to invest in high growth bulk land parcels starting ₹1.75 CR" />
+       <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
       <div>
         <FAQSection/>
       </div>

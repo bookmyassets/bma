@@ -2,19 +2,7 @@ import Image from "next/image";
 import React from "react";
 import banner from "@/assests/bulkLand/Knowledge and it zone-hero.webp";
 import bannerMob from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp";
-import {
-  Cpu,
-  FlaskConical,
-  GraduationCap,
-  Building2,
-  Home,
-  Lightbulb,
-  Globe2,
-  TrendingUp,
-  BrainCircuit,
-} from "lucide-react";
 import knowledgeITMap from "@/assests/bulkLand/knowledge-it-map.webp";
-import { TbBuildingSkyscraper } from "react-icons/tb";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getKnowledgeITLinks } from "../Interlink";
@@ -128,7 +116,7 @@ export default function page() {
       <div>
         <Table />
       </div>
-      <BulkLand title="Want to invest in high growth bulk land parcels starting ₹1.75 CR" />
+      <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
       <FAQSection/>
       <Interlink
         properties={getKnowledgeITLinks()}

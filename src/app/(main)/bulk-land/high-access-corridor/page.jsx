@@ -2,22 +2,7 @@ import Image from "next/image";
 import React from "react";
 import banner from "@/assests/bulkLand/HighAccess corridor-hero.webp";
 import bannerMob from "@/assests/bulkLand/high-access-hero-mob-webp.webp";
-import icon from "@/assests/svg/building-and-house.svg";
-import icon2 from "@/assests/svg/human-resources.svg";
-import {
-  Eye,
-  Layers,
-  Footprints,
-  Plug,
-  Landmark,
-  ShoppingBag,
-  BedDouble,
-  Building2,
-  Hospital,
-  Home,
-} from "lucide-react";
 import hacMap from "@/assests/bulkLand/high-access-corridor-map.webp";
-import { TbGardenCart } from "react-icons/tb";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getHACLinks } from "../Interlink";
@@ -131,7 +116,7 @@ export default function page() {
       <div>
         <Table />
       </div>
-      <BulkLand title="Want to invest in high growth bulk land parcels starting ₹1.75 CR" />
+       <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
       <div>
         <FAQSection/>
       </div>

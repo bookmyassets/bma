@@ -2,19 +2,6 @@ import Image from "next/image";
 import React from "react";
 import banner from "@/assests/bulkLand/residential plot-hero.webp";
 import bannerMob from "@/assests/bulkLand/residential-hero-mob.-webp.webp";
-import {
-  TrendingUp,
-  LayoutGrid,
-  Plug,
-  Users,
-  Landmark,
-  ShoppingBag,
-  UtensilsCrossed,
-  HeartPulse,
-  GraduationCap,
-  Home,
-  HomeIcon,
-} from "lucide-react";
 import residentialMap from "@/assests/bulkLand/residential-zone-map.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
@@ -132,7 +119,7 @@ export default function page() {
       <div>
         <Table />
       </div>
-      <BulkLand title="Want to invest in high growth bulk land parcels starting ₹1.75 CR" />
+      <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
       <div>
         <FAQSection/>
       </div>

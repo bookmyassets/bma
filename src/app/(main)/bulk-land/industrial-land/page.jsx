@@ -2,21 +2,7 @@ import Image from "next/image";
 import React from "react";
 import banner from "@/assests/bulkLand/industrial zone-hero.webp";
 import bannerMob from "@/assests/bulkLand/industrial-hero-mob-webp.webp";
-import {
-  Factory,
-  Truck,
-  Wrench,
-  Zap,
-  School,
-  Network,
-  Construction,
-  Banknote,
-  Ruler,
-  Globe2,
-} from "lucide-react";
-import CommonForm from "../../components/CommonForm";
 import industrialMap from "@/assests/bulkLand/industrial-map.webp";
-import icon2 from "@/assests/svg/plug-and-plug-connection.svg";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getIndustrialLinks } from "../Interlink";
@@ -129,7 +115,7 @@ export default function page() {
       <div>
         <Table />
       </div>
-      <BulkLand title="Want to invest in high growth bulk land parcels starting ₹1.75 CR" />
+       <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
       <FAQSection/>
       <Interlink
         properties={getIndustrialLinks()}
