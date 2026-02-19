@@ -32,7 +32,7 @@ export default function HeroCarousel() {
   const [buttonName, setButtonName] = useState("");
   const [formType, setFormType] = useState("");
   const [eventVar, setEventVar] = useState("");
-
+  const project = "Marina Bay"
   const openContactForm = (title, headline, btnName, type, project) => {
     setFormTitle(title);
     setFormHeadline(headline);
@@ -330,7 +330,7 @@ export default function HeroCarousel() {
       </div>
 
       {/* Form */}
-      <CommonForm title="Marina Bay is sold out. Want to invest in more projects like this?" button="Talk to our Team" />
+      <CommonForm title="Marina Bay is Sold Out. Want to Invest in More Projects Like This?" button="Talk to our Team" />
 
       <ActiveProjectsSection />
 
@@ -344,7 +344,7 @@ export default function HeroCarousel() {
                 headline={formHeadline}
                 buttonName={buttonName}
                 /*  onAfterSubmit={handleAfterSubmit} */
-                project="Marina bay"
+                project={project}
               />
             </div>
           </div>

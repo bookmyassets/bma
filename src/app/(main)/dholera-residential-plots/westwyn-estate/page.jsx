@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/westwyn-county/westwyn-gate-cover.webp";
 import westwyn2 from "@/assests/westwyn-county/westwyn-1.webp";
 import westwyn3 from "@/assests/westwyn-county/westwyn-2.webp";
-import { Plus, Minus, ChevronLeft, ChevronRight, Scroll } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
@@ -19,37 +19,10 @@ import img1 from "@/assests/residential/estate1.webp";
 import img2 from "@/assests/residential/estate2.webp";
 import img3 from "@/assests/residential/estate3.webp";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
-import imgM1 from "@/assests/residential/estate1M.webp";
-import imgM2 from "@/assests/residential/estate2M.webp";
-import imgM3 from "@/assests/residential/estate3M.webp";
 import PopupScroll from "../../components/PopUpScroll";
 import CostSheet from "../costsheet2";
 
 export default function HeroCarousel() {
-  const faqs = [
-    {
-      question: "What is cluster housing perumnas?",
-      answer:
-        "Cluster housing perumnas is a housing concept that consists of several houses in a gated cluster. Cluster housing perumnas offers comfortable, secure, and affordable housing with various complete and modern facilities.",
-      isOpen: true,
-    },
-    {
-      question: "Where is the location of cluster housing perumnas?",
-      answer: "Location details would go here...",
-      isOpen: false,
-    },
-    {
-      question:
-        "How much are the prices and types of houses in cluster housing perumnas?",
-      answer: "Pricing and house type information would go here...",
-      isOpen: false,
-    },
-    {
-      question: "What are the facilities provided in cluster housing perumnas?",
-      answer: "Facilities list would go here...",
-      isOpen: false,
-    },
-  ];
 
   const images = [
     { src: westwyn1, alt: "Westwyn Estate View 1" },
@@ -58,22 +31,15 @@ export default function HeroCarousel() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [openIndex, setOpenIndex] = useState(0);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-
-  // Counter states for new section 3
-  const [sqYards, setSqYards] = useState(0);
-  const [plots, setPlots] = useState(0);
-  const [amenities, setAmenities] = useState(0);
 
   // New state for brochure form
   const [formTitle, setFormTitle] = useState("");
   const [formHeadline, setFormHeadline] = useState("");
   const [buttonName, setButtonName] = useState("");
   const [formType, setFormType] = useState("");
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [showPopup, setShowPopup] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);;
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [eventVar, setEventVar] = useState("");
@@ -82,12 +48,6 @@ export default function HeroCarousel() {
     { src: img1, alt: "Dholera Investment Opportunity 1" },
     { src: img2, alt: "Dholera Investment Opportunity 2" },
     { src: img3, alt: "Dholera Investment Opportunity 3" },
-  ];
-
-  const mobileImages = [
-    { src: imgM1, alt: "Dholera Mobile 1" },
-    { src: imgM2, alt: "Dholera Mobile 2" },
-    { src: imgM3, alt: "Dholera Mobile 3" },
   ];
 
   const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
@@ -169,10 +129,6 @@ export default function HeroCarousel() {
     }
   };
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   // Auto-rotate images every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -183,58 +139,7 @@ export default function HeroCarousel() {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  // Auto-increment counters for section 3
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Start counters when section comes into view
-            const sqYardsInterval = setInterval(() => {
-              setSqYards((prev) => {
-                if (prev >= 150) {
-                  clearInterval(sqYardsInterval);
-                  return 150;
-                }
-                /* return parseFloat((prev + 0.05).toFixed(2)); */
-                return prev + 2;
-              });
-            }, 20);
-
-            const plotsInterval = setInterval(() => {
-              setPlots((prev) => {
-                if (prev >= 9250) {
-                  clearInterval(plotsInterval);
-                  return 9250;
-                }
-                return prev + 2;
-              });
-            }, 1);
-
-            const amenitiesInterval = setInterval(() => {
-              setAmenities((prev) => {
-                if (prev >= 15) {
-                  clearInterval(amenitiesInterval);
-                  return 15;
-                }
-                return prev + 1;
-              });
-            }, 60);
-
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 },
-    );
-
-    const countersSection = document.getElementById("counters-section");
-    if (countersSection) {
-      observer.observe(countersSection);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+ 
 
   return (
     <>
@@ -479,7 +384,7 @@ export default function HeroCarousel() {
 
       <div className="md:hidden">
         <CommonForm
-          title="Want to verify plot documents before booking?"
+          title="Want to Verify Plot Documents Before Booking?"
           button="Connect with an Expert"
         />
       </div>
@@ -491,7 +396,7 @@ export default function HeroCarousel() {
 
       <div className="max-sm:hidden">
         <CommonForm
-          title="Want to verify plot documents before booking?"
+          title="Want to Verify Plot Documents Before Booking?"
           button="Connect with an Expert"
         />
       </div>

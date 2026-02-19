@@ -546,7 +546,7 @@ export default function HeroCarousel() {
 
       <div className="md:hidden">
         <CommonForm
-          title="Invest on Dholera’s widest road:Fedra-Pipli Highway"
+          title="Invest on Dholera’s Widest Road:Fedra-Pipli Highway"
           button="Talk to an Advisor"
         />
       </div>
@@ -654,7 +654,7 @@ export default function HeroCarousel() {
       <ProjectAmenities />
       <div className="max-sm:hidden">
         <CommonForm
-          title="Invest on Dholera’s widest road:Fedra-Pipli Highway"
+          title="Invest on Dholera’s Widest Road:Fedra-Pipli Highway"
           button="Talk to an Advisor"
         />
       </div>

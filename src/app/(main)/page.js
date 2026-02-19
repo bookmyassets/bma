@@ -168,7 +168,7 @@ export default function page() {
       </div>
 
       <PopupForm
-        title="Best investment-ready locations in Dholera"
+        title="Best Investment-Ready Locations in Dholera"
         project="Home-Page"
       />
     </>

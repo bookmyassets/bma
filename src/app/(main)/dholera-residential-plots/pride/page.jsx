@@ -31,9 +31,9 @@ export default function HeroCarousel() {
   const [formHeadline, setFormHeadline] = useState("");
   const [buttonName, setButtonName] = useState("");
   const [formType, setFormType] = useState("");
-    const [eventVar, setEventVar] = useState("");
-  
+  const [eventVar, setEventVar] = useState("");
 
+  const project = "Pride";
   const openContactForm = (title, headline, btnName, type) => {
     setFormTitle(title);
     setFormHeadline(headline);
@@ -80,7 +80,7 @@ export default function HeroCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1,
       );
     }, 5000);
     return () => clearInterval(interval);
@@ -88,7 +88,9 @@ export default function HeroCarousel() {
 
   return (
     <>
-       <title>Buy Pride the Premium Residentail plots in Dholera with BookMyAssets</title>
+      <title>
+        Buy Pride the Premium Residentail plots in Dholera with BookMyAssets
+      </title>
       <meta
         name="description"
         content="Invest in residentail plotting project located in Dholera,a rapidly developing Smart City in Gujarat."
@@ -132,9 +134,9 @@ export default function HeroCarousel() {
               onClick={() =>
                 openContactForm(
                   "Missed Pride? Explore plots under ₹10 lakh at Westwyn Estate",
-                    "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
-                    "Get Plot Details",
-                  ""
+                  "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
+                  "Get Plot Details",
+                  "",
                 )
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
@@ -167,7 +169,11 @@ export default function HeroCarousel() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
-              About <span className="max-sm:hidden"><br /></span> Pride
+              About{" "}
+              <span className="max-sm:hidden">
+                <br />
+              </span>{" "}
+              Pride
             </h2>
           </div>
 
@@ -190,11 +196,10 @@ export default function HeroCarousel() {
               <button
                 onClick={() =>
                   openContactForm(
-                    
-                    "Get details on WestWyn Estate",
+                    "Get Details on WestWyn Estate",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Download Brochure",
-                    "brochure"
+                    "brochure",
                   )
                 }
                 className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
@@ -320,7 +325,10 @@ export default function HeroCarousel() {
       </div>
 
       {/* Form */}
-      <CommonForm title="Pride is sold out. Want to invest in more projects like this?" button="Talk to our Team" />
+      <CommonForm
+        title="Pride is Sold Out. Want to Invest in More Projects Like This?"
+        button="Talk to our Team"
+      />
 
       <ActiveProjectsSection />
 
@@ -333,7 +341,7 @@ export default function HeroCarousel() {
                 title={formTitle}
                 headline={formHeadline}
                 buttonName={buttonName}
-                project="Pride"
+                project={project}
                 /*  onAfterSubmit={handleAfterSubmit} */
               />
             </div>
