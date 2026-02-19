@@ -70,12 +70,14 @@ export default function page() {
 
   return (
     <>
-<title>Dholera Events & Updates | Latest News & Announcements by BookMy Assets</title>
-    <meta
-      name="description"
-      content="Stay updated with the latest Dholera events, news, project launches and smart city activities. Get official updates and insights from BookMyAssets."
-    />
-    
+      <title>
+        Dholera Events & Updates | Latest News & Announcements by BookMy Assets
+      </title>
+      <meta
+        name="description"
+        content="Stay updated with the latest Dholera events, news, project launches and smart city activities. Get official updates and insights from BookMyAssets."
+      />
+
       <section className="relative overflow-hidden max-sm:bg-[#0d0d0d]">
         {/* Background Overlay */}
         <div className="absolute inset-0  opacity-80"></div>
@@ -206,24 +208,22 @@ export default function page() {
                   <h3 className="text-lg font-semibold text-gray-700 mb-2">
                     What's Happening:
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    <p className="leading-relaxed text-black mb-4">
-                      Dholera: Now or Never is a one-day real estate event for
-                      investors, channel partners, and advisors exploring
-                      Dholera's rapid growth and future potential. As one of the
-                      key real estate current events, it offers
-                      expert insights, verified opportunities, and practical{" "}
-                      real estate event ideas for professionals.
-                    </p>
-                    <p className="leading-relaxed text-black">
-                      Join this exclusive real estate broker event{" "}
-                      to understand Dholera's development roadmap and explore
-                      registry-ready options backed by due diligence. This{" "}
-                      real estate event invitation is open to all
-                      looking to learn and connect with industry experts in
-                      Chandigarh. Register now to be part of the discussion
-                      shaping Dholera's future.
-                    </p>
+
+                  <p className="leading-relaxed text-black mb-4">
+                    Dholera: Now or Never is a one-day real estate event for
+                    investors, channel partners, and advisors exploring
+                    Dholera's rapid growth and future potential. As one of the
+                    key real estate current events, it offers expert insights,
+                    verified opportunities, and practical real estate event
+                    ideas for professionals.
+                  </p>
+                  <p className="leading-relaxed text-black">
+                    Join this exclusive real estate broker event to understand
+                    Dholera's development roadmap and explore registry-ready
+                    options backed by due diligence. This real estate event
+                    invitation is open to all looking to learn and connect with
+                    industry experts in Chandigarh. Register now to be part of
+                    the discussion shaping Dholera's future.
                   </p>
                 </div>
               </div>
@@ -392,7 +392,7 @@ export default function page() {
         </div>
       </div>
       <div>
-        <ImageGallery/>
+        <ImageGallery />
       </div>
     </>
   );
