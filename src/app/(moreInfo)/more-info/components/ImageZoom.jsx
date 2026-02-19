@@ -11,89 +11,120 @@ export default function ImageZoom() {
   const lensRefDesktop = useRef(null);
 
   useEffect(() => {
-    const setupZoom = (imgRef, lensRef) => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    const setupZoom = (imgRef, lensRef, srcUrl) => {
       const img = imgRef.current;
       const lens = lensRef.current;
 
       if (!img || !lens) return;
 
-      const initZoom = () => {
-        if (!img.complete || img.naturalWidth === 0) {
-          setTimeout(initZoom, 200);
-          return;
+      const zoomLevel = 2;
+
+      // Cache lens dimensions once (set via CSS)
+      const lensW = lens.offsetWidth;
+      const lensH = lens.offsetHeight;
+
+      // Pre-set background so it's ready on first hover/touch
+      lens.style.backgroundImage = `url('${srcUrl}')`;
+      lens.style.backgroundRepeat = "no-repeat";
+
+      const moveLens = (e) => {
+        e.preventDefault();
+
+        const rect = img.getBoundingClientRect();
+        const clientX = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
+        const clientY = e.clientY ?? e.touches?.[0]?.clientY ?? 0;
+
+        // Finger/cursor position relative to image
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        // --- BACKGROUND POSITION ---
+        // This must be clamped to image bounds so the zoomed content is always valid
+        const bgSrcX = Math.max(0, Math.min(x, rect.width));
+        const bgSrcY = Math.max(0, Math.min(y, rect.height));
+
+        // --- LENS VISUAL POSITION ---
+        // On mobile: show lens ABOVE the finger so thumb doesn't block it
+        // On desktop: center lens on cursor
+        let lensX, lensY;
+
+        if (isMobile) {
+          // Place lens above finger with a small gap
+          const offset = 20; // gap between finger and lens bottom
+          lensX = x - lensW / 2;
+          lensY = y - lensH - offset;
+
+          // If lens would go above the image top, flip it below the finger instead
+          if (lensY < 0) {
+            lensY = y + offset;
+          }
+
+          // Allow lens to go slightly outside horizontally — clamp only to prevent full overflow
+          lensX = Math.max(-lensW / 4, Math.min(lensX, rect.width - lensW * 0.75));
+        } else {
+          // Desktop: center on cursor, clamp within image
+          lensX = Math.max(0, Math.min(x - lensW / 2, rect.width - lensW));
+          lensY = Math.max(0, Math.min(y - lensH / 2, rect.height - lensH));
         }
 
-        const zoomLevel = 2; // 2x zoom - aap isko badha ya kam kar sakte ho
+        lens.style.left = `${lensX}px`;
+        lens.style.top = `${lensY}px`;
+        lens.style.backgroundSize = `${rect.width * zoomLevel}px ${rect.height * zoomLevel}px`;
 
-        const moveLens = (e) => {
-          e.preventDefault();
-          
-          const rect = img.getBoundingClientRect();
-          const clientX = e.clientX || e.touches?.[0]?.clientX || 0;
-          const clientY = e.clientY || e.touches?.[0]?.clientY || 0;
-          
-          const x = clientX - rect.left;
-          const y = clientY - rect.top;
-
-          let lensX = x - (lens.offsetWidth / 2);
-          let lensY = y - (lens.offsetHeight / 2);
-
-          // Keep lens within bounds
-          if (lensX > rect.width - lens.offsetWidth) lensX = rect.width - lens.offsetWidth;
-          if (lensX < 0) lensX = 0;
-          if (lensY > rect.height - lens.offsetHeight) lensY = rect.height - lens.offsetHeight;
-          if (lensY < 0) lensY = 0;
-
-          // Position lens
-          lens.style.left = lensX + 'px';
-          lens.style.top = lensY + 'px';
-          
-          // Set zoomed image as lens background
-          lens.style.backgroundImage = `url('${img.src}')`;
-          lens.style.backgroundSize = `${rect.width * zoomLevel}px ${rect.height * zoomLevel}px`;
-          lens.style.backgroundRepeat = 'no-repeat';
-          
-          // Calculate background position to show zoomed portion
-          const bgX = (lensX + lens.offsetWidth / 2) * zoomLevel - lens.offsetWidth / 2;
-          const bgY = (lensY + lens.offsetHeight / 2) * zoomLevel - lens.offsetHeight / 2;
-          
-          lens.style.backgroundPosition = `-${bgX}px -${bgY}px`;
-        };
-
-        const showLens = () => {
-          lens.style.display = 'block';
-        };
-
-        const hideLens = () => {
-          lens.style.display = 'none';
-        };
-
-        img.addEventListener('mousemove', moveLens);
-        img.addEventListener('touchmove', moveLens);
-        img.addEventListener('mouseenter', showLens);
-        img.addEventListener('mouseleave', hideLens);
-        img.addEventListener('touchstart', showLens);
-        img.addEventListener('touchend', hideLens);
-
-        return () => {
-          img.removeEventListener('mousemove', moveLens);
-          img.removeEventListener('touchmove', moveLens);
-          img.removeEventListener('mouseenter', showLens);
-          img.removeEventListener('mouseleave', hideLens);
-          img.removeEventListener('touchstart', showLens);
-          img.removeEventListener('touchend', hideLens);
-        };
+        // Background position based on actual finger position, not lens position
+        const bgX = bgSrcX * zoomLevel - lensW / 2;
+        const bgY = bgSrcY * zoomLevel - lensH / 2;
+        lens.style.backgroundPosition = `-${bgX}px -${bgY}px`;
       };
 
-      return initZoom();
+      const showLens = (e) => {
+        e.preventDefault();
+        lens.style.display = "block";
+      };
+
+      const hideLens = () => {
+        lens.style.display = "none";
+      };
+
+      const attach = () => {
+        img.addEventListener("mousemove", moveLens);
+        img.addEventListener("touchmove", moveLens, { passive: false });
+        img.addEventListener("mouseenter", showLens);
+        img.addEventListener("mouseleave", hideLens);
+        img.addEventListener("touchstart", showLens, { passive: false });
+        img.addEventListener("touchend", hideLens);
+      };
+
+      const detach = () => {
+        img.removeEventListener("mousemove", moveLens);
+        img.removeEventListener("touchmove", moveLens);
+        img.removeEventListener("mouseenter", showLens);
+        img.removeEventListener("mouseleave", hideLens);
+        img.removeEventListener("touchstart", showLens);
+        img.removeEventListener("touchend", hideLens);
+      };
+
+      if (img.complete && img.naturalWidth > 0) {
+        attach();
+        return detach;
+      } else {
+        const onLoad = () => attach();
+        img.addEventListener("load", onLoad, { once: true });
+        return () => {
+          img.removeEventListener("load", onLoad);
+          detach();
+        };
+      }
     };
 
-    const cleanupMobile = setupZoom(imgRefMobile, lensRefMobile);
-    const cleanupDesktop = setupZoom(imgRefDesktop, lensRefDesktop);
+    const cleanupMobile = setupZoom(imgRefMobile, lensRefMobile, mapM.src);
+    const cleanupDesktop = setupZoom(imgRefDesktop, lensRefDesktop, mapD.src);
 
     return () => {
-      if (typeof cleanupMobile === 'function') cleanupMobile();
-      if (typeof cleanupDesktop === 'function') cleanupDesktop();
+      cleanupMobile?.();
+      cleanupDesktop?.();
     };
   }, []);
 
@@ -103,20 +134,33 @@ export default function ImageZoom() {
         .img-zoom-container {
           position: relative;
           display: inline-block;
+          touch-action: none;
+          /* Allow lens to visually overflow image edges */
+          overflow: visible;
         }
-        
+
         .img-zoom-lens {
           position: absolute;
           border: 3px solid #fff;
-          box-shadow: 0 0 15px rgba(0,0,0,0.5);
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+          /* Desktop size */
           width: 250px;
           height: 250px;
           cursor: none;
           pointer-events: none;
           display: none;
           z-index: 100;
-          border-radius: 50%;
+          border-radius: 0%;
           overflow: hidden;
+          will-change: left, top, background-position;
+        }
+
+        /* Smaller lens on mobile so it doesn't block the image */
+        @media (max-width: 768px) {
+          .img-zoom-lens {
+            width: 160px;
+            height: 160px;
+          }
         }
       `}</style>
 
@@ -129,7 +173,7 @@ export default function ImageZoom() {
               src={mapM.src}
               alt="Map"
               className="rounded-2xl"
-              style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
+              style={{ display: "block", maxWidth: "100%", height: "auto", touchAction: "none" }}
             />
             <div ref={lensRefMobile} className="img-zoom-lens"></div>
           </div>
@@ -143,7 +187,7 @@ export default function ImageZoom() {
               src={mapD.src}
               alt="Map"
               className="rounded-2xl"
-              style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
+              style={{ display: "block", maxWidth: "100%", height: "auto" }}
             />
             <div ref={lensRefDesktop} className="img-zoom-lens"></div>
           </div>

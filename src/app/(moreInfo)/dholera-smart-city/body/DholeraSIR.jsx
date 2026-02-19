@@ -1,7 +1,6 @@
 import React from "react";
 import ProjectsSection from "./MajorProjects";
 import abcd from "@/assests/ad-page/abcd-building-dholera-about-section.webp";
-import bma_dholera from "@/assests/ad-page/bookmyassets-dholera.webp";
 import Image from "next/image";
 
 export default function DholeraLandingPage() {

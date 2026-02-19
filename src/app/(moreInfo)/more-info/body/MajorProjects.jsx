@@ -1,7 +1,4 @@
-import Image from "next/image";
 import React, { useState } from "react";
-import mapD from "@/assests/ad-page/dholera-sir-latest-map-2026-desktop-v2.webp";
-import mapM from "@/assests/ad-page/dholera-sir-latest-map-2026-mobile-v2.webp";
 import PopupForm from "../components/PopUpForm";
 import ImageZoom from "../components/ImageZoom";
 
@@ -133,11 +130,12 @@ function DesktopDesign() {
               <h3 className="text-2xl font-bold text-gray-800 mb-3">
                 {selectedProject.name}
               </h3>
-              <p className="text-gray-600 leading-relaxed px-6">
+              <ul className="text-gray-600 leading-relaxed px-6 list-disc space-y-2">
+
                 {selectedProject.points.map((point, index) => (
                   <li key={index}>{point}</li>
                 ))}
-              </p>
+              </ul>
             </div>
           </div>
         </div>
@@ -314,11 +312,11 @@ function Design3() {
               )}
             </div>
             <div className="p-6">
-              <p className="text-gray-300 text-sm leading-relaxed ">
+              <ul className="text-gray-300 text-sm leading-relaxed ">
                 {currentProject.points.map((point, index) => (
                   <li key={index}>{point}</li>
                 ))}
-              </p>
+              </ul>
             </div>
           </div>
         </div>
