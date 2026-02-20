@@ -150,7 +150,7 @@ export default function ImageZoom() {
           pointer-events: none;
           display: none;
           z-index: 100;
-          border-radius: 0%;
+          border-radius: 50%;
           overflow: hidden;
           will-change: left, top, background-position;
         }

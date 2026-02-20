@@ -31,7 +31,7 @@ export default function DholeraProgressPage() {
     {
       id: 2,
       src: activationZone,
-      alt: "Activation Zone Dholera SIR",
+      alt: "Dholera Activation Zone",
       caption: "Activation Zone – First development phase of Dholera",
     },
     {
@@ -54,9 +54,9 @@ export default function DholeraProgressPage() {
     },
     {
       id: 6,
-      src: expresswayBoard,
-      alt: "Expressway Direction Board",
-      caption: "Ahmedabad–Dholera Expressway signage",
+      src: riverFront,
+      alt: "Riverfront Development Dholera",
+      caption: "Riverfront Development Dholera",
     },
     {
       id: 7,
@@ -72,9 +72,9 @@ export default function DholeraProgressPage() {
     },
     {
       id: 9,
-      src: riverFront,
-      alt: "Riverfront Development Dholera",
-      caption: "Planned riverfront in Dholera Smart City",
+      src: expresswayBoard,
+      alt: "Dholera Expressway",
+      caption: "109KM Dholera-Ahmedabad Expressway",
     },
     {
       id: 10,
@@ -85,7 +85,7 @@ export default function DholeraProgressPage() {
     {
       id: 11,
       src: silkRoute,
-      alt: "Silk Route Connectivity Dholera",
+      alt: "Silk Route Park in Dholera",
       caption: "Strategic Silk Route industrial corridor",
     },
     {
@@ -97,31 +97,31 @@ export default function DholeraProgressPage() {
     {
       id: 13,
       src: solarBoard,
-      alt: "Solar Project Information Board",
-      caption: "Solar park project signage",
+      alt: "Tata Solar Plant in Dholera",
+      caption: "Tata Solar Park Project Dholera",
     },
     {
       id: 14,
       src: tata,
       alt: "TATA Semiconductor Plant Dholera",
-      caption: "TATA semiconductor manufacturing facility",
+      caption: "TATA Semiconductor manufacturing facility",
     },
     {
       id: 15,
       src: tataGate,
-      alt: "TATA Semiconductor Main Gate",
-      caption: "Front gate of TATA semiconductor campus",
+      alt: "TATA Semiconductor Hub Dholera",
+      caption: "TATA Semiconductor facility",
     },
     {
       id: 16,
       src: tataNight,
-      alt: "TATA Plant Night View",
+      alt: "TATA Semiconductor Plant Night View",
       caption: "Night view of TATA semiconductor project",
     },
     {
       id: 17,
       src: tataRenew,
-      alt: "TATA & ReNew Power Collaboration",
+      alt: "TATA & ReNew Power Plant",
       caption: "Renewable energy integration with TATA plant",
     },
   ];
@@ -194,7 +194,6 @@ export default function DholeraProgressPage() {
               {/* Caption */}
               <div className="p-4 text-center">
                 <h3 className="text-lg font-bold text-gray-800 mb-2">{image.alt}</h3>
-                <p className="text-sm text-gray-600">{image.caption}</p>
               </div>
             </div>
           ))}

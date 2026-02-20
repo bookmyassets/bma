@@ -11,6 +11,7 @@ import LandingPage from "./homeComponents/Hero3";
 import Groundzero from "./homeComponents/Groundzero";
 import PopupForm from "./components/PopUpForm";
 import ImageZoom from "./homeComponents/ImageZoom";
+import InteractiveMap from "./homeComponents/InteractiveMap";
 
 export default function page() {
   const [showpopForm, setpopShowForm] = useState(false);
@@ -162,8 +163,8 @@ export default function page() {
         <BMA />
         <WestWyn />
         <div>
-          {/* <InteractiveMap /> */}
-          <ImageZoom/>
+          <InteractiveMap />
+          {/* <ImageZoom/> */}
         </div>
         <ShortsSection />
         <Groundzero />
