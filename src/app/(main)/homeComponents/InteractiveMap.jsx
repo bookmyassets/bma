@@ -305,16 +305,6 @@ export default function InteractiveMap() {
             8 Mega Projects Powering
           </h2>
           <h2 className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-4">Dholera</h2>
-          <div className="flex flex-wrap justify-center items-center gap-4 text-sm md:text-base text-gray-600">
-            <div className="flex items-center">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-              <span>Fedra-Pipil State Highway</span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-              <span>Navda</span>
-            </div>
-          </div>
         </div>
 
         {/* Map Container */}
@@ -339,7 +329,7 @@ export default function InteractiveMap() {
         {/* Instruction */}
         <p className="text-center text-gray-600 mt-6 text-lg font-medium">
           <span className="inline-block w-3 h-3 rounded-full animate-pulse mr-2"></span>
-          {isMobile ? 'Tap' : 'Click'} on icons to explore details
+          {isMobile ? 'Tap' : 'Click'} on icons to explore Mega Projects
         </p>
 
         {/* 🧩 Modal for Project Details */}

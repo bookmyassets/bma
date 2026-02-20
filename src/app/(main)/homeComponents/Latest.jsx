@@ -20,8 +20,8 @@ const RelatedBlogCard = ({ item, type }) => {
           {item.mainImage ? (
             <Image
               src={urlFor(item.mainImage)
-                .width(800)
-                .height(450)
+                .width(1200)
+                .height(800)
                 .format("webp")
                 .quality(60)
                 .url()}

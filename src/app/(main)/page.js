@@ -6,9 +6,11 @@ import ShortsSection from "./homeComponents/YouTube";
 import FAQSection from "./homeComponents/FAQs";
 import WestWyn from "./homeComponents/WestWyn";
 import LandingPage from "./homeComponents/Hero3";
-import InteractiveMap from "./homeComponents/InteractiveMap";
+/* import InteractiveMap from "./homeComponents/InteractiveMap"; */
+
 import Groundzero from "./homeComponents/Groundzero";
 import PopupForm from "./components/PopUpForm";
+import ImageZoom from "./homeComponents/ImageZoom";
 
 export default function page() {
   const [showpopForm, setpopShowForm] = useState(false);
@@ -160,7 +162,8 @@ export default function page() {
         <BMA />
         <WestWyn />
         <div>
-          <InteractiveMap />
+          {/* <InteractiveMap /> */}
+          <ImageZoom/>
         </div>
         <ShortsSection />
         <Groundzero />
