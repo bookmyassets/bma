@@ -200,7 +200,7 @@ export default function PopupForm({ title, project }) {
           onClick={handleBackdropClick}
         >
           <div
-            className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl relative"
+            className="bg-white rounded-xl p-6 max-w-md w-full shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             {showThankYou ? (
@@ -250,7 +250,7 @@ export default function PopupForm({ title, project }) {
                   </div>
                   <button
                     onClick={handlePopupClose}
-                    className="absolute -top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl "
+                    className="absolute -top-6 right-4 text-gray-400 hover:text-gray-600 text-3xl "
                   >
                     ×
                   </button>
