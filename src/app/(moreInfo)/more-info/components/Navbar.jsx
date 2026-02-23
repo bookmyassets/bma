@@ -268,8 +268,8 @@ export default function Navbar() {
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <GetinTouch
-              title=""
-              buttonName="Talk To Investment Advisor"
+              title="Best Investment-Ready Locations in Dholera"
+              buttonName="Get A Call Back"
               onClose={() => setIsContactFormOpen(false)}
             />
           </div>

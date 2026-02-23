@@ -760,7 +760,7 @@ export default async function page() {
                   BookMyAssets
                 </Link>{" "}
                 connects you to premium residential projects in{" "}
-                <strong>Dholera, Gujarat,</strong> with exceptional long-term
+                <strong>Dholera Smart City, Gujarat,</strong> with exceptional long-term
                 growth potential.
               </p>
 
@@ -837,17 +837,17 @@ export default async function page() {
           <section>
             <div className="bg-black text-white rounded-xl p-6 md:p-8 text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                Dholera Is Not a Project-It's India's Long-Term Industrial
+                Dholera Is Not a Project - It's India's Long-Term Industrial
                 Strategy
               </h2>
               <div className="w-24 h-1 bg-[#deae3c] mx-auto mb-4"></div>
               <p className="text-lg text-white/90 max-w-4xl mx-auto leading-relaxed">
-                Dholera is not just about infrastructure-it is about India's
+                Dholera Smart City is not just about infrastructure-it is about India's
                 industrial future, smart governance, and globally competitive
                 manufacturing. For investors and decision-makers seeking
                 stability, scale, and strategic growth,{" "}
                 <strong className="text-[#deae3c]">
-                  Dholera SIR Smart City
+                  Dholera SIR 
                 </strong>{" "}
                 represents a once-in-a-generation urban vision.
               </p>

@@ -4,7 +4,7 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "What makes the City Centre an important zone in Dholera?",
+    question: "What makes the City Centre an important zone in Dholera Smart City?",
     answer:
       "It functions as the urban core of Dholera, featuring retail, hospitality, corporate offices, civic spaces, and high-density residential development.",
   },

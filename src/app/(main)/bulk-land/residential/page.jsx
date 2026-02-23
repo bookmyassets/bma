@@ -94,7 +94,7 @@ export default function page() {
             Catering to homebuyers, real estate developers, and investors, it
             allows for a variety of residential formats and supporting
             facilities like schools, healthcare centers, retail spaces, and
-            recreational hubs. As a key component of Dholera’s smart city
+            recreational hubs. As a key component of Dholera smart city
             masterplan, this zone ensures balanced growth by blending
             high-quality housing with commercial and public infrastructure,
             making it a hub for sustainable and future-ready living.
@@ -125,7 +125,7 @@ export default function page() {
       </div>
       <Interlink
         properties={getResidentialLinks()}
-        title="Explore Other Zones in Dholera SIR"
+        title="Explore Other Zones in Dholera Smart City"
       />
 
     </>

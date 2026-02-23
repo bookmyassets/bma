@@ -4,7 +4,7 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "What types of residential projects are allowed in the Residential Zone of Dholera?",
+    question: "What types of residential projects are allowed in the Residential Zone of Dholera Smart City?",
     answer:
       "Plotted housing, group housing, mixed-use developments, and community facilities such as schools and healthcare are permitted based on zoning guidelines.",
   },

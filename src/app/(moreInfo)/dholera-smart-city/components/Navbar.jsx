@@ -9,12 +9,13 @@ import GetinTouch from "./GetinTouch";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] = useState(false);
+  const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] =
+    useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  
+
   const router = useRouter();
   const pathname = usePathname();
-  
+
   const openContactForm = () => {
     setIsContactFormOpen(true);
   };
@@ -26,12 +27,13 @@ export default function Navbar() {
   const handleNavigation = (section) => {
     setIsMenuOpen(false);
 
-    if (pathname === '/dholera-smart-city') {
-      const element = document.getElementById(section.replace('#', ''));
+    if (pathname === "/dholera-smart-city") {
+      const element = document.getElementById(section.replace("#", ""));
       if (element) {
         const yOffset = -100;
-        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        const y =
+          element.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
     } else {
       router.push(`/dholera-smart-city${section}`);
@@ -84,8 +86,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <button 
-            onClick={() => handleNavigation("#hero")} 
+          <button
+            onClick={() => handleNavigation("#hero")}
             className="flex-shrink-0"
           >
             <Image
@@ -108,7 +110,7 @@ export default function Navbar() {
                 {label}
               </button>
             ))}
-            
+
             <div ref={getInTouchRef} className="relative group">
               <button
                 className="text-black px-3 py-2 cursor-pointer flex items-center gap-1"
@@ -268,8 +270,8 @@ export default function Navbar() {
         {isContactFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <GetinTouch
-              title=""
-              buttonName="Talk To Investment Advisor"
+              title="Best Investment-Ready Locations in Dholera"
+              buttonName="Get A Call Back"
               onClose={() => setIsContactFormOpen(false)}
             />
           </div>

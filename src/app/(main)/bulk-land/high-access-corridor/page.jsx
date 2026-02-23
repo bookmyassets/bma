@@ -122,7 +122,7 @@ export default function page() {
       </div>
       <Interlink
         properties={getHACLinks()}
-        title="Explore Other Zones in Dholera SIR"
+        title="Explore Other Zones in Dholera Smart City"
       />
     </>
   );

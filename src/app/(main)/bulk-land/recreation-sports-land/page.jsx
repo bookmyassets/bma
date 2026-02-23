@@ -123,7 +123,7 @@ export default function page() {
       </div>
       <Interlink
         properties={getSportLinks()}
-        title="Explore Other Zones in Dholera SIR"
+        title="Explore Other Zones in Dholera Smart City"
       />
     </>
   );

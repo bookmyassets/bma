@@ -94,7 +94,7 @@ export default function page() {
             lifestyle in one vibrant hub. This zone is meant for retail,
             hospitality, corporate offices, and civic institutions, along with
             high-density residential and mixed-use projects. As the focal point
-            of Dholera’s master plan, the City Centre offers maximum visibility,
+            of Dholera Smart City master plan, the City Centre offers maximum visibility,
             footfall, and prestige - making it the prime location for businesses
             and investors seeking a landmark presence in India’s first
             greenfield smart city.
@@ -124,7 +124,7 @@ export default function page() {
       </div>
       <Interlink
         properties={getCityCenterLinks()}
-        title="Explore Other Zones in Dholera SIR"
+        title="Explore Other Zones in Dholera Smart City"
       />
     </>
   );

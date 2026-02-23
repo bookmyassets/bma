@@ -20,7 +20,7 @@ const faqs = [
       "With a global presence and fully focusing on Dholera Smart City, BookMyAssets offers 365-day site visit assistance, immediate sale deed registration, and an in-house due diligence team, along with resale support and buyback assistance*.",
   },
   {
-    question: "How does WestWyn County compare to other projects in Dholera?",
+    question: "How does WestWyn County compare to other projects in Dholera Smart City?",
     answer:
       "WestWyn County stands apart with its strategic location near the upcoming Dholera International Airport and Expressway, ensuring unmatched connectivity and growth potential. Unlike many projects, it offers government approved plots backed by premium amenities and future ready infrastructure. This combination not only elevates lifestyle but also makes WestWyn County a high yield investment opportunity in one of India’s fastest growing smart city zones.",
   },

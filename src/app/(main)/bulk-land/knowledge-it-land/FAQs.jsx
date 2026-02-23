@@ -4,7 +4,7 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "What is the purpose of the Knowledge & IT Zone?",
+    question: "What is the purpose of the Knowledge & IT Zone in Dholera Smart City?",
     answer:
       "The Knowledge & IT Zone is designed to support education, research, technology-driven enterprises, and knowledge-led industries.",
   },

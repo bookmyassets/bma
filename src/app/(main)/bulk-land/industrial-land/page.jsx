@@ -119,7 +119,7 @@ export default function page() {
       <FAQSection/>
       <Interlink
         properties={getIndustrialLinks()}
-        title="Explore Other Zones in Dholera SIR"
+        title="Explore Other Zones in Dholera Smart City"
       />
     </>
   );

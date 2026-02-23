@@ -188,7 +188,7 @@ const WestWynAboutSection = () => {
 
               <p className="text-gray-600 mb-8 leading-relaxed">
                 After the resounding success of WestWyn County, we proudly
-                present the next chapter in our journey – WestWyn Estate.
+                present the next chapter in our journey - WestWyn Estate.
                 Trusted by investors and inspired by the strong response to our
                 earlier project, this new launch carries forward the same vision
                 of excellence, growth, and reliability at a prime location.
@@ -196,7 +196,7 @@ const WestWynAboutSection = () => {
                 Located on Navda Highway, right at the entrance of Dholera SIR
                 (0 km) and close to TP 5, WestWyn Estate places you at the
                 center of a rapidly developing smart city corridor. Every plot
-                here is designed to be more than land – it is a secure,
+                here is designed to be more than land - it is a secure,
                 future-ready investment that grows as Dholera transforms.
               </p>
 

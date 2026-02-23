@@ -91,7 +91,7 @@ export default function page() {
             designed for IT parks, educational institutions, R&D centers, and
             knowledge-based industries. This zone is meant for universities,
             training institutes, IT companies, startups, and technology
-            investors seeking a future-ready ecosystem. As part of Dholera’s
+            investors seeking a future-ready ecosystem. As part of Dholera Smart City
             master plan, it plays a vital role in building a skilled workforce,
             nurturing innovation, and driving the smart city’s digital and
             intellectual growth.
@@ -120,7 +120,7 @@ export default function page() {
       <FAQSection/>
       <Interlink
         properties={getKnowledgeITLinks()}
-        title="Explore Other Zones in Dholera SIR"
+        title="Explore Other Zones in Dholera Smart City"
       />
     </>
   );
