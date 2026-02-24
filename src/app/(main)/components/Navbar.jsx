@@ -1053,72 +1053,27 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Dholera SIR Dropdown */}
-            <div className="border-b border-gray-100 pb-2">
-              <button
-                onClick={toggleDholeraMenu}
-                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-blue-500 py-3 transition-colors"
-              >
-                <span>Dholera SIR</span>
-                <svg
-                  className={`w-5 h-5 transition-transform ${isDholeraMenuOpen ? "rotate-180" : ""}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-
-              {isDholeraMenuOpen && (
-                <div className="pl-4 mt-2 space-y-2 border-l-2 border-blue-500">
-                  {/* Dholera Projects in Mobile */}
-                  {dholeraLoading ? (
-                    <div className="text-gray-500 text-sm py-4 text-center">
-                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500 mr-2"></div>
-                      Loading projects...
-                    </div>
-                  ) : dholeraError ? (
-                    <div className="text-red-500 text-sm py-2">
-                      {dholeraError}
-                    </div>
-                  ) : dholeraProjects.length > 0 ? (
-                    <div className="space-y-2 mt-3 pt-3 border-t border-gray-200">
-                      <p className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
-                        Projects
-                      </p>
-                      {dholeraProjects.map((project, index) => (
-                        <Link
-                          key={index}
-                          href={`/${project.link}`}
-                          onClick={closeAllMenus}
-                          className="flex items-center py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
-                        >
-                          <div className="w-12 h-12 rounded-lg overflow-hidden mr-3 flex-shrink-0">
-                            <Image
-                              src={project.image}
-                              alt={project.projectName}
-                              width={48}
-                              height={48}
-                              className="object-cover w-full h-full"
-                            />
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-black font-medium text-sm">
-                              {project.projectName}
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              )}
-            </div>
+          <Link
+              href="/dholera-sir-blogs"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+            >
+              Blogs
+            </Link>
+            <Link
+              href="/dholera-sir-updates"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+            >
+              Dholera SIR Updates
+            </Link>
+            <Link
+              href="/about-dholera-sir"
+              onClick={closeAllMenus}
+              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
+            >
+              About Dholera
+            </Link>
 
             <Link
               href="/contact"
@@ -1134,27 +1089,7 @@ export default function Navbar() {
             >
               About Us
             </Link>
-            <Link
-              href="/career"
-              onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
-            >
-              Careers
-            </Link>
-            <Link
-              href="/channel-partner"
-              onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
-            >
-              Channel Partner
-            </Link>
-            <Link
-              href="/dholera-events"
-              onClick={closeAllMenus}
-              className="block font-medium text-black hover:text-yellow-500 py-3 border-b border-gray-100 transition-colors"
-            >
-              Events
-            </Link>
+            
             <Link
               href="/gallery"
               onClick={closeAllMenus}

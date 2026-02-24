@@ -140,7 +140,7 @@ export default function DholeraProgressPage() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-200">
       <link
         rel="canonical"
-        href="https://www.dholeratimes.com/gallery/dholera-sir-progress"
+        href="https://www.bookmyassets.com/gallery"
       />
       <meta name="robots" content="index, dofollow" />
       <title>Dholera Smart City Site Photos & Project Visual</title>
