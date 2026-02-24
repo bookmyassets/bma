@@ -557,7 +557,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "dholera-sir-blogs/first-smart-city-dholera",
+        source: "/dholera-sir-blogs/first-smart-city-dholera",
         destination:
           "/dholera-sir-blogs/impact-of-tata-semiconductor-plant-on-land-value-in-dholera",
         permanent: true,
