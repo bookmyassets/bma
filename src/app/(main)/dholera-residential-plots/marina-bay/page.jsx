@@ -97,6 +97,10 @@ export default function HeroCarousel() {
         name="description"
         content="Discover the future of living at Marina Bay Dholera! Invest in a prime waterfront property in India's smart city, close to all essential amenities."
       />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/dholera-residential-plots/marina-bay"
+      />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}

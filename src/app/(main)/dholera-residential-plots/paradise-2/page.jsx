@@ -98,6 +98,7 @@ export default function HeroCarousel() {
         name="description"
         content="Secure your dream plot in Paradise 2 Dholera.Smart amenities, fast appreciation, and location advantage in a government-backed project."
       />
+      <link rel="canonical" href="https://www.bookmyassets.com/dholera-residential-plots/paradise-2" />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}

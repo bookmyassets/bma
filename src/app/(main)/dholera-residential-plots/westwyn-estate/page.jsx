@@ -177,6 +177,7 @@ export default function HeroCarousel() {
         name="description"
         content="Invest in plots in Dholera at WestWyn Estate, 0 km from Dholera SIR, and close to proximity to the activation area at an unbeatable price."
       />
+      <link rel="canonical" href="https://www.bookmyassets.com/dholera-residential-plots/westwyn-estate" />
       {/* Hero Section with Carousel */}
       <div id="hero" className="relative min-h-screen bg-white">
         <div className="h-screen max-sm:h-auto flex flex-col">

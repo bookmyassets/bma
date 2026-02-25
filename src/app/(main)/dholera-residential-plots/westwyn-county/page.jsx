@@ -234,6 +234,7 @@ export default function HeroCarousel() {
         name="description"
         content="Discover Smart Residential Plots in Dholera With Great connectivity, smart infrastructure & high ROI."
       />
+      <link rel="canonical" href="https://www.bookmyassets.com/dholera-residential-plots/westwyn-county" />
       {/* Hero Section with Carousel - Matching Hero3 Design */}
       <div id="hero" className="relative min-h-screen bg-white">
         <div className="h-screen max-sm:h-auto flex flex-col">

@@ -86,6 +86,10 @@ export default function HeroCarousel() {
         name="description"
         content=" Discover your ideal plot in Maple Township Dholera! Embrace modern living with lush greenery and a prime location set for future growth."
       />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/dholera-residential-plots/maple"
+      />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}

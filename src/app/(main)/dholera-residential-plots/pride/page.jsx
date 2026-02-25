@@ -95,6 +95,7 @@ export default function HeroCarousel() {
         name="description"
         content="Invest in residentail plotting project located in Dholera,a rapidly developing Smart City in Gujarat."
       />
+      <link rel="canonical" href="https://www.bookmyassets.com/dholera-residential-plots/pride" />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}

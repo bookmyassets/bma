@@ -147,6 +147,7 @@ export default function HeroCarousel() {
         name="description"
         content="Discover Invest in Paradise Dholera: premium residential plots with smart infrastructure, promising ROI, and excellent connectivity in Dholera SIR."
       />
+      <link rel="canonical" href="https://www.bookmyassets.com/dholera-residential-plots/paradise" />
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}

@@ -32,14 +32,14 @@ export default function HeroCarousel() {
   const [buttonName, setButtonName] = useState("");
   const [formType, setFormType] = useState("");
   const [eventVar, setEventVar] = useState("");
-  const project = "Orchid"
+  const project = "Orchid";
   const openContactForm = (title, headline, btnName, type, project) => {
     setFormTitle(title);
     setFormHeadline(headline);
     setButtonName(btnName);
     setFormType(type);
     setIsContactFormOpen(true);
-    setEventVar(project)
+    setEventVar(project);
   };
 
   const closeContactForm = () => {
@@ -79,7 +79,7 @@ export default function HeroCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1,
       );
     }, 5000);
     return () => clearInterval(interval);
@@ -127,7 +127,7 @@ export default function HeroCarousel() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     const countersSection = document.getElementById("counters-section");
@@ -150,6 +150,11 @@ export default function HeroCarousel() {
         name="description"
         content="Explore Orchid Township in Dholera SIR! Find your ideal plot amidst innovative urban planning and smart infrastructure designed for future growth."
       />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/dholera-residential-plots/orchid"
+      />
+
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}
@@ -198,7 +203,7 @@ export default function HeroCarousel() {
                   "Missed Orchid? Explore plots under ₹10 lakh at Westwyn Estate",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
                   "Get A Call Back",
-                  ""
+                  "",
                 )
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
@@ -231,7 +236,11 @@ export default function HeroCarousel() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
-              About <span className="max-sm:hidden"><br /></span> Orchid
+              About{" "}
+              <span className="max-sm:hidden">
+                <br />
+              </span>{" "}
+              Orchid
             </h2>
           </div>
 
@@ -253,7 +262,7 @@ export default function HeroCarousel() {
                     "Get details on WestWyn Estate",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Download Brochure",
-                    "brochure"
+                    "brochure",
                   )
                 }
                 className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
@@ -379,7 +388,10 @@ export default function HeroCarousel() {
       </div>
 
       {/* Form */}
-      <CommonForm title="Orchid is Sold Out. Want to Invest in More Projects Like This?" button="Talk to our Team" />
+      <CommonForm
+        title="Orchid is Sold Out. Want to Invest in More Projects Like This?"
+        button="Talk to our Team"
+      />
 
       <ActiveProjectsSection />
 
