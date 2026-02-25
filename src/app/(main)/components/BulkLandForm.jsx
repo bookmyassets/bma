@@ -119,82 +119,71 @@ export default function BulkLand({ title }) {
   };
 
   const onRecaptchaSuccess = async (token) => {
-    try {
-      // API Request using the new endpoint and format
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              email: formData.email,
-              source: "BookMyAssets Bulk Land",
-            },
-            source: "BookMyAssets Website",
-            tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
-            recaptchaToken: token,
-          }),
-        }
-      );
+  try {
+    const response = await fetch("/api/submit-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fields: {
+          name: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          source: "BookMyAssets Bulk Land",
+        },
+        source: "BookMyAssets Website",
+        tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
+        recaptchaToken: token,
+      }),
+    });
 
-      // Store response text before parsing
-      const responseText = await response.text();
-      console.log("TeleCRM Response:", responseText);
+    // Safe JSON parse — response may be empty or HTML on errors (e.g. 404, 405)
+    let data = {};
+    const contentType = response.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      data = await response.json();
+    } else {
+      const text = await response.text();
+      console.error("Non-JSON response:", response.status, text);
+    }
 
-      // Check response status and handle accordingly
-      if (response.ok) {
-        if (
-          responseText === "OK" ||
-          responseText.toLowerCase().includes("success")
-        ) {
-          // Success handling
-          setFormData({ fullName: "", email: "", phone: "" });
-          setShowPopup(true);
+    if (response.ok && data.success) {
+      setFormData({ fullName: "", email: "", phone: "" });
+      setShowPopup(true);
 
-          // Update submission count
-          const newCount = submissionCount + 1;
-          setSubmissionCount(newCount);
-          if (typeof window !== "undefined") {
-            localStorage.setItem("formSubmissionCount", newCount.toString());
-            localStorage.setItem("lastSubmissionTime", Date.now().toString());
-          }
-           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "lead_form",
-            page_name:project
-          });
-
-        } else {
-          console.log("Response Text:", responseText);
-          setErrorMessage("Submission received but with unexpected response");
-        }
-      } else {
-        console.error("Server Error:", responseText);
-        throw new Error(responseText || "Submission failed");
+      const newCount = submissionCount + 1;
+      setSubmissionCount(newCount);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("formSubmissionCount", newCount.toString());
+        localStorage.setItem("lastSubmissionTime", Date.now().toString());
       }
 
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setErrorMessage(`Error submitting form: ${error.message}`);
-    } finally {
-      setIsLoading(false);
-      
-      // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (err) {
-          console.error("Error resetting reCAPTCHA:", err);
-        }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "lead_form",
+        page_name: title,
+      });
+    } else {
+      setErrorMessage(
+        data.error ||
+          (response.status === 405
+            ? "API route not found. Check file location: app/api/submit-lead/route.js"
+            : `Submission failed (${response.status}). Please try again.`)
+      );
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    setErrorMessage("Network error. Please check your connection and try again.");
+  } finally {
+    setIsLoading(false);
+    if (typeof window !== "undefined" && window.grecaptcha && recaptchaRef.current) {
+      try {
+        window.grecaptcha.reset();
+      } catch (err) {
+        console.error("Error resetting reCAPTCHA:", err);
       }
     }
-  };
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
