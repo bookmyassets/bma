@@ -3,13 +3,12 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 
-
 export default function BulkLand({ title }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "", 
-    email: "", 
-    phone: "" 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
   });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -47,9 +46,15 @@ export default function BulkLand({ title }) {
 
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
-      const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
-      const lastSubmissionTime = parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10);
-      
+      const storedCount = parseInt(
+        localStorage.getItem("formSubmissionCount") || "0",
+        10,
+      );
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("lastSubmissionTime") || "0",
+        10,
+      );
+
       // Check if 24 hours have passed since the last submission
       if (lastSubmissionTime) {
         const timeDifference = Date.now() - lastSubmissionTime;
@@ -103,14 +108,16 @@ export default function BulkLand({ title }) {
     }
 
     // Phone validation - accept various formats (10-15 digits)
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
     // Check submission limits
     if (submissionCount >= 20) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours.",
+      );
       setIsDisabled(true);
       return false;
     }
@@ -120,72 +127,50 @@ export default function BulkLand({ title }) {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      // API Request using the new endpoint and format
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+      const response = await fetch("/api/submit-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            source: "BookMyAssets Bulk Land",
           },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              email: formData.email,
-              source: "BookMyAssets Bulk Land",
-            },
-            source: "BookMyAssets Website",
-            tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
-            recaptchaToken: token,
-          }),
+          source: "BookMyAssets Website",
+          tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
+          recaptchaToken: token,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setFormData({ fullName: "", email: "", phone: "" });
+        setShowPopup(true);
+
+        const newCount = submissionCount + 1;
+        setSubmissionCount(newCount);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", Date.now().toString());
         }
-      );
 
-      // Store response text before parsing
-      const responseText = await response.text();
-      console.log("TeleCRM Response:", responseText);
-
-      // Check response status and handle accordingly
-      if (response.ok) {
-        if (
-          responseText === "OK" ||
-          responseText.toLowerCase().includes("success")
-        ) {
-          // Success handling
-          setFormData({ fullName: "", email: "", phone: "" });
-          setShowPopup(true);
-
-          // Update submission count
-          const newCount = submissionCount + 1;
-          setSubmissionCount(newCount);
-          if (typeof window !== "undefined") {
-            localStorage.setItem("formSubmissionCount", newCount.toString());
-            localStorage.setItem("lastSubmissionTime", Date.now().toString());
-          }
-           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "lead_form",
-            page_name:project
-          });
-
-        } else {
-          console.log("Response Text:", responseText);
-          setErrorMessage("Submission received but with unexpected response");
-        }
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "lead_form",
+          page_name: title, // use `title` prop instead of undefined `project`
+        });
       } else {
-        console.error("Server Error:", responseText);
-        throw new Error(responseText || "Submission failed");
+        setErrorMessage(data.error || "Submission failed. Please try again.");
       }
-
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage(`Error submitting form: ${error.message}`);
+      setErrorMessage(
+        "Network error. Please check your connection and try again.",
+      );
     } finally {
       setIsLoading(false);
-      
-      // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         try {
           window.grecaptcha.reset();
@@ -207,7 +192,9 @@ export default function BulkLand({ title }) {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
       setIsLoading(false);
       return;
     }
@@ -277,7 +264,8 @@ export default function BulkLand({ title }) {
             ) : isDisabled ? (
               <div className="text-center py-8">
                 <p className="text-center text-red-400 font-semibold">
-                  You have reached the maximum submission limit. Try again after 24 hours.
+                  You have reached the maximum submission limit. Try again after
+                  24 hours.
                 </p>
               </div>
             ) : (
@@ -288,7 +276,7 @@ export default function BulkLand({ title }) {
                   </div>
                 )}
                 <div className="max-sm:space-y-4 md:flex justify-center items-center gap-6">
-                  <div className="w-full"> 
+                  <div className="w-full">
                     <label
                       htmlFor="fullName"
                       className="block text-white text-sm font-medium mb-2"
