@@ -52,7 +52,7 @@ export default function Footer() {
               </a>
 
               {/* Branch Office */}
-              <a className="flex items-start gap-3 hover:text-yellow-500 transition-colors" aria-label="BookMyAssets Branch Office" href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7">
+              <a className="flex items-start gap-3 hover:text-yellow-500 transition-colors" aria-label="BookMyAssets Branch Office" href="https://maps.app.goo.gl/MsdYUzz3WuUD4ZWb6">
                 <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500 mt-0.5">
                   <FaMapMarkerAlt className="text-xs" />
                 </span>
