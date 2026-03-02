@@ -8,12 +8,11 @@ import { FaFacebook, FaInstagram, FaXTwitter, FaLinkedin, FaYoutube } from "reac
 export default function Footer() {
   return (
     <footer className="bg-white text-gray-800 border-t border-gray-200">
-      {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          
+      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-8 lg:px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+
           {/* Logo + Contact Info */}
-          <div className="col-span-1 space-y-4">
+          <div className="col-span-1 space-y-5">
             <Link href="/">
               <Image
                 src={logo}
@@ -23,67 +22,110 @@ export default function Footer() {
                 className="hover:opacity-80 transition-opacity"
               />
             </Link>
-            <div className="space-y-2 text-sm">
-              <a className="flex items-center gap-2" aria-label='BookMyAssets Phone' href="tel:+918130371647"><FaPhone className=' rotate-90' /> +91 81 30 37 16 47</a>
-              <a className="flex items-center gap-2" aria-label='BookMyAssets Email' href="mailto:info@bookmyassets.com"><FaEnvelope /> info@bookmyassets.com</a>
-              <a className="flex items-center gap-2" aria-label='BookMyAssets Google Maps Location' href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7"><FaMapMarkerAlt /> 620, 6th Floor, JMD Megapolis,<br /> Sector 48, Gurugram, Haryana 122001</a>
+
+            <div className="space-y-4 text-sm text-gray-600">
+              {/* Phone */}
+              <a className="flex items-center gap-3 hover:text-yellow-500 transition-colors" aria-label="BookMyAssets Phone" href="tel:+918130371647">
+                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500">
+                  <FaPhone className="rotate-90 text-xs" />
+                </span>
+                +91 81 30 37 16 47
+              </a>
+
+              {/* Email */}
+              <a className="flex items-center gap-3 hover:text-yellow-500 transition-colors" aria-label="BookMyAssets Email" href="mailto:info@bookmyassets.com">
+                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500">
+                  <FaEnvelope className="text-xs" />
+                </span>
+                info@bookmyassets.com
+              </a>
+
+              {/* Head Office */}
+              <a className="flex items-start gap-3 hover:text-yellow-500 transition-colors" aria-label="BookMyAssets Head Office" href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7">
+                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500 mt-0.5">
+                  <FaMapMarkerAlt className="text-xs" />
+                </span>
+                <div>
+                  <p className="font-semibold text-gray-800 mb-0.5">Head Office</p>
+                  <p className="leading-relaxed">620, 6th Floor, JMD Megapolis,<br />Sector 48, Gurugram, Haryana 122001</p>
+                </div>
+              </a>
+
+              {/* Branch Office */}
+              <a className="flex items-start gap-3 hover:text-yellow-500 transition-colors" aria-label="BookMyAssets Branch Office" href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7">
+                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500 mt-0.5">
+                  <FaMapMarkerAlt className="text-xs" />
+                </span>
+                <div>
+                  <p className="font-semibold text-gray-800 mb-0.5">Branch Office</p>
+                  <p className="leading-relaxed">303, 3rd Floor H-110, Sector-63,<br /> Noida, Uttar Pradesh 201301</p>
+                </div>
+              </a>
             </div>
+
             {/* Social Icons */}
-            <div className="flex gap-4 text-xl mt-4">
-              <Link aria-label='Visit Facebook Page of BookMyAssets' href="https://www.facebook.com/profile.php?id=61583265159985"><FaFacebook className="text-blue-600" /></Link>
-              <Link aria-label='Visit Instagram Account of BookMyAssets' href="https://www.instagram.com/bookmyassets/"><FaInstagram className="text-pink-500" /></Link>
-              <Link aria-label='Visit X handle of BookMyAssets' href="https://x.com/BookMyAssets"><FaXTwitter className="text-black" /></Link>
-              <Link aria-label='Visit LinkedIn Profile of BookMyAssets' href="https://www.linkedin.com/company/bookmyassetss/"><FaLinkedin className="text-blue-700" /></Link>
-              <Link aria-label='Visit YouTube Channel of BookMyAssets' href="https://www.youtube.com/@BookMyAssets"><FaYoutube className="text-red-600" /></Link>
+            <div className="flex gap-3 pt-1">
+              <Link aria-label="Facebook" href="https://www.facebook.com/profile.php?id=61583265159985" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-blue-100 flex items-center justify-center transition-colors">
+                <FaFacebook className="text-blue-600 text-lg" />
+              </Link>
+              <Link aria-label="Instagram" href="https://www.instagram.com/bookmyassets/" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-pink-100 flex items-center justify-center transition-colors">
+                <FaInstagram className="text-pink-500 text-lg" />
+              </Link>
+              <Link aria-label="X / Twitter" href="https://x.com/BookMyAssets" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                <FaXTwitter className="text-black text-lg" />
+              </Link>
+              <Link aria-label="LinkedIn" href="https://www.linkedin.com/company/bookmyassetss/" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-blue-100 flex items-center justify-center transition-colors">
+                <FaLinkedin className="text-blue-700 text-lg" />
+              </Link>
+              <Link aria-label="YouTube" href="https://www.youtube.com/@BookMyAssets" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-red-100 flex items-center justify-center transition-colors">
+                <FaYoutube className="text-red-600 text-lg" />
+              </Link>
             </div>
           </div>
 
           {/* Residential */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Residential</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/dholera-residential-plots/westwyn-estate" className="hover:text-yellow-500">WestWyn Estate</Link></li>
-              <li><Link href="/dholera-residential-plots/westwyn-county" className="hover:text-yellow-500">WestWyn County</Link></li>
-              <li><Link href="/dholera-residential-plots/pride">Pride</Link></li>
-              <li><Link href="/dholera-residential-plots/paradise">Paradise</Link></li>
-              <li><Link href="/dholera-residential-plots/paradise-2">Paradise 2</Link></li>
-              <li><Link href="/dholera-residential-plots/orchid">Orchid</Link></li>
-              <li><Link href="/dholera-residential-plots/marina-bay">Marina Bay</Link></li>
+            <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">Residential</h3>
+            <ul className="space-y-3 text-sm text-gray-600">
+              <li><Link href="/dholera-residential-plots/westwyn-estate" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">WestWyn Estate</Link></li>
+              <li><Link href="/dholera-residential-plots/westwyn-county" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">WestWyn County</Link></li>
+              <li><Link href="/dholera-residential-plots/pride" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Pride</Link></li>
+              <li><Link href="/dholera-residential-plots/paradise" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Paradise</Link></li>
+              <li><Link href="/dholera-residential-plots/paradise-2" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Paradise 2</Link></li>
+              <li><Link href="/dholera-residential-plots/orchid" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Orchid</Link></li>
+              <li><Link href="/dholera-residential-plots/marina-bay" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Marina Bay</Link></li>
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about">About us</Link></li>
-              <li><Link href="/dholera-sir-blogs">Blog</Link></li>
-              <li><Link href="/career">Careers</Link></li>
-              <li><Link href="/bulk-land/residential">Bulk Land</Link></li>
-              <li><Link href="/channel-partner">Channel Partner</Link></li>
+            <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">Quick Links</h3>
+            <ul className="space-y-3 text-sm text-gray-600">
+              <li><Link href="/about" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">About us</Link></li>
+              <li><Link href="/dholera-sir-blogs" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Blog</Link></li>
+              <li><Link href="/career" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Careers</Link></li>
+              <li><Link href="/bulk-land/residential" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Bulk Land</Link></li>
+              <li><Link href="/channel-partner" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Channel Partner</Link></li>
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Policies */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Policies</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/policies/terms">Terms of Service</Link></li>
-              <li><Link href="/policies/privacy">Privacy Policy</Link></li>
-              <li><Link href="/policies/copyright">Copyright Policy</Link></li>
-              <li><Link href="/policies/refund-and-cancellation">Refund and Cancellation</Link></li>
+            <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">Policies</h3>
+            <ul className="space-y-3 text-sm text-gray-600">
+              <li><Link href="/policies/terms" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Terms of Service</Link></li>
+              <li><Link href="/policies/privacy" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Privacy Policy</Link></li>
+              <li><Link href="/policies/copyright" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Copyright Policy</Link></li>
+              <li><Link href="/policies/refund-and-cancellation" className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all">Refund and Cancellation</Link></li>
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Bottom Border */}
-      <div className="border-t border-gray-300"></div>
-
-      {/* Copyright Section */}
-      <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 space-y-2 md:space-y-0">
-          <p>© {new Date().getFullYear()} BookMyAssets. All rights reserved</p>
+      {/* Copyright */}
+      <div className="border-t border-gray-200">
+        <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 flex justify-center">
+          <p className="text-sm text-gray-500">© {new Date().getFullYear()} BookMyAssets. All rights reserved.</p>
         </div>
       </div>
     </footer>
