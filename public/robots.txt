@@ -31,6 +31,6 @@ Disallow:/projects/dholera/sitemap.html
 Disallow:/about-dholera-sir/dholera-customs-port-update
 Disallow:/projects/dholera/westwyn-county-wc
 Disallow:/projects/dholera
-Disallow:/_next/
+
 
 Sitemap : https://www.bookmyassets.com/sitemap.xml
