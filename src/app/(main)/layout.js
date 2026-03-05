@@ -9,7 +9,6 @@ import ContactNow from "./components/Callus";
 import ScrollToTop from "./components/ScrollToTop";
 import RagePopup from "./components/RageClickForm";
 import { Lato } from "next/font/google";
-import Head from "next/head";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -21,7 +20,7 @@ const lato = Lato({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <meta
           name="facebook-domain-verification"
           content="6dgioemr9ldkch8vjbshuxe5g66y85"
@@ -78,7 +77,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     })(window, document, "clarity", "script", "rivub95ldd");
         `}
         </Script>
-      </Head>
+      </head>
       <body className={lato.className}>
         <ScrollToTop />
         {/* <style jsx global>{`
