@@ -1,57 +1,56 @@
-import React from "react";
+"use client";
+
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 
+const PHONE = "+918130371647";
+const WA_URL = `https://wa.me/918130371647?text=${encodeURIComponent("Hi, I need a call back")}`;
+
+// Safe GTM push — won't throw if dataLayer isn't ready yet
+function pushEvent(payload) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(payload);
+}
+
 const FloatingButtons = () => {
-
   const handleCallClick = () => {
-    // 🔥 Google Tag Manager event
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "call_click_organic",
-      lead_type: "phone",
-      device: "mobile",
-    });
-
-    // 📞 Call trigger
-    window.location.href = "tel:+918130371647";
+    pushEvent({ event: "call_click_organic", lead_type: "phone", device: "mobile" });
+    window.location.href = `tel:${PHONE}`;
   };
 
   const handleWhatsAppClick = () => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "whatsapp_click_organic",
-      lead_type: "whatsapp",
-      device: "mobile",
-    });
-
-    window.open("https://wa.me/918130371647?text=Hi%20I%20need%20a%20call%20back", "_blank");
+    pushEvent({ event: "whatsapp_click_organic", lead_type: "whatsapp", device: "mobile" });
+    // noopener,noreferrer — security best practice for _blank links
+    window.open(WA_URL, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <>
-      {/* Mobile View - Fixed Box at Bottom */}
-      <div className="trackerx fixed bottom-0 left-0 w-full bg-white shadow-md p-3 flex justify-around lg:hidden z-50">
-        
-        {/* WhatsApp Button */}
-        <button
-          onClick={handleWhatsAppClick}
-          className="flex items-center justify-center text-green-500 text-lg font-semibold"
-          id="whatsapp-mobile"
-        >
-          <FaWhatsapp size={24} className="mr-2" /> WhatsApp
-        </button>
+    <div
+      className="trackerx fixed bottom-0 left-0 w-full bg-white shadow-md p-3 flex justify-around lg:hidden z-50"
+      role="toolbar"
+      aria-label="Quick contact options"
+    >
+      <button
+        onClick={handleWhatsAppClick}
+        className="flex items-center justify-center gap-2 text-green-500 text-lg font-semibold touch-manipulation"
+        id="whatsapp-mobile"
+        type="button"
+        aria-label="Chat on WhatsApp"
+      >
+        <FaWhatsapp size={24} aria-hidden="true" />
+        WhatsApp
+      </button>
 
-        {/* Call Button */}
-        <button
-          onClick={handleCallClick}
-          className="flex items-center justify-center text-blue-500 text-lg font-semibold"
-          id="call-now-mobile"
-        >
-          <FaPhoneAlt size={24} className="mr-2" /> Call
-        </button>
-
-      </div>
-    </>
+      <button
+        onClick={handleCallClick}
+        className="flex items-center justify-center gap-2 text-blue-500 text-lg font-semibold touch-manipulation"
+        id="call-now-mobile"
+        type="button"
+        aria-label="Call us now"
+      >
+        <FaPhoneAlt size={24} aria-hidden="true" />
+        Call
+      </button>
+    </div>
   );
 };
 
