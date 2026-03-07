@@ -34,7 +34,28 @@ const SLIDES = [
 
 const AUTOPLAY_INTERVAL = 5000;
 
-// ── Nav button (memoised & actually used) ────────────────────────────────────
+// ── FIX 1: useIsMobile hook — replaces CSS hidden/block double-render ─────────
+// Previously, both desktop AND mobile image sets were mounted simultaneously.
+// CSS `hidden` hides visually but Next.js <Image> still fires all network
+// requests for both sets. This hook ensures only ONE set of images ever loads.
+
+function useIsMobile(breakpoint = 1024) {
+  // Default to false (desktop) for SSR — avoids hydration mismatch.
+  // On the client, the effect immediately corrects the value.
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
+// ── Nav button (memoised) ─────────────────────────────────────────────────────
 
 const NavButton = memo(({ onClick, direction, ariaLabel }) => (
   <button
@@ -55,7 +76,7 @@ const NavButton = memo(({ onClick, direction, ariaLabel }) => (
 ));
 NavButton.displayName = "NavButton";
 
-// ── Slide indicator dots ─────────────────────────────────────────────────────
+// ── Slide indicator dots ──────────────────────────────────────────────────────
 
 const SlideDots = memo(({ total, current, onSelect }) => (
   <div
@@ -81,14 +102,12 @@ const SlideDots = memo(({ total, current, onSelect }) => (
 ));
 SlideDots.displayName = "SlideDots";
 
-// ── SlideImage — only renders when index is current or adjacent ──────────────
-// This avoids loading all 6 images upfront. We only preload +1 ahead.
-
 const SlideImage = memo(({ slide, index, currentSlide, isMobile }) => {
   const isActive = index === currentSlide;
-  // Preload the next slide so transition is smooth; skip the rest until needed
-  const isNext = index === (currentSlide + 1) % SLIDES.length;
-  const shouldRender = isActive || isNext || index === 0;
+  const isNext   = index === (currentSlide + 1) % SLIDES.length;
+
+  const isPrev   = index === (currentSlide - 1 + SLIDES.length) % SLIDES.length;
+  const shouldRender = isActive || isNext || isPrev;
 
   if (!shouldRender) return null;
 
@@ -108,9 +127,7 @@ const SlideImage = memo(({ slide, index, currentSlide, isMobile }) => {
             alt={slide.alt}
             width={800}
             height={534}
-            // FIX: was "100vw" — mobile slider is full-width but images are
-            // object-contain inside a 50vh container; 800px is more than enough.
-            sizes="(max-width: 768px) 100vw"
+            sizes="(max-width: 768px) 100vw, 1px"
             className="w-full h-auto object-contain rounded-lg shadow-lg"
             priority={index === 0}
             fetchPriority={index === 0 ? "high" : "low"}
@@ -132,8 +149,7 @@ const SlideImage = memo(({ slide, index, currentSlide, isMobile }) => {
         src={slide.src}
         alt={slide.alt}
         fill
-        // FIX: was "100vw" — desktop slider is 60vw wide, not full screen.
-        sizes="(min-width: 1024px) 60vw, 100vw"
+        sizes="(min-width: 1024px) 60vw, (min-width: 768px) 80vw, 100vw"
         className="object-contain pt-8"
         priority={index === 0}
         fetchPriority={index === 0 ? "high" : "low"}
@@ -148,11 +164,11 @@ SlideImage.displayName = "SlideImage";
 
 export default function HeroSlider({ openForm }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const touchStartX = useRef(0);
-  const intervalRef = useRef(null);
+  const [isPaused, setIsPaused]         = useState(false);
+  const touchStartX                     = useRef(0);
+  const intervalRef                     = useRef(null);
 
-  // ── Autoplay ────────────────────────────────────────────────────────────────
+  const isMobile = useIsMobile(1024);
 
   const startAutoplay = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -167,11 +183,8 @@ export default function HeroSlider({ openForm }) {
     return () => clearInterval(intervalRef.current);
   }, [isPaused, startAutoplay]);
 
-  // ── Navigation ──────────────────────────────────────────────────────────────
-
   const goTo = useCallback((index) => {
     setCurrentSlide(index);
-    // Reset autoplay timer on manual navigation
     if (!isPaused) startAutoplay();
   }, [isPaused, startAutoplay]);
 
@@ -184,8 +197,6 @@ export default function HeroSlider({ openForm }) {
     [currentSlide, goTo]
   );
 
-  // ── Touch / swipe ───────────────────────────────────────────────────────────
-
   const handleTouchStart = useCallback((e) => {
     touchStartX.current = e.targetTouches[0].clientX;
   }, []);
@@ -195,43 +206,43 @@ export default function HeroSlider({ openForm }) {
     if (Math.abs(delta) > 50) delta > 0 ? next() : prev();
   }, [next, prev]);
 
-  // ── Keyboard support ────────────────────────────────────────────────────────
-
   const handleKeyDown = useCallback((e) => {
     if (e.key === "ArrowRight") next();
-    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowLeft")  prev();
   }, [next, prev]);
 
   return (
     <div id="hero" className="relative min-h-screen bg-white">
       <div className="h-screen max-sm:h-[80vh] flex flex-col">
         <div className="flex-1 flex flex-col lg:flex-row md:min-h-0">
-
-          {/* ── LEFT: Slider ─────────────────────────────────────────────── */}
           <section
             className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[50vh]"
             aria-roledescription="carousel"
             aria-label="Dholera Smart City project highlights"
+            tabIndex={0}
             onKeyDown={handleKeyDown}
           >
-            {/* ── DESKTOP ── */}
-            <div className="absolute inset-0 hidden lg:block">
-              <div className="relative w-full h-full overflow-hidden">
+            <div
+              className="absolute inset-0 overflow-hidden"
+              onTouchStart={isMobile ? handleTouchStart : undefined}
+              onTouchEnd={isMobile   ? handleTouchEnd   : undefined}
+              role={isMobile ? "region" : undefined}
+              aria-label={isMobile ? "Mobile image carousel" : undefined}
+            >
+              {SLIDES.map((slide, index) => (
+                <SlideImage
+                  key={index}
+                  slide={slide}
+                  index={index}
+                  currentSlide={currentSlide}
+                  isMobile={isMobile}
+                />
+              ))}
 
-                {SLIDES.map((slide, index) => (
-                  <SlideImage
-                    key={index}
-                    slide={slide}
-                    index={index}
-                    currentSlide={currentSlide}
-                    isMobile={false}
-                  />
-                ))}
+              <NavButton onClick={prev} direction="left"  ariaLabel="Previous slide" />
+              <NavButton onClick={next} direction="right" ariaLabel="Next slide" />
 
-                <NavButton onClick={prev} direction="left" ariaLabel="Previous slide" />
-                <NavButton onClick={next} direction="right" ariaLabel="Next slide" />
-
-                {/* Pause / Play — WCAG 2.1 SC 2.2.2 compliance */}
+              {!isMobile && (
                 <button
                   onClick={() => setIsPaused((p) => !p)}
                   aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
@@ -239,52 +250,26 @@ export default function HeroSlider({ openForm }) {
                   className="absolute top-3 right-3 z-10 bg-black/50 hover:bg-black/75 text-white p-1.5 rounded-full transition-colors"
                 >
                   {isPaused
-                    ? <Play className="w-4 h-4" aria-hidden="true" />
+                    ? <Play  className="w-4 h-4" aria-hidden="true" />
                     : <Pause className="w-4 h-4" aria-hidden="true" />}
                 </button>
-
-                <SlideDots
-                  total={SLIDES.length}
-                  current={currentSlide}
-                  onSelect={goTo}
-                />
-
-                <div className="absolute bottom-0 left-0 right-0 z-20">
-                  <Running />
-                </div>
-              </div>
-            </div>
-
-            {/* ── MOBILE ── */}
-            <div
-              className="absolute inset-0 block lg:hidden overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              role="region"
-              aria-label="Mobile image carousel"
-            >
-              {SLIDES.map((slide, index) => (
-                <SlideImage
-                  key={`m-${index}`}
-                  slide={slide}
-                  index={index}
-                  currentSlide={currentSlide}
-                  isMobile={true}
-                />
-              ))}
-
-              <NavButton onClick={prev} direction="left" ariaLabel="Previous slide" />
-              <NavButton onClick={next} direction="right" ariaLabel="Next slide" />
+              )}
 
               <SlideDots
                 total={SLIDES.length}
                 current={currentSlide}
                 onSelect={goTo}
               />
+
+              {!isMobile && (
+                <div className="absolute bottom-0 left-0 right-0 z-20">
+                  <Running />
+                </div>
+              )}
             </div>
           </section>
 
-          {/* ── RIGHT: Form ──────────────────────────────────────────────── */}
+          {/* ── Form ───────────────────────────────────────────────────── */}
           <div className="w-full lg:w-[40%] bg-white flex md:items-center md:justify-center p-4 sm:p-6 lg:p-8">
             <HeroForm />
           </div>
