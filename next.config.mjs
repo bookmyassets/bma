@@ -209,6 +209,11 @@ const nextConfig = {
         destination: "/dholera-sir-blogs/:slug*",
         permanent: true,
       },
+      {
+        source: "/blogs",
+        destination: "/dholera-sir-blogs",
+        permanent: true,
+      },
 
       /* BEFORE SITE RESTRUCTURE SLUGS REDIRECTION */
       {
@@ -218,7 +223,13 @@ const nextConfig = {
           "/dholera-sir-updates/dholera-international-airport-latest-news",
         permanent: true,
       },
-
+      {
+        source:
+          "/dholera-sir-updates/dholera-sea-port-location-connectivity",
+        destination:
+          "/dholera-sir-blogs/dholera-sea-port-location-connectivity",
+        permanent: true,
+      },
       {
         source: "/blog",
         destination: "/dholera-sir-blogs",
