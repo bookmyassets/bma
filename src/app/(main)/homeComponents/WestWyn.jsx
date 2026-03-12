@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import sample1 from "@/assests/residential/westwyn-estate.webp";
+import sample1 from "@/assests/residential/estates.webp";
 //import sample1 from "@/assests/residential/westwyn-estates.png";
 import Link from "next/link";
 import LatestUpdates from "./Latest";
