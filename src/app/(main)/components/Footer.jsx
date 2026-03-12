@@ -146,7 +146,7 @@ export default function Footer() {
                   href="/dholera-residential-plots/westwyn-estate"
                   className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
                 >
-                  WestWyn Estate
+                  WestWyn Estates
                 </Link>
               </li>
               <li>
