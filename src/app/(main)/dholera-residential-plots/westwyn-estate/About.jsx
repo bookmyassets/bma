@@ -1,8 +1,8 @@
 import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
-import ContactForm from "../../components/Contactform";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
+import Link from "next/link";
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({
@@ -32,15 +32,15 @@ const WestWynAboutSection = () => {
       const timer = setInterval(() => {
         current.plotSize = Math.min(
           current.plotSize + targets.plotSize / steps,
-          targets.plotSize
+          targets.plotSize,
         );
         current.price = Math.min(
           current.price + targets.price / steps,
-          targets.price
+          targets.price,
         );
         current.amenities = Math.min(
           current.amenities + targets.amenities / steps,
-          targets.amenities
+          targets.amenities,
         );
 
         setCounters({
@@ -66,7 +66,7 @@ const WestWynAboutSection = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     const counterSection = document.getElementById("counters-section");
@@ -76,18 +76,6 @@ const WestWynAboutSection = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const openContactForm = (title, headline, btnName, type) => {
-    setFormTitle(title);
-    setFormHeadline(headline);
-    setButtonName(btnName);
-    setFormType(type);
-    setIsContactFormOpen(true);
-  };
-
-  const closeContactForm = () => {
-    setIsContactFormOpen();
-  };
 
   const openBrochureForm = (title, headline, btnName, type) => {
     setFormTitle(title);
@@ -111,7 +99,8 @@ const WestWynAboutSection = () => {
         // Using setTimeout to ensure the popup closes before download starts
         setTimeout(() => {
           const link = document.createElement("a");
-          link.href = "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
+          link.href =
+            "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
           link.target = "_blank";
           link.download = "brochure.pdf"; // Add download attribute
           document.body.appendChild(link);
@@ -121,7 +110,10 @@ const WestWynAboutSection = () => {
         }, 300);
       } catch (error) {
         console.error("Error downloading brochure:", error);
-        window.open("https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf", "_blank");
+        window.open(
+          "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf",
+          "_blank",
+        );
       }
     }
   };
@@ -152,55 +144,23 @@ const WestWynAboutSection = () => {
                     </div> */}
 
           <h1 className="text-[32px] font-bold text-gray-900 ">
-            About <span className="text-[#deae3c]">WestWyn Estate</span>
+            About <span className="text-[#deae3c]">WestWyn Estates</span>
           </h1>
 
           <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            Premium plotted development in Dholera Smart City with strategic
-            location and high ROI potential
+             Westwyn Estates is a premium plotted society located directly on
+                State Highway-117 at Dholera Smart City. The project offers
+                strong connectivity and thoughtfully planned layout ensuring
+                high growth potential in future.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+        <div className=" gap-12 items-stretch space-y-4">
           {/* Left Content */}
           <div className="space-y-8 h-full">
-            <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 h-full">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-[#f8f5e6] rounded-lg flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-[#deae3c]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900">
-                  Premium Development
-                </h3>
-              </div>
+          
 
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                After the resounding success of WestWyn County, we proudly
-                present the next chapter in our journey - WestWyn Estate.
-                Trusted by investors and inspired by the strong response to our
-                earlier project, this new launch carries forward the same vision
-                of excellence, growth, and reliability at a prime location.
-                <br />
-                Located on Navda Highway, right at the entrance of Dholera SIR
-                (0 km) and close to TP 5, WestWyn Estate places you at the
-                center of a rapidly developing smart city corridor. Every plot
-                here is designed to be more than land - it is a secure,
-                future-ready investment that grows as Dholera transforms.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col justify-center items-center sm:flex-row gap-4">
                 <button
                   onClick={openBrochureForm}
                   className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
@@ -221,14 +181,13 @@ const WestWynAboutSection = () => {
                   Download Brochure
                 </button>
 
-                <a href="https://wa.me/918130371647">
-                  <button className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                <Link href="https://wa.me/918130371647">
+                  <button className="bg-white border border-[#deae3c] text-[#deae3c] px-10 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                     <FaWhatsapp />
                     Book Site Visit
                   </button>
-                </a>
+                </Link>
               </div>
-            </div>
           </div>
 
           {/* Right Content - Stats Section */}
@@ -238,44 +197,57 @@ const WestWynAboutSection = () => {
               className="bg-black rounded-2xl overflow-hidden shadow-lg h-full"
             >
               <div className="p-4 md:p-10">
-                <div className="text-center mb-10">
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#deae3c] mb-4">
-                    WestWyn Estate{" "}
-                    <span className="text-white">by Numbers</span>
-                  </h3>
-                  <p className="text-gray-300">
-                    Designed for investors who value scale, location, and
-                    returns
-                  </p>
-                </div>
+                
 
                 <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                     <div className="text-center p-3 md:p-6  bg-white/5 rounded-xl">
                       <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
-                        {counters.plotSize} sq yd
+                        7.83 Acres
                       </div>
                       <div className="text-lg font-medium text-white mb-1"></div>
                       <div className="text-gray-300 text-sm">
-                        Minimum plot size
+                        Total Land Parcel
                       </div>
                     </div>
 
                     <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
                       <div className="text-xl md:text-3xl  font-bold text-[#deae3c] mb-3">
-                        ₹ {counters.price.toLocaleString()} Lakhs
+                        231
                       </div>
-                      <div className="text-gray-300 text-sm">
-                        Starting Price
+                      <div className="text-gray-300 text-sm">Total Units</div>
+                    </div>
+                    <div>
+                      <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
+                        <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
+                          151-198 <span className="text-lg">sq. yd</span>
+                        </div>
+                        <div className="text-gray-300 text-sm">
+                          {" "}
+                          Plot Sizes{" "}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
-                      <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
-                        {counters.amenities}x ROI
+                    <div>
+                      <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
+                        <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
+                          ₹ 10 Lakh
+                        </div>
+                        <div className="text-gray-300 text-sm">
+                          {" "}
+                          Starting Price{" "}
+                        </div>
                       </div>
-                      <div className="text-gray-300 text-sm"> In 5 years </div>
+                    </div>
+                    <div>
+                      <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
+                        <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
+                          Min 300%
+                        </div>
+                        <div className="text-gray-300 text-sm">
+                          Returns In 5 years{" "}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -292,7 +264,6 @@ const WestWynAboutSection = () => {
               <BrochureDownload
                 onClose={closeBrochureForm}
                 title="Want Verified Project Details?"
-                headline="Plots starting 10 Lakh at 0 km from Dholera SIR "
                 buttonName="Get Brochure"
                 onAfterSubmit={handleAfterSubmit}
                 link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"

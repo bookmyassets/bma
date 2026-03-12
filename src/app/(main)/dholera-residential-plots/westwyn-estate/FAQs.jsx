@@ -4,34 +4,34 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Where is WestWyn Estate located?",
+    question: "Where is WestWyn Estates located?",
     answer:
-      "WestWyn Estate is located on State Highway, 0 km from Dholera SIR, close to TP 5, in the heart of Dholera’s fastest-growing corridor, and it is only 25 minutes away from the activation area.",
+      "WestWyn Estates is located on State Highway-117, just 5 minutes from Bhimnath Railway Station, within a rapidly developing corridor at Dholera Smart City.",
   },
   {
-    question: "What is the price of WestWyn Estate?",
+    question: "What is the price of plots?",
     answer:
-      "WestWyn Estate in Dholera start from ₹10 Lakh, with plot size ranging between 151 and 198 per sq. yd.",
+      "Plots at WestWyn Estates start from ₹10 Lakh, with sizes ranging between 151–198 sq. yd.",
   },
   {
     question: "Are the plots legally approved?",
     answer:
-      "Yes, all plots are NA/NOC cleared, AUDA registered and title-cleared, ensuring a safe and transparent investment.",
+      "Yes. The plots are government approved with NA/NOC/Title clearance, AUDA registered, and registry-ready, ensuring transparency and investment security.",
   },
   {
     question: "What is the booking process?",
     answer:
-      "You can reserve your plot with a token amount of ₹50,000. After booking, clients get a free site visit. Once the payment is complete, we initiate the legal process and send the registry papers via speed post.",
+      "You can reserve your plot with a token amount of ₹50,000. After booking, clients can visit the site with our team in Dholera. Once payment is completed, the legal process begins and the registry documents are sent via speed post.",
   },
   {
-    question: "Why should I invest in WestWyn Estate now?",
+    question: "Why consider investing in WestWyn Estates now?",
     answer:
-      "With the upcoming Dholera International Airport and the Tata Semiconductor Plant, Dholera is becoming India’s new Semiconductor hub. Land values are expected to rise rapidly, and residential demand is projected to grow quickly, making it a smart early Dholera SIR investment.",
+      "With over ₹3 Lakh crore global investment and upcoming developments like the Dholera International Airport and Tata Semiconductor Plant, the region is attracting major industrial growth and infrastructure development.",
   },
   {
-    question: "How can BookMyAssets help you invest?",
+    question: "How can BookMyAssets (BMA) help you invest?",
     answer:
-      "BookMyAssets assists you with plot selection in Dholera, legal verification, and the complete booking process. Our experts guide you step-by-step to ensure a safe, hassle-free investment.",
+      "BookMyAssets (BMA) assists investors with free consultation, plot selection, due diligence, and complete legal assistance till registry, ensuring a smooth and seamless investment at Dholera Smart City.",
   },
 ];
 
@@ -56,18 +56,18 @@ export default function FAQSection() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "Where is WestWyn Estate located?",
+                name: "Where is WestWyn Estates located?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "WestWyn Estate is located on State Highway, 0 km from Dholera SIR, close to TP 5, in the heart of Dholera’s fastest-growing corridor, and it is only 25 minutes away from the activation area.",
+                  text: "WestWyn Estates is located on State Highway-117, just 5 minutes from Bhimnath Railway Station, within a rapidly developing corridor at Dholera Smart City.",
                 },
               },
               {
                 "@type": "Question",
-                name: "What is the price of WestWyn Estate?",
+                name: "What is the price of plots?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "WestWyn Estate starts from ₹10 Lakh, with plot sizes ranging between 151 and 198 square yards.",
+                  text: "Plots at WestWyn Estates start from ₹10 Lakh, with sizes ranging between 151–198 sq. yd.",
                 },
               },
               {
@@ -75,7 +75,7 @@ export default function FAQSection() {
                 name: "Are the plots legally approved?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes, all plots are NA/NOC cleared, AUDA registered, and title-cleared, ensuring a safe and transparent investment.",
+                  text: "Yes. The plots are government approved with NA/NOC/Title clearance, AUDA registered, and registry-ready, ensuring transparency and investment security.",
                 },
               },
               {
@@ -83,23 +83,23 @@ export default function FAQSection() {
                 name: "What is the booking process?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "You can reserve your plot with a token amount of ₹50,000. After booking, clients receive a free site visit. Once payment is complete, the legal process begins and registry papers are sent via speed post.",
+                  text: "You can reserve your plot with a token amount of ₹50,000. After booking, clients can visit the site with our team in Dholera. Once payment is completed, the legal process begins and the registry documents are sent via speed post.",
                 },
               },
               {
                 "@type": "Question",
-                name: "Why should I invest in WestWyn Estate now?",
+                name: "Why consider investing in WestWyn Estates now?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "With the upcoming Dholera International Airport and the Tata Semiconductor Plant, Dholera is emerging as India’s semiconductor hub, driving rapid land value appreciation and residential demand.",
+                  text: "With over ₹3 Lakh crore global investment and upcoming developments like the Dholera International Airport and Tata Semiconductor Plant, the region is attracting major industrial growth and infrastructure development.",
                 },
               },
               {
                 "@type": "Question",
-                name: "How can BookMyAssets help you invest?",
+                name: "How can BookMyAssets (BMA) help you invest?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "BookMyAssets supports plot selection in Dholera, legal verification, and the complete booking process, ensuring a secure and hassle-free investment experience.",
+                  text: "BookMyAssets (BMA) assists investors with free consultation, plot selection, due diligence, and complete legal assistance till registry, ensuring a smooth and seamless investment at Dholera Smart City.",
                 },
               },
             ],
@@ -115,7 +115,7 @@ export default function FAQSection() {
               Frequently Asked Questions
             </h2>
             <p className="text-gray-600 mb-2">
-              Got questions about WestWyn Estate?
+              Got questions about WestWyn Estates?
             </p>
             <div className="pt-4">
               <a

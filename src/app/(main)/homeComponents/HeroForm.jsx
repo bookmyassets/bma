@@ -274,7 +274,7 @@ export default function HeroForm() {
               Dholera Plots under ₹10 Lakh
             </h1>
             <p className="text-sm md:text-base glowing-text px-2">
-              0 KM from Dholera SIR Boundary
+              Direct Entry from Gujarat State Highway 117
             </p>
           </div>
         </div>

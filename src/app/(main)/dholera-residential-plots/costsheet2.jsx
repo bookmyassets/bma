@@ -19,7 +19,7 @@ function formatIndianNumber(value) {
 
 // Project-specific configurations
 const projectConfigs = {
-  "WestWyn Estate": {
+  "WestWyn Estates": {
     basePrice: 6500,
     chargeType: "developement",
     chargeRate: 500,
@@ -149,7 +149,7 @@ export default function CostSheet({
 
     if (name === "projectName") {
       const selectedProject = availableProjects.find(
-        (p) => p.projectName === value
+        (p) => p.projectName === value,
       );
       const config = projectConfigs[value];
 
@@ -186,7 +186,7 @@ export default function CostSheet({
       const totalCharges =
         chargeAmount +
         parseFloat(
-          formData.legalFee
+          formData.legalFee,
         ); /* + parseFloat(formData.oneTimeMaintenance) */
       const plotTotalPayment = totalPayment + totalCharges;
       const plotAreaFeet = formData.plotAreaYards * 9;
@@ -261,7 +261,7 @@ export default function CostSheet({
       const formattedLegalFee = formatIndianNumber(legalFee);
       const formattedTotalCharges = formatIndianNumber(totalCharges);
       const formattedPlotTotalPayment = formatIndianNumber(plotTotalPayment);
-        // Combine salutation and name
+      // Combine salutation and name
       const fullName = `${salutation} ${name}`.trim();
 
       autoTable(doc, {
@@ -377,7 +377,7 @@ export default function CostSheet({
       doc.text(
         text,
         pageWidth - textWidth - 15,
-        doc.internal.pageSize.height - 5
+        doc.internal.pageSize.height - 5,
       );
 
       doc.save(`${projectName || "Plot"}_Details.pdf`);
@@ -389,276 +389,303 @@ export default function CostSheet({
   };
 
   return (
-    <div className="max-w-3xl mx-auto bg-white shadow-xl shadow-gray-500 rounded-lg p-6">
-      <p className="text-center text-3xl font-bold text-gray-700 mb-4">
+    <div className="max-w-5xl mx-auto bg-white shadow-xl shadow-gray-500 rounded-lg p-4">
+      <p className="text-center text-xl font-bold text-gray-700 mb-3">
         {currentProject
           ? `${currentProject.projectName} - Cost Estimate`
           : "Cost Estimate"}
       </p>
 
       <form>
-        <table className="w-full border-collapse">
-          <tbody>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Salutation</td>
-              <td className="p-2">
-                <select
-                  name="salutation"
-                  value={formData.salutation}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                >
-                  {SALUTATIONS.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Name</td>
-              <td className="p-2">
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Phone Number</td>
-              <td className="p-2">
-                <input
-                  type="number"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Email</td>
-              <td className="p-2">
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-
-            {showProjectSelector && (
-              <tr className="border-b">
-                <td className="p-2 font-semibold">Project Name</td>
-                <td className="p-2">
-                  {projectsLoading ? (
-                    <div className="border p-2 w-full rounded bg-gray-100 text-gray-500">
-                      Loading projects...
-                    </div>
-                  ) : projectsError ? (
-                    <div className="border p-2 w-full rounded bg-red-100 text-red-500">
-                      {projectsError}
-                    </div>
-                  ) : (
+        <div className="grid grid-cols-2 gap-x-4">
+          {/* LEFT COLUMN */}
+          <div className="border rounded-lg overflow-hidden">
+            <table className="w-full border-collapse text-sm">
+              <tbody>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold w-2/5 text-gray-600">
+                    Salutation
+                  </td>
+                  <td className="px-2 py-1">
                     <select
-                      name="projectName"
-                      id="projectName"
-                      value={formData.projectName}
+                      name="salutation"
+                      value={formData.salutation}
                       onChange={handleChange}
-                      className="border p-2 w-full rounded"
+                      className="border px-2 py-1 w-full rounded text-sm"
                     >
-                      <option value="">Select Project</option>
-                      {availableProjects.map((project) => (
-                        <option key={project.link} value={project.projectName}>
-                          {project.projectName} - {project.location}
+                      {SALUTATIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
                         </option>
                       ))}
                     </select>
-                  )}
-                </td>
-              </tr>
-            )}
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Name
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Phone
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="number"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Email
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                {showProjectSelector && (
+                  <tr className="border-b">
+                    <td className="px-2 py-1 font-semibold text-gray-600">
+                      Project
+                    </td>
+                    <td className="px-2 py-1">
+                      {projectsLoading ? (
+                        <div className="border px-2 py-1 w-full rounded bg-gray-100 text-gray-500 text-sm">
+                          Loading...
+                        </div>
+                      ) : projectsError ? (
+                        <div className="border px-2 py-1 w-full rounded bg-red-100 text-red-500 text-sm">
+                          {projectsError}
+                        </div>
+                      ) : (
+                        <select
+                          name="projectName"
+                          id="projectName"
+                          value={formData.projectName}
+                          onChange={handleChange}
+                          className="border px-2 py-1 w-full rounded text-sm"
+                        >
+                          <option value="">Select Project</option>
+                          {availableProjects.map((project) => (
+                            <option
+                              key={project.link}
+                              value={project.projectName}
+                            >
+                              {project.projectName} - {project.location}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </td>
+                  </tr>
+                )}
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Plot No
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="text"
+                      name="plotNo"
+                      value={formData.plotNo}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">PLC</td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="number"
+                      name="plc"
+                      value={formData.plc}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Plot No</td>
-              <td className="p-2">
-                <input
-                  type="text"
-                  name="plotNo"
-                  value={formData.plotNo}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">
-                Preferred Location Charge (PLC)
-              </td>
-              <td className="p-2">
-                <input
-                  type="number"
-                  name="plc"
-                  value={formData.plc}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Plot Area (Sq. Yards)</td>
-              <td className="p-2">
-                <input
-                  type="number"
-                  name="plotAreaYards"
-                  value={formData.plotAreaYards}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Plot Area (Sq. Feet)</td>
-              <td className="p-2">
-                <input
-                  type="number"
-                  name="plotAreaFeet"
-                  value={formData.plotAreaFeet}
-                  className="border p-2 w-full rounded"
-                  readOnly
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">
-                Base Plot Price per Sq. Yard
-              </td>
-              <td className="p-2">
-                <input
-                  type="number"
-                  name="basePlotPriceYards"
-                  value={formData.basePlotPriceYards}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">
-                Final Plot Price per Sq. Yard (Base + PLC)
-              </td>
-              <td className="p-2">
-                <input
-                  type="text"
-                  value={plotPriceWithPLC.toFixed(2)}
-                  className="border p-2 w-full rounded"
-                  readOnly
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Total Payment</td>
-              <td className="p-2">
-                <input
-                  type="text"
-                  name="totalPaymentYards"
-                  value={formData.totalPaymentYards}
-                  className="border p-2 w-full rounded"
-                  readOnly
-                />
-              </td>
-            </tr>
-            <tr className="border-b bg-gray-100">
-              <td colSpan="2" className="p-2 font-bold text-center">
-                Additional Charges
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">{formData.chargeName} Rate</td>
-              <td className="p-2">
-                <input
-                  type="number"
-                  name="chargeRate"
-                  value={formData.chargeRate}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">
-                {formData.chargeName} ({formData.chargeRate} x Size)
-              </td>
-              <td className="p-2">
-                <input
-                  type="text"
-                  value={formData.chargeAmount}
-                  className="border p-2 w-full rounded"
-                  readOnly
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Legal Fee (Per Sale Deed)</td>
-              <td className="p-2">
-                <input
-                  type="number"
-                  name="legalFee"
-                  value={formData.legalFee}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr>
-            {/* <tr className="border-b">
-              <td className="p-2 font-semibold">
-                One Time Maintenance(for 3 years)
-              </td>
-              <td className="p-2">
-                <input
-                  type="number"
-                  name="oneTimeMaintenance"
-                  value={formData.oneTimeMaintenance}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
-              </td>
-            </tr> */}
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Total Charges</td>
-              <td className="p-2">
-                <input
-                  type="text"
-                  value={formData.totalCharges}
-                  className="border p-2 w-full rounded"
-                  readOnly
-                />
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2 font-semibold">Plot Total Payment</td>
-              <td className="p-2">
-                <input
-                  type="text"
-                  value={formData.plotTotalPayment}
-                  className="border p-2 w-full rounded"
-                  readOnly
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          {/* RIGHT COLUMN */}
+          <div className="border rounded-lg overflow-hidden">
+            <table className="w-full border-collapse text-sm">
+              <tbody>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold w-2/5 text-gray-600">
+                    Area (Sq. Yds)
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="number"
+                      name="plotAreaYards"
+                      value={formData.plotAreaYards}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Area (Sq. Ft)
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="number"
+                      name="plotAreaFeet"
+                      value={formData.plotAreaFeet}
+                      className="border px-2 py-1 w-full rounded text-sm bg-gray-50"
+                      readOnly
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Base Price / Sq. Yd
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="number"
+                      name="basePlotPriceYards"
+                      value={formData.basePlotPriceYards}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Final Price / Sq. Yd
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="text"
+                      value={plotPriceWithPLC.toFixed(2)}
+                      className="border px-2 py-1 w-full rounded text-sm bg-gray-50"
+                      readOnly
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Total Payment
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="text"
+                      name="totalPaymentYards"
+                      value={formData.totalPaymentYards}
+                      className="border px-2 py-1 w-full rounded text-sm bg-gray-50"
+                      readOnly
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b bg-gray-100">
+                  <td
+                    colSpan="2"
+                    className="px-2 py-1 font-bold text-center text-gray-700"
+                  >
+                    Additional Charges
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    {formData.chargeName} Rate
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="number"
+                      name="chargeRate"
+                      value={formData.chargeRate}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    {formData.chargeName} Amount
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="text"
+                      value={formData.chargeAmount}
+                      className="border px-2 py-1 w-full rounded text-sm bg-gray-50"
+                      readOnly
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Legal Fee
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="number"
+                      name="legalFee"
+                      value={formData.legalFee}
+                      onChange={handleChange}
+                      className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Total Charges
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="text"
+                      value={formData.totalCharges}
+                      className="border px-2 py-1 w-full rounded text-sm bg-gray-50"
+                      readOnly
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Plot Total
+                  </td>
+                  <td className="px-2 py-1">
+                    <input
+                      type="text"
+                      value={formData.plotTotalPayment}
+                      className="border px-2 py-1 w-full rounded text-sm bg-gray-50"
+                      readOnly
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
         <button
           type="button"
           onClick={generatePDF}
-          className="bg-blue-600 text-white p-2 mt-6 w-full rounded hover:bg-blue-700 transition-colors"
+          className="bg-blue-600 text-white py-1.5 px-4 mt-4 w-full rounded text-sm font-medium hover:bg-blue-700 transition-colors"
         >
           Generate PDF
         </button>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import sample1 from "@/assests/residential/westwyn-estate.webp";
+//import sample1 from "@/assests/residential/westwyn-estates.png";
 import Link from "next/link";
 import LatestUpdates from "./Latest";
 
@@ -16,10 +17,10 @@ export default function WestWyn() {
           </div>
           <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center md:hidden">
             <a
-              href="/dholera-residential-plots/westwyn-estate"
+              href="/dholera-residential-plots/westwyn-Estates"
               className="text-lg  text-white p-4 border-2 border-[#deae3c] rounded-lg bg-[#deae3c] "
             >
-              About WestWyn Estate
+              About WestWyn Estates
             </a>
           </div>
         </div>
@@ -27,7 +28,7 @@ export default function WestWyn() {
         {/* Right Section (60%) */}
         <div className="w-full md:w-3/5 md:pl-24 md:pr-4  md:mt-0 ">
           <h3 className="text-[32px] font-semibold text-black">
-            Westwyn Estate
+            Westwyn Estates
           </h3>
           <h2 className="text-xl font-semibold text-[#deae3c] ">
             The Next Chapter in Dholera’s Growth Story
@@ -37,25 +38,25 @@ export default function WestWyn() {
               <p className="text-lg mb-2 "></p>
               <p className="text-gray-600 ">
                 After the success of WestWyn County, BookMyAssets proudly
-                introduces WestWyn Estate - a new benchmark in trust,
+                introduces WestWyn Estates - a new benchmark in trust,
                 transparency, and value-driven development. Strategically
                 located on the Vadhela–Navda Highway, right at the entrance of
-                Dholera SIR (0 KM) and near TP5, WestWyn Estate offers unmatched
+                Dholera SIR (0 KM) and near TP5, WestWyn Estates offers unmatched
                 connectivity and high appreciation potential. Each plot is
                 registry-ready, NA / NOC approved, and title clear, plan pass
                 ensuring a secure and future-ready investment. Whether you’re
                 investing for long-term returns or planning your dream space in
-                Dholera Smart City, WestWyn Estate by
+                Dholera Smart City, WestWyn Estates by
                 BookMyAssets places you at the heart of opportunity and growth.
               </p>
             </div>
           </div>
           <div className="md:pt-12 max-sm:hidden">
             <Link
-              href="/dholera-residential-plots/westwyn-estate"
+              href="/dholera-residential-plots/westwyn-estates"
               className="bg-[#deae3c] text-white px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
             >
-              About WestWyn Estate
+              About WestWyn Estates
             </Link>
           </div>
         </div>
