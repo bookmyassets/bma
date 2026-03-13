@@ -10,11 +10,10 @@ import {
   Square,
   User,
   Activity,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import Image from "next/image";
 import img from "@/assests/image.webp";
+import { FaRoad } from "react-icons/fa";
 
 const ProjectAmenities = () => {
   const [showAll, setShowAll] = useState(false);
@@ -97,9 +96,16 @@ const ProjectAmenities = () => {
       description:
         "A charging facility for electric vehicles to support eco-friendly living.",
     },
+    {
+      icon: <FaRoad className="w-6 h-6" />,
+      title: "Wide Internal Roads",
+      color: "from-blue-600 to-blue-800",
+      description:
+        "Spacious and well-planned internal roads ensuring easy vehicle movement and ample parking space.",
+    },
   ];
 
-  const visibleAmenities = showAll ? amenities : amenities.slice(0, 6);
+  const visibleAmenities = showAll ? amenities : amenities.slice(0, 12);
 
   return (
     <>
@@ -154,43 +160,31 @@ const ProjectAmenities = () => {
               className="text-4xl md:text-5xl font-bold mb-4"
               style={{ color: "#0d0d0d", letterSpacing: "-0.02em" }}
             >
-              Project Features
+              Amenities
             </h2>
-            <div
-              className="w-20 h-[3px] mx-auto mb-5 rounded-full"
-              style={{ backgroundColor: "#deae3c" }}
-            />
-            <p
-              className="text-base max-w-2xl mx-auto leading-relaxed"
-              style={{ color: "#555" }}
-            >
-              At WestWyn Estates, we offer more than just plots – we provide a
-              complete lifestyle. Key features include:
-            </p>
           </div>
 
           {/* Two-column layout */}
           <div className="flex flex-col lg:flex-row gap-10 items-start">
             <div className="lg:w-[50%]">
-
-            {/* Left panel — desktop only */}
-            <div className="px-4 sm:px-6 lg:px-8  aspect-[2/1]">
-              <Image
-                src={img}
-                alt="dholera map"
-                className="rounded-xl w-full h-auto aspect-[2/1]"
-                priority
+              {/* Left panel — desktop only */}
+              <div className="px-4 sm:px-6 lg:px-8  aspect-[2/1]">
+                <Image
+                  src={img}
+                  alt="dholera map"
+                  className="rounded-xl w-full h-auto aspect-[2/1]"
+                  priority
                 />
+              </div>
             </div>
-                </div>
 
             {/* Right panel */}
             <div className="w-full lg:w-[50%]">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {visibleAmenities.map((amenity, index) => (
                   <div
                     key={amenity.title}
-                    className={`amenity-card border-2 rounded-2xl p-5 flex flex-col items-center text-center ${index >= 6 ? "card-new" : ""}`}
+                    className={`amenity-card border-2 rounded-2xl p-4 flex flex-col items-center text-center`}
                     style={{ borderColor: "#e8e8e8" }}
                   >
                     <div
@@ -206,30 +200,6 @@ const ProjectAmenities = () => {
                     </h3>
                   </div>
                 ))}
-              </div>
-
-              {/* Show More / Show Less */}
-              <div className="flex justify-center mt-8">
-                <button
-                  onClick={() => setShowAll(!showAll)}
-                  className="show-btn flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold border-2"
-                  style={{
-                    borderColor: "#deae3c",
-                    background: showAll ? "#deae3c" : "transparent",
-                    color: showAll ? "#fff" : "#0d0d0d",
-                  }}
-                >
-                  {showAll ? (
-                    <>
-                      <ChevronUp className="w-4 h-4" /> Show Less
-                    </>
-                  ) : (
-                    <>
-                      <ChevronDown className="w-4 h-4" /> Show All{" "}
-                      {amenities.length} Features
-                    </>
-                  )}
-                </button>
               </div>
             </div>
           </div>
