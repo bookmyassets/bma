@@ -1,9 +1,6 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import westwyn1 from "@/assests/westwyn-county/westwyn-gate-cover.webp";
-import westwyn2 from "@/assests/westwyn-county/westwyn-1.webp";
-import westwyn3 from "@/assests/westwyn-county/westwyn-2.webp";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CommonForm from "../../components/CommonForm";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,6 +15,9 @@ import WestWynAboutSection from "./About";
 import img1 from "@/assests/residential/estate1.webp";
 import img2 from "@/assests/residential/estate2a.webp";
 import img3 from "@/assests/residential/estate3a.webp";
+import img1M from "@/assests/residential/estates-1M.webp";
+import img2M from "@/assests/residential/estates-2M.webp";
+import img3M from "@/assests/residential/estates-3M.webp";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import PopupScroll from "../../components/PopUpScroll";
 import CostSheet from "../costsheet2";
@@ -42,15 +42,21 @@ export default function HeroCarousel() {
     { src: img3, alt: "Dholera Investment Opportunity 3" },
   ];
 
+  const mobileImages = [
+    { src: img1M, alt: "Dholera Investment Opportunity 1" },
+    { src: img2M, alt: "Dholera Investment Opportunity 2" },
+    { src: img3M, alt: "Dholera Investment Opportunity 3" },
+  ];
+
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) =>
-      prev === desktopImages.length - 1 ? 0 : prev + 1
+      prev === desktopImages.length - 1 ? 0 : prev + 1,
     );
   }, [desktopImages.length]);
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) =>
-      prev === 0 ? desktopImages.length - 1 : prev - 1
+      prev === 0 ? desktopImages.length - 1 : prev - 1,
     );
   }, [desktopImages.length]);
 
@@ -65,7 +71,7 @@ export default function HeroCarousel() {
       const delta = touchStartX.current - touchEndX.current;
       if (Math.abs(delta) > 50) delta > 0 ? nextSlide() : prevSlide();
     },
-    [nextSlide, prevSlide]
+    [nextSlide, prevSlide],
   );
 
   const openContactForm = (title, headline, btnName, type, project) => {
@@ -107,7 +113,7 @@ export default function HeroCarousel() {
         console.error("Error downloading brochure:", error);
         window.open(
           "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf",
-          "_blank"
+          "_blank",
         );
       }
     }
@@ -162,14 +168,16 @@ export default function HeroCarousel() {
 
       {/* ── Hero Section ───────────────────────────────────────────────────── */}
       <div id="hero" className="relative w-full overflow-hidden">
-
         {/* ── DESKTOP (lg+): translateX sliding ──────────────────────────── */}
         <div
           className="hidden lg:flex w-full transition-transform duration-700 ease-in-out"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }} 
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {desktopImages.map((image, index) => (
-            <div key={`desktop-${index}`} className="w-full flex-shrink-0 relative">
+            <div
+              key={`desktop-${index}`}
+              className="w-full flex-shrink-0 relative"
+            >
               <div className="relative w-full md:h-[70vh] aspect-[3/1]">
                 <Image
                   src={image.src}
@@ -203,34 +211,40 @@ export default function HeroCarousel() {
 
         {/* ── MOBILE (< lg): opacity-fade + swipe ────────────────────────── */}
         <div
-          className="relative block lg:hidden w-full h-[40vh]"
+          className="relative block lg:hidden w-full"
+          style={{ aspectRatio: "5/4" }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           role="region"
           aria-label="Mobile image carousel"
         >
-          {desktopImages.map((image, index) => (
-            <div
-              key={`mobile-${index}`}
-              className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-              style={{
-                opacity: index === currentSlide ? 1 : 0,
-                pointerEvents: index === currentSlide ? "auto" : "none",
-              }}
-              aria-hidden={index !== currentSlide}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-contain"
-                priority={index === 0}
-                fetchPriority={index === 0 ? "high" : "low"}
-                sizes="100vw"
-                quality={85}
-              />
-            </div>
-          ))}
+          {mobileImages.map(
+            (
+              image,
+              index, // <-- mobileImages here
+            ) => (
+              <div
+                key={`mobile-${index}`}
+                className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                style={{
+                  opacity: index === currentSlide ? 1 : 0,
+                  pointerEvents: index === currentSlide ? "auto" : "none",
+                }}
+                aria-hidden={index !== currentSlide}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover" // <-- cover works better for fixed-ratio mobile images
+                  priority={index === 0}
+                  fetchPriority={index === 0 ? "high" : "low"}
+                  sizes="100vw"
+                  quality={85}
+                />
+              </div>
+            ),
+          )}
 
           <button
             onClick={prevSlide}
@@ -247,7 +261,6 @@ export default function HeroCarousel() {
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
-
       </div>
       {/* ── End Hero Section ───────────────────────────────────────────────── */}
 
