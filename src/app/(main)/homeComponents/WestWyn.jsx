@@ -53,7 +53,7 @@ export default function WestWyn() {
           </div>
           <div className="md:pt-12 max-sm:hidden">
             <Link
-              href="/dholera-residential-plots/westwyn-estates"
+              href="/dholera-residential-plots/westwyn-estate"
               className="bg-[#deae3c] text-white px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
             >
               About WestWyn Estates
