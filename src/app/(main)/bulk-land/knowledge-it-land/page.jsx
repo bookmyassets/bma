@@ -8,6 +8,7 @@ import BulkLand from "../../components/BulkLandForm";
 import Interlink, { getKnowledgeITLinks } from "../Interlink";
 import FAQSection from "./FAQs";
 import KnowledgeITZoneCards from "./Cards";
+import GDCR from "../residential/GDCR";
 
 export default function page() {
   return (
@@ -114,7 +115,8 @@ export default function page() {
         <KnowledgeITZoneCards/>
       </div>
       <div>
-        <Table />
+        {/* <Table /> */}
+        <GDCR/>
       </div>
       <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
       <FAQSection/>
