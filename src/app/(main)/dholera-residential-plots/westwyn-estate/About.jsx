@@ -197,58 +197,37 @@ const WestWynAboutSection = () => {
               id="counters-section"
               className="bg-black rounded-2xl overflow-hidden shadow-lg h-full"
             >
-              <div className="p-4 md:p-10">
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-                    <div className="text-center p-3 md:p-6  bg-white/5 rounded-xl">
-                      <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
-                        7.83 Acres
+              <div className="p-4 md:p-8">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                  {[
+                    { value: <>7.83 Acres</>, label: "Total Land Parcel" },
+                    { value: <>231</>, label: "Total Units" },
+                    {
+                      value: (
+                        <>
+                          151-198{" "}
+                          <span className="text-base font-semibold">
+                            sq. yd
+                          </span>
+                        </>
+                      ),
+                      label: "Plot Sizes",
+                    },
+                    { value: <>₹ 10 Lakh</>, label: "Starting Price" },
+                    { value: <>Min 300%</>, label: "Returns In 5 years" },
+                  ].map(({ value, label }, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center justify-center text-center p-6 bg-white/5 rounded-xl min-h-[100px]"
+                    >
+                      <div className="text-xl md:text-2xl font-bold text-[#deae3c] leading-tight mb-2 whitespace-nowrap">
+                        {value}
                       </div>
-                      <div className="text-lg font-medium text-white mb-1"></div>
-                      <div className="text-gray-300 text-sm">
-                        Total Land Parcel
-                      </div>
-                    </div>
-
-                    <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
-                      <div className="text-xl md:text-3xl  font-bold text-[#deae3c] mb-3">
-                        231
-                      </div>
-                      <div className="text-gray-300 text-sm">Total Units</div>
-                    </div>
-                    <div>
-                      <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
-                        <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
-                          151-198 <span className="text-lg">sq. yd</span>
-                        </div>
-                        <div className="text-gray-300 text-sm">
-                          {" "}
-                          Plot Sizes{" "}
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
-                        <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
-                          ₹ 10 Lakh
-                        </div>
-                        <div className="text-gray-300 text-sm">
-                          {" "}
-                          Starting Price{" "}
-                        </div>
+                      <div className="text-gray-300 text-sm whitespace-nowrap">
+                        {label}
                       </div>
                     </div>
-                    <div>
-                      <div className="text-center p-3 md:p-6 bg-white/5 rounded-xl">
-                        <div className="text-xl md:text-3xl font-bold text-[#deae3c] mb-3">
-                          Min 300%
-                        </div>
-                        <div className="text-gray-300 text-sm">
-                          Returns In 5 years{" "}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
