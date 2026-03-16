@@ -8,7 +8,7 @@ import LatestUpdates from "./Latest";
 export default function WestWyn() {
   return (
     <>
-    <LatestUpdates/>
+      <LatestUpdates />
       <div className="flex flex-col max-sm:flex-col-reverse max-w-7xl mx-auto pt-8 md:flex-row px-4 py-12 gap-8 overflow-hidden">
         {/* Left Section (40%) */}
         <div className="w-full md:w-2/5 max-w-2xl mx-auto md:pt-4 pl-4 pr-4">
@@ -37,17 +37,20 @@ export default function WestWyn() {
             <div className="">
               <p className="text-lg mb-2 "></p>
               <p className="text-gray-600 ">
-                After the success of WestWyn County, BookMyAssets proudly
-                introduces WestWyn Estates - a new benchmark in trust,
-                transparency, and value-driven development. Strategically
-                located on the Vadhela–Navda Highway, right at the entrance of
-                Dholera SIR (0 KM) and near TP5, WestWyn Estates offers unmatched
-                connectivity and high appreciation potential. Each plot is
-                registry-ready, NA / NOC approved, and title clear, plan pass
-                ensuring a secure and future-ready investment. Whether you’re
-                investing for long-term returns or planning your dream space in
-                Dholera Smart City, WestWyn Estates by
-                BookMyAssets places you at the heart of opportunity and growth.
+                After the success of WestWyn County, BookMyAssets introduced
+                WestWyn Estates, a thoughtfully planned premium plotted
+                community built on trust and long-term value. With direct entry
+                from State Highway-117, minutes from Bhimnath Railway Station,
+                and close to the Dholera SIR boundary, the location offers
+                strong connectivity while maintaining a calm environment.
+                <br />
+                Planned as a secure gated community, WestWyn Estates reflects
+                the comfort of premium estates living, designed for a peaceful
+                and secure lifestyle.
+                <br />
+                Whether you’re looking for long-term growth or planning your own
+                space near Dholera SIR, WestWyn Estates offers a well-connected
+                location close to upcoming development.
               </p>
             </div>
           </div>

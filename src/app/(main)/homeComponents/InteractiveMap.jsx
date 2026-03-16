@@ -72,7 +72,7 @@ export default function InteractiveMap() {
       details: [
         "India's Second Largest Airport",
         "Spread Across 1400+ hectares",
-        "Construction work to be Completed in December 2025"
+        "Construction work to be Completed in Mid 2026"
       ],
       videoId: "Aih4UJppDbM",
       type: "video"
@@ -100,7 +100,7 @@ export default function InteractiveMap() {
       details: [
         "One Stop Hub for all Administrative & Construction",
         "Smart city command and control centre",
-        "Real Time Control of Roads & Electricity",
+        "Real Time Control of Roads, Power & City Administration",
       ],
       videoId: "jF2U2IWF3yk",
       type: "video"

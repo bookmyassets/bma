@@ -148,46 +148,47 @@ const WestWynAboutSection = () => {
           </h1>
 
           <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-             Westwyn Estates is a premium plotted society located directly on
-                State Highway-117 at Dholera Smart City. The project offers
-                strong connectivity and thoughtfully planned layout ensuring
-                high growth potential in future.
+            WestWyn Estates is a premium residential plotting project in Dholera
+            SIR, Gujarat, designed for comfortable living and long-term value.
+            With direct entry from State Highway-117, the project offers
+            excellent connectivity. The location is just minutes from Bhimnath
+            Railway Station, making it easily accessible. WestWyn Estates is a
+            good option for those looking at Dholera plots with long-term
+            investment.
           </p>
         </div>
 
         <div className=" gap-12 items-stretch space-y-4">
           {/* Left Content */}
           <div className="space-y-8 h-full">
-          
-
-              <div className="flex flex-col justify-center items-center sm:flex-row gap-4">
-                <button
-                  onClick={openBrochureForm}
-                  className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
+            <div className="flex flex-col justify-center items-center sm:flex-row gap-4">
+              <button
+                onClick={openBrochureForm}
+                className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </svg>
-                  Download Brochure
-                </button>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                Download Brochure
+              </button>
 
-                <Link href="https://wa.me/918130371647">
-                  <button className="bg-white border border-[#deae3c] text-[#deae3c] px-10 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                    <FaWhatsapp />
-                    Book Site Visit
-                  </button>
-                </Link>
-              </div>
+              <Link href="https://wa.me/918130371647">
+                <button className="bg-white border border-[#deae3c] text-[#deae3c] px-10 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                  <FaWhatsapp />
+                  Book Site Visit
+                </button>
+              </Link>
+            </div>
           </div>
 
           {/* Right Content - Stats Section */}
@@ -197,8 +198,6 @@ const WestWynAboutSection = () => {
               className="bg-black rounded-2xl overflow-hidden shadow-lg h-full"
             >
               <div className="p-4 md:p-10">
-                
-
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                     <div className="text-center p-3 md:p-6  bg-white/5 rounded-xl">
