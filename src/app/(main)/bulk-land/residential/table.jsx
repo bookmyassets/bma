@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect, useRef } from "react";
 
 const locations = [
@@ -9,20 +9,20 @@ Row‐house, Villa/Bungalow; Multi‐purpose ground smaller than 5 ha;
 Terraced/Row House; Villa/Bungalow; Housing for EWS; Night Shelter; Old‐Age Home; 
 Maternity Home, Nursing Home, Kindergarten, Day‐care, Dispensary, 
 Veterinary Clinic, Health‐club, Place of Worship on plot smaller than 1000sqm, 
-Community Hall, Health‐Club, Swimming Pool`
+Community Hall, Health‐Club, Swimming Pool`,
   },
   {
     name: "Residential Projects Allowed on Road 25m to Below 55m",
     text: `Neighbourhood Retail/Service Shop, Restaurant/Café, Hawker Zone, 
 Designated Vegetable Market/bazaar, Commercial Centre, Primary and Secondary School; 
 Multi‐purpose ground larger than 5 ha; Place of Worship on Plot larger than 1000 sq m; 
-Service/Repair Shop; Veterinary Hospital; Public Facility/Infrastructure/Utility Buildings`
+Service/Repair Shop; Veterinary Hospital; Public Facility/Infrastructure/Utility Buildings`,
   },
   {
     name: "Residential Projects Allowed on Road 55m and Above",
     text: `Cinema Hall, Retail Mall, Petrol/CNG/LPG Pump, Bank, Hospital all use premises given in 
-the categories above`
-  }
+the categories above`,
+  },
 ];
 
 export default function Table() {
@@ -77,10 +77,14 @@ export default function Table() {
             className="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors duration-300"
             onClick={() => toggleLocation(index)}
           >
-            <h2 className="text-2xl max-sm:text-lg text-gray-900">{location.name}</h2>
+            <h2 className="text-2xl max-sm:text-lg text-gray-900">
+              {location.name}
+            </h2>
             <span
               className={`inline-flex items-center justify-center w-8 h-8 rounded-full transition-all duration-500 ${
-                expandedLocation === index ? "bg-[#deae3c] text-white" : "bg-gray-100 text-gray-500"
+                expandedLocation === index
+                  ? "bg-[#deae3c] text-white"
+                  : "bg-gray-100 text-gray-500"
               }`}
             >
               <svg
@@ -103,7 +107,8 @@ export default function Table() {
           <div
             className="overflow-hidden transition-all duration-500 ease-in-out"
             style={{
-              maxHeight: expandedLocation === index ? `${heights[index]}px` : "0px",
+              maxHeight:
+                expandedLocation === index ? `${heights[index]}px` : "0px",
               opacity: expandedLocation === index ? 1 : 0,
             }}
           >
@@ -125,26 +130,24 @@ export default function Table() {
           className="bg-white  rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
         >
           <div className="p-4 border-b border-gray-200">
-            <h2 className="text-xl text-center text-black">
-              {location.name}
-            </h2>
+            <h2 className="text-xl text-center text-black">{location.name}</h2>
           </div>
-          <div className="p-4 text-black">
-            {renderText(location.text)}
-          </div>
+          <div className="p-4 text-black">{renderText(location.text)}</div>
         </div>
       ))}
     </div>
   );
 
   return (
-    <div
-      className=" bg-gradient-to-b from-blue-50 to-gray-100 py-4 px-4 sm:px-6 lg:px-8 space-y-4"
-    >
+    <div className=" bg-gradient-to-b from-blue-50 to-gray-100 py-4 px-4 sm:px-6 lg:px-8 space-y-4">
       <div className="w-full max-w-7xl mx-auto space-y-3 max-md:flex flex-col justify-center items-center px-4 py-8 sm:px-6 lg:px-8">
-        <p className="text-center text-2xl mb-4">Development Control Regulations for Residential Zone (as per Minimum Road Row)</p>
+        <p className="text-center text-2xl mb-4">
+          Development Control Regulations for Residential Zone (as per
+          Minimum Road Row)
+        </p>
         <p className="text-center text-sm mb-8 animate-fadeIn">
-          All details are verified from the official website of Dholera by the Government of Gujarat.
+          All details are verified from the official website of Dholera by the
+          Government of Gujarat.
         </p>
 
         {!isMobile && (
@@ -177,9 +180,47 @@ export default function Table() {
         )}
 
         <div className="animate-fadeIn">
-          {isMobile || viewMode === "list" ? renderListView() : renderGridView()}
+          {isMobile || viewMode === "list"
+            ? renderListView()
+            : renderGridView()}
         </div>
       </div>
+
+<div>
+  <section style={{ margin: "40px 0" }}>
+    <h3>General Development Control Regulations – Full Document</h3>
+    <p>
+      Official regulations as published by the Government of Gujarat for
+      Dholera SIR.
+    </p>
+
+    <iframe
+      src={`https://docs.google.com/viewer?url=https://cdn.sanity.io/files/c3e1h345/projects/66dcad140036ee16f4c1d0d40cb3f56d39841639.pdf&embedded=true`}
+      width="100%"
+      height="700"
+      style={{ border: "1px solid #ddd", borderRadius: "8px" }}
+      title="General Development Control Regulations - Dholera SIR"
+    />
+
+    <a
+      href="https://cdn.sanity.io/files/c3e1h345/projects/66dcad140036ee16f4c1d0d40cb3f56d39841639.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      download
+      style={{
+        display: "inline-block",
+        marginTop: "12px",
+        padding: "10px 20px",
+        background: "#E8562A",
+        color: "#fff",
+        borderRadius: "4px",
+        textDecoration: "none",
+      }}
+    >
+      ⬇ Download Full DCR Document
+    </a>
+  </section>
+</div>
 
       <style jsx>{`
         @keyframes fadeIn {
