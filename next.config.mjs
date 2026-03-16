@@ -428,6 +428,11 @@ const nextConfig = {
         destination: "/events",
         permanent: true,
       },
+      {
+        source: "/blogs/how-tata-semiconductor-fab-dholera-impact-plot-prices",
+        destination: "/dholera-sir-blogs/impact-of-tata-semiconductor-plant-on-land-value-in-dholera",
+        permanent: true,
+      },
     ];
   },
 };
