@@ -74,7 +74,7 @@ export default function BMA() {
                     key={label}
                     className="
                       flex flex-col justify-center items-center
-                      p-[calc(0.75rem+0.5vw)]
+                      p-[calc(0.75rem+0.2vw)]
                       bg-white rounded-2xl shadow-md
                       hover:shadow-xl transition-shadow
                     "
