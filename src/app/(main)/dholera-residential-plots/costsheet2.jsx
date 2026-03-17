@@ -20,7 +20,7 @@ function formatIndianNumber(value) {
 // Project-specific configurations
 const projectConfigs = {
   "WestWyn Estates": {
-    basePrice: 6500,
+    basePrice: 6700,
     chargeType: "developement",
     chargeRate: 500,
     chargeName: "Development Charge",
