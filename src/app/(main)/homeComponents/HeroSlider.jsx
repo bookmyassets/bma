@@ -5,7 +5,6 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { ChevronRight, ChevronLeft, Pause, Play } from "lucide-react";
 
-// Images
 import img1 from "@/assests/homepage/hero2/westwyn-estate-dholera-residential-plots-desktop.webp";
 import img2 from "@/assests/homepage/hero2/dholera-international-airport-desktop.webp";
 import img3 from "@/assests/homepage/hero2/silk-route-park-dholera-desktop.webp";
@@ -15,17 +14,20 @@ import img6 from "@/assests/homepage/hero2/tata_gate_hero.webp";
 
 import HeroForm from "./HeroForm";
 
-// Lazy-load the running ticker — not needed for LCP
 const Running = dynamic(() => import("./Running"), {
   ssr: false,
   loading: () => <div className="h-12" />,
 });
 
-// ── Slide data ────────────────────────────────────────────────────────────────
-
 const SLIDES = [
-  { src: img1, alt: "Westwyn Estate Dholera Residential Plots - Premium Investment Opportunity" },
-  { src: img2, alt: "Dholera International Airport - Smart City Infrastructure Development" },
+  {
+    src: img1,
+    alt: "Westwyn Estate Dholera Residential Plots - Premium Investment Opportunity",
+  },
+  {
+    src: img2,
+    alt: "Dholera International Airport - Smart City Infrastructure Development",
+  },
   { src: img3, alt: "Silk Route Park Dholera - Modern Urban Development" },
   { src: img4, alt: "Dholera Ahmedabad Expressway" },
   { src: img5, alt: "River Front Dholera" },
@@ -34,16 +36,8 @@ const SLIDES = [
 
 const AUTOPLAY_INTERVAL = 5000;
 
-// ── FIX 1: useIsMobile hook — replaces CSS hidden/block double-render ─────────
-// Previously, both desktop AND mobile image sets were mounted simultaneously.
-// CSS `hidden` hides visually but Next.js <Image> still fires all network
-// requests for both sets. This hook ensures only ONE set of images ever loads.
-
 function useIsMobile(breakpoint = 1024) {
-  // Default to false (desktop) for SSR — avoids hydration mismatch.
-  // On the client, the effect immediately corrects the value.
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
     setIsMobile(mq.matches);
@@ -51,11 +45,8 @@ function useIsMobile(breakpoint = 1024) {
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, [breakpoint]);
-
   return isMobile;
 }
-
-// ── Nav button (memoised) ─────────────────────────────────────────────────────
 
 const NavButton = memo(({ onClick, direction, ariaLabel }) => (
   <button
@@ -63,20 +54,25 @@ const NavButton = memo(({ onClick, direction, ariaLabel }) => (
     aria-label={ariaLabel}
     type="button"
     className={`
-      absolute ${direction === "left" ? "left-3" : "right-3"}
+      absolute
+      ${
+        direction === "left"
+          ? "left-[calc(0.5rem+0.5vw)]" // ✅ calc() — stays off edge on any screen
+          : "right-[calc(0.5rem+0.5vw)]"
+      }
       top-1/2 -translate-y-1/2 z-10
       bg-black/50 hover:bg-black/75 text-white
       p-2 rounded-full transition-colors touch-manipulation
     `}
   >
-    {direction === "left"
-      ? <ChevronLeft className="w-6 h-6" aria-hidden="true" />
-      : <ChevronRight className="w-6 h-6" aria-hidden="true" />}
+    {direction === "left" ? (
+      <ChevronLeft className="w-6 h-6" aria-hidden="true" />
+    ) : (
+      <ChevronRight className="w-6 h-6" aria-hidden="true" />
+    )}
   </button>
 ));
 NavButton.displayName = "NavButton";
-
-// ── Slide indicator dots ──────────────────────────────────────────────────────
 
 const SlideDots = memo(({ total, current, onSelect }) => (
   <div
@@ -104,9 +100,8 @@ SlideDots.displayName = "SlideDots";
 
 const SlideImage = memo(({ slide, index, currentSlide, isMobile }) => {
   const isActive = index === currentSlide;
-  const isNext   = index === (currentSlide + 1) % SLIDES.length;
-
-  const isPrev   = index === (currentSlide - 1 + SLIDES.length) % SLIDES.length;
+  const isNext = index === (currentSlide + 1) % SLIDES.length;
+  const isPrev = index === (currentSlide - 1 + SLIDES.length) % SLIDES.length;
   const shouldRender = isActive || isNext || isPrev;
 
   if (!shouldRender) return null;
@@ -120,19 +115,22 @@ const SlideImage = memo(({ slide, index, currentSlide, isMobile }) => {
           pointerEvents: isActive ? "auto" : "none",
         }}
         aria-hidden={!isActive}
+        inert={!isActive} // ✅ plain boolean
       >
+        {/* ✅ responsive image — aspect-ratio container + fill instead of fixed width/height */}
         <div className="h-full flex items-center justify-center px-1 pt-16 pb-4">
-          <Image
-            src={slide.src}
-            alt={slide.alt}
-            width={800}
-            height={534}
-            sizes="(max-width: 768px) 100vw, 1px"
-            className="w-full h-auto object-contain rounded-lg shadow-lg"
-            priority={index === 0}
-            fetchPriority={index === 0 ? "high" : "low"}
-            quality={65}
-          />
+          <div className="relative w-full aspect-[3/2] rounded-lg overflow-hidden shadow-lg">
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority={index === 0}
+              fetchPriority={index === 0 ? "high" : "low"}
+              quality={65}
+            />
+          </div>
         </div>
       </div>
     );
@@ -144,6 +142,7 @@ const SlideImage = memo(({ slide, index, currentSlide, isMobile }) => {
         isActive ? "opacity-100" : "opacity-0"
       }`}
       aria-hidden={!isActive}
+      inert={!isActive} // ✅ plain boolean
     >
       <Image
         src={slide.src}
@@ -160,14 +159,11 @@ const SlideImage = memo(({ slide, index, currentSlide, isMobile }) => {
 });
 SlideImage.displayName = "SlideImage";
 
-// ── Main component ────────────────────────────────────────────────────────────
-
 export default function HeroSlider({ openForm }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused]         = useState(false);
-  const touchStartX                     = useRef(0);
-  const intervalRef                     = useRef(null);
-
+  const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef(0);
+  const intervalRef = useRef(null);
   const isMobile = useIsMobile(1024);
 
   const startAutoplay = useCallback(() => {
@@ -183,40 +179,50 @@ export default function HeroSlider({ openForm }) {
     return () => clearInterval(intervalRef.current);
   }, [isPaused, startAutoplay]);
 
-  const goTo = useCallback((index) => {
-    setCurrentSlide(index);
-    if (!isPaused) startAutoplay();
-  }, [isPaused, startAutoplay]);
+  const goTo = useCallback(
+    (index) => {
+      setCurrentSlide(index);
+      if (!isPaused) startAutoplay();
+    },
+    [isPaused, startAutoplay],
+  );
 
   const next = useCallback(
     () => goTo((currentSlide + 1) % SLIDES.length),
-    [currentSlide, goTo]
+    [currentSlide, goTo],
   );
   const prev = useCallback(
     () => goTo((currentSlide - 1 + SLIDES.length) % SLIDES.length),
-    [currentSlide, goTo]
+    [currentSlide, goTo],
   );
 
   const handleTouchStart = useCallback((e) => {
     touchStartX.current = e.targetTouches[0].clientX;
   }, []);
-
-  const handleTouchEnd = useCallback((e) => {
-    const delta = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(delta) > 50) delta > 0 ? next() : prev();
-  }, [next, prev]);
-
-  const handleKeyDown = useCallback((e) => {
-    if (e.key === "ArrowRight") next();
-    if (e.key === "ArrowLeft")  prev();
-  }, [next, prev]);
+  const handleTouchEnd = useCallback(
+    (e) => {
+      const delta = touchStartX.current - e.changedTouches[0].clientX;
+      if (Math.abs(delta) > 50) delta > 0 ? next() : prev();
+    },
+    [next, prev],
+  );
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    },
+    [next, prev],
+  );
 
   return (
-    <div id="hero" className="relative min-h-screen bg-white">
-      <div className="h-screen max-sm:h-[80vh] flex flex-col">
+    // ✅ min-h-[100dvh] — accounts for mobile browser toolbar collapsing
+    <div id="hero" className="relative min-h-[87dvh] bg-white">
+      {/* ✅ h-[100dvh] + max-sm:h-[80dvh] — dvh replaces vh everywhere */}
+      <div className="h-[100dvh] max-sm:h-[80dvh] flex flex-col">
         <div className="flex-1 flex flex-col lg:flex-row md:min-h-0">
           <section
-            className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[50vh]"
+            // ✅ clamp() — mobile min-height scales fluidly between 40dvh and 60dvh
+            className="w-full lg:w-[60%] relative flex-1 min-h-[clamp(40dvh,50dvh,60dvh)]"
             aria-roledescription="carousel"
             aria-label="Dholera Smart City project highlights"
             tabIndex={0}
@@ -225,7 +231,7 @@ export default function HeroSlider({ openForm }) {
             <div
               className="absolute inset-0 overflow-hidden"
               onTouchStart={isMobile ? handleTouchStart : undefined}
-              onTouchEnd={isMobile   ? handleTouchEnd   : undefined}
+              onTouchEnd={isMobile ? handleTouchEnd : undefined}
               role={isMobile ? "region" : undefined}
               aria-label={isMobile ? "Mobile image carousel" : undefined}
             >
@@ -239,8 +245,16 @@ export default function HeroSlider({ openForm }) {
                 />
               ))}
 
-              <NavButton onClick={prev} direction="left"  ariaLabel="Previous slide" />
-              <NavButton onClick={next} direction="right" ariaLabel="Next slide" />
+              <NavButton
+                onClick={prev}
+                direction="left"
+                ariaLabel="Previous slide"
+              />
+              <NavButton
+                onClick={next}
+                direction="right"
+                ariaLabel="Next slide"
+              />
 
               {!isMobile && (
                 <button
@@ -249,9 +263,11 @@ export default function HeroSlider({ openForm }) {
                   type="button"
                   className="absolute top-3 right-3 z-10 bg-black/50 hover:bg-black/75 text-white p-1.5 rounded-full transition-colors"
                 >
-                  {isPaused
-                    ? <Play  className="w-4 h-4" aria-hidden="true" />
-                    : <Pause className="w-4 h-4" aria-hidden="true" />}
+                  {isPaused ? (
+                    <Play className="w-4 h-4" aria-hidden="true" />
+                  ) : (
+                    <Pause className="w-4 h-4" aria-hidden="true" />
+                  )}
                 </button>
               )}
 
@@ -269,11 +285,10 @@ export default function HeroSlider({ openForm }) {
             </div>
           </section>
 
-          {/* ── Form ───────────────────────────────────────────────────── */}
-          <div className="w-full lg:w-[40%] bg-white flex md:items-center md:justify-center p-4 sm:p-6 lg:p-8">
+          {/* ✅ calc() — padding grows smoothly with screen width */}
+          <div className="w-full lg:w-[40%] bg-white flex md:items-center md:justify-center p-[calc(1rem+1vw)]">
             <HeroForm />
           </div>
-
         </div>
       </div>
     </div>

@@ -2,8 +2,6 @@ import { useState, useEffect, useRef, useCallback, memo } from "react";
 import Image from "next/image";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 
-// ── Icon components ──────────────────────────────────────────────────────────
-
 const UserIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -40,28 +38,34 @@ const PhoneIcon = () => (
   </svg>
 );
 
-// ── Memoized input ────────────────────────────────────────────────────────────
-
-const FormInput = memo(({ name, type = "text", placeholder, value, onChange, icon: Icon, ...props }) => (
-  <div className="relative">
-    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-500 pointer-events-none">
-      <Icon />
+const FormInput = memo(
+  ({
+    name,
+    type = "text",
+    placeholder,
+    value,
+    onChange,
+    icon: Icon,
+    ...props
+  }) => (
+    <div className="relative">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-500 pointer-events-none">
+        <Icon />
+      </div>
+      <input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        // ✅ clamp() — input text scales between 12px and 14px
+        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-[clamp(0.75rem,1.5vw,0.875rem)]"
+        {...props}
+      />
     </div>
-    <input
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
-      {...props}
-    />
-  </div>
-));
-
+  ),
+);
 FormInput.displayName = "FormInput";
-
-// ── Main component ────────────────────────────────────────────────────────────
 
 export default function HeroForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -76,7 +80,6 @@ export default function HeroForm() {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
-    // Defer reCAPTCHA loading by 2 seconds
     const loadRecaptchaTimeout = setTimeout(() => {
       if (typeof window === "undefined") return;
       if (!window.grecaptcha) {
@@ -87,12 +90,12 @@ export default function HeroForm() {
           script.defer = true;
           script.onload = () => setRecaptchaLoaded(true);
           script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
+            console.error("Failed to load reCAPTCHA");
             setRecaptchaLoaded(true);
           };
           document.head.appendChild(script);
         } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
+          console.error("reCAPTCHA error:", err);
           setRecaptchaLoaded(true);
         }
       } else {
@@ -101,12 +104,16 @@ export default function HeroForm() {
     }, 2000);
 
     if (typeof window !== "undefined") {
-      setSubmissionCount(parseInt(localStorage.getItem("formSubmissionCount") || "0", 10));
-      setLastSubmissionTime(parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10));
+      setSubmissionCount(
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
+      );
+      setLastSubmissionTime(
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
+      );
     }
 
-    const handleEscapeKey = (event) => {
-      if (event.key === "Escape") setShowPopup(false);
+    const handleEscapeKey = (e) => {
+      if (e.key === "Escape") setShowPopup(false);
     };
     document.addEventListener("keydown", handleEscapeKey);
 
@@ -131,19 +138,18 @@ export default function HeroForm() {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
-
     const now = Date.now();
     const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
-
     if (hoursPassed >= 24) {
       setSubmissionCount(0);
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "Maximum submission limit reached. Try again after 24 hours.",
+      );
       return false;
     }
-
     return true;
   };
 
@@ -151,9 +157,8 @@ export default function HeroForm() {
     try {
       const now = Date.now();
       setSubmittedName(formData.fullName);
-
       const response = await fetch(
-       "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -172,7 +177,6 @@ export default function HeroForm() {
           }),
         },
       );
-
       if (response.ok) {
         setShowPopup(true);
         setSubmissionCount((prev) => {
@@ -181,7 +185,6 @@ export default function HeroForm() {
           localStorage.setItem("lastSubmissionTime", now.toString());
           return newCount;
         });
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: "lead_form_hero" });
       } else {
@@ -189,12 +192,13 @@ export default function HeroForm() {
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      setErrorMessage(error.message || "Error submitting form. Please try again.");
+      setErrorMessage(
+        error.message || "Error submitting form. Please try again.",
+      );
     } finally {
       setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
+      if (window.grecaptcha && recaptchaRef.current)
         window.grecaptcha.reset(recaptchaRef.current);
-      }
     }
   };
 
@@ -202,12 +206,10 @@ export default function HeroForm() {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage("");
-
     if (!validateForm()) {
       setIsLoading(false);
       return;
     }
-
     if (window.grecaptcha && recaptchaLoaded) {
       try {
         if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
@@ -221,7 +223,7 @@ export default function HeroForm() {
           window.grecaptcha.execute();
         }
       } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
+        console.error("reCAPTCHA render error:", error);
         setErrorMessage("Error with verification. Please try again.");
         setIsLoading(false);
       }
@@ -232,20 +234,27 @@ export default function HeroForm() {
   };
 
   return (
-    <div className="w-full max-w-md">
+    // ✅ calc() — padding scales with viewport instead of hard breakpoint jumps
+    <div className="w-full max-w-md p-[calc(0.5rem+1vw)]">
       {/* Logo */}
-      <div className="text-center mb-4 sm:mb-6">
-        <Image
-          src={logo}
-          alt="BookMyAssets - Dholera Property Investment"
-          className="mx-auto mb-2 sm:mb-3 hidden md:block"
-          fetchPriority="high"
-        />
+      <div className="text-center mb-[calc(0.75rem+0.5vw)]">
+        {/* ✅ responsive image — aspect-ratio + fill instead of unsized bare <Image> */}
+        <div className="relative w-[clamp(240px,20vw,300px)] aspect-[3/1] mx-auto mb-[calc(0.5rem+0.25vw)] hidden md:block">
+          <Image
+            src={logo}
+            alt="BookMyAssets - Dholera Property Investment"
+            fill
+            sizes="(min-width: 768px) 20vw, 0px"
+            className="object-contain"
+            fetchPriority="high"
+          />
+        </div>
 
         <div className="relative max-sm:space-y-2">
           <style jsx>{`
             @keyframes textGlow {
-              0%, 100% {
+              0%,
+              100% {
                 text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
                 color: black;
               }
@@ -256,24 +265,24 @@ export default function HeroForm() {
                 color: black;
               }
             }
-
             .flashy-blink {
               animation: flashyBlink 3s infinite ease-in-out;
               padding: 4px;
               border-radius: 1rem;
               border: 3px solid #deae3c;
             }
-
             .glowing-text {
               animation: textGlow 1s infinite ease-in-out;
             }
           `}</style>
 
           <div className="flashy-blink">
-            <h1 className="text-xl sm:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 glowing-text px-2">
+            {/* ✅ clamp() — hero headline scales between 18px and 24px */}
+            <h1 className="text-[clamp(1.125rem,2.5vw,1.5rem)] font-bold mb-1 glowing-text px-2">
               Dholera Plots under ₹10 Lakh
             </h1>
-            <p className="text-sm md:text-base glowing-text px-2">
+            {/* ✅ clamp() — subline scales between 13px and 16px */}
+            <p className="text-[clamp(0.8125rem,1.5vw,1rem)] glowing-text px-2">
               Direct Entry from Gujarat State Highway 117
             </p>
           </div>
@@ -281,12 +290,12 @@ export default function HeroForm() {
       </div>
 
       {/* Two-Step Progress Indicator */}
-      <div className="mb-6">
-        <div className="flex items-center justify-center gap-2 sm:gap-4">
+      <div className="mb-[calc(1rem+0.5vw)]">
+        <div className="flex items-center justify-center gap-[calc(0.5rem+0.5vw)]">
           {/* Step 1 */}
           <div className="flex items-center gap-2">
             <div
-              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${
+              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-[clamp(0.75rem,1.5vw,1rem)] transition-all ${
                 !showPopup
                   ? "bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg"
                   : "bg-green-500 text-white"
@@ -295,29 +304,38 @@ export default function HeroForm() {
               {showPopup ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 sm:h-6 sm:w-6"
+                  className="h-5 w-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={3}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               ) : (
                 "1"
               )}
             </div>
-            <span className={`text-xs sm:text-sm font-semibold ${!showPopup ? "text-yellow-600" : "text-green-600"}`}>
+            <span
+              className={`text-[clamp(0.7rem,1.2vw,0.875rem)] font-semibold ${!showPopup ? "text-yellow-600" : "text-green-600"}`}
+            >
               Submit Details
             </span>
           </div>
 
           {/* Connector */}
-          <div className={`h-0.5 w-8 sm:w-12 transition-all ${showPopup ? "bg-green-500" : "bg-gray-300"}`} />
+          <div
+            className={`h-0.5 w-[calc(2rem+1vw)] transition-all ${showPopup ? "bg-green-500" : "bg-gray-300"}`}
+          />
 
           {/* Step 2 */}
           <div className="flex items-center gap-2">
             <div
-              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${
+              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-[clamp(0.75rem,1.5vw,1rem)] transition-all ${
                 showPopup
                   ? "bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg"
                   : "bg-gray-200 text-gray-500"
@@ -325,23 +343,24 @@ export default function HeroForm() {
             >
               2
             </div>
-            <span className={`text-xs sm:text-sm font-semibold ${showPopup ? "text-yellow-600" : "text-gray-400"}`}>
+            <span
+              className={`text-[clamp(0.7rem,1.2vw,0.875rem)] font-semibold ${showPopup ? "text-yellow-600" : "text-gray-400"}`}
+            >
               {!showPopup ? "Free consultation" : "Free consultation booked"}
             </span>
           </div>
         </div>
 
-        {/* Step description */}
         <div className="text-center mt-3">
-          <p className="text-xs sm:text-sm text-gray-600 font-medium">
+          <p className="text-[clamp(0.7rem,1.2vw,0.875rem)] text-gray-600 font-medium">
             {!showPopup
               ? "Fill the form to get started"
-              : `Free consultation booked ${submittedName} in 24 hours`}
+              : `Free consultation booked for ${submittedName} within 24 hours`}
           </p>
         </div>
       </div>
 
-      {/* Success state / Form */}
+      {/* Success state — ✅ inert on the form when success is shown */}
       {showPopup ? (
         <div className="text-center py-6" role="alert" aria-live="polite">
           <div className="mb-4 inline-block">
@@ -354,21 +373,33 @@ export default function HeroForm() {
                 stroke="currentColor"
                 aria-hidden="true"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             </div>
           </div>
-          <h2 className="text-xl font-bold text-black mb-2">Thank You!</h2>
-          <p className="text-gray-600 text-sm mb-1">Your request has been submitted successfully.</p>
-          <p className="text-yellow-600 text-sm font-semibold">
-            Our expert will contact you within 24 hours for your free consultation.
+          {/* ✅ clamp() — success text scales fluidly */}
+          <h2 className="text-[clamp(1.125rem,2.5vw,1.25rem)] font-bold text-black mb-2">
+            Thank You!
+          </h2>
+          <p className="text-[clamp(0.8125rem,1.5vw,0.875rem)] text-gray-600 mb-1">
+            Your request has been submitted successfully.
+          </p>
+          <p className="text-[clamp(0.8125rem,1.5vw,0.875rem)] text-yellow-600 font-semibold">
+            Our expert will contact you within 24 hours for your free
+            consultation.
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-1">
+        // ✅ inert={false} explicitly when form is active (no warning)
+        <form onSubmit={handleSubmit} className="space-y-1" inert={false}>
           {errorMessage && (
             <div
-              className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm"
+              className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-[clamp(0.75rem,1.5vw,0.875rem)]"
               role="alert"
             >
               {errorMessage}
@@ -401,7 +432,6 @@ export default function HeroForm() {
             />
           </div>
 
-          {/* reCAPTCHA container */}
           <div className="flex justify-center">
             <div ref={recaptchaRef} />
           </div>
@@ -409,7 +439,17 @@ export default function HeroForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-sm sm:text-base rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed touch-manipulation"
+            className="
+              w-full
+              py-[calc(0.5rem+0.25vw)]
+              px-[calc(1rem+1vw)]
+              bg-gradient-to-r from-yellow-500 to-yellow-600
+              text-white text-[clamp(0.875rem,1.5vw,1rem)]
+              rounded-lg hover:from-yellow-600 hover:to-yellow-700
+              transition-all shadow-lg hover:shadow-yellow-500/20
+              font-semibold disabled:opacity-70 disabled:cursor-not-allowed
+              touch-manipulation
+            "
           >
             {isLoading ? "Submitting..." : "Get A Call Back"}
           </button>
