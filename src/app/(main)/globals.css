@@ -13,6 +13,26 @@ body {
   }
 }
 
+/* globals.css */
+.prose-content ol {
+  counter-reset: item;
+}
+.prose-content ol > li {
+  counter-increment: item;
+}
+.prose-content ol > li .item-counter::before {
+  content: counter(item);
+}
+
+ol {
+  counter-reset: item;
+}
+ol > li {
+  counter-increment: item;
+}
+ol > li .item-counter::before {
+  content: counter(item);
+}
 
 html {
   scroll-behavior: smooth;

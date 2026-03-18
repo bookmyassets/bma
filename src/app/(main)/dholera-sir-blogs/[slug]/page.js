@@ -190,10 +190,8 @@ export default async function Post({ params }) {
       types: {
         image: ({ value }) => {
           if (!value?.asset) return null;
-
           const imageUrl =
             value.asset.url || urlFor(value).width(1200).height(800).url();
-
           const imageNode = (
             <img
               src={imageUrl}
@@ -204,7 +202,6 @@ export default async function Post({ params }) {
               loading="lazy"
             />
           );
-
           return (
             <figure className="my-6">
               {value.url ? (
@@ -229,24 +226,14 @@ export default async function Post({ params }) {
         },
 
         table: ({ value }) => {
-          if (!value?.rows || !Array.isArray(value.rows)) {
-            console.log("No table data or invalid structure:", value);
-            return null;
-          }
-
-          const rows = value.rows || [];
-
+          if (!value?.rows || !Array.isArray(value.rows)) return null;
           return (
             <div className="overflow-x-auto my-8 bg-white rounded-2xl shadow-lg border border-gray-100">
               <table className="min-w-full">
                 <tbody>
-                  {rows.map((row, i) => {
+                  {value.rows.map((row, i) => {
                     const cells = row.cells || row;
-
-                    if (!cells || !Array.isArray(cells)) {
-                      return null;
-                    }
-
+                    if (!cells || !Array.isArray(cells)) return null;
                     return (
                       <tr
                         key={i}
@@ -258,21 +245,16 @@ export default async function Post({ params }) {
                               : "bg-white"
                         }`}
                       >
-                        {cells.map((cell, j) => {
-                          const cellContent =
-                            typeof cell === "string"
+                        {cells.map((cell, j) => (
+                          <td
+                            key={j}
+                            className="px-6 py-4 text-gray-700 border-b border-gray-100 last:border-r-0"
+                          >
+                            {typeof cell === "string"
                               ? cell
-                              : cell?.text || cell?.value || "";
-
-                          return (
-                            <td
-                              key={j}
-                              className="px-6 py-4 text-gray-700 border-b border-gray-100 last:border-r-0"
-                            >
-                              {cellContent}
-                            </td>
-                          );
-                        })}
+                              : cell?.text || cell?.value || ""}
+                          </td>
+                        ))}
                       </tr>
                     );
                   })}
@@ -284,18 +266,16 @@ export default async function Post({ params }) {
 
         htmlTableBlock: ({ value }) => {
           if (!value?.html) return null;
-
           return (
             <div className="my-8 overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
               <div
-                className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-white 
-      [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700 
-      [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
-      [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
-      [&_tr:last-child_td]:border-b-0
-      [&_tr:hover]:bg-gray-50/50
-      [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
-      [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
+                className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-white
+              [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700
+              [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
+              [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
+              [&_tr:last-child_td]:border-b-0 [&_tr:hover]:bg-gray-50/50
+              [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
+              [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
                 dangerouslySetInnerHTML={{ __html: value.html }}
               />
             </div>
@@ -315,13 +295,13 @@ export default async function Post({ params }) {
 
       marks: {
         link: ({ children, value }) => (
-          <Link
+          <a
             href={value.href}
             rel="noopener noreferrer"
             className="text-[#C69C21] hover:text-[#FDB913] underline decoration-[#FDB913]/30 hover:decoration-[#FDB913] decoration-2 underline-offset-4 transition-all duration-300 hover:bg-[#FDB913]/5 px-1 py-0.5 rounded"
           >
             {children}
-          </Link>
+          </a>
         ),
         strong: ({ children }) => (
           <strong className="font-bold text-gray-900 px-1 py-0.5 rounded">
@@ -349,172 +329,71 @@ export default async function Post({ params }) {
                 return "bg-gradient-to-r from-[#C69C21] to-[#FDB913] hover:from-[#FDB913] hover:to-[#C69C21] shadow-lg hover:shadow-xl";
             }
           };
-
           return (
-            <Link
+            <a
               href={value.href}
               className={`inline-block px-8 py-3 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 ${getButtonClasses()}`}
             >
               {value.text || children}
-            </Link>
+            </a>
           );
         },
       },
 
       block: {
-        h1: ({ children }) => {
-          const getText = () => {
-            if (typeof children === "string") return children;
-            if (Array.isArray(children)) {
-              return children
-                .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || "",
-                )
-                .join("");
-            }
-            return "";
+        // ── heading factory — avoids repeating getText/URLFormatter 6 times ──────
+        ...(() => {
+          const makeHeading =
+            (Tag, className) =>
+            ({ children }) => {
+              const getText = () => {
+                if (typeof children === "string") return children;
+                if (Array.isArray(children))
+                  return children
+                    .map((c) =>
+                      typeof c === "string" ? c : c?.props?.text || "",
+                    )
+                    .join("");
+                return "";
+              };
+              const id = URLFormatter(getText());
+              return (
+                <Tag id={id} className={className}>
+                  <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full" />
+                  {children}
+                </Tag>
+              );
+            };
+          return {
+            h1: makeHeading(
+              "h1",
+              "text-[clamp(1.75rem,4vw,3rem)] font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4",
+            ),
+            h2: makeHeading(
+              "h2",
+              "text-[clamp(1.375rem,3vw,1.875rem)] font-bold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-3 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4",
+            ),
+            h3: makeHeading(
+              "h3",
+              "text-[clamp(1.25rem,2.5vw,1.875rem)] font-bold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4",
+            ),
+            h4: makeHeading(
+              "h4",
+              "text-[clamp(2rem,2vw,1.5rem)] font-semibold mt-6 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3",
+            ),
+            h5: makeHeading(
+              "h5",
+              "text-[clamp(1rem,1.8vw,1.25rem)] font-semibold mt-6 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3",
+            ),
+            h6: makeHeading(
+              "h6",
+              "text-[clamp(0.9375rem,1.5vw,1.125rem)] font-semibold mt-4 mb-2 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-1 [&+ul]:mt-2 [&+ol]:mt-2",
+            ),
           };
-          const text = getText();
-          const id = URLFormatter(text);
-
-          return (
-            <h1
-              id={id}
-              className="text-3xl md:text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
-            >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
-              {children}
-            </h1>
-          );
-        },
-        h2: ({ children }) => {
-          const getText = () => {
-            if (typeof children === "string") return children;
-            if (Array.isArray(children)) {
-              return children
-                .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || "",
-                )
-                .join("");
-            }
-            return "";
-          };
-          const text = getText();
-          const id = URLFormatter(text);
-
-          return (
-            <h2
-              id={id}
-              className="text-2xl md:text-3xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-3 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
-            >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
-              {children}
-            </h2>
-          );
-        },
-        h3: ({ children }) => {
-          const getText = () => {
-            if (typeof children === "string") return children;
-            if (Array.isArray(children)) {
-              return children
-                .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || "",
-                )
-                .join("");
-            }
-            return "";
-          };
-          const text = getText();
-          const id = URLFormatter(text);
-
-          return (
-            <h3
-              id={id}
-              className="text-3xl font-bold mt-12 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
-            >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
-              {children}
-            </h3>
-          );
-        },
-        h4: ({ children }) => {
-          const getText = () => {
-            if (typeof children === "string") return children;
-            if (Array.isArray(children)) {
-              return children
-                .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || "",
-                )
-                .join("");
-            }
-            return "";
-          };
-          const text = getText();
-          const id = URLFormatter(text);
-
-          return (
-            <h4
-              id={id}
-              className="text-2xl font-semibold mt-10 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
-            >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
-              {children}
-            </h4>
-          );
-        },
-        h5: ({ children }) => {
-          const getText = () => {
-            if (typeof children === "string") return children;
-            if (Array.isArray(children)) {
-              return children
-                .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || "",
-                )
-                .join("");
-            }
-            return "";
-          };
-          const text = getText();
-          const id = URLFormatter(text);
-
-          return (
-            <h5
-              id={id}
-              className="text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
-            >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
-              {children}
-            </h5>
-          );
-        },
-        h6: ({ children }) => {
-          const getText = () => {
-            if (typeof children === "string") return children;
-            if (Array.isArray(children)) {
-              return children
-                .map((child) =>
-                  typeof child === "string" ? child : child?.props?.text || "",
-                )
-                .join("");
-            }
-            return "";
-          };
-          const text = getText();
-          const id = URLFormatter(text);
-
-          return (
-            <h6
-              id={id}
-              className="text-lg font-semibold mt-6 mb-2 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-1 [&+ul]:mt-2 [&+ol]:mt-2"
-            >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full"></span>
-              {children}
-            </h6>
-          );
-        },
+        })(),
 
         normal: ({ children }) => (
-          <p className="mb-8 text-gray-700 leading-loose text-lg font-light tracking-wide">
+          <p className="mb-4 text-gray-700 leading-loose text-[clamp(0.9375rem,1.5vw,1.125rem)] font-light tracking-wide">
             {children}
           </p>
         ),
@@ -529,19 +408,27 @@ export default async function Post({ params }) {
           </blockquote>
         ),
         centerAlign: ({ children }) => (
-          <p className="mb-8 text-gray-700 leading-loose text-lg text-center bg-gray-50 py-6 rounded-xl">
+          <p className="mb-4 text-gray-700 leading-loose text-lg text-center bg-gray-50 py-6 rounded-xl">
             {children}
           </p>
         ),
       },
 
       list: {
+        // ✅ FIX 1 — reduced space-y-4 → space-y-2 and mb-8 → mb-4 to close the huge gaps
         bullet: ({ children }) => (
-          <ul className="space-y-4 mb-8 pl-0">{children}</ul>
+          <ul className="space-y-2 mb-4 pl-0">{children}</ul>
         ),
+
+        // ✅ FIX 3 — counterReset on the ol itself is fine, but we also add a
+        //    CSS-counter-based fallback via a wrapper so interrupted lists (image
+        //    between items breaks Sanity into two <ol>s) don't lose their colour.
+        //    The real fix: use a single shared CSS counter on a parent via a
+        //    className on the prose wrapper, but since we can't do that here we
+        //    at least keep each ol self-contained and visually consistent.
         number: ({ children }) => (
           <ol
-            className="space-y-4 mb-8 pl-0 list-none"
+            className="space-y-2 mb-4 pl-0 list-none"
             style={{ counterReset: "item" }}
           >
             {children}
@@ -550,20 +437,52 @@ export default async function Post({ params }) {
       },
 
       listItem: {
+        // ✅ FIX 1 — reduced p-4 → p-2.5 py-2 and tighter text size
+        // ✅ FIX 2 — added overrides for headings that land inside a list item:
+        //    strip border-left, gradient bg, large margins so they don't blow
+        //    up the card. Target via Tailwind arbitrary-variant selectors.
         bullet: ({ children }) => (
-          <li className="text-lg leading-relaxed text-gray-700 flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
-            <div className="w-3 h-3 rounded-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] mt-2 flex-shrink-0"></div>
-            <div className="flex-1 [&>ul]:mt-4 [&>ul]:mb-0 [&>ol]:mt-4 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:p-2 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:p-2">
-              {children}
-            </div>
-          </li>
-        ),
+  <li className="
+    text-[clamp(0.875rem,1.5vw,1rem)] leading-relaxed text-gray-700
+    flex items-start gap-3
+    bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
+    hover:shadow-md transition-shadow duration-300
+    [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-xl  [&_h1]:font-bold
+    [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-lg  [&_h2]:font-bold
+    [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-lg  [&_h3]:font-semibold
+    [&_h4]:border-l-0 [&_h4]:pl-0 [&_h4]:bg-transparent [&_h4]:mt-0 [&_h4]:mb-0 [&_h4]:py-0 [&_h4]:text-xl [&_h4]:font-semibold
+    [&_h5]:border-l-0 [&_h5]:pl-0 [&_h5]:bg-transparent [&_h5]:mt-0 [&_h5]:mb-0 [&_h5]:py-0 [&_h5]:text-base [&_h5]:font-semibold
+    [&_h6]:border-l-0 [&_h6]:pl-0 [&_h6]:bg-transparent [&_h6]:mt-0 [&_h6]:mb-0 [&_h6]:py-0 [&_h6]:text-sm  [&_h6]:font-medium
+    [&_span.absolute]:hidden
+  ">
+    <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] mt-1.5 flex-shrink-0 flex justify-center items-center" />
+    <div className="flex-1 [&>ul]:mt-2 [&>ul]:mb-0 [&>ol]:mt-2 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:py-1 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:py-1">
+      {children}
+    </div>
+  </li>
+),
+
+        // ✅ FIX 3 — counter circle is always rendered; same heading overrides applied
         number: ({ children }) => (
           <li
-            className="text-lg leading-relaxed text-gray-700 flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 relative before:content-[counter(item)] before:absolute before:left-4 before:top-4 before:w-8 before:h-8 before:bg-gradient-to-r before:from-[#C69C21] before:to-[#FDB913] before:rounded-full before:flex before:items-center before:justify-center before:text-white before:text-sm before:font-bold"
+            className="
+        text-[clamp(0.875rem,1.5vw,1rem)] leading-relaxed text-gray-700
+        flex items-start gap-3
+        bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
+        hover:shadow-md transition-shadow duration-300
+        [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-base [&_h1]:font-semibold
+        [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-base [&_h2]:font-semibold
+        [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-base [&_h3]:font-semibold
+        [&_span.absolute]:hidden
+      "
             style={{ counterIncrement: "item" }}
           >
-            <div className="ml-10 flex-1 [&>ul]:mt-4 [&>ul]:mb-0 [&>ol]:mt-4 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:p-2 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:p-2">
+            {/* ✅ PLACE IT HERE — replaces the old aria-hidden div */}
+            <div className="w-7 h-7 flex-shrink-0 rounded-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] flex items-center justify-center text-white text-xs font-bold mt-0.5">
+              <span className="item-counter" />
+            </div>
+
+            <div className="flex-1 [&>ul]:mt-2 [&>ul]:mb-0 [&>ol]:mt-2 [&>ol]:mb-0">
               {children}
             </div>
           </li>
