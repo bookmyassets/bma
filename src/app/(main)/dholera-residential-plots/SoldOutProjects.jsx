@@ -181,15 +181,7 @@ const SoldOutProjectsSection = () => {
           </h2>
         </div>
 
-        {/* Desktop/Tablet View - Static Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {soldOutProjects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
-          ))}
-        </div>
-
-        {/* Mobile View - Auto Slider */}
-        <div className="block md:hidden">
+        <div className="">
           {/* Slider Container */}
           <div className="relative">
             {/* Navigation Arrows (visible on tablet) */}
