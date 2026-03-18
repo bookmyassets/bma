@@ -148,13 +148,12 @@ const WestWynAboutSection = () => {
           </h1>
 
           <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            WestWyn Estates is a premium residential plotting project in Dholera
-            SIR, Gujarat, designed for comfortable living and long-term value.
-            With direct entry from State Highway-117, the project offers
-            excellent connectivity. The location is just minutes from Bhimnath
-            Railway Station, making it easily accessible. WestWyn Estates is a
-            good option for those looking at Dholera plots with long-term
-            investment.
+            WestWyn Estates a premium residential plotted society in Polarpur,
+            Dholera, designed for Investors who value location, connectivity,
+            and long term potential. Stratigically positioned on State
+            Hoghway-117, near Bhimnath Railway Station, the expressway corridor,
+            and major industrial growth zones, the project offers a practical
+            entry into one of Gujarat’s most closely watched smart city regions.
           </p>
         </div>
 
@@ -198,36 +197,33 @@ const WestWynAboutSection = () => {
               className="bg-black rounded-2xl overflow-hidden shadow-lg h-full"
             >
               <div className="p-4 md:p-8">
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                   {[
-                    { value: <>7.83 Acres</>, label: "Total Land Parcel" },
-                    { value: <>231</>, label: "Total Units" },
-                    {
-                      value: (
-                        <>
-                          151-198{" "}
-                          <span className="text-base font-semibold">
-                            sq. yd
-                          </span>
-                        </>
-                      ),
-                      label: "Plot Sizes",
-                    },
-                    { value: <>₹ 10 Lakh</>, label: "Starting Price" },
-                    { value: <>Min 300%</>, label: "Returns In 5 years" },
-                  ].map(({ value, label }, i) => (
-                    <div
-                      key={i}
-                      className="flex flex-col items-center justify-center text-center p-6 bg-white/5 rounded-xl min-h-[100px]"
-                    >
-                      <div className="text-xl md:text-2xl font-bold text-[#deae3c] leading-tight mb-2 whitespace-nowrap">
-                        {value}
-                      </div>
-                      <div className="text-gray-300 text-sm whitespace-nowrap">
-                        {label}
-                      </div>
-                    </div>
-                  ))}
+  { value: <>7.83 Acres</>, label: "Total Land Parcel" },
+  { value: <>231</>, label: "Total Units" },
+  {
+    value: (
+      <>
+        151-198{" "}
+        <span className="text-base font-semibold">sq. yd</span>
+      </>
+    ),
+    label: "Plot Sizes",
+  },
+  { value: <>₹ 10 Lakh</>, label: "Starting Price" },
+  { value: <>Min 300%</>, label: "Returns In 5 years" },
+].map(({ value, label }, i) => (
+  <div
+    key={i}
+    className={`flex flex-col w-auto items-center justify-center text-center p-6 bg-white/5 rounded-xl min-h-[100px]
+      ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}
+  >
+    <div className="text-xl md:text-2xl font-bold text-[#deae3c] leading-tight mb-2 whitespace-nowrap">
+      {value}
+    </div>
+    <div className="text-gray-300 text-sm whitespace-nowrap">{label}</div>
+  </div>
+))}
                 </div>
               </div>
             </div>

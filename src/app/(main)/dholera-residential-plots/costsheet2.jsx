@@ -397,7 +397,7 @@ export default function CostSheet({
       </p>
 
       <form>
-        <div className="grid grid-cols-2 gap-x-4">
+        <div className="grid md:grid-cols-2 gap-x-4">
           {/* LEFT COLUMN */}
           <div className="border rounded-lg overflow-hidden">
             <table className="w-full border-collapse text-sm">

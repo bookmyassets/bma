@@ -16,7 +16,7 @@ const SALUTATIONS = [
 
 // Local projects array
 const PROJECTS = [
-  { id: 1, title: "WestWyn Estate", ctype: "D" },
+  { id: 1, title: "WestWyn Estates", ctype: "D" },
   { id: 2, title: "WestWyn County", ctype: "M" },
   { id: 3, title: "Paradise", ctype: "M" },
   { id: 4, title: "Paradise 2", ctype: "M" },
@@ -93,7 +93,7 @@ export default function CostSheet() {
       const plotPrice = plotPriceWithPLC;
       const totalPayment = formData.plotAreaYards * plotPrice;
       const maintenance = formData.plotAreaYards * formData.maintenanceRate;
-      const ifmsCharge = formData.plotAreaYards * formData.ifmsRate;
+      const ifmsCharge = formData.plotAreaYards * 100;
       const totalCharges =
         maintenance +
         parseFloat(formData.legalFee) +
@@ -703,8 +703,8 @@ export default function CostSheet() {
                   type="number"
                   name="legalFee"
                   value={formData.legalFee}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
+                  readOnly
+                  className="border p-2 w-full rounded bg-gray-100"
                 />
               </td>
             </tr>
@@ -715,8 +715,8 @@ export default function CostSheet() {
                   type="number"
                   name="ifmsRate"
                   value={formData.ifmsRate}
-                  onChange={handleChange}
-                  className="border p-2 w-full rounded"
+                  readOnly
+                  className="border p-2 w-full rounded bg-gray-100"
                 />
               </td>
             </tr>
