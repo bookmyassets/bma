@@ -7,7 +7,7 @@ import { FaDownload } from "react-icons/fa";
 import Image from "next/image";
 import img from "@/assests/image.webp";
 
-const WestWynAboutSection = () => {
+const PlanLayout = () => {
   const [counters, setCounters] = useState({
     plotSize: 0,
     price: 0,
@@ -67,44 +67,6 @@ const WestWynAboutSection = () => {
       {/* Subtle background pattern */}
 
       <div className="relative max-w-7xl mx-auto px-4 py-4">
-        {/* Header Section */}
-        <div className="text-center mb-4 space-y-2">
-          <h1 className="text-[32px] font-bold text-gray-900 ">
-            About <span className="text-[#deae3c]">WestWyn Estates</span>
-          </h1>
-
-          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            WestWyn Estates a premium residential plotted society in Polarpur,
-            Dholera, designed for Investors who value location, connectivity,
-            and long term potential. Stratigically positioned on State
-            Hoghway-117, near Bhimnath Railway Station, the expressway corridor,
-            and major industrial growth zones, the project offers a practical
-            entry into one of Gujarat’s most closely watched smart city regions.
-          </p>
-        </div>
-
-        <div className=" gap-12 items-stretch space-y-4">
-          {/* Left Content */}
-          <div className=" h-full">
-            <div className="flex justify-center items-center flex-row gap-4 ">
-              <button
-                onClick={openBrochureForm}
-                className="bg-[#deae3c] text-white px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
-              >
-                <FaDownload />
-                Download Brochure
-              </button>
-
-              <Link href="https://wa.me/918130371647">
-                <button className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaWhatsapp />
-                  Book Site Visit
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-
         {/* Location Advantage */}
         <div className="max-w-7xl mx-auto py-6">
           <div>
@@ -113,15 +75,15 @@ const WestWynAboutSection = () => {
             </h3>
           </div>
           <div className="grid md:grid-cols-2 py-4">
-            <div className="px-4 sm:px-6 lg:px-8 aspect-[2/1]">
+            <div className="px-4 sm:px-6 lg:px-8 aspect-[2/1] md:order-2">
               <Image
                 src={img}
                 alt="dholera map"
-                className="rounded-xl w-full h-auto aspect-[2/1]"
+                className="rounded-xl w-full h-auto aspect-[2/1] md:order-1"
                 priority
               />
             </div>
-            <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
+            <div className="bg-gray-100 max-sm:pt-4 text-base md:text-lg p-4 rounded-xl">
               <ul className="space-y-4 text-gray-700">
                 <li className="flex items-start justify-start gap-2 font-semibold">
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">
@@ -218,4 +180,4 @@ const WestWynAboutSection = () => {
   );
 };
 
-export default WestWynAboutSection;
+export default PlanLayout;

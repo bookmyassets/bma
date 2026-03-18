@@ -8,7 +8,7 @@ import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
 import SoldOutProjectsSection from "../SoldOutProjects";
-import InvestmentBenefits from "./Benefits";
+
 import WestWynAboutSection from "./About";
 
 //images import
@@ -18,9 +18,10 @@ import img3 from "@/assests/residential/estate3a.webp";
 import img1M from "@/assests/residential/estates-1M.webp";
 import img2M from "@/assests/residential/estates-2M.webp";
 import img3M from "@/assests/residential/estates-3M.webp";
-import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import PopupScroll from "../../components/PopUpScroll";
 import CostSheet from "../costsheet2";
+import OurCommits from "./OurCommits";
+import PlanLayout from "./PlanLayout";
 
 export default function HeroCarousel() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -268,25 +269,20 @@ export default function HeroCarousel() {
         <WestWynAboutSection />
       </div>
 
-      <div className="md:hidden">
+      <div className="">
         <CommonForm
-          title="Want to Verify Plot Documents Before Booking?"
+          title="Want to Know More About WestWyn Estates?"
           button="Connect with an Expert"
         />
       </div>
 
-      <div className="pt-4 pb-4">
-        <InvestmentBenefits />
-      </div>
-
-      <div className="max-sm:hidden">
-        <CommonForm
-          title="Want to Verify Plot Documents Before Booking?"
-          button="Connect with an Expert"
-        />
-      </div>
+   {/*    <PlanLayout/> */}
 
       <ProjectAmenities />
+
+      <div className="pt-4 pb-4">
+        <OurCommits/>
+      </div>
 
       <div className="pt-4 pb-4">
         <CostSheet projectSlug="westwyn-estate" showProjectSelector={false} />

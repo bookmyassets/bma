@@ -20,7 +20,7 @@ export default function InvestmentBenefits() {
 
   return (
     <>
-      <div className="max-w-3xl mx-auto py-4">
+      <div className="max-w-3xl mx-auto">
         <motion.h2
           className="text-2xl md:text-[32px] lg:text-[40px] font-semibold text-center text-[#deae3c] mb-8"
           initial={{ opacity: 0, y: -20 }}
