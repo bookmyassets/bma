@@ -442,7 +442,8 @@ export default async function Post({ params }) {
         //    strip border-left, gradient bg, large margins so they don't blow
         //    up the card. Target via Tailwind arbitrary-variant selectors.
         bullet: ({ children }) => (
-  <li className="
+          <li
+            className="
     text-[clamp(0.875rem,1.5vw,1rem)] leading-relaxed text-gray-700
     flex items-start gap-3
     bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
@@ -454,13 +455,14 @@ export default async function Post({ params }) {
     [&_h5]:border-l-0 [&_h5]:pl-0 [&_h5]:bg-transparent [&_h5]:mt-0 [&_h5]:mb-0 [&_h5]:py-0 [&_h5]:text-base [&_h5]:font-semibold
     [&_h6]:border-l-0 [&_h6]:pl-0 [&_h6]:bg-transparent [&_h6]:mt-0 [&_h6]:mb-0 [&_h6]:py-0 [&_h6]:text-sm  [&_h6]:font-medium
     [&_span.absolute]:hidden
-  ">
-    <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] mt-1.5 flex-shrink-0 flex justify-center items-center" />
-    <div className="flex-1 [&>ul]:mt-2 [&>ul]:mb-0 [&>ol]:mt-2 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:py-1 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:py-1">
-      {children}
-    </div>
-  </li>
-),
+  "
+          >
+            <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] mt-1.5 flex-shrink-0 flex justify-center items-center" />
+            <div className="flex-1 [&>ul]:mt-2 [&>ul]:mb-0 [&>ol]:mt-2 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:py-1 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:py-1">
+              {children}
+            </div>
+          </li>
+        ),
 
         // ✅ FIX 3 — counter circle is always rendered; same heading overrides applied
         number: ({ children }) => (
