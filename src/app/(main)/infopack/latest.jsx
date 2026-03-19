@@ -262,7 +262,7 @@ export default async function Info() {
             <ul className="text-gray-800 font-medium text-xl md:text-2xl leading-relaxed text-left">
               <li>🏆 Verified Residential Plots </li>
               <li>📋 Immediate Registry </li>
-              <li>👥 Trusted by 400+ Investors </li>
+              <li>👥 Trusted by 561+ Investors </li>
             </ul>
           </div>
 
