@@ -266,7 +266,7 @@ export default async function Info() {
             </ul>
           </div>
 
-          <div className="pt-6">
+          {/* <div className="pt-6">
             <Link
               href="https://shorturl.at/8OD6u"
               className="group inline-flex items-center gap-4 bg-gradient-to-r from-gray-900 to-gray-800 text-amber-400 text-lg md:text-2xl font-bold px-10 py-6 rounded-2xl shadow-2xl hover:shadow-amber-500/25 transition-all duration-300 transform hover:scale-105"
@@ -278,7 +278,7 @@ export default async function Info() {
               />
               Download WestWyn County Brochure
             </Link>
-          </div>
+          </div> */}
         </section>
 
         {/* Growth Statistics */}
@@ -338,7 +338,7 @@ export default async function Info() {
               id="updates-heading"
               className="inline-block bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-gray-900 text-2xl md:text-4xl lg:text-5xl font-black px-8 py-6 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
             >
-              Discover <span className="text-gray-800">WestWyn County</span>
+              Discover <span className="text-gray-800">WestWyn Estates</span>
               <br />
               <span className="text-lg md:text-2xl font-semibold">
                 Premium Residential Plots
@@ -350,8 +350,8 @@ export default async function Info() {
   {subProjectInventory.length > 0 ? (
     subProjectInventory
       .filter((project) => 
-        project.title.includes('WestWyn County') ||
-        project.slug?.current === 'westwyn-county'
+        project.title.includes('WestWyn Estate') ||
+        project.slug?.current === 'westwyn-estate'
       )
       .map((west, index) => (
         <div
@@ -382,7 +382,7 @@ export default async function Info() {
               {/* Enhanced read more button */}
               <div className="mt-auto">
                 <Link
-                  href={`/dholera-residential-plots/westwyn-county`}
+                  href={`/dholera-residential-plots/westwyn-estate`}
                   className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-bold py-4 px-8 rounded-2xl hover:from-amber-500 hover:to-amber-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   Explore Details

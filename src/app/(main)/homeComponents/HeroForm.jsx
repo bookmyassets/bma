@@ -235,7 +235,7 @@ export default function HeroForm() {
 
   return (
     // ✅ calc() — padding scales with viewport instead of hard breakpoint jumps
-    <div className="w-full max-w-md p-[calc(0.5rem+1vw)]">
+    <div className="w-full max-w-lg p-[calc(0.5rem+1vw)]">
       {/* Logo */}
       <div className="text-center mb-[calc(0.75rem+0.5vw)]">
         {/* ✅ responsive image — aspect-ratio + fill instead of unsized bare <Image> */}
@@ -278,7 +278,7 @@ export default function HeroForm() {
 
           <div className="flashy-blink">
             {/* ✅ clamp() — hero headline scales between 18px and 24px */}
-            <h1 className="text-[clamp(1.125rem,2.5vw,1.5rem)] font-bold mb-1 glowing-text px-2">
+            <h1 className="text-[clamp(1.15rem,2.5vw,1.5rem)] font-bold mb-1 glowing-text px-2">
               Dholera Plots Starting From ₹10 Lakh
             </h1>
             {/* ✅ clamp() — subline scales between 13px and 16px */}

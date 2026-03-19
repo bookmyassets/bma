@@ -5,10 +5,10 @@ import BMAimage from "@/assests/BMA.webp";
 import LeadForm from "../components/LeadForm";
 
 const COUNTERS = [
-  { value: "1 Lakh", label: "sq. yards Sold" },
-  { value: "1000",   label: "Plots Sold" },
-  { value: "400",    label: "Happy Customers" },
-  { value: "8",      label: "Total Residential Projects" },
+  { value: "2 Lakh+", label: "sq. yards Sold" },
+  { value: "957+",   label: "Plots Sold" },
+  { value: "561+",    label: "Happy Customers" },
+  { value: "9",      label: "Total Residential Projects" },
 ];
 
 export default function BMA() {
