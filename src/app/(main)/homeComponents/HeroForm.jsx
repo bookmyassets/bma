@@ -279,7 +279,7 @@ export default function HeroForm() {
           <div className="flashy-blink">
             {/* ✅ clamp() — hero headline scales between 18px and 24px */}
             <h1 className="text-[clamp(1.125rem,2.5vw,1.5rem)] font-bold mb-1 glowing-text px-2">
-              Dholera Plots under ₹10 Lakh
+              Dholera Plots Starting From ₹10 Lakh
             </h1>
             {/* ✅ clamp() — subline scales between 13px and 16px */}
             <p className="text-[clamp(0.8125rem,1.5vw,1rem)] glowing-text px-2">
