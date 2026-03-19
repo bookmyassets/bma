@@ -120,6 +120,7 @@ export async function projectInfoX() {
     title,
     slug,
     mainImage,
+    metaDescription,
     publishedAt,
     body,
     author->{name, image},
