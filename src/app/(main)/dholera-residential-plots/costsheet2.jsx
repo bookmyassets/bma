@@ -87,6 +87,7 @@ export default function CostSheet({
     totalPaymentYards: "",
     legalFee: 20000,
     chargeRate: 500,
+    ifmsRate: 100,
     chargeAmount: 0,
     chargeName: "Maintenance Charge",
     chargeType: "maintenance",
@@ -227,6 +228,8 @@ export default function CostSheet({
       totalPaymentYards,
       chargeRate,
       chargeAmount,
+      ifmsRate,
+      ifms,
       chargeName,
       /* oneTimeMaintenance, */
       legalFee,
@@ -317,6 +320,7 @@ export default function CostSheet({
             `Rs. ${formattedChargeAmount}`,
           ],
           ["Legal Fee (Per Sale Deed)", `Rs. ${formattedLegalFee}`],
+          [`IFMS (${ifmsRate} x Size)`, `Rs. ${formattedIfms}`],
           /* ["Maintenance For 3 years", `Rs. ${formattedOneTimeMaintenance}`], */
           ["Total Charges", `Rs. ${formattedTotalCharges}`],
           ["Plot Total Payment", `Rs. ${formattedPlotTotalPayment}`],
@@ -648,6 +652,31 @@ export default function CostSheet({
                       value={formData.legalFee}
                       onChange={handleChange}
                       className="border px-2 py-1 w-full rounded text-sm"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="p-2 font-semibold text-gray-600">IFMS Rate</td>
+                  <td className="p-2">
+                    <input
+                      type="number"
+                      name="ifmsRate"
+                      value={formData.ifmsRate}
+                      readOnly
+                      className="border p-2 w-full rounded bg-gray-100"
+                    />
+                  </td>
+                </tr>
+                <tr className="border-b">
+                  <td className="p-2 font-semibold text-gray-600">
+                    IFMS ({formData.ifmsRate} x Size)
+                  </td>
+                  <td className="p-2">
+                    <input
+                      type="text"
+                      value={formData.ifms}
+                      className="border p-2 w-full rounded bg-gray-100"
+                      readOnly
                     />
                   </td>
                 </tr>

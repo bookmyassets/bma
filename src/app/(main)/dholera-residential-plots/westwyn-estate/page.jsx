@@ -276,19 +276,19 @@ export default function HeroCarousel() {
         />
       </div>
 
-      <PlanLayout/>
+      <PlanLayout />
 
       <ProjectAmenities />
 
-      <div className="pt-4 pb-4">
-        <OurCommits/>
-      </div>
-
-      <div className="pt-4 pb-4">
-        <CostSheet projectSlug="westwyn-estate" showProjectSelector={false} />
+      <div className=" ">
+        <OurCommits />
       </div>
 
       <FAQSection />
+
+      <div className=" ">
+        <CostSheet projectSlug="westwyn-estate" showProjectSelector={false} />
+      </div>
 
       <SoldOutProjectsSection />
       <PopupScroll title="Get Verified Project Details" />
