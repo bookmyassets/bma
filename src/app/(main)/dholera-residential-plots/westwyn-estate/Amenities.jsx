@@ -12,7 +12,7 @@ import {
   Activity,
 } from "lucide-react";
 import Image from "next/image";
-import img from "@/assests/homepage/hero2/test/img5x4.png";
+import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-villas.webp";
 import { FaFilter, FaRoad } from "react-icons/fa";
 
 // ✅ Moved OUTSIDE the component — not recreated on every render
