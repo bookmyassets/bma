@@ -5,7 +5,7 @@ import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 
 export default function RagePopup({
-  title = "Get Registry Ready Plots under ₹10 Lakh",
+  title = "Get Govt Approved Plots Starting from ₹10 Lakh",
   subtitle = "Get exclusive updates",
   clickThreshold = 5, // Number of clicks to trigger popup
   timeWindow = 2000 // Time window in ms for clicks to count as "rage"

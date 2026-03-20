@@ -62,14 +62,15 @@
     "constructionStatus" : "Under Construction",
     "status" : "sold-out",
     "description" : "A unique project inspired by coastal living, situated near Dholera Port and the Solar Power Plant, is ideal for future growth."
-  },
+  }
+  ,
   {
-    "projectName": "Pride",
-    "link": "pride",
-    "location": "Kasindra, Dholera",
-    "image": "/assets/residential/maple-township.webp",
+    "projectName": "Marina bay",
+    "link": "marina-bay",
+    "location": "Gamph, Dholera",
+    "image": "/assets/residential/marina-bay.webp",
     "constructionStatus" : "Under Construction",
     "status" : "sold-out",
-    "description" : "Prestigious township with eco-friendly infrastructure and assured growth potential in Dholera Metro City."
+    "description" : "A unique project inspired by coastal living, situated near Dholera Port and the Solar Power Plant, is ideal for future growth."
   }
 ]

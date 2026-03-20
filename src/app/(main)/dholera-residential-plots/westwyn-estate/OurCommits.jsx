@@ -22,7 +22,7 @@ export default function () {
                   value: "365 Days Site Visit Assitance",
                   label: "Plot Sizes",
                 },
-                { value: "ReSale Support", label: "Starting Price" },
+                { value: <>ReSale <br /> Support</>, label: "Starting Price" },
                 { value: "BuyBack Assistance", label: "Returns In 5 years" },
               ].map(({ value }, i) => (
                 <div

@@ -56,9 +56,6 @@ const ActiveProjectsSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{color: '#0d0d0d'}}>
             Explore Our Active Projects
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover other premium residential developments currently available for investment
-          </p>
         </div>
 
         {/* Projects Grid */}

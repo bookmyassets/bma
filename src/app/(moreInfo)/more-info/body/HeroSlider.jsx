@@ -468,7 +468,7 @@ export default function LandingPage({ openForm }) {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="w-full max-w-md"
+              className="w-full max-w-lg"
             >
               {/* Logo */}
               <div className="text-center mb-6">
@@ -478,7 +478,7 @@ export default function LandingPage({ openForm }) {
                   className="mx-auto mb-3 md:h-auto md:w-80"
                 />
                 <h2 className="text-xl lg:text-2xl font-bold text-black mb-2">
-                  Registry-Ready Plots under ₹10 Lakh
+                  Govt Approved Plots Starting from ₹10 Lakh
                 </h2>
               </div>
 

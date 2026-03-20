@@ -20,7 +20,8 @@ import {
 
 import { MapPin, Route, Factory, Plane, Clock } from "lucide-react";
 
-import { FaRoad } from "react-icons/fa6";
+import { FaRoad, FaRoadBridge } from "react-icons/fa6";
+import { GiRailway, GiRoad } from "react-icons/gi";
 
 export default function WestWyn() {
   const [activeSection, setActiveSection] = useState(0);
@@ -39,23 +40,27 @@ export default function WestWyn() {
   ];
   const location = [
     {
-      label: "0 km from Dholera SIR Boundary",
+      label: "Located on SH-117 in Polarpur, Dholera",
       icon: MapPin,
     },
     {
-      label: "5 Minutes from Dholera–Ahmedabad Expressway",
-      icon: Route,
+      label: "5 minutes from Bhimnath Railway Station",
+      icon: GiRailway,
     },
     {
-      label: "20 Minutes from Activation Area",
+      label: "15 minutes from Dholera SIR boundary",
       icon: Clock,
     },
     {
-      label: "20 Minutes from Tata Semiconductor Plant",
-      icon: Factory,
+      label: "17 minutes from Ahmedabad–Dholera Expressway",
+      icon: GiRoad,
     },
     {
-      label: "30 Minutes from Dholera International Airport",
+      label: "30 minutes from Tata Semiconductor Plant",
+      icon:Factory,
+    },
+    {
+      label: "45 minutes from Dholera International Airport ",
       icon: Plane,
     },
   ];
@@ -63,9 +68,10 @@ export default function WestWyn() {
   const sections = [
     {
       title: "About WestWyn Estate",
-      content: `WestWyn Estate is strategically positioned at the epicenter of Dholera’s rapid transformation, located directly at the SIR boundary. This project offers unmatched proximity to major infrastructure milestones, making it one of the most accessible residential plot developments in the region.
-
-      This is not just about buying land. It is about securing a location that combines prime connectivity, immediate possession with registry, verified legal documentation, and an accessible entry point aligned with prevailing Dholera Smart City Plot Price expectations.
+      content: `WestWyn Estates is a well-located residential plot in Polarpur, Dholera, ideal for buyers looking for connectivity and future growth.
+Located on SH-117, the project is close to Bhimnath Railway Station, key expressway routes, and industrial development zones, offering a strong combination of accessibility and long-term potential.
+This is not just about buying land- it’s about securing a well-connected location with strong future potential. With Registry-Ready plots and clear legal documentation, the process is simple and reliable. It offers a low entry point, making it easier to plan your investment without a high initial commitment.
+Combined with growing infrastructure and current Dholera Smart City plot price trends, it presents a practical long-term opportunity.
 
       `,
       image: img1,

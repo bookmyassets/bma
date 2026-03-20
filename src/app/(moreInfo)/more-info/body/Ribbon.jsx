@@ -210,8 +210,8 @@ export default function Ribbon() {
   return (
     <>
       <div className="bg-black border-t-8 border-t-[#deae3c] border-b-8 border-b-[#deae3c] py-4">
-        <div className="pr-8 pl-8 pb-8 text-[#deae3c] flex justify-center items-center font-semibold italic text-xl md:text-3xl">
-          Verified plots under ₹10 Lakh only, 5 Minute from the Expressway
+        <div className="pr-8 pl-8 pb-8 text-[#deae3c] flex justify-center items-center font-semibold text-xl md:text-3xl">
+         Govt Approved Plots Starting from ₹10 Lakh
         </div>
         
         <div className="max-w-3xl mx-auto max-sm:pl-4 max-sm:pr-4 space-y-4">

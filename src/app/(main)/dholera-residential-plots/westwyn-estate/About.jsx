@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { FaDownload } from "react-icons/fa";
 import Image from "next/image";
-import img from "@/assests/image.webp";
+import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-google-maps-location.webp";
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({
@@ -112,12 +112,12 @@ const WestWynAboutSection = () => {
               Location Advantage
             </h3>
           </div>
-          <div className="grid md:grid-cols-2 py-4">
-            <div className="px-4 sm:px-6 lg:px-8 aspect-[2/1]">
+          <div className="grid lg:grid-cols-2 py-4">
+            <div className="px-4 sm:px-6 lg:px-8 ">
               <Image
                 src={img}
                 alt="dholera map"
-                className="rounded-xl w-full h-auto aspect-[2/1]"
+                className="rounded-xl w-full h-auto md:h-full"
                 priority
               />
             </div>
@@ -127,7 +127,14 @@ const WestWynAboutSection = () => {
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>Premium residential plots in Polarpur, Dholera</span>
+                  <span>Premium residential plots in Polarpur, Dholera, Gujarat</span>
+                </li>
+
+                <li className="flex items-start justify-start gap-2 font-bold">
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
+                  <span>Located on State Highway-117 (150 foot road)</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
