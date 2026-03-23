@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "@/assests/bma-logo.png";
 import Image from "next/image";
-import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
+import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import aboutDholera from "@/assests/dholeraSIR/about-dholera-sir.webp";
 import dholeraBlogs from "@/assests/dholeraSIR/dholera-blogs.webp";
@@ -16,413 +16,370 @@ import industrial from "@/assests/bulkLand/industrial-cover.webp";
 import sport from "@/assests/bulkLand/recreation-sports-map.webp";
 import knowledgeIT from "@/assests/bulkLand/knowledge-it-cover.webp";
 
-// ── Status badge ──────────────────────────────────────────────────────────────
-const STATUS_STYLES = {
-  ongoing:   { label: "Ongoing",   cls: "bg-emerald-500/15 text-emerald-600 border-emerald-200" },
-  upcoming:  { label: "Upcoming",  cls: "bg-blue-500/15 text-blue-600 border-blue-200"          },
-  limited:   { label: "Limited",   cls: "bg-amber-500/15 text-amber-600 border-amber-200"       },
-  "sold-out":{ label: "Sold Out",  cls: "bg-red-500/15 text-red-600 border-red-200"             },
-  available: { label: "Available", cls: "bg-emerald-500/15 text-emerald-600 border-emerald-200" },
-};
-
-const StatusBadge = ({ status }) => {
-  const s = STATUS_STYLES[status];
-  if (!s) return null;
-  return (
-    <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full border ${s.cls}`}>
-      {s.label}
-    </span>
-  );
-};
-
-// ── Editorial dropdown ────────────────────────────────────────────────────────
-function EditorialDropdown({ projects, loading, error, hrefPrefix, accentColor = "#deae3c", onClose }) {
-  const activeProjects  = projects.filter((p) => p.status !== "sold-out");
-  const soldOutProjects = projects.filter((p) => p.status === "sold-out");
-
-  const [hoveredIndex, setHoveredIndex] = useState(0);
-  const [soldOutOpen, setSoldOutOpen] = useState(false);
-  const previewProject = activeProjects[hoveredIndex] ?? activeProjects[0];
-
-  if (loading) return (
-    <div className="flex items-center justify-center h-full">
-      <div className="flex flex-col items-center gap-3">
-        <div
-          className="w-8 h-8 border-2 border-gray-200 rounded-full animate-spin"
-          style={{ borderTopColor: accentColor }}
-        />
-        <span className="text-xs text-gray-400 tracking-widest uppercase">Loading</span>
-      </div>
-    </div>
-  );
-
-  if (error) return (
-    <div className="flex items-center justify-center h-full">
-      <p className="text-red-400 text-sm">{error}</p>
-    </div>
-  );
-
-  if (!projects.length) return (
-    <div className="flex items-center justify-center h-full">
-      <p className="text-gray-400 text-sm">No projects available</p>
-    </div>
-  );
-
-  const buildHref = (project) =>
-    hrefPrefix === "/"
-      ? `/${project.link}`
-      : project.link.startsWith("/")
-      ? `${hrefPrefix}${project.link}`
-      : `${hrefPrefix}/${project.link}`;
-
-  return (
-    <div className="flex h-full">
-
-      {/* Left — full-height image preview (only active projects cycle here) */}
-      <div className="w-[42%] relative overflow-hidden flex-shrink-0 bg-gray-950">
-        {activeProjects.map((p, i) => (
-          <div
-            key={i}
-            className="absolute inset-0 transition-opacity duration-500 ease-in-out"
-            style={{ opacity: i === hoveredIndex ? 1 : 0 }}
-          >
-            <Image
-              src={p.image}
-              alt={p.projectName}
-              fill
-              sizes="42vw"
-              className="object-cover scale-105"
-              priority={i === 0}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-          </div>
-        ))}
-
-        {/* Counter — only counts active */}
-        <div className="absolute top-8 left-8 z-10">
-          <span className="text-white/40 font-mono text-xs tracking-[0.2em]">
-            {String(hoveredIndex + 1).padStart(2, "0")} / {String(activeProjects.length).padStart(2, "0")}
-          </span>
-        </div>
-
-        {/* Active project label bottom-left */}
-        {previewProject && (
-          <div className="absolute bottom-8 left-8 right-6 z-10">
-            <p className="text-white/50 text-xs tracking-[0.18em] uppercase mb-2">
-              {previewProject.location ?? ""}
-            </p>
-            <h2 className="text-white text-2xl font-light leading-snug mb-3">
-              {previewProject.projectName}
-            </h2>
-            <StatusBadge status={previewProject.status} />
-          </div>
-        )}
-      </div>
-
-      {/* Right — two sections: active on top, sold-out below */}
-      <div className="flex-1 flex flex-col px-10 overflow-y-auto py-8 justify-center">
-
-        {/* ── Active / Available projects ── */}
-        {activeProjects.length > 0 && (
-          <div className="mt-6">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-[30px] font-semibold uppercase tracking-[0.2em] text-green-800">
-                Ongoing
-              </span>
-              <div className="flex-1 h-px border-t border-dashed border-gray-200" />
-            </div>
-            <ul className="divide-y divide-gray-100">
-              {activeProjects.map((project, i) => {
-                const isHovered = i === hoveredIndex;
-                return (
-                  <li key={i}>
-                    <Link
-                      href={buildHref(project)}
-                      onClick={onClose}
-                      onMouseEnter={() => setHoveredIndex(i)}
-                      className="group flex items-center justify-between py-4 transition-all duration-200 cursor-pointer"
-                    >
-                      <div className="flex items-center gap-5">
-                        <span
-                          className="font-mono tabular-nums w-6 transition-colors duration-200"
-                          style={{ color: isHovered ? accentColor : "#d1d5db" }}
-                        >
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <div className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 ring-1 ring-black/5">
-                          <Image
-                            src={project.image}
-                            alt={project.projectName}
-                            fill
-                            sizes="48px"
-                            className={`object-cover transition-transform duration-500 ${isHovered ? "scale-110" : "scale-100"}`}
-                          />
-                        </div>
-                        <div>
-                          <p
-                            className="font-semibold leading-tight transition-colors duration-200"
-                            style={{ color: isHovered ? "#111827" : "#6b7280" }}
-                          >
-                            {project.projectName}
-                          </p>
-                          {project.location && (
-                            <p className="text-sm text-gray-400 mt-0.5 leading-tight">{project.location}</p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3 flex-shrink-0 ml-4">
-                        <StatusBadge status={project.status} />
-                        <ArrowUpRight
-                          className="w-4 h-4 -translate-x-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
-                          style={{ color: accentColor }}
-                        />
-                      </div>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
-
-        {/* ── Sold Out accordion ── */}
-        {soldOutProjects.length > 0 && (
-          <div className="mt-6">
-            {/* Clickable header */}
-            <button
-              onClick={() => setSoldOutOpen((p) => !p)}
-              className="flex items-center gap-3 w-full group"
-            >
-              <span className="text-[30px] font-semibold uppercase tracking-[0.2em] text-red-800">
-                Sold Out
-              </span>
-              <div className="flex-1 h-px border-t border-dashed border-gray-200" />
-              <span className="text-xs font-medium text-red-300 tracking-widest uppercase ml-1 flex-shrink-0">
-                {soldOutOpen ? "hide" : `${soldOutProjects.length} projects`}
-              </span>
-              <ChevronDown
-                className={`w-4 h-4 text-red-400 flex-shrink-0 transition-transform duration-300 ${soldOutOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-
-            {/* Collapsible body */}
-            <div
-              className={`overflow-hidden transition-all duration-400 ease-in-out ${
-                soldOutOpen ? "max-h-[600px] opacity-100 mt-3" : "max-h-0 opacity-0"
-              }`}
-            >
-              <ul className="divide-y divide-gray-100">
-                {soldOutProjects.map((project, i) => (
-                  <li key={i}>
-                    <div className="flex items-center justify-between py-3 opacity-40 cursor-not-allowed">
-                      <div className="flex items-center gap-5">
-                        <span className="font-mono tabular-nums w-6 text-gray-300">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <div className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 ring-1 ring-black/5">
-                          <Image
-                            src={project.image}
-                            alt={project.projectName}
-                            fill
-                            sizes="48px"
-                            className="object-cover grayscale"
-                          />
-                        </div>
-                        <div>
-                          <p className="font-semibold text-gray-400 leading-tight line-through decoration-gray-300">
-                            {project.projectName}
-                          </p>
-                          {project.location && (
-                            <p className="text-sm text-gray-300 mt-0.5 leading-tight">{project.location}</p>
-                          )}
-                        </div>
-                      </div>
-                      <StatusBadge status="sold-out" />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-
-      </div>
-    </div>
-  );
-}
-
-// ── Main Navbar ───────────────────────────────────────────────────────────────
 export default function Navbar() {
-  const [isScrolled, setIsScrolled]         = useState(false);
-  const [isMobileMenuOpen, setMobileOpen]   = useState(false);
-  const [activeMenu, setActiveMenu]         = useState(null); // "residential"|"bulk"|"dholera"|null
-  const [residentialProjects, setRP]        = useState([]);
-  const [bulkLandProjects, setBP]           = useState([]);
-  const [dholeraProjects, setDP]            = useState([]);
-  const [loadingMap, setLoadingMap]         = useState({});
-  const [errorMap, setErrorMap]             = useState({});
-  const navRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isResidentialMenuOpen, setIsResidentialMenuOpen] = useState(false);
+  const [isDholeraMenuOpen, setIsDholeraMenuOpen] = useState(false);
+  const [isBulkLandMenuOpen, setIsBulkLandMenuOpen] = useState(false);
+  const [residentialProjects, setResidentialProjects] = useState([]);
+  const [dholeraProjects, setDholeraProjects] = useState([]);
+  const [bulkLandProjects, setBulkLandProjects] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [dholeraLoading, setDholeraLoading] = useState(false);
+  const [bulkLandLoading, setBulkLandLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [dholeraError, setDholeraError] = useState(null);
+  const [bulkLandError, setBulkLandError] = useState(null);
 
-  // Scroll
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
+  const shouldUseWhiteBackground =
+    isScrolled ||
+    !isHomePage ||
+    isResidentialMenuOpen ||
+    isDholeraMenuOpen ||
+    isBulkLandMenuOpen;
+  const textColor = "text-black";
+
   useEffect(() => {
-    const fn = () => { setIsScrolled(window.scrollY > 50); setActiveMenu(null); };
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Click outside
+  // Fetch residential projects
   useEffect(() => {
-    const fn = (e) => { if (navRef.current && !navRef.current.contains(e.target)) setActiveMenu(null); };
-    document.addEventListener("mousedown", fn);
-    return () => document.removeEventListener("mousedown", fn);
-  }, []);
+    async function fetchResidentialProjects() {
+      if (!isResidentialMenuOpen || residentialProjects.length > 0) return;
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await fetch("/data/Residential.json");
+        if (!response.ok) throw new Error("Failed to fetch projects");
+        setResidentialProjects(await response.json());
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load projects");
+        setResidentialProjects([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchResidentialProjects();
+  }, [isResidentialMenuOpen, residentialProjects.length]);
 
-  // Escape
+  // Fetch bulk land projects
   useEffect(() => {
-    const fn = (e) => { if (e.key === "Escape") setActiveMenu(null); };
-    document.addEventListener("keydown", fn);
-    return () => document.removeEventListener("keydown", fn);
-  }, []);
+    async function fetchBulkLandProjects() {
+      if (!isBulkLandMenuOpen || bulkLandProjects.length > 0) return;
+      try {
+        setBulkLandLoading(true);
+        setBulkLandError(null);
+        const mockBulkLandProjects = [
+          {
+            projectName: "Residential Zone",
+            location: "Prime locations across Gujarat",
+            image: residential,
+            link: "/residential",
+            status: "available",
+          },
+          {
+            projectName: "High Access Corridor",
+            location: "Major highways and arterial roads",
+            image: hac,
+            link: "/high-access-corridor",
+            status: "available",
+          },
+          {
+            projectName: "City Centre",
+            location: "Urban commercial districts",
+            image: cityCenter,
+            link: "/city-centre-land",
+            status: "limited",
+          },
+          {
+            projectName: "Knowledge and IT",
+            location: "IT parks and tech corridors",
+            image: knowledgeIT,
+            link: "/knowledge-it-land",
+            status: "available",
+          },
+          {
+            projectName: "Industrial",
+            location: "Industrial zones and SEZs",
+            image: industrial,
+            link: "/industrial-land",
+            status: "available",
+          },
+          {
+            projectName: "Recreation Sports & Entertainment",
+            location: "Entertainment districts",
+            image: sport,
+            link: "/recreation-sports-land",
+            status: "upcoming",
+          },
+        ];
+        await new Promise((r) => setTimeout(r, 500));
+        setBulkLandProjects(mockBulkLandProjects);
+      } catch (err) {
+        console.error(err);
+        setBulkLandError("Failed to load projects");
+        setBulkLandProjects([]);
+      } finally {
+        setBulkLandLoading(false);
+      }
+    }
+    fetchBulkLandProjects();
+  }, [isBulkLandMenuOpen, bulkLandProjects.length]);
 
-  // Fetch residential
+  // Fetch dholera projects
   useEffect(() => {
-    if (activeMenu !== "residential" || residentialProjects.length) return;
-    setLoadingMap((p) => ({ ...p, residential: true }));
-    fetch("/data/Residential.json")
-      .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
-      .then(setRP)
-      .catch(() => setErrorMap((p) => ({ ...p, residential: "Failed to load" })))
-      .finally(() => setLoadingMap((p) => ({ ...p, residential: false })));
-  }, [activeMenu]);
+    async function fetchDholeraProjects() {
+      if (!isDholeraMenuOpen || dholeraProjects.length > 0) return;
+      try {
+        setDholeraLoading(true);
+        setDholeraError(null);
+        const mockDholeraProjects = [
+          {
+            projectName: "About Dholera SIR",
+            location: "Dholera SIR, Gujarat",
+            image: aboutDholera,
+            link: "about-dholera-sir",
+            status: "ongoing",
+          },
+          {
+            projectName: "Dholera Blogs",
+            location: "Dholera SIR, Gujarat",
+            image: dholeraBlogs,
+            link: "dholera-sir-blogs",
+            status: "upcoming",
+          },
+          {
+            projectName: "Dholera Latest Updates",
+            location: "Dholera SIR, Gujarat",
+            image: dholeraUpdates,
+            link: "dholera-sir-updates",
+            status: "ongoing",
+          },
+        ];
+        await new Promise((r) => setTimeout(r, 500));
+        setDholeraProjects(mockDholeraProjects);
+      } catch (err) {
+        console.error(err);
+        setDholeraError("Failed to load projects");
+        setDholeraProjects([]);
+      } finally {
+        setDholeraLoading(false);
+      }
+    }
+    fetchDholeraProjects();
+  }, [isDholeraMenuOpen, dholeraProjects.length]);
 
-  // Fetch bulk
-  useEffect(() => {
-    if (activeMenu !== "bulk" || bulkLandProjects.length) return;
-    setLoadingMap((p) => ({ ...p, bulk: true }));
-    setTimeout(() => {
-      setBP([
-        { projectName: "Residential Zone",                  location: "Prime locations across Gujarat",   image: residential, link: "/residential",            status: "" },
-        { projectName: "High Access Corridor",              location: "Major highways and arterial roads",image: hac,         link: "/high-access-corridor",   status: "" },
-        { projectName: "City Centre",                       location: "Urban commercial districts",       image: cityCenter,  link: "/city-centre-land",       status: ""   },
-        { projectName: "Knowledge and IT",                  location: "IT parks and tech corridors",      image: knowledgeIT, link: "/knowledge-it-land",      status: "" },
-        { projectName: "Industrial",                        location: "Industrial zones and SEZs",        image: industrial,  link: "/industrial-land",         status: "" },
-        { projectName: "Recreation Sports & Entertainment", location: "Entertainment districts",          image: sport,       link: "/recreation-sports-land", status: ""  },
-      ]);
-      setLoadingMap((p) => ({ ...p, bulk: false }));
-    }, 400);
-  }, [activeMenu]);
-
-  // Fetch dholera
-  useEffect(() => {
-    if (activeMenu !== "dholera" || dholeraProjects.length) return;
-    setLoadingMap((p) => ({ ...p, dholera: true }));
-    setTimeout(() => {
-      setDP([
-        { projectName: "About Dholera SIR",     location: "Dholera SIR, Gujarat", image: aboutDholera,   link: "about-dholera-sir",   status: ""  },
-        { projectName: "Dholera Blogs",          location: "Dholera SIR, Gujarat", image: dholeraBlogs,   link: "dholera-sir-blogs",   status: "" },
-        { projectName: "Dholera Latest Updates", location: "Dholera SIR, Gujarat", image: dholeraUpdates, link: "dholera-sir-updates", status: ""  },
-      ]);
-      setLoadingMap((p) => ({ ...p, dholera: false }));
-    }, 400);
-  }, [activeMenu]);
-
-  const closeAll = () => { setActiveMenu(null); setMobileOpen(false); };
-  const toggle   = (key) => setActiveMenu((prev) => (prev === key ? null : key));
-
-  const NAV_ITEMS = [
-    { key: "residential", label: "Residential Projects" },
-    { key: "bulk",        label: "Bulk Land"            },
-    { key: "dholera",     label: "Dholera SIR"          },
-  ];
-
-  const DROPDOWN_CONFIG = {
-    residential: { projects: residentialProjects, hrefPrefix: "/dholera-residential-plots", accentColor: "#deae3c" },
-    bulk:        { projects: bulkLandProjects,    hrefPrefix: "/bulk-land",                 accentColor: "#f97316" },
-    dholera:     { projects: dholeraProjects,     hrefPrefix: "/",                          accentColor: "#3b82f6" },
+  const closeAllMenus = () => {
+    setIsMobileMenuOpen(false);
+    setIsResidentialMenuOpen(false);
+    setIsDholeraMenuOpen(false);
+    setIsBulkLandMenuOpen(false);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => {
+      if (!prev) {
+        setIsResidentialMenuOpen(false);
+        setIsDholeraMenuOpen(false);
+        setIsBulkLandMenuOpen(false);
+      }
+      return !prev;
+    });
+  };
+
+  const toggleResidentialMenu = () => {
+    setIsResidentialMenuOpen((p) => !p);
+    setIsDholeraMenuOpen(false);
+    setIsBulkLandMenuOpen(false);
+  };
+  const toggleBulkLandMenu = () => {
+    setIsBulkLandMenuOpen((p) => !p);
+    setIsResidentialMenuOpen(false);
+    setIsDholeraMenuOpen(false);
+  };
+  const toggleDholeraMenu = () => {
+    setIsDholeraMenuOpen((p) => !p);
+    setIsResidentialMenuOpen(false);
+    setIsBulkLandMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (window.innerWidth < 768) return;
+      if (
+        !e.target.closest(".dropdown-container") &&
+        !e.target.closest(".residential-dropdown") &&
+        !e.target.closest(".dholera-dropdown") &&
+        !e.target.closest(".bulk-land-dropdown")
+      ) {
+        setIsResidentialMenuOpen(false);
+        setIsDholeraMenuOpen(false);
+        setIsBulkLandMenuOpen(false);
+      }
+    };
+    const handleScroll = () => {
+      if (window.innerWidth < 768) return;
+      setIsResidentialMenuOpen(false);
+      setIsDholeraMenuOpen(false);
+      setIsBulkLandMenuOpen(false);
+    };
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        setIsResidentialMenuOpen(false);
+        setIsDholeraMenuOpen(false);
+        setIsBulkLandMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  // Shared loading / error / empty states
+  const LoadingSpinner = ({ color = "yellow" }) => (
+    <div className="flex justify-center items-center h-64">
+      <div className="text-center">
+        <div
+          className={`inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-${color}-500`}
+        />
+        <p className="text-gray-500 mt-4">Loading...</p>
+      </div>
+    </div>
+  );
+  const ErrorState = ({ msg }) => (
+    <div className="flex justify-center items-center h-64">
+      <p className="text-red-500 text-lg">{msg}</p>
+    </div>
+  );
+  const EmptyState = () => (
+    <div className="flex justify-center items-center h-64">
+      <div className="text-gray-500 text-center">
+        <p className="text-lg">No projects available at the moment</p>
+        <p className="text-sm mt-2">Please check back later</p>
+      </div>
+    </div>
+  );
+
   return (
-    <div ref={navRef}>
-      {/* ── Navbar ─────────────────────────────────────────────────────────── */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${isScrolled || activeMenu ? "shadow-sm" : ""}`}>
-        <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-20">
-
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white">
+        {/* ✅ calc() — horizontal padding scales with viewport */}
+        <div className="max-w-7xl mx-auto px-[calc(1rem+1vw)]">
+          <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link href="/" onClick={closeAll} className="flex-shrink-0">
-              <Image src={logo} height={72} width={72} alt="BookMyAssets" className="p-1" />
-            </Link>
-
-            {/* Desktop links */}
-            <div className="hidden md:flex items-center gap-1">
-              {NAV_ITEMS.map(({ key, label }) => (
-                <button
-                  key={key}
-                  onClick={() => toggle(key)}
-                  className={`relative flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    activeMenu === key
-                      ? "text-black bg-gray-100"
-                      : "text-gray-600 hover:text-black hover:bg-gray-50"
-                  }`}
-                >
-                  {label}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === key ? "rotate-180" : ""}`} />
-                  {activeMenu === key && (
-                    <span
-                      className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full"
-                      style={{ backgroundColor: DROPDOWN_CONFIG[key]?.accentColor }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Desktop right */}
-            <div className="hidden md:flex items-center gap-3">
-              {/* Misc dropdown */}
-              <div className="relative group">
-                <button className="p-2.5 rounded-lg text-gray-500 hover:text-black hover:bg-gray-100 transition-colors">
-                  <Menu className="w-5 h-5" />
-                </button>
-                <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
-                  {[
-                    { href: "/career",          label: "Careers"         },
-                    { href: "/channel-partner", label: "Channel Partner" },
-                    { href: "/dholera-events",  label: "Events"          },
-                    { href: "/gallery",         label: "Gallery"         },
-                    { href: "/about",           label: "About"           },
-                  ].map(({ href, label }) => (
-                    <Link
-                      key={href}
-                      href={href}
-                      onClick={closeAll}
-                      className="flex items-center justify-between px-5 py-3.5 text-sm text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
-                    >
-                      {label}
-                      <ArrowUpRight className="w-3.5 h-3.5 opacity-30" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA */}
-              <Link
-                href="/contact"
-                onClick={closeAll}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-black transition-all duration-200 hover:brightness-105 active:scale-95"
-                style={{ backgroundColor: "#deae3c" }}
-              >
-                Contact Us
-                <ArrowUpRight className="w-4 h-4" />
+            <div className="flex-shrink-0">
+              <Link href="/" onClick={closeAllMenus}>
+                {/* Logo keeps fixed dimensions — it's a brand mark, not content imagery */}
+                <Image
+                  src={logo}
+                  height={75}
+                  width={75}
+                  alt="BookMyAssets logo"
+                  className="p-1"
+                />
               </Link>
             </div>
 
-            {/* Mobile toggle */}
+            {/* Desktop nav */}
+            <div className="hidden md:flex items-center space-x-12">
+              {[
+                {
+                  label: "Our Residential Projects",
+                  toggle: toggleResidentialMenu,
+                  open: isResidentialMenuOpen,
+                },
+                {
+                  label: "Bulk Land Projects",
+                  toggle: toggleBulkLandMenu,
+                  open: isBulkLandMenuOpen,
+                },
+                {
+                  label: "Dholera SIR",
+                  toggle: toggleDholeraMenu,
+                  open: isDholeraMenuOpen,
+                },
+              ].map(({ label, toggle, open }) => (
+                <div key={label} className="relative group dropdown-container">
+                  <button
+                    className={`font-medium transition-colors duration-300 hover:text-yellow-500 flex items-center text-[clamp(0.8rem,1.2vw,1rem)] ${textColor}`}
+                    onClick={toggle}
+                  >
+                    {label}
+                    <svg
+                      className={`w-4 h-4 ml-1 transition-transform ${open ? "rotate-180" : ""}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+
+              <div className="flex items-center space-x-6">
+                <Link
+                  href="/contact"
+                  className="bg-[#deae3c] text-black px-6 py-2 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md text-[clamp(0.8rem,1.2vw,1rem)]"
+                >
+                  Contact Us
+                </Link>
+                <div className="relative group">
+                  <button
+                    className={`font-medium transition-colors duration-300 hover:text-yellow-500 ${textColor}`}
+                  >
+                    <Menu
+                      className={`inline-block mr-1 h-8 w-8 p-1 rounded-sm ${shouldUseWhiteBackground ? "bg-gray-100 text-black" : "bg-white text-black"}`}
+                    />
+                  </button>
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="py-2">
+                      {[
+                        { href: "/career", label: "Careers" },
+                        { href: "/channel-partner", label: "Channel Partner" },
+                        { href: "/dholera-events", label: "Events" },
+                        { href: "/gallery", label: "Gallery" },
+                        { href: "/about", label: "About" },
+                      ].map(({ href, label }) => (
+                        <Link
+                          key={href}
+                          href={href}
+                          onClick={closeAllMenus}
+                          className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors text-[clamp(0.8rem,1.2vw,0.875rem)]"
+                        >
+                          {label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile menu button */}
             <div className="md:hidden">
               <button
-                onClick={() => setMobileOpen((p) => !p)}
-                className="p-2 rounded-md text-black hover:bg-gray-100 transition-colors duration-300"
+                onClick={toggleMobileMenu}
+                className={`p-2 rounded-md transition-colors duration-300 ${shouldUseWhiteBackground ? "text-black hover:bg-gray-100" : "hover:bg-white/10"}`}
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               >
                 <svg
@@ -432,9 +389,19 @@ export default function Navbar() {
                   stroke="currentColor"
                 >
                   {isMobileMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
                   )}
                 </svg>
               </button>
@@ -443,35 +410,253 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ── Backdrop ────────────────────────────────────────────────────────── */}
-      <div
-        onClick={() => setActiveMenu(null)}
-        className={`fixed inset-0 z-30 hidden md:block bg-black/20 backdrop-blur-sm transition-all duration-300 ${
-          activeMenu ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
-      />
+      {/* ── Residential Dropdown ─────────────────────────────────────────── */}
+      {isResidentialMenuOpen && (
+        <div
+          className="residential-dropdown hidden md:flex fixed left-0 top-20 w-screen bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300
+          
+          h-[calc(100dvh-5rem)]"
+        >
+          <div className="w-1/3 flex flex-col  p-[calc(2rem+1vw)] h-full bg-gradient-to-br from-gray-50 to-white">
+            {/* clamp() — heading scales between 36px and 48px */}
+            <h3 className="text-[clamp(2.25rem,4vw,3rem)] font-light text-gray-900 leading-tight">
+              Residential <br /> Projects
+            </h3>
+            <p className="text-gray-600 mt-4 text-[clamp(1rem,1.5vw,1.25rem)]">
+              Discover premium residential developments with world-class
+              amenities
+            </p>
+          </div>
 
-      {/* ── Dropdown panel ──────────────────────────────────────────────────── */}
-      <div
-        className={`fixed left-0 right-0 top-20 z-40 bg-white border-t border-gray-100 shadow-2xl hidden md:block transition-all duration-300 ease-out ${
-          activeMenu ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-3 pointer-events-none"
-        }`}
-        style={{ height: "calc(100dvh - 5rem)" }}
-      >
-        {activeMenu && DROPDOWN_CONFIG[activeMenu] && (
-          <EditorialDropdown
-            key={activeMenu}
-            projects={DROPDOWN_CONFIG[activeMenu].projects}
-            loading={loadingMap[activeMenu]}
-            error={errorMap[activeMenu]}
-            hrefPrefix={DROPDOWN_CONFIG[activeMenu].hrefPrefix}
-            accentColor={DROPDOWN_CONFIG[activeMenu].accentColor}
-            onClose={closeAll}
-          />
-        )}
-      </div>
+          <div className="w-2/3 p-[calc(1rem+0.5vw)] h-full overflow-y-auto">
+            {loading ? (
+              <LoadingSpinner color="yellow" />
+            ) : error ? (
+              <ErrorState msg={error} />
+            ) : residentialProjects.length > 0 ? (
+              <div className="grid grid-cols-4 gap-[calc(0.5rem+0.5vw)] pb-6 h-full">
+                {residentialProjects.map((project, index) => (
+                  <Link
+                    key={index}
+                    href={`/dholera-residential-plots/${project.link}`}
+                    onClick={closeAllMenus}
+                    className={`group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col ${project.status === "sold-out" ? "opacity-75 cursor-not-allowed" : ""}`}
+                  >
+                    {/* ✅ responsive image — aspect-ratio container + fill */}
+                    <div className="relative w-full h-full aspect-[1/1] overflow-hidden rounded-xl flex-shrink-0">
+                      <Image
+                        src={project.image}
+                        alt={project.projectName}
+                        fill
+                        sizes="(min-width: 1024px) 15vw, 25vw"
+                        className={`object-fit transition-transform duration-700 ease-out ${project.status === "sold-out" ? "grayscale" : "group-hover:scale-110"}`}
+                        priority={index < 6}
+                      />
+                      <div
+                        className={`absolute inset-0 transition-all duration-500 ${project.status === "sold-out" ? "bg-gradient-to-t from-red-900/50 via-red-900/20 to-transparent" : ""}`}
+                      />
+
+                      <div className="absolute top-3 right-3 flex flex-col gap-2">
+                        {project.status === "ongoing" && (
+                          <span className="bg-green-500  text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg animate-pulse">
+                            ONGOING
+                          </span>
+                        )}
+                        {project.status === "sold-out" && (
+                          <span className="bg-red-500    text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg">
+                            SOLD OUT
+                          </span>
+                        )}
+                        {project.status === "upcoming" && (
+                          <span className="bg-blue-500   text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg">
+                            UPCOMING
+                          </span>
+                        )}
+                        {project.status === "limited" && (
+                          <span className="bg-orange-500 text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg animate-pulse">
+                            LIMITED
+                          </span>
+                        )}
+                      </div>
+
+                      {project.status === "sold-out" && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
+                          <div className="text-white text-2xl font-bold transform -rotate-12 bg-red-600/80 px-6 py-2 rounded-lg border-2 border-red-400">
+                            SOLD OUT
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="absolute bottom-5 left-0 right-0 p-4 text-white space-y-2">
+                        <h3
+                          className={`text-[clamp(0.875rem,1.2vw,1.125rem)] font-semibold group-hover:text-[#deae3c] transition-colors duration-300 leading-tight ${project.status === "sold-out" ? "text-gray-300" : ""}`}
+                        >
+                          {project.projectName}
+                        </h3>
+                        <div className="flex items-center">
+                          <svg
+                            className="w-3 h-3 mr-2 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span
+                            className={`text-xs opacity-90 ${project.status === "sold-out" ? "text-gray-400" : ""}`}
+                          >
+                            {project.location}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <EmptyState />
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── Bulk Land Dropdown ───────────────────────────────────────────── */}
+      {isBulkLandMenuOpen && (
+        <div
+          className="bulk-land-dropdown hidden md:flex fixed left-0 top-20 w-screen bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300
+          h-[calc(100dvh-5rem)]"
+        >
+          <div className="w-1/3 flex flex-col justify-between p-[calc(2rem+1vw)] h-full bg-gradient-to-br from-orange-50 to-white">
+            <div>
+              <h3 className="text-[clamp(2.25rem,4vw,3rem)] font-light text-gray-900 leading-tight">
+                Bulk Land <br /> Opportunities
+              </h3>
+              <p className="text-gray-600 mt-4 text-[clamp(1rem,1.5vw,1.25rem)]">
+                Strategic land parcels for commercial and industrial development
+              </p>
+            </div>
+          </div>
+
+          <div className="w-2/3 p-[calc(1rem+0.5vw)] h-full overflow-y-auto">
+            {bulkLandLoading ? (
+              <LoadingSpinner color="orange" />
+            ) : bulkLandError ? (
+              <ErrorState msg={bulkLandError} />
+            ) : bulkLandProjects.length > 0 ? (
+              <div className="grid grid-cols-4 gap-[calc(0.5rem+0.5vw)] pb-6 h-full">
+                {bulkLandProjects.map((project, index) => (
+                  <Link
+                    key={index}
+                    href={`/bulk-land/${project.link}`}
+                    onClick={closeAllMenus}
+                    className="group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col"
+                  >
+                    <div className="relative w-full aspect-[4/5] overflow-hidden rounded-xl flex-shrink-0">
+                      <Image
+                        src={project.image}
+                        alt={project.projectName}
+                        fill
+                        sizes="(min-width: 1024px) 15vw, 25vw"
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                        priority={index < 6}
+                      />
+                      <div className="absolute bottom-5 left-0 right-0 p-4 text-white">
+                        <h3 className="text-[clamp(0.875rem,1.2vw,1.125rem)] font-semibold group-hover:text-orange-300 transition-colors duration-300 leading-tight">
+                          {project.projectName}
+                        </h3>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <EmptyState />
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── Dholera Dropdown ─────────────────────────────────────────────── */}
+      {isDholeraMenuOpen && (
+        <div
+          className="dholera-dropdown hidden md:flex fixed left-0 top-20 w-screen bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300
+          h-[calc(100dvh-5rem)]"
+        >
+          <div className="w-1/3 flex flex-col justify-between p-[calc(2rem+1vw)] h-full bg-gradient-to-br from-blue-50 to-white">
+            <div>
+              <h3 className="text-[clamp(2.25rem,4vw,3rem)] font-light text-gray-900 leading-tight">
+                DHOLERA SIR
+              </h3>
+              <p className="text-gray-600 mt-4 text-[clamp(1rem,1.5vw,1.25rem)]">
+                India's first planned smart city with futuristic infrastructure
+              </p>
+            </div>
+          </div>
+
+          <div className="w-2/3 p-[calc(1rem+0.5vw)] h-full overflow-y-auto">
+            {dholeraLoading ? (
+              <LoadingSpinner color="blue" />
+            ) : dholeraError ? (
+              <ErrorState msg={dholeraError} />
+            ) : dholeraProjects.length > 0 ? (
+              <div className="grid grid-cols-4 gap-[calc(0.5rem+0.5vw)] pb-6 h-full">
+                {dholeraProjects.map((project, index) => {
+                  const words = project.projectName.split(" ");
+                  const firstLine = words
+                    .slice(0, Math.ceil(words.length / 2))
+                    .join(" ");
+                  const secondLine = words
+                    .slice(Math.ceil(words.length / 2))
+                    .join(" ");
+                  return (
+                    <Link
+                      key={index}
+                      href={`/${project.link}`}
+                      onClick={closeAllMenus}
+                      className={`group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col ${project.status === "sold-out" ? "opacity-75 cursor-not-allowed" : ""}`}
+                    >
+                      {/* ✅ responsive image — fill + sizes instead of fixed width/height */}
+                      <div className="relative w-full aspect-[4/5] overflow-hidden rounded-xl flex-shrink-0">
+                        <Image
+                          src={project.image}
+                          alt={project.projectName}
+                          fill
+                          sizes="(min-width: 1024px) 15vw, 25vw"
+                          className={`object-cover transition-transform duration-700 ease-out ${project.status === "sold-out" ? "grayscale" : "group-hover:scale-110"}`}
+                          priority={index < 6}
+                        />
+                        <div className="absolute bottom-0 left-0 p-4 text-white">
+                          <div
+                            className={`font-semibold group-hover:text-[#deae3c] transition-colors duration-300 leading-tight ${project.status === "sold-out" ? "text-gray-300" : ""}`}
+                          >
+                            {/* ✅ clamp() — two-line title scales fluidly */}
+                            <div className="text-[clamp(1rem,1.5vw,1.25rem)]">
+                              {firstLine}
+                            </div>
+                            {secondLine && (
+                              <div className="text-[clamp(1.125rem,1.8vw,1.5rem)]">
+                                {secondLine}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : (
+              <EmptyState />
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── Mobile Menu ──────────────────────────────────────────────────── */}
+      {/* ✅ inert — when menu is closed, all interactive children are fully blocked */}
       <div
         className={`fixed inset-0 z-30 md:hidden transition-all duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
         inert={!isMobileMenuOpen}
@@ -480,75 +665,117 @@ export default function Navbar() {
           className={`relative z-50 bg-white h-full w-full transition-all duration-300 overflow-y-auto ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
           <div className="flex items-center justify-between p-[calc(0.75rem+0.5vw)] border-b border-gray-200">
-            <h2 className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-gray-800">Menu</h2>
+            <h2 className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-gray-800">
+              Menu
+            </h2>
             <button
-              onClick={closeAll}
+              onClick={closeAllMenus}
               className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
               aria-label="Close menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
 
           <div className="p-[calc(0.75rem+0.5vw)] space-y-2">
-
             {/* Mobile — Residential */}
             <div className="border-b border-gray-100 pb-2">
               <button
-                onClick={() => toggle("residential")}
+                onClick={toggleResidentialMenu}
                 className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-3 text-[clamp(0.875rem,2vw,1rem)]"
               >
                 <span>Our Residential Projects</span>
                 <svg
-                  className={`w-5 h-5 transition-transform ${activeMenu === "residential" ? "rotate-180" : ""}`}
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  className={`w-5 h-5 transition-transform ${isResidentialMenuOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
-              {activeMenu === "residential" && (
+              {isResidentialMenuOpen && (
                 <div className="pl-4 mt-2 space-y-2 max-h-80 overflow-y-auto border-l-2 border-yellow-500">
-                  {loadingMap.residential ? (
+                  {loading ? (
                     <div className="text-gray-500 text-sm py-4 text-center">
-                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-yellow-500 mr-2" /> Loading...
+                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-yellow-500 mr-2" />{" "}
+                      Loading...
                     </div>
-                  ) : errorMap.residential ? (
-                    <div className="text-red-500 text-sm py-2">{errorMap.residential}</div>
+                  ) : error ? (
+                    <div className="text-red-500 text-sm py-2">{error}</div>
                   ) : (
                     residentialProjects.map((project, index) => (
                       <Link
                         key={index}
                         href={`/dholera-residential-plots/${project.link}`}
-                        onClick={closeAll}
-                        className={`flex items-center py-3 px-2 rounded-lg transition-colors ${
-                          project.status === "sold-out" ? "opacity-60 cursor-not-allowed bg-gray-50" : "hover:bg-gray-50"
-                        }`}
+                        onClick={closeAllMenus}
+                        className={`flex items-center py-3 px-2 rounded-lg transition-colors ${project.status === "sold-out" ? "opacity-60 cursor-not-allowed bg-gray-50" : "hover:bg-gray-50"}`}
                       >
+                        {/* ✅ responsive image — aspect-square container + fill for mobile thumbnails */}
                         <div className="relative w-12 h-12 rounded-lg overflow-hidden mr-3 flex-shrink-0">
                           <Image
-                            src={project.image} alt={project.projectName}
-                            fill sizes="48px"
+                            src={project.image}
+                            alt={project.projectName}
+                            fill
+                            sizes="48px"
                             className={`object-cover ${project.status === "sold-out" ? "grayscale" : ""}`}
                           />
                           {project.status === "sold-out" && (
                             <div className="absolute inset-0 bg-red-500/20 flex items-center justify-center">
-                              <span className="text-[8px] font-bold text-red-600 bg-white/90 px-1 rounded">SOLD</span>
+                              <span className="text-[8px] font-bold text-red-600 bg-white/90 px-1 rounded">
+                                SOLD
+                              </span>
                             </div>
                           )}
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
-                            <span className={`font-medium text-sm ${project.status === "sold-out" ? "text-gray-500" : "text-black"}`}>
+                            <span
+                              className={`font-medium text-sm ${project.status === "sold-out" ? "text-gray-500" : "text-black"}`}
+                            >
                               {project.projectName}
                             </span>
-                            {project.status === "sold-out" && <span className="text-[9px] font-semibold text-red-600    bg-red-50    px-1.5 py-0.5 rounded-full">SOLD OUT</span>}
-                            {project.status === "ongoing"  && <span className="text-[9px] font-semibold text-green-600  bg-green-50  px-1.5 py-0.5 rounded-full">ONGOING</span>}
-                            {project.status === "upcoming" && <span className="text-[9px] font-semibold text-blue-600   bg-blue-50   px-1.5 py-0.5 rounded-full">UPCOMING</span>}
-                            {project.status === "limited"  && <span className="text-[9px] font-semibold text-orange-600 bg-orange-50 px-1.5 py-0.5 rounded-full">LIMITED</span>}
+                            {project.status === "sold-out" && (
+                              <span className="text-[9px] font-semibold text-red-600    bg-red-50    px-1.5 py-0.5 rounded-full">
+                                SOLD OUT
+                              </span>
+                            )}
+                            {project.status === "ongoing" && (
+                              <span className="text-[9px] font-semibold text-green-600  bg-green-50  px-1.5 py-0.5 rounded-full">
+                                ONGOING
+                              </span>
+                            )}
+                            {project.status === "upcoming" && (
+                              <span className="text-[9px] font-semibold text-blue-600   bg-blue-50   px-1.5 py-0.5 rounded-full">
+                                UPCOMING
+                              </span>
+                            )}
+                            {project.status === "limited" && (
+                              <span className="text-[9px] font-semibold text-orange-600 bg-orange-50 px-1.5 py-0.5 rounded-full">
+                                LIMITED
+                              </span>
+                            )}
                           </div>
-                          <div className={`text-xs mt-1 ${project.status === "sold-out" ? "text-gray-400" : "text-gray-500"}`}>
+                          <div
+                            className={`text-xs mt-1 ${project.status === "sold-out" ? "text-gray-400" : "text-gray-500"}`}
+                          >
                             {project.location}
                           </div>
                         </div>
@@ -562,39 +789,59 @@ export default function Navbar() {
             {/* Mobile — Bulk Land */}
             <div className="border-b border-gray-100 pb-2">
               <button
-                onClick={() => toggle("bulk")}
+                onClick={toggleBulkLandMenu}
                 className="flex items-center justify-between w-full text-left font-medium text-black hover:text-orange-500 py-3 transition-colors text-[clamp(0.875rem,2vw,1rem)]"
               >
                 <span>Bulk Land Projects</span>
                 <svg
-                  className={`w-5 h-5 transition-transform ${activeMenu === "bulk" ? "rotate-180" : ""}`}
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  className={`w-5 h-5 transition-transform ${isBulkLandMenuOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
-              {activeMenu === "bulk" && (
+              {isBulkLandMenuOpen && (
                 <div className="pl-4 mt-2 space-y-2 max-h-80 overflow-y-auto border-l-2 border-orange-500">
-                  {loadingMap.bulk ? (
+                  {bulkLandLoading ? (
                     <div className="text-gray-500 text-sm py-4 text-center">
-                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-orange-500 mr-2" /> Loading...
+                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-orange-500 mr-2" />{" "}
+                      Loading...
                     </div>
-                  ) : errorMap.bulk ? (
-                    <div className="text-red-500 text-sm py-2">{errorMap.bulk}</div>
+                  ) : bulkLandError ? (
+                    <div className="text-red-500 text-sm py-2">
+                      {bulkLandError}
+                    </div>
                   ) : (
                     bulkLandProjects.map((project, index) => (
                       <Link
                         key={index}
                         href={`/bulk-land/${project.link}`}
-                        onClick={closeAll}
+                        onClick={closeAllMenus}
                         className="flex items-center py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="relative w-12 h-12 rounded-lg overflow-hidden mr-3 flex-shrink-0">
-                          <Image src={project.image} alt={project.projectName} fill sizes="48px" className="object-cover" />
+                          <Image
+                            src={project.image}
+                            alt={project.projectName}
+                            fill
+                            sizes="48px"
+                            className="object-cover"
+                          />
                         </div>
                         <div className="flex-1">
-                          <div className="text-black font-medium text-sm">{project.projectName}</div>
-                          <div className="text-xs text-gray-500 mt-1">{project.location}</div>
+                          <div className="text-black font-medium text-sm">
+                            {project.projectName}
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1">
+                            {project.location}
+                          </div>
                         </div>
                       </Link>
                     ))
@@ -605,20 +852,18 @@ export default function Navbar() {
 
             {/* Mobile — static links */}
             {[
-              { href: "/dholera-sir-blogs",   label: "Blogs"               },
+              { href: "/dholera-sir-blogs", label: "Blogs" },
               { href: "/dholera-sir-updates", label: "Dholera SIR Updates" },
-              { href: "/about-dholera-sir",   label: "About Dholera"       },
-              { href: "/contact",             label: "Contact Us"          },
-              { href: "/about",               label: "About Us"            },
-              { href: "/gallery",             label: "Gallery"             },
+              { href: "/about-dholera-sir", label: "About Dholera" },
+              { href: "/contact", label: "Contact Us" },
+              { href: "/about", label: "About Us" },
+              { href: "/gallery", label: "Gallery" },
             ].map(({ href, label }, i, arr) => (
               <Link
                 key={href}
                 href={href}
-                onClick={closeAll}
-                className={`block font-medium text-[clamp(0.875rem,2vw,1rem)] text-black hover:text-yellow-500 py-3 transition-colors ${
-                  i < arr.length - 1 ? "border-b border-gray-100" : ""
-                }`}
+                onClick={closeAllMenus}
+                className={`block font-medium text-[clamp(0.875rem,2vw,1rem)] text-black hover:text-yellow-500 py-3 transition-colors ${i < arr.length - 1 ? "border-b border-gray-100" : ""}`}
               >
                 {label}
               </Link>
@@ -626,6 +871,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
