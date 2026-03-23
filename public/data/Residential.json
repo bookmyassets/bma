@@ -1,5 +1,15 @@
 [
   {
+    "projectName": "Upcoming Project",
+    "link": "westwyn-estate",
+    "location": "Pipariya, Dholera, Gujarat",
+    "image": "/assets/residential/img.png",
+    "constructionStatus" : "Under Construction",
+    "status" : "upcoming",
+    "latest" : "yes",
+    "description" : "Invest in plots in Dholera at WestWyn Estates, and close to proximity to the activation area at an unbeatable price."
+  },
+  {
     "projectName": "WestWyn Estates",
     "link": "westwyn-estate",
     "location": "Polarpur, Dholera, Gujarat",
@@ -65,8 +75,8 @@
   }
   ,
   {
-    "projectName": "Marina bay",
-    "link": "marina-bay",
+    "projectName": "Pride",
+    "link": "pride",
     "location": "Gamph, Dholera",
     "image": "/assets/residential/marina-bay.webp",
     "constructionStatus" : "Under Construction",

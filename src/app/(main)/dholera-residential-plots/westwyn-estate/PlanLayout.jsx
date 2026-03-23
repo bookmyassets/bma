@@ -59,13 +59,13 @@ const PlanLayout = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 py-4">
         {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto py-6">
+        <div className="max-w-7xl mx-auto">
           <div>
             <h3 className="text-[32px] font-semibold text-center ">
               Plan Layout
             </h3>
           </div>
-          <div className="grid md:grid-cols-2 py-4">
+          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
             <div className="px-4 sm:px-6 lg:px-8 md:order-2">
               <Image
                 src={img}

@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { FaDownload } from "react-icons/fa";
 import Image from "next/image";
-import img from "@/assests/image.webp";
+import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-google-maps-location.webp";
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({
@@ -70,16 +70,17 @@ const WestWynAboutSection = () => {
         {/* Header Section */}
         <div className="text-center mb-4 space-y-2">
           <h1 className="text-[32px] font-bold text-gray-900 ">
-            About <span className="text-[#deae3c]">WestWyn Estates</span>
+            About <span className="text-[#deae3c]">WestWyn Residency</span>
           </h1>
 
-          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            WestWyn Estates a premium residential plotted society in Polarpur,
-            Dholera, designed for Investors who value location, connectivity,
-            and long term potential. Stratigically positioned on State
-            Hoghway-117, near Bhimnath Railway Station, the expressway corridor,
-            and major industrial growth zones, the project offers a practical
-            entry into one of Gujarat’s most closely watched smart city regions.
+          <p className="text-base md:text-lg text-gray-600 max-w-4xl mx-auto">
+            WestWyn Residency a premium residential plotted soceity in Pipariya,
+            Dholera, designed for buyers who value location, connectivity, and
+            long term Investment Growth. With easy access to the Dholera SIR
+            boundary, Bhimnath Railway station, Activation Area, Dholera
+            expressway, and airport corridor, the project offers residential
+            plots with immediate registry in the most connected and developed
+            region in Dholera.
           </p>
         </div>
 
@@ -106,87 +107,74 @@ const WestWynAboutSection = () => {
         </div>
 
         {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto py-6">
+        <div className="max-w-7xl mx-auto py-4">
           <div>
             <h3 className="text-[32px] font-semibold text-center ">
               Location Advantage
             </h3>
           </div>
-          <div className="grid md:grid-cols-2 py-4">
-            <div className="px-4 sm:px-6 lg:px-8 aspect-[2/1]">
+          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
+            <div className="px-4 sm:px-6 lg:px-8 ">
               <Image
                 src={img}
                 alt="dholera map"
-                className="rounded-xl w-full h-auto aspect-[2/1]"
+                className="rounded-xl w-full h-auto md:h-full"
                 priority
               />
             </div>
             <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
               <ul className="space-y-4 text-gray-700">
                 <li className="flex items-start justify-start gap-2 font-semibold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>Premium residential plots in Polarpur, Dholera</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span>Premium residential plots in Pipariya, Dholera</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>5 Minutes from Bhimnath Railway Junction</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span>Located on Major District Road(MDR)</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>15 Minutes from Dholera SIR boundary</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span>2 Minutes from Railway Connectivity</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>15 Minutes from RMS Multi-Specialty Hospital</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span>5 Minutes from Dholera SIR boundary</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>17 minutes from Ahmedabad Dholera Expressway</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span>12 minutes from Ahmedabad Dholera Expressway</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>30 minutes from Tata Semiconductor Plant</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span>17 minutes from Tata Semiconductor Plant</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>45 minutes from Dholera International Airport</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span>20 Minutes from RMS Multi-Specialty Hospital</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span>40 minutes from Dholera International Airport</span>
+                </li>
+
+                <li className="flex items-start justify-start gap-2 font-bold">
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
                   <span>
-                    Close proximity to Public Facilities and Transport: Bus
+                    Close proximity to public facilities and transport: Bus
                     stand, school, hospital, shopping complex, park, food
                     courts.
                   </span>
                 </li>
 
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
+                <li className="flex items-start gap-2 font-bold">
+                  <span className="text-[#deae4c] mt-1">•</span>
                   <span>
                     Industrial proximity: Seamless connectivity to TATA
                     Semiconductor Plant & ReNew Solar Plant. 25 minutes to

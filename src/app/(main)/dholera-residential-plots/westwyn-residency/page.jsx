@@ -164,7 +164,7 @@ export default function HeroCarousel() {
       />
       <link
         rel="canonical"
-        href="https://www.bookmyassets.com/dholera-residential-plots/westwyn-estate"
+        href="https://www.bookmyassets.com/dholera-residential-plots/westwyn-residency"
       />
 
       {/* ── Hero Section ───────────────────────────────────────────────────── */}
@@ -271,24 +271,24 @@ export default function HeroCarousel() {
 
       <div className="">
         <CommonForm
-          title="Want to Know More About WestWyn Estates?"
+          title="Want to Know More About WestWyn Residency?"
           button="Connect with an Expert"
         />
       </div>
 
-      <PlanLayout/>
+      <PlanLayout />
 
       <ProjectAmenities />
 
-      <div className="pt-4 pb-4">
-        <OurCommits/>
-      </div>
-
-      <div className="pt-4 pb-4">
-        <CostSheet projectSlug="westwyn-estate" showProjectSelector={false} />
+      <div className=" ">
+        <OurCommits />
       </div>
 
       <FAQSection />
+
+      <div className=" ">
+        <CostSheet projectSlug="westwyn-residency" showProjectSelector={false} />
+      </div>
 
       <SoldOutProjectsSection />
       <PopupScroll title="Get Verified Project Details" />

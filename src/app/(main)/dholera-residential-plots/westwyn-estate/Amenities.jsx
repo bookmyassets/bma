@@ -135,10 +135,10 @@ const ProjectAmenities = () => {
         }
       `}</style>
 
-      <div className="bg-white py-8 sm:py-10 lg:py-12 px-4 sm:px-6">
+      <div className="bg-white py-4 sm:py-10 lg:py-4 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+          <div className="text-center mb-4 sm:mb-4 lg:mb-8">
             <p
               className="font-bold tracking-[0.25em] uppercase mb-3
                 text-xl sm:text-2xl lg:text-3xl"
@@ -157,11 +157,11 @@ const ProjectAmenities = () => {
           {/* Two-column layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-start">
             {/* Left — Image */}
-            <div className="px-4 sm:px-6 lg:px-8 aspect-[5/4]">
+            <div className="px-4 sm:px-6 lg:px-8 aspect-[5/4] w-full h-full">
               <Image
                 src={img}
                 alt="dholera map"
-                className="rounded-xl w-full aspect-[5/4] md:h-full h-auto"
+                className="rounded-xl w-full aspect-[5/4] md:h-full h-auto overflow-hidden object-fit"
                 priority
               />
             </div>

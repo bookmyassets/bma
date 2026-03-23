@@ -4,34 +4,29 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Where is WestWyn Estates located?",
+    question: "Where is WestWyn Residency located?",
     answer:
-      "WestWyn Estates is located on State Highway-117, just 5 minutes from Bhimnath Railway Station, within a rapidly developing corridor at Dholera Smart City.",
+      "WestWyn Residency is located in Pipariya, Dholera, within a fast-developing investment corridor near Dholera Smart City.",
   },
   {
-    question: "What is the price of plots?",
+    question: "How far is the project from the Dholera SIR boundary?",
     answer:
-      "Plots at WestWyn Estates start from ₹10 Lakh, with sizes ranging between 151–198 sq. yd.",
+      "The project is approximately 7 km from the Dholera SIR boundary, ensuring close proximity to the main development zone.",
   },
   {
-    question: "Are the plots legally approved?",
+    question: "Is the project close to the expressway?",
     answer:
-      "Yes. The plots are government approved with NA/NOC/Title clearance, AUDA registered, and registry-ready, ensuring transparency and investment security.",
+      "Yes, WestWyn Residency is around 12 minutes away from the Ahmedabad–Dholera Expressway, providing excellent connectivity.",
   },
   {
-    question: "What is the booking process?",
+    question: "How far is the Activation Area from the project?",
     answer:
-      "You can reserve your plot with a token amount of ₹50,000. After booking, clients can visit the site with our team in Dholera. Once payment is completed, the legal process begins and the registry documents are sent via speed post.",
+      "The Activation Area is approximately 15 minutes from the project, making it a strategically located investment option.",
   },
   {
-    question: "Why consider investing in WestWyn Estates now?",
+    question: "Is this a residential plot project?",
     answer:
-      "With over ₹3 Lakh crore global investment and upcoming developments like the Dholera International Airport and Tata Semiconductor Plant, the region is attracting major industrial growth and infrastructure development.",
-  },
-  {
-    question: "How can BookMyAssets (BMA) help you invest?",
-    answer:
-      "BookMyAssets (BMA) assists investors with free consultation, plot selection, due diligence, and complete legal assistance till registry, ensuring a smooth and seamless investment at Dholera Smart City.",
+      "Yes, WestWyn Residency is a premium residential plotted development designed for both investment and future living.",
   },
 ];
 
@@ -49,57 +44,46 @@ export default function FAQSection() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProjectPage",
-            name: "BookMyAssets",
-            alternateName: "BMA",
-            url: "https://www.bookmyassets.com/",
+            "@type": "FAQPage",
             mainEntity: [
               {
                 "@type": "Question",
-                name: "Where is WestWyn Estates located?",
+                name: "Where is WestWyn Residency located?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "WestWyn Estates is located on State Highway-117, just 5 minutes from Bhimnath Railway Station, within a rapidly developing corridor at Dholera Smart City.",
+                  text: "WestWyn Residency is located in Pipariya, Dholera, within a fast-developing investment corridor near Dholera Smart City.",
                 },
               },
               {
                 "@type": "Question",
-                name: "What is the price of plots?",
+                name: "How far is the project from the Dholera SIR boundary?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Plots at WestWyn Estates start from ₹10 Lakh, with sizes ranging between 151–198 sq. yd.",
+                  text: "The project is approximately 7 km from the Dholera SIR boundary, ensuring close proximity to the main development zone.",
                 },
               },
               {
                 "@type": "Question",
-                name: "Are the plots legally approved?",
+                name: "Is the project close to the expressway?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes. The plots are government approved with NA/NOC/Title clearance, AUDA registered, and registry-ready, ensuring transparency and investment security.",
+                  text: "Yes, WestWyn Residency is around 12 minutes away from the Ahmedabad–Dholera Expressway, providing excellent connectivity.",
                 },
               },
               {
                 "@type": "Question",
-                name: "What is the booking process?",
+                name: "How far is the Activation Area from the project?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "You can reserve your plot with a token amount of ₹50,000. After booking, clients can visit the site with our team in Dholera. Once payment is completed, the legal process begins and the registry documents are sent via speed post.",
+                  text: "The Activation Area is approximately 15 minutes from the project, making it a strategically located investment option.",
                 },
               },
               {
                 "@type": "Question",
-                name: "Why consider investing in WestWyn Estates now?",
+                name: "Is this a residential plot project?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "With over ₹3 Lakh crore global investment and upcoming developments like the Dholera International Airport and Tata Semiconductor Plant, the region is attracting major industrial growth and infrastructure development.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "How can BookMyAssets (BMA) help you invest?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "BookMyAssets (BMA) assists investors with free consultation, plot selection, due diligence, and complete legal assistance till registry, ensuring a smooth and seamless investment at Dholera Smart City.",
+                  text: "Yes, WestWyn Residency is a premium residential plotted development designed for both investment and future living.",
                 },
               },
             ],

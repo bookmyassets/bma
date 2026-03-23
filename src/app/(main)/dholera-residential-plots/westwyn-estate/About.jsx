@@ -73,7 +73,7 @@ const WestWynAboutSection = () => {
             About <span className="text-[#deae3c]">WestWyn Estates</span>
           </h1>
 
-          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 max-w-4xl mx-auto">
             WestWyn Estates a premium residential plotted society in Polarpur,
             Dholera, designed for Investors who value location, connectivity,
             and long term potential. Stratigically positioned on State
@@ -106,13 +106,13 @@ const WestWynAboutSection = () => {
         </div>
 
         {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto py-6">
+        <div className="max-w-7xl mx-auto py-4">
           <div>
             <h3 className="text-[32px] font-semibold text-center ">
               Location Advantage
             </h3>
           </div>
-          <div className="grid lg:grid-cols-2 py-4">
+          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
             <div className="px-4 sm:px-6 lg:px-8 ">
               <Image
                 src={img}

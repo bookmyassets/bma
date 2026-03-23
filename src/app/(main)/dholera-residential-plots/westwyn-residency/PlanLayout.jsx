@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import BrochureDownload from "../../components/BrochureDownload";
 import Image from "next/image";
-import img from "@/assests/image.webp";
+import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-plan-layout.webp";
 
 const PlanLayout = () => {
   const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
@@ -59,85 +59,106 @@ const PlanLayout = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 py-4">
         {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto py-6">
+        <div className="max-w-7xl mx-auto">
           <div>
             <h3 className="text-[32px] font-semibold text-center ">
               Plan Layout
             </h3>
           </div>
-          <div className="grid md:grid-cols-2 py-4">
-            <div className="px-4 sm:px-6 lg:px-8 aspect-[2/1] md:order-2">
+          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
+            <div className="px-4 sm:px-6 lg:px-8 md:order-2">
               <Image
                 src={img}
                 alt="dholera map"
-                className="rounded-xl w-full h-auto aspect-[2/1] md:order-1"
+                className="rounded-xl w-full md:h-full h-auto md:order-1"
                 priority
               />
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="flex flex-col shadow-lg h-48 p-4 rounded-xl text-base md:text-lg text-gray-700">
-                <span className="text-[#deae4c] font-bold text-center w-full mb-2">
-                  Land Parcel
-                </span>
-                <div className="flex flex-1 items-center">
-                  <span className="font-semibold text-left">
-                    4.45 Acres (21,500 sq. yards)
-                  </span>
-                </div>
-              </div>
+              {[
+                {
+                  title: "Land Parcel",
+                  content: (
+                    <span>
+                      8.26 Acres <br /> (40,000 sq. yards)
+                    </span>
+                  ),
+                  align: "text-center",
+                  divider: true,
+                },
+                {
+                  title: "Location",
+                  content: "Pipariya, Dholera",
+                  align: "text-left",
+                },
+                {
+                  title: "Prime Connectivity",
+                  content: "Entry From Major District Road (MDR)",
+                  align: "text-left",
+                },
+                {
+                  title: "Plot Sizes",
+                  content: (
+                    <span>
+                      154, 179 & 202 <br /> sq. yards
+                    </span>
+                  ),
+                  align: "text-left",
+                },
+                {
+                  title: "Total Units",
+                  content: "233 exclusive plots",
+                  align: "text-left",
+                },
+                {
+                  title: "Possession",
+                  content: "Immediate",
+                  align: "text-left",
+                },
+              ].map(({ title, content, align, divider }) => (
+                <div
+                  key={title}
+                  className="flex flex-col rounded-2xl text-black overflow-hidden"
+                  style={{
+                    border: "1.5px solid #f0f0f0",
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+                  }}
+                >
+                  {/* Gold top accent bar */}
+                  <div
+                    className="h-1 w-full"
+                    style={{
+                      background: "linear-gradient(90deg, #deae3c, #f0c96a)",
+                    }}
+                  />
 
-              <div className="flex flex-col shadow-lg h-48 p-4 rounded-xl text-base md:text-lg text-gray-700">
-                <span className="text-[#deae4c] font-bold text-center w-full mb-2">
-                  Location
-                </span>
-                <div className="flex flex-1 items-center">
-                  <span className="font-semibold text-left">
-                    Polarpur, near Bhimnath Railway Station
-                  </span>
-                </div>
-              </div>
+                  <div className="flex flex-col flex-1 p-3 sm:p-4 lg:p-5">
+                    {/* Title */}
+                    <span
+                      className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
+                      style={{ color: "#deae3c", letterSpacing: "0.01em" }}
+                    >
+                      {title}
+                    </span>
 
-              <div className="flex flex-col shadow-lg h-48 p-4 rounded-xl text-base md:text-lg text-gray-700">
-                <span className="text-[#deae4c] font-bold text-center w-full mb-2">
-                  Highway Access
-                </span>
-                <div className="flex flex-1 items-center">
-                  <span className="font-semibold text-left">
-                    Entry from 4-Lane State Highway (SH-117) (150-Feet Road)
-                  </span>
-                </div>
-              </div>
+                    {/* Divider */}
+                    <div
+                      className="w-2/3 mx-auto mt-2 mb-3 h-[1px]"
+                      style={{ background: "#ececec" }}
+                    />
 
-              <div className="flex flex-col shadow-lg h-48 p-4 rounded-xl text-base md:text-lg text-gray-700">
-                <span className="text-[#deae4c] font-bold text-center w-full mb-2">
-                  Plot Sizes
-                </span>
-                <div className="flex flex-1 items-center">
-                  <span className="font-semibold text-left">
-                    152 & 200 sq. yards
-                  </span>
+                    {/* Content */}
+                    <div className="flex flex-1 items-center justify-center">
+                      <span
+                        className={`font-semibold ${align} text-xs sm:text-sm lg:text-base leading-snug`}
+                        style={{ color: "#1a1a1a" }}
+                      >
+                        {content}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex flex-col shadow-lg h-48 p-4 rounded-xl text-base md:text-lg text-gray-700">
-                <span className="text-[#deae4c] font-bold text-center w-full mb-2">
-                  Total Units
-                </span>
-                <div className="flex flex-1 items-center">
-                  <span className="font-semibold text-left">
-                    131 exclusive plots
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-col shadow-lg h-48 p-4 rounded-xl text-base md:text-lg text-gray-700">
-                <span className="text-[#deae4c] font-bold text-center w-full mb-2">
-                  Possession
-                </span>
-                <div className="flex flex-1 items-center">
-                  <span className="font-semibold text-left">Immediate</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
