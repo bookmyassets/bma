@@ -31,6 +31,7 @@ export default function Navbar() {
   const [error, setError] = useState(null);
   const [dholeraError, setDholeraError] = useState(null);
   const [bulkLandError, setBulkLandError] = useState(null);
+  const [isSoldOutOpen, setIsSoldOutOpen] = useState(false);
 
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -434,41 +435,55 @@ export default function Navbar() {
             ) : error ? (
               <ErrorState msg={error} />
             ) : residentialProjects.length > 0 ? (
-              <div className="grid grid-cols-4 gap-[calc(0.5rem+0.5vw)] pb-6 h-full">
-                {residentialProjects.map((project, index) => (
+              (() => {
+                const activeProjects = residentialProjects.filter(
+                  (p) => p.status !== "sold-out",
+                );
+                const soldOutProjects = residentialProjects.filter(
+                  (p) => p.status === "sold-out",
+                );
+
+                const ProjectCard = ({ project, index, href }) => (
                   <Link
                     key={index}
-                    href={`/dholera-residential-plots/${project.link}`}
+                    href={href}
                     onClick={closeAllMenus}
-                    className={`group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col ${project.status === "sold-out" ? "opacity-75 cursor-not-allowed" : ""}`}
+                    className="group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
                   >
-                    {/* ✅ responsive image — aspect-ratio container + fill */}
-                    <div className="relative w-full h-full aspect-[1/1] overflow-hidden rounded-xl flex-shrink-0">
+                    <div className="relative w-full aspect-[4/5] overflow-hidden rounded-xl flex-shrink-0">
                       <Image
                         src={project.image}
                         alt={project.projectName}
                         fill
                         sizes="(min-width: 1024px) 15vw, 25vw"
-                        className={`object-fit transition-transform duration-700 ease-out ${project.status === "sold-out" ? "grayscale" : "group-hover:scale-110"}`}
+                        className={`object-fit transition-transform duration-700 ease-out ${
+                          project.status === "sold-out"
+                            ? "grayscale"
+                            : "group-hover:scale-110"
+                        }`}
                         priority={index < 6}
                       />
                       <div
-                        className={`absolute inset-0 transition-all duration-500 ${project.status === "sold-out" ? "bg-gradient-to-t from-red-900/50 via-red-900/20 to-transparent" : ""}`}
+                        className={`absolute inset-0 transition-all duration-500 ${
+                          project.status === "sold-out"
+                            ? "bg-gradient-to-t from-red-900/50 via-red-900/20 to-transparent"
+                            : ""
+                        }`}
                       />
 
                       <div className="absolute top-3 right-3 flex flex-col gap-2">
                         {project.status === "ongoing" && (
-                          <span className="bg-green-500  text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg animate-pulse">
+                          <span className="bg-green-500 text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg animate-pulse">
                             ONGOING
                           </span>
                         )}
                         {project.status === "sold-out" && (
-                          <span className="bg-red-500    text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg">
+                          <span className="bg-red-500 text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg">
                             SOLD OUT
                           </span>
                         )}
                         {project.status === "upcoming" && (
-                          <span className="bg-blue-500   text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg">
+                          <span className="bg-blue-500 text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg">
                             UPCOMING
                           </span>
                         )}
@@ -489,7 +504,9 @@ export default function Navbar() {
 
                       <div className="absolute bottom-5 left-0 right-0 p-4 text-white space-y-2">
                         <h3
-                          className={`text-[clamp(0.875rem,1.2vw,1.125rem)] font-semibold group-hover:text-[#deae3c] transition-colors duration-300 leading-tight ${project.status === "sold-out" ? "text-gray-300" : ""}`}
+                          className={`text-[clamp(0.875rem,1.2vw,1.125rem)] font-semibold group-hover:text-[#deae3c] transition-colors duration-300 leading-tight ${
+                            project.status === "sold-out" ? "text-gray-300" : ""
+                          }`}
                         >
                           {project.projectName}
                         </h3>
@@ -514,8 +531,78 @@ export default function Navbar() {
                       </div>
                     </div>
                   </Link>
-                ))}
-              </div>
+                );
+
+                return (
+                  <div className="flex flex-col gap-6 pb-6">
+                    {/* ── Active projects ── */}
+                    {activeProjects.length > 0 && (
+                      <div className="grid grid-cols-4 gap-[calc(0.5rem+0.5vw)]">
+                        {activeProjects.map((project, index) => (
+                          <ProjectCard
+                            key={index}
+                            project={project}
+                            index={index}
+                            href={`/dholera-residential-plots/${project.link}`}
+                          />
+                        ))}
+                      </div>
+                    )}
+
+                    {/* ── Sold Out collapsible ── */}
+                    {soldOutProjects.length > 0 && (
+                      <div
+                        className={`mt-2 rounded-xl border border-red-200 overflow-hidden transition-colors duration-200 ${isSoldOutOpen ? "bg-red-50/40" : "bg-red-50"}`}
+                      >
+                        <button
+                          onClick={() => setIsSoldOutOpen((prev) => !prev)}
+                          className="w-full flex items-center justify-between px-5 py-3 hover:bg-red-100 transition-colors duration-200"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="w-2 h-2 rounded-full bg-red-400" />
+                            <span className="text-red-600 font-semibold text-sm uppercase tracking-widest">
+                              Sold Out Projects
+                            </span>
+                            <span className="bg-red-200 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">
+                              {soldOutProjects.length}
+                            </span>
+                          </div>
+                          <svg
+                            className={`w-4 h-4 text-red-400 transition-transform duration-300 flex-shrink-0 ${isSoldOutOpen ? "rotate-180" : ""}`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+
+                        <div
+                          className={`grid grid-cols-4 gap-[calc(0.5rem+0.5vw)] overflow-hidden transition-all duration-500 ease-in-out ${
+                            isSoldOutOpen
+                              ? "max-h-[2000px] opacity-100 p-4"
+                              : "max-h-0 opacity-0 px-4"
+                          }`}
+                        >
+                          {soldOutProjects.map((project, index) => (
+                            <ProjectCard
+                              key={index}
+                              project={project}
+                              index={index}
+                              href={`/dholera-residential-plots/${project.link}`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()
             ) : (
               <EmptyState />
             )}
