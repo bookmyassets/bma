@@ -110,7 +110,7 @@ const amenities = [
     color: "from-blue-600 to-blue-800",
   },
   {
-    icon: <FaStor className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    icon: <FaStore className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Clubhouse Lite",
     color: "from-blue-600 to-blue-800",
   },
