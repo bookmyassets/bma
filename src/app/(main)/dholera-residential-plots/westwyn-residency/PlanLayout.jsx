@@ -150,7 +150,7 @@ const PlanLayout = () => {
                     {/* Content */}
                     <div className="flex flex-1 items-center justify-center">
                       <span
-                        className={`font-semibold ${align} text-xs sm:text-sm lg:text-base leading-snug`}
+                        className={`font-semibold ${align} text-xs sm:text-sm lg:text-base text-center leading-snug`}
                         style={{ color: "#1a1a1a" }}
                       >
                         {content}

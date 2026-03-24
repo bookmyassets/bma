@@ -8,7 +8,6 @@ import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
 import SoldOutProjectsSection from "../SoldOutProjects";
-
 import WestWynAboutSection from "./About";
 
 //images import

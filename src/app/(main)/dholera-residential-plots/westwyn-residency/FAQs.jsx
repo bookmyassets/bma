@@ -99,7 +99,7 @@ export default function FAQSection() {
               Frequently Asked Questions
             </h2>
             <p className="text-gray-600 mb-2">
-              Got questions about WestWyn Estates?
+              Got questions about WestWyn Residency?
             </p>
             <div className="pt-4">
               <a

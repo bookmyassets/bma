@@ -12,9 +12,18 @@ import {
   Activity,
 } from "lucide-react";
 import Image from "next/image";
-import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-villas.webp";
+
 import { FaFilter, FaRoad } from "react-icons/fa";
 
+import img1 from "@/assests/homepage/hero2/test/westwyn-estates-dholera-villas.webp";
+import img2 from "@/assests/homepage/hero2/test/westwyn-estates-dholera-villas.webp";
+import img3 from "@/assests/homepage/hero2/test/westwyn-estates-dholera-villas.webp";
+
+const carouselImages = [
+  { src: img1, alt: "WestWyn Estates - Villa View" },
+  { src: img2, alt: "WestWyn Estates - Amenities" },
+  { src: img3, alt: "WestWyn Estates - Aerial View" },
+];
 // ✅ Moved OUTSIDE the component — not recreated on every render
 const AmenityCard = ({ amenity }) => (
   <div
@@ -107,6 +116,10 @@ const amenities = [
 const ProjectAmenities = () => {
   const [showAll, setShowAll] = useState(false);
   const visibleAmenities = showAll ? amenities : amenities.slice(0, 6);
+  const [current, setCurrent] = useState(0);
+  const prev = () =>
+    setCurrent((c) => (c - 1 + carouselImages.length) % carouselImages.length);
+  const next = () => setCurrent((c) => (c + 1) % carouselImages.length);
 
   return (
     <>
@@ -157,13 +170,85 @@ const ProjectAmenities = () => {
           {/* Two-column layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-start">
             {/* Left — Image */}
-            <div className="px-4 sm:px-6 lg:px-8 aspect-[5/4] w-full h-full">
+            {/* Left — Carousel */}
+            <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/4] w-full h-full group">
+              {/* Original image — style completely unchanged */}
               <Image
-                src={img}
-                alt="dholera map"
+                src={carouselImages[current].src}
+                alt={carouselImages[current].alt}
                 className="rounded-xl w-full aspect-[5/4] md:h-full h-auto overflow-hidden object-fit"
                 priority
               />
+
+              {/* Prev button */}
+              <button
+                onClick={prev}
+                className="absolute left-6 top-1/2 -translate-y-1/2 z-30
+      w-8 h-8 sm:w-10 sm:h-10
+      bg-white/80 hover:bg-white
+      rounded-full shadow-lg
+      flex items-center justify-center
+      transition-all duration-200 hover:scale-110
+      opacity-0 group-hover:opacity-100"
+                aria-label="Previous image"
+              >
+                <svg
+                  className="w-4 h-4 text-gray-800"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Next button */}
+              <button
+                onClick={next}
+                className="absolute right-6 top-1/2 -translate-y-1/2 z-30
+      w-8 h-8 sm:w-10 sm:h-10
+      bg-white/80 hover:bg-white
+      rounded-full shadow-lg
+      flex items-center justify-center
+      transition-all duration-200 hover:scale-110
+      opacity-0 group-hover:opacity-100"
+                aria-label="Next image"
+              >
+                <svg
+                  className="w-4 h-4 text-gray-800"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+
+              {/* Dot indicators */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+                {carouselImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrent(i)}
+                    className={`rounded-full transition-all duration-300 ${
+                      i === current
+                        ? "w-6 h-2 bg-[#deae3c]"
+                        : "w-2 h-2 bg-white/70 hover:bg-white"
+                    }`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Right — Amenities */}
