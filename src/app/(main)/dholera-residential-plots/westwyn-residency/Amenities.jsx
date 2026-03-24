@@ -13,16 +13,19 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import { FaFilter, FaRoad } from "react-icons/fa";
+import { FaFilter, FaRoad, FaStore } from "react-icons/fa";
 
-import img1 from "@/assests/homepage/hero2/test/westwyn-estates-dholera-villas.webp";
-import img2 from "@/assests/homepage/hero2/test/westwyn-estates-dholera-villas.webp";
-import img3 from "@/assests/homepage/hero2/test/westwyn-estates-dholera-villas.webp";
+import img1 from "@/assests/residential/residency/clubresidency.webp";
+import img2 from "@/assests/residential/residency/kidsplayresidency.webp";
+import img3 from "@/assests/residential/residency/Villaresidency.webp";
+import img4 from "@/assests/residential/residency/yogaresidency.webp";
+import { FaCcDinersClub, FaHouse } from "react-icons/fa6";
 
 const carouselImages = [
-  { src: img1, alt: "WestWyn Estates - Villa View" },
-  { src: img2, alt: "WestWyn Estates - Amenities" },
-  { src: img3, alt: "WestWyn Estates - Aerial View" },
+  { src: img1, alt: "WestWyn Estates - Kids Play Area" },
+  { src: img2, alt: "WestWyn Estates - Project Boundary" },
+  { src: img3, alt: "WestWyn Estates - Villa" },
+  { src: img4, alt: "WestWyn Estates - Yoga Deck" },
 ];
 // ✅ Moved OUTSIDE the component — not recreated on every render
 const AmenityCard = ({ amenity }) => (
@@ -107,8 +110,8 @@ const amenities = [
     color: "from-blue-600 to-blue-800",
   },
   {
-    icon: <FaFilter className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    title: "Drainage System",
+    icon: <FaStor className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Clubhouse Lite",
     color: "from-blue-600 to-blue-800",
   },
 ];
@@ -240,7 +243,7 @@ const ProjectAmenities = () => {
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
-                    className={`rounded-full transition-all duration-300 ${
+                    className={`rounded-full transition-all duration-500 ${
                       i === current
                         ? "w-6 h-2 bg-[#deae3c]"
                         : "w-2 h-2 bg-white/70 hover:bg-white"

@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { FaDownload } from "react-icons/fa";
 import Image from "next/image";
-import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-google-maps-location.webp";
+import img from "@/assests/residential/residency/Residency.webp";
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({

@@ -12,10 +12,10 @@ import SoldOutProjectsSection from "../SoldOutProjects";
 import WestWynAboutSection from "./About";
 
 //images import
-import img1 from "@/assests/residential/estate1.webp";
+import img1 from "@/assests/residential/residency/residency-hero_D.webp";
 import img2 from "@/assests/residential/estate2a.webp";
 import img3 from "@/assests/residential/estate3a.webp";
-import img1M from "@/assests/residential/estates-1M.webp";
+import img1M from "@/assests/residential/residency/residency-hero.webp";
 import img2M from "@/assests/residential/estates-2M.webp";
 import img3M from "@/assests/residential/estates-3M.webp";
 import PopupScroll from "../../components/PopUpScroll";
