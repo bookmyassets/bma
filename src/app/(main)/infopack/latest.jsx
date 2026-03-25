@@ -22,6 +22,8 @@ import bg from "@/assests/bg-image.webp";
 import { getPosts, getSub } from "@/sanity/lib/api";
 import Dholera from "./Dholera";
 import BrowseBlogs from "./Blogs";
+import WhyBMA from "./WhyBMA";
+import SoldOutProjectsSection from "../dholera-residential-plots/SoldOutProjects";
 
 export const metadata = {
   robots: {
@@ -76,13 +78,13 @@ const GrowthStats = () => (
 
     <div className="bg-gradient-to-br from-green-500 to-green-600 p-6 rounded-2xl text-white text-center shadow-xl transform hover:scale-105 transition-all duration-300">
       <FaCity className="text-4xl mx-auto mb-4" />
-      <h3 className="text-2xl font-bold mb-2">₹2 Lakh Cr</h3>
+      <h3 className="text-2xl font-bold mb-2">₹3 Lakh Cr</h3>
       <p className="text-green-100">Investment Potential</p>
     </div>
 
     <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-2xl text-white text-center shadow-xl transform hover:scale-105 transition-all duration-300">
       <FaIndustry className="text-4xl mx-auto mb-4" />
-      <h3 className="text-2xl font-bold mb-2">800+</h3>
+      <h3 className="text-2xl font-bold mb-2">200+</h3>
       <p className="text-purple-100">Industries Expected</p>
     </div>
 
@@ -223,7 +225,7 @@ export default async function Info() {
 
   return (
     <main
-      className="relative py-16 px-4 sm:px-6 pt-32 lg:px-8 min-h-[70vh] overflow-auto"
+      className="relative py-8 px-4 sm:px-6 pt-32 lg:px-8 min-h-[70vh] overflow-auto"
       style={{
         backgroundImage: `url(${bg.src})`,
         backgroundSize: "cover",
@@ -237,54 +239,45 @@ export default async function Info() {
       {/* Enhanced overlay */}
       <div className="absolute inset-0 bg-white/20 backdrop-blur-sm" />
 
-      <div className="max-w-7xl mx-auto relative z-10 space-y-16">
+      <div className="max-w-7xl mx-auto relative z-10 space-y-4">
         {/* Enhanced Hero Section */}
         <section
           aria-labelledby="hero-heading"
-          className="text-center space-y-8 pt-16"
+          className="text-center space-y-4 pt-16"
         >
           <div className="space-y-6">
             <h1
               id="hero-heading"
-              className="font-extrabold text-4xl md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight"
+              className="font-extrabold text-4xl md:text-5xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight"
             >
-              Invest in India's First
+              Dholera Special Investment Region
               <br />
-              <span className="text-amber-600 animate-pulse">Smart City</span>
+              <span className="text-amber-600 animate-pulse"></span>
             </h1>
             <div className="h-2 w-32 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto rounded-full" />
             <p className="text-gray-800 font-bold text-2xl md:text-3xl">
               <span className="bg-gradient-to-r from-amber-400 to-amber-600 text-transparent bg-clip-text">
-                Dholera Special Investment Region
+                India's First Greenfield Smart City
               </span>
             </p>
           </div>
 
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl max-w-4xl flex justify-center items-center mx-auto">
-            <ul className="text-gray-800 font-medium text-xl md:text-2xl leading-relaxed text-left">
-              <li>🏆 Verified Residential Plots </li>
-              <li>📋 Immediate Registry </li>
-              <li>👥 Trusted by 561+ Investors </li>
-            </ul>
+            <p className="text-gray-800 font-semibold text-lg leading-relaxed text-left">
+              Dholera Smart City is India’s first planned greenfield smart city,
+              developed under the Delhi–Mumbai Industrial Corridor. It is
+              designed as a major hub for manufacturing, logistics, and future
+              industries like semiconductors. The city is supported by
+              large-scale infrastructure including expressways, an international
+              airport, and renewable energy projects. With strong government
+              backing, Dholera is emerging as a key destination for long-term
+              investment and growth.
+            </p>
           </div>
-
-          {/* <div className="pt-6">
-            <Link
-              href="https://shorturl.at/8OD6u"
-              className="group inline-flex items-center gap-4 bg-gradient-to-r from-gray-900 to-gray-800 text-amber-400 text-lg md:text-2xl font-bold px-10 py-6 rounded-2xl shadow-2xl hover:shadow-amber-500/25 transition-all duration-300 transform hover:scale-105"
-              aria-label="Download WestWyn County Brochure"
-            >
-              <FaDownload
-                className="group-hover:animate-bounce text-2xl"
-                aria-hidden="true"
-              />
-              Download WestWyn County Brochure
-            </Link>
-          </div> */}
         </section>
 
         {/* Growth Statistics */}
-        <section className="pt-16">
+        <section className="pt-8">
           <GrowthStats />
         </section>
 
@@ -295,7 +288,7 @@ export default async function Info() {
 
         {/* Enhanced Features Section */}
         <section aria-labelledby="features-heading" className="pt-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-4">
             <h2
               id="features-heading"
               className="text-3xl md:text-4xl font-black text-gray-800 mb-4"
@@ -334,13 +327,13 @@ export default async function Info() {
         </section>
 
         {/* Enhanced WestWyn County Section */}
-        <section aria-labelledby="updates-heading" className="pt-16">
-          <div className="text-center mb-12">
+        <section aria-labelledby="updates-heading" className="pt-8">
+          <div className="text-center mb-8">
             <h2
               id="updates-heading"
-              className="inline-block bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-gray-900 text-2xl md:text-4xl lg:text-5xl font-black px-8 py-6 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+              className="inline-block bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-gray-900 text-2xl md:text-4xl lg:text-5xl font-black w-[250px] md:w-[450px]  md:h-[130px] p-4 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
             >
-              Discover <span className="text-gray-800">WestWyn Estates</span>
+              Our Offerings
               <br />
               <span className="text-lg md:text-2xl font-semibold">
                 Premium Residential Plots
@@ -348,22 +341,24 @@ export default async function Info() {
             </h2>
           </div>
 
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto grid grid-cols-2 space-x-4">
             {subProjectInventory.length > 0 ? (
               subProjectInventory
                 .filter(
                   (project) =>
-                    project.title.includes("WestWyn Estate") ||
-                    project.slug?.current === "westwyn-estate",
+                    project.title.includes(
+                      "WestWyn Residency" && "WestWyn Estate",
+                    ) ||
+                    (project.slug?.current === "westwyn-residency" &&
+                      "westwyn-estate"),
                 )
                 .map((west, index) => (
                   <div
                     key={index}
                     className="bg-white/95 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 border border-amber-200/50 mb-8"
                   >
-                    <div className="flex flex-col lg:flex-row h-full">
-                      {/* Enhanced image container */}
-                      <div className="lg:w-1/2 h-64 lg:h-auto relative overflow-hidden">
+                    <div className="flex flex-col h-auto">
+                      <div className="relative overflow-hidden h-64">
                         <Image
                           src={urlFor(west.mainImage)?.url() || ""}
                           alt={west.title}
@@ -374,18 +369,18 @@ export default async function Info() {
                       </div>
 
                       {/* Enhanced content section with truncated content */}
-                      <div className="lg:w-1/2 p-8 flex flex-col justify-center">
-                        <h3 className="font-black text-3xl md:text-4xl mb-6 text-gray-800 leading-tight">
+                      <div className="p-4 flex flex-col justify-center">
+                        <h3 className="font-black text-xl md:text-2xl mb-2 text-gray-800 leading-tight">
                           {west.title}
                         </h3>
-                        <div className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed line-clamp-4">
+                        <div className="text-base md:text-lg text-gray-700 mb-4 leading-relaxed line-clamp-4">
                           <PortableText value={west.body} />
                         </div>
 
                         {/* Enhanced read more button */}
                         <div className="mt-auto">
                           <Link
-                            href={`/dholera-residential-plots/westwyn-estate`}
+                            href={`/dholera-residential-plots/${west.slug?.current}`} // ✅ was: project.slug?.current
                             className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-bold py-4 px-8 rounded-2xl hover:from-amber-500 hover:to-amber-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                           >
                             Explore Details
@@ -407,31 +402,35 @@ export default async function Info() {
           </div>
         </section>
 
+        <section>
+          <WhyBMA />
+        </section>
+
         {/* Enhanced Dholera Section */}
-        <section className="pt-16">
-          <div className="text-center mb-12">
+        <section className="pt-8">
+          <div className="text-center mb-4">
             <h2
               id="dholera-heading"
-              className="inline-block bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-gray-900 text-2xl md:text-4xl lg:text-5xl font-black px-8 py-6 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+              className="inline-block bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-gray-900 text-2xl md:text-4xl lg:text-5xl font-black w-[250px] md:w-[450px]  md:h-[130px] p-4 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
             >
-              About <span className="text-gray-800">Dholera-SIR</span>
+              Mega Projects
               <br />
               <span className="text-lg md:text-2xl font-semibold">
                 India's Smart City Vision
               </span>
             </h2>
           </div>
-          <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-amber-200/50">
+          <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-2 border border-amber-200/50">
             <Dholera />
           </div>
         </section>
 
         {/* Enhanced Blogs Section */}
-        <section className="pt-16">
-          <div className="text-center mb-12">
+        <section className="pt-8">
+          <div className="text-center mb-4">
             <h2
               id="blogs-heading"
-              className="inline-block bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-gray-900 text-2xl md:text-4xl lg:text-5xl font-black px-8 py-6 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+              className="inline-block bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-gray-900 text-2xl md:text-4xl lg:text-5xl font-black w-[250px] md:w-[450px]  md:h-[130px] p-4 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
             >
               Latest <span className="text-gray-800">Insights</span>
               <br />
@@ -440,9 +439,13 @@ export default async function Info() {
               </span>
             </h2>
           </div>
-          <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-amber-200/50">
+          <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-2 border border-amber-200/50">
             <BrowseBlogs />
           </div>
+        </section>
+
+        <section>
+          <SoldOutProjectsSection/>
         </section>
       </div>
     </main>

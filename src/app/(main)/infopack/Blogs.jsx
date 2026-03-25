@@ -1,87 +1,308 @@
-import React from "react";
+"use client";
+import { getblogs, getUpdates } from "@/sanity/lib/api";
+import Image from "next/image";
 import Link from "next/link";
-import NotFound from "../components/ui/NotFound";
+import React, { useState, useEffect } from "react";
+import { urlFor } from "@/sanity/lib/image";
 
-const BrowseBlogs = () => {
-  const b = [
-    {
-      id: 1,
-      title: "Dholera International Airport – India’s Second Largest Airport and Its Impact on Growth",
-      link: "https://www.bookmyassets.com/dholera-sir-blogs/dholera-international-airport",
-    },
-    {
-      id: 2,
-      title: "How TATA Semiconductor Fab Dholera Impact Plot Prices?",
-      link: "https://www.bookmyassets.com/dholera-sir-blogs/how-tata-semiconductor-fab-dholera-impact-plot-prices",
-    },
-    {
-      id: 3,
-      title: "Factors That Will Affect Dholera Plot Prices in the Next 5 Years",
-      link: "https://www.bookmyassets.com/dholera-sir-blogs/factors-affecting-dholera-plot-prices",
-    },
-  ];
-
-  const themeColors = {
-    black: "#000000",
-    gold: "#FDB913",
-    darkGold: "#C69C21",
-    white: "#FFFFFF",
-  };
+const RelatedBlogCard = ({ item, type }) => {
+  const slug =
+    type === "blog"
+      ? `/dholera-sir-blogs/${item.slug?.current || "#"}`
+      : `/dholera-sir-updates/${item.slug?.current || "#"}`;
 
   return (
-    <section className="px-6 md:px-36 relative">
-      <div className="container mx-auto relative">
-        {b.length > 0 ? (
-          <div className="max-w-4xl mx-auto space-y-4 px-2 gap-8">
-            {b.map((blog) => (
-              <div
-                key={blog.id}
-                className="overflow-hidden transition-all duration-300 transform hover:scale-105 relative flex flex-col shadow-lg"
-                style={{
-                  backgroundColor: `${themeColors.white}E6`,
-                  border: `2px solid ${themeColors.gold}`,
-                  backdropFilter: "blur(10px)",
-                }}
-              >
-                <div className="p-5 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold mb-3" style={{ color: themeColors.black }}>
-                    {blog.title}
-                  </h3>
-                  <Link href={blog.link} target="_blank">
-                    <button
-                      className="px-4 py-2 transition-all font-semibold border-white rounded-full hover:bg-[#FDB913] bg-black hover:text-black text-lg md:text-base text-[#FDB913] mt-auto"
-                    >
-                      Read More
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <NotFound/>
-        )}
+    <div className="flex-shrink-0 w-48 md:w-72 mx-3 snap-center cursor-pointer transform transition-all duration-300 hover:scale-100 md:hover:scale-105">
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-shadow duration-300">
+        {/* ✅ responsive image — aspect-video container + fill replaces fixed h-36/h-48 */}
+        <div className="relative w-full aspect-video">
+          {item.mainImage ? (
+            <Image
+              src={urlFor(item.mainImage)
+                .width(1200)
+                .height(800)
+                .format("webp")
+                .quality(60)
+                .url()}
+              alt={item.title}
+              fill
+              sizes="(max-width: 768px) 56vw, 72vw"
+              loading="lazy"
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400 text-sm">No image</span>
+            </div>
+          )}
+        </div>
 
-        {/* Browse More Blogs Button */}
-        {b.length > 3 && (
-          <div className="mt-10 py-8 flex justify-center">
-            <Link href="/blogs">
-              <button
-                className="px-6 text-xl py-3 rounded-md transition-all duration-300 hover:scale-105"
-                style={{
-                  backgroundColor: themeColors.gold,
-                  color: themeColors.black,
-                  boxShadow: `0 4px 0 ${themeColors.darkGold}`,
-                }}
+        {/* ✅ calc() — card padding breathes with viewport */}
+        <div className="p-2">
+          <Link href={slug} className="block">
+            {/* ✅ clamp() — title scales between 13px and 16px */}
+            <h3 className="text-[clamp(0.8125rem,1.5vw,1rem)] font-semibold text-gray-800 line-clamp-2 mb-2 hover:text-[#deae3c] transition-colors duration-300">
+              {item.title}
+            </h3>
+
+            <div className="text-xs text-gray-500 mb-3">
+              <time className="block mb-1">
+                {new Date(
+                  item.publishedAt || item._createdAt,
+                ).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </time>
+              <span className="font-medium">BookMyAssets</span>
+            </div>
+
+            <span className="text-[#deae3c] hover:text-[#deae4c] text-[clamp(0.75rem,1.2vw,0.875rem)] font-medium inline-flex items-center group">
+              Read More
+              <svg
+                className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                Browse More Blogs
-              </button>
-            </Link>
-          </div>
-        )}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </span>
+          </Link>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default BrowseBlogs;
+const BlogSkeleton = () => (
+  <div className="flex-shrink-0 w-56 md:w-72 mx-3 snap-center">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+      <div className="w-full aspect-video bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse" />
+      <div className="p-4 space-y-2">
+        <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse" />
+        <div className="h-4 bg-gray-200 rounded w-full animate-pulse" />
+        <div className="h-3 bg-gray-200 rounded w-1/2 animate-pulse" />
+        <div className="h-3 bg-gray-200 rounded w-1/3 animate-pulse" />
+      </div>
+    </div>
+  </div>
+);
+
+export default function LatestUpdates() {
+  const [content, setContent] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+  const sliderRef = React.useRef(null);
+  const autoPlayIntervalRef = React.useRef(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        setLoading(true);
+        const [blogsData, updatesData] = await Promise.allSettled([
+          getblogs(),
+          getUpdates(),
+        ]);
+        const blogs = blogsData.status === "fulfilled" ? blogsData.value : [];
+        const updates =
+          updatesData.status === "fulfilled" ? updatesData.value : [];
+
+        const combined = [];
+        if (Array.isArray(blogs))
+          blogs.forEach((p) => {
+            if (p?._id)
+              combined.push({
+                ...p,
+                type: "blog",
+                author: p.author || "BookMyAssets",
+                mainImage: p.mainImage || null,
+                slug: p.slug || { current: "#" },
+                publishedAt: p.publishedAt || p._createdAt,
+              });
+          });
+        if (Array.isArray(updates))
+          updates.forEach((p) => {
+            if (p?._id)
+              combined.push({
+                ...p,
+                type: "update",
+                author: p.author || "BookMyAssets",
+                mainImage: p.mainImage || null,
+                slug: p.slug || { current: "#" },
+                publishedAt: p.publishedAt || p._createdAt,
+              });
+          });
+
+        setContent(
+          combined
+            .filter((i) => i.publishedAt)
+            .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+            .slice(0, 4),
+        );
+      } catch (err) {
+        setError(err.message || "Failed to load content");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchContent();
+  }, []);
+
+  useEffect(() => {
+    if (sliderRef.current && isClient) {
+      const cardWidth = window.innerWidth < 768 ? 224 + 24 : 288 + 24; // matches w-56/w-72 + mx-3*2
+      sliderRef.current.scrollTo({
+        left: currentIndex * cardWidth,
+        behavior: "smooth",
+      });
+    }
+  }, [currentIndex, isClient]);
+
+  const startAutoplay = () => {
+    clearInterval(autoPlayIntervalRef.current);
+    autoPlayIntervalRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev === content.length - 1 ? 0 : prev + 1));
+    }, 4000);
+  };
+
+  useEffect(() => {
+    if (!loading && content.length > 0) startAutoplay();
+    return () => clearInterval(autoPlayIntervalRef.current);
+  }, [loading, content.length]);
+
+  const handleArrowClick = (direction) => {
+    clearInterval(autoPlayIntervalRef.current);
+    setCurrentIndex((prev) =>
+      direction === "prev"
+        ? prev === 0
+          ? content.length - 1
+          : prev - 1
+        : prev === content.length - 1
+          ? 0
+          : prev + 1,
+    );
+    setTimeout(startAutoplay, 10000);
+  };
+
+  const handleDotClick = (index) => {
+    clearInterval(autoPlayIntervalRef.current);
+    setCurrentIndex(index);
+    setTimeout(startAutoplay, 10000);
+  };
+
+  if (error) {
+    return (
+      <div className="py-12 bg-white min-h-[480px]">
+        <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
+          <p className="text-[clamp(1.25rem,3vw,2.25rem)] text-center font-bold text-gray-800 mb-4">
+            Featured Content
+          </p>
+          <div className="text-center text-red-500">
+            <p>Error loading content. Please try again later.</p>
+            <p className="text-sm">{error}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {/* ✅ calc() — section padding scales with viewport */}
+      <div className="py-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          {/* Slider */}
+          <div className="relative">
+            <div
+              ref={sliderRef}
+              className="flex overflow-x-hidden pb-2 snap-x snap-mandatory scrollbar-hide"
+            >
+              {loading
+                ? Array(4)
+                    .fill(0)
+                    .map((_, i) => <BlogSkeleton key={i} />)
+                : content.length > 0
+                  ? content.map((item) => (
+                      <RelatedBlogCard
+                        key={`${item.type}-${item._id}`}
+                        item={item}
+                        type={item.type}
+                      />
+                    ))
+                  : Array(4)
+                      .fill(0)
+                      .map((_, i) => <BlogSkeleton key={i} />)}
+            </div>
+
+            {/* Nav arrows */}
+            {isClient && !loading && content.length > 0 && (
+              <>
+                <button
+                  className=" absolute md:hidden left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg flex items-center justify-center z-10 transition-all duration-300 hover:scale-110"
+                  onClick={() => handleArrowClick("prev")}
+                  aria-label="Previous slide"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  className="absolute md:hidden right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg flex items-center justify-center z-10 transition-all duration-300 hover:scale-110"
+                  onClick={() => handleArrowClick("next")}
+                  aria-label="Next slide"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+    </>
+  );
+}

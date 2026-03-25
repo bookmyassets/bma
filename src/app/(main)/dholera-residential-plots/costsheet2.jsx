@@ -357,25 +357,21 @@ export default function CostSheet({
       doc.text("Terms & Conditions:", 15, finalY + 6);
       doc.setFontSize(9);
       const terms = [
-        "1. The booking amount is Rs. 50,000.",
-        "2. You can request a refund within 30 days, and the payment will be returned to you within 7 days.",
-        "3. The plot price and charges are subject to change without prior notice.",
-        "4.  Maintenance Charges, as decided, will be collected separately.",
-        /* `4. ${chargeType}, as decided, will be collected separately.`, */
-        "5. Legal fees cover documentation required for registration purposes.",
-        "6. The full payment must be completed within the stipulated period, i.e., within 30 days.",
-        "7. For registry, stamp duty is 4.9% for females and 5.9% for males.",
-        "8. This is a system-generated document and does not require a signature.",
-        "9. Late Payment Charges :",
-        "a.  Rs. 250/- per sq yard if payment is made after 30 days and within 60 days",
-        "b.  Rs. 500/- per sq yard if payment is made after 60 days and within 90 days",
+        "1. Full payment must be made within the stipulated 45-day period.",
+        "2. Payment milestones: Within 10 Days, Within 25 Days, and 45 Days.",
+        "3. Payment delay or default may result in booking amount forfeiture and plot cancellation.",
+        "4. Stamp duty and registration deposits are additional.",
+        "5. Refunds are available within 14 days of booking; after 15 days, the booking becomes non-refundable.",
+        "6. Company decisions will be communicated only through authorised written communication.",
+        "7. Late Payment Charges:",
+        "a. Rs. 250/- per sq yard if payment is made after 45 days and within 60 days.",
+        "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days.",
+        "Note - Kindly acknowledge the payment schedule to ensure a seamless registry process."
       ];
-
       terms.forEach((term, index) => {
-        // Indent sub-points (a., b., c., etc.)
         const isSubPoint = /^[a-z]\./.test(term.trim());
-        const xPos = isSubPoint ? 25 : 15; // add indentation for sub-points
-        doc.text(term.trim(), xPos, finalY + 12 + index * 5);
+        const xPos = isSubPoint ? 25 : 15;
+        doc.text(term.trim(), xPos, finalY + 10 + index * 5);
       });
 
       let date = new Date().toLocaleDateString();

@@ -113,6 +113,11 @@ const amenities = [
     title: "Drainage System",
     color: "from-blue-600 to-blue-800",
   },
+  {
+    icon: <FaFilter className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Drainage System",
+    color: "from-blue-600 to-blue-800",
+  },
 ];
 
 const ProjectAmenities = () => {
@@ -178,7 +183,7 @@ const ProjectAmenities = () => {
               <Image
                 src={carouselImages[current].src}
                 alt={carouselImages[current].alt}
-                className="rounded-xl w-full aspect-[5/4] md:h-full h-auto overflow-hidden object-fit"
+                className="rounded-xl w-full aspect-[5/4] md:h-full h-auto overflow-hidden object-cover"
                 priority
               />
 
