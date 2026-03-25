@@ -10,6 +10,7 @@ import {
   FaCity,
   FaIndustry,
   FaPlane,
+  FaDollarSign,
 } from "react-icons/fa";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
@@ -24,6 +25,7 @@ import Dholera from "./Dholera";
 import BrowseBlogs from "./Blogs";
 import WhyBMA from "./WhyBMA";
 import SoldOutProjectsSection from "../dholera-residential-plots/SoldOutProjects";
+import { FaIndianRupeeSign, FaMoneyBill, FaMoneyBillTrendUp, FaPeopleGroup } from "react-icons/fa6";
 
 export const metadata = {
   robots: {
@@ -72,25 +74,25 @@ const GrowthStats = () => (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
     <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white text-center shadow-xl transform hover:scale-105 transition-all duration-300">
       <FaRocket className="text-4xl mx-auto mb-4" />
-      <h3 className="text-2xl font-bold mb-2">920 sq km</h3>
+      <h3 className="text-2xl font-bold mb-2">922.5 sq. km</h3>
       <p className="text-blue-100">Smart City Area</p>
     </div>
 
     <div className="bg-gradient-to-br from-green-500 to-green-600 p-6 rounded-2xl text-white text-center shadow-xl transform hover:scale-105 transition-all duration-300">
-      <FaCity className="text-4xl mx-auto mb-4" />
-      <h3 className="text-2xl font-bold mb-2">₹3 Lakh Cr</h3>
+      <FaMoneyBillTrendUp className="text-4xl mx-auto mb-4" />
+      <h3 className="text-2xl font-bold mb-2">₹3 Lakh Crore+</h3>
       <p className="text-green-100">Investment Potential</p>
     </div>
 
     <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-2xl text-white text-center shadow-xl transform hover:scale-105 transition-all duration-300">
       <FaIndustry className="text-4xl mx-auto mb-4" />
-      <h3 className="text-2xl font-bold mb-2">200+</h3>
+      <h3 className="text-2xl font-bold mb-2">250+</h3>
       <p className="text-purple-100">Industries Expected</p>
     </div>
 
     <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-2xl text-white text-center shadow-xl transform hover:scale-105 transition-all duration-300">
-      <FaPlane className="text-4xl mx-auto mb-4" />
-      <h3 className="text-2xl font-bold mb-2">2030</h3>
+      <FaCity className="text-4xl mx-auto mb-4" />
+      <h3 className="text-2xl font-bold mb-2">2042</h3>
       <p className="text-orange-100">Full Development</p>
     </div>
   </div>
@@ -101,8 +103,8 @@ const WhyDholeraGrowth = () => (
   <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-3xl shadow-2xl border border-amber-200 mb-12">
     <div className="text-center mb-8">
       <h2 className="text-3xl md:text-4xl font-black text-gray-800 mb-4">
-        Why Dholera is the{" "}
-        <span className="text-amber-600">Future of India</span>
+        Dholera -{" "}
+        <span className="text-amber-600"> The Blueprint of India's Future</span>
       </h2>
       <div className="h-1 w-32 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto rounded-full" />
     </div>
@@ -262,7 +264,7 @@ export default async function Info() {
             </p>
           </div>
 
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl max-w-4xl flex justify-center items-center mx-auto">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl max-w-7xl flex justify-center items-center mx-auto">
             <p className="text-gray-800 font-semibold text-lg leading-relaxed text-left">
               Dholera Smart City is India’s first planned greenfield smart city,
               developed under the Delhi–Mumbai Industrial Corridor. It is
