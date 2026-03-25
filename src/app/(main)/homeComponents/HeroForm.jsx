@@ -279,11 +279,11 @@ export default function HeroForm() {
           <div className="flashy-blink">
             {/* ✅ clamp() — hero headline scales between 18px and 24px */}
             <h1 className="text-[clamp(1.15rem,2.5vw,1.5rem)] font-bold mb-1 glowing-text px-2">
-              Dholera Plots Starting From ₹10 Lakh
+              Govt Approved Plots in Dholera
             </h1>
             {/* ✅ clamp() — subline scales between 13px and 16px */}
-            <p className="text-[clamp(0.8125rem,1.5vw,1rem)] glowing-text px-2">
-              Direct Entry from Gujarat State Highway 117
+            <p className="text-[clamp(1.15rem,2.5vw,1.5rem)] glowing-text px-2">
+              Starting from ₹10 Lakh
             </p>
           </div>
         </div>

@@ -115,50 +115,71 @@ const PlanLayout = () => {
                   content: "Immediate",
                   align: "text-left",
                 },
-              ].map(({ title, content, align, divider }) => (
-                <div
-                  key={title}
-                  className="flex flex-col rounded-2xl text-black overflow-hidden"
-                  style={{
-                    border: "1.5px solid #f0f0f0",
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-                  }}
+                {
+                  title: "Developer",
+                  content: "BookMyAssets",
+                  align: "text-left",
+                },
+                {
+                  title: "Documentation",
+                  content: "NA/NOC",
+                  align: "text-left",
+                },
+                {
+                  title: "Price",
+                  content: "₹6000/sq yard",
+                  align: "text-left",
+                },
+              ].map(({ title, content, align }, index, arr) => {
+          const isLastOdd = index === arr.length - 1 && arr.length % 2 !== 0;
+
+          return (
+            <div
+              key={title}
+              className={`flex flex-col rounded-2xl text-black overflow-hidden ${
+                isLastOdd ? "col-span-2 sm:col-span-1" : ""
+              }`}
+              style={{
+                border: "1.5px solid #f0f0f0",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+              }}
+            >
+              {/* Gold top accent bar */}
+              <div
+                className="h-1 w-full"
+                style={{
+                  background: "linear-gradient(90deg, #deae3c, #f0c96a)",
+                }}
+              />
+
+              <div className="flex flex-col flex-1 p-3 sm:p-4 lg:p-5">
+                {/* Title */}
+                <span
+                  className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
+                  style={{ color: "#deae3c", letterSpacing: "0.01em" }}
                 >
-                  {/* Gold top accent bar */}
-                  <div
-                    className="h-1 w-full"
-                    style={{
-                      background: "linear-gradient(90deg, #deae3c, #f0c96a)",
-                    }}
-                  />
+                  {title}
+                </span>
 
-                  <div className="flex flex-col flex-1 p-3 sm:p-4 lg:p-5">
-                    {/* Title */}
-                    <span
-                      className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
-                      style={{ color: "#deae3c", letterSpacing: "0.01em" }}
-                    >
-                      {title}
-                    </span>
+                {/* Divider */}
+                <div
+                  className="w-2/3 mx-auto mt-2 mb-3 h-[1px]"
+                  style={{ background: "#ececec" }}
+                />
 
-                    {/* Divider */}
-                    <div
-                      className="w-2/3 mx-auto mt-2 mb-3 h-[1px]"
-                      style={{ background: "#ececec" }}
-                    />
-
-                    {/* Content */}
-                    <div className="flex flex-1 items-center justify-center">
-                      <span
-                        className={`font-semibold ${align} text-xs sm:text-sm lg:text-base text-center leading-snug`}
-                        style={{ color: "#1a1a1a" }}
-                      >
-                        {content}
-                      </span>
-                    </div>
-                  </div>
+                {/* Content */}
+                <div className="flex flex-1 items-center justify-center">
+                  <span
+                    className={`font-semibold ${align} text-xs sm:text-sm lg:text-base leading-snug`}
+                    style={{ color: "#1a1a1a" }}
+                  >
+                    {content}
+                  </span>
                 </div>
-              ))}
+              </div>
+            </div>
+          );
+        })}
             </div>
           </div>
         </div>

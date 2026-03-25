@@ -13,13 +13,13 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import { FaFilter, FaRoad, FaStore } from "react-icons/fa";
+import { FaBuilding, FaFilter, FaRoad, FaStore } from "react-icons/fa";
 
-import img1 from "@/assests/residential/residency/clubresidency.webp";
+import img1 from "@/assests/residential/residency/westwyn-residency-dholera-utilities-store.webp";
 import img2 from "@/assests/residential/residency/kidsplayresidency.webp";
 import img3 from "@/assests/residential/residency/Villaresidency.webp";
-import img4 from "@/assests/residential/residency/yogaresidency.webp";
-import { FaCcDinersClub, FaHouse } from "react-icons/fa6";
+import img4 from "@/assests/residential/residency/clubresidency.webp";
+import { FaCcDinersClub, FaHouse, FaShop } from "react-icons/fa6";
 
 const carouselImages = [
   { src: img1, alt: "WestWyn Estates - Kids Play Area" },
@@ -110,9 +110,19 @@ const amenities = [
     color: "from-blue-600 to-blue-800",
   },
   {
-    icon: <FaStore className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    icon: <FaFilter className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Drainage System",
+    color: "from-amber-600 to-amber-800",
+  },
+  {
+    icon: <FaBuilding className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Clubhouse Lite",
-    color: "from-blue-600 to-blue-800",
+    color: "from-gray-600 to-gray-800",
+  },
+  {
+    icon: <FaShop className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Utilities Inside",
+    color: "from-orange-600 to-orange-800",
   },
 ];
 
@@ -179,7 +189,7 @@ const ProjectAmenities = () => {
               <Image
                 src={carouselImages[current].src}
                 alt={carouselImages[current].alt}
-                className="rounded-xl w-full aspect-[5/4] md:h-full h-auto overflow-hidden object-fit"
+                className="rounded-xl w-full aspect-[5/4] h-full overflow-hidden object-fit max-sm:object-cover"
                 priority
               />
 

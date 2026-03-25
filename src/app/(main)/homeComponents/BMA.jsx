@@ -8,7 +8,7 @@ const COUNTERS = [
   { value: "2 Lakh+", label: "sq. yards Sold" },
   { value: "957+",   label: "Plots Sold" },
   { value: "561+",    label: "Happy Customers" },
-  { value: "9",      label: "Total Residential Projects" },
+  { value: "9+",      label: "Total Residential Projects" },
 ];
 
 export default function BMA() {

@@ -13,12 +13,13 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import { FaFilter, FaRoad } from "react-icons/fa";
+import { FaBuilding, FaFilter, FaHome, FaRoad } from "react-icons/fa";
 
 import img1 from "@/assests/residential/estates/kidsplayarea.webp";
 import img2 from "@/assests/residential/estates/Projectboundary.webp";
 import img3 from "@/assests/residential/estates/Villa.webp";
 import img4 from "@/assests/residential/estates/yogadeck.webp";
+import { FaShop } from "react-icons/fa6";
 
 const carouselImages = [
   { src: img1, alt: "WestWyn Estates - Kids Play Area" },
@@ -111,12 +112,17 @@ const amenities = [
   {
     icon: <FaFilter className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Drainage System",
-    color: "from-blue-600 to-blue-800",
+    color: "from-amber-600 to-amber-800",
   },
   {
-    icon: <FaFilter className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    title: "Drainage System",
-    color: "from-blue-600 to-blue-800",
+    icon: <FaBuilding className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Clubhouse Lite",
+    color: "from-gray-600 to-gray-800",
+  },
+  {
+    icon: <FaShop className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Utilities Inside",
+    color: "from-orange-600 to-orange-800",
   },
 ];
 

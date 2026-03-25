@@ -301,10 +301,10 @@ export default function InteractiveMap() {
       <div className={`mx-auto ${isMobile ? 'max-w-md' : 'max-w-6xl'}`}>
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            8 Mega Projects Powering
+          <h2 className="text-2xl md:text-4xl whitespace-nowrap font-bold text-gray-900 mb-2">
+            8 Mega Projects Powering 
           </h2>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-4">Dholera</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#deae4c] mb-4">Dholera</h2>
         </div>
 
         {/* Map Container */}

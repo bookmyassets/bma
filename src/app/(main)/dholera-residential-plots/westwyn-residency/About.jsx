@@ -110,7 +110,7 @@ const WestWynAboutSection = () => {
         <div className="max-w-7xl mx-auto py-4">
           <div>
             <h3 className="text-[32px] font-semibold text-center ">
-              Location Advantage
+              Prime Location
             </h3>
           </div>
           <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
@@ -151,17 +151,17 @@ const WestWynAboutSection = () => {
 
                 <li className="flex items-start justify-start gap-2 font-bold">
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
-                  <span>17 minutes from Tata Semiconductor Plant</span>
+                  <span>17 Minutes from RMS Multi-Specialty Hospital</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
-                  <span>20 Minutes from RMS Multi-Specialty Hospital</span>
+                  <span>22 minutes from Tata Semiconductor Plant</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
-                  <span>40 minutes from Dholera International Airport</span>
+                  <span>30 minutes from Dholera International Airport</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">

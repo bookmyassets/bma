@@ -68,37 +68,39 @@ const WestWynAboutSection = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 py-4">
         {/* Header Section */}
-        <div className="text-center mb-4 space-y-2">
-          <h1 className="text-[32px] font-bold text-gray-900 ">
-            About <span className="text-[#deae3c]">WestWyn Estates</span>
+        <div className="text-center space-y-2">
+          <h1 className=" text-[#deae3c] text-[32px] leading-none font-bold">
+            WestWyn Estates <span className="font-semibold text-sm md:text-lg whitespace-nowrap text-black"> <br />Plots Starting from ₹10 Lakh</span>
           </h1>
 
-          <p className="text-base md:text-lg text-gray-600 max-w-4xl mx-auto">
+          <p className=" italic  py-0.5"></p>
+
+          <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
             WestWyn Estates a premium residential plotted society in Polarpur,
             Dholera, designed for Investors who value location, connectivity,
             and long term potential. Stratigically positioned on State
-            Hoghway-117, near Bhimnath Railway Station, the expressway corridor,
+            Highway-117, near Bhimnath Railway Station, the expressway corridor,
             and major industrial growth zones, the project offers a practical
             entry into one of Gujarat’s most closely watched smart city regions.
           </p>
         </div>
 
-        <div className=" gap-12 items-stretch space-y-4">
+        <div className=" gap-12 items-stretch space-y-4 px-4 py-4">
           {/* Left Content */}
           <div className=" h-full">
             <div className="flex justify-center items-center flex-row gap-4 ">
               <button
                 onClick={openBrochureForm}
-                className="bg-[#deae3c] text-white px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
+                className="bg-[#deae3c] text-white text-base px-2 md:px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
               >
                 <FaDownload />
                 Download Brochure
               </button>
 
               <Link href="https://wa.me/918130371647">
-                <button className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                <button className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                   <FaWhatsapp />
-                  Book Site Visit
+                  Enquire Now
                 </button>
               </Link>
             </div>
@@ -109,7 +111,7 @@ const WestWynAboutSection = () => {
         <div className="max-w-7xl mx-auto py-4">
           <div>
             <h3 className="text-[32px] font-semibold text-center ">
-              Location Advantage
+              Prime Location
             </h3>
           </div>
           <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
@@ -127,7 +129,9 @@ const WestWynAboutSection = () => {
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>Premium residential plots in Polarpur, Dholera, Gujarat</span>
+                  <span>
+                    Premium residential plots in Polarpur, Dholera, Gujarat
+                  </span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
@@ -162,7 +166,7 @@ const WestWynAboutSection = () => {
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>17 minutes from Ahmedabad Dholera Expressway</span>
+                  <span>18 minutes from Ahmedabad Dholera Expressway</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
@@ -196,7 +200,7 @@ const WestWynAboutSection = () => {
                   </span>
                   <span>
                     Industrial proximity: Seamless connectivity to TATA
-                    Semiconductor Plant & ReNew Solar Plant. 25 minutes to
+                    Semiconductor Plant & ReNew Solar Plant. Nearby to
                     Hebatpur Industrial Area.
                   </span>
                 </li>
@@ -212,7 +216,7 @@ const WestWynAboutSection = () => {
             <div className="w-full max-w-md">
               <BrochureDownload
                 onClose={closeBrochureForm}
-                title="Want Verified Project Details?"
+                title="Get Verified Project Details?"
                 buttonName="Get Brochure"
                 onAfterSubmit={handleAfterSubmit}
                 link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"

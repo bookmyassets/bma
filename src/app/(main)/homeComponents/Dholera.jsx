@@ -20,7 +20,7 @@ export default function DholeraSmartCity() {
           <h2
             className="
               text-[clamp(1.5rem,3vw,2rem)]
-              font-semibold text-black mb-1
+              font-semibold text-black mb-1 max-sm:pt-4
             "
           >
             India's First Semiconductor Hub

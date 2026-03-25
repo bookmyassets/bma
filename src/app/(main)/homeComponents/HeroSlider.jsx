@@ -11,6 +11,7 @@ import img3 from "@/assests/homepage/hero2/silk-route-park-dholera-desktop.webp"
 import img4 from "@/assests/homepage/hero2/expressway_hero.webp";
 import img5 from "@/assests/homepage/hero2/river_front_hero.webp";
 import img6 from "@/assests/homepage/hero2/tata_gate_hero.webp";
+import img7 from "@/assests/homepage/hero2/abcd-building-dholera-sir-bookmyassets.webp";
 
 import HeroForm from "./HeroForm";
 
@@ -20,6 +21,7 @@ const Running = dynamic(() => import("./Running"), {
 });
 
 const SLIDES = [
+  { src: img7, alt: "ABCD Building Dholera" },
   {
     src: img1,
     alt: "Westwyn Estate Dholera Residential Plots - Premium Investment Opportunity",

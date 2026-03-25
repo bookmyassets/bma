@@ -58,107 +58,125 @@ const PlanLayout = () => {
       {/* Subtle background pattern */}
 
       <div className="relative max-w-7xl mx-auto px-4 py-4">
-        {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto">
-          <div>
-            <h3 className="text-[32px] font-semibold text-center ">
-              Plan Layout
-            </h3>
-          </div>
-          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-            <div className="px-4 sm:px-6 lg:px-8 md:order-2">
-              <Image
-                src={img}
-                alt="dholera map"
-                className="rounded-xl w-full md:h-full h-auto md:order-1"
-                priority
-              />
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                {
-                  title: "Land Parcel",
-                  content: (
-                    <span>
-                      4.45 Acres <br /> (21,500 sq. yards)
-                    </span>
-                  ),
-                  align: "text-center",
-                  divider: true,
-                },
-                {
-                  title: "Location",
-                  content: "Polarpur, near Bhimnath Railway Station",
-                  align: "text-left",
-                },
-                {
-                  title: "Highway Access",
-                  content: "Entry from 4-Lane State Highway (150-Feet Road)",
-                  align: "text-left",
-                },
-                {
-                  title: "Plot Sizes",
-                  content: "152 & 200 sq. yards",
-                  align: "text-left",
-                },
-                {
-                  title: "Total Units",
-                  content: "131 exclusive plots",
-                  align: "text-left",
-                },
-                {
-                  title: "Possession",
-                  content: "Immediate",
-                  align: "text-left",
-                },
-              ].map(({ title, content, align, divider }) => (
-                <div
-                  key={title}
-                  className="flex flex-col rounded-2xl text-black overflow-hidden"
-                  style={{
-                    border: "1.5px solid #f0f0f0",
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-                  }}
-                >
-                  {/* Gold top accent bar */}
-                  <div
-                    className="h-1 w-full"
-                    style={{
-                      background: "linear-gradient(90deg, #deae3c, #f0c96a)",
-                    }}
-                  />
-
-                  <div className="flex flex-col flex-1 p-3 sm:p-4 lg:p-5">
-                    {/* Title */}
-                    <span
-                      className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
-                      style={{ color: "#deae3c", letterSpacing: "0.01em" }}
-                    >
-                      {title}
-                    </span>
-
-                    {/* Divider */}
-                    <div
-                      className="w-2/3 mx-auto mt-2 mb-3 h-[1px]"
-                      style={{ background: "#ececec" }}
-                    />
-
-                    {/* Content */}
-                    <div className="flex flex-1 items-center justify-center">
-                      <span
-                        className={`font-semibold ${align} text-xs sm:text-sm lg:text-base leading-snug`}
-                        style={{ color: "#1a1a1a" }}
-                      >
-                        {content}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+  {/* Location Advantage */}
+  <div className="max-w-7xl mx-auto">
+    <div>
+      <h3 className="text-[32px] font-semibold text-center">Plan Layout</h3>
+    </div>
+    <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
+      <div className="px-4 sm:px-6 lg:px-8 md:order-2">
+        <Image
+          src={img}
+          alt="dholera map"
+          className="rounded-xl w-full md:h-full h-auto md:order-1"
+          priority
+        />
       </div>
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[
+          {
+            title: "Land Parcel",
+            content: (
+              <span>
+                4.45 Acres <br /> (21,500 sq. yards)
+              </span>
+            ),
+            align: "text-center",
+          },
+          {
+            title: "Location",
+            content: "Polarpur, near Bhimnath Railway Station",
+            align: "text-left",
+          },
+          {
+            title: "Highway Access",
+            content: "Entry from 4-Lane State Highway (150-Feet Road)",
+            align: "text-left",
+          },
+          {
+            title: "Plot Sizes",
+            content: "152 & 200 sq. yards",
+            align: "text-left",
+          },
+          {
+            title: "Total Units",
+            content: "131 exclusive plots",
+            align: "text-left",
+          },
+          {
+            title: "Possession",
+            content: "Immediate",
+            align: "text-left",
+          },
+          {
+            title: "Developers",
+            content: "BookMyAssets",
+            align: "text-left",
+          },
+          {
+            title: "Documentation",
+            content: "NA/NOC",
+            align: "text-left",
+          },
+          {
+            title: "Plot Price",
+            content: "₹6700/sq. yard",
+            align: "text-left",
+          },
+        ].map(({ title, content, align }, index, arr) => {
+          const isLastOdd = index === arr.length - 1 && arr.length % 2 !== 0;
+
+          return (
+            <div
+              key={title}
+              className={`flex flex-col rounded-2xl text-black overflow-hidden ${
+                isLastOdd ? "col-span-2 sm:col-span-1" : ""
+              }`}
+              style={{
+                border: "1.5px solid #f0f0f0",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+              }}
+            >
+              {/* Gold top accent bar */}
+              <div
+                className="h-1 w-full"
+                style={{
+                  background: "linear-gradient(90deg, #deae3c, #f0c96a)",
+                }}
+              />
+
+              <div className="flex flex-col flex-1 p-3 sm:p-4 lg:p-5">
+                {/* Title */}
+                <span
+                  className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
+                  style={{ color: "#deae3c", letterSpacing: "0.01em" }}
+                >
+                  {title}
+                </span>
+
+                {/* Divider */}
+                <div
+                  className="w-2/3 mx-auto mt-2 mb-3 h-[1px]"
+                  style={{ background: "#ececec" }}
+                />
+
+                {/* Content */}
+                <div className="flex flex-1 items-center justify-center">
+                  <span
+                    className={`font-semibold ${align} text-xs sm:text-sm lg:text-base leading-snug`}
+                    style={{ color: "#1a1a1a" }}
+                  >
+                    {content}
+                  </span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</div>
 
       <AnimatePresence>
         {isBrochureFormOpen && (
