@@ -16,10 +16,10 @@ import Image from "next/image";
 
 import { FaBuilding, FaFilter, FaHome, FaRoad } from "react-icons/fa";
 
-import img1 from "@/assests/residential/estates/kidsplayarea.webp";
-import img2 from "@/assests/residential/estates/Projectboundary.webp";
-import img3 from "@/assests/residential/estates/Villa.webp";
-import img4 from "@/assests/residential/estates/yogadeck.webp";
+import img1 from "@/assests/residential/estates/westwyn-estates-dholera-utilities-shop.webp";
+import img2 from "@/assests/residential/estates/westwyn-estates-dholera-kids-play-area.webp";
+import img3 from "@/assests/residential/estates/westwyn-estates-dholera-ev-charging-station.webp";
+import img4 from "@/assests/residential/estates/westwyn-estates-dholera-clubhouse-lite.webp";
 import { FaShop } from "react-icons/fa6";
 
 const carouselImages = [
