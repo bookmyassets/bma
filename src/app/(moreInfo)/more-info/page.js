@@ -11,7 +11,6 @@ import Gallery from "./gallery/page";
 import AboutBMA from "./body/About_BMA";
 import DholeraLandingPage from "./body/DholeraSIR";
 import MegaIndustries from "./body/MegaIndustries";
-import WestWyn from "./body/WestWyn";
 import TestimonialPagination from "./components/Testimonials";
 import ImageZoom from "./components/ImageZoom";
 import NewSection from "./body/NewSection";
@@ -45,7 +44,7 @@ export default function Page() {
         <MegaIndustries />
         {/* Westwyn Estate */}
         {/*         <ProjectSlider/> */}
-        <WestWyn />
+  
         {/* About BookMyAssets */}
         <AboutBMA />
         {/* Lead Form */}

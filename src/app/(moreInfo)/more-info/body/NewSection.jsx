@@ -1,11 +1,27 @@
 import React, { useState } from "react";
-import img1 from "@/assests/ad-page/ad-img-test.png";
-import img2 from "@/assests/ad-page/ad-img-test.png";
-import img3 from "@/assests/ad-page/ad-img-test.png";
+import img1a from "@/assests/ad-page/westwyn-residency-dholera-society-gate.webp";
+import img1b from "@/assests/ad-page/amenities-residency.webp";
+import img1c from "@/assests/ad-page/residency-map.webp";
+import img2a from "@/assests/ad-page/westwyn-estates-dholera-society-gate.webp";
+import img2b from "@/assests/ad-page/clubhouse-lite-westwyn-estates-dholera-landing-page.webp";
+import img2c from "@/assests/ad-page/estates-map.webp";
+//import img1b from "@/assests/ad-page/westwyn-estates-dholera-society-gate.webp";
+
 import Image from "next/image";
 import {
-  Fence, Building2, Cctv, Baby, Car, Users,
-  Zap, Leaf, PersonStanding, MapPin, Factory, Plane, Clock,
+  Fence,
+  Building2,
+  Cctv,
+  Baby,
+  Car,
+  Users,
+  Zap,
+  Leaf,
+  PersonStanding,
+  MapPin,
+  Factory,
+  Plane,
+  Clock,
 } from "lucide-react";
 import { FaRoad } from "react-icons/fa6";
 import { GiRailway, GiRoad } from "react-icons/gi";
@@ -60,14 +76,19 @@ function ProjectCard({ projectName, sections, essentials, location }) {
       {sections[activeSection].title === "Amenities" ||
       sections[activeSection].title === "Location Advantage" ? (
         <div className="grid grid-cols-2 gap-x-6 gap-y-5">
-          {(sections[activeSection].title === "Amenities" ? essentials : location).map(
-            ({ label, icon: Icon }) => (
-              <div key={label} className="flex items-center gap-3">
-                <Icon size={24} strokeWidth={1.5} className="text-black shrink-0" />
-                <span className="text-sm font-medium text-gray-800">{label}</span>
-              </div>
-            )
-          )}
+          {(sections[activeSection].title === "Amenities"
+            ? essentials
+            : location
+          ).map(({ label, icon: Icon }) => (
+            <div key={label} className="flex items-center gap-3">
+              <Icon
+                size={24}
+                strokeWidth={1.5}
+                className="text-black shrink-0"
+              />
+              <span className="text-sm font-medium text-gray-800">{label}</span>
+            </div>
+          ))}
         </div>
       ) : (
         <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm">
@@ -82,7 +103,9 @@ function ProjectCard({ projectName, sections, essentials, location }) {
             key={i}
             onClick={() => setActiveSection(i)}
             className={`h-2 rounded-full transition-all ${
-              i === activeSection ? "w-16 bg-gray-900" : "w-8 bg-gray-300 hover:bg-gray-400"
+              i === activeSection
+                ? "w-16 bg-gray-900"
+                : "w-8 bg-gray-300 hover:bg-gray-400"
             }`}
           />
         ))}
@@ -114,25 +137,35 @@ export default function WestWyn() {
     { label: "45 minutes from Dholera International Airport", icon: Plane },
   ];
 
+  const location2 = [
+    { label: "Located on Major District Road (MDR) in Pipariya, Dholera", icon: MapPin },
+    { label: "2 minutes from Railway Station", icon: GiRailway },
+    { label: "5 minutes from Dholera SIR boundary", icon: Clock },
+    { label: "12 minutes from Ahmedabad Dholera Expressway", icon: GiRoad },
+    { label: "22 minutes from Tata Semiconductor Plant", icon: Factory },
+    { label: "30 minutes from Dholera International Airport", icon: Plane },
+  ];
+
   const sections = [
     {
-      title: "About WestWyn Estate",
-      content: `WestWyn Estates is a well-located residential plot in Polarpur, Dholera...`,
-      image: img1,
+      title: "WestWyn Estate",
+      content: `WestWyn Estates brings a refined residential plotted experience in the evolving landscape of Dholera. Developed by BookMyAssets, this premium community is designed for those who value planning, connectivity, and long-term clarity. Strategically located on State Highway-117 and close to Bhimnath Railway Station and the Dholera SIR boundary.
+`,
+      image: img2a,
     },
-    { title: "Amenities", content: essentials, image: img2 },
-    { title: "Location Advantage", content: location, image: img3 },
+    { title: "Amenities", content: essentials, image: img2b },
+    { title: "Location Advantage", content: location, image: img2c },
   ];
 
   // ✅ Project 2 can have its own different sections/data
   const sections2 = [
     {
-      title: "About WestWyn Estate",
-      content: `Project 2 description goes here...`,
-      image: img1,
+      title: "WestWyn Residency",
+      content: `WestWyn Residency is a well-planned residential plot project in Pipariya, Dholera by BookMyAssets. It offers Direct entry from Major District Road (MDR) and just 5 min from SIR Boundary. The project is designed as a gated community, giving you a peaceful and secure environment. It is a good option for buyers who want a clear, simple, and practical investment.`,
+      image: img1a,
     },
-    { title: "Amenities", content: essentials, image: img2 },
-    { title: "Location Advantage", content: location, image: img3 },
+    { title: "Amenities", content: essentials, image: img1b },
+    { title: "Location Advantage", content: location2, image: img1c },
   ];
 
   return (
@@ -146,10 +179,10 @@ export default function WestWyn() {
           location={location}
         />
         <ProjectCard
-          projectName="WestWyn Estate"   
+          projectName="WestWyn Residency"
           sections={sections2}
           essentials={essentials}
-          location={location}
+          location={location2}
         />
       </div>
 
@@ -162,10 +195,10 @@ export default function WestWyn() {
           location={location}
         />
         <ProjectCard
-          projectName="WestWyn Estate"
+          projectName="WestWyn Residency"
           sections={sections2}
           essentials={essentials}
-          location={location}
+          location={location2}
         />
       </div>
     </div>
