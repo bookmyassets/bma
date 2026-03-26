@@ -377,7 +377,7 @@ export default function MobileDesignShowcase() {
       {selectedDesign === 3 && <Design3 />}
       <DesktopDesign />
 
-      <div className="bg-gray-100">
+      {/* <div className="bg-gray-100">
         <p className="text-xl md:text-3xl pt-8 font-semibold text-center">
           The Complete Dholera Blueprint
         </p>
@@ -394,7 +394,7 @@ export default function MobileDesignShowcase() {
         <div className="p-4 flex justify-center">
           <ImageZoom/>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
