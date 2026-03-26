@@ -69,11 +69,11 @@ const WestWynAboutSection = () => {
       <div className="relative max-w-7xl mx-auto px-4 py-4">
         {/* Header Section */}
         <div className="text-center mb-4 space-y-2">
-          <h1 className="text-[32px] font-bold text-gray-900 ">
-            About <span className="text-[#deae3c]">WestWyn Residency</span>
+          <h1 className="text-[32px] font-bold text-[#deae3c]">
+           WestWyn Residency
           </h1>
 
-          <p className="text-base md:text-lg text-gray-600 max-w-4xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
             WestWyn Residency a premium residential plotted soceity in Pipariya,
             Dholera, designed for buyers who value location, connectivity, and
             long term Investment Growth. With easy access to the Dholera SIR
@@ -193,7 +193,7 @@ const WestWynAboutSection = () => {
             <div className="w-full max-w-md">
               <BrochureDownload
                 onClose={closeBrochureForm}
-                title="Want Verified Project Details?"
+                title="Get Verified Project Details?"
                 buttonName="Get Brochure"
                 onAfterSubmit={handleAfterSubmit}
                 link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"

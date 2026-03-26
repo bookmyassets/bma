@@ -10,6 +10,7 @@ import {
   Square,
   User,
   Activity,
+  Footprints,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -90,7 +91,7 @@ const amenities = [
     color: "from-pink-500 to-rose-500",
   },
   {
-    icon: <Activity className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    icon: <Footprints className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Jogging Track",
     color: "from-green-500 to-emerald-500",
   },
