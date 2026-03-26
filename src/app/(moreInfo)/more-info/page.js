@@ -14,6 +14,7 @@ import MegaIndustries from "./body/MegaIndustries";
 import WestWyn from "./body/WestWyn";
 import TestimonialPagination from "./components/Testimonials";
 import ImageZoom from "./components/ImageZoom";
+import NewSection from "./body/NewSection";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -39,6 +40,7 @@ export default function Page() {
         </section>
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
         <DholeraLandingPage />
+        <NewSection/>
         {/* Mega Industries crousel */}
         <MegaIndustries />
         {/* Westwyn Estate */}
