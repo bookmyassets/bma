@@ -184,7 +184,7 @@ export default function HeroCarousel() {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-contain aspect-[3/1]"
+                  className="object-fill aspect-[3/1]"
                   priority={index === 0}
                   fetchPriority={index === 0 ? "high" : "low"}
                   sizes="100vw"

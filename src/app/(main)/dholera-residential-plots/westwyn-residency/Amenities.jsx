@@ -185,12 +185,12 @@ const ProjectAmenities = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-start">
             {/* Left — Image */}
             {/* Left — Carousel */}
-            <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/4] w-full h-full group">
+            <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/5] w-full h-full group">
               {/* Original image — style completely unchanged */}
               <Image
                 src={carouselImages[current].src}
                 alt={carouselImages[current].alt}
-                className="rounded-xl w-full aspect-[5/4] h-full overflow-hidden object-fit max-sm:object-cover"
+                className="rounded-xl w-full aspect-[5/6] h-full overflow-hidden object-fit max-sm:object-cover"
                 priority
               />
 
