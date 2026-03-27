@@ -1,9 +1,9 @@
 [
   {
-    "projectName": "Upcoming Project",
-    "link": "westwyn-estate",
+    "projectName": "WestWyn Residency",
+    "link": "westwyn-residency",
     "location": "Pipariya, Dholera, Gujarat",
-    "image": "/assets/residential/img.png",
+    "image": "/assets/residential/residency.webp",
     "constructionStatus" : "Under Construction",
     "status" : "upcoming",
     "latest" : "yes",
