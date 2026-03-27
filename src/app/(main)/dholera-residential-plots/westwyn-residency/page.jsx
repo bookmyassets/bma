@@ -157,10 +157,10 @@ export default function HeroCarousel() {
         }}
       />
 
-      <title>WestWyn Estates – Secure Plots Near Dholera SIR</title>
+      <title>WestWyn Residency – Secure Plots Near Dholera SIR</title>
       <meta
         name="description"
-        content="Invest in WestWyn Estates: Premium Plots at Dholera Smart City, just 5 minutes from Bhimnath Railway Station with strong connectivity and high growth potential in future."
+        content="Invest in WestWyn Residency: Premium Plots at Dholera Smart City, just 5 minutes from Bhimnath Railway Station with strong connectivity and high growth potential in future."
       />
       <link
         rel="canonical"
