@@ -38,9 +38,9 @@ export default function HeroCarousel() {
   const touchEndX = useRef(0);
 
   const desktopImages = [
-    { src: img1, alt: "Dholera Investment Opportunity 1" },
-    { src: img2, alt: "Dholera Investment Opportunity 2" },
     { src: img3, alt: "Dholera Investment Opportunity 3" },
+    { src: img2, alt: "Dholera Investment Opportunity 2" },
+    { src: img1, alt: "Dholera Investment Opportunity 1" },
   ];
 
   const mobileImages = [
