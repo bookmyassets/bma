@@ -132,7 +132,7 @@ export default function BrochureDownload({
       setSubmissionCount(0);
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
-    } else if (submissionCount >= 20) {
+    } else if (submissionCount >= 3) {
       setErrorMessage(
         "You have reached the maximum submission limit. Try again after 24 hours."
       );
@@ -177,8 +177,14 @@ const onRecaptchaSuccess = async (token) => {
         return newCount;
       });
 
+
+
       // Download PDF immediately after successful submission
       downloadPDF();
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "lead_form_hero",
+      });
 
       // Show thank you popup for 2 seconds
       setShowThankYou(true);
