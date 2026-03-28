@@ -169,7 +169,7 @@ export default function WestWyn() {
   ];
 
   return (
-    <div className="w-full bg-white" id="westwyn-estate">
+    <div className="w-full bg-white" id="westwyn-estates">
       {/* Desktop: Two independent project columns */}
       <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 max-w-7xl mx-auto px-8 py-12">
         <ProjectCard
