@@ -10,7 +10,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=GT-ND5WPPD5"
@@ -25,7 +24,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-ND5WPPD5');
            `}
         </Script>
-
+        <Script>
+          {` !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+twq('config','oxi2l');`}
+        </Script>
         {/* Clarity */}
         <Script type="text/javascript">
           {`
