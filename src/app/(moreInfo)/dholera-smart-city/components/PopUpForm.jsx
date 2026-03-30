@@ -100,7 +100,7 @@ export default function PopupForm({ title, sectionId }) {
               name: formData.fullName,
               phone: formData.mobileNumber,
               email: formData.email,
-              source: "BookMyAssets Google Ads",
+              source: "BookMyAssets Twitter Ads",
             },
             source: "BookMyAssets Popup",
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],

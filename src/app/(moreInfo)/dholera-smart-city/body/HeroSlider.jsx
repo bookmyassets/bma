@@ -156,9 +156,9 @@ export default function LandingPage({ openForm }) {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: "BookMyAssets Google Ads",
+              source: "BookMyAssets Twitter Ads",
             },
-            source: "BookMyAssets Google Ads",
+            source: "BookMyAssets Twitter Ads",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
