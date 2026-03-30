@@ -11,8 +11,8 @@ import Gallery from "./gallery/page";
 import AboutBMA from "./body/About_BMA";
 import DholeraLandingPage from "./body/DholeraSIR";
 import MegaIndustries from "./body/MegaIndustries";
-import WestWyn from "./body/WestWyn";
 import TestimonialPagination from "./components/Testimonials";
+import WestWyn from "./body/WestWyn";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -38,7 +38,9 @@ export default function Page() {
           />
         </section>
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
-        <WestWyn />
+        {/* <WestWyn /> */}
+        <WestWyn/>
+        
         <Ribbon />
 
         {/* Mega Industries crousel */}
