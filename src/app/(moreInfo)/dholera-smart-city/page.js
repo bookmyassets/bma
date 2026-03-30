@@ -12,7 +12,8 @@ import AboutBMA from "./body/About_BMA";
 import DholeraLandingPage from "./body/DholeraSIR";
 import MegaIndustries from "./body/MegaIndustries";
 import TestimonialPagination from "./components/Testimonials";
-import WestWyn from "./body/WestWyn";
+import WestWyn from "./body/NewSection";
+
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
