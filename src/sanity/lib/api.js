@@ -103,8 +103,18 @@ export async function getEvents() {
 }
 
 /* Fetch single post by slug */
-export async function getPostBySlug(slug) {
-  const query = `*[_type == "post" && slug.current == $slug && site == $site][0]{
+// AFTER — category is now part of the GROQ filter
+export async function getPostBySlug(slug, category = null) {
+  const categoryFilter = category
+    ? `&& "${category}" in categories[]->title`
+    : "";
+
+  const query = `*[
+    _type == "post" &&
+    slug.current == $slug &&
+    site == $site
+    ${categoryFilter}
+  ][0]{
     _id, title, metaTitle, metaDescription, formTitle, "keywords": keywords, slug,
     mainImage { asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, alt, caption, url },
     publishedAt, _createdAt,
@@ -113,6 +123,11 @@ export async function getPostBySlug(slug) {
   }`;
   return await client.fetch(query, { slug, site });
 }
+
+// Named wrappers — use these in your page files
+export const getBlogBySlug = (slug) => getPostBySlug(slug, "Blog");
+export const getUpdateBySlug = (slug) => getPostBySlug(slug, "Updates");
+export const getAboutBySlug = (slug) => getPostBySlug(slug, "project-Info");
 
 export async function projectInfoX() {
   const query = `*[_type == "post" && "project-Info" in categories[]->title && author->name == "BookMyAssets"]{

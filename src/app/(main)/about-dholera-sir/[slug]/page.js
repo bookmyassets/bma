@@ -5,6 +5,7 @@ import {
   getblogs,
   getUpdates,
   projectInfo,
+  getAboutBySlug,
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
@@ -131,7 +132,7 @@ export default async function Post({ params }) {
 
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
-      getPostBySlug(slug, site),
+      getAboutBySlug(slug),
       getUpdates(0, 6), // Get 6 blogs for sidebar
       getblogs(slug, 3),
     ]);

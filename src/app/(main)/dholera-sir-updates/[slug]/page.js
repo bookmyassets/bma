@@ -2,6 +2,7 @@ import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import {
   getPostBySlug,
+  getUpdateBySlug,
   getUpdates,
   getblogs,
   projectInfo,
@@ -159,7 +160,7 @@ export default async function Post({ params }) {
 
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
-      getPostBySlug(slug, site),
+      getUpdateBySlug(slug),
       getUpdates(0, 6), // Get 6 blogs for sidebar
       getblogs(slug, 3),
     ]);
