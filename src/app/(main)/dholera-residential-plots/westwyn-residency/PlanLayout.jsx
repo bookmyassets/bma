@@ -100,14 +100,14 @@ const PlanLayout = () => {
                   title: "Plot Sizes",
                   content: (
                     <span>
-                      154, 179 & 202 <br /> sq. yards
+                      124, 152 & 187 <br /> sq. yards
                     </span>
                   ),
                   align: "text-left",
                 },
                 {
                   title: "Total Units",
-                  content: "233 exclusive plots",
+                  content: "290 exclusive plots",
                   align: "text-left",
                 },
                 {
