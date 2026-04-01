@@ -16,6 +16,7 @@ const SALUTATIONS = [
 
 // Local projects array
 const PROJECTS = [
+  { id: 1, title: "WestWyn Residency", ctype: "D" },
   { id: 1, title: "WestWyn Estates", ctype: "D" },
   { id: 2, title: "WestWyn County", ctype: "M" },
   { id: 3, title: "Paradise", ctype: "M" },
