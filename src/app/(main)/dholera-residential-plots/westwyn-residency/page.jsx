@@ -157,10 +157,14 @@ export default function HeroCarousel() {
         }}
       />
 
-      <title>WestWyn Residency – Secure Plots Near Dholera SIR</title>
+      <title>WestWyn Residency Dholera | Registry Ready Plots in Pipariya</title>
       <meta
         name="description"
-        content="Invest in WestWyn Residency: Premium Plots at Dholera Smart City, just 5 minutes from Bhimnath Railway Station with strong connectivity and high growth potential in future."
+        content="WestWyn Residency offers registry ready plots in Pipariya, Dholera with NA NOC, immediate possession, Just 5 mins from Dholera SIR Boundary."
+      />
+      <meta 
+        name="keywords"
+        content="westwyn residency dholera, dholera residential plots, plots near dholera sir, dholera smart city plots, buy plot in dholera, residential plots in dholera sir, dholera investment plots, plots near dholera expressway, dholera smart city investment, buy land in dholera gujarat, gated community plots dholera, dholera airport nearby plots"
       />
       <link
         rel="canonical"

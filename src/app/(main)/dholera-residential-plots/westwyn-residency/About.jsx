@@ -70,7 +70,7 @@ const WestWynAboutSection = () => {
         {/* Header Section */}
         <div className="text-center mb-4 space-y-2">
           <h1 className="text-[32px] font-bold text-[#deae3c]">
-           WestWyn Residency
+            WestWyn Residency
           </h1>
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
@@ -125,47 +125,65 @@ const WestWynAboutSection = () => {
             <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
               <ul className="space-y-4 text-gray-700">
                 <li className="flex items-start justify-start gap-2 font-semibold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
                   <span>Premium residential plots in Pipariya, Dholera</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
-                  <span>Located on Major District Road(MDR)</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
+                  <span>Direct Entry from Major District Road(MDR)</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
                   <span>2 Minutes from Railway Connectivity</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
                   <span>5 Minutes from Dholera SIR boundary</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
                   <span>12 minutes from Ahmedabad Dholera Expressway</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
                   <span>17 Minutes from RMS Multi-Specialty Hospital</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
                   <span>22 minutes from Tata Semiconductor Plant</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
                   <span>30 minutes from Dholera International Airport</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">•</span>
+                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    •
+                  </span>
                   <span>
                     Close proximity to public facilities and transport: Bus
                     stand, school, hospital, shopping complex, park, food
@@ -176,9 +194,9 @@ const WestWynAboutSection = () => {
                 <li className="flex items-start gap-2 font-bold">
                   <span className="text-[#deae4c] mt-1">•</span>
                   <span>
-                    Industrial proximity: Seamless connectivity to TATA
-                    Semiconductor Plant & ReNew Solar Plant. 25 minutes to
-                    Hebatpur Industrial Area.
+                    Industrial proximity: Seamless connectivity to the TATA
+                    Semiconductor Plant & ReNew Solar Plant, with Hebatpur
+                    Industrial Area just 25 minutes away.
                   </span>
                 </li>
               </ul>
@@ -193,7 +211,7 @@ const WestWynAboutSection = () => {
             <div className="w-full max-w-md">
               <BrochureDownload
                 onClose={closeBrochureForm}
-                title="Get Verified Project Details?"
+                title="Get Full Project Details"
                 buttonName="Get Brochure"
                 onAfterSubmit={handleAfterSubmit}
                 link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"

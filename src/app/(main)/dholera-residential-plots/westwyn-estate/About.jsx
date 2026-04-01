@@ -138,7 +138,7 @@ const WestWynAboutSection = () => {
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>Located on State Highway-117 (150 foot road)</span>
+                  <span>Direct Entry from State Highway-117 (150 foot road)</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
@@ -216,7 +216,7 @@ const WestWynAboutSection = () => {
             <div className="w-full max-w-md">
               <BrochureDownload
                 onClose={closeBrochureForm}
-                title="Get Verified Project Details?"
+                title="Get Full Project Details"
                 buttonName="Get Brochure"
                 onAfterSubmit={handleAfterSubmit}
                 link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"

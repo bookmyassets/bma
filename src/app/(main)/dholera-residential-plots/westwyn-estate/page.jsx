@@ -156,10 +156,16 @@ export default function HeroCarousel() {
         }}
       />
 
-      <title>WestWyn Estates – Secure Plots Near Dholera SIR</title>
+      <title>
+        WestWyn Estates Polarpur Dholera | NA NOC Registry Ready Plots
+      </title>
       <meta
         name="description"
-        content="Invest in WestWyn Estates: Premium Plots at Dholera Smart City, just 5 minutes from Bhimnath Railway Station with strong connectivity and high growth potential in future."
+        content="Explore WestWyn Estates in Polarpur, Dholera with registry ready NA NOC plots, immediate possession, and smooth access to Bhimnath Railway Station and Dholera SIR."
+      />
+      <meta
+        name="keywords"
+        content="WestWyn Estates, WestWyn Estates Dholera, WestWyn Estates Polarpur, Dholera residential plots, plots in Dholera, residential plots in Polarpur, plots near Dholera SIR, plots near Bhimnath Railway Station, State Highway 117 Dholera plots, NA NOC plots in Dholera, registry ready plots in Dholera, immediate possession plots in Dholera, 152 sq yd plots in Dholera, 200 sq yd plots in Dholera, plots near Ahmedabad Dholera Expressway, plots near Tata Semiconductor Plant, BookMyAssets WestWyn Estates"
       />
       <link
         rel="canonical"
