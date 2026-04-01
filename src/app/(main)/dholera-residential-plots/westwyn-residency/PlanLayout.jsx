@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import BrochureDownload from "../../components/BrochureDownload";
 import Image from "next/image";
-import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-plan-layout.webp";
+import img from "@/assests/residential/residency/westwyn-Residency.webp";
 import { FaDownload } from "react-icons/fa";
 import { FaLocationPin, FaLocationPinLock, FaMapLocation } from "react-icons/fa6";
 import Link from "next/link";

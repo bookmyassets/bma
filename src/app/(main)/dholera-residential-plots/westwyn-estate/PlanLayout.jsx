@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import BrochureDownload from "../../components/BrochureDownload";
 import Image from "next/image";
-import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-plan-layout.webp";
+import img from "@/assests/residential/estates/westwyn-Estates.webp";
 import { FaDownload } from "react-icons/fa";
 import { FaLocationPin, FaLocationPinLock, FaMapLocation } from "react-icons/fa6";
 import Link from "next/link";
@@ -214,7 +214,7 @@ const PlanLayout = () => {
                 title="Get Project Plan Layout"
                 buttonName="Get Brochure"
                 onAfterSubmit={handleAfterSubmit}
-                link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"
+                link="https://drive.google.com/file/d/1xJzNlQpyqyDIaSzOCo48s8J44qC3gS2S/view?usp=sharing"
               />
             </div>
           </div>
