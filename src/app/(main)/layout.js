@@ -17,13 +17,6 @@ const lato = Lato({
   weight: ["400", "700"], // include 700 — you likely use bold somewhere
 });
 
-// ── Metadata (only works when layout is a Server Component) ───────────────────
-export const metadata = {
-  title: "Dholera Plots under ₹10 Lakh | BookMyAssets",
-  description:
-    "Invest in RERA-approved, registry-ready plots in Dholera Smart City — India's first greenfield smart city. 0 KM from Dholera SIR boundary.",
-};
-
 // ── Root Layout ───────────────────────────────────────────────────────────────
 export default function RootLayout({ children }) {
   // Replace these with your real IDs
