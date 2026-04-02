@@ -6,27 +6,42 @@ const faqs = [
   {
     question: "Where is WestWyn Residency located?",
     answer:
-      "WestWyn Residency is located in Pipariya, Dholera, within a fast-developing investment corridor near Dholera Smart City.",
+      "WestWyn Residency is located in Pipariya, Dholera, in a strategically connected area with access to key infrastructure and nearby development zones.",
   },
   {
-    question: "How far is the project from the Dholera SIR boundary?",
+    question: "Is WestWyn Residency a residential plot project?",
     answer:
-      "The project is approximately 7 km from the Dholera SIR boundary, ensuring close proximity to the main development zone.",
+      "Yes, WestWyn Residency is a premium residential plotted development designed for buyers looking at long-term investment potential as well as future residential use.",
   },
   {
-    question: "Is the project close to the expressway?",
+    question: "Is the project registry-ready?",
     answer:
-      "Yes, WestWyn Residency is around 12 minutes away from the Ahmedabad–Dholera Expressway, providing excellent connectivity.",
+      "The project is positioned as a registry-ready residential plot offering. Serious buyers should connect with the BookMyAssets team to understand the buying process and next-step support in detail.",
   },
   {
-    question: "How far is the Activation Area from the project?",
+    question: "What kind of support does BookMyAssets provide to buyers?",
     answer:
-      "The Activation Area is approximately 15 minutes from the project, making it a strategically located investment option.",
+      "BookMyAssets assists serious buyers with project understanding, plot guidance, site visit support, and next-step coordination through the buying journey.",
   },
   {
-    question: "Is this a residential plot project?",
+    question: "Can buyers from Delhi NCR plan a guided site visit?",
     answer:
-      "Yes, WestWyn Residency is a premium residential plotted development designed for both investment and future living.",
+      "Yes, buyers from Delhi NCR, Gurugram, Noida, and nearby regions can connect with the team for guided site visit coordination.",
+  },
+  {
+    question: "What plot sizes are available in WestWyn Residency?",
+    answer:
+      "The project offers multiple residential plot sizes. Buyers can request the latest availability, price sheet, and layout details directly from the team.",
+  },
+  {
+    question: "Is this project suitable only for investors?",
+    answer:
+      "No. WestWyn Residency may appeal to both investment-focused buyers and those planning for future residential use, depending on their goals and timeline.",
+  },
+  {
+    question: "How do I get brochure, layout, and pricing details?",
+    answer:
+      "You can submit your details on the page or connect with BookMyAssets on WhatsApp to receive brochure, layout, and project guidance.",
   },
 ];
 
@@ -39,58 +54,6 @@ export default function FAQSection() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "Where is WestWyn Residency located?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "WestWyn Residency is located in Pipariya, Dholera, within a fast-developing investment corridor near Dholera Smart City.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "How far is the project from the Dholera SIR boundary?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "The project is approximately 7 km from the Dholera SIR boundary, ensuring close proximity to the main development zone.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Is the project close to the expressway?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes, WestWyn Residency is around 12 minutes away from the Ahmedabad–Dholera Expressway, providing excellent connectivity.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "How far is the Activation Area from the project?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "The Activation Area is approximately 15 minutes from the project, making it a strategically located investment option.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Is this a residential plot project?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes, WestWyn Residency is a premium residential plotted development designed for both investment and future living.",
-                },
-              },
-            ],
-          }),
-        }}
-      />
-
       <div className="bg-white">
         <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
           {/* Left Section (40%) */}

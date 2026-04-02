@@ -157,10 +157,10 @@ export default function HeroCarousel() {
         }}
       />
 
-      <title>WestWyn Residency Dholera | Registry Ready Plots in Pipariya</title>
+      <title>WestWyn Residency Dholera | Registry-Ready Residential Plots in Pipariya</title>
       <meta
         name="description"
-        content="WestWyn Residency offers registry ready plots in Pipariya, Dholera with NA NOC, immediate possession, Just 5 mins from Dholera SIR Boundary."
+        content="Explore WestWyn Residency in Pipariya, Dholera premium registry-ready residential plots with strong connectivity, document support, and guided site visit assistance for serious buyers."
       />
       <meta 
         name="keywords"
@@ -275,7 +275,7 @@ export default function HeroCarousel() {
 
       <div className="">
         <CommonForm
-          title="Want to Know More About WestWyn Residency?"
+          title="Get Brochure, Price Sheet & Project Guidance"
           button="Connect with an Expert"
         />
       </div>

@@ -70,17 +70,20 @@ const WestWynAboutSection = () => {
         {/* Header Section */}
         <div className="text-center mb-4 space-y-2">
           <h1 className="text-[32px] font-bold text-[#deae3c]">
-            WestWyn Residency
+            WestWyn Residency{" "}
+            <span className="text-black">
+              - Govt Approved Premium Residential Plots
+            </span>
           </h1>
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
-            WestWyn Residency a premium residential plotted soceity in Pipariya,
-            Dholera, designed for buyers who value location, connectivity, and
-            long term Investment Growth. With easy access to the Dholera SIR
-            boundary, Bhimnath Railway station, Activation Area, Dholera
-            expressway, and airport corridor, the project offers residential
-            plots with immediate registry in the most connected and developed
-            region in Dholera.
+            WestWyn Residency is a premium residential plotted society in
+            Pipariya, Dholera, designed for buyers who want location advantage,
+            documentation clarity, and long-term confidence. With strong
+            connectivity to the Dholera SIR boundary, Bhimnath Railway Station,
+            Ahmedabad-Dholera Expressway, Activation Area, and airport corridor,
+            this project offers registry-ready residential plots in one of the
+            most strategically connected parts of Dholera.
           </p>
         </div>
 
