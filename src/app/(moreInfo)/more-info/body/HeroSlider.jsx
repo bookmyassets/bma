@@ -344,19 +344,6 @@ export default function LandingPage({ openForm }) {
                   <span className="text-[#b8892a] font-bold">₹8 Lakh</span>
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-2 mb-5">
-                {trustItems.map(({ icon: Icon, label }) => (
-                  <div
-                    key={label}
-                    className="flex items-center gap-1.5 bg-white border border-[#deae3c]/30 rounded-lg px-2 py-2"
-                  >
-                    <Icon className="w-3.5 h-3.5 text-[#b8892a] flex-shrink-0" />
-                    <span className="text-xs font-medium text-gray-700">
-                      {label}
-                    </span>
-                  </div>
-                ))}
-              </div>
               <form noValidate>
                 <div className="space-y-3">
                   {errorMessage && (
