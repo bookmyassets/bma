@@ -40,75 +40,80 @@ function ProjectCard({ projectName, sections, essentials, location }) {
       </div>
 
       {/* Image */}
-      <div className="rounded-lg flex justify-center items-center overflow-hidden mb-6">
-        <Image
-          src={sections[activeSection].image}
-          alt={sections[activeSection].title}
-          className="md:w-1/2 rounded-lg object-cover"
-        />
-      </div>
-
-      {/* Tab Navigation */}
-      <div className="flex border-b mb-6">
-        {sections.map((section, index) => (
-          <button
-            key={section.title}
-            onClick={() => setActiveSection(index)}
-            className={`pb-3 px-6 font-semibold transition-all relative ${
-              activeSection === index
-                ? "text-[#deae3c]"
-                : "text-gray-400 hover:text-gray-600"
-            }`}
-          >
-            {section.title}
-            {activeSection === index && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#deae3c]" />
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Content */}
-      <h3 className="text-xl font-bold text-black mb-4">
-        {sections[activeSection].title}
-      </h3>
-
-      {sections[activeSection].title === "Amenities" ||
-      sections[activeSection].title === "Location Advantage" ? (
-        <div className="grid grid-cols-2 gap-x-6 gap-y-5">
-          {(sections[activeSection].title === "Amenities"
-            ? essentials
-            : location
-          ).map(({ label, icon: Icon }) => (
-            <div key={label} className="flex items-center gap-3">
-              <Icon
-                size={24}
-                strokeWidth={1.5}
-                className="text-black shrink-0"
-              />
-              <span className="text-sm font-medium text-gray-800">{label}</span>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm">
-          {sections[activeSection].content}
-        </p>
-      )}
-
-      {/* Dot Indicators */}
-      <div className="flex gap-2 mt-8">
-        {sections.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActiveSection(i)}
-            className={`h-2 rounded-full transition-all ${
-              i === activeSection
-                ? "w-16 bg-gray-900"
-                : "w-8 bg-gray-300 hover:bg-gray-400"
-            }`}
+      <div className="md:grid md:grid-cols-2 md:space-x-8">
+        <div className="rounded-lg flex justify-center items-center overflow-hidden mb-6">
+          <Image
+            src={sections[activeSection].image}
+            alt={sections[activeSection].title}
+            className=" rounded-lg object-cover"
           />
-        ))}
+        </div>
+
+        {/* Tab Navigation */}
+        <div>
+          <div className="flex border-b mb-6">
+            {sections.map((section, index) => (
+              <button
+                key={section.title}
+                onClick={() => setActiveSection(index)}
+                className={`pb-3 px-6 font-semibold transition-all relative ${
+                  activeSection === index
+                    ? "text-[#deae3c]"
+                    : "text-gray-400 hover:text-gray-600"
+                }`}
+              >
+                {section.title}
+                {activeSection === index && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#deae3c]" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Content */}
+          <h3 className="text-xl font-bold text-black mb-4">
+            {sections[activeSection].title}
+          </h3>
+          {sections[activeSection].title === "Amenities" ||
+          sections[activeSection].title === "Location Advantage" ? (
+            <div className="grid grid-cols-2 gap-x-6 gap-y-5">
+              {(sections[activeSection].title === "Amenities"
+                ? essentials
+                : location
+              ).map(({ label, icon: Icon }) => (
+                <div key={label} className="flex items-center gap-3">
+                  <Icon
+                    size={24}
+                    strokeWidth={1.5}
+                    className="text-black shrink-0"
+                  />
+                  <span className="text-sm font-medium text-gray-800">
+                    {label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm">
+              {sections[activeSection].content}
+            </p>
+          )}
+
+          {/* Dot Indicators */}
+          <div className="flex gap-2 mt-8">
+            {sections.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveSection(i)}
+                className={`h-2 rounded-full transition-all ${
+                  i === activeSection
+                    ? "w-16 bg-gray-900"
+                    : "w-8 bg-gray-300 hover:bg-gray-400"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -138,7 +143,10 @@ export default function WestWyn() {
   ];
 
   const location2 = [
-    { label: "Located on Major District Road (MDR) in Pipariya, Dholera", icon: MapPin },
+    {
+      label: "Located on Major District Road (MDR) in Pipariya, Dholera",
+      icon: MapPin,
+    },
     { label: "2 minutes from Railway Station", icon: GiRailway },
     { label: "5 minutes from Dholera SIR boundary", icon: Clock },
     { label: "12 minutes from Ahmedabad Dholera Expressway", icon: GiRoad },
@@ -182,7 +190,6 @@ export default function WestWyn() {
 
       {/* Mobile: stacked */}
       <div className="lg:hidden px-4 py-8 space-y-12">
-        
         <ProjectCard
           projectName="WestWyn Residency"
           sections={sections2}

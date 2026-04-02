@@ -538,22 +538,6 @@ export default function LandingPage({ openForm }) {
           </div>
 
           {/* Trust pills — horizontal scroll, no wrap */}
-          <div
-            className="grid grid-cols-2 gap-1.5 overflow-x-auto pb-1 mb-3 scrollbar-none"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {trustItems.map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex items-center  gap-1 bg-amber-50 border border-[#deae3c]/40 rounded-full px-2.5 py-1 flex-shrink-0"
-              >
-                <Icon className="w-3 h-3 text-[#b8892a]" />
-                <span className="text-[14px] font-semibold text-center text-[#7a5510] whitespace-nowrap">
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
 
           {/* Form */}
           <form noValidate>

@@ -30,10 +30,10 @@ const blocks = [
 export default function WhyNCRInvestors() {
   return (
     <section
-      className="w-full py-14 px-4 md:px-10 lg:px-20"
+      className="w-full py-8 px-4 md:px-10 lg:px-20"
       style={{ backgroundColor: "#0d0d0d" }}
     >
-      <div className="max-w-5xl mx-auto space-y-10">
+      <div className="max-w-7xl mx-auto space-y-4">
 
         {/* ── Header ── */}
         <div className="space-y-4 max-w-3xl">
@@ -57,7 +57,7 @@ export default function WhyNCRInvestors() {
           {blocks.map((block) => (
             <div
               key={block.number}
-              className="rounded-2xl p-6 md:p-8 flex flex-col gap-4 group transition-all duration-300"
+              className="rounded-2xl p-2 md:p-4 flex flex-col gap-4 group transition-all duration-300"
               style={{
                 backgroundColor: "#1a1a1a",
                 border: "1px solid rgba(255,255,255,0.07)",
@@ -74,16 +74,16 @@ export default function WhyNCRInvestors() {
               {/* Top row: number + icon */}
               <div className="flex items-center justify-between">
                 <span
-                  className="text-xs font-bold tracking-widest"
+                  className=" md:text-lg  font-bold tracking-widest"
                   style={{ color: "#deae3c" }}
                 >
                   {block.number}
                 </span>
                 <span
-                  className="text-xl w-9 h-9 rounded-xl flex items-center justify-center"
+                  className="text-xl w-12 h-12 rounded-xl flex items-center justify-center"
                   style={{
                     backgroundColor: "rgba(222,174,60,0.1)",
-                    fontSize: "18px",
+                    fontSize: "32px",
                   }}
                 >
                   {block.icon}
