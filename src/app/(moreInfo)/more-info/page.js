@@ -14,6 +14,8 @@ import MegaIndustries from "./body/MegaIndustries";
 import TestimonialPagination from "./components/Testimonials";
 import ImageZoom from "./components/ImageZoom";
 import NewSection from "./body/NewSection";
+import LegalClarity from "./body/LegalClarity";
+import WhyNCRInvestors from "./body/WhyNCR";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -40,26 +42,17 @@ export default function Page() {
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
         <DholeraLandingPage />
         <NewSection/>
+        <LegalClarity/>
         {/* Mega Industries crousel */}
         <MegaIndustries />
-        {/* Westwyn Estate */}
-        {/*         <ProjectSlider/> */}
-  
-        {/* About BookMyAssets */}
+        <WhyNCRInvestors/>
         <AboutBMA />
         {/* Lead Form */}
         <Ribbon />
         <Gallery />
         <Dholeravideos />
         <TestimonialPagination />
-        {/*  <AboutBMA/> */}
-        {/* <Westwyn />
-        <Ammenties />
-        <WhyDholera />
-        <WhyInvest />
-        <TestimonialPagination />
-        <FAQSection />
-        <EndSection /> */}
+       
         <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
       </div>
 

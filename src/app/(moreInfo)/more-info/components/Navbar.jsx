@@ -71,9 +71,7 @@ export default function Navbar() {
   const navItems = [
     { href: "#hero", label: "Home" },
     { href: "#dholera", label: "Dholera" },
-    { href: "#major-projects", label: "Major Projects" },
     { href: "#westwyn-estates", label: "Westwyn Estates" },
-    /* { href: "#WhyInvest", label: "Investment Benefits" }, */
     { href: "#why-bma", label: "Why BMA" },
     { href: "#Gallery", label: "Gallery" },
     { href: "#videos", label: "Dholera Live" },

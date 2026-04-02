@@ -31,7 +31,7 @@ function ProjectCard({ projectName, sections, essentials, location }) {
   const [activeSection, setActiveSection] = useState(0);
 
   return (
-    <div className="flex flex-col">
+    <div className="">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-center">
@@ -40,11 +40,11 @@ function ProjectCard({ projectName, sections, essentials, location }) {
       </div>
 
       {/* Image */}
-      <div className="rounded-lg shadow-xl overflow-hidden mb-6">
+      <div className="rounded-lg flex justify-center items-center overflow-hidden mb-6">
         <Image
           src={sections[activeSection].image}
           alt={sections[activeSection].title}
-          className="w-full object-cover"
+          className="md:w-1/2 rounded-lg object-cover"
         />
       </div>
 
@@ -169,15 +169,9 @@ export default function WestWyn() {
   ];
 
   return (
-    <div className="w-full bg-white" id="westwyn-estates">
+    <div className="w-[1/2] bg-white" id="westwyn-estates">
       {/* Desktop: Two independent project columns */}
-      <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 max-w-7xl mx-auto px-8 py-12">
-        <ProjectCard
-          projectName="WestWyn Estate"
-          sections={sections}
-          essentials={essentials}
-          location={location}
-        />
+      <div className="hidden lg:block lg:gap-12 max-w-7xl mx-auto px-8 py-12">
         <ProjectCard
           projectName="WestWyn Residency"
           sections={sections2}
@@ -188,12 +182,7 @@ export default function WestWyn() {
 
       {/* Mobile: stacked */}
       <div className="lg:hidden px-4 py-8 space-y-12">
-        <ProjectCard
-          projectName="WestWyn Estate"
-          sections={sections}
-          essentials={essentials}
-          location={location}
-        />
+        
         <ProjectCard
           projectName="WestWyn Residency"
           sections={sections2}
