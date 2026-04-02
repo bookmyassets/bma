@@ -5,6 +5,20 @@ import bg from "@/assests/bg-image.webp"
 
 const locations = [
   {
+    name: "WestWyn Residency",
+    coordinates: "22°41'50.2\"N 72°21'18.8\"E",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4395.496159798104!2d71.98350837596773!3d22.22599997974006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f2d000a9dce15%3A0x11321e23c1c9298c!2sWestWyn%20Residency!5e1!3m2!1sen!2sin!4v1775131856118!5m2!1sen!2sin",
+    link: "https://maps.app.goo.gl/RtiA6KcF5cr94jEG6",
+  },
+  {
+    name: "WestWyn Estates",
+    coordinates: "22°41'50.2\"N 72°21'18.8\"E",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4395.187065104911!2d71.91267047596803!3d22.23585807973304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f33007987615f%3A0x28c9c473efaffc7c!2sWestWyn%20Estates!5e1!3m2!1sen!2sin!4v1775131748459!5m2!1sen!2sin",
+    link: "https://maps.app.goo.gl/ZcfH7r7QVi8F2n3F7",
+  },
+  {
     name: "WestWyn County",
     coordinates: "22°41'50.2\"N 72°21'18.8\"E",
     mapSrc:
