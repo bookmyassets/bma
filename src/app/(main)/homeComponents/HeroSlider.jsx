@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback, memo } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { ChevronRight, ChevronLeft, Pause, Play } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 import img1 from "@/assests/homepage/hero2/westwyn-estate-dholera-residential-plots-desktop.webp";
 import img2 from "@/assests/homepage/hero2/dholera-international-airport-desktop.webp";
@@ -56,13 +56,13 @@ const NavButton = memo(({ onClick, direction, ariaLabel }) => (
     aria-label={ariaLabel}
     type="button"
     className={`
-      absolute
+      absolute flex justify-center items-center
       ${
         direction === "left"
-          ? "left-[calc(0.5rem+0.5vw)]" // ✅ calc() — stays off edge on any screen
+          ? "left-[calc(0.5rem+0.5vw)]"
           : "right-[calc(0.5rem+0.5vw)]"
       }
-      top-1/2 -translate-y-1/2 z-10
+      top-1/2 z-10
       bg-black/50 hover:bg-black/75 text-white
       p-2 rounded-full transition-colors touch-manipulation
     `}
@@ -258,20 +258,7 @@ export default function HeroSlider({ openForm }) {
                 ariaLabel="Next slide"
               />
 
-              {!isMobile && (
-                <button
-                  onClick={() => setIsPaused((p) => !p)}
-                  aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
-                  type="button"
-                  className="absolute top-3 right-3 z-10 bg-black/50 hover:bg-black/75 text-white p-1.5 rounded-full transition-colors"
-                >
-                  {isPaused ? (
-                    <Play className="w-4 h-4" aria-hidden="true" />
-                  ) : (
-                    <Pause className="w-4 h-4" aria-hidden="true" />
-                  )}
-                </button>
-              )}
+              
 
               <SlideDots
                 total={SLIDES.length}
