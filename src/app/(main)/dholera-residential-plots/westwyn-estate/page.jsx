@@ -157,11 +157,11 @@ export default function HeroCarousel() {
       />
 
       <title>
-        WestWyn Estates Polarpur Dholera | NA NOC Registry Ready Plots
+        WestWyn Estates Dholera | NA/NOC Registry-Ready Plots
       </title>
       <meta
         name="description"
-        content="Explore WestWyn Estates in Polarpur, Dholera with registry ready NA NOC plots, immediate possession, and smooth access to Bhimnath Railway Station and Dholera SIR."
+        content=" Explore WestWyn Estates in Polarpur, Dholera. Premium residential plots near SH-117 and Bhimnath Railway Station with legal clarity, registry support, and site visit assistance."
       />
       <meta
         name="keywords"

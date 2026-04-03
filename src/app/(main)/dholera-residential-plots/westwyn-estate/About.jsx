@@ -70,18 +70,24 @@ const WestWynAboutSection = () => {
         {/* Header Section */}
         <div className="text-center space-y-2">
           <h1 className=" text-[#deae3c] text-[32px] leading-none font-bold">
-            WestWyn Estates <span className="font-semibold text-sm md:text-lg whitespace-nowrap text-black"> <br />Plots Starting from ₹10 Lakh</span>
+            WestWyn Estates{" "}
+            <span className="font-semibold text-sm md:text-lg whitespace-nowrap text-black">
+              {" "}
+              <br />
+              Plots Starting from ₹10 Lakh
+            </span>
           </h1>
 
           <p className=" italic  py-0.5"></p>
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
-            WestWyn Estates a premium residential plotted society in Polarpur,
-            Dholera, designed for Investors who value location, connectivity,
-            and long term potential. Stratigically positioned on State
-            Highway-117, near Bhimnath Railway Station, the expressway corridor,
-            and major industrial growth zones, the project offers a practical
-            entry into one of Gujarat’s most closely watched smart city regions.
+            WestWyn Estates is a thoughtfully planned plotted community in
+            Polarpur, Dholera. With direct access from State Highway-117, close
+            proximity to Bhimnath Railway Station, and strong connectivity to
+            the Dholera SIR boundary, expressway corridor, airport zone, and
+            major industrial growth areas, it offers a practical entry point for
+            long-term buyers who prefer verified opportunities over vague
+            promises.
           </p>
         </div>
 
@@ -94,13 +100,13 @@ const WestWynAboutSection = () => {
                 className="bg-[#deae3c] text-white text-base px-2 md:px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
               >
                 <FaDownload />
-                Download Brochure
+                Get Brochure
               </button>
 
               <Link href="https://wa.me/918130371647">
                 <button className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                   <FaWhatsapp />
-                  Enquire Now
+                  Book Dholera Site Visit
                 </button>
               </Link>
             </div>
@@ -138,7 +144,9 @@ const WestWynAboutSection = () => {
                   <span className="text-[#deae4c] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>Direct Entry from State Highway-117 (150 foot road)</span>
+                  <span>
+                    Direct Entry from State Highway-117 (150 foot road)
+                  </span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
@@ -200,8 +208,8 @@ const WestWynAboutSection = () => {
                   </span>
                   <span>
                     Industrial proximity: Seamless connectivity to TATA
-                    Semiconductor Plant & ReNew Solar Plant. Nearby to
-                    Hebatpur Industrial Area.
+                    Semiconductor Plant & ReNew Solar Plant. Nearby to Hebatpur
+                    Industrial Area.
                   </span>
                 </li>
               </ul>
