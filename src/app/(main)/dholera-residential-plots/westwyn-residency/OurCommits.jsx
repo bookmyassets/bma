@@ -19,7 +19,7 @@ export default function () {
                 { value: "NA/NOC/Title Clearance", label: "Total Land Parcel" },
                 { value: "Immediate Registry", label: "Total Units" },
                 {
-                  value: "365 Days Site Visit Assitance",
+                  value: "365 Days Site Visit Assistance",
                   label: "Plot Sizes",
                 },
                 {
