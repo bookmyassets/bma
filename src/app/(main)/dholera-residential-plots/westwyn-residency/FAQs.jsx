@@ -69,7 +69,7 @@ export default function FAQSection() {
                 className="px-2 py-3 bg-[#deae3c] rounded-md"
                 href="tel:+918130371647"
               >
-                Give Us A Missed Call
+                Request a Call Back
               </a>
             </div>
           </div>

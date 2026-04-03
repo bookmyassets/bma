@@ -94,6 +94,7 @@ export default function CostSheet({
     legalFee: 20000,
     chargeRate: 500,
     ifmsRate: 100,
+    ifms: 0,
     chargeAmount: 0,
     chargeName: "Maintenance Charge",
     chargeType: "maintenance",
@@ -189,6 +190,7 @@ export default function CostSheet({
     if (formData.plotAreaYards && formData.basePlotPriceYards) {
       const plotPrice = plotPriceWithPLC;
       const totalPayment = formData.plotAreaYards * plotPrice;
+      const ifmsCharge = formData.plotAreaYards * 100;
       const chargeAmount = formData.plotAreaYards * formData.chargeRate;
       const totalCharges =
         chargeAmount +
@@ -203,6 +205,7 @@ export default function CostSheet({
         plotAreaFeet,
         totalPaymentYards: totalPayment.toFixed(2),
         chargeAmount: chargeAmount.toFixed(2),
+        ifms: ifmsCharge.toFixed(2),
         totalCharges: totalCharges.toFixed(2),
         plotTotalPayment: plotTotalPayment.toFixed(2),
       }));
@@ -266,6 +269,7 @@ export default function CostSheet({
       const formattedPricePerYard = formatIndianNumber(plotPriceWithPLC);
       const formattedTotalPaymentYards = formatIndianNumber(totalPaymentYards);
       const formattedChargeAmount = formatIndianNumber(chargeAmount);
+      const formattedIfms = formatIndianNumber(ifmsRate);
       /*  const formattedOneTimeMaintenance = formatIndianNumber(oneTimeMaintenance); */
       const formattedLegalFee = formatIndianNumber(legalFee);
       const formattedTotalCharges = formatIndianNumber(totalCharges);
@@ -357,13 +361,12 @@ export default function CostSheet({
       doc.text("Terms & Conditions:", 15, finalY + 6);
       doc.setFontSize(9);
       const terms = [
-        "1. Full payment must be made within the stipulated 45-day period.",
-        "2. Payment milestones: Within 10 Days, Within 25 Days, and 45 Days.",
-        "3. Payment delay or default may result in booking amount forfeiture and plot cancellation.",
-        "4. Stamp duty and registration deposits are additional.",
-        "5. Refunds are available within 14 days of booking; after 15 days, the booking becomes non-refundable.",
-        "6. Company decisions will be communicated only through authorised written communication.",
-        "7. Late Payment Charges:",
+        "1. Full payment must be made within the stipulated timeline.",
+        "2.Payment delay or default may result in booking amount forfeiture and plot cancellation.",
+        "3. Stamp duty and registration deposits are additional",
+        "4. Refunds are available within 14 days of booking; after 15 days, the booking becomes non-refundable.",
+        "5. Company decision only through authorised written communication",
+        "6. Late Payment Charges:",
         "a. Rs. 250/- per sq yard if payment is made after 45 days and within 60 days.",
         "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days.",
         "Note - Kindly acknowledge the payment schedule to ensure a seamless registry process."
