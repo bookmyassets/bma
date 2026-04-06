@@ -469,20 +469,20 @@ export default async function Post({ params }) {
     };
 
     const TableOfContent = ({ headings }) => {
-      // Filter for valid headings with text content
       const validHeadings =
         headings?.filter((heading) => {
           const text = heading.children?.[0]?.text;
           return text && text.trim().length > 0;
         }) || [];
 
-      // Filter for only h1 and h2 headings
-      const h1h2Headings = validHeadings.filter((heading) => {
-        return heading.style === "h1" || heading.style === "h2";
-      });
+      const h1h2Headings = validHeadings.filter(
+        (heading) => heading.style === "h1" || heading.style === "h2",
+      );
 
-      // Hide TOC if no h1 or h2 headings exist
       if (h1h2Headings.length === 0) return null;
+
+      // Declare prevLevel here, outside JSX
+      let prevLevel = 1;
 
       return (
         <div className="my-8 p-6 bg-gradient-to-br from-[#C69C21]/5 to-[#FDB913]/10 rounded-2xl shadow-lg border border-[#C69C21]/20">
@@ -491,8 +491,10 @@ export default async function Post({ params }) {
           </h2>
           <ul className="space-y-3">
             {validHeadings.map((heading, index) => {
+              const rawLevel = parseInt(heading.style.replace("h", ""));
+              const level = Math.min(rawLevel, prevLevel + 1);
+              prevLevel = level;
               const text = heading.children[0].text.trim();
-              const level = parseInt(heading.style.replace("h", ""));
               const indent = (level - 2) * 16;
 
               return (
