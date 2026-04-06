@@ -63,10 +63,11 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         <p className="text-gray-700 mb-4 text-sm">
           Learn which sectors are driving growth in Dholera.
         </p>
-        <a href="tel:+918130371647">
-          <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
-            Book a Free Visit Site Now
-          </button>
+        <a
+          href="tel:+918130371647"
+          className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
+        >
+          Book a Free Visit Site Now
         </a>
       </div>
       <div className="sticky top-24 space-y-6">
@@ -105,10 +106,11 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           </div>
 
           <div className="mt-6 pt-4 border-t border-gray-600">
-            <Link href="/dholera-sir-updates">
-              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39]  p-3 transition-colors">
-                Explore More
-              </button>
+            <Link
+              href="/dholera-sir-updates"
+              className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39]  p-3 transition-colors"
+            >
+              Explore More
             </Link>
           </div>
         </div>
@@ -645,7 +647,7 @@ export default async function Post({ params }) {
                   </h1>
 
                   <div className="flex items-center gap-4 text-black text-sm mb-6">
-                   <div className="flex items-center">
+                    <div className="flex items-center">
                       <svg
                         className="w-4 h-4 mr-1"
                         fill="none"
@@ -672,8 +674,6 @@ export default async function Post({ params }) {
                         {formattedDate}
                       </time>
                     </div>
-
-                 
                   </div>
                 </div>
 
