@@ -996,7 +996,7 @@ export default async function Post({ params }) {
                                   </div>
                                 )}
                                 <div className="flex items-center gap-2 text-[#C69C21] font-semibold text-sm group-hover:gap-3 transition-all duration-300">
-                                  <span>Read More</span>
+                                  <span>Explore More</span>
                                   <svg
                                     className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                     fill="none"

@@ -52,11 +52,11 @@ export default function BlogCard({ post }) {
           {/* Footer with "Read More" */}
           <div className="border-t border-gray-200 pt-4 mt-auto">
             <div className="flex justify-between text-sm">
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-black">
                   {formatDate(post.publishedAt || post._createdAt)}
                 </p>
                 <button className="font-medium hover:underline text-[#deae3c]">
-                  Read More →
+                  Explore More →
                 </button>
             </div>
           </div>
