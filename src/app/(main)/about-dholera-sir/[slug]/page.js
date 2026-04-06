@@ -93,8 +93,11 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           </div>
 
           <div className="mt-6 pt-4 border-t border-gray-600">
-            <Link href="/about-dholera-sir" className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors">
-                Explore More
+            <Link
+              href="/about-dholera-sir"
+              className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors"
+            >
+              Explore More
             </Link>
           </div>
         </div>
@@ -105,10 +108,11 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           <p className="text-gray-700 mb-4 text-sm">
             Interested in our insights? Contact our experts
           </p>
-          <a href="tel:+918130371647">
-            <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
-              Contact Now
-            </button>
+          <a
+            href="tel:+918130371647"
+            className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
+          >
+            Contact Now
           </a>
         </div>
       </div>
@@ -118,7 +122,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = await   getAboutBySlug(slug);
+  const post = await getAboutBySlug(slug);
   return {
     title: post?.metaTitle,
     description: post?.metaDescription,
@@ -610,32 +614,32 @@ export default async function Post({ params }) {
 
                     <div className="flex items-center gap-4 text-black text-[clamp(0.75rem,1.5vw,0.875rem)] mb-6">
                       <div className="flex items-center">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        ></path>
-                      </svg>
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          ></path>
+                        </svg>
 
-                      <time
-                        className="text-black"
-                        dateTime={
-                          new Date(post.publishedAt || post._createdAt)
-                            .toISOString()
-                            .split("T")[0]
-                        }
-                      >
-                        {formattedDate}
-                      </time>
-                    </div>
+                        <time
+                          className="text-black"
+                          dateTime={
+                            new Date(post.publishedAt || post._createdAt)
+                              .toISOString()
+                              .split("T")[0]
+                          }
+                        >
+                          {formattedDate}
+                        </time>
+                      </div>
 
                       {post.readingTime && (
                         <div className="flex items-center">
@@ -767,7 +771,7 @@ export default async function Post({ params }) {
                               {blog.description}
                             </p>
                             <span className="hover:text-[#C69C21] text-[#FDB913] p-1 rounded-xl font-semibold bg-gray-800 inline-flex items-center">
-                             Explore More
+                              Explore More
                             </span>
                           </div>
                         </div>
@@ -803,10 +807,10 @@ export default async function Post({ params }) {
           <h1 className="text-2xl font-bold mb-2">Error loading blog post</h1>
           <p className="text-gray-600">Please try again later</p>
           <Link
-            href="/dholera-sir-blogs"
+            href="/aboout-dholera-sir"
             className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
           >
-            ← Back to Blogs
+            ← Back to Dholera SIR
           </Link>
         </div>
       </div>
