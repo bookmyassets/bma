@@ -847,7 +847,7 @@ export default async function Post({ params }) {
                                   {/* Footer */}
                                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                                     {blog.publishedAt && (
-                                      <div className="flex items-center gap-1.5 text-gray-400">
+                                      <div className="flex items-center gap-1.5 text-black">
                                         <svg
                                           className="w-3.5 h-3.5"
                                           fill="none"
@@ -872,7 +872,7 @@ export default async function Post({ params }) {
                                       </div>
                                     )}
                                     <div className="flex items-center gap-1.5 text-[#C69C21] font-semibold text-sm group-hover:gap-2.5 transition-all duration-300">
-                                      <span>Read More</span>
+                                      <span>Explore More</span>
                                       <svg
                                         className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                         fill="none"
@@ -970,7 +970,7 @@ export default async function Post({ params }) {
                               {/* Footer */}
                               <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100">
                                 {blog.publishedAt && (
-                                  <div className="flex items-center gap-2 text-gray-400">
+                                  <div className="flex items-center gap-2 text-black">
                                     <svg
                                       className="w-4 h-4"
                                       fill="none"
