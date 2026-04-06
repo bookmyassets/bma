@@ -132,6 +132,13 @@ export async function generateMetadata({ params }) {
     title: post?.metaTitle,
     description: post?.metaDescription,
     keywords: post?.keywords,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    other: {
+      publisher: "BookMyAssets",
+    },
     alternates: {
       canonical: `https://www.bookmyassets.com/dholera-sir-blogs/${slug}`,
     },
@@ -528,31 +535,8 @@ export default async function Post({ params }) {
 
     return (
       <>
-        <div>
-          <title>{post.metaTitle}</title>
-
-          <meta name="keywords" content={post.keywords} />
-          <meta name="publisher" content="BookMyAssets" />
-          <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
-
-          {/* Additional SEO meta tags */}
-          <link
-            rel="canonical"
-            href={`https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-          />
-
-          {/* Preload critical resources */}
-          {post.mainImage && (
-            <link
-              rel="preload"
-              as="image"
-              href={urlFor(post.mainImage).width(1200).height(675).url()}
-            />
-          )}
-        </div>
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-20" />
-
           <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
             <div className="flex flex-col lg:flex-row gap-10">
               {/* Main Content */}
