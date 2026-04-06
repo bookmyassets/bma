@@ -46,7 +46,7 @@ export default function BlogCard({ post }) {
           <div className="border-t border-gray-200 pt-4 mt-auto">
             <div className="flex justify-between text-sm">
                 <button className="font-medium hover:underline text-[#deae3c]">
-                  Read More →
+                  Exlpore More →
                 </button>
             </div>
           </div>

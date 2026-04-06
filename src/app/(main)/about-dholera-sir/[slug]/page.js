@@ -118,6 +118,29 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   );
 };
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const post = await   getAboutBySlug(slug);
+  return {
+    title: post?.metaTitle,
+    description: post?.metaDescription,
+    keywords: post?.keywords,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    other: {
+      publisher: "BookMyAssets",
+    },
+    alternates: {
+      canonical: `https://www.bookmyassets.com/about-dholera-sir/${slug}`,
+    },
+    openGraph: {
+      images: post?.mainImage ? [urlFor(post.mainImage).url()] : [],
+    },
+  };
+}
+
 export default async function Post({ params }) {
   const { slug } = await params;
   const site = "bookmyassets";
@@ -503,29 +526,6 @@ export default async function Post({ params }) {
 
     return (
       <>
-        <div>
-          <title>{post.metaTitle}</title>
-          <meta name="description" content={post.metaDescription} />
-          <meta name="keywords" content={post.keywords} />
-          <meta name="publisher" content="BookMyAssets" />
-          <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
-
-          {/* Additional SEO meta tags */}
-          <link
-            rel="canonical"
-            href={`https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
-          />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-          {/* Preload critical resources */}
-          {post.mainImage && (
-            <link
-              rel="preload"
-              as="image"
-              href={urlFor(post.mainImage).width(1200).height(675).url()}
-            />
-          )}
-        </div>
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30" />
 
@@ -610,24 +610,34 @@ export default async function Post({ params }) {
                       {post.title}
                     </h1>
 
-                    <div className="flex items-center gap-4 text-gray-500 text-[clamp(0.75rem,1.5vw,0.875rem)] mb-6">
+                    <div className="flex items-center gap-4 text-black text-[clamp(0.75rem,1.5vw,0.875rem)] mb-6">
                       <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          ></path>
-                        </svg>
-                        <time className="text-gray-500">{formattedDate}</time>
-                      </div>
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        ></path>
+                      </svg>
+
+                      <time
+                        className="text-black"
+                        dateTime={
+                          new Date(post.publishedAt || post._createdAt)
+                            .toISOString()
+                            .split("T")[0]
+                        }
+                      >
+                        {formattedDate}
+                      </time>
+                    </div>
 
                       {post.readingTime && (
                         <div className="flex items-center">
@@ -759,7 +769,7 @@ export default async function Post({ params }) {
                               {blog.description}
                             </p>
                             <span className="hover:text-[#C69C21] text-[#FDB913] p-1 rounded-xl font-semibold bg-gray-800 inline-flex items-center">
-                              Read more
+                             Explore More
                             </span>
                           </div>
                         </div>

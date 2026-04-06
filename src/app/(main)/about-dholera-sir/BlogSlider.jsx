@@ -115,14 +115,14 @@ export default function BlogSlider({ posts = [] }) {
                       {post.title}
                     </h2>
 
-                    {/* Footer with "Read More" */}
+                    {/* Footer with "ExlporeMore" */}
                     <div className="border-t border-gray-200 pt-4 mt-auto">
                       <div className="flex justify-between text-sm">
                         <p className="text-sm text-gray-400">
                           {formatDate(post.publishedAt || post._createdAt)}
                         </p>
                         <button className="font-medium hover:underline text-[#deae3c]">
-                          Read More →
+                          Exlpore More →
                         </button>
                       </div>
                     </div>
@@ -202,11 +202,11 @@ export default function BlogSlider({ posts = [] }) {
                       {post.title}
                     </h2>
 
-                    {/* Footer with "Read More" */}
+                    {/* Footer with "ExlporeMore" */}
                     <div className="border-t border-gray-200 pt-4 mt-auto">
                       <div className=" text-right">
                         <button className="font-medium hover:underline text-[#deae3c]">
-                          Read More →
+                          Exlpore More →
                         </button>
                       </div>
                     </div>
