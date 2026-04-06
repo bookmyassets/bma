@@ -39,7 +39,7 @@ export default function BlogCard({ post }) {
               <div className="flex items-center">
                 <span className="inline-block w-2 h-2 rounded-full bg-[#FDB913] mr-2"></span>
                 <span className="text-black font-medium">
-                  Read More
+                  Explore More
                 </span>
               </div>
               <span className="text-[#C69C21] font-medium">

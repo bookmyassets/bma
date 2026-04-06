@@ -117,34 +117,28 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   );
 };
 
-// Trending Blog Item Component (updated)
-const TrendingBlogItem = ({ post }) => {
-  return (
-    <Link href={`/dholera-sir-updates/${post.slug.current}`}>
-      <div className="flex gap-4 items-center bg-white hover:bg-gray-50 p-4 rounded-lg border border-gray-100 transition-all hover:shadow-md">
-        {post.mainImage && (
-          <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-            <Image
-              src={urlFor(post.mainImage).width(80).height(80).url()}
-              alt={post.title}
-              width={80}
-              height={80}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        )}
-        <div>
-          <h4 className="font-semibold text-gray-900 line-clamp-2">
-            {post.title}
-          </h4>
-          <p className="text-sm text-gray-500 line-clamp-1 mt-1">
-            {post.description}
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-};
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const post = await getUpdateBySlug(slug);
+  return {
+    title: post?.metaTitle,
+    description: post?.metaDescription,
+    keywords: post?.keywords,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    other: {
+      publisher: "BookMyAssets",
+    },
+    alternates: {
+      canonical: `https://www.bookmyassets.com/dholera-sir-updates/${slug}`,
+    },
+    openGraph: {
+      images: post?.mainImage ? [urlFor(post.mainImage).url()] : [],
+    },
+  };
+}
 
 export default async function Post({ params }) {
   const { slug } = await params;
@@ -265,12 +259,12 @@ export default async function Post({ params }) {
             <div className="my-8 overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
               <div
                 className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-white
-                  [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700
-                  [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
-                  [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
-                  [&_tr:last-child_td]:border-b-0 [&_tr:hover]:bg-gray-50/50
-                  [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
-                  [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
+                     [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700
+                     [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
+                     [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
+                     [&_tr:last-child_td]:border-b-0 [&_tr:hover]:bg-gray-50/50
+                     [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
+                     [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
                 dangerouslySetInnerHTML={{ __html: value.html }}
               />
             </div>
@@ -428,18 +422,18 @@ export default async function Post({ params }) {
         bullet: ({ children }) => (
           <li
             className="
-              text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
-              flex items-start gap-3
-              bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
-              hover:shadow-md transition-shadow duration-300
-              [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-xl  [&_h1]:font-bold
-              [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-lg  [&_h2]:font-bold
-              [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-lg  [&_h3]:font-semibold
-              [&_h4]:border-l-0 [&_h4]:pl-0 [&_h4]:bg-transparent [&_h4]:mt-0 [&_h4]:mb-0 [&_h4]:py-0 [&_h4]:text-xl [&_h4]:font-semibold
-              [&_h5]:border-l-0 [&_h5]:pl-0 [&_h5]:bg-transparent [&_h5]:mt-0 [&_h5]:mb-0 [&_h5]:py-0 [&_h5]:text-base [&_h5]:font-semibold
-              [&_h6]:border-l-0 [&_h6]:pl-0 [&_h6]:bg-transparent [&_h6]:mt-0 [&_h6]:mb-0 [&_h6]:py-0 [&_h6]:text-sm  [&_h6]:font-medium
-              [&_span.absolute]:hidden
-            "
+                 text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
+                 flex items-start gap-3
+                 bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
+                 hover:shadow-md transition-shadow duration-300
+                 [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-xl  [&_h1]:font-bold
+                 [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-lg  [&_h2]:font-bold
+                 [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-lg  [&_h3]:font-semibold
+                 [&_h4]:border-l-0 [&_h4]:pl-0 [&_h4]:bg-transparent [&_h4]:mt-0 [&_h4]:mb-0 [&_h4]:py-0 [&_h4]:text-xl [&_h4]:font-semibold
+                 [&_h5]:border-l-0 [&_h5]:pl-0 [&_h5]:bg-transparent [&_h5]:mt-0 [&_h5]:mb-0 [&_h5]:py-0 [&_h5]:text-base [&_h5]:font-semibold
+                 [&_h6]:border-l-0 [&_h6]:pl-0 [&_h6]:bg-transparent [&_h6]:mt-0 [&_h6]:mb-0 [&_h6]:py-0 [&_h6]:text-sm  [&_h6]:font-medium
+                 [&_span.absolute]:hidden
+               "
           >
             <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] mt-1.5 flex-shrink-0 flex justify-center items-center" />
             <div className="flex-1 [&>ul]:mt-2 [&>ul]:mb-0 [&>ol]:mt-2 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:py-1 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:py-1">
@@ -451,15 +445,15 @@ export default async function Post({ params }) {
         number: ({ children }) => (
           <li
             className="
-              text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
-              flex items-start gap-3
-              bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
-              hover:shadow-md transition-shadow duration-300
-              [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-base [&_h1]:font-semibold
-              [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-base [&_h2]:font-semibold
-              [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-base [&_h3]:font-semibold
-              [&_span.absolute]:hidden
-            "
+                 text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
+                 flex items-start gap-3
+                 bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
+                 hover:shadow-md transition-shadow duration-300
+                 [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-base [&_h1]:font-semibold
+                 [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-base [&_h2]:font-semibold
+                 [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-base [&_h3]:font-semibold
+                 [&_span.absolute]:hidden
+               "
             style={{ counterIncrement: "item" }}
           >
             <div className="w-7 h-7 flex-shrink-0 rounded-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] flex items-center justify-center text-white text-xs font-bold mt-0.5">
@@ -530,29 +524,6 @@ export default async function Post({ params }) {
     });
     return (
       <>
-        <div>
-          <title>{post.metaTitle}</title>
-          <meta name="description" content={post.metaDescription} />
-          <meta name="keywords" content={post.keywords?.join(", ")} />
-          <meta name="publisher" content="BookMyAssets" />
-          <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
-
-          {/* Additional SEO meta tags */}
-          <link
-            rel="canonical"
-            href={`https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
-          />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-          {/* Preload critical resources */}
-          {post.mainImage && (
-            <link
-              rel="preload"
-              as="image"
-              href={urlFor(post.mainImage).width(1200).height(675).url()}
-            />
-          )}
-        </div>
         <SlugPageForm
           title="Explore the Latest Development in Dholera"
           button="Talk To A Dholera Expert"
@@ -673,8 +644,8 @@ export default async function Post({ params }) {
                     {post.title}
                   </h1>
 
-                  <div className="flex items-center gap-4 text-gray-500 text-sm mb-6">
-                    <div className="flex items-center">
+                  <div className="flex items-center gap-4 text-black text-sm mb-6">
+                   <div className="flex items-center">
                       <svg
                         className="w-4 h-4 mr-1"
                         fill="none"
@@ -689,28 +660,20 @@ export default async function Post({ params }) {
                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         ></path>
                       </svg>
-                      <time className="text-gray-500">{formattedDate}</time>
+
+                      <time
+                        className="text-black"
+                        dateTime={
+                          new Date(post.publishedAt || post._createdAt)
+                            .toISOString()
+                            .split("T")[0]
+                        }
+                      >
+                        {formattedDate}
+                      </time>
                     </div>
 
-                    {post.readingTime && (
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                        <span>{post.readingTime} min read</span>
-                      </div>
-                    )}
+                 
                   </div>
                 </div>
 
@@ -855,7 +818,7 @@ export default async function Post({ params }) {
                                   {/* Footer */}
                                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                                     {blog.publishedAt && (
-                                      <div className="flex items-center gap-1.5 text-gray-400">
+                                      <div className="flex items-center gap-1.5 text-black">
                                         <svg
                                           className="w-3.5 h-3.5"
                                           fill="none"
@@ -978,7 +941,7 @@ export default async function Post({ params }) {
                               {/* Footer */}
                               <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100">
                                 {blog.publishedAt && (
-                                  <div className="flex items-center gap-2 text-gray-400">
+                                  <div className="flex items-center gap-2 text-black">
                                     <svg
                                       className="w-4 h-4"
                                       fill="none"
@@ -1004,7 +967,7 @@ export default async function Post({ params }) {
                                   </div>
                                 )}
                                 <div className="flex items-center gap-2 text-[#C69C21] font-semibold text-sm group-hover:gap-3 transition-all duration-300">
-                                  <span>Read More</span>
+                                  <span>Explore More</span>
                                   <svg
                                     className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                     fill="none"
