@@ -65,10 +65,11 @@ const RightSidebar = ({ trendingBlogs }) => {
         <p className="text-gray-700 mb-4 text-sm">
           Learn which sectors are driving growth in Dholera.
         </p>
-        <a href="tel:+918130371647">
-          <button className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
-            Book a Free Visit Site Now
-          </button>
+        <a
+          href="tel:+918130371647"
+          className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
+        >
+          Book a Free Visit Site Now
         </a>
       </div>
       <div className="sticky top-24 space-y-6">
@@ -109,10 +110,11 @@ const RightSidebar = ({ trendingBlogs }) => {
           </div>
 
           <div className="mt-6 pt-4 border-t border-gray-600">
-            <Link href="/dholera-sir-updates">
-              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors">
-                Explore More
-              </button>
+            <Link
+              href="/dholera-sir-updates"
+              className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors"
+            >
+              Explore More
             </Link>
           </div>
         </div>
@@ -123,34 +125,21 @@ const RightSidebar = ({ trendingBlogs }) => {
   );
 };
 
-// Trending Blog Item Component (updated)
-const TrendingBlogItem = ({ post }) => {
-  return (
-    <Link href={`/blogs/${post.slug.current}`}>
-      <div className="flex gap-4 items-center bg-white hover:bg-gray-50 p-4 rounded-lg border border-gray-100 transition-all hover:shadow-md">
-        {post.mainImage && (
-          <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-            <Image
-              src={urlFor(post.mainImage).width(80).height(80).url()}
-              alt={post.title}
-              width={80}
-              height={80}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        )}
-        <div>
-          <h4 className="font-semibold text-gray-900 line-clamp-2">
-            {post.title}
-          </h4>
-          <p className="text-sm text-gray-500 line-clamp-1 mt-1">
-            {post.description}
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-};
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const post = await getBlogBySlug(slug);
+  return {
+    title: post?.metaTitle,
+    description: post?.metaDescription,
+    keywords: post?.keywords,
+    alternates: {
+      canonical: `https://www.bookmyassets.com/dholera-sir-blogs/${slug}`,
+    },
+    openGraph: {
+      images: post?.mainImage ? [urlFor(post.mainImage).url()] : [],
+    },
+  };
+}
 
 export default async function Post({ params }) {
   const { slug } = await params;
@@ -539,7 +528,7 @@ export default async function Post({ params }) {
       <>
         <div>
           <title>{post.metaTitle}</title>
-          <meta name="description" content={post.metaDescription} />
+
           <meta name="keywords" content={post.keywords} />
           <meta name="publisher" content="BookMyAssets" />
           <BlogSchemaMarkup post={post} relatedBlogs={relatedBlogs} />
@@ -549,7 +538,6 @@ export default async function Post({ params }) {
             rel="canonical"
             href={`https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
           />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
 
           {/* Preload critical resources */}
           {post.mainImage && (
@@ -675,7 +663,7 @@ export default async function Post({ params }) {
                     {post.title}
                   </h1>
 
-                  <div className="flex items-center gap-4 text-gray-500 text-sm mb-6">
+                  <div className="flex items-center gap-4 text-black text-sm mb-6">
                     <div className="flex items-center">
                       <svg
                         className="w-4 h-4 mr-1"
@@ -691,7 +679,17 @@ export default async function Post({ params }) {
                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         ></path>
                       </svg>
-                      <time className="text-gray-500">{formattedDate}</time>
+
+                      <time
+                        className="text-black"
+                        dateTime={
+                          new Date(post.publishedAt || post._createdAt)
+                            .toISOString()
+                            .split("T")[0]
+                        }
+                      >
+                        {formattedDate}
+                      </time>
                     </div>
 
                     {post.readingTime && (
