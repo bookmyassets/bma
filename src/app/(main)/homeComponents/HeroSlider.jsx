@@ -218,7 +218,7 @@ export default function HeroSlider({ openForm }) {
 
   return (
     // ✅ min-h-[100dvh] — accounts for mobile browser toolbar collapsing
-    <div id="hero" className="relative min-h-[87dvh] bg-white">
+    <div id="hero" className="relative min-h-[87dvh] bg-white md:overflow-hidden">
       {/* ✅ h-[100dvh] + max-sm:h-[80dvh] — dvh replaces vh everywhere */}
       <div className="h-[100dvh] max-sm:h-[80dvh] flex flex-col">
         <div className="flex-1 flex flex-col lg:flex-row md:min-h-0">
