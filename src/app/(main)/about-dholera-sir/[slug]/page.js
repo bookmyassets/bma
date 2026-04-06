@@ -93,10 +93,8 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           </div>
 
           <div className="mt-6 pt-4 border-t border-gray-600">
-            <Link href="/about-dholera-sir">
-              <button className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors">
+            <Link href="/about-dholera-sir" className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors">
                 Explore More
-              </button>
             </Link>
           </div>
         </div>
