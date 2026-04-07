@@ -32,14 +32,14 @@ function VideoFacade({ youtubeId, title, onActivate }) {
         width={480}
         height={270}
       />
-      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-20 h-14 rounded-2xl bg-red-600 group-hover:bg-red-500 flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-110">
+      <span className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
+      <span className="absolute inset-0 flex items-center justify-center">
+        <span className="w-20 h-14 rounded-2xl bg-red-600 group-hover:bg-red-500 flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-110">
           <svg className="w-9 h-9 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z" />
           </svg>
-        </div>
-      </div>
+        </span>
+      </span>
     </button>
   );
 }
