@@ -45,9 +45,9 @@ export default function BlogCard({ post }) {
           {/* Footer with "Read More" */}
           <div className="border-t border-gray-200 pt-4 mt-auto">
             <div className="flex justify-between text-sm">
-                <button className="font-medium hover:underline text-[#deae3c]">
+                <p className="font-medium hover:underline text-[#deae3c]">
                   Exlpore More →
-                </button>
+                </p>
             </div>
           </div>
         </div>

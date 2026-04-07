@@ -205,9 +205,9 @@ export default function BlogSlider({ posts = [] }) {
                     {/* Footer with "ExlporeMore" */}
                     <div className="border-t border-gray-200 pt-4 mt-auto">
                       <div className=" text-right">
-                        <button className="font-medium hover:underline text-[#deae3c]">
+                        <p className="font-medium hover:underline text-[#deae3c]">
                           Exlpore More →
-                        </button>
+                        </p>
                       </div>
                     </div>
                   </div>
