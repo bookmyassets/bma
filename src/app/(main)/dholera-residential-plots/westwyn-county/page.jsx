@@ -476,10 +476,10 @@ export default function HeroCarousel() {
               </button>
 
               <a href="https://wa.me/918130371647">
-                <button className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                <p className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                   <FaWhatsapp />
                   Book Site Visit
-                </button>
+                </p>
               </a>
             </div>
           </div>
