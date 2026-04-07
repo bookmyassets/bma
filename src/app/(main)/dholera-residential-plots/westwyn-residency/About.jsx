@@ -100,10 +100,10 @@ const WestWynAboutSection = () => {
               </button>
 
               <Link href="https://wa.me/918130371647">
-                <button className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                <p className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                   <FaWhatsapp />
                   Book Site Visit
-                </button>
+                </p>
               </Link>
             </div>
           </div>
