@@ -55,9 +55,9 @@ export default function BlogCard({ post }) {
                 <p className="text-sm text-black">
                   {formatDate(post.publishedAt || post._createdAt)}
                 </p>
-                <button className="font-medium hover:underline text-[#deae3c]">
+                <p className="font-medium hover:underline text-[#deae3c]">
                   Explore More →
-                </button>
+                </p>
             </div>
           </div>
         </div>
