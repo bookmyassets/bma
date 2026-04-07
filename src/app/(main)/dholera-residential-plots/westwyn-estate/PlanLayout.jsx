@@ -194,10 +194,10 @@ const PlanLayout = () => {
                 </button>
 
                 <Link href="https://maps.app.goo.gl/UkvNKmgf1yPF8eKS6">
-                  <button className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                  <p className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                     <FaMapLocation />
                     Project Location
-                  </button>
+                  </p>
                 </Link>
               </div>
             </div>
