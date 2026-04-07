@@ -167,9 +167,9 @@ export default async function page() {
                                   post.publishedAt || post._createdAt
                                 )}
                               </p>
-                              <button className="font-medium hover:underline text-[#deae3c]">
-                                Read More →
-                              </button>
+                              <p className="font-medium hover:underline text-[#deae3c]">
+                                Explore More →
+                              </p>
                             </div>
                           </div>
                         </Link>
