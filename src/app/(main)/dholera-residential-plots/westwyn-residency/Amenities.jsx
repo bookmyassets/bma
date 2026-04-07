@@ -137,32 +137,6 @@ const ProjectAmenities = () => {
 
   return (
     <>
-      <Head>
-        <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(16px); }
-          to { opacity: 1; transform: translateY(0); }
-          }
-          .amenity-card {
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-            }
-            .amenity-card:hover {
-              transform: translateY(-4px);
-              box-shadow: 0 16px 32px rgba(222,174,60,0.14);
-              border-color: #deae3c !important;
-              }
-              .amenity-card:hover .card-icon {
-                transform: scale(1.12) rotate(-4deg);
-                }
-                .card-icon { transition: transform 0.3s ease; }
-                .show-btn {
-                  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
-                  }
-                  .show-btn:hover {
-                    box-shadow: 0 8px 24px rgba(222,174,60,0.3);
-                    }
-                    `}</style>
-      </Head>
 
       <div className="bg-white py-4 sm:py-10 lg:py-4 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
