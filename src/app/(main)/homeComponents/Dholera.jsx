@@ -44,24 +44,24 @@ function HighlightCard({ title, body }) {
         }
       `}
     >
-      <p className={`text-[clamp(0.75rem,1.2vw,0.875rem)] font-semibold leading-snug transition-colors duration-200 ${open ? "text-[#c49b2e]" : "text-black"}`}>
+      <span className={`text-[clamp(0.75rem,1.2vw,0.875rem)] font-semibold leading-snug transition-colors duration-200 ${open ? "text-[#c49b2e]" : "text-black"}`}>
         {title}
-      </p>
+      </span>
 
       {/* Body — grid-rows trick for smooth expand */}
-      <div
+      <span
         style={{
           display: "grid",
           gridTemplateRows: open ? "1fr" : "0fr",
           transition: "grid-template-rows 0.26s ease",
         }}
       >
-        <div className="overflow-hidden">
-          <p className="text-[clamp(0.75rem,1.1vw,0.8125rem)] text-gray-500 leading-relaxed mt-2">
+        <span className="overflow-hidden">
+          <span className="text-[clamp(0.75rem,1.1vw,0.8125rem)] text-gray-500 leading-relaxed mt-2">
             {body}
-          </p>
-        </div>
-      </div>
+          </span>
+        </span>
+      </span>
     </button>
   );
 }

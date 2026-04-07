@@ -1,10 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import BMAimage from "@/assests/BMA.webp";
 import LeadForm from "../components/LeadForm";
-import { FaCheckCircle, FaHeadset } from "react-icons/fa";
-import { FaLocationDot, FaFileCircleCheck } from "react-icons/fa6";
 import { FileCheck, MapPinned, FileSearch, Headset } from "lucide-react";
 
 const COUNTERS = [

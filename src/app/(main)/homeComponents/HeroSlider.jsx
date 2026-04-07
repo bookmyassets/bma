@@ -79,15 +79,14 @@ NavButton.displayName = "NavButton";
 const SlideDots = memo(({ total, current, onSelect }) => (
   <div
     className="absolute bottom-14 left-1/2 -translate-x-1/2 z-10 flex gap-2"
-    role="tablist"
+    role="group"
     aria-label="Slide navigation"
   >
     {Array.from({ length: total }).map((_, i) => (
       <button
         key={i}
-        role="tab"
-        aria-selected={i === current}
         aria-label={`Go to slide ${i + 1} of ${total}`}
+        aria-current={i === current ? "true" : undefined}
         onClick={() => onSelect(i)}
         type="button"
         className={`
