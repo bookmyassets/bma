@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import ROI from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
+import Link from "next/link";
 
 const highlights = [
   {
@@ -100,8 +101,8 @@ export default function DholeraSmartCity() {
               Why Long-Term Investors Are Watching Dholera
             </h3>
             <p className="text-[clamp(0.875rem,1.5vw,1rem)] text-gray-600 leading-relaxed">
-              Dholera Smart City is India's first greenfield smart city, designed with world class
-              infrastructure and unmatched growth potential. The Dholera project offers prime
+              <Link href="https://www.bookmyassets.com/about-dholera-sir/infrastructure-development" title="Dholera Smart City" className="text-[#deae3c]">Dholera Smart City</Link> is India's first greenfield smart city, designed with world class
+              infrastructure and unmatched growth potential. The <Link href="https://www.bookmyassets.com/dholera-sir-blogs/dholera-sir-pm-narendra-modi-dream-smart-city-project" title="Dholera Project" className="text-[#deae3c]">Dholera project</Link> offers prime
               industrial, commercial, and residential opportunities backed by government support and
               rapid development. Invest today to be part of a future ready city built for innovation,
               sustainability, and prosperity.

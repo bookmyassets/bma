@@ -79,8 +79,8 @@ export default function WestWyn() {
 
           <div className="space-y-6 pt-4">
             <p className="text-[clamp(0.875rem,1.5vw,1rem)] text-gray-600 leading-relaxed">
-              WestWyn Estates is a planned community for buyers looking at a
-              well-connected location near Dholera SIR. It offers access from
+              <Link href='/dholera-residential-plots/westwyn-estate' title="WestWyn Estates" className="text-[#deae3c]">WestWyn Estates</Link> is a planned community for buyers looking at a
+              well-connected location near <Link href='/about-dholera-sir' title="Dholera SIR" className="text-[#deae3c]">Dholera SIR</Link>. It offers access from
               State Highway-117 and is positioned for investors who want a
               practical plotted option with long-term holding potential.
             </p>

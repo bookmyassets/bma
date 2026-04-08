@@ -45,7 +45,7 @@ const RelatedBlogCard = ({ item, type }) => {
               {item.title}
             </h3>
 
-            <div className="text-xs text-gray-500 mb-3">
+            <div className="text-xs text-black mb-3">
               <time className="block mb-1">
                 {new Date(
                   item.publishedAt || item._createdAt,
@@ -55,11 +55,10 @@ const RelatedBlogCard = ({ item, type }) => {
                   year: "numeric",
                 })}
               </time>
-              <span className="font-medium">BookMyAssets</span>
             </div>
 
             <span className="text-[#deae3c] hover:text-[#deae4c] text-[clamp(0.75rem,1.2vw,0.875rem)] font-medium inline-flex items-center group">
-              Read More
+              Explore More
               <svg
                 className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
                 fill="none"
