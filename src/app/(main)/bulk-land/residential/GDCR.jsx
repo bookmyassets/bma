@@ -5,7 +5,7 @@ export default function GDCR() {
   return (
     <div className="max-w-7xl mx-auto bg-gradient-to-b from-blue-50 to-gray-100 py-4 px-4 sm:px-6 lg:px-8 space-y-4">
       <div>
-        <section style={{ margin: "40px 0" }}>
+        <div style={{ margin: "40px 0" }}>
           <div className="w-full space-y-3 max-md:flex flex-col justify-center items-center px-4 py-8 sm:px-6 lg:px-8">
             <p className="text-center text-2xl mb-4">
               General Development Control Regulations - Full Document
@@ -31,7 +31,7 @@ export default function GDCR() {
           >
             ⬇ Download Full DCR Document
           </a>
-        </section>
+        </div>
       </div>
     </div>
   );

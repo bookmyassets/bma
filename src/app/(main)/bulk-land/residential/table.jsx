@@ -187,7 +187,7 @@ export default function Table() {
       </div>
 
 <div>
-  <section style={{ margin: "40px 0" }}>
+  <div style={{ margin: "40px 0" }}>
     <h3>General Development Control Regulations – Full Document</h3>
     <p>
       Official regulations as published by the Government of Gujarat for
@@ -219,7 +219,7 @@ export default function Table() {
     >
       ⬇ Download Full DCR Document
     </a>
-  </section>
+  </div>
 </div>
 
       <style jsx>{`
