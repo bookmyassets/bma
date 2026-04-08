@@ -409,25 +409,7 @@ export default function HeroCarousel() {
                     Unbeatable Price in Dholera
                   </motion.button>
 
-                  {/* Secondary CTA */}
-                  <motion.button
-                    onClick={() =>
-                      openBrochureForm(
-                        "Get Verified Project Details",
-                        "Please fill out the form to download our brochure",
-                        "Get Project Details",
-                        "brochure",
-                      )
-                    }
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.1 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-white border-2 border-yellow-500 text-yellow-600 text-sm sm:text-base rounded-lg hover:bg-yellow-50 transition-all shadow-md font-semibold"
-                  >
-                    Download Brochure
-                  </motion.button>
+                 
                 </motion.div>
               </motion.div>
             </div>
@@ -606,19 +588,19 @@ export default function HeroCarousel() {
                       aria-expanded={openIndex === index}
                       aria-controls={`benefit-${index}`}
                     >
-                      <div className="flex items-center space-x-4">
+                      <span className="flex items-center space-x-4">
                         <span className="text-2xl">{benefit.icon}</span>
                         <span className="text-lg md:text-xl font-semibold text-gray-800 group-hover:text-[#deae3c]">
                           {benefit.title}
                         </span>
-                      </div>
-                      <div className="flex-shrink-0 transition-transform duration-200">
+                      </span>
+                      <span className="flex-shrink-0 transition-transform duration-200">
                         {openIndex === index ? (
                           <Minus className="w-6 h-6 text-[#deae3c]" />
                         ) : (
                           <Plus className="w-6 h-6 text-gray-400 group-hover:text-[#deae3c]" />
                         )}
-                      </div>
+                      </span>
                     </button>
 
                     <div
@@ -682,22 +664,7 @@ export default function HeroCarousel() {
           </div>
         )}
       </AnimatePresence>
-      <AnimatePresence>
-        {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
-              <BrochureDownload
-                onClose={closeBrochureForm}
-                title={formTitle}
-                headline={formHeadline}
-                buttonName={buttonName}
-                onAfterSubmit={handleAfterSubmit}
-                link="https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf"
-              />
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
+      
     </>
   );
 }
