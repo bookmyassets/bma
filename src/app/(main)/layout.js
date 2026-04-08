@@ -30,16 +30,7 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="YrX73EQCsMkKBmh2pHUc" />
         <meta name="facebook-domain-verification" content="6dgiuxe5g66y85" />
 
-        {/*
-          ── Preconnects ────────────────────────────────────────────────────
-          Sanity CDN: 300ms LCP savings (flagged by PageSpeed)
-          GTM/GA: establishes connection before scripts fire
-          FB: needed for pixel script
-        */}
-        <link rel="preconnect" href="https://c3e1h345.apicdn.sanity.io" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+     
 
         {/* ── Google Tag Manager ── */}
         <Script

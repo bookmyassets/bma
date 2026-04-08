@@ -595,19 +595,6 @@ export default async function Post({ params }) {
                 <div className="flex flex-col-reverse gap-8 mb-2 items-center">
                   {/* Article Header */}
                   <div className="w-full ">
-                    {/* {post.categories && post.categories.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {post.categories.map((category) => (
-                          <span
-                            key={category._id || category.title}
-                            className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
-                          >
-                            {category.title}
-                          </span>
-                        ))}
-                      </div>
-                    )} */}
-
                     <h1 className="text-[clamp(1rem,calc(2vw+1rem),2.5rem)] font-bold text-gray-900 mb-4 leading-tight">
                       {post.title}
                     </h1>

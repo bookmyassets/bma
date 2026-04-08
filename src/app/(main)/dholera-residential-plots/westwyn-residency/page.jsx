@@ -188,7 +188,7 @@ export default function HeroCarousel() {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-fill aspect-[3/1]"
+                  className=" aspect-[3/1]"
                   priority={index === 0}
                   fetchPriority={index === 0 ? "high" : "low"}
                   sizes="100vw"
@@ -226,7 +226,7 @@ export default function HeroCarousel() {
           {mobileImages.map(
             (
               image,
-              index, // <-- mobileImages here
+              index,
             ) => (
               <div
                 key={`mobile-${index}`}
@@ -241,7 +241,7 @@ export default function HeroCarousel() {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-cover" // <-- cover works better for fixed-ratio mobile images
+                  className="object-cover" 
                   priority={index === 0}
                   fetchPriority={index === 0 ? "high" : "low"}
                   sizes="100vw"

@@ -256,6 +256,7 @@ const ContactPage = () => {
               className="w-full max-w-md mx-auto h-auto rounded-lg shadow-md"
               width={490}
               height={290}
+              fetchPriority="high"
             />
           </div>
 
