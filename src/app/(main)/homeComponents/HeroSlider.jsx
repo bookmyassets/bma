@@ -83,21 +83,11 @@ const SlideDots = memo(({ total, current, onSelect }) => (
 ));
 SlideDots.displayName = "SlideDots";
 
-// ─── KEY CHANGE: No JS-based isMobile. One component, CSS handles layout. ───
-const SlideImage = memo(({ slide, index, currentSlide }) => {
+  const SlideImage = memo(({ slide, index, currentSlide }) => {
   const isActive = index === currentSlide;
   const isNext = index === (currentSlide + 1) % SLIDES.length;
   const isPrev = index === (currentSlide - 1 + SLIDES.length) % SLIDES.length;
 
-  // On MOBILE: only render active slide (saves 2 image downloads per transition)
-  // On DESKTOP: render prev+active+next for smooth crossfade
-  // We use a CSS trick — the slide is always in DOM on desktop via opacity,
-  // but on mobile we truly unmount non-active slides.
-  //
-  // Since we can't use JS isMobile without hydration mismatch,
-  // we render both and hide with CSS:
-  //   - Mobile wrapper: hidden on lg+, only shows active
-  //   - Desktop wrapper: hidden below lg, shows prev/active/next
 
   return (
     <>

@@ -79,49 +79,14 @@ export default function HeroForm() {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  useEffect(() => {
-    const loadRecaptchaTimeout = setTimeout(() => {
-      if (typeof window === "undefined") return;
-      if (!window.grecaptcha) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA");
-            setRecaptchaLoaded(true);
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA error:", err);
-          setRecaptchaLoaded(true);
-        }
-      } else {
-        setRecaptchaLoaded(true);
-      }
-    }, 2000);
-
-    if (typeof window !== "undefined") {
-      setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
-      );
-      setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
-      );
-    }
-
-    const handleEscapeKey = (e) => {
-      if (e.key === "Escape") setShowPopup(false);
-    };
-    document.addEventListener("keydown", handleEscapeKey);
-
-    return () => {
-      clearTimeout(loadRecaptchaTimeout);
-      document.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, []);
+ const loadRecaptcha = useCallback(() => {
+    if (recaptchaLoaded) return;
+    const s = document.createElement("script");
+    s.src = "https://www.google.com/recaptcha/api.js";
+    s.async = true;
+    document.head.appendChild(s);
+    setRecaptchaLoaded(true);
+  }, [recaptchaLoaded]);
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
@@ -251,31 +216,6 @@ export default function HeroForm() {
         </div>
 
         <div className="relative max-sm:space-y-2">
-          <style jsx>{`
-            @keyframes textGlow {
-              0%,
-              100% {
-                text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
-                color: black;
-              }
-              50% {
-                text-shadow:
-                  0 0 20px rgba(255, 255, 255, 1),
-                  0 0 30px rgba(255, 255, 255, 0.8);
-                color: black;
-              }
-            }
-            .flashy-blink {
-              animation: flashyBlink 3s infinite ease-in-out;
-              padding: 4px;
-              border-radius: 1rem;
-              border: 3px solid #deae3c;
-            }
-            .glowing-text {
-              animation: textGlow 1s infinite ease-in-out;
-            }
-          `}</style>
-
           <div className="flashy-blink">
             {/* ✅ clamp() — hero headline scales between 18px and 24px */}
             <h1 className="text-[clamp(1.15rem,2.5vw,1.5rem)] font-bold mb-1 glowing-text px-2">
@@ -326,7 +266,7 @@ export default function HeroForm() {
         </div>
       ) : (
         // ✅ inert={false} explicitly when form is active (no warning)
-        <form onSubmit={handleSubmit} className="space-y-1" inert={false}>
+        <form onSubmit={handleSubmit} onFocus={loadRecaptcha} className="space-y-1" inert={false}>
           {errorMessage && (
             <div
               className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-[clamp(0.75rem,1.5vw,0.875rem)]"

@@ -1,7 +1,6 @@
-'use client';
+"use client";
 
 import React, { useEffect, useState } from "react";
-
 
 const Running = () => {
   const [animate, setAnimate] = useState(false);
@@ -12,20 +11,15 @@ const Running = () => {
   }, []);
 
   return (
-
     <>
-
-
-
-    <div className="w-full overflow-hidden bg-black py-2 relative">
-  <div className="whitespace-nowrap text-[#deae3c] animate-marquee">
-    <p className="inline-block text-white bg-[#deae3c] px-5 py-2 rounded-lg shadow-lg text-[20px] font-semibold">
-      Registry Ready Plots in Dholera Under ₹10 Lakh
-    </p>
-  </div>
-</div>
-
-        </>
+      <div className="w-full overflow-hidden bg-black py-2 relative">
+        <div className="whitespace-nowrap text-[#deae3c] animate-marquee">
+          <p className="inline-block text-white bg-[#deae3c] px-5 py-2 rounded-lg shadow-lg text-[20px] font-semibold">
+            Registry Ready Plots in Dholera Under ₹10 Lakh
+          </p>
+        </div>
+      </div>
+    </>
   );
 };
 
