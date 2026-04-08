@@ -190,10 +190,10 @@ export default function HeroCarousel() {
               </button>
 
               <a href="https://wa.me/918130371647">
-                <button className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                <span className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                   <FaWhatsapp />
                   Book Site Visit
-                </button>
+                </span>
               </a>
             </div>
           </div>
@@ -254,19 +254,19 @@ export default function HeroCarousel() {
                       aria-expanded={openIndex === index}
                       aria-controls={`benefit-${index}`}
                     >
-                      <div className="flex items-center space-x-4">
+                      <span className="flex items-center space-x-4">
                         <span className="text-2xl">{benefit.icon}</span>
                         <span className="text-lg md:text-xl font-semibold text-gray-800 group-hover:text-[#deae3c]">
                           {benefit.title}
                         </span>
-                      </div>
-                      <div className="flex-shrink-0 transition-transform duration-200">
+                      </span>
+                      <span className="flex-shrink-0 transition-transform duration-200">
                         {openIndex === index ? (
                           <Minus className="w-6 h-6 text-[#deae3c]" />
                         ) : (
                           <Plus className="w-6 h-6 text-gray-400 group-hover:text-[#deae3c]" />
                         )}
-                      </div>
+                      </span>
                     </button>
 
                     <div
