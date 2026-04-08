@@ -36,32 +36,11 @@ function HighlightCard({ title, body }) {
 
   return (
     <button
-      onClick={() => setOpen((p) => !p)}
-      className={`
-        text-left w-full rounded-lg border transition-all duration-250 p-[clamp(0.75rem,1.5vw,1rem)]
-        ${open
-          ? "border-[#deae3c] bg-[#deae3c]/5"
-          : "border-gray-200 bg-white hover:border-[#deae3c]/60 hover:bg-[#deae3c]/5"
-        }
-      `}
+      className="
+        text-left w-full rounded-lg border transition-all duration-250 p-[clamp(0.75rem,1.5vw,1rem)] border-[#deae3c] bg-[#deae3c]/5 hover:border-[#deae3c]/60"
     >
       <span className={`text-[clamp(0.75rem,1.2vw,0.875rem)] font-semibold leading-snug transition-colors duration-200 ${open ? "text-[#c49b2e]" : "text-black"}`}>
         {title}
-      </span>
-
-      {/* Body — grid-rows trick for smooth expand */}
-      <span
-        style={{
-          display: "grid",
-          gridTemplateRows: open ? "1fr" : "0fr",
-          transition: "grid-template-rows 0.26s ease",
-        }}
-      >
-        <span className="overflow-hidden">
-          <span className="text-[clamp(0.75rem,1.1vw,0.8125rem)] text-gray-500 leading-relaxed mt-2">
-            {body}
-          </span>
-        </span>
       </span>
     </button>
   );
