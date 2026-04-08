@@ -122,9 +122,9 @@ export default function HighAccessCorridorCards() {
       <div className="p-4">
         {/* Benefits Section */}
         <div className="mb-8">
-          <p className="text-center text-3xl font-semibold mb-8">
+          <h2 className="text-center text-3xl font-semibold mb-8">
             Benefits of Buying Land in High Access Corridor Zone
-          </p>
+          </h2>
 
           <div className={`flex flex-wrap justify-center gap-8 pt-4`}>
             {benefits.map((benefit) => {
@@ -182,9 +182,9 @@ export default function HighAccessCorridorCards() {
 
         {/* Projects Section */}
         <div className="pb-8 pt-4">
-          <p className="text-center text-3xl font-semibold mb-8">
+          <h3 className="text-center text-3xl font-semibold mb-8">
             Types of Projects Allowed
-          </p>
+          </h3>
 
           <div className={`flex flex-wrap justify-center gap-8`}>
             {projects.map((project) => {

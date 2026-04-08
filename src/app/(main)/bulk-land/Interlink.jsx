@@ -301,9 +301,9 @@ const PropertyCard = ({ image, title, area, price, link }) => {
       {/* Content Section */}
       <div className="p-4 md:p-6 flex flex-col flex-grow">
         {/* Title */}
-        <h3 className="text-lg font-bold text-gray-800 mb-3 line-clamp-2">
+        <p className="text-lg font-bold text-gray-800 mb-3 line-clamp-2">
           {title}
-        </h3>
+        </p>
         
         {/* Area */}
         <div className="flex items-center mb-4 flex-grow">
@@ -337,9 +337,9 @@ const Interlink = ({ properties, title = "Related Properties" }) => {
     <div className=" py-16 px-4">
       {/* Header */}
       <div className="text-center mb-12">
-        <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4">
+        <h5 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4">
           {title}
-        </h2>
+        </h5>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Explore other investment opportunities in Dholera SIR
         </p>

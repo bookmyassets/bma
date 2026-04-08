@@ -42,9 +42,9 @@ export default function FAQSection() {
           
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h2 className="text-[32px] font-semibold text-black mb-4">
+            <h4 className="text-[32px] font-semibold text-black mb-4">
               Frequently Asked Questions
-            </h2>
+            </h4>
             <p className="text-gray-600 mb-2">
               More Questions about Dholera Smart City?
             </p>
