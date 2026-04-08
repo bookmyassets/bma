@@ -298,10 +298,10 @@ const RealEstateLandingPage = () => {
                     </button>
                   </div>
                   <Link href="https://www.youtube.com/@BookMyAssets">
-                    <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                    <span className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
                       <Play size={20} />
                       <span>Watch Video</span>
-                    </button>
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -393,10 +393,10 @@ const RealEstateLandingPage = () => {
                       </button>
                     </div>
                     <Link href="https://www.youtube.com/@BookMyAssets">
-                      <button className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                      <span className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
                         <Play size={20} />
                         <span>Watch Video</span>
-                      </button>
+                      </span>
                     </Link>
                   </div>
                 </div>

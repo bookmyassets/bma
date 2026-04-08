@@ -462,46 +462,6 @@ export default function BookMyAssets() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(30px) scale(0.8);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        
-        @keyframes progressLine {
-          from {
-            width: 0%;
-          }
-          to {
-            width: 100%;
-          }
-        }
-        
-        .timeline-item {
-          animation: slideIn 0.8s ease-out forwards;
-        }
-        
-        .timeline-progress {
-          animation: progressLine 10s ease-in-out forwards;
-          width: 0%;
-        }
-        
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </div>
   );
 }
