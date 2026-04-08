@@ -55,25 +55,25 @@ export default function page() {
           <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200 p-4 md:p-6 mx-auto">
             <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-6 text-center">
               <div className="flex flex-col items-center">
-                <h3 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
+                <p className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
                   Zone Area
-                </h3>
+                </p>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
                   6091.41<span className="md:hidden"><br /></span> sq. yards
                 </p>
               </div>
               <div className="flex flex-col items-center">
-                <h3 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
+                <p className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
                   Key Permissions
-                </h3>
+                </p>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
                   Residential and Commercial Development
                 </p>
               </div>
               <div className="flex flex-col items-center">
-                <h3 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
+                <p className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
                   Get Brochure
-                </h3>
+                </p>
                 <a href="https://cdn.sanity.io/files/c3e1h345/projects/66dcad140036ee16f4c1d0d40cb3f56d39841639.pdf" target="_blank" className="text-blue-400 underline text-sm md:text-lg font-medium">
                   Brochure
                 </a>
