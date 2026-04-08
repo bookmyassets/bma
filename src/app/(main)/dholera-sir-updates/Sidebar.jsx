@@ -274,9 +274,9 @@ const onRecaptchaSuccess = async (token) => {
     <aside className="lg:sticky lg:top-24 space-y-6">
       {/* Get Our Free Guide Widget */}
       <div className="bg-[#f9f9f9] rounded-xl shadow-sm p-6 border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">
          Get Free Advice from Dholera Investment Advise
-        </h3>
+        </h2>
         <p className="text-gray-600 text-sm mb-6">
           Download our comprehensive guide covering investment opportunities,
           infrastructure development, and future prospects in Dholera SIR.
@@ -316,9 +316,9 @@ const onRecaptchaSuccess = async (token) => {
 
       {/* Popular Articles Widget */}
       <div className="bg-[#f9f9f9] rounded-xl shadow-sm p-6 border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">
+        <p className="text-xl font-bold text-gray-900 mb-6">
           Popular Articles
-        </h3>
+        </p>
         <div className="space-y-4">
           {popularArticles.map((article, index) => (
             <article

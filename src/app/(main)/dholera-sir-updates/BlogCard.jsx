@@ -29,9 +29,9 @@ export default function BlogCard({ post }) {
 
         {/* Content */}
         <div className="p-6">
-          <h2 className="text-xl font-bold mb-3 text-black group-hover:text-[#C69C21] line-clamp-2 transition-colors">
+          <p className="text-xl font-bold mb-3 text-black group-hover:text-[#C69C21] line-clamp-2 transition-colors">
             {post.title}
-          </h2>
+          </p>
 
           {/* Footer with "Read More" */}
           <div className="border-t border-gray-200 pt-4 mt-auto">
