@@ -87,21 +87,12 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-
-        {/*
-          ── Facebook Pixel ──────────────────────────────────────────────────
-          FIX: was strategy="afterInteractive" but pixel still fires fbq('track')
-          immediately on load, blocking the main thread.
-          New approach: initialise the fbq stub immediately (tiny, no network),
-          but defer loading the heavy fbevents.js until the first user interaction.
-          This cuts TBT by ~60ms on average mobile connection.
-        */}
+        
         <Script
           id="fb-pixel-stub"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              // Set up fbq stub — no network request yet
               !function(f,b,e,v,n,t,s){
                 if(f.fbq)return;
                 n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -112,8 +103,6 @@ export default function RootLayout({ children }) {
               fbq('init', '${FB_PIXEL_ID}');
               fbq('track', 'PageView');
 
-              // Defer loading the actual fbevents.js script until first interaction
-              // Saves ~60ms TBT on mobile
               function loadFbPixel() {
                 var s = document.createElement('script');
                 s.async = true;
