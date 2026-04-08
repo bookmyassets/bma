@@ -752,9 +752,9 @@ export default function Navbar() {
           className={`relative z-50 bg-white h-full w-full transition-all duration-300 overflow-y-auto ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
           <div className="flex items-center justify-between p-[calc(0.75rem+0.5vw)] border-b border-gray-200">
-            <h2 className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-gray-800">
+            <p className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-gray-800">
               Menu
-            </h2>
+            </p>
             <button
               onClick={closeAllMenus}
               className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
