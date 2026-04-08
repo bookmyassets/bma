@@ -232,9 +232,7 @@ export default function CommonForm({ title, button }) {
             <h3 className="text-white text-xl md:text-3xl font-semibold text-center">
               {title}
             </h3>
-            <h5 className="text-white text-xs font-light text-center pt-3">
-              Share your details and our team will help you with brochure access, plot details, and next-step guidance.
-            </h5>
+            
 
             {showPopup ? (
               <div className="text-center py-8">
