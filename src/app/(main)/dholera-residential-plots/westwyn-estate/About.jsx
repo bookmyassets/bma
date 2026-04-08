@@ -116,9 +116,9 @@ const WestWynAboutSection = () => {
         {/* Location Advantage */}
         <div className="max-w-7xl mx-auto py-4">
           <div>
-            <h3 className="text-[32px] font-semibold text-center ">
+            <h2 className="text-[32px] font-semibold text-center ">
               Prime Location
-            </h3>
+            </h2>
           </div>
           <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
             <div className="px-4 sm:px-6 lg:px-8 ">

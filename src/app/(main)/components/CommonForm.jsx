@@ -229,9 +229,9 @@ export default function CommonForm({ title, button }) {
       <section className="py-12 bg-black">
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-white text-xl md:text-3xl font-semibold text-center">
+            <h3 className="text-white text-xl md:text-3xl font-semibold text-center">
               {title}
-            </h2>
+            </h3>
             <h5 className="text-white text-xs font-light text-center pt-3">
               Share your details and our team will help you with brochure access, plot details, and next-step guidance.
             </h5>

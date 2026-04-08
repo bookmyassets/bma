@@ -49,9 +49,9 @@ export default function FAQSection() {
         <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h2 className="text-[32px] font-semibold text-black mb-4">
+            <h5 className="text-[32px] font-semibold text-black mb-4">
               Frequently Asked Questions
-            </h2>
+            </h5>
             <p className="text-gray-600 mb-2">
               Got questions about WestWyn Estates?
             </p>

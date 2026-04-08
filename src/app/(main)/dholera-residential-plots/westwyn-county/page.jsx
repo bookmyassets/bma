@@ -422,13 +422,13 @@ export default function HeroCarousel() {
         <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h2 className="text-[32px] font-semibold text-black mb-4">
+            <h1 className="text-[32px] font-semibold text-black mb-4">
               About{" "}
               <span className="max-sm:hidden">
                 <br />
               </span>{" "}
               WestWyn County
-            </h2>
+            </h1>
           </div>
 
           {/* Right Section (60%) */}
@@ -537,9 +537,9 @@ export default function HeroCarousel() {
       {/* Section 4 - Why Invest in WestWyn Estate */}
       <div className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#deae3c] mb-12 md:mb-16">
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#deae3c] mb-12 md:mb-16">
             Why Invest in WestWyn County?
-          </h2>
+          </h3>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
             {/* Left Column - Image */}

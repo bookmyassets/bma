@@ -149,12 +149,12 @@ const ProjectAmenities = () => {
             >
               WestWyn Estates
             </p>
-            <h2
+            <h4
               className="font-bold mb-4 text-lg sm:text-2xl lg:text-3xl"
               style={{ color: "#0d0d0d", letterSpacing: "-0.02em" }}
             >
               Amenities
-            </h2>
+            </h4>
           </div>
 
           {/* Two-column layout */}
