@@ -466,9 +466,9 @@ export default async function page() {
           {/* Infrastructure & Connectivity */}
           <section className="mb-8">
             <div className="text-center mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-black mb-3">
+              <h3 className="text-2xl md:text-3xl font-bold text-black mb-3">
                 Landmark Infrastructure & Connectivity
-              </h2>
+              </h3>
               <div className="w-24 h-1 bg-[#deae3c] mx-auto"></div>
             </div>
 
@@ -569,9 +569,9 @@ export default async function page() {
               <div className="inline-block bg-[#deae3c] text-black px-4 py-2 rounded-full text-sm md:text-lg font-bold mb-3 uppercase tracking-wider">
                 2025-2026 GROWTH PHASE
               </div>
-              <h2 className="text-xl md:text-3xl font-bold text-black mb-3">
+              <h3 className="text-xl md:text-3xl font-bold text-black mb-3">
                 Major Investments in Dholera Smart City
-              </h2>
+              </h3>
               <div className="w-24 h-1 bg-[#deae3c] mx-auto mb-3"></div>
               <p className="text-lg text-gray-700 max-w-3xl mx-auto">
                 Dholera Smart City is entering a major growth phase with
@@ -745,9 +745,9 @@ export default async function page() {
             <div className="bg-gradient-to-br from-[#deae3c] via-[#d4a435] to-[#c89a2e] rounded-2xl p-8 md:p-12 shadow-2xl">
               {/* Header */}
               <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">
+                <h5 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">
                   Why Invest in Dholera with BookMyAssets
-                </h2>
+                </h5>
                 <div className="w-32 h-1.5 bg-white/90 mx-auto rounded-full shadow-md"></div>
               </div>
 
@@ -819,9 +819,9 @@ export default async function page() {
                 <div className="inline-block bg-[#deae3c] text-black px-4 py-1 rounded-full text-sm font-bold mb-4">
                   EXCLUSIVE OPPORTUNITY
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                <h5 className="text-2xl md:text-3xl font-bold mb-4">
                   Early Mover Advantage
-                </h3>
+                </h5>
                 <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
                   Secure your position in India's first and largest{" "}
                   <strong className="text-[#deae3c]">
@@ -836,10 +836,10 @@ export default async function page() {
           {/* Final Statement Section */}
           <section>
             <div className="bg-black text-white rounded-xl p-6 md:p-8 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              <h5 className="text-2xl md:text-3xl font-bold mb-4">
                 Dholera Is Not a Project - It's India's Long-Term Industrial
                 Strategy
-              </h2>
+              </h5>
               <div className="w-24 h-1 bg-[#deae3c] mx-auto mb-4"></div>
               <p className="text-lg text-white/90 max-w-4xl mx-auto leading-relaxed">
                 Dholera Smart City is not just about infrastructure-it is about India's
