@@ -167,7 +167,7 @@ export default function page() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "RealEstateAgent",
+            "@type": "Local Business",
             name: "BookMyAssets",
             image: "",
             "@id": "",
