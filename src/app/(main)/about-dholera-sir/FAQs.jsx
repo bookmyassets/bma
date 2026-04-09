@@ -4,79 +4,54 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is WestWyn Estates legally clear and safe to invest in?",
+    question: "What is Dholera SIR?",
     answer:
-      "Yes, WestWyn Estates offers plots with NA/NOC approvals and title clarity, ensuring that your investment is legally secure. We provide full documentation support so you can verify everything before making a decision.",
+      "Dholera SIR, or Dholera Special Investment Region, is India’s first and largest greenfield smart city. It is being developed in Gujarat as a large-scale industrial and urban hub under the Delhi-Mumbai Industrial Corridor.",
   },
   {
-    question: "Is immediate registry available in WestWyn Estates?",
+    question: "Where is Dholera SIR located?",
     answer:
-      "Yes, plots in WestWyn Estates come with immediate registry, allowing you to secure ownership quickly without long waiting periods or uncertainty.",
+      "Dholera SIR is located in Gujarat, around 100 km from Ahmedabad. Its location gives it strong strategic importance for industrial, infrastructure, and long-term urban development.",
   },
   {
-    question: "What documents will I receive when I buy a plot?",
-    answer: [
-      "Sale deed",
-      "NA approval documents",
-      "Title clearance details",
-      "Layout plan",
-    ],
-  },
-  {
-    question: "Where exactly is WestWyn Estates located in Dholera?",
+    question: "Is Dholera SIR government approved?",
     answer:
-      "WestWyn Estates is strategically located in a developing zone of Dholera with proximity to key infrastructure such as planned roads, industrial areas, and future connectivity projects.",
+      "Yes, Dholera SIR is a government-backed development. It is being developed with support from the Government of Gujarat and the Government of India under a planned policy and infrastructure framework.",
   },
   {
-    question:
-      "How close is WestWyn Estates to the Dholera SIR activation area?",
+    question: "Why is Dholera called a smart city?",
     answer:
-      "The project is positioned with access to the broader Dholera SIR development zone, making it relevant for long-term growth aligned with infrastructure expansion.",
+      "Dholera is called a smart city because it is being planned with:\n• Modern infrastructure\n• Underground utilities\n• Digital governance\n• Smart mobility planning\n• Sustainable zoning\n• Future-ready urban design",
   },
   {
-    question: "What plot sizes are available in WestWyn Estates?",
+    question: "What makes Dholera different from other developing cities?",
     answer:
-      "WestWyn Estates offers multiple plot sizes suitable for different investment and usage needs. Detailed size options and availability are shared based on current inventory.",
+      "Dholera stands out due to:\n• Greenfield smart city development (built from scratch)\n• Planned infrastructure-first approach\n• Strong industrial vision\n• Government policy support\n• Structured urban growth instead of unplanned expansion",
   },
   {
-    question: "What infrastructure and amenities are planned in the project?",
-    answer: [
-      "Internal roads",
-      "Gated layout planning",
-      "Basic infrastructure readiness",
-      "Planned development structure",
-      "Full project layout is explained before booking",
-    ],
+    question: "What major infrastructure projects are planned in Dholera?",
+    answer:
+      "Major infrastructure projects include:\n• Ahmedabad-Dholera Expressway\n• Dholera International Airport\n• Activation Area development\n• Industrial zones\n• Large-scale power and connectivity infrastructure",
   },
   {
-    question: "Can I visit WestWyn Estates before buying?",
-    answer: [
-      "Complete site visit planning",
-      "On-ground assistance",
-      "Project walkthrough",
-      "Especially helpful for buyers traveling from Delhi NCR",
-    ],
+    question: "What is Dholera’s role in India’s semiconductor ecosystem?",
+    answer:
+      "Dholera is emerging as an important destination in India’s semiconductor and advanced manufacturing ecosystem. This strengthens its long-term industrial relevance and increases investor interest in the region.",
   },
   {
-    question: "What is the process to book a plot in WestWyn Estates?",
-    answer: [
-      "Consultation",
-      "Project selection",
-      "Document verification",
-      "Token booking",
-      "Registry completion",
-      "Our team guides you step-by-step",
-    ],
+    question: "What is the Activation Area in Dholera?",
+    answer:
+      "The Activation Area is the early operational zone of Dholera where:\n• Core infrastructure is being developed first\n• Residential and commercial zones are becoming ready\n• Initial economic and urban activity is expected to begin",
   },
   {
-    question: "Do you provide support after purchase?",
-    answer: [
-      "Registry assistance",
-      "Documentation support",
-      "Site visit coordination",
-      "Ongoing guidance",
-      "You are supported even after the transaction is complete",
-    ],
+    question: "Is Dholera suitable for long-term investment?",
+    answer:
+      "Dholera is generally seen as a long-term growth destination because its value is linked to:\n• Phased infrastructure development\n• Industrial expansion\n• Planned urban growth\nrather than short-term speculation.",
+  },
+  {
+    question: "Who governs and plans Dholera SIR?",
+    answer:
+      "Dholera SIR is administered by the Dholera Special Investment Region Development Authority, which oversees planning, infrastructure, and development implementation for the region.",
   },
 ];
 

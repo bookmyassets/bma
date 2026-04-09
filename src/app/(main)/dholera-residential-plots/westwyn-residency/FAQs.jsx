@@ -6,42 +6,52 @@ const faqs = [
   {
     question: "Where is WestWyn Residency located?",
     answer:
-      "WestWyn Residency is located in Pipariya, Dholera, in a strategically connected area with access to key infrastructure and nearby development zones.",
+      "WestWyn Residency is located in Pipariya, Dholera, with connectivity to the Dholera SIR boundary, Bhimnath Railway Station, Ahmedabad-Dholera Expressway, the activation area, and the airport corridor.",
   },
   {
     question: "Is WestWyn Residency a residential plot project?",
     answer:
-      "Yes, WestWyn Residency is a premium residential plotted development designed for buyers looking at long-term investment potential as well as future residential use.",
+      "Yes, WestWyn Residency is a premium residential plotted project designed for buyers looking for long-term investment potential as well as future residential use.",
   },
   {
-    question: "Is the project registry-ready?",
+    question: "Is WestWyn Residency registry-ready?",
     answer:
-      "The project is positioned as a registry-ready residential plot offering. Serious buyers should connect with the BookMyAssets team to understand the buying process and next-step support in detail.",
+      "Yes, WestWyn Residency is presented as a registry-ready residential plot project with immediate possession, which makes it suitable for buyers who want greater clarity and quicker ownership transfer.",
   },
   {
-    question: "What kind of support does BookMyAssets provide to buyers?",
+    question: "What documentation is available for the WestWyn Residency?",
     answer:
-      "BookMyAssets assists serious buyers with project understanding, plot guidance, site visit support, and next-step coordination through the buying journey.",
+      "The project highlights NA/NOC documentation and also lists NA/NOC/Title Clearance among its commitments. Buyers should still review all documents carefully before proceeding, and BookMyAssets offers support during that process.",
   },
   {
-    question: "Can buyers from Delhi NCR plan a guided site visit?",
+    question: "What plot sizes are available in the WestWyn Residency?",
     answer:
-      "Yes, buyers from Delhi NCR, Gurugram, Noida, and nearby regions can connect with the team for guided site visit coordination.",
+      "WestWyn Residency offers residential plots in 124, 152, and 187 sq. yards, subject to current availability.",
   },
   {
-    question: "What plot sizes are available in WestWyn Residency?",
+    question: "What is the price of plots in WestWyn Residency?",
     answer:
-      "The project offers multiple residential plot sizes. Buyers can request the latest availability, price sheet, and layout details directly from the team.",
+      "The page currently lists the project price at ₹6500 per sq. yard. Final costing may vary depending on plot selection and charges, so buyers should request the latest price sheet and cost estimate.",
   },
   {
-    question: "Is this project suitable only for investors?",
+    question: "What amenities are available in the WestWyn Residency?",
     answer:
-      "No. WestWyn Residency may appeal to both investment-focused buyers and those planning for future residential use, depending on their goals and timeline.",
+      "The project highlights amenities such as a gated community, 24/7 security with CCTV, kids play area, app-based management, power and water supply, yoga deck, jogging track, drainage system, and clubhouse lite.",
   },
   {
-    question: "How do I get brochure, layout, and pricing details?",
+    question: "Can I plan a site visit before buying?",
     answer:
-      "You can submit your details on the page or connect with BookMyAssets on WhatsApp to receive brochure, layout, and project guidance.",
+      "Yes. BookMyAssets offers 365 days site visit assistance, and the page also invites buyers to book a site visit for project guidance and on-ground understanding.",
+  },
+  {
+    question: "What support does BookMyAssets provide to buyers?",
+    answer:
+      "BookMyAssets highlights support with project understanding, plot guidance, site visit assistance, next-step coordination, immediate registry support, resale support, and buyback assistance.",
+  },
+  {
+    question: "Is WestWyn Residency suitable for both investors and future end users?",
+    answer:
+      "Yes. The page positions WestWyn Residency for both investment-focused buyers and those considering future residential use, depending on their timeline and goals.",
   },
 ];
 

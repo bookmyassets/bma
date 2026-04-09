@@ -5,36 +5,46 @@ import TestimonialPagination from "../components/Testimonials";
 
 const faqs = [
   {
-    question: "Why is Dholera Smart City the best investment option in India?",
+    question: "What type of plots does BookMyAssets offer in Dholera?",
     answer:
-      "The Dholera Smart City Project is part of the ambitious Dholera project in Gujarat, offering world class infrastructure, government backed mega projects, and high appreciation potential, making it one of the best investment options in India.",
+      "We help buyers explore verified residential plot options in and around relevant Dholera growth zones, depending on project availability and buyer requirements.",
   },
   {
-    question: "When will Dholera International Airport start operations?",
+    question: "Are these government approved plots?",
     answer:
-      "The Dholera International Airport, a key milestone in the Dholera city development, is expected to start operations by December 2025, boosting passenger and cargo connectivity across India and abroad.",
+      "BookMyAssets focuses on plotted opportunities where buyers can review:\n• Project documents\n• Layout details\n• Approval-related information\nbefore making a decision.",
   },
   {
-    question: "When is the Ahmedabad Dholera Expressway inauguration?",
+    question: "Who usually considers buying plots in Dholera?",
     answer:
-      "The Ahmedabad Dholera Expressway, connecting Ahmedabad to Dholera Smart City in under an hour, is expected to be inaugurated by mid-2025, enhancing accessibility and investment appeal.",
+      "Most enquiries come from:\n• Long-term investors\n• Retirement-focused buyers\n• Delhi NCR families\n• NRIs",
   },
   {
-    question: "What legal documents are required to buy plots in Dholera?",
+    question: "What should I check before buying a plot in Dholera?",
     answer:
-      "To buy plots in Dholera city, you need a sale deed, NA/NOC clearance, title deed, and valid identification proofs, ensuring secure ownership.",
+      "You should evaluate:\n• Project location\n• Documentation process\n• Layout planning\n• Road access\n• Pricing structure\n• Registry process\nbefore booking.",
   },
   {
-    question: "How much do I need to invest in Dholera Smart City?",
+    question: "Is Dholera suitable for short-term investment?",
     answer:
-      "Investment in Dholera residential plots starts from around ₹8 lakhs, depending on plot size, location, and the stage of project development.",
+      "Most buyers evaluate Dholera as a long-term land holding opportunity rather than a short-term flip market.",
+  },
+  {
+    question: "Is it safe to invest in Dholera plots right now?",
+    answer:
+      "Dholera is India’s first Greenfield Smart City with strong government backing. Key factors include:\n• International airport development\n• Expressway connectivity\n• Industrial growth including semiconductor ecosystem\n\nAt BookMyAssets, we focus on:\n• NA-approved plots\n• NOC clearance\n• Clear title verification\n• Immediate registry\n\nThese factors significantly reduce investment risk.",
+  },
+  {
+    question: "What is the future potential of Dholera Smart City?",
+    answer:
+      "Dholera is planned as a major industrial and infrastructure hub with:\n• International airport\n• Expressway connectivity\n• Industrial zones\n• Semiconductor and manufacturing investments\n\nThese developments are expected to drive long-term demand and value appreciation.",
   },
 ];
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
- const handleCallClick = () => {
+  const handleCallClick = () => {
     //  Google Tag Manager event
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
@@ -55,7 +65,6 @@ export default function FAQSection() {
     <>
       <div className="bg-white">
         <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
-          
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-black mb-4">
@@ -65,7 +74,13 @@ export default function FAQSection() {
               More Questions about Dholera Smart City?
             </p>
             <div className="pt-4">
-              <a href="#" className="px-2 py-3 bg-[#deae3c] text-white rounded-md" onClick={handleCallClick} >Give Us A Missed Call</a>
+              <a
+                href="#"
+                className="px-2 py-3 bg-[#deae3c] text-white rounded-md"
+                onClick={handleCallClick}
+              >
+                Give Us A Missed Call
+              </a>
             </div>
           </div>
 
@@ -97,14 +112,21 @@ export default function FAQSection() {
                   }`}
                 >
                   <div className="pb-4 px-0">
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {faq.answer}
-                    </p>
+                    <div className="text-gray-600 text-sm leading-relaxed">
+                      {Array.isArray(faq.answer) ? (
+                        <ul className="list-disc pl-5 space-y-1">
+                          {faq.answer.map((point, i) => (
+                            <li key={i}>{point}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p>{faq.answer}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
-            
           </div>
         </div>
       </div>

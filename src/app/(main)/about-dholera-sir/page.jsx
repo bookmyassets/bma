@@ -5,6 +5,7 @@ import BlogSlider from "./BlogSlider";
 import LeadForm from "../components/LeadForm";
 import Link from "next/link";
 import Image from "next/image";
+import FAQSection from "./FAQs";
 
 export default async function page() {
   let posts = [];
@@ -985,6 +986,10 @@ export default async function page() {
                 </p>
               </div>
             </div>
+          </section>
+
+          <section>
+            <FAQSection/>
           </section>
 
           {/* Final Statement Section */}
