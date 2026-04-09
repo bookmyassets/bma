@@ -202,11 +202,11 @@ export default function BlogSlider({ posts = [] }) {
                       {post.title}
                     </h2>
 
-                    {/* Footer with "ExlporeMore" */}
+                    {/* Footer with "ExploreMore" */}
                     <div className="border-t border-gray-200 pt-4 mt-auto">
                       <div className=" text-right">
                         <p className="font-medium hover:underline text-[#deae3c]">
-                          Exlpore More →
+                          Explore More →
                         </p>
                       </div>
                     </div>

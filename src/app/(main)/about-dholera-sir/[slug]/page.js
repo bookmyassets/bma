@@ -286,15 +286,33 @@ export default async function Post({ params }) {
       },
 
       marks: {
-        link: ({ children, value }) => (
-          <a
-            href={value.href}
-            rel="noopener noreferrer"
-            className="text-[#C69C21] hover:text-[#FDB913] underline decoration-[#FDB913]/30 hover:decoration-[#FDB913] decoration-2 underline-offset-4 transition-all duration-300 hover:bg-[#FDB913]/5 px-1 py-0.5 rounded"
-          >
-            {children}
-          </a>
-        ),
+        link: ({ children, value }) => {
+          // Helper function to extract plain text from children
+          const extractText = (node) => {
+            if (typeof node === "string") return node;
+            if (Array.isArray(node)) {
+              return node.map(extractText).join("");
+            }
+            if (node?.props?.children) {
+              return extractText(node.props.children);
+            }
+            return "";
+          };
+
+          const linkText = extractText(children);
+          const titleText = value.title || linkText; // Use provided title or fallback to link text
+
+          return (
+            <Link
+              href={value.href}
+              title={titleText}
+              rel="noopener noreferrer"
+              className="text-[#C69C21] hover:text-[#FDB913] underline decoration-[#FDB913]/30 hover:decoration-[#FDB913] decoration-2 underline-offset-4 transition-all duration-300 hover:bg-[#FDB913]/5 px-1 py-0.5 rounded"
+            >
+              {children}
+            </Link>
+          );
+        },
         strong: ({ children }) => (
           <strong className="font-bold text-gray-900 px-1 py-0.5 rounded">
             {children}
