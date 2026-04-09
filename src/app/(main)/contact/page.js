@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import img from "@/assests/contact.jpg";
+import img from "@/assests/contact.webp";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
