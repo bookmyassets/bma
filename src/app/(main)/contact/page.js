@@ -247,15 +247,13 @@ const ContactPage = () => {
       />
       {/* Hero Section */}
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row-reverse items-center justify-between py-16 mt-20 gap-10">
+        <div className="flex flex-col md:flex-row-reverse items-center justify-between py-8 mt-20 gap-10">
           {/* Image Section */}
           <div className="w-full md:w-1/2">
             <Image
               src={img}
               alt="Contact us"
-              className="w-full max-w-md mx-auto h-auto rounded-lg shadow-md"
-              width={490}
-              height={290}
+              className="w-full h-auto rounded-lg shadow-md"
               fetchPriority="high"
             />
           </div>
