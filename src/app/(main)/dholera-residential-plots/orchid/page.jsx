@@ -1,432 +1,308 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import { useCallback, useState } from "react";
+
 import westwyn1 from "@/assests/residential/Orchid-dholera-plan-layout.webp";
 import banner from "@/assests/residential/orchid-hero-desktopview.webp";
 import bannerMob from "@/assests/residential/orchid-hero-mob.view-webp.webp";
-import { Plus, Minus } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
-import { AnimatePresence } from "framer-motion";
-import ContactForm from "../../components/Contactform";
-import CostSheet from "../costsheet2";
-import ActiveProjectsSection from "../ActiveProject";
-import BrochureDownload from "../../components/BrochureDownload";
-import { FaWhatsapp } from "react-icons/fa6";
 
-export default function HeroCarousel() {
-  const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
+const CommonForm = dynamic(() => import("../../components/CommonForm"), {
+  loading: () => <div className="min-h-[220px]" />,
+});
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+const ContactForm = dynamic(() => import("../../components/Contactform"), {
+  loading: () => <div className="min-h-[320px]" />,
+});
+
+const CostSheet = dynamic(() => import("../costsheet2"), {
+  loading: () => <div className="min-h-[240px]" />,
+});
+
+const ActiveProjectsSection = dynamic(() => import("../ActiveProject"), {
+  loading: () => <div className="min-h-[240px]" />,
+});
+
+const BrochureDownload = dynamic(
+  () => import("../../components/BrochureDownload"),
+  {
+    loading: () => <div className="min-h-[320px]" />,
+  },
+);
+
+const PROJECT_NAME = "Orchid";
+const BROCHURE_LINK =
+  "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf";
+
+const BENEFITS = [
+  {
+    title: "Prime Location",
+    icon: "📍",
+    content:
+      "Located in Gamph village, Dholera, Ahmedabad, Orchid benefits from planned connectivity through the Ahmedabad Dholera Expressway, Dholera International Airport, and the broader DMIC corridor.",
+  },
+  {
+    title: "Flexible and Investor Friendly",
+    icon: "📈",
+    content:
+      "Plots begin at 100 sq. yards priced around ₹6,700 per sq. yard, with investor friendly payment terms and convenient installments.",
+  },
+  {
+    title: "Fully Approved and Legal",
+    icon: "✅",
+    content:
+      "All plots are NA NOC approved, have clear titles, and are registry ready with plan pass certification for immediate registry and sale deed execution.",
+  },
+  {
+    title: "Future Growth Potential",
+    icon: "🌿",
+    content:
+      "Being in the early stage of development within Dholera creates long term growth potential as infrastructure develops over time.",
+  },
+  {
+    title: "Premium Infrastructure",
+    icon: "🏆",
+    content:
+      "Orchid includes gated entry, internal roads, street lighting, electricity, water connectivity, CCTV security, and landscaped greenery.",
+  },
+];
+
+export default function OrchidPage() {
   const [openIndex, setOpenIndex] = useState(0);
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [modalState, setModalState] = useState({
+    open: false,
+    type: "contact",
+    title: "",
+    headline: "",
+    buttonName: "",
+  });
 
-  // Counter states for new section 3
-  const [sqYards, setSqYards] = useState(0);
-  const [plots, setPlots] = useState(0);
-  const [amenities, setAmenities] = useState(0);
+  const openModal = useCallback(
+    ({ type = "contact", title, headline, buttonName }) => {
+      setModalState({
+        open: true,
+        type,
+        title,
+        headline,
+        buttonName,
+      });
+    },
+    [],
+  );
 
-  // New state for brochure form
-  const [formTitle, setFormTitle] = useState("");
-  const [formHeadline, setFormHeadline] = useState("");
-  const [buttonName, setButtonName] = useState("");
-  const [formType, setFormType] = useState("");
-  const [eventVar, setEventVar] = useState("");
-  const project = "Orchid";
-  const openContactForm = (title, headline, btnName, type, project) => {
-    setFormTitle(title);
-    setFormHeadline(headline);
-    setButtonName(btnName);
-    setFormType(type);
-    setIsContactFormOpen(true);
-    setEventVar(project);
-  };
+  const closeModal = useCallback(() => {
+    setModalState((prev) => ({ ...prev, open: false }));
+  }, []);
 
-  const closeContactForm = () => {
-    setIsContactFormOpen(false);
-  };
+  const handleAfterSubmit = useCallback(() => {
+    window.open(BROCHURE_LINK, "_blank", "noopener,noreferrer");
+  }, []);
 
-  const handleAfterSubmit = () => {
-    console.log("Form submitted successfully, type:", formType);
-
-    if (formType === "brochure") {
-      try {
-        console.log("Initiating brochure download");
-
-        // Using setTimeout to ensure the popup closes before download starts
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.href = "https://shorturl.at/Dv00M";
-          link.target = "_blank";
-          link.download = "brochure.pdf"; // Add download attribute
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          console.log("Download link clicked");
-        }, 300);
-      } catch (error) {
-        console.error("Error downloading brochure:", error);
-        window.open("https://shorturl.at/Dv00M", "_blank");
-      }
-    }
-  };
-
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  // Auto-rotate images every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1,
-      );
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [images.length]);
-
-  // Auto-increment counters for section 3
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Start counters when section comes into view
-            const sqYardsInterval = setInterval(() => {
-              setSqYards((prev) => {
-                if (prev >= 150) {
-                  clearInterval(sqYardsInterval);
-                  return 150;
-                }
-                /* return parseFloat((prev + 0.05).toFixed(2)); */
-                return prev + 2;
-              });
-            }, 20);
-
-            const plotsInterval = setInterval(() => {
-              setPlots((prev) => {
-                if (prev >= 9250) {
-                  clearInterval(plotsInterval);
-                  return 9250;
-                }
-                return prev + 2;
-              });
-            }, 1);
-
-            const amenitiesInterval = setInterval(() => {
-              setAmenities((prev) => {
-                if (prev >= 15) {
-                  clearInterval(amenitiesInterval);
-                  return 15;
-                }
-                return prev + 1;
-              });
-            }, 60);
-
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 },
-    );
-
-    const countersSection = document.getElementById("counters-section");
-    if (countersSection) {
-      observer.observe(countersSection);
-    }
-
-    return () => observer.disconnect();
+  const toggleFAQ = useCallback((index) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
   }, []);
 
   return (
     <>
-      {/* <title>Residential Plots in Dholera SIR | Secure High-ROI Investments</title>
-    <meta
-        name="description"
-        content="Invest in AUDA-approved residential plots in Dholera SIR! Enjoy buy-back with high growth potential in India's smart city."
-      /> */}
-      <title>Orchid Township Dholera | Exclusive Residential Plots</title>
-      <meta
-        name="description"
-        content="Explore Orchid Township in Dholera SIR! Find your ideal plot amidst innovative urban planning and smart infrastructure designed for future growth."
-      />
-      <link
-        rel="canonical"
-        href="https://www.bookmyassets.com/dholera-residential-plots/orchid"
-      />
-
-      {/* Hero Section with Carousel */}
-      <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
-        {/* Carousel Images */}
-        <div className="relative w-full h-full">
-          <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
-            <Image
-              src={banner}
-              alt="maple"
-              fill
-              className="w-full h-full max-sm:hidden"
-              priority // Only prioritize first image
+      <div className="relative h-[60vh] w-full overflow-hidden sm:h-[70vh] md:h-[100vh]">
+        <div className="absolute inset-0">
+          <picture>
+            <source media="(max-width: 767px)" srcSet={bannerMob.src} />
+            <img
+              src={banner.src}
+              alt="Orchid Township Dholera"
+              className="h-full w-full object-cover"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
             />
-            <Image
-              src={bannerMob}
-              alt="maple"
-              fill
-              className="w-full h-full md:hidden"
-              priority // Only prioritize first image
-            />
-          </div>
+          </picture>
         </div>
 
-        {/* Overlay with Title and Details */}
-        <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center px-4">
-          {/* Main Title */}
-          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 px-4 text-center">
+          <h1 className="mb-2 text-4xl font-bold text-white sm:mb-4 sm:text-5xl md:text-6xl">
             Orchid
           </h1>
 
-          {/* Property Details */}
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 sm:p-6 max-w-md w-full">
-            <div className="gap-4 text-white">
-              {/* Plot Information */}
+          <div className="w-full max-w-md rounded-lg bg-white/20 p-4 backdrop-blur-sm sm:p-6">
+            <div className="text-white">
               <div className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-bold">167</span>
+                <span className="text-2xl font-bold sm:text-3xl">167</span>
                 <span className="text-sm sm:text-base">plots sold</span>
               </div>
-
-              {/* Acreage Information */}
             </div>
 
-            {/* CTA Button */}
             <button
               onClick={() =>
-                openContactForm(
-                  "Missed Orchid? Explore plots under ₹10 lakh at Westwyn Estate",
-                  "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
-                  "Get A Call Back",
-                  "",
-                )
+                openModal({
+                  title: "Missed Orchid? Explore plots under ₹10 lakh",
+                  headline:
+                    "Please fill out the form to get project details. Fields marked with * are mandatory.",
+                  buttonName: "Get A Call Back",
+                  type: "contact",
+                })
               }
-              className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
+              className="mt-4 w-full rounded-full bg-yellow-500 px-6 py-2 font-semibold text-black transition-colors duration-300 hover:bg-yellow-600"
             >
               Book Your Plot In Dholera under ₹10 Lakh
             </button>
           </div>
         </div>
-
-        {/* Navigation Dots */}
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex ? "bg-white w-6" : "bg-white/50"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Navigation Arrows */}
       </div>
 
-      {/* Section 2 - About */}
-      <div className="bg-white">
-        <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
-          {/* Left Section (40%) */}
-          <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h1 className="text-[32px] font-semibold text-black mb-4">
-              About{" "}
-              <span className="max-sm:hidden">
+      <section className="bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 md:flex-row md:gap-12 md:px-8 md:py-20">
+          <div className="w-full px-2 md:w-2/5">
+            <h2 className="text-[32px] font-semibold text-black">
+              About
+              <span className="hidden sm:inline">
                 <br />
               </span>{" "}
               Orchid
-            </h1>
+            </h2>
           </div>
 
-          {/* Right Section (60%) */}
-          <div className="w-full md:w-3/5 pl-2 pr-2 space-y-6">
-            <p className="text-base md:text-lg font-light leading-relaxed text-gray-600">
+          <div className="w-full space-y-6 px-2 md:w-3/5">
+            <p className="text-base font-light leading-relaxed text-gray-600 md:text-lg">
               Orchid is a premium residential plotting project located in Gamph
-              village within the rapidly evolving Dholera Smart City (Dholera
-              SIR). Positioned within the DMIC corridor, Orchid offers legally
-              secure, developer backed plots with modern infrastructure and
-              digitized convenience.
+              village within the rapidly evolving Dholera Smart City. It offers
+              legally secure, developer backed plots with modern infrastructure
+              and digital convenience.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <button
                 onClick={() =>
-                  openContactForm(
-                    "Get details on WestWyn Estate",
-                    "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
-                    "Download Brochure",
-                    "brochure",
-                  )
+                  openModal({
+                    title: "Get the Orchid brochure",
+                    headline:
+                      "Please fill out the form to download the brochure. Fields marked with * are mandatory.",
+                    buttonName: "Download Brochure",
+                    type: "brochure",
+                  })
                 }
-                className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
+                className="rounded-md bg-[#deae3c] px-6 py-3 font-medium text-black shadow-md transition duration-300 hover:bg-[#f3bb39]"
               >
                 Download Brochure
               </button>
 
-              <a href="https://wa.me/918130371647">
-                <span className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaWhatsapp />
-                  Book Site Visit
-                </span>
+              <a
+                href="https://wa.me/918130371647"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 rounded-xl border border-[#deae3c] bg-white px-6 py-3 font-medium text-[#deae3c] transition-colors hover:bg-[#f8f5e6]"
+              >
+                WhatsApp Site Visit
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Section 4 - Why Invest in Dholera Forest Estate */}
-      <div className="py-12 md:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#deae3c] mb-12 md:mb-16">
+      <section className="bg-gray-50 py-12 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-12 text-center text-3xl font-light text-[#deae3c] md:mb-16 md:text-4xl lg:text-5xl">
             Why Invest in Orchid?
           </h2>
 
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
-            {/* Left Column - Image */}
+          <div className="flex flex-col items-center gap-8 lg:flex-row lg:gap-16">
             <div className="w-full lg:w-1/2">
               <div className="relative">
                 <Image
                   src={westwyn1}
-                  alt="Dholera Forest Estate Entrance"
-                  className="w-full h-auto rounded-2xl shadow-2xl"
+                  alt="Orchid Township layout"
+                  className="h-auto w-full rounded-2xl shadow-2xl"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority={false}
                 />
               </div>
             </div>
 
-            {/* Right Column - Investment Benefits */}
-            <div className="w-full  lg:w-1/2">
+            <div className="w-full lg:w-1/2">
               <div className="space-y-4">
-                {[
-                  {
-                    title: "Prime Location",
-                    icon: "📍",
-                  },
-                  {
-                    title: "Flexible and Investor Friendly:",
-                    icon: "📈",
-                  },
-                  {
-                    title: "Fully Approved and Legal",
-                    icon: "🌿",
-                  },
-                  {
-                    title: "High ROI Potential",
-                    icon: "✅",
-                  },
-                  {
-                    title: "Premium Infrastructure and Digital Convenience",
-                    icon: "🏆",
-                  },
-                ].map((benefit, index) => (
-                  <div
-                    key={index}
-                    className="group border border-gray-200 rounded-xl p-6 bg-white  transition-all duration-300 hover:shadow-lg"
-                  >
-                    <button
-                      className="w-full flex justify-between items-center text-left focus:outline-none"
-                      onClick={() => toggleFAQ(index)}
-                      aria-expanded={openIndex === index}
-                      aria-controls={`benefit-${index}`}
-                    >
-                      <span className="flex items-center space-x-4">
-                        <span className="text-2xl">{benefit.icon}</span>
-                        <span className="text-lg md:text-xl font-semibold text-gray-800 group-hover:text-[#deae3c]">
-                          {benefit.title}
-                        </span>
-                      </span>
-                      <span className="flex-shrink-0 transition-transform duration-200">
-                        {openIndex === index ? (
-                          <Minus className="w-6 h-6 text-[#deae3c]" />
-                        ) : (
-                          <Plus className="w-6 h-6 text-gray-400 group-hover:text-[#deae3c]" />
-                        )}
-                      </span>
-                    </button>
+                {BENEFITS.map((benefit, index) => {
+                  const isOpen = openIndex === index;
 
+                  return (
                     <div
-                      id={`benefit-${index}`}
-                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                        openIndex === index
-                          ? "max-h-96 opacity-100 mt-4"
-                          : "max-h-0 opacity-0"
-                      }`}
+                      key={benefit.title}
+                      className="rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:shadow-lg"
                     >
-                      <div className="pl-10">
-                        <p className="text-black leading-relaxed">
-                          {index === 0 &&
-                            "Located in village: Gamph, tehsil: Dholera, Dist: Ahmedabad, Orchid benefits from planned connectivity through the Ahmedabad–Dholera Expressway, Dholera International Airport, and the broader DMIC corridor."}
-                          {index === 1 &&
-                            "Plots begin at 100 sq. yards (900 sq. ft.) priced around ₹6,700 per sq. yard (₹744 per sq. ft.), with investor friendly terms such as a 25% down payment and convenient installments."}
-                          {index === 2 &&
-                            "All plots are NA/NOC approved, have clear titles, and are registry ready plots with plan pass certification ready for immediate registry and sale deed execution."}
-                          {index === 3 &&
-                            "Being at an early stage of development in a major smart city like Dholera opens the potential for significant appreciation as infrastructure matures."}
-                          {index === 4 &&
-                            "Orchid includes gated entry, internal roads, street lighting, electricity, full water connectivity, CCTV security, and landscaped greenery. An integrated digital system streamlines booking with instant offer letters, auto-calculated payments, and downloadable PDFs"}
-                        </p>
+                      <button
+                        className="flex w-full items-center justify-between text-left"
+                        onClick={() => toggleFAQ(index)}
+                        aria-expanded={isOpen}
+                        aria-controls={`benefit-${index}`}
+                      >
+                        <span className="flex items-center space-x-4">
+                          <span className="text-2xl">{benefit.icon}</span>
+                          <span className="text-lg font-semibold text-gray-800 md:text-xl">
+                            {benefit.title}
+                          </span>
+                        </span>
+
+                        <span className="ml-4 text-2xl text-[#deae3c]">
+                          {isOpen ? "−" : "+"}
+                        </span>
+                      </button>
+
+                      <div
+                        id={`benefit-${index}`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isOpen ? "mt-4 max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="pl-10">
+                          <p className="leading-relaxed text-black">
+                            {benefit.content}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="pt-4 pb-4">
-        {/* <CostSheet /> */}
-
+      <div className="pb-4 pt-4">
         <CostSheet projectSlug="orchid" showProjectSelector={false} />
       </div>
 
-      {/* Form */}
       <CommonForm
-        title="Orchid is Sold Out. Want to Invest in More Projects Like This?"
+        title="Orchid is Sold Out. Want to Explore Similar Projects?"
         button="Talk to our Team"
       />
 
       <ActiveProjectsSection />
 
-      <AnimatePresence>
-        {isContactFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
-              <ContactForm
-                onClose={closeContactForm}
-                title={formTitle}
-                headline={formHeadline}
-                buttonName={buttonName}
-                project={project}
-                /*  onAfterSubmit={handleAfterSubmit} */
-              />
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {isContactFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
+      {modalState.open && (
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-md">
+            {modalState.type === "brochure" ? (
               <BrochureDownload
-                onClose={closeContactForm}
-                title={formTitle}
-                headline={formHeadline}
-                buttonName={buttonName}
+                onClose={closeModal}
+                title={modalState.title}
+                headline={modalState.headline}
+                buttonName={modalState.buttonName}
                 onAfterSubmit={handleAfterSubmit}
-                link="https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf"
+                link={BROCHURE_LINK}
               />
-            </div>
+            ) : (
+              <ContactForm
+                onClose={closeModal}
+                title={modalState.title}
+                headline={modalState.headline}
+                buttonName={modalState.buttonName}
+                project={PROJECT_NAME}
+              />
+            )}
           </div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
     </>
   );
 }
