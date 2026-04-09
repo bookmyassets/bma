@@ -2,195 +2,191 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
     --radius: 0.5rem;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100%;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    scroll-margin-top: 100px;
+  }
+
+  ol,
+  .prose-content ol {
+    counter-reset: item;
+  }
+
+  ol > li,
+  .prose-content ol > li {
+    counter-increment: item;
+  }
+
+  ol > li .item-counter::before,
+  .prose-content ol > li .item-counter::before {
+    content: counter(item);
+  }
 }
 
-/* globals.css */
-.prose-content ol {
-  counter-reset: item;
-}
-.prose-content ol > li {
-  counter-increment: item;
-}
-.prose-content ol > li .item-counter::before {
-  content: counter(item);
-}
+@layer components {
+  .amenity-card {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
 
-ol {
-  counter-reset: item;
-}
-ol > li {
-  counter-increment: item;
-}
-ol > li .item-counter::before {
-  content: counter(item);
-}
+  .amenity-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(222, 174, 60, 0.14);
+    border-color: #deae3c !important;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  .amenity-card:hover .card-icon {
+    transform: scale(1.12) rotate(-4deg);
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  scroll-margin-top: 100px; /* Adjust this value based on your header height */
+  .card-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .show-btn {
+    transition:
+      background 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .show-btn:hover {
+    box-shadow: 0 8px 24px rgba(222, 174, 60, 0.3);
+  }
+
+  .hero-bg {
+    background-color: #000;
+  }
+
+  .gold-text {
+    color: #deae4c;
+  }
 }
 
 @layer utilities {
   @keyframes marquee {
-    0% {
+    from {
       transform: translateX(100%);
     }
-    100% {
+    to {
       transform: translateX(-100%);
+    }
+  }
+
+  @keyframes slide-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes timeline-fill {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes text-glow {
+    0%,
+    100% {
+      text-shadow: 0 0 20px rgba(222, 174, 60, 0.5);
+      color: black;
+    }
+    50% {
+      text-shadow:
+        0 0 12px rgba(255, 255, 255, 0.9),
+        0 0 20px rgba(255, 255, 255, 0.6);
+      color: black;
+    }
+  }
+
+  @keyframes ping-slow {
+    75%,
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes flashy-blink {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(222, 174, 60, 0.35);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(222, 174, 60, 0);
     }
   }
 
   .animate-marquee {
     animation: marquee 20s linear infinite;
   }
-}
 
-/* Amenities CSS */
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
+  .timeline-item {
+    animation: slide-in-up 0.8s ease-out forwards;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.amenity-card {
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
-}
-.amenity-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(222, 174, 60, 0.14);
-  border-color: #deae3c !important;
-}
-.amenity-card:hover .card-icon {
-  transform: scale(1.12) rotate(-4deg);
-}
-.card-icon {
-  transition: transform 0.3s ease;
-}
-.show-btn {
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease;
-}
-.show-btn:hover {
-  box-shadow: 0 8px 24px rgba(222, 174, 60, 0.3);
-}
 
-/* About Page CSS */
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes progressLine {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-.timeline-item {
-  animation: slideIn 0.8s ease-out forwards;
-}
-
-.timeline-progress {
-  animation: progressLine 10s ease-in-out forwards;
-  width: 0%;
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Home Page CSS */
-
-@keyframes textGlow {
-  0%,
-  100% {
-    text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
-    color: black;
-  }
-  50% {
-    text-shadow:
-      0 0 20px rgba(255, 255, 255, 1),
-      0 0 30px rgba(255, 255, 255, 0.8);
-    color: black;
-  }
-}
-.flashy-blink {
-  animation: flashyBlink 3s infinite ease-in-out;
-  padding: 4px;
-  border-radius: 1rem;
-  border: 3px solid #deae3c;
-}
-.glowing-text {
-  animation: textGlow 1s infinite ease-in-out;
-}
-
-/* About Page CSS */
-
-.hero-bg {
-  background-color: #000;
-}
-.gold-text {
-  color: #deae4c;
-}
-.timeline-progress {
-  animation: progress 1.5s ease-out forwards;
-}
-@keyframes progress {
-  from {
+  .timeline-progress {
     width: 0;
+    animation: timeline-fill 1.5s ease-out forwards;
   }
-  to {
-    width: 100%;
+
+  .animate-ping-slow {
+    animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .glowing-text {
+    animation: text-glow 1.6s ease-in-out infinite;
+  }
+
+  .flashy-blink {
+    animation: flashy-blink 2s ease-in-out infinite;
+    padding: 4px;
+    border-radius: 1rem;
+    border: 3px solid #deae3c;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
-@keyframes ping-slow {
-  75%,
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-}
-.animate-ping-slow {
-  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
