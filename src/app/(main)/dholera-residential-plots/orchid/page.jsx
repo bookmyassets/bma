@@ -107,9 +107,9 @@ export default function OrchidPage() {
     <>
       <div className="relative h-[60vh] w-full overflow-hidden sm:h-[70vh] md:h-[100vh]">
         <div className="absolute inset-0">
-          <picture>
+       
             <source media="(max-width: 767px)" srcSet={bannerMob.src} />
-            <img
+            <Image
               src={banner.src}
               alt="Orchid Township Dholera"
               className="h-full w-full object-cover"
@@ -117,7 +117,7 @@ export default function OrchidPage() {
               loading="eager"
               decoding="async"
             />
-          </picture>
+          
         </div>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 px-4 text-center">
