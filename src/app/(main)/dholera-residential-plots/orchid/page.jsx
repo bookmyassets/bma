@@ -51,22 +51,37 @@ const BENEFITS = [
 export default function OrchidPage() {
   return (
     <>
-    <title>Orchid Township Dholera | Exclusive Residential Plots</title>
-    <meta name="description" content="Explore Orchid Township in Dholera SIR. Discover plotted opportunities with modern infrastructure and future growth potential." />
-    <link rel="canonical" href="https://www.bookmyassets.com/dholera-residential-plots/orchid" />
+      <title>Orchid Township Dholera | Exclusive Residential Plots</title>
+      <meta
+        name="description"
+        content="Explore Orchid Township in Dholera SIR. Discover plotted opportunities with modern infrastructure and future growth potential."
+      />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/dholera-residential-plots/orchid"
+      />
       <main>
         <section className="relative h-[60vh] w-full overflow-hidden sm:h-[70vh] md:h-[100vh]">
-          <picture>
-            <source media="(max-width: 767px)" srcSet={bannerMob.src} />
-            <img
-              src={banner.src}
+          <div className="relative h-[60vh] w-full overflow-hidden sm:h-[70vh] md:h-[100vh]">
+            <Image
+              src={bannerMob}
               alt="Orchid Township Dholera"
-              className="h-full w-full object-cover"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
+              priority
+              sizes="100vw"
+              className="object-cover md:hidden"
+              fill
+              quality={70}
             />
-          </picture>
+            <Image
+              src={banner}
+              alt="Orchid Township Dholera"
+              priority
+              sizes="100vw"
+              className="hidden object-cover md:block"
+              fill
+              quality={70}
+            />
+          </div>
 
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 px-4 text-center">
             <h1 className="mb-2 text-4xl font-bold text-white sm:mb-4 sm:text-5xl md:text-6xl">
