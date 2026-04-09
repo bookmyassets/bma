@@ -164,3 +164,33 @@ h6 {
 .glowing-text {
   animation: textGlow 1s infinite ease-in-out;
 }
+
+/* About Page CSS */
+
+.hero-bg {
+  background-color: #000;
+}
+.gold-text {
+  color: #deae4c;
+}
+.timeline-progress {
+  animation: progress 1.5s ease-out forwards;
+}
+@keyframes progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes ping-slow {
+  75%,
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.animate-ping-slow {
+  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}

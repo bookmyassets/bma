@@ -98,8 +98,7 @@ export default function page() {
             <Image
               src={eventHeroM}
               alt="Dholera Event - Mobile Banner"
-              width={450}
-              height={550}
+
               className="w-full h-auto object-cover"
               priority
             />
