@@ -109,6 +109,7 @@ export default function page() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
+            name: "BookMyAssets",
             mainEntity: [
               {
                 "@type": "Question",
