@@ -35,27 +35,16 @@ export default function page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Corporation",
+            "@context": "https://schema.org/",
+            "@type": "WebSite",
             name: "BookMyAssets",
-            alternateName: "BMA",
             url: "https://www.bookmyassets.com/",
-            logo: "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FBmalogo.ab09adfe.png&w=96&q=75",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "620, JMD Megapolis, Sohna Rd, Sector 48,",
-              addressLocality: "Gurgaon",
-              addressRegion: "Haryana",
-              postalCode: "122001",
-              addressCountry: "IN",
+            potentialAction: {
+              "@type": "SearchAction",
+              target:
+                "https://www.bookmyassets.com/dholera-residential-plots/westwyn-residency{search_term_string}",
+              "query-input": "required name=search_term_string",
             },
-            sameAs: [
-              "https://www.facebook.com/people/Bookmyassets/61556534554379/",
-              "https://www.instagram.com/bookmyassets/",
-              "https://www.youtube.com/@BookMyAssets",
-              "https://x.com/BookMyAssets",
-              "https://www.linkedin.com/company/bookmyassetss",
-            ],
           }),
         }}
       />
@@ -63,16 +52,26 @@ export default function page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org/",
-            "@type": "WebSite",
-            name: "Book My Assets",
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "BookMyAssets",
             url: "https://www.bookmyassets.com/",
-            potentialAction: {
-              "@type": "SearchAction",
-              target:
-                "https://www.bookmyassets.com/search?q={search_term_string}{search_term_string}",
-              "query-input": "required name=search_term_string",
+            logo: "",
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "8130371647",
+              contactType: "sales",
+              areaServed: "IN",
+              availableLanguage: ["en", "Hindi"],
             },
+            sameAs: [
+              "https://www.bookmyassets.com/",
+              "https://www.facebook.com/profile.php?id=61583265159985",
+              "https://x.com/BookMyAssets",
+              "https://www.instagram.com/bookmyassets",
+              "https://www.youtube.com/@BookMyAssets",
+              "https://www.linkedin.com/company/bookmyassetss/",
+            ],
           }),
         }}
       />
@@ -113,44 +112,96 @@ export default function page() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "Why is Dholera Smart City the best investment option in India?",
+                name: "Is it safe to invest in Dholera plots right now?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "The Dholera Smart City Project is part of the ambitious Dholera project in Gujarat, offering world class infrastructure, government backed mega projects, and high appreciation potential, making it one of the best investment options in India.",
+                  text: "Dholera is India’s first Greenfield Smart City with strong government backing, including the international airport, expressway, and industrial developments like the semiconductor ecosystem. However, safety depends on where and how you invest. Many buyers face issues due to unclear titles or unapproved layouts. At BookMyAssets, we focus only on legally verified plots with NA, NOC, Title clearance, and immediate registry, reducing risk significantly. You can also request a full document walkthrough before making any decision.",
                 },
               },
               {
                 "@type": "Question",
-                name: "When will Dholera International Airport start operations?",
+                name: "How do I verify if a plot in Dholera is legally clear?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "The Dholera International Airport, a key milestone in the Dholera city development, is expected to start operations by December 2025, boosting passenger and cargo connectivity across India and abroad.",
+                  text: "You should always check NA (Non-Agricultural) status, title clearance, NOC approvals, chain of ownership, and layout approvals. We provide complete documentation support and verification assistance, so you do not have to rely on assumptions or broker claims. Our team can walk you through each document step-by-step.",
                 },
               },
               {
                 "@type": "Question",
-                name: "When is the Ahmedabad Dholera Expressway inauguration?",
+                name: "What documents should I check before buying a plot?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "The Ahmedabad Dholera Expressway, connecting Ahmedabad to Dholera Smart City in under an hour, is expected to be inaugurated by mid-2025, enhancing accessibility and investment appeal.",
+                  text: "Before investing, you should verify the NA order copy, title clearance report, sale deed history, layout plan approval, and applicable government approvals. We ensure all required documents are available, verified, and transparently shared with every buyer",
                 },
               },
               {
                 "@type": "Question",
-                name: "What legal documents are required to buy plots in Dholera?",
+                name: "Do you provide legal verification and documentation support?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "To buy plots in Dholera city, you need a sale deed, NA/NOC clearance, title deed, and valid identification proofs, ensuring secure ownership.",
+                  text: "Yes. Documentation clarity is a core part of our process. We assist you with document explanation, legal clarity, registry process, and ownership verification. Our goal is to make sure you invest with full confidence, not confusion.",
                 },
               },
               {
                 "@type": "Question",
-                name: "How much do I need to invest in Dholera Smart City?",
+                name: "Is immediate registry available for your plots?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Investment in Dholera residential plots starts from around ₹8 lakhs, depending on plot size, location, and the stage of project development.",
+                  text: "Yes, our selected projects offer immediate registry, which means you get ownership transferred quickly, reduced risk compared to long-term commitments, and clear legal standing from day one. This is one of the key reasons many investors prefer our projects.",
                 },
               },
+              {
+                "@type": "Question",
+                name: "What is the future potential of Dholera Smart City?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Dholera is planned as a major industrial and infrastructure hub with an international airport, expressway connectivity, industrial zones, and semiconductor and manufacturing investments. These developments are expected to drive long-term demand and value appreciation.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "RealEstateAgent",
+            name: "BookMyAssets",
+            image: "",
+            "@id": "",
+            url: "https://www.bookmyassets.com",
+            telephone: "8130371647",
+            priceRange: "₹₹",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress:
+                "6th Floor, Unit - 620, JMD MEGAPOLIS, Badshahpur Sohna Rd Hwy, Sector 48",
+              addressLocality: "Gurgaon",
+              postalCode: "122018",
+              addressCountry: "IN",
+            },
+            openingHoursSpecification: {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+              ],
+              opens: "09:00",
+              closes: "21:00",
+            },
+            sameAs: [
+              "https://www.bookmyassets.com/",
+              "https://www.instagram.com/bookmyassets",
+              "https://www.youtube.com/@BookMyAssets",
+              "https://www.facebook.com/profile.php?id=61583265159985",
+              "https://x.com/BookMyAssets",
             ],
           }),
         }}

@@ -89,7 +89,7 @@ export default function page() {
               src={eventHero}
               alt="Dholera Event - Desktop Banner"
               className="w-full h-auto object-contain"
-              priority
+              fetchPriority="high"
             />
           </div>
 
@@ -100,7 +100,7 @@ export default function page() {
               alt="Dholera Event - Mobile Banner"
 
               className="w-full h-auto object-cover"
-              priority
+              fetchPriority="high"
             />
           </div>
         </div>
