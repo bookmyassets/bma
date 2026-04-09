@@ -84,10 +84,13 @@ export default async function page() {
               <div className="absolute inset-0 bg-black/60"></div>
 
               {/* Text Content */}
-              <div className="absolute inset-0 z-10 flex items-center justify-center px-4 text-center">
-                <h1 className="text-2xl md:text-5xl font-bold text-white leading-tight">
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">
+                <h1 className="text-2xl md:text-5xl py-4 font-bold text-white leading-tight">
                   Dholera Smart City Blogs
                 </h1>
+                <p className="text-sm md:text-lg font-bold text-white leading-tight">
+                  Stay updated with the latest trends, infrastructure developments, and residential plot opportunities shaping Dholera’s growth.
+                </p>
               </div>
             </div>
           </div>

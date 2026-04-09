@@ -121,7 +121,11 @@ export default function CostSheet({
   }, [projects]);
 
   const selectedProject = useMemo(() => {
-    return projects.find((project) => project.projectName === formData.projectName) || null;
+    return (
+      projects.find(
+        (project) => project.projectName === formData.projectName,
+      ) || null
+    );
   }, [projects, formData.projectName]);
 
   useEffect(() => {
@@ -181,29 +185,26 @@ export default function CostSheet({
     };
   }, [formData]);
 
-  const handleChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
 
-      if (name === "projectName") {
-        const config = getProjectConfig(value);
-
-        setFormData((prev) => ({
-          ...prev,
-          projectName: value,
-          basePlotPriceYards: String(config.basePrice),
-          chargeRate: String(config.chargeRate),
-        }));
-        return;
-      }
+    if (name === "projectName") {
+      const config = getProjectConfig(value);
 
       setFormData((prev) => ({
         ...prev,
-        [name]: value,
+        projectName: value,
+        basePlotPriceYards: String(config.basePrice),
+        chargeRate: String(config.chargeRate),
       }));
-    },
-    [],
-  );
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }, []);
 
   const generatePDF = useCallback(async () => {
     const { jsPDF } = await import("jspdf");
@@ -230,7 +231,9 @@ export default function CostSheet({
     const formattedIfms = formatIndianNumber(numbers.ifms);
     const formattedLegalFee = formatIndianNumber(numbers.legalFee);
     const formattedTotalCharges = formatIndianNumber(numbers.totalCharges);
-    const formattedPlotTotalPayment = formatIndianNumber(numbers.plotTotalPayment);
+    const formattedPlotTotalPayment = formatIndianNumber(
+      numbers.plotTotalPayment,
+    );
 
     autoTable(doc, {
       startY: 50,
@@ -313,15 +316,16 @@ export default function CostSheet({
     doc.setFontSize(9);
 
     const terms = [
-      "1. Full payment must be made within the stipulated timeline.",
+      "1. Full payment must be made within the stipulated 30-day period",
       "2. Payment delay or default may result in booking amount forfeiture and plot cancellation.",
       "3. Stamp duty and registration deposits are additional.",
-      "4. Refunds are available within 14 days of booking; after 15 days, the booking becomes non refundable.",
-      "5. Company decision only through authorised written communication.",
-      "6. Late payment charges apply:",
-      "a. Rs. 250 per sq yard if payment is made after 45 days and within 60 days.",
-      "b. Rs. 500 per sq yard if payment is made after 60 days and within 90 days.",
-      "Note: Kindly acknowledge the payment schedule to ensure a seamless registry process.",
+      "4. Refunds are available within 14 days of booking; after 15 days, the booking becomes non-refundable.",
+      "5. BBA will be initiated after 25% payment is completed.",
+      "6. Company decision only through authorised written communication.",
+      "7. Late Payment Charges:",
+      "a. Rs. 250/- per sq yard if payment is made after 45 days and within 60 days.",
+      "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days.",
+      "Note - Kindly acknowledge the payment schedule to ensure a seamless registry process.",
     ];
 
     terms.forEach((term, index) => {
@@ -344,12 +348,15 @@ export default function CostSheet({
     doc.save(`${formData.projectName || "Plot"}_Details.pdf`);
   }, [activeConfig.chargeName, formData, numbers]);
 
-  const currentProjectTitle = selectedProject?.projectName || formData.projectName;
+  const currentProjectTitle =
+    selectedProject?.projectName || formData.projectName;
 
   return (
     <div className="mx-auto max-w-5xl rounded-lg bg-white p-4 shadow-xl shadow-gray-500">
       <p className="mb-3 text-center text-xl font-bold text-gray-700">
-        {currentProjectTitle ? `${currentProjectTitle} - Cost Estimate` : "Cost Estimate"}
+        {currentProjectTitle
+          ? `${currentProjectTitle} - Cost Estimate`
+          : "Cost Estimate"}
       </p>
 
       <form>
@@ -378,7 +385,9 @@ export default function CostSheet({
                 </tr>
 
                 <tr className="border-b">
-                  <td className="px-2 py-1 font-semibold text-gray-600">Name</td>
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Name
+                  </td>
                   <td className="px-2 py-1">
                     <input
                       type="text"
@@ -391,7 +400,9 @@ export default function CostSheet({
                 </tr>
 
                 <tr className="border-b">
-                  <td className="px-2 py-1 font-semibold text-gray-600">Phone</td>
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Phone
+                  </td>
                   <td className="px-2 py-1">
                     <input
                       type="tel"
@@ -405,7 +416,9 @@ export default function CostSheet({
                 </tr>
 
                 <tr className="border-b">
-                  <td className="px-2 py-1 font-semibold text-gray-600">Email</td>
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Email
+                  </td>
                   <td className="px-2 py-1">
                     <input
                       type="email"
@@ -431,7 +444,10 @@ export default function CostSheet({
                       >
                         <option value="">Select Project</option>
                         {projects.map((project) => (
-                          <option key={project.link} value={project.projectName}>
+                          <option
+                            key={project.link}
+                            value={project.projectName}
+                          >
                             {project.projectName} - {project.location}
                           </option>
                         ))}
@@ -441,7 +457,9 @@ export default function CostSheet({
                 )}
 
                 <tr className="border-b">
-                  <td className="px-2 py-1 font-semibold text-gray-600">Plot No</td>
+                  <td className="px-2 py-1 font-semibold text-gray-600">
+                    Plot No
+                  </td>
                   <td className="px-2 py-1">
                     <input
                       type="text"
@@ -545,7 +563,10 @@ export default function CostSheet({
                 </tr>
 
                 <tr className="border-b bg-gray-100">
-                  <td colSpan="2" className="px-2 py-1 text-center font-bold text-gray-700">
+                  <td
+                    colSpan="2"
+                    className="px-2 py-1 text-center font-bold text-gray-700"
+                  >
                     Additional Charges
                   </td>
                 </tr>

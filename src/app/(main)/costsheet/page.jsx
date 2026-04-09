@@ -257,12 +257,13 @@ export default function CostSheet() {
       doc.text("Terms & Conditions:", 15, finalY + 5);
       doc.setFontSize(9);
       const terms = [
-        "1. Full payment must be made within the stipulated timeline.",
-        "2.Payment delay or default may result in booking amount forfeiture and plot cancellation.",
-        "3. Stamp duty and registration deposits are additional",
+        "1. Full payment must be made within the stipulated 30-day period",
+        "2. Payment delay or default may result in booking amount forfeiture and plot cancellation.",
+        "3. Stamp duty and registration deposits are additional.",
         "4. Refunds are available within 14 days of booking; after 15 days, the booking becomes non-refundable.",
-        "5. Company decision only through authorised written communication",
-        "6. Late Payment Charges:",
+        "5. BBA will be initiated after 25% payment is completed.",
+        "6. Company decision only through authorised written communication.",
+        "7. Late Payment Charges:",
         "a. Rs. 250/- per sq yard if payment is made after 45 days and within 60 days.",
         "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days.",
         "Note - Kindly acknowledge the payment schedule to ensure a seamless registry process."
@@ -416,12 +417,13 @@ export default function CostSheet() {
       doc.setFontSize(9);
 
       const terms = [
-        "1. Full payment must be made within the stipulated timeline.",
-        "2.Payment delay or default may result in booking amount forfeiture and plot cancellation.",
-        "3. Stamp duty and registration deposits are additional",
+        "1. Full payment must be made within the stipulated 30-day period",
+        "2. Payment delay or default may result in booking amount forfeiture and plot cancellation.",
+        "3. Stamp duty and registration deposits are additional.",
         "4. Refunds are available within 14 days of booking; after 15 days, the booking becomes non-refundable.",
-        "5. Company decision only through authorised written communication",
-        "6. Late Payment Charges:",
+        "5. BBA will be initiated after 25% payment is completed.",
+        "6. Company decision only through authorised written communication.",
+        "7. Late Payment Charges:",
         "a. Rs. 250/- per sq yard if payment is made after 45 days and within 60 days.",
         "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days.",
         "Note - Kindly acknowledge the payment schedule to ensure a seamless registry process."
