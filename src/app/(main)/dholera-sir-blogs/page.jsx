@@ -47,10 +47,23 @@ export default async function page() {
 
   return (
     <>
-      <title>Dholera Blog | Investment Tips, News & Smart City Insights</title>
+      <title>
+        Dholera Smart City Blogs, News, Plot Guides & Investment Updates
+      </title>
       <meta
         name="description"
-        content="Stay ahead in Dholera SIR investments! Read expert blogs on development, market trends, and project reviews, all curated by BookMyAssets for you."
+        content="Read Dholera Smart City blogs, plot buying guides, price insights, and investor-focused analysis from BookMyAssets"
+      />
+      <meta
+        name="keywords"
+        content="Dholera latest updates,Dholera investment blog, Dholera plot guides, Dholera Smart City news, Dholera SIR updates, Dholera Smart City blog"
+      />
+      <meta name="robots" content="index, follow" />
+      <meta name="author" content="BookMyAssets" />
+      <meta name="publisher" content="BookMyAssets" />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/dholera-sir-blogs"
       />
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}

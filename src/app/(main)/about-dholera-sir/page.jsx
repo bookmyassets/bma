@@ -27,6 +27,160 @@ export default async function page() {
 
   return (
     <>
+      {/* Schema Markups */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": "https://www.bookmyassets.com/about-dholera-sir",
+            },
+            headline:
+              "About Dholera SIR | India's Largest Smart City & Investment Hub",
+            description:
+              "Discover Dholera SIR - India's largest planned industrial and residential hub. Part of Delhi-Mumbai Industrial Corridor with world-class infrastructure, Tata semiconductor plant, and premium investment opportunities with BookMyAssets.",
+            image: "",
+            author: {
+              "@type": "Organization",
+              name: "BooKMyAssets",
+              url: "https://www.bookmyassets.com",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "BookMyAssets",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbma-logo.7459937c.png&w=96&q=75&dpl=dpl_9ULDZsFrNy1s6zRNGySswsNpWE3n",
+              },
+            },
+            datePublished: "",
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "1",
+                item: "https://www.bookmyassets.com/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "2",
+                item: "https://www.bookmyassets.com/about-dholera-sir",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "3",
+                item: "https://www.bookmyassets.com/dholera-sir-blogs",
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is Dholera SIR?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Dholera SIR, or Dholera Special Investment Region, is India’s first and largest greenfield smart city. It is being developed in Gujarat as a large-scale industrial and urban hub under the Delhi-Mumbai Industrial Corridor.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Where is Dholera SIR located?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Dholera SIR is located in Gujarat, around 100 km from Ahmedabad. Its location gives it strong strategic importance for industrial, infrastructure, and long-term urban development.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is Dholera SIR government approved?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, Dholera SIR is a government-backed development. It is being developed with support from the Government of Gujarat and the Government of India under a planned policy and infrastructure framework.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Why is Dholera called a smart city?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Dholera is called a smart city because it is being planned with modern infrastructure and integrated systems such as underground utilities, digital governance, smart mobility planning, sustainable zoning, and future-ready urban design.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What makes Dholera different from other developing cities?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Dholera is being built as a greenfield smart city from the ground up. Its planned development, industrial vision, infrastructure-first model, and policy support make it different from conventional city expansion or unplanned real estate growth.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What major infrastructure projects are planned in Dholera?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Major infrastructure linked to Dholera includes the Ahmedabad-Dholera Expressway, Dholera International Airport, activation area development, industrial zones, and large-scale power and connectivity infrastructure.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What is Dholera’s role in India’s semiconductor ecosystem?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Dholera is emerging as an important destination in India’s semiconductor and advanced manufacturing ecosystem. This strengthens its long-term industrial relevance and increases investor interest in the region.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What is the Activation Area in Dholera?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "The Activation Area is the early operational zone of Dholera where core infrastructure and ready residential and commercial areas are being developed first. It plays an important role in the city’s phased development model.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is Dholera suitable for long-term investment?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Dholera is generally seen as a long-term growth destination because its value is linked to phased infrastructure, industrial expansion, and planned urban development rather than short-term speculation.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Who governs and plans Dholera SIR?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Dholera SIR is administered by the Dholera Special Investment Region Development Authority, which oversees planning, infrastructure, and development implementation for the region.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
       <title>
         Dholera SIR | India's Largest Smart City & Investment Hub - BookMyAssets
       </title>
@@ -760,8 +914,8 @@ export default async function page() {
                   BookMyAssets
                 </Link>{" "}
                 connects you to premium residential projects in{" "}
-                <strong>Dholera Smart City, Gujarat,</strong> with exceptional long-term
-                growth potential.
+                <strong>Dholera Smart City, Gujarat,</strong> with exceptional
+                long-term growth potential.
               </p>
 
               {/* Feature Grid */}
@@ -842,13 +996,11 @@ export default async function page() {
               </h5>
               <div className="w-24 h-1 bg-[#deae3c] mx-auto mb-4"></div>
               <p className="text-lg text-white/90 max-w-4xl mx-auto leading-relaxed">
-                Dholera Smart City is not just about infrastructure-it is about India's
-                industrial future, smart governance, and globally competitive
-                manufacturing. For investors and decision-makers seeking
-                stability, scale, and strategic growth,{" "}
-                <strong className="text-[#deae3c]">
-                  Dholera SIR 
-                </strong>{" "}
+                Dholera Smart City is not just about infrastructure-it is about
+                India's industrial future, smart governance, and globally
+                competitive manufacturing. For investors and decision-makers
+                seeking stability, scale, and strategic growth,{" "}
+                <strong className="text-[#deae3c]">Dholera SIR</strong>{" "}
                 represents a once-in-a-generation urban vision.
               </p>
             </div>

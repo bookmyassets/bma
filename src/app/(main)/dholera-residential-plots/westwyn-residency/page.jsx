@@ -132,37 +132,163 @@ export default function HeroCarousel() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Corporation",
-            name: "BookMyAssets",
-            alternateName: "BMA",
-            url: "https://www.bookmyassets.com/",
-            logo: "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FBmalogo.ab09adfe.png&w=96&q=75",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "620, JMD Megapolis, Sohna Rd, Sector 48,",
-              addressLocality: "Gurgaon",
-              addressRegion: "Haryana",
-              postalCode: "122001",
-              addressCountry: "IN",
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            name: "Westwyn Residency",
+            image:
+              "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwestwyn-residency-dholera-entry-gate-hero.117c5f91.webp&w=1920&q=75&dpl=dpl_7qHQ2s7hGsjaNs7PGckW61725kmB",
+            description:
+              "Explore WestWyn Residency in Pipariya, Dholera premium registry-ready residential plots with strong connectivity, document support, and guided site visit assistance for serious buyers.",
+            brand: {
+              "@type": "Brand",
+              name: "BookMyAssets",
             },
-            sameAs: [
-              "https://www.facebook.com/people/Bookmyassets/61556534554379/",
-              "https://www.instagram.com/bookmyassets/",
-              "https://www.youtube.com/@BookMyAssets",
-              "https://x.com/BookMyAssets",
-              "https://www.linkedin.com/company/bookmyassetss",
+            offers: {
+              "@type": "Offer",
+              url: "https://www.bookmyassets.com/dholera-residential-plots/westwyn-residency",
+              priceCurrency: "INR",
+              price: "850000",
+              availability: "https://schema.org/InStock",
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "5",
+              bestRating: "5",
+              worstRating: "4",
+              ratingCount: "4",
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "1",
+                item: "https://www.bookmyassets.com/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "2",
+                item: "https://www.bookmyassets.com/dholera-residential-plots/westwyn-residency",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "3",
+                item: "https://www.bookmyassets.com/dholera-residential-plots/westwyn-estate",
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Where is WestWyn Residency located?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "WestWyn Residency is located in Pipariya, Dholera, with connectivity to the Dholera SIR boundary, Bhimnath Railway Station, Ahmedabad-Dholera Expressway, the activation area, and the airport corridor.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is WestWyn Residency a residential plot project?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, WestWyn Residency is a premium residential plotted project designed for buyers looking for long-term investment potential as well as future residential use.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is WestWyn Residency registry-ready?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, WestWyn Residency is presented as a registry-ready residential plot project with immediate possession, which makes it suitable for buyers who want greater clarity and quicker ownership transfer.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What documentation is available for WestWyn Residency?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "The project highlights NA/NOC documentation and also lists NA/NOC/Title Clearance among its commitments. Buyers should still review all documents carefully before proceeding, and BookMyAssets offers support during that process.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What plot sizes are available in WestWyn Residency?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "WestWyn Residency offers residential plots in 124, 152, and 187 sq. yards, subject to current availability.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What is the price of plots in WestWyn Residency?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "The page currently lists the project price at ₹6500 per sq. yard. Final costing may vary depending on plot selection and charges, so buyers should request the latest price sheet and cost estimate.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What amenities are available in WestWyn Residency?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "The project highlights amenities such as a gated community, 24/7 security with CCTV, kids play area, app-based management, power and water supply, yoga deck, jogging track, senior citizen zone, EV charging station, wide internal roads, drainage system, and clubhouse lite",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I plan a site visit before buying?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. BookMyAssets offers 365 days site visit assistance, and the page also invites buyers to book a site visit for project guidance and on-ground understanding.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What support does BookMyAssets provide to buyers?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "BookMyAssets highlights support with project understanding, plot guidance, site visit assistance, next-step coordination, immediate registry support, resale support, and buyback assistance.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is WestWyn Residency suitable for both investors and future end users?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. The page positions WestWyn Residency for both investment-focused buyers and those considering future residential use, depending on their timeline and goals.",
+                },
+              },
             ],
           }),
         }}
       />
 
-      <title>WestWyn Residency Dholera | Registry-Ready Residential Plots in Pipariya</title>
+      <title>
+        WestWyn Residency Dholera | Registry-Ready Residential Plots in Pipariya
+      </title>
       <meta
         name="description"
         content="Explore WestWyn Residency in Pipariya, Dholera premium registry-ready residential plots with strong connectivity, document support, and guided site visit assistance for serious buyers."
       />
-      <meta 
+      <meta
         name="keywords"
         content="westwyn residency dholera, dholera residential plots, plots near dholera sir, dholera smart city plots, buy plot in dholera, residential plots in dholera sir, dholera investment plots, plots near dholera expressway, dholera smart city investment, buy land in dholera gujarat, gated community plots dholera, dholera airport nearby plots"
       />
@@ -223,33 +349,28 @@ export default function HeroCarousel() {
           role="region"
           aria-label="Mobile image carousel"
         >
-          {mobileImages.map(
-            (
-              image,
-              index,
-            ) => (
-              <div
-                key={`mobile-${index}`}
-                className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-                style={{
-                  opacity: index === currentSlide ? 1 : 0,
-                  pointerEvents: index === currentSlide ? "auto" : "none",
-                }}
-                aria-hidden={index !== currentSlide}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover" 
-                  priority={index === 0}
-                  fetchPriority={index === 0 ? "high" : "low"}
-                  sizes="100vw"
-                  quality={85}
-                />
-              </div>
-            ),
-          )}
+          {mobileImages.map((image, index) => (
+            <div
+              key={`mobile-${index}`}
+              className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+              style={{
+                opacity: index === currentSlide ? 1 : 0,
+                pointerEvents: index === currentSlide ? "auto" : "none",
+              }}
+              aria-hidden={index !== currentSlide}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+                priority={index === 0}
+                fetchPriority={index === 0 ? "high" : "low"}
+                sizes="100vw"
+                quality={85}
+              />
+            </div>
+          ))}
 
           <button
             onClick={prevSlide}
@@ -291,7 +412,10 @@ export default function HeroCarousel() {
       <FAQSection />
 
       <div className=" ">
-        <CostSheet projectSlug="westwyn-residency" showProjectSelector={false} />
+        <CostSheet
+          projectSlug="westwyn-residency"
+          showProjectSelector={false}
+        />
       </div>
 
       <SoldOutProjectsSection />
