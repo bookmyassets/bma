@@ -62,6 +62,7 @@ export default function OrchidPage() {
               src={banner.src}
               alt="Orchid Township Dholera"
               className="h-full w-full object-cover"
+              loading="eager"
               fetchPriority="high"
               decoding="async"
             />
