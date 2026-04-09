@@ -3,9 +3,18 @@
 import { useCallback, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 
-const ContactForm = dynamic(() => import("../../components/Contactform"));
+/*
+  FIX: `ssr: false` added — ContactForm and BrochureDownload are modals that
+  only render after a user click. SSR-ing them generates unused HTML on the
+  initial response and adds to the JS bundle evaluated at hydration time.
+  Skipping SSR keeps them completely out of the critical path.
+*/
+const ContactForm = dynamic(() => import("../../components/Contactform"), {
+  ssr: false,
+});
 const BrochureDownload = dynamic(
   () => import("../../components/BrochureDownload"),
+  { ssr: false },
 );
 
 const PROJECT = "Orchid";
