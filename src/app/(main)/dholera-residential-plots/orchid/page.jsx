@@ -58,11 +58,10 @@ export default function OrchidPage() {
         <section className="relative h-[60vh] w-full overflow-hidden sm:h-[70vh] md:h-[100vh]">
           <picture>
             <source media="(max-width: 767px)" srcSet={bannerMob.src} />
-            <img
+            <Image
               src={banner.src}
               alt="Orchid Township Dholera"
               className="h-full w-full object-cover"
-              loading="eager"
               fetchPriority="high"
               decoding="async"
             />
