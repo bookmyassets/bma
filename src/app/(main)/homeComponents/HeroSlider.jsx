@@ -5,13 +5,14 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
-import img1 from "@/assests/homepage/hero2/westwyn-estate-dholera-residential-plots-desktop.webp";
+import img1 from "@/assests/homepage/hero2/westwyn-estates-dholera-sir-banner.webp";
 import img2 from "@/assests/homepage/hero2/dholera-international-airport-desktop.webp";
 import img3 from "@/assests/homepage/hero2/silk-route-park-dholera-desktop.webp";
 import img4 from "@/assests/homepage/hero2/expressway_hero.webp";
 import img5 from "@/assests/homepage/hero2/river_front_hero.webp";
 import img6 from "@/assests/homepage/hero2/tata_gate_hero.webp";
 import img7 from "@/assests/homepage/hero2/abcd-building-dholera-sir-bookmyassets.webp";
+import img8 from "@/assests/homepage/hero2/westwyn-residency-dholera-banner.webp";
 
 import HeroForm from "./HeroForm";
 
@@ -25,6 +26,10 @@ const SLIDES = [
   {
     src: img1,
     alt: "Westwyn Estate Dholera Residential Plots - Premium Investment Opportunity",
+  },
+  {
+    src: img8,
+    alt: "Westwyn Residency Dholera Residential Plots - Premium Investment Opportunity",
   },
   {
     src: img2,

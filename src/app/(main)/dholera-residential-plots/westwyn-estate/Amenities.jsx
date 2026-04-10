@@ -16,17 +16,15 @@ import Image from "next/image";
 
 import { FaBuilding, FaFilter, FaHome, FaRoad } from "react-icons/fa";
 
-import img1 from "@/assests/residential/estates/westwyn-estates-dholera-utilities-shop.webp";
-import img2 from "@/assests/residential/estates/westwyn-estates-dholera-kids-play-area.webp";
-import img3 from "@/assests/residential/estates/westwyn-estates-dholera-ev-charging-station.webp";
-import img4 from "@/assests/residential/estates/westwyn-estates-dholera-clubhouse-lite.webp";
+import img1 from "@/assests/residential/estates/westwyn-estates-dholera-sir-kids-play-area.webp";
+import img2 from "@/assests/residential/estates/westwyn-estates-dholera-sir-jogging-track.webp";
+import img3 from "@/assests/residential/estates/westwyn-estates-dholera-sir-utilities-shop.webp";
 import { FaShop } from "react-icons/fa6";
 
 const carouselImages = [
   { src: img1, alt: "WestWyn Estates - Kids Play Area" },
   { src: img2, alt: "WestWyn Estates - Project Boundary" },
   { src: img3, alt: "WestWyn Estates - Villa" },
-  { src: img4, alt: "WestWyn Estates - Yoga Deck" },
 ];
 // ✅ Moved OUTSIDE the component — not recreated on every render
 const AmenityCard = ({ amenity }) => (

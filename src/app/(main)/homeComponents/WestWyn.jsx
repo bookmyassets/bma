@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import sample1 from "@/assests/residential/estates.webp";
+import sample1 from "@/assests/homepage/section-images/westwyn-estates-dholera-sir-homepage.webp";
 import Link from "next/link";
 import LatestUpdates from "./Latest";
 import { MdLocationOn, MdApartment } from "react-icons/md";
