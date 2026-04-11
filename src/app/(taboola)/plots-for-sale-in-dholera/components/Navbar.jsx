@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import logo from "@/assests/bma-logo.png";
+import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -69,15 +69,13 @@ export default function Navbar() {
   // Navigation items
   const navItems = [
     { href: "#hero", label: "Home" },
-    { href: "#dholera", label: "Dholera" },
-    { href: "#westwyn-estates", label: "Westwyn Estates" },
-    { href: "#why-bma", label: "Why BMA" },
-    { href: "#Gallery", label: "Gallery" },
-    { href: "#videos", label: "Dholera Live" },
+    { href: "#dholera", label: "About Dholera" },
+    { href: "#westwyn-estates", label: "Westwyn Residency" },
+    { href: "#why-bma", label: "Why BookMyAssets" },
   ];
 
   return (
-    <nav className="bg-white h-20 fixed w-full z-50">
+    <nav className="bg-white h-24 fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -87,8 +85,8 @@ export default function Navbar() {
           >
             <Image
               src={logo}
-              height={60}
-              width={60}
+              height={70}
+              width={70}
               alt="Logo"
               className="cursor-pointer"
             />
@@ -100,7 +98,7 @@ export default function Navbar() {
               <button
                 key={label}
                 onClick={() => handleNavigation(href)}
-                className="hover:text-[#e1b24c] transition duration-200"
+                className="hover:text-[#e1b24c] text-[clamp(0.7rem,1vw,1.25rem)] transition duration-200"
               >
                 {label}
               </button>
@@ -108,7 +106,7 @@ export default function Navbar() {
             
             <div ref={getInTouchRef} className="relative group">
               <button
-                className="text-black px-3 py-2 cursor-pointer flex items-center gap-1"
+                className="text-black px-3 py-2 text-[clamp(0.7rem,1vw,1.25rem)] cursor-pointer flex items-center gap-1"
                 onClick={toggleGetInTouchDropdown}
                 onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
                 onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
