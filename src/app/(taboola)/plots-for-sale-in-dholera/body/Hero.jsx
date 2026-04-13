@@ -36,6 +36,12 @@ const FormCard = ({
       </h3>
     </div>
 
+    {errorMessage && (
+      <div className="p-2 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm text-center">
+        {errorMessage}
+      </div>
+    )}
+
     <input
       name="fullName"
       placeholder="Full Name*"
@@ -76,15 +82,12 @@ const FormCard = ({
       <option value="" disabled>
         Budget*
       </option>
-      <option value="8-15">₹5 Lakh - ₹15 Lakh</option>
+      <option value="5-15">₹5 Lakh - ₹15 Lakh</option>
       <option value="15-25">₹15 Lakh - ₹25 Lakh</option>
       <option value="25+">₹25 Lakh +</option>
     </select>
 
-    {errorMessage && (
-      <p className="text-red-500 text-xs text-center">{errorMessage}</p>
-    )}
-    <div ref={recaptchaRef} className="hidden" />
+    <div ref={recaptchaRef}></div>
 
     <button
       onClick={handleSubmit}
@@ -178,21 +181,18 @@ export default function Hero() {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
-    // Load reCAPTCHA script
+    // Load reCAPTCHA script (same as working form)
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
         try {
           const script = document.createElement("script");
-          script.src = `https://www.google.com/recaptcha/api.js?render=explicit`;
+          script.src = "https://www.google.com/recaptcha/api.js";
           script.async = true;
           script.defer = true;
-          script.onload = () => {
-            console.log("reCAPTCHA script loaded");
-            setRecaptchaLoaded(true);
-          };
+          script.onload = () => setRecaptchaLoaded(true);
           script.onerror = () => {
             console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true); // Still allow form submission but will show error
+            setRecaptchaLoaded(true);
           };
           document.head.appendChild(script);
         } catch (err) {
@@ -200,21 +200,20 @@ export default function Hero() {
           setRecaptchaLoaded(true);
         }
       } else if (window.grecaptcha || !siteKey) {
-        console.log("reCAPTCHA already loaded or no site key");
         setRecaptchaLoaded(true);
       }
     };
 
     loadRecaptcha();
 
-    // Load submission count from localStorage
+    // Get submission count from localStorage
     if (typeof window !== "undefined") {
       const storedCount = parseInt(
-        localStorage.getItem("formSubmissionCount") || "0",
+        localStorage.getItem("heroFormSubmissionCount") || "0",
         10,
       );
       const lastSubmissionTime = parseInt(
-        localStorage.getItem("lastSubmissionTime") || "0",
+        localStorage.getItem("heroFormLastSubmissionTime") || "0",
         10,
       );
 
@@ -224,11 +223,11 @@ export default function Hero() {
 
         if (hoursPassed >= 24) {
           setSubmissionCount(0);
-          localStorage.setItem("formSubmissionCount", "0");
-          localStorage.setItem("lastSubmissionTime", Date.now().toString());
+          localStorage.setItem("heroFormSubmissionCount", "0");
+          localStorage.setItem("heroFormLastSubmissionTime", Date.now().toString());
         } else {
           setSubmissionCount(storedCount);
-          if (storedCount >= 3) {
+          if (storedCount >= 20) {
             setIsDisabled(true);
           }
         }
@@ -236,6 +235,16 @@ export default function Hero() {
         setSubmissionCount(storedCount);
       }
     }
+
+    return () => {
+      if (window.grecaptcha && recaptchaRef.current) {
+        try {
+          window.grecaptcha.reset();
+        } catch (e) {
+          console.log("reCAPTCHA cleanup error:", e);
+        }
+      }
+    };
   }, [siteKey]);
 
   const handleChange = (e) => {
@@ -245,23 +254,24 @@ export default function Hero() {
   };
 
   const validateForm = () => {
-    if (!formData.fullName.trim()) {
-      setErrorMessage("Please enter your full name");
-      return false;
-    }
-    
-    if (!formData.phone.trim()) {
-      setErrorMessage("Please enter your phone number");
+    if (!formData.fullName.trim() || !formData.phone.trim()) {
+      setErrorMessage("Please fill in all required fields");
       return false;
     }
 
-    const phoneDigits = formData.phone.replace(/\D/g, "");
-    if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+    // Email validation (optional field)
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setErrorMessage("Please enter a valid email address");
+      return false;
+    }
+
+    // Phone validation
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
-    if (submissionCount >= 3) {
+    if (submissionCount >= 20) {
       setErrorMessage(
         "You have reached the maximum submission limit. Try again after 24 hours.",
       );
@@ -272,86 +282,79 @@ export default function Hero() {
     return true;
   };
 
-  // Direct API call function
-  const submitToAPI = async () => {
-    const notesArray = [];
-    if (formData.city) notesArray.push(`City: ${formData.city}`);
-    if (formData.investmentAmt)
-      notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
-    const notes = notesArray.join(" | ");
-
-    console.log("Submitting to API with data:", {
-      name: formData.fullName,
-      phone: formData.phone,
-      email: formData.email,
-      notes: notes,
-    });
-
-    const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-      },
-      body: JSON.stringify({
-        fields: {
-          name: formData.fullName,
-          phone: formData.phone,
-          email: formData.email || "",
-          notes: notes,
-          source: "BookMyAssets Taboola Ads",
-        },
-        source: "BookMyAssets Taboola Ads",
-        tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
-      }),
-    });
-
-    const responseText = await response.text();
-    console.log("TeleCRM Response:", responseText);
-
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status} - ${responseText}`);
-    }
-
-    return responseText;
-  };
-
   const onRecaptchaSuccess = async (token) => {
-    console.log("reCAPTCHA success, token received:", token);
-    
     try {
-      await submitToAPI();
-      
-      // Success - reset form and show popup
-      setFormData({
-        fullName: "",
-        phone: "",
-        email: "",
-        investmentAmt: "",
-        city: "",
-      });
-      setShowPopup(true);
+      // Prepare notes from additional fields
+      const notesArray = [];
+      if (formData.city) notesArray.push(`City: ${formData.city}`);
+      if (formData.investmentAmt)
+        notesArray.push(`Budget: ${formData.investmentAmt}`);
+      const notes = notesArray.join(" | ");
 
-      const newCount = submissionCount + 1;
-      setSubmissionCount(newCount);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("formSubmissionCount", newCount.toString());
-        localStorage.setItem("lastSubmissionTime", Date.now().toString());
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            notes: notes,
+            source: "BookMyAssets Taboola Hero Section",
+          },
+          source: "BookMyAssets Website",
+          tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
+          recaptchaToken: token,
+        }),
+      });
+
+      let data = {};
+      const contentType = response.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.error("Non-JSON response:", response.status, text);
       }
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "lead_form",
-        page_name: "BookMyAssets Taboola Page",
-      });
-      
+      if (response.ok && data.success) {
+        setFormData({
+          fullName: "",
+          phone: "",
+          email: "",
+          investmentAmt: "",
+          city: "",
+        });
+        setShowPopup(true);
+
+        const newCount = submissionCount + 1;
+        setSubmissionCount(newCount);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("heroFormSubmissionCount", newCount.toString());
+          localStorage.setItem("heroFormLastSubmissionTime", Date.now().toString());
+        }
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "lead_form",
+          page_name: "Dholera Hero Section",
+        });
+      } else {
+        setErrorMessage(
+          data.error ||
+            (response.status === 405
+              ? "API route not found. Check file location: app/api/submit-form/route.js"
+              : `Submission failed (${response.status}). Please try again.`)
+        );
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage(`Error: ${error.message}`);
+      setErrorMessage(
+        "Network error. Please check your connection and try again."
+      );
     } finally {
       setIsLoading(false);
-      // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaRef.current) {
+      if (typeof window !== "undefined" && window.grecaptcha && recaptchaRef.current) {
         try {
           window.grecaptcha.reset();
         } catch (err) {
@@ -361,56 +364,40 @@ export default function Hero() {
     }
   };
 
-  const onRecaptchaError = (error) => {
-    console.error("reCAPTCHA error:", error);
-    setErrorMessage("Security verification failed. Please try again.");
-    setIsLoading(false);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Clear previous errors
+    setIsLoading(true);
     setErrorMessage("");
-    
-    // Validate form
+
     if (!validateForm()) {
+      setIsLoading(false);
       return;
     }
 
-    // Check if reCAPTCHA is available
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page.",
+        "Security verification not loaded. Please refresh the page."
       );
+      setIsLoading(false);
       return;
     }
 
-    // Set loading state
-    setIsLoading(true);
-
-    try {
-      // Check if reCAPTCHA is already rendered
-      if (!recaptchaRef.current.innerHTML) {
-        console.log("Rendering reCAPTCHA");
+    // Render reCAPTCHA if not already rendered (same as working form)
+    if (!recaptchaRef.current.innerHTML) {
+      try {
         window.grecaptcha.render(recaptchaRef.current, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
-          "error-callback": onRecaptchaError,
-          size: "invisible",
+          theme: "dark",
         });
-        // Small delay to ensure rendering completes
-        await new Promise(resolve => setTimeout(resolve, 100));
+      } catch (error) {
+        console.error("Error rendering reCAPTCHA:", error);
+        setErrorMessage("Error with verification. Please try again.");
+        setIsLoading(false);
       }
-      
-      // Execute reCAPTCHA
-      console.log("Executing reCAPTCHA");
+    } else {
+      // Execute existing reCAPTCHA
       window.grecaptcha.execute();
-      
-    } catch (error) {
-      console.error("Error in handleSubmit:", error);
-      setErrorMessage("An error occurred. Please try again.");
-      setIsLoading(false);
     }
   };
 
@@ -427,6 +414,7 @@ export default function Hero() {
 
   return (
     <div id="hero">
+      {/* Popup */}
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <div className="bg-white rounded-xl p-8 max-w-sm w-full text-center shadow-xl">
