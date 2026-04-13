@@ -98,7 +98,7 @@ const PointsList = () => (
 
 export default function Hero() {
   return (
-    <div>
+    <div id="hero">
       {/* Desktop */}
       <div className="relative w-full h-screen aspect-[3/1] hidden md:block">
         <Image

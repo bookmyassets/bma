@@ -4,6 +4,9 @@ import WhyDholera from './body/WhyDholera'
 import Residency from './body/Residency'
 import Form from './components/Form'
 import CTAsection from './body/CTAsection'
+import WhyBMA from './body/WhyBMA'
+import TestimonialPagination from './body/Testimonials'
+import Footer from './body/Footer'
 
 export default function page() {
   return (
@@ -13,6 +16,9 @@ export default function page() {
             <WhyDholera/>
             <Residency/>
             <CTAsection/>
+            <WhyBMA/>
+            <TestimonialPagination/>
+            <Footer/>
         </div>
 
         <Form  title="Registry Ready Plots Under ₹10 Lakh in Dholera"/>

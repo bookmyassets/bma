@@ -25,7 +25,7 @@ export default function Navbar() {
   const handleNavigation = (section) => {
     setIsMenuOpen(false);
 
-    if (pathname === '/more-info') {
+    if (pathname === '/plots-for-sale-in-dholera') {
       const element = document.getElementById(section.replace('#', ''));
       if (element) {
         const yOffset = -100;
@@ -33,7 +33,7 @@ export default function Navbar() {
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
     } else {
-      router.push(`/more-info${section}`);
+      router.push(`/plots-for-sale-in-dholera${section}`);
     }
   };
 
@@ -70,8 +70,8 @@ export default function Navbar() {
   const navItems = [
     { href: "#hero", label: "Home" },
     { href: "#dholera", label: "About Dholera" },
-    { href: "#westwyn-estates", label: "Westwyn Residency" },
-    { href: "#why-bma", label: "Why BookMyAssets" },
+    { href: "#westwyn-residency", label: "Westwyn Residency" },
+    { href: "#Why-BMA", label: "Why BookMyAssets" },
   ];
 
   return (
@@ -174,7 +174,7 @@ export default function Navbar() {
           {/* Mobile menu section with Get in Touch dropdown */}
           <div className="md:hidden flex items-center gap-4">
             <div className="relative">
-              <button
+             {/*  <button
                 className="text-black text-base font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
                 onClick={toggleGetInTouchDropdown}
               >
@@ -195,7 +195,7 @@ export default function Navbar() {
                     d="M19 9l-7 7-7-7"
                   />
                 </svg>
-              </button>
+              </button> */}
 
               <AnimatePresence>
                 {isGetInTouchDropdownOpen && (

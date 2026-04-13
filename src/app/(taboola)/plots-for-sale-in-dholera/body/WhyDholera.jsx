@@ -34,7 +34,7 @@ function HighlightCard({ title, body }) {
 
 export default function WhyDholera() {
   return (
-    <section className="bg-white py-[calc(0.5rem+2vw)]">
+    <section className="bg-white py-[calc(0.5rem+2vw)]" id="dholera">
       <div className="px-[clamp(1rem,4vw,2.5rem)]">
         {/* Heading */}
         <div className="flex flex-col max-w-7xl mx-auto items-center text-center mb-[clamp(0.75rem,2vw,1.5rem)]">

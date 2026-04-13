@@ -1,49 +1,116 @@
-import React from "react";
+import Image from "next/image";
+import img1 from "@/assests/taboola/icons/365-days-site-visit-bookmyassets-dholera.webp";
+import img2 from "@/assests/taboola/icons/buyback-assistance-bookmyassets-dholera.webp";
+import img3 from "@/assests/taboola/icons/due-diligence-team-bookmyassets-dholera.webp";
+import img4 from "@/assests/taboola/icons/resale-support-bookmyassets-dholera.webp";
+import img5 from "@/assests/taboola/icons/sale-deed-bookmyassets-dholera.webp";
+import ROI from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
+
+const icons = [
+  { id: 1, icon: img1, label: "365 Days Site Visit" },
+  { id: 2, icon: img2, label: "Buyback Assistance" },
+  { id: 3, icon: img3, label: "Due Diligence Team" },
+  { id: 4, icon: img4, label: "Resale Support" },
+  { id: 5, icon: img5, label: "Sale Deed" },
+];
+
+const COUNTERS = [
+  { value: "7+ Projects", label: "Successfully Sold Out" },
+  { value: "2 Lakh+ Sq. Yd", label: "Dholera Land Sold" },
+  { value: "957+ Plots", label: "Registry Delivered" },
+  { value: "561+ Clients", label: "Smart Investor Client Base" },
+];
 
 export default function WhyBMA() {
-  const stats = [
-    "2 Lakh+ Sq. Yards Sold",
-    "957+ Plots Sold",
-    "561+ Happy Customers",
-    "9+ Residential Projects",
-  ];
   return (
-    <>
-      <section className="bg-white py-[clamp(0.75rem,6vw,1rem)]">
-        <div className="max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)]">
-          {/* Heading */}
-          <div className="flex flex-col items-center text-center mb-[clamp(0.5rem,4vw,1rem)]">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
-              <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-                Why Buy With{" "}
-                <span className="text-[#deae3c]"> BookMyAssets </span>
-              </h2>
-              <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+    <section className="bg-white py-[clamp(0.75rem,6vw,1rem)]" id="Why-BMA">
+      <div className="max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)]">
+        {/* Heading */}
+        <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+            <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
+              Why Invest With{" "}
+              <span className="text-[#deae3c]">BookMyAssets</span>
+            </h2>
+            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+          </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row px-[calc(1rem+2vw)] max-w-7xl mx-auto gap-6 md:gap-8">
+          {/* Left — 40% */}
+          <div className="w-full md:w-2/5 md:pb-4">
+            <div className="relative w-full aspect-[5/4] rounded-lg overflow-hidden ">
+              <Image
+                src={ROI}
+                alt="Dholera SIR — India's first semiconductor hub"
+                fill
+                sizes=""
+                className="object-contain aspect-[5/4] h-full w-auto"
+                priority
+              />
             </div>
           </div>
-
-          {/* Body Copy */}
-          <div className="gap-[clamp(0.25rem,3vw,2.5rem)] items-start">
-            <div className="flex gap-4">
-              <div className="shrink-0 mt-1 w-1 rounded-full bg-[#deae3c] self-stretch" />
-              <p className="text-[clamp(0.8rem,1.1vw,0.95rem)] text-gray-600 leading-relaxed">
-                Many investors look at Dholera because plotted assets are easier
-                to evaluate for long-term holding, family planning, and future
-                ownership decisions. For buyers who prefer land-backed options,
-                Dholera remains a location of interest due to ongoing
-                infrastructure attention and long-term development discussions.
-              </p>
+          <div className="w-full md:w-3/5">
+            <p className="text-[clamp(1rem,1.5vw,1.2rem)] space-y-6">
+              BookMyAssets is the #1 Choice of Smart Investors looking for
+              Dholera Plots for sale with Location Clarity, and High
+              Appreciation.
+            </p>
+            <div className="py-4">
+              <div className="px-[calc(0.5rem+1vw)] max-w-7xl mx-auto">
+                <div className="grid grid-cols-2 gap-[calc(0.75rem+0.5vw)]">
+                  {COUNTERS.map(({ value, label }) => (
+                    <div
+                      key={label}
+                      className="
+                    flex flex-col justify-center items-center
+                    p-[calc(0.75rem+0.2vw)]
+                    bg-white rounded-2xl shadow-md
+                    hover:shadow-xl transition-shadow
+                  "
+                    >
+                      <div className="text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#deae3c] mb-2">
+                        {value}
+                      </div>
+                      <p className="text-[clamp(0.75rem,1.2vw,0.875rem)] text-gray-700 font-medium text-center">
+                        {label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section className="bg-black">
-        <div className="max-w-7xl mx-auto">
-
+        {/* Icons Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          {icons.map((item, index) => {
+            const isLastOdd =
+              index === icons.length - 1 && icons.length % 2 !== 0;
+            return (
+              <div
+                key={item.id}
+                className={`flex flex-col items-center gap-3 p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow
+                  ${isLastOdd ? "col-span-2 sm:col-span-1" : ""}`}
+              >
+                <div className="relative w-[clamp(3rem,8vw,4.5rem)] h-[clamp(3rem,8vw,4.5rem)]">
+                  <Image
+                    src={item.icon}
+                    alt={item.label}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <p className="text-center text-[clamp(0.75rem,1.5vw,0.95rem)] font-medium text-gray-700">
+                  {item.label}
+                </p>
+              </div>
+            );
+          })}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

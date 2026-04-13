@@ -109,7 +109,7 @@ const FeatureCard = ({ icon, title, value }) => (
 
 export default function Residency() {
   return (
-    <div className="bg-white py-[calc(0.5rem+2vw)]">
+    <div className="bg-white py-[calc(0.5rem+2vw)]" id="westwyn-residency">
       <div className="max-w-7xl mx-auto text-center  px-[calc(1rem+2vw)]">
         <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold text-black">
           WestWyn Residency : Residential Plots in Dholera
