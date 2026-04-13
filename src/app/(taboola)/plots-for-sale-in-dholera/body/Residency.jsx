@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import ROI from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
-import Link from "next/link";
 import img from "@/assests/residential/residency/Residency.webp";
+import img2 from "@/assests/taboola/section/westwyn-residency-dholera-residential-plots-bookmyassets.webp";
 import {
   FaMapMarkerAlt,
   FaRoad,
@@ -12,6 +11,11 @@ import {
   FaPlane,
   FaClock,
 } from "react-icons/fa";
+
+const carouselImages = [
+  { src: img, alt: "WestWyn Estates - Kids Play Area" },
+  { src: img2, alt: "WestWyn Estates - Project Boundary" },
+];
 
 const amenities = [
   {
@@ -108,6 +112,11 @@ const FeatureCard = ({ icon, title, value }) => (
 );
 
 export default function Residency() {
+  const [current, setCurrent] = useState(0);
+  const prev = () =>
+    setCurrent((c) => (c - 1 + carouselImages.length) % carouselImages.length);
+  const next = () => setCurrent((c) => (c + 1) % carouselImages.length);
+
   return (
     <div className="bg-white py-[calc(0.5rem+2vw)]" id="westwyn-residency">
       <div className="max-w-7xl mx-auto text-center  px-[calc(1rem+2vw)]">
@@ -122,13 +131,84 @@ export default function Residency() {
       {/* Main two-column layout */}
       <div className="max-w-7xl mx-auto py-4">
         <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-          <div className="px-4 sm:px-6 lg:px-8 ">
+          <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/5] w-full h-full group">
+            {/* Original image — style completely unchanged */}
             <Image
-              src={img}
-              alt="dholera map"
-              className="rounded-xl w-full h-auto md:h-full"
+              src={carouselImages[current].src}
+              alt={carouselImages[current].alt}
+              className="rounded-xl w-full aspect-[5/6] h-full overflow-hidden object-fit max-sm:object-cover"
               priority
             />
+
+            {/* Prev button */}
+            <button
+              onClick={prev}
+              className="absolute left-6 top-1/2 -translate-y-1/2 z-30
+               w-8 h-8 sm:w-10 sm:h-10
+               bg-white/80 hover:bg-white
+               rounded-full shadow-lg
+               flex items-center justify-center
+               transition-all duration-200 hover:scale-110
+               opacity-0 group-hover:opacity-100"
+              aria-label="Previous image"
+            >
+              <svg
+                className="w-4 h-4 text-gray-800"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Next button */}
+            <button
+              onClick={next}
+              className="absolute right-6 top-1/2 -translate-y-1/2 z-30
+               w-8 h-8 sm:w-10 sm:h-10
+               bg-white/80 hover:bg-white
+               rounded-full shadow-lg
+               flex items-center justify-center
+               transition-all duration-200 hover:scale-110
+               opacity-0 group-hover:opacity-100"
+              aria-label="Next image"
+            >
+              <svg
+                className="w-4 h-4 text-gray-800"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+
+            {/* Dot indicators */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+              {carouselImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className={`rounded-full transition-all duration-500 ${
+                    i === current
+                      ? "w-6 h-2 bg-[#deae3c]"
+                      : "w-2 h-2 bg-white/70 hover:bg-white"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
           <div className="grid grid-rows-7 gap-3">
             {points.map((point, i) => {
@@ -153,10 +233,24 @@ export default function Residency() {
 
       <div className="bg-gray-100 border-b">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 ">
-            {projectFeatures.map((feature, index) => (
-              <FeatureCard key={index} {...feature} />
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {projectFeatures.map((item, index) => {
+              const isLastOdd =
+                index === projectFeatures.length - 1 &&
+                projectFeatures.length % 2 !== 0;
+              return (
+                <div
+                  key={index}
+                  className={isLastOdd ? "col-span-2 md:col-span-1" : ""}
+                >
+                  <FeatureCard
+                    icon={item.icon}
+                    title={item.title}
+                    value={item.value}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

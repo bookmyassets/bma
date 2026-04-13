@@ -1,17 +1,17 @@
 import Image from "next/image";
-import img1 from "@/assests/taboola/icons/365-days-site-visit-bookmyassets-dholera.webp";
-import img2 from "@/assests/taboola/icons/buyback-assistance-bookmyassets-dholera.webp";
-import img3 from "@/assests/taboola/icons/due-diligence-team-bookmyassets-dholera.webp";
-import img4 from "@/assests/taboola/icons/resale-support-bookmyassets-dholera.webp";
-import img5 from "@/assests/taboola/icons/sale-deed-bookmyassets-dholera.webp";
-import ROI from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
+import img1 from "@/assests/taboola/icons/bookmyassets-365-days-assistance-icon.svg";
+import img2 from "@/assests/taboola/icons/bookmyassets-buy-back-assistance-icon.svg";
+import img3 from "@/assests/taboola/icons/bookmyassets-due-diligence-team-icon.svg";
+import img4 from "@/assests/taboola/icons/bookmyassets-immediate-sale-deed-icon.svg";
+import img5 from "@/assests/taboola/icons/bookmyassets-resale-support-icon.svg";
+import ROI from "@/assests/taboola/section/champions-of-dholera-real-estate-bookmyassets.webp";
 
 const icons = [
   { id: 1, icon: img1, label: "365 Days Site Visit" },
   { id: 2, icon: img2, label: "Buyback Assistance" },
   { id: 3, icon: img3, label: "Due Diligence Team" },
-  { id: 4, icon: img4, label: "Resale Support" },
-  { id: 5, icon: img5, label: "Sale Deed" },
+  { id: 4, icon: img5, label: "Resale Support" },
+  { id: 5, icon: img4, label: "Sale Deed" },
 ];
 
 const COUNTERS = [
@@ -94,10 +94,10 @@ export default function WhyBMA() {
             return (
               <div
                 key={item.id}
-                className={`flex flex-col items-center gap-3 p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow
+                className={`flex flex-col items-center gap-3 p-2 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow
                   ${isLastOdd ? "col-span-2 sm:col-span-1" : ""}`}
               >
-                <div className="relative w-[clamp(3rem,8vw,4.5rem)] h-[clamp(3rem,8vw,4.5rem)]">
+                <div className="relative w-[clamp(7rem,8vw,9rem)] h-[clamp(7rem,8vw,9rem)]">
                   <Image
                     src={item.icon}
                     alt={item.label}
