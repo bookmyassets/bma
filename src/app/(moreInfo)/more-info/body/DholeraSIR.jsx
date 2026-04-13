@@ -1,99 +1,100 @@
 import React from "react";
 
-import dholeraMap from "@/assests/ad-page/dholera-sir-latest-map-2026-mobile-v2.webp";
+import dholera from "@/assests/ad-page/section/dholera-smart-city-latest-updates.webp";
 import Image from "next/image";
 
 const distances = [
-  {
-    label: "Railway Connectivity",
-    value: "2 Min",
+  /*  {
+    label: "India’s First Planned Smart City",
+    value: "Dholera SIR is being developed as a government-planned smart city under the Delhi Mumbai Industrial Corridor.",
     icon: "🛤️",
   },
   {
-    label: "Dholera SIR Boundary",
-    value: "5 Min",
-    icon: "🏙️",
-  },
+    label: "Early Mover Advantage",
+    value: "Many investors are investing in Dholera right now to secure their land at affordable rates and gain high returns in long-term investment.",
+    icon: "✈️",
+  }, */
   {
-    label: "Ahmedabad–Dholera Expressway",
-    value: "12 Min",
+    label: "Global Connectivity",
+    value:
+      "Dholera International Airport, Ahmedabad-Dholera Expressway, Dedicated Seaport have enabled seamless connectivity of Dholera SIR across India and globe.",
     icon: "🛣️",
   },
   {
-    label: "Dholera International Airport",
-    value: "30 Min",
-    icon: "✈️",
+    label: "₹6 Lakh Crore Global Investment",
+    value:
+      "Major industry giants including Fortune 500 companies have already invested in Dholera including mega projects like the Tata Semiconductor Plant and Dholera Solar Park.",
+    icon: "🏙️",
   },
+  {
+    label: "Early Mover Advantage",
+    value:
+      "Many investors are investing in Dholera right now to secure their land at affordable rates and gain high returns in long-term investment.",
+    icon: "🏙️",
+  },
+  
 ];
 
 export default function DholeraLandingPage() {
   return (
-    <div className="bg-white" id="dholera">
-
+    <div className="" id="dholera">
       {/* ─────────────────────────────────────────
           Section 1: About Dholera
       ───────────────────────────────────────── */}
-      <section className="grid md:grid-cols-2">
-
+      <section className="pt-3">
         {/* Left: Text */}
-        <div className="bg-black text-white p-8 md:p-12 lg:p-16 flex items-center">
-          <div className="max-w-3xl mx-auto w-full">
+        <div className=" bg-white p-4">
+          <div className=" w-full">
             <h1
-              className="text-xl md:text-3xl font-bold mb-6"
+              className="text-xl md:text-3xl max-w-7xl mx-auto font-bold mb-4 text-center"
               style={{ color: "#deae3c" }}
             >
-              Where exactly is this in Dholera, Gujarat?
+              Invest in India's First Planned Smart City: Dholera SIR
             </h1>
 
-            <div className="space-y-4 leading-relaxed text-gray-200 md:text-lg">
+            <div className=" text-black max-w-7xl mx-auto leading-relaxed md:text-lg text-center">
               <p>
-                This plotted investment opportunity is located near the Dholera
-                SIR boundary in Gujarat. It is meant for buyers who are
-                comfortable evaluating land outside their home city and want to
-                understand the location clearly before making a decision.
-              </p>
-              <p>
-                For investors from Delhi NCR, Noida, Gurugram, and other North
-                Indian cities, location clarity is often the first concern. That
-                is why we make the map and surrounding area understanding easier
-                before moving forward.
+                Dholera Special Investment Region (SIR) is India's first planned
+                smart city located in Gujarat, designed as a global
+                manufacturing hub. With seamless connectivity including
+                Ahmedabad-Dholera Expressway, Dholera International Airport, and
+                Dedicated Seaport; the city has gained over ₹6 Lakh Crore
+                investment from Government and Industry Giants. Dholera Smart
+                City is currently the top choice for investors securing land
+                investment with high appreciation potential.
               </p>
             </div>
-
-            {/* Distance Grid */}
-            <div className="mt-8 grid grid-cols-2 gap-3">
-              {distances.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-xl p-3 md:p-4 flex flex-col gap-1"
-                  style={{ backgroundColor: "rgba(255,255,255,0.07)", border: "1px solid rgba(222,174,60,0.2)" }}
-                >
-                  <span className="text-xl">{item.icon}</span>
-                  <p
-                    className="text-lg font-semibold leading-tight"
-                    style={{ color: "#deae3c" }}
+            <div className="grid grid-cols-2 pt-8 max-w-6xl mx-auto">
+              <div>
+                <Image src={dholera} alt="Dholera Smart City" />
+              </div>
+              {/* Distance Grid */}
+              <div className=" space-y-4 gap-3 text-black">
+                {distances.map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-xl p-[14px] flex flex-col gap-1"
+                    style={{
+                      backgroundColor: "rgba(255,255,255,0.07)",
+                      border: "2px solid rgba(222,174,60,0.2)",
+                    }}
                   >
-                    {item.label}
-                  </p>
-                  <p className="text-white font-bold text-sm md:text-base">
-                    {item.value}
-                  </p>
-                </div>
-              ))}
+                    <p
+                      className="text-lg font-semibold leading-tight "
+                      style={{ color: "#deae3c" }}
+                    >
+                      {item.label}
+                    </p>
+                    <p className="text-black font-bold text-sm md:text-base">
+                      {item.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Right: Building Image */}
-        <div className="flex items-center justify-center bg-gray-100 p-8">
-          <Image
-            src={dholeraMap}
-            alt="Dholera Smart City Building"
-            className="h-96 aspect-[3 /4] rounded-xl shadow-2xl w-72 object-contain"
-          />
-        </div>
       </section>
-
     </div>
   );
 }

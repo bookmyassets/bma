@@ -1,21 +1,18 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import LandingPage from "./body/HeroSlider";
-import img1 from "@/assests/ad-page/BenefitsofInvestinginDholeraSIR.webp";
-import mimg1 from "@/assests/landing/heroMobile.webp";
+import React, { useState } from "react";
 import PopupForm from "./components/PopUpForm";
 import Dholeravideos from "./body/Videos";
 import Ribbon from "./body/Ribbon";
-import ProjectSlider from "./projects/page";
 import Gallery from "./gallery/page";
 import AboutBMA from "./body/About_BMA";
 import DholeraLandingPage from "./body/DholeraSIR";
 import MegaIndustries from "./body/MegaIndustries";
 import TestimonialPagination from "./components/Testimonials";
-import ImageZoom from "./components/ImageZoom";
 import NewSection from "./body/NewSection";
 import LegalClarity from "./body/LegalClarity";
 import WhyNCRInvestors from "./body/WhyNCR";
+import Hero from "./body/Hero";
+import Whatsapp from "./components/WhatsAppCirle";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -33,28 +30,25 @@ export default function Page() {
       />
       <div className="overflow-hidden">
         <section>
-          <LandingPage
-            img1={img1}
-            mimg1={mimg1}
-            openForm={() => setShowForm(true)}
-          />
+          <Hero/>
         </section>
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
         <DholeraLandingPage />
         <NewSection/>
-        <LegalClarity/>
+        <Ribbon />
+        <AboutBMA />
+       {/*  <LegalClarity/> */}
         {/* Mega Industries crousel */}
         <MegaIndustries />
-        <WhyNCRInvestors/>
-        <AboutBMA />
+        {/* <WhyNCRInvestors/> */}
         {/* Lead Form */}
-        <Ribbon />
         <Gallery />
-        <Dholeravideos />
+
         <TestimonialPagination />
        
         <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
       </div>
+  
 
       {showForm && (
         <PopupForm

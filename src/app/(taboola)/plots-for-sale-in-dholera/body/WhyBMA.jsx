@@ -7,11 +7,11 @@ import img5 from "@/assests/taboola/icons/bookmyassets-resale-support-icon.svg";
 import ROI from "@/assests/taboola/section/champions-of-dholera-real-estate-bookmyassets.webp";
 
 const icons = [
-  { id: 1, icon: img1, label: "365 Days Site Visit" },
-  { id: 2, icon: img2, label: "Buyback Assistance" },
-  { id: 3, icon: img3, label: "Due Diligence Team" },
+  { id: 1, icon: img3, label: "Due Diligence Team" },
+  { id: 2, icon: img4, label: "Immediate Sale Deed" },
+  { id: 3, icon: img1, label: "365 Days Site Visit" },
   { id: 4, icon: img5, label: "Resale Support" },
-  { id: 5, icon: img4, label: "Sale Deed" },
+  { id: 5, icon: img2, label: "Buyback Assistance" },
 ];
 
 const COUNTERS = [

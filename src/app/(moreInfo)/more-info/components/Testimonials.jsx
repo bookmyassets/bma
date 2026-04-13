@@ -14,42 +14,42 @@ import saransh from "@/assests/testimonials/saransh-pal.webp";
 const testimonials = [
   {
     quote:
-      "Investing in Dholera Smart City through Book My Assets was one of the best decisions I made. The team guided me through every step, ensuring a hassle-free purchase. The plot prices are affordable, and I am already seeing a great appreciation in value. Highly recommended.",
+      "I am very satisfied with my investment in Westwyn Residency near the Dholera Activation Area in Dholera. Its proximity to the Dholera Solar Park and Dholera Special Investment Region gives me strong confidence in future growth. The buying process was smooth and transparent.",
     name: "Saransh Pal",
     location: "Gurugram",
     avatar: saransh,
   },
   {
     quote:
-      "I was initially skeptical about investing in Dholera, but Book My Assets provided me with all the necessary details and market insights. Their transparency and professionalism gave me confidence, and now I own a prime plot in Gujarat's first smart city. Excited about the future.",
+      "I had a great experience with BookMyAssets! The team was highly professional, responsive, and knowledgeable about the real estate market. They made the entire process from property shortlisting to final documentation, smooth and hassle-free.",
     name: "Pooja Shah",
     location: "Ahmedabad",
     avatar: pooja,
   },
   {
     quote:
-      "Dholera Smart City is the future, and Book My Assets helped me secure a great investment opportunity. Their team is knowledgeable and responsive and ensures a smooth transaction. I am confident my investment will yield high returns in the coming years.",
+      "Excellent Experience with BookMyAssets... Highly Recommended!!  The team at BookMyAssets was extremely supportive and professional throughout the entire process. Special thanks to the CRM team for being kind, responsive, and always helpful. Truly appreciate the service and would definitely recommend them.",
     name: "Vikas Patel",
     location: "Delhi",
     avatar: vikas,
   },
   {
     quote:
-      "I invested ₹25 lakhs in a plot at Dholera Smart City three years ago through Book My Assets. Today, my investment has already appreciated by 10%, and I can see the future growth potential is even higher. The team provided excellent support throughout the buying process, making it a seamless experience. I highly recommend Book My Assets to anyone looking for a profitable real estate investment.",
+      "Had a great experience with BookMyAssets in Gurugram. The team was professional, transparent, and guided me to the right plot in Dholera without any pressure. They handled everything smoothly, from site visits to paperwork. If you are looking for genuine developers in Dholera, they are the ones to trust!",
     name: "Amit Khurana",
     location: "Ghaziabad",
     avatar: amit,
   },
   {
     quote:
-      "This was my first real estate investment, and I had many doubts. Book My Assets patiently guided me through every detail, helping me choose the best plot within my budget. The property value has already been appreciated, and I feel confident about my decision. Great service and a trustworthy team.",
+      "Best services in Dholera real estate, thanks BookMyAssets for helping me. I was able to invest my money in better location plots with maximum profits, with BookMyAssets. Highly recommend them for plots in Dholera.",
     name: "Anjali Mehta",
     location: "Delhi",
     avatar: anjali,
   },
   {
     quote:
-      "I wanted to invest in a futuristic city with strong growth potential, and Dholera Smart City was the perfect choice. The infrastructure development, government support, and upcoming projects make it a great investment hub. Thanks to Book My Assets for their expert advice and smooth transaction process.",
+      "Big shoutout to the BookMyAssets team for their excellent support and honest dealings. Unlike many agents, they genuinely care about finding the right fit for you. I resold my plots to them and they helped me get good returns on my investment.",
     name: "Vikram Singh",
     location: "Ludhiana",
     avatar: vikram,
@@ -116,7 +116,7 @@ const TestimonialPagination = () => {
     <div className="bg-black py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-center text-3xl font-bold text-[#deae3c] mb-12">
-          What Our Clients Say
+          #1 Choice of 561+ Families Across India and Globe
         </h2>
 
         {/* Mobile Slider View */}

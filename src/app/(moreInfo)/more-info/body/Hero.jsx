@@ -1,16 +1,30 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import img1 from "@/assests/taboola/hero/dholera-sir-residential-plots-bookmyassets-desktop-banner.webp";
-import img2 from "@/assests/taboola/hero/dholera-sir-residential-plots-bookmyassets-mobile-banner.webp";
+import img1 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-desktop-banner.webp";
+import img2 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-mobile-banner.webp";
+import {
+  CheckCircle,
+  CalendarCheck,
+  Download,
+  FileCheck,
+  HomeIcon,
+} from "lucide-react";
+
+const stats = [
+  { icon: HomeIcon, label: "Immediate Possession" },
+  { icon: CheckCircle, label: "Govt Approved" },
+  { icon: CalendarCheck, label: "365 Days Visit" },
+  { icon: FileCheck, label: "Due Diligence" },
+];
 
 const points = [
   {
-    title: "Registry ready with Immediate Possession",
+    title: "AUDA Approved",
     desc: "Suitable for buyers exploring high-growth land opportunities in India's first greenfield smart city.",
   },
   {
-    title: "Plots in Dholera's fastest-growing corridors",
+    title: "Registry-ready with Immediate Possession",
     desc: "Focused on long-term planning — we guide you through timelines, returns, and exit strategies.",
   },
   {
@@ -20,7 +34,14 @@ const points = [
 ];
 
 // FIX 1: Accept formData, handleChange, handleSubmit as props
-const FormCard = ({ formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage }) => (
+const FormCard = ({
+  formData,
+  handleChange,
+  handleSubmit,
+  isLoading,
+  isDisabled,
+  errorMessage,
+}) => (
   <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
     <div>
       <h3 className="text-black font-semibold text-center text-lg md:text-[clamp(1.25rem,1.85vw,1.7rem)] leading-tight">
@@ -79,7 +100,6 @@ const FormCard = ({ formData, handleChange, handleSubmit, isLoading, isDisabled,
     {errorMessage && (
       <p className="text-red-500 text-xs text-center">{errorMessage}</p>
     )}
-      <div ref={recaptchaRef} className="hidden" />
 
     {/* FIX 5: Wired up onClick handler */}
     <button
@@ -87,7 +107,7 @@ const FormCard = ({ formData, handleChange, handleSubmit, isLoading, isDisabled,
       disabled={isDisabled || isLoading}
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#deae3c] hover:to-yellow-500 text-black font-medium text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest rounded-md transition-all hover:-translate-y-px disabled:opacity-60 disabled:cursor-not-allowed"
     >
-      {isLoading ? "Submitting..." : "Get A Call Back"}
+      {isLoading ? "Submitting..." : "Get Project Details"}
     </button>
   </div>
 );
@@ -241,7 +261,8 @@ export default function Hero() {
     try {
       const notesArray = [];
       if (formData.city) notesArray.push(`City: ${formData.city}`);
-      if (formData.investmentAmt) notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
+      if (formData.investmentAmt)
+        notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
       const notes = notesArray.join(" | ");
 
       // FIX 6: Restored URL as first argument to fetch()
@@ -275,7 +296,13 @@ export default function Hero() {
           responseText === "OK" ||
           responseText.toLowerCase().includes("success")
         ) {
-          setFormData({ fullName: "", phone: "", email: "", investmentAmt: "", city: "" });
+          setFormData({
+            fullName: "",
+            phone: "",
+            email: "",
+            investmentAmt: "",
+            city: "",
+          });
           setShowPopup(true);
 
           const newCount = submissionCount + 1;
@@ -350,11 +377,19 @@ export default function Hero() {
   };
 
   // Shared props for FormCard
-  const formProps = { formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage };
+  const formProps = {
+    formData,
+    handleChange,
+    handleSubmit,
+    isLoading,
+    isDisabled,
+    errorMessage,
+  };
 
   return (
     <div id="hero">
       {/* reCAPTCHA container */}
+      <div ref={recaptchaRef} className="hidden" />
 
       {/* Popup */}
       {showPopup && (
@@ -384,6 +419,7 @@ export default function Hero() {
           priority
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
+
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(.7rem,3.2vw,3.2rem)]">
           <PointsList />
           <FormCard {...formProps} />

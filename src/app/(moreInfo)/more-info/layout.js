@@ -5,6 +5,7 @@ import "./globals.css";
 import Footer from "./body/Footer";
 import FloatingButtons from "./components/whatsapp";
 import Script from "next/script";
+import Whatsapp from "./components/WhatsAppCirle";
 
 export default function RootLayout({ children }) {
   return (
@@ -59,6 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Navbar />
         {children}
         <Footer />
+        <Whatsapp/>
         <FloatingButtons />
       </body>
     </html>

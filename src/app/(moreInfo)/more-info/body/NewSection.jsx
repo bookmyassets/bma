@@ -1,201 +1,334 @@
-import React, { useState } from "react";
-import img1a from "@/assests/ad-page/westwyn-residency-dholera-society-gate.webp";
-import img1b from "@/assests/ad-page/amenities-residency.webp";
-import img1c from "@/assests/ad-page/residency-map.webp";
-import img2a from "@/assests/ad-page/westwyn-estates-dholera-society-gate.webp";
-import img2b from "@/assests/ad-page/clubhouse-lite-westwyn-estates-dholera-landing-page.webp";
-import img2c from "@/assests/ad-page/estates-map.webp";
-//import img1b from "@/assests/ad-page/westwyn-estates-dholera-society-gate.webp";
-
+"use client";
 import Image from "next/image";
+import React, { useState } from "react";
+import img from "@/assests/residential/residency/Residency.webp";
+import img2 from "@/assests/taboola/section/westwyn-residency-dholera-residential-plots-bookmyassets.webp";
 import {
-  Fence,
-  Building2,
-  Cctv,
-  Baby,
-  Car,
-  Users,
-  Zap,
-  Leaf,
-  PersonStanding,
-  MapPin,
-  Factory,
-  Plane,
-  Clock,
-} from "lucide-react";
-import { FaRoad } from "react-icons/fa6";
-import { GiRailway, GiRoad } from "react-icons/gi";
+  FaMapMarkerAlt,
+  FaRoad,
+  FaTrain,
+  FaIndustry,
+  FaPlane,
+  FaClock,
+  FaLocation,
+  FaLocationArrow
+} from "react-icons/fa";
 
-// ✅ Extracted reusable component — each instance has its OWN state
-function ProjectCard({ projectName, sections, essentials, location }) {
-  const [activeSection, setActiveSection] = useState(0);
+import icon1 from "@/assests/taboola/Amenities/app-based-society-management.svg";
+import icon2 from "@/assests/taboola/Amenities/boundary-wall.svg";
+import icon3 from "@/assests/taboola/Amenities/cctv-security.svg";
+import icon4 from "@/assests/taboola/Amenities/clubhouse-lite.svg";
+import icon5 from "@/assests/taboola/Amenities/daily-essentials-store.svg";
+import icon6 from "@/assests/taboola/Amenities/drainage-system.svg";
+import icon7 from "@/assests/taboola/Amenities/ev-charging-station.svg";
+import icon8 from "@/assests/taboola/Amenities/gated-community.svg";
+import icon9 from "@/assests/taboola/Amenities/internal-roads.svg";
+import icon10 from "@/assests/taboola/Amenities/jogging-track.svg";
+import icon11 from "@/assests/taboola/Amenities/kids-play-area.svg";
+import icon12 from "@/assests/taboola/Amenities/power-and-water-supply.svg";
+import icon13 from "@/assests/taboola/Amenities/senior-citizen-zone.svg";
+import icon14 from "@/assests/taboola/Amenities/yoga-deck.svg";
+import { MapPin } from "lucide-react";
+
+const carouselImages = [
+  { src: img, alt: "WestWyn Estates - Kids Play Area" },
+  { src: img2, alt: "WestWyn Estates - Project Boundary" },
+];
+
+const amenities = [
+  {
+    icon: icon2,
+    title: "Signature Project Boundary",
+  },
+  {
+    icon: icon8,
+    title: "Controlled Access Gated Community",
+  },
+  {
+    icon: icon9,
+    title: "Wide Internal Road Network",
+  },
+  {
+    icon: icon3,
+    title: "24/7 Security & CCTV Surveillance",
+  },
+  {
+    icon: icon1,
+    title: "App-Based Society Management",
+  },
+  {
+    icon: icon6,
+    title: "Drainage System",
+  },
+  {
+    icon: icon12,
+    title: "Power & Water Supply",
+  },
+  {
+    icon: icon7,
+    title: "EV Charging Station",
+  },
+  
+  {
+    icon: icon4,
+    title: "Clubhouse Lite",
+  },
+  {
+    icon: icon14,
+    title: "Yoga Deck",
+  },
+  {
+    icon: icon10,
+    title: "Jogging Track",
+  },
+  {
+    icon: icon13,
+    title: "Senior Citizen Zone",
+  },
+  {
+    icon: icon11,
+    title: "Kids Play Area",
+  },
+  {
+    icon: icon5,
+    title: "Daily Essentials & Utilities Store",
+  },
+];
+
+const points = [
+  {
+    icon: MapPin,
+    text: "Location : Pipariya, Dholera",
+  },
+  {
+    icon: FaLocationArrow,
+    text: "Direct entry from Major District Road (MDR)",
+  },
+  { icon: FaTrain, text: "2 mins from Railway Connectivity" },
+  { icon: FaClock, text: "5 mins from Dholera SIR boundary" },
+  { icon: FaRoad, text: "12 mins from Ahmedabad-Dholera Expressway" },
+  {
+    icon: FaIndustry,
+    text: "22 mins from Tata Semiconductor Plant & Industrial Zones",
+  },
+  { icon: FaPlane, text: "30 mins from Dholera International Airport" },
+];
+
+const projectFeatures = [
+  { icon: "🏗️", title: "Project Type", value: "Residential" },
+  {
+    icon: "🌏",
+    title: "Land Parcel",
+    value: "40,000 Sq.Yd",
+  },
+  {
+    icon: "📍",
+    title: "Total Units",
+    value: "290 Plots",
+  },
+  { icon: "🏠", title: "Plot Sizes", value: "124 Sq.Yd Onwards" },
+  { icon: "💰", title: "Price", value: "₹6,500*/Sq.Yd" },
+];
+
+const FeatureCard = ({ icon, title, value }) => (
+  <div className="bg-white rounded-xl p-4 border hover:bg-[#deae3c] group border-gray-200 text-center transition-colors duration-300 ease-in-out">
+    {/* <div className="w-12 h-12 bg-blue-100 group-hover:text-white group-hover:scale-110 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300 ease-in-out">
+      {icon}
+    </div> */}
+    <p className="group-hover:text-white group-hover:scale-110 text-[#151f28] font-bold text-lg transition-all duration-300 ease-in-out">
+      {value}
+    </p>
+    <h4 className="group-hover:text-white group-hover:scale-110  text-gray-900 text-sm mb-1 transition-all duration-300 ease-in-out">
+      {title}
+    </h4>
+  </div>
+);
+
+export default function Residency() {
+  const [current, setCurrent] = useState(0);
+  const prev = () =>
+    setCurrent((c) => (c - 1 + carouselImages.length) % carouselImages.length);
+  const next = () => setCurrent((c) => (c + 1) % carouselImages.length);
 
   return (
-    <div className="">
-      {/* Header */}
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-center">
-          <span className="text-[#deae3c]">{projectName}</span>
+    <div className="bg-white py-[calc(0.5rem+1.5vw)]" id="westwyn-residency">
+      <div className="max-w-7xl mx-auto text-center  px-[calc(1rem+2vw)]">
+        <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold text-black">
+          WestWyn Residency : Residential Plots in Dholera
         </h2>
+        <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-[#deae3c] font-semibold leading-relaxed">
+          Govt. Approved | Immediate Possession | Starting from ₹8 Lakh
+        </p>
       </div>
 
-      {/* Image */}
-      <div className="md:grid md:grid-cols-2 md:space-x-8">
-        <div className="rounded-lg flex justify-center items-center overflow-hidden mb-6">
-          <Image
-            src={sections[activeSection].image}
-            alt={sections[activeSection].title}
-            className=" rounded-lg object-cover"
-          />
-        </div>
+      {/* Main two-column layout */}
+      <div className="max-w-7xl mx-auto py-4">
+        <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
+          <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/5] w-full h-full group">
+            {/* Original image — style completely unchanged */}
+            <Image
+              src={carouselImages[current].src}
+              alt={carouselImages[current].alt}
+              className="rounded-xl w-full aspect-[5/6] h-full overflow-hidden object-cover max-sm:object-cover"
+              priority
+            />
 
-        {/* Tab Navigation */}
-        <div>
-          <div className="flex border-b mb-6">
-            {sections.map((section, index) => (
-              <button
-                key={section.title}
-                onClick={() => setActiveSection(index)}
-                className={`pb-3 px-6 font-semibold transition-all relative ${
-                  activeSection === index
-                    ? "text-[#deae3c]"
-                    : "text-gray-400 hover:text-gray-600"
-                }`}
+            {/* Prev button */}
+            <button
+              onClick={prev}
+              className="absolute left-6 top-1/2 -translate-y-1/2 z-30
+               w-8 h-8 sm:w-10 sm:h-10
+               bg-white/80 hover:bg-white
+               rounded-full shadow-lg
+               flex items-center justify-center
+               transition-all duration-200 hover:scale-110
+               opacity-0 group-hover:opacity-100"
+              aria-label="Previous image"
+            >
+              <svg
+                className="w-4 h-4 text-gray-800"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                {section.title}
-                {activeSection === index && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#deae3c]" />
-                )}
-              </button>
-            ))}
-          </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
 
-          {/* Content */}
-          <h3 className="text-xl font-bold text-black mb-4">
-            {sections[activeSection].title}
-          </h3>
-          {sections[activeSection].title === "Amenities" ||
-          sections[activeSection].title === "Location Advantage" ? (
-            <div className="grid grid-cols-2 gap-x-6 gap-y-5">
-              {(sections[activeSection].title === "Amenities"
-                ? essentials
-                : location
-              ).map(({ label, icon: Icon }) => (
-                <div key={label} className="flex items-center gap-3">
-                  <Icon
-                    size={24}
-                    strokeWidth={1.5}
-                    className="text-black shrink-0"
-                  />
-                  <span className="text-sm font-medium text-gray-800">
-                    {label}
-                  </span>
-                </div>
+            {/* Next button */}
+            <button
+              onClick={next}
+              className="absolute right-6 top-1/2 -translate-y-1/2 z-30
+               w-8 h-8 sm:w-10 sm:h-10
+               bg-white/80 hover:bg-white
+               rounded-full shadow-lg
+               flex items-center justify-center
+               transition-all duration-200 hover:scale-110
+               opacity-0 group-hover:opacity-100"
+              aria-label="Next image"
+            >
+              <svg
+                className="w-4 h-4 text-gray-800"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+
+            {/* Dot indicators */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+              {carouselImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className={`rounded-full transition-all duration-500 ${
+                    i === current
+                      ? "w-6 h-2 bg-[#deae3c]"
+                      : "w-2 h-2 bg-white/70 hover:bg-white"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
               ))}
             </div>
-          ) : (
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm">
-              {sections[activeSection].content}
-            </p>
-          )}
+          </div>
 
-          {/* Dot Indicators */}
-          <div className="flex gap-2 mt-8">
-            {sections.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveSection(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === activeSection
-                    ? "w-16 bg-gray-900"
-                    : "w-8 bg-gray-300 hover:bg-gray-400"
-                }`}
-              />
-            ))}
+          <div className="p-2 space-y-2">
+            {/* <p className="text-lg md:text-2xl font-semibold ">
+              Project Overview
+            </p> */}
+            <p className="text-base md:text-lg">
+              WestWyn Residency by BookMyAssets offers registry-ready
+              residential plots in Pipariya, Dholera. With direct entry from
+              Major District Road and 5 minute proximity to the SIR boundary.
+            </p>
+            {/* <p className="text-lg md:text-2xl font-semibold ">
+              Location Advantage With WestWyn Residency
+            </p> */}
+            <p className="text-base md:text-lg space-y-4">
+              {points.map((point, i) => {
+                const Icon = point.icon;
+                return (
+                  <span
+                    key={i}
+                    className="flex items-center justify-start gap-2 bg-white rounded-xl p-[clamp(0.25rem,1vw,0.75rem)] shadow-sm hover:border-[#deae3c] hover:shadow-md transition-all duration-200"
+                  >
+                    <span className="w-12 h-12 rounded-lg bg-[#deae3c]/10 flex items-center justify-center shrink-0">
+                      <Icon className="text-[#deae3c] text-base w-5 h-5" />
+                    </span>
+                    <span className="text-[clamp(1rem,2vw,0.875rem)] font-semibold text-gray-800 leading-snug">
+                      {point.text}
+                    </span>
+                  </span>
+                );
+              })}
+            </p>
+          </div>
+          {/* <div className="grid grid-rows-7 gap-3">
+            
+          </div> */}
+        </div>
+      </div>
+
+      <div className="bg-gray-100 border-b">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {projectFeatures.map((item, index) => {
+              const isLastOdd =
+                index === projectFeatures.length - 1 &&
+                projectFeatures.length % 2 !== 0;
+              return (
+                <div
+                  key={index}
+                  className={isLastOdd ? "col-span-2 md:col-span-1" : ""}
+                >
+                  <FeatureCard
+                    icon={item.icon}
+                    title={item.title}
+                    value={item.value}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
-    </div>
-  );
-}
 
-export default function WestWyn() {
-  const essentials = [
-    { label: "Project Boundary", icon: Fence },
-    { label: "Gated Community", icon: Building2 },
-    { label: "Internal Roads", icon: FaRoad },
-    { label: "24/7 Security & CCTV", icon: Cctv },
-    { label: "Kids Play Area", icon: Baby },
-    { label: "EV Charging Station", icon: Car },
-    { label: "App-Based Society Management", icon: Users },
-    { label: "Power & Water Supply", icon: Zap },
-    { label: "Yoga Deck", icon: Leaf },
-    { label: "Senior Citizen Zone", icon: PersonStanding },
-  ];
+      <div className="max-w-7xl mx-auto py-4">
+        <h2 className="text-xl md:text-4xl text-center font-bold text-black mb-8">
+          Amenities
+        </h2>
 
-  const location = [
-    { label: "Located on SH-117 in Polarpur, Dholera", icon: MapPin },
-    { label: "5 minutes from Bhimnath Railway Station", icon: GiRailway },
-    { label: "15 minutes from Dholera SIR boundary", icon: Clock },
-    { label: "17 minutes from Ahmedabad–Dholera Expressway", icon: GiRoad },
-    { label: "30 minutes from Tata Semiconductor Plant", icon: Factory },
-    { label: "45 minutes from Dholera International Airport", icon: Plane },
-  ];
-
-  const location2 = [
-    {
-      label: "Located on Major District Road (MDR) in Pipariya, Dholera",
-      icon: MapPin,
-    },
-    { label: "2 minutes from Railway Station", icon: GiRailway },
-    { label: "5 minutes from Dholera SIR boundary", icon: Clock },
-    { label: "12 minutes from Ahmedabad Dholera Expressway", icon: GiRoad },
-    { label: "22 minutes from Tata Semiconductor Plant", icon: Factory },
-    { label: "30 minutes from Dholera International Airport", icon: Plane },
-  ];
-
-  const sections = [
-    {
-      title: "WestWyn Estate",
-      content: `WestWyn Estates brings a refined residential plotted experience in the evolving landscape of Dholera. Developed by BookMyAssets, this premium community is designed for those who value planning, connectivity, and long-term clarity. Strategically located on State Highway-117 and close to Bhimnath Railway Station and the Dholera SIR boundary.
-`,
-      image: img2a,
-    },
-    { title: "Amenities", content: essentials, image: img2b },
-    { title: "Location Advantage", content: location, image: img2c },
-  ];
-
-  // ✅ Project 2 can have its own different sections/data
-  const sections2 = [
-    {
-      title: "WestWyn Residency",
-      content: `WestWyn Residency is a well-planned residential plot project in Pipariya, Dholera by BookMyAssets. It offers Direct entry from Major District Road (MDR) and just 5 min from SIR Boundary. The project is designed as a gated community, giving you a peaceful and secure environment. It is a good option for buyers who want a clear, simple, and practical investment.`,
-      image: img1a,
-    },
-    { title: "Amenities", content: essentials, image: img1b },
-    { title: "Location Advantage", content: location2, image: img1c },
-  ];
-
-  return (
-    <div className="w-[1/2] bg-white" id="westwyn-estates">
-      {/* Desktop: Two independent project columns */}
-      <div className="hidden lg:block lg:gap-12 max-w-7xl mx-auto px-8 py-12">
-        <ProjectCard
-          projectName="WestWyn Residency"
-          sections={sections2}
-          essentials={essentials}
-          location={location2}
-        />
-      </div>
-
-      {/* Mobile: stacked */}
-      <div className="lg:hidden px-4 py-8 space-y-12">
-        <ProjectCard
-          projectName="WestWyn Residency"
-          sections={sections2}
-          essentials={essentials}
-          location={location2}
-        />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {amenities.map((amenity, index) => (
+            <div
+              key={index}
+              className="bg-[#deae3c]/5 backdrop-blur-sm rounded-lg p-4 text-center border border-[#deae3c]/30 hover:bg-[#deae3c]/5 transition-all duration-300"
+            >
+              <div className="text-xl md:text-4xl mb-2 flex items-center justify-center">
+                <Image
+                  src={amenity.icon}
+                  alt={amenity.title}
+                  width={48}
+                  height={48}
+                  className=""
+                />
+              </div>
+              <p className="text-black font-medium text-lg">{amenity.title}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
