@@ -280,9 +280,9 @@ export default function Hero() {
       const notes = notesArray.join(" | ");
 
       // FIXED: Replace with your actual API endpoint
-      const API_URL = process.env.NEXT_PUBLIC_TELECRM_API_URL || "https://your-api-endpoint.com/submit";
+  
       
-      const response = await fetch(API_URL, {
+      const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
