@@ -305,7 +305,7 @@ export default function Hero() {
         notesArray.push(`Budget: ${formData.investmentAmt}`);
       const notes = notesArray.join(" | ");
 
-      const response = await fetch("/api/submit-form", {
+      const response = await fetch("/api/submit-form-google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
