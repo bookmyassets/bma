@@ -272,129 +272,129 @@ export default function Hero() {
   };
 
   const onRecaptchaSuccess = async (token) => {
-    try {
-      const notesArray = [];
-      if (formData.city) notesArray.push(`City: ${formData.city}`);
-      if (formData.investmentAmt)
-        notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
-      const notes = notesArray.join(" | ");
-
-      // FIXED: Replace with your actual API endpoint
+  // Don't set isLoading false here yet - we'll do it after API call
   
-      
-      const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-        },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            email: formData.email,
-            notes: notes,
-            source: "BookMyAssets Taboola Ads",
-          },
+  try {
+    const notesArray = [];
+    if (formData.city) notesArray.push(`City: ${formData.city}`);
+    if (formData.investmentAmt)
+      notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
+    const notes = notesArray.join(" | ");
+
+    const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+      },
+      body: JSON.stringify({
+        fields: {
+          name: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          notes: notes,
           source: "BookMyAssets Taboola Ads",
-          tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
-          recaptchaToken: token,
-        }),
-      });
+        },
+        source: "BookMyAssets Taboola Ads",
+        tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
+        recaptchaToken: token,
+      }),
+    });
 
-      const responseText = await response.text();
-      console.log("TeleCRM Response:", responseText);
+    const responseText = await response.text();
+    console.log("TeleCRM Response:", responseText);
 
-      if (response.ok) {
-        if (
-          responseText === "OK" ||
-          responseText.toLowerCase().includes("success")
-        ) {
-          setFormData({
-            fullName: "",
-            phone: "",
-            email: "",
-            investmentAmt: "",
-            city: "",
-          });
-          setShowPopup(true);
-
-          const newCount = submissionCount + 1;
-          setSubmissionCount(newCount);
-          if (typeof window !== "undefined") {
-            localStorage.setItem("formSubmissionCount", newCount.toString());
-            localStorage.setItem("lastSubmissionTime", Date.now().toString());
-          }
-
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "lead_form",
-            page_name: "Dholera Times",
-          });
-        } else {
-          console.log("Response Text:", responseText);
-          setErrorMessage("Submission received but with unexpected response");
-        }
-      } else {
-        console.error("Server Error:", responseText);
-        throw new Error(responseText || "Submission failed");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setErrorMessage(`Error submitting form: ${error.message}`);
-    } finally {
-      setIsLoading(false);
-
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (err) {
-          console.error("Error resetting reCAPTCHA:", err);
-        }
-      }
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage("");
-
-    if (!validateForm()) {
-      setIsLoading(false);
-      return;
-    }
-
-    if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage(
-        "Security verification not loaded. Please refresh the page.",
-      );
-      setIsLoading(false);
-      return;
-    }
-
-    // FIXED: Proper reCAPTCHA rendering and execution
-    if (!recaptchaRendered.current) {
-      try {
-        window.grecaptcha.render(recaptchaRef.current, {
-          sitekey: siteKey,
-          callback: onRecaptchaSuccess,
-          size: "invisible",
-          theme: "dark",
+    if (response.ok) {
+      if (
+        responseText === "OK" ||
+        responseText.toLowerCase().includes("success")
+      ) {
+        setFormData({
+          fullName: "",
+          phone: "",
+          email: "",
+          investmentAmt: "",
+          city: "",
         });
-        recaptchaRendered.current = true;
-        // Execute reCAPTCHA immediately after rendering
-        window.grecaptcha.execute();
-      } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
+        setShowPopup(true);
+
+        const newCount = submissionCount + 1;
+        setSubmissionCount(newCount);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", Date.now().toString());
+        }
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "lead_form",
+          page_name: "BookMyAssets Taboola Page",
+        });
+      } else {
+        console.log("Response Text:", responseText);
+        setErrorMessage("Submission received but with unexpected response");
       }
     } else {
-      // Execute reCAPTCHA if already rendered
-      window.grecaptcha.execute();
+      console.error("Server Error:", responseText);
+      throw new Error(responseText || "Submission failed");
     }
-  };
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    setErrorMessage(`Error submitting form: ${error.message}`);
+  } finally {
+    setIsLoading(false);
+
+    if (window.grecaptcha && recaptchaRef.current) {
+      try {
+        window.grecaptcha.reset();
+      } catch (err) {
+        console.error("Error resetting reCAPTCHA:", err);
+      }
+    }
+  }
+};
+
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setErrorMessage("");
+
+  if (!validateForm()) {
+    setIsLoading(false);
+    return;
+  }
+
+  if (!recaptchaLoaded || !window.grecaptcha) {
+    setErrorMessage(
+      "Security verification not loaded. Please refresh the page.",
+    );
+    setIsLoading(false);
+    return;
+  }
+
+  // FIX: Check if reCAPTCHA is already rendered by checking innerHTML
+  if (!recaptchaRef.current.innerHTML) {
+    try {
+      window.grecaptcha.render(recaptchaRef.current, {
+        sitekey: siteKey,
+        callback: onRecaptchaSuccess,
+        size: "invisible",
+        theme: "dark",
+      });
+      // Execute after a small delay to ensure rendering is complete
+      setTimeout(() => {
+        window.grecaptcha.execute();
+      }, 100);
+    } catch (error) {
+      console.error("Error rendering reCAPTCHA:", error);
+      setErrorMessage("Error with verification. Please try again.");
+      setIsLoading(false);
+    }
+  } else {
+    // Already rendered, just execute
+    window.grecaptcha.execute();
+  }
+};
 
   const formProps = {
     formData,
