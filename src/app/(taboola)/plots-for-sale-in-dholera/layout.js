@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import './globals.css';
 import Form from "./components/Form";
+import FloatingButtons from "./components/Whatsapp";
 
 export default function layout({ children }) {
 
@@ -23,6 +24,7 @@ export default function layout({ children }) {
           <div>
             <Navbar />
             {children}
+            <FloatingButtons/>
           </div>
         </div>
       </body>
