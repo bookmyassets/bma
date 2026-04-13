@@ -20,7 +20,7 @@ const points = [
 ];
 
 // FIX 1: Accept formData, handleChange, handleSubmit as props
-const FormCard = ({ formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage }) => (
+const FormCard = ({ formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage, recaptchaRef }) => (
   <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
     <div>
       <h3 className="text-black font-semibold text-center text-lg md:text-[clamp(1.25rem,1.85vw,1.7rem)] leading-tight">
@@ -350,7 +350,7 @@ export default function Hero() {
   };
 
   // Shared props for FormCard
-  const formProps = { formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage };
+const formProps = { formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage, recaptchaRef };
 
   return (
     <div id="hero">
