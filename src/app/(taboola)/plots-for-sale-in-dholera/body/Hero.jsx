@@ -383,8 +383,10 @@ export default function Hero() {
         window.grecaptcha.render(recaptchaRef.current, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
+          size: "invisible",
           theme: "dark",
         });
+        window.grecaptcha.execute(); // ← ADD THIS (first submit ke liye)
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
         setErrorMessage("Error with verification. Please try again.");
