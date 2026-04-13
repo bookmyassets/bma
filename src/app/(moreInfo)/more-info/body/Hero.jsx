@@ -33,7 +33,6 @@ const points = [
   },
 ];
 
-// FIX 1: Accept formData, handleChange, handleSubmit as props
 const FormCard = ({
   formData,
   handleChange,
@@ -41,6 +40,8 @@ const FormCard = ({
   isLoading,
   isDisabled,
   errorMessage,
+  recaptchaRef,
+  recaptchaLoaded,
 }) => (
   <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
     <div>
@@ -49,7 +50,12 @@ const FormCard = ({
       </h3>
     </div>
 
-    {/* FIX 2 & 3: Added name attributes + fixed formData.fullName key */}
+    {errorMessage && (
+      <div className="p-2 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm text-center">
+        {errorMessage}
+      </div>
+    )}
+
     <input
       name="fullName"
       placeholder="Full Name*"
@@ -65,7 +71,6 @@ const FormCard = ({
       value={formData.phone}
       onChange={handleChange}
     />
-    {/* FIX 4: Added email to inputs with correct name */}
     <input
       name="email"
       placeholder="Email (Optional)"
@@ -82,7 +87,6 @@ const FormCard = ({
       value={formData.city}
       onChange={handleChange}
     />
-    {/* FIX 7: Removed defaultValue from controlled select */}
     <select
       name="investmentAmt"
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
@@ -92,22 +96,49 @@ const FormCard = ({
       <option value="" disabled>
         Budget*
       </option>
-      <option value="8-15">₹5 Lakh - ₹15 Lakh</option>
+      <option value="5-15">₹5 Lakh - ₹15 Lakh</option>
       <option value="15-25">₹15 Lakh - ₹25 Lakh</option>
       <option value="25+">₹25 Lakh +</option>
     </select>
 
-    {errorMessage && (
-      <p className="text-red-500 text-xs text-center">{errorMessage}</p>
-    )}
+    <div ref={recaptchaRef}></div>
 
-    {/* FIX 5: Wired up onClick handler */}
     <button
       onClick={handleSubmit}
-      disabled={isDisabled || isLoading}
-      className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#deae3c] hover:to-yellow-500 text-black font-medium text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest rounded-md transition-all hover:-translate-y-px disabled:opacity-60 disabled:cursor-not-allowed"
+      disabled={isLoading || isDisabled || !recaptchaLoaded}
+      className={`w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] font-bold px-6 rounded-lg transition-all duration-300 text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest ${
+        isLoading || isDisabled || !recaptchaLoaded
+          ? "bg-gray-600 cursor-not-allowed text-gray-400"
+          : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+      }`}
     >
-      {isLoading ? "Submitting..." : "Get Project Details"}
+      {isLoading ? (
+        <div className="flex items-center justify-center">
+          <svg
+            className="animate-spin -ml-1 mr-3 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          Submitting...
+        </div>
+      ) : (
+        "Talk to Dholera Expert"
+      )}
     </button>
   </div>
 );
@@ -146,7 +177,6 @@ const PointsList = () => (
 );
 
 export default function Hero() {
-  // FIX 4: Added email key to initial state
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -165,6 +195,7 @@ export default function Hero() {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
+    // Load reCAPTCHA script (same as working form)
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
         try {
@@ -189,13 +220,14 @@ export default function Hero() {
 
     loadRecaptcha();
 
+    // Get submission count from localStorage
     if (typeof window !== "undefined") {
       const storedCount = parseInt(
-        localStorage.getItem("formSubmissionCount") || "0",
+        localStorage.getItem("heroFormSubmissionCount") || "0",
         10,
       );
       const lastSubmissionTime = parseInt(
-        localStorage.getItem("lastSubmissionTime") || "0",
+        localStorage.getItem("heroFormLastSubmissionTime") || "0",
         10,
       );
 
@@ -205,11 +237,11 @@ export default function Hero() {
 
         if (hoursPassed >= 24) {
           setSubmissionCount(0);
-          localStorage.setItem("formSubmissionCount", "0");
-          localStorage.setItem("lastSubmissionTime", Date.now().toString());
+          localStorage.setItem("heroFormSubmissionCount", "0");
+          localStorage.setItem("heroFormLastSubmissionTime", Date.now().toString());
         } else {
           setSubmissionCount(storedCount);
-          if (storedCount >= 3) {
+          if (storedCount >= 20) {
             setIsDisabled(true);
           }
         }
@@ -241,12 +273,19 @@ export default function Hero() {
       return false;
     }
 
+    // Email validation (optional field)
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setErrorMessage("Please enter a valid email address");
+      return false;
+    }
+
+    // Phone validation
     if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
-    if (submissionCount >= 3) {
+    if (submissionCount >= 20) {
       setErrorMessage(
         "You have reached the maximum submission limit. Try again after 24 hours.",
       );
@@ -259,79 +298,77 @@ export default function Hero() {
 
   const onRecaptchaSuccess = async (token) => {
     try {
+      // Prepare notes from additional fields
       const notesArray = [];
       if (formData.city) notesArray.push(`City: ${formData.city}`);
       if (formData.investmentAmt)
-        notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
+        notesArray.push(`Budget: ${formData.investmentAmt}`);
       const notes = notesArray.join(" | ");
 
-      // FIX 6: Restored URL as first argument to fetch()
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            notes: notes,
+            source: "BookMyAssets Google Hero Section",
           },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              notes: notes,
-              source: "BookMyAssets Taboola Ads",
-            },
-            source: "BookMyAssets Taboola Ads",
-            tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
-            recaptchaToken: token,
-          }),
-        },
-      );
+          source: "BookMyAssets Website",
+          tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
+          recaptchaToken: token,
+        }),
+      });
 
-      const responseText = await response.text();
-      console.log("TeleCRM Response:", responseText);
-
-      if (response.ok) {
-        if (
-          responseText === "OK" ||
-          responseText.toLowerCase().includes("success")
-        ) {
-          setFormData({
-            fullName: "",
-            phone: "",
-            email: "",
-            investmentAmt: "",
-            city: "",
-          });
-          setShowPopup(true);
-
-          const newCount = submissionCount + 1;
-          setSubmissionCount(newCount);
-          if (typeof window !== "undefined") {
-            localStorage.setItem("formSubmissionCount", newCount.toString());
-            localStorage.setItem("lastSubmissionTime", Date.now().toString());
-          }
-
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "lead_form",
-            page_name: "Dholera Times",
-          });
-        } else {
-          console.log("Response Text:", responseText);
-          setErrorMessage("Submission received but with unexpected response");
-        }
+      let data = {};
+      const contentType = response.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        data = await response.json();
       } else {
-        console.error("Server Error:", responseText);
-        throw new Error(responseText || "Submission failed");
+        const text = await response.text();
+        console.error("Non-JSON response:", response.status, text);
+      }
+
+      if (response.ok && data.success) {
+        setFormData({
+          fullName: "",
+          phone: "",
+          email: "",
+          investmentAmt: "",
+          city: "",
+        });
+        setShowPopup(true);
+
+        const newCount = submissionCount + 1;
+        setSubmissionCount(newCount);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("heroFormSubmissionCount", newCount.toString());
+          localStorage.setItem("heroFormLastSubmissionTime", Date.now().toString());
+        }
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "lead_form",
+          page_name: "Dholera Hero Section",
+        });
+      } else {
+        setErrorMessage(
+          data.error ||
+            (response.status === 405
+              ? "API route not found. Check file location: app/api/submit-form/route.js"
+              : `Submission failed (${response.status}). Please try again.`)
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage(`Error submitting form: ${error.message}`);
+      setErrorMessage(
+        "Network error. Please check your connection and try again."
+      );
     } finally {
       setIsLoading(false);
-
-      if (window.grecaptcha && recaptchaRef.current) {
+      if (typeof window !== "undefined" && window.grecaptcha && recaptchaRef.current) {
         try {
           window.grecaptcha.reset();
         } catch (err) {
@@ -353,12 +390,13 @@ export default function Hero() {
 
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page.",
+        "Security verification not loaded. Please refresh the page."
       );
       setIsLoading(false);
       return;
     }
 
+    // Render reCAPTCHA if not already rendered (same as working form)
     if (!recaptchaRef.current.innerHTML) {
       try {
         window.grecaptcha.render(recaptchaRef.current, {
@@ -372,11 +410,11 @@ export default function Hero() {
         setIsLoading(false);
       }
     } else {
+      // Execute existing reCAPTCHA
       window.grecaptcha.execute();
     }
   };
 
-  // Shared props for FormCard
   const formProps = {
     formData,
     handleChange,
@@ -384,13 +422,12 @@ export default function Hero() {
     isLoading,
     isDisabled,
     errorMessage,
+    recaptchaRef,
+    recaptchaLoaded,
   };
 
   return (
     <div id="hero">
-      {/* reCAPTCHA container */}
-      <div ref={recaptchaRef} className="hidden" />
-
       {/* Popup */}
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
@@ -419,7 +456,6 @@ export default function Hero() {
           priority
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
-
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(.7rem,3.2vw,3.2rem)]">
           <PointsList />
           <FormCard {...formProps} />
