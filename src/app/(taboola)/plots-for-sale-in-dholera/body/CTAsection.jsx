@@ -102,37 +102,6 @@ export default function CTAsection() {
             </motion.a>
           </motion.div>
 
-          {/* Get Callback */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <motion.button
-              onClick={openContactForm}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative text-white px-10 py-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 min-w-[250px]"
-              style={{
-                backgroundColor: "transparent",
-                border: "2px solid #deae3c",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#deae3c1a")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style={{ color: "#deae3c" }}>
-                  <path
-                    fillRule="evenodd"
-                    d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Get A Call Back
-              </span>
-            </motion.button>
-          </motion.div>
-
           {/* Footer note */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -146,65 +115,6 @@ export default function CTAsection() {
         </div>
       </div>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {isContactFormOpen && (
-          <motion.div
-            className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            style={{ backgroundColor: "rgba(0,0,0,0.80)" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeContactForm}
-          >
-            <motion.div
-              className="rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
-              style={{
-                backgroundColor: "#111111",
-                border: "1px solid #deae3c55",
-              }}
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative">
-                {/* Close button */}
-                <button
-                  onClick={closeContactForm}
-                  className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200"
-                  style={{
-                    backgroundColor: "#deae3c22",
-                    border: "1px solid #deae3c55",
-                    color: "#deae3c",
-                  }}
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-
-                <div className="p-6">
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-white mb-2">Get A Call Back</h3>
-                    <div
-                      className="w-16 h-1 mx-auto rounded-full"
-                      style={{ backgroundColor: "#deae3c" }}
-                    />
-                  </div>
-                  <CommonForm
-                    title="Buy Residential Plots in Dholera Just 5 Min from SIR"
-                    buttonName="Talk To Our Investment Advisor"
-                    onClose={closeContactForm}
-                    id="faq-form"
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

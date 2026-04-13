@@ -7,6 +7,7 @@ import CTAsection from './body/CTAsection'
 import WhyBMA from './body/WhyBMA'
 import TestimonialPagination from './body/Testimonials'
 import Footer from './body/Footer'
+import FAQSection from './body/FAQs'
 
 export default function page() {
   return (
@@ -18,6 +19,7 @@ export default function page() {
             <CTAsection/>
             <WhyBMA/>
             <TestimonialPagination/>
+            <FAQSection/>
             <Footer/>
         </div>
 

@@ -1,5 +1,6 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import img1 from "@/assests/taboola/hero/dholera-sir-residential-plots-bookmyassets-desktop-banner.webp";
 import img2 from "@/assests/taboola/hero/dholera-sir-residential-plots-bookmyassets-mobile-banner.webp";
 
@@ -9,7 +10,7 @@ const points = [
     desc: "Suitable for buyers exploring high-growth land opportunities in India's first greenfield smart city.",
   },
   {
-    title: "Plots in Dholera’s fastest-growing corridors",
+    title: "Plots in Dholera's fastest-growing corridors",
     desc: "Focused on long-term planning — we guide you through timelines, returns, and exit strategies.",
   },
   {
@@ -18,7 +19,8 @@ const points = [
   },
 ];
 
-const FormCard = () => (
+// FIX 1: Accept formData, handleChange, handleSubmit as props
+const FormCard = ({ formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage }) => (
   <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
     <div>
       <h3 className="text-black font-semibold text-center text-lg md:text-[clamp(1.25rem,1.85vw,1.7rem)] leading-tight">
@@ -26,39 +28,65 @@ const FormCard = () => (
       </h3>
     </div>
 
+    {/* FIX 2 & 3: Added name attributes + fixed formData.fullName key */}
     <input
+      name="fullName"
       placeholder="Full Name*"
       className="w-full h-10 md:h-[clamp(2.25rem,3.45vw,2.85rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+      value={formData.fullName}
+      onChange={handleChange}
     />
     <input
+      name="phone"
       placeholder="Phone Number*"
       type="tel"
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+      value={formData.phone}
+      onChange={handleChange}
     />
+    {/* FIX 4: Added email to inputs with correct name */}
     <input
+      name="email"
       placeholder="Email (Optional)"
       type="email"
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+      value={formData.email}
+      onChange={handleChange}
     />
     <input
+      name="city"
       placeholder="City*"
       type="text"
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+      value={formData.city}
+      onChange={handleChange}
     />
+    {/* FIX 7: Removed defaultValue from controlled select */}
     <select
+      name="investmentAmt"
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-      defaultValue=""
+      value={formData.investmentAmt}
+      onChange={handleChange}
     >
       <option value="" disabled>
         Budget*
       </option>
-      <option value="8-15">8 lakh - 15 lakhs</option>
-      <option value="15-25">15 lakhs - 25 lakhs</option>
-      <option value="25+">25 lakhs +</option>
+      <option value="8-15">₹5 Lakh - ₹15 Lakh</option>
+      <option value="15-25">₹15 Lakh - ₹25 Lakh</option>
+      <option value="25+">₹25 Lakh +</option>
     </select>
 
-    <button className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#deae3c] hover:to-yellow-500 text-black font-medium text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest rounded-md transition-all hover:-translate-y-px">
-      Get A Call Back
+    {errorMessage && (
+      <p className="text-red-500 text-xs text-center">{errorMessage}</p>
+    )}
+
+    {/* FIX 5: Wired up onClick handler */}
+    <button
+      onClick={handleSubmit}
+      disabled={isDisabled || isLoading}
+      className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#deae3c] hover:to-yellow-500 text-black font-medium text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest rounded-md transition-all hover:-translate-y-px disabled:opacity-60 disabled:cursor-not-allowed"
+    >
+      {isLoading ? "Submitting..." : "Get A Call Back"}
     </button>
   </div>
 );
@@ -97,25 +125,268 @@ const PointsList = () => (
 );
 
 export default function Hero() {
+  // FIX 4: Added email key to initial state
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    email: "",
+    investmentAmt: "",
+    city: "",
+  });
+
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const recaptchaRef = useRef(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
+        try {
+          const script = document.createElement("script");
+          script.src = "https://www.google.com/recaptcha/api.js";
+          script.async = true;
+          script.defer = true;
+          script.onload = () => setRecaptchaLoaded(true);
+          script.onerror = () => {
+            console.error("Failed to load reCAPTCHA script");
+            setRecaptchaLoaded(true);
+          };
+          document.head.appendChild(script);
+        } catch (err) {
+          console.error("reCAPTCHA script loading error:", err);
+          setRecaptchaLoaded(true);
+        }
+      } else if (window.grecaptcha || !siteKey) {
+        setRecaptchaLoaded(true);
+      }
+    };
+
+    loadRecaptcha();
+
+    if (typeof window !== "undefined") {
+      const storedCount = parseInt(
+        localStorage.getItem("formSubmissionCount") || "0",
+        10,
+      );
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("lastSubmissionTime") || "0",
+        10,
+      );
+
+      if (lastSubmissionTime) {
+        const timeDifference = Date.now() - lastSubmissionTime;
+        const hoursPassed = timeDifference / (1000 * 60 * 60);
+
+        if (hoursPassed >= 24) {
+          setSubmissionCount(0);
+          localStorage.setItem("formSubmissionCount", "0");
+          localStorage.setItem("lastSubmissionTime", Date.now().toString());
+        } else {
+          setSubmissionCount(storedCount);
+          if (storedCount >= 3) {
+            setIsDisabled(true);
+          }
+        }
+      } else {
+        setSubmissionCount(storedCount);
+      }
+    }
+
+    return () => {
+      if (window.grecaptcha && recaptchaRef.current) {
+        try {
+          window.grecaptcha.reset();
+        } catch (e) {
+          console.log("reCAPTCHA cleanup error:", e);
+        }
+      }
+    };
+  }, [siteKey]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrorMessage("");
+  };
+
+  const validateForm = () => {
+    if (!formData.fullName.trim() || !formData.phone.trim()) {
+      setErrorMessage("Please fill in all required fields");
+      return false;
+    }
+
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
+      setErrorMessage("Please enter a valid phone number (10-15 digits)");
+      return false;
+    }
+
+    if (submissionCount >= 3) {
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours.",
+      );
+      setIsDisabled(true);
+      return false;
+    }
+
+    return true;
+  };
+
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const notesArray = [];
+      if (formData.city) notesArray.push(`City: ${formData.city}`);
+      if (formData.investmentAmt) notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
+      const notes = notesArray.join(" | ");
+
+      // FIX 6: Restored URL as first argument to fetch()
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+          },
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              notes: notes,
+              source: "BookMyAssets Taboola Ads",
+            },
+            source: "BookMyAssets Taboola Ads",
+            tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
+            recaptchaToken: token,
+          }),
+        },
+      );
+
+      const responseText = await response.text();
+      console.log("TeleCRM Response:", responseText);
+
+      if (response.ok) {
+        if (
+          responseText === "OK" ||
+          responseText.toLowerCase().includes("success")
+        ) {
+          setFormData({ fullName: "", phone: "", email: "", investmentAmt: "", city: "" });
+          setShowPopup(true);
+
+          const newCount = submissionCount + 1;
+          setSubmissionCount(newCount);
+          if (typeof window !== "undefined") {
+            localStorage.setItem("formSubmissionCount", newCount.toString());
+            localStorage.setItem("lastSubmissionTime", Date.now().toString());
+          }
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead_form",
+            page_name: "Dholera Times",
+          });
+        } else {
+          console.log("Response Text:", responseText);
+          setErrorMessage("Submission received but with unexpected response");
+        }
+      } else {
+        console.error("Server Error:", responseText);
+        throw new Error(responseText || "Submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setErrorMessage(`Error submitting form: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+
+      if (window.grecaptcha && recaptchaRef.current) {
+        try {
+          window.grecaptcha.reset();
+        } catch (err) {
+          console.error("Error resetting reCAPTCHA:", err);
+        }
+      }
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
+
+    if (!validateForm()) {
+      setIsLoading(false);
+      return;
+    }
+
+    if (!recaptchaLoaded || !window.grecaptcha) {
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
+      setIsLoading(false);
+      return;
+    }
+
+    if (!recaptchaRef.current.innerHTML) {
+      try {
+        window.grecaptcha.render(recaptchaRef.current, {
+          sitekey: siteKey,
+          callback: onRecaptchaSuccess,
+          theme: "dark",
+        });
+      } catch (error) {
+        console.error("Error rendering reCAPTCHA:", error);
+        setErrorMessage("Error with verification. Please try again.");
+        setIsLoading(false);
+      }
+    } else {
+      window.grecaptcha.execute();
+    }
+  };
+
+  // Shared props for FormCard
+  const formProps = { formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage };
+
   return (
     <div id="hero">
+      {/* reCAPTCHA container */}
+      <div ref={recaptchaRef} className="hidden" />
+
+      {/* Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white rounded-xl p-8 max-w-sm w-full text-center shadow-xl">
+            <h2 className="text-xl font-bold text-black mb-2">Thank You!</h2>
+            <p className="text-gray-600 text-sm mb-4">
+              Our team will get back to you shortly.
+            </p>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-2 rounded-md transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Desktop */}
       <div className="relative w-full h-screen aspect-[3/1] hidden md:block">
         <Image
           src={img1}
-          alt="WestWyn Estate"
+          alt="Dholera Smart City Plots"
           fill
           className="object-cover w-full h-screen"
           priority
         />
-
-        {/* Gradient */}
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
-
-        {/* Left: Points | Right: Form */}
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(.7rem,3.2vw,3.2rem)]">
           <PointsList />
-          <FormCard />
+          <FormCard {...formProps} />
         </div>
       </div>
 
@@ -124,14 +395,13 @@ export default function Hero() {
         <div className="relative w-full min-h-screen">
           <Image
             src={img2}
-            alt="WestWyn Estate"
+            alt="Dholera Smart City Plots"
             fill
             className="object-cover"
             priority
           />
           <div className="absolute inset-0 bg-black/60" />
 
-          {/* All content overlaid on image */}
           <div className="absolute inset-0 z-20 flex flex-col px-4 py-6 justify-center gap-4 overflow-y-auto">
             <h1 className="text-white font-bold text-[clamp(1.5rem,6vw,2rem)] leading-tight mb-2">
               Govt Approved Plots in Dholera
@@ -147,16 +417,15 @@ export default function Hero() {
                   </span>
                 </div>
                 <div>
-                  <p className="mt-1 text-white font-medium text-sm leading-snug flex items-center justify-center">
+                  <p className="mt-1 text-white font-medium text-sm leading-snug">
                     {point.title}
                   </p>
                 </div>
               </div>
             ))}
 
-            {/* Form also on image */}
             <div className="mt-2 border-t border-yellow-600/20 pt-4">
-              <FormCard />
+              <FormCard {...formProps} />
             </div>
           </div>
         </div>

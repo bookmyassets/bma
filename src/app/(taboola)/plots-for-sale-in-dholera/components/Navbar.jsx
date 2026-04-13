@@ -5,6 +5,7 @@ import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import GetinTouch from "./GetinTouch";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

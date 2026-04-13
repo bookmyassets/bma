@@ -7,7 +7,17 @@ export default function layout({ children }) {
 
   return (
     <html>
-      <head></head>
+      <head>
+        <title> Premium Residential Plots in Dholera | BookMyAssets </title>
+        <meta
+          name="description"
+          content="Explore premium plotted opportunities in Dholera Smart City. Get brochure, price list, site visit support, and expert guidance from BookMyAssets."
+        />
+        <meta
+          name="keywords"
+          content="premium plots in dholera, residential plots in dholera, dholera smart city plots, bookmyassets plots, dholera investment plots, govt approved dholera plots"
+        />
+      </head>
       <body>
         <div>
           <div>

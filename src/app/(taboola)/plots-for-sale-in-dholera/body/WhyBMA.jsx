@@ -53,9 +53,11 @@ export default function WhyBMA() {
           </div>
           <div className="w-full md:w-3/5">
             <p className="text-[clamp(1rem,1.5vw,1.2rem)] space-y-6">
-              BookMyAssets is the #1 Choice of Smart Investors looking for
-              Dholera Plots for sale with Location Clarity, and High
-              Appreciation.
+              BookMyAssets is the #1 choice of Smart investors looking for
+              Dholera plots for sale with location clarity, expert guidance and
+              high appreciation. We explore developing and high growth potential
+              land in Dholera to deliver higher appreciation to our clients with
+              100% trust and transparency.
             </p>
             <div className="py-4">
               <div className="px-[calc(0.5rem+1vw)] max-w-7xl mx-auto">
