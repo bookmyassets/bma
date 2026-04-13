@@ -5,29 +5,34 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Are these government approved plots in Dholera?",
+    question: "Is WestWyn Residency an AUDA approved project in Dholera?",
     answer:
-      "Yes, BookMyAssets helps buyers explore government-approved plotted opportunities in Dholera with guided consultation and proper documentation support.",
+      "Yes, WestWyn Residency offers plots with NA/NOC and clear title documentation. Buyers can review all approval-related documents before making a decision.",
   },
   {
-    question: "What do I get after filling the form?",
+    question: "Is Dholera a good option for long-term investment?",
     answer:
-      "You will receive:\n• Brochure details\n• Price information\n• Layout discussion support\n• A callback from our team for further guidance",
+      "Dholera is being developed as India’s first Greenfield Smart City with strong government backing and large-scale infrastructure projects. It is primarily considered by investors looking for long-term growth potential.",
   },
   {
-    question: "Is this suitable for long-term investors?",
+    question: "What major developments are happening in Dholera?",
     answer:
-      "Yes, this opportunity is primarily designed for buyers exploring long-term plotted investment options in Dholera rather than short-term gains.",
+      "Dholera is witnessing multiple large-scale developments such as the Dholera International Airport, Ahmedabad–Dholera Expressway, semiconductor manufacturing projects, and one of the largest solar parks in India.",
   },
   {
-    question: "Can I review project layout and location before deciding?",
+    question: "How long does it take to get possession of the plot?",
     answer:
-      "Yes, our team provides complete assistance in understanding:\n• Project layout\n• Plot positioning\n• Location insights\nbefore you make any decision.",
+      "Plots are typically registry-ready. Possession can be initiated after full payment, and registry documentation is generally completed within 7–15 working days.",
   },
   {
-    question: "Can I schedule a site visit?",
+    question: "Does BookMyAssets provide support after purchase?",
     answer:
-      "Yes, BookMyAssets offers year-round site visit support along with step-by-step guidance based on your interest and availability.",
+      "Yes, BookMyAssets offers ongoing support including site visit coordination, resale assistance, and general guidance for your investment in Dholera.",
+  },
+  {
+    question: "Can I visit the project before making a decision?",
+    answer:
+      "Yes, site visits can be arranged based on your availability. You can explore the location, layout, and surrounding development before proceeding.",
   },
 ];
 

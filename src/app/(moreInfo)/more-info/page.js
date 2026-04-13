@@ -13,6 +13,7 @@ import LegalClarity from "./body/LegalClarity";
 import WhyNCRInvestors from "./body/WhyNCR";
 import Hero from "./body/Hero";
 import Whatsapp from "./components/WhatsAppCirle";
+import FAQSection from "./body/FAQs";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -30,14 +31,14 @@ export default function Page() {
       />
       <div className="overflow-hidden">
         <section>
-          <Hero/>
+          <Hero />
         </section>
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
         <DholeraLandingPage />
-        <NewSection/>
+        <NewSection />
         <Ribbon />
         <AboutBMA />
-       {/*  <LegalClarity/> */}
+        {/*  <LegalClarity/> */}
         {/* Mega Industries crousel */}
         <MegaIndustries />
         {/* <WhyNCRInvestors/> */}
@@ -45,10 +46,9 @@ export default function Page() {
         <Gallery />
 
         <TestimonialPagination />
-       
+        <FAQSection />
         <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
       </div>
-  
 
       {showForm && (
         <PopupForm

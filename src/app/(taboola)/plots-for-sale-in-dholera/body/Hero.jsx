@@ -20,7 +20,16 @@ const points = [
 ];
 
 // FIX 1: Accept formData, handleChange, handleSubmit as props
-const FormCard = ({ formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage, recaptchaRef }) => (
+const FormCard = ({
+  formData,
+  handleChange,
+  handleSubmit,
+  isLoading,
+  isDisabled,
+  errorMessage,
+  recaptchaRef,
+  recaptchaLoaded,
+}) => (
   <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
     <div>
       <h3 className="text-black font-semibold text-center text-lg md:text-[clamp(1.25rem,1.85vw,1.7rem)] leading-tight">
@@ -79,15 +88,45 @@ const FormCard = ({ formData, handleChange, handleSubmit, isLoading, isDisabled,
     {errorMessage && (
       <p className="text-red-500 text-xs text-center">{errorMessage}</p>
     )}
-      <div ref={recaptchaRef} className="hidden" />
+    <div ref={recaptchaRef} className="hidden" />
 
     {/* FIX 5: Wired up onClick handler */}
     <button
       onClick={handleSubmit}
-      disabled={isDisabled || isLoading}
-      className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#deae3c] hover:to-yellow-500 text-black font-medium text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest rounded-md transition-all hover:-translate-y-px disabled:opacity-60 disabled:cursor-not-allowed"
+      disabled={isLoading || isDisabled || !recaptchaLoaded}
+      className={`w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] font-bold px-6 rounded-lg transition-all duration-300 text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest ${
+        isLoading || isDisabled || !recaptchaLoaded
+          ? "bg-gray-600 cursor-not-allowed text-gray-400"
+          : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+      }`}
     >
-      {isLoading ? "Submitting..." : "Get A Call Back"}
+      {isLoading ? (
+        <div className="flex items-center justify-center">
+          <svg
+            className="animate-spin -ml-1 mr-3 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          Submitting...
+        </div>
+      ) : (
+        "Talk to Dholera Expert"
+      )}
     </button>
   </div>
 );
@@ -241,7 +280,8 @@ export default function Hero() {
     try {
       const notesArray = [];
       if (formData.city) notesArray.push(`City: ${formData.city}`);
-      if (formData.investmentAmt) notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
+      if (formData.investmentAmt)
+        notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
       const notes = notesArray.join(" | ");
 
       // FIX 6: Restored URL as first argument to fetch()
@@ -275,7 +315,13 @@ export default function Hero() {
           responseText === "OK" ||
           responseText.toLowerCase().includes("success")
         ) {
-          setFormData({ fullName: "", phone: "", email: "", investmentAmt: "", city: "" });
+          setFormData({
+            fullName: "",
+            phone: "",
+            email: "",
+            investmentAmt: "",
+            city: "",
+          });
           setShowPopup(true);
 
           const newCount = submissionCount + 1;
@@ -350,7 +396,16 @@ export default function Hero() {
   };
 
   // Shared props for FormCard
-const formProps = { formData, handleChange, handleSubmit, isLoading, isDisabled, errorMessage, recaptchaRef };
+  const formProps = {
+    formData,
+    handleChange,
+    handleSubmit,
+    isLoading,
+    isDisabled,
+    errorMessage,
+    recaptchaRef,
+    recaptchaLoaded,
+  };
 
   return (
     <div id="hero">
