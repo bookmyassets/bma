@@ -196,7 +196,9 @@ export default function Hero() {
   const [showPopup, setShowPopup] = useState(false);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [recaptchaRendered, setRecaptchaRendered] = useState(false);
-  const recaptchaRef = useRef(null);
+  const desktopRecaptchaRef = useRef(null);
+  const mobileRecaptchaRef = useRef(null);
+  const activeRecaptchaRef = useRef(null); // set at submit time to whichever form was used
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // Validation function
@@ -330,7 +332,7 @@ export default function Hero() {
       if (
         typeof window !== "undefined" &&
         window.grecaptcha &&
-        recaptchaRef.current
+        activeRecaptchaRef.current
       ) {
         try {
           window.grecaptcha.reset();
@@ -342,10 +344,11 @@ export default function Hero() {
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, ref) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage("");
+    activeRecaptchaRef.current = ref.current; // track which form triggered submit
 
     if (!validateForm()) {
       setIsLoading(false);
@@ -362,7 +365,7 @@ export default function Hero() {
     }
 
     // Check if reCAPTCHA container exists
-    if (!recaptchaRef.current) {
+    if (!activeRecaptchaRef.current) {
       setErrorMessage("Form error. Please refresh the page.");
       setIsLoading(false);
       return;
@@ -375,7 +378,7 @@ export default function Hero() {
         window.grecaptcha.execute();
       } else {
         // Render reCAPTCHA first
-        const widgetId = window.grecaptcha.render(recaptchaRef.current, {
+        const widgetId = window.grecaptcha.render(activeRecaptchaRef.current, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
           theme: "dark",
@@ -470,7 +473,7 @@ export default function Hero() {
     console.log("Component mounted with siteKey:", !!siteKey);
 
     return () => {
-      if (window.grecaptcha && recaptchaRef.current) {
+      if (window.grecaptcha && desktopRecaptchaRef.current) {
         try {
           window.grecaptcha.reset();
         } catch (e) {
@@ -480,15 +483,25 @@ export default function Hero() {
     };
   }, [siteKey]);
 
-  const formProps = {
+  const baseFormProps = {
     formData,
     handleChange,
-    handleSubmit,
     isLoading,
     isDisabled,
     errorMessage,
-    recaptchaRef,
     recaptchaLoaded,
+  };
+
+  const desktopFormProps = {
+    ...baseFormProps,
+    recaptchaRef: desktopRecaptchaRef,
+    handleSubmit: (e) => handleSubmit(e, desktopRecaptchaRef),
+  };
+
+  const mobileFormProps = {
+    ...baseFormProps,
+    recaptchaRef: mobileRecaptchaRef,
+    handleSubmit: (e) => handleSubmit(e, mobileRecaptchaRef),
   };
 
   return (
@@ -523,7 +536,7 @@ export default function Hero() {
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(.7rem,3.2vw,3.2rem)]">
           <PointsList />
-          <FormCard {...formProps} />
+          <FormCard {...desktopFormProps} />
         </div>
       </div>
 
@@ -562,7 +575,7 @@ export default function Hero() {
             ))}
 
             <div className="mt-2 border-t border-yellow-600/20 pt-4">
-              <FormCard {...formProps} />
+              <FormCard {...mobileFormProps} />
             </div>
           </div>
         </div>
