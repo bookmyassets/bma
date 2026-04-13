@@ -62,6 +62,7 @@ const FormCard = ({
       className="w-full h-10 md:h-[clamp(2.25rem,3.45vw,2.85rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
       value={formData.fullName}
       onChange={handleChange}
+      required
     />
     <input
       name="phone"
@@ -70,6 +71,7 @@ const FormCard = ({
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
       value={formData.phone}
       onChange={handleChange}
+      required
     />
     <input
       name="email"
@@ -86,12 +88,14 @@ const FormCard = ({
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
       value={formData.city}
       onChange={handleChange}
+      required
     />
     <select
       name="investmentAmt"
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
       value={formData.investmentAmt}
       onChange={handleChange}
+      required
     >
       <option value="" disabled>
         Budget*
@@ -101,7 +105,7 @@ const FormCard = ({
       <option value="25+">₹25 Lakh +</option>
     </select>
 
-    <div ref={recaptchaRef}></div>
+    <div ref={recaptchaRef} className="recaptcha-container"></div>
 
     <button
       onClick={handleSubmit}
@@ -191,97 +195,48 @@ export default function Hero() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const [recaptchaRendered, setRecaptchaRendered] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  useEffect(() => {
-    // Load reCAPTCHA script (same as working form)
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true);
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true);
-        }
-      } else if (window.grecaptcha || !siteKey) {
-        setRecaptchaLoaded(true);
-      }
-    };
-
-    loadRecaptcha();
-
-    // Get submission count from localStorage
-    if (typeof window !== "undefined") {
-      const storedCount = parseInt(
-        localStorage.getItem("heroFormSubmissionCount") || "0",
-        10,
-      );
-      const lastSubmissionTime = parseInt(
-        localStorage.getItem("heroFormLastSubmissionTime") || "0",
-        10,
-      );
-
-      if (lastSubmissionTime) {
-        const timeDifference = Date.now() - lastSubmissionTime;
-        const hoursPassed = timeDifference / (1000 * 60 * 60);
-
-        if (hoursPassed >= 24) {
-          setSubmissionCount(0);
-          localStorage.setItem("heroFormSubmissionCount", "0");
-          localStorage.setItem("heroFormLastSubmissionTime", Date.now().toString());
-        } else {
-          setSubmissionCount(storedCount);
-          if (storedCount >= 20) {
-            setIsDisabled(true);
-          }
-        }
-      } else {
-        setSubmissionCount(storedCount);
-      }
-    }
-
-    return () => {
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (e) {
-          console.log("reCAPTCHA cleanup error:", e);
-        }
-      }
-    };
-  }, [siteKey]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-    setErrorMessage("");
-  };
-
+  // Validation function
   const validateForm = () => {
-    if (!formData.fullName.trim() || !formData.phone.trim()) {
-      setErrorMessage("Please fill in all required fields");
+    // Check for required fields with proper trimming
+    if (!formData.fullName || formData.fullName.trim() === "") {
+      setErrorMessage("Please enter your full name");
       return false;
     }
 
-    // Email validation (optional field)
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
+    if (!formData.phone || formData.phone.trim() === "") {
+      setErrorMessage("Please enter your phone number");
       return false;
     }
 
-    // Phone validation
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
+    // Phone validation - more flexible for different formats
+    const phoneDigits = formData.phone.replace(/\D/g, "");
+    if (phoneDigits.length < 10 || phoneDigits.length > 15) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
+      return false;
+    }
+
+    // Email validation (only if provided)
+    if (formData.email && formData.email.trim() !== "") {
+      const emailRegex = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        setErrorMessage("Please enter a valid email address");
+        return false;
+      }
+    }
+
+    // Check for city
+    if (!formData.city || formData.city.trim() === "") {
+      setErrorMessage("Please enter your city");
+      return false;
+    }
+
+    // Check for investment amount
+    if (!formData.investmentAmt) {
+      setErrorMessage("Please select your budget");
       return false;
     }
 
@@ -296,6 +251,7 @@ export default function Hero() {
     return true;
   };
 
+  // reCAPTCHA success callback
   const onRecaptchaSuccess = async (token) => {
     try {
       // Prepare notes from additional fields
@@ -345,7 +301,10 @@ export default function Hero() {
         setSubmissionCount(newCount);
         if (typeof window !== "undefined") {
           localStorage.setItem("heroFormSubmissionCount", newCount.toString());
-          localStorage.setItem("heroFormLastSubmissionTime", Date.now().toString());
+          localStorage.setItem(
+            "heroFormLastSubmissionTime",
+            Date.now().toString(),
+          );
         }
 
         window.dataLayer = window.dataLayer || [];
@@ -358,17 +317,21 @@ export default function Hero() {
           data.error ||
             (response.status === 405
               ? "API route not found. Check file location: app/api/submit-form/route.js"
-              : `Submission failed (${response.status}). Please try again.`)
+              : `Submission failed (${response.status}). Please try again.`),
         );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       setErrorMessage(
-        "Network error. Please check your connection and try again."
+        "Network error. Please check your connection and try again.",
       );
     } finally {
       setIsLoading(false);
-      if (typeof window !== "undefined" && window.grecaptcha && recaptchaRef.current) {
+      if (
+        typeof window !== "undefined" &&
+        window.grecaptcha &&
+        recaptchaRef.current
+      ) {
         try {
           window.grecaptcha.reset();
         } catch (err) {
@@ -378,6 +341,7 @@ export default function Hero() {
     }
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -388,32 +352,133 @@ export default function Hero() {
       return;
     }
 
+    // Wait for reCAPTCHA to be ready
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page."
+        "Security verification is loading. Please wait a moment and try again.",
       );
       setIsLoading(false);
       return;
     }
 
-    // Render reCAPTCHA if not already rendered (same as working form)
-    if (!recaptchaRef.current.innerHTML) {
-      try {
-        window.grecaptcha.render(recaptchaRef.current, {
+    // Check if reCAPTCHA container exists
+    if (!recaptchaRef.current) {
+      setErrorMessage("Form error. Please refresh the page.");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // Execute reCAPTCHA
+      if (recaptchaRendered) {
+        // reCAPTCHA already rendered
+        window.grecaptcha.execute();
+      } else {
+        // Render reCAPTCHA first
+        const widgetId = window.grecaptcha.render(recaptchaRef.current, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
           theme: "dark",
+          size: "invisible",
         });
-      } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
+        setRecaptchaRendered(true);
+        // Execute after rendering
+        setTimeout(() => {
+          if (window.grecaptcha) {
+            window.grecaptcha.execute(widgetId);
+          }
+        }, 100);
       }
-    } else {
-      // Execute existing reCAPTCHA
-      window.grecaptcha.execute();
+    } catch (error) {
+      console.error("Error with reCAPTCHA:", error);
+      setErrorMessage("Error with verification. Please try again.");
+      setIsLoading(false);
     }
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrorMessage("");
+  };
+
+  // Load reCAPTCHA and initialize
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
+        try {
+          const script = document.createElement("script");
+          script.src =
+            "https://www.google.com/recaptcha/api.js?render=explicit";
+          script.async = true;
+          script.defer = true;
+          script.onload = () => {
+            console.log("reCAPTCHA script loaded");
+            setRecaptchaLoaded(true);
+          };
+          script.onerror = () => {
+            console.error("Failed to load reCAPTCHA script");
+            setRecaptchaLoaded(true);
+          };
+          document.head.appendChild(script);
+        } catch (err) {
+          console.error("reCAPTCHA script loading error:", err);
+          setRecaptchaLoaded(true);
+        }
+      } else if (window.grecaptcha || !siteKey) {
+        console.log("reCAPTCHA already loaded or no site key");
+        setRecaptchaLoaded(true);
+      }
+    };
+
+    loadRecaptcha();
+
+    // Get submission count from localStorage
+    if (typeof window !== "undefined") {
+      const storedCount = parseInt(
+        localStorage.getItem("heroFormSubmissionCount") || "0",
+        10,
+      );
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("heroFormLastSubmissionTime") || "0",
+        10,
+      );
+
+      if (lastSubmissionTime) {
+        const timeDifference = Date.now() - lastSubmissionTime;
+        const hoursPassed = timeDifference / (1000 * 60 * 60);
+
+        if (hoursPassed >= 24) {
+          setSubmissionCount(0);
+          localStorage.setItem("heroFormSubmissionCount", "0");
+          localStorage.setItem(
+            "heroFormLastSubmissionTime",
+            Date.now().toString(),
+          );
+        } else {
+          setSubmissionCount(storedCount);
+          if (storedCount >= 20) {
+            setIsDisabled(true);
+          }
+        }
+      } else {
+        setSubmissionCount(storedCount);
+      }
+    }
+
+    // Debug info
+    console.log("Component mounted with siteKey:", !!siteKey);
+
+    return () => {
+      if (window.grecaptcha && recaptchaRef.current) {
+        try {
+          window.grecaptcha.reset();
+        } catch (e) {
+          console.log("reCAPTCHA cleanup error:", e);
+        }
+      }
+    };
+  }, [siteKey]);
 
   const formProps = {
     formData,
@@ -502,6 +567,13 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .recaptcha-container {
+          min-height: 78px;
+          margin: 10px 0;
+        }
+      `}</style>
     </div>
   );
 }
