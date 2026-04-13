@@ -19,7 +19,6 @@ const points = [
   },
 ];
 
-// FIX 1: Accept formData, handleChange, handleSubmit as props
 const FormCard = ({
   formData,
   handleChange,
@@ -37,7 +36,6 @@ const FormCard = ({
       </h3>
     </div>
 
-    {/* FIX 2 & 3: Added name attributes + fixed formData.fullName key */}
     <input
       name="fullName"
       placeholder="Full Name*"
@@ -53,7 +51,6 @@ const FormCard = ({
       value={formData.phone}
       onChange={handleChange}
     />
-    {/* FIX 4: Added email to inputs with correct name */}
     <input
       name="email"
       placeholder="Email (Optional)"
@@ -70,7 +67,6 @@ const FormCard = ({
       value={formData.city}
       onChange={handleChange}
     />
-    {/* FIX 7: Removed defaultValue from controlled select */}
     <select
       name="investmentAmt"
       className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
@@ -90,7 +86,6 @@ const FormCard = ({
     )}
     <div ref={recaptchaRef} className="hidden" />
 
-    {/* FIX 5: Wired up onClick handler */}
     <button
       onClick={handleSubmit}
       disabled={isLoading || isDisabled || !recaptchaLoaded}
@@ -165,7 +160,6 @@ const PointsList = () => (
 );
 
 export default function Hero() {
-  // FIX 4: Added email key to initial state
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -182,6 +176,9 @@ export default function Hero() {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  
+  // Add this - to track if reCAPTCHA is already rendered
+  const recaptchaRendered = useRef(false);
 
   useEffect(() => {
     const loadRecaptcha = () => {
@@ -238,12 +235,10 @@ export default function Hero() {
     }
 
     return () => {
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (e) {
-          console.log("reCAPTCHA cleanup error:", e);
-        }
+      // Cleanup script if needed
+      const script = document.querySelector('script[src="https://www.google.com/recaptcha/api.js"]');
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
       }
     };
   }, [siteKey]);
@@ -284,28 +279,28 @@ export default function Hero() {
         notesArray.push(`Investment Amount: ${formData.investmentAmt}`);
       const notes = notesArray.join(" | ");
 
-      // FIX 6: Restored URL as first argument to fetch()
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              notes: notes,
-              source: "BookMyAssets Taboola Ads",
-            },
-            source: "BookMyAssets Taboola Ads",
-            tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
-            recaptchaToken: token,
-          }),
+      // FIXED: Replace with your actual API endpoint
+      const API_URL = process.env.NEXT_PUBLIC_TELECRM_API_URL || "https://your-api-endpoint.com/submit";
+      
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
         },
-      );
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            notes: notes,
+            source: "BookMyAssets Taboola Ads",
+          },
+          source: "BookMyAssets Taboola Ads",
+          tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
+          recaptchaToken: token,
+        }),
+      });
 
       const responseText = await response.text();
       console.log("TeleCRM Response:", responseText);
@@ -378,7 +373,8 @@ export default function Hero() {
       return;
     }
 
-    if (!recaptchaRef.current.innerHTML) {
+    // FIXED: Proper reCAPTCHA rendering and execution
+    if (!recaptchaRendered.current) {
       try {
         window.grecaptcha.render(recaptchaRef.current, {
           sitekey: siteKey,
@@ -386,18 +382,20 @@ export default function Hero() {
           size: "invisible",
           theme: "dark",
         });
-        window.grecaptcha.execute(); // ← ADD THIS (first submit ke liye)
+        recaptchaRendered.current = true;
+        // Execute reCAPTCHA immediately after rendering
+        window.grecaptcha.execute();
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
         setErrorMessage("Error with verification. Please try again.");
         setIsLoading(false);
       }
     } else {
+      // Execute reCAPTCHA if already rendered
       window.grecaptcha.execute();
     }
   };
 
-  // Shared props for FormCard
   const formProps = {
     formData,
     handleChange,
@@ -411,9 +409,6 @@ export default function Hero() {
 
   return (
     <div id="hero">
-      {/* reCAPTCHA container */}
-
-      {/* Popup */}
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <div className="bg-white rounded-xl p-8 max-w-sm w-full text-center shadow-xl">
