@@ -12,6 +12,21 @@ import {
   FaClock,
 } from "react-icons/fa";
 
+import icon1 from "@/assests/taboola/Amenities/app-based-society-management.svg";
+import icon2 from "@/assests/taboola/Amenities/boundary-wall.svg";
+import icon3 from "@/assests/taboola/Amenities/cctv-security.svg";
+import icon4 from "@/assests/taboola/Amenities/clubhouse-lite.svg";
+import icon5 from "@/assests/taboola/Amenities/daily-essentials-store.svg";
+import icon6 from "@/assests/taboola/Amenities/drainage-system.svg";
+import icon7 from "@/assests/taboola/Amenities/ev-charging-station.svg";
+import icon8 from "@/assests/taboola/Amenities/gated-community.svg";
+import icon9 from "@/assests/taboola/Amenities/internal-roads.svg";
+import icon10 from "@/assests/taboola/Amenities/jogging-track.svg";
+import icon11 from "@/assests/taboola/Amenities/kids-play-area.svg";
+import icon12 from "@/assests/taboola/Amenities/power-and-water-supply.svg";
+import icon13 from "@/assests/taboola/Amenities/senior-citizen-zone.svg";
+import icon14 from "@/assests/taboola/Amenities/yoga-deck.svg";
+
 const carouselImages = [
   { src: img, alt: "WestWyn Estates - Kids Play Area" },
   { src: img2, alt: "WestWyn Estates - Project Boundary" },
@@ -19,52 +34,60 @@ const carouselImages = [
 
 const amenities = [
   {
-    icon: "🚗",
-    title: "EV Charging Station",
+    icon: icon2,
+    title: "Signature Project Boundary",
   },
   {
-    icon: "⚡",
-    title: "Power & Water Supply",
+    icon: icon8,
+    title: "Controlled Access Gated Community",
   },
   {
-    icon: "🏃‍♂️",
-    title: "Jogging Track & Yoga Deck",
+    icon: icon9,
+    title: "Wide Internal Road Network",
   },
   {
-    icon: "🧒",
-    title: "Kids Play Area",
-  },
-  {
-    icon: "🧱",
-    title: "Project Boundary",
-  },
-  {
-    icon: "🏘️",
-    title: "Gated Community",
-  },
-  {
-    icon: "🛣️",
-    title: "Internal Roads",
-  },
-  {
-    icon: "👵",
-    title: "Senior Citizen Zone",
-  },
-  {
-    icon: "📱",
-    title: "App-Based Society Management",
-  },
-  {
-    icon: "📹",
+    icon: icon3,
     title: "24/7 Security & CCTV Surveillance",
   },
   {
-    icon: "🚿",
+    icon: icon1,
+    title: "App-Based Society Management",
+  },
+  {
+    icon: icon6,
     title: "Drainage System",
   },
   {
-    icon: "🏡",
+    icon: icon12,
+    title: "Power & Water Supply",
+  },
+  {
+    icon: icon7,
+    title: "EV Charging Station",
+  },
+  {
+    icon: icon5,
+    title: "Daily Essentials & Utilities Store",
+  },
+  {
+    icon: icon4,
     title: "Clubhouse Lite",
+  },
+  {
+    icon: icon14,
+    title: "Yoga Deck",
+  },
+  {
+    icon: icon10,
+    title: "Jogging Track",
+  },
+  {
+    icon: icon13,
+    title: "Senior Citizen Zone",
+  },
+  {
+    icon: icon11,
+    title: "Kids Play Area",
   },
 ];
 
@@ -266,7 +289,15 @@ export default function Residency() {
               key={index}
               className="bg-[#deae3c]/5 backdrop-blur-sm rounded-lg p-4 text-center border border-[#deae3c]/30 hover:bg-[#deae3c]/5 transition-all duration-300"
             >
-              <div className="text-xl md:text-4xl mb-2">{amenity.icon}</div>
+              <div className="text-xl md:text-4xl mb-2 flex items-center justify-center">
+                <Image
+                  src={amenity.icon}
+                  alt={amenity.title}
+                  width={48}
+                  height={48}
+                  className=""
+                />
+              </div>
               <p className="text-black font-medium text-lg">{amenity.title}</p>
             </div>
           ))}
