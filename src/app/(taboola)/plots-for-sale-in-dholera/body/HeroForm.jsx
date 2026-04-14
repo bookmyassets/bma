@@ -90,40 +90,37 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      // Prepare notes from additional fields
+      // Prepare notes from additional fields (same as before)
       const notesArray = [];
       if (formData.city) notesArray.push(`City: ${formData.city}`);
       if (formData.investmentAmt)
         notesArray.push(`Budget: ${formData.investmentAmt}`);
       const notes = notesArray.join(" | ");
 
-      const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            email: formData.email,
-            notes: notes,
-            source: "BookMyAssets Taboola Hero Section",
+      // Using GetinTouch's TeleCRM API endpoint
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
-          source: "BookMyAssets Website",
-          tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
-          recaptchaToken: token,
-        }),
-      });
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              email: formData.email || "",
+              notes: notes,
+              source: "BookMyAssets Taboola Hero Section",
+            },
+            tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
+            recaptchaToken: token,
+          }),
+        }
+      );
 
-      let data = {};
-      const contentType = response.headers.get("content-type") || "";
-      if (contentType.includes("application/json")) {
-        data = await response.json();
-      } else {
-        const text = await response.text();
-        console.error("Non-JSON response:", response.status, text);
-      }
-
-      if (response.ok && data.success) {
+      if (response.ok) {
         setFormData({
           fullName: "",
           phone: "",
@@ -143,11 +140,10 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
           page_name: "Dholera Hero Section",
         });
       } else {
+        const errorText = await response.text();
+        console.error("API Error:", response.status, errorText);
         setErrorMessage(
-          data.error ||
-            (response.status === 405
-              ? "API route not found. Check file location: app/api/submit-form/route.js"
-              : `Submission failed (${response.status}). Please try again.`)
+          `Submission failed (${response.status}). Please try again.`
         );
       }
     } catch (error) {
@@ -191,7 +187,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         window.grecaptcha.render(recaptchaRef.current, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
-          theme: "dark",
+          theme: "light", // Using light theme to match form background
         });
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
@@ -200,7 +196,13 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
       }
     } else {
       // Execute existing reCAPTCHA
-      window.grecaptcha.execute();
+      try {
+        window.grecaptcha.execute();
+      } catch (error) {
+        console.error("Error executing reCAPTCHA:", error);
+        setErrorMessage("Error with verification. Please try again.");
+        setIsLoading(false);
+      }
     }
   };
 
