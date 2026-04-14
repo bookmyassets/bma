@@ -1,32 +1,19 @@
 // Hero.jsx
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import img1 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-desktop-banner.webp";
 import img2 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-mobile-banner.webp";
-import {
-  CheckCircle,
-  CalendarCheck,
-  Download,
-  FileCheck,
-  HomeIcon,
-} from "lucide-react";
-import HeroForm from "./HeroForm"; // Import the extracted form component
-
-const stats = [
-  { icon: HomeIcon, label: "Immediate Possession" },
-  { icon: CheckCircle, label: "Govt Approved" },
-  { icon: CalendarCheck, label: "365 Days Visit" },
-  { icon: FileCheck, label: "Due Diligence" },
-];
+import HeroForm from "./HeroForm";
+import Running from "../components/Marquee";
 
 const points = [
   {
-    title: "AUDA Approved",
+    title: "Registry-Ready",
     desc: "Suitable for buyers exploring high-growth land opportunities in India's first greenfield smart city.",
   },
   {
-    title: "Registry-ready with Immediate Possession",
+    title: "Immediate Possession",
     desc: "Focused on long-term planning — we guide you through timelines, returns, and exit strategies.",
   },
   {
@@ -152,6 +139,9 @@ export default function Hero() {
           priority
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
+         <div className="absolute bottom-0 left-0 right-0 z-20 ">
+            <Running />
+          </div>
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(.7rem,3.2vw,3.2rem)]">
           <PointsList />
           <HeroForm 
@@ -172,6 +162,9 @@ export default function Hero() {
             priority
           />
           <div className="absolute inset-0 bg-black/60" />
+           <div className="absolute bottom-0 left-0 right-0 z-20 ">
+            <Running />
+          </div>
 
           <div className="absolute inset-0 z-20 flex flex-col px-4 py-6 justify-center gap-4 overflow-y-auto">
             <h1 className="text-white font-bold text-[clamp(1.5rem,6vw,2rem)] leading-tight mb-2">

@@ -17,7 +17,7 @@ const COUNTERS = [
   { value: "7+ Projects", label: "Successfully Sold Out" },
   { value: "2 Lakh+ Sq. Yd", label: "Dholera Land Sold" },
   { value: "957+ Plots", label: "Registry Delivered" },
-  { value: "561+ Clients", label: "Smart Investor Client Base" },
+  { value: "561+ Clients", label: "Investor Client Base" },
 ];
 
 export default function AboutBMA() {
@@ -68,7 +68,7 @@ export default function AboutBMA() {
 
             <div className="py-4">
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <div className="flex flex-col max-sm:grid max-sm:grid-cols-2 md:flex-row items-center justify-center gap-4 pt-4">
                 <a
                   href="tel:+918130371647"
                   className="flex items-center gap-2 bg-[#deae3c] hover:bg-[#c99a2e] text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto justify-center text-[clamp(0.875rem,1.5vw,1rem)]"

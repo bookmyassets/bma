@@ -210,7 +210,6 @@ export default function page() {
 
       <div>
         <LandingPage openForm={() => setpopShowForm(true)} />
-        {/* <Hero openForm={() => setpopShowForm(true)} /> */}
         <Dholera />
         <BMA />
         <WestWyn />

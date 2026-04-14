@@ -131,16 +131,14 @@ const projectFeatures = [
 ];
 
 const FeatureCard = ({ icon, title, value }) => (
-  <div className="bg-white rounded-xl p-4 border hover:bg-[#deae3c] group border-gray-200 text-center transition-colors duration-300 ease-in-out">
-    {/* <div className="w-12 h-12 bg-blue-100 group-hover:text-white group-hover:scale-110 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300 ease-in-out">
-      {icon}
-    </div> */}
-    <p className="group-hover:text-white group-hover:scale-110 text-[#151f28] font-bold text-lg transition-all duration-300 ease-in-out">
-      {value}
-    </p>
-    <h4 className="group-hover:text-white group-hover:scale-110  text-gray-900 text-sm mb-1 transition-all duration-300 ease-in-out">
+  <div className="bg-white rounded-xl p-3 md:p-4 border hover:bg-[#deae3c] group border-gray-200 text-center transition-colors duration-300 ease-in-out">
+    
+    <h4 className="group-hover:text-white font-semibold text-gray-900 text-xs md:text-sm mb-1 transition-all duration-300 ease-in-out">
       {title}
     </h4>
+    <p className="group-hover:text-white text-[#151f28] font-bold text-base md:text-lg transition-all duration-300 ease-in-out">
+      {value}
+    </p>
   </div>
 );
 
@@ -310,7 +308,7 @@ export default function Residency() {
           Amenities
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
           {amenities.map((amenity, index) => (
             <div
               key={index}
