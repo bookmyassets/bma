@@ -309,7 +309,7 @@ export default function Hero() {
         notesArray.push(`Budget: ${formData.investmentAmt}`);
       const notes = notesArray.join(" | ");
 
-      const response = await fetch("/api/submit-form-taboola", {
+      const response = await fetch("/api/submit-form", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
