@@ -76,7 +76,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white h-24 fixed w-full z-50">
+    <nav className="bg-white h-20 md:h-24 fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -89,7 +89,7 @@ export default function Navbar() {
               height={70}
               width={70}
               alt="Logo"
-              className="cursor-pointer"
+              className="cursor-pointer max-sm:h-[50px] max-sm:w-[50px]"
             />
           </button>
 
@@ -175,7 +175,7 @@ export default function Navbar() {
           {/* Mobile menu section with Get in Touch dropdown */}
           <div className="md:hidden flex items-center gap-4">
             <div className="relative">
-             {/*  <button
+              <button
                 className="text-black text-base font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
                 onClick={toggleGetInTouchDropdown}
               >
@@ -196,7 +196,7 @@ export default function Navbar() {
                     d="M19 9l-7 7-7-7"
                   />
                 </svg>
-              </button> */}
+              </button>
 
               <AnimatePresence>
                 {isGetInTouchDropdownOpen && (
