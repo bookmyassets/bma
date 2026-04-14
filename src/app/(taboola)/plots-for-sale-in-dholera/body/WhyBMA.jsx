@@ -18,13 +18,13 @@ const COUNTERS = [
   { value: "7+ Projects", label: "Successfully Sold Out" },
   { value: "2 Lakh+ Sq. Yd", label: "Dholera Land Sold" },
   { value: "957+ Plots", label: "Registry Delivered" },
-  { value: "561+ Clients", label: "Smart Investor Client Base" },
+  { value: "561+ Clients", label: "Investor Client Base" },
 ];
 
 export default function WhyBMA() {
   return (
     <section className="bg-white py-[clamp(0.75rem,6vw,1rem)]" id="Why-BMA">
-      <div className="max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)]">
+      <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
           <div className="flex items-center gap-3 mb-3">
@@ -37,7 +37,7 @@ export default function WhyBMA() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row px-[calc(1rem+2vw)] max-w-7xl mx-auto gap-6 md:gap-8">
+        <div className="flex flex-col md:flex-row max-w-7xl mx-auto gap-4 md:gap-6">
           {/* Left — 40% */}
           <div className="w-full md:w-2/5 md:pb-4">
             <div className="relative w-full aspect-[5/4] rounded-lg overflow-hidden ">
@@ -52,7 +52,7 @@ export default function WhyBMA() {
             </div>
           </div>
           <div className="w-full md:w-3/5">
-            <p className="text-[clamp(1rem,1.5vw,1.2rem)] space-y-6">
+            <p className="text-[clamp(1rem,1.5vw,1.2rem)] text-center space-y-6">
               BookMyAssets is the #1 choice of Smart investors looking for
               Dholera plots for sale with location clarity, expert guidance and
               high appreciation. We explore developing and high growth potential
@@ -61,21 +61,22 @@ export default function WhyBMA() {
             </p>
             <div className="py-4">
               <div className="px-[calc(0.5rem+1vw)] max-w-7xl mx-auto">
-                <div className="grid grid-cols-2 gap-[calc(0.75rem+0.5vw)]">
+                <div className="grid grid-cols-2 gap-3">
                   {COUNTERS.map(({ value, label }) => (
                     <div
                       key={label}
                       className="
-                    flex flex-col justify-center items-center
-                    p-[calc(0.75rem+0.2vw)]
-                    bg-white rounded-2xl shadow-md
-                    hover:shadow-xl transition-shadow
-                  "
+            flex flex-col justify-center items-center
+            h-[120px] sm:h-auto
+            p-4 sm:p-[calc(0.75rem+0.2vw)]
+            bg-white rounded-2xl shadow-md
+            hover:shadow-xl transition-shadow
+          "
                     >
-                      <div className="text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#deae3c] mb-2">
+                      <div className="text-base sm:text-lg md:text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#deae3c] mb-2">
                         {value}
                       </div>
-                      <p className="text-[clamp(0.75rem,1.2vw,0.875rem)] text-gray-700 font-medium text-center">
+                      <p className="text-xs sm:text-sm md:text-[clamp(0.75rem,1.2vw,0.875rem)] text-gray-700 font-medium text-center leading-snug">
                         {label}
                       </p>
                     </div>
@@ -83,6 +84,17 @@ export default function WhyBMA() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
+          <div className="flex items-center gap-3 mb-3">
+            
+            <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
+              A Name You Can Trust{" "}
+              <span className="text-[#deae3c]"></span>
+            </h2>
+            
           </div>
         </div>
 

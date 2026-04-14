@@ -5,14 +5,14 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Are these government approved plots in Dholera?",
+    question: " Is WestWyn Residency a govt approved plot project in Dholera?",
     answer:
-      "Yes, BookMyAssets helps buyers explore government-approved plotted opportunities in Dholera with guided consultation and proper documentation support.",
+      "Yes, WestWyn Residency is a govt approved plotted project in Dholera with registry-ready plots and clear documentation.",
   },
   {
-    question: "What do I get after filling the form?",
+    question: "Where is WestWyn Residency located?",
     answer:
-      "You will receive:\n• Brochure details\n• Price information\n• Layout discussion support\n• A callback from our team for further guidance",
+      "WestWyn Residency is located in Pipariya, Dholera, near the Dholera SIR boundary.",
   },
   {
     question: "Is this suitable for long-term investors?",

@@ -28,8 +28,8 @@ import icon13 from "@/assests/taboola/Amenities/senior-citizen-zone.svg";
 import icon14 from "@/assests/taboola/Amenities/yoga-deck.svg";
 
 const carouselImages = [
-  { src: img, alt: "WestWyn Estates - Kids Play Area" },
   { src: img2, alt: "WestWyn Estates - Project Boundary" },
+  { src: img, alt: "WestWyn Estates - Kids Play Area" },
 ];
 
 const amenities = [
