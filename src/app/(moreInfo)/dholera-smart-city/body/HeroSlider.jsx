@@ -187,7 +187,7 @@ export default function LandingPage({ openForm }) {
         setTimeout(() => {
           setShowThankYou(false); // Hide the overlay before navigation
           console.log("Navigating to thank you page..."); // Debug log
-          router.push("/more-info/thankyou");
+          router.push("/dholera-smart-city/thankyou");
         }, 2000);
       } else {
         throw new Error("Error submitting form");
