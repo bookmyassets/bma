@@ -121,14 +121,14 @@ const projectFeatures = [
 ];
 
 const FeatureCard = ({ icon, title, value }) => (
-  <div className="bg-white rounded-xl p-4 border hover:bg-[#deae3c] group border-gray-200 text-center transition-colors duration-300 ease-in-out">
-    <div className="w-12 h-12 bg-blue-100 group-hover:text-white group-hover:scale-110 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300 ease-in-out">
+  <div className="bg-white rounded-xl p-3 md:p-4 border hover:bg-[#deae3c] group border-gray-200 text-center transition-colors duration-300 ease-in-out">
+    <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 group-hover:text-white group-hover:scale-110 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300 ease-in-out">
       {icon}
     </div>
-    <h4 className="group-hover:text-white group-hover:scale-110 font-semibold text-gray-900 text-sm mb-1 transition-all duration-300 ease-in-out">
+    <h4 className="group-hover:text-white font-semibold text-gray-900 text-xs md:text-sm mb-1 transition-all duration-300 ease-in-out">
       {title}
     </h4>
-    <p className="group-hover:text-white group-hover:scale-110 text-[#151f28] font-bold text-lg transition-all duration-300 ease-in-out">
+    <p className="group-hover:text-white text-[#151f28] font-bold text-base md:text-lg transition-all duration-300 ease-in-out">
       {value}
     </p>
   </div>
@@ -233,7 +233,7 @@ export default function Residency() {
               ))}
             </div>
           </div>
-          <div className="grid grid-rows-7 gap-3">
+          <div className="grid grid-rows-7 gap-3 px-4">
             {points.map((point, i) => {
               const Icon = point.icon;
               return (
@@ -256,7 +256,7 @@ export default function Residency() {
 
       <div className="bg-gray-100 border-b">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 ">
             {projectFeatures.map((item, index) => {
               const isLastOdd =
                 index === projectFeatures.length - 1 &&
@@ -283,7 +283,7 @@ export default function Residency() {
           Amenities
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
           {amenities.map((amenity, index) => (
             <div
               key={index}
