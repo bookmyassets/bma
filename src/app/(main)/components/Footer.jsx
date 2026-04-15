@@ -143,6 +143,14 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-600">
               <li>
                 <Link
+                  href="/dholera-residential-plots/westwyn-residency"
+                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                >
+                  WestWyn Residency
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/dholera-residential-plots/westwyn-estate"
                   className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
                 >
