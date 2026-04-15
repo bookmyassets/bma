@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
-
 // Salutation options
 const SALUTATIONS = [
   { value: "Mr.", label: "Mr." },
@@ -37,19 +36,23 @@ function formatIndianNumber(value) {
 function formatBookingDate(dateString) {
   const date = new Date(dateString);
   const day = date.getDate();
-  const month = date.toLocaleString('en-IN', { month: 'long' });
+  const month = date.toLocaleString("en-IN", { month: "long" });
   const year = date.getFullYear();
-  
+
   const getOrdinalSuffix = (day) => {
-    if (day > 3 && day < 21) return 'th';
+    if (day > 3 && day < 21) return "th";
     switch (day % 10) {
-      case 1: return 'st';
-      case 2: return 'nd';
-      case 3: return 'rd';
-      default: return 'th';
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
     }
   };
-  
+
   return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
 }
 
@@ -73,7 +76,8 @@ export default function CostSheet() {
     ifms: 0,
     totalCharges: 0,
     plotTotalPayment: 0,
-    bookingDate: new Date().toISOString().split('T')[0],
+    bookingDate: new Date().toISOString().split("T")[0],
+    managerName: "",
     associateName: "",
     generateForCRM: false,
   });
@@ -85,7 +89,7 @@ export default function CostSheet() {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -96,9 +100,7 @@ export default function CostSheet() {
       const maintenance = formData.plotAreaYards * formData.maintenanceRate;
       const ifmsCharge = formData.plotAreaYards * 100;
       const totalCharges =
-        maintenance +
-        parseFloat(formData.legalFee) +
-        ifmsCharge;
+        maintenance + parseFloat(formData.legalFee) + ifmsCharge;
       const plotTotalPayment = totalPayment + totalCharges;
       const plotAreaFeet = formData.plotAreaYards * 9;
 
@@ -257,7 +259,7 @@ export default function CostSheet() {
       doc.text("Terms & Conditions:", 15, finalY + 5);
       doc.setFontSize(9);
       const terms = [
-        "1. Full payment must be made within the stipulated 30-day period",
+        "1. Full payment must be made within the stipulated timeline.",
         "2. Payment delay or default may result in booking amount forfeiture and plot cancellation.",
         "3. Stamp duty and registration deposits are additional.",
         "4. Refunds are available within 14 days of booking; after 15 days, the booking becomes non-refundable.",
@@ -266,7 +268,6 @@ export default function CostSheet() {
         "7. Late Payment Charges:",
         "a. Rs. 250/- per sq yard if payment is made after 45 days and within 60 days.",
         "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days.",
-        "Note - Kindly acknowledge the payment schedule to ensure a seamless registry process."
       ];
       terms.forEach((term, index) => {
         const isSubPoint = /^[a-z]\./.test(term.trim());
@@ -283,7 +284,7 @@ export default function CostSheet() {
       doc.text(
         text,
         pageWidth - textWidth - 15,
-        doc.internal.pageSize.height - 5
+        doc.internal.pageSize.height - 5,
       );
 
       doc.save(`${projectName || "Plot"}_Details.pdf`);
@@ -304,15 +305,17 @@ export default function CostSheet() {
       plotAreaYards,
       plotAreaFeet,
       bookingDate,
+      managerName,
       associateName,
       legalFee,
     } = formData;
 
     // Calculate simplified totals for CRM
-    const crmBasePlotPriceYards = parseFloat(formData.basePlotPriceYards) + 
-                                   (parseFloat(formData.plc) || 0) + 
-                                   parseFloat(formData.maintenanceRate) + 
-                                   parseFloat(formData.ifmsRate);
+    const crmBasePlotPriceYards =
+      parseFloat(formData.basePlotPriceYards) +
+      (parseFloat(formData.plc) || 0) +
+      parseFloat(formData.maintenanceRate) +
+      parseFloat(formData.ifmsRate);
     const totalPayment = formData.plotAreaYards * crmBasePlotPriceYards;
     const plotTotalPayment = totalPayment + parseFloat(formData.legalFee);
 
@@ -346,6 +349,7 @@ export default function CostSheet() {
         body: [
           ["Name", fullName],
           ["Booking Date", formattedBookingDate],
+          ["Manager Name", managerName],
           ["Associate Name", associateName],
           ["Project Name", projectName],
           ["Plot No", plotNo],
@@ -417,7 +421,7 @@ export default function CostSheet() {
       doc.setFontSize(9);
 
       const terms = [
-        "1. Full payment must be made within the stipulated 30-day period",
+        "1. Full payment must be made within the stipulated timeline.",
         "2. Payment delay or default may result in booking amount forfeiture and plot cancellation.",
         "3. Stamp duty and registration deposits are additional.",
         "4. Refunds are available within 14 days of booking; after 15 days, the booking becomes non-refundable.",
@@ -426,7 +430,6 @@ export default function CostSheet() {
         "7. Late Payment Charges:",
         "a. Rs. 250/- per sq yard if payment is made after 45 days and within 60 days.",
         "b. Rs. 500/- per sq yard if payment is made after 60 days and within 90 days.",
-        "Note - Kindly acknowledge the payment schedule to ensure a seamless registry process."
       ];
 
       terms.forEach((term, index) => {
@@ -444,7 +447,7 @@ export default function CostSheet() {
       doc.text(
         text,
         pageWidth - textWidth - 15,
-        doc.internal.pageSize.height - 5
+        doc.internal.pageSize.height - 5,
       );
 
       doc.save(`${projectName || "Plot"}_CRM_Cost_Estimate.pdf`);
@@ -458,7 +461,7 @@ export default function CostSheet() {
   const handleGeneratePDF = () => {
     // Generate main PDF
     generateMainPDF();
-    
+
     // Generate CRM PDF if option is checked
     if (formData.generateForCRM) {
       // Small delay to ensure both PDFs download properly
@@ -539,6 +542,19 @@ export default function CostSheet() {
                   value={formData.bookingDate}
                   onChange={handleChange}
                   className="border p-2 w-full rounded"
+                />
+              </td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-2 font-semibold">Manager Name</td>
+              <td className="p-2">
+                <input
+                  type="text"
+                  name="managerName"
+                  value={formData.managerName}
+                  onChange={handleChange}
+                  className="border p-2 w-full rounded"
+                  placeholder="Enter associate name"
                 />
               </td>
             </tr>
@@ -720,7 +736,9 @@ export default function CostSheet() {
               </td>
             </tr>
             <tr className="border-b">
-              <td className="p-2 font-semibold">IFMS ({formData.ifmsRate} x Size)</td>
+              <td className="p-2 font-semibold">
+                IFMS ({formData.ifmsRate} x Size)
+              </td>
               <td className="p-2">
                 <input
                   type="text"
@@ -777,7 +795,9 @@ export default function CostSheet() {
           onClick={handleGeneratePDF}
           className="bg-blue-600 text-white p-2 mt-6 w-full rounded hover:bg-blue-700 transition-colors"
         >
-          {formData.generateForCRM ? 'Generate PDFs (Main + CRM)' : 'Generate PDF'}
+          {formData.generateForCRM
+            ? "Generate PDFs (Main + CRM)"
+            : "Generate PDF"}
         </button>
       </div>
     </div>

@@ -95,10 +95,11 @@ export default function ShortsSection() {
     >
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl text-[#deae3c] font-bold text-center mb-2">
-          Dholera in Motion
+          Dholera Latest Updates
         </h2>
         <p className="text-center font-light text-white text-lg mb-6">
-          Witness real-time progress in the Dholera smart city project
+          Witness real-time progress of Dholera Smart City Project and Latest
+          updates on infrastructure projects in Dholera
         </p>
 
         <div className="relative">

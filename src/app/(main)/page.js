@@ -12,6 +12,9 @@ import Groundzero from "./homeComponents/Groundzero";
 import PopupForm from "./components/PopUpForm";
 import ImageZoom from "./homeComponents/ImageZoom";
 import InteractiveMap from "./homeComponents/InteractiveMap";
+import Hero from "./homeComponents/Hero";
+import LatestUpdates from "./homeComponents/Latest";
+import LeadForm from "./components/LeadForm";
 
 export default function page() {
   const [showpopForm, setpopShowForm] = useState(false);
@@ -209,14 +212,20 @@ export default function page() {
       />
 
       <div>
-        <LandingPage openForm={() => setpopShowForm(true)} />
+        <Hero />
         <Dholera />
         <BMA />
         <WestWyn />
+        <div className="max-w-7xl mx-auto" id="contact">
+          <LeadForm
+            title="Invest in Registry Ready Plots in Dholera"
+            button="Talk to an Expert"
+          />
+        </div>
         <div>
           <InteractiveMap />
-          {/* <ImageZoom/> */}
         </div>
+        <LatestUpdates />
         <ShortsSection />
         <Groundzero />
         <FAQSection />

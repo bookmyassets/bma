@@ -200,9 +200,9 @@ export default function HeroForm() {
 
   return (
     // ✅ calc() — padding scales with viewport instead of hard breakpoint jumps
-    <div className="w-full max-w-lg p-[calc(0.5rem+1vw)] md:overflow-hidden">
+    <div className="w-full bg-white rounded-xl max-w-lg p-[calc(0.7rem+1vw)] md:overflow-hidden">
       {/* Logo */}
-      <div className="text-center mb-[calc(0.75rem+0.5vw)]">
+      <div className="text-center mb-[calc(0.9rem+0.5vw)]">
         {/* ✅ responsive image — aspect-ratio + fill instead of unsized bare <Image> */}
         <div className="relative w-[clamp(240px,20vw,300px)] aspect-[3/1] mx-auto mb-[calc(0.5rem+0.25vw)] hidden md:block">
           <Image

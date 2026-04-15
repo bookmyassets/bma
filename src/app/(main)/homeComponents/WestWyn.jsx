@@ -1,131 +1,82 @@
 import Image from "next/image";
-import React from "react";
-import sample1 from "@/assests/homepage/section-images/westwyn-estates-dholera-sir-homepage.webp";
 import Link from "next/link";
-import LatestUpdates from "./Latest";
-import { MdLocationOn, MdApartment } from "react-icons/md";
-import { GiTwoCoins } from "react-icons/gi";
-import { PiLeafFill } from "react-icons/pi";
-import { FaCheck } from "react-icons/fa";
+import img1 from "@/assests/BMA.webp";
+import img from "@/assests/we_cover.webp";
+import img2 from "@/assests/residency.webp";
+import { FaCheck, FaArrowRight } from "react-icons/fa";
 
-const POINTS = [
+const PROJECTS = [
   {
-    icon: MdLocationOn,
-    title: "Strategic Location",
-    body: "Near Dholera SIR boundary with access from State Highway-117",
+    image: img2,
+    name: "WestWyn Residency",
+    subtext: "State Highway Plots in Dholera Starting from ₹10 Lakh*",
+    tag: "Premium Plots",
+    href: "/dholera-residential-plots/westwyn-residency",
+    description:
+      "WestWyn Residency is a premium plotted residential society in Pipariya, Dholera. Buy plots in dholera that are government-approved plots with immediate possession. The Dholera Project is located just 5 minutes from SIR boundary, at Dholera’s developing corridor, with seamless connectivity to Railway Station, Ahmedabad-Dholera Expressway, TATA Semiconductor Plant and Dholera International Airport.",
   },
   {
-    icon: GiTwoCoins,
-    title: "Long-Term Investment Fit",
-    body: "Suitable for buyers looking at plotted land with patient holding potential",
-  },
-  {
-    icon: MdApartment,
-    title: "Planned Community",
-    body: "A structured plotted development designed for orderly growth and better living",
-  },
-  {
-    icon: FaCheck,
-    title: "NA/NOC & Title-Clarity Support",
-    body: "Assistance with approvals and clear title verification for safe buying.",
+    image: img,
+    name: "WestWyn Estates",
+    subtext: "Registry-ready Plots Under ₹8 Lakh*",
+    tag: "Plotted Residential",
+    href: "/dholera-residential-plots/westwyn-estates",
+    description:
+      "WestWyn Estates, by BookMyAssets, is a plotted residential society on State Highway-117, Polarpur, Dholera. Buy plots in dholera that are government-approved. The project is located just 5 minutes from Bhimnath Railway Station, in one of Dholera’s most active and fast developing corridors. with seamless connectivity to Bhimnath Railway Junction, Ahmedabad-Dholera Expressway, TATA Semiconductor Plant and Dholera International Airport.",
   },
 ];
 
 export default function WestWyn() {
   return (
-    <>
-      <LatestUpdates />
-
-      <div
-        className="
-          flex flex-col max-sm:flex-col-reverse md:flex-row
-          max-w-7xl mx-auto
-          px-[calc(1rem+2vw)] py-4
-          gap-[calc(1.5rem+1vw)]
-          overflow-hidden
-        "
-      >
-        {/* Left Section (40%) */}
-        <div className="w-full md:w-2/5 max-w-2xl mx-auto md:pt-4">
-          <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden">
-            <Image
-              src={sample1}
-              alt="WestWyn Estates — premium plotted community in Dholera SIR"
-              fill
-              sizes="(min-width: 768px) 40vw, 100vw"
-              className="object-cover"
-              priority
-            />
-          </div>
-
-          <div className="pt-4 max-sm:flex max-sm:justify-center max-sm:items-center md:hidden">
-            <a
-              href="/dholera-residential-plots/westwyn-estate"
-              className="text-[clamp(0.875rem,2vw,1.125rem)] text-white p-4 border-2 border-[#deae3c] rounded-lg bg-[#deae3c]"
-            >
-              About WestWyn Estates
-            </a>
-          </div>
-        </div>
-
-        {/* Right Section (60%) */}
-        <div className="w-full md:w-3/5 md:pl-[calc(3rem+2vw)] md:pr-4">
-          <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold text-black">
-            Westwyn Estates
-          </h3>
-          <h2 className="text-[clamp(1rem,2vw,1.25rem)] font-semibold text-[#deae3c]">
-            Verified Residential Plots Near Dholera SIR
+    <section className="bg-white py-[clamp(1rem,2vw,2rem)]">
+      <div className="max-w-7xl mx-auto px-[clamp(1rem,4vw,2rem)]">
+        {/* ── Section Header ── */}
+        <div className="mb-[clamp(1rem,2vw,2.5rem)] text-center">
+          <h2 className="text-[clamp(1.75rem,2vw,2.5rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
+            Our Premium{" "}
+            <span className="text-[#deae3c]">Residential Projects</span>
           </h2>
-
-          <div className="space-y-6 pt-4">
-            <p className="text-[clamp(0.875rem,1.5vw,1rem)] text-gray-600 leading-relaxed">
-              <Link href='/dholera-residential-plots/westwyn-estate' title="WestWyn Estates" className="text-[#deae3c]">WestWyn Estates</Link> is a planned community for buyers looking at a
-              well-connected location near <Link href='/about-dholera-sir' title="Dholera SIR" className="text-[#deae3c]">Dholera SIR</Link>. It offers access from
-              State Highway-117 and is positioned for investors who want a
-              practical plotted option with long-term holding potential.
-            </p>
-
-            {/* 4 pointer cards */}
-            <div className="grid grid-cols-2 gap-3">
-              {POINTS.map(({ icon: Icon, title, body }) => (
-                <div
-                  key={title}
-                  className="flex gap-3 items-start bg-white rounded-xl p-[clamp(0.65rem,1.2vw,0.875rem)] shadow-sm border border-gray-100"
-                >
-                  <div className="shrink-0 w-9 h-9 rounded-lg bg-[#deae3c]/10 flex items-center justify-center">
-                    <Icon className="text-[#deae3c] text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-[clamp(0.8125rem,1.2vw,0.9375rem)] font-semibold text-black leading-snug mb-0.5">
-                      {title}
-                    </p>
-                    <p className="text-[clamp(0.75rem,1vw,0.8125rem)] text-gray-500 leading-relaxed">
-                      {body}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-         
         </div>
-        
-      </div>
-       <div className="md:pt-[calc(1rem+1vw)] flex justify-center items-center max-sm:hidden">
-            <Link
-              href="/dholera-residential-plots/westwyn-estate"
-              className="
-                bg-[#deae3c] text-white
-                px-[calc(1rem+1vw)] py-3
-                rounded-md font-medium
-                hover:bg-[#f3bb39] transition duration-300 shadow-md
-                text-[clamp(0.875rem,1.5vw,1rem)]
-              "
+
+        {/* ── Project Cards ── */}
+        <div className="grid md:grid-cols-2 gap-[clamp(1.25rem,3vw,2rem)] mb-[clamp(2.5rem,5vw,4rem)]">
+          {PROJECTS.map((project) => (
+            <div
+              key={project.name}
+              className="group border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
             >
-              About WestWyn Estates
-            </Link>
-          </div>
-    </>
+              {/* Image */}
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="p-[clamp(1rem,2vw,1.5rem)]">
+                <h3 className="text-[clamp(1rem,1.6vw,1.25rem)] font-bold text-black mb-1">
+                  {project.name}
+                </h3>
+                <p className="text-[clamp(0.8rem,1vw,0.9rem)] font-semibold text-[#deae3c] mb-3">
+                  {project.subtext}
+                </p>
+                <p className="text-[clamp(0.78rem,1.1vw,0.875rem)] text-gray-500 leading-relaxed mb-4 line-clamp-3">
+                  {project.description}
+                </p>
+                <Link
+                  href={project.href}
+                  className="inline-flex items-center gap-2 text-[clamp(0.75rem,1vw,0.825rem)] font-semibold text-[#deae3c] border border-[#deae3c] px-4 py-2 rounded-full hover:bg-[#deae3c] hover:text-white transition-colors duration-200"
+                >
+                  Explore More <FaArrowRight className="text-xs" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
