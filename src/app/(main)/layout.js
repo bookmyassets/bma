@@ -5,9 +5,9 @@ import Script from "next/script";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/whatsapp";
-import ContactNow from "./components/Callus";
 import ScrollToTop from "./components/ScrollToTop";
 import RagePopup from "./components/RageClickForm";
+import Whatsapp from "./components/Callus";
 
 // ── Font ──────────────────────────────────────────────────────────────────────
 // next/font handles preloading automatically — no manual <link> needed.
@@ -149,7 +149,7 @@ y.parentNode.insertBefore(t,y);
         {children}
         <Footer />
         <FloatingButtons />
-        <ContactNow />
+        <Whatsapp/>
         <RagePopup />
       </body>
     </html>

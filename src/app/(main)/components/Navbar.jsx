@@ -304,7 +304,7 @@ export default function Navbar() {
                   open: isResidentialMenuOpen,
                 },
                 {
-                  label: "Bulk Land Projects",
+                  label: "Bulk Land Deals",
                   toggle: toggleBulkLandMenu,
                   open: isBulkLandMenuOpen,
                 },

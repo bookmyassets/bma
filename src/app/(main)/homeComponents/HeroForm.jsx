@@ -223,7 +223,7 @@ export default function HeroForm() {
             </h1>
             {/* ✅ clamp() — subline scales between 13px and 16px */}
             <p className="text-[clamp(1.15rem,2.5vw,1.5rem)] glowing-text px-2">
-              Starting from ₹10 Lakh
+              Starting from ₹8 Lakh
             </p>
           </div>
         </div>
