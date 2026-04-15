@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // Predefined project options
 const PROJECT_OPTIONS = [
