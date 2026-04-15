@@ -13,7 +13,7 @@ const FIELDS = [
   { key: "projectName",         label: "Project Name",      section: "Client Details", type: "dropdown" },
   { key: "clientName",          label: "Client Name",       section: "Client Details", type: "text" },
   { key: "plotNumber",          label: "Plot Number",       section: "Client Details", type: "text" },
-  { key: "tokenPaymentDueDate", label: "Token Payment Due Date",  section: "Token Amount",  type: "text" },
+  { key: "tokenPaymentDueDate", label: "Token Payment Due Date",  section: "Token Details",  type: "text" },
   { key: "paymentPlanDays",     label: "Payment Plan Days", section: "Payment Plan", type: "number", placeholder: "e.g. 90" },
   { key: "m1DueTimeline",       label: "Due Timeline",      section: "Milestone 1", type: "text", readonly: true },
   { key: "m1PaymentDueDate",    label: "Payment Due Date",  section: "Milestone 1", type: "text", readonly: true },
