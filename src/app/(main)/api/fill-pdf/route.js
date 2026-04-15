@@ -6,9 +6,9 @@ import { NextResponse } from "next/server";
 // Coordinates measured from actual PDF (pdfplumber → pdf-lib bottom-left origin)
 // Page: 595.5 × 842.25 pt  |  MediaBox top = 834.42
 const FIELD_MAP = [
-  { key: "projectName",         x: 136,  y: 665 },
-  { key: "clientName",          x: 136,  y: 645 },
-  { key: "plotNumber",          x: 136,  y: 625 },
+  { key: "projectName",         x: 125,  y: 675.3 },
+  { key: "clientName",          x: 125,  y: 654.3 },
+  { key: "plotNumber",          x: 125,  y: 633.3 },
   { key: "tokenPaymentDueDate", x: 456,  y: 527.0 },
   { key: "m1DueTimeline",       x: 365,  y: 497.6 },
   { key: "m1PaymentDueDate",    x: 458,  y: 497.6 },
