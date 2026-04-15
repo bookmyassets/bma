@@ -16,14 +16,14 @@ const SALUTATIONS = [
 // Local projects array
 const PROJECTS = [
   { id: 1, title: "WestWyn Residency", ctype: "D" },
-  { id: 1, title: "WestWyn Estates", ctype: "D" },
-  { id: 2, title: "WestWyn County", ctype: "M" },
-  { id: 3, title: "Paradise", ctype: "M" },
-  { id: 4, title: "Paradise 2", ctype: "M" },
-  { id: 5, title: "Orchid", ctype: "M" },
-  { id: 6, title: "Marina Bay", ctype: "M" },
-  { id: 7, title: "Maple Township", ctype: "M" },
-  { id: 8, title: "Pride", ctype: "M" },
+  { id: 2, title: "WestWyn Estates", ctype: "D" },
+  { id: 3, title: "WestWyn County", ctype: "M" },
+  { id: 4, title: "Paradise", ctype: "M" },
+  { id: 5, title: "Paradise 2", ctype: "M" },
+  { id: 6, title: "Orchid", ctype: "M" },
+  { id: 7, title: "Marina Bay", ctype: "M" },
+  { id: 8, title: "Maple Township", ctype: "M" },
+  { id: 9, title: "Pride", ctype: "M" },
 ];
 
 function formatIndianNumber(value) {
