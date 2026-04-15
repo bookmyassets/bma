@@ -53,13 +53,15 @@ export async function POST(request) {
     }
 
     const filledPdfBytes = await pdfDoc.save();
-    const clientName = (body.clientName || "client").replace(/\s+/g, "-");
+    const plotNumber = (body.plotNumber || "client").replace(/\s+/g, "-");
+    const projectName = (body.projectName || "client").replace(/\s+/g, "-");
+    const paymentPlanDays = (body.paymentPlanDays || "client").replace(/\s+/g, "-");
 
     return new NextResponse(filledPdfBytes, {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="payment-schedule-${clientName}.pdf"`,
+        "Content-Disposition": `attachment; filename="Payment-Schedule-Unit-${plotNumber}-${projectName}-${paymentPlanDays}.pdf"`,
       },
     });
   } catch (err) {

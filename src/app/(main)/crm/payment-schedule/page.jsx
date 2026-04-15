@@ -180,7 +180,7 @@ export default function PaymentSchedulePage() {
       const url  = URL.createObjectURL(blob);
       const a    = document.createElement("a");
       a.href     = url;
-      a.download = `payment-schedule-${form.clientName.replace(/\s+/g, "-")}.pdf`;
+      a.download = `Payment-Schedule-Unit-${form.plotNumber}-${form.projectName}-${form.paymentPlanDays}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {

@@ -8,18 +8,32 @@ const PROJECT_OPTIONS = [
   { name: "WestWyn Estates", code: "WWE" },
 ];
 
-// Payment Receipt Fields with coordinates
+// Adjusted coordinates based on your template layout
+// These coordinates position text within the table cells properly
+const COORDINATES = {
+  receiptNumber: { page: 1, x: 175, y: 500, width: 100, fontSize: 9, align: "left" },
+  receivedFrom: { page: 1, x: 420, y: 500, width: 130, fontSize: 9, align: "left" },
+  projectName: { page: 1, x: 175, y: 465, width: 130, fontSize: 9, align: "left" },
+  plotNumber: { page: 1, x: 420, y: 465, width: 100, fontSize: 9, align: "left" },
+  paymentDate: { page: 1, x: 175, y: 430, width: 100, fontSize: 9, align: "left" },
+  referenceNo: { page: 1, x: 420, y: 430, width: 130, fontSize: 9, align: "left" },
+  modeOfPayment: { page: 1, x: 175, y: 395, width: 120, fontSize: 9, align: "left" },
+  amountInNumbers: { page: 1, x: 420, y: 395, width: 130, fontSize: 9, align: "left" },
+  amountInWords: { page: 1, x: 175, y: 360, width: 380, fontSize: 9, align: "left" },
+  remarks: { page: 1, x: 175, y: 325, width: 380, fontSize: 9, align: "left" },
+};
+
 const FIELDS = [
-  { key: "receiptNumber",      label: "Receipt Number",        type: "text", placeholder: "e.g. REC-001" },
-  { key: "receivedFrom",       label: "Received From",         type: "text", placeholder: "Client/Party name" },
+  { key: "receiptNumber",      label: "Receipt Number",        type: "text", placeholder: "e.g. REC-001", maxLength: 15 },
+  { key: "receivedFrom",       label: "Received From",         type: "text", placeholder: "Client/Party name", maxLength: 25 },
   { key: "projectName",        label: "Project Name",          type: "dropdown" },
-  { key: "plotNumber",         label: "Plot Number",           type: "text", placeholder: "e.g. Plot 123" },
-  { key: "paymentDate",        label: "Payment Date",          type: "text", placeholder: "DD/MM/YYYY" },
-  { key: "referenceNo",        label: "Reference No",          type: "text", placeholder: "e.g. TRANS-001" },
-  { key: "modeOfPayment",      label: "Mode of Payment",       type: "text", placeholder: "e.g. Bank Transfer/Cash" },
-  { key: "amountInNumbers",    label: "Amount (in numbers)",   type: "number", placeholder: "e.g. 50000" },
+  { key: "plotNumber",         label: "Plot Number",           type: "text", placeholder: "e.g. 202", maxLength: 10 },
+  { key: "paymentDate",        label: "Payment Date",          type: "text", placeholder: "DD/MM/YYYY", maxLength: 10 },
+  { key: "referenceNo",        label: "Reference No",          type: "text", placeholder: "e.g. TRANS-001", maxLength: 20 },
+  { key: "modeOfPayment",      label: "Mode of Payment",       type: "text", placeholder: "e.g. UPI/Cash/Transfer", maxLength: 15 },
+  { key: "amountInNumbers",    label: "Amount (in numbers)",   type: "number", placeholder: "e.g. 49999", maxLength: 10 },
   { key: "amountInWords",      label: "Amount (in words)",     type: "text", readonly: true },
-  { key: "remarks",            label: "Remarks",               type: "text", placeholder: "Optional remarks" },
+  { key: "remarks",            label: "Remarks",               type: "text", placeholder: "Optional remarks", maxLength: 50 },
 ];
 
 const defaultForm = Object.fromEntries(FIELDS.map((f) => [f.key, ""]));
@@ -43,13 +57,17 @@ const numberToWords = (num) => {
   
   const amount = Math.floor(num);
   const result = numToWords(amount);
-  return result + ' Rupees Only';
+  return result;
 };
+
 
 export default function PaymentReceiptPage() {
   const [form, setForm] = useState(defaultForm);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showAlignment, setShowAlignment] = useState(false);
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,7 +79,8 @@ export default function PaymentReceiptPage() {
       if (name === "amountInNumbers") {
         const amount = parseFloat(value);
         if (amount && amount > 0) {
-          newForm.amountInWords = numberToWords(amount);
+          const words = numberToWords(amount);
+          newForm.amountInWords = words ? `${words} Rupees Only` : "";
         } else {
           newForm.amountInWords = "";
         }
@@ -97,30 +116,52 @@ export default function PaymentReceiptPage() {
       return dateStr.replace(/\//g, "");
     };
     
-    // Create filename: Payment Receipt_Unit_{plotNumber}_{projectCode}_{date}
+    // Create filename
     const filename = `Payment Receipt_Unit_${form.plotNumber}_${projectCode}_${formatDateForFilename(form.paymentDate)}.pdf`;
 
     setLoading(true);
     setError("");
 
     try {
+      // Apply offsets if in alignment mode
+      let adjustedCoordinates = { ...COORDINATES };
+      if (showAlignment) {
+        adjustedCoordinates = Object.keys(COORDINATES).reduce((acc, key) => {
+          acc[key] = {
+            ...COORDINATES[key],
+            x: COORDINATES[key].x + offsetX,
+            y: COORDINATES[key].y + offsetY,
+          };
+          return acc;
+        }, {});
+      }
+
+      // Prepare data with truncation
+      const fieldLimits = {
+        receiptNumber: 15,
+        receivedFrom: 25,
+        projectName: 20,
+        plotNumber: 10,
+        paymentDate: 10,
+        referenceNo: 20,
+        modeOfPayment: 15,
+        amountInNumbers: 10,
+        amountInWords: 60,
+        remarks: 50,
+      };
+
+      const truncatedForm = {};
+      for (const [key, value] of Object.entries(form)) {
+        const limit = fieldLimits[key];
+        truncatedForm[key] = value;
+      }
+
       const res = await fetch("/api/fill-payment-receipt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formData: form,
-          coordinates: {
-            receiptNumber: { page: 1, x: 171, y: 496, width: 116, height: 10 },
-            receivedFrom: { page: 1, x: 416, y: 497, width: 141, height: 10 },
-            projectName: { page: 1, x: 168, y: 462, width: 116, height: 10 },
-            plotNumber: { page: 1, x: 407, y: 462, width: 145, height: 10 },
-            paymentDate: { page: 1, x: 172, y: 428, width: 110, height: 9 },
-            referenceNo: { page: 1, x: 414, y: 428, width: 135, height: 9 },
-            modeOfPayment: { page: 1, x: 172, y: 393, width: 111, height: 10 },
-            amountInNumbers: { page: 1, x: 414, y: 393, width: 134, height: 10 },
-            amountInWords: { page: 1, x: 175, y: 357, width: 371, height: 12 },
-            remarks: { page: 1, x: 174, y: 321, width: 382, height: 20 },
-          }
+          formData: truncatedForm,
+          coordinates: adjustedCoordinates,
         }),
       });
 
@@ -143,7 +184,6 @@ export default function PaymentReceiptPage() {
     }
   };
 
-  // Get project code for display
   const getProjectCode = () => {
     const selectedProject = PROJECT_OPTIONS.find(p => p.name === form.projectName);
     return selectedProject ? selectedProject.code : "PROJECTCODE";
@@ -164,9 +204,44 @@ export default function PaymentReceiptPage() {
           </p>
         </div>
 
+        {/* Alignment Toggle */}
+        <div className="mb-4 flex items-center justify-between p-3 bg-neutral-900/50 rounded-lg border border-neutral-800">
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={showAlignment}
+              onChange={(e) => setShowAlignment(e.target.checked)}
+              className="rounded bg-neutral-800 border-neutral-700 text-amber-500 focus:ring-amber-500"
+            />
+            <span>Fine-tune alignment</span>
+          </label>
+          {showAlignment && (
+            <div className="flex gap-3">
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-neutral-500">X:</span>
+                <input
+                  type="number"
+                  value={offsetX}
+                  onChange={(e) => setOffsetX(parseInt(e.target.value) || 0)}
+                  className="w-16 bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-xs"
+                />
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-neutral-500">Y:</span>
+                <input
+                  type="number"
+                  value={offsetY}
+                  onChange={(e) => setOffsetY(parseInt(e.target.value) || 0)}
+                  className="w-16 bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-xs"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Form Fields */}
         <div className="space-y-5">
-          {FIELDS.map(({ key, label, type, placeholder, readonly }) => (
+          {FIELDS.map(({ key, label, type, placeholder, readonly, maxLength }) => (
             <div key={key}>
               <label className="block text-xs text-neutral-500 mb-1.5">
                 {label}
@@ -175,6 +250,9 @@ export default function PaymentReceiptPage() {
                 )}
                 {readonly && (
                   <span className="ml-2 text-amber-500 text-[10px]">(auto-calculated)</span>
+                )}
+                {maxLength && !readonly && (
+                  <span className="ml-2 text-neutral-600 text-[10px]">max {maxLength} chars</span>
                 )}
               </label>
               
@@ -199,6 +277,7 @@ export default function PaymentReceiptPage() {
                   value={form[key]}
                   onChange={handleChange}
                   readOnly={readonly}
+                  maxLength={maxLength}
                   className={`w-full bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors ${
                     readonly ? "opacity-70 cursor-not-allowed" : ""
                   }`}
@@ -214,17 +293,42 @@ export default function PaymentReceiptPage() {
         {/* Info Box */}
         <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
           <p className="text-xs text-amber-400">
-            💡 <span className="font-semibold">How it works:</span> Enter amount in numbers and the amount in words will be automatically generated in Indian Rupees format.
+            💡 <span className="font-semibold">Note:</span> Text will be automatically truncated if it exceeds the available space in the PDF.
           </p>
         </div>
 
-        {/* Live Preview of Filename */}
+        {/* Live Preview */}
         {form.plotNumber && form.projectName && form.paymentDate && (
           <div className="mt-4 p-3 bg-neutral-900/50 border border-neutral-800 rounded-lg">
             <p className="text-xs text-neutral-500 mb-1">Preview PDF Name:</p>
             <p className="text-xs text-amber-400 font-mono break-all">
               Payment Receipt_Unit_{form.plotNumber}_{getProjectCode()}_{form.paymentDate.replace(/\//g, "")}.pdf
             </p>
+          </div>
+        )}
+
+        {/* Data Preview */}
+        {form.receiptNumber && (
+          <div className="mt-4 p-3 bg-neutral-900/50 border border-neutral-800 rounded-lg">
+            <p className="text-xs text-neutral-500 mb-2">Preview Data:</p>
+            <div className="space-y-1 text-xs">
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Receipt No:</span>
+                <span className="text-white">{form.receiptNumber}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Received From:</span>
+                <span className="text-white">{form.receivedFrom}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Amount:</span>
+                <span className="text-white">₹ {form.amountInNumbers}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Amount in Words:</span>
+                <span className="text-white text-right break-words max-w-[60%]">{form.amountInWords}</span>
+              </div>
+            </div>
           </div>
         )}
 
@@ -243,10 +347,7 @@ export default function PaymentReceiptPage() {
         >
           {loading ? "Generating…" : "Generate & Download Payment Receipt"}
         </button>
-{/* 
-        <p className="text-center text-xs text-neutral-600 mt-4">
-          PDF will be named: Payment Receipt_Unit_{{plot number}}_{{project code}}_{{date}}.pdf
-        </p> */}
+
       </div>
     </main>
   );

@@ -15,17 +15,26 @@ export async function POST(request) {
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
     const page = pdfDoc.getPages()[0];
     
-    // Embed a font
+    // Embed fonts
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     
     // Fill all fields based on coordinates
     for (const [fieldKey, fieldData] of Object.entries(coordinates)) {
       const value = formData[fieldKey];
       if (value && value.trim()) {
-        page.drawText(value, {
+        // For amount in words, use smaller font and wrap if needed
+        let fontSize = fieldData.fontSize || 9;
+        let displayValue = value;
+        
+        // Adjust font size for long text
+        if (fieldKey === 'amountInWords' && value.length > 50) {
+          fontSize = 7;
+        }
+        
+        page.drawText(displayValue, {
           x: fieldData.x,
           y: fieldData.y,
-          size: 8,
+          size: fontSize,
           font: font,
           color: rgb(0, 0, 0),
         });
@@ -40,7 +49,7 @@ export async function POST(request) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="Payment-Receipt.pdf"',
+        'Content-Disposition': 'attachment; filename="payment-receipt.pdf"',
       },
     });
   } catch (error) {
