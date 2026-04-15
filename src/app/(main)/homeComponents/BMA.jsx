@@ -4,10 +4,10 @@ import LeadForm from "../components/LeadForm";
 import { FileCheck, MapPinned, FileSearch, Headset } from "lucide-react";
 
 const COUNTERS = [
-  { value: "2 Lakh+", label: "sq. yards Sold" },
-  { value: "957+", label: "Plots Sold" },
-  { value: "561+", label: "Happy Customers" },
-  { value: "9+", label: "Total Residential Projects" },
+  { value: "7+ Projects", label: "Successfully Sold Out" },
+  { value: "2 Lakh+ Sq. Yd", label: "Dholera Land Sold" },
+  { value: "957+ Plots", label: "Registry Delivered" },
+  { value: "561+ Clients", label: "Investor Client Base" },
 ];
 
 const POINTS = [

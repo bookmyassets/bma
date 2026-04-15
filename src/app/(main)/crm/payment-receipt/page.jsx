@@ -190,6 +190,8 @@ export default function PaymentReceiptPage() {
   };
 
   return (
+    <>
+    <meta name="robots" content="noindex, nofollow"/>
     <main className="min-h-screen bg-neutral-950 text-white flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-xl">
 
@@ -269,9 +271,9 @@ export default function PaymentReceiptPage() {
                       {project.name}
                     </option>
                   ))}
-                </select>
-              ) : (
-                <input
+                  </select>
+                ) : (
+                  <input
                   type={type}
                   name={key}
                   value={form[key]}
@@ -284,20 +286,20 @@ export default function PaymentReceiptPage() {
                   placeholder={placeholder}
                   min={type === "number" ? "0" : undefined}
                   step={type === "number" ? "1" : undefined}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Info Box */}
-        <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-          <p className="text-xs text-amber-400">
-            💡 <span className="font-semibold">Note:</span> Text will be automatically truncated if it exceeds the available space in the PDF.
-          </p>
-        </div>
-
-        {/* Live Preview */}
+                  />
+                )}
+                </div>
+              ))}
+              </div>
+              
+              {/* Info Box */}
+              <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+              <p className="text-xs text-amber-400">
+              💡 <span className="font-semibold">Note:</span> Text will be automatically truncated if it exceeds the available space in the PDF.
+              </p>
+              </div>
+              
+              {/* Live Preview */}
         {form.plotNumber && form.projectName && form.paymentDate && (
           <div className="mt-4 p-3 bg-neutral-900/50 border border-neutral-800 rounded-lg">
             <p className="text-xs text-neutral-500 mb-1">Preview PDF Name:</p>
@@ -344,11 +346,12 @@ export default function PaymentReceiptPage() {
           onClick={handleSubmit}
           disabled={loading}
           className="mt-7 w-full bg-amber-500 hover:bg-amber-400 active:bg-amber-600 disabled:bg-amber-900 disabled:cursor-not-allowed text-black font-semibold text-sm rounded-lg py-3 transition-colors"
-        >
+          >
           {loading ? "Generating…" : "Generate & Download Payment Receipt"}
         </button>
 
       </div>
     </main>
+          </>
   );
 }
