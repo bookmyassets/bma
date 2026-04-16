@@ -135,7 +135,7 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Missed Maple? Explore plots under ₹10 lakh at Westwyn Estate",
+                  "Missed Maple? Explore plots from ₹8 lakh at Westwyn Residency",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
                   "Get A Call Back",
                   ""
@@ -178,7 +178,7 @@ export default function HeroCarousel() {
               <button
                 onClick={() =>
                   openContactForm(
-                    "Get details on WestWyn Estate",
+                    "Get details on WestWyn Residency",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Download Brochure",
                     "brochure"
@@ -204,7 +204,7 @@ export default function HeroCarousel() {
       <div className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#deae3c] mb-12 md:mb-16">
-            Why Invest in Paradise?
+            Why Invest in Maple?
           </h2>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">

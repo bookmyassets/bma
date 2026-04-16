@@ -430,7 +430,60 @@ const nextConfig = {
       },
       {
         source: "/blogs/how-tata-semiconductor-fab-dholera-impact-plot-prices",
-        destination: "/dholera-sir-blogs/impact-of-tata-semiconductor-plant-on-land-value-in-dholera",
+        destination:
+          "/dholera-sir-blogs/impact-of-tata-semiconductor-plant-on-land-value-in-dholera",
+        permanent: true,
+      },
+      {
+        source:
+          "/dholera-sir-blogs/how-tata-semiconductor-fab-dholera-impact-plot-prices",
+        destination:
+          "/dholera-sir-blogs/impact-of-tata-semiconductor-plant-on-land-value-in-dholera",
+        permanent: true,
+      },
+      {
+        source: "/about-dholera-sir/dholera-customs-port-update",
+        destination: "/dholera-sir-updates/dholera-customs-port-update",
+        permanent: true,
+      },
+      {
+        source:
+          "/dholera-sir-blogs/nextgen-8800-crore-investment-dholera-industrial-ecosystem",
+        destination:
+          "/dholera-sir-updates/nextgen-8800-crore-investment-dholera-industrial-ecosystem",
+        permanent: true,
+      },
+      {
+        source: "/dholera-sir-blogs/Plug-and-play-infrastructure-in-dholera",
+        destination:
+          "/dholera-sir-blogs/plug-and-play-infrastructure-in-dholera",
+        permanent: true,
+      },
+      {
+        source: "/dholera-sir-updates/buy-plots-in-dholera-smart-city",
+        destination: "/dholera-sir-blogs/buy-plots-in-dholera-smart-city",
+        permanent: true,
+      },
+      {
+        source: "/dholera-sir-blogs/gujarat-budget-2026-dholera-smart-city",
+        destination:
+          "/dholera-sir-updates/gujarat-budget-2026-dholera-smart-city",
+        permanent: true,
+      },
+      {
+        source: "/about-dholera-sir/ahmedabad%E2%80%93dholera-monorail-project",
+        destination:
+          "/dholera-sir-blogs/ahmedabad-dholera-monorail-project-2025",
+        permanent: true,
+      },
+      {
+        source: "/about-dholera-sir/dholera-smart-city-investment",
+        destination: "/dholera-sir-blogs/investment-in-dholera-smart-city",
+        permanent: true,
+      },
+      {
+        source: "/about-dholera-sir/current-status",
+        destination: "/dholera-sir-updates",
         permanent: true,
       },
     ];

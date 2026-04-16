@@ -193,7 +193,7 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Missed Paradise? Explore plots under ₹10 lakh at Westwyn Estate",
+                  "Missed Paradise? Explore plots from ₹8 lakh Westwyn Residency",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
                   "Get A Call Back",
                   ""
@@ -201,7 +201,7 @@ export default function HeroCarousel() {
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
             >
-              Book Your Plot In Dholera under ₹10 Lakh
+              Book Your Plot In Dholera from ₹8 Lakh
             </button>
           </div>
         </div>
@@ -251,7 +251,7 @@ export default function HeroCarousel() {
               <button
                 onClick={() =>
                   openContactForm(
-                    "Get details on WestWyn Estate",
+                    "Get details on WestWyn Residency",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Download Brochure",
                     "brochure"

@@ -39,7 +39,7 @@ export default function OrchidLeadActions({ variant = "hero" }) {
     }
 
     return {
-      contactTitle: "Missed Orchid? Explore plots under ₹10 lakh",
+      contactTitle: "Missed Orchid? Explore plots from ₹8 lakh at Westwyn Residency",
       contactHeadline:
         "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
       contactButton: "Get A Call Back",
@@ -81,7 +81,7 @@ export default function OrchidLeadActions({ variant = "hero" }) {
           onClick={openContact}
           className="w-full rounded-full bg-yellow-500 px-6 py-2 font-semibold text-black transition-colors duration-300 hover:bg-yellow-600"
         >
-          Book Your Plot In Dholera under ₹10 Lakh
+          Book Your Plot In Dholera from ₹8 Lakh
         </button>
       ) : (
         <div className="flex flex-col gap-4 sm:flex-row">

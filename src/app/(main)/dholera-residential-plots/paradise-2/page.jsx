@@ -144,7 +144,7 @@ export default function HeroCarousel() {
             <button
               onClick={() =>
                 openContactForm(
-                  "Missed Paradise 2? Explore plots under ₹10 lakh at Westwyn Estate",
+                  "Missed Paradise 2? Explore plots from ₹8 lakh at Westwyn Residency",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
                   "Get A Call Back",
                   ""
@@ -152,7 +152,7 @@ export default function HeroCarousel() {
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
             >
-              Book Your Plot In Dholera under ₹10 Lakh
+              Book Your Plot In Dholera from ₹8 Lakh
             </button>
           </div>
         </div>
@@ -202,7 +202,7 @@ export default function HeroCarousel() {
               <button
                 onClick={() =>
                   openContactForm(
-                    "Get details on WestWyn Estate",
+                    "Get details on WestWyn Residency",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Download Brochure",
                     "brochure"
@@ -228,7 +228,7 @@ export default function HeroCarousel() {
       <div className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#deae3c] mb-12 md:mb-16">
-            Why Invest in Paradise?
+            Why Invest in Paradise 2?
           </h2>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">

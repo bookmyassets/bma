@@ -31,6 +31,9 @@ Disallow:/projects/dholera/sitemap.html
 Disallow:/about-dholera-sir/dholera-customs-port-update
 Disallow:/projects/dholera/westwyn-county-wc
 Disallow:/projects/dholera
+Disallow:/about-dholera-sir/current-status
+Disallow:/blogs/first-smart-city-dholera
+Disallow:/dholera-sir-blogs/first-smart-city-dholera
 
 
 Sitemap : https://www.bookmyassets.com/sitemap.xml

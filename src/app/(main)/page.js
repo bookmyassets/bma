@@ -84,7 +84,7 @@ export default function page() {
             logo: "https://www.bookmyassets.com/assets/images/logo.png",
             image:
               "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout.d8188d06.webp&w=640&q=75",
-            priceRange: "from ₹10 Lakh",
+            priceRange: "from ₹8 Lakh",
             telephone: "+91 81 30 37 16 47",
             address: {
               "@type": "PostalAddress",
