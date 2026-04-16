@@ -1,12 +1,11 @@
-"use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import ROI from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
 import Link from "next/link";
 
 const highlights = [
   {
-    title: " India’s First Special Investment Region (SIR)",
+    title: "India's First Special Investment Region (SIR)",
     body: "Dholera is planned with advanced smart city standards, focusing on sustainability, efficient urban design, and modern infrastructure.",
   },
   {
@@ -31,17 +30,16 @@ const highlights = [
   },
 ];
 
-function HighlightCard({ title, body }) {
-  const [open, setOpen] = useState(false);
-
+function HighlightCard({ title }) {
   return (
     <button
       className="
-        text-left w-full rounded-lg border transition-all duration-250 p-[clamp(0.75rem,1.5vw,1rem)] border-[#deae3c] bg-[#deae3c]/5 hover:border-[#deae3c]/60"
+        text-left w-full rounded-lg border transition-all duration-250
+        p-[clamp(0.5rem,1.25vw,0.875rem)]
+        border-[#deae3c] bg-[#deae3c]/5 hover:bg-[#deae3c]/10 hover:border-[#deae3c]/70
+      "
     >
-      <span
-        className={`text-[clamp(0.75rem,1.2vw,0.875rem)] font-bold leading-snug transition-colors duration-200`}
-      >
+      <span className="text-[clamp(0.875rem,2vw,1.125rem)] font-bold leading-snug text-gray-800 transition-colors duration-200">
         {title}
       </span>
     </button>
@@ -50,72 +48,69 @@ function HighlightCard({ title, body }) {
 
 export default function DholeraSmartCity() {
   return (
-    <div className="bg-white">
-      <div className="max-w-7xl mx-auto text-center px-[calc(1rem+2vw)] py-[calc(0.2rem+1.5vw)] max-sm:py-[calc(1rem+2vw)]">
-        <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold text-black mb-1 max-sm:pt-4">
-          Invest in India’s First Semiconductor City: {" "}
-          <span className="text-[clamp(1.5rem,3vw,2rem)] font-semibold text-[#deae3c]">
-            {" "}
-            Dholera Smart City
-          </span>
+    <section className="bg-white">
+      <div className="max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)] py-[clamp(2rem,5vw,3.5rem)]">
+        {/* Section heading */}
+        <h2 className="text-[clamp(1.25rem,2.5vw,2rem)] font-semibold text-black text-center mb-[clamp(1rem,2.5vw,1.75rem)] leading-snug">
+          Invest in India's First Semiconductor City:{" "}
+          <span className="text-[#deae3c]">Dholera Smart City</span>
         </h2>
-      </div>
 
-      <div className="flex flex-col md:flex-row px-[calc(1rem+2vw)] max-w-7xl mx-auto gap-6 md:gap-8">
-        {/* Left — 40% */}
-        <div className="w-full md:w-2/5 md:pb-4">
-          <div className="relative w-full aspect-[5/4] rounded-lg overflow-hidden ">
-            <Image
-              src={ROI}
-              alt="Dholera SIR — India's first semiconductor hub"
-              fill
-              sizes=""
-              className="object-contain aspect-[5/4] h-full w-auto"
-              priority
-            />
+        {/* Two-column layout */}
+        <div className="flex flex-col md:flex-row gap-[clamp(1.25rem,3vw,2rem)]">
+          {/* Left — image 40% */}
+          <div className="w-full md:w-2/5">
+            <div className="relative w-full aspect-[5/4] rounded-lg overflow-hidden">
+              <Image
+                src={ROI}
+                alt="Dholera SIR — India's first semiconductor hub"
+                fill
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="object-contain h-full w-auto"
+                priority
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Right — 60% */}
-        <div className="w-full md:w-3/5 space-y-6 flex flex-col justify-center items-center">
-          <div>
-            <p className="text-[clamp(1rem,2.5vw,1.1rem)] text-gray-600 leading-relaxed">
+          {/* Right — content 60% */}
+          <div className="w-full md:w-3/5 flex flex-col justify-center gap-[clamp(0.75rem,2vw,1.25rem)]">
+            {/* Body paragraph */}
+            <p className="text-[clamp(0.875rem,2vw,1.125rem)] text-gray-600 leading-relaxed">
               <Link
                 href="https://www.bookmyassets.com/about-dholera-sir/infrastructure-development"
                 title="Dholera Smart City"
-                className="text-[#deae3c]"
+                className="text-[#deae3c] hover:underline"
               >
                 Dholera Smart City
               </Link>{" "}
-              is India's first greenfield smart city, designed with world class
-              is India's first platinum-rated smart city, with world class
-              infrastructure and planned to become a global manufacturing and
-              exports hub. For long-term investors, the {" "}
+              is India's first platinum-rated greenfield smart city, designed
+              with world-class infrastructure and planned to become a global
+              manufacturing and exports hub. For long-term investors, the{" "}
               <Link
                 href="https://www.bookmyassets.com/dholera-sir-blogs/dholera-sir-pm-narendra-modi-dream-smart-city-project"
                 title="Dholera Project"
-                className="text-[#deae3c]"
+                className="text-[#deae3c] hover:underline"
               >
                 Dholera project
               </Link>{" "}
-              offers an excellent opportunity to invest in residential plots in
-              dholera for sale and earn consistent land appreciation. Here is
-              what makes Dholera Smart City different from other investments:
+              offers an excellent opportunity to invest in residential plots and
+              earn consistent land appreciation. Here is what makes Dholera
+              Smart City different from other investments:
             </p>
-          </div>
 
-          {/* 3×2 highlight cards */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pb-2 md:pb-4">
-            {highlights.map((item) => (
-              <HighlightCard
-                key={item.title}
-                title={item.title}
-                body={item.body}
-              />
-            ))}
+            {/* 3×2 highlight cards */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-[clamp(0.5rem,1.5vw,0.875rem)]">
+              {highlights.map((item) => (
+                <HighlightCard
+                  key={item.title}
+                  title={item.title}
+                  body={item.body}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

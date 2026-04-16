@@ -204,7 +204,7 @@ export default function LatestUpdates() {
 
   if (error) {
     return (
-      <div className="py-12 bg-white min-h-[480px]">
+      <div className="py-[clamp(2rem,5vw,3.5rem)] bg-white min-h-[480px]">
         <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
           <p className="text-[clamp(1.25rem,3vw,2.25rem)] text-center font-bold text-gray-800 mb-4">
             Featured Content
@@ -224,7 +224,7 @@ export default function LatestUpdates() {
       <div className="py-[calc(2rem+2vw)] bg-white min-h-[480px]">
         <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
           {/* ✅ clamp() — section heading scales between 20px and 36px */}
-          <p className="text-[clamp(1.25rem,3vw,2.25rem)] text-center font-bold text-gray-800 mb-4">
+          <p className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-center font-bold text-gray-800 mb-4">
             Featured Content
           </p>
           {/* ✅ clamp() — subheading scales between 14px and 18px */}

@@ -5,13 +5,8 @@ import BMA from "./homeComponents/BMA";
 import ShortsSection from "./homeComponents/YouTube";
 import FAQSection from "./homeComponents/FAQs";
 import WestWyn from "./homeComponents/WestWyn";
-import LandingPage from "./homeComponents/Hero3";
-/* import InteractiveMap from "./homeComponents/InteractiveMap"; */
-
 import Groundzero from "./homeComponents/Groundzero";
 import PopupForm from "./components/PopUpForm";
-import ImageZoom from "./homeComponents/ImageZoom";
-import InteractiveMap from "./homeComponents/InteractiveMap";
 import Hero from "./homeComponents/Hero";
 import LatestUpdates from "./homeComponents/Latest";
 import LeadForm from "./components/LeadForm";
@@ -221,9 +216,6 @@ export default function page() {
             title="Invest in Registry Ready Plots in Dholera"
             button="Talk to an Expert"
           />
-        </div>
-        <div>
-          <InteractiveMap />
         </div>
         <LatestUpdates />
         <ShortsSection />

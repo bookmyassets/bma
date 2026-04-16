@@ -90,11 +90,11 @@ export default function ShortsSection() {
 
   return (
     <section
-      className="bg-black py-8 overflow-hidden"
+      className="bg-black py-[clamp(2rem,5vw,3.5rem)] overflow-hidden"
       aria-label="Dholera in Motion"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl text-[#deae3c] font-bold text-center mb-2">
+        <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-[#deae3c] font-bold text-center mb-2">
           Dholera Latest Updates
         </h2>
         <p className="text-center font-light text-white text-lg mb-6">

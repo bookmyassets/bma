@@ -1,71 +1,59 @@
-import { useState, useEffect, useRef, useCallback, memo } from "react";
+"use client";
 import Image from "next/image";
-import logo from "@/assests/ad-page/dholera-govt-logo.webp";
-
-const UserIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    className="w-4 h-4"
-    aria-hidden="true"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-    />
-  </svg>
-);
-
-const PhoneIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    className="w-4 h-4"
-    aria-hidden="true"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-    />
-  </svg>
-);
-
-const FormInput = memo(
-  ({
-    name,
-    type = "text",
-    placeholder,
-    value,
-    onChange,
-    icon: Icon,
-    ...props
-  }) => (
-    <div className="relative">
-      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-500 pointer-events-none">
-        <Icon />
-      </div>
+import React, { useCallback, useRef, useState } from "react";
+import logo from "@/assests/ad-page/dholera-govt-logo.webp"; // adjust path as needed
+import { PhoneIcon } from "@/assests/icons/call-icon.svg"; // adjust if using different icon lib
+import { UserIcon } from "@/assests/icons/user-icon.svg"; // adjust if using different icon lib
+// ── FormInput sub-component (kept inline for portability) ──────────────────
+function FormInput({
+  name,
+  type = "text",
+  placeholder,
+  value,
+  onChange,
+  icon: Icon,
+  required,
+  autoComplete,
+  minLength,
+  maxLength,
+  "aria-label": ariaLabel,
+}) {
+  return (
+    <div className="relative w-full">
+      {Icon && (
+        <div className="absolute left-[clamp(0.5rem,1vw,0.75rem)] top-1/2 -translate-y-1/2 pointer-events-none">
+          <Icon className="w-[20px] h-[20px] text-gray-400" />
+        </div>
+      )}
       <input
         name={name}
         type={type}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        // ✅ clamp() — input text scales between 12px and 14px
-        className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-[clamp(0.75rem,1.5vw,0.875rem)]"
-        {...props}
+        required={required}
+        autoComplete={autoComplete}
+        minLength={minLength}
+        maxLength={maxLength}
+        aria-label={ariaLabel}
+        className="
+          w-full
+          pl-[clamp(1.75rem,2.5vw,2.25rem)]
+          pr-[clamp(0.5rem,1vw,0.75rem)]
+          py-[clamp(0.4rem,0.85vw,0.6rem)]
+          text-[clamp(0.8rem,1.1vw,0.875rem)]
+          border border-gray-200
+          rounded-lg
+          bg-gray-50
+          text-gray-800
+          placeholder:text-gray-400
+          focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400
+          transition-colors
+        "
       />
     </div>
-  ),
-);
-FormInput.displayName = "FormInput";
+  );
+}
 
 export default function HeroForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -200,44 +188,46 @@ export default function HeroForm() {
 
   return (
     // ✅ calc() — padding scales with viewport instead of hard breakpoint jumps
-    <div className="w-full bg-white rounded-xl max-w-lg p-[calc(0.7rem+1vw)] md:overflow-hidden">
-      {/* Logo */}
-      <div className="text-center mb-[calc(0.9rem+0.5vw)]">
-        {/* ✅ responsive image — aspect-ratio + fill instead of unsized bare <Image> */}
-        <div className="relative w-[clamp(240px,20vw,300px)] aspect-[3/1] mx-auto mb-[calc(0.5rem+0.25vw)] hidden md:block">
+     <div className="w-full bg-white rounded-xl max-w-lg p-[clamp(1rem,2vw,1.5rem)] md:overflow-hidden shadow-lg">
+ 
+      {/* ── Logo + Headline ── */}
+      <div className="text-center mb-[clamp(0.75rem,1.5vw,1.25rem)]">
+ 
+        {/* Logo — desktop only */}
+        <div className="relative w-[clamp(200px,18vw,280px)] aspect-[3/1] mx-auto mb-[clamp(0.4rem,0.85vw,0.75rem)] hidden md:block">
           <Image
             src={logo}
             alt="BookMyAssets - Dholera Property Investment"
             fill
-            sizes="(min-width: 768px) 20vw, 0px"
+            sizes="(min-width: 768px) 18vw, 0px"
             className="object-contain"
             fetchPriority="high"
           />
         </div>
-
-        <div className="relative max-sm:space-y-2">
-          <div className="flashy-blink">
-            {/* ✅ clamp() — hero headline scales between 18px and 24px */}
-            <h1 className="text-[clamp(1.15rem,2.5vw,1.5rem)] font-bold mb-1 glowing-text px-2">
-              Govt Approved Plots in Dholera
-            </h1>
-            {/* ✅ clamp() — subline scales between 13px and 16px */}
-            <p className="text-[clamp(1.15rem,2.5vw,1.5rem)] glowing-text px-2">
-              Starting from ₹8 Lakh
-            </p>
-          </div>
+ 
+        {/* Headline */}
+        <div className="flashy-blink space-y-[clamp(0.2rem,0.5vw,0.4rem)]">
+          <h2 className="text-[clamp(1.1rem,2vw,1.35rem)] font-bold glowing-text px-2 leading-snug">
+            Govt Approved Plots in Dholera
+          </h2>
+          <p className="text-[clamp(0.875rem,1.25vw,1rem)] glowing-text px-2">
+            Starting from ₹8 Lakh
+          </p>
         </div>
       </div>
-
-
-      {/* Success state — ✅ inert on the form when success is shown */}
+ 
+      {/* ── Success State ── */}
       {showPopup ? (
-        <div className="text-center py-6" role="alert" aria-live="polite">
-          <div className="mb-4 inline-block">
-            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+        <div
+          className="text-center py-[clamp(1rem,2.5vw,1.75rem)]"
+          role="alert"
+          aria-live="polite"
+        >
+          <div className="mb-[clamp(0.75rem,1.5vw,1rem)] inline-block">
+            <div className="w-[clamp(2.75rem,4vw,3.5rem)] h-[clamp(2.75rem,4vw,3.5rem)] bg-green-500 rounded-full flex items-center justify-center mx-auto">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-10 w-10 text-white"
+                className="h-[clamp(1.5rem,2.5vw,2rem)] w-[clamp(1.5rem,2.5vw,2rem)] text-white"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -252,31 +242,37 @@ export default function HeroForm() {
               </svg>
             </div>
           </div>
-          {/* ✅ clamp() — success text scales fluidly */}
-          <h2 className="text-[clamp(1.125rem,2.5vw,1.25rem)] font-bold text-black mb-2">
+ 
+          <h2 className="text-[clamp(1.1rem,2vw,1.35rem)] font-bold text-black mb-[clamp(0.3rem,0.75vw,0.5rem)]">
             Thank You!
           </h2>
-          <p className="text-[clamp(0.8125rem,1.5vw,0.875rem)] text-gray-600 mb-1">
+          <p className="text-[clamp(0.8rem,1.1vw,0.875rem)] text-gray-600 mb-[clamp(0.2rem,0.5vw,0.4rem)]">
             Your request has been submitted successfully.
           </p>
-          <p className="text-[clamp(0.8125rem,1.5vw,0.875rem)] text-yellow-600 font-semibold">
+          <p className="text-[clamp(0.8rem,1.1vw,0.875rem)] text-yellow-600 font-semibold">
             Our expert will contact you within 24 hours for your free
             consultation.
           </p>
         </div>
+ 
       ) : (
-        // ✅ inert={false} explicitly when form is active (no warning)
-        <form onSubmit={handleSubmit} onFocus={loadRecaptcha} className="space-y-1" inert={false}>
+        /* ── Form ── */
+        <form
+          onSubmit={handleSubmit}
+          onFocus={loadRecaptcha}
+          className="space-y-[clamp(0.5rem,1vw,0.75rem)]"
+        >
           {errorMessage && (
             <div
-              className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-[clamp(0.75rem,1.5vw,0.875rem)]"
+              className="p-[clamp(0.5rem,1vw,0.75rem)] bg-red-500/10 border border-red-400 text-red-700 rounded-lg text-[clamp(0.75rem,1vw,0.875rem)]"
               role="alert"
             >
               {errorMessage}
             </div>
           )}
-
-          <div className="grid grid-cols-2 gap-2 items-center">
+ 
+          {/* Name + Phone */}
+          <div className="grid grid-cols-2 gap-[clamp(0.5rem,1.5vw,0.875rem)]">
             <FormInput
               name="fullName"
               placeholder="Enter Name"
@@ -301,23 +297,29 @@ export default function HeroForm() {
               aria-label="Phone Number"
             />
           </div>
-
+ 
+          {/* reCAPTCHA */}
           <div className="flex justify-center">
             <div ref={recaptchaRef} />
           </div>
-
+ 
+          {/* Submit */}
           <button
             type="submit"
             disabled={isLoading}
             className="
               w-full
-              py-[calc(0.5rem+0.25vw)]
-              px-[calc(1rem+1vw)]
+              py-[clamp(0.5rem,1vw,0.75rem)]
+              px-[clamp(1rem,2vw,1.5rem)]
               bg-gradient-to-r from-yellow-500 to-yellow-600
-              text-white text-[clamp(0.875rem,1.5vw,1rem)]
-              rounded-lg hover:from-yellow-600 hover:to-yellow-700
-              transition-all shadow-lg hover:shadow-yellow-500/20
-              font-semibold disabled:opacity-70 disabled:cursor-not-allowed
+              text-white
+              text-[clamp(0.875rem,1.25vw,1rem)]
+              font-semibold
+              rounded-lg
+              hover:from-yellow-600 hover:to-yellow-700
+              transition-all
+              shadow-md hover:shadow-yellow-500/20
+              disabled:opacity-70 disabled:cursor-not-allowed
               touch-manipulation
             "
           >
@@ -328,3 +330,4 @@ export default function HeroForm() {
     </div>
   );
 }
+ 
