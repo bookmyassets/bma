@@ -74,7 +74,7 @@ export default function WestWyn() {
                 <p className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-[#deae3c] mb-3">
                   {project.subtext}
                 </p>
-                <p className="text-[clamp(0.8rem,2vw,1.5rem)] text-black leading-relaxed mb-4 line-clamp-3">
+                <p className="text-[clamp(0.8rem,2vw,1.5rem)] text-black leading-relaxed mb-4">
                   {project.description}
                 </p>
                 <ul className="space-y-1 mb-3">

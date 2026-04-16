@@ -27,11 +27,10 @@ export default function AboutBMA() {
         <div className="max-w-7xl mx-auto px-4 ">
           <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
             <div className="flex items-center gap-3 mb-3">
-              <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
               <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-                BookMyAssets: Trusted Developers in Dholera{" "}
+                <span className="text-[#deae3c]">BookMyAssets</span> : Trusted
+                Developers in Dholera{" "}
               </h2>
-              <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
             </div>
           </div>
 
@@ -81,7 +80,6 @@ export default function AboutBMA() {
                     });
                   }}
                 >
-                  
                   Know More About Us
                 </a>
               </div>
