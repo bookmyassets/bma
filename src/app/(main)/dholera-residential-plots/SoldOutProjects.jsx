@@ -190,7 +190,7 @@ const SoldOutProjectsSection = () => {
               <>
                 <button
                   onClick={scrollPrev}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 bg-black rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={currentIndex === 0}
                   style={{ color: "#deae3c" }}
                 >
@@ -198,7 +198,7 @@ const SoldOutProjectsSection = () => {
                 </button>
                 <button
                   onClick={scrollNext}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 bg-black rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={currentIndex === soldOutProjects.length - 1}
                   style={{ color: "#deae3c" }}
                 >

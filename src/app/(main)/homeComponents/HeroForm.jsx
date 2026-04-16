@@ -2,8 +2,8 @@
 import Image from "next/image";
 import React, { useCallback, useRef, useState } from "react";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp"; // adjust path as needed
-import { PhoneIcon } from "@/assests/icons/call-icon.svg"; // adjust if using different icon lib
-import { UserIcon } from "@/assests/icons/user-icon.svg"; // adjust if using different icon lib
+import { Phone } from "@/assests/icons/call-icon.svg"; // adjust if using different icon lib
+import { User } from "@/assests/icons/user-icon.svg"; // adjust if using different icon lib
 // ── FormInput sub-component (kept inline for portability) ──────────────────
 function FormInput({
   name,
@@ -278,7 +278,7 @@ export default function HeroForm() {
               placeholder="Enter Name"
               value={formData.fullName}
               onChange={handleChange}
-              icon={UserIcon}
+              icon={User}
               required
               autoComplete="name"
               aria-label="Full Name"
@@ -289,7 +289,7 @@ export default function HeroForm() {
               placeholder="Mobile No"
               value={formData.phone}
               onChange={handleChange}
-              icon={PhoneIcon}
+              icon={Phone}
               minLength={10}
               maxLength={15}
               required

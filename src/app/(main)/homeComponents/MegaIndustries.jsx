@@ -165,7 +165,7 @@ export default function MegaIndustries() {
 
   return (
     <>
-      <div className="py-12 bg-white min-h-[480px]">
+      <div className="py-[clamp(2rem,5vw,3.5rem)] bg-white min-h-[480px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-xl md:text-4xl text-center font-bold text-gray-800 mb-4">
             Mega Projects Powering{" "}

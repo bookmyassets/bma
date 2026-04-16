@@ -207,7 +207,11 @@ export default function LatestUpdates() {
       <div className="py-[clamp(2rem,5vw,3.5rem)] bg-white min-h-[480px]">
         <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
           <p className="text-[clamp(1.25rem,3vw,2.25rem)] text-center font-bold text-gray-800 mb-4">
-            Featured Content
+            Everything about Dholera Smart City
+          </p>
+          <p className="text-[clamp(0.75rem,1.5vw,0.875rem)] text-center font-bold text-gray-800 mb-4">
+            Stay updated with the latest developments, project updates, dholera
+            plots for sale, and important insights from Dholera Smart City.
           </p>
           <div className="text-center text-red-500">
             <p>Error loading content. Please try again later.</p>

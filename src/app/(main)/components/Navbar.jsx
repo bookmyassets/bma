@@ -309,7 +309,7 @@ export default function Navbar() {
                   open: isBulkLandMenuOpen,
                 },
                 {
-                  label: "Dholera SIR",
+                  label: "Dholera SIR Blogs",
                   toggle: toggleDholeraMenu,
                   open: isDholeraMenuOpen,
                 },

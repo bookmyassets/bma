@@ -12,12 +12,12 @@ import SoldOutProjectsSection from "../SoldOutProjects";
 import WestWynAboutSection from "./About";
 
 //images import
-import img1 from "@/assests/residential/residency/westwyn-residency-dholera-grocery-store-hero.webp";
-import img2 from "@/assests/residential/residency/westwyn-residency-dholera-clubhouse-lite-banner-hero.webp";
-import img3 from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate-hero.webp";
-import img1M from "@/assests/residential/residency/westwyn-residency-dholera-grocery-store-mobile.webp";
-import img2M from "@/assests/residential/residency/westwyn-residency-dholera-clubhouse-lite-mobile.webp";
-import img3M from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate-mobile.webp";
+import img1 from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate.webp";
+import img2 from "@/assests/residential/residency/westwyn-residency-dholera-sir-clubhouse-hero.webp";
+import img3 from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area.webp";
+import img1M from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate-mobile.webp";
+import img2M from "@/assests/residential/residency/westwyn-residency-dholera-sir-clubhouse-lite-mobile.webp";
+import img3M from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area-mobile.webp";
 import PopupScroll from "../../components/PopUpScroll";
 import CostSheet from "../costsheet2";
 import OurCommits from "./OurCommits";
