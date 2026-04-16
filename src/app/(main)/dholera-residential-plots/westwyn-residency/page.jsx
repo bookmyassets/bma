@@ -14,7 +14,7 @@ import WestWynAboutSection from "./About";
 //images import
 import img1 from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate.webp";
 import img2 from "@/assests/residential/residency/westwyn-residency-dholera-sir-clubhouse-hero.webp";
-import img3 from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area.webp";
+import img3 from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area-hero.webp";
 import img1M from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate-mobile.webp";
 import img2M from "@/assests/residential/residency/westwyn-residency-dholera-sir-clubhouse-lite-mobile.webp";
 import img3M from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area-mobile.webp";
@@ -314,7 +314,7 @@ export default function HeroCarousel() {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className=" aspect-[3/1]"
+                  className="aspect-[3/1]"
                   priority={index === 0}
                   fetchPriority={index === 0 ? "high" : "low"}
                   sizes="100vw"
