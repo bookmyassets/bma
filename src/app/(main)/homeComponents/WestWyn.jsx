@@ -74,16 +74,16 @@ export default function WestWyn() {
                 <p className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-[#deae3c] mb-3">
                   {project.subtext}
                 </p>
-                <p className="text-[clamp(0.8rem,2vw,1.5rem)] text-black leading-relaxed mb-4">
+                <p className="text-[clamp(0.5rem,1.5vw,1rem)] text-black leading-relaxed mb-4">
                   {project.description}
                 </p>
                 <ul className="space-y-1 mb-3">
                   {project.points.map((point, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-1.5 text-[clamp(0.8rem,2vw,1.5rem)] text-black leading-snug"
+                      className="flex items-start gap-1.5 text-[clamp(0.5rem,1.5vw,1rem)] text-black leading-snug"
                     >
-                      <FaCheckCircle className="text-[#deae3c] mt-[2px] flex-shrink-0 text-[clamp(0.8rem,2vw,1.5rem)]" />
+                      <FaCheckCircle className="text-[#deae3c] mt-[2px] flex-shrink-0 text-[clamp(0.5rem,1.5vw,1rem)]" />
                       <span>{point}</span>
                     </li>
                   ))}
