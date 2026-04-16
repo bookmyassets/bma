@@ -208,7 +208,7 @@ export default function HeroForm() {
         {/* Headline */}
         <div className="flashy-blink space-y-[clamp(0.2rem,0.5vw,0.4rem)]">
           <h2 className="text-[clamp(1.1rem,2vw,1.35rem)] font-bold glowing-text px-2 leading-snug">
-            Govt Approved Plots in Dholera
+            Invest in Residential Plots in Dholera
           </h2>
           <p className="text-[clamp(0.875rem,1.25vw,1rem)] glowing-text px-2">
             Starting from ₹8 Lakh
