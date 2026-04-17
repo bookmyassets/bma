@@ -19,7 +19,19 @@ export default function layout({ children }) {
           content="premium plots in dholera, residential plots in dholera, dholera smart city plots, bookmyassets plots, dholera investment plots, govt approved dholera plots"
         />
 
-         <Script
+        <Script
+          id="gtm-head"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WRB4QS44')`,
+          }}
+        />
+
+        <Script
           id="taboola-base"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -54,12 +66,20 @@ export default function layout({ children }) {
         />
       </head>
       <body>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=GTM-WRB4QS44`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <div>
           <div>
             <Navbar />
             {children}
             <FloatingButtons />
-            <Whatsapp/>
+            <Whatsapp />
           </div>
         </div>
       </body>
