@@ -139,9 +139,7 @@ export default function Hero() {
           priority
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
-         <div className="absolute bottom-0 left-0 right-0 z-20 ">
-            <Running />
-          </div>
+         
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(.7rem,3.2vw,3.2rem)]">
           <PointsList />
           <HeroForm 
@@ -162,9 +160,7 @@ export default function Hero() {
             priority
           />
           <div className="absolute inset-0 bg-black/60" />
-           <div className="absolute bottom-0 left-0 right-0 z-20 ">
-            <Running />
-          </div>
+           
 
           <div className="absolute inset-0 z-20 flex flex-col px-4 py-6 justify-center gap-4 overflow-y-auto">
             <h1 className="text-white font-bold text-[clamp(1.5rem,6vw,2rem)] leading-tight mb-2">

@@ -4,6 +4,7 @@ import "./globals.css";
 import Form from "./components/Form";
 import FloatingButtons from "./components/Whatsapp";
 import Script from "next/script";
+import Whatsapp from "@/app/(moreInfo)/more-info/components/WhatsAppCirle";
 
 export default function layout({ children }) {
   return (
@@ -59,6 +60,7 @@ export default function layout({ children }) {
             <Navbar />
             {children}
             <FloatingButtons />
+            <Whatsapp/>
           </div>
         </div>
       </body>

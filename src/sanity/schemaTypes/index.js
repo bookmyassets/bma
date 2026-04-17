@@ -4,7 +4,8 @@ import author from './author'; // Import the author schema
 import category from './category'; // Import the category schema
 import blockContent from './blockContent';
 import contact from './contact'; // Import the blockContent schema
+import redirect from './redirect';
 
 export const schema = {
-  types: [post, author, category, blockContent, contact], // Add all schemas here
+  types: [post, author, redirect, category, blockContent, contact], // Add all schemas here
 };
