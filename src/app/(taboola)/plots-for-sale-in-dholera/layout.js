@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import "./globals.css";
-import Form from "./components/Form";
 import FloatingButtons from "./components/Whatsapp";
 import Script from "next/script";
 import Whatsapp from "@/app/(moreInfo)/more-info/components/WhatsAppCirle";
@@ -26,7 +25,7 @@ export default function layout({ children }) {
           dangerouslySetInnerHTML={{
             __html: `
               window._tfa = window._tfa || [];
-              window._tfa.push({notify: 'event', name: 'page_view', id: 292018249});
+              window._tfa.push({notify: 'event', name: 'page_view', id: 2018249});
               !function (t, f, a, x) {
                 if (!document.getElementById(x)) {
                   t.async = 1;

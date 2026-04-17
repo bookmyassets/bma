@@ -115,14 +115,17 @@ export async function getPostBySlug(slug, category = null) {
     site == $site
     ${categoryFilter}
   ][0]{
-    _id, title, metaTitle, metaDescription, formTitle, "keywords": keywords, slug,
-    mainImage { asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, alt, caption, url },
-    publishedAt, _createdAt,
-    body[]{ ..., _type=="image"=>{..., asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, "url": url }, markDefs[]{..., _type=="link"=>{"href":@.href}} },
+    _id, title, metaTitle, metaDescription, 
+    canonicalUrl, noIndex, keywords,   
+    "ogImage": ogImage.asset->url,    
+    slug,
+    mainImage { asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, alt },
+    publishedAt, _updatedAt,
+    body[]{ ..., _type=="image"=>{..., asset->{ _id, _ref, url }}, markDefs[]{..., _type=="link"=>{"href":@.href}} },
     author->{ name, image }, categories[]->{ title, _id }, readingTime
   }`;
   return await client.fetch(query, { slug, site });
-}
+} 
 
 // Named wrappers — use these in your page files
 export const getBlogBySlug = (slug) => getPostBySlug(slug, "Blog");

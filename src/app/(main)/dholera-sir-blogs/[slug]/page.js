@@ -1,20 +1,19 @@
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import {
-  getPostBySlug,
   getblogs,
   getUpdates,
-  projectInfo,
   getBlogBySlug,
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
-import BlogSchemaMarkup from "../BlogSchemaMarkup";
+
 import SlugPageForm from "../../components/SlugPageForm";
 import ExitPopup from "../../components/ExitForm";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import "./blogPage.css";
+import { generateMetadata as buildMeta } from "@/lib/seo";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -126,26 +125,21 @@ const RightSidebar = ({ trendingBlogs }) => {
 };
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const post = await getBlogBySlug(slug);
-  return {
-    title: post?.metaTitle,
-    description: post?.metaDescription,
-    keywords: post?.keywords,
-    robots: {
-      index: true,
-      follow: true,
-    },
-    other: {
-      publisher: "BookMyAssets",
-    },
-    alternates: {
-      canonical: `https://www.bookmyassets.com/dholera-sir-blogs/${slug}`,
-    },
-    openGraph: {
-      images: post?.mainImage ? [urlFor(post.mainImage).url()] : [],
-    },
-  };
+  const post = await getBlogBySlug(params.slug);
+  if (!post) return {};
+
+  return buildMeta({
+    title: post.metaTitle || post.title,
+    description: post.metaDescription,
+    slug: `dholera-sir-blogs/${post.slug.current}`,
+    image: post.mainImage?.asset?.url,
+    canonicalUrl: post.seo?.canonicalUrl,
+    noIndex: post.seo?.noIndex,
+    keywords: post.seo?.keywords || post.keywords || [],
+    type: "blog",
+    publishedAt: post.publishedAt,
+    updatedAt: post._updatedAt,
+  });
 }
 
 export default async function Post({ params }) {

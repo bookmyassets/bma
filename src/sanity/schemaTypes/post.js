@@ -25,6 +25,28 @@ export default {
       type: "array",
       of: [{ type: "string" }],
     },
+    // ✅ NEW FIELDS ADDED
+    {
+      name: "canonicalUrl",
+      title: "Canonical URL",
+      type: "url",
+      description:
+        "Leave empty - auto generate, override when needed.",
+    },
+    {
+      name: "noIndex",
+      title: "No Index (Hide from Google)",
+      type: "boolean",
+      description: "Enable if need to hide from google",
+      initialValue: false,
+    },
+    {
+      name: "ogImage",
+      title: "OG Image (Social Share Image)",
+      type: "image",
+      description: "1200x630px — WhatsApp/Facebook/Twitter",
+    },
+    // ✅ NEW FIELDS END
     {
       name: "slug",
       title: "Slug",
