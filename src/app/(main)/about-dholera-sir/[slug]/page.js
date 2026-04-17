@@ -609,7 +609,6 @@ export default async function Post({ params }) {
                 </div>
 
                 {/* Article Header */}
-                {/* Article Header + Featured Image — responsive hero */}
                 <div className="flex flex-col-reverse gap-8 mb-2 items-center">
                   {/* Article Header */}
                   <div className="w-full ">

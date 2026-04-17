@@ -247,7 +247,7 @@ export default function LeadForm({ title, button }) {
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-4xl mx-auto">
             <h4 className="text-white text-xl md:text-3xl font-bold text-center">
-              {title}
+              Registry Ready Plots in Dholera
             </h4>
             {/* <p className="text-gray-300 mt-2 text-xs text-center">
               Scale Your Portfolio with High-Growth Land Opportunities

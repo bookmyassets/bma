@@ -255,7 +255,7 @@ export default function PopupForm({ title, project }) {
                     ×
                   </button>
                   <h1 className="text-xl font-bold text-gray-800 mb-2">
-                    {title}
+                    Book Your Plot in Dholera
                   </h1>
                 </div>
 

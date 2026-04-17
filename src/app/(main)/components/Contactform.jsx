@@ -332,7 +332,7 @@ export default function ContactForm({
           className="text-center mb-6 mt-12 sm:mt-8"
         >
           <h2 className="text-xl md:text-3xl font-bold text-gray-700 mb-2">
-            {title}
+            Book Your Plot in Dholera
           </h2>
         </motion.div>
 

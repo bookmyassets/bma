@@ -190,7 +190,7 @@ export default function Popup({
               phone: formData.phone,
               source: source,
             },
-            source: "BookMyAssets Google Ads",
+            source: "BookMyAssets",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
@@ -414,7 +414,7 @@ export default function Popup({
                 </div> */}
 
                 <h2 className="text-xl md:text-3xl font-bold mb-1 leading-tight text-[#FDB913]">
-                  {titleInfo.mainText}
+                  Invest in Dholera Residential Plots
                 </h2>
 
                 <p className="text-white/90 text-xl">

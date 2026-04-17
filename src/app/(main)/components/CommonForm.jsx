@@ -230,7 +230,7 @@ export default function CommonForm({ title, button }) {
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-5xl mx-auto">
             <h3 className="text-white text-xl md:text-3xl font-semibold text-center">
-              {title}
+              Invest in Dholera Residential Plots
             </h3>
             
 
