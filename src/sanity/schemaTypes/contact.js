@@ -1,4 +1,4 @@
-import { ContactView } from "@/app/(main)/studio/components/ContactView"
+import { ContactView } from "@/app/studio/components/ContactView"
 
 export default {
     name: 'contact',
