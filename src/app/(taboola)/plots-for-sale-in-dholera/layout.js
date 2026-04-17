@@ -26,7 +26,7 @@ export default function layout({ children }) {
           dangerouslySetInnerHTML={{
             __html: `
               window._tfa = window._tfa || [];
-              window._tfa.push({notify: 'event', name: 'page_view', id: 292018249});
+              window._tfa.push({notify: 'event', name: 'page_view', id: 2018249});
               !function (t, f, a, x) {
                 if (!document.getElementById(x)) {
                   t.async = 1;
