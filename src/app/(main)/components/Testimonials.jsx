@@ -116,7 +116,7 @@ const TestimonialPagination = () => {
     <div className="bg-black py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-center text-3xl font-bold text-[#deae3c] mb-12">
-          What Our Clients Say
+          Experience Dholera Through Our Clients
         </h2>
 
         {/* Mobile Slider View */}

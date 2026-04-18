@@ -229,12 +229,12 @@ export default function LatestUpdates() {
         <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
           {/* ✅ clamp() — section heading scales between 20px and 36px */}
           <p className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-center font-bold text-gray-800 mb-4">
-            Featured Content
+            Everything about Dholera Smart City
           </p>
           {/* ✅ clamp() — subheading scales between 14px and 18px */}
           <p className="text-[clamp(0.875rem,1.5vw,1.125rem)] text-gray-600 text-center mb-12 max-w-5xl mx-auto">
-            Stay updated with the latest insights and developments from
-            BookMyAssets
+            Stay updated with the latest developments, project updates, dholera
+            plots for sale, and important insights from Dholera Smart City.
           </p>
 
           {/* Slider */}
@@ -304,24 +304,6 @@ export default function LatestUpdates() {
               </>
             )}
           </div>
-
-          {/* Dots */}
-          {!loading && content.length > 0 && (
-            <div className="flex justify-center mt-8 space-x-3">
-              {content.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
-                    currentIndex === index
-                      ? "bg-blue-600 scale-125"
-                      : "bg-gray-300 hover:bg-gray-400"
-                  }`}
-                  onClick={() => handleDotClick(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
 
