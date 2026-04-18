@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 
-// Predefined project options
 const PROJECT_OPTIONS = ["WestWyn Residency", "WestWyn Estates"];
 
-// Token Amount (₹50,000) is pre-printed in the PDF — not editable
+const PROJECT_ABBREVIATIONS = {
+  "WestWyn Residency": "WWR",
+  "WestWyn Estates": "WWE",
+};
+
 const FIELDS = [
   {
     key: "projectName",
@@ -99,34 +102,28 @@ const FIELDS = [
 const SECTIONS = [...new Set(FIELDS.map((f) => f.section))];
 const defaultForm = Object.fromEntries(FIELDS.map((f) => [f.key, ""]));
 
-// Helper function to add days to a date
 const addDays = (date, days) => {
   const result = new Date(date);
   result.setDate(result.getDate() + days);
   return result;
 };
 
-// Parse date from DD/MM/YYYY string
 const parseDate = (dateStr) => {
   if (!dateStr) return null;
   const parts = dateStr.split("/");
   if (parts.length !== 3) return null;
-  const day = parseInt(parts[0]);
-  const month = parseInt(parts[1]) - 1; // Months are 0-indexed
-  const year = parseInt(parts[2]);
-  return new Date(year, month, day);
+  return new Date(
+    parseInt(parts[2]),
+    parseInt(parts[1]) - 1,
+    parseInt(parts[0]),
+  );
 };
 
-// Format date as DD/MM/YYYY
 const formatDateForInput = (date) => {
   if (!date) return "";
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  return `${String(date.getDate()).padStart(2, "0")}/${String(date.getMonth() + 1).padStart(2, "0")}/${date.getFullYear()}`;
 };
 
-// Calculate all dates based on token date and payment plan days
 const calculateDates = (tokenDateStr, totalDays) => {
   if (!tokenDateStr || !totalDays || totalDays <= 0) {
     return {
@@ -140,30 +137,18 @@ const calculateDates = (tokenDateStr, totalDays) => {
       totalPaymentDueDate: "",
     };
   }
-
   const tokenDate = parseDate(tokenDateStr);
   if (!tokenDate) return {};
-
   const intervalDays = Math.floor(totalDays / 3);
-
-  // Calculate milestone dates
-  const m1Date = addDays(tokenDate, intervalDays);
-  const m2Date = addDays(tokenDate, intervalDays * 2);
-  const m3Date = addDays(tokenDate, intervalDays * 3);
-  const totalDate = addDays(tokenDate, totalDays);
-
-  // Format due timelines
-  const formatTimeline = (days) => `${days} days`;
-
   return {
-    m1DueTimeline: formatTimeline(intervalDays),
-    m1PaymentDueDate: formatDateForInput(m1Date),
-    m2DueTimeline: formatTimeline(intervalDays),
-    m2PaymentDueDate: formatDateForInput(m2Date),
-    m3DueTimeline: formatTimeline(intervalDays),
-    m3PaymentDueDate: formatDateForInput(m3Date),
-    totalDueTimeline: formatTimeline(totalDays),
-    totalPaymentDueDate: formatDateForInput(totalDate),
+    m1DueTimeline: `${intervalDays} days`,
+    m1PaymentDueDate: formatDateForInput(addDays(tokenDate, intervalDays)),
+    m2DueTimeline: `${intervalDays} days`,
+    m2PaymentDueDate: formatDateForInput(addDays(tokenDate, intervalDays * 2)),
+    m3DueTimeline: `${intervalDays} days`,
+    m3PaymentDueDate: formatDateForInput(addDays(tokenDate, intervalDays * 3)),
+    totalDueTimeline: `${totalDays} days`,
+    totalPaymentDueDate: formatDateForInput(addDays(tokenDate, totalDays)),
   };
 };
 
@@ -174,25 +159,18 @@ export default function PaymentSchedulePage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setForm((prev) => {
       const newForm = { ...prev, [name]: value };
-
-      // Auto-calculate dates when token date or payment plan days change
       if (name === "tokenPaymentDueDate" || name === "paymentPlanDays") {
         const tokenDate =
           name === "tokenPaymentDueDate" ? value : newForm.tokenPaymentDueDate;
-        const planDays =
-          name === "paymentPlanDays"
-            ? parseInt(value)
-            : parseInt(newForm.paymentPlanDays);
-
+        const planDays = parseInt(
+          name === "paymentPlanDays" ? value : newForm.paymentPlanDays,
+        );
         if (tokenDate && planDays && planDays > 0) {
-          const calculatedDates = calculateDates(tokenDate, planDays);
-          Object.assign(newForm, calculatedDates);
+          Object.assign(newForm, calculateDates(tokenDate, planDays));
         } else {
-          // Clear calculated fields if inputs are invalid
-          const clearedFields = {
+          Object.assign(newForm, {
             m1DueTimeline: "",
             m1PaymentDueDate: "",
             m2DueTimeline: "",
@@ -201,62 +179,41 @@ export default function PaymentSchedulePage() {
             m3PaymentDueDate: "",
             totalDueTimeline: "",
             totalPaymentDueDate: "",
-          };
-          Object.assign(newForm, clearedFields);
+          });
         }
       }
-
       return newForm;
     });
-
     setError("");
   };
 
   const handleSubmit = async () => {
-    // Check required fields (excluding auto-calculated ones)
-    const requiredFields = FIELDS.filter(
-      (f) =>
-        !f.readonly &&
-        f.key !== "m1DueTimeline" &&
-        f.key !== "m2DueTimeline" &&
-        f.key !== "m3DueTimeline" &&
-        f.key !== "totalDueTimeline" &&
-        f.key !== "m1PaymentDueDate" &&
-        f.key !== "m2PaymentDueDate" &&
-        f.key !== "m3PaymentDueDate" &&
-        f.key !== "totalPaymentDueDate",
-    );
-
+    const requiredFields = FIELDS.filter((f) => !f.readonly);
     const empty = requiredFields.filter((f) => !form[f.key]);
     if (empty.length) {
       setError(
-        `Please fill all required fields. Missing: ${empty
-          .map((f) => `${f.section} › ${f.label}`)
-          .join(", ")}`,
+        `Please fill all required fields. Missing: ${empty.map((f) => `${f.section} › ${f.label}`).join(", ")}`,
       );
       return;
     }
-
     setLoading(true);
     setError("");
-
     try {
       const res = await fetch("/api/fill-pdf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
       if (!res.ok) {
         const { error: msg } = await res.json().catch(() => ({}));
         throw new Error(msg || "Failed to generate PDF");
       }
-
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `Payment-Schedule-Unit-${form.plotNumber}-${form.projectName}-${form.paymentPlanDays}.pdf`;
+      // ✅ Abbreviated project name in filename
+      a.download = `Payment-Schedule-Unit-${form.plotNumber}-${PROJECT_ABBREVIATIONS[form.projectName] || form.projectName}-${form.paymentPlanDays}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {
@@ -268,10 +225,9 @@ export default function PaymentSchedulePage() {
 
   return (
     <>
-    <meta name="robots" content="noindex, nofollow"/>
-      <main className="min-h-screen bg-white text-black  flex items-center justify-center px-4 py-12">
+      <meta name="robots" content="noindex, nofollow" />
+      <main className="min-h-screen bg-white text-black flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-xl">
-          {/* Header */}
           <div className="mb-8 pt-16">
             <p className="text-base uppercase tracking-widest text-amber-500 font-semibold mb-1">
               BookMyAssets
@@ -283,7 +239,6 @@ export default function PaymentSchedulePage() {
             </p>
           </div>
 
-          {/* Sections */}
           <div className="space-y-7">
             {SECTIONS.map((section) => {
               const sectionFields = FIELDS.filter((f) => f.section === section);
@@ -295,11 +250,8 @@ export default function PaymentSchedulePage() {
                     </span>
                     <span className="flex-1 border-t border-neutral-800" />
                   </div>
-
                   <div
-                    className={`grid gap-3 ${
-                      sectionFields.length === 2 ? "grid-cols-2" : "grid-cols-1"
-                    }`}
+                    className={`grid gap-3 ${sectionFields.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}
                   >
                     {sectionFields.map(
                       ({
@@ -308,53 +260,57 @@ export default function PaymentSchedulePage() {
                         type = "text",
                         placeholder,
                         readonly,
-                      }) => (
-                        <div key={key}>
-                          <label className="block text-base text-black mb-1.5">
-                            {label}
-                            {readonly && (
-                              <span className="ml-2 text-amber-500 text-[10px]">
-                                (auto-calculated)
-                              </span>
-                            )}
-                          </label>
-
-                          {type === "dropdown" ? (
-                            <select
-                              name={key}
-                              value={form[key]}
-                              onChange={handleChange}
-                              className="w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black focus:outline-none focus:border-amber-500 transition-colors"
+                      }) => {
+                        // ✅ Bold only the Total section's Payment Due Date
+                        const isTotalDueDate =
+                          section === "Total" && key === "totalPaymentDueDate";
+                        return (
+                          <div key={key}>
+                            <label
+                              className={`block text-base text-black mb-1.5 ${isTotalDueDate ? "font-bold" : ""}`}
                             >
-                              <option value="">Select project...</option>
-                              {PROJECT_OPTIONS.map((project) => (
-                                <option key={project} value={project}>
-                                  {project}
-                                </option>
-                              ))}
-                            </select>
-                          ) : (
-                            <input
-                              type={type}
-                              name={key}
-                              value={form[key]}
-                              onChange={handleChange}
-                              readOnly={readonly}
-                              placeholder={
-                                placeholder ||
-                                (type === "text" && key.includes("Date")
-                                  ? "DD/MM/YYYY"
-                                  : "Enter value")
-                              }
-                              className={`w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors ${
-                                readonly ? "opacity-70 cursor-not-allowed" : ""
-                              }`}
-                              min={type === "number" ? "1" : undefined}
-                              step={type === "number" ? "1" : undefined}
-                            />
-                          )}
-                        </div>
-                      ),
+                              {label}
+                              {readonly && (
+                                <span className="ml-2 text-amber-500 text-[10px]">
+                                  (auto-calculated)
+                                </span>
+                              )}
+                            </label>
+                            {type === "dropdown" ? (
+                              <select
+                                name={key}
+                                value={form[key]}
+                                onChange={handleChange}
+                                className="w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black focus:outline-none focus:border-amber-500 transition-colors"
+                              >
+                                <option value="">Select project...</option>
+                                {PROJECT_OPTIONS.map((project) => (
+                                  <option key={project} value={project}>
+                                    {project}
+                                  </option>
+                                ))}
+                              </select>
+                            ) : (
+                              <input
+                                type={type}
+                                name={key}
+                                value={form[key]}
+                                onChange={handleChange}
+                                readOnly={readonly}
+                                placeholder={
+                                  placeholder ||
+                                  (type === "text" && key.includes("Date")
+                                    ? "DD/MM/YYYY"
+                                    : "Enter value")
+                                }
+                                className={`w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors ${readonly ? "opacity-70 cursor-not-allowed" : ""} ${isTotalDueDate ? "font-bold" : ""}`}
+                                min={type === "number" ? "1" : undefined}
+                                step={type === "number" ? "1" : undefined}
+                              />
+                            )}
+                          </div>
+                        );
+                      },
                     )}
                   </div>
                 </div>
@@ -362,7 +318,6 @@ export default function PaymentSchedulePage() {
             })}
           </div>
 
-          {/* Info Box */}
           <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
             <p className="text-base text-amber-400">
               💡 <span className="font-semibold">How it works:</span> Enter
@@ -372,14 +327,12 @@ export default function PaymentSchedulePage() {
             </p>
           </div>
 
-          {/* Error */}
           {error && (
             <div className="mt-5 text-base text-red-400 bg-red-950/40 border border-red-900 rounded-lg px-4 py-3">
               {error}
             </div>
           )}
 
-          {/* Submit */}
           <button
             onClick={handleSubmit}
             disabled={loading}
