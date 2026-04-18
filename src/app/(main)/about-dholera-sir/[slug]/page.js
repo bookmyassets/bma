@@ -141,6 +141,8 @@ export async function generateMetadata({ params }) {
 
 export default async function Post({ params }) {
   const { slug } = await params;
+  const post = await getAboutBySlug(slug);
+  
   const site = "bookmyassets";
 
   if (!slug) {
