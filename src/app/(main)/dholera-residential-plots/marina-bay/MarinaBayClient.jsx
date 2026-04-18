@@ -13,6 +13,8 @@ import CostSheet from "../costsheet2";
 import ActiveProjectsSection from "../ActiveProject";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
+import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
+import SchemaMarkup from "../../components/SchemaMarkup";
 
 export default function MarinaBayClient() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];

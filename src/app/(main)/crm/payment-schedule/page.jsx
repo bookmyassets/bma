@@ -269,15 +269,15 @@ export default function PaymentSchedulePage() {
   return (
     <>
     <meta name="robots" content="noindex, nofollow"/>
-      <main className="min-h-screen bg-neutral-950 text-white  flex items-center justify-center px-4 py-12">
+      <main className="min-h-screen bg-white text-black  flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-xl">
           {/* Header */}
           <div className="mb-8 pt-16">
-            <p className="text-xs uppercase tracking-widest text-amber-500 font-semibold mb-1">
+            <p className="text-base uppercase tracking-widest text-amber-500 font-semibold mb-1">
               BookMyAssets
             </p>
             <h1 className="text-2xl font-bold">Payment Schedule Generator</h1>
-            <p className="text-sm text-neutral-400 mt-1">
+            <p className="text-base text-black mt-1">
               Set token payment date and payment plan days — milestone dates
               will auto-calculate
             </p>
@@ -310,7 +310,7 @@ export default function PaymentSchedulePage() {
                         readonly,
                       }) => (
                         <div key={key}>
-                          <label className="block text-xs text-neutral-500 mb-1.5">
+                          <label className="block text-base text-black mb-1.5">
                             {label}
                             {readonly && (
                               <span className="ml-2 text-amber-500 text-[10px]">
@@ -324,7 +324,7 @@ export default function PaymentSchedulePage() {
                               name={key}
                               value={form[key]}
                               onChange={handleChange}
-                              className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors"
+                              className="w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black focus:outline-none focus:border-amber-500 transition-colors"
                             >
                               <option value="">Select project...</option>
                               {PROJECT_OPTIONS.map((project) => (
@@ -346,7 +346,7 @@ export default function PaymentSchedulePage() {
                                   ? "DD/MM/YYYY"
                                   : "Enter value")
                               }
-                              className={`w-full bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors ${
+                              className={`w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors ${
                                 readonly ? "opacity-70 cursor-not-allowed" : ""
                               }`}
                               min={type === "number" ? "1" : undefined}
@@ -364,7 +364,7 @@ export default function PaymentSchedulePage() {
 
           {/* Info Box */}
           <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-            <p className="text-xs text-amber-400">
+            <p className="text-base text-amber-400">
               💡 <span className="font-semibold">How it works:</span> Enter
               Token Payment Due Date (DD/MM/YYYY) and Payment Plan Days. The
               total days will be divided into 3 equal intervals to calculate all
@@ -374,7 +374,7 @@ export default function PaymentSchedulePage() {
 
           {/* Error */}
           {error && (
-            <div className="mt-5 text-sm text-red-400 bg-red-950/40 border border-red-900 rounded-lg px-4 py-3">
+            <div className="mt-5 text-base text-red-400 bg-red-950/40 border border-red-900 rounded-lg px-4 py-3">
               {error}
             </div>
           )}
@@ -383,12 +383,12 @@ export default function PaymentSchedulePage() {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="mt-7 w-full bg-amber-500 hover:bg-amber-400 active:bg-amber-600 disabled:bg-amber-900 disabled:cursor-not-allowed text-black font-semibold text-sm rounded-lg py-3 transition-colors"
+            className="mt-7 w-full bg-amber-500 hover:bg-amber-400 active:bg-amber-600 disabled:bg-amber-900 disabled:cursor-not-allowed text-black font-semibold text-base rounded-lg py-3 transition-colors"
           >
             {loading ? "Generating…" : "Generate & Download PDF"}
           </button>
 
-          <p className="text-center text-xs text-neutral-600 mt-4">
+          <p className="text-center text-base text-neutral-600 mt-4">
             Token Amount (₹50,000) is pre-filled in the template
           </p>
         </div>

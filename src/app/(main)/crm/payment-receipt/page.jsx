@@ -192,49 +192,49 @@ export default function PaymentReceiptPage() {
   return (
     <>
     <meta name="robots" content="noindex, nofollow"/>
-    <main className="min-h-screen bg-neutral-950 text-white flex items-center justify-center px-4 py-12">
+    <main className="min-h-screen bg-white text-black flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-xl">
 
         {/* Header */}
         <div className="mb-8">
-          <p className="text-xs uppercase tracking-widest text-amber-500 font-semibold mb-1">
+          <p className="text-base uppercase tracking-widest text-amber-500 font-semibold mb-1">
             BookMyAssets
           </p>
           <h1 className="text-2xl font-bold">Payment Receipt Generator</h1>
-          <p className="text-sm text-neutral-400 mt-1">
+          <p className="text-base text-neutral-400 mt-1">
             Fill in the payment details — amount in words will be auto-generated
           </p>
         </div>
 
         {/* Alignment Toggle */}
-        <div className="mb-4 flex items-center justify-between p-3 bg-neutral-900/50 rounded-lg border border-neutral-800">
-          <label className="flex items-center gap-2 text-sm">
+        <div className="mb-4 flex items-center justify-between p-3 bg-white rounded-lg border border-neutral-800">
+          <label className="flex items-center gap-2 text-base">
             <input
               type="checkbox"
               checked={showAlignment}
               onChange={(e) => setShowAlignment(e.target.checked)}
-              className="rounded bg-neutral-800 border-neutral-700 text-amber-500 focus:ring-amber-500"
+              className="rounded bg-white border-neutral-700 text-amber-500 focus:ring-amber-500"
             />
             <span>Fine-tune alignment</span>
           </label>
           {showAlignment && (
             <div className="flex gap-3">
               <div className="flex items-center gap-1">
-                <span className="text-xs text-neutral-500">X:</span>
+                <span className="text-base text-black">X:</span>
                 <input
                   type="number"
                   value={offsetX}
                   onChange={(e) => setOffsetX(parseInt(e.target.value) || 0)}
-                  className="w-16 bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-xs"
+                  className="w-16 bg-white border border-neutral-700 rounded px-2 py-1 text-base"
                 />
               </div>
               <div className="flex items-center gap-1">
-                <span className="text-xs text-neutral-500">Y:</span>
+                <span className="text-base text-black">Y:</span>
                 <input
                   type="number"
                   value={offsetY}
                   onChange={(e) => setOffsetY(parseInt(e.target.value) || 0)}
-                  className="w-16 bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-xs"
+                  className="w-16 bg-white border border-neutral-700 rounded px-2 py-1 text-base"
                 />
               </div>
             </div>
@@ -245,7 +245,7 @@ export default function PaymentReceiptPage() {
         <div className="space-y-5">
           {FIELDS.map(({ key, label, type, placeholder, readonly, maxLength }) => (
             <div key={key}>
-              <label className="block text-xs text-neutral-500 mb-1.5">
+              <label className="block text-base text-black mb-1.5">
                 {label}
                 {!readonly && key !== "remarks" && (
                   <span className="ml-1 text-red-400 text-[10px]">*</span>
@@ -263,7 +263,7 @@ export default function PaymentReceiptPage() {
                   name={key}
                   value={form[key]}
                   onChange={handleChange}
-                  className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors"
+                  className="w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black focus:outline-none focus:border-amber-500 transition-colors"
                 >
                   <option value="">Select project...</option>
                   {PROJECT_OPTIONS.map((project) => (
@@ -280,7 +280,7 @@ export default function PaymentReceiptPage() {
                   onChange={handleChange}
                   readOnly={readonly}
                   maxLength={maxLength}
-                  className={`w-full bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors ${
+                  className={`w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors ${
                     readonly ? "opacity-70 cursor-not-allowed" : ""
                   }`}
                   placeholder={placeholder}
@@ -294,16 +294,16 @@ export default function PaymentReceiptPage() {
               
               {/* Info Box */}
               <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-              <p className="text-xs text-amber-400">
+              <p className="text-base text-amber-400">
               💡 <span className="font-semibold">Note:</span> Text will be automatically truncated if it exceeds the available space in the PDF.
               </p>
               </div>
               
               {/* Live Preview */}
         {form.plotNumber && form.projectName && form.paymentDate && (
-          <div className="mt-4 p-3 bg-neutral-900/50 border border-neutral-800 rounded-lg">
-            <p className="text-xs text-neutral-500 mb-1">Preview PDF Name:</p>
-            <p className="text-xs text-amber-400 font-mono break-all">
+          <div className="mt-4 p-3 bg-white/50 border border-neutral-800 rounded-lg">
+            <p className="text-base text-black mb-1">Preview PDF Name:</p>
+            <p className="text-base text-amber-400 font-mono break-all">
               Payment Receipt_Unit_{form.plotNumber}_{getProjectCode()}_{form.paymentDate.replace(/\//g, "")}.pdf
             </p>
           </div>
@@ -311,24 +311,24 @@ export default function PaymentReceiptPage() {
 
         {/* Data Preview */}
         {form.receiptNumber && (
-          <div className="mt-4 p-3 bg-neutral-900/50 border border-neutral-800 rounded-lg">
-            <p className="text-xs text-neutral-500 mb-2">Preview Data:</p>
-            <div className="space-y-1 text-xs">
+          <div className="mt-4 p-3 bg-white/50 border border-neutral-800 rounded-lg">
+            <p className="text-base text-black mb-2">Preview Data:</p>
+            <div className="space-y-1 text-base">
               <div className="flex justify-between">
-                <span className="text-neutral-500">Receipt No:</span>
-                <span className="text-white">{form.receiptNumber}</span>
+                <span className="text-black">Receipt No:</span>
+                <span className="text-black">{form.receiptNumber}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-500">Received From:</span>
-                <span className="text-white">{form.receivedFrom}</span>
+                <span className="text-black">Received From:</span>
+                <span className="text-black">{form.receivedFrom}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-500">Amount:</span>
-                <span className="text-white">₹ {form.amountInNumbers}</span>
+                <span className="text-black">Amount:</span>
+                <span className="text-black">₹ {form.amountInNumbers}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-500">Amount in Words:</span>
-                <span className="text-white text-right break-words max-w-[60%]">{form.amountInWords}</span>
+                <span className="text-black">Amount in Words:</span>
+                <span className="text-black text-right break-words max-w-[60%]">{form.amountInWords}</span>
               </div>
             </div>
           </div>
@@ -336,7 +336,7 @@ export default function PaymentReceiptPage() {
 
         {/* Error */}
         {error && (
-          <div className="mt-5 text-sm text-red-400 bg-red-950/40 border border-red-900 rounded-lg px-4 py-3">
+          <div className="mt-5 text-base text-red-400 bg-red-950/40 border border-red-900 rounded-lg px-4 py-3">
             {error}
           </div>
         )}
@@ -345,7 +345,7 @@ export default function PaymentReceiptPage() {
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="mt-7 w-full bg-amber-500 hover:bg-amber-400 active:bg-amber-600 disabled:bg-amber-900 disabled:cursor-not-allowed text-black font-semibold text-sm rounded-lg py-3 transition-colors"
+          className="mt-7 w-full bg-amber-500 hover:bg-amber-400 active:bg-amber-600 disabled:bg-amber-900 disabled:cursor-not-allowed text-black font-semibold text-base rounded-lg py-3 transition-colors"
           >
           {loading ? "Generating…" : "Generate & Download Payment Receipt"}
         </button>
