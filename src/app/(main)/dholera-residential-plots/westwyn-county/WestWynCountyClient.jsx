@@ -21,6 +21,8 @@ import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
 import PopupScroll from "../../components/PopUpScroll";
 import ActiveProjectsSection from "../ActiveProject";
+import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
+import SchemaMarkup from "../../components/SchemaMarkup";
 
 export default function WestWynCountyClient() {
   const faqs = [
@@ -227,8 +229,44 @@ export default function WestWynCountyClient() {
 
   return (
     <>
-      
-      <link rel="canonical" href="https://www.bookmyassets.com/dholera-residential-plots/westwyn-county" />
+      <SchemaMarkup
+        schema={realEstateSchema({
+          name: "WestWyn County - Residential Plots in Dholera SIR",
+          description: "Buy residential plots in WestWyn County, Dholera SIR.",
+          url: "/dholera-residential-plots/westwyn-county",
+        })}
+      />
+
+      <SchemaMarkup
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Residential Plots", path: "/dholera-residential-plots" },
+          {
+            name: "WestWyn County",
+            path: "/dholera-residential-plots/westwyn-county",
+          },
+        ])}
+      />
+
+      <SchemaMarkup
+        schema={faqSchema([
+          {
+            question: "Is Maple Township NA/NOC approved?",
+            answer:
+              "Yes, Maple Township plots are NA NOC approved with clear titles and registry ready.",
+          },
+          {
+            question: "Where is Maple Township located?",
+            answer:
+              "Maple Township is located in Village Gamph, Tehsil Dholera, District Ahmedabad inside Dholera SIR.",
+          },
+          {
+            question: "What is the starting price of plots in Maple Township?",
+            answer:
+              "Maple Township is sold out. Similar projects start from ₹8 lakh at WestWyn Residency.",
+          },
+        ])}
+      />
       {/* Hero Section with Carousel - Matching Hero3 Design */}
       <div id="hero" className="relative min-h-screen bg-white">
         <div className="h-screen max-sm:h-auto flex flex-col">
@@ -402,8 +440,6 @@ export default function WestWynCountyClient() {
                   >
                     Unbeatable Price in Dholera
                   </motion.button>
-
-                 
                 </motion.div>
               </motion.div>
             </div>
@@ -629,7 +665,7 @@ export default function WestWynCountyClient() {
       </div>
 
       <ProjectAmenities />
-      
+
       <div className="pt-4 pb-4">
         <CostSheet projectSlug="westwyn-county" showProjectSelector={false} />
       </div>
@@ -653,7 +689,6 @@ export default function WestWynCountyClient() {
           </div>
         )}
       </AnimatePresence>
-      
     </>
   );
 }

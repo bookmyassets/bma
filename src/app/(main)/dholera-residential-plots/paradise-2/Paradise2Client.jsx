@@ -14,6 +14,8 @@ import ActiveProjectsSection from "../ActiveProject";
 import CostSheet from "../costsheet2";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
+import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
+import SchemaMarkup from "../../components/SchemaMarkup";
 
 export default function Paradise2Client() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
@@ -88,6 +90,21 @@ export default function Paradise2Client() {
 
   return (
     <>
+   <SchemaMarkup
+           schema={realEstateSchema({
+             name: "Paradise 2 - Residential Plots in Dholera SIR",
+             description: "Buy residential plots in Paradise 2, Dholera SIR.",
+             url: "/dholera-residential-plots/paradise-2",
+           })}
+         />
+   
+         <SchemaMarkup
+           schema={breadcrumbSchema([
+             { name: "Home", path: "/" },
+             { name: "Residential Plots", path: "/dholera-residential-plots" },
+             { name: "Paradise 2", path: "/dholera-residential-plots/paradise-2" },
+           ])}
+         />
    
        {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">

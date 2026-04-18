@@ -21,6 +21,8 @@ import PopupScroll from "../../components/PopUpScroll";
 import CostSheet from "../costsheet2";
 import OurCommits from "./OurCommits";
 import PlanLayout from "./PlanLayout";
+import SchemaMarkup from "../../components/SchemaMarkup";
+import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
 
 export default function WestWynEstateClient() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -127,33 +129,20 @@ export default function WestWynEstateClient() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Corporation",
-            name: "BookMyAssets",
-            alternateName: "BMA",
-            url: "https://www.bookmyassets.com/",
-            logo: "https://www.bookmyassets.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FBmalogo.ab09adfe.png&w=96&q=75",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "620, JMD Megapolis, Sohna Rd, Sector 48,",
-              addressLocality: "Gurgaon",
-              addressRegion: "Haryana",
-              postalCode: "122001",
-              addressCountry: "IN",
-            },
-            sameAs: [
-              "https://www.facebook.com/people/Bookmyassets/61556534554379/",
-              "https://www.instagram.com/bookmyassets/",
-              "https://www.youtube.com/@BookMyAssets",
-              "https://x.com/BookMyAssets",
-              "https://www.linkedin.com/company/bookmyassetss",
-            ],
-          }),
-        }}
+      <SchemaMarkup
+        schema={realEstateSchema({
+          name: "WestWyn Estates - Residential Plots in Dholera SIR",
+          description: "Buy residential plots in WestWyn Estates, Dholera SIR.",
+          url: "/dholera-residential-plots/westwyn-estates",
+        })}
+      />
+
+      <SchemaMarkup
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Residential Plots", path: "/dholera-residential-plots" },
+          { name: "WestWyn Estates", path: "/dholera-residential-plots/westwyn-estates" },
+        ])}
       />
 
       {/* ── Hero Section ───────────────────────────────────────────────────── */}

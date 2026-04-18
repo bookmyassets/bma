@@ -13,6 +13,8 @@ import CostSheet from "../costsheet2";
 import ActiveProjectsSection from "../ActiveProject";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
+import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
+import SchemaMarkup from "../../components/SchemaMarkup";
 
 export default function ParadiseClient() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
@@ -33,7 +35,7 @@ export default function ParadiseClient() {
   const [formType, setFormType] = useState("");
   const [eventVar, setEventVar] = useState("");
 
-  const project = "Paradise"
+  const project = "Paradise";
   const openContactForm = (title, headline, btnName, type, project) => {
     setFormTitle(title);
     setFormHeadline(headline);
@@ -79,7 +81,7 @@ export default function ParadiseClient() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1,
       );
     }, 5000);
     return () => clearInterval(interval);
@@ -127,7 +129,7 @@ export default function ParadiseClient() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     const countersSection = document.getElementById("counters-section");
@@ -140,7 +142,23 @@ export default function ParadiseClient() {
 
   return (
     <>
-          {/* Hero Section with Carousel */}
+      <SchemaMarkup
+        schema={realEstateSchema({
+          name: "Paradise Township - Residential Plots in Dholera SIR",
+          description: "Buy residential plots in Paradise Township, Dholera SIR.",
+          url: "/dholera-residential-plots/paradise",
+        })}
+      />
+
+      <SchemaMarkup
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Residential Plots", path: "/dholera-residential-plots" },
+          { name: "Paradise", path: "/dholera-residential-plots/paradise" },
+        ])}
+      />
+
+      {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}
         <div className="relative w-full h-full">
@@ -188,7 +206,7 @@ export default function ParadiseClient() {
                   "Missed Paradise? Explore plots from ₹8 lakh Westwyn Residency",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
                   "Get A Call Back",
-                  ""
+                  "",
                 )
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
@@ -221,7 +239,11 @@ export default function ParadiseClient() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h1 className="text-[32px] font-semibold text-black mb-4">
-              About <span className="max-sm:hidden"><br /></span> Paradise
+              About{" "}
+              <span className="max-sm:hidden">
+                <br />
+              </span>{" "}
+              Paradise
             </h1>
           </div>
 
@@ -246,7 +268,7 @@ export default function ParadiseClient() {
                     "Get details on WestWyn Residency",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Download Brochure",
-                    "brochure"
+                    "brochure",
                   )
                 }
                 className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
@@ -372,7 +394,10 @@ export default function ParadiseClient() {
       </div>
 
       {/* Form */}
-      <CommonForm title="Paradise is Sold Out. Want to Invest in More Projects Like This?" button="Talk to our Team" />
+      <CommonForm
+        title="Paradise is Sold Out. Want to Invest in More Projects Like This?"
+        button="Talk to our Team"
+      />
 
       <ActiveProjectsSection />
 

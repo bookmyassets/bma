@@ -5,6 +5,8 @@ import westwyn1 from "@/assests/residential/Orchid-dholera-plan-layout.webp";
 import banner from "@/assests/residential/orchid-hero-desktopview.webp";
 import bannerMob from "@/assests/residential/orchid-hero-mob.view-webp.webp";
 import OrchidLeadActions from "./OrchidLeadActions";
+import SchemaMarkup from "../../components/SchemaMarkup";
+import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
 
 // ─── Dynamic imports — below-the-fold components ─────────────────────────────
 const CostSheet = dynamic(() => import("../costsheet2"), {
@@ -55,13 +57,22 @@ export default function OrchidClient() {
   return (
     <main>
       {/* ── Hero ── */}
-      {/*
-        FIX: Removed the redundant inner <div> that duplicated `relative h-[60vh]
-        overflow-hidden` — it added an extra layout pass and stacking context,
-        contributing to the 1,770 ms element render delay.
-        The <section> itself is the single `relative` container for both fill
-        images and the absolute overlay.
-      */}
+      <SchemaMarkup
+        schema={realEstateSchema({
+          name: "Orchid Township - Residential Plots in Dholera SIR",
+          description: "Buy residential plots in Orchid Township, Dholera SIR.",
+          url: "/dholera-residential-plots/orchid",
+        })}
+      />
+
+      <SchemaMarkup
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Residential Plots", path: "/dholera-residential-plots" },
+          { name: "Orchid", path: "/dholera-residential-plots/orchid" },
+        ])}
+      />
+
       <section className="relative h-[60vh] w-full overflow-hidden sm:h-[70vh] md:h-[100vh]">
         {/* LCP image — mobile */}
         <Image

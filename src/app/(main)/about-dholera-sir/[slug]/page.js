@@ -10,8 +10,8 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { generateMetadata as buildMeta } from "@/lib/seo";
-;
-
+import { articleSchema, breadcrumbSchema } from "@/lib/schema";
+import SchemaMarkup from "../../components/SchemaMarkup";
 const URLFormatter = (text) => {
   if (!text) return "";
   return text
@@ -142,7 +142,7 @@ export async function generateMetadata({ params }) {
 export default async function Post({ params }) {
   const { slug } = await params;
   const post = await getAboutBySlug(slug);
-  
+
   const site = "bookmyassets";
 
   if (!slug) {
@@ -544,6 +544,26 @@ export default async function Post({ params }) {
 
     return (
       <>
+        <SchemaMarkup
+          schema={articleSchema({
+            title: post.metaTitle || post.title,
+            description: post.metaDescription,
+            image: post.mainImage?.asset?.url,
+            publishedAt: post.publishedAt,
+            updatedAt: post._updatedAt,
+            slug: `about-dholera-sir/${slug}`,
+            authorName: post.author?.name || "BookMyAssets",
+          })}
+        />
+        
+        <SchemaMarkup
+          schema={breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Dholera", path: "/about-dholera-sir" },
+            { name: post.title, path: `/about-dholera-sir/${slug}` },
+          ])}
+        />
+
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-30" />
 

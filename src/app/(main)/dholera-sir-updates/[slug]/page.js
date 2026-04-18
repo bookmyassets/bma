@@ -13,6 +13,8 @@ import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import SlugPageForm from "../../components/SlugPageForm";
 import { generateMetadata as buildMeta } from "@/lib/seo";
+import SchemaMarkup from "../../components/SchemaMarkup";
+import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -120,7 +122,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 };
 
 export async function generateMetadata({ params }) {
-  const {slug} = await params;
+  const { slug } = await params;
   const post = await getUpdateBySlug(slug);
   if (!post) return {};
 
@@ -138,11 +140,10 @@ export async function generateMetadata({ params }) {
   });
 }
 
-
 export default async function Post({ params }) {
   const { slug } = await params;
-    const post = await getUpdateBySlug(slug);
-  
+  const post = await getUpdateBySlug(slug);
+
   const site = "bookmyassets";
 
   if (!slug) {
@@ -543,6 +544,26 @@ export default async function Post({ params }) {
     });
     return (
       <>
+        <SchemaMarkup
+          schema={articleSchema({
+            title: post.metaTitle || post.title,
+            description: post.metaDescription,
+            image: post.mainImage?.asset?.url,
+            publishedAt: post.publishedAt,
+            updatedAt: post._updatedAt,
+            slug: `dholera-sir-updates/${slug}`,
+            authorName: post.author?.name || "BookMyAssets",
+          })}
+        />
+
+        <SchemaMarkup
+          schema={breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Updates", path: "/dholera-sir-updates" },
+            { name: post.title, path: `/dholera-sir-updates/${slug}` },
+          ])}
+        />
+
         <SlugPageForm
           title="Explore the Latest Development in Dholera"
           button="Talk To A Dholera Expert"

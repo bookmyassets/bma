@@ -13,6 +13,8 @@ import ActiveProjectsSection from "../ActiveProject";
 import CostSheet from "../costsheet2";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
+import SchemaMarkup from "../../components/SchemaMarkup";
+import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
 
 export default function PrideClient() {
   const images = [{ src: westwyn1, alt: "Westwyn County View 1" }];
@@ -88,6 +90,22 @@ export default function PrideClient() {
 
   return (
     <>
+      <SchemaMarkup
+        schema={realEstateSchema({
+          name: "Pride - Residential Plots in Dholera SIR",
+          description: "Buy residential plots in Pride, Dholera SIR.",
+          url: "/dholera-residential-plots/pride",
+        })}
+      />
+
+      <SchemaMarkup
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Residential Plots", path: "/dholera-residential-plots" },
+          { name: "Pride", path: "/dholera-residential-plots/pride" },
+        ])}
+      />
+
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}

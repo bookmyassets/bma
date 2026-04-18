@@ -1,10 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import {
-  getblogs,
-  getUpdates,
-  getBlogBySlug,
-} from "@/sanity/lib/api";
+import { getblogs, getUpdates, getBlogBySlug } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -14,6 +10,8 @@ import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import "./blogPage.css";
 import { generateMetadata as buildMeta } from "@/lib/seo";
+import SchemaMarkup from "../../components/SchemaMarkup";
+import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -125,7 +123,7 @@ const RightSidebar = ({ trendingBlogs }) => {
 };
 
 export async function generateMetadata({ params }) {
-  const {slug} = await params;
+  const { slug } = await params;
   const post = await getBlogBySlug(slug);
   if (!post) return {};
 
@@ -548,6 +546,26 @@ export default async function Post({ params }) {
 
     return (
       <>
+        <SchemaMarkup
+          schema={articleSchema({
+            title: post.metaTitle || post.title,
+            description: post.metaDescription,
+            image: post.mainImage?.asset?.url,
+            publishedAt: post.publishedAt,
+            updatedAt: post._updatedAt,
+            slug: `dholera-sir-blogs/${slug}`,
+            authorName: post.author?.name || "BookMyAssets",
+          })}
+        />
+
+        <SchemaMarkup
+          schema={breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blogs", path: "/dholera-sir-blogs" },
+            { name: post.title, path: `/dholera-sir-blogs/${slug}` },
+          ])}
+        />
+
         <div className="bg-white min-h-screen">
           <div className="bg-white shadow-sm sticky top-0 z-20" />
           <main className="max-w-7xl mx-auto px-4 py-8 pt-24">

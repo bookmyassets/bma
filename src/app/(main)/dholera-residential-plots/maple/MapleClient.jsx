@@ -14,6 +14,8 @@ import { FaWhatsapp } from "react-icons/fa6";
 import ActiveProjectsSection from "../ActiveProject";
 import CostSheet from "../costsheet2";
 import BrochureDownload from "../../components/BrochureDownload";
+import SchemaMarkup from "../../components/SchemaMarkup";
+import { breadcrumbSchema, faqSchema, realEstateSchema } from "@/lib/schema";
 
 export default function MapleClient() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,14 +33,14 @@ export default function MapleClient() {
   const [buttonName, setButtonName] = useState("");
   const [formType, setFormType] = useState("");
   const [eventVar, setEventVar] = useState("");
-  const project = "Maple"
+  const project = "Maple";
   const openContactForm = (title, headline, btnName, type, project) => {
     setFormTitle(title);
     setFormHeadline(headline);
     setButtonName(btnName);
     setFormType(type);
     setIsContactFormOpen(true);
-    setEventVar(project)
+    setEventVar(project);
   };
 
   const closeContactForm = () => {
@@ -76,6 +78,22 @@ export default function MapleClient() {
 
   return (
     <>
+      <SchemaMarkup
+        schema={realEstateSchema({
+          name: "Maple Township - Residential Plots in Dholera SIR",
+          description: "Buy residential plots in Maple Township, Dholera SIR.",
+          url: "/dholera-residential-plots/maple",
+        })}
+      />
+
+      <SchemaMarkup
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Residential Plots", path: "/dholera-residential-plots" },
+          { name: "Maple", path: "/dholera-residential-plots/maple" },
+        ])}
+      />
+
       {/* Hero Section with Carousel */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[100vh] overflow-hidden">
         {/* Carousel Images */}
@@ -124,7 +142,7 @@ export default function MapleClient() {
                   "Missed Maple? Explore plots from ₹8 lakh at Westwyn Residency",
                   "Please fill out the form to get exclusive details of Orchid. Fields marked with * are mandatory.",
                   "Get A Call Back",
-                  ""
+                  "",
                 )
               }
               className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
@@ -141,7 +159,11 @@ export default function MapleClient() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h1 className="text-[32px] font-semibold text-black mb-4">
-              About <span className="max-sm:hidden"><br /></span> Maple
+              About{" "}
+              <span className="max-sm:hidden">
+                <br />
+              </span>{" "}
+              Maple
             </h1>
           </div>
 
@@ -167,7 +189,7 @@ export default function MapleClient() {
                     "Get details on WestWyn Residency",
                     "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
                     "Download Brochure",
-                    "brochure"
+                    "brochure",
                   )
                 }
                 className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
@@ -293,7 +315,10 @@ export default function MapleClient() {
       </div>
 
       {/* Form */}
-      <CommonForm title="Maple is Sold Out. Want to Invest in More Projects Like This?" button="Talk to our Team" />
+      <CommonForm
+        title="Maple is Sold Out. Want to Invest in More Projects Like This?"
+        button="Talk to our Team"
+      />
 
       <ActiveProjectsSection />
 
