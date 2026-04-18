@@ -142,7 +142,7 @@ export default function Form({ title }) {
 
        window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
-            event: "lead",
+            event: "lead_form_submitted",
           });
       } else {
         throw new Error("Error submitting form");

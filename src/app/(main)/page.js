@@ -5,7 +5,6 @@ import BMA from "./homeComponents/BMA";
 import ShortsSection from "./homeComponents/YouTube";
 import FAQSection from "./homeComponents/FAQs";
 import WestWyn from "./homeComponents/WestWyn";
-import Groundzero from "./homeComponents/Groundzero";
 import PopupForm from "./components/PopUpForm";
 import Hero from "./homeComponents/Hero";
 import LatestUpdates from "./homeComponents/Latest";
@@ -221,7 +220,6 @@ export default function page() {
         </div>
         <LatestUpdates />
         <ShortsSection />
-        <Groundzero />
         <FAQSection />
       </div>
 

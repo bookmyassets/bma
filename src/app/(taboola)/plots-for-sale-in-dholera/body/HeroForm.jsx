@@ -136,7 +136,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: "lead",
+          event: "lead_form_submitted",
         });
       } else {
         const errorText = await response.text();

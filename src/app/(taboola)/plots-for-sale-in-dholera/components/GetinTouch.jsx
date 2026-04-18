@@ -156,7 +156,7 @@ const onRecaptchaSuccess = async (token) => {
 
       window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
-            event: "lead",
+            event: "lead_form_submitted",
           });
 
       // Show thank you popup for 2 seconds

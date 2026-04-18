@@ -172,7 +172,7 @@ export default function CommonForm({ title, button }) {
           }
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
-            event: "lead",
+            event: "lead_form_submitted",
           });
         } else {
           console.log("Response Text:", responseText);
