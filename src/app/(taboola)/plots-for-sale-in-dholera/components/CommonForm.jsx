@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 
 export default function CommonForm({ title, button }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "", 
-    email: "", 
-    phone: "" 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
   });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -46,9 +46,15 @@ export default function CommonForm({ title, button }) {
 
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
-      const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
-      const lastSubmissionTime = parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10);
-      
+      const storedCount = parseInt(
+        localStorage.getItem("formSubmissionCount") || "0",
+        10,
+      );
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("lastSubmissionTime") || "0",
+        10,
+      );
+
       // Check if 24 hours have passed since the last submission
       if (lastSubmissionTime) {
         const timeDifference = Date.now() - lastSubmissionTime;
@@ -102,14 +108,16 @@ export default function CommonForm({ title, button }) {
     }
 
     // Phone validation - accept various formats (10-15 digits)
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
     // Check submission limits
     if (submissionCount >= 20) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours.",
+      );
       setIsDisabled(true);
       return false;
     }
@@ -132,13 +140,13 @@ export default function CommonForm({ title, button }) {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: "BookMyAssets",
+              source: "BookMyAssets taboola Ads",
             },
             source: "BookMyAssets Website",
             tags: ["Dholera Investment", "Website Lead", "Common Form"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       // Store response text before parsing
@@ -162,7 +170,10 @@ export default function CommonForm({ title, button }) {
             localStorage.setItem("formSubmissionCount", newCount.toString());
             localStorage.setItem("lastSubmissionTime", Date.now().toString());
           }
-
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead",
+          });
         } else {
           console.log("Response Text:", responseText);
           setErrorMessage("Submission received but with unexpected response");
@@ -171,13 +182,12 @@ export default function CommonForm({ title, button }) {
         console.error("Server Error:", responseText);
         throw new Error(responseText || "Submission failed");
       }
-
     } catch (error) {
       console.error("Error submitting form:", error);
       setErrorMessage(`Error submitting form: ${error.message}`);
     } finally {
       setIsLoading(false);
-      
+
       // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         try {
@@ -200,7 +210,9 @@ export default function CommonForm({ title, button }) {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
       setIsLoading(false);
       return;
     }
@@ -232,7 +244,6 @@ export default function CommonForm({ title, button }) {
             <h3 className="text-white text-xl md:text-3xl font-semibold text-center">
               {title}
             </h3>
-            
 
             {showPopup ? (
               <div className="text-center py-8">
@@ -269,7 +280,8 @@ export default function CommonForm({ title, button }) {
             ) : isDisabled ? (
               <div className="text-center py-8">
                 <p className="text-center text-red-400 font-semibold">
-                  You have reached the maximum submission limit. Try again after 24 hours.
+                  You have reached the maximum submission limit. Try again after
+                  24 hours.
                 </p>
               </div>
             ) : (
@@ -298,7 +310,7 @@ export default function CommonForm({ title, button }) {
                       placeholder="Enter your name"
                     />
                   </div>
-                
+
                   <div className="w-full">
                     <label
                       htmlFor="phone"

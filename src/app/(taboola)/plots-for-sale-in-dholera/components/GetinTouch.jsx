@@ -155,9 +155,9 @@ const onRecaptchaSuccess = async (token) => {
       });
 
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "lead_form_hero",
-      });
+          window.dataLayer.push({
+            event: "lead",
+          });
 
       // Show thank you popup for 2 seconds
       setShowThankYou(true);

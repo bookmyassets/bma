@@ -140,10 +140,10 @@ export default function Form({ title }) {
           setShowFormPopup(false);
         }, 3000);
 
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "lead_form",
-        });
+       window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "lead",
+          });
       } else {
         throw new Error("Error submitting form");
       }

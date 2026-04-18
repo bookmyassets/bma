@@ -117,7 +117,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
             tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -128,7 +128,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
           investmentAmt: "",
           city: "",
         });
-        
+
         // Notify parent component of successful submission
         if (onSuccess) {
           onSuccess();
@@ -136,24 +136,27 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: "lead_form",
-          page_name: "Dholera Hero Section",
+          event: "lead",
         });
       } else {
         const errorText = await response.text();
         console.error("API Error:", response.status, errorText);
         setErrorMessage(
-          `Submission failed (${response.status}). Please try again.`
+          `Submission failed (${response.status}). Please try again.`,
         );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       setErrorMessage(
-        "Network error. Please check your connection and try again."
+        "Network error. Please check your connection and try again.",
       );
     } finally {
       setIsLoading(false);
-      if (typeof window !== "undefined" && window.grecaptcha && recaptchaRef.current) {
+      if (
+        typeof window !== "undefined" &&
+        window.grecaptcha &&
+        recaptchaRef.current
+      ) {
         try {
           window.grecaptcha.reset();
         } catch (err) {
@@ -175,7 +178,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
 
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page."
+        "Security verification not loaded. Please refresh the page.",
       );
       setIsLoading(false);
       return;
