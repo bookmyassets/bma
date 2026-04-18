@@ -14,6 +14,7 @@ export default function robots() {
           "/costsheet/",
           "/thankyou/",
           "/exit-popup/",
+          "/infopack/",
         ],
       },
     ],
