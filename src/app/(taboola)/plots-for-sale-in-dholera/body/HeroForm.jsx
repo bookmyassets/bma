@@ -248,6 +248,8 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         value={formData.email}
         onChange={handleChange}
       />
+      <div className="grid grid-cols-2 md:grid md:grid-cols-1 gap-[clamp(0.5rem,1vw,0.75rem)]">
+
       <input
         name="city"
         placeholder="City*"
@@ -256,14 +258,14 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         value={formData.city}
         onChange={handleChange}
         required
-      />
+        />
       <select
         name="investmentAmt"
         className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
         value={formData.investmentAmt}
         onChange={handleChange}
         required
-      >
+        >
         <option value="" disabled>
           Budget*
         </option>
@@ -272,6 +274,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         <option value="25+">₹25 Lakh +</option>
       </select>
 
+        </div>
       <div ref={recaptchaRef} className="recaptcha-container"></div>
 
       <button
