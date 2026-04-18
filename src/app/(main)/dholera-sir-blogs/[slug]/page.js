@@ -125,7 +125,8 @@ const RightSidebar = ({ trendingBlogs }) => {
 };
 
 export async function generateMetadata({ params }) {
-  const post = await getBlogBySlug(params.slug);
+  const {slug} = await params;
+  const post = await getBlogBySlug(slug);
   if (!post) return {};
 
   return buildMeta({
@@ -136,7 +137,7 @@ export async function generateMetadata({ params }) {
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
     keywords: post.seo?.keywords || post.keywords || [],
-    type: "blog",
+    type: "article",
     publishedAt: post.publishedAt,
     updatedAt: post._updatedAt,
   });

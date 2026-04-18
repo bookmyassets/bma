@@ -1,5 +1,5 @@
 // lib/seo.js
-import defaultImage from "@/assests/bma-logo.png"
+import defaultImageSrc from "@/assests/bma-logo.png"
 const BASE_URL = "https://www.BookMyAssets.com";
 
 export function generateMetadata({
@@ -24,12 +24,12 @@ export function generateMetadata({
     ? image.startsWith("https")
       ? image
       : `${BASE_URL}/${image}`
-    : defaultImage;
+    : defaultImageSrc.src;;
 
   return {
     title: metaTitle,
     description: metaDesc,
-    keywords: keywords.join(", "),
+    keywords: keywords,
     ...(noIndex && { robots: { index: false, follow: false } }),
     alternates: {
       canonical,

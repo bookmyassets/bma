@@ -9,7 +9,6 @@ import {
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
-import BlogSchemaMarkup from "../BlogSchemaMarkup";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import SlugPageForm from "../../components/SlugPageForm";
@@ -121,18 +120,19 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 };
 
 export async function generateMetadata({ params }) {
-  const post = await getBlogBySlug(params.slug);
+  const {slug} = await params;
+  const post = await getUpdateBySlug(slug);
   if (!post) return {};
 
   return buildMeta({
     title: post.metaTitle || post.title,
     description: post.metaDescription,
-    slug: `dholera-sir-blogs/${post.slug.current}`,
+    slug: `dholera-sir-updates/${post.slug.current}`,
     image: post.mainImage?.asset?.url,
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
     keywords: post.seo?.keywords || post.keywords || [],
-    type: "blog",
+    type: "article",
     publishedAt: post.publishedAt,
     updatedAt: post._updatedAt,
   });

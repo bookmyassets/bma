@@ -122,18 +122,18 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 };
 
 export async function generateMetadata({ params }) {
-  const post = await getBlogBySlug(params.slug);
+  const post = await getAboutBySlug(params.slug);
   if (!post) return {};
 
   return buildMeta({
     title: post.metaTitle || post.title,
     description: post.metaDescription,
-    slug: `dholera-sir-blogs/${post.slug.current}`,
+    slug: `about-dholera-sir/${post.slug.current}`,
     image: post.mainImage?.asset?.url,
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
     keywords: post.seo?.keywords || post.keywords || [],
-    type: "blog",
+    type: "article",
     publishedAt: post.publishedAt,
     updatedAt: post._updatedAt,
   });
