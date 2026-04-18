@@ -43,7 +43,6 @@ export default async function sitemap() {
     { url: `${BASE_URL}/dholera-sir-blogs`,       priority: 0.8, changeFrequency: "daily" },
     { url: `${BASE_URL}/dholera-sir-updates`,     priority: 0.7, changeFrequency: "daily" },
     { url: `${BASE_URL}/about-dholera-sir`,       priority: 0.7, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/plots-for-sale-in-dholera`, priority: 0.9, changeFrequency: "weekly" },
 
     // Dholera Residential Plots — Static Pages
     { url: `${BASE_URL}/dholera-residential-plots`,                   priority: 0.8, changeFrequency: "weekly" },
