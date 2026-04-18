@@ -17,7 +17,7 @@ const points = [
     desc: "Focused on long-term planning — we guide you through timelines, returns, and exit strategies.",
   },
   {
-    title: "High ROI Potential in Next 5 Years",
+    title: "Near Dholera SIR",
     desc: "Access maps, master plans, and plot layout walkthroughs before making any decision.",
   },
 ];
@@ -25,7 +25,7 @@ const points = [
 const PointsList = () => (
   <div className="flex flex-col gap-[clamp(1rem,1.75vw,1.5rem)] w-[clamp(500px,45vw,700px)]">
     <h1 className="text-white font-bold text-[clamp(1.5rem,2.7vw,2.45rem)] leading-tight mb-[clamp(0.25rem,0.75vw,0.75rem)]">
-      Govt. Approved Plots in Dholera
+      Registry-Ready Plots in Dholera
       <br />
       <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
     </h1>
@@ -79,7 +79,10 @@ export default function Hero() {
         if (hoursPassed >= 24) {
           setSubmissionCount(0);
           localStorage.setItem("heroFormSubmissionCount", "0");
-          localStorage.setItem("heroFormLastSubmissionTime", Date.now().toString());
+          localStorage.setItem(
+            "heroFormLastSubmissionTime",
+            Date.now().toString(),
+          );
         } else {
           setSubmissionCount(storedCount);
           if (storedCount >= 20) {
@@ -139,13 +142,10 @@ export default function Hero() {
           priority
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
-         
+
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(.7rem,3.2vw,3.2rem)]">
           <PointsList />
-          <HeroForm 
-            isDisabled={isDisabled} 
-            onSuccess={handleFormSuccess}
-          />
+          <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
         </div>
       </div>
 
@@ -160,11 +160,10 @@ export default function Hero() {
             priority
           />
           <div className="absolute inset-0 bg-black/60" />
-           
 
           <div className="absolute inset-0 z-20 flex flex-col px-4 py-6 justify-center gap-4 overflow-y-auto">
             <h1 className="text-white font-bold text-[clamp(1.5rem,6vw,2rem)] leading-tight mb-2">
-              Govt Approved Plots in Dholera
+              Registry-Ready Plots in Dholera
               <br />
               <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
             </h1>
@@ -185,10 +184,7 @@ export default function Hero() {
             ))}
 
             <div className="mt-2 border-t border-yellow-600/20 pt-4">
-              <HeroForm 
-                isDisabled={isDisabled} 
-                onSuccess={handleFormSuccess}
-              />
+              <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
             </div>
           </div>
         </div>
