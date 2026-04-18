@@ -21,7 +21,7 @@ import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
 import PopupScroll from "../../components/PopUpScroll";
 import ActiveProjectsSection from "../ActiveProject";
-import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema, realEstateSchema } from "@/lib/schema";
 import SchemaMarkup from "../../components/SchemaMarkup";
 
 export default function WestWynCountyClient() {
