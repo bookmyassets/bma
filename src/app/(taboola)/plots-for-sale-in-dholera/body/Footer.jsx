@@ -29,7 +29,7 @@ const Footer = () => {
               About Us
             </h3>
             <p className="text-black mb-4">
-              BookMyAssets delivers verified, AUDA-approved projects in Dholera - trusted by 561+ investors for transparent, expert-led investments.
+              BookMyAssets delivers verified, clear documentation and project details in Dholera - trusted by 561+ investors for transparent, expert-led investments.
             </p>
             
             {/* Social Media Icons */}

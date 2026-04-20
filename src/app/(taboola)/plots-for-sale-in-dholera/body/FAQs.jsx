@@ -5,9 +5,9 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: " Is WestWyn Residency a govt approved plot project in Dholera?",
+    question: " Is WestWyn Residency a near Dholera SIR plot project in Dholera?",
     answer:
-      "Yes, WestWyn Residency is a govt approved plotted project in Dholera with registry-ready plots and clear documentation.",
+      "Yes, WestWyn Residency is a near Dholera SIR plotted project in Dholera with registry-ready plots and clear documentation.",
   },
   {
     question: "Where is WestWyn Residency located?",

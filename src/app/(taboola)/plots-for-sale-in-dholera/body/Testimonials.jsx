@@ -14,7 +14,7 @@ import saransh from "@/assests/testimonials/saransh-pal.webp";
 const testimonials = [
   {
     quote:
-      "Investing in Dholera Smart City through BookMyAssets was one of the best decisions I made. The team guided me through every step, ensuring a hassle-free purchase. The plot prices are affordable, and I am already seeing a great appreciation in value. Highly recommended.",
+      "Investing in Dholera Smart City through BookMyAssets was one of the a confident decisions I made. The team guided me through every step, ensuring a hassle-free purchase. The plot prices are affordable, and I am already seeing a promising developing area. Highly recommended.",
     name: "Saransh Pal",
     location: "Gurugram",
     avatar: saransh,
@@ -28,7 +28,7 @@ const testimonials = [
   },
   {
     quote:
-      "Dholera Smart City is the future, and BookMyAssets helped me secure a great investment opportunity. Their team is knowledgeable and responsive and ensures a smooth transaction. I am confident my investment will yield high returns in the coming years.",
+      "Dholera Smart City is the future, and BookMyAssets helped me secure a future-focused plot opportunity. Their team is knowledgeable and responsive and ensures a smooth transaction. I am confident my investment will yield long-term investment option in the coming years.",
     name: "Vikas Patel",
     location: "Delhi",
     avatar: vikas,

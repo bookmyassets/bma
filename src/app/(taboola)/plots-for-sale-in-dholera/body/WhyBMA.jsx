@@ -53,11 +53,11 @@ export default function WhyBMA() {
           </div>
           <div className="w-full md:w-3/5">
             <p className="text-[clamp(1rem,1.5vw,1.2rem)] text-center space-y-6">
-              BookMyAssets is the #1 choice of Smart investors looking for
+              BookMyAssets is the trusted of Smart investors looking for
               Dholera plots for sale with location clarity, expert guidance and
-              high appreciation. We explore developing and high growth potential
-              land in Dholera to deliver higher appreciation to our clients with
-              100% trust and transparency.
+              long-term potential. We explore developing and high growth
+              potential land in Dholera to deliver future growth potential to our
+              clients with 100% trust and transparency.
             </p>
             <div className="py-4">
               <div className="px-[calc(0.5rem+1vw)] max-w-7xl mx-auto">
@@ -89,12 +89,9 @@ export default function WhyBMA() {
 
         <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
           <div className="flex items-center gap-3 mb-3">
-            
             <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-              A Name You Can Trust{" "}
-              <span className="text-[#deae3c]"></span>
+              A Name You Can Trust <span className="text-[#deae3c]"></span>
             </h2>
-            
           </div>
         </div>
 

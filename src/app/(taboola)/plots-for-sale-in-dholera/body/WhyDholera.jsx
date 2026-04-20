@@ -11,11 +11,11 @@ const highlights = [
   },
   {
     title: "₹6 Lakh Crore Investment",
-    body: "Backed by Fortune 500 companies, ₹6 lakh crore investment is accelerating Dholera's development. Strong growth and rising demand are expected.",
+    body: "Backed by Fortune 500 companies, ₹6 lakh crore investment is accelerating Dholera's development. Dholera continues to attract buyer interest.",
   },
   {
     title: "Early-Stage Investment Opportunity",
-    body: "Dholera is still in a developing phase, allowing investors to enter at lower prices with strong long-term appreciation potential.",
+    body: "Dholera is still in a developing phase, allowing investors to enter at lower prices with strong long-term potential.",
   },
 ];
 
