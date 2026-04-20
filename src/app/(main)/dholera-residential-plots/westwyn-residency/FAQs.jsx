@@ -4,54 +4,28 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Where is WestWyn Residency located?",
+    question: "Who should choose WestWyn Residency?",
     answer:
-      "WestWyn Residency is located in Pipariya, Dholera, with connectivity to the Dholera SIR boundary, Bhimnath Railway Station, Ahmedabad-Dholera Expressway, the activation area, and the airport corridor.",
+      "WestWyn Residency is best for buyers who want a lower-entry plotted option with practical ticket size and location clarity.",
   },
   {
-    question: "Is WestWyn Residency a residential plot project?",
+    question: "What are the available plot sizes?",
     answer:
-      "Yes, WestWyn Residency is a premium residential plotted project designed for buyers looking for long-term investment potential as well as future residential use.",
+      "124, 152, and 187 sq. yards plots are available in WestWyn Residency.",
   },
   {
-    question: "Is WestWyn Residency registry-ready?",
-    answer:
-      "Yes, WestWyn Residency is presented as a registry-ready residential plot project with immediate possession, which makes it suitable for buyers who want greater clarity and quicker ownership transfer.",
+    question: "What is the token amount?",
+    answer: "The token amount is ₹50,000.",
   },
   {
-    question: "What documentation is available for the WestWyn Residency?",
+    question: "Is the project registry-ready?",
     answer:
-      "The project highlights NA/NOC documentation and also lists NA/NOC/Title Clearance among its commitments. Buyers should still review all documents carefully before proceeding, and BookMyAssets offers support during that process.",
-  },
-  {
-    question: "What plot sizes are available in the WestWyn Residency?",
-    answer:
-      "WestWyn Residency offers residential plots in 124, 152, and 187 sq. yards, subject to current availability.",
-  },
-  {
-    question: "What is the price of plots in WestWyn Residency?",
-    answer:
-      "The page currently lists the project price at ₹6500 per sq. yard. Final costing may vary depending on plot selection and charges, so buyers should request the latest price sheet and cost estimate.",
-  },
-  {
-    question: "What amenities are available in the WestWyn Residency?",
-    answer:
-      "The project highlights amenities such as a gated community, 24/7 security with CCTV, kids play area, app-based management, power and water supply, yoga deck, jogging track, drainage system, and clubhouse lite.",
+      "Yes, WestWyn Residency is presented as a registry-ready residential plot project with immediate possession, suitable for buyers seeking clarity and quicker ownership transfer.",
   },
   {
     question: "Can I plan a site visit before buying?",
     answer:
-      "Yes. BookMyAssets offers 365 days site visit assistance, and the page also invites buyers to book a site visit for project guidance and on-ground understanding.",
-  },
-  {
-    question: "What support does BookMyAssets provide to buyers?",
-    answer:
-      "BookMyAssets highlights support with project understanding, plot guidance, site visit assistance, next-step coordination, immediate registry support, resale support, and buyback assistance.",
-  },
-  {
-    question: "Is WestWyn Residency suitable for both investors and future end users?",
-    answer:
-      "Yes. The page positions WestWyn Residency for both investment-focused buyers and those considering future residential use, depending on their timeline and goals.",
+      "Yes. BookMyAssets offers 365-day site visit assistance and also allows buyers to book a visit for on-ground guidance and better understanding of the project.",
   },
 ];
 

@@ -165,46 +165,7 @@ export default function Footer() {
                   WestWyn County
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/dholera-residential-plots/pride"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
-                >
-                  Pride
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dholera-residential-plots/paradise"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
-                >
-                  Paradise
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dholera-residential-plots/paradise-2"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
-                >
-                  Paradise 2
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dholera-residential-plots/orchid"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
-                >
-                  Orchid
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dholera-residential-plots/marina-bay"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
-                >
-                  Marina Bay
-                </Link>
-              </li>
+              
             </ul>
           </div>
 

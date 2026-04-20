@@ -5,28 +5,23 @@ import ContactForm from "../components/Contactform";
 const steps = [
   {
     num: "1",
-    title: "Enquire",
-    desc: "Share your interest and preferred budget.",
+    title: "Enquire & Get a Call Back",
+    desc: "Get a quick call or video consultation Share your interest and budget to shortlist the right project, along with plan layout & pricing.",
   },
   {
     num: "2",
-    title: "Get A Call Back from Dholera Expert",
-    desc: "Call or video consultation to shortlist the right project and Get project map, charges sheet, approval details, and registry proof sample.",
+    title: "Reserve your Plot with a Token Amount",
+    desc: "Secure your preferred plot with a ₹50,000 token and complete your kyc verification process.",
   },
   {
     num: "3",
-    title: "Reserve your Plot with Token Amount",
-    desc: "Secure your preferred plot with a ₹50,000 token",
+    title: "Site Visit Assistance",
+    desc: "Plan your site visit, guided by our team and get on-ground updates of Dholera.",
   },
   {
     num: "4",
-    title: "Site Visit Only If Needed",
-    desc: "Visit if you prefer. Many buyers move forward after verification and discussion.",
-  },
-  {
-    num: "5",
-    title: "Complete Payment & Registry",
-    desc: "Follow the 30-day plan and complete documentation with guided support.",
+    title: "Complete Payment & Get Your Plot Registry",
+    desc: "Follow the Payment schedule and complete documentation with guided support and Own a plot in India's first Greenfield smart city.",
   },
 ];
 
@@ -53,11 +48,11 @@ export default function HowToBuy() {
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-[clamp(0.75rem,2vw,1rem)]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-[clamp(0.75rem,2vw,1rem)]">
           {steps.map((step, i) => (
             <div
               key={step.num}
-              className="group relative border border-white/10 p-[clamp(1.25rem,3vw,2rem)] hover:border-[#deae3c]/60 transition-colors duration-300 bg-black hover:bg-white/[0.03]"
+              className="group relative  border border-white/10 p-[clamp(1.25rem,3vw,2rem)] hover:border-[#deae3c]/60 transition-colors duration-300 bg-black hover:bg-white/[0.03]"
             >
               {/* Step number */}
               <span className="block text-[#deae3c] text-[clamp(1.5rem,3vw,2rem)] font-black leading-none mb-[clamp(1rem,2.5vw,1.5rem)] opacity-90 select-none">
@@ -65,7 +60,7 @@ export default function HowToBuy() {
               </span>
 
               {/* Gold divider */}
-              <div className="w-8 h-[2px] bg-[#deae3c] mb-[clamp(0.75rem,2vw,1rem)]" />
+              <div className="w-8 h-[2px] bg-[#deae3c] mb-[clamp(0.75rem,2vw,1rem)] " />
 
               {/* Title */}
               <h3 className="text-white text-[clamp(0.95rem,1.8vw,1.125rem)] font-semibold leading-snug mb-[clamp(0.5rem,1.2vw,0.75rem)]">
