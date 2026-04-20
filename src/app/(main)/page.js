@@ -10,6 +10,7 @@ import Hero from "./homeComponents/Hero";
 import LatestUpdates from "./homeComponents/Latest";
 import LeadForm from "./components/LeadForm";
 import MegaIndustries from "./homeComponents/MegaIndustries";
+import HowToBuy from "./homeComponents/BuyingProcess";
 
 export default function page() {
   const [showpopForm, setpopShowForm] = useState(false);
@@ -211,6 +212,7 @@ export default function page() {
         <Dholera />
         <BMA />
         <WestWyn />
+        <HowToBuy/>
         <MegaIndustries/>
         <div className="max-w-7xl mx-auto" id="contact">
           <LeadForm

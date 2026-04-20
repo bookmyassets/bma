@@ -1,0 +1,108 @@
+"use client";
+import React, { useState } from "react";
+import ContactForm from "../components/Contactform";
+
+const steps = [
+  {
+    num: "1",
+    title: "Enquire",
+    desc: "Share your interest and preferred budget.",
+  },
+  {
+    num: "2",
+    title: "Get A Call Back from Dholera Expert",
+    desc: "Call or video consultation to shortlist the right project and Get project map, charges sheet, approval details, and registry proof sample.",
+  },
+  {
+    num: "3",
+    title: "Reserve your Plot with Token Amount",
+    desc: "Secure your preferred plot with a ₹50,000 token",
+  },
+  {
+    num: "4",
+    title: "Site Visit Only If Needed",
+    desc: "Visit if you prefer. Many buyers move forward after verification and discussion.",
+  },
+  {
+    num: "5",
+    title: "Complete Payment & Registry",
+    desc: "Follow the 30-day plan and complete documentation with guided support.",
+  },
+];
+
+export default function HowToBuy() {
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const openContactForm = (title, headline, btnName, type, project) => {;
+    setIsContactFormOpen(true);
+  };
+
+  const closeContactForm = () => {
+    setIsContactFormOpen(false);
+  };
+  return (
+    <section className="bg-black py-[calc(2rem+2vw)] px-[clamp(1rem,5vw,2rem)]">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-[clamp(2rem,5vw,4rem)]">
+          <p className="text-[#deae3c] uppercase tracking-[0.2em] text-[clamp(0.65rem,1.5vw,0.75rem)] font-semibold mb-3">
+            Simple. Transparent. Guided.
+          </p>
+          <h2 className="text-white text-[clamp(1.75rem,4vw,3rem)] font-bold leading-tight">
+            Buying Process
+          </h2>
+        </div>
+
+        {/* Steps Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-[clamp(0.75rem,2vw,1rem)]">
+          {steps.map((step, i) => (
+            <div
+              key={step.num}
+              className="group relative border border-white/10 p-[clamp(1.25rem,3vw,2rem)] hover:border-[#deae3c]/60 transition-colors duration-300 bg-black hover:bg-white/[0.03]"
+            >
+              {/* Step number */}
+              <span className="block text-[#deae3c] text-[clamp(1.5rem,3vw,2rem)] font-black leading-none mb-[clamp(1rem,2.5vw,1.5rem)] opacity-90 select-none">
+                Step-{step.num}
+              </span>
+
+              {/* Gold divider */}
+              <div className="w-8 h-[2px] bg-[#deae3c] mb-[clamp(0.75rem,2vw,1rem)]" />
+
+              {/* Title */}
+              <h3 className="text-white text-[clamp(0.95rem,1.8vw,1.125rem)] font-semibold leading-snug mb-[clamp(0.5rem,1.2vw,0.75rem)]">
+                {step.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-white/80 text-[clamp(0.8rem,1.4vw,0.9rem)] leading-relaxed">
+                {step.desc}
+              </p>
+
+              {/* Corner accent on hover */}
+              <span className="absolute top-0 right-0 w-0 h-0 border-t-[0px] border-r-[0px] border-[#deae3c] group-hover:border-t-[20px] group-hover:border-r-[20px] transition-all duration-300" />
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA strip */}
+        <div className="mt-[clamp(2rem,4vw,3rem)] border-t border-white/10 pt-[clamp(1.25rem,3vw,2rem)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <p className="text-white/40 text-[clamp(0.75rem,1.3vw,0.85rem)]">
+            Questions before you start? We&apos;re here.
+          </p>
+          <button
+            onClick={() => openContactForm()}
+            className="self-start sm:self-auto bg-[#deae3c] hover:bg-[#c89b2e] text-black font-semibold text-[clamp(0.8rem,1.4vw,0.875rem)] px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] transition-colors duration-200"
+          >
+            Start Your Enquiry
+          </button>
+        </div>
+      </div>
+      {isContactFormOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
+          <div className="w-full max-w-md">
+            <ContactForm onClose={closeContactForm} />
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}

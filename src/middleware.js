@@ -28,9 +28,6 @@ export async function middleware(request) {
   const redirects = await fetchRedirects()
   const pathname = request.nextUrl.pathname
 
-  console.log('👉 Path:', pathname)
-  console.log('👉 Redirects count:', redirects.length)
-
   const match = redirects.find(r => r.source === pathname)
 
   if (match) {

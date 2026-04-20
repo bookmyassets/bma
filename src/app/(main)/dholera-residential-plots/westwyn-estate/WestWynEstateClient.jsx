@@ -12,11 +12,9 @@ import WestWynAboutSection from "./About";
 
 //images import
 import img1 from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate.webp";
-import img2 from "@/assests/residential/estates/westwyn-estates-dholera-sir-kids-play-area-hero.webp";
-import img3 from "@/assests/residential/estates/westwyn-estates-dholera-sir-utilities-shop-hero.webp";
+
 import img1M from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate-mobile.webp";
-import img2M from "@/assests/residential/estates/westwyn-estates-dholera-sir-kids-play-area-mobile.webp";
-import img3M from "@/assests/residential/estates/westwyn-estates-dholera-sir-clubhouse-lite-mobile.webp";
+
 import PopupScroll from "../../components/PopUpScroll";
 import CostSheet from "../costsheet2";
 import OurCommits from "./OurCommits";
@@ -34,47 +32,7 @@ export default function WestWynEstateClient() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [eventVar, setEventVar] = useState("");
 
-  // Touch refs (no re-render on touch move)
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
 
-  const desktopImages = [
-    { src: img1, alt: "Dholera Investment Opportunity 1" },
-    { src: img2, alt: "Dholera Investment Opportunity 2" },
-    { src: img3, alt: "Dholera Investment Opportunity 3" },
-  ];
-
-  const mobileImages = [
-    { src: img1M, alt: "Dholera Investment Opportunity 1" },
-    { src: img2M, alt: "Dholera Investment Opportunity 2" },
-    { src: img3M, alt: "Dholera Investment Opportunity 3" },
-  ];
-
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) =>
-      prev === desktopImages.length - 1 ? 0 : prev + 1,
-    );
-  }, [desktopImages.length]);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? desktopImages.length - 1 : prev - 1,
-    );
-  }, [desktopImages.length]);
-
-  // Touch handlers for mobile swipe
-  const handleTouchStart = useCallback((e) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-  }, []);
-
-  const handleTouchEnd = useCallback(
-    (e) => {
-      touchEndX.current = e.changedTouches[0].clientX;
-      const delta = touchStartX.current - touchEndX.current;
-      if (Math.abs(delta) > 50) delta > 0 ? nextSlide() : prevSlide();
-    },
-    [nextSlide, prevSlide],
-  );
 
   const openContactForm = (title, headline, btnName, type, project) => {
     setFormTitle(title);
@@ -121,12 +79,6 @@ export default function WestWynEstateClient() {
     }
   };
 
-  // Auto-rotate every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, [nextSlide]);
-
   return (
     <>
       <SchemaMarkup
@@ -141,7 +93,10 @@ export default function WestWynEstateClient() {
         schema={breadcrumbSchema([
           { name: "Home", path: "/" },
           { name: "Residential Plots", path: "/dholera-residential-plots" },
-          { name: "WestWyn Estates", path: "/dholera-residential-plots/westwyn-estates" },
+          {
+            name: "WestWyn Estates",
+            path: "/dholera-residential-plots/westwyn-estates",
+          },
         ])}
       />
 
@@ -152,93 +107,38 @@ export default function WestWynEstateClient() {
           className="hidden lg:flex w-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {desktopImages.map((image, index) => (
-            <div
-              key={`desktop-${index}`}
-              className="w-full flex-shrink-0 relative"
-            >
-              <div className="relative w-full md:h-[70vh] aspect-[3/1]">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-fill aspect-[3/1]"
-                  priority={index === 0}
-                  fetchPriority={index === 0 ? "high" : "low"}
-                  sizes="100vw"
-                />
-              </div>
+          <div className="w-full flex-shrink-0 relative">
+            <div className="relative w-full md:h-[70vh] aspect-[3/1]">
+              <Image
+                src={img1}
+                alt="WestWyn Estates, Dholera Premium Residential Plots"
+                fill
+                className="object-fill aspect-[3/1]"
+                fetchPriority="high"
+                sizes="100vw"
+              />
             </div>
-          ))}
+          </div>
         </div>
-
-        {/* Desktop nav arrows — outside the sliding track so they stay fixed */}
-        <button
-          onClick={prevSlide}
-          className="hidden lg:flex absolute left-4 top-[40vh] -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-          aria-label="Previous image"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="hidden lg:flex absolute right-4 top-[40vh] -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-          aria-label="Next image"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
 
         {/* ── MOBILE (< lg): opacity-fade + swipe ────────────────────────── */}
         <div
           className="relative block lg:hidden w-full"
           style={{ aspectRatio: "5/4" }}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
           role="region"
           aria-label="Mobile image carousel"
         >
-          {mobileImages.map(
-            (
-              image,
-              index, // <-- mobileImages here
-            ) => (
-              <div
-                key={`mobile-${index}`}
-                className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-                style={{
-                  opacity: index === currentSlide ? 1 : 0,
-                  pointerEvents: index === currentSlide ? "auto" : "none",
-                }}
-                aria-hidden={index !== currentSlide}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover" // <-- cover works better for fixed-ratio mobile images
-                  priority={index === 0}
-                  fetchPriority={index === 0 ? "high" : "low"}
-                  sizes="100vw"
-                  quality={85}
-                />
-              </div>
-            ),
-          )}
-
-          <button
-            onClick={prevSlide}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-            aria-label="Previous image"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-            aria-label="Next image"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+          <div>
+            <Image
+              src={img1M}
+              alt="WestWyn Estates, Dholera Premium Residential Plots"
+              fill
+              className="object-cover"
+              fetchPriority="high"
+              sizes="100vw"
+              quality={85}
+            />
+          </div>
         </div>
       </div>
       {/* ── End Hero Section ───────────────────────────────────────────────── */}
