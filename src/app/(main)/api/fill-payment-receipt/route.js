@@ -23,12 +23,12 @@ export async function POST(request) {
       const value = formData[fieldKey];
       if (value && value.trim()) {
         // For amount in words, use smaller font and wrap if needed
-        let fontSize = fieldData.fontSize || 9;
+        let fontSize = 9;
         let displayValue = value;
         
         // Adjust font size for long text
         if (fieldKey === 'amountInWords' && value.length > 50) {
-          fontSize = 7;
+          fontSize = 9;
         }
         
         page.drawText(displayValue, {

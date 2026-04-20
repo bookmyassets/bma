@@ -139,14 +139,34 @@ const calculateDates = (tokenDateStr, totalDays) => {
   }
   const tokenDate = parseDate(tokenDateStr);
   if (!tokenDate) return {};
-  const intervalDays = Math.floor(totalDays / 3);
+  
+  // Alternative: Distribute remainder more evenly
+  const baseInterval = Math.floor(totalDays / 3);
+  const remainder = totalDays % 3;
+  
+  let m1Days = baseInterval;
+  let m2Days = baseInterval;
+  let m3Days = baseInterval;
+  
+  // Distribute remainder days starting from earliest milestones
+  if (remainder === 1) {
+    m1Days += 1;
+  } else if (remainder === 2) {
+    m1Days += 1;
+    m2Days += 1;
+  }
+  
+  const m1Cumulative = m1Days;
+  const m2Cumulative = m1Days + m2Days;
+  const m3Cumulative = m1Days + m2Days + m3Days;
+  
   return {
-    m1DueTimeline: `${intervalDays} days`,
-    m1PaymentDueDate: formatDateForInput(addDays(tokenDate, intervalDays)),
-    m2DueTimeline: `${intervalDays} days`,
-    m2PaymentDueDate: formatDateForInput(addDays(tokenDate, intervalDays * 2)),
-    m3DueTimeline: `${intervalDays} days`,
-    m3PaymentDueDate: formatDateForInput(addDays(tokenDate, intervalDays * 3)),
+    m1DueTimeline: `${m1Days} days`,
+    m1PaymentDueDate: formatDateForInput(addDays(tokenDate, m1Cumulative)),
+    m2DueTimeline: `${m2Days} days`,
+    m2PaymentDueDate: formatDateForInput(addDays(tokenDate, m2Cumulative)),
+    m3DueTimeline: `${m3Days} days`,
+    m3PaymentDueDate: formatDateForInput(addDays(tokenDate, m3Cumulative)),
     totalDueTimeline: `${totalDays} days`,
     totalPaymentDueDate: formatDateForInput(addDays(tokenDate, totalDays)),
   };
@@ -212,7 +232,6 @@ export default function PaymentSchedulePage() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      // ✅ Abbreviated project name in filename
       a.download = `Payment-Schedule-Unit-${form.plotNumber}-${PROJECT_ABBREVIATIONS[form.projectName] || form.projectName}-${form.paymentPlanDays}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
