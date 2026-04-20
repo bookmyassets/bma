@@ -5,10 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import vikas from "@/assests/testimonials/vikas-patel.webp";
-import amit from "@/assests/testimonials/amit-khurana.webp";
-import anjali from "@/assests/testimonials/anjali-mehta.webp";
 import pooja from "@/assests/testimonials/pooja-shah.webp";
-import vikram from "@/assests/testimonials/vikram-singh.webp";
 import saransh from "@/assests/testimonials/saransh-pal.webp";
 
 const testimonials = [
