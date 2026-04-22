@@ -15,15 +15,27 @@ export default {
       name: 'destination',
       title: 'Destination Path',
       type: 'string',
-      description: 'e.g. /new-page or https://example.com',
+      description: 'e.g. /new-page',
       validation: Rule => Rule.required()
     },
     {
       name: 'permanent',
       title: 'Permanent (301)?',
       type: 'boolean',
-      description: 'If false, uses 302 temporary redirect',
       initialValue: false
+    },
+    {
+      name: 'site',
+      title: 'Site',
+      type: 'string',
+      validation: Rule => Rule.required(),
+      options: {
+        list: [
+          { title: 'BookMyAssets', value: 'bookmyassets' },
+          { title: 'Dholera Times', value: 'dholera-times' },
+          { title: 'Dholera Insider', value: 'dholera-insider' },
+        ]
+      }
     }
   ]
 }
