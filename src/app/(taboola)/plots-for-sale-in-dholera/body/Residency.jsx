@@ -26,6 +26,7 @@ import icon11 from "@/assests/taboola/Amenities/kids-play-area.svg";
 import icon12 from "@/assests/taboola/Amenities/power-and-water-supply.svg";
 import icon13 from "@/assests/taboola/Amenities/senior-citizen-zone.svg";
 import icon14 from "@/assests/taboola/Amenities/yoga-deck.svg";
+import CTAsection from "./CTAsection";
 
 const carouselImages = [
   { src: img2, alt: "WestWyn Estates - Project Boundary" },
@@ -116,7 +117,7 @@ const projectFeatures = [
     title: "Total Units",
     value: "290 Plots",
   },
-  { icon: "🏠", title: "Plot Sizes", value: "124 Sq.Yd Onwards" },
+  { icon: "🏠", title: "Plot Sizes", value: "124, 152 & 187 Sq.Yd" },
   { icon: "💰", title: "Price", value: "₹6,500*/Sq.Yd" },
 ];
 
@@ -278,9 +279,13 @@ export default function Residency() {
         </div>
       </div>
 
+      <div>
+        <CTAsection text1="Get Expert Guidance for" text2="Dholera Plots" subTitle="Have questions about Dholera investments? Our team is here to guide you." />
+      </div>
+
       <div className="max-w-7xl mx-auto py-4">
         <h2 className="text-xl md:text-4xl text-center font-bold text-black mb-8">
-          Amenities
+          Project Amenities
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">

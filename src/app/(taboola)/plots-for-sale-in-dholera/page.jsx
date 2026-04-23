@@ -8,21 +8,22 @@ import WhyBMA from './body/WhyBMA'
 import TestimonialPagination from './body/Testimonials'
 import Footer from './body/Footer'
 import FAQSection from './body/FAQs'
+import PopupScroll from './components/PopupScroll'
 
 export default function page() {
   return (
     <>
         <div>
             <Hero/>
-            <WhyDholera/>
             <Residency/>
-            <CTAsection/>
+            <WhyDholera/>
             <WhyBMA/>
+            <CTAsection text1="Invest in Registry-Ready" text2="Plots in Dholera" subTitle="Get Project Brochure, Pricing, Location Details, and Site Visit Support." />
             <TestimonialPagination/>
             <FAQSection/>
             <Footer/>
         </div>
-
+        <PopupScroll/>
         <Form  title="Registry Ready Plots Under ₹10 Lakh in Dholera"/>
     </>
   )

@@ -7,7 +7,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
     fullName: "",
     phone: "",
     email: "",
-    investmentAmt: "",
     city: "",
   });
 
@@ -93,8 +92,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
       // Prepare notes from additional fields (same as before)
       const notesArray = [];
       if (formData.city) notesArray.push(`City: ${formData.city}`);
-      if (formData.investmentAmt)
-        notesArray.push(`Budget: ${formData.investmentAmt}`);
       const notes = notesArray.join(" | ");
 
       // Using GetinTouch's TeleCRM API endpoint
@@ -125,7 +122,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
           fullName: "",
           phone: "",
           email: "",
-          investmentAmt: "",
           city: "",
         });
 
@@ -213,7 +209,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
     <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
       <div>
         <h3 className="text-black font-semibold text-center text-lg md:text-[clamp(1.25rem,1.85vw,1.7rem)] leading-tight">
-          Invest in India's First Smart City
+          Get Project Details
         </h3>
       </div>
 
@@ -248,7 +244,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         value={formData.email}
         onChange={handleChange}
       />
-      <div className="grid grid-cols-2 md:grid md:grid-cols-1 gap-[clamp(0.5rem,1vw,0.75rem)]">
+      <div className="gap-[clamp(0.5rem,1vw,0.75rem)]">
 
       <input
         name="city"
@@ -259,7 +255,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         onChange={handleChange}
         required
         />
-      <select
+      {/* <select
         name="investmentAmt"
         className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
         value={formData.investmentAmt}
@@ -272,7 +268,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         <option value="5-15">₹5 Lakh - ₹15 Lakh</option>
         <option value="15-25">₹15 Lakh - ₹25 Lakh</option>
         <option value="25+">₹25 Lakh +</option>
-      </select>
+      </select> */}
 
         </div>
       <div ref={recaptchaRef} className="recaptcha-container"></div>
@@ -311,7 +307,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
             Submitting...
           </div>
         ) : (
-          "Talk to Dholera Expert"
+          "Get Price"
         )}
       </button>
     </div>

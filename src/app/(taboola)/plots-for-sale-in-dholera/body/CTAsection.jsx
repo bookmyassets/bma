@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CTAsection() {
+export default function CTAsection({text1, text2, subTitle}) {
   return (
     <div
       className="relative py-8 px-4 overflow-hidden"
@@ -18,8 +18,8 @@ export default function CTAsection() {
       <div className="max-w-7xl mx-auto text-center relative z-10">
         <div className="mb-8">
           <h2 className="text-xl md:text-4xl font-bold text-white mb-4 drop-shadow-lg">
-            Expert Guidance for{" "}
-            <span style={{ color: "#deae3c" }}>Smart Investors</span>
+            {text1}{" "}
+            <span style={{ color: "#deae3c" }}>{text2}</span>
           </h2>
           <div
             className="w-24 h-1 mx-auto rounded-full"
@@ -28,11 +28,10 @@ export default function CTAsection() {
         </div>
 
         <p
-          className="text-sm mb-12 leading-relaxed"
+          className="text-base mb-12 leading-relaxed"
           style={{ color: "#cccccc" }}
         >
-          Have questions about Dholera investments? Our team is here to guide
-          you every step of the way.
+          {subTitle}
         </p>
 
         <div className="flex flex-row gap-3 md:gap-6 justify-center items-center mb-8">

@@ -37,14 +37,15 @@ export default function WhyDholera() {
     <section className="bg-white py-[calc(0.5rem+2vw)]" id="dholera">
       <div className="px-[clamp(1rem,4vw,2.5rem)]">
         {/* Heading */}
-        <div className="flex flex-col max-w-7xl mx-auto items-center text-center mb-[clamp(0.75rem,2vw,1.5rem)]">
+        <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
           <div className="flex items-center gap-3 mb-3">
-            <div className="h-[2px] w-[clamp(2.5rem,6vw,7rem)] bg-[#deae3c]" />
-            <h2 className="text-[clamp(1.25rem,2.2vw,1.875rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-              Why Invest in{" "}
-              <span className="text-[#deae3c]">Dholera Smart City</span>
+            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+            <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-[#deae3c] leading-tight max-w-5xl mx-auto">
+              Dholera
+{" "}
+              <span className="text-black">: India's First Planned Greenfield Smart City</span>
             </h2>
-            <div className="h-[2px] w-[clamp(2.5rem,6vw,7rem)] bg-[#deae3c]" />
+            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
           </div>
         </div>
 
@@ -61,7 +62,11 @@ export default function WhyDholera() {
         {/* Cards */}
         <div className="max-w-7xl mx-auto grid grid-cols-2 gap-[clamp(0.5rem,1.5vw,0.875rem)]">
           {highlights.map((item) => (
-            <HighlightCard key={item.title} title={item.title} body={item.body} />
+            <HighlightCard
+              key={item.title}
+              title={item.title}
+              body={item.body}
+            />
           ))}
         </div>
       </div>

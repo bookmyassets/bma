@@ -9,7 +9,7 @@ import Running from "../components/Marquee";
 
 const points = [
   {
-    title: "Registry-Ready",
+    title: "Registry-Ready Plots",
     desc: "Suitable for buyers exploring high-growth land opportunities in India's first greenfield smart city.",
   },
   {
@@ -25,13 +25,13 @@ const points = [
 const PointsList = () => (
   <div className="flex flex-col gap-[clamp(1rem,1.75vw,1.5rem)] w-[clamp(500px,45vw,700px)]">
     <h1 className="text-white font-bold text-[clamp(1.5rem,2.7vw,2.45rem)] leading-tight mb-[clamp(0.25rem,0.75vw,0.75rem)]">
-      Registry-Ready Plots in Dholera
+      Residential Plots in Dholera
       <br />
       <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
     </h1>
 
     <p className="text-white text-[clamp(0.75rem,1.5vw,1.2rem)] mb-[clamp(0.25rem,0.75vw,0.75rem)]">
-      Explore premium plotted investment opportunities in Dholera Smart City.
+      Explore premium plotted opportunities in Dholera.
       <br />
       Get brochure, price list, location details, and expert guidance from
       BookMyAssets.
@@ -163,7 +163,7 @@ export default function Hero() {
 
           <div className="absolute inset-0 z-20 flex flex-col px-4 py-6 justify-center gap-4 overflow-y-auto">
             <h1 className="text-white font-bold text-[clamp(1.5rem,6vw,2rem)] leading-tight mb-2">
-              Registry-Ready Plots in Dholera
+              Residential Plots in Dholera
               <br />
               <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
             </h1>

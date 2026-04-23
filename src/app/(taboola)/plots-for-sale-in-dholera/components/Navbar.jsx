@@ -70,8 +70,8 @@ export default function Navbar() {
   // Navigation items
   const navItems = [
     { href: "#hero", label: "Home" },
-    { href: "#dholera", label: "About Dholera" },
     { href: "#westwyn-residency", label: "Westwyn Residency" },
+    { href: "#dholera", label: "About Dholera" },
     { href: "#Why-BMA", label: "Why BookMyAssets" },
   ];
 
