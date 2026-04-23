@@ -25,7 +25,7 @@ const PROJECTS = [
     name: "WestWyn Estates",
     subtext: "State Highway Plots in Dholera Starting from ₹10 Lakh*",
     tag: "Plotted Residential",
-    href: "/dholera-residential-plots/westwyn-estates",
+    href: "/dholera-residential-plots/westwyn-estate",
     description:
       "WestWyn Estates, by BookMyAssets, is a plotted residential society on State Highway-117, Polarpur, Dholera. Buy plots in Dholera that are registry-ready with all documentation ready.",
     points: [
