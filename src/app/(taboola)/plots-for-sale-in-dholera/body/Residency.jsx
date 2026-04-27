@@ -280,7 +280,11 @@ export default function Residency() {
       </div>
 
       <div>
-        <CTAsection text1="Get Expert Guidance for" text2="Dholera Plots" subTitle="Have questions about Dholera investments? Our team is here to guide you." />
+        <CTAsection
+          text1="Invest in Registry-Ready"
+          text2="Plots in Dholera"
+          subTitle="Get Project Brochure, Pricing, Location Details, and Site Visit Support."
+        />
       </div>
 
       <div className="max-w-7xl mx-auto py-4">

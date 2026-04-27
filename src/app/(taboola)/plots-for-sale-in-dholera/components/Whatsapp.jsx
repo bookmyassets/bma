@@ -10,7 +10,7 @@ function pushEvent(payload) {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(payload);
 }
-
+  
 const FloatingButtons = () => {
   const handleCallClick = () => {
       _tfa.push({notify: 'event', name: 'Whatsapp', id: 2018249})
