@@ -26,7 +26,7 @@ export default function Navbar() {
   const handleNavigation = (section) => {
     setIsMenuOpen(false);
 
-    if (pathname === '/more-info') {
+    if (pathname === '/dholera-smart-city-plots') {
       const element = document.getElementById(section.replace('#', ''));
       if (element) {
         const yOffset = -100;
@@ -34,7 +34,7 @@ export default function Navbar() {
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
     } else {
-      router.push(`/more-info${section}`);
+      router.push(`/dholera-smart-city-plots${section}`);
     }
   };
 

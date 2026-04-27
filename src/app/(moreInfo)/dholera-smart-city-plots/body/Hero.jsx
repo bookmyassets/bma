@@ -30,10 +30,9 @@ const PointsList = () => (
     </h1>
 
     <p className="text-white text-[clamp(0.75rem,1.5vw,1.2rem)] mb-[clamp(0.25rem,0.75vw,0.75rem)]">
-      Explore premium plotted investment opportunities in Dholera Smart City.
+      Registry-ready plots near Dholera SIR with clear title, location transparency,
       <br />
-      Get brochure, price list, location details, and expert guidance from
-      BookMyAssets.
+      site visit support, resale assistance, and expert guidance from BookMyAssets.
     </p>
 
     {points.map((point, i) => (

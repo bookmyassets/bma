@@ -196,7 +196,7 @@ const onRecaptchaSuccess = async (token) => {
         const currentPath = pathname || window.location.pathname;
         
         // Push to thank-you route with return URL
-        router.push(`/more-info/thankyou`);
+        router.push(`/dholera-smart-city-plots/thankyou`);
       }, 2000);
     } else {
       throw new Error("Error submitting form");

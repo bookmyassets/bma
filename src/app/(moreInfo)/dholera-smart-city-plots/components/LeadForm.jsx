@@ -167,7 +167,7 @@ export default function LeadForm({ title }) {
           window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: "lead_form_hero",
-      });src/app/(moreInfo)/more-info/components/LeadForm.jsx
+      });src/app/(moreInfo)/dholera-smart-city-plots/components/LeadForm.jsx
 
         } else {
           console.log("Response Text:", responseText);
