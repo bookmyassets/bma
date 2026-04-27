@@ -305,7 +305,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
             Submitting...
           </div>
         ) : (
-          "Talk to Dholera Expert"
+          "Get Price Details"
         )}
       </button>
     </div>
