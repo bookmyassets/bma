@@ -128,7 +128,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
           investmentAmt: "",
           city: "",
         });
-        
+
         // Notify parent component of successful submission
         if (onSuccess) {
           onSuccess();
@@ -274,11 +274,10 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
       <button
         onClick={handleSubmit}
         disabled={isLoading || parentIsDisabled || !recaptchaLoaded}
-        className={`w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] font-bold px-6 rounded-lg transition-all duration-300 text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest ${
-          isLoading || parentIsDisabled || !recaptchaLoaded
+        className={`w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] font-bold px-6 rounded-lg transition-all duration-300 text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest ${isLoading || parentIsDisabled || !recaptchaLoaded
             ? "bg-gray-600 cursor-not-allowed text-gray-400"
             : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-        }`}
+          }`}
       >
         {isLoading ? (
           <div className="flex items-center justify-center">
@@ -308,6 +307,11 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
           "Get Price Details"
         )}
       </button>
+      <div className="text-center mt-4">
+        <p className="text-sm font-bold text-gray-500">
+          Fill Up the Form To Get Project Price
+        </p>
+      </div>
     </div>
   );
 };
