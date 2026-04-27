@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import "./globals.css";
 import FloatingButtons from "./components/Whatsapp";
 import Script from "next/script";
-import Whatsapp from "@/app/(moreInfo)/more-info/components/WhatsAppCirle";
+import Whatsapp from "@/app/(moreInfo)/dholera-smart-city-plots/components/WhatsAppCirle";
 
 export default function layout({ children }) {
   return (

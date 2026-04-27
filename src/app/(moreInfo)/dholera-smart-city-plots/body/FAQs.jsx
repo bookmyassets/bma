@@ -5,36 +5,36 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is WestWyn Residency an AUDA approved project in Dholera?",
+    question: "Is Dholera Smart City good for investment?",
     answer:
-      "Yes, WestWyn Residency offers plots with NA/NOC and clear title documentation. Buyers can review all approval-related documents before making a decision.",
+      "Yes, Dholera can be good for long-term land investors. Check location, approval, registry status, and holding period before investing.",
   },
   {
-    question: "Is Dholera a good option for long-term investment?",
+    question: "Are Dholera plots registry-ready?",
     answer:
-      "Dholera is being developed as India’s first Greenfield Smart City with strong government backing and large-scale infrastructure projects. It is primarily considered by investors looking for long-term growth potential.",
+      "Some projects are registry-ready. Always verify AUDA approval, title clarity, NA/NOC, and layout plan before booking.",
   },
   {
-    question: "What major developments are happening in Dholera?",
+    question: "What are AUDA-approved plots in Dholera?",
     answer:
-      "Dholera is witnessing multiple large-scale developments such as the Dholera International Airport, Ahmedabad–Dholera Expressway, semiconductor manufacturing projects, and one of the largest solar parks in India.",
+      "AUDA-approved plots follow development authority guidelines, giving better clarity on layout, legal structure, and planning.",
   },
   {
-    question: "How long does it take to get possession of the plot?",
+    question: "Can I visit the Dholera plot before buying?",
     answer:
-      "Plots are typically registry-ready. Possession can be initiated after full payment, and registry documentation is generally completed within 7–15 working days.",
+      "Yes. Site visit helps verify actual location, road access, nearby development, and project suitability.",
   },
   {
-    question: "Does BookMyAssets provide support after purchase?",
+    question: "Is Dholera short-term or long-term investment?",
     answer:
-      "Yes, BookMyAssets offers ongoing support including site visit coordination, resale assistance, and general guidance for your investment in Dholera.",
+      "Dholera is better for long-term investment, not quick resale. Serious investors should plan a multi-year holding period.",
   },
   {
-    question: "Can I visit the project before making a decision?",
+    question: "Which Dholera projects does BookMyAssets offer?",
     answer:
-      "Yes, site visits can be arranged based on your availability. You can explore the location, layout, and surrounding development before proceeding.",
+      "BookMyAssets currently offers Dholera investment projects like WestWyn Residency and WestWyn Estates, with focus on registry-ready plots, site visit support, and investor guidance.",
   },
-];
+];;
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
