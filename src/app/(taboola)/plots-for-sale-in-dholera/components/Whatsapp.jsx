@@ -13,12 +13,12 @@ function pushEvent(payload) {
 
 const FloatingButtons = () => {
   const handleCallClick = () => {
-    pushEvent({ event: "call_click_organic", lead_type: "phone", device: "mobile" });
+      _tfa.push({notify: 'event', name: 'Whatsapp', id: 2018249})
     window.location.href = `tel:${PHONE}`;
   };
 
   const handleWhatsAppClick = () => {
-    pushEvent({ event: "whatsapp_click_organic", lead_type: "whatsapp", device: "mobile" });
+      _tfa.push({notify: 'event', name: 'Whatsapp', id: 2018249})
     // noopener,noreferrer — security best practice for _blank links
     window.open(WA_URL, "_blank", "noopener,noreferrer");
   };
