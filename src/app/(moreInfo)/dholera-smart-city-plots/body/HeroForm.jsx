@@ -308,7 +308,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         )}
       </button>
       <div className="text-center mt-4">
-        <p className="text-sm font-bold text-gray-500">
+        <p className="text-sm font-bold text-black">
           Fill Up the Form To Get Project Price
         </p>
       </div>
