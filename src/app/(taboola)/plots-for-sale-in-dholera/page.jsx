@@ -13,6 +13,7 @@ import PopupScroll from "./components/PopupScroll";
 export default function page() {
   return (
     <>
+
       <div>
         <Hero />
         <Residency />

@@ -18,7 +18,8 @@ export default function layout({ children }) {
           name="keywords"
           content="premium plots in dholera, residential plots in dholera, dholera smart city plots, bookmyassets plots, dholera investment plots, govt approved dholera plots"
         />
-
+            <meta name="robots" content="noindex,nofollow" />
+        
         <Script
           id="gtm-head"
           strategy="afterInteractive"

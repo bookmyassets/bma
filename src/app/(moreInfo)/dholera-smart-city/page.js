@@ -25,6 +25,7 @@ export default function Page() {
         name="description"
         content="Explore premium plots in Dholera smart city with legal verification, prime connectivity, and high growth potential. Book your plot with BookMyAssets now."
       />
+      <meta name="robots" content="noindex,nofollow" />
 
       <meta
         name="keywords"

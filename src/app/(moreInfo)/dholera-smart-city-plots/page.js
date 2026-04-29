@@ -25,6 +25,8 @@ export default function Page() {
         name="description"
         content="Invest in AUDA-approved Dholera plots with registry-ready paperwork, site visit assistance, resale support, and expert guidance from BookMyAssets."
       />
+      <meta name="robots" content="noindex,nofollow" />
+
       <meta
         name="keywords"
         content="Dholera Smart City, Dholera plots, plots in Dholera, Dholera SIR plots, Dholera land investment, Dholera Smart City investment, residential plots in Dholera, industrial plots in Dholera, Dholera real estate, Dholera investment opportunities, dholerainsider, Gujarat smart city plots, DMIC corridor, Investments in Dholera Smart City, dholera latest news, Dholera International Airport, Dholera Solar Park,  Ahmedabad Dholera Expressway, Dholera SIR, Dholera plot prices, Dholera Smart City Projects"
