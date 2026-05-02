@@ -1,6 +1,6 @@
 // lib/seo.js
 import defaultImageSrc from "@/assests/bma-logo.png"
-const BASE_URL = "https://www.BookMyAssets.com";
+const BASE_URL = "https://www.bookmyassets.com";
 
 export function generateMetadata({
   title,

@@ -189,6 +189,10 @@ export default async function page() {
         name="description"
         content="Discover Dholera SIR - India's largest planned industrial and residential hub. Part of Delhi-Mumbai Industrial Corridor with world-class infrastructure, Tata semiconductor plant, and premium investment opportunities with BookMyAssets."
       />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/about-dholera-sir"
+      />
       <div className="bg-white">
         {/* Hero Section */}
         <div className=" pt-16">

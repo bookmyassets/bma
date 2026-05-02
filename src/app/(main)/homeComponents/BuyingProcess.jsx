@@ -73,14 +73,13 @@ export default function HowToBuy() {
               </p>
 
               {/* Corner accent on hover */}
-              <span className="absolute top-0 right-0 w-0 h-0 border-t-[0px] border-r-[0px] border-[#deae3c] group-hover:border-t-[20px] group-hover:border-r-[20px] transition-all duration-300" />
-            </div>
+              </div>
           ))}
         </div>
 
         {/* Bottom CTA strip */}
-        <div className="mt-[clamp(2rem,4vw,3rem)] border-t border-white/10 pt-[clamp(1.25rem,3vw,2rem)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <p className="text-white/40 text-[clamp(0.75rem,1.3vw,0.85rem)]">
+        <div className="mt-[clamp(2rem,4vw,3rem)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <p className="text-white/40 text-[clamp(0.75rem,1.3vw,0.85rem)]"> 
             Questions before you start? We&apos;re here.
           </p>
           <button
