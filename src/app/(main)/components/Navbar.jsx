@@ -299,7 +299,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center space-x-12">
               {[
                 {
-                  label: "Our Residential Projects",
+                  label: "Residential Projects",
                   toggle: toggleResidentialMenu,
                   open: isResidentialMenuOpen,
                 },
@@ -357,7 +357,7 @@ export default function Navbar() {
                       {[
                         { href: "/career", label: "Careers" },
                         { href: "/channel-partner", label: "Channel Partner" },
-                        { href: "/dholera-events", label: "Events" },
+                        { href: "/dholera-events", label: "Investor Meetups" },
                         { href: "/gallery", label: "Gallery" },
                         { href: "/about", label: "About" },
                       ].map(({ href, label }) => (
@@ -619,7 +619,7 @@ export default function Navbar() {
           <div className="w-1/3 flex flex-col justify-between p-[calc(2rem+1vw)] h-full bg-gradient-to-br from-orange-50 to-white">
             <div>
               <h3 className="text-[clamp(2.25rem,4vw,3rem)] font-light text-gray-900 leading-tight">
-                Bulk Land <br /> Opportunities
+                Bulk Land <br /> Deals
               </h3>
               <p className="text-gray-600 mt-4 text-[clamp(1rem,1.5vw,1.25rem)]">
                 Strategic land parcels for commercial and industrial development
@@ -783,7 +783,7 @@ export default function Navbar() {
                 onClick={toggleResidentialMenu}
                 className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-3 text-[clamp(0.875rem,2vw,1rem)]"
               >
-                <span>Our Residential Projects</span>
+                <span>Residential Projects</span>
                 <svg
                   className={`w-5 h-5 transition-transform ${isResidentialMenuOpen ? "rotate-180" : ""}`}
                   fill="none"
@@ -879,7 +879,7 @@ export default function Navbar() {
                 onClick={toggleBulkLandMenu}
                 className="flex items-center justify-between w-full text-left font-medium text-black hover:text-orange-500 py-3 transition-colors text-[clamp(0.875rem,2vw,1rem)]"
               >
-                <span>Bulk Land Projects</span>
+                <span>Bulk Land Deals</span>
                 <svg
                   className={`w-5 h-5 transition-transform ${isBulkLandMenuOpen ? "rotate-180" : ""}`}
                   fill="none"
@@ -942,7 +942,7 @@ export default function Navbar() {
               { href: "/dholera-sir-blogs", label: "Blogs" },
               { href: "/dholera-sir-updates", label: "Dholera SIR Updates" },
               { href: "/about-dholera-sir", label: "About Dholera" },
-              { href: "/dholera-events", label: "Dholera Events" },
+              { href: "/dholera-events", label: "Investor Meetups" },
               { href: "/contact", label: "Contact Us" },
               { href: "/about", label: "About Us" },
               { href: "/gallery", label: "Gallery" },
