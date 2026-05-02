@@ -20,6 +20,10 @@ export default function page() {
         name="description"
         content="Explore premium bulk land in Dholera SIR for sale. In India’s first smart city Dholera Gujarat."
       />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/bulk-land/recreation-sports-land"
+      />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image

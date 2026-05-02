@@ -18,6 +18,10 @@ export default function page() {
         name="description"
         content="Industrial land in Dholera designed for factories, warehouses and long term growth."
       />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/bulk-land/industrial-land"
+      />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image

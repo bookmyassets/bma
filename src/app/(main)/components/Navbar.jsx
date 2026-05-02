@@ -42,23 +42,29 @@ export default function Navbar() {
     isResidentialMenuOpen ||
     isDholeraMenuOpen ||
     isBulkLandMenuOpen;
+
   const textColor = "text-black";
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Fetch residential projects
   useEffect(() => {
     async function fetchResidentialProjects() {
       if (!isResidentialMenuOpen || residentialProjects.length > 0) return;
+
       try {
         setLoading(true);
         setError(null);
+
         const response = await fetch("/data/Residential.json");
+
         if (!response.ok) throw new Error("Failed to fetch projects");
+
         setResidentialProjects(await response.json());
       } catch (err) {
         console.error(err);
@@ -68,16 +74,18 @@ export default function Navbar() {
         setLoading(false);
       }
     }
+
     fetchResidentialProjects();
   }, [isResidentialMenuOpen, residentialProjects.length]);
 
-  // Fetch bulk land projects
   useEffect(() => {
     async function fetchBulkLandProjects() {
       if (!isBulkLandMenuOpen || bulkLandProjects.length > 0) return;
+
       try {
         setBulkLandLoading(true);
         setBulkLandError(null);
+
         const mockBulkLandProjects = [
           {
             projectName: "Residential Zone",
@@ -122,7 +130,9 @@ export default function Navbar() {
             status: "upcoming",
           },
         ];
+
         await new Promise((r) => setTimeout(r, 500));
+
         setBulkLandProjects(mockBulkLandProjects);
       } catch (err) {
         console.error(err);
@@ -132,16 +142,18 @@ export default function Navbar() {
         setBulkLandLoading(false);
       }
     }
+
     fetchBulkLandProjects();
   }, [isBulkLandMenuOpen, bulkLandProjects.length]);
 
-  // Fetch dholera projects
   useEffect(() => {
     async function fetchDholeraProjects() {
       if (!isDholeraMenuOpen || dholeraProjects.length > 0) return;
+
       try {
         setDholeraLoading(true);
         setDholeraError(null);
+
         const mockDholeraProjects = [
           {
             projectName: "About Dholera SIR",
@@ -165,7 +177,9 @@ export default function Navbar() {
             status: "ongoing",
           },
         ];
+
         await new Promise((r) => setTimeout(r, 500));
+
         setDholeraProjects(mockDholeraProjects);
       } catch (err) {
         console.error(err);
@@ -175,6 +189,7 @@ export default function Navbar() {
         setDholeraLoading(false);
       }
     }
+
     fetchDholeraProjects();
   }, [isDholeraMenuOpen, dholeraProjects.length]);
 
@@ -192,22 +207,25 @@ export default function Navbar() {
         setIsDholeraMenuOpen(false);
         setIsBulkLandMenuOpen(false);
       }
+
       return !prev;
     });
   };
 
   const toggleResidentialMenu = () => {
-    setIsResidentialMenuOpen((p) => !p);
+    setIsResidentialMenuOpen((prev) => !prev);
     setIsDholeraMenuOpen(false);
     setIsBulkLandMenuOpen(false);
   };
+
   const toggleBulkLandMenu = () => {
-    setIsBulkLandMenuOpen((p) => !p);
+    setIsBulkLandMenuOpen((prev) => !prev);
     setIsResidentialMenuOpen(false);
     setIsDholeraMenuOpen(false);
   };
+
   const toggleDholeraMenu = () => {
-    setIsDholeraMenuOpen((p) => !p);
+    setIsDholeraMenuOpen((prev) => !prev);
     setIsResidentialMenuOpen(false);
     setIsBulkLandMenuOpen(false);
   };
@@ -215,6 +233,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (window.innerWidth < 768) return;
+
       if (
         !e.target.closest(".dropdown-container") &&
         !e.target.closest(".residential-dropdown") &&
@@ -226,12 +245,15 @@ export default function Navbar() {
         setIsBulkLandMenuOpen(false);
       }
     };
+
     const handleScroll = () => {
       if (window.innerWidth < 768) return;
+
       setIsResidentialMenuOpen(false);
       setIsDholeraMenuOpen(false);
       setIsBulkLandMenuOpen(false);
     };
+
     const handleEscape = (e) => {
       if (e.key === "Escape") {
         setIsResidentialMenuOpen(false);
@@ -243,6 +265,7 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     window.addEventListener("scroll", handleScroll);
     document.addEventListener("keydown", handleEscape);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("scroll", handleScroll);
@@ -250,53 +273,68 @@ export default function Navbar() {
     };
   }, []);
 
-  // Shared loading / error / empty states
-  const LoadingSpinner = ({ color = "yellow" }) => (
-    <div className="flex justify-center items-center h-64">
-      <div className="text-center">
-        <div
-          className={`inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-${color}-500`}
-        />
-        <p className="text-gray-500 mt-4">Loading...</p>
+  const LoadingSpinner = ({ color = "yellow" }) => {
+    const spinnerColorClasses = {
+      yellow: "border-yellow-500",
+      orange: "border-orange-500",
+      blue: "border-blue-500",
+    };
+
+    return (
+      <div className="flex h-[16rem] items-center justify-center">
+        <div className="text-center">
+          <div
+            className={`inline-block h-[2rem] w-[2rem] animate-spin rounded-full border-b-[0.125rem] ${
+              spinnerColorClasses[color] || spinnerColorClasses.yellow
+            }`}
+          />
+          <p className="mt-[calc(0.75rem_+_0.25vw)] text-[clamp(0.875rem,0.75rem_+_0.3vw,1rem)] text-gray-500">
+            Loading...
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+
   const ErrorState = ({ msg }) => (
-    <div className="flex justify-center items-center h-64">
-      <p className="text-red-500 text-lg">{msg}</p>
+    <div className="flex h-[16rem] items-center justify-center">
+      <p className="text-[clamp(1rem,0.875rem_+_0.5vw,1.125rem)] text-red-500">
+        {msg}
+      </p>
     </div>
   );
+
   const EmptyState = () => (
-    <div className="flex justify-center items-center h-64">
-      <div className="text-gray-500 text-center">
-        <p className="text-lg">No projects available at the moment</p>
-        <p className="text-sm mt-2">Please check back later</p>
+    <div className="flex h-[16rem] items-center justify-center">
+      <div className="text-center text-gray-500">
+        <p className="text-[clamp(1rem,0.875rem_+_0.5vw,1.125rem)]">
+          No projects available at the moment
+        </p>
+        <p className="mt-[calc(0.375rem_+_0.125vw)] text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.9375rem)]">
+          Please check back later
+        </p>
       </div>
     </div>
   );
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white">
-        {/* ✅ calc() — horizontal padding scales with viewport */}
-        <div className="max-w-7xl mx-auto px-[calc(1rem+1vw)]">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <div className="flex-shrink-0">
+      <nav className="fixed inset-x-0 top-0 z-50 bg-white transition-all duration-300">
+        <div className="mx-auto max-w-7xl px-[calc(1rem_+_1vw)]">
+          <div className="flex h-[5rem] items-center justify-between">
+            <div className="shrink-0">
               <Link href="/" onClick={closeAllMenus}>
-                {/* Logo keeps fixed dimensions — it's a brand mark, not content imagery */}
                 <Image
                   src={logo}
                   height={75}
                   width={75}
                   alt="BookMyAssets logo"
-                  className="p-1"
+                  className="p-[0.25rem]"
                 />
               </Link>
             </div>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center space-x-12">
+            <div className="hidden items-center gap-[calc(2rem_+_0.75vw)] md:flex">
               {[
                 {
                   label: "Residential Projects",
@@ -314,14 +352,17 @@ export default function Navbar() {
                   open: isDholeraMenuOpen,
                 },
               ].map(({ label, toggle, open }) => (
-                <div key={label} className="relative group dropdown-container">
+                <div key={label} className="dropdown-container relative group">
                   <button
-                    className={`font-medium transition-colors duration-300 hover:text-yellow-500 flex items-center text-[clamp(0.8rem,1.2vw,1rem)] ${textColor}`}
+                    className={`flex items-center text-[clamp(0.875rem,0.75rem_+_0.35vw,1rem)] font-medium transition-colors duration-300 hover:text-yellow-500 ${textColor}`}
                     onClick={toggle}
                   >
                     {label}
+
                     <svg
-                      className={`w-4 h-4 ml-1 transition-transform ${open ? "rotate-180" : ""}`}
+                      className={`ml-[0.25rem] h-[1rem] w-[1rem] transition-transform ${
+                        open ? "rotate-180" : ""
+                      }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -337,23 +378,29 @@ export default function Navbar() {
                 </div>
               ))}
 
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center gap-[calc(1rem_+_0.5vw)]">
                 <Link
                   href="/contact"
-                  className="bg-[#deae3c] text-black px-6 py-2 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md text-[clamp(0.8rem,1.2vw,1rem)]"
+                  className="rounded-md bg-[#deae3c] px-[calc(1rem_+_0.5vw)] py-[calc(0.375rem_+_0.25vw)] text-[clamp(0.875rem,0.75rem_+_0.35vw,1rem)] font-medium text-black shadow-md transition duration-300 hover:bg-[#f3bb39]"
                 >
                   Contact Us
                 </Link>
+
                 <div className="relative group">
                   <button
                     className={`font-medium transition-colors duration-300 hover:text-yellow-500 ${textColor}`}
                   >
                     <Menu
-                      className={`inline-block mr-1 h-8 w-8 p-1 rounded-sm ${shouldUseWhiteBackground ? "bg-gray-100 text-black" : "bg-white text-black"}`}
+                      className={`mr-[0.25rem] inline-block h-[2rem] w-[2rem] rounded-sm p-[0.25rem] ${
+                        shouldUseWhiteBackground
+                          ? "bg-gray-100 text-black"
+                          : "bg-white text-black"
+                      }`}
                     />
                   </button>
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <div className="py-2">
+
+                  <div className="invisible absolute right-0 top-full z-50 mt-[calc(0.5rem_+_0.25vw)] w-[12rem] rounded-lg border border-gray-200 bg-white opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                    <div className="py-[calc(0.375rem_+_0.125vw)]">
                       {[
                         { href: "/career", label: "Careers" },
                         { href: "/channel-partner", label: "Channel Partner" },
@@ -365,7 +412,7 @@ export default function Navbar() {
                           key={href}
                           href={href}
                           onClick={closeAllMenus}
-                          className="block px-4 py-3 text-black hover:bg-gray-50 hover:text-yellow-600 transition-colors text-[clamp(0.8rem,1.2vw,0.875rem)]"
+                          className="block px-[calc(0.875rem_+_0.25vw)] py-[calc(0.625rem_+_0.125vw)] text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.9375rem)] text-black transition-colors hover:bg-gray-50 hover:text-yellow-600"
                         >
                           {label}
                         </Link>
@@ -376,15 +423,20 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Mobile menu button */}
             <div className="md:hidden">
               <button
                 onClick={toggleMobileMenu}
-                className={`p-2 rounded-md transition-colors duration-300 ${shouldUseWhiteBackground ? "text-black hover:bg-gray-100" : "hover:bg-white/10"}`}
+                className={`rounded-md p-[0.5rem] transition-colors duration-300 ${
+                  shouldUseWhiteBackground
+                    ? "text-black hover:bg-gray-100"
+                    : "hover:bg-white/10"
+                }`}
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               >
                 <svg
-                  className={`h-6 w-6 transition-transform duration-300 ${isMobileMenuOpen ? "rotate-90" : ""}`}
+                  className={`h-[1.5rem] w-[1.5rem] transition-transform duration-300 ${
+                    isMobileMenuOpen ? "rotate-90" : ""
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -411,25 +463,20 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ── Residential Dropdown ─────────────────────────────────────────── */}
       {isResidentialMenuOpen && (
-        <div
-          className="residential-dropdown hidden md:flex fixed left-0 top-20 w-screen bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300
-          
-          h-[calc(100dvh-5rem)]"
-        >
-          <div className="w-1/3 flex flex-col  p-[calc(2rem+1vw)] h-full bg-gradient-to-br from-gray-50 to-white">
-            {/* clamp() — heading scales between 36px and 48px */}
-            <h3 className="text-[clamp(2.25rem,4vw,3rem)] font-light text-gray-900 leading-tight">
+        <div className="residential-dropdown fixed left-0 top-[5rem] z-40 hidden h-[calc(100dvh_-_5rem)] w-screen animate-in border-t border-gray-200 bg-white shadow-2xl slide-in-from-top-4 duration-300 md:flex">
+          <div className="flex h-full w-1/3 flex-col bg-gradient-to-br from-gray-50 to-white p-[calc(2rem_+_1vw)]">
+            <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-gray-900">
               Residential <br /> Projects
             </h3>
-            <p className="text-gray-600 mt-4 text-[clamp(1rem,1.5vw,1.25rem)]">
+
+            <p className="mt-[calc(0.75rem_+_0.25vw)] text-[clamp(1rem,0.875rem_+_0.5vw,1.25rem)] text-gray-600">
               Discover premium residential developments with world-class
               amenities
             </p>
           </div>
 
-          <div className="w-2/3 p-[calc(1rem+0.5vw)] h-full overflow-y-auto">
+          <div className="h-full w-2/3 overflow-y-auto p-[calc(1rem_+_0.5vw)]">
             {loading ? (
               <LoadingSpinner color="yellow" />
             ) : error ? (
@@ -437,10 +484,11 @@ export default function Navbar() {
             ) : residentialProjects.length > 0 ? (
               (() => {
                 const activeProjects = residentialProjects.filter(
-                  (p) => p.status !== "sold-out",
+                  (project) => project.status !== "sold-out",
                 );
+
                 const soldOutProjects = residentialProjects.filter(
-                  (p) => p.status === "sold-out",
+                  (project) => project.status === "sold-out",
                 );
 
                 const ProjectCard = ({ project, index, href }) => (
@@ -448,21 +496,22 @@ export default function Navbar() {
                     key={index}
                     href={href}
                     onClick={closeAllMenus}
-                    className="group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+                    className="group relative flex flex-col overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-[0.25rem]"
                   >
-                    <div className="relative w-full aspect-[4/5] overflow-hidden rounded-xl flex-shrink-0">
+                    <div className="relative w-full shrink-0 overflow-hidden rounded-xl aspect-[4/5]">
                       <Image
                         src={project.image}
                         alt={project.projectName}
                         fill
-                        sizes="(min-width: 1024px) 15vw, 25vw"
-                        className={`object-fit transition-transform duration-700 ease-out ${
+                        sizes="(min-width: 64rem) 15vw, 25vw"
+                        className={`object-cover transition-transform duration-700 ease-out ${
                           project.status === "sold-out"
                             ? "grayscale"
                             : "group-hover:scale-110"
                         }`}
                         priority={index < 6}
                       />
+
                       <div
                         className={`absolute inset-0 transition-all duration-500 ${
                           project.status === "sold-out"
@@ -471,48 +520,52 @@ export default function Navbar() {
                         }`}
                       />
 
-                      <div className="absolute top-3 right-3 flex flex-col gap-2">
+                      <div className="absolute right-[0.75rem] top-[0.75rem] flex flex-col gap-[0.5rem]">
                         {project.status === "ongoing" && (
-                          <span className="bg-green-500 text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg animate-pulse">
+                          <span className="animate-pulse rounded-full bg-green-500 px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.25vw,0.75rem)] font-semibold uppercase text-white shadow-lg">
                             ONGOING
                           </span>
                         )}
+
                         {project.status === "sold-out" && (
-                          <span className="bg-red-500 text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg">
+                          <span className="rounded-full bg-red-500 px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.25vw,0.75rem)] font-semibold uppercase text-white shadow-lg">
                             SOLD OUT
                           </span>
                         )}
+
                         {project.status === "upcoming" && (
-                          <span className="bg-blue-500 text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg">
+                          <span className="rounded-full bg-blue-500 px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.25vw,0.75rem)] font-semibold uppercase text-white shadow-lg">
                             UPCOMING
                           </span>
                         )}
+
                         {project.status === "limited" && (
-                          <span className="bg-orange-500 text-white px-2 py-1 text-xs font-semibold uppercase rounded-full shadow-lg animate-pulse">
+                          <span className="animate-pulse rounded-full bg-orange-500 px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.25vw,0.75rem)] font-semibold uppercase text-white shadow-lg">
                             LIMITED
                           </span>
                         )}
                       </div>
 
                       {project.status === "sold-out" && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
-                          <div className="text-white text-2xl font-bold transform -rotate-12 bg-red-600/80 px-6 py-2 rounded-lg border-2 border-red-400">
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[0.0625rem]">
+                          <div className="-rotate-12 rounded-lg border-[0.125rem] border-red-400 bg-red-600/80 px-[1.5rem] py-[0.5rem] text-[clamp(1.25rem,1rem_+_1vw,1.5rem)] font-bold text-white">
                             SOLD OUT
                           </div>
                         </div>
                       )}
 
-                      <div className="absolute bottom-5 left-0 right-0 p-4 text-white space-y-2">
+                      <div className="absolute bottom-[1.25rem] left-0 right-0 space-y-[0.5rem] p-[1rem] text-white">
                         <h3
-                          className={`text-[clamp(0.875rem,1.2vw,1.125rem)] font-semibold group-hover:text-[#deae3c] transition-colors duration-300 leading-tight ${
+                          className={`text-[clamp(0.875rem,0.75rem_+_0.45vw,1.125rem)] font-semibold leading-tight transition-colors duration-300 group-hover:text-[#deae3c] ${
                             project.status === "sold-out" ? "text-gray-300" : ""
                           }`}
                         >
                           {project.projectName}
                         </h3>
+
                         <div className="flex items-center">
                           <svg
-                            className="w-3 h-3 mr-2 flex-shrink-0"
+                            className="mr-[0.5rem] h-[0.75rem] w-[0.75rem] shrink-0"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -522,8 +575,13 @@ export default function Navbar() {
                               clipRule="evenodd"
                             />
                           </svg>
+
                           <span
-                            className={`text-xs opacity-90 ${project.status === "sold-out" ? "text-gray-400" : ""}`}
+                            className={`text-[clamp(0.6875rem,0.6rem_+_0.25vw,0.75rem)] opacity-90 ${
+                              project.status === "sold-out"
+                                ? "text-gray-400"
+                                : ""
+                            }`}
                           >
                             {project.location}
                           </span>
@@ -534,10 +592,9 @@ export default function Navbar() {
                 );
 
                 return (
-                  <div className="flex flex-col gap-6 pb-6">
-                    {/* ── Active projects ── */}
+                  <div className="flex flex-col gap-[calc(1rem_+_0.5vw)] pb-[calc(1rem_+_0.5vw)]">
                     {activeProjects.length > 0 && (
-                      <div className="grid grid-cols-4 gap-[calc(0.5rem+0.5vw)]">
+                      <div className="grid grid-cols-4 gap-[calc(0.5rem_+_0.5vw)]">
                         {activeProjects.map((project, index) => (
                           <ProjectCard
                             key={index}
@@ -549,26 +606,32 @@ export default function Navbar() {
                       </div>
                     )}
 
-                    {/* ── Sold Out collapsible ── */}
                     {soldOutProjects.length > 0 && (
                       <div
-                        className={`mt-2 rounded-xl border border-red-200 overflow-hidden transition-colors duration-200 ${isSoldOutOpen ? "bg-red-50/40" : "bg-red-50"}`}
+                        className={`mt-[calc(0.375rem_+_0.125vw)] overflow-hidden rounded-xl border border-red-200 transition-colors duration-200 ${
+                          isSoldOutOpen ? "bg-red-50/40" : "bg-red-50"
+                        }`}
                       >
                         <button
                           onClick={() => setIsSoldOutOpen((prev) => !prev)}
-                          className="w-full flex items-center justify-between px-5 py-3 hover:bg-red-100 transition-colors duration-200"
+                          className="flex w-full items-center justify-between px-[calc(1rem_+_0.25vw)] py-[calc(0.625rem_+_0.125vw)] transition-colors duration-200 hover:bg-red-100"
                         >
-                          <div className="flex items-center gap-3">
-                            <span className="w-2 h-2 rounded-full bg-red-400" />
-                            <span className="text-red-600 font-semibold text-sm uppercase tracking-widest">
+                          <div className="flex items-center gap-[0.75rem]">
+                            <span className="h-[0.5rem] w-[0.5rem] rounded-full bg-red-400" />
+
+                            <span className="text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.875rem)] font-semibold uppercase tracking-widest text-red-600">
                               Sold Out Projects
                             </span>
-                            <span className="bg-red-200 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">
+
+                            <span className="rounded-full bg-red-200 px-[0.5rem] py-[0.125rem] text-[clamp(0.6875rem,0.6rem_+_0.25vw,0.75rem)] font-bold text-red-700">
                               {soldOutProjects.length}
                             </span>
                           </div>
+
                           <svg
-                            className={`w-4 h-4 text-red-400 transition-transform duration-300 flex-shrink-0 ${isSoldOutOpen ? "rotate-180" : ""}`}
+                            className={`h-[1rem] w-[1rem] shrink-0 text-red-400 transition-transform duration-300 ${
+                              isSoldOutOpen ? "rotate-180" : ""
+                            }`}
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -583,10 +646,10 @@ export default function Navbar() {
                         </button>
 
                         <div
-                          className={`grid grid-cols-4 gap-[calc(0.5rem+0.5vw)] overflow-hidden transition-all duration-500 ease-in-out ${
+                          className={`grid grid-cols-4 gap-[calc(0.5rem_+_0.5vw)] overflow-hidden transition-all duration-500 ease-in-out ${
                             isSoldOutOpen
-                              ? "max-h-[2000px] opacity-100 p-4"
-                              : "max-h-0 opacity-0 px-4"
+                              ? "max-h-[125rem] p-[1rem] opacity-100"
+                              : "max-h-0 px-[1rem] opacity-0"
                           }`}
                         >
                           {soldOutProjects.map((project, index) => (
@@ -610,48 +673,46 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* ── Bulk Land Dropdown ───────────────────────────────────────────── */}
       {isBulkLandMenuOpen && (
-        <div
-          className="bulk-land-dropdown hidden md:flex fixed left-0 top-20 w-screen bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300
-          h-[calc(100dvh-5rem)]"
-        >
-          <div className="w-1/3 flex flex-col justify-between p-[calc(2rem+1vw)] h-full bg-gradient-to-br from-orange-50 to-white">
+        <div className="bulk-land-dropdown fixed left-0 top-[5rem] z-40 hidden h-[calc(100dvh_-_5rem)] w-screen animate-in border-t border-gray-200 bg-white shadow-2xl slide-in-from-top-4 duration-300 md:flex">
+          <div className="flex h-full w-1/3 flex-col justify-between bg-gradient-to-br from-orange-50 to-white p-[calc(2rem_+_1vw)]">
             <div>
-              <h3 className="text-[clamp(2.25rem,4vw,3rem)] font-light text-gray-900 leading-tight">
+              <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-gray-900">
                 Bulk Land <br /> Deals
               </h3>
-              <p className="text-gray-600 mt-4 text-[clamp(1rem,1.5vw,1.25rem)]">
+
+              <p className="mt-[calc(0.75rem_+_0.25vw)] text-[clamp(1rem,0.875rem_+_0.5vw,1.25rem)] text-gray-600">
                 Strategic land parcels for commercial and industrial development
               </p>
             </div>
           </div>
 
-          <div className="w-2/3 p-[calc(1rem+0.5vw)] h-full overflow-y-auto">
+          <div className="h-full w-2/3 overflow-y-auto p-[calc(1rem_+_0.5vw)]">
             {bulkLandLoading ? (
               <LoadingSpinner color="orange" />
             ) : bulkLandError ? (
               <ErrorState msg={bulkLandError} />
             ) : bulkLandProjects.length > 0 ? (
-              <div className="grid grid-cols-4 gap-[calc(0.5rem+0.5vw)] pb-6 h-full">
+              <div className="grid h-full grid-cols-4 gap-[calc(0.5rem_+_0.5vw)] pb-[calc(1rem_+_0.5vw)]">
                 {bulkLandProjects.map((project, index) => (
                   <Link
                     key={index}
                     href={`/bulk-land/${project.link}`}
                     onClick={closeAllMenus}
-                    className="group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col"
+                    className="group relative flex h-full flex-col overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-[0.25rem]"
                   >
-                    <div className="relative w-full aspect-[4/5] overflow-hidden rounded-xl flex-shrink-0">
+                    <div className="relative w-full shrink-0 overflow-hidden rounded-xl aspect-[4/5]">
                       <Image
                         src={project.image}
                         alt={project.projectName}
                         fill
-                        sizes="(min-width: 1024px) 15vw, 25vw"
-                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                        sizes="(min-width: 64rem) 15vw, 25vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         priority={index < 6}
                       />
-                      <div className="absolute bottom-5 left-0 right-0 p-4 text-white">
-                        <h3 className="text-[clamp(0.875rem,1.2vw,1.125rem)] font-semibold group-hover:text-orange-300 transition-colors duration-300 leading-tight">
+
+                      <div className="absolute bottom-[1.25rem] left-0 right-0 p-[1rem] text-white">
+                        <h3 className="text-[clamp(0.875rem,0.75rem_+_0.45vw,1.125rem)] font-semibold leading-tight transition-colors duration-300 group-hover:text-orange-300">
                           {project.projectName}
                         </h3>
                       </div>
@@ -666,30 +727,27 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* ── Dholera Dropdown ─────────────────────────────────────────────── */}
       {isDholeraMenuOpen && (
-        <div
-          className="dholera-dropdown hidden md:flex fixed left-0 top-20 w-screen bg-white shadow-2xl border-t border-gray-200 z-40 animate-in slide-in-from-top-4 duration-300
-          h-[calc(100dvh-5rem)]"
-        >
-          <div className="w-1/3 flex flex-col justify-between p-[calc(2rem+1vw)] h-full bg-gradient-to-br from-blue-50 to-white">
+        <div className="dholera-dropdown fixed left-0 top-[5rem] z-40 hidden h-[calc(100dvh_-_5rem)] w-screen animate-in border-t border-gray-200 bg-white shadow-2xl slide-in-from-top-4 duration-300 md:flex">
+          <div className="flex h-full w-1/3 flex-col justify-between bg-gradient-to-br from-blue-50 to-white p-[calc(2rem_+_1vw)]">
             <div>
-              <h3 className="text-[clamp(2.25rem,4vw,3rem)] font-light text-gray-900 leading-tight">
+              <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-gray-900">
                 DHOLERA SIR
               </h3>
-              <p className="text-gray-600 mt-4 text-[clamp(1rem,1.5vw,1.25rem)]">
+
+              <p className="mt-[calc(0.75rem_+_0.25vw)] text-[clamp(1rem,0.875rem_+_0.5vw,1.25rem)] text-gray-600">
                 India's first planned smart city with futuristic infrastructure
               </p>
             </div>
           </div>
 
-          <div className="w-2/3 p-[calc(1rem+0.5vw)] h-full overflow-y-auto">
+          <div className="h-full w-2/3 overflow-y-auto p-[calc(1rem_+_0.5vw)]">
             {dholeraLoading ? (
               <LoadingSpinner color="blue" />
             ) : dholeraError ? (
               <ErrorState msg={dholeraError} />
             ) : dholeraProjects.length > 0 ? (
-              <div className="grid grid-cols-4 gap-[calc(0.5rem+0.5vw)] pb-6 h-full">
+              <div className="grid h-full grid-cols-4 gap-[calc(0.5rem_+_0.5vw)] pb-[calc(1rem_+_0.5vw)]">
                 {dholeraProjects.map((project, index) => {
                   const words = project.projectName.split(" ");
                   const firstLine = words
@@ -698,33 +756,46 @@ export default function Navbar() {
                   const secondLine = words
                     .slice(Math.ceil(words.length / 2))
                     .join(" ");
+
                   return (
                     <Link
                       key={index}
                       href={`/${project.link}`}
                       onClick={closeAllMenus}
-                      className={`group relative rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col ${project.status === "sold-out" ? "opacity-75 cursor-not-allowed" : ""}`}
+                      className={`group relative flex h-full flex-col overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-[0.25rem] ${
+                        project.status === "sold-out"
+                          ? "cursor-not-allowed opacity-75"
+                          : ""
+                      }`}
                     >
-                      {/* ✅ responsive image — fill + sizes instead of fixed width/height */}
-                      <div className="relative w-full aspect-[4/5] overflow-hidden rounded-xl flex-shrink-0">
+                      <div className="relative w-full shrink-0 overflow-hidden rounded-xl aspect-[4/5]">
                         <Image
                           src={project.image}
                           alt={project.projectName}
                           fill
-                          sizes="(min-width: 1024px) 15vw, 25vw"
-                          className={`object-cover transition-transform duration-700 ease-out ${project.status === "sold-out" ? "grayscale" : "group-hover:scale-110"}`}
+                          sizes="(min-width: 64rem) 15vw, 25vw"
+                          className={`object-cover transition-transform duration-700 ease-out ${
+                            project.status === "sold-out"
+                              ? "grayscale"
+                              : "group-hover:scale-110"
+                          }`}
                           priority={index < 6}
                         />
-                        <div className="absolute bottom-0 left-0 p-4 text-white">
+
+                        <div className="absolute bottom-0 left-0 p-[1rem] text-white">
                           <div
-                            className={`font-semibold group-hover:text-[#deae3c] transition-colors duration-300 leading-tight ${project.status === "sold-out" ? "text-gray-300" : ""}`}
+                            className={`font-semibold leading-tight transition-colors duration-300 group-hover:text-[#deae3c] ${
+                              project.status === "sold-out"
+                                ? "text-gray-300"
+                                : ""
+                            }`}
                           >
-                            {/* ✅ clamp() — two-line title scales fluidly */}
-                            <div className="text-[clamp(1rem,1.5vw,1.25rem)]">
+                            <div className="text-[clamp(1rem,0.8rem_+_0.65vw,1.25rem)]">
                               {firstLine}
                             </div>
+
                             {secondLine && (
-                              <div className="text-[clamp(1.125rem,1.8vw,1.5rem)]">
+                              <div className="text-[clamp(1.125rem,0.875rem_+_0.75vw,1.5rem)]">
                                 {secondLine}
                               </div>
                             )}
@@ -742,26 +813,29 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* ── Mobile Menu ──────────────────────────────────────────────────── */}
-      {/* ✅ inert — when menu is closed, all interactive children are fully blocked */}
       <div
-        className={`fixed inset-0 z-30 md:hidden transition-all duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+        className={`fixed inset-0 z-30 transition-all duration-300 md:hidden ${
+          isMobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"
+        }`}
         inert={!isMobileMenuOpen}
       >
         <div
-          className={`relative z-50 bg-white h-full w-full transition-all duration-300 overflow-y-auto ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+          className={`relative z-50 h-full w-full overflow-y-auto bg-white transition-all duration-300 ${
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         >
-          <div className="flex items-center justify-between p-[calc(0.75rem+0.5vw)] border-b border-gray-200">
-            <p className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-gray-800">
+          <div className="flex items-center justify-between border-b border-gray-200 p-[calc(0.75rem_+_0.5vw)]">
+            <p className="text-[clamp(1rem,0.875rem_+_0.5vw,1.125rem)] font-semibold text-gray-800">
               Menu
             </p>
+
             <button
               onClick={closeAllMenus}
-              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+              className="rounded-full p-[0.5rem] text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
               aria-label="Close menu"
             >
               <svg
-                className="w-6 h-6"
+                className="h-[1.5rem] w-[1.5rem]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -776,16 +850,18 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="p-[calc(0.75rem+0.5vw)] space-y-2">
-            {/* Mobile — Residential */}
-            <div className="border-b border-gray-100 pb-2">
+          <div className="space-y-[0.5rem] p-[calc(0.75rem_+_0.5vw)]">
+            <div className="border-b border-gray-100 pb-[0.5rem]">
               <button
                 onClick={toggleResidentialMenu}
-                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-yellow-500 py-3 text-[clamp(0.875rem,2vw,1rem)]"
+                className="flex w-full items-center justify-between py-[0.75rem] text-left text-[clamp(0.875rem,0.75rem_+_0.45vw,1rem)] font-medium text-black hover:text-yellow-500"
               >
                 <span>Residential Projects</span>
+
                 <svg
-                  className={`w-5 h-5 transition-transform ${isResidentialMenuOpen ? "rotate-180" : ""}`}
+                  className={`h-[1.25rem] w-[1.25rem] transition-transform ${
+                    isResidentialMenuOpen ? "rotate-180" : ""
+                  }`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -798,70 +874,93 @@ export default function Navbar() {
                   />
                 </svg>
               </button>
+
               {isResidentialMenuOpen && (
-                <div className="pl-4 mt-2 space-y-2 max-h-80 overflow-y-auto border-l-2 border-yellow-500">
+                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-yellow-500 pl-[1rem]">
                   {loading ? (
-                    <div className="text-gray-500 text-sm py-4 text-center">
-                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-yellow-500 mr-2" />{" "}
+                    <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.9375rem)] text-gray-500">
+                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-full border-b-[0.125rem] border-yellow-500" />{" "}
                       Loading...
                     </div>
                   ) : error ? (
-                    <div className="text-red-500 text-sm py-2">{error}</div>
+                    <div className="py-[0.5rem] text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.9375rem)] text-red-500">
+                      {error}
+                    </div>
                   ) : (
                     residentialProjects.map((project, index) => (
                       <Link
                         key={index}
                         href={`/dholera-residential-plots/${project.link}`}
                         onClick={closeAllMenus}
-                        className={`flex items-center py-3 px-2 rounded-lg transition-colors ${project.status === "sold-out" ? "opacity-60 cursor-not-allowed bg-gray-50" : "hover:bg-gray-50"}`}
+                        className={`flex items-center rounded-lg px-[0.5rem] py-[0.75rem] transition-colors ${
+                          project.status === "sold-out"
+                            ? "cursor-not-allowed bg-gray-50 opacity-60"
+                            : "hover:bg-gray-50"
+                        }`}
                       >
-                        {/* ✅ responsive image — aspect-square container + fill for mobile thumbnails */}
-                        <div className="relative w-12 h-12 rounded-lg overflow-hidden mr-3 flex-shrink-0">
+                        <div className="relative mr-[0.75rem] h-[3rem] w-[3rem] shrink-0 overflow-hidden rounded-lg">
                           <Image
                             src={project.image}
                             alt={project.projectName}
                             fill
-                            sizes="48px"
-                            className={`object-cover ${project.status === "sold-out" ? "grayscale" : ""}`}
+                            sizes="3rem"
+                            className={`object-cover ${
+                              project.status === "sold-out" ? "grayscale" : ""
+                            }`}
                           />
+
                           {project.status === "sold-out" && (
-                            <div className="absolute inset-0 bg-red-500/20 flex items-center justify-center">
-                              <span className="text-[8px] font-bold text-red-600 bg-white/90 px-1 rounded">
+                            <div className="absolute inset-0 flex items-center justify-center bg-red-500/20">
+                              <span className="rounded bg-white/90 px-[0.25rem] text-[0.5rem] font-bold text-red-600">
                                 SOLD
                               </span>
                             </div>
                           )}
                         </div>
+
                         <div className="flex-1">
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-[0.5rem]">
                             <span
-                              className={`font-medium text-sm ${project.status === "sold-out" ? "text-gray-500" : "text-black"}`}
+                              className={`text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.9375rem)] font-medium ${
+                                project.status === "sold-out"
+                                  ? "text-gray-500"
+                                  : "text-black"
+                              }`}
                             >
                               {project.projectName}
                             </span>
+
                             {project.status === "sold-out" && (
-                              <span className="text-[9px] font-semibold text-red-600    bg-red-50    px-1.5 py-0.5 rounded-full">
+                              <span className="rounded-full bg-red-50 px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold text-red-600">
                                 SOLD OUT
                               </span>
                             )}
+
                             {project.status === "ongoing" && (
-                              <span className="text-[9px] font-semibold text-green-600  bg-green-50  px-1.5 py-0.5 rounded-full">
+                              <span className="rounded-full bg-green-50 px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold text-green-600">
                                 ONGOING
                               </span>
                             )}
+
                             {project.status === "upcoming" && (
-                              <span className="text-[9px] font-semibold text-blue-600   bg-blue-50   px-1.5 py-0.5 rounded-full">
+                              <span className="rounded-full bg-blue-50 px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold text-blue-600">
                                 UPCOMING
                               </span>
                             )}
+
                             {project.status === "limited" && (
-                              <span className="text-[9px] font-semibold text-orange-600 bg-orange-50 px-1.5 py-0.5 rounded-full">
+                              <span className="rounded-full bg-orange-50 px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold text-orange-600">
                                 LIMITED
                               </span>
                             )}
                           </div>
+
                           <div
-                            className={`text-xs mt-1 ${project.status === "sold-out" ? "text-gray-400" : "text-gray-500"}`}
+                            className={`mt-[0.25rem] text-[clamp(0.6875rem,0.6rem_+_0.25vw,0.75rem)] ${
+                              project.status === "sold-out"
+                                ? "text-gray-400"
+                                : "text-gray-500"
+                            }`}
                           >
                             {project.location}
                           </div>
@@ -873,15 +972,17 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Mobile — Bulk Land */}
-            <div className="border-b border-gray-100 pb-2">
+            <div className="border-b border-gray-100 pb-[0.5rem]">
               <button
                 onClick={toggleBulkLandMenu}
-                className="flex items-center justify-between w-full text-left font-medium text-black hover:text-orange-500 py-3 transition-colors text-[clamp(0.875rem,2vw,1rem)]"
+                className="flex w-full items-center justify-between py-[0.75rem] text-left text-[clamp(0.875rem,0.75rem_+_0.45vw,1rem)] font-medium text-black transition-colors hover:text-orange-500"
               >
                 <span>Bulk Land Deals</span>
+
                 <svg
-                  className={`w-5 h-5 transition-transform ${isBulkLandMenuOpen ? "rotate-180" : ""}`}
+                  className={`h-[1.25rem] w-[1.25rem] transition-transform ${
+                    isBulkLandMenuOpen ? "rotate-180" : ""
+                  }`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -894,15 +995,16 @@ export default function Navbar() {
                   />
                 </svg>
               </button>
+
               {isBulkLandMenuOpen && (
-                <div className="pl-4 mt-2 space-y-2 max-h-80 overflow-y-auto border-l-2 border-orange-500">
+                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-orange-500 pl-[1rem]">
                   {bulkLandLoading ? (
-                    <div className="text-gray-500 text-sm py-4 text-center">
-                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-orange-500 mr-2" />{" "}
+                    <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.9375rem)] text-gray-500">
+                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-full border-b-[0.125rem] border-orange-500" />{" "}
                       Loading...
                     </div>
                   ) : bulkLandError ? (
-                    <div className="text-red-500 text-sm py-2">
+                    <div className="py-[0.5rem] text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.9375rem)] text-red-500">
                       {bulkLandError}
                     </div>
                   ) : (
@@ -911,22 +1013,24 @@ export default function Navbar() {
                         key={index}
                         href={`/bulk-land/${project.link}`}
                         onClick={closeAllMenus}
-                        className="flex items-center py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex items-center rounded-lg px-[0.5rem] py-[0.75rem] transition-colors hover:bg-gray-50"
                       >
-                        <div className="relative w-12 h-12 rounded-lg overflow-hidden mr-3 flex-shrink-0">
+                        <div className="relative mr-[0.75rem] h-[3rem] w-[3rem] shrink-0 overflow-hidden rounded-lg">
                           <Image
                             src={project.image}
                             alt={project.projectName}
                             fill
-                            sizes="48px"
+                            sizes="3rem"
                             className="object-cover"
                           />
                         </div>
+
                         <div className="flex-1">
-                          <div className="text-black font-medium text-sm">
+                          <div className="text-[clamp(0.8125rem,0.7rem_+_0.3vw,0.9375rem)] font-medium text-black">
                             {project.projectName}
                           </div>
-                          <div className="text-xs text-gray-500 mt-1">
+
+                          <div className="mt-[0.25rem] text-[clamp(0.6875rem,0.6rem_+_0.25vw,0.75rem)] text-gray-500">
                             {project.location}
                           </div>
                         </div>
@@ -937,21 +1041,22 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Mobile — static links */}
             {[
-              { href: "/dholera-sir-blogs", label: "Blogs" },
+              { href: "/dholera-sir-blogs", label: "Dholera Blogs" },
               { href: "/dholera-sir-updates", label: "Dholera SIR Updates" },
               { href: "/about-dholera-sir", label: "About Dholera" },
               { href: "/dholera-events", label: "Investor Meetups" },
               { href: "/contact", label: "Contact Us" },
               { href: "/about", label: "About Us" },
               { href: "/gallery", label: "Gallery" },
-            ].map(({ href, label }, i, arr) => (
+            ].map(({ href, label }, index, arr) => (
               <Link
                 key={href}
                 href={href}
                 onClick={closeAllMenus}
-                className={`block font-medium text-[clamp(0.875rem,2vw,1rem)] text-black hover:text-yellow-500 py-3 transition-colors ${i < arr.length - 1 ? "border-b border-gray-100" : ""}`}
+                className={`block py-[0.75rem] text-[clamp(0.875rem,0.75rem_+_0.45vw,1rem)] font-medium text-black transition-colors hover:text-yellow-500 ${
+                  index < arr.length - 1 ? "border-b border-gray-100" : ""
+                }`}
               >
                 {label}
               </Link>

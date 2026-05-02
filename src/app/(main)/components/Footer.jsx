@@ -30,7 +30,7 @@ export default function Footer() {
 
             <div className="space-y-4 text-sm text-gray-600">
               {/* Phone */}
-              <a
+              <Link
                 className="flex items-center gap-3 hover:text-yellow-500 transition-colors"
                 aria-label="BookMyAssets Phone"
                 href="tel:+918130371647"
@@ -39,10 +39,10 @@ export default function Footer() {
                   <FaPhone className="rotate-90 text-xs" />
                 </span>
                 +91 81 30 37 16 47
-              </a>
+              </Link>
 
               {/* Email */}
-              <a
+              <Link
                 className="flex items-center gap-3 hover:text-yellow-500 transition-colors"
                 aria-label="BookMyAssets Email"
                 href="mailto:info@bookmyassets.com"
@@ -51,10 +51,10 @@ export default function Footer() {
                   <FaEnvelope className="text-xs" />
                 </span>
                 info@bookmyassets.com
-              </a>
+              </Link>
 
               {/* Head Office */}
-              <a
+              <Link
                 className="flex items-start gap-3 hover:text-yellow-500 transition-colors"
                 aria-label="BookMyAssets Head Office"
                 href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7"
@@ -72,7 +72,7 @@ export default function Footer() {
                     Sector 48, Gurugram, Haryana 122001
                   </p>
                 </div>
-              </a>
+              </Link>
 
               {/* Branch Office */}
               <a
@@ -138,7 +138,7 @@ export default function Footer() {
           {/* Residential */}
           <div>
             <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
-              Residential
+              Residential Projects
             </h3>
             <ul className="space-y-3 text-sm text-gray-600">
               <li>
@@ -204,7 +204,7 @@ export default function Footer() {
                   href="/bulk-land/residential"
                   className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
                 >
-                  Bulk Land
+                  Bulk Land Deals
                 </Link>
               </li>
               <li>

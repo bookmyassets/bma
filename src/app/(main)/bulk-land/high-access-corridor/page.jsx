@@ -18,6 +18,10 @@ export default function page() {
         name="description"
         content="Invest in bulk land at Dholera High Access Corridor with verified documents and high growth prospects."
       />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/bulk-land/high-access-corridor"
+      />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image

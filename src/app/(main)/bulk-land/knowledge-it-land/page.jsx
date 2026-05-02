@@ -18,6 +18,10 @@ export default function page() {
         name="description"
         content="Explore IT and Knowledge Zone land in Dholera with verified papers and strong long term development potential."
       />
+      <link
+        rel="canonical"
+        href="https://www.bookmyassets.com/bulk-land/knowledge-it-land"
+      />
       <div className="relative h-[50vh] w-full mb-20">
         {/* Banner Image */}
         <Image
