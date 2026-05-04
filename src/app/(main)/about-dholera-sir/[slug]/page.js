@@ -627,7 +627,7 @@ export default async function Post({ params }) {
                 </div>
 
                 {/* Article Header */}
-                <div className="flex flex-col-reverse gap-8 mb-2 items-center">
+                <div className="flex flex-col gap-4 items-center">
                   {/* Article Header */}
                   <div className="w-full ">
                     <h1 className="text-[clamp(1rem,calc(2vw+1rem),2.5rem)] font-bold text-gray-900 mb-4 leading-tight">
