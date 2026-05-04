@@ -183,11 +183,15 @@ export default async function page() {
       />
 
       <title>
-        Dholera SIR | India's Largest Smart City & Investment Hub - BookMyAssets
+        About Dholera SIR - India’s First Smart City | BookMyAssets
       </title>
       <meta
         name="description"
-        content="Discover Dholera SIR - India's largest planned industrial and residential hub. Part of Delhi-Mumbai Industrial Corridor with world-class infrastructure, Tata semiconductor plant, and premium investment opportunities with BookMyAssets."
+        content="Dholera SIR, India’s first greenfield smart city Dholera. Know more about Dholera airport, expressway, activation area, infrastructure, industries & investment."
+      />
+      <metassssssssssssss
+        name="keywords"
+        content="Dholera SIR, Smart city Dholera"
       />
       <link
         rel="canonical"

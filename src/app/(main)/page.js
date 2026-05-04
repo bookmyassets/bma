@@ -18,12 +18,12 @@ export default function page() {
   return (
     <>
       <title>
-        Discover Investment-Ready Plots in Dholera Smart City | BookMyAssets
+        Govt Approved Plots in Dholera from ₹8 Lakh | BookMyAssets
       </title>
 
       <meta
         name="description"
-        content="Secure your future with BookMyAssets! Hassle-free residential property investment with clear titles and N.A. NOC. Start your journey today!"
+        content="Buy govt approved, registry-ready residential plots in Dholera Smart City from ₹8 Lakh. Get Project brochure, price list, & location details."
       />
       <meta
         name="keywords"
