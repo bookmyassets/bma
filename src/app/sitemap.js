@@ -44,8 +44,6 @@ export default async function sitemap() {
     { url: `${BASE_URL}/dholera-sir-updates`,     priority: 0.7, changeFrequency: "daily" },
     { url: `${BASE_URL}/about-dholera-sir`,       priority: 0.7, changeFrequency: "monthly" },
 
-    // Dholera Residential Plots — Static Pages
-    { url: `${BASE_URL}/dholera-residential-plots`,                   priority: 0.8, changeFrequency: "weekly" },
     { url: `${BASE_URL}/dholera-residential-plots/maple`,             priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/marina-bay`,        priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/orchid`,            priority: 0.8, changeFrequency: "monthly" },

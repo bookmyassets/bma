@@ -23,21 +23,20 @@ export default function BlogCard({ post }) {
         <div className="relative h-52">
           {post.mainImage ? (
             <Image
-  src={
-    urlFor(post.mainImage)
-      .width(600)
-      .height(338)
-      .auto("format")
-      .quality(60)
-      .url() || "/placeholder.svg"
-  }
-  alt={post.title}
-  fill
-  sizes="(max-width: 768px) 100vw, 33vw"
-  className="object-cover"
-  loading="lazy"
-/>
-
+              src={
+                urlFor(post.mainImage)
+                  .width(600)
+                  .height(338)
+                  .auto("format")
+                  .quality(60)
+                  .url() || "/placeholder.svg"
+              }
+              alt={post.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+              loading="lazy"
+            />
           ) : (
             <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21]"></div>
           )}
@@ -52,12 +51,12 @@ export default function BlogCard({ post }) {
           {/* Footer with "Read More" */}
           <div className="border-t border-gray-200 pt-4 mt-auto">
             <div className="flex justify-between text-sm">
-                <p className="text-sm text-black">
-                  {formatDate(post.publishedAt || post._createdAt)}
-                </p>
-                <p className="font-medium hover:underline text-[#deae3c]">
-                  Explore More →
-                </p>
+              <p className="text-sm text-black">
+                {formatDate(post.publishedAt || post._createdAt)}
+              </p>
+              <p className="font-medium hover:underline text-[#deae3c]">
+                Explore More →
+              </p>
             </div>
           </div>
         </div>
