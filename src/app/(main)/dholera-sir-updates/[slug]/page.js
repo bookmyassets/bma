@@ -61,7 +61,9 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   return (
     <aside className="lg:w-1/3 space-y-4 pt-4">
       <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
-        <h4 className="font-bold text-lg mb-3 text-gray-900">Get My Guide</h4>
+        <h4 className="font-bold text-lg mb-3 text-gray-900">
+          Get the Complete Dholera Investment Guide
+        </h4>
         <p className="text-gray-700 mb-4 text-sm">
           Learn which sectors are driving growth in Dholera.
         </p>
@@ -69,7 +71,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           href="tel:+918130371647"
           className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
         >
-          Get My Guide
+          Lets Connect
         </a>
       </div>
       <div className="sticky top-24 space-y-6">
@@ -762,7 +764,9 @@ export default async function Post({ params }) {
 
               {/* Right Sidebar */}
               <RightSidebar
-                trendingBlogs={trendingBlogs?.filter((item) => item.slug.current !== slug)}
+                trendingBlogs={trendingBlogs?.filter(
+                  (item) => item.slug.current !== slug,
+                )}
                 relatedProjects={relatedBlogs}
                 type="blog"
               />
