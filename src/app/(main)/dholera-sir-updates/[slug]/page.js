@@ -69,7 +69,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           href="tel:+918130371647"
           className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
         >
-          Book a Free Visit Site Now
+          Get My Guide
         </a>
       </div>
       <div className="sticky top-24 space-y-6">
@@ -77,10 +77,10 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
           <h3 className="text-xl font-bold mb-4 text-white">Latest Updates</h3>
           <div className="space-y-8 max-h-[400px] overflow-y-auto">
-            {trendingBlogs?.slice(0, 4).map((item) => (
+            {trendingBlogs?.slice(1, 5).map((item) => (
               <Link
                 key={item._id}
-                href={`/dholera-sir-Updates/${item.slug.current}`}
+                href={`/dholera-sir-updates/${item.slug.current}`}
               >
                 <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3  border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
@@ -157,8 +157,8 @@ export default async function Post({ params }) {
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
       getUpdateBySlug(slug),
-      getUpdates(0, 6), // Get 6 blogs for sidebar
-      getblogs(slug, 3),
+      getUpdates(1, 6), // Get 6 blogs for sidebar
+      getUpdates(slug, 3),
     ]);
 
     if (!post) {
@@ -762,7 +762,7 @@ export default async function Post({ params }) {
 
               {/* Right Sidebar */}
               <RightSidebar
-                trendingBlogs={trendingBlogs}
+                trendingBlogs={trendingBlogs?.filter((item) => item.slug.current !== slug)}
                 relatedProjects={relatedBlogs}
                 type="blog"
               />

@@ -783,7 +783,7 @@ export default async function Post({ params }) {
 
               {/* Right Sidebar */}
               <RightSidebar
-                trendingBlogs={trendingBlogs}
+                trendingBlogs={trendingBlogs?.filter((item) => item.slug.current !== slug)}
                 relatedProjects={relatedBlogs}
                 type="blog"
               />
