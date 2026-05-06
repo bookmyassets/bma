@@ -12,6 +12,7 @@ import Image from "next/image";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import SchemaMarkup from "../../components/SchemaMarkup";
+import LeadFormSlug from "../../components/LeadFormSlug";
 const URLFormatter = (text) => {
   if (!text) return "";
   return text
@@ -57,6 +58,12 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   return (
     <aside className="lg:w-1/3">
       <div className="sticky top-24 space-y-6">
+        <div className=" pt-4 max-w-xl mx-auto">
+          <LeadFormSlug
+            title="Buy Residential Plots in Dholera Starting From ₹8 Lakh"
+            buttonName="Know More"
+          />
+        </div>
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
           <h3 className="text-xl font-bold mb-4 text-white">
@@ -104,18 +111,6 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         </div>
 
         {/* Contact/CTA Card */}
-        <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
-          <h4 className="font-bold text-lg mb-3 text-gray-900">Get In Touch</h4>
-          <p className="text-gray-700 mb-4 text-sm">
-            Interested in our insights? Contact our experts
-          </p>
-          <a
-            href="tel:+918130371647"
-            className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
-          >
-            Contact Now
-          </a>
-        </div>
       </div>
     </aside>
   );
@@ -555,7 +550,7 @@ export default async function Post({ params }) {
             authorName: post.author?.name || "BookMyAssets",
           })}
         />
-        
+
         <SchemaMarkup
           schema={breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -597,10 +592,10 @@ export default async function Post({ params }) {
                             />
                           </svg>
                           <Link
-                            href="/dholera-sir-blogs"
+                            href="/about-dholera-sir"
                             className="ml-1 text-sm font-medium text-gray-500 hover:text-gray-700 md:ml-2"
                           >
-                            Blogs
+                            Dholera
                           </Link>
                         </div>
                       </li>

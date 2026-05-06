@@ -15,6 +15,7 @@ import SlugPageForm from "../../components/SlugPageForm";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
+import LeadFormSlug from "../../components/LeadFormSlug";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -60,19 +61,11 @@ const extractHeadings = (body) => {
 const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   return (
     <aside className="lg:w-1/3 space-y-4 pt-4">
-      <div className="bg-gradient-to-br from-[#C69C21]/10 to-[#FDB913]/10 rounded-xl p-6 border border-[#C69C21]/20">
-        <h4 className="font-bold text-lg mb-3 text-gray-900">
-          Get the Complete Dholera Investment Guide
-        </h4>
-        <p className="text-gray-700 mb-4 text-sm">
-          Learn which sectors are driving growth in Dholera.
-        </p>
-        <a
-          href="tel:+918130371647"
-          className="w-full bg-[#deae3c] hover:bg-[#f3bb39] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
-        >
-          Lets Connect
-        </a>
+      <div className=" pt-4 max-w-xl mx-auto">
+        <LeadFormSlug
+          title="Buy Residential Plots in Dholera Starting From ₹8 Lakh"
+          buttonName="Know More"
+        />
       </div>
       <div className="sticky top-24 space-y-6">
         {/* Latest Content Section */}
