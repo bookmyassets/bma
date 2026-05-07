@@ -125,10 +125,17 @@ export default function IndustrialZoneCards() {
         {/* Benefits Section */}
         <div className="mb-8">
           <h2 className="text-center text-3xl font-semibold mb-8">
-            Benefits of Buying Land in Industrial Zone
+            Key Benefits of Buying Industrial Land in Dholera
           </h2>
 
-          <div className={`flex flex-wrap justify-center gap-8 pt-4`}>
+          <p className="text-sm mt-4 mb-4 text-center">
+            Dholera Industrial Zone offers strong connectivity, planned
+            infrastructure, and scalable land options. It is suitable for
+            manufacturing, warehousing, logistics, and future business
+            expansion.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-8 pt-4">
             {benefits.map((benefit) => {
               const Icon = benefit.icon;
               const isFlipped = activeBenefit === benefit.id;
@@ -137,7 +144,7 @@ export default function IndustrialZoneCards() {
               return (
                 <div
                   key={benefit.id}
-                  className="relative h-48 sm:h-64 cursor-pointer w-full sm:w-5/12 md:w-64"
+                  className="relative h-48 sm:h-64 cursor-pointer w-full"
                   style={{ perspective: "1000px" }}
                   onClick={() => handleBenefitFlip(benefit.id)}
                 >
@@ -185,10 +192,17 @@ export default function IndustrialZoneCards() {
         {/* Projects Section */}
         <div className="pb-8 pt-4">
           <h3 className="text-center text-3xl font-semibold mb-8">
-            Types of Projects Allowed
+            Projects Allowed in Dholera Industrial Zone
           </h3>
 
-          <div className={`flex flex-wrap justify-center gap-8`}>
+          <p className="text-sm mt-4 mb-4 text-center">
+            This zone allows manufacturing units, warehouses, logistics, light
+            industries, and support services. It is useful for businesses
+            planning production, storage, distribution, or industrial
+            operations.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-8">
             {projects.map((project) => {
               const Icon = project.icon;
               const isFlipped = activeProject === project.id;
@@ -197,7 +211,7 @@ export default function IndustrialZoneCards() {
               return (
                 <div
                   key={project.id}
-                  className="relative h-48 sm:h-64 cursor-pointer w-full sm:w-5/12 md:w-64"
+                  className="relative h-48 sm:h-64 cursor-pointer w-full"
                   style={{ perspective: "1000px" }}
                   onClick={() => handleProjectFlip(project.id)}
                 >

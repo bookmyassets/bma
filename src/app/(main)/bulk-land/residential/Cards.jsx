@@ -134,124 +134,140 @@ export default function ResidentialZoneCards() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-8 bg-white">
-  <div className="p-4">
-    {/* Benefits Section */}
-    <div className="mb-8">
-      <h2 className="text-center text-3xl font-semibold mb-8">
-        Benefits of Buying Land in Residential Zone
-      </h2>
+    <div className="max-w-7xl mx-auto  p-8 bg-white">
+      <div className="p-4">
+        {/* Benefits Section */}
+        <div className="mb-8">
+          <h2 className="text-center text-3xl font-semibold mb-8">
+            Key Benefits of Buying Residential Zone Land in Dholera
+          </h2>
 
-      <div className={`flex flex-wrap justify-center gap-8 pt-4`}>
-        {benefits.map((benefit) => {
-          const Icon = benefit.icon;
-          const isFlipped = activeBenefit === benefit.id;
-          const colors = colorClasses[benefit.color];
+          <p className="text-sm mt-4 mb-4 text-center">
+            Dholera Residential Zone offers planned growth, better land use, and
+            long-term potential.It is suitable for housing projects, residential
+            planning, and future land investment.
+          </p>
 
-          return (
-            <div
-              key={benefit.id}
-              className="relative h-48 sm:h-64 cursor-pointer w-full sm:w-5/12 md:w-64"
-              style={{ perspective: "1000px" }}
-              onClick={() => handleBenefitFlip(benefit.id)}
-            >
-              <div
-                className="relative w-full h-full transition-transform duration-700"
-                style={{
-                  transformStyle: "preserve-3d",
-                  transform: isFlipped
-                    ? "rotateY(180deg)"
-                    : "rotateY(0deg)",
-                }}
-              >
-                {/* Front of card */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-8 pt-4">
+            {benefits.map((benefit) => {
+              const Icon = benefit.icon;
+              const isFlipped = activeBenefit === benefit.id;
+              const colors = colorClasses[benefit.color];
+
+              return (
                 <div
-                  className={`absolute w-full h-full flex flex-col items-center justify-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors`}
-                  style={{ backfaceVisibility: "hidden" }}
+                  key={benefit.id}
+                  className="relative h-48 sm:h-64 cursor-pointer w-full"
+                  style={{ perspective: "1000px" }}
+                  onClick={() => handleBenefitFlip(benefit.id)}
                 >
-                  <Icon className={`w-12 h-12 sm:w-16 sm:h-16 ${colors.icon}`} />
-                  <p className="text-base sm:text-lg font-medium text-gray-800">
-                    {benefit.title}
-                  </p>
-                </div>
+                  <div
+                    className="relative w-full h-full transition-transform duration-700"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transform: isFlipped
+                        ? "rotateY(180deg)"
+                        : "rotateY(0deg)",
+                    }}
+                  >
+                    {/* Front of card */}
+                    <div
+                      className={`absolute w-full h-full flex flex-col items-center justify-center text-center space-y-4 p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors`}
+                      style={{ backfaceVisibility: "hidden" }}
+                    >
+                      <Icon
+                        className={`w-12 h-12 sm:w-16 sm:h-16 ${colors.icon}`}
+                      />
+                      <p className="text-base sm:text-lg font-medium text-gray-800">
+                        {benefit.title}
+                      </p>
+                    </div>
 
-                {/* Back of card */}
-                <div
-                  className={`absolute w-full h-full flex items-center justify-center p-6 ${colors.bg} ${colors.hover} rounded-lg transition-colors`}
-                  style={{
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
-                  }}
-                >
-                  <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
-                    {benefit.description}
-                  </p>
+                    {/* Back of card */}
+                    <div
+                      className={`absolute w-full h-full flex items-center justify-center p-6 ${colors.bg} ${colors.hover} rounded-lg transition-colors`}
+                      style={{
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    >
+                      <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
+                        {benefit.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Projects Section */}
+        <div className="pb-8 pt-4">
+          <h3 className="text-center text-3xl font-semibold mb-8">
+            Projects Allowed in Dholera Residential Zone
+          </h3>
+
+          <p className="text-sm mt-4 mb-4 text-center">
+            This zone allows housing, retail, food, healthcare, education, and
+            community facilities. It is useful for residential projects with
+            daily-use services nearby.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-8">
+            {projects.map((project) => {
+              const Icon = project.icon;
+              const isFlipped = activeProject === project.id;
+              const colors = colorClasses[project.color];
+
+              return (
+                <div
+                  key={project.id}
+                  className="relative h-48 sm:h-64 cursor-pointer w-full"
+                  style={{ perspective: "1000px" }}
+                  onClick={() => handleProjectFlip(project.id)}
+                >
+                  <div
+                    className="relative w-full h-full transition-transform duration-700"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transform: isFlipped
+                        ? "rotateY(180deg)"
+                        : "rotateY(0deg)",
+                    }}
+                  >
+                    {/* Front of card */}
+                    <div
+                      className={`absolute w-full h-full flex flex-col items-center justify-center text-center space-y-4 p-6 ${colors.bg} rounded-lg ${colors.hover} transition-colors`}
+                      style={{ backfaceVisibility: "hidden" }}
+                    >
+                      <Icon
+                        className={`w-12 h-12 sm:w-16 sm:h-16 ${colors.icon}`}
+                      />
+                      <p className="text-base sm:text-lg font-medium text-gray-800">
+                        {project.title}
+                      </p>
+                    </div>
+
+                    {/* Back of card */}
+                    <div
+                      className={`absolute w-full h-full flex items-center justify-center p-6 ${colors.bg} ${colors.hover} rounded-lg transition-colors`}
+                      style={{
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    >
+                      <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
-
-    {/* Projects Section */}
-    <div className="pb-8 pt-4">
-      <h3 className="text-center text-3xl font-semibold mb-8">
-        Types of Projects Allowed
-      </h3>
-
-      <div className={`flex flex-wrap justify-center gap-8`}>
-        {projects.map((project) => {
-          const Icon = project.icon;
-          const isFlipped = activeProject === project.id;
-          const colors = colorClasses[project.color];
-
-          return (
-            <div
-              key={project.id}
-              className="relative h-48 sm:h-64 cursor-pointer w-full sm:w-5/12 md:w-64"
-              style={{ perspective: "1000px" }}
-              onClick={() => handleProjectFlip(project.id)}
-            >
-              <div
-                className="relative w-full h-full transition-transform duration-700"
-                style={{
-                  transformStyle: "preserve-3d",
-                  transform: isFlipped
-                    ? "rotateY(180deg)"
-                    : "rotateY(0deg)",
-                }}
-              >
-                {/* Front of card */}
-                <div
-                  className={`absolute w-full h-full flex flex-col items-center justify-center text-center space-y-4 p-6 ${colors.bg} rounded-lg ${colors.hover} transition-colors`}
-                  style={{ backfaceVisibility: "hidden" }}
-                >
-                  <Icon className={`w-12 h-12 sm:w-16 sm:h-16 ${colors.icon}`} />
-                  <p className="text-base sm:text-lg font-medium text-gray-800">
-                    {project.title}
-                  </p>
-                </div>
-
-                {/* Back of card */}
-                <div
-                  className={`absolute w-full h-full flex items-center justify-center p-6 ${colors.bg} ${colors.hover} rounded-lg transition-colors`}
-                  style={{
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
-                  }}
-                >
-                  <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  </div>
-</div>
   );
 }
