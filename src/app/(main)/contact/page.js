@@ -48,10 +48,10 @@ const ContactPage = () => {
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
 
@@ -155,7 +155,7 @@ const ContactPage = () => {
             tags: ["Website Lead", "Contact Form", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -238,7 +238,6 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-
       <link rel="canonical" href={canonicalUrl} />
       <title>Contact BookMyAssets | Buy Plots in Dholera SIR</title>
       <meta
@@ -272,15 +271,17 @@ const ContactPage = () => {
             </div>
 
             {/* Second Line */}
-            <div className="flex items-center justify-center md:justify-start mt-2">
-              <div className="h-[2px] w-20 bg-[#FDB913]"></div>
-              <div className="h-[2px] w-20 bg-[#FDB913] ml-4"></div>
-            </div>
+            
 
             {/* Description Text */}
             <p className="text-black mt-6 text-lg md:text-xl max-w-lg mx-auto md:mx-0">
-              We welcome you to the world of sheer convenience where all your
-              property and financing needs are made super easy.
+              Have questions about Dholera investment or need expert guidance?
+              BookMyAssets is here to help you with verified projects and
+              complete support at every step.
+              <br />
+              Whether you are a first-time buyer or an experienced investor,
+              connect with us for transparent assistance and the latest updates
+              on Dholera Smart City opportunities.
             </p>
           </div>
         </div>
@@ -299,7 +300,7 @@ const ContactPage = () => {
       {/* Contact Section */}
       <div className="bg-gray-100 py-10 flex-grow">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex flex-col-reverse md:flex-row gap-8">
             {/* Contact Info */}
             <div className="w-full md:w-1/3 bg-white rounded-lg shadow-lg p-6">
               <div className="mb-8">
@@ -361,7 +362,7 @@ const ContactPage = () => {
                   <a
                     href="mailto:info@bookmyassets.com"
                     className="text-blue-600 hover:underline"
-                    aria-label='BookMyAssets Email'
+                    aria-label="BookMyAssets Email"
                   >
                     info@bookmyassets.com
                   </a>
@@ -387,7 +388,7 @@ const ContactPage = () => {
                   <a
                     href="tel:+918130371647"
                     className="text-blue-600 hover:underline"
-                    aria-label='BookMyAssets Phone'
+                    aria-label="BookMyAssets Phone"
                   >
                     +91 81 30 37 1647
                   </a>
@@ -397,7 +398,7 @@ const ContactPage = () => {
                   <a
                     href="https://www.facebook.com/share/1AXGEEX1M8/"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label='Visit Facebook Page of BookMyAssets'
+                    aria-label="Visit Facebook Page of BookMyAssets"
                   >
                     <span className="sr-only">Facebook</span>
                     <svg
@@ -411,7 +412,7 @@ const ContactPage = () => {
                   <a
                     href="https://x.com/BookMyAssets"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label='Visit X handle of BookMyAssets'
+                    aria-label="Visit X handle of BookMyAssets"
                   >
                     <span className="sr-only">Twitter</span>
                     <svg
@@ -425,7 +426,7 @@ const ContactPage = () => {
                   <a
                     href="https://www.linkedin.com/company/bookmyassetss"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label='Visit LinkedIn Profile of BookMyAssets'
+                    aria-label="Visit LinkedIn Profile of BookMyAssets"
                   >
                     <span className="sr-only">LinkedIn</span>
                     <svg
@@ -439,7 +440,7 @@ const ContactPage = () => {
                   <a
                     href="https://www.instagram.com/bookmyassets/"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label='Visit Instagram Account of BookMyAssets'
+                    aria-label="Visit Instagram Account of BookMyAssets"
                   >
                     <span className="sr-only">Instagram</span>
                     <svg
@@ -453,7 +454,7 @@ const ContactPage = () => {
                   <a
                     href="https://www.youtube.com/@BookMyAssets"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label='Visit YouTube Channel of BookMyAssets'
+                    aria-label="Visit YouTube Channel of BookMyAssets"
                   >
                     <span className="sr-only">YouTube</span>
                     <svg
