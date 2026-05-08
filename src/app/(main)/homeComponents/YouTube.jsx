@@ -95,7 +95,7 @@ export default function ShortsSection() {
     >
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-[#deae3c] font-bold text-center mb-2">
-          Dholera Latest Updates
+          Dholera Drone Shorts{" "}
         </h2>
         <p className="text-center font-light text-white text-lg mb-6">
           Witness real-time progress of Dholera Smart City Project and Latest

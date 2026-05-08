@@ -229,12 +229,12 @@ export default function LatestUpdates() {
         <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
           {/* ✅ clamp() — section heading scales between 20px and 36px */}
           <p className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-center font-bold text-gray-800 mb-4">
-            Everything about Dholera Smart City
+            Dholera Smart City Updates & Blogs
           </p>
           {/* ✅ clamp() — subheading scales between 14px and 18px */}
           <p className="text-[clamp(0.875rem,1.5vw,1.125rem)] text-gray-600 text-center mb-12 max-w-5xl mx-auto">
-            Stay updated with the latest developments, project updates, dholera
-            plots for sale, and important insights from Dholera Smart City.
+            Stay updated with the latest developments, project updates and
+            important investment insights from Dholera Smart City.
           </p>
 
           {/* Slider */}

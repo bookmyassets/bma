@@ -67,7 +67,7 @@ export default function HeroForm() {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
- const loadRecaptcha = useCallback(() => {
+  const loadRecaptcha = useCallback(() => {
     if (recaptchaLoaded) return;
     const s = document.createElement("script");
     s.src = "https://www.google.com/recaptcha/api.js";
@@ -188,11 +188,9 @@ export default function HeroForm() {
 
   return (
     // ✅ calc() — padding scales with viewport instead of hard breakpoint jumps
-     <div className="w-full bg-white rounded-xl max-w-lg p-[clamp(1rem,2vw,1.5rem)] md:overflow-hidden shadow-lg">
- 
+    <div className="w-full bg-white rounded-xl max-w-lg p-[clamp(1rem,2vw,1.5rem)] md:overflow-hidden shadow-lg">
       {/* ── Logo + Headline ── */}
       <div className="text-center mb-[clamp(0.75rem,1.5vw,1.25rem)]">
- 
         {/* Logo — desktop only */}
         <div className="relative w-[clamp(200px,18vw,280px)] aspect-[3/1] mx-auto mb-[clamp(0.4rem,0.85vw,0.75rem)] hidden md:block">
           <Image
@@ -204,18 +202,18 @@ export default function HeroForm() {
             fetchPriority="high"
           />
         </div>
- 
+
         {/* Headline */}
         <div className="flashy-blink space-y-[clamp(0.2rem,0.5vw,0.4rem)]">
           <h2 className="text-[clamp(1.1rem,2vw,1.35rem)] font-bold glowing-text px-2 leading-snug">
-           Buy Residential Plots in Dholera
+            Buy Residential Plots in Dholera
           </h2>
           <p className="text-[clamp(0.875rem,1.25vw,1rem)] glowing-text px-2">
-            Starting from ₹8 Lakh
+            Get Project Details{" "}
           </p>
         </div>
       </div>
- 
+
       {/* ── Success State ── */}
       {showPopup ? (
         <div
@@ -242,7 +240,7 @@ export default function HeroForm() {
               </svg>
             </div>
           </div>
- 
+
           <h2 className="text-[clamp(1.1rem,2vw,1.35rem)] font-bold text-black mb-[clamp(0.3rem,0.75vw,0.5rem)]">
             Thank You!
           </h2>
@@ -254,7 +252,6 @@ export default function HeroForm() {
             consultation.
           </p>
         </div>
- 
       ) : (
         /* ── Form ── */
         <form
@@ -270,7 +267,7 @@ export default function HeroForm() {
               {errorMessage}
             </div>
           )}
- 
+
           {/* Name + Phone */}
           <div className="grid grid-cols-2 gap-[clamp(0.5rem,1.5vw,0.875rem)]">
             <FormInput
@@ -297,12 +294,12 @@ export default function HeroForm() {
               aria-label="Phone Number"
             />
           </div>
- 
+
           {/* reCAPTCHA */}
           <div className="flex justify-center">
             <div ref={recaptchaRef} />
           </div>
- 
+
           {/* Submit */}
           <button
             type="submit"
@@ -330,4 +327,3 @@ export default function HeroForm() {
     </div>
   );
 }
- 
