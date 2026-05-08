@@ -29,8 +29,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="google-site-verification" content="YrX73EQCsMkKBmh2pHUc" />
         <meta name="facebook-domain-verification" content="6dgiuxe5g66y85" />
-
-        
+        <meta name="msvalidate.01" content="4EEB445EE58BDF9E15EFDE4DB906372D" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
 
