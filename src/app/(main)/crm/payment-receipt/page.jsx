@@ -1,15 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-// Predefined project options with codes
 const PROJECT_OPTIONS = [
   { name: "WestWyn Residency", code: "WWR" },
   { name: "WestWyn Estates", code: "WWE" },
 ];
 
-// Adjusted coordinates based on your template layout
-// These coordinates position text within the table cells properly
 const COORDINATES = {
   receiptNumber: {
     page: 1,
@@ -89,10 +86,10 @@ const COORDINATES = {
 const FIELDS = [
   {
     key: "receiptNumber",
-    label: "Receipt Number (Last Part)",
+    label: "Receipt Number",
     type: "text",
-    placeholder: "e.g. 001",
-    maxLength: 10,
+    placeholder: "e.g. BMA/001/2026-27",
+    maxLength: 30,
   },
   {
     key: "receivedFrom",
@@ -222,7 +219,6 @@ const numberToWords = (num) => {
     );
   };
 
-  // Remove commas from input and parse
   const cleanNumber = parseFloat(num.toString().replace(/,/g, ""));
   if (isNaN(cleanNumber)) return "";
 
@@ -231,7 +227,7 @@ const numberToWords = (num) => {
   return result ? `${result} Rupees Only` : "";
 };
 
-// Format date to Indian format (e.g., 24th April 2026)
+// Format date to Indian format (e.g., 24 April 2026)
 const formatIndianDate = (dateStr) => {
   if (!dateStr) return "";
 
@@ -260,40 +256,20 @@ const formatIndianDate = (dateStr) => {
     "December",
   ];
 
-  // Add ordinal suffix to day
-  /* const getOrdinal = (n) => {
-    if (n > 3 && n < 21) return "th";
-    switch (n % 10) {
-      case 1:
-        return "st";
-      case 2:
-        return "nd";
-      case 3:
-        return "rd";
-      default:
-        return "th";
-    }
-  }; */
-
   return `${day} ${months[month]} ${year}`;
-  /* return `${day}${getOrdinal(day)} ${months[month]} ${year}`; */
 };
 
 // Format number to Indian currency format (e.g., 49,999)
 const formatIndianCurrency = (numStr) => {
   if (!numStr) return "";
 
-  // Remove any existing commas and non-numeric characters except decimal
   const cleanNum = numStr.toString().replace(/[^0-9.]/g, "");
   if (!cleanNum) return "";
 
   const num = parseFloat(cleanNum);
   if (isNaN(num)) return "";
 
-  // Format as Indian currency
   const integerPart = Math.floor(num).toString();
-
-  // Format integer part with Indian numbering system (last 3 digits, then 2 digits groups)
   const lastThree = integerPart.slice(-3);
   const otherNumbers = integerPart.slice(0, -3);
   const formatted =
@@ -304,12 +280,6 @@ const formatIndianCurrency = (numStr) => {
   return formatted;
 };
 
-// Format receipt number (BMA/_____/2026-27)
-const formatReceiptNumber = (lastPart, year = "2026-27") => {
-  if (!lastPart) return "";
-  return `BMA/${lastPart}/${year}`;
-};
-
 export default function PaymentReceiptPage() {
   const [form, setForm] = useState(defaultForm);
   const [loading, setLoading] = useState(false);
@@ -317,7 +287,20 @@ export default function PaymentReceiptPage() {
   const [showAlignment, setShowAlignment] = useState(false);
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
-  const [financialYear, setFinancialYear] = useState("2026-27");
+  const [lastReceiptNumber, setLastReceiptNumber] = useState("");
+
+  // On mount: fetch last saved receipt number and prefill the field
+  useEffect(() => {
+    fetch("/api/fill-payment-receipt")
+      .then((r) => r.json())
+      .then(({ lastReceiptNumber }) => {
+        if (lastReceiptNumber) {
+          setLastReceiptNumber(lastReceiptNumber);
+          setForm((prev) => ({ ...prev, receiptNumber: lastReceiptNumber }));
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -325,10 +308,8 @@ export default function PaymentReceiptPage() {
     setForm((prev) => {
       const newForm = { ...prev, [name]: value };
 
-      // Auto-convert amount in numbers to words
       if (name === "amountInNumbers") {
-        const words = numberToWords(value);
-        newForm.amountInWords = words;
+        newForm.amountInWords = numberToWords(value);
       }
 
       return newForm;
@@ -338,7 +319,6 @@ export default function PaymentReceiptPage() {
   };
 
   const handleSubmit = async () => {
-    // Check required fields (excluding readonly fields)
     const requiredFields = FIELDS.filter(
       (f) => !f.readonly && f.key !== "remarks",
     );
@@ -346,45 +326,29 @@ export default function PaymentReceiptPage() {
 
     if (empty.length) {
       setError(
-        `Please fill all required fields. Missing: ${empty
-          .map((f) => f.label)
-          .join(", ")}`,
+        `Please fill all required fields. Missing: ${empty.map((f) => f.label).join(", ")}`,
       );
       return;
     }
 
-    // Get project code for filename
     const selectedProject = PROJECT_OPTIONS.find(
       (p) => p.name === form.projectName,
     );
     const projectCode = selectedProject ? selectedProject.code : "";
 
-    // Format date for filename (DDMMYYYY)
     const formatDateForFilename = (dateStr) => {
       if (!dateStr) return "";
       return dateStr.replace(/\//g, "");
     };
 
-    // Format the receipt number with full format
-    const fullReceiptNumber = formatReceiptNumber(
-      form.receiptNumber,
-      financialYear,
-    );
-
-    // Format the payment date to Indian format
     const formattedDate = formatIndianDate(form.paymentDate);
-
-    // Format amount in Indian currency (without ₹ symbol for PDF)
     const formattedAmount = formatIndianCurrency(form.amountInNumbers);
-
-    // Create filename
     const filename = `Payment Receipt_Unit_${form.plotNumber}_${projectCode}_${formatDateForFilename(form.paymentDate)}.pdf`;
 
     setLoading(true);
     setError("");
 
     try {
-      // Apply offsets if in alignment mode
       let adjustedCoordinates = { ...COORDINATES };
       if (showAlignment) {
         adjustedCoordinates = Object.keys(COORDINATES).reduce((acc, key) => {
@@ -397,16 +361,15 @@ export default function PaymentReceiptPage() {
         }, {});
       }
 
-      // Prepare data with formatted values - USING "Rs." INSTEAD OF "₹"
       const formattedFormData = {
-        receiptNumber: fullReceiptNumber,
+        receiptNumber: form.receiptNumber, // stamped exactly as typed — no transformation
         receivedFrom: form.receivedFrom,
         projectName: form.projectName,
         plotNumber: form.plotNumber,
         paymentDate: formattedDate,
         referenceNo: form.referenceNo,
         modeOfPayment: form.modeOfPayment,
-        amountInNumbers: `Rs. ${formattedAmount}`, // Changed from ₹ to Rs.
+        amountInNumbers: `Rs. ${formattedAmount}`,
         amountInWords: form.amountInWords,
         remarks: form.remarks,
       };
@@ -424,6 +387,9 @@ export default function PaymentReceiptPage() {
         const { error: msg } = await res.json().catch(() => ({}));
         throw new Error(msg || "Failed to generate PDF");
       }
+
+      // Update badge after successful generation
+      setLastReceiptNumber(form.receiptNumber);
 
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
@@ -446,22 +412,6 @@ export default function PaymentReceiptPage() {
     return selectedProject ? selectedProject.code : "PROJECTCODE";
   };
 
-  // Get preview of formatted values
-  const getPreviewReceiptNumber = () => {
-    if (!form.receiptNumber) return "";
-    return formatReceiptNumber(form.receiptNumber, financialYear);
-  };
-
-  const getPreviewFormattedDate = () => {
-    if (!form.paymentDate) return "";
-    return formatIndianDate(form.paymentDate);
-  };
-
-  const getPreviewFormattedAmount = () => {
-    if (!form.amountInNumbers) return "";
-    return `Rs. ${formatIndianCurrency(form.amountInNumbers)}`; // Changed from ₹ to Rs.
-  };
-
   return (
     <>
       <meta name="robots" content="noindex, nofollow" />
@@ -479,27 +429,15 @@ export default function PaymentReceiptPage() {
             </p>
           </div>
 
-          {/* Financial Year Selection */}
-          <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-            <label className="block text-base text-black mb-1.5">
-              Financial Year
-              <span className="ml-1 text-red-400 text-[10px]">*</span>
-            </label>
-            <select
-              value={financialYear}
-              onChange={(e) => setFinancialYear(e.target.value)}
-              className="w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black focus:outline-none focus:border-amber-500 transition-colors"
-            >
-              <option value="2025-26">2025-26</option>
-              <option value="2026-27">2026-27</option>
-              <option value="2027-28">2027-28</option>
-              <option value="2028-29">2028-29</option>
-              <option value="2029-30">2029-30</option>
-            </select>
-            <p className="text-xs text-neutral-600 mt-1">
-              Receipt format: BMA/[number]/{financialYear}
-            </p>
-          </div>
+          {/* Last receipt number badge */}
+          {lastReceiptNumber && (
+            <div className="mb-5 flex items-center gap-2 px-3 py-2 bg-neutral-50 border border-neutral-200 rounded-lg text-sm text-neutral-600">
+              <span>🧾 Last generated receipt:</span>
+              <span className="font-mono font-semibold text-black">
+                {lastReceiptNumber}
+              </span>
+            </div>
+          )}
 
           {/* Alignment Toggle */}
           <div className="mb-4 flex items-center justify-between p-3 bg-white rounded-lg border border-neutral-800">
@@ -597,11 +535,8 @@ export default function PaymentReceiptPage() {
               💡 <span className="font-semibold">Note:</span>
             </p>
             <ul className="text-base text-amber-400 mt-2 space-y-1 list-disc list-inside">
-              <li>
-                Receipt number will be formatted as: BMA/[your input]/
-                {financialYear}
-              </li>
-              <li>Payment date will be formatted as: 24th April 2026</li>
+              <li>Receipt number is stamped exactly as you type it</li>
+              <li>Payment date will be formatted as: 24 April 2026</li>
               <li>Amount will be formatted in Indian currency: Rs. 49,999</li>
               <li>Amount in words auto-generates with "Rupees Only" suffix</li>
             </ul>
@@ -622,7 +557,7 @@ export default function PaymentReceiptPage() {
                   <div className="flex justify-between">
                     <span className="text-neutral-600">Receipt Number:</span>
                     <span className="text-black font-mono">
-                      {getPreviewReceiptNumber()}
+                      {form.receiptNumber}
                     </span>
                   </div>
                 )}
@@ -630,7 +565,7 @@ export default function PaymentReceiptPage() {
                   <div className="flex justify-between">
                     <span className="text-neutral-600">Payment Date:</span>
                     <span className="text-black">
-                      {getPreviewFormattedDate()}
+                      {formatIndianDate(form.paymentDate)}
                     </span>
                   </div>
                 )}
@@ -638,7 +573,7 @@ export default function PaymentReceiptPage() {
                   <div className="flex justify-between">
                     <span className="text-neutral-600">Amount:</span>
                     <span className="text-black font-semibold">
-                      {getPreviewFormattedAmount()}
+                      Rs. {formatIndianCurrency(form.amountInNumbers)}
                     </span>
                   </div>
                 )}
