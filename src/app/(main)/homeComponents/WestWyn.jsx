@@ -8,7 +8,7 @@ const PROJECTS = [
   {
     image: img2,
     name: "WestWyn Residency",
-    subtext: "Registry ready plots under ₹8 lakh*",
+    subtext: "Registry ready plots starting from ₹8 lakh*",
     tag: "Premium plots",
     href: "/dholera-residential-plots/westwyn-residency",
     description:
