@@ -151,6 +151,28 @@ const FIELDS = [
 
 const defaultForm = Object.fromEntries(FIELDS.map((f) => [f.key, ""]));
 
+const fetchReceiptCounter = async (projectName, paymentDate, signal) => {
+  if (!projectName) {
+    return { lastReceiptNumber: "", nextReceiptNumber: "" };
+  }
+
+  const params = new URLSearchParams({ projectName });
+  if (paymentDate) {
+    params.set("paymentDate", paymentDate);
+  }
+
+  const res = await fetch(`/api/fill-payment-receipt?${params.toString()}`, {
+    signal,
+  });
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error || "Failed to load receipt counter");
+  }
+
+  return data;
+};
+
 // Convert number to words in Indian Rupees format
 const numberToWords = (num) => {
   if (!num || num === 0) return "";
@@ -219,7 +241,7 @@ const numberToWords = (num) => {
     );
   };
 
-  const cleanNumber = parseFloat(num.toString().replace(/,/g, ""));
+  const cleanNumber = parseFloat(num.toString().replace(/[^0-9.]/g, ""));
   if (isNaN(cleanNumber)) return "";
 
   const amount = Math.floor(cleanNumber);
@@ -289,18 +311,37 @@ export default function PaymentReceiptPage() {
   const [offsetY, setOffsetY] = useState(0);
   const [lastReceiptNumber, setLastReceiptNumber] = useState("");
 
-  // On mount: fetch last saved receipt number and prefill the field
+  // Fetch the project-specific receipt number and prefill the field.
   useEffect(() => {
-    fetch("/api/fill-payment-receipt")
-      .then((r) => r.json())
-      .then(({ lastReceiptNumber }) => {
-        if (lastReceiptNumber) {
-          setLastReceiptNumber(lastReceiptNumber);
-          setForm((prev) => ({ ...prev, receiptNumber: lastReceiptNumber }));
+    if (!form.projectName) {
+      setLastReceiptNumber("");
+      setForm((prev) =>
+        prev.receiptNumber ? { ...prev, receiptNumber: "" } : prev,
+      );
+      return;
+    }
+
+    const controller = new AbortController();
+
+    fetchReceiptCounter(form.projectName, form.paymentDate, controller.signal)
+      .then(({ lastReceiptNumber, nextReceiptNumber }) => {
+        setLastReceiptNumber(lastReceiptNumber || "");
+
+        if (nextReceiptNumber) {
+          setForm((prev) => ({
+            ...prev,
+            receiptNumber: nextReceiptNumber,
+          }));
         }
       })
-      .catch(() => {});
-  }, []);
+      .catch((err) => {
+        if (err.name !== "AbortError") {
+          setError(err.message);
+        }
+      });
+
+    return () => controller.abort();
+  }, [form.projectName, form.paymentDate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -380,6 +421,7 @@ export default function PaymentReceiptPage() {
         body: JSON.stringify({
           formData: formattedFormData,
           coordinates: adjustedCoordinates,
+          paymentDate: form.paymentDate,
         }),
       });
 
@@ -398,6 +440,18 @@ export default function PaymentReceiptPage() {
       a.download = filename;
       a.click();
       URL.revokeObjectURL(url);
+
+      const counter = await fetchReceiptCounter(
+        form.projectName,
+        form.paymentDate,
+      );
+      setLastReceiptNumber(counter.lastReceiptNumber || form.receiptNumber);
+      if (counter.nextReceiptNumber) {
+        setForm((prev) => ({
+          ...prev,
+          receiptNumber: counter.nextReceiptNumber,
+        }));
+      }
     } catch (err) {
       setError(err.message);
     } finally {

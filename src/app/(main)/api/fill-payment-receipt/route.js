@@ -7,35 +7,132 @@ import {
   receiptCounterClient,
 } from "@/sanity/lib/writeClient";
 
-const RECEIPT_COUNTER_ID = "receiptCounter.bma";
-const INITIAL_RECEIPT_NUMBER = "BMA-027";
+const RECEIPT_PREFIX = "BMA";
+const PROJECT_INITIAL_RECEIPTS = {
+  "westwyn-residency": "BMA/28/2026-27",
+  "westwyn-estates": "BMA/201/2026-27",
+};
 
-async function getLastReceiptNumber() {
-  const data = await receiptCounterClient.fetch(
-    `*[_id == $id][0]{lastReceiptNumber}`,
-    { id: RECEIPT_COUNTER_ID },
-  );
-
-  return data?.lastReceiptNumber || INITIAL_RECEIPT_NUMBER;
+function getProjectKey(projectName) {
+  return (projectName || "default")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
-async function saveLastReceiptNumber(receiptNumber) {
+function getFinancialYear(dateValue) {
+  let date = new Date();
+
+  if (dateValue) {
+    const parts = dateValue.split("/");
+    if (parts.length === 3) {
+      const day = Number(parts[0]);
+      const month = Number(parts[1]) - 1;
+      const year = Number(parts[2]);
+      const parsedDate = new Date(year, month, day);
+
+      if (!isNaN(parsedDate.getTime())) {
+        date = parsedDate;
+      }
+    }
+  }
+
+  const startYear =
+    date.getMonth() >= 3 ? date.getFullYear() : date.getFullYear() - 1;
+  const endYear = String((startYear + 1) % 100).padStart(2, "0");
+
+  return `${startYear}-${endYear}`;
+}
+
+function getCounterId(projectKey, financialYear) {
+  return `receiptCounter.bma.${projectKey}.${financialYear}`;
+}
+
+function getInitialReceiptNumber(projectKey, financialYear) {
+  const projectInitial = PROJECT_INITIAL_RECEIPTS[projectKey];
+
+  if (projectInitial?.endsWith(`/${financialYear}`)) {
+    return projectInitial;
+  }
+
+  return `${RECEIPT_PREFIX}/001/${financialYear}`;
+}
+
+function getNextReceiptNumber(lastReceiptNumber, projectKey, financialYear) {
+  if (!lastReceiptNumber) {
+    return getInitialReceiptNumber(projectKey, financialYear);
+  }
+
+  const match = lastReceiptNumber.match(/^([A-Z]+)\/(\d+)\/(\d{4}-\d{2})$/);
+
+  if (!match) {
+    return getInitialReceiptNumber(projectKey, financialYear);
+  }
+
+  const [, prefix, number, year] = match;
+  if (year !== financialYear) {
+    return `${prefix}/001/${financialYear}`;
+  }
+
+  const nextNumber = Number(number) + 1;
+  const width = number.length >= 3 ? number.length : 0;
+  const formattedNumber = width
+    ? String(nextNumber).padStart(width, "0")
+    : String(nextNumber);
+
+  return `${prefix}/${formattedNumber}/${financialYear}`;
+}
+
+async function getProjectReceiptCounter(projectName, paymentDate) {
+  const projectKey = getProjectKey(projectName);
+  const financialYear = getFinancialYear(paymentDate);
+  const counterId = getCounterId(projectKey, financialYear);
+  const data = await receiptCounterClient.fetch(
+    `*[_id == $id][0]{lastReceiptNumber}`,
+    { id: counterId },
+  );
+  const lastReceiptNumber = data?.lastReceiptNumber || "";
+
+  return {
+    financialYear,
+    lastReceiptNumber,
+    nextReceiptNumber: getNextReceiptNumber(
+      lastReceiptNumber,
+      projectKey,
+      financialYear,
+    ),
+    projectKey,
+  };
+}
+
+async function saveLastReceiptNumber(receiptNumber, projectName, paymentDate) {
   if (!receiptNumber) return;
 
   if (!hasSanityWriteToken) {
     throw new Error("Missing SANITY_API_WRITE_TOKEN for receipt counter update");
   }
 
+  const projectKey = getProjectKey(projectName);
+  const financialYear = getFinancialYear(paymentDate);
+  const counterId = getCounterId(projectKey, financialYear);
+
   await receiptCounterClient.createIfNotExists({
-    _id: RECEIPT_COUNTER_ID,
+    _id: counterId,
     _type: "receiptCounter",
-    title: "BMA Receipt Counter",
-    lastReceiptNumber: INITIAL_RECEIPT_NUMBER,
+    title: `BMA Receipt Counter - ${projectName || "Default"} - ${financialYear}`,
+    projectName: projectName || "",
+    projectKey,
+    financialYear,
+    lastReceiptNumber: getInitialReceiptNumber(projectKey, financialYear),
   });
 
   await receiptCounterClient
-    .patch(RECEIPT_COUNTER_ID)
+    .patch(counterId)
     .set({
+      projectName: projectName || "",
+      projectKey,
+      financialYear,
       lastReceiptNumber: receiptNumber,
       updatedAt: new Date().toISOString(),
     })
@@ -43,11 +140,22 @@ async function saveLastReceiptNumber(receiptNumber) {
 }
 
 // GET — returns the last saved receipt number string
-export async function GET() {
+export async function GET(request) {
   try {
-    return NextResponse.json({
-      lastReceiptNumber: await getLastReceiptNumber(),
-    });
+    const searchParams = new URL(request.url).searchParams;
+    const projectName = searchParams.get("projectName") || "";
+    const paymentDate = searchParams.get("paymentDate") || "";
+
+    if (!projectName) {
+      return NextResponse.json({
+        lastReceiptNumber: "",
+        nextReceiptNumber: "",
+      });
+    }
+
+    return NextResponse.json(
+      await getProjectReceiptCounter(projectName, paymentDate),
+    );
   } catch (error) {
     return NextResponse.json(
       { error: error.message || "Failed to load receipt counter" },
@@ -59,7 +167,7 @@ export async function GET() {
 // POST — generates the PDF and saves the receipt number
 export async function POST(request) {
   try {
-    const { formData, coordinates } = await request.json();
+    const { formData, coordinates, paymentDate } = await request.json();
 
     // Load the PDF template
     const templatePath = path.join(
@@ -103,7 +211,11 @@ export async function POST(request) {
     const pdfBytes = await pdfDoc.save();
 
     // Persist the receipt number exactly as provided (no transformation)
-    await saveLastReceiptNumber(formData.receiptNumber);
+    await saveLastReceiptNumber(
+      formData.receiptNumber,
+      formData.projectName,
+      paymentDate,
+    );
 
     // Return the PDF as a download
     return new NextResponse(pdfBytes, {

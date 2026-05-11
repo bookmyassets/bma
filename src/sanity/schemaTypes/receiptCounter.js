@@ -16,6 +16,24 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "projectName",
+      title: "Project Name",
+      type: "string",
+      readOnly: true,
+    },
+    {
+      name: "projectKey",
+      title: "Project Key",
+      type: "string",
+      readOnly: true,
+    },
+    {
+      name: "financialYear",
+      title: "Financial Year",
+      type: "string",
+      readOnly: false,
+    },
+    {
       name: "updatedAt",
       title: "Updated At",
       type: "datetime",
