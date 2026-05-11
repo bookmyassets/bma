@@ -2,26 +2,57 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import {
+  hasSanityWriteToken,
+  receiptCounterClient,
+} from "@/sanity/lib/writeClient";
 
-const counterPath = path.join(
-  process.cwd(),
-  "public",
-  "assets",
-  "receipt-counter.json",
-);
+const RECEIPT_COUNTER_ID = "receiptCounter.bma";
+const INITIAL_RECEIPT_NUMBER = "BMA-027";
+
+async function getLastReceiptNumber() {
+  const data = await receiptCounterClient.fetch(
+    `*[_id == $id][0]{lastReceiptNumber}`,
+    { id: RECEIPT_COUNTER_ID },
+  );
+
+  return data?.lastReceiptNumber || INITIAL_RECEIPT_NUMBER;
+}
+
+async function saveLastReceiptNumber(receiptNumber) {
+  if (!receiptNumber) return;
+
+  if (!hasSanityWriteToken) {
+    throw new Error("Missing SANITY_API_WRITE_TOKEN for receipt counter update");
+  }
+
+  await receiptCounterClient.createIfNotExists({
+    _id: RECEIPT_COUNTER_ID,
+    _type: "receiptCounter",
+    title: "BMA Receipt Counter",
+    lastReceiptNumber: INITIAL_RECEIPT_NUMBER,
+  });
+
+  await receiptCounterClient
+    .patch(RECEIPT_COUNTER_ID)
+    .set({
+      lastReceiptNumber: receiptNumber,
+      updatedAt: new Date().toISOString(),
+    })
+    .commit();
+}
 
 // GET — returns the last saved receipt number string
 export async function GET() {
   try {
-    if (!fs.existsSync(counterPath)) {
-      return NextResponse.json({ lastReceiptNumber: "" });
-    }
-    const data = JSON.parse(fs.readFileSync(counterPath, "utf-8"));
     return NextResponse.json({
-      lastReceiptNumber: data.lastReceiptNumber ?? "",
+      lastReceiptNumber: await getLastReceiptNumber(),
     });
-  } catch {
-    return NextResponse.json({ lastReceiptNumber: "" });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error.message || "Failed to load receipt counter" },
+      { status: 500 },
+    );
   }
 }
 
@@ -72,12 +103,7 @@ export async function POST(request) {
     const pdfBytes = await pdfDoc.save();
 
     // Persist the receipt number exactly as provided (no transformation)
-    if (formData.receiptNumber) {
-      fs.writeFileSync(
-        counterPath,
-        JSON.stringify({ lastReceiptNumber: formData.receiptNumber }),
-      );
-    }
+    await saveLastReceiptNumber(formData.receiptNumber);
 
     // Return the PDF as a download
     return new NextResponse(pdfBytes, {
