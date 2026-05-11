@@ -44,7 +44,7 @@ export default function WestWyn() {
         <div className="mb-[clamp(1.25rem,3vw,2rem)] text-center">
           <h2 className="mx-auto max-w-[64rem] text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold leading-[1.15] text-gray-900">
             Premium{" "}
-            <span className="text-[#deae3c]">Residential Projects in Dholera</span>
+            <span className="text-[#deae3c]">Residential Plots in Dholera</span>
           </h2>
         </div>
 
