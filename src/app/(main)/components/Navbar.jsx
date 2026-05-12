@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import logo from "@/assests/bma-logo.png";
@@ -15,6 +16,10 @@ import cityCenter from "@/assests/bulkLand/city-centre-cover.webp";
 import industrial from "@/assests/bulkLand/industrial-cover.webp";
 import sport from "@/assests/bulkLand/recreation-sports-map.webp";
 import knowledgeIT from "@/assests/bulkLand/knowledge-it-cover.webp";
+
+const whatsappEnquiryLink = `https://wa.me/918130371647?text=${encodeURIComponent(
+  "Hi, I need a call back",
+)}`;
 
 const bulkLandItems = [
   {
@@ -656,7 +661,18 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="md:hidden">
+            <div className="flex items-center gap-[0.5rem] md:hidden">
+              <a
+                href={whatsappEnquiryLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-[0.375rem] whitespace-nowrap rounded-md bg-[#deae3c] px-[0.75rem] py-[0.5rem] text-[0.875rem] font-medium text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
+                aria-label="Enquire Now on WhatsApp"
+              >
+                <FaWhatsapp className="h-[1rem] w-[1rem] shrink-0" />
+                <span>Enquire Now</span>
+              </a>
+
               <button
                 onClick={toggleMobileMenu}
                 className={`rounded-md p-[0.5rem] transition-colors duration-300 ${
