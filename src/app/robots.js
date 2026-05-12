@@ -19,6 +19,5 @@ export default function robots() {
       },
     ],
     sitemap: "https://www.bookmyassets.com/sitemap.xml",
-    host: "https://www.bookmyassets.com",
   };
 }
