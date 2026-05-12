@@ -13,7 +13,7 @@ const COORDINATES = {
     x: 175,
     y: 500,
     width: 100,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   receivedFrom: {
@@ -21,7 +21,7 @@ const COORDINATES = {
     x: 420,
     y: 500,
     width: 130,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   projectName: {
@@ -29,7 +29,7 @@ const COORDINATES = {
     x: 175,
     y: 465,
     width: 130,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   plotNumber: {
@@ -37,7 +37,7 @@ const COORDINATES = {
     x: 420,
     y: 465,
     width: 100,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   paymentDate: {
@@ -45,7 +45,7 @@ const COORDINATES = {
     x: 175,
     y: 430,
     width: 100,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   referenceNo: {
@@ -53,7 +53,7 @@ const COORDINATES = {
     x: 420,
     y: 430,
     width: 130,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   modeOfPayment: {
@@ -61,7 +61,7 @@ const COORDINATES = {
     x: 175,
     y: 395,
     width: 120,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   amountInNumbers: {
@@ -69,7 +69,7 @@ const COORDINATES = {
     x: 420,
     y: 395,
     width: 130,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   amountInWords: {
@@ -77,7 +77,7 @@ const COORDINATES = {
     x: 175,
     y: 360,
     width: 380,
-    fontSize: 9,
+    fontSize: 12,
     align: "left",
   },
   remarks: { page: 1, x: 175, y: 325, width: 380, fontSize: 9, align: "left" },
