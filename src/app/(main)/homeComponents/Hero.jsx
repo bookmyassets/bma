@@ -12,7 +12,7 @@ const points = [
   },
   {
     title: "Immediate Possession",
-    desc: "Focused on long-term planning — we guide you through timelines, returns, and exit strategies.",
+    desc: "Focused on long-term planning â€” we guide you through timelines, returns, and exit strategies.",
   },
   {
     title: "High ROI Potential in Next 5 Years",
@@ -60,7 +60,7 @@ const PointsList = () => (
 export default function Hero() {
   return (
     <div id="hero">
-      {/* ── Desktop ── */}
+
       <div className="relative w-full h-screen hidden md:block">
         <Image
           src={img1}
@@ -77,7 +77,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Mobile ── */}
+      {/* â”€â”€ Mobile â”€â”€ */}
       <div className="md:hidden">
         <div className="relative w-full min-h-screen">
           <Image
@@ -90,12 +90,12 @@ export default function Hero() {
           <div className="absolute inset-0 bg-black/60" />
 
           <div className="absolute inset-0 z-20 flex flex-col px-[clamp(1rem,4vw,2rem)] py-[clamp(2rem,5vw,3.5rem)] justify-center gap-[clamp(0.4rem,1vw,0.75rem)] overflow-y-auto">
-            {/* H1 — Mobile */}
-            <h1 className="text-white font-bold text-[clamp(1.25rem,4vw,1.75rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
+            {/* Visual heading â€” Mobile */}
+            <div className="text-white font-bold text-[clamp(1.25rem,4vw,1.75rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
               Govt Approved Plots in Dholera
               <br />
               <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
-            </h1>
+            </div>
 
             {points.map((point, i) => (
               <div
