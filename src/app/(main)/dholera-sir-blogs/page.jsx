@@ -1,6 +1,7 @@
 import { getblogs } from "@/sanity/lib/api";
 import React from "react";
 import BlogCard from "./BlogCard";
+import MobileBlogPagination from "./MobileBlogPagination";
 import Image from "next/image";
 import hero from "@/assests/dholera-sir-blogs-2026-desktop-banner.webp";
 
@@ -98,10 +99,24 @@ export default async function page() {
           <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
             {safePosts.length > 0 ? (
               <>
-                {/* All Posts Grid */}
+                {/* Mobile paginated grid */}
+                <div className="md:hidden">
+                  <MobileBlogPagination>
+                    {safePosts.map((post) => (
+                      <div
+                        key={post._id}
+                        className="transform hover:-translate-y-2 transition-all duration-300"
+                      >
+                        <BlogCard post={post} />
+                      </div>
+                    ))}
+                  </MobileBlogPagination>
+                </div>
+
+                {/* Tablet and desktop full grid */}
                 <div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    {safePosts.map((post, index) => (
+                  <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    {safePosts.map((post) => (
                       <div
                         key={post._id}
                         className="transform hover:-translate-y-2 transition-all duration-300"
