@@ -473,6 +473,7 @@ export default function CostSheet() {
 
   return (
     <div className="max-w-3xl mx-auto pt-40 bg-white shadow-xl shadow-gray-500 rounded-lg p-6">
+      <meta name="robots" content="noindex, nofollow" />
       <p className="text-center text-3xl font-bold text-gray-700 mb-4">
         Plot Price Calculation
       </p>

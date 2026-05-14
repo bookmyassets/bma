@@ -21,6 +21,7 @@ export default function CrmLock() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#151f28]">
+      <meta name="robots" content="noindex, nofollow" />
       <h2 className="text-[#debe6b] text-2xl font-bold mb-6">Enter CRM PIN</h2>
       <input
         type="password"
