@@ -66,7 +66,7 @@ export default function CostSheet() {
     projectName: "",
     plc: "",
     plotAreaYards: "",
-    basePlotPriceYards: 11000,
+    basePlotPriceYards: 6700,
     plotAreaFeet: "",
     totalPaymentYards: "",
     legalFee: 20000,
