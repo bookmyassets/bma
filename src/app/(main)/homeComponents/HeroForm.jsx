@@ -2,9 +2,8 @@
 import Image from "next/image";
 import React, { useCallback, useRef, useState } from "react";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp"; // adjust path as needed
-import { Phone } from "@/assests/icons/call-icon.svg"; // adjust if using different icon lib
-import { User } from "@/assests/icons/user-icon.svg"; // adjust if using different icon lib
-// ── FormInput sub-component (kept inline for portability) ──────────────────
+import { FaUser, FaPhoneAlt } from "react-icons/fa";
+
 function FormInput({
   name,
   type = "text",
@@ -22,7 +21,7 @@ function FormInput({
     <div className="relative w-full">
       {Icon && (
         <div className="absolute left-[clamp(0.5rem,1vw,0.75rem)] top-1/2 -translate-y-1/2 pointer-events-none">
-          <Icon className="w-[20px] h-[20px] text-gray-400" />
+          <Icon className="w-[10px] h-[10px] text-gray-400" />
         </div>
       )}
       <input
@@ -55,7 +54,7 @@ function FormInput({
   );
 }
 
-export default function HeroForm() {
+export default function  HeroForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
@@ -275,7 +274,7 @@ export default function HeroForm() {
               placeholder="Enter Name"
               value={formData.fullName}
               onChange={handleChange}
-              icon={User}
+              icon={FaUser}
               required
               autoComplete="name"
               aria-label="Full Name"
@@ -286,7 +285,7 @@ export default function HeroForm() {
               placeholder="Mobile No"
               value={formData.phone}
               onChange={handleChange}
-              icon={Phone}
+              icon={FaPhoneAlt}
               minLength={10}
               maxLength={15}
               required

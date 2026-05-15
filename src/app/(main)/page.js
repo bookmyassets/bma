@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import Dholera from "./homeComponents/Dholera";
 import BMA from "./homeComponents/BMA";
 import ShortsSection from "./homeComponents/YouTube";
@@ -13,7 +12,6 @@ import MegaIndustries from "./homeComponents/MegaIndustries";
 import HowToBuy from "./homeComponents/BuyingProcess";
 
 export default function page() {
-  const [showpopForm, setpopShowForm] = useState(false);
 
   return (
     <>

@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import img1 from "@/assests/homepage/mega-industries/tata-semiconductor-plant-in-dholera.webp";
 import img2 from "@/assests/homepage/mega-industries/dholera-international-airport.webp";

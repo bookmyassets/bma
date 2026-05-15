@@ -6,7 +6,7 @@ import { Menu } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import logo from "@/assests/bma-logo.png";
+import logo from "@/assests/bma-logo-black.png";
 import aboutDholera from "@/assests/dholeraSIR-nav/about-dholera-sir-bookmyassets.webp";
 import dholeraBlogs from "@/assests/dholeraSIR-nav/dholera-sir-blogs-bookmyassets.webp";
 import dholeraUpdates from "@/assests/dholeraSIR-nav/dholera-sir-latest-updates-bookmyassets.webp";
@@ -960,7 +960,7 @@ export default function Navbar() {
             <div className="border-b border-gray-100 pb-[0.5rem]">
               <button
                 onClick={toggleResidentialMenu}
-                className={`flex w-full items-center justify-between rounded-md px-[0.75rem] py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
+                className={`flex w-full items-center justify-between rounded-md  py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isResidentialMenuOpen
                     ? "bg-[#deae3c] text-black"
                     : "text-black hover:text-yellow-500"
@@ -1002,7 +1002,7 @@ export default function Navbar() {
             <div className="border-b border-gray-100 pb-[0.5rem]">
               <button
                 onClick={toggleBulkLandMenu}
-                className={`flex w-full items-center justify-between rounded-md px-[0.75rem] py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
+                className={`flex w-full items-center justify-between rounded-md py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isBulkLandMenuOpen
                     ? "bg-[#deae3c] text-black"
                     : "text-black hover:text-orange-500"

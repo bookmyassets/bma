@@ -4,6 +4,7 @@ import img2 from "@/assests/taboola/icons/bookmyassets-buy-back-assistance-icon.
 import img3 from "@/assests/taboola/icons/bookmyassets-due-diligence-team-icon.svg";
 import img4 from "@/assests/taboola/icons/bookmyassets-immediate-sale-deed-icon.svg";
 import img5 from "@/assests/taboola/icons/bookmyassets-resale-support-icon.svg";
+import Link from "next/link";
 
 const icons = [
   { id: 1, icon: img3, label: "Due Diligence Team" },
@@ -68,20 +69,13 @@ export default function AboutBMA() {
             <div className="">
               {/* CTA Buttons */}
               <div className="flex items-center justify-center gap-4 pt-4">
-                <a
+                <Link
                   href="/about"
                   className="flex items-center gap-2 bg-[#deae3c] hover:bg-[#c99a2e] text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto justify-center text-[clamp(0.875rem,1.5vw,1rem)]"
-                  onClick={() => {
-                    window.dataLayer = window.dataLayer || [];
-                    window.dataLayer.push({
-                      event: "click_to_call",
-                      lead_type: "phone",
-                      device: "mobile",
-                    });
-                  }}
+                  
                 >
                   Know More About Us
-                </a>
+                </Link>
               </div>
             </div>
 
