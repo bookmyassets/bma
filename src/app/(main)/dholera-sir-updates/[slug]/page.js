@@ -560,7 +560,7 @@ export default async function Post({ params }) {
         />
 
         <SlugPageForm
-          title="Explore the Latest Development in Dholera"
+          title="Book Your Plot in Dholera"
           button="Talk To A Dholera Expert"
           project={post.title}
         />
@@ -768,23 +768,27 @@ export default async function Post({ params }) {
 
           {/* Related Articles Section */}
           <section className="bg-gray-50 py-12 mt-4">
-  <div className="max-w-7xl mx-auto px-4">
-    <div className="gap-6">
-      {relatedBlogs && relatedBlogs.length > 0 ? (
-        (() => {
-          const filteredBlogs = relatedBlogs.filter(
-            (b) => b.slug.current !== post.slug.current
-          );
-          const itemsPerPage = 3;
-          const pages = [];
-          for (let i = 0; i < filteredBlogs.length; i += itemsPerPage) {
-            pages.push(filteredBlogs.slice(i, i + itemsPerPage));
-          }
-          const totalPages = pages.length;
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="gap-6">
+                {relatedBlogs && relatedBlogs.length > 0 ? (
+                  (() => {
+                    const filteredBlogs = relatedBlogs.filter(
+                      (b) => b.slug.current !== post.slug.current,
+                    );
+                    const itemsPerPage = 3;
+                    const pages = [];
+                    for (
+                      let i = 0;
+                      i < filteredBlogs.length;
+                      i += itemsPerPage
+                    ) {
+                      pages.push(filteredBlogs.slice(i, i + itemsPerPage));
+                    }
+                    const totalPages = pages.length;
 
-          return (
-            <div className="relative">
-              <style>{`
+                    return (
+                      <div className="relative">
+                        <style>{`
                 ${pages
                   .map(
                     (_, index) => `
@@ -803,144 +807,144 @@ export default async function Post({ params }) {
                   .join("")}
               `}</style>
 
-              {pages.map((_, index) => (
-                <input
-                  key={`related-page-input-${index}`}
-                  type="radio"
-                  id={`related-page-${index}`}
-                  name="related-pages"
-                  className="sr-only"
-                  defaultChecked={index === 0}
-                />
-              ))}
-
-              <div className="related-slider">
-                <div className="relative overflow-hidden">
-                  <div
-                    className="related-track flex transition-transform duration-500 ease-out"
-                    style={{ width: `${totalPages * 100}%` }}
-                  >
-                    {pages.map((page, pageIndex) => (
-                      <div
-                        key={pageIndex}
-                        className="grid grid-cols-1 md:grid-cols-3 gap-6"
-                        style={{ width: `${100 / totalPages}%` }}
-                      >
-                        {page.map((blog) => (
-                          <Link
-                            key={blog._id}
-                            href={`/dholera-sir-updates/${blog.slug.current}`}
-                            className="block"
-                          >
-                            <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
-                              <div className="relative h-56 overflow-hidden flex-shrink-0">
-                                {blog.mainImage ? (
-                                  <Image
-                                    src={urlFor(blog.mainImage)
-                                      .width(1200)
-                                      .height(675)
-                                      .url()}
-                                    alt={blog.title}
-                                    width={1200}
-                                    height={675}
-                                    className="object-cover"
-                                  />
-                                ) : (
-                                  <div className="w-full h-full bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center">
-                                    <span className="text-gray-400">
-                                      No image
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-                              <div className="p-5 flex flex-col flex-1">
-                                <h3 className="font-bold text-lg mb-2 text-gray-900 line-clamp-2">
-                                  {blog.title}
-                                </h3>
-                                <p className="text-gray-700 mb-4 line-clamp-3 flex-1">
-                                  {blog.description}
-                                </p>
-                                <span className="hover:text-[#C69C21] text-[#FDB913] p-1 rounded-xl font-semibold bg-gray-800 inline-flex items-center self-start">
-                                  Explore More
-                                </span>
-                              </div>
-                            </div>
-                          </Link>
+                        {pages.map((_, index) => (
+                          <input
+                            key={`related-page-input-${index}`}
+                            type="radio"
+                            id={`related-page-${index}`}
+                            name="related-pages"
+                            className="sr-only"
+                            defaultChecked={index === 0}
+                          />
                         ))}
-                      </div>
-                    ))}
-                  </div>
 
-                  {/* Navigation Arrows */}
-                  {pages.map((_, index) => {
-                    const prevIndex =
-                      index === 0 ? totalPages - 1 : index - 1;
-                    const nextIndex =
-                      index === totalPages - 1 ? 0 : index + 1;
-                    return (
-                      <div
-                        key={`related-control-${index}`}
-                        className={`related-control-${index} absolute inset-y-0 left-0 right-0 hidden items-center justify-between px-2 pointer-events-none`}
-                      >
-                        <label
-                          htmlFor={`related-page-${prevIndex}`}
-                          className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#deae3c]"
-                          aria-label="Previous"
-                        >
-                          <span aria-hidden="true">&#8249;</span>
-                        </label>
-                        <label
-                          htmlFor={`related-page-${nextIndex}`}
-                          className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#deae3c]"
-                          aria-label="Next"
-                        >
-                          <span aria-hidden="true">&#8250;</span>
-                        </label>
+                        <div className="related-slider">
+                          <div className="relative overflow-hidden">
+                            <div
+                              className="related-track flex transition-transform duration-500 ease-out"
+                              style={{ width: `${totalPages * 100}%` }}
+                            >
+                              {pages.map((page, pageIndex) => (
+                                <div
+                                  key={pageIndex}
+                                  className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                                  style={{ width: `${100 / totalPages}%` }}
+                                >
+                                  {page.map((blog) => (
+                                    <Link
+                                      key={blog._id}
+                                      href={`/dholera-sir-updates/${blog.slug.current}`}
+                                      className="block"
+                                    >
+                                      <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+                                        <div className="relative h-56 overflow-hidden flex-shrink-0">
+                                          {blog.mainImage ? (
+                                            <Image
+                                              src={urlFor(blog.mainImage)
+                                                .width(1200)
+                                                .height(675)
+                                                .url()}
+                                              alt={blog.title}
+                                              width={1200}
+                                              height={675}
+                                              className="object-cover"
+                                            />
+                                          ) : (
+                                            <div className="w-full h-full bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center">
+                                              <span className="text-gray-400">
+                                                No image
+                                              </span>
+                                            </div>
+                                          )}
+                                        </div>
+                                        <div className="p-5 flex flex-col flex-1">
+                                          <h3 className="font-bold text-lg mb-2 text-gray-900 line-clamp-2">
+                                            {blog.title}
+                                          </h3>
+                                          <p className="text-gray-700 mb-4 line-clamp-3 flex-1">
+                                            {blog.description}
+                                          </p>
+                                          <span className="hover:text-[#C69C21] text-[#FDB913] p-1 rounded-xl font-semibold bg-gray-800 inline-flex items-center self-start">
+                                            Explore More
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </Link>
+                                  ))}
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Navigation Arrows */}
+                            {pages.map((_, index) => {
+                              const prevIndex =
+                                index === 0 ? totalPages - 1 : index - 1;
+                              const nextIndex =
+                                index === totalPages - 1 ? 0 : index + 1;
+                              return (
+                                <div
+                                  key={`related-control-${index}`}
+                                  className={`related-control-${index} absolute inset-y-0 left-0 right-0 hidden items-center justify-between px-2 pointer-events-none`}
+                                >
+                                  <label
+                                    htmlFor={`related-page-${prevIndex}`}
+                                    className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#deae3c]"
+                                    aria-label="Previous"
+                                  >
+                                    <span aria-hidden="true">&#8249;</span>
+                                  </label>
+                                  <label
+                                    htmlFor={`related-page-${nextIndex}`}
+                                    className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#deae3c]"
+                                    aria-label="Next"
+                                  >
+                                    <span aria-hidden="true">&#8250;</span>
+                                  </label>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Dot Indicators — only show if more than 1 page */}
+                          {totalPages > 1 && (
+                            <div className="mt-5 flex justify-center gap-2">
+                              {pages.map((_, index) => (
+                                <label
+                                  key={`related-dot-${index}`}
+                                  htmlFor={`related-page-${index}`}
+                                  className={`related-dot-${index} h-2.5 w-2.5 cursor-pointer rounded-full bg-gray-300 transition-all duration-300 hover:bg-[#deae3c]`}
+                                  aria-label={`Page ${index + 1}`}
+                                />
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     );
-                  })}
-                </div>
-
-                {/* Dot Indicators — only show if more than 1 page */}
-                {totalPages > 1 && (
-                  <div className="mt-5 flex justify-center gap-2">
-                    {pages.map((_, index) => (
-                      <label
-                        key={`related-dot-${index}`}
-                        htmlFor={`related-page-${index}`}
-                        className={`related-dot-${index} h-2.5 w-2.5 cursor-pointer rounded-full bg-gray-300 transition-all duration-300 hover:bg-[#deae3c]`}
-                        aria-label={`Page ${index + 1}`}
-                      />
-                    ))}
+                  })()
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {Array(3)
+                      .fill(0)
+                      .map((_, i) => (
+                        <div
+                          key={i}
+                          className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200"
+                        >
+                          <div className="h-48 bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse" />
+                          <div className="p-6 space-y-3">
+                            <div className="h-4 bg-gray-200 rounded w-1/4" />
+                            <div className="h-6 bg-gray-200 rounded w-3/4" />
+                            <div className="h-4 bg-gray-200 rounded w-full" />
+                            <div className="h-4 bg-gray-200 rounded w-2/3" />
+                          </div>
+                        </div>
+                      ))}
                   </div>
                 )}
               </div>
             </div>
-          );
-        })()
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array(3)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200"
-              >
-                <div className="h-48 bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse" />
-                <div className="p-6 space-y-3">
-                  <div className="h-4 bg-gray-200 rounded w-1/4" />
-                  <div className="h-6 bg-gray-200 rounded w-3/4" />
-                  <div className="h-4 bg-gray-200 rounded w-full" />
-                  <div className="h-4 bg-gray-200 rounded w-2/3" />
-                </div>
-              </div>
-            ))}
-        </div>
-      )}
-    </div>
-  </div>
-</section>
+          </section>
         </div>
       </>
     );
