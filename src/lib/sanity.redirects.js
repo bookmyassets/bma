@@ -1,10 +1,11 @@
-// lib/sanity.redirects.js
-import { client } from '@/sanity/lib/client'  // apna sanity client path
+import { client } from '@/sanity/lib/client'
+
+const SITE_NAME = process.env.SITE_NAME || 'bookmyassets'
 
 export async function getRedirects() {
   return client.fetch(
-    `*[_type == "redirect"]{ source, destination, permanent }`,
-    {},
-    { next: { tags: ['redirect'] } }
+    `*[_type == "redirect" && site == $site]{ source, destination, permanent }`,
+    { site: SITE_NAME },  // ✅ site filter add kiya
+    { next: { tags: ['redirects'] } }
   )
 }
