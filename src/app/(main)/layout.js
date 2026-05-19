@@ -20,7 +20,7 @@ const lato = Lato({
 
 const GTM_ID = "GTM-5CXXQ9DJ";
 const GA_ID = "G-M6ZWDM9CGE";
-const FB_PIXEL_ID = "672210205737825";
+const FB_PIXEL_ID = "982876334382862";
 const CLARITY_ID = "rivub95ldd";
 // ── Root Layout ───────────────────────────────────────────────────────────────
 export default function RootLayout({ children }) {
