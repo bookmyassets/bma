@@ -2,12 +2,13 @@ import "./globals.css";
 import { Lato } from "next/font/google";
 import Script from "next/script";
 
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/whatsapp";
 import ScrollToTop from "./components/ScrollToTop";
 import RagePopup from "./components/RageClickForm";
 import Whatsapp from "./components/Callus";
+/* import Navbar from "./components/Navbar_codexTemp"; */
+import Navbar from "./components/Navbar";
 
 // ── Font ──────────────────────────────────────────────────────────────────────
 // next/font handles preloading automatically — no manual <link> needed.
@@ -82,28 +83,16 @@ gtag('config','${GA_ID}',{page_path:window.location.pathname,send_page_view:true
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-!function(f,b,e,v,n,t,s){
-  if(f.fbq)return;
-  n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init','${FB_PIXEL_ID}');
-fbq('track','PageView');
-
-function _loadFbScript(){
-  var s=document.createElement('script');
-  s.async=true;
-  s.src='https://connect.facebook.net/en_US/fbevents.js';
-  document.head.appendChild(s);
-  ['mousemove','scroll','keydown','touchstart','click'].forEach(function(e){
-    document.removeEventListener(e,_loadFbScript);
-  });
-}
-['mousemove','scroll','keydown','touchstart','click'].forEach(function(e){
-  document.addEventListener(e,_loadFbScript,{once:true,passive:true});
-});`,
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '982876334382862');
+fbq('track', 'PageView');`,
           }}
         />
 
@@ -137,9 +126,8 @@ y.parentNode.insertBefore(t,y);
           <img
             height="1"
             width="1"
-            style={{ display: "none" }}
-            src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
-            alt=""
+            style="display:none"
+            src="https://www.facebook.com/tr?id=982876334382862&ev=PageView&noscript=1"
           />
         </noscript>
 
@@ -148,7 +136,7 @@ y.parentNode.insertBefore(t,y);
         {children}
         <Footer />
         <FloatingButtons />
-        <Whatsapp/>
+        <Whatsapp />
         <RagePopup />
       </body>
     </html>

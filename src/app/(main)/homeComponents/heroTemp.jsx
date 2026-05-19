@@ -24,43 +24,21 @@ const PointsList = () => (
   <div className="flex flex-col gap-[clamp(0.4rem,1vw,0.75rem)] w-[clamp(480px,44vw,680px)]">
     {/* H1 */}
     <h1 className="text-white font-bold text-[clamp(1.5rem,3vw,3rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
-      Govt. Approved Plots in Dholera
+      Dedicated to Dholera
       <br />
-      <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
+
     </h1>
 
     {/* Body */}
     <p className="text-white text-[clamp(0.875rem,2vw,1.125rem)] leading-relaxed mb-[clamp(0.4rem,1vw,0.75rem)]">
-      Explore premium plotted investment opportunities in Dholera Smart City.
-      <br />
-      Get brochure, price list, location details, and expert guidance from
-      BookMyAssets.
+      We help to simplify Dholera before you book a plot.
     </p>
-
-    {points.map((point, i) => (
-      <div
-        key={i}
-        className="flex gap-[clamp(0.4rem,1vw,0.75rem)] items-center"
-      >
-        {/* Icon circle */}
-        <div className="shrink-0 w-[clamp(1.1rem,1.5vw,1.35rem)] h-[clamp(1.1rem,1.5vw,1.35rem)] rounded-full border border-yellow-500/60 flex items-center justify-center">
-          <span className="text-[#deae3c] text-[clamp(0.55rem,0.85vw,0.7rem)] font-semibold">
-            ➤
-          </span>
-        </div>
-        {/* Point title */}
-        <p className="text-white font-medium text-[clamp(0.875rem,2vw,1.125rem)] leading-snug">
-          {point.title}
-        </p>
-      </div>
-    ))}
   </div>
 );
 
 export default function Hero() {
   return (
     <div id="hero">
-
       <div className="relative w-full h-screen hidden md:block">
         <Image
           src={img1}
@@ -90,13 +68,19 @@ export default function Hero() {
 
           <div className="absolute inset-0 z-20 flex flex-col px-[clamp(1rem,4vw,2rem)] py-[clamp(2rem,5vw,3.5rem)] justify-center gap-[clamp(0.4rem,1vw,0.75rem)] overflow-y-auto">
             {/* Visual heading â€” Mobile */}
-            <div className="text-white font-bold text-[clamp(1.25rem,4vw,1.75rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
+            <div className="text-[#deae3c] font-bold text-[clamp(1.25rem,4vw,1.75rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
               Dedicated to Dholera
               <br />
-              <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
             </div>
 
-            {points.map((point, i) => (
+            <div className="flex gap-[clamp(0.4rem,1.5vw,0.75rem)] items-start">
+              <p className="mt-0.5 text-white font-medium text-[clamp(0.875rem,2.5vw,1rem)] leading-snug">
+                Explore premium plotted investment opportunities in Dholera
+                Smart City.
+              </p>
+            </div>
+
+            {/* {points.map((point, i) => (
               <div
                 key={i}
                 className="flex gap-[clamp(0.4rem,1.5vw,0.75rem)] items-start"
@@ -110,7 +94,7 @@ export default function Hero() {
                   {point.title}
                 </p>
               </div>
-            ))}
+            ))} */}
 
             <div className="mt-[clamp(0.75rem,2vw,1.25rem)] border-t border-yellow-600/20 pt-[clamp(0.75rem,2vw,1.25rem)]">
               <HeroForm />
