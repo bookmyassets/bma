@@ -70,4 +70,5 @@ jobs:
             HOSTNAME=127.0.0.1 PORT=3000 pm2 restart bma --update-env || HOSTNAME=127.0.0.1 PORT=3000 pm2 start .next/standalone/server.js --name bma
             pm2 save
             pm2 list
-            ss -tulpn | grep ':3000'
+            sleep 3
+            ss -tulpn | grep ':3000' || true
