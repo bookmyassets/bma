@@ -7,8 +7,8 @@ import FloatingButtons from "./components/whatsapp";
 import ScrollToTop from "./components/ScrollToTop";
 import RagePopup from "./components/RageClickForm";
 import Whatsapp from "./components/Callus";
-/* import Navbar from "./components/Navbar_codexTemp"; */
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar_codexTemp";
+/* import Navbar from "./components/Navbar"; */
 
 // ── Font ──────────────────────────────────────────────────────────────────────
 // next/font handles preloading automatically — no manual <link> needed.
