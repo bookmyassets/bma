@@ -65,7 +65,10 @@ export default function ProjectsSection() {
                 )}
               </div>
 
-              <div className="space-y-[1rem] p-[clamp(1.25rem,2.5vw,2rem)]">
+              <Link
+                href={project.href}
+                className="block space-y-[1rem] p-[clamp(1.25rem,2.5vw,2rem)] transition-opacity duration-300 hover:opacity-90"
+              >
                 <div>
                   <h3 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.25]">
                     {project.name}
@@ -80,13 +83,10 @@ export default function ProjectsSection() {
                   <span>{project.location}</span>
                 </div>
 
-                <Link
-                  href={project.href}
-                  className="inline-flex min-h-[2.75rem] items-center justify-center rounded-full bg-[#deae3c] px-[1.25rem] text-[0.9375rem] font-semibold text-black transition-colors duration-300 hover:bg-[#f3bb39]"
-                >
+                <span className="inline-flex min-h-[2.75rem] items-center justify-center rounded-full bg-[#deae3c] px-[1.25rem] text-[0.9375rem] font-semibold text-black transition-colors duration-300 group-hover:bg-[#f3bb39]">
                   Explore
-                </Link>
-              </div>
+                </span>
+              </Link>
             </article>
           ))}
         </div>
