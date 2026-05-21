@@ -224,7 +224,7 @@ export default function page() {
           />
         </div>
         <LatestUpdates />
-        <ShortsSection />
+        {/* <ShortsSection /> */}
         <FAQSection />
       </div>
 

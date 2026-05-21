@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "@/assests/bma-logo-black.png";
+import logo from "@/assests/Bmalogo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
@@ -13,7 +13,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-gray-800 border-t border-gray-200">
+    <footer className="bg-black text-[#deae3c] border-t border-[#deae3c]">
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-8 lg:px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo + Contact Info */}
@@ -28,7 +28,7 @@ export default function Footer() {
               />
             </Link>
 
-            <div className="space-y-4 text-sm text-gray-600">
+            <div className="space-y-4 text-sm text-[#deae3c]">
               {/* Phone */}
               <Link
                 className="flex items-center gap-3 hover:text-yellow-500 transition-colors"
@@ -63,7 +63,7 @@ export default function Footer() {
                   <FaMapMarkerAlt className="text-xs" />
                 </span>
                 <div>
-                  <p className="font-semibold text-gray-800 mb-0.5">
+                  <p className="font-semibold text-[#deae3c] mb-0.5">
                     Head Office
                   </p>
                   <p className="leading-relaxed">
@@ -84,7 +84,7 @@ export default function Footer() {
                   <FaMapMarkerAlt className="text-xs" />
                 </span>
                 <div>
-                  <p className="font-semibold text-gray-800 mb-0.5">
+                  <p className="font-semibold text-[#deae3c] mb-0.5">
                     Branch Office
                   </p>
                   <p className="leading-relaxed">
@@ -96,7 +96,7 @@ export default function Footer() {
             </div>
 
             {/* Social Icons */}
-            <div className="flex gap-3 pt-1">
+            <div className="flex gap-3 pt-1 py-2">
               <Link
                 aria-label="Facebook"
                 href="https://www.facebook.com/profile.php?id=61583265159985"
@@ -140,7 +140,7 @@ export default function Footer() {
             <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
               Residential Projects
             </h3>
-            <ul className="space-y-3 text-sm text-gray-600">
+            <ul className="space-y-3 text-sm text-[#deae3c]">
               <li>
                 <Link
                   href="/dholera-residential-plots/westwyn-residency"
@@ -174,7 +174,7 @@ export default function Footer() {
             <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
               Quick Links
             </h3>
-            <ul className="space-y-3 text-sm text-gray-600">
+            <ul className="space-y-3 text-sm text-[#deae3c]">
               <li>
                 <Link
                   href="/about"
@@ -223,7 +223,7 @@ export default function Footer() {
             <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
               Policies
             </h3>
-            <ul className="space-y-3 text-sm text-gray-600">
+            <ul className="space-y-3 text-sm text-[#deae3c]">
               <li>
                 <Link
                   href="/policies/terms"
@@ -291,9 +291,9 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-gray-200">
+      <div className="border-t border-[#deae3c]">
         <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 flex justify-center">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-white">
             © {new Date().getFullYear()} BookMyAssets. All rights reserved.
           </p>
         </div>
