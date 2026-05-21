@@ -386,10 +386,10 @@ function DesktopNavButton({ label, open, onClick }) {
         type="button"
       >
         <span
-          className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-lg px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
+          className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-full border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
             open
-              ? "bg-[#deae3c] font-semibold text-black shadow-sm"
-              : "text-white/80 hover:bg-[#deae3c]/15 hover:text-[#deae3c]"
+              ? "border-[#deae3c]/55 bg-white/20 font-semibold text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.18)] backdrop-blur-md"
+              : "text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
           }`}
         >
           {label}
@@ -618,17 +618,17 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-3 py-3 sm:px-4 md:px-6 md:py-4 lg:px-8">
           <div
-            className={`liquid-glass-container flex h-[4.25rem] items-center gap-3 overflow-visible rounded-full border px-4 shadow-xl backdrop-blur-xl transition-all duration-300 md:h-[4.5rem] md:px-5 lg:h-[5rem] lg:gap-4 lg:px-6 xl:gap-6 ${
+            className={`liquid-glass-container relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-full border px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[4.5rem] md:px-5 lg:h-[5rem] lg:gap-4 lg:px-6 xl:gap-6 ${
               isScrolled
-                ? "border-[#deae3c]/45 bg-black/85 shadow-black/35"
-                : "border-[#deae3c]/30 bg-gradient-to-r from-black/75 via-black/60 to-black/75 shadow-black/25"
+                ? "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
+                : "border-white/20 bg-white/10 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.22)]"
             }`}
           >
             <div className="relative z-10 shrink-0">
               <Link
                 href="/"
                 onClick={closeAllMenus}
-                className="block rounded-full  px-[0.75rem] py-[0.4375rem] shadow-sm transition-all duration-300 hover:scale-105"
+                className="block  px-[0.75rem] py-[0.4375rem] shadow-sm transition-all duration-300 hover:scale-105 "
                 aria-label="BookMyAssets home"
               >
                 <Image
@@ -642,8 +642,8 @@ export default function Navbar() {
               </Link>
             </div>
 
-            <div className="relative z-10 hidden flex-1 lg:flex">
-              <nav className="flex h-full items-center" role="menubar">
+            <div className="relative text-black z-10 ml-auto hidden flex-1 justify-end lg:flex">
+              <nav className="flex h-full items-center justify-end" role="menubar">
                 {desktopDropdowns.map(({ label, open, onClick }) => (
                   <div key={label} className="dropdown-container relative">
                     <DesktopNavButton label={label} open={open} onClick={onClick} />
@@ -657,10 +657,10 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={closeAllMenus}
-                  className={`ml-2 rounded-full px-[calc(0.875rem_+_0.5vw)] py-[calc(0.375rem_+_0.25vw)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium shadow-sm transition-all duration-200 active:scale-[0.98] ${
+                  className={`ml-2 rounded-full border px-[calc(0.875rem_+_0.5vw)] py-[calc(0.375rem_+_0.25vw)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium shadow-sm transition-all duration-200 active:scale-[0.98] ${
                     isContactActive
-                      ? "bg-[#deae3c] text-black"
-                      : "bg-[#deae3c] text-black hover:bg-[#f3bb39]"
+                      ? "border-[#deae3c]/70 bg-[#deae3c] text-black"
+                      : "border-[#deae3c]/45 bg-[#deae3c]/90 text-black hover:border-[#f3bb39]/70 hover:bg-[#f3bb39]"
                   }`}
                 >
                   Contact Us
@@ -668,21 +668,21 @@ export default function Navbar() {
 
                 <div className="group relative">
                   <button
-                    className="inline-flex touch-manipulation items-center gap-2 rounded-lg border-0 bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/80 transition-all duration-200 hover:bg-[#deae3c]/15 hover:text-[#deae3c] focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
+                    className="inline-flex touch-manipulation items-center gap-2 rounded-full border border-transparent bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
                     aria-label="Open secondary menu"
                     type="button"
                   >
                     <Menu className="h-[1.5rem] w-[1.5rem]" aria-hidden="true" />
                   </button>
 
-                  <div className="invisible absolute right-0 top-full z-50 mt-[0.5rem] w-[12rem] rounded-xl border border-[#deae3c]/25 bg-black/90 opacity-0 shadow-xl shadow-black/30 backdrop-blur-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  <div className="invisible absolute right-0 top-full z-50 mt-[0.5rem] w-[12rem] rounded-xl border border-white/15 bg-[#111111]/75 opacity-0 shadow-xl shadow-black/30 backdrop-blur-2xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
                     <div className="py-[0.5rem]">
                       {utilityLinks.map(({ href, label }) => (
                         <Link
                           key={href}
                           href={href}
                           onClick={closeAllMenus}
-                          className="block px-[1rem] py-[0.75rem] text-[0.875rem] text-white/75 transition-colors hover:bg-[#deae3c]/15 hover:text-[#deae3c]"
+                          className="block px-[1rem] py-[0.75rem] text-[0.875rem] text-white/75 transition-colors hover:bg-white/10 hover:text-white"
                         >
                           {label}
                         </Link>
@@ -698,7 +698,7 @@ export default function Navbar() {
                 href={whatsappEnquiryLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[2.75rem] px-2 gap-2 min-w-[2.75rem] items-center justify-center rounded-xl bg-[#deae3c] text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
+                className="inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center gap-2 rounded-full border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
                 aria-label="Enquire Now on WhatsApp"
               >
                 <FaWhatsapp className="h-[1.25rem] w-[1.25rem] shrink-0" /> Know More
@@ -706,7 +706,7 @@ export default function Navbar() {
 
               <button
                 onClick={toggleMobileMenu}
-                className="flex min-h-[3rem] min-w-[3rem] touch-manipulation items-center justify-center rounded-xl p-3 text-white transition-all duration-200 hover:bg-[#deae3c]/15 hover:text-[#deae3c] focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40 active:bg-[#deae3c]/20"
+                className="flex min-h-[3rem] min-w-[3rem] touch-manipulation items-center justify-center rounded-full border border-white/15 bg-white/10 p-3 text-white transition-all duration-200 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40 active:bg-white/20"
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open mobile menu"}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
@@ -744,10 +744,10 @@ export default function Navbar() {
 
       {isResidentialMenuOpen && (
         <div
-          className="residential-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-[#deae3c]/25 bg-black/90 shadow-2xl shadow-black/40 backdrop-blur-xl slide-in-from-top-4 duration-300 lg:flex"
+          className="residential-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#101010]/75 shadow-2xl shadow-black/40 backdrop-blur-2xl slide-in-from-top-4 duration-300 lg:flex"
           style={{ top: "calc(var(--nav-offset-top, 0px) + 6.5rem)" }}
         >
-          <div className="flex h-full w-1/3 flex-col bg-gradient-to-br from-[#171717] via-black to-[#0c0c0c] p-[calc(2rem_+_1vw)]">
+          <div className="flex h-full w-1/3 flex-col border-r border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-[#deae3c]/10 p-[calc(2rem_+_1vw)]">
             <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-white">
               Residential <br /> Projects
             </h3>
@@ -833,10 +833,10 @@ export default function Navbar() {
 
       {isBulkLandMenuOpen && (
         <div
-          className="bulk-land-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-[#deae3c]/25 bg-black/90 shadow-2xl shadow-black/40 backdrop-blur-xl slide-in-from-top-4 duration-300 lg:flex"
+          className="bulk-land-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#101010]/75 shadow-2xl shadow-black/40 backdrop-blur-2xl slide-in-from-top-4 duration-300 lg:flex"
           style={{ top: "calc(var(--nav-offset-top, 0px) + 6.5rem)" }}
         >
-          <div className="flex h-full w-1/3 flex-col justify-between bg-gradient-to-br from-[#171717] via-black to-[#0c0c0c] p-[calc(2rem_+_1vw)]">
+          <div className="flex h-full w-1/3 flex-col justify-between border-r border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-[#deae3c]/10 p-[calc(2rem_+_1vw)]">
             <div>
               <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-white">
                 Bulk Land <br /> Deals
@@ -873,10 +873,10 @@ export default function Navbar() {
 
       {isDholeraMenuOpen && (
         <div
-          className="dholera-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-[#deae3c]/25 bg-black/90 shadow-2xl shadow-black/40 backdrop-blur-xl slide-in-from-top-4 duration-300 lg:flex"
+          className="dholera-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#101010]/75 shadow-2xl shadow-black/40 backdrop-blur-2xl slide-in-from-top-4 duration-300 lg:flex"
           style={{ top: "calc(var(--nav-offset-top, 0px) + 6.5rem)" }}
         >
-          <div className="flex h-full w-1/3 flex-col justify-between bg-gradient-to-br from-[#171717] via-black to-[#0c0c0c] p-[calc(2rem_+_1vw)]">
+          <div className="flex h-full w-1/3 flex-col justify-between border-r border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-[#deae3c]/10 p-[calc(2rem_+_1vw)]">
             <div>
               <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-white">
                 DHOLERA SIR
@@ -967,7 +967,7 @@ export default function Navbar() {
         inert={!isMobileMenuOpen}
       >
         <div
-          className={`relative z-50 h-full w-full overflow-y-auto bg-black text-white transition-all duration-300 ${
+          className={`relative z-50 h-full w-full overflow-y-auto bg-[#0d0d0d]/95 text-white backdrop-blur-2xl transition-all duration-300 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -977,8 +977,8 @@ export default function Navbar() {
                 onClick={toggleResidentialMenu}
                 className={`flex w-full items-center justify-between rounded-md px-[0.75rem] py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isResidentialMenuOpen
-                    ? "bg-[#deae3c] text-black"
-                    : "text-white hover:text-[#deae3c]"
+                    ? "border border-[#deae3c]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
+                    : "border border-transparent text-white hover:bg-white/10 hover:text-white"
                 }`}
                 aria-expanded={isResidentialMenuOpen}
                 type="button"
@@ -1020,8 +1020,8 @@ export default function Navbar() {
                 onClick={toggleBulkLandMenu}
                 className={`flex w-full items-center justify-between rounded-md px-[0.75rem] py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isBulkLandMenuOpen
-                    ? "bg-[#deae3c] text-black"
-                    : "text-white hover:text-[#deae3c]"
+                    ? "border border-[#deae3c]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
+                    : "border border-transparent text-white hover:bg-white/10 hover:text-white"
                 }`}
                 aria-expanded={isBulkLandMenuOpen}
                 type="button"
@@ -1063,7 +1063,7 @@ export default function Navbar() {
                 key={href}
                 href={href}
                 onClick={closeAllMenus}
-                className={`block rounded-md px-[0.75rem] py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-white transition-colors hover:bg-[#deae3c]/15 hover:text-[#deae3c] ${
+                className={`block rounded-md px-[0.75rem] py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-white transition-colors hover:bg-white/10 hover:text-white ${
                   index < mobileLinks.length - 1 ? "border-b border-white/10" : ""
                 }`}
               >

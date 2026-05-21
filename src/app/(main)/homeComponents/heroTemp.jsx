@@ -23,14 +23,13 @@ const points = [
 const PointsList = () => (
   <div className="flex flex-col gap-[clamp(0.4rem,1vw,0.75rem)] w-[clamp(480px,44vw,680px)]">
     {/* H1 */}
-    <h1 className="text-white font-bold text-[clamp(1.5rem,3vw,3rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
+    <h1 className="text-white font-bold text-[clamp(2rem,3vw,3rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
       Dedicated to Dholera
       <br />
-
     </h1>
 
     {/* Body */}
-    <p className="text-white text-[clamp(0.875rem,2vw,1.125rem)] leading-relaxed mb-[clamp(0.4rem,1vw,0.75rem)]">
+    <p className="text-white text-[clamp(1.2rem,2vw,1.125rem)] leading-relaxed mb-[clamp(0.4rem,1vw,0.75rem)]">
       We help to simplify Dholera before you book a plot.
     </p>
   </div>
@@ -47,7 +46,7 @@ export default function Hero() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/50 via-black/30 to-black/55" />
 
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)]">
           <PointsList />
@@ -68,13 +67,13 @@ export default function Hero() {
 
           <div className="absolute inset-0 z-20 flex flex-col px-[clamp(1rem,4vw,2rem)] py-[clamp(2rem,5vw,3.5rem)] justify-center gap-[clamp(0.4rem,1vw,0.75rem)] overflow-y-auto">
             {/* Visual heading â€” Mobile */}
-            <div className="text-[#deae3c] font-bold text-[clamp(1.25rem,4vw,1.75rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
+            <div className="text-white font-bold text-[clamp(1.5rem,4vw,1.75rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
               Dedicated to Dholera
               <br />
             </div>
 
             <div className="flex gap-[clamp(0.4rem,1.5vw,0.75rem)] items-start">
-              <p className="mt-0.5 text-white font-medium text-[clamp(0.875rem,2.5vw,1rem)] leading-snug">
+              <p className="mt-0.5 text-white font-medium text-[clamp(1rem,2.5vw,1.5rem)] leading-snug">
                 Explore premium plotted investment opportunities in Dholera
                 Smart City.
               </p>

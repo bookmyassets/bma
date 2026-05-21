@@ -243,7 +243,7 @@ export default function LeadForm({ title, button }) {
 
   return (
     <div>
-      <section className="py-8 bg-black rounded-lg">
+      <section className="py-8 bg-black ">
         <div className="container mx-auto px-6 sm:px-12">
           <div className="max-w-4xl mx-auto">
             <h4 className="text-white text-xl md:text-3xl font-bold text-center">
@@ -373,7 +373,7 @@ export default function LeadForm({ title, button }) {
                     className={`w-auto font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
                       isLoading || isDisabled || !recaptchaLoaded
                         ? "bg-gray-600 cursor-not-allowed text-gray-400"
-                        : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                        : "bg-[#deae3c] hover:bg-[#c99a2d] text-black shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                     }`}
                   >
                     {isLoading ? (

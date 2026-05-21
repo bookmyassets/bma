@@ -1,15 +1,18 @@
 import React from "react";
 import Dholera from "./homeComponents/Dholera";
-import BMA from "./homeComponents/BMA";
+/* import BMA from "./homeComponents/BMA"; */
 import ShortsSection from "./homeComponents/YouTube";
 import FAQSection from "./homeComponents/FAQs";
 import WestWyn from "./homeComponents/WestWyn";
 import PopupForm from "./components/PopUpForm";
-import Hero from "./homeComponents/Hero";
+import Hero from "./homeComponents/heroTemp";
+/* import Hero from "./homeComponents/Hero"; */
 import LatestUpdates from "./homeComponents/Latest";
 import LeadForm from "./components/LeadForm";
 import MegaIndustries from "./homeComponents/MegaIndustries";
 import HowToBuy from "./homeComponents/BuyingProcess";
+import ProjectsSection from "./homeComponents/ProjectsSection_codexTemp";
+import AboutBMA from "./homeComponents/BMA_codexTemp";
 
 export default function page() {
 
@@ -207,12 +210,14 @@ export default function page() {
 
       <div>
         <Hero />
-        <Dholera />
-        <BMA />
-        <WestWyn />
+       <ProjectsSection/>
+        {/* <Dholera /> */}
+        {/* <BMA /> */}
+        <AboutBMA/>
+       {/*  <WestWyn /> */}
         <HowToBuy/>
-        <MegaIndustries/>
-        <div className="max-w-7xl mx-auto" id="contact">
+        {/* <MegaIndustries/> */}
+        <div className="" id="contact">
           <LeadForm
             title="Invest in Registry Ready Plots in Dholera"
             button="Talk to an Expert"
