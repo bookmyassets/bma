@@ -16,7 +16,7 @@ const documents = [
   { title: "Title Certificate", icon: ShieldCheck },
   { title: "7/12 Extract", icon: FileText },
   { title: "NA / NOC", icon: FileCheck2 },
-  { title: "RERA Certificate", icon: BadgeCheck },
+  { title: "AUDA Certificate", icon: BadgeCheck },
   { title: "Site Plan Approval", icon: MapPinned },
 ];
 
