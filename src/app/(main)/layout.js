@@ -135,7 +135,7 @@ y.parentNode.insertBefore(t,y);
         <Navbar />
         {children}
         <Footer />
-        <FloatingButtons />
+        {/* <FloatingButtons /> */}
         <Whatsapp />
         <RagePopup />
       </body>

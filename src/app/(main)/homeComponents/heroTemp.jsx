@@ -74,8 +74,7 @@ export default function Hero() {
 
             <div className="flex gap-[clamp(0.4rem,1.5vw,0.75rem)] items-start">
               <p className="mt-0.5 text-white font-medium text-[clamp(1rem,2.5vw,1.5rem)] leading-snug">
-                Explore premium plotted investment opportunities in Dholera
-                Smart City.
+                We help to simplify Dholera before you book a plot.
               </p>
             </div>
 

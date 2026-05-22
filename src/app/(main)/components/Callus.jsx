@@ -25,9 +25,9 @@ export default function Whatsapp() {
   return (
     <div
       onClick={handleWhatsappClick}
-      className="hidden md:block  fixed bottom-8 right-8 z-50 hover:scale-105 transition-transform duration-300 cursor-pointer"
+      className="  fixed bottom-8 right-8 z-50 hover:scale-105 transition-transform duration-300 cursor-pointer"
     >
-      <div className="relative h-24 w-24 rounded-full bg-white shadow-xl flex items-center justify-center">
+      <div className="relative h-16 md:h-24 w-16 md:w-24 rounded-full bg-white shadow-xl flex items-center justify-center">
         {/* Rotating SVG Text */}
         <svg
           className="absolute w-full h-full"

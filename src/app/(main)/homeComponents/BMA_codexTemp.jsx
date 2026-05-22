@@ -56,7 +56,7 @@ function AnimatedCounter({ target, suffix, shouldStart }) {
     }
 
     let animationFrame;
-    const duration = 1100;
+    const duration = 3100;
     const startTime = performance.now();
 
     const animate = (currentTime) => {
@@ -182,7 +182,7 @@ export default function AboutBMA() {
                     return (
                       <div
                         key={item.id}
-                        className={`flex flex-col items-center gap-3 rounded-xl border border-gray-100 p-2 shadow-sm transition-shadow hover:shadow-md ${
+                        className={`flex flex-col items-center gap-3 rounded-xl border border-gray-100 p-2 shadow-lg transition-shadow hover:shadow-xl ${
                           isLastOdd ? "col-span-2 sm:col-span-1" : ""
                         }`}
                       >
