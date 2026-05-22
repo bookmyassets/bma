@@ -109,7 +109,7 @@ async function getProjectReceiptCounter(projectName, paymentDate) {
 async function saveLastReceiptNumber(receiptNumber, projectName, paymentDate) {
   if (!receiptNumber) return;
 
-  if (!hasSanityWriteToken) {
+  if (!hasSanityWriteToken()) {
     throw new Error("Missing SANITY_API_WRITE_TOKEN for receipt counter update");
   }
 
