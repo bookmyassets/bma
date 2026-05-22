@@ -375,7 +375,7 @@ function MobileProjectLink({ project, href, onClick }) {
   );
 }
 
-function DesktopNavButton({ label, open, onClick }) {
+function DesktopNavButton({ label, open, active, onClick }) {
   return (
     <div className="relative">
       <button
@@ -384,12 +384,13 @@ function DesktopNavButton({ label, open, onClick }) {
         role="menuitem"
         aria-expanded={open}
         aria-haspopup="true"
+        aria-current={active ? "page" : undefined}
         type="button"
       >
         <span
           className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-full border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
-            open
-              ? "border-[#deae3c]/55 bg-white/20 font-semibold text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.18)] backdrop-blur-md"
+            open || active
+              ? "border-[#deae3c] bg-[#deae3c] font-semibold text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.22)]"
               : "text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
           }`}
         >
@@ -421,6 +422,12 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHomeActive = pathname === "/";
   const isContactActive = pathname === "/contact";
+  const isResidentialActive = pathname?.startsWith("/dholera-residential-plots");
+  const isBulkLandActive = pathname?.startsWith("/bulk-land");
+  const isDholeraActive =
+    pathname?.startsWith("/dholera-sir-blogs") ||
+    pathname?.startsWith("/dholera-sir-updates") ||
+    pathname?.startsWith("/about-dholera-sir");
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -589,16 +596,19 @@ export default function Navbar() {
     {
       label: "Residential Projects",
       open: isResidentialMenuOpen,
+      active: isResidentialActive,
       onClick: toggleResidentialMenu,
     },
     {
       label: "Bulk Land Deals",
       open: isBulkLandMenuOpen,
+      active: isBulkLandActive,
       onClick: toggleBulkLandMenu,
     },
     {
       label: "Dholera Blogs",
       open: isDholeraMenuOpen,
+      active: isDholeraActive,
       onClick: toggleDholeraMenu,
     },
   ];
@@ -626,9 +636,9 @@ export default function Navbar() {
                 : "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
             }`}
           >
-            <div className="relative z-10 shrink-0">
-              <Link
-                href="/"
+              <div className="relative z-10 shrink-0">
+                <Link
+                  href="/"
                 onClick={closeAllMenus}
                 className="block  px-[0.75rem] py-[0.4375rem] shadow-sm transition-all duration-300 hover:scale-105 "
                 aria-label="BookMyAssets home"
@@ -655,17 +665,22 @@ export default function Navbar() {
                     <span
                       className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-full border px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
                         isHomeActive
-                          ? "border-[#deae3c]/55 bg-white/20 font-semibold text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.18)] backdrop-blur-md"
-                          : "border-transparent text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
+                          ? "border-[#deae3c] bg-[#deae3c] font-semibold text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.22)]"
+                            : "border-transparent text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
                       }`}
                     >
                       Home
                     </span>
                   </Link>
 
-                  {desktopDropdowns.map(({ label, open, onClick }) => (
+                  {desktopDropdowns.map(({ label, open, active, onClick }) => (
                   <div key={label} className="dropdown-container relative">
-                    <DesktopNavButton label={label} open={open} onClick={onClick} />
+                      <DesktopNavButton
+                        label={label}
+                        open={open}
+                        active={active}
+                        onClick={onClick}
+                      />
                   </div>
                 ))}
               </nav>
@@ -1077,18 +1092,29 @@ export default function Navbar() {
               )}
             </div>
 
-            {mobileLinks.map(({ href, label }, index) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={closeAllMenus}
-                className={`block rounded-md px-[0.75rem] py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-white transition-colors hover:bg-white/10 hover:text-white ${
-                  index < mobileLinks.length - 1 ? "border-b border-white/10" : ""
-                }`}
-              >
-                {label}
-              </Link>
-            ))}
+            {mobileLinks.map(({ href, label }, index) => {
+              const isActive = pathname === href;
+
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={closeAllMenus}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`block rounded-md px-[0.75rem] py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors hover:bg-white/10 hover:text-white ${
+                    isActive
+                      ? "border border-[#deae3c] bg-[#deae3c] text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.18)]"
+                      : "text-white"
+                  } ${
+                    !isActive && index < mobileLinks.length - 1
+                      ? "border-b border-white/10"
+                      : ""
+                  }`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
 
             <Link
               href={whatsappEnquiryLink}

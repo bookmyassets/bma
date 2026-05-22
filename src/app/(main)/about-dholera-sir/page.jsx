@@ -199,8 +199,8 @@ export default async function page() {
       />
       <div className="bg-white">
         {/* Hero Section */}
-        <div className=" pt-16">
-          <div className="md:relative md:h-[65vh] overflow-hidden shadow-lg">
+        <div className=" pt-16 md:pt-0">
+          <div className="md:relative md:h-[70vh] overflow-hidden shadow-lg">
             <Image
               src={banner}
               alt="banner"

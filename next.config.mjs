@@ -443,12 +443,7 @@ const nextConfig = {
           "/dholera-sir-updates/nextgen-8800-crore-investment-dholera-industrial-ecosystem",
         permanent: true,
       },
-      {
-        source: "/dholera-sir-blogs/Plug-and-play-infrastructure-in-dholera",
-        destination:
-          "/dholera-sir-blogs/plug-and-play-infrastructure-in-dholera",
-        permanent: true,
-      },
+      
       {
         source: "/dholera-sir-updates/buy-plots-in-dholera-smart-city",
         destination: "/dholera-sir-blogs/buy-plots-in-dholera-smart-city",

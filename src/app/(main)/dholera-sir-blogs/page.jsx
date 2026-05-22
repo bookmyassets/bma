@@ -66,7 +66,7 @@ export default async function page() {
       <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}
         <div className="bg-white relative">
-          <div className="pt-16 md:pt-20">
+          <div className="pt-16 md:pt-0">
             <div className="relative md:h-[60vh] overflow-hidden shadow-lg">
               {/* Hero Image */}
               <Image
