@@ -14,9 +14,7 @@ import {
 const documents = [
   { title: "Sale Deed", icon: ScrollText },
   { title: "Title Certificate", icon: ShieldCheck },
-  { title: "7/12 Extract", icon: FileText },
   { title: "NA / NOC", icon: FileCheck2 },
-  { title: "AUDA Certificate", icon: BadgeCheck },
   { title: "Site Plan Approval", icon: MapPinned },
 ];
 
@@ -31,38 +29,37 @@ const buyingSteps = [
 
 const DocumentChecklistProcess = ({ onDocumentChecklistClick }) => {
   return (
-    <section className="bg-black px-4 py-[clamp(1rem,2vw,1.75rem)]">
+    <section className="bg-black px-4 py-[clamp(1.75rem,3vw,3rem)]">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] bg-[#050505] p-[clamp(0.875rem,2vw,1.5rem)] text-white shadow-2xl ring-1 ring-[#deae3c]/20">
         <div className="flex flex-col gap-[clamp(1.25rem,2.5vw,2rem)]">
-          <div className="border-t border-white/10 pt-[clamp(1.25rem,2.5vw,2rem)]">
-            <div className="mb-5 flex items-center gap-2 text-[#deae3c]">
-              <Landmark className="h-4 w-4" aria-hidden="true" />
+          <div>
+            <div className="mb-4 flex items-center gap-2 text-[#deae3c]">
+              <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
               <h2 className="text-[clamp(0.95rem,1.2vw,1.05rem)] font-semibold uppercase tracking-[0.12em]">
-                Easy 6 Step Buying Process
+                Document Checklist
               </h2>
             </div>
 
-            <ol className="grid gap-3 md:grid-cols-2 xl:grid-cols-6">
-              {buyingSteps.map((step, index) => (
-                <li
-                  key={step}
-                  className="relative flex min-h-[5rem] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-3 xl:flex-col xl:items-start"
+            <div className="grid gap-3 grid-cols-2 lg:grid-cols-[repeat(4,minmax(0,1fr))]">
+              {documents.map(({ title, icon: Icon }) => (
+                <div
+                  key={title}
+                  className="group min-h-[5.75rem] rounded-xl border border-[#deae3c]/20 bg-white/[0.035] p-3 transition-colors hover:border-[#deae3c]/45 hover:bg-[#deae3c]/10"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#deae3c]/40 bg-[#deae3c]/10 text-[1rem] font-bold text-[#deae3c]">
-                    {index + 1}
-                  </span>
-                  <span className="text-[clamp(0.95rem,1.15vw,1.05rem)] font-semibold leading-[1.35] text-white/90">
-                    {step}
-                  </span>
-                  {index < buyingSteps.length - 1 && (
-                    <ArrowRight
-                      className="absolute right-[-0.85rem] top-1/2 z-10 hidden h-4 w-4 -translate-y-1/2 text-[#deae3c] xl:block"
+                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-[#deae3c]/30 bg-black text-[#deae3c]">
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                  </div>
+                  <p className="flex items-start gap-2 text-[clamp(0.95rem,1.2vw,1.05rem)] font-semibold leading-[1.35] text-white/90">
+                    <BadgeCheck
+                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500"
                       aria-hidden="true"
                     />
-                  )}
-                </li>
+                    {title}
+                  </p>
+                </div>
               ))}
-            </ol>
+            </div>
+
             <div className="mt-5 flex justify-center lg:justify-end">
               <button
                 type="button"
@@ -74,6 +71,8 @@ const DocumentChecklistProcess = ({ onDocumentChecklistClick }) => {
               </button>
             </div>
           </div>
+
+
         </div>
       </div>
     </section>
