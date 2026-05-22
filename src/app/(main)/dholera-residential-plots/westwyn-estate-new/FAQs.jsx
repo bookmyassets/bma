@@ -33,7 +33,7 @@ const faqs = [
     answer:
       "The project is positioned with access to the broader Dholera SIR development zone, making it relevant for long-term growth aligned with infrastructure expansion.",
   },
-  {
+ /*  {
     question: "What plot sizes are available in WestWyn Estates?",
     answer:
       "WestWyn Estates offers multiple plot sizes suitable for different investment and usage needs. Detailed size options and availability are shared based on current inventory.",
@@ -77,7 +77,7 @@ const faqs = [
       "Ongoing guidance",
       "You are supported even after the transaction is complete",
     ],
-  },
+  }, */
 ];
 
 export default function FAQSection() {
