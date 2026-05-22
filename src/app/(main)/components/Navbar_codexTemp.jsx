@@ -99,7 +99,7 @@ const utilityLinks = [
 ];
 
 const mobileLinks = [
-  { href: "/", label: "Home" },
+
   { href: "/dholera-sir-blogs", label: "Dholera Blogs" },
   { href: "/dholera-sir-updates", label: "Dholera SIR Updates" },
   { href: "/about-dholera-sir", label: "About Dholera" },
