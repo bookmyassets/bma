@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
@@ -39,11 +39,16 @@ jobs:
           GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
 
-      # THIS is the critical missing step
       - name: Prepare standalone output
         run: |
+          mkdir -p .next/standalone/.next
+
+          rm -rf .next/standalone/.next/static
           cp -r .next/static .next/standalone/.next/static
-          cp -r public .next/standalone/public
+
+          rm -rf .next/standalone/public
+          mkdir -p .next/standalone/public
+          cp -r public/. .next/standalone/public/
 
       - name: Archive build output
         run: tar -czf app.tar.gz .next/standalone package.json
@@ -65,10 +70,28 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            set -e
+
             cd /var/www/bma
+
+            rm -rf .next/standalone/public
+
             tar -xzf app.tar.gz
+
+            pm2 delete app || true
+
             HOSTNAME=127.0.0.1 PORT=3000 pm2 restart bma --update-env || HOSTNAME=127.0.0.1 PORT=3000 pm2 start .next/standalone/server.js --name bma
+
             pm2 save
             pm2 list
+
             sleep 3
-            ss -tulpn | grep ':3000' || true
+
+            echo "Checking private app port"
+            ss -tln | grep '127.0.0.1:3000' || ss -tln | grep ':3000' || true
+
+            echo "Checking Residential JSON"
+            curl -I https://bookmyassets.com/data/Residential.json || true
+
+            echo "Checking website"
+            curl -I https://bookmyassets.com || true
