@@ -146,7 +146,7 @@ export default function WestWynEstateClient() {
             </div>
           </div>
 
-          <div className="relative min-h-[17rem] overflow-hidden sm:min-h-[22rem] lg:min-h-full">
+          <div className="relative order-first min-h-[17rem] overflow-hidden sm:min-h-[22rem] lg:order-none lg:min-h-full">
             <div className="relative h-full min-h-[17rem] sm:min-h-[22rem] lg:min-h-full">
               <Image
                 src={img1}
