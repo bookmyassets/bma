@@ -80,6 +80,10 @@ jobs:
 
             tar -xzf app.tar.gz
 
+            mkdir -p /var/www/bma/public
+            rm -rf /var/www/bma/public/assets
+            cp -r /var/www/bma/.next/standalone/public/assets /var/www/bma/public/assets
+
             pm2 delete app || true
 
             HOSTNAME=127.0.0.1 PORT=3000 pm2 restart bma --update-env || HOSTNAME=127.0.0.1 PORT=3000 pm2 start .next/standalone/server.js --name bma
@@ -87,13 +91,5 @@ jobs:
             pm2 save
             pm2 list
 
-            sleep 3
-
-            echo "Checking private app port"
-            ss -tln | grep '127.0.0.1:3000' || ss -tln | grep ':3000' || true
-
-            echo "Checking Residential JSON"
-            curl -I https://bookmyassets.com/data/Residential.json || true
-
-            echo "Checking website"
-            curl -I https://bookmyassets.com || true
+            curl -I https://bookmyassets.com/assets/Payment-Receipt.pdf || true
+            curl -I https://bookmyassets.com/assets/Payment_Schedule.pdf || true
