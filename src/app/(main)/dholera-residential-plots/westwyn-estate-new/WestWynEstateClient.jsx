@@ -9,6 +9,7 @@ import FAQSection from "./FAQs";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import WestWynAboutSection from "./About";
 import WhyInvestBookMyAssets from "./WhyInvestBookMyAssets";
+import Link from "next/link";
 
 //images import
 import img1 from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate.webp";
@@ -22,6 +23,7 @@ import PlanLayout from "./PlanLayout";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
 import DocumentChecklistProcess from "./DocumentChecklistProcess";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function WestWynEstateClient() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -134,21 +136,13 @@ export default function WestWynEstateClient() {
               >
                 Get Price List
               </button>
-              <button
+              <Link
+                href="https://wa.me/918130371647?text=Hi%2C%20I%27m%20interested%20in%20Dholera%20plots.%20Please%20share%20details"
                 type="button"
-                onClick={() =>
-                  openContactForm(
-                    "Talk to Advisor",
-                    "Speak with a project advisor about WestWyn Estates.",
-                    "Talk To Advisor",
-                    "contact",
-                    "WestWyn Estates",
-                  )
-                }
                 className="inline-flex min-h-[3rem] items-center justify-center rounded-[0.375rem] border border-[#deae3c] px-6 text-[0.95rem] font-semibold text-white transition-colors hover:bg-[#deae3c] hover:text-black focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:ring-offset-2 focus:ring-offset-black"
               >
-                Talk To Advisor
-              </button>
+              <FaWhatsapp/>  Talk To Advisor
+              </Link>
             </div>
           </div>
 
