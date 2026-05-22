@@ -18,7 +18,7 @@ export default function WhyInvestBookMyAssets() {
     <section className="bg-black px-[clamp(1rem,4vw,3rem)] py-[clamp(2rem,4vw,3.5rem)] text-white">
       <div className="mx-auto max-w-7xl">
         <div className="mb-[clamp(1rem,2vw,1.5rem)]">
-          <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-[#deae3c]">
+          <p className="text-[clamp(1.5rem,3vw,2rem)] text-center font-semibold uppercase tracking-[0.08em] text-[#deae3c]">
             Why Invest with BookMyAssets
           </p>
         </div>
@@ -35,7 +35,7 @@ export default function WhyInvestBookMyAssets() {
                   isLastOdd ? "col-span-2 sm:col-span-1" : ""
                 }`}
               >
-                <div className="relative mb-3 h-[clamp(2.25rem,4vw,3rem)] w-[clamp(2.25rem,4vw,3rem)]">
+                <div className="relative mb-3 h-[clamp(7rem,8vw,9rem)] w-[clamp(7rem,8vw,9rem)]">
                   <Image
                     src={item.icon}
                     alt=""

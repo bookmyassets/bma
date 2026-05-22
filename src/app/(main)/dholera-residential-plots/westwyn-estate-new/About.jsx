@@ -4,8 +4,6 @@ import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { FaDownload } from "react-icons/fa";
-import Image from "next/image";
-import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-google-maps-location.webp";
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({
@@ -63,155 +61,108 @@ const WestWynAboutSection = () => {
   };
 
   return (
-    <div className="bg-white relative overflow-hidden">
-      {/* Subtle background pattern */}
+    <div className="bg-black relative overflow-hidden">
 
       <div className="relative max-w-7xl mx-auto px-4 py-4">
-        {/* Header Section */}
-        <div className="text-center space-y-2">
-          <h1 className=" text-[#deae3c] text-[32px] leading-none font-bold">
-            WestWyn Estates{" "}
-            <span className="font-semibold text-sm md:text-lg whitespace-nowrap text-black">
-              {" "}
-              <br />
-              Plots Starting from ₹10 Lakh
-            </span>
-          </h1>
-
-          <p className=" italic  py-0.5"></p>
-
-          <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
-            Westwyn Estates offers premium, well-planned residential plots in a
-            fast-growing zone in Polarpur, Dholera, best for investors looking
-            for long-term value. With clear documentation, strategic location,
-            and strong development potential, it ensures a secure and
-            transparent buying experience. It is a smart opportunity to be part
-            of India’s next big smart city growth story.
-          </p>
-        </div>
-
-        <div className=" gap-12 items-stretch space-y-4 px-4 py-4">
-          {/* Left Content */}
-          <div className=" h-full">
-            <div className="flex justify-center items-center flex-row gap-4 ">
-              <button
-                onClick={openBrochureForm}
-                className="bg-[#deae3c] text-white text-base px-2 md:px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
-              >
-                <FaDownload />
-                Get Brochure
-              </button>
-
-              <Link href="https://wa.me/918130371647">
-                <p className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaWhatsapp />
-                  Book Dholera Site Visit
-                </p>
-              </Link>
-            </div>
-          </div>
-        </div>
-
         {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto py-4">
-          <div>
-            <h2 className="text-[32px] font-semibold text-center ">
+        <div className="max-w-7xl mx-auto my-[clamp(2.5rem,5vw,4.5rem)] rounded-[1.5rem] bg-[#050505] px-[clamp(0.75rem,2vw,1rem)] py-[clamp(2rem,4vw,3rem)] shadow-2xl">
+          <div className="mx-auto max-w-[42rem] text-center">
+            <p className="mb-2 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-[#deae3c]">
+              Location Advantage
+            </p>
+            <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-semibold leading-[1.1] text-white">
               Prime Location
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-            <div className="px-4 sm:px-6 lg:px-8 ">
-              <Image
-                src={img}
-                alt="dholera map"
-                className="rounded-xl w-full h-auto md:h-full"
-                priority
-              />
-            </div>
-            <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex items-start justify-start gap-2 font-semibold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>
-                    Premium residential plots in Polarpur, Dholera, Gujarat
-                  </span>
-                </li>
 
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>
-                    Direct Entry from State Highway-117 (150 foot road)
-                  </span>
-                </li>
+          <div className="mt-[clamp(1.25rem,2.5vw,2rem)] overflow-hidden rounded-[1.25rem] bg-[#080808] p-[clamp(0.75rem,1.5vw,1rem)] ring-1 ring-[#deae3c]/20">
+            <div className="grid gap-4 lg:grid-cols-[0.85fr_1.4fr]">
+              <div className="relative overflow-hidden rounded-2xl border border-[#deae3c]/25 bg-[linear-gradient(145deg,#0d0d0d_0%,#050505_55%,#171105_100%)] p-[clamp(1.25rem,2.5vw,2rem)] text-white">
+                <div className="absolute right-[-4rem] top-[-4rem] h-32 w-32 rounded-full border border-[#deae3c]/20" />
+                <div className="absolute bottom-[-5rem] left-[-5rem] h-40 w-40 rounded-full border border-white/10" />
 
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>5 Minutes from Bhimnath Railway Junction</span>
-                </li>
+                <div className="relative">
+                  <div className="mb-[clamp(1rem,2vw,1.5rem)] inline-flex items-center gap-2 rounded-full border border-[#deae3c]/35 bg-[#deae3c]/10 px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[#deae3c]">
+                    <span className="text-[1rem] leading-none">&#8226;</span>
+                    Location Clarity
+                  </div>
 
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>15 Minutes from Dholera SIR boundary</span>
-                </li>
+                  <h3 className="max-w-[18rem] text-[clamp(1.35rem,2.5vw,2rem)] font-semibold leading-[1.15]">
+                    Connected to Dholera's key growth corridors
+                  </h3>
 
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>15 Minutes from RMS Multi-Specialty Hospital</span>
-                </li>
+                  <p className="mt-3 text-[0.95rem] leading-[1.7] text-white/70">
+                    A clear location snapshot for rail, expressway, industrial,
+                    and airport connectivity around WestWyn Estates.
+                  </p>
+                </div>
 
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>18 minutes from Ahmedabad Dholera Expressway</span>
-                </li>
+                <ul className="relative mt-[clamp(1.25rem,2.5vw,2rem)] space-y-3">
+                  <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
+                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                      5 min
+                    </span>
+                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                      Bhimnath Railway Junction
+                    </span>
+                  </li>
+                  <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
+                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                      15 min
+                    </span>
+                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                      Dholera SIR boundary
+                    </span>
+                  </li>
+                  <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
+                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                      18 min
+                    </span>
+                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                      Ahmedabad Dholera Expressway
+                    </span>
+                  </li>
+                  <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
+                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                      30 min
+                    </span>
+                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                      Tata Semiconductor Plant
+                    </span>
+                  </li>
+                  <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
+                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                      45 min
+                    </span>
+                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                      Dholera International Airport
+                    </span>
+                  </li>
+                </ul>
+              </div>
 
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>30 minutes from Tata Semiconductor Plant</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>45 minutes from Dholera International Airport</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>
-                    Close proximity to Public Facilities and Transport: Bus
-                    stand, school, hospital, shopping complex, park, food
-                    courts.
-                  </span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>
-                    Industrial proximity: Seamless connectivity to TATA
-                    Semiconductor Plant & ReNew Solar Plant. Nearby to Hebatpur
-                    Industrial Area.
-                  </span>
-                </li>
-              </ul>
+              <div className="relative min-h-[20rem] overflow-hidden rounded-2xl border border-white/10 bg-black sm:min-h-[25rem] lg:min-h-[31rem]">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3107.878172212779!2d71.91529182071378!3d22.2353352510217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f33007987615f%3A0x28c9c473efaffc7c!2sWestWyn%20Estates!5e1!3m2!1sen!2sin!4v1779431027763!5m2!1sen!2sin"
+                  title="WestWyn Estates location on Google Maps"
+                  className="absolute inset-0 h-full w-full border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/50 to-transparent" />
+                <div className="pointer-events-none absolute left-4 top-4 rounded-full border border-[#deae3c]/30 bg-black/75 px-4 py-2 text-[0.8rem] font-semibold text-white shadow-lg backdrop-blur-sm">
+                  WestWyn Estates, Polarpur
+                </div>
+                <div className="pointer-events-none absolute bottom-4 right-4 hidden rounded-xl border border-white/15 bg-black/75 px-4 py-3 text-right shadow-lg backdrop-blur-sm sm:block">
+                  <p className="text-[0.75rem] uppercase tracking-[0.16em] text-[#deae3c]">
+                    Map View
+                  </p>
+                  <p className="mt-1 text-[0.9rem] font-medium text-white">
+                    Google Maps embedded location
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

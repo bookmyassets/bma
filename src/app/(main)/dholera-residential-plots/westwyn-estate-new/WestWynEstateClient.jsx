@@ -21,6 +21,7 @@ import OurCommits from "./OurCommits";
 import PlanLayout from "./PlanLayout";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
+import DocumentChecklistProcess from "./DocumentChecklistProcess";
 
 export default function WestWynEstateClient() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -183,9 +184,21 @@ export default function WestWynEstateClient() {
 
       <WhyInvestBookMyAssets />
 
-      <div className="pt-4 pb-4">
+      <div className="">
         <WestWynAboutSection />
       </div>
+
+      <DocumentChecklistProcess
+        onDocumentChecklistClick={() =>
+          openContactForm(
+            "Get Document Checklist",
+            "Share your details to receive the WestWyn Estates document checklist.",
+            "Get Document Checklist",
+            "document-checklist",
+            "WestWyn Estates",
+          )
+        }
+      />
 
       <div className="">
         <CommonForm
@@ -194,9 +207,9 @@ export default function WestWynEstateClient() {
         />
       </div>
 
-      <PlanLayout />
+     {/*  <PlanLayout /> */}
 
-      <ProjectAmenities />
+      {/* <ProjectAmenities /> */}
 
       <div className=" ">
         <OurCommits />
