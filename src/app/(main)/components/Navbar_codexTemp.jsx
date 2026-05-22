@@ -99,6 +99,7 @@ const utilityLinks = [
 ];
 
 const mobileLinks = [
+  { href: "/", label: "Home" },
   { href: "/dholera-sir-blogs", label: "Dholera Blogs" },
   { href: "/dholera-sir-updates", label: "Dholera SIR Updates" },
   { href: "/about-dholera-sir", label: "About Dholera" },
@@ -418,6 +419,7 @@ export default function Navbar() {
   const [isSoldOutOpen, setIsSoldOutOpen] = useState(false);
 
   const pathname = usePathname();
+  const isHomeActive = pathname === "/";
   const isContactActive = pathname === "/contact";
 
   useEffect(() => {
@@ -595,7 +597,7 @@ export default function Navbar() {
       onClick: toggleBulkLandMenu,
     },
     {
-      label: "Dholera SIR Blogs",
+      label: "Dholera Blogs",
       open: isDholeraMenuOpen,
       onClick: toggleDholeraMenu,
     },
@@ -621,7 +623,7 @@ export default function Navbar() {
             className={`liquid-glass-container relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-full border px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[4.5rem] md:px-5 lg:h-[5rem] lg:gap-4 lg:px-6 xl:gap-6 ${
               isScrolled
                 ? "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
-                : "border-white/20 bg-white/10 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.22)]"
+                : "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
             }`}
           >
             <div className="relative z-10 shrink-0">
@@ -644,7 +646,24 @@ export default function Navbar() {
 
             <div className="relative text-black z-10 ml-auto hidden flex-1 justify-end lg:flex">
               <nav className="flex h-full items-center justify-end" role="menubar">
-                {desktopDropdowns.map(({ label, open, onClick }) => (
+                  <Link
+                    href="/"
+                    onClick={closeAllMenus}
+                    className="relative flex min-h-[2.75rem] touch-manipulation items-center font-medium"
+                    aria-current={isHomeActive ? "page" : undefined}
+                  >
+                    <span
+                      className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-full border px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
+                        isHomeActive
+                          ? "border-[#deae3c]/55 bg-white/20 font-semibold text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.18)] backdrop-blur-md"
+                          : "border-transparent text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      Home
+                    </span>
+                  </Link>
+
+                  {desktopDropdowns.map(({ label, open, onClick }) => (
                   <div key={label} className="dropdown-container relative">
                     <DesktopNavButton label={label} open={open} onClick={onClick} />
                   </div>

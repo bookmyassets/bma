@@ -182,7 +182,7 @@ export default function AboutBMA() {
                     return (
                       <div
                         key={item.id}
-                        className={`flex flex-col items-center gap-3 rounded-xl border border-gray-100 p-2 shadow-lg transition-shadow hover:shadow-xl ${
+                        className={`flex flex-col items-center gap-3 rounded-xl border border-gray-100 p-2 shadow-[#deae3c]  shadow-lg transition-shadow hover:shadow-xl ${
                           isLastOdd ? "col-span-2 sm:col-span-1" : ""
                         }`}
                       >
