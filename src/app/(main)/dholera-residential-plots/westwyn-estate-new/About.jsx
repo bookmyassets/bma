@@ -1,9 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import BrochureDownload from "../../components/BrochureDownload";
-import { FaWhatsapp } from "react-icons/fa6";
-import Link from "next/link";
-import { FaDownload } from "react-icons/fa";
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({
@@ -63,46 +60,43 @@ const WestWynAboutSection = () => {
   return (
     <div className="bg-black relative overflow-hidden">
 
-      <div className="relative max-w-7xl mx-auto px-4 py-4">
+      <div className="relative max-w-7xl mx-auto px-4 py-[clamp(0.75rem,1.5vw,1.25rem)]">
         {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto my-[clamp(2.5rem,5vw,4.5rem)] rounded-[1.5rem] bg-[#050505] px-[clamp(0.75rem,2vw,1rem)] py-[clamp(2rem,4vw,3rem)] shadow-2xl">
+        <div className="max-w-7xl mx-auto rounded-[1.5rem] bg-[#050505] px-[clamp(0.75rem,2vw,1rem)] py-[clamp(1.25rem,2.5vw,2rem)] shadow-2xl">
           <div className="mx-auto max-w-[42rem] text-center">
             <p className="mb-2 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-[#deae3c]">
               Location Advantage
             </p>
-            <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-semibold leading-[1.1] text-white">
+            <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.15] text-white">
               Prime Location
             </h2>
           </div>
 
-          <div className="mt-[clamp(1.25rem,2.5vw,2rem)] overflow-hidden rounded-[1.25rem] bg-[#080808] p-[clamp(0.75rem,1.5vw,1rem)] ring-1 ring-[#deae3c]/20">
+          <div className="mt-[clamp(1rem,2vw,1.5rem)] overflow-hidden rounded-[1.25rem] bg-[#080808] p-[clamp(0.75rem,1.5vw,1rem)] ring-1 ring-[#deae3c]/20">
             <div className="grid gap-4 lg:grid-cols-[0.85fr_1.4fr]">
               <div className="relative overflow-hidden rounded-2xl border border-[#deae3c]/25 bg-[linear-gradient(145deg,#0d0d0d_0%,#050505_55%,#171105_100%)] p-[clamp(1.25rem,2.5vw,2rem)] text-white">
-                <div className="absolute right-[-4rem] top-[-4rem] h-32 w-32 rounded-full border border-[#deae3c]/20" />
-                <div className="absolute bottom-[-5rem] left-[-5rem] h-40 w-40 rounded-full border border-white/10" />
-
                 <div className="relative">
                   <div className="mb-[clamp(1rem,2vw,1.5rem)] inline-flex items-center gap-2 rounded-full border border-[#deae3c]/35 bg-[#deae3c]/10 px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[#deae3c]">
                     <span className="text-[1rem] leading-none">&#8226;</span>
                     Location Clarity
                   </div>
 
-                  <h3 className="max-w-[18rem] text-[clamp(1.35rem,2.5vw,2rem)] font-semibold leading-[1.15]">
+                  <h3 className="max-w-[20rem] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.25]">
                     Connected to Dholera's key growth corridors
                   </h3>
 
-                  <p className="mt-3 text-[0.95rem] leading-[1.7] text-white/70">
+                  <p className="mt-3 text-[0.95rem] leading-[1.65] text-white/70">
                     A clear location snapshot for rail, expressway, industrial,
                     and airport connectivity around WestWyn Estates.
                   </p>
                 </div>
 
-                <ul className="relative mt-[clamp(1.25rem,2.5vw,2rem)] space-y-3">
+                <ul className="relative mt-[clamp(1rem,2vw,1.5rem)] space-y-3">
                   <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
                     <span className="text-[1.05rem] font-bold text-[#deae3c]">
                       5 min
                     </span>
-                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                    <span className="text-[0.95rem] leading-[1.4] text-white/85">
                       Bhimnath Railway Junction
                     </span>
                   </li>
@@ -110,7 +104,7 @@ const WestWynAboutSection = () => {
                     <span className="text-[1.05rem] font-bold text-[#deae3c]">
                       15 min
                     </span>
-                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                    <span className="text-[0.95rem] leading-[1.4] text-white/85">
                       Dholera SIR boundary
                     </span>
                   </li>
@@ -118,7 +112,7 @@ const WestWynAboutSection = () => {
                     <span className="text-[1.05rem] font-bold text-[#deae3c]">
                       18 min
                     </span>
-                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                    <span className="text-[0.95rem] leading-[1.4] text-white/85">
                       Ahmedabad Dholera Expressway
                     </span>
                   </li>
@@ -126,7 +120,7 @@ const WestWynAboutSection = () => {
                     <span className="text-[1.05rem] font-bold text-[#deae3c]">
                       30 min
                     </span>
-                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                    <span className="text-[0.95rem] leading-[1.4] text-white/85">
                       Tata Semiconductor Plant
                     </span>
                   </li>
@@ -134,14 +128,14 @@ const WestWynAboutSection = () => {
                     <span className="text-[1.05rem] font-bold text-[#deae3c]">
                       45 min
                     </span>
-                    <span className="text-[0.9rem] leading-[1.4] text-white/85">
+                    <span className="text-[0.95rem] leading-[1.4] text-white/85">
                       Dholera International Airport
                     </span>
                   </li>
                 </ul>
               </div>
 
-              <div className="relative min-h-[20rem] overflow-hidden rounded-2xl border border-white/10 bg-black sm:min-h-[25rem] lg:min-h-[31rem]">
+              <div className="relative min-h-[19rem] overflow-hidden rounded-2xl border border-white/10 bg-black sm:min-h-[23rem] lg:min-h-[27rem]">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3107.878172212779!2d71.91529182071378!3d22.2353352510217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f33007987615f%3A0x28c9c473efaffc7c!2sWestWyn%20Estates!5e1!3m2!1sen!2sin!4v1779431027763!5m2!1sen!2sin"
                   title="WestWyn Estates location on Google Maps"

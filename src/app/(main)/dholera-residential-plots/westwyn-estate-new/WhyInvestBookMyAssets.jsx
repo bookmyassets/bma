@@ -15,10 +15,10 @@ const benefits = [
 
 export default function WhyInvestBookMyAssets() {
   return (
-    <section className="bg-black px-[clamp(1rem,4vw,3rem)] py-[clamp(2rem,4vw,3.5rem)] text-white">
+    <section className="bg-black px-[clamp(1rem,4vw,3rem)] py-[clamp(1.25rem,2.5vw,2rem)] text-white">
       <div className="mx-auto max-w-7xl">
         <div className="mb-[clamp(1rem,2vw,1.5rem)]">
-          <p className="text-[clamp(1.5rem,3vw,2rem)] text-center font-semibold uppercase tracking-[0.08em] text-[#deae3c]">
+          <p className="text-[clamp(1.375rem,2.4vw,1.875rem)] text-center font-semibold uppercase tracking-[0.08em] text-[#deae3c]">
             Why Invest with BookMyAssets
           </p>
         </div>
@@ -31,11 +31,11 @@ export default function WhyInvestBookMyAssets() {
             return (
               <div
                 key={item.id}
-                className={`flex min-h-[8rem] flex-col items-center justify-center rounded-[0.5rem] border border-white/10 bg-white/[0.03] p-[clamp(1rem,2vw,1.5rem)] text-center shadow-[0_0_0_1px_rgba(222,174,60,0.08)] transition-colors hover:border-[#deae3c]/50 ${
+                className={`flex min-h-[7rem] flex-col items-center justify-center rounded-[0.5rem] border border-white/10 bg-white/[0.03] p-[clamp(0.875rem,1.6vw,1.25rem)] text-center shadow-[0_0_0_1px_rgba(222,174,60,0.08)] transition-colors hover:border-[#deae3c]/50 ${
                   isLastOdd ? "col-span-2 sm:col-span-1" : ""
                 }`}
               >
-                <div className="relative mb-3 h-[clamp(7rem,8vw,9rem)] w-[clamp(7rem,8vw,9rem)]">
+                <div className="relative mb-3 h-[clamp(4rem,5vw,5.5rem)] w-[clamp(4rem,5vw,5.5rem)]">
                   <Image
                     src={item.icon}
                     alt=""
@@ -45,7 +45,7 @@ export default function WhyInvestBookMyAssets() {
                     aria-hidden="true"
                   />
                 </div>
-                <p className="text-[clamp(0.875rem,1.4vw,1rem)] font-semibold leading-[1.35] text-white">
+                <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] font-semibold leading-[1.35] text-white">
                   {item.label}
                 </p>
               </div>

@@ -90,18 +90,18 @@ export default function FAQSection() {
   return (
     <>
       <div className="bg-white">
-        <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row px-4 md:px-8 py-[clamp(1.5rem,3vw,3rem)] gap-6 md:gap-10 max-w-7xl mx-auto">
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h5 className="text-[32px] font-semibold text-black mb-4">
+            <h5 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold text-black mb-4 leading-[1.15]">
               Frequently Asked Questions
             </h5>
-            <p className="text-gray-600 mb-2">
+            <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] text-gray-600 mb-2 leading-[1.7]">
               Got questions about WestWyn Estates?
             </p>
             <div className="pt-4">
               <a
-                className="px-2 py-3 bg-[#deae3c] rounded-md"
+                className="inline-flex min-h-[2.75rem] items-center px-4 bg-[#deae3c] rounded-md text-[0.95rem] font-semibold text-black"
                 href="tel:+918130371647"
               >
                 Give Us A Missed Call
@@ -110,14 +110,14 @@ export default function FAQSection() {
           </div>
 
           {/* Right Section (60%) */}
-          <div className="w-full md:w-3/5 md:pl-24 md:pr-4  md:mt-0 space-y-1">
+          <div className="w-full md:w-3/5 md:pl-16 md:pr-4 md:mt-0 space-y-1">
             {faqs.map((faq, index) => (
               <div key={index} className="border-b border-gray-200">
                 <button
-                  className="w-full py-4 flex justify-between items-center text-left hover:bg-gray-50 transition-all duration-200"
+                    className="w-full py-4 flex justify-between items-center text-left hover:bg-gray-50 transition-all duration-200"
                   onClick={() => toggleFAQ(index)}
                 >
-                  <span className="text-gray-900 font-medium pr-4 leading-relaxed">
+                  <span className="text-[clamp(0.95rem,1.2vw,1.05rem)] text-gray-900 font-medium pr-4 leading-relaxed">
                     {faq.question}
                   </span>
                   <span className="flex-shrink-0 transition-transform duration-200">
@@ -137,7 +137,7 @@ export default function FAQSection() {
                   }`}
                 >
                   <div className="pb-4 px-0">
-                    <div className="text-gray-600 text-sm leading-relaxed">
+                    <div className="text-gray-600 text-[0.95rem] leading-relaxed">
                       {Array.isArray(faq.answer) ? (
                         <ul className="list-disc pl-5 space-y-1">
                           {faq.answer.map((point, i) => (

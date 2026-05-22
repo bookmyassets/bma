@@ -67,10 +67,15 @@ jobs:
 
       - name: Deploy on server via SSH
         uses: appleboy/ssh-action@v1.2.0
+        env:
+          SANITY_API_WRITE_TOKEN: ${{ secrets.SANITY_API_WRITE_TOKEN }}
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          envs: SANITY_API_WRITE_TOKEN,NEXT_PUBLIC_SANITY_PROJECT_ID,NEXT_PUBLIC_SANITY_DATASET
           script: |
             set -e
 
@@ -80,16 +85,11 @@ jobs:
 
             tar -xzf app.tar.gz
 
-            mkdir -p /var/www/bma/public
-            rm -rf /var/www/bma/public/assets
-            cp -r /var/www/bma/.next/standalone/public/assets /var/www/bma/public/assets
-
             pm2 delete app || true
 
-            HOSTNAME=127.0.0.1 PORT=3000 pm2 restart bma --update-env || HOSTNAME=127.0.0.1 PORT=3000 pm2 start .next/standalone/server.js --name bma
+            SANITY_API_WRITE_TOKEN="$SANITY_API_WRITE_TOKEN" NEXT_PUBLIC_SANITY_PROJECT_ID="$NEXT_PUBLIC_SANITY_PROJECT_ID" NEXT_PUBLIC_SANITY_DATASET="$NEXT_PUBLIC_SANITY_DATASET" HOSTNAME=127.0.0.1 PORT=3000 pm2 restart bma --update-env || SANITY_API_WRITE_TOKEN="$SANITY_API_WRITE_TOKEN" NEXT_PUBLIC_SANITY_PROJECT_ID="$NEXT_PUBLIC_SANITY_PROJECT_ID" NEXT_PUBLIC_SANITY_DATASET="$NEXT_PUBLIC_SANITY_DATASET" HOSTNAME=127.0.0.1 PORT=3000 pm2 start .next/standalone/server.js --name bma
 
             pm2 save
             pm2 list
 
-            curl -I https://bookmyassets.com/assets/Payment-Receipt.pdf || true
-            curl -I https://bookmyassets.com/assets/Payment_Schedule.pdf || true
+            curl -I https://bookmyassets.com || true

@@ -109,19 +109,19 @@ export default function WestWynEstateClient() {
         aria-label="WestWyn Estates hero"
       >
         {/* ── DESKTOP (lg+): translateX sliding ──────────────────────────── */}
-        <div className="mx-auto grid w-full max-w-[120rem] lg:min-h-[40rem] lg:grid-cols-[40%_60%]">
-          <div className="relative z-10 flex flex-col justify-center px-[clamp(1rem,4vw,3rem)] py-[clamp(3rem,7vw,6rem)] lg:py-[clamp(4rem,8vw,7rem)]">
-            <p className="mb-3 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-[#deae3c]">
+        <div className="mx-auto grid w-full max-w-[120rem] lg:min-h-[36rem] lg:grid-cols-[40%_60%]">
+          <div className="relative z-10 flex flex-col justify-center px-[clamp(1rem,4vw,3rem)] py-[clamp(2.5rem,5vw,5rem)]">
+            <p className="mb-3 text-[clamp(0.8125rem,1vw,0.95rem)] font-semibold uppercase tracking-[0.08em] text-[#deae3c]">
               Invest in Dholera. Invest in Tomorrow.
             </p>
-            <h1 className="max-w-[42rem] text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.05] text-white">
+            <h1 className="max-w-[42rem] text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.08] text-white">
               Dholera Residential Plots Starting From{" "}
               <span className="block text-[#deae3c]">₹10 Lakh</span>
             </h1>
-            <p className="mt-4 max-w-[34rem] text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.7] text-white/80">
+            <p className="mt-3 max-w-[34rem] text-[clamp(0.95rem,1.25vw,1.075rem)] leading-[1.7] text-white/80">
               Premium residential plots in prime locations of Dholera SIR.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
                 onClick={() =>
@@ -132,22 +132,22 @@ export default function WestWynEstateClient() {
                     "brochure",
                   )
                 }
-                className="inline-flex min-h-[3rem] items-center justify-center rounded-[0.375rem] bg-[#deae3c] px-6 text-[0.95rem] font-semibold text-black transition-colors hover:bg-[#f0c65a] focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:ring-offset-2 focus:ring-offset-black"
+                className="inline-flex min-h-[2.875rem] items-center justify-center rounded-[0.375rem] bg-[#deae3c] px-6 text-[0.95rem] font-semibold text-black transition-colors hover:bg-[#f0c65a] focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:ring-offset-2 focus:ring-offset-black"
               >
                 Get Price List
               </button>
               <Link
                 href="https://wa.me/918130371647?text=Hi%2C%20I%27m%20interested%20in%20Dholera%20plots.%20Please%20share%20details"
                 type="button"
-                className="inline-flex min-h-[3rem] items-center justify-center rounded-[0.375rem] border border-[#deae3c] px-6 text-[0.95rem] font-semibold text-white transition-colors hover:bg-[#deae3c] hover:text-black focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:ring-offset-2 focus:ring-offset-black"
+                className="inline-flex min-h-[2.875rem] items-center justify-center rounded-[0.375rem] border border-[#deae3c] px-6 text-[0.95rem] font-semibold text-white transition-colors hover:bg-[#deae3c] hover:text-black focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:ring-offset-2 focus:ring-offset-black"
               >
-              <FaWhatsapp/>  Talk To Advisor
+                <FaWhatsapp /> Talk To Advisor
               </Link>
             </div>
           </div>
 
-          <div className="relative min-h-[18rem] overflow-hidden sm:min-h-[24rem] lg:min-h-full">
-            <div className="relative h-full min-h-[18rem] sm:min-h-[24rem] lg:min-h-full">
+          <div className="relative min-h-[17rem] overflow-hidden sm:min-h-[22rem] lg:min-h-full">
+            <div className="relative h-full min-h-[17rem] sm:min-h-[22rem] lg:min-h-full">
               <Image
                 src={img1}
                 alt="WestWyn Estates, Dholera Premium Residential Plots"
@@ -176,7 +176,9 @@ export default function WestWynEstateClient() {
       </section>
       {/* ── End Hero Section ───────────────────────────────────────────────── */}
 
-      <WhyInvestBookMyAssets />
+      <div className="bg-black ">
+        <OurCommits />
+      </div>
 
       <div className="">
         <WestWynAboutSection />
@@ -205,9 +207,7 @@ export default function WestWynEstateClient() {
 
       {/* <ProjectAmenities /> */}
 
-      <div className=" ">
-        <OurCommits />
-      </div>
+      
 
       <FAQSection />
 

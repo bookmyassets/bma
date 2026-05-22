@@ -31,49 +31,13 @@ const buyingSteps = [
 
 const DocumentChecklistProcess = ({ onDocumentChecklistClick }) => {
   return (
-    <section className="bg-black px-4 py-[clamp(2rem,4vw,3.5rem)]">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] bg-[#050505] p-[clamp(1rem,2.5vw,2rem)] text-white shadow-2xl ring-1 ring-[#deae3c]/20">
-        <div className="flex flex-col gap-[clamp(1.5rem,3vw,2.5rem)]">
-          <div>
-            <div className="mb-4 flex items-center gap-2 text-[#deae3c]">
-              <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
-              <h2 className="text-[clamp(0.95rem,1.4vw,1.15rem)] font-semibold uppercase tracking-[0.14em]">
-                Document Checklist
-              </h2>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(6,minmax(0,1fr))]">
-              {documents.map(({ title, icon: Icon }) => (
-                <div
-                  key={title}
-                  className="group min-h-[6.5rem] rounded-xl border border-[#deae3c]/20 bg-white/[0.035] p-4 transition-colors hover:border-[#deae3c]/45 hover:bg-[#deae3c]/10"
-                >
-                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-[#deae3c]/30 bg-black text-[#deae3c]">
-                    <Icon className="h-4 w-4" aria-hidden="true" />
-                  </div>
-                  <p className="text-[clamp(1rem,1.35vw,1.15rem)] font-semibold leading-[1.35] text-white/90">
-                    {title}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-5 flex justify-center lg:justify-end">
-              <button
-                type="button"
-                onClick={onDocumentChecklistClick}
-                className="inline-flex min-h-[2.75rem] w-full items-center justify-center gap-2 rounded-md bg-[#deae3c] px-5 text-[clamp(0.95rem,1.25vw,1.05rem)] font-semibold text-black transition-colors hover:bg-[#f0c65a] focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:ring-offset-2 focus:ring-offset-black sm:w-auto"
-              >
-                Get Document Checklist
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </button>
-            </div>
-          </div>
-
+    <section className="bg-black px-4 py-[clamp(1rem,2vw,1.75rem)]">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] bg-[#050505] p-[clamp(0.875rem,2vw,1.5rem)] text-white shadow-2xl ring-1 ring-[#deae3c]/20">
+        <div className="flex flex-col gap-[clamp(1.25rem,2.5vw,2rem)]">
           <div className="border-t border-white/10 pt-[clamp(1.25rem,2.5vw,2rem)]">
             <div className="mb-5 flex items-center gap-2 text-[#deae3c]">
               <Landmark className="h-4 w-4" aria-hidden="true" />
-              <h2 className="text-[clamp(0.95rem,1.4vw,1.15rem)] font-semibold uppercase tracking-[0.14em]">
+              <h2 className="text-[clamp(0.95rem,1.2vw,1.05rem)] font-semibold uppercase tracking-[0.12em]">
                 Easy 6 Step Buying Process
               </h2>
             </div>
@@ -82,12 +46,12 @@ const DocumentChecklistProcess = ({ onDocumentChecklistClick }) => {
               {buyingSteps.map((step, index) => (
                 <li
                   key={step}
-                  className="relative flex min-h-[5.5rem] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-4 xl:flex-col xl:items-start"
+                  className="relative flex min-h-[5rem] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-3 xl:flex-col xl:items-start"
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#deae3c]/40 bg-[#deae3c]/10 text-[1rem] font-bold text-[#deae3c]">
                     {index + 1}
                   </span>
-                  <span className="text-[clamp(1rem,1.3vw,1.125rem)] font-semibold leading-[1.35] text-white/90">
+                  <span className="text-[clamp(0.95rem,1.15vw,1.05rem)] font-semibold leading-[1.35] text-white/90">
                     {step}
                   </span>
                   {index < buyingSteps.length - 1 && (
@@ -99,6 +63,16 @@ const DocumentChecklistProcess = ({ onDocumentChecklistClick }) => {
                 </li>
               ))}
             </ol>
+            <div className="mt-5 flex justify-center lg:justify-end">
+              <button
+                type="button"
+                onClick={onDocumentChecklistClick}
+                className="inline-flex min-h-[2.75rem] w-full items-center justify-center gap-2 rounded-md bg-[#deae3c] px-5 text-[0.95rem] font-semibold text-black transition-colors hover:bg-[#f0c65a] focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:ring-offset-2 focus:ring-offset-black sm:w-auto"
+              >
+                Get Document Checklist
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
