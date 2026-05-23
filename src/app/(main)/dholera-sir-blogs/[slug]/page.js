@@ -255,12 +255,12 @@ export default async function Post({ params }) {
             <div className="my-8 overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
               <div
                 className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-white
-                 [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700
-                 [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
-                 [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
-                 [&_tr:last-child_td]:border-b-0 [&_tr:hover]:bg-gray-50/50
-                 [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
-                 [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
+              [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700
+              [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
+              [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
+              [&_tr:last-child_td]:border-b-0 [&_tr:hover]:bg-gray-50/50
+              [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
+              [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
                 dangerouslySetInnerHTML={{ __html: value.html }}
               />
             </div>
