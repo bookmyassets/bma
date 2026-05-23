@@ -63,7 +63,7 @@ export default async function page() {
         rel="canonical"
         href="https://www.bookmyassets.com/dholera-sir-blogs"
       />
-      <div className="min-h-screen bg-white relative overflow-hidden">
+      <div className="min-h-screen bg-black relative overflow-hidden">
         {/* Enhanced Hero Section - Responsive Height */}
         <div className="bg-white relative">
           <div className="pt-16 md:pt-0">
