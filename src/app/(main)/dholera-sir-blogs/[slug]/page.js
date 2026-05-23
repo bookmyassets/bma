@@ -210,7 +210,7 @@ export default async function Post({ params }) {
           );
         },
 
-        table: ({ value }) => {
+      table: ({ value }) => {
           if (!value?.rows || !Array.isArray(value.rows)) return null;
           return (
             <div className="overflow-x-auto my-8 bg-white rounded-2xl shadow-lg border border-gray-100">
