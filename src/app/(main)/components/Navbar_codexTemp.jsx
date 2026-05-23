@@ -99,7 +99,6 @@ const utilityLinks = [
 ];
 
 const mobileLinks = [
-
   { href: "/dholera-sir-blogs", label: "Dholera Blogs" },
   { href: "/dholera-sir-updates", label: "Dholera SIR Updates" },
   { href: "/about-dholera-sir", label: "About Dholera" },
@@ -395,7 +394,10 @@ function DesktopNavButton({ label, open, active, onClick }) {
           }`}
         >
           {label}
-          <ChevronIcon open={open} className="ml-[0.25rem] h-[0.85rem] w-[0.85rem]" />
+          <ChevronIcon
+            open={open}
+            className="ml-[0.25rem] h-[0.85rem] w-[0.85rem]"
+          />
         </span>
       </button>
     </div>
@@ -418,11 +420,13 @@ export default function Navbar() {
   const [bulkLandError, setBulkLandError] = useState(null);
   const [dholeraError, setDholeraError] = useState(null);
   const [isSoldOutOpen, setIsSoldOutOpen] = useState(false);
-
+  const [isUtilityMenuOpen, setIsUtilityMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHomeActive = pathname === "/";
   const isContactActive = pathname === "/contact";
-  const isResidentialActive = pathname?.startsWith("/dholera-residential-plots");
+  const isResidentialActive = pathname?.startsWith(
+    "/dholera-residential-plots",
+  );
   const isBulkLandActive = pathname?.startsWith("/bulk-land");
   const isDholeraActive =
     pathname?.startsWith("/dholera-sir-blogs") ||
@@ -530,7 +534,8 @@ export default function Navbar() {
         !event.target.closest(".dropdown-container") &&
         !event.target.closest(".residential-dropdown") &&
         !event.target.closest(".bulk-land-dropdown") &&
-        !event.target.closest(".dholera-dropdown")
+        !event.target.closest(".dholera-dropdown") &&
+        !event.target.closest(".utility-dropdown")
       ) {
         closeDesktopDropdowns();
       }
@@ -560,6 +565,7 @@ export default function Navbar() {
     setIsResidentialMenuOpen(false);
     setIsBulkLandMenuOpen(false);
     setIsDholeraMenuOpen(false);
+    setIsUtilityMenuOpen(false); // add this
   };
 
   const toggleMobileMenu = () => {
@@ -636,9 +642,9 @@ export default function Navbar() {
                 : "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
             }`}
           >
-              <div className="relative z-10 shrink-0">
-                <Link
-                  href="/"
+            <div className="relative z-10 shrink-0">
+              <Link
+                href="/"
                 onClick={closeAllMenus}
                 className="block  px-[0.75rem] py-[0.4375rem] shadow-sm transition-all duration-300 hover:scale-105 "
                 aria-label="BookMyAssets home"
@@ -655,32 +661,35 @@ export default function Navbar() {
             </div>
 
             <div className="relative text-black z-10 ml-auto hidden flex-1 justify-end lg:flex">
-              <nav className="flex h-full items-center justify-end" role="menubar">
-                  <Link
-                    href="/"
-                    onClick={closeAllMenus}
-                    className="relative flex min-h-[2.75rem] touch-manipulation items-center font-medium"
-                    aria-current={isHomeActive ? "page" : undefined}
+              <nav
+                className="flex h-full items-center justify-end"
+                role="menubar"
+              >
+                <Link
+                  href="/"
+                  onClick={closeAllMenus}
+                  className="relative flex min-h-[2.75rem] touch-manipulation items-center font-medium"
+                  aria-current={isHomeActive ? "page" : undefined}
+                >
+                  <span
+                    className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-full border px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
+                      isHomeActive
+                        ? "border-[#deae3c] bg-[#deae3c] font-semibold text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.22)]"
+                        : "border-transparent text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
+                    }`}
                   >
-                    <span
-                      className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-full border px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
-                        isHomeActive
-                          ? "border-[#deae3c] bg-[#deae3c] font-semibold text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.22)]"
-                            : "border-transparent text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
-                      }`}
-                    >
-                      Home
-                    </span>
-                  </Link>
+                    Home
+                  </span>
+                </Link>
 
-                  {desktopDropdowns.map(({ label, open, active, onClick }) => (
+                {desktopDropdowns.map(({ label, open, active, onClick }) => (
                   <div key={label} className="dropdown-container relative">
-                      <DesktopNavButton
-                        label={label}
-                        open={open}
-                        active={active}
-                        onClick={onClick}
-                      />
+                    <DesktopNavButton
+                      label={label}
+                      open={open}
+                      active={active}
+                      onClick={onClick}
+                    />
                   </div>
                 ))}
               </nav>
@@ -700,15 +709,19 @@ export default function Navbar() {
                   Contact Us
                 </Link>
 
-                <div className="group relative">
+                <div className="relative z-50">
                   <button
+                    onClick={() => setIsUtilityMenuOpen((prev) => !prev)}
                     className="inline-flex touch-manipulation items-center gap-2 rounded-full border border-transparent bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
                     aria-label="Open secondary menu"
+                    aria-expanded={isUtilityMenuOpen}
                     type="button"
                   >
-                    <Menu className="h-[1.5rem] w-[1.5rem]" aria-hidden="true" />
+                    <Menu
+                      className="h-[1.5rem] w-[1.5rem]"
+                      aria-hidden="true"
+                    />
                   </button>
-
                   <div className="invisible absolute right-0 top-full z-50 mt-[0.5rem] w-[12rem] rounded-xl border border-white/15 bg-[#111111]/75 opacity-0 shadow-xl shadow-black/30 backdrop-blur-2xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
                     <div className="py-[0.5rem]">
                       {utilityLinks.map(({ href, label }) => (
@@ -735,13 +748,16 @@ export default function Navbar() {
                 className="inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center gap-2 rounded-full border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
                 aria-label="Enquire Now on WhatsApp"
               >
-                <FaWhatsapp className="h-[1.25rem] w-[1.25rem] shrink-0" /> Know More
+                <FaWhatsapp className="h-[1.25rem] w-[1.25rem] shrink-0" /> Know
+                More
               </Link>
 
               <button
                 onClick={toggleMobileMenu}
                 className="flex min-h-[3rem] min-w-[3rem] touch-manipulation items-center justify-center rounded-full border border-white/15 bg-white/10 p-3 text-white transition-all duration-200 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40 active:bg-white/20"
-                aria-label={isMobileMenuOpen ? "Close menu" : "Open mobile menu"}
+                aria-label={
+                  isMobileMenuOpen ? "Close menu" : "Open mobile menu"
+                }
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
                 type="button"
@@ -989,6 +1005,26 @@ export default function Navbar() {
             ) : (
               <EmptyState />
             )}
+          </div>
+        </div>
+      )}
+
+      {isUtilityMenuOpen && (
+        <div
+          className="utility-dropdown fixed right-[calc((100vw_-_min(calc(100vw_-_2rem),80rem))/2_+_1.5rem)] z-40 w-[12rem] rounded-xl border border-white/15 bg-[#111111]/90 shadow-xl shadow-black/30 backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200"
+          style={{ top: "calc(var(--nav-offset-top, 0px) + 6rem)" }}
+        >
+          <div className="py-[0.5rem]">
+            {utilityLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={closeAllMenus}
+                className="block px-[1rem] py-[0.75rem] text-[0.875rem] text-white/75 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
       )}
