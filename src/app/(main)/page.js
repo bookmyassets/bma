@@ -210,8 +210,8 @@ export default function page() {
 
       <div>
         <Hero />
+        <Dholera />
        <ProjectsSection/>
-        {/* <Dholera /> */}
         {/* <BMA /> */}
         <AboutBMA/>
        {/*  <WestWyn /> */}

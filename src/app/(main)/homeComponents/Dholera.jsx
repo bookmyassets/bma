@@ -39,7 +39,7 @@ function HighlightCard({ title }) {
         border-[#deae3c] bg-[#deae3c]/5 hover:bg-[#deae3c]/10 hover:border-[#deae3c]/70
       "
     >
-      <span className="text-[clamp(0.875rem,2vw,1.125rem)] font-bold leading-snug text-gray-800 transition-colors duration-200">
+      <span className="text-[clamp(0.875rem,2vw,1.125rem)] font-bold leading-snug text-gray-300 transition-colors duration-200">
         {title}
       </span>
     </button>
@@ -48,10 +48,10 @@ function HighlightCard({ title }) {
 
 export default function DholeraSmartCity() {
   return (
-    <section className="bg-white">
+    <section className="bg-black">
       <div className="max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)] py-[clamp(2rem,5vw,3.5rem)]">
         {/* Section heading */}
-        <h2 className="text-[clamp(1.25rem,2.5vw,2rem)] font-semibold text-black text-center mb-[clamp(1rem,2.5vw,1.75rem)] leading-snug">
+        <h2 className="text-[clamp(1.25rem,2.5vw,2rem)] font-semibold text-white text-center mb-[clamp(1rem,2.5vw,1.75rem)] leading-snug">
           Invest in India's First Semiconductor City:{" "}
           <span className="text-[#deae3c]">Dholera Smart City</span>
         </h2>
@@ -75,7 +75,7 @@ export default function DholeraSmartCity() {
           {/* Right — content 60% */}
           <div className="w-full md:w-3/5 flex flex-col justify-center gap-[clamp(0.75rem,2vw,1.25rem)]">
             {/* Body paragraph */}
-            <p className="text-[clamp(0.875rem,2vw,1.125rem)] text-gray-600 leading-relaxed">
+            <p className="text-[clamp(0.875rem,2vw,1.125rem)] text-gray-300 leading-relaxed">
               <Link
                 href="https://www.bookmyassets.com/about-dholera-sir/infrastructure-development"
                 title="Dholera Smart City"
