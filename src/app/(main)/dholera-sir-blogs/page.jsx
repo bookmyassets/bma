@@ -79,7 +79,7 @@ export default async function page() {
               />
 
               {/* Black Overlay */}
-              <div className="absolute inset-0 bg-black/60"></div>
+              <div className="absolute inset-0 bg-black/30"></div>
 
               {/* Text Content */}
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">

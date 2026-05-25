@@ -5,29 +5,26 @@ import Link from "next/link";
 
 const highlights = [
   {
-    title: "India's First Special Investment Region (SIR)",
+    title: "India’s first Special Investment Region (SIR)",
     body: "Dholera is planned with advanced smart city standards, focusing on sustainability, efficient urban design, and modern infrastructure.",
   },
   {
-    title: "Backed by State and Central Governments",
+    title: "Smart planned city",
     body: "The city offers ready-to-use infrastructure like roads, power, water, and ICT systems, making it easier for development and operations.",
   },
   {
-    title: "₹6 Lakh Crore Investment by Fortune 500 Companies",
+    title: "Govt-backed project",
     body: "The project is supported by both central and state governments, ensuring planned growth, policy support, and long-term development.",
   },
   {
-    title: "Plug-and-Play Infra for Quick Industrial Setup",
+    title: "Near Dholera International Airport",
     body: "Large-scale investments are planned and committed, reflecting strong interest from global players and industrial sectors.",
   },
   {
-    title: "Planned to be a Global Manufacturing Hub",
+    title: "Connected by Ahmedabad-Dholera Expressway",
     body: "Dholera is the first project under the Special Investment Region (SIR) Act, enabling structured planning and large-scale development.",
   },
-  {
-    title: "100% Land Appreciation in Last 5 Years",
-    body: "Strategically located within the Delhi-Mumbai Industrial Corridor and Dedicated Freight Corridor, boosting logistics and industrial growth.",
-  },
+
 ];
 
 function HighlightCard({ title }) {
@@ -47,6 +44,15 @@ function HighlightCard({ title }) {
 }
 
 export default function DholeraSmartCity() {
+
+   const locationFeatures = [
+     { text: "India’s First Special Investment Region" },
+     { text: "Smart planned city" },
+     { text: "Govt-backed project" },
+     { text: "Near Dholera International Airport" },
+     { text: "Connected by Ahmedabad-Dholera Expressway" },
+  ];
+
   return (
     <section className="bg-black">
       <div className="max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)] py-[clamp(2rem,5vw,3.5rem)]">
@@ -77,37 +83,40 @@ export default function DholeraSmartCity() {
             {/* Body paragraph */}
             <p className="text-[clamp(0.875rem,2vw,1.125rem)] text-gray-300 leading-relaxed">
               <Link
-                href="https://www.bookmyassets.com/about-dholera-sir/infrastructure-development"
+                href="https://www.bookmyassets.com/about-dholera-sir"
                 title="Dholera Smart City"
                 className="text-[#deae3c] hover:underline"
               >
                 Dholera Smart City
               </Link>{" "}
-              is India's first platinum-rated greenfield smart city, designed
-              with world-class infrastructure and planned to become a global
-              manufacturing and exports hub. For long-term investors, the{" "}
-              <Link
-                href="https://www.bookmyassets.com/dholera-sir-blogs/dholera-sir-pm-narendra-modi-dream-smart-city-project"
-                title="Dholera Project"
-                className="text-[#deae3c] hover:underline"
-              >
-                Dholera project
-              </Link>{" "}
-              offers an excellent opportunity to invest in residential plots and
-              earn consistent land appreciation. Here is what makes Dholera
-              Smart City different from other investments:
+              is a planned smart city in Gujarat, India, developed as part of
+              the Delhi-Mumbai Industrial Corridor (DMIC). It is India’s first
+              greenfield smart city, building from scratch with modern
+              infrastructure and proper planning. The city is designed to become
+              a major industrial, manufacturing, and technology hub, with
+              sectors like semiconductors, renewable energy, data centres, and
+              logistics.
+              
             </p>
 
             {/* 3×2 highlight cards */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-[clamp(0.5rem,1.5vw,0.875rem)]">
-              {highlights.map((item) => (
-                <HighlightCard
-                  key={item.title}
-                  title={item.title}
-                  body={item.body}
-                />
-              ))}
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-left mb-6">
+                  {locationFeatures.map((feature, index) => {
+                    const isLast = index === locationFeatures.length - 1;
+                    const isOdd = locationFeatures.length % 2 !== 0;
+
+                    return (
+                      <div
+                        key={index}
+                        className={`flex items-start gap-3 p-3 rounded-lg bg-white border border-gray-200 hover:border-amber-300 hover:shadow-md transition-all duration-200 ${isLast && isOdd ? "md:col-span-2" : ""}`}
+                      >
+                        <span className="text-base text-black leading-snug">
+                          ➣ {feature.text}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
           </div>
         </div>
       </div>
