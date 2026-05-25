@@ -135,23 +135,26 @@ export default function LeadFormBlock({
   const onRecaptchaSuccess = async (token) => {
     try {
       // API Request using the new endpoint and format
-      const response = await fetch("", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-        },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            source: "BookMyAssets",
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
-          source: "BookMyAssets Website",
-          tags: ["Dholera Investment", "Website Lead", "Common Form"],
-          recaptchaToken: token,
-        }),
-      });
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: "BookMyAssets",
+            },
+            source: "BookMyAssets Website",
+            tags: ["Dholera Investment", "Website Lead", "Common Form"],
+            recaptchaToken: token,
+          }),
+        },
+      );
 
       // Store response text before parsing
       const responseText = await response.text();
