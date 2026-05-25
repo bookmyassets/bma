@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import logo from "@/assests/Bmalogo.png";
 import aboutDholera from "@/assests/dholeraSIR-nav/about-dholera-sir-bookmyassets.webp";
@@ -145,7 +144,7 @@ function LoadingState({ color = "yellow" }) {
     <div className="flex h-[16rem] items-center justify-center">
       <div className="text-center">
         <div
-          className={`inline-block h-[2rem] w-[2rem] animate-spin rounded-full border-b-[0.125rem] ${
+          className={`inline-block h-[2rem] w-[2rem] animate-spin rounded-lg border-b-[0.125rem] ${
             spinnerColor[color] || spinnerColor.yellow
           }`}
         />
@@ -189,7 +188,7 @@ function StatusBadge({ status }) {
 
   return (
     <span
-      className={`rounded-full px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.3vw,0.8125rem)] font-semibold uppercase text-white shadow-lg ${
+      className={`rounded-lg px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.3vw,0.8125rem)] font-semibold uppercase text-white shadow-lg ${
         statusClasses[status] || "bg-gray-500"
       } ${status === "ongoing" || status === "limited" ? "animate-pulse" : ""}`}
     >
@@ -345,7 +344,7 @@ function MobileProjectLink({ project, href, onClick }) {
 
           {project.status && project.status !== "available" && (
             <span
-              className={`rounded-full px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold ${
+              className={`rounded-lg px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold ${
                 project.status === "sold-out"
                   ? "bg-red-500/15 text-red-300"
                   : project.status === "ongoing"
@@ -374,7 +373,7 @@ function MobileProjectLink({ project, href, onClick }) {
   );
 }
 
-function DesktopNavButton({ label, open, active, onClick }) {
+function DesktopNavButton({ label, open, onClick }) {
   return (
     <div className="relative">
       <button
@@ -383,12 +382,11 @@ function DesktopNavButton({ label, open, active, onClick }) {
         role="menuitem"
         aria-expanded={open}
         aria-haspopup="true"
-        aria-current={active ? "page" : undefined}
         type="button"
       >
         <span
-          className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-full border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
-            open || active
+          className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
+            open
               ? "border-[#deae3c] bg-[#deae3c] font-semibold text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.22)]"
               : "text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
           }`}
@@ -421,17 +419,6 @@ export default function Navbar() {
   const [dholeraError, setDholeraError] = useState(null);
   const [isSoldOutOpen, setIsSoldOutOpen] = useState(false);
   const [isUtilityMenuOpen, setIsUtilityMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const isHomeActive = pathname === "/";
-  const isContactActive = pathname === "/contact";
-  const isResidentialActive = pathname?.startsWith(
-    "/dholera-residential-plots",
-  );
-  const isBulkLandActive = pathname?.startsWith("/bulk-land");
-  const isDholeraActive =
-    pathname?.startsWith("/dholera-sir-blogs") ||
-    pathname?.startsWith("/dholera-sir-updates") ||
-    pathname?.startsWith("/about-dholera-sir");
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -602,19 +589,16 @@ export default function Navbar() {
     {
       label: "Residential Projects",
       open: isResidentialMenuOpen,
-      active: isResidentialActive,
       onClick: toggleResidentialMenu,
     },
     {
       label: "Bulk Land Deals",
       open: isBulkLandMenuOpen,
-      active: isBulkLandActive,
       onClick: toggleBulkLandMenu,
     },
     {
       label: "Dholera Blogs",
       open: isDholeraMenuOpen,
-      active: isDholeraActive,
       onClick: toggleDholeraMenu,
     },
   ];
@@ -634,9 +618,9 @@ export default function Navbar() {
         aria-label="Main navigation"
         style={{ top: "var(--nav-offset-top, 0px)" }}
       >
-        <div className="mx-auto max-w-7xl px-3 py-3 sm:px-4 md:px-6 md:py-4 lg:px-8">
+        <div className=" px-3 py-3 sm:px-4 md:px-6 md:py-4 lg:px-8">
           <div
-            className={`liquid-glass-container relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-full border px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[4.5rem] md:px-5 lg:h-[5rem] lg:gap-4 lg:px-6 xl:gap-6 ${
+            className={`liquid-glass-container relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-lg border px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[4.5rem] md:px-5 lg:h-[5rem] lg:gap-4 lg:px-6 xl:gap-6 ${
               isScrolled
                 ? "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
                 : "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
@@ -669,25 +653,19 @@ export default function Navbar() {
                   href="/"
                   onClick={closeAllMenus}
                   className="relative flex min-h-[2.75rem] touch-manipulation items-center font-medium"
-                  aria-current={isHomeActive ? "page" : undefined}
                 >
                   <span
-                    className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-full border px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
-                      isHomeActive
-                        ? "border-[#deae3c] bg-[#deae3c] font-semibold text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.22)]"
-                        : "border-transparent text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
-                    }`}
+                    className="relative z-10 flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
                   >
                     Home
                   </span>
                 </Link>
 
-                {desktopDropdowns.map(({ label, open, active, onClick }) => (
+                {desktopDropdowns.map(({ label, open, onClick }) => (
                   <div key={label} className="dropdown-container relative">
                     <DesktopNavButton
                       label={label}
                       open={open}
-                      active={active}
                       onClick={onClick}
                     />
                   </div>
@@ -700,11 +678,7 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={closeAllMenus}
-                  className={`ml-2 px-[calc(0.875rem_+_0.5vw)] py-[calc(0.375rem_+_0.25vw)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium  transition-all duration-200 active:scale-[0.98] ${
-                    isContactActive
-                      ? "border-[#deae3c]/70 bg-[#deae3c] text-black"
-                      : "text-white"
-                  }`}
+                  className="rounded-lg border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] text-white/85  hover:border-white/20 hover:bg-white/10 hover:text-white transition-all duration-200"
                 >
                   Contact Us
                 </Link>
@@ -712,7 +686,7 @@ export default function Navbar() {
                 <div className="relative z-50">
                   <button
                     onClick={() => setIsUtilityMenuOpen((prev) => !prev)}
-                    className="inline-flex touch-manipulation items-center gap-2 rounded-full border border-transparent bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
+                    className="inline-flex touch-manipulation items-center gap-2 rounded-lg border border-transparent bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
                     aria-label="Open secondary menu"
                     aria-expanded={isUtilityMenuOpen}
                     type="button"
@@ -745,7 +719,7 @@ export default function Navbar() {
                 href={whatsappEnquiryLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center gap-2 rounded-full border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
+                className="inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center gap-2 rounded-lg border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
                 aria-label="Enquire Now on WhatsApp"
               >
                 <FaWhatsapp className="h-[1.25rem] w-[1.25rem] shrink-0" /> Know
@@ -754,7 +728,7 @@ export default function Navbar() {
 
               <button
                 onClick={toggleMobileMenu}
-                className="flex min-h-[3rem] min-w-[3rem] touch-manipulation items-center justify-center rounded-full border border-white/15 bg-white/10 p-3 text-white transition-all duration-200 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40 active:bg-white/20"
+                className="flex min-h-[3rem] min-w-[3rem] touch-manipulation items-center justify-center rounded-lg border border-white/15 bg-white/10 p-3 text-white transition-all duration-200 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
                 aria-label={
                   isMobileMenuOpen ? "Close menu" : "Open mobile menu"
                 }
@@ -840,11 +814,11 @@ export default function Navbar() {
                       type="button"
                     >
                       <div className="flex items-center gap-[0.75rem]">
-                        <span className="h-[0.5rem] w-[0.5rem] rounded-full bg-red-400" />
+                        <span className="h-[0.5rem] w-[0.5rem] rounded-lg bg-red-400" />
                         <span className="text-[clamp(0.8125rem,0.72rem_+_0.38vw,0.9375rem)] font-semibold uppercase tracking-widest text-red-300">
                           Sold Out Projects
                         </span>
-                        <span className="rounded-full bg-red-500/20 px-[0.5rem] py-[0.125rem] text-[clamp(0.6875rem,0.6rem_+_0.3vw,0.8125rem)] font-bold text-red-200">
+                        <span className="rounded-lg bg-red-500/20 px-[0.5rem] py-[0.125rem] text-[clamp(0.6875rem,0.6rem_+_0.3vw,0.8125rem)] font-bold text-red-200">
                           {soldOutProjects.length}
                         </span>
                       </div>
@@ -1064,7 +1038,7 @@ export default function Navbar() {
                 <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#deae3c] pl-[1rem]">
                   {loading ? (
                     <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-white/60">
-                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-full border-b-[0.125rem] border-[#deae3c]" />{" "}
+                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-lg border-b-[0.125rem] border-[#deae3c]" />{" "}
                       Loading...
                     </div>
                   ) : error ? (
@@ -1107,7 +1081,7 @@ export default function Navbar() {
                 <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#deae3c] pl-[1rem]">
                   {bulkLandLoading ? (
                     <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-white/60">
-                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-full border-b-[0.125rem] border-[#deae3c]" />{" "}
+                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-lg border-b-[0.125rem] border-[#deae3c]" />{" "}
                       Loading...
                     </div>
                   ) : bulkLandError ? (
@@ -1128,35 +1102,26 @@ export default function Navbar() {
               )}
             </div>
 
-            {mobileLinks.map(({ href, label }, index) => {
-              const isActive = pathname === href;
-
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={closeAllMenus}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`block rounded-md px-[0.75rem] py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors hover:bg-white/10 hover:text-white ${
-                    isActive
-                      ? "border border-[#deae3c] bg-[#deae3c] text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.18)]"
-                      : "text-white"
-                  } ${
-                    !isActive && index < mobileLinks.length - 1
-                      ? "border-b border-white/10"
-                      : ""
-                  }`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
+            {mobileLinks.map(({ href, label }, index) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={closeAllMenus}
+                className={`block rounded-md px-[0.75rem] py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-white transition-colors hover:bg-white/10 hover:text-white ${
+                  index < mobileLinks.length - 1
+                    ? "border-b border-white/10"
+                    : ""
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
 
             <Link
               href={whatsappEnquiryLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-[1rem] hidden w-full items-center justify-center gap-[0.5rem] rounded-full bg-[#deae3c] px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-black transition duration-300 hover:bg-[#f3bb39]"
+              className="mt-[1rem] hidden w-full items-center justify-center gap-[0.5rem] rounded-lg bg-[#deae3c] px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-black transition duration-300 hover:bg-[#f3bb39]"
               aria-label="Enquire Now on WhatsApp"
             >
               <FaWhatsapp className="h-[1rem] w-[1rem] shrink-0" />

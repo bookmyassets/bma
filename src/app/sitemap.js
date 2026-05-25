@@ -1,32 +1,37 @@
 // app/sitemap.js
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 import { client } from "@/sanity/lib/client";
 
 const BASE_URL = "https://www.bookmyassets.com";
+
+const FETCH_OPTIONS = { cache: "no-store" }; // ← bypass Sanity CDN cache
 
 export default async function sitemap() {
 
   const [blogs, updates, aboutDholera] = await Promise.all([
 
-    // index 0 → Blogs
     client.fetch(
       `*[_type == "post" && "Blog" in categories[]->title && site == "bookmyassets" && (noIndex == null || noIndex == false)]{
         "slug": slug.current, _updatedAt
-      }`
+      }`,
+      {},
+      FETCH_OPTIONS  // ← add as third arg
     ),
 
-    // index 1 → Updates
     client.fetch(
       `*[_type == "post" && "Updates" in categories[]->title && site == "bookmyassets" && (noIndex == null || noIndex == false)]{
         "slug": slug.current, _updatedAt
-      }`
+      }`,
+      {},
+      FETCH_OPTIONS
     ),
 
-    // index 2 → About Dholera SIR
     client.fetch(
       `*[_type == "post" && "project-Info" in categories[]->title && site == "bookmyassets" && (noIndex == null || noIndex == false)]{
         "slug": slug.current, _updatedAt
-      }`
+      }`,
+      {},
+      FETCH_OPTIONS
     ),
   ]);
 
