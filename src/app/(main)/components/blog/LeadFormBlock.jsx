@@ -261,8 +261,8 @@ export default function LeadFormBlock({
               Your Name
               <input
                 type="text"
-                name="name"
-                value={formData.name}
+                name="fullName"
+                value={formData.fullName}
                 onChange={handleChange}
                 placeholder="Enter your name"
                 autoComplete="name"
@@ -284,13 +284,19 @@ export default function LeadFormBlock({
               />
             </label>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-1 min-h-[50px] rounded-xl bg-[#deae3c] px-5 text-base font-extrabold text-[#111111] transition hover:bg-[#c99a2f] disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              {loading ? "Please wait" : buttonText}
-            </button>
+            <div>
+                  <button
+                    type="submit"
+                    disabled={isLoading || isDisabled || !recaptchaLoaded}
+                    className={`w-full font-bold py-3 px-6 rounded-lg transition duration-300 ${
+                      isLoading || isDisabled || !recaptchaLoaded
+                        ? "bg-gray-600 cursor-not-allowed text-gray-400"
+                        : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-md"
+                    }`}
+                  >
+                    {isLoading ? "Submitting..." : "Get A Call Back"}
+                  </button>
+                </div>
 
             {helperText ? (
               <p className="text-sm leading-relaxed text-[#555555]">
