@@ -1,4 +1,5 @@
 // app/sitemap.js
+export const dynamic = "force-dynamic"
 import { client } from "@/sanity/lib/client";
 
 const BASE_URL = "https://www.bookmyassets.com";

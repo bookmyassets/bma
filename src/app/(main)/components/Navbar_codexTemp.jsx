@@ -700,10 +700,10 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={closeAllMenus}
-                  className={`ml-2 rounded-full border px-[calc(0.875rem_+_0.5vw)] py-[calc(0.375rem_+_0.25vw)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium shadow-sm transition-all duration-200 active:scale-[0.98] ${
+                  className={`ml-2 px-[calc(0.875rem_+_0.5vw)] py-[calc(0.375rem_+_0.25vw)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium  transition-all duration-200 active:scale-[0.98] ${
                     isContactActive
                       ? "border-[#deae3c]/70 bg-[#deae3c] text-black"
-                      : "border-[#deae3c]/45 bg-[#deae3c]/90 text-black hover:border-[#f3bb39]/70 hover:bg-[#f3bb39]"
+                      : "text-white"
                   }`}
                 >
                   Contact Us
