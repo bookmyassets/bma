@@ -9,7 +9,7 @@ const client = createClient({
   useCdn: false,
 })
 
-const SITE_NAME = process.env.SITE_NAME || 'bookmyassets'
+const SITE_NAME = 'bookmyassets'
 
 let redirectCache = null
 let cacheTime = 0
