@@ -80,7 +80,7 @@ export default function HowToBuy() {
         {/* Bottom CTA strip */}
         <div className="mt-[clamp(2rem,4vw,3rem)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="text-white/40 text-[clamp(0.75rem,1.3vw,0.85rem)]"> 
-            Questions before you start? We&apos;re here.
+         
           </p>
           <button
             onClick={() => openContactForm()}

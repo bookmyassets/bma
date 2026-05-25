@@ -378,7 +378,7 @@ function DesktopNavButton({ label, open, onClick }) {
     <div className="relative">
       <button
         onClick={onClick}
-        className="relative flex min-h-[2.75rem] touch-manipulation items-center font-medium"
+        className="relative flex min-h-[2rem] touch-manipulation items-center font-medium"
         role="menuitem"
         aria-expanded={open}
         aria-haspopup="true"
@@ -620,7 +620,7 @@ export default function Navbar() {
       >
         <div className=" px-3 py-3 sm:px-4 md:px-6 md:py-4 lg:px-8">
           <div
-            className={`liquid-glass-container relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-lg border px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[4.5rem] md:px-5 lg:h-[5rem] lg:gap-4 lg:px-6 xl:gap-6 ${
+            className={`liquid-glass-container relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-lg border px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[3.5rem] md:px-5 lg:h-[4rem] lg:gap-4 lg:px-6 xl:gap-6 ${
               isScrolled
                 ? "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
                 : "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
@@ -638,7 +638,7 @@ export default function Navbar() {
                   height={100}
                   width={100}
                   alt="BookMyAssets logo"
-                  className="h-[2.5rem] w-auto object-contain md:h-[2.875rem] lg:h-[3.25rem]"
+                  className="h-[2.5rem] w-auto object-contain md:h-[2rem] lg:h-[3rem]"
                   priority
                 />
               </Link>
@@ -654,9 +654,7 @@ export default function Navbar() {
                   onClick={closeAllMenus}
                   className="relative flex min-h-[2.75rem] touch-manipulation items-center font-medium"
                 >
-                  <span
-                    className="relative z-10 flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
-                  >
+                  <span className="relative z-10 flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white">
                     Home
                   </span>
                 </Link>
@@ -686,7 +684,7 @@ export default function Navbar() {
                 <div className="relative z-50">
                   <button
                     onClick={() => setIsUtilityMenuOpen((prev) => !prev)}
-                    className="inline-flex touch-manipulation items-center gap-2 rounded-lg border border-transparent bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
+                    className=" gap-2 rounded-lg border border-transparent bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
                     aria-label="Open secondary menu"
                     aria-expanded={isUtilityMenuOpen}
                     type="button"
@@ -696,7 +694,7 @@ export default function Navbar() {
                       aria-hidden="true"
                     />
                   </button>
-                  <div className="invisible absolute right-0 top-full z-50 mt-[0.5rem] w-[12rem] rounded-xl border border-white/15 bg-[#111111]/75 opacity-0 shadow-xl shadow-black/30 backdrop-blur-2xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  <div className="invisible absolute top-full z-50 mt-[0.5rem] w-[12rem] rounded-xl border border-white/15 bg-[#111111]/75 opacity-0 shadow-xl shadow-black/30 backdrop-blur-2xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
                     <div className="py-[0.5rem]">
                       {utilityLinks.map(({ href, label }) => (
                         <Link
@@ -719,7 +717,7 @@ export default function Navbar() {
                 href={whatsappEnquiryLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center gap-2 rounded-lg border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
+                className="inline-flex min-h-[2.75rem] md:min-h-[2rem] min-w-[2.75rem] md:min-w-[2rem] items-center justify-center gap-2 rounded-lg border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
                 aria-label="Enquire Now on WhatsApp"
               >
                 <FaWhatsapp className="h-[1.25rem] w-[1.25rem] shrink-0" /> Know
@@ -985,7 +983,7 @@ export default function Navbar() {
 
       {isUtilityMenuOpen && (
         <div
-          className="utility-dropdown fixed right-[calc((100vw_-_min(calc(100vw_-_2rem),80rem))/2_+_1.5rem)] z-40 w-[12rem] rounded-xl border border-white/15 bg-[#111111]/90 shadow-xl shadow-black/30 backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200"
+          className="utility-dropdown fixed right-[clamp(1rem,4vw,2rem)] z-40 w-[12rem] rounded-xl border border-white/15 bg-[#111111]/90 shadow-xl shadow-black/30 backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200"
           style={{ top: "calc(var(--nav-offset-top, 0px) + 6rem)" }}
         >
           <div className="py-[0.5rem]">

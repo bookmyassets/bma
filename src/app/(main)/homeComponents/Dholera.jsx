@@ -100,18 +100,17 @@ export default function DholeraSmartCity() {
             </p>
 
             {/* 3×2 highlight cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-left mb-6">
+            <div className=" gap-3 text-left ">
                   {locationFeatures.map((feature, index) => {
-                    const isLast = index === locationFeatures.length - 1;
-                    const isOdd = locationFeatures.length % 2 !== 0;
+
 
                     return (
                       <div
                         key={index}
-                        className={`flex items-start gap-3 p-3 rounded-lg bg-white border border-gray-200 hover:border-amber-300 hover:shadow-md transition-all duration-200 ${isLast && isOdd ? "md:col-span-2" : ""}`}
+                        className={`flex items-start gap-3 p-1 rounded-lg text-white hover:border-amber-300 hover:shadow-md transition-all duration-200 `}
                       >
-                        <span className="text-base text-black leading-snug">
-                          ➣ {feature.text}
+                        <span className="text-base  leading-snug">
+                        <span className="text-green-500 px-2">🗹</span> {feature.text}
                         </span>
                       </div>
                     );

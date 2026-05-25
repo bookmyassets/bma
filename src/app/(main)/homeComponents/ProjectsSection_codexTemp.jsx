@@ -43,18 +43,18 @@ export default function ProjectsSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-[clamp(1rem,2vw,2rem)] lg:grid-cols-3">
+        <div className="mx-auto grid max-w-[68rem] grid-cols-1 gap-[clamp(0.875rem,1.8vw,1.5rem)] md:grid-cols-3">
           {projects.map((project) => (
             <article
               key={project.name}
               className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_1.5rem_3rem_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-[0.25rem] hover:border-[#deae3c]/40 hover:bg-white/[0.07]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-black">
+              <div className="relative aspect-[16/10] overflow-hidden bg-black">
                 <Image
                   src={project.image}
                   alt={project.name}
                   fill
-                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  sizes="(min-width: 1024px) 22rem, 100vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
@@ -67,23 +67,23 @@ export default function ProjectsSection() {
 
               <Link
                 href={project.href}
-                className="block space-y-[1rem] p-[clamp(1.25rem,2.5vw,2rem)] transition-opacity duration-300 hover:opacity-90"
+                className="block space-y-[0.75rem] p-[clamp(1rem,2vw,1.375rem)] transition-opacity duration-300 hover:opacity-90"
               >
                 <div>
-                  <h3 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.25]">
+                  <h3 className="text-[clamp(1rem,1.6vw,1.25rem)] font-semibold leading-[1.25]">
                     {project.name}
                   </h3>
-                  <p className="mt-[0.5rem] text-[clamp(1rem,1.4vw,1.125rem)] font-semibold text-[#deae3c]">
+                  <p className="mt-[0.375rem] text-[clamp(0.9375rem,1.2vw,1rem)] font-semibold text-[#deae3c]">
                     Starting from {project.price}
                   </p>
                 </div>
 
-                <div className="flex items-start gap-[0.625rem] text-[0.9375rem] leading-[1.6] text-white/70">
+                <div className="flex items-start gap-[0.625rem] text-[0.875rem] leading-[1.55] text-white/70">
                   <span className="mt-[0.45rem] h-[0.375rem] w-[0.375rem] shrink-0 rounded-full bg-[#deae3c]" />
                   <span>{project.location}</span>
                 </div>
 
-                <span className="inline-flex min-h-[2.75rem] items-center justify-center rounded-full bg-[#deae3c] px-[1.25rem] text-[0.9375rem] font-semibold text-black transition-colors duration-300 group-hover:bg-[#f3bb39]">
+                <span className="inline-flex min-h-[2.5rem] items-center justify-center rounded-lg bg-[#deae3c] px-[1rem] text-[0.875rem] font-semibold text-black transition-colors duration-300 group-hover:bg-[#f3bb39]">
                   Explore
                 </span>
               </Link>
