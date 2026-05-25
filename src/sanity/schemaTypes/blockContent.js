@@ -129,6 +129,8 @@ export default {
           title: "Link URL",
         },
       ],
+    },{
+      type: "leadFormBlock",
     },
     // Code block
     {

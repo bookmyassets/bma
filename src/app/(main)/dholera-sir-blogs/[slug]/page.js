@@ -13,6 +13,7 @@ import { generateMetadata as buildMeta } from "@/lib/seo";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import LeadFormSlug from "../../components/LeadFormSlug";
+import LeadFormBlock from "../../components/blog/LeadFormBlock";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -58,7 +59,7 @@ const extractHeadings = (body) => {
 const RightSidebar = ({ trendingBlogs }) => {
   return (
     <aside className="lg:w-1/3 space-y-4 pt-4">
-      <div className=" pt-4 max-w-xl mx-auto">
+      <div className=" pt-4 max-w-xl mx-auto hidden md:block">
         <LeadFormSlug
           title="Buy Residential Plots in Dholera Starting From ₹8 Lakh"
           buttonName="Know More"
@@ -210,7 +211,11 @@ export default async function Post({ params }) {
           );
         },
 
-      table: ({ value }) => {
+        leadFormBlock: ({ value }) => {
+          return <LeadFormBlock {...value} />;
+        },
+
+        table: ({ value }) => {
           if (!value?.rows || !Array.isArray(value.rows)) return null;
           return (
             <div className="overflow-x-auto my-8 bg-white rounded-2xl shadow-lg border border-gray-100">
