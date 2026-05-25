@@ -84,9 +84,9 @@ export default function HowToBuy() {
           </p>
           <button
             onClick={() => openContactForm()}
-            className="self-start sm:self-auto bg-[#deae3c] hover:bg-[#c89b2e] text-black font-semibold text-[clamp(0.8rem,1.4vw,0.875rem)] px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] transition-colors duration-200"
+            className="self-start sm:self-auto bg-[#deae3c] hover:bg-[#c89b2e] text-black font-semibold rounded-lg text-[clamp(0.8rem,1.4vw,0.875rem)] px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] transition-colors duration-200"
           >
-            Start Your Enquiry
+            Get A Call Back
           </button>
         </div>
       </div>

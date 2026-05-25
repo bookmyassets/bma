@@ -370,7 +370,7 @@ export default function LeadForm({ title, button }) {
                   <button
                     type="submit"
                     disabled={isLoading || isDisabled || !recaptchaLoaded}
-                    className={`w-auto font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
+                    className={`w-auto font-bold px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] rounded-lg transition-all duration-300 ${
                       isLoading || isDisabled || !recaptchaLoaded
                         ? "bg-gray-600 cursor-not-allowed text-gray-400"
                         : "bg-[#deae3c] hover:bg-[#c99a2d] text-black shadow-lg hover:shadow-xl transform hover:-translate-y-1"

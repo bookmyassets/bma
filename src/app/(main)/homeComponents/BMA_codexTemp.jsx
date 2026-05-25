@@ -163,7 +163,7 @@ export default function AboutBMA() {
               <div className="flex items-center justify-center gap-4">
                 <Link
                   href="/about"
-                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[#deae3c] px-6 py-3 text-[clamp(0.875rem,1.5vw,1rem)] font-semibold text-white shadow-md transition-all hover:bg-[#c99a2e] hover:shadow-lg sm:w-auto"
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[#deae3c] px-6 py-2 text-[clamp(0.875rem,1.5vw,1rem)] font-semibold text-white shadow-md transition-all hover:bg-[#c99a2e] hover:shadow-lg sm:w-auto"
                 >
                   Know More About Us
                 </Link>
