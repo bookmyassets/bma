@@ -283,20 +283,22 @@ export default function LeadFormBlock({
                 className="min-h-12 w-full rounded-xl border border-[#dddddd] bg-white px-4 text-base text-[#111111] outline-none transition focus:border-[#deae3c] focus:ring-4 focus:ring-[#deae3c]/20"
               />
             </label>
-
+            <div className="flex justify-center">
+              <div ref={recaptchaRef}></div>
+            </div>
             <div>
-                  <button
-                    type="submit"
-                    disabled={isLoading || isDisabled || !recaptchaLoaded}
-                    className={`w-full font-bold py-3 px-6 rounded-lg transition duration-300 ${
-                      isLoading || isDisabled || !recaptchaLoaded
-                        ? "bg-gray-600 cursor-not-allowed text-gray-400"
-                        : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-md"
-                    }`}
-                  >
-                    {isLoading ? "Submitting..." : "Get A Call Back"}
-                  </button>
-                </div>
+              <button
+                type="submit"
+                disabled={isLoading || isDisabled || !recaptchaLoaded}
+                className={`w-full font-bold py-3 px-6 rounded-lg transition duration-300 ${
+                  isLoading || isDisabled || !recaptchaLoaded
+                    ? "bg-gray-600 cursor-not-allowed text-gray-400"
+                    : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-md"
+                }`}
+              >
+                {isLoading ? "Submitting..." : "Get A Call Back"}
+              </button>
+            </div>
 
             {helperText ? (
               <p className="text-sm leading-relaxed text-[#555555]">
