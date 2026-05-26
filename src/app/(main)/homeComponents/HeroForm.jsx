@@ -54,7 +54,7 @@ function FormInput({
   );
 }
 
-export default function  HeroForm() {
+export default function HeroForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
@@ -65,6 +65,17 @@ export default function  HeroForm() {
   const [submittedName, setSubmittedName] = useState("");
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
 
   const loadRecaptcha = useCallback(() => {
     if (recaptchaLoaded) return;
@@ -121,7 +132,7 @@ export default function  HeroForm() {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: "BookMyAssets",
+              source: getLeadSource(),
             },
             source: "BookMyAssets",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
