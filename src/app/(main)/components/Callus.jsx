@@ -50,10 +50,13 @@ export default function Whatsapp() {
               href="#circlePath"
               startOffset="0%"
               textAnchor="bold"
+              textLength="230"
+              lengthAdjust="spacing"
               className="tracking-wider"
             >
               LET'S CONNECT ● LET'S CONNECT ●
             </textPath>
+            
           </text>
         </svg>
 
