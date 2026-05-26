@@ -270,12 +270,31 @@ const onRecaptchaSuccess = async (token) => {
     
   };
 
+  const latestPopularArticles = Array.isArray(popularArticles)
+    ? [...popularArticles]
+        .filter(Boolean)
+        .sort((a, b) => {
+          const dateA = new Date(a.publishedAt || a._createdAt || 0).getTime();
+          const dateB = new Date(b.publishedAt || b._createdAt || 0).getTime();
+          return dateB - dateA;
+        })
+        .slice(0, 3)
+    : [];
+
+  const getArticlePath = (article) => {
+    if (!article?.slug?.current) return "/dholera-sir-updates";
+
+    return article?.type === "blog"
+      ? `/dholera-sir-blogs/${article.slug.current}`
+      : `/dholera-sir-updates/${article.slug.current}`;
+  };
+
   return (
     <aside className="lg:sticky lg:top-24 space-y-6">
       {/* Get Our Free Guide Widget */}
       <div className="bg-[#f9f9f9] rounded-xl shadow-sm p-6 border border-gray-200">
         <h2 className="text-xl font-bold text-gray-900 mb-4">
-         Get Free Advice from Dholera Investment Advise
+         Get Free Advice from Dholera Investment Advisor
         </h2>
         <p className="text-gray-600 text-sm mb-6">
           Download our comprehensive guide covering investment opportunities,
@@ -309,7 +328,7 @@ const onRecaptchaSuccess = async (token) => {
             disabled={isLoading}
             className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? "Processing..." : "Enquire Now"}
+            {isLoading ? "Processing..." : "Get A Call Back"}
           </button>
         </form>
       </div>
@@ -320,20 +339,20 @@ const onRecaptchaSuccess = async (token) => {
           Popular Articles
         </p>
         <div className="space-y-4">
-          {popularArticles.map((article, index) => (
+          {latestPopularArticles.map((article, index) => (
             <article
-              key={index}
+              key={article?._id || `${article?.slug?.current || "article"}-${index}`}
               className="pb-4 border-b border-gray-200 last:border-b-0 last:pb-0"
             >
               <Link
-                href={`/dholera-sir-updates/${article.slug.current}`}
+                href={getArticlePath(article)}
                 className="block group"
               >
                 <h4 className="text-base font-semibold text-gray-800 mb-1 group-hover:text-[#deae3c] transition-colors">
-                  {article.title || `Dholera Update ${index + 1}`}
+                  {article?.title || `Dholera Update ${index + 1}`}
                 </h4>
                 <p className="text-sm text-gray-500">
-                  {formatDate(article.publishedAt || article._createdAt)}
+                  {formatDate(article?.publishedAt || article?._createdAt)}
                 </p>
               </Link>
             </article>
@@ -341,29 +360,6 @@ const onRecaptchaSuccess = async (token) => {
         </div>
       </div>
 
-      {/* Schedule a Consultation */}
-      <div className="bg-[#f9f9f9] rounded-xl shadow-sm p-6 border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">
-          Schedule Investment Consultation
-        </h3>
-        <p className="text-gray-600 text-sm mb-6">
-          Ready to invest in Dholera SIR? Get personalized guidance from our
-          investment experts.
-        </p>
-        <button
-          onClick={() =>
-            openContactForm(
-              "Get Free Advice from Dholera Investment Adviser",
-              "Please fill out the form to get exclusive details of WestWyn County. Fields marked with * are mandatory.",
-              "Enquire Now",
-              ""
-            )
-          }
-          className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md"
-        >
-          Book Free Consultation
-        </button>
-      </div>
 
       {/* Newsletter Signup */}
       {/* <div className="bg-gradient-to-br from-[#deae3c]/10 to-gray-100 rounded-xl p-6 border border-gray-200">

@@ -1,4 +1,4 @@
-import { getUpdates } from "@/sanity/lib/api";
+import { getblogs, getUpdates } from "@/sanity/lib/api";
 import React from "react";
 import SidebarWithForm from "./Sidebar";
 import MobileUpdatesPagination from "./MobileUpdatesPagination";
@@ -6,16 +6,40 @@ import BlogCard from "./BlogCard";
 
 export default async function page() {
   let posts = [];
+  let popularArticles = [];
+
   try {
-    const postsData = await getUpdates();
+    const [postsData, blogsData] = await Promise.all([
+      getUpdates(),
+      getblogs(),
+    ]);
+
     posts = Array.isArray(postsData) ? postsData : [];
 
     // Sort by publishedAt date (newest first)
     posts.sort((a, b) => {
       const dateA = new Date(a.publishedAt || a._createdAt || 0);
       const dateB = new Date(b.publishedAt || b._createdAt || 0);
-      return dateB - dateA; // Descending order (newest first)
+      return dateB - dateA;
     });
+
+    const combinedPopularArticles = [
+      ...(Array.isArray(blogsData)
+        ? blogsData.map((post) => ({ ...post, type: "blog" }))
+        : []),
+      ...posts.map((post) => ({ ...post, type: "update" })),
+    ].filter(
+      (post, index, self) =>
+        post?._id && self.findIndex((item) => item._id === post._id) === index
+    );
+
+    popularArticles = [...combinedPopularArticles]
+      .sort(
+        (a, b) =>
+          new Date(b.publishedAt || b._createdAt || 0) -
+          new Date(a.publishedAt || a._createdAt || 0)
+      )
+      .slice(0, 3);
 
     console.log("Posts data fetched:", posts.length);
   } catch (error) {
@@ -29,15 +53,6 @@ export default async function page() {
       ? { current: post.slug.current }
       : { current: "#" },
   }));
-
-  // Get the 3 most recently published posts for popular articles
-  const popularArticles = [...safePosts]
-    .sort(
-      (a, b) =>
-        new Date(b.publishedAt || b._createdAt) -
-        new Date(a.publishedAt || a._createdAt)
-    )
-    .slice(0, 3);
 
   return (
     <>
