@@ -28,6 +28,17 @@ export default function Popup({
   const [showForm, setShowForm] = useState(false);
 
   const [timeLeft, setTimeLeft] = useState(1800);
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
 
   useEffect(() => {
     let timer;
@@ -188,7 +199,7 @@ export default function Popup({
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: source,
+              source: getLeadSource(),
             },
             source: "BookMyAssets",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],

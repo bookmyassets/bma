@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 
-
 export default function LeadForm({ title, button }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -18,6 +17,17 @@ export default function LeadForm({ title, button }) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
 
   useEffect(() => {
     // Load reCAPTCHA script
@@ -49,11 +59,11 @@ export default function LeadForm({ title, button }) {
     if (typeof window !== "undefined") {
       const storedCount = parseInt(
         localStorage.getItem("formSubmissionCount") || "0",
-        10
+        10,
       );
       const lastSubmissionTime = parseInt(
         localStorage.getItem("lastSubmissionTime") || "0",
-        10
+        10,
       );
 
       // Check if 24 hours have passed since the last submission
@@ -117,7 +127,7 @@ export default function LeadForm({ title, button }) {
     // Check submission limits
     if (submissionCount >= 20) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       setIsDisabled(true);
       return false;
@@ -142,13 +152,13 @@ export default function LeadForm({ title, button }) {
               name: formData.fullName,
               phone: formData.mobileNumber,
               email: formData.email,
-              source: "BookMyAssets",
+              source: getLeadSource(),
             },
             source: "BookMyAssets Website",
             tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       // Store response text before parsing
@@ -178,7 +188,6 @@ export default function LeadForm({ title, button }) {
           window.dataLayer.push({
             event: "lead_form_other",
           });
-
         } else {
           console.log("Response Text:", responseText);
           setErrorMessage("Submission received but with unexpected response");
@@ -216,7 +225,7 @@ export default function LeadForm({ title, button }) {
 
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page."
+        "Security verification not loaded. Please refresh the page.",
       );
       setIsLoading(false);
       return;

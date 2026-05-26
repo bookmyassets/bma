@@ -22,6 +22,17 @@ export default function PopupScroll({ title }) {
 
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
 
   // Auto-popup after 5 seconds
   useEffect(() => {
@@ -122,7 +133,7 @@ export default function PopupScroll({ title }) {
             fields: {
               name: formData.fullName,
               phone: formData.mobileNumber,
-              source: "BookMyAssets",
+              source: getLeadSource(),
             },
             source: "BookMyAssets Popup",
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],

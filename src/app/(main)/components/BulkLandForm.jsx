@@ -3,13 +3,12 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 
-
 export default function BulkLand({ title }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "", 
-    email: "", 
-    phone: "" 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
   });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -18,6 +17,17 @@ export default function BulkLand({ title }) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
 
   useEffect(() => {
     // Load reCAPTCHA script
@@ -47,9 +57,15 @@ export default function BulkLand({ title }) {
 
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
-      const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
-      const lastSubmissionTime = parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10);
-      
+      const storedCount = parseInt(
+        localStorage.getItem("formSubmissionCount") || "0",
+        10,
+      );
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("lastSubmissionTime") || "0",
+        10,
+      );
+
       // Check if 24 hours have passed since the last submission
       if (lastSubmissionTime) {
         const timeDifference = Date.now() - lastSubmissionTime;
@@ -103,14 +119,16 @@ export default function BulkLand({ title }) {
     }
 
     // Phone validation - accept various formats (10-15 digits)
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
     // Check submission limits
     if (submissionCount >= 20) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours.",
+      );
       setIsDisabled(true);
       return false;
     }
@@ -119,71 +137,78 @@ export default function BulkLand({ title }) {
   };
 
   const onRecaptchaSuccess = async (token) => {
-  try {
-    const response = await fetch("/api/submit-form", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fields: {
-          name: formData.fullName,
-          phone: formData.phone,
-          email: formData.email,
-          source: "BookMyAssets Bulk Land",
-        },
-        source: "BookMyAssets Website",
-        tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
-        recaptchaToken: token,
-      }),
-    });
-
-    // Safe JSON parse — response may be empty or HTML on errors (e.g. 404, 405)
-    let data = {};
-    const contentType = response.headers.get("content-type") || "";
-    if (contentType.includes("application/json")) {
-      data = await response.json();
-    } else {
-      const text = await response.text();
-      console.error("Non-JSON response:", response.status, text);
-    }
-
-    if (response.ok && data.success) {
-      setFormData({ fullName: "", email: "", phone: "" });
-      setShowPopup(true);
-
-      const newCount = submissionCount + 1;
-      setSubmissionCount(newCount);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("formSubmissionCount", newCount.toString());
-        localStorage.setItem("lastSubmissionTime", Date.now().toString());
-      }
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "lead_form",
-        page_name: title,
+    try {
+      const source = getLeadSource();
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            source: source,
+          },
+          source: "BookMyAssets Website",
+          tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
+          recaptchaToken: token,
+        }),
       });
-    } else {
+
+      // Safe JSON parse — response may be empty or HTML on errors (e.g. 404, 405)
+      let data = {};
+      const contentType = response.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.error("Non-JSON response:", response.status, text);
+      }
+
+      if (response.ok && data.success) {
+        setFormData({ fullName: "", email: "", phone: "" });
+        setShowPopup(true);
+
+        const newCount = submissionCount + 1;
+        setSubmissionCount(newCount);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", Date.now().toString());
+        }
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "lead_form",
+          page_name: title,
+        });
+      } else {
+        setErrorMessage(
+          data.error ||
+            (response.status === 405
+              ? "API route not found. Check file location: app/api/submit-lead/route.js"
+              : `Submission failed (${response.status}). Please try again.`),
+        );
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
       setErrorMessage(
-        data.error ||
-          (response.status === 405
-            ? "API route not found. Check file location: app/api/submit-lead/route.js"
-            : `Submission failed (${response.status}). Please try again.`)
+        "Network error. Please check your connection and try again.",
       );
-    }
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    setErrorMessage("Network error. Please check your connection and try again.");
-  } finally {
-    setIsLoading(false);
-    if (typeof window !== "undefined" && window.grecaptcha && recaptchaRef.current) {
-      try {
-        window.grecaptcha.reset();
-      } catch (err) {
-        console.error("Error resetting reCAPTCHA:", err);
+    } finally {
+      setIsLoading(false);
+      if (
+        typeof window !== "undefined" &&
+        window.grecaptcha &&
+        recaptchaRef.current
+      ) {
+        try {
+          window.grecaptcha.reset();
+        } catch (err) {
+          console.error("Error resetting reCAPTCHA:", err);
+        }
       }
     }
-  }
-};
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -196,7 +221,9 @@ export default function BulkLand({ title }) {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
       setIsLoading(false);
       return;
     }
@@ -266,7 +293,8 @@ export default function BulkLand({ title }) {
             ) : isDisabled ? (
               <div className="text-center py-8">
                 <p className="text-center text-red-400 font-semibold">
-                  You have reached the maximum submission limit. Try again after 24 hours.
+                  You have reached the maximum submission limit. Try again after
+                  24 hours.
                 </p>
               </div>
             ) : (
@@ -277,7 +305,7 @@ export default function BulkLand({ title }) {
                   </div>
                 )}
                 <div className="max-sm:space-y-4 md:flex justify-center items-center gap-6">
-                  <div className="w-full"> 
+                  <div className="w-full">
                     <label
                       htmlFor="fullName"
                       className="block text-white text-sm font-medium mb-2"

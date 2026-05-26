@@ -15,6 +15,17 @@ export default function DholeraPopupForm(title) {
   const recaptchaRefMobile = useRef(null);
   const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
 
   // Auto-popup after 3 seconds
   useEffect(() => {
@@ -84,7 +95,7 @@ export default function DholeraPopupForm(title) {
   const onRecaptchaSuccess = async (token) => {
     try {
       const response = await fetch(
-         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -95,7 +106,7 @@ export default function DholeraPopupForm(title) {
             fields: {
               name: formData.fullName,
               phone: formData.mobileNumber,
-              source: "BookMyAssets ",
+              source: getLeadSource(),
             },
             source: "BookMyAssets christmas Popup",
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],

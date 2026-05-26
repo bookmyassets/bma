@@ -30,6 +30,19 @@ export default function BrochureDownload({
   const router = useRouter();
   const pathname = usePathname();
 
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
+
+
   // PDF download URL
   const pdfUrl = link;
 
@@ -88,10 +101,10 @@ export default function BrochureDownload({
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
 
@@ -135,7 +148,7 @@ export default function BrochureDownload({
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       return false;
     }
@@ -146,7 +159,7 @@ export default function BrochureDownload({
   const onRecaptchaSuccess = async (token) => {
     try {
       const now = Date.now();
-
+      const source = getLeadSource();
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
@@ -165,7 +178,7 @@ export default function BrochureDownload({
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -178,10 +191,10 @@ export default function BrochureDownload({
           return newCount;
         });
 
-         window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "brochure_lead_form",
-          });
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "brochure_lead_form",
+        });
 
         // Download PDF immediately after successful submission
         downloadPDF();
@@ -204,7 +217,7 @@ export default function BrochureDownload({
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(
-        error.message || "Error submitting form. Please try again."
+        error.message || "Error submitting form. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -398,7 +411,9 @@ export default function BrochureDownload({
               transition={{ delay: 0.3 }}
               className="text-center mb-6 pt-6"
             >
-              <h2 className="text-xl md:text-3xl font-bold text-gray-900 mb-2">Registry Ready Plots in Dholera</h2>
+              <h2 className="text-xl md:text-3xl font-bold text-gray-900 mb-2">
+                Registry Ready Plots in Dholera
+              </h2>
             </motion.div>
 
             {showPopup ? (

@@ -6,6 +6,19 @@ import logo from "@/assests/bma-logo-black.png";
 import Image from "next/image";
 
 export default function PopupForm({ title, project }) {
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
+
+
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -106,7 +119,7 @@ export default function PopupForm({ title, project }) {
               name: formData.fullName,
               phone: formData.mobileNumber,
               email: formData.email,
-              source: "BookMyAssets",
+              source: getLeadSource(),
             },
             source: "BookMyAssets Popup",
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],

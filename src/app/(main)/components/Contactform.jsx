@@ -23,6 +23,17 @@ export default function ContactForm({
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+    if (params.has("")) return "BookMyAssets";
+    return "BookMyAssets ";
+  };
 
   useEffect(() => {
     // Load reCAPTCHA script
@@ -153,6 +164,7 @@ export default function ContactForm({
 
   const onRecaptchaSuccess = async (token) => {
     try {
+      const source = getLeadSource();
       // API Request using the new endpoint and format
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
@@ -166,7 +178,7 @@ export default function ContactForm({
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: "BookMyAssets",
+              source: source,
             },
             source: "BookMyAssets Website",
             tags: ["Dholera Investment", "Website Lead"],
@@ -386,7 +398,6 @@ export default function ContactForm({
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-         
             {errorMessage && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
