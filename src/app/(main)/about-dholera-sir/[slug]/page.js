@@ -13,6 +13,8 @@ import { generateMetadata as buildMeta } from "@/lib/seo";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import LeadFormSlug from "../../components/LeadFormSlug";
+import LeadFormBlock from "../../components/blog/LeadFormBlock";
+
 const URLFormatter = (text) => {
   if (!text) return "";
   return text
@@ -208,6 +210,10 @@ export default async function Post({ params }) {
               )}
             </figure>
           );
+        },
+
+        leadFormBlock: ({ value }) => {
+          return <LeadFormBlock {...value} />;
         },
 
         table: ({ value }) => {
@@ -436,18 +442,18 @@ export default async function Post({ params }) {
         bullet: ({ children }) => (
           <li
             className="
-          text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
-          flex items-start gap-3
-          bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
-          hover:shadow-md transition-shadow duration-300
-          [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-xl  [&_h1]:font-bold
-          [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-lg  [&_h2]:font-bold
-          [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-lg  [&_h3]:font-semibold
-          [&_h4]:border-l-0 [&_h4]:pl-0 [&_h4]:bg-transparent [&_h4]:mt-0 [&_h4]:mb-0 [&_h4]:py-0 [&_h4]:text-xl [&_h4]:font-semibold
-          [&_h5]:border-l-0 [&_h5]:pl-0 [&_h5]:bg-transparent [&_h5]:mt-0 [&_h5]:mb-0 [&_h5]:py-0 [&_h5]:text-base [&_h5]:font-semibold
-          [&_h6]:border-l-0 [&_h6]:pl-0 [&_h6]:bg-transparent [&_h6]:mt-0 [&_h6]:mb-0 [&_h6]:py-0 [&_h6]:text-sm  [&_h6]:font-medium
-          [&_span.absolute]:hidden
-        "
+             text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
+             flex items-start gap-3
+             bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
+             hover:shadow-md transition-shadow duration-300
+             [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-xl  [&_h1]:font-bold
+             [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-lg  [&_h2]:font-bold
+             [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-lg  [&_h3]:font-semibold
+             [&_h4]:border-l-0 [&_h4]:pl-0 [&_h4]:bg-transparent [&_h4]:mt-0 [&_h4]:mb-0 [&_h4]:py-0 [&_h4]:text-xl [&_h4]:font-semibold
+             [&_h5]:border-l-0 [&_h5]:pl-0 [&_h5]:bg-transparent [&_h5]:mt-0 [&_h5]:mb-0 [&_h5]:py-0 [&_h5]:text-base [&_h5]:font-semibold
+             [&_h6]:border-l-0 [&_h6]:pl-0 [&_h6]:bg-transparent [&_h6]:mt-0 [&_h6]:mb-0 [&_h6]:py-0 [&_h6]:text-sm  [&_h6]:font-medium
+             [&_span.absolute]:hidden
+           "
           >
             <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] mt-1.5 flex-shrink-0 flex justify-center items-center" />
             <div className="flex-1 [&>ul]:mt-2 [&>ul]:mb-0 [&>ol]:mt-2 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:py-1 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:py-1">
@@ -459,15 +465,15 @@ export default async function Post({ params }) {
         number: ({ children }) => (
           <li
             className="
-          text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
-          flex items-start gap-3
-          bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
-          hover:shadow-md transition-shadow duration-300
-          [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-base [&_h1]:font-semibold
-          [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-base [&_h2]:font-semibold
-          [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-base [&_h3]:font-semibold
-          [&_span.absolute]:hidden
-        "
+             text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
+             flex items-start gap-3
+             bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
+             hover:shadow-md transition-shadow duration-300
+             [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-base [&_h1]:font-semibold
+             [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-base [&_h2]:font-semibold
+             [&_h3]:border-l-0 [&_h3]:pl-0 [&_h3]:bg-transparent [&_h3]:mt-0 [&_h3]:mb-0 [&_h3]:py-0 [&_h3]:text-base [&_h3]:font-semibold
+             [&_span.absolute]:hidden
+           "
             style={{ counterIncrement: "item" }}
           >
             <div className="w-7 h-7 flex-shrink-0 rounded-full bg-gradient-to-r from-[#C69C21] to-[#FDB913] flex items-center justify-center text-white text-xs font-bold mt-0.5">
