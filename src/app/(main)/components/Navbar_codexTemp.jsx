@@ -597,7 +597,7 @@ export default function Navbar() {
       onClick: toggleBulkLandMenu,
     },
     {
-      label: "Dholera Blogs",
+      label: "Blogs",
       open: isDholeraMenuOpen,
       onClick: toggleDholeraMenu,
     },

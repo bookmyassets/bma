@@ -3,54 +3,14 @@ import React from "react";
 import ROI from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
 import Link from "next/link";
 
-const highlights = [
-  {
-    title: "India’s first Special Investment Region (SIR)",
-    body: "Dholera is planned with advanced smart city standards, focusing on sustainability, efficient urban design, and modern infrastructure.",
-  },
-  {
-    title: "Smart planned city",
-    body: "The city offers ready-to-use infrastructure like roads, power, water, and ICT systems, making it easier for development and operations.",
-  },
-  {
-    title: "Govt-backed project",
-    body: "The project is supported by both central and state governments, ensuring planned growth, policy support, and long-term development.",
-  },
-  {
-    title: "Near Dholera International Airport",
-    body: "Large-scale investments are planned and committed, reflecting strong interest from global players and industrial sectors.",
-  },
-  {
-    title: "Connected by Ahmedabad-Dholera Expressway",
-    body: "Dholera is the first project under the Special Investment Region (SIR) Act, enabling structured planning and large-scale development.",
-  },
-
-];
-
-function HighlightCard({ title }) {
-  return (
-    <button
-      className="
-        text-left w-full rounded-lg border transition-all duration-250
-        p-[clamp(0.5rem,1.25vw,0.875rem)]
-        border-[#deae3c] bg-[#deae3c]/5 hover:bg-[#deae3c]/10 hover:border-[#deae3c]/70
-      "
-    >
-      <span className="text-[clamp(0.875rem,2vw,1.125rem)] font-bold leading-snug text-gray-300 transition-colors duration-200">
-        {title}
-      </span>
-    </button>
-  );
-}
 
 export default function DholeraSmartCity() {
-
-   const locationFeatures = [
-     { text: "India’s First Special Investment Region" },
-     { text: "Smart planned city" },
-     { text: "Govt-backed project" },
-     { text: "Near Dholera International Airport" },
-     { text: "Connected by Ahmedabad-Dholera Expressway" },
+  const locationFeatures = [
+    { text: "India’s First Special Investment Region" },
+    { text: "Smart planned city" },
+    { text: "Govt-backed project" },
+    { text: "Near Dholera International Airport" },
+    { text: "Connected by Ahmedabad-Dholera Expressway" },
   ];
 
   return (
@@ -96,26 +56,24 @@ export default function DholeraSmartCity() {
               a major industrial, manufacturing, and technology hub, with
               sectors like semiconductors, renewable energy, data centres, and
               logistics.
-              
             </p>
 
             {/* 3×2 highlight cards */}
             <div className=" gap-3 text-left ">
-                  {locationFeatures.map((feature, index) => {
-
-
-                    return (
-                      <div
-                        key={index}
-                        className={`flex items-start gap-3 p-1 rounded-lg text-white hover:border-amber-300 hover:shadow-md transition-all duration-200 `}
-                      >
-                        <span className="text-base  leading-snug">
-                        <span className="text-green-500 px-2">🗹</span> {feature.text}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
+              {locationFeatures.map((feature, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`flex items-start gap-3 p-1 rounded-lg text-white hover:border-amber-300 hover:shadow-md transition-all duration-200 `}
+                  >
+                    <span className="text-base  leading-snug">
+                      <span className="text-green-500 px-2">🗹</span>{" "}
+                      {feature.text}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
