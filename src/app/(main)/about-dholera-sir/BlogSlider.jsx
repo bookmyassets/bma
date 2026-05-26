@@ -22,19 +22,19 @@ export default function BlogSlider({ posts = [] }) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const cardsPerPage = 3;
+  const cardsPerPage = isMobile ? 1 : 3;
   const totalPages = Math.ceil(posts.length / cardsPerPage);
 
-  // Auto-slide every 4 seconds - only on desktop
+  // Auto-slide every 4 seconds
   useEffect(() => {
-    if (isMobile || !isAutoPlaying || totalPages <= 1) return;
+    if (!isAutoPlaying || totalPages <= 1) return;
 
     const interval = setInterval(() => {
       setCurrentPage((prev) => (prev + 1) % totalPages);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, totalPages, isMobile]);
+  }, [isAutoPlaying, totalPages]);
 
   const goToPage = (page) => {
     setCurrentPage(page);
@@ -67,89 +67,6 @@ export default function BlogSlider({ posts = [] }) {
     return date.toLocaleDateString("en-US", options);
   };
 
-  // For mobile: show all posts in a single column
-  if (isMobile) {
-    return (
-      <div className="mb-8">
-        {/* Mobile: Show all posts in a single column */}
-        <div className="flex flex-col gap-6">
-          {posts.map((post, index) => (
-            <div
-              key={post._id}
-              className="transform hover:-translate-y-1 transition-all duration-300"
-              style={{
-                animation: `fadeIn 0.5s ease-in ${index * 0.1}s both`,
-              }}
-            >
-              <Link
-                href={
-                  post.slug?.current
-                    ? `/about-dholera-sir/${post.slug.current}`
-                    : "#"
-                }
-                className="group"
-              >
-                <div className="bg-white rounded-xl shadow-md overflow-hidden h-full hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 border border-gray-200">
-                  {/* Blog Image */}
-                  <div className="relative h-52">
-                    {post.mainImage ? (
-                      <Image
-                        src={
-                          urlFor(post.mainImage)
-                            .width(1200)
-                            .height(675)
-                            .url() || "/placeholder.svg"
-                        }
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21]"></div>
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <h2 className="text-xl font-bold mb-3 text-black group-hover:text-[#C69C21] line-clamp-2 transition-colors">
-                      {post.title}
-                    </h2>
-
-                    {/* Footer with "ExlporeMore" */}
-                    <div className="border-t border-gray-200 pt-4 mt-auto">
-                      <div className="flex justify-between text-sm">
-                        <p className="text-sm text-gray-400">
-                          {formatDate(post.publishedAt || post._createdAt)}
-                        </p>
-                        <button className="font-medium hover:underline text-[#deae3c]">
-                          Exlpore More →
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-
-        <style jsx>{`
-          @keyframes fadeIn {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-        `}</style>
-      </div>
-    );
-  }
-
-  // Desktop: Show slider with 3 posts per page
   const currentPosts = posts.slice(
     currentPage * cardsPerPage,
     (currentPage + 1) * cardsPerPage,
@@ -158,8 +75,8 @@ export default function BlogSlider({ posts = [] }) {
   return (
     <div className="mb-8">
       <div className="relative">
-        {/* Desktop Grid Container */}
-        <div className="hidden md:grid grid-cols-3 gap-6 lg:gap-8">
+        {/* Responsive Grid Container */}
+        <div className="grid grid-cols-1 gap-6 lg:gap-8 md:grid-cols-3">
           {currentPosts.map((post, index) => (
             <div
               key={post._id}
@@ -222,14 +139,14 @@ export default function BlogSlider({ posts = [] }) {
           <>
             <button
               onClick={goToPrevious}
-              className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden md:block"
+              className="absolute -left-4 top-1/2 -translate-y-1/2 rounded-full p-3 shadow-lg bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden md:block"
               aria-label="Previous page"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={goToNext}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden md:block"
+              className="absolute -right-4 top-1/2 -translate-y-1/2 rounded-full p-3 shadow-lg bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden md:block"
               aria-label="Next page"
             >
               <ChevronRight className="w-6 h-6" />
@@ -261,14 +178,14 @@ export default function BlogSlider({ posts = [] }) {
           <div className="flex gap-3 md:hidden">
             <button
               onClick={goToPrevious}
-              className="bg-white rounded-full p-2 shadow-md hover:bg-[#deae3c] hover:text-white transition-all duration-300"
+              className="rounded-full p-2 shadow-md bg-[#deae3c] hover:text-white transition-all duration-300"
               aria-label="Previous page"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={goToNext}
-              className="bg-white rounded-full p-2 shadow-md hover:bg-[#deae3c] hover:text-white transition-all duration-300"
+              className="rounded-full p-2 shadow-md bg-[#deae3c] hover:text-white transition-all duration-300"
               aria-label="Next page"
             >
               <ChevronRight className="w-5 h-5" />

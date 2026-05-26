@@ -65,19 +65,17 @@ export default async function page() {
         rel="canonical"
         href="https://www.bookmyassets.com/dholera-sir-updates"
       />
-      <div className="min-h-screen bg-white relative overflow-hidden">
+      <div className="min-h-screen bg-black relative overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-4 pt-28 pb-16">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Main Content - Blog Posts (comes first on mobile) */}
             <div className="lg:w-2/3 space-y-8 order-1 lg:order-2">
               <div>
-                <h1 className="text-4xl font-bold text-gray-800 mb-2">
-                  Dholera SIR Latest Updates
+                <h1 className="text-center md:text-left text-3xl md:text-4xl font-bold text-white mb-2">
+                  Dholera Latest Updates
                 </h1>
-                <p className="text-gray-600 mb-8">
-                  Stay updated with the latest insights about Dholera Special
-                  Investment Region, infrastructure developments, and smart city
-                  investment opportunities.
+                <p className="text-gray-200 mb-8">
+
                 </p>
               </div>
 
@@ -89,7 +87,7 @@ export default async function page() {
                       {safePosts.map((post) => (
                         <div
                           key={post._id}
-                          className="transform hover:-translate-y-2 transition-all duration-300"
+                          className="transform hover:-translate-y-2 p-2 transition-all duration-300"
                         >
                           <BlogCard post={post} />
                         </div>
@@ -110,19 +108,19 @@ export default async function page() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-white rounded-xl shadow-sm p-8 text-center transition-all duration-300 hover:shadow-lg hover:scale-[1.01]">
+                <div className="bg-gray-950 rounded-xl shadow-sm p-8 text-center transition-all duration-300 hover:shadow-lg hover:scale-[1.01] border border-gray-800">
                   <div className="h-48 bg-gradient-to-br from-[#FF9933]/20 to-[#138808]/20 rounded-lg mb-6 flex items-center justify-center">
                     <div className="text-6xl">ðŸ™ï¸</div>
                   </div>
-                  <h2 className="text-xl font-bold text-gray-800 mb-3">
+                  <h2 className="text-xl font-bold text-white mb-3">
                     Dholera SIR Investment Updates Coming Soon
                   </h2>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-200 mb-4">
                     We're preparing comprehensive guides about investment
                     opportunities in Dholera Special Investment Region. Stay
                     tuned for expert insights on India's first smart city.
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-300">
                     Content will be available soon
                   </p>
                 </div>

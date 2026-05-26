@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import ROI from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
+import ROI from "@/assests/dholera-on-gujarat-map-bookmyassets.webp";
 import Link from "next/link";
 
 
@@ -67,7 +67,7 @@ export default function DholeraSmartCity() {
                     className={`flex items-start gap-3 p-1 rounded-lg text-white hover:border-amber-300 hover:shadow-md transition-all duration-200 `}
                   >
                     <span className="text-base  leading-snug">
-                      <span className="text-green-500 px-2">🗹</span>{" "}
+                      <span className="text-green-500 px-2">✓</span>{" "}
                       {feature.text}
                     </span>
                   </div>
