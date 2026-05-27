@@ -42,7 +42,6 @@ export default async function sitemap() {
     { url: `${BASE_URL}/contact`,                 priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/career`,                  priority: 0.5, changeFrequency: "monthly" },
     { url: `${BASE_URL}/channel-partner`,         priority: 0.6, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/bulk-land`,               priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/bulk-land/residential`,   priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/bulk-land/industrial-land`, priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/bulk-land/city-centre-land`, priority: 0.6, changeFrequency: "monthly" },
