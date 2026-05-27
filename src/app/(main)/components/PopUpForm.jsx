@@ -9,15 +9,45 @@ export default function PopupForm({ title, project }) {
   const getLeadSource = () => {
     if (typeof window === "undefined") return "BookMyAssets";
     const params = new URLSearchParams(window.location.search);
-    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
-    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
-    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
-    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
-    if (params.has("gad_source")) return "BookMyAssets Google Ads";
-    if (params.has("")) return "BookMyAssets";
-    return "BookMyAssets ";
-  };
 
+    // Twitter Ads
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("paid")) return "BookMyAssets Twitter Ads";
+
+    // Meta Ads — check fbclid + utm_source to split FB vs IG
+    if (params.has("fbclid")) {
+      const source = params.get("utm_source")?.toLowerCase();
+      if (source === "instagram") return "BookMyAssets Meta IG";
+      return "BookMyAssets Meta FB";
+    }
+
+    // Slug-based params — capture first two words of the slug value
+    const slugParam = (key) => {
+      const val = params.get(key) || "";
+      const words = val.split("-").filter(Boolean).slice(0, 2).join(" ");
+      return words || null;
+    };
+
+    if (params.has("dholera-sir-blogs")) {
+      const slug = slugParam("dholera-sir-blogs");
+      return slug ? `BookMyAssets Blogs ${slug}` : "BookMyAssets Blogs";
+    }
+    if (params.has("dholera-sir-updates")) {
+      const slug = slugParam("dholera-sir-updates");
+      return slug ? `BookMyAssets Updates ${slug}` : "BookMyAssets Updates";
+    }
+    if (params.has("about-dholera-sir")) {
+      const slug = slugParam("about-dholera-sir");
+      return slug
+        ? `BookMyAssets Dholera SIR ${slug}`
+        : "BookMyAssets Dholera SIR";
+    }
+
+    // Google Ads
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+
+    return "BookMyAssets";
+  };
 
   // Popup states
   const [showFormPopup, setShowFormPopup] = useState(false);
@@ -218,9 +248,7 @@ export default function PopupForm({ title, project }) {
           >
             {showThankYou ? (
               <div className="text-center">
-                <div
-                  className="mb-6"
-                >
+                <div className="mb-6">
                   <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -249,9 +277,7 @@ export default function PopupForm({ title, project }) {
 
                 <div className="text-center mb-6 space-y-8">
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
-                    <div
-                      className="rounded-lg "
-                    >
+                    <div className="rounded-lg ">
                       <Image
                         src={logo}
                         alt="Logo"

@@ -17,7 +17,48 @@ export default function SlugPageForm({ title, formTitle }) {
   const recaptchaRefMobile = useRef(null);
   const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
 
+    // Twitter Ads
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("paid")) return "BookMyAssets Twitter Ads";
+
+    // Meta Ads — check fbclid + utm_source to split FB vs IG
+    if (params.has("fbclid")) {
+      const source = params.get("utm_source")?.toLowerCase();
+      if (source === "instagram") return "BookMyAssets Meta IG";
+      return "BookMyAssets Meta FB";
+    }
+
+    // Slug-based params — capture first two words of the slug value
+    const slugParam = (key) => {
+      const val = params.get(key) || "";
+      const words = val.split("-").filter(Boolean).slice(0, 2).join(" ");
+      return words || null;
+    };
+
+    if (params.has("dholera-sir-blogs")) {
+      const slug = slugParam("dholera-sir-blogs");
+      return slug ? `BookMyAssets Blogs ${slug}` : "BookMyAssets Blogs";
+    }
+    if (params.has("dholera-sir-updates")) {
+      const slug = slugParam("dholera-sir-updates");
+      return slug ? `BookMyAssets Updates ${slug}` : "BookMyAssets Updates";
+    }
+    if (params.has("about-dholera-sir")) {
+      const slug = slugParam("about-dholera-sir");
+      return slug
+        ? `BookMyAssets Dholera SIR ${slug}`
+        : "BookMyAssets Dholera SIR";
+    }
+
+    // Google Ads
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+
+    return "BookMyAssets";
+  };  
   // Auto-popup after 3 seconds
   useEffect(() => {
     const hasShown = sessionStorage.getItem("popupShown");
@@ -97,7 +138,7 @@ export default function SlugPageForm({ title, formTitle }) {
             fields: {
               name: formData.fullName,
               phone: formData.mobileNumber,
-              source: "BookMyAssets Blogs",
+              source: getLeadSource(),
             },
             source: "BookMyAssets christmas Popup",
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
@@ -186,7 +227,7 @@ export default function SlugPageForm({ title, formTitle }) {
     }
   };
 
- const handlePopupClose = () => {
+  const handlePopupClose = () => {
     setShowPopup(false);
   };
 
@@ -233,22 +274,21 @@ export default function SlugPageForm({ title, formTitle }) {
                       <div className="space-y-4 pb-2">
                         {/* Dynamic Form Title */}
                         <div className="text-center mb-6 space-y-8">
-                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
-                        <div className="rounded-lg ">
-                          <Image
-                            src={logo}
-                            alt="Logo"
-                            width={60}
-                            height={60}
-                            className="rounded-lg"
-                          />
+                          <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+                            <div className="rounded-lg ">
+                              <Image
+                                src={logo}
+                                alt="Logo"
+                                width={60}
+                                height={60}
+                                className="rounded-lg"
+                              />
+                            </div>
+                          </div>
+                          <h2 className="text-xl mb-2 font-bold text-gray-700">
+                            {displayTitle || "Get Investment Details"}
+                          </h2>
                         </div>
-                      </div>
-                      <h2 className="text-xl mb-2 font-bold text-gray-700">
-                        {displayTitle || "Get Investment Details"}
-                      </h2>
-                      
-                    </div>
 
                         {errorMessage && (
                           <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs md:text-sm">

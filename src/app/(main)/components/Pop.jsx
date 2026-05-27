@@ -3,7 +3,7 @@ import { FaUser, FaPhoneAlt, FaClock } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/Bmalogo.png";
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Popup({
   onClose,
@@ -14,7 +14,7 @@ export default function Popup({
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
-  const [showFormPopup, setShowFormPopup] = useState(true); 
+  const [showFormPopup, setShowFormPopup] = useState(true);
   const [showSubmissionSuccess, setShowSubmissionSuccess] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
@@ -31,13 +31,44 @@ export default function Popup({
   const getLeadSource = () => {
     if (typeof window === "undefined") return "BookMyAssets";
     const params = new URLSearchParams(window.location.search);
+
+    // Twitter Ads
     if (params.has("twclid")) return "BookMyAssets Twitter Ads";
-    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
-    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
-    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+    if (params.has("paid")) return "BookMyAssets Twitter Ads";
+
+    // Meta Ads — check fbclid + utm_source to split FB vs IG
+    if (params.has("fbclid")) {
+      const source = params.get("utm_source")?.toLowerCase();
+      if (source === "instagram") return "BookMyAssets Meta IG";
+      return "BookMyAssets Meta FB";
+    }
+
+    // Slug-based params — capture first two words of the slug value
+    const slugParam = (key) => {
+      const val = params.get(key) || "";
+      const words = val.split("-").filter(Boolean).slice(0, 2).join(" ");
+      return words || null;
+    };
+
+    if (params.has("dholera-sir-blogs")) {
+      const slug = slugParam("dholera-sir-blogs");
+      return slug ? `BookMyAssets Blogs ${slug}` : "BookMyAssets Blogs";
+    }
+    if (params.has("dholera-sir-updates")) {
+      const slug = slugParam("dholera-sir-updates");
+      return slug ? `BookMyAssets Updates ${slug}` : "BookMyAssets Updates";
+    }
+    if (params.has("about-dholera-sir")) {
+      const slug = slugParam("about-dholera-sir");
+      return slug
+        ? `BookMyAssets Dholera SIR ${slug}`
+        : "BookMyAssets Dholera SIR";
+    }
+
+    // Google Ads
     if (params.has("gad_source")) return "BookMyAssets Google Ads";
-    if (params.has("")) return "BookMyAssets";
-    return "BookMyAssets ";
+
+    return "BookMyAssets";
   };
 
   useEffect(() => {
@@ -57,7 +88,7 @@ export default function Popup({
       }, 1000);
     }
 
-    return () => clearInterval(timer); 
+    return () => clearInterval(timer);
   }, [showForm]);
 
   const formatTime = (seconds) => {
@@ -81,7 +112,7 @@ export default function Popup({
       price,
       timeLeft,
       mainText: "Dholera – India’s Safest Investment",
-      subText: "Limited Plots – Booking Closing Soon"
+      subText: "Limited Plots – Booking Closing Soon",
     };
   };
 
@@ -94,7 +125,7 @@ export default function Popup({
   // Handle close function
   const handleClose = () => {
     setShowFormPopup(false);
-    if (onClose && typeof onClose === 'function') {
+    if (onClose && typeof onClose === "function") {
       onClose();
     }
   };
@@ -103,10 +134,10 @@ export default function Popup({
     // Load localStorage data
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
 
@@ -137,15 +168,15 @@ export default function Popup({
 
     // Handle Escape key press
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         handleClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
 
@@ -175,7 +206,7 @@ export default function Popup({
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       return false;
     }
@@ -205,7 +236,7 @@ export default function Popup({
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -231,7 +262,7 @@ export default function Popup({
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(
-        error.message || "Error submitting form. Please try again."
+        error.message || "Error submitting form. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -428,9 +459,7 @@ export default function Popup({
                   Invest in Dholera Residential Plots
                 </h2>
 
-                <p className="text-white/90 text-xl">
-                  {titleInfo.subText}
-                </p>
+                <p className="text-white/90 text-xl">{titleInfo.subText}</p>
 
                 {titleInfo.timeLeft && (
                   <div className="bg-[#FDB913] text-black px-4 py-2 rounded-lg inline-flex items-center gap-2 font-bold mb-6">
@@ -546,16 +575,15 @@ export default function Popup({
                         Verifying...
                       </>
                     ) : recaptchaLoaded ? (
-                      <>
-                        Get A Call Back
-                      </>
+                      <>Get A Call Back</>
                     ) : (
                       "Loading..."
                     )}
                   </motion.button>
 
                   <p className="text-xs text-gray-400 text-center">
-                    By submitting, you agree to receive calls/WhatsApp messages about our services
+                    By submitting, you agree to receive calls/WhatsApp messages
+                    about our services
                   </p>
                 </form>
               )}
