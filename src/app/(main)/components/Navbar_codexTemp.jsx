@@ -712,12 +712,12 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="relative z-10 ml-auto flex items-center gap-[0.5rem] lg:hidden">
-              <Link
+            <div className="z-10 ml-auto flex items-center justify-end lg:hidden">
+              <Link 
                 href={whatsappEnquiryLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[2.75rem] md:min-h-[2rem] min-w-[2.75rem] md:min-w-[2rem] items-center justify-center gap-2 rounded-lg border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
+                className="absolute left-1/2 z-10 inline-flex min-h-[2.75rem] min-w-[2.75rem] -translate-x-1/2 items-center justify-center gap-2 rounded-lg border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39] md:min-h-[2rem] md:min-w-[2rem]"
                 aria-label="Enquire Now on WhatsApp"
               >
                 <FaWhatsapp className="h-[1.25rem] w-[1.25rem] shrink-0" /> Know
