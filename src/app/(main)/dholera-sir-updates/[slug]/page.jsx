@@ -78,7 +78,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
                 key={item._id}
                 href={`/dholera-sir-updates/${item.slug.current}`}
               >
-                <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3  border border-gray-200 transition-all hover:shadow-md">
+                <div className="flex gap-3 items-center bg-gray-950 hover:bg-gray-900 p-3  border border-gray-700 transition-all hover:shadow-md">
                   {item.mainImage && (
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                       <Image
@@ -91,10 +91,10 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
                     </div>
                   )}
                   <div className="min-w-0">
-                    <h4 className="font-semibold text-sm text-gray-900 line-clamp-2">
+                    <h4 className="font-semibold text-sm text-white line-clamp-2">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-gray-500 line-clamp-1 mt-1">
+                    <p className="text-xs text-gray-300 line-clamp-1 mt-1">
                       {item.description}
                     </p>
                   </div>
@@ -219,7 +219,7 @@ export default async function Post({ params }) {
         table: ({ value }) => {
           if (!value?.rows || !Array.isArray(value.rows)) return null;
           return (
-            <div className="overflow-x-auto my-8 bg-white rounded-2xl shadow-lg border border-gray-100">
+            <div className="overflow-x-auto my-8 bg-black rounded-2xl shadow-lg border border-gray-700">
               <table className="min-w-full">
                 <tbody>
                   {value.rows.map((row, i) => {
@@ -228,18 +228,18 @@ export default async function Post({ params }) {
                     return (
                       <tr
                         key={i}
-                        className={`hover:bg-gray-50 transition-colors duration-200 ${
+                        className={`hover:bg-gray-900 transition-colors duration-200 ${
                           i === 0
-                            ? "bg-gradient-to-r from-[#C69C21]/10 to-[#FDB913]/10 font-semibold"
+                            ? "bg-gradient-to-r from-[#C69C21]/20 to-[#FDB913]/20 font-semibold"
                             : i % 2 === 0
-                              ? "bg-gray-50/50"
-                              : "bg-white"
+                              ? "bg-gray-950"
+                              : "bg-black"
                         }`}
                       >
                         {cells.map((cell, j) => (
                           <td
                             key={j}
-                            className="px-6 py-4 text-gray-700 border-b border-gray-100 last:border-r-0 text-[clamp(0.8rem,calc(0.4vw+0.75rem),0.95rem)]"
+                            className="px-6 py-4 text-gray-200 border-b border-gray-700 last:border-r-0 text-[clamp(0.8rem,calc(0.4vw+0.75rem),0.95rem)]"
                           >
                             {typeof cell === "string"
                               ? cell
@@ -258,13 +258,13 @@ export default async function Post({ params }) {
         htmlTableBlock: ({ value }) => {
           if (!value?.html) return null;
           return (
-            <div className="my-8 overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+            <div className="my-8 overflow-x-auto rounded-lg border border-gray-700 shadow-sm">
               <div
-                className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-white
-                  [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-gray-700
-                  [&_th]:bg-gray-50 [&_th]:border-b [&_th]:border-gray-200
-                  [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:border-b [&_td]:border-gray-200
-                  [&_tr:last-child_td]:border-b-0 [&_tr:hover]:bg-gray-50/50
+                className="[&_table]:w-full [&_table]:border-collapse [&_table]:bg-black
+                  [&_th]:px-6 [&_th]:py-4 [&_th]:text-left [&_th]:font-semibold [&_th]:text-white
+                  [&_th]:bg-gray-950 [&_th]:border-b [&_th]:border-gray-700
+                  [&_td]:px-6 [&_td]:py-4 [&_td]:text-gray-200 [&_td]:border-b [&_td]:border-gray-700
+                  [&_tr:last-child_td]:border-b-0 [&_tr:hover]:bg-gray-900
                   [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
                   [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
                 dangerouslySetInnerHTML={{ __html: value.html }}
@@ -313,17 +313,17 @@ export default async function Post({ params }) {
           );
         },
         strong: ({ children }) => (
-          <strong className="font-bold text-gray-900 px-1 py-0.5 rounded">
+          <strong className="font-bold text-white px-1 py-0.5 rounded">
             {children}
           </strong>
         ),
         em: ({ children }) => (
-          <em className="italic text-gray-800 px-1 py-0.5 rounded">
+          <em className="italic text-gray-200 px-1 py-0.5 rounded">
             {children}
           </em>
         ),
         code: ({ children }) => (
-          <code className="font-mono bg-gradient-to-r from-gray-100 to-gray-200 px-2 py-1 rounded-md text-[clamp(0.75rem,calc(0.4vw+0.7rem),0.875rem)] text-gray-800 border border-gray-300">
+          <code className="font-mono bg-gradient-to-r from-gray-900 to-gray-800 px-2 py-1 rounded-md text-[clamp(0.75rem,calc(0.4vw+0.7rem),0.875rem)] text-gray-100 border border-gray-700">
             {children}
           </code>
         ),
@@ -375,33 +375,33 @@ export default async function Post({ params }) {
           return {
             h1: makeHeading(
               "h1",
-              "text-[clamp(1.35rem,calc(1.8vw+0.85rem),2.5rem)] leading-[1.22] font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4",
+              "text-[clamp(1.35rem,calc(1.8vw+0.85rem),2.5rem)] leading-[1.22] font-black mt-8 mb-6 text-white relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/10 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4",
             ),
             h2: makeHeading(
               "h2",
-              "text-[clamp(1.375rem,calc(2.5vw+1rem),1.875rem)] font-bold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-3 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4",
+              "text-[clamp(1.375rem,calc(2.5vw+1rem),1.875rem)] font-bold mt-8 mb-4 text-white relative border-l-4 border-[#FDB913] pl-3 bg-gradient-to-r from-[#FDB913]/10 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4",
             ),
             h3: makeHeading(
               "h3",
-              "text-[clamp(1.25rem,calc(2vw+1rem),1.875rem)] font-bold mt-8 mb-4 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4",
+              "text-[clamp(1.25rem,calc(2vw+1rem),1.875rem)] font-bold mt-8 mb-4 text-white relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/10 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4",
             ),
             h4: makeHeading(
               "h4",
-              "text-[clamp(1.125rem,calc(1.5vw+1rem),1.5rem)] font-semibold mt-6 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3",
+              "text-[clamp(1.125rem,calc(1.5vw+1rem),1.5rem)] font-semibold mt-6 mb-3 text-white relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/10 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3",
             ),
             h5: makeHeading(
               "h5",
-              "text-[clamp(1rem,calc(1.2vw+0.9rem),1.25rem)] font-semibold mt-6 mb-3 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3",
+              "text-[clamp(1rem,calc(1.2vw+0.9rem),1.25rem)] font-semibold mt-6 mb-3 text-white relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/10 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3",
             ),
             h6: makeHeading(
               "h6",
-              "text-[clamp(0.875rem,calc(1vw+0.8rem),1.125rem)] font-semibold mt-4 mb-2 text-gray-800 relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/5 to-transparent py-1 [&+ul]:mt-2 [&+ol]:mt-2",
+              "text-[clamp(0.875rem,calc(1vw+0.8rem),1.125rem)] font-semibold mt-4 mb-2 text-white relative border-l-4 border-[#FDB913] pl-6 bg-gradient-to-r from-[#FDB913]/10 to-transparent py-1 [&+ul]:mt-2 [&+ol]:mt-2",
             ),
           };
         })(),
 
         normal: ({ children }) => (
-          <p className="mb-4 text-gray-700 leading-loose text-[clamp(0.9rem,calc(0.5vw+0.85rem),1.125rem)] font-light tracking-wide">
+          <p className="mb-4 text-gray-200 leading-loose text-[clamp(0.9rem,calc(0.5vw+0.85rem),1.125rem)] font-light tracking-wide">
             {children}
           </p>
         ),
@@ -411,14 +411,14 @@ export default async function Post({ params }) {
             <div className="absolute top-4 left-6 text-6xl text-[#C69C21]/30 font-serif">
               "
             </div>
-            <div className="pl-8 italic text-gray-700 text-[clamp(1rem,calc(1vw+0.85rem),1.25rem)] leading-relaxed font-medium">
+            <div className="pl-8 italic text-gray-200 text-[clamp(1rem,calc(1vw+0.85rem),1.25rem)] leading-relaxed font-medium">
               {children}
             </div>
           </blockquote>
         ),
 
         centerAlign: ({ children }) => (
-          <p className="mb-4 text-gray-700 leading-loose text-[clamp(0.9rem,calc(0.5vw+0.85rem),1.125rem)] text-center bg-gray-50 py-6 rounded-xl">
+          <p className="mb-4 text-gray-200 leading-loose text-[clamp(0.9rem,calc(0.5vw+0.85rem),1.125rem)] text-center bg-gray-950 py-6 rounded-xl">
             {children}
           </p>
         ),
@@ -442,9 +442,9 @@ export default async function Post({ params }) {
         bullet: ({ children }) => (
           <li
             className="
-                 text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
+                 text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-200
                  flex items-start gap-3
-                 bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
+                 bg-gray-950 px-3 py-2.5 rounded-lg shadow-sm border border-gray-700
                  hover:shadow-md transition-shadow duration-300
                  [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-xl  [&_h1]:font-bold
                  [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-lg  [&_h2]:font-bold
@@ -465,9 +465,9 @@ export default async function Post({ params }) {
         number: ({ children }) => (
           <li
             className="
-                 text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-700
+                 text-[clamp(0.875rem,calc(0.5vw+0.8rem),1rem)] leading-relaxed text-gray-200
                  flex items-start gap-3
-                 bg-white px-3 py-2.5 rounded-lg shadow-sm border border-gray-100
+                 bg-gray-950 px-3 py-2.5 rounded-lg shadow-sm border border-gray-700
                  hover:shadow-md transition-shadow duration-300
                  [&_h1]:border-l-0 [&_h1]:pl-0 [&_h1]:bg-transparent [&_h1]:mt-0 [&_h1]:mb-0 [&_h1]:py-0 [&_h1]:text-base [&_h1]:font-semibold
                  [&_h2]:border-l-0 [&_h2]:pl-0 [&_h2]:bg-transparent [&_h2]:mt-0 [&_h2]:mb-0 [&_h2]:py-0 [&_h2]:text-base [&_h2]:font-semibold
@@ -505,7 +505,7 @@ export default async function Post({ params }) {
 
       return (
         <div className="my-8 p-6 bg-gradient-to-br from-[#C69C21]/5 to-[#FDB913]/10 rounded-2xl shadow-lg border border-[#C69C21]/20">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          <h2 className="text-2xl font-bold text-white mb-4">
             Table of Contents
           </h2>
           <ul className="space-y-3">
@@ -569,8 +569,8 @@ export default async function Post({ params }) {
           button="Talk To A Dholera Expert"
           project={post.title}
         />
-        <div className="bg-white min-h-screen">
-          <div className="bg-white shadow-sm sticky top-0 z-30" />
+        <div className="bg-black min-h-screen text-white">
+          <div className="bg-black shadow-sm sticky top-0 z-30" />
 
           <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
             <div className="flex flex-col lg:flex-row gap-10">
@@ -583,7 +583,7 @@ export default async function Post({ params }) {
                       <li className="inline-flex items-center">
                         <Link
                           href="/"
-                          className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
+                          className="inline-flex items-center text-sm font-medium text-white "
                         >
                           Home
                         </Link>
@@ -591,7 +591,7 @@ export default async function Post({ params }) {
                       <li>
                         <div className="flex items-center">
                           <svg
-                            className="w-3 h-3 text-gray-400"
+                            className="w-3 h-3 text-white"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -603,7 +603,7 @@ export default async function Post({ params }) {
                           </svg>
                           <Link
                             href="/dholera-sir-updates"
-                            className="ml-1 text-sm font-medium text-gray-500 hover:text-gray-700 md:ml-2"
+                            className="ml-1 text-sm font-medium text-white  md:ml-2"
                           >
                             Updates
                           </Link>
@@ -612,7 +612,7 @@ export default async function Post({ params }) {
                       <li aria-current="page">
                         <div className="flex items-center">
                           <svg
-                            className="w-3 h-3 text-gray-400"
+                            className="w-3 h-3 text-white"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -622,7 +622,7 @@ export default async function Post({ params }) {
                               clipRule="evenodd"
                             />
                           </svg>
-                          <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 line-clamp-1">
+                          <span className="ml-1 text-sm font-medium text-white md:ml-2 line-clamp-1">
                             {post.title}
                           </span>
                         </div>
@@ -680,11 +680,11 @@ export default async function Post({ params }) {
                     </div>
                   </div>
 
-                  <h1 className="text-[clamp(1.35rem,calc(1.8vw+0.85rem),2.5rem)] leading-[1.22]  font-bold text-gray-900 mb-4">
+                  <h1 className="text-[clamp(1.35rem,calc(1.8vw+0.85rem),2.5rem)] leading-[1.22]  font-bold text-white mb-4">
                     {post.title}
                   </h1>
 
-                  <div className="flex items-center gap-4 text-black text-sm mb-6">
+                  <div className="flex items-center gap-4 text-[#deae3c] text-sm mb-6">
                     <div className="flex items-center">
                       <svg
                         className="w-4 h-4 mr-1"
@@ -702,7 +702,7 @@ export default async function Post({ params }) {
                       </svg>
 
                       <time
-                        className="text-black"
+                        className="text-[#deae3c]"
                         dateTime={
                           new Date(post.publishedAt || post._createdAt)
                             .toISOString()
@@ -733,15 +733,15 @@ export default async function Post({ params }) {
                 <TableOfContent headings={extractHeadings(post.body)} />
 
                 {/* Article Content */}
-                <div className="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+                <div className="bg-black rounded-xl shadow-2xl p-8 border border-gray-700">
                   <div className="text-xl max-w-none">
                     <PortableText value={post.body} components={components} />
                   </div>
 
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
-                    <div className="mt-12 pt-6 border-t border-gray-200">
-                      <h4 className="font-semibold text-gray-900 mb-3">
+                    <div className="mt-12 pt-6 border-t border-gray-700">
+                      <h4 className="font-semibold text-white mb-3">
                         Related Topics:
                       </h4>
                       <div className="flex flex-wrap gap-2">
@@ -749,7 +749,7 @@ export default async function Post({ params }) {
                           <Link
                             key={tag}
                             href={`/blogs/tag/${tag}`}
-                            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-full transition"
+                            className="px-3 py-1 bg-gray-900 hover:bg-gray-800 text-[#FDB913] text-sm rounded-full transition"
                           >
                             #{tag}
                           </Link>
@@ -772,7 +772,7 @@ export default async function Post({ params }) {
           </main>
 
           {/* Related Articles Section */}
-          <section className="bg-gray-50 py-12 mt-4">
+          <section className="bg-black py-12 mt-4">
             <div className="max-w-7xl mx-auto px-4">
               <div className="gap-6">
                 {relatedBlogs && relatedBlogs.length > 0 ? (
@@ -841,7 +841,7 @@ export default async function Post({ params }) {
                                       href={`/dholera-sir-updates/${blog.slug.current}`}
                                       className="block"
                                     >
-                                      <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+                                    <div className="bg-gray-950 rounded-xl shadow-md overflow-hidden border border-gray-700 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
                                         <div className="relative h-56 overflow-hidden flex-shrink-0">
                                           {blog.mainImage ? (
                                             <Image
@@ -863,10 +863,10 @@ export default async function Post({ params }) {
                                           )}
                                         </div>
                                         <div className="p-5 flex flex-col flex-1">
-                                          <h3 className="font-bold text-lg mb-2 text-gray-900 line-clamp-2">
+                                          <h3 className="font-bold text-lg mb-2 text-white line-clamp-2">
                                             {blog.title}
                                           </h3>
-                                          <p className="text-gray-700 mb-4 line-clamp-3 flex-1">
+                                          <p className="text-gray-200 mb-4 line-clamp-3 flex-1">
                                             {blog.description}
                                           </p>
                                           <span className="hover:text-[#C69C21] text-[#FDB913] p-1 rounded-xl font-semibold bg-gray-800 inline-flex items-center self-start">
