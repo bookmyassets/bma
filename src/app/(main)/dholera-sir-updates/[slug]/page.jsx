@@ -1,14 +1,17 @@
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import { getblogs, getUpdates, getBlogBySlug } from "@/sanity/lib/api";
+import {
+  getPostBySlug,
+  getUpdateBySlug,
+  getUpdates,
+  getblogs,
+  projectInfo,
+} from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
-
-import SlugPageForm from "../../components/SlugPageForm";
-import ExitPopup from "../../components/ExitForm";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
-import "./blogPage.css";
+import SlugPageForm from "../../components/SlugPageForm";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
@@ -56,28 +59,26 @@ const extractHeadings = (body) => {
 };
 
 // Right Sidebar Component
-const RightSidebar = ({ trendingBlogs }) => {
+const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   return (
     <aside className="lg:w-1/3 space-y-4 pt-4">
-      <div className=" pt-4 max-w-xl mx-auto hidden md:block">
+      <div className=" pt-4 max-w-xl mx-auto">
         <LeadFormSlug
-          title="Buy Residential Plots in Dholera Starting From ₹8 Lakh"
+          title="Registry Ready Plots in Dholera"
           buttonName="Know More"
         />
       </div>
-      <div className="sticky top-24 space-y-6">
+      <div className="sticky top-24 hidden md:block space-y-6">
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
-          <h3 className="text-xl font-bold mb-4 text-white">
-            Latest News on Dholera SIR
-          </h3>
-          <div className=" overflow-y-auto">
-            {trendingBlogs?.slice(0, 4).map((item) => (
+          <h3 className="text-xl font-bold mb-4 text-white">Latest Updates</h3>
+          <div className="space-y-8 max-h-[400px] overflow-y-auto">
+            {trendingBlogs?.slice(1, 5).map((item) => (
               <Link
                 key={item._id}
                 href={`/dholera-sir-updates/${item.slug.current}`}
               >
-                <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3 border border-gray-200 transition-all hover:shadow-md">
+                <div className="flex gap-3 items-center bg-white hover:bg-gray-50 p-3  border border-gray-200 transition-all hover:shadow-md">
                   {item.mainImage && (
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                       <Image
@@ -105,14 +106,12 @@ const RightSidebar = ({ trendingBlogs }) => {
           <div className="mt-6 pt-4 border-t border-gray-600">
             <Link
               href="/dholera-sir-updates"
-              className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors"
+              className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39]  p-3 transition-colors"
             >
               Explore More
             </Link>
           </div>
         </div>
-
-        {/* Contact/CTA Card */}
       </div>
     </aside>
   );
@@ -120,13 +119,13 @@ const RightSidebar = ({ trendingBlogs }) => {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = await getBlogBySlug(slug);
+  const post = await getUpdateBySlug(slug);
   if (!post) return {};
 
   return buildMeta({
     title: post.metaTitle || post.title,
     description: post.metaDescription,
-    slug: `dholera-sir-blogs/${post.slug.current}`,
+    slug: `dholera-sir-updates/${post.slug.current}`,
     image: post.mainImage?.asset?.url,
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
@@ -139,6 +138,8 @@ export async function generateMetadata({ params }) {
 
 export default async function Post({ params }) {
   const { slug } = await params;
+  const post = await getUpdateBySlug(slug);
+
   const site = "bookmyassets";
 
   if (!slug) {
@@ -151,9 +152,9 @@ export default async function Post({ params }) {
 
   try {
     const [post, trendingBlogs, relatedBlogs] = await Promise.all([
-      getBlogBySlug(slug),
-      getUpdates(0, 6), // Get 6 blogs for sidebar
-      getblogs(slug, 3),
+      getUpdateBySlug(slug),
+      getUpdates(1, 6), // Get 6 blogs for sidebar
+      getUpdates(slug, 3),
     ]);
 
     if (!post) {
@@ -162,10 +163,10 @@ export default async function Post({ params }) {
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-2">Blog post not found</h1>
             <Link
-              href="/dholera-sir-blogs"
+              href="/dholera-sir-updates"
               className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
             >
-              ← Back to Blogs
+              ← Back to Updates
             </Link>
           </div>
         </div>
@@ -487,20 +488,20 @@ export default async function Post({ params }) {
     };
 
     const TableOfContent = ({ headings }) => {
+      // Filter for valid headings with text content
       const validHeadings =
         headings?.filter((heading) => {
           const text = heading.children?.[0]?.text;
           return text && text.trim().length > 0;
         }) || [];
 
-      const h1h2Headings = validHeadings.filter(
-        (heading) => heading.style === "h1" || heading.style === "h2",
-      );
+      // Filter for only h1 and h2 headings
+      const h1h2Headings = validHeadings.filter((heading) => {
+        return heading.style === "h1" || heading.style === "h2";
+      });
 
+      // Hide TOC if no h1 or h2 headings exist
       if (h1h2Headings.length === 0) return null;
-
-      // Declare prevLevel here, outside JSX
-      let prevLevel = 1;
 
       return (
         <div className="my-8 p-6 bg-gradient-to-br from-[#C69C21]/5 to-[#FDB913]/10 rounded-2xl shadow-lg border border-[#C69C21]/20">
@@ -509,10 +510,8 @@ export default async function Post({ params }) {
           </h2>
           <ul className="space-y-3">
             {validHeadings.map((heading, index) => {
-              const rawLevel = parseInt(heading.style.replace("h", ""));
-              const level = Math.min(rawLevel, prevLevel + 1);
-              prevLevel = level;
               const text = heading.children[0].text.trim();
+              const level = parseInt(heading.style.replace("h", ""));
               const indent = (level - 2) * 16;
 
               return (
@@ -543,7 +542,6 @@ export default async function Post({ params }) {
       month: "long",
       year: "numeric",
     });
-
     return (
       <>
         <SchemaMarkup
@@ -553,7 +551,7 @@ export default async function Post({ params }) {
             image: post.mainImage?.asset?.url,
             publishedAt: post.publishedAt,
             updatedAt: post._updatedAt,
-            slug: `dholera-sir-blogs/${slug}`,
+            slug: `dholera-sir-updates/${slug}`,
             authorName: post.author?.name || "BookMyAssets",
           })}
         />
@@ -561,13 +559,19 @@ export default async function Post({ params }) {
         <SchemaMarkup
           schema={breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Blogs", path: "/dholera-sir-blogs" },
-            { name: post.title, path: `/dholera-sir-blogs/${slug}` },
+            { name: "Updates", path: "/dholera-sir-updates" },
+            { name: post.title, path: `/dholera-sir-updates/${slug}` },
           ])}
         />
 
+        <SlugPageForm
+          title="Book Your Plot in Dholera"
+          button="Talk To A Dholera Expert"
+          project={post.title}
+        />
         <div className="bg-white min-h-screen">
-          <div className="bg-white shadow-sm sticky top-0 z-20" />
+          <div className="bg-white shadow-sm sticky top-0 z-30" />
+
           <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
             <div className="flex flex-col lg:flex-row gap-10">
               {/* Main Content */}
@@ -598,10 +602,10 @@ export default async function Post({ params }) {
                             />
                           </svg>
                           <Link
-                            href="/dholera-sir-blogs"
+                            href="/dholera-sir-updates"
                             className="ml-1 text-sm font-medium text-gray-500 hover:text-gray-700 md:ml-2"
                           >
-                            Blogs
+                            Updates
                           </Link>
                         </div>
                       </li>
@@ -645,14 +649,14 @@ export default async function Post({ params }) {
                     <div className="flex space-x-2 pr-2">
                       {/* WhatsApp */}
                       <Link
-                        href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                        href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
                       >
                         <FaWhatsapp className="text-green-500 w-5 h-5" />
                       </Link>
 
                       {/* Facebook */}
                       <Link
-                        href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                        href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
                       >
                         <FaFacebook className="text-blue-500 w-5 h-5" />
                       </Link>
@@ -662,21 +666,21 @@ export default async function Post({ params }) {
 
                       {/* LinkedIn */}
                       <Link
-                        href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
                       >
                         <FaLinkedin className="text-blue-800 w-5 h-5" />
                       </Link>
 
                       {/* Twitter/X */}
                       <Link
-                        href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                        href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-updates/${post.slug.current}`}
                       >
                         <FaXTwitter className=" w-5 h-5" />
                       </Link>
                     </div>
                   </div>
 
-                  <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h1 className="text-[clamp(1.35rem,calc(1.8vw+0.85rem),2.5rem)] leading-[1.22]  font-bold text-gray-900 mb-4">
                     {post.title}
                   </h1>
 
@@ -708,26 +712,6 @@ export default async function Post({ params }) {
                         {formattedDate}
                       </time>
                     </div>
-
-                    {post.readingTime && (
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                        <span>{post.readingTime} min read</span>
-                      </div>
-                    )}
                   </div>
                 </div>
 
@@ -753,11 +737,6 @@ export default async function Post({ params }) {
                   <div className="text-xl max-w-none">
                     <PortableText value={post.body} components={components} />
                   </div>
-                  <SlugPageForm
-                    title={post.formTitle}
-                    button="Show Me How"
-                    project={post.title}
-                  />
 
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
@@ -795,52 +774,43 @@ export default async function Post({ params }) {
           {/* Related Articles Section */}
           <section className="bg-gray-50 py-12 mt-4">
             <div className="max-w-7xl mx-auto px-4">
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Our Latest Blogs
-                </h2>
-                <Link
-                  href="/dholera-sir-blogs"
-                  className="rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] px-4 py-2"
-                >
-                  View all
-                </Link>
-              </div>
-
-              <div className=" gap-6">
+              <div className="gap-6">
                 {relatedBlogs && relatedBlogs.length > 0 ? (
                   (() => {
+                    const filteredBlogs = relatedBlogs.filter(
+                      (b) => b.slug.current !== post.slug.current,
+                    );
                     const itemsPerPage = 3;
                     const pages = [];
                     for (
                       let i = 0;
-                      i < relatedBlogs.length;
+                      i < filteredBlogs.length;
                       i += itemsPerPage
                     ) {
-                      pages.push(relatedBlogs.slice(i, i + itemsPerPage));
+                      pages.push(filteredBlogs.slice(i, i + itemsPerPage));
                     }
                     const totalPages = pages.length;
 
                     return (
                       <div className="relative">
                         <style>{`
-          ${pages
-            .map(
-              (_, index) => `
-              #related-page-${index}:checked ~ .related-slider .related-track {
-                transform: translateX(-${index * (100 / totalPages)}%);
-              }
-              #related-page-${index}:checked ~ .related-slider .related-control-${index} {
-                display: flex;
-              }
-              #related-page-${index}:checked ~ .related-slider .related-dot-${index} {
-                background-color: #deae3c;
-                width: 2rem;
-              }
-            `,
-            )
-            .join("")}
-        `}</style>
+                ${pages
+                  .map(
+                    (_, index) => `
+                    #related-page-${index}:checked ~ .related-slider .related-track {
+                      transform: translateX(-${index * (100 / totalPages)}%);
+                    }
+                    #related-page-${index}:checked ~ .related-slider .related-control-${index} {
+                      display: flex;
+                    }
+                    #related-page-${index}:checked ~ .related-slider .related-dot-${index} {
+                      background-color: #deae3c;
+                      width: 2rem;
+                    }
+                  `,
+                  )
+                  .join("")}
+              `}</style>
 
                         {pages.map((_, index) => (
                           <input
@@ -868,7 +838,7 @@ export default async function Post({ params }) {
                                   {page.map((blog) => (
                                     <Link
                                       key={blog._id}
-                                      href={`/dholera-sir-blogs/${blog.slug.current}`}
+                                      href={`/dholera-sir-updates/${blog.slug.current}`}
                                       className="block"
                                     >
                                       <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
@@ -980,7 +950,6 @@ export default async function Post({ params }) {
               </div>
             </div>
           </section>
-          <ExitPopup />
         </div>
       </>
     );
@@ -992,7 +961,7 @@ export default async function Post({ params }) {
           <h1 className="text-2xl font-bold mb-2">Error loading blog post</h1>
           <p className="text-gray-600">Please try again later</p>
           <Link
-            href="/dholera-sir-blogs"
+            href="/dholera-sir-updates"
             className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
           >
             ← Back to Blogs
