@@ -10,6 +10,7 @@ const client = createClient({
 })
 
 const SITE_NAME = 'bookmyassets'
+const SITE_URL = 'https://www.bookmyassets.com'
 
 let redirectCache = null
 let cacheTime = 0
@@ -17,34 +18,73 @@ const CACHE_TTL = 60 * 1000
 
 async function fetchRedirects() {
   const now = Date.now()
-  if (redirectCache && now - cacheTime < CACHE_TTL) return redirectCache
+
+  if (redirectCache && now - cacheTime < CACHE_TTL) {
+    return redirectCache
+  }
+
   redirectCache = await client.fetch(
     `*[_type == "redirect" && site == $site]{ source, destination, permanent }`,
     { site: SITE_NAME }
   )
+
   cacheTime = now
   return redirectCache
+}
+
+function buildRedirectUrl(destination) {
+  if (!destination) return null
+
+  let cleanDestination = destination.trim()
+
+  // Protect against localhost accidentally saved in Sanity
+  cleanDestination = cleanDestination.replace(
+    /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?/i,
+    ''
+  )
+
+  // Internal redirect: /blogs/xyz
+  if (cleanDestination.startsWith('/')) {
+    return new URL(cleanDestination, SITE_URL)
+  }
+
+  // External redirect: https://example.com/page
+  if (cleanDestination.startsWith('https://')) {
+    return cleanDestination
+  }
+
+  // Fallback: treat missing leading slash as internal path
+  return new URL(`/${cleanDestination}`, SITE_URL)
 }
 
 export async function middleware(req) {
   const { pathname } = req.nextUrl
   const auth = req.cookies.get('crm_auth')?.value
 
-  // ✅ 1. CRM Auth — same as before
-  if (pathname.startsWith('/after-sales/crm') && !pathname.startsWith('/after-sales/crm-lock')) {
+  // 1. CRM Auth
+  if (
+    pathname.startsWith('/after-sales/crm') &&
+    !pathname.startsWith('/after-sales/crm-lock')
+  ) {
     if (auth !== 'granted') {
-      return NextResponse.redirect(new URL('/after-sales/crm-lock', req.url))
+      return NextResponse.redirect(
+        new URL('/after-sales/crm-lock', SITE_URL)
+      )
     }
   }
 
-  // ✅ 2. Sanity Redirects
+  // 2. Sanity Redirects
   const redirects = await fetchRedirects()
-  const match = redirects.find(r => r.source === pathname)
+  const match = redirects.find((r) => r.source === pathname)
 
   if (match) {
-    const url = req.nextUrl.clone()
-    url.pathname = match.destination
-    return NextResponse.redirect(url, { status: match.permanent ? 301 : 302 })
+    const redirectUrl = buildRedirectUrl(match.destination)
+
+    if (redirectUrl) {
+      return NextResponse.redirect(redirectUrl, {
+        status: match.permanent ? 301 : 302,
+      })
+    }
   }
 
   return NextResponse.next()
