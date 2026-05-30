@@ -67,13 +67,6 @@ const bulkLandItems = [
 
 const dholeraItems = [
   {
-    projectName: "About Dholera SIR",
-    location: "Dholera SIR, Gujarat",
-    image: aboutDholera,
-    link: "about-dholera-sir",
-    status: "ongoing",
-  },
-  {
     projectName: "Dholera Blogs",
     location: "Dholera SIR, Gujarat",
     image: dholeraBlogs,
@@ -90,6 +83,7 @@ const dholeraItems = [
 ];
 
 const utilityLinks = [
+  { href: "/about-dholera-sir", label: "About Dholera" },
   { href: "/career", label: "Careers" },
   { href: "/channel-partner", label: "Channel Partner" },
   { href: "/dholera-events", label: "Investor Meetups" },
@@ -103,6 +97,7 @@ const mobileLinks = [
   { href: "/about-dholera-sir", label: "About Dholera" },
   { href: "/dholera-events", label: "Investor Meetups" },
   { href: "/contact", label: "Contact Us" },
+  { href: "/career", label: "Careers" },
   { href: "/about", label: "About Us" },
   { href: "/gallery", label: "Gallery" },
 ];
@@ -592,14 +587,14 @@ export default function Navbar() {
       onClick: toggleResidentialMenu,
     },
     {
-      label: "Bulk Land Deals",
-      open: isBulkLandMenuOpen,
-      onClick: toggleBulkLandMenu,
-    },
-    {
       label: "Blogs",
       open: isDholeraMenuOpen,
       onClick: toggleDholeraMenu,
+    },
+    {
+      label: "Bulk Land Deals",
+      open: isBulkLandMenuOpen,
+      onClick: toggleBulkLandMenu,
     },
   ];
 
@@ -620,11 +615,7 @@ export default function Navbar() {
       >
         <div className=" px-3 py-3 sm:px-4 md:px-6 md:py-4 lg:px-8">
           <div
-            className={`liquid-glass-container relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-lg border px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[3.5rem] md:px-5 lg:h-[4rem] lg:gap-4 lg:px-6 xl:gap-6 ${
-              isScrolled
-                ? "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
-                : "border-white/25 bg-[#121212]/60 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.28)]"
-            }`}
+            className={` relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-lg border bg-[#1b1b1b]/80 px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[3.5rem] md:px-5 lg:h-[4rem] lg:gap-4 lg:px-6 xl:gap-6`}
           >
             <div className="relative z-10 shrink-0">
               <Link
@@ -766,20 +757,20 @@ export default function Navbar() {
 
       {isResidentialMenuOpen && (
         <div
-          className="residential-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#101010]/75 shadow-2xl shadow-black/40 backdrop-blur-2xl slide-in-from-top-4 duration-300 lg:flex"
-          style={{ top: "calc(var(--nav-offset-top, 0px) + 6.5rem)" }}
+          className="residential-dropdown fixed left-1/2 z-40 hidden h-[min(31rem,calc(100dvh_-_6.5rem))] w-[min(calc(100vw_-_2rem),64rem)] origin-top -translate-x-1/2 animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 overflow-hidden rounded-lg border border-white/15 bg-[#1b1b1b] shadow-2xl shadow-black/45 duration-300 lg:flex"
+          style={{ top: "calc(var(--nav-offset-top, 0px) + 5.75rem)" }}
         >
-          <div className="flex h-full w-1/3 flex-col border-r border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-[#deae3c]/10 p-[calc(2rem_+_1vw)]">
-            <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-white">
+          <div className="flex h-full w-[18rem] shrink-0 flex-col border-r border-white/10 bg-[#1b1b1b] p-[clamp(1.25rem,2vw,2rem)]">
+            <h3 className="text-[clamp(1.5rem,2vw,2.125rem)] font-light leading-tight text-white">
               Residential <br /> Projects
             </h3>
-            <p className="mt-[calc(0.75rem_+_0.25vw)] text-[clamp(1rem,0.875rem_+_0.5vw,1.25rem)] text-white/60">
+            <p className="mt-[0.75rem] text-[clamp(0.875rem,1vw,1rem)] leading-[1.6] text-white/60">
               Discover premium residential developments with world-class
               amenities
             </p>
           </div>
 
-          <div className="h-full w-2/3 overflow-y-auto p-[calc(1rem_+_0.5vw)]">
+          <div className="h-full min-w-0 flex-1 overflow-y-auto p-[clamp(1rem,1.5vw,1.5rem)]">
             {loading ? (
               <LoadingState color="yellow" />
             ) : error ? (
@@ -855,21 +846,21 @@ export default function Navbar() {
 
       {isBulkLandMenuOpen && (
         <div
-          className="bulk-land-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#101010]/75 shadow-2xl shadow-black/40 backdrop-blur-2xl slide-in-from-top-4 duration-300 lg:flex"
-          style={{ top: "calc(var(--nav-offset-top, 0px) + 6.5rem)" }}
+          className="bulk-land-dropdown fixed left-1/2 z-40 hidden h-[min(31rem,calc(100dvh_-_6.5rem))] w-[min(calc(100vw_-_2rem),64rem)] origin-top -translate-x-1/2 animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 overflow-hidden rounded-lg border border-white/15 bg-[#1b1b1b] shadow-2xl shadow-black/45 duration-300 lg:flex"
+          style={{ top: "calc(var(--nav-offset-top, 0px) + 5.75rem)" }}
         >
-          <div className="flex h-full w-1/3 flex-col justify-between border-r border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-[#deae3c]/10 p-[calc(2rem_+_1vw)]">
+          <div className="flex h-full w-[18rem] shrink-0 flex-col justify-between border-r border-white/10 bg-[#1b1b1b] p-[clamp(1.25rem,2vw,2rem)]">
             <div>
-              <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-white">
+              <h3 className="text-[clamp(1.5rem,2vw,2.125rem)] font-light leading-tight text-white">
                 Bulk Land <br /> Deals
               </h3>
-              <p className="mt-[calc(0.75rem_+_0.25vw)] text-[clamp(1rem,0.875rem_+_0.5vw,1.25rem)] text-white/60">
+              <p className="mt-[0.75rem] text-[clamp(0.875rem,1vw,1rem)] leading-[1.6] text-white/60">
                 Strategic land parcels for commercial and industrial development
               </p>
             </div>
           </div>
 
-          <div className="h-full w-2/3 overflow-y-auto p-[calc(1rem_+_0.5vw)]">
+          <div className="h-full min-w-0 flex-1 overflow-y-auto p-[clamp(1rem,1.5vw,1.5rem)]">
             {bulkLandLoading ? (
               <LoadingState color="yellow" />
             ) : bulkLandError ? (
@@ -895,21 +886,21 @@ export default function Navbar() {
 
       {isDholeraMenuOpen && (
         <div
-          className="dholera-dropdown fixed left-1/2 z-40 hidden h-[min(38rem,calc(100dvh_-_7rem))] w-[min(calc(100vw_-_2rem),80rem)] -translate-x-1/2 animate-in overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#101010]/75 shadow-2xl shadow-black/40 backdrop-blur-2xl slide-in-from-top-4 duration-300 lg:flex"
-          style={{ top: "calc(var(--nav-offset-top, 0px) + 6.5rem)" }}
+          className="dholera-dropdown fixed left-1/2 z-40 hidden h-[min(31rem,calc(100dvh_-_6.5rem))] w-[min(calc(100vw_-_2rem),64rem)] origin-top -translate-x-1/2 animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 overflow-hidden rounded-lg border border-white/15 bg-[#1b1b1b] shadow-2xl shadow-black/45 duration-300 lg:flex"
+          style={{ top: "calc(var(--nav-offset-top, 0px) + 5.75rem)" }}
         >
-          <div className="flex h-full w-1/3 flex-col justify-between border-r border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-[#deae3c]/10 p-[calc(2rem_+_1vw)]">
+          <div className="flex h-full w-[18rem] shrink-0 flex-col justify-between border-r border-white/10 bg-[#1b1b1b] p-[clamp(1.25rem,2vw,2rem)]">
             <div>
-              <h3 className="text-[clamp(2.25rem,1.75rem_+_1.5vw,3rem)] font-light leading-tight text-white">
+              <h3 className="text-[clamp(1.5rem,2vw,2.125rem)] font-light leading-tight text-white">
                 DHOLERA SIR
               </h3>
-              <p className="mt-[calc(0.75rem_+_0.25vw)] text-[clamp(1rem,0.875rem_+_0.5vw,1.25rem)] text-white/60">
+              <p className="mt-[0.75rem] text-[clamp(0.875rem,1vw,1rem)] leading-[1.6] text-white/60">
                 India's first planned smart city with futuristic infrastructure
               </p>
             </div>
           </div>
 
-          <div className="h-full w-2/3 overflow-y-auto p-[calc(1rem_+_0.5vw)]">
+          <div className="h-full min-w-0 flex-1 overflow-y-auto p-[clamp(1rem,1.5vw,1.5rem)]">
             {dholeraLoading ? (
               <LoadingState color="yellow" />
             ) : dholeraError ? (
@@ -983,7 +974,7 @@ export default function Navbar() {
 
       {isUtilityMenuOpen && (
         <div
-          className="utility-dropdown fixed right-[clamp(1rem,4vw,2rem)] z-40 w-[12rem] rounded-xl border border-white/15 bg-[#111111]/90 shadow-xl shadow-black/30 backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200"
+          className="utility-dropdown fixed right-[clamp(1rem,4vw,2rem)] z-40 w-[12rem] origin-top animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 rounded-lg border border-white/15 bg-[#1b1b1b] shadow-xl shadow-black/30 duration-200"
           style={{ top: "calc(var(--nav-offset-top, 0px) + 6rem)" }}
         >
           <div className="py-[0.5rem]">

@@ -14,6 +14,19 @@ const DOCUMENT_OPTIONS = [
   { id: "payment-receipt", label: "Payment Receipt" },
 ];
 
+const DOCUMENT_WORKFLOWS = {
+  "welcome-letter": {
+    label: "Welcome Letter",
+    description: "Generate welcome letter, plot details, and allotment letter.",
+    documents: ["welcome-letter", "plot-details", "allotment-letter"],
+  },
+  "payment-receipt": {
+    label: "Payment Receipt",
+    description: "Generate payment receipt separately.",
+    documents: ["payment-receipt"],
+  },
+};
+
 const EMPTY_CLIENT = {
   salutation: "Mr.",
   name: "",
@@ -26,7 +39,7 @@ const INITIAL_BOOKING = {
   projectName: "",
   plotNumber: "",
   plotArea: "",
-  bsp: "",
+  totalConsideration: "",
   paymentSchedule: "",
   associateName: "",
   bookingDate: "",
@@ -268,80 +281,80 @@ const DOCUMENT_COORDINATES = {
   "plot-details": {
     clientNames: {
       page: 1,
-      x: 306,
-      y: 576,
+      x: 311,
+      y: 591,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     client1Phone: {
       page: 1,
-      x: 306,
-      y: 537,
+      x: 311,
+      y: 552,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     client1Email: {
       page: 1,
-      x: 306,
-      y: 497,
+      x: 311,
+      y: 512,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     bookingDate: {
       page: 1,
-      x: 306,
-      y: 458,
+      x: 311,
+      y: 473,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     projectName: {
       page: 1,
-      x: 306,
-      y: 419,
+      x: 311,
+      y: 434,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     plotNumber: {
       page: 1,
-      x: 306,
-      y: 380,
+      x: 311,
+      y: 395,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     plotArea: {
       page: 1,
-      x: 306,
-      y: 342,
+      x: 311,
+      y: 357,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     plotAreaSqFeet: {
       page: 1,
-      x: 306,
-      y: 302,
+      x: 311,
+      y: 317,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     paymentSchedule: {
       page: 1,
-      x: 306,
-      y: 263,
+      x: 311,
+      y: 278,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
     },
     associateName: {
       page: 1,
-      x: 306,
-      y: 224,
+      x: 311,
+      y: 239,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -520,14 +533,12 @@ function formatPlotAreaSqYards(value) {
   return `${formattedArea} sq. yds`;
 }
 
-function calculatePlotConsideration(bsp, plotArea) {
-  const cleanBsp = bsp?.toString().replace(/[^0-9.]/g, "");
-  const cleanArea = plotArea?.toString().replace(/[^0-9.]/g, "");
+function formatTotalConsideration(value) {
+  const cleanValue = value?.toString().replace(/[^0-9.]/g, "");
+  if (!cleanValue) return value || "";
 
-  if (!cleanBsp || !cleanArea) return "";
-
-  const amount = Number(cleanBsp) * Number(cleanArea);
-  if (Number.isNaN(amount)) return "";
+  const amount = Number(cleanValue);
+  if (Number.isNaN(amount)) return value || "";
 
   const formattedAmount = Number.isInteger(amount)
     ? amount.toLocaleString("en-IN")
@@ -616,6 +627,7 @@ function downloadUrl(url, filename) {
 }
 
 export default function Form() {
+  const [activeTool, setActiveTool] = useState("");
   const [clientCount, setClientCount] = useState("1");
   const [clients, setClients] = useState([
     { ...EMPTY_CLIENT },
@@ -623,12 +635,7 @@ export default function Form() {
   ]);
   const [booking, setBooking] = useState(INITIAL_BOOKING);
   const [receipt, setReceipt] = useState(INITIAL_RECEIPT);
-  const [selectedDocuments, setSelectedDocuments] = useState([
-    "welcome-letter",
-    "plot-details",
-    "allotment-letter",
-    "payment-receipt",
-  ]);
+  const [selectedDocuments, setSelectedDocuments] = useState([]);
   const [previews, setPreviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [finalizing, setFinalizing] = useState(false);
@@ -644,6 +651,7 @@ export default function Form() {
     () => numberToWords(receipt.amountInNumbers || booking.bookingAmount),
     [booking.bookingAmount, receipt.amountInNumbers],
   );
+  const activeWorkflow = DOCUMENT_WORKFLOWS[activeTool];
 
   useEffect(() => {
     return () => {
@@ -703,12 +711,23 @@ export default function Form() {
     setError("");
   };
 
-  const toggleDocument = (documentId) => {
-    setSelectedDocuments((current) =>
-      current.includes(documentId)
-        ? current.filter((id) => id !== documentId)
-        : [...current, documentId],
-    );
+  const selectWorkflow = (workflowId) => {
+    const workflow = DOCUMENT_WORKFLOWS[workflowId];
+
+    if (!workflow) return;
+
+    previews.forEach((preview) => URL.revokeObjectURL(preview.url));
+    setActiveTool(workflowId);
+    setSelectedDocuments(workflow.documents);
+    setPreviews([]);
+    setError("");
+  };
+
+  const returnToDashboard = () => {
+    previews.forEach((preview) => URL.revokeObjectURL(preview.url));
+    setActiveTool("");
+    setSelectedDocuments([]);
+    setPreviews([]);
     setError("");
   };
 
@@ -748,8 +767,8 @@ export default function Form() {
       plotArea: booking.plotArea,
       plotAreaSqYardsText: formatPlotAreaSqYards(booking.plotArea),
       plotAreaSqFeet: calculateSqFeetFromSqYards(booking.plotArea),
-      plotConsideration: calculatePlotConsideration(booking.bsp, booking.plotArea),
-      bsp: booking.bsp,
+      plotConsideration: formatTotalConsideration(booking.totalConsideration),
+      totalConsideration: booking.totalConsideration,
       paymentSchedule: booking.paymentSchedule,
       associateName: booking.associateName,
       bookingDate: formatDisplayDate(booking.bookingDate),
@@ -937,6 +956,41 @@ export default function Form() {
     }
   };
 
+  if (!activeWorkflow) {
+    return (
+      <main className="min-h-screen bg-[#151f28] px-[clamp(1rem,4vw,3rem)] py-[clamp(5rem,8vw,7rem)] text-white">
+        <div className="mx-auto max-w-[64rem]">
+          <div className="mb-[clamp(1.5rem,3vw,2.5rem)]">
+            <p className="mb-[0.5rem] text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#debe6b]">
+              After Sales
+            </p>
+            <h1 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.1]">
+              CRM Document Generator
+            </h1>
+          </div>
+
+          <div className="grid gap-[1rem] md:grid-cols-2">
+            {Object.entries(DOCUMENT_WORKFLOWS).map(([workflowId, workflow]) => (
+              <button
+                key={workflowId}
+                type="button"
+                onClick={() => selectWorkflow(workflowId)}
+                className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)] text-left transition hover:border-[#debe6b]/60 hover:bg-[#203140]"
+              >
+                <span className="block text-[clamp(1.125rem,2vw,1.5rem)] font-semibold text-white">
+                  {workflow.label}
+                </span>
+                <span className="mt-[0.5rem] block text-[0.9375rem] leading-[1.6] text-white/65">
+                  {workflow.description}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-[#151f28] px-[clamp(1rem,4vw,3rem)] py-[clamp(5rem,8vw,7rem)] text-white">
       <div className="mx-auto max-w-[76rem]">
@@ -944,9 +998,18 @@ export default function Form() {
           <p className="mb-[0.5rem] text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#debe6b]">
             After Sales
           </p>
-          <h1 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.1]">
-            CRM Document Generator
-          </h1>
+          <div className="flex flex-wrap items-center justify-between gap-[1rem]">
+            <h1 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.1]">
+              {activeWorkflow.label}
+            </h1>
+            <button
+              type="button"
+              onClick={returnToDashboard}
+              className="rounded-lg border border-white/15 px-[1rem] py-[0.625rem] text-[0.875rem] font-semibold text-white/80 transition hover:border-[#debe6b]/60 hover:text-[#debe6b]"
+            >
+              Back To Dashboard
+            </button>
+          </div>
         </div>
 
         <form
@@ -1061,9 +1124,9 @@ export default function Form() {
                   onChange={(value) => updateBooking("plotArea", value)}
                 />
                 <Input
-                  label="BSP"
-                  value={booking.bsp}
-                  onChange={(value) => updateBooking("bsp", value)}
+                  label="Total Consideration"
+                  value={booking.totalConsideration}
+                  onChange={(value) => updateBooking("totalConsideration", value)}
                 />
                 <Input
                   label="Payment Schedule"
@@ -1094,74 +1157,80 @@ export default function Form() {
               </div>
             </section>
 
-            <section className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)]">
-              <h2 className="mb-[1rem] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold">
-                Receipt Details
-              </h2>
-              {lastReceiptNumber && (
-                <div className="mb-[1rem] rounded-lg border border-[#debe6b]/30 bg-[#debe6b]/10 px-[0.875rem] py-[0.625rem] text-[0.875rem] text-[#debe6b]">
-                  Last generated receipt:{" "}
-                  <span className="font-mono font-semibold">{lastReceiptNumber}</span>
-                </div>
-              )}
-              <div className="grid gap-[1rem] md:grid-cols-2">
-                <Input
-                  label="Receipt Number"
-                  value={receipt.receiptNumber}
-                  onChange={(value) => updateReceipt("receiptNumber", value)}
-                />
-                <Input
-                  label="Payment Date"
-                  type="date"
-                  value={receipt.paymentDate}
-                  onChange={(value) => updateReceipt("paymentDate", value)}
-                />
-                <Input
-                  label="Reference Number"
-                  value={receipt.referenceNo}
-                  onChange={(value) => updateReceipt("referenceNo", value)}
-                />
-                <Input
-                  label="Mode Of Payment"
-                  value={receipt.modeOfPayment}
-                  onChange={(value) => updateReceipt("modeOfPayment", value)}
-                />
-                <Input
-                  label="Amount"
-                  value={receipt.amountInNumbers}
-                  onChange={(value) => updateReceipt("amountInNumbers", value)}
-                />
-                <Input label="Amount In Words" value={amountInWords} readOnly />
-                <div className="md:col-span-2">
+            {activeTool === "payment-receipt" && (
+              <section className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)]">
+                <h2 className="mb-[1rem] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold">
+                  Receipt Details
+                </h2>
+                {lastReceiptNumber && (
+                  <div className="mb-[1rem] rounded-lg border border-[#debe6b]/30 bg-[#debe6b]/10 px-[0.875rem] py-[0.625rem] text-[0.875rem] text-[#debe6b]">
+                    Last generated receipt:{" "}
+                    <span className="font-mono font-semibold">
+                      {lastReceiptNumber}
+                    </span>
+                  </div>
+                )}
+                <div className="grid gap-[1rem] md:grid-cols-2">
                   <Input
-                    label="Remarks"
-                    value={receipt.remarks}
-                    onChange={(value) => updateReceipt("remarks", value)}
+                    label="Receipt Number"
+                    value={receipt.receiptNumber}
+                    onChange={(value) => updateReceipt("receiptNumber", value)}
                   />
+                  <Input
+                    label="Payment Date"
+                    type="date"
+                    value={receipt.paymentDate}
+                    onChange={(value) => updateReceipt("paymentDate", value)}
+                  />
+                  <Input
+                    label="Reference Number"
+                    value={receipt.referenceNo}
+                    onChange={(value) => updateReceipt("referenceNo", value)}
+                  />
+                  <Input
+                    label="Mode Of Payment"
+                    value={receipt.modeOfPayment}
+                    onChange={(value) => updateReceipt("modeOfPayment", value)}
+                  />
+                  <Input
+                    label="Amount"
+                    value={receipt.amountInNumbers}
+                    onChange={(value) => updateReceipt("amountInNumbers", value)}
+                  />
+                  <Input label="Amount In Words" value={amountInWords} readOnly />
+                  <div className="md:col-span-2">
+                    <Input
+                      label="Remarks"
+                      value={receipt.remarks}
+                      onChange={(value) => updateReceipt("remarks", value)}
+                    />
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
+            )}
           </div>
 
           <aside className="space-y-[clamp(1rem,2vw,1.5rem)]">
             <section className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)]">
               <h2 className="mb-[1rem] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold">
-                Documents
+                Selected Workflow
               </h2>
-              <div className="space-y-[0.625rem]">
-                {DOCUMENT_OPTIONS.map((document) => (
-                  <label
-                    key={document.id}
-                    className="flex items-center gap-[0.625rem] rounded-lg border border-white/10 bg-white/[0.03] px-[0.875rem] py-[0.75rem] text-[0.9375rem] text-white/85"
+              <div className="rounded-lg border border-white/10 bg-white/[0.03] px-[0.875rem] py-[0.75rem]">
+                <p className="text-[0.9375rem] font-semibold text-white">
+                  {activeWorkflow.label}
+                </p>
+                <p className="mt-[0.25rem] text-[0.8125rem] leading-[1.5] text-white/55">
+                  {activeWorkflow.description}
+                </p>
+              </div>
+              <div className="mt-[0.75rem] space-y-[0.5rem]">
+                {selectedDocuments.map((documentId) => (
+                  <div
+                    key={documentId}
+                    className="rounded-lg border border-white/10 bg-white/[0.03] px-[0.875rem] py-[0.625rem] text-[0.875rem] text-white/80"
                   >
-                    <input
-                      type="checkbox"
-                      checked={selectedDocuments.includes(document.id)}
-                      onChange={() => toggleDocument(document.id)}
-                      className="h-[1rem] w-[1rem] accent-[#debe6b]"
-                    />
-                    {document.label}
-                  </label>
+                    {getDocumentLabel(documentId)}
+                  </div>
                 ))}
               </div>
 
