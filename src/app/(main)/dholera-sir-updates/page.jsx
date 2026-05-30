@@ -96,7 +96,7 @@ export default async function page() {
                   </div>
 
                   {/* Tablet and desktop full updates grid */}
-                  <div className="hidden md:grid md:grid-cols-2 gap-6">
+                  <div className="hidden md:grid md:grid-cols-2 gap-6  p-2 space-x-4 sm:gap-8">
                     {safePosts.map((post) => (
                       <div
                         key={post._id}

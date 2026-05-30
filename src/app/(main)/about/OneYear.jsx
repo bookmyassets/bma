@@ -409,7 +409,12 @@ export default function BookMyAssets() {
                   <p className="text-sm leading-relaxed text-white">
                     {founder.bio}
                   </p>
+                  <div
+                  className="absolute bottom-0 left-0 right-0 h-0.5 z-10"
+                  style={{ backgroundColor: "#deae4c" }}
+                />
                 </div>
+                
               </div>
             ))}
           </div>

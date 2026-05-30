@@ -105,7 +105,7 @@ export default async function page() {
                     {safePosts.map((post) => (
                       <div
                         key={post._id}
-                        className="transform hover:-translate-y-2 transition-all duration-300"
+                        className="transform hover:-translate-y-2  transition-all duration-300"
                       >
                         <BlogCard post={post} />
                       </div>
@@ -115,7 +115,7 @@ export default async function page() {
 
                 {/* Tablet and desktop full grid */}
                 <div>
-                  <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                  <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-2 space-x-4 sm:gap-8">
                     {safePosts.map((post) => (
                       <div
                         key={post._id}

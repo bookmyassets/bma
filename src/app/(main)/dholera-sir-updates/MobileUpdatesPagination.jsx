@@ -22,7 +22,7 @@ export default function MobileUpdatesPagination({ children }) {
 
   return (
     <div>
-      <div className="grid grid-cols-1 gap-6">{visibleCards}</div>
+      <div className="grid grid-cols-1 gap-x-12 gap-y-12">{visibleCards}</div>
 
       <nav
         className="mt-8 grid grid-cols-[auto_1fr_auto] items-center gap-3"

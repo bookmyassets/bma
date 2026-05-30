@@ -18,7 +18,7 @@ export default function MobileBlogPagination({ children }) {
 
   if (totalPages <= 1) {
     return (
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-6 ">
         {cards}
       </div>
     );
@@ -26,7 +26,7 @@ export default function MobileBlogPagination({ children }) {
 
   return (
     <div>
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-x-12 gap-y-12">
         {visibleCards}
       </div>
 
