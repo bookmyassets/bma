@@ -409,21 +409,7 @@ export default function BookMyAssets() {
                   <p className="text-sm leading-relaxed text-white">
                     {founder.bio}
                   </p>
-                  <span
-                    className="inline-flex items-center gap-2 mt-3 px-3 py-1 text-xs"
-                    style={{
-                      color: "#deae4c",
-                      border: "1px solid #2a2a1a",
-                      background: "#151407",
-                      letterSpacing: "0.08em",
-                    }}
-                  >
-                    <span
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: "#deae4c" }}
-                    />
-                    {founder.tag}
-                  </span>
+                  
                 </div>
               </div>
             ))}
