@@ -164,15 +164,10 @@ export async function GET(request) {
   }
 }
 
-// POST — generates the PDF. Preview requests can skip saving the counter.
+// POST — generates the PDF and saves the receipt number
 export async function POST(request) {
   try {
-    const {
-      formData = {},
-      coordinates = {},
-      paymentDate,
-      saveCounter = true,
-    } = await request.json();
+    const { formData, coordinates, paymentDate } = await request.json();
 
     // Load the PDF template
     const templatePath = path.join(
@@ -185,28 +180,24 @@ export async function POST(request) {
 
     // Load the PDF document
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
-    const pages = pdfDoc.getPages();
-    const page = pages[0];
+    const page = pdfDoc.getPages()[0];
 
     // Embed fonts
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
     // Fill all fields based on coordinates
     for (const [fieldKey, fieldData] of Object.entries(coordinates)) {
-      const value = String(formData[fieldKey] || "");
-      if (value.trim()) {
-        let fontSize = fieldData.fontSize || 9;
-        const displayValue = value;
+      const value = formData[fieldKey];
+      if (value && value.trim()) {
+        let fontSize = 9;
+        let displayValue = value;
 
         // Adjust font size for long text
         if (fieldKey === "amountInWords" && value.length > 50) {
           fontSize = 9;
         }
 
-        const pageIndex = Math.max(0, Number(fieldData.page || 1) - 1);
-        const targetPage = pages[pageIndex] || page;
-
-        targetPage.drawText(displayValue, {
+        page.drawText(displayValue, {
           x: fieldData.x,
           y: fieldData.y,
           size: fontSize,
@@ -219,14 +210,12 @@ export async function POST(request) {
     // Save the PDF
     const pdfBytes = await pdfDoc.save();
 
-    if (saveCounter) {
-      // Persist the receipt number exactly as provided (no transformation)
-      await saveLastReceiptNumber(
-        formData.receiptNumber,
-        formData.projectName,
-        paymentDate,
-      );
-    }
+    // Persist the receipt number exactly as provided (no transformation)
+    await saveLastReceiptNumber(
+      formData.receiptNumber,
+      formData.projectName,
+      paymentDate,
+    );
 
     // Return the PDF as a download
     return new NextResponse(pdfBytes, {

@@ -68,7 +68,7 @@ export async function middleware(req) {
   ) {
     if (auth !== 'granted') {
       return NextResponse.redirect(
-        new URL('/after-sales/crm-lock', req.url)
+        new URL('/after-sales/crm-lock')
       )
     }
   }
