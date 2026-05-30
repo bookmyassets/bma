@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import logo from "@/assests/Bmalogo.png";
+import logo from "@/assests/bookmyassets-dholera-logo-v3.svg";
 import aboutDholera from "@/assests/dholeraSIR-nav/about-dholera-sir-bookmyassets.webp";
 import dholeraBlogs from "@/assests/dholeraSIR-nav/dholera-sir-blogs-bookmyassets.webp";
 import dholeraUpdates from "@/assests/dholeraSIR-nav/dholera-sir-latest-updates-bookmyassets.webp";

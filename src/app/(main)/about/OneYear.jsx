@@ -16,6 +16,8 @@ import img3 from "@/assests/about/full-house.webp";
 import img4 from "@/assests/about/meeting.webp";
 import img5 from "@/assests/about/training-back.webp";
 import img6 from "@/assests/about/training-front.webp";
+import img7 from "@/assests/samarth-gupta-cofounder-bookmyassets-dholera.webp";
+import img8 from "@/assests/jivjot-singh-cofounder-bookmyassets-dholera.webp";
 import Image from "next/image";
 
 export default function BookMyAssets() {
@@ -49,7 +51,7 @@ export default function BookMyAssets() {
     },
     {
       date: "May 2025",
-      event: "1st Project Launch: Westwyn County",
+      event: "1st In-house Project Launch: Westwyn County",
       icon: Building,
       position: "top",
     },
@@ -75,6 +77,43 @@ export default function BookMyAssets() {
 
   const slides = [img1, img2, img3, img4, img5, img6];
 
+  const founders = [
+    {
+      name: "Jivjot Singh",
+      title: "Co-Founder & CEO",
+      initials: "JJ",
+      bio: (
+        <>
+          A dynamic leader focused on{" "}
+          <strong className=" font-medium">
+            trust, teamwork, and customer experience.
+          </strong>{" "}
+          His mission is to make investing in Dholera simple, transparent, and
+          reliable for every client.
+        </>
+      ),
+      tag: "Vision & Leadership",
+      image: img8,
+    },
+    {
+      name: "Samarth Gupta",
+      title: "Co-Founder & Director",
+      initials: "SG",
+      bio: (
+        <>
+          A key pillar of BMA with expertise in{" "}
+          <strong className=" font-medium">
+            finance, accounts, legal checks,
+          </strong>{" "}
+          due diligence, and bulk land deals in Dholera. The backbone of
+          Accounts and Legal at BMA.
+        </>
+      ),
+      tag: "Finance & Legal",
+      image: img7,
+    },
+  ];
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -91,7 +130,7 @@ export default function BookMyAssets() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     const timelineSection = document.getElementById("timeline-section");
@@ -128,7 +167,7 @@ export default function BookMyAssets() {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <h2
-            className="text-3xl md:text-4xl font-bold text-center mb-8 "
+            className="text-3xl md:text-4xl font-bold text-center mb-8"
             style={{ color: "#deae4c" }}
           >
             365 Days That Changed Everything
@@ -145,7 +184,9 @@ export default function BookMyAssets() {
 
               {/* Animated progress line */}
               <div
-                className={`absolute left-0 h-1 top-1/2 transform -translate-y-1/2 ${timelineVisible ? "timeline-progress" : ""}`}
+                className={`absolute left-0 h-1 top-1/2 transform -translate-y-1/2 ${
+                  timelineVisible ? "timeline-progress" : ""
+                }`}
                 style={{
                   backgroundColor: "#deae4c",
                   boxShadow: "0 0 20px rgba(222, 174, 76, 0.5)",
@@ -278,10 +319,122 @@ export default function BookMyAssets() {
         </div>
       </div>
 
+      {/* Meet Our Founders */}
+      <div className="bg-black py-4 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto">
+          <p
+            className="text-center text-xs tracking-widest uppercase mb-3"
+            style={{ color: "#deae4c" }}
+          >
+            The Visionaries Behind BMA
+          </p>
+          <h2
+            className="text-4xl md:text-5xl font-bold text-center text-white mb-4"
+            style={{ fontFamily: "Georgia, serif" }}
+          >
+            Meet Our{" "}
+            <em style={{ color: "#deae4c", fontStyle: "italic" }}>Founders</em>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {founders.map((founder, i) => (
+              <div
+                key={i}
+                className="relative overflow-hidden rounded-sm"
+                style={{
+                  background: "#111",
+                  border: "1px solid #222",
+                }}
+              >
+                {/* Gold top accent */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-0.5 z-10"
+                  style={{ backgroundColor: "#deae4c" }}
+                />
+
+                {/* Image area — 4:5 ratio at card width (~280px wide = 350px tall) */}
+                <div
+                  className="w-full overflow-hidden"
+                  style={{
+                    height: "320px",
+                    position: "relative",
+                    background:
+                      "linear-gradient(160deg, #1c1a14 0%, #0f0e0a 100%)",
+                  }}
+                >
+                  {founder.image ? (
+                    <Image
+                      src={founder.image}
+                      alt={founder.name}
+                      fill
+                      className="object-cover object-top"
+                    />
+                  ) : (
+                    <span
+                      className="absolute inset-0 flex items-center justify-center font-bold opacity-20 select-none"
+                      style={{
+                        fontFamily: "Georgia, serif",
+                        fontSize: "80px",
+                        color: "#deae4c",
+                        letterSpacing: "-4px",
+                      }}
+                    >
+                      {founder.initials}
+                    </span>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="p-4">
+                  <p
+                    className="text-xl font-bold text-white mb-0.5"
+                    style={{ fontFamily: "Georgia, serif" }}
+                  >
+                    {founder.name}
+                  </p>
+                  <p
+                    className="text-xs tracking-widest uppercase mb-3"
+                    style={{ color: "#deae4c", letterSpacing: "0.15em" }}
+                  >
+                    {founder.title}
+                  </p>
+                  <div
+                    className="mb-3"
+                    style={{
+                      width: "32px",
+                      height: "1px",
+                      backgroundColor: "#333",
+                    }}
+                  />
+                  <p className="text-sm leading-relaxed text-white">
+                    {founder.bio}
+                  </p>
+                  <span
+                    className="inline-flex items-center gap-2 mt-3 px-3 py-1 text-xs"
+                    style={{
+                      color: "#deae4c",
+                      border: "1px solid #2a2a1a",
+                      background: "#151407",
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    <span
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: "#deae4c" }}
+                    />
+                    {founder.tag}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Image Slideshow - Full Width Mobile */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8 md:mb-0">
+      <div className="max-w-7xl mx-auto pt-4 px-4 md:px-6 mb-8 md:mb-0">
         <div
-          className="relative rounded-xl overflow-hidden shadow-2xl mx-auto md:hidden "
+          className="relative rounded-xl overflow-hidden shadow-2xl mx-auto md:hidden"
           style={{ maxWidth: "400px", height: "500px" }}
         >
           {slides.map((slide, index) => (
@@ -294,8 +447,8 @@ export default function BookMyAssets() {
                 opacity: currentSlide === index ? 1 : 0,
                 zIndex: currentSlide === index ? 1 : 0,
               }}
-              priority={index === 0} // Add priority for first image (Next.js)
-              loading={index === 0 ? "eager" : "lazy"} // Optimize loading
+              priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
             />
           ))}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
@@ -316,7 +469,7 @@ export default function BookMyAssets() {
       </div>
 
       {/* Content Section with Slideshow */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 ">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
         <div className="flex flex-col md:flex-row gap-8 items-start">
           {/* Content */}
           <div className="w-full md:w-3/5 space-y-6 md:space-y-8">
@@ -326,7 +479,6 @@ export default function BookMyAssets() {
                 style={{ borderColor: "#deae4c" }}
               >
                 <div className="grid md:grid-cols-1 gap-8">
-                  {/* Left Column - The Beginning */}
                   <div>
                     <h2
                       className="text-2xl md:text-3xl font-bold mb-4"
@@ -340,14 +492,15 @@ export default function BookMyAssets() {
                       office, no big investors, just raw hunger and an
                       unshakable belief that we could build something
                       extraordinary in real estate. Most people called it crazy.
-                      We called it destiny. <br />
+                      We called it destiny.
+                      <br />
                       The odds were stacked against us, but we did not wait for
                       permission. Our first sale came just 14 days later. Then
                       one viral reel brought 400 queries per day. We did not
                       just handle it but we turned that momentum into our first
                       developer project, WestWyn County. While others were
                       planning, we were building.
-                      <br />{" "}
+                      <br />
                       <span className="font-bold">
                         Today, 365 days later:
                       </span>{" "}
@@ -358,10 +511,9 @@ export default function BookMyAssets() {
                       too.
                       <br />
                       Year One was our audition. Year Two? That's where we prove
-                      it was not luck. It was our hunger, heart, and hustle.{" "}
-                      <br />{" "}
+                      it was not luck. It was our hunger, heart, and hustle.
+                      <br />
                       <span className="font-bold">
-                        {" "}
                         This is BookMyAssets. And we're just getting started.
                       </span>
                     </p>
@@ -371,7 +523,7 @@ export default function BookMyAssets() {
             </div>
 
             <div className="lg:flex justify-center items-center">
-              <section className="bg-white rounded-xl shadow-lg p-6 ">
+              <section className="bg-white rounded-xl shadow-lg p-6">
                 <h2
                   className="text-2xl md:text-3xl font-bold mb-6"
                   style={{ color: "#deae4c" }}
@@ -416,7 +568,8 @@ export default function BookMyAssets() {
                 </div>
               </section>
             </div>
-            <section className="bg-black rounded-xl shadow-lg p-6  text-center">
+
+            <section className="bg-black rounded-xl shadow-lg p-6 text-center">
               <h2
                 className="text-xl md:text-3xl font-bold mb-4"
                 style={{ color: "#deae4c" }}

@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "@/assests/Bmalogo.png";
+import logo from "@/assests/bookmyassets-dholera-logo-v3.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
