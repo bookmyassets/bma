@@ -615,7 +615,7 @@ export default function Navbar() {
       >
         <div className=" px-3 py-3 sm:px-4 md:px-6 md:py-4 lg:px-8">
           <div
-            className={` relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-lg border bg-[#1b1b1b]/80 px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[3.5rem] md:px-5 lg:h-[4rem] lg:gap-4 lg:px-6 xl:gap-6`}
+            className={` relative isolate flex h-[4.25rem] items-center gap-3 overflow-visible rounded-lg border bg-[#1b1b1b] px-4 shadow-xl backdrop-blur-2xl transition-all duration-300 md:h-[3.5rem] md:px-5 lg:h-[4rem] lg:gap-4 lg:px-6 xl:gap-6`}
           >
             <div className="relative z-10 shrink-0">
               <Link
@@ -629,7 +629,7 @@ export default function Navbar() {
                   height={100}
                   width={100}
                   alt="BookMyAssets logo"
-                  className="h-[2.5rem] w-auto object-contain md:h-[2rem] lg:h-[3rem]"
+                  className="h-[2.5rem] w-auto max-sm:-translate-x-6 object-contain md:h-[2rem] lg:h-[3rem]"
                   priority
                 />
               </Link>
