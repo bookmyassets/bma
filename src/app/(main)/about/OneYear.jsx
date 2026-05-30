@@ -79,23 +79,6 @@ export default function BookMyAssets() {
 
   const founders = [
     {
-      name: "Jivjot Singh",
-      title: "Co-Founder & CEO",
-      initials: "JJ",
-      bio: (
-        <>
-          A dynamic leader focused on{" "}
-          <strong className=" font-medium">
-            trust, teamwork, and customer experience.
-          </strong>{" "}
-          His mission is to make investing in Dholera simple, transparent, and
-          reliable for every client.
-        </>
-      ),
-      tag: "Vision & Leadership",
-      image: img8,
-    },
-    {
       name: "Samarth Gupta",
       title: "Co-Founder & Director",
       initials: "SG",
@@ -111,6 +94,23 @@ export default function BookMyAssets() {
       ),
       tag: "Finance & Legal",
       image: img7,
+    },
+    {
+      name: "Jivjot Singh",
+      title: "Co-Founder & CEO",
+      initials: "JJ",
+      bio: (
+        <>
+          A dynamic leader focused on{" "}
+          <strong className=" font-medium">
+            trust, teamwork, and customer experience.
+          </strong>{" "}
+          His mission is to make investing in Dholera simple, transparent, and
+          reliable for every client.
+        </>
+      ),
+      tag: "Vision & Leadership",
+      image: img8,
     },
   ];
 
@@ -323,7 +323,7 @@ export default function BookMyAssets() {
       <div className="bg-black py-4 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <p
-            className="text-center text-xs tracking-widest uppercase mb-3"
+            className="text-center text-sm tracking-widest uppercase mb-3"
             style={{ color: "#deae4c" }}
           >
             The Visionaries Behind BMA
@@ -336,7 +336,7 @@ export default function BookMyAssets() {
             <em style={{ color: "#deae4c", fontStyle: "italic" }}>Founders</em>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-3xl mx-auto">
             {founders.map((founder, i) => (
               <div
                 key={i}
@@ -409,7 +409,6 @@ export default function BookMyAssets() {
                   <p className="text-sm leading-relaxed text-white">
                     {founder.bio}
                   </p>
-                  
                 </div>
               </div>
             ))}
