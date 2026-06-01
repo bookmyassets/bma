@@ -13,8 +13,8 @@ const Running = () => {
   return (
     <>
       <div className="w-full overflow-hidden bg-black py-2 relative">
-        <div className="whitespace-nowrap text-[#deae3c] animate-marquee">
-          <p className="inline-block text-white bg-[#deae3c] px-5 py-2 rounded-lg shadow-lg text-[20px] font-semibold">
+        <div className="whitespace-nowrap text-[#ddbc69] animate-marquee">
+          <p className="inline-block text-white bg-[#ddbc69] px-5 py-2 rounded-lg shadow-lg text-[20px] font-semibold">
             Registry Ready Plots in Dholera Starting from ₹8 Lakh
           </p>
         </div>

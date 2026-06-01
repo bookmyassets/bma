@@ -192,7 +192,7 @@ const SoldOutProjectsSection = () => {
                   onClick={scrollPrev}
                   className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 bg-black rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={currentIndex === 0}
-                  style={{ color: "#deae3c" }}
+                  style={{ color: "#ddbc69" }}
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
@@ -200,7 +200,7 @@ const SoldOutProjectsSection = () => {
                   onClick={scrollNext}
                   className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 bg-black rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={currentIndex === soldOutProjects.length - 1}
-                  style={{ color: "#deae3c" }}
+                  style={{ color: "#ddbc69" }}
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
@@ -237,7 +237,7 @@ const ProjectCard = ({ project }) => (
       <div className="absolute top-0 right-0 z-10">
         <div
           className="px-4 py-2 text-xs font-bold text-white transform rotate-45 translate-x-6 translate-y-2 shadow-lg"
-          style={{ backgroundColor: "#deae3c" }}
+          style={{ backgroundColor: "#ddbc69" }}
         >
           SUCCESS
         </div>
@@ -258,9 +258,9 @@ const ProjectCard = ({ project }) => (
         <div className="absolute top-4 left-4">
           <span
             className="px-3 py-1 rounded-full text-sm font-semibold text-black border-2 bg-white flex items-center gap-2"
-            style={{ borderColor: "#deae3c" }}
+            style={{ borderColor: "#ddbc69" }}
           >
-            <CheckCircle className="w-4 h-4" style={{ color: "#deae3c" }} />
+            <CheckCircle className="w-4 h-4" style={{ color: "#ddbc69" }} />
             Sold Out
           </span>
         </div>
@@ -270,7 +270,7 @@ const ProjectCard = ({ project }) => (
           <div className="bg-white/90 backdrop-blur-sm rounded-full p-2">
             <Star
               className="w-5 h-5 fill-current"
-              style={{ color: "#deae3c" }}
+              style={{ color: "#ddbc69" }}
             />
           </div>
         </div>
@@ -279,7 +279,7 @@ const ProjectCard = ({ project }) => (
       {/* Project Details */}
       <div className="p-6 flex-grow flex flex-col">
         <h3
-          className="text-xl font-bold mb-3 group-hover:text-yellow-600 transition-colors duration-300"
+          className="text-xl font-bold mb-3 group-hover:text-[#ddbc69] transition-colors duration-300"
           style={{ color: "#0d0d0d" }}
         >
           {project.projectName}
@@ -288,19 +288,19 @@ const ProjectCard = ({ project }) => (
         <div className="flex items-start gap-2 mb-3">
           <MapPin
             className="w-4 h-4 mt-1 flex-shrink-0"
-            style={{ color: "#deae3c" }}
+            style={{ color: "#ddbc69" }}
           />
           <p className="text-gray-600 text-sm">{project.location}</p>
         </div>
 
         {/* CTA Button */}
         <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
-          <span className="font-semibold" style={{ color: "#deae3c" }}>
+          <span className="font-semibold" style={{ color: "#ddbc69" }}>
             View Success Story
           </span>
           <ArrowRight
             className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-2"
-            style={{ color: "#deae3c" }}
+            style={{ color: "#ddbc69" }}
           />
         </div>
       </div>
@@ -309,3 +309,4 @@ const ProjectCard = ({ project }) => (
 );
 
 export default SoldOutProjectsSection;
+

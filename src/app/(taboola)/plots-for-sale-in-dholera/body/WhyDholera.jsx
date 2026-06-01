@@ -21,7 +21,7 @@ const highlights = [
 
 function HighlightCard({ title, body }) {
   return (
-    <button className="text-left w-full rounded-lg border flex flex-col gap-2 transition-all duration-250 p-[clamp(0.75rem,2vw,1.25rem)] border-[#deae3c] bg-[#deae3c]/5 hover:border-[#deae3c]/60">
+    <button className="text-left w-full rounded-lg border flex flex-col gap-2 transition-all duration-250 p-[clamp(0.75rem,2vw,1.25rem)] border-[#ddbc69] bg-[#ddbc69]/5 hover:border-[#ddbc69]/60">
       <span className="text-[clamp(0.95rem,1.4vw,1.15rem)] font-semibold leading-snug text-gray-900">
         {title}
       </span>
@@ -39,13 +39,13 @@ export default function WhyDholera() {
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
           <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
-            <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-[#deae3c] leading-tight max-w-5xl mx-auto">
+            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#ddbc69]" />
+            <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-[#ddbc69] leading-tight max-w-5xl mx-auto">
               Dholera
 {" "}
               <span className="text-black">: India's First Planned Greenfield Smart City</span>
             </h2>
-            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#ddbc69]" />
           </div>
         </div>
 
@@ -73,3 +73,4 @@ export default function WhyDholera() {
     </section>
   );
 }
+

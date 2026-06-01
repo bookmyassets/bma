@@ -209,8 +209,8 @@ export default function Ribbon() {
 
   return (
     <>
-      <div className="bg-black border-t-8 border-t-[#deae3c] border-b-8 border-b-[#deae3c] py-4">
-        <div className="pr-8 pl-8 pb-8 text-[#deae3c] flex justify-center items-center font-semibold text-xl md:text-3xl">
+      <div className="bg-black border-t-8 border-t-[#ddbc69] border-b-8 border-b-[#ddbc69] py-4">
+        <div className="pr-8 pl-8 pb-8 text-[#ddbc69] flex justify-center items-center font-semibold text-xl md:text-3xl">
          Govt Approved Plots Starting from ₹8 Lakh
         </div>
         
@@ -224,7 +224,7 @@ export default function Ribbon() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#ddbc69] h-4 w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -242,7 +242,7 @@ export default function Ribbon() {
                 value={formData.fullName}
                 onChange={handleChange}
                 required
-                className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-300 hover:border-[#ddbc69] transition-colors text-sm"
               />
             </motion.div>
             
@@ -254,7 +254,7 @@ export default function Ribbon() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#ddbc69] h-4 w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -275,7 +275,7 @@ export default function Ribbon() {
                 minLength={10}
                 maxLength={15}
                 required
-                className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-300 hover:border-[#ddbc69] transition-colors text-sm"
               />
             </motion.div>
           </div>
@@ -301,7 +301,7 @@ export default function Ribbon() {
               id="ribbion-form"
               onClick={handleSubmit}
               disabled={isLoading}
-              className="w-auto py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-auto py-3 px-6 bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] text-white rounded-lg hover:from-[#ddbc69] hover:to-[#ddbc69] transition-all shadow-lg hover:shadow-[#ddbc69]/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isLoading ? "Submitting..." : "Get A Call Back"}
             </motion.button>

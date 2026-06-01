@@ -135,7 +135,7 @@ function ChevronIcon({ open, className = "h-[1rem] w-[1rem]" }) {
 
 function LoadingState({ color = "yellow" }) {
   const spinnerColor = {
-    yellow: "border-yellow-500",
+    yellow: "border-[#ddbc69]",
     orange: "border-orange-500",
     blue: "border-blue-500",
   };
@@ -240,7 +240,7 @@ function ResidentialCard({ project, index, href, onClick }) {
 
         <div className="absolute bottom-[1.25rem] left-0 right-0 space-y-[0.5rem] p-[1rem] text-white">
           <h3
-            className={`text-[clamp(0.9375rem,0.78rem_+_0.65vw,1.25rem)] font-semibold leading-tight transition-colors duration-300 group-hover:text-[#deae3c] ${
+            className={`text-[clamp(0.9375rem,0.78rem_+_0.65vw,1.25rem)] font-semibold leading-tight transition-colors duration-300 group-hover:text-[#ddbc69] ${
               isSoldOut ? "text-gray-300" : ""
             }`}
           >
@@ -278,7 +278,7 @@ function ImageCard({ project, index, href, onClick, color = "yellow" }) {
   const hoverColor =
     color === "orange"
       ? "group-hover:text-orange-300"
-      : "group-hover:text-[#deae3c]";
+      : "group-hover:text-[#ddbc69]";
 
   return (
     <Link
@@ -607,8 +607,8 @@ export default function Navbar() {
                     onClick={onClick}
                     className={`flex items-center rounded-md px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium transition-colors duration-300 ${
                       open
-                        ? "bg-[#deae3c] text-black"
-                        : "text-black hover:text-yellow-500"
+                        ? "bg-[#ddbc69] text-black"
+                        : "text-black hover:text-[#ddbc69]"
                     }`}
                     aria-expanded={open}
                   >
@@ -624,14 +624,14 @@ export default function Navbar() {
               <div className="flex items-center gap-[calc(0.75rem_+_0.5vw)]">
                 <Link
                   href="/contact"
-                  className="rounded-md bg-[#deae3c] px-[calc(0.875rem_+_0.5vw)] py-[calc(0.375rem_+_0.25vw)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-black shadow-md transition duration-300 hover:bg-[#f3bb39]"
+                  className="rounded-md bg-[#ddbc69] px-[calc(0.875rem_+_0.5vw)] py-[calc(0.375rem_+_0.25vw)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-black shadow-md transition duration-300 hover:bg-[#f3bb39]"
                 >
                   Contact Us
                 </Link>
 
                 <div className="relative group">
                   <button
-                    className="font-medium text-black transition-colors duration-300 hover:text-yellow-500"
+                    className="font-medium text-black transition-colors duration-300 hover:text-[#ddbc69]"
                     aria-label="Open secondary menu"
                   >
                     <Menu
@@ -650,7 +650,7 @@ export default function Navbar() {
                           key={href}
                           href={href}
                           onClick={closeAllMenus}
-                          className="block px-[calc(0.875rem_+_0.25vw)] py-[calc(0.625rem_+_0.125vw)] text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-black transition-colors hover:bg-gray-50 hover:text-yellow-600"
+                          className="block px-[calc(0.875rem_+_0.25vw)] py-[calc(0.625rem_+_0.125vw)] text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-black transition-colors hover:bg-gray-50 hover:text-[#ddbc69]"
                         >
                           {label}
                         </Link>
@@ -666,7 +666,7 @@ export default function Navbar() {
                 href={whatsappEnquiryLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-[0.375rem] whitespace-nowrap rounded-md bg-[#deae3c] px-[0.75rem] py-[0.5rem] text-[0.875rem] font-medium text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
+                className="inline-flex items-center gap-[0.375rem] whitespace-nowrap rounded-md bg-[#ddbc69] px-[0.75rem] py-[0.5rem] text-[0.875rem] font-medium text-black shadow-sm transition duration-300 hover:bg-[#f3bb39]"
                 aria-label="Enquire Now on WhatsApp"
               >
                 <FaWhatsapp className="h-[1rem] w-[1rem] shrink-0" />
@@ -891,7 +891,7 @@ export default function Navbar() {
 
                         <div className="absolute bottom-0 left-0 p-[1rem] text-white">
                           <div
-                            className={`font-semibold leading-tight transition-colors duration-300 group-hover:text-[#deae3c] ${
+                            className={`font-semibold leading-tight transition-colors duration-300 group-hover:text-[#ddbc69] ${
                               project.status === "sold-out"
                                 ? "text-gray-300"
                                 : ""
@@ -962,8 +962,8 @@ export default function Navbar() {
                 onClick={toggleResidentialMenu}
                 className={`flex w-full items-center justify-between rounded-md  py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isResidentialMenuOpen
-                    ? "bg-[#deae3c] text-black"
-                    : "text-black hover:text-yellow-500"
+                    ? "bg-[#ddbc69] text-black"
+                    : "text-black hover:text-[#ddbc69]"
                 }`}
                 aria-expanded={isResidentialMenuOpen}
               >
@@ -975,10 +975,10 @@ export default function Navbar() {
               </button>
 
               {isResidentialMenuOpen && (
-                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-yellow-500 pl-[1rem]">
+                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#ddbc69] pl-[1rem]">
                   {loading ? (
                     <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-gray-500">
-                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-full border-b-[0.125rem] border-yellow-500" />{" "}
+                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-full border-b-[0.125rem] border-[#ddbc69]" />{" "}
                       Loading...
                     </div>
                   ) : error ? (
@@ -1004,7 +1004,7 @@ export default function Navbar() {
                 onClick={toggleBulkLandMenu}
                 className={`flex w-full items-center justify-between rounded-md py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isBulkLandMenuOpen
-                    ? "bg-[#deae3c] text-black"
+                    ? "bg-[#ddbc69] text-black"
                     : "text-black hover:text-orange-500"
                 }`}
                 aria-expanded={isBulkLandMenuOpen}
@@ -1046,7 +1046,7 @@ export default function Navbar() {
                 key={href}
                 href={href}
                 onClick={closeAllMenus}
-                className={`block py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-black transition-colors hover:text-yellow-500 ${
+                className={`block py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-black transition-colors hover:text-[#ddbc69] ${
                   index < mobileLinks.length - 1
                     ? "border-b border-gray-100"
                     : ""
@@ -1061,3 +1061,4 @@ export default function Navbar() {
     </>
   );
 }
+

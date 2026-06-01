@@ -39,7 +39,7 @@ export default function WhyNCRInvestors() {
         <div className="space-y-4 max-w-3xl">
           <h2
             className="text-2xl md:text-3xl font-bold leading-snug"
-            style={{ color: "#deae3c" }}
+            style={{ color: "#ddbc69" }}
           >
             Why NCR investors are evaluating Dholera now
           </h2>
@@ -75,7 +75,7 @@ export default function WhyNCRInvestors() {
               <div className="flex items-center justify-between">
                 <span
                   className=" md:text-lg  font-bold tracking-widest"
-                  style={{ color: "#deae3c" }}
+                  style={{ color: "#ddbc69" }}
                 >
                   {block.number}
                 </span>
@@ -93,7 +93,7 @@ export default function WhyNCRInvestors() {
               {/* Divider */}
               <div
                 className="w-8 h-px"
-                style={{ backgroundColor: "#deae3c", opacity: 0.4 }}
+                style={{ backgroundColor: "#ddbc69", opacity: 0.4 }}
               />
 
               {/* Title */}

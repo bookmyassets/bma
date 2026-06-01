@@ -304,7 +304,7 @@ export default function InteractiveMap() {
           <h2 className="text-2xl md:text-4xl whitespace-nowrap font-bold text-gray-900 mb-2">
             8 Mega Projects Powering 
           </h2>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#deae4c] mb-4">Dholera</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#ddbc69] mb-4">Dholera</h2>
         </div>
 
         {/* Map Container */}
@@ -350,7 +350,7 @@ export default function InteractiveMap() {
               <div className="flex flex-col h-full">
                 {/* Header with close button */}
                 <div className="relative h-12 bg-black flex items-center justify-between px-4 flex-shrink-0">
-                  <h3 className="text-[#deae3c] font-bold text-lg truncate pr-10">
+                  <h3 className="text-[#ddbc69] font-bold text-lg truncate pr-10">
                     {selectedArea.title}
                   </h3>
                   <button

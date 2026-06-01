@@ -30,7 +30,7 @@ export default function () {
                   className={`flex flex-col w-auto items-center justify-center text-center p-4 bg-white/15 rounded-xl min-h-[5.5rem]
       ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}
                 >
-                  <div className="text-[clamp(0.95rem,1.4vw,1.125rem)] flex justify-center items-center font-bold text-[#deae3c] leading-tight mb-2">
+                  <div className="text-[clamp(0.95rem,1.4vw,1.125rem)] flex justify-center items-center font-bold text-[#ddbc69] leading-tight mb-2">
                     
                     {value}
                   </div>
@@ -43,3 +43,4 @@ export default function () {
     </div>
   );
 }
+

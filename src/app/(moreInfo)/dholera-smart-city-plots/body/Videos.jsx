@@ -85,7 +85,7 @@ export default function Dholeravideos() {
       <div className="space-y-4">
         <div className="relative pt-8">
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-center text-2xl font-bold md:text-[32px] mb-2 text-[#deae3c]">
+            <h2 className="text-center text-2xl font-bold md:text-[32px] mb-2 text-[#ddbc69]">
              Popular Videos About Dholera on YouTube
             </h2>
             <p className="text-center text-black mb-8">
@@ -106,7 +106,7 @@ export default function Dholeravideos() {
                           return (
                             <div key={video.id} className="w-full h-80">
                               <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl">
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#deae3c] via-[#deae3c] to-[#c49a2f]"></div>
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#ddbc69] via-[#ddbc69] to-[#c49a2f]"></div>
                                 
                                 <div className="p-4">
                                   <div className="relative aspect-video w-full bg-gray-100 rounded-lg overflow-hidden">
@@ -114,7 +114,7 @@ export default function Dholeravideos() {
                                    
                                         {videoStates[globalIndex]?.isLoading && (
                                           <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-                                            <div className="w-12 h-12 rounded-full border-4 border-gray-300 border-t-[#deae3c] animate-spin"></div>
+                                            <div className="w-12 h-12 rounded-full border-4 border-gray-300 border-t-[#ddbc69] animate-spin"></div>
                                           </div>
                                         )}
                                         <iframe
@@ -141,12 +141,12 @@ export default function Dholeravideos() {
                                     BookMyAssets
                                   </div>
                                   <div className="flex space-x-3">
-                                    <button className="text-gray-500 hover:text-[#deae3c] transition-colors">
+                                    <button className="text-gray-500 hover:text-[#ddbc69] transition-colors">
                                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
                                       </svg>
                                     </button>
-                                    <button className="text-gray-500 hover:text-[#deae3c] transition-colors">
+                                    <button className="text-gray-500 hover:text-[#ddbc69] transition-colors">
                                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
                                       </svg>
@@ -166,14 +166,14 @@ export default function Dholeravideos() {
               <div className="flex justify-center mt-6 md:hidden py-4">
                 <button
                   onClick={prevSlide}
-                  className="bg-[#deae3c] hover:bg-[#c49a2f] text-white p-3 rounded-full shadow-lg transition-all duration-300 mx-2"
+                  className="bg-[#ddbc69] hover:bg-[#c49a2f] text-white p-3 rounded-full shadow-lg transition-all duration-300 mx-2"
                   disabled={totalSlides <= 1}
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="bg-[#deae3c] hover:bg-[#c49a2f] text-white p-3 rounded-full shadow-lg transition-all duration-300 mx-2"
+                  className="bg-[#ddbc69] hover:bg-[#c49a2f] text-white p-3 rounded-full shadow-lg transition-all duration-300 mx-2"
                   disabled={totalSlides <= 1}
                 >
                   <ChevronRight className="w-5 h-5" />

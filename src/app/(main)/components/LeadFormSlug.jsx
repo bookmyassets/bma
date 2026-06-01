@@ -259,7 +259,7 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
               className={`w-full p-4 text-white text-lg font-semibold rounded-xl shadow-md transition-all duration-300 ${
                 isLoading || isDisabled || !recaptchaLoaded
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-[#deae3c] hover:bg-[#b98b27] hover:shadow-lg active:scale-95"
+                  : "bg-[#ddbc69] hover:bg-[#b98b27] hover:shadow-lg active:scale-95"
               }`}
             >
               {isLoading ? "Submitting..." : "Get A Call back"}
@@ -281,7 +281,7 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
             </p>
             <button
               onClick={() => setShowPopup(false)}
-              className="w-full bg-[#deae3c] hover:bg-[#b98b27] text-white font-semibold py-3 px-4 rounded-xl transition duration-300"
+              className="w-full bg-[#ddbc69] hover:bg-[#b98b27] text-white font-semibold py-3 px-4 rounded-xl transition duration-300"
             >
               Close
             </button>

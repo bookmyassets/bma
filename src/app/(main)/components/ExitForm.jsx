@@ -398,7 +398,7 @@ export default function ExitPopup({
                 className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 text-base ${
                   isLoading
                     ? "bg-gray-400 cursor-not-allowed text-gray-600"
-                    : "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                    : "bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] hover:from-[#ddbc69] hover:to-[#ddbc69] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
                 }`}
               >
                 {isLoading ? (

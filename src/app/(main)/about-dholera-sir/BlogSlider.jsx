@@ -122,7 +122,7 @@ export default function BlogSlider({ posts = [] }) {
                     {/* Footer with "ExploreMore" */}
                     <div className="border-t border-gray-200 pt-4 mt-auto">
                       <div className=" text-right">
-                        <p className="font-medium hover:underline text-[#deae3c]">
+                        <p className="font-medium hover:underline text-[#ddbc69]">
                           Explore More →
                         </p>
                       </div>
@@ -139,14 +139,14 @@ export default function BlogSlider({ posts = [] }) {
           <>
             <button
               onClick={goToPrevious}
-              className="absolute -left-4 top-1/2 -translate-y-1/2 rounded-full p-3 shadow-lg bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden md:block"
+              className="absolute -left-4 top-1/2 -translate-y-1/2 rounded-full p-3 shadow-lg bg-[#ddbc69] hover:text-white transition-all duration-300 z-10 hidden md:block"
               aria-label="Previous page"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={goToNext}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 rounded-full p-3 shadow-lg bg-[#deae3c] hover:text-white transition-all duration-300 z-10 hidden md:block"
+              className="absolute -right-4 top-1/2 -translate-y-1/2 rounded-full p-3 shadow-lg bg-[#ddbc69] hover:text-white transition-all duration-300 z-10 hidden md:block"
               aria-label="Next page"
             >
               <ChevronRight className="w-6 h-6" />
@@ -166,7 +166,7 @@ export default function BlogSlider({ posts = [] }) {
                 onClick={() => goToPage(index)}
                 className={`transition-all duration-300 rounded-full ${
                   index === currentPage
-                    ? "bg-[#deae3c] w-8 h-2"
+                    ? "bg-[#ddbc69] w-8 h-2"
                     : "bg-gray-300 w-2 h-2 hover:bg-gray-400"
                 }`}
                 aria-label={`Go to page ${index + 1}`}
@@ -178,14 +178,14 @@ export default function BlogSlider({ posts = [] }) {
           <div className="flex gap-3 md:hidden">
             <button
               onClick={goToPrevious}
-              className="rounded-full p-2 shadow-md bg-[#deae3c] hover:text-white transition-all duration-300"
+              className="rounded-full p-2 shadow-md bg-[#ddbc69] hover:text-white transition-all duration-300"
               aria-label="Previous page"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={goToNext}
-              className="rounded-full p-2 shadow-md bg-[#deae3c] hover:text-white transition-all duration-300"
+              className="rounded-full p-2 shadow-md bg-[#ddbc69] hover:text-white transition-all duration-300"
               aria-label="Next page"
             >
               <ChevronRight className="w-5 h-5" />
@@ -209,3 +209,4 @@ export default function BlogSlider({ posts = [] }) {
     </div>
   );
 }
+

@@ -261,8 +261,8 @@ const RealEstateLandingPage = () => {
               >
                 <div className="space-y-4">
                   <div className="flex items-center space-x-2 pt-4">
-                    <div className="h-1 w-12 bg-yellow-500 rounded"></div>
-                    <span className="text-yellow-500 font-medium tracking-wide text-sm">
+                    <div className="h-1 w-12 bg-[#ddbc69] rounded"></div>
+                    <span className="text-[#ddbc69] font-medium tracking-wide text-sm">
                       BMA GROUP OF COMPANIES
                     </span>
                   </div>
@@ -270,7 +270,7 @@ const RealEstateLandingPage = () => {
                   <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
                     Year One: Just the Beginning
                     <br />
-                    {/* <span className="bg-yellow-400 bg-clip-text text-transparent">
+                    {/* <span className="bg-[#ddbc69] bg-clip-text text-transparent">
                       India’s First Greenfield Smart City
                     </span>{" "}
                     <br />
@@ -289,7 +289,7 @@ const RealEstateLandingPage = () => {
 
                 <div className="flex flex-col gap-4">
                   <div onClick={handleScrollDown}>
-                    <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                    <button className="group bg-[#ddbc69] hover:bg-[#ddbc69] text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                       <span>Scroll Down to View More</span>
                       <ArrowDown
                         className="group-hover:translate-x-1 transition-transform"
@@ -298,7 +298,7 @@ const RealEstateLandingPage = () => {
                     </button>
                   </div>
                   <Link href="https://www.youtube.com/@BookMyAssets">
-                    <span className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                    <span className="group bg-transparent border-2 border-white/30 hover:border-[#ddbc69] text-white hover:text-[#ddbc69] px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
                       <Play size={20} />
                       <span>Watch Video</span>
                     </span>
@@ -320,7 +320,7 @@ const RealEstateLandingPage = () => {
                     style={{ paddingBottom: "56.25%" }}
                   >
                     {/* Animated background glow */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse -z-10"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#ddbc69] to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse -z-10"></div>
 
                     {/* Glass container */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-3 border border-white/20">
@@ -357,8 +357,8 @@ const RealEstateLandingPage = () => {
                 >
                   <div className="space-y-4 xl:space-y-6">
                     <div className="flex items-center space-x-2">
-                      <div className="h-1 w-12 bg-yellow-500 rounded"></div>
-                      <span className="text-yellow-500 font-medium tracking-wide text-sm xl:text-base">
+                      <div className="h-1 w-12 bg-[#ddbc69] rounded"></div>
+                      <span className="text-[#ddbc69] font-medium tracking-wide text-sm xl:text-base">
                         BMA GROUP OF COMPANIES
                       </span>
                     </div>
@@ -366,7 +366,7 @@ const RealEstateLandingPage = () => {
                     <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
                       Year One: Just the Beginning
                       <br />
-                      {/* <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                      {/* <span className="bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] bg-clip-text text-transparent">
                         India’s First Greenfield Smart City
                       </span>{" "}
                       Dholera with BookMyAssets */}
@@ -384,7 +384,7 @@ const RealEstateLandingPage = () => {
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                     <div onClick={handleScrollDown}>
-                      <button className="group bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                      <button className="group bg-[#ddbc69] hover:bg-[#ddbc69] text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                         <span>Scroll Down to View More</span>
                         <ArrowDown
                           className="group-hover:translate-x-1 transition-transform"
@@ -393,7 +393,7 @@ const RealEstateLandingPage = () => {
                       </button>
                     </div>
                     <Link href="https://www.youtube.com/@BookMyAssets">
-                      <span className="group bg-transparent border-2 border-white/30 hover:border-yellow-500 text-white hover:text-yellow-500 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                      <span className="group bg-transparent border-2 border-white/30 hover:border-[#ddbc69] text-white hover:text-[#ddbc69] px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
                         <Play size={20} />
                         <span>Watch Video</span>
                       </span>
@@ -415,7 +415,7 @@ const RealEstateLandingPage = () => {
                       style={{ paddingBottom: "56.25%" }}
                     >
                       {/* Animated background glow */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse -z-10"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#ddbc69] to-blue-500 rounded-3xl blur-2xl opacity-20 animate-pulse -z-10"></div>
 
                       {/* Glass container */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-3 md:p-6 border border-white/20">
@@ -453,11 +453,11 @@ const RealEstateLandingPage = () => {
                   About Us
                 </h2>
                 <div className="flex items-center justify-center mb-6">
-                  <div className="h-1 w-16 bg-yellow-500 rounded"></div>
-                  <Star className="mx-4 text-yellow-500" size={24} />
-                  <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+                  <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
+                  <Star className="mx-4 text-[#ddbc69]" size={24} />
+                  <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
                 </div>
-                <p className="text-lg  text-yellow-600 font-bold mb-4">
+                <p className="text-lg  text-[#ddbc69] font-bold mb-4">
                   Focused on Your Growth. Driven by Your Trust.
                 </p>
               </div>
@@ -543,7 +543,7 @@ const RealEstateLandingPage = () => {
                     </p>
                   </div>
 
-                  <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-6 sm:p-8 border border-yellow-200 flex-1 flex flex-col">
+                  <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-6 sm:p-8 border border-[#ddbc69] flex-1 flex flex-col">
                     <h3 className="text-xl sm:text-2xl font-bold text-orange-900 mb-4">
                       Our Promise
                     </h3>
@@ -572,9 +572,9 @@ const RealEstateLandingPage = () => {
                 BMA Group of Companies
               </h2>
               <div className="flex items-center justify-center mb-6">
-                <div className="h-1 w-16 bg-yellow-500 rounded"></div>
-                <Star className="mx-4 text-yellow-500" size={24} />
-                <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
+                <Star className="mx-4 text-[#ddbc69]" size={24} />
+                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
               </div>
               <p className="text-xl text-black max-w-5xl mx-auto">
                 Four strong arms, each one created to serve you better, faster,
@@ -593,7 +593,7 @@ const RealEstateLandingPage = () => {
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  <div className="bg-gray-900 backdrop-blur-xl rounded-3xl p-6 border border-white/20 hover:border-yellow-500 transition-all duration-500 h-full">
+                  <div className="bg-gray-900 backdrop-blur-xl rounded-3xl p-6 border border-white/20 hover:border-[#ddbc69] transition-all duration-500 h-full">
                     <div className="flex items-center space-x-4 mb-6">
                       <div
                         className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${company.color} flex items-center justify-center group-hover:rotate-12 transition-transform duration-300`}
@@ -604,7 +604,7 @@ const RealEstateLandingPage = () => {
                         <h3 className="text-2xl font-bold text-white">
                           {company.name}
                         </h3>
-                        <p className="text-yellow-500 font-medium">
+                        <p className="text-[#ddbc69] font-medium">
                           {company.subtitle}
                         </p>
                       </div>
@@ -645,9 +645,9 @@ const RealEstateLandingPage = () => {
                 Our Milestones
               </h2>
               <div className="flex items-center justify-center">
-                <div className="h-1 w-16 bg-yellow-500 rounded"></div>
-                <Star className="mx-4 text-yellow-500" size={24} />
-                <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
+                <Star className="mx-4 text-[#ddbc69]" size={24} />
+                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
               </div>
             </div>
 
@@ -702,9 +702,9 @@ const RealEstateLandingPage = () => {
                 Why Choose Us?
               </h2>
               <div className="flex items-center justify-center mb-6">
-                <div className="h-1 w-16 bg-yellow-500 rounded"></div>
-                <Star className="mx-4 text-yellow-500" size={24} />
-                <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
+                <Star className="mx-4 text-[#ddbc69]" size={24} />
+                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
               </div>
               <p className="text-xl text-gray-300 max-w-4xl mx-auto">
                 We go beyond just selling properties we create investment
@@ -747,7 +747,7 @@ const RealEstateLandingPage = () => {
                   title: "Industry Recognition",
                   description:
                     "Award winning real estate consultancy with a proven track record of successful investments.",
-                  color: "from-yellow-500 to-yellow-600",
+                  color: "from-[#ddbc69] to-[#ddbc69]",
                 },
                 {
                   icon: Phone,
@@ -766,7 +766,7 @@ const RealEstateLandingPage = () => {
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-yellow-500 transition-all duration-300 h-full">
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-[#ddbc69] transition-all duration-300 h-full">
                     <div
                       className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6`}
                     >
@@ -796,9 +796,9 @@ const RealEstateLandingPage = () => {
                 What Our Clients Say
               </h2>
               <div className="flex items-center justify-center mb-6">
-                <div className="h-1 w-16 bg-yellow-500 rounded"></div>
-                <Star className="mx-4 text-yellow-500" size={24} />
-                <div className="h-1 w-16 bg-yellow-500 rounded"></div>
+                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
+                <Star className="mx-4 text-[#ddbc69]" size={24} />
+                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
               </div>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto">
                 Don't just take our word for it. Here's what our investors have
@@ -817,7 +817,7 @@ const RealEstateLandingPage = () => {
                 <div className="flex flex-col md:flex-row items-center">
                   <div className="w-full md:w-1/3 mb-8 md:mb-0 md:pr-8">
                     <div className="relative">
-                      <div className="w-32 h-32 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 mx-auto flex items-center justify-center text-white text-4xl font-bold">
+                      <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#ddbc69] to-[#ddbc69] mx-auto flex items-center justify-center text-white text-4xl font-bold">
                         <Image
                           src={testimonials[testimonialIndex].image}
                           alt={testimonials[testimonialIndex].name}
@@ -832,7 +832,7 @@ const RealEstateLandingPage = () => {
                         (_, i) => (
                           <Star
                             key={i}
-                            className="text-yellow-500 fill-yellow-500"
+                            className="text-[#ddbc69] fill-[#ddbc69]"
                             size={20}
                           />
                         )
@@ -854,7 +854,7 @@ const RealEstateLandingPage = () => {
                             onClick={() => setTestimonialIndex(index)}
                             className={`w-3 h-3 rounded-full transition-all ${
                               testimonialIndex === index
-                                ? "bg-yellow-500 w-6"
+                                ? "bg-[#ddbc69] w-6"
                                 : "bg-gray-300"
                             }`}
                           />
@@ -881,7 +881,7 @@ const RealEstateLandingPage = () => {
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="https://wa.me/918130371647">
-                  <button className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                  <button className="bg-[#ddbc69] hover:bg-[#ddbc69] text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                     <span>Schedule a Consultation</span>
                     <ArrowRight
                       className="group-hover:translate-x-1 transition-transform"
@@ -890,7 +890,7 @@ const RealEstateLandingPage = () => {
                   </button>
                 </a>
                 <a href="tel:+918130371647">
-                  <button className="border-2 border-yellow-500 hover:bg-yellow-500 text-yellow-500 hover:text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                  <button className="border-2 border-[#ddbc69] hover:bg-[#ddbc69] text-[#ddbc69] hover:text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                     <Phone size={20} />
                     <span>Call Us Now</span>
                   </button>
@@ -905,3 +905,4 @@ const RealEstateLandingPage = () => {
 };
 
 export default RealEstateLandingPage;
+

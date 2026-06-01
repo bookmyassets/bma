@@ -315,7 +315,7 @@ const PropertyCard = ({ image, title, area, price, link }) => {
         {/* Read More Button - Now always at bottom */}
         <a 
           href={link}
-          className="w-full flex items-center justify-between px-4 py-2 md:py-3 rounded-lg border-2 border-[#deae3c] text-[#deae3c] font-semibold hover:bg-[#deae3c] hover:text-white transition-all duration-300 group mt-auto"
+          className="w-full flex items-center justify-between px-4 py-2 md:py-3 rounded-lg border-2 border-[#ddbc69] text-[#ddbc69] font-semibold hover:bg-[#ddbc69] hover:text-white transition-all duration-300 group mt-auto"
         >
           <span className="text-sm">Read More</span>
           <svg className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -363,3 +363,4 @@ const Interlink = ({ properties, title = "Related Properties" }) => {
 };
 
 export default Interlink;
+

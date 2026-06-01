@@ -27,11 +27,11 @@ export default function AboutBMA() {
         <div className="max-w-7xl mx-auto px-4 ">
           <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
             <div className="flex items-center gap-3 mb-3">
-              <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+              <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#ddbc69]" />
               <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
                 BookMyAssets: Trusted Developers in Dholera{" "}
               </h2>
-              <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+              <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#ddbc69]" />
             </div>
           </div>
 
@@ -55,7 +55,7 @@ export default function AboutBMA() {
                     hover:shadow-xl transition-shadow
                   "
                   >
-                    <div className="text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#deae3c] mb-2">
+                    <div className="text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#ddbc69] mb-2">
                       {value}
                     </div>
                     <p className="text-[clamp(0.75rem,1.2vw,0.875rem)] text-gray-700 font-medium text-center">
@@ -71,7 +71,7 @@ export default function AboutBMA() {
               <div className="flex flex-col max-sm:grid max-sm:grid-cols-2 md:flex-row items-center justify-center gap-4 pt-4">
                 <a
                   href="tel:+918130371647"
-                  className="flex items-center gap-2 bg-[#deae3c] hover:bg-[#c99a2e] text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto justify-center text-[clamp(0.875rem,1.5vw,1rem)]"
+                  className="flex items-center gap-2 bg-[#ddbc69] hover:bg-[#c99a2e] text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto justify-center text-[clamp(0.875rem,1.5vw,1rem)]"
                   onClick={() => {
                     window.dataLayer = window.dataLayer || [];
                     window.dataLayer.push({
@@ -157,3 +157,4 @@ export default function AboutBMA() {
     </>
   );
 }
+

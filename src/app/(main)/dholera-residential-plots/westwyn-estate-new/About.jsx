@@ -64,7 +64,7 @@ const WestWynAboutSection = () => {
         {/* Location Advantage */}
         <div className="max-w-7xl mx-auto rounded-[1.5rem] bg-[#050505] px-[clamp(0.75rem,2vw,1rem)] py-[clamp(1.25rem,2.5vw,2rem)] shadow-2xl">
           <div className="mx-auto max-w-[42rem] text-center">
-            <p className="mb-2 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-[#deae3c]">
+            <p className="mb-2 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-[#ddbc69]">
               Location Advantage
             </p>
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.15] text-white">
@@ -72,11 +72,11 @@ const WestWynAboutSection = () => {
             </h2>
           </div>
 
-          <div className="mt-[clamp(1rem,2vw,1.5rem)] overflow-hidden rounded-[1.25rem] bg-[#080808] p-[clamp(0.75rem,1.5vw,1rem)] ring-1 ring-[#deae3c]/20">
+          <div className="mt-[clamp(1rem,2vw,1.5rem)] overflow-hidden rounded-[1.25rem] bg-[#080808] p-[clamp(0.75rem,1.5vw,1rem)] ring-1 ring-[#ddbc69]/20">
             <div className="grid gap-4 lg:grid-cols-[0.85fr_1.4fr]">
-              <div className="relative overflow-hidden rounded-2xl border border-[#deae3c]/25 bg-[linear-gradient(145deg,#0d0d0d_0%,#050505_55%,#171105_100%)] p-[clamp(1.25rem,2.5vw,2rem)] text-white">
+              <div className="relative overflow-hidden rounded-2xl border border-[#ddbc69]/25 bg-[linear-gradient(145deg,#0d0d0d_0%,#050505_55%,#171105_100%)] p-[clamp(1.25rem,2.5vw,2rem)] text-white">
                 <div className="relative">
-                  <div className="mb-[clamp(1rem,2vw,1.5rem)] inline-flex items-center gap-2 rounded-full border border-[#deae3c]/35 bg-[#deae3c]/10 px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[#deae3c]">
+                  <div className="mb-[clamp(1rem,2vw,1.5rem)] inline-flex items-center gap-2 rounded-full border border-[#ddbc69]/35 bg-[#ddbc69]/10 px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[#ddbc69]">
                     <span className="text-[1rem] leading-none">&#8226;</span>
                     Location Clarity
                   </div>
@@ -93,7 +93,7 @@ const WestWynAboutSection = () => {
 
                 <ul className="relative mt-[clamp(1rem,2vw,1.5rem)] space-y-3">
                   <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
-                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                    <span className="text-[1.05rem] font-bold text-[#ddbc69]">
                       5 min
                     </span>
                     <span className="text-[0.95rem] leading-[1.4] text-white/85">
@@ -101,7 +101,7 @@ const WestWynAboutSection = () => {
                     </span>
                   </li>
                   <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
-                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                    <span className="text-[1.05rem] font-bold text-[#ddbc69]">
                       15 min
                     </span>
                     <span className="text-[0.95rem] leading-[1.4] text-white/85">
@@ -109,7 +109,7 @@ const WestWynAboutSection = () => {
                     </span>
                   </li>
                   <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
-                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                    <span className="text-[1.05rem] font-bold text-[#ddbc69]">
                       18 min
                     </span>
                     <span className="text-[0.95rem] leading-[1.4] text-white/85">
@@ -117,7 +117,7 @@ const WestWynAboutSection = () => {
                     </span>
                   </li>
                   <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
-                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                    <span className="text-[1.05rem] font-bold text-[#ddbc69]">
                       30 min
                     </span>
                     <span className="text-[0.95rem] leading-[1.4] text-white/85">
@@ -125,7 +125,7 @@ const WestWynAboutSection = () => {
                     </span>
                   </li>
                   <li className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
-                    <span className="text-[1.05rem] font-bold text-[#deae3c]">
+                    <span className="text-[1.05rem] font-bold text-[#ddbc69]">
                       45 min
                     </span>
                     <span className="text-[0.95rem] leading-[1.4] text-white/85">
@@ -145,11 +145,11 @@ const WestWynAboutSection = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/50 to-transparent" />
-                <div className="pointer-events-none absolute left-4 top-4 rounded-full border border-[#deae3c]/30 bg-black/75 px-4 py-2 text-[0.8rem] font-semibold text-white shadow-lg backdrop-blur-sm">
+                <div className="pointer-events-none absolute left-4 top-4 rounded-full border border-[#ddbc69]/30 bg-black/75 px-4 py-2 text-[0.8rem] font-semibold text-white shadow-lg backdrop-blur-sm">
                   WestWyn Estates, Polarpur
                 </div>
                 <div className="pointer-events-none absolute bottom-4 right-4 hidden rounded-xl border border-white/15 bg-black/75 px-4 py-3 text-right shadow-lg backdrop-blur-sm sm:block">
-                  <p className="text-[0.75rem] uppercase tracking-[0.16em] text-[#deae3c]">
+                  <p className="text-[0.75rem] uppercase tracking-[0.16em] text-[#ddbc69]">
                     Map View
                   </p>
                   <p className="mt-1 text-[0.9rem] font-medium text-white">
@@ -182,3 +182,4 @@ const WestWynAboutSection = () => {
 };
 
 export default WestWynAboutSection;
+

@@ -115,7 +115,7 @@ const TestimonialPagination = () => {
   return (
     <div className="bg-black py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-center text-3xl font-bold text-[#deae3c] mb-12">
+        <h2 className="text-center text-3xl font-bold text-[#ddbc69] mb-12">
           #1 Choice of 561+ Families Across India and Globe
         </h2>
 
@@ -133,7 +133,7 @@ const TestimonialPagination = () => {
               <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-sm">
                 {/* Avatar */}
                 <div className="flex justify-center -mt-16 mb-4">
-                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#deae3c]">
+                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#ddbc69]">
                     <Image
                       src={testimonials[currentMobileIndex].avatar}
                       alt={testimonials[currentMobileIndex].name}
@@ -146,20 +146,20 @@ const TestimonialPagination = () => {
                   <h3 className="text-xl font-bold text-gray-800">
                     {testimonials[currentMobileIndex].name}
                   </h3>
-                  <p className="text-sm text-[#deae3c] font-medium">
+                  <p className="text-sm text-[#ddbc69] font-medium">
                     {testimonials[currentMobileIndex].location}
                   </p>
                 </div>
 
                 {/* Quote */}
                 <div className="relative">
-                  <div className="absolute -top-6 left-0 text-5xl text-[#deae3c] opacity-20">
+                  <div className="absolute -top-6 left-0 text-5xl text-[#ddbc69] opacity-20">
                     “
                   </div>
                   <p className="text-gray-600 italic text-center px-2">
                     {testimonials[currentMobileIndex].quote}
                   </p>
-                  <div className="absolute -bottom-6 right-0 text-5xl text-[#deae3c] opacity-20">
+                  <div className="absolute -bottom-6 right-0 text-5xl text-[#ddbc69] opacity-20">
                     ”
                   </div>
                 </div>
@@ -169,7 +169,7 @@ const TestimonialPagination = () => {
               <div className="flex justify-center space-x-4 mt-6">
                 <Button
                   onClick={prevMobileSlide}
-                  className="bg-[#deae3c] hover:bg-[#deae3c] text-white rounded-full p-2"
+                  className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white rounded-full p-2"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </Button>
@@ -180,14 +180,14 @@ const TestimonialPagination = () => {
                     <button
                       key={index}
                       onClick={() => setCurrentMobileIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-colors ${currentMobileIndex === index ? "bg-[#deae3c]" : "bg-gray-300"}`}
+                      className={`w-3 h-3 rounded-full transition-colors ${currentMobileIndex === index ? "bg-[#ddbc69]" : "bg-gray-300"}`}
                     />
                   ))}
                 </div>
 
                 <Button
                   onClick={nextMobileSlide}
-                  className="bg-[#deae3c] hover:bg-[#deae3c] text-white rounded-full p-2"
+                  className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white rounded-full p-2"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </Button>
@@ -203,7 +203,7 @@ const TestimonialPagination = () => {
             <button
               onClick={prevPage}
               disabled={currentPage === 1}
-              className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 p-2 rounded-full ${currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-[#deae3c] hover:bg-[#deae3c] hover:text-white"}`}
+              className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 p-2 rounded-full ${currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-[#ddbc69] hover:bg-[#ddbc69] hover:text-white"}`}
             >
               <ChevronLeft className="h-8 w-8" />
             </button>
@@ -211,7 +211,7 @@ const TestimonialPagination = () => {
             <button
               onClick={nextPage}
               disabled={currentPage === totalPages}
-              className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 p-2 rounded-full ${currentPage === totalPages ? "text-gray-400 cursor-not-allowed" : "text-[#deae3c] hover:bg-[#deae3c] hover:text-white"}`}
+              className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 p-2 rounded-full ${currentPage === totalPages ? "text-gray-400 cursor-not-allowed" : "text-[#ddbc69] hover:bg-[#ddbc69] hover:text-white"}`}
             >
               <ChevronRight className="h-8 w-8" />
             </button>
@@ -228,7 +228,7 @@ const TestimonialPagination = () => {
                 >
                   {/* Avatar */}
                   <div className="flex justify-center mt-4 mb-4">
-                    <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#deae3c] shadow-md">
+                    <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#ddbc69] shadow-md">
                       <Image
                         src={testimonial.avatar}
                         alt={testimonial.name}
@@ -243,20 +243,20 @@ const TestimonialPagination = () => {
                     <h3 className="text-xl font-bold text-gray-800">
                       {testimonial.name}
                     </h3>
-                    <p className="text-sm text-[#deae3c] font-medium mb-4">
+                    <p className="text-sm text-[#ddbc69] font-medium mb-4">
                       {testimonial.location}
                     </p>
                   </div>
 
                   {/* Quote */}
                   <div className="px-6 pb-4 relative">
-                    <div className="absolute top-0 left-6 text-5xl text-[#deae3c] opacity-10">
+                    <div className="absolute top-0 left-6 text-5xl text-[#ddbc69] opacity-10">
                       “
                     </div>
                     <p className="text-gray-600 italic text-center">
                       {testimonial.quote}
                     </p>
-                    <div className="absolute bottom-0 right-6 text-5xl text-[#deae3c] opacity-10">
+                    <div className="absolute bottom-0 right-6 text-5xl text-[#ddbc69] opacity-10">
                       ”
                     </div>
                   </div>
@@ -270,7 +270,7 @@ const TestimonialPagination = () => {
                 <button
                   key={index}
                   onClick={() => paginate(index + 1)}
-                  className={`w-3 h-3 rounded-full transition-colors ${currentPage === index + 1 ? "bg-[#deae3c]" : "bg-gray-300"}`}
+                  className={`w-3 h-3 rounded-full transition-colors ${currentPage === index + 1 ? "bg-[#ddbc69]" : "bg-gray-300"}`}
                 />
               ))}
             </div>
@@ -282,3 +282,4 @@ const TestimonialPagination = () => {
 };
 
 export default TestimonialPagination;
+

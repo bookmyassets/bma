@@ -29,7 +29,7 @@ export default function AboutBMA() {
           <div className="mb-[clamp(1rem,3vw,1.75rem)] flex flex-col items-center text-center">
             <div className="flex items-center gap-3">
               <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-                <span className="text-[#deae3c]">BookMyAssets</span> : Trusted
+                <span className="text-[#ddbc69]">BookMyAssets</span> : Trusted
                 Developers in Dholera{" "}
               </h2>
             </div>
@@ -55,7 +55,7 @@ export default function AboutBMA() {
                     hover:shadow-xl transition-shadow
                   "
                   >
-                    <div className="text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#deae3c] mb-2">
+                    <div className="text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#ddbc69] mb-2">
                       {value}
                     </div>
                     <p className="text-[clamp(0.75rem,1.5vw,0.875rem)] text-gray-700 font-medium text-center">
@@ -71,7 +71,7 @@ export default function AboutBMA() {
               <div className="flex items-center justify-center gap-4">
                 <Link
                   href="/about"
-                  className="flex items-center gap-2 bg-[#deae3c] hover:bg-[#c99a2e] text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto justify-center text-[clamp(0.875rem,1.5vw,1rem)]"
+                  className="flex items-center gap-2 bg-[#ddbc69] hover:bg-[#c99a2e] text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto justify-center text-[clamp(0.875rem,1.5vw,1rem)]"
                   
                 >
                   Know More About Us

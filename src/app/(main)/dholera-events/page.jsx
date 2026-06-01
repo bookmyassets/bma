@@ -123,7 +123,7 @@ export default function page() {
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Location</p>
                 <a href="https://maps.app.goo.gl/oZHMZEpNRPMw33Q88">
-                  <span className="text-[#deae3c]">TBD</span>
+                  <span className="text-[#ddbc69]">TBD</span>
                 </a>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function page() {
             <div className="flex flex-col items-center text-center">
               <div
                 className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3"
-                style={{ backgroundColor: "#deae3c" }}
+                style={{ backgroundColor: "#ddbc69" }}
               >
                 <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-black" />
               </div>
@@ -150,7 +150,7 @@ export default function page() {
             <div className="flex flex-col items-center text-center">
               <div
                 className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3"
-                style={{ backgroundColor: "#deae3c" }}
+                style={{ backgroundColor: "#ddbc69" }}
               >
                 <MapPin className="w-6 h-6 md:w-8 md:h-8 text-black" />
               </div>
@@ -162,7 +162,7 @@ export default function page() {
             <div className="flex flex-col items-center text-center">
               <div
                 className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3"
-                style={{ backgroundColor: "#deae3c" }}
+                style={{ backgroundColor: "#ddbc69" }}
               >
                 <FileText className="w-6 h-6 md:w-8 md:h-8 text-black" />
               </div>
@@ -176,7 +176,7 @@ export default function page() {
             <div className="flex flex-col items-center text-center">
               <div
                 className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-2 md:mb-3"
-                style={{ backgroundColor: "#deae3c" }}
+                style={{ backgroundColor: "#ddbc69" }}
               >
                 <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-black" />
               </div>
@@ -396,3 +396,4 @@ export default function page() {
     </>
   );
 }
+

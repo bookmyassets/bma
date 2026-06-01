@@ -359,7 +359,7 @@ export default function LeadForm({ title, button }) {
                       value={formData.fullName}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69] placeholder-gray-400"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -378,7 +378,7 @@ export default function LeadForm({ title, button }) {
                       value={formData.mobileNumber}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69] placeholder-gray-400"
                       placeholder="Enter your mobile number"
                     />
                   </div>
@@ -397,7 +397,7 @@ export default function LeadForm({ title, button }) {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69] placeholder-gray-400"
                     placeholder="Enter your email address"
                   />
                 </div>
@@ -413,7 +413,7 @@ export default function LeadForm({ title, button }) {
                     className={`w-auto font-bold px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] rounded-lg transition-all duration-300 ${
                       isLoading || isDisabled || !recaptchaLoaded
                         ? "bg-gray-600 cursor-not-allowed text-gray-400"
-                        : "bg-[#deae3c] hover:bg-[#c99a2d] text-black shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                        : "bg-[#ddbc69] hover:bg-[#c99a2d] text-black shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                     }`}
                   >
                     {isLoading ? (
@@ -453,3 +453,4 @@ export default function LeadForm({ title, button }) {
     </div>
   );
 }
+

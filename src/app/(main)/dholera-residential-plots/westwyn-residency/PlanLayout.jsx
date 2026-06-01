@@ -152,7 +152,7 @@ const PlanLayout = () => {
                     <div
                       className="h-1 w-full"
                       style={{
-                        background: "linear-gradient(90deg, #deae3c, #f0c96a)",
+                        background: "linear-gradient(90deg, #ddbc69, #f0c96a)",
                       }}
                     />
 
@@ -160,7 +160,7 @@ const PlanLayout = () => {
                       {/* Title */}
                       <span
                         className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
-                        style={{ color: "#deae3c", letterSpacing: "0.01em" }}
+                        style={{ color: "#ddbc69", letterSpacing: "0.01em" }}
                       >
                         {title}
                       </span>
@@ -192,14 +192,14 @@ const PlanLayout = () => {
             <div className="flex justify-center items-center flex-row gap-4 ">
               <button
                 onClick={openBrochureForm}
-                className="bg-[#deae3c] text-white px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
+                className="bg-[#ddbc69] text-white px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
               >
                 <FaDownload />
                 Download Plan Layout
               </button>
 
               <Link href="https://maps.app.goo.gl/cokFB3ntW2a66ntD7">
-                <p className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                   <FaMapLocation />
                   Project Location
                 </p>
@@ -230,3 +230,4 @@ const PlanLayout = () => {
 };
 
 export default PlanLayout;
+

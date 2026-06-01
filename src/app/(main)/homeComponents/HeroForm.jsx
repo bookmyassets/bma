@@ -46,7 +46,7 @@ function FormInput({
           bg-gray-50
           text-gray-800
           placeholder:text-gray-400
-          focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400
+          focus:outline-none focus:ring-1 focus:ring-[#ddbc69] focus:border-[#ddbc69]
           transition-colors
         "
       />
@@ -257,7 +257,7 @@ export default function HeroForm() {
           <p className="text-[clamp(0.8rem,1.1vw,0.875rem)] text-gray-600 mb-[clamp(0.2rem,0.5vw,0.4rem)]">
             Your request has been submitted successfully.
           </p>
-          <p className="text-[clamp(0.8rem,1.1vw,0.875rem)] text-yellow-600 font-semibold">
+          <p className="text-[clamp(0.8rem,1.1vw,0.875rem)] text-[#ddbc69] font-semibold">
             Our expert will contact you within 24 hours for your free
             consultation.
           </p>
@@ -318,14 +318,14 @@ export default function HeroForm() {
               w-full
               py-[clamp(0.5rem,1vw,0.75rem)]
               px-[clamp(1rem,2vw,1.5rem)]
-              bg-gradient-to-r from-yellow-500 to-yellow-600
+              bg-gradient-to-r from-[#ddbc69] to-[#ddbc69]
               text-white
               text-[clamp(0.875rem,1.25vw,1rem)]
               font-semibold
               rounded-lg
-              hover:from-yellow-600 hover:to-yellow-700
+              hover:from-[#ddbc69] hover:to-[#ddbc69]
               transition-all
-              shadow-md hover:shadow-yellow-500/20
+              shadow-md hover:shadow-[#ddbc69]/20
               disabled:opacity-70 disabled:cursor-not-allowed
               touch-manipulation
             "
@@ -337,3 +337,4 @@ export default function HeroForm() {
     </div>
   );
 }
+

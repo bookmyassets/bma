@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { FaUser, FaPhoneAlt, FaClock } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assests/Bmalogo.png";
+import logo from "@/assests/bma-dedicated-to-dholera.svg";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function Popup({
@@ -411,8 +411,8 @@ export default function Popup({
                 <Image
                   src={logo}
                   alt="Logo"
-                  width={50}
-                  height={50}
+                  width={120}
+                  height={120}
                   className="rounded-full"
                 />
                 {/* Shine effect */}

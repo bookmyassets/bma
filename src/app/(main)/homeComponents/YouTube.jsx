@@ -95,7 +95,7 @@ export default function ShortsSection() {
       aria-label="Dholera in Motion"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-[#deae3c] font-bold text-center mb-2">
+        <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-[#ddbc69] font-bold text-center mb-2">
           Dholera Drone Shorts{" "}
         </h2>
         <p className="text-center font-light text-white text-lg mb-6">
@@ -205,7 +205,7 @@ export default function ShortsSection() {
                 aria-label={`Go to slide ${i + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   currentIndex === i
-                    ? "bg-[#deae3c] w-6"
+                    ? "bg-[#ddbc69] w-6"
                     : "bg-white/30 hover:bg-white/50 w-2"
                 }`}
               />

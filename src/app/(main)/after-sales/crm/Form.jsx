@@ -961,7 +961,7 @@ export default function Form() {
       <main className="min-h-screen bg-[#151f28] px-[clamp(1rem,4vw,3rem)] py-[clamp(5rem,8vw,7rem)] text-white">
         <div className="mx-auto max-w-[64rem]">
           <div className="mb-[clamp(1.5rem,3vw,2.5rem)]">
-            <p className="mb-[0.5rem] text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#debe6b]">
+            <p className="mb-[0.5rem] text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
               After Sales
             </p>
             <h1 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.1]">
@@ -975,7 +975,7 @@ export default function Form() {
                 key={workflowId}
                 type="button"
                 onClick={() => selectWorkflow(workflowId)}
-                className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)] text-left transition hover:border-[#debe6b]/60 hover:bg-[#203140]"
+                className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)] text-left transition hover:border-[#ddbc69]/60 hover:bg-[#203140]"
               >
                 <span className="block text-[clamp(1.125rem,2vw,1.5rem)] font-semibold text-white">
                   {workflow.label}
@@ -995,7 +995,7 @@ export default function Form() {
     <main className="min-h-screen bg-[#151f28] px-[clamp(1rem,4vw,3rem)] py-[clamp(5rem,8vw,7rem)] text-white">
       <div className="mx-auto max-w-[76rem]">
         <div className="mb-[clamp(1.5rem,3vw,2.5rem)]">
-          <p className="mb-[0.5rem] text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#debe6b]">
+          <p className="mb-[0.5rem] text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
             After Sales
           </p>
           <div className="flex flex-wrap items-center justify-between gap-[1rem]">
@@ -1005,7 +1005,7 @@ export default function Form() {
             <button
               type="button"
               onClick={returnToDashboard}
-              className="rounded-lg border border-white/15 px-[1rem] py-[0.625rem] text-[0.875rem] font-semibold text-white/80 transition hover:border-[#debe6b]/60 hover:text-[#debe6b]"
+              className="rounded-lg border border-white/15 px-[1rem] py-[0.625rem] text-[0.875rem] font-semibold text-white/80 transition hover:border-[#ddbc69]/60 hover:text-[#ddbc69]"
             >
               Back To Dashboard
             </button>
@@ -1030,7 +1030,7 @@ export default function Form() {
                       onClick={() => setClientCount(count)}
                       className={`rounded-md px-[0.875rem] py-[0.5rem] text-[0.875rem] font-medium transition ${
                         clientCount === count
-                          ? "bg-[#debe6b] text-black"
+                          ? "bg-[#ddbc69] text-black"
                           : "text-white/75 hover:bg-white/10"
                       }`}
                     >
@@ -1057,7 +1057,7 @@ export default function Form() {
                           onChange={(event) =>
                             updateClient(index, "salutation", event.target.value)
                           }
-                          className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#debe6b]"
+                          className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
                         >
                           <option value="Mr.">Mr.</option>
                           <option value="Ms.">Ms.</option>
@@ -1103,7 +1103,7 @@ export default function Form() {
                     onChange={(event) =>
                       updateBooking("projectName", event.target.value)
                     }
-                    className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#debe6b]"
+                    className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
                   >
                     <option value="">Select project</option>
                     {PROJECT_OPTIONS.map((project) => (
@@ -1163,7 +1163,7 @@ export default function Form() {
                   Receipt Details
                 </h2>
                 {lastReceiptNumber && (
-                  <div className="mb-[1rem] rounded-lg border border-[#debe6b]/30 bg-[#debe6b]/10 px-[0.875rem] py-[0.625rem] text-[0.875rem] text-[#debe6b]">
+                  <div className="mb-[1rem] rounded-lg border border-[#ddbc69]/30 bg-[#ddbc69]/10 px-[0.875rem] py-[0.625rem] text-[0.875rem] text-[#ddbc69]">
                     Last generated receipt:{" "}
                     <span className="font-mono font-semibold">
                       {lastReceiptNumber}
@@ -1243,7 +1243,7 @@ export default function Form() {
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-[1rem] w-full rounded-lg bg-[#debe6b] px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-black transition hover:bg-[#f1cf78] disabled:cursor-not-allowed disabled:opacity-60"
+                className="mt-[1rem] w-full rounded-lg bg-[#ddbc69] px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-black transition hover:bg-[#f1cf78] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {loading ? "Preparing Preview..." : "Preview Selected Documents"}
               </button>
@@ -1252,7 +1252,7 @@ export default function Form() {
                 type="button"
                 onClick={handleFinalDownload}
                 disabled={!previews.length || finalizing}
-                className="mt-[0.75rem] w-full rounded-lg border border-[#debe6b]/50 px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-[#debe6b] transition hover:bg-[#debe6b]/10 disabled:cursor-not-allowed disabled:opacity-50"
+                className="mt-[0.75rem] w-full rounded-lg border border-[#ddbc69]/50 px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-[#ddbc69] transition hover:bg-[#ddbc69]/10 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {finalizing ? "Downloading..." : "Confirm And Download"}
               </button>
@@ -1311,7 +1311,7 @@ function Input({ label, value, onChange, type = "text", readOnly = false }) {
         value={value}
         readOnly={readOnly}
         onChange={(event) => onChange?.(event.target.value)}
-        className={`rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none transition focus:border-[#debe6b] ${
+        className={`rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none transition focus:border-[#ddbc69] ${
           readOnly ? "cursor-not-allowed opacity-70" : ""
         }`}
       />
@@ -1327,8 +1327,9 @@ function Textarea({ label, value, onChange }) {
         value={value}
         onChange={(event) => onChange(event.target.value)}
         rows={4}
-        className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none transition focus:border-[#debe6b]"
+        className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none transition focus:border-[#ddbc69]"
       />
     </label>
   );
 }
+

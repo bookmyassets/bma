@@ -532,7 +532,7 @@ export default function LandingPage({ openForm }) {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#ddbc69] h-4 w-4"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -550,7 +550,7 @@ export default function LandingPage({ openForm }) {
                           value={formData.fullName}
                           onChange={handleChange}
                           required
-                          className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                          className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-300 hover:border-[#ddbc69] transition-colors text-sm"
                         />
                       </motion.div>
 
@@ -562,7 +562,7 @@ export default function LandingPage({ openForm }) {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-4 w-4"
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#ddbc69] h-4 w-4"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -583,7 +583,7 @@ export default function LandingPage({ openForm }) {
                           minLength={10}
                           maxLength={15}
                           required
-                          className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-300 hover:border-yellow-400 transition-colors text-sm"
+                          className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-300 hover:border-[#ddbc69] transition-colors text-sm"
                         />
                       </motion.div>
                     </div>
@@ -603,7 +603,7 @@ export default function LandingPage({ openForm }) {
                       id=""
                       onClick={handleSubmit}
                       disabled={isLoading}
-                      className="w-full py-3 px-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-lg hover:shadow-yellow-500/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="w-full py-3 px-6 bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] text-white rounded-lg hover:from-[#ddbc69] hover:to-[#ddbc69] transition-all shadow-lg hover:shadow-[#ddbc69]/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       {isLoading ? "Submitting..." : "Get A Call Back"}
                     </motion.button>
@@ -621,58 +621,58 @@ export default function LandingPage({ openForm }) {
             <div className="grid max-sm:hidden md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-gray-200">
               {/* Land Parcel */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
                   <Home className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold flex items-center justify-center text-[#deae3c]">
+                <h3 className="text-lg font-semibold flex items-center justify-center text-[#ddbc69]">
                   Immediate Possession
                 </h3>
-                <p className="text-lg font-bold text-[#deae3c]"></p>
+                <p className="text-lg font-bold text-[#ddbc69]"></p>
               </div>
 
               {/* Type */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
                   <CheckCircle className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold flex items-center justify-center text-[#deae3c]">
+                <h3 className="text-lg font-semibold flex items-center justify-center text-[#ddbc69]">
                   Government Approved
                 </h3>
-                <p className="text-lg font-bold text-[#deae3c]"></p>
+                <p className="text-lg font-bold text-[#ddbc69]"></p>
               </div>
 
               {/* Amenities */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
                   <CalendarCheck className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold flex items-center justify-center text-[#deae3c]">
+                <h3 className="text-lg font-semibold flex items-center justify-center text-[#ddbc69]">
                   365 Days Site Visit
                 </h3>
-                <p className="text-lg font-bold text-[#deae3c]"></p>
+                <p className="text-lg font-bold text-[#ddbc69]"></p>
               </div>
 
               {/* Price */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
                   <FileCheck className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold flex items-center justify-center text-[#deae3c]">
+                <h3 className="text-lg font-semibold flex items-center justify-center text-[#ddbc69]">
                   Due Diligence
                 </h3>
-                <p className="text-lg font-bold text-[#deae3c]"></p>
+                <p className="text-lg font-bold text-[#ddbc69]"></p>
                 <p className="text-xs text-gray-500"></p>
               </div>
 
               {/* Download Brochure */}
               <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-2">
+                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
                   <Download className="w-4 h-4 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-gray-800 mb-1"></h3>
                 <button
                   onClick={openBrochure}
-                  className="bg-[#deae3c] hover:bg-[#f3bb39] text-white font-semibold py-1 px-3 rounded-lg transition-colors duration-300 text-sm"
+                  className="bg-[#ddbc69] hover:bg-[#f3bb39] text-white font-semibold py-1 px-3 rounded-lg transition-colors duration-300 text-sm"
                 >
                   Download Brochure
                 </button>
@@ -696,3 +696,4 @@ export default function LandingPage({ openForm }) {
     </div>
   );
 }
+

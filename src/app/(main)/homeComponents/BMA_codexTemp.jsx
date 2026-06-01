@@ -119,7 +119,7 @@ export default function AboutBMA() {
           <div className="mb-[clamp(1rem,3vw,1.75rem)] flex flex-col items-center text-center">
             <div className="flex items-center gap-3">
               <h2 className="mx-auto max-w-5xl text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold leading-tight text-gray-900">
-                <span className="text-[#deae3c]">BookMyAssets</span> : Trusted
+                <span className="text-[#ddbc69]">BookMyAssets</span> : Trusted
                 Developers in Dholera{" "}
               </h2>
             </div>
@@ -143,7 +143,7 @@ export default function AboutBMA() {
                     key={label}
                     className="flex min-h-[7rem] flex-col items-center justify-center rounded-2xl bg-white p-[clamp(0.875rem,2vw,1.25rem)] shadow-md transition-shadow hover:shadow-xl"
                   >
-                    <div className="mb-2 text-center text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#deae3c]">
+                    <div className="mb-2 text-center text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#ddbc69]">
                       <AnimatedCounter
                         target={target}
                         suffix={suffix}
@@ -163,7 +163,7 @@ export default function AboutBMA() {
               <div className="flex items-center justify-center gap-4">
                 <Link
                   href="/about"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#deae3c] px-6 py-2 text-[clamp(0.875rem,1.5vw,1rem)] font-semibold text-white shadow-md transition-all hover:bg-[#c99a2e] hover:shadow-lg sm:w-auto"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#ddbc69] px-6 py-2 text-[clamp(0.875rem,1.5vw,1rem)] font-semibold text-white shadow-md transition-all hover:bg-[#c99a2e] hover:shadow-lg sm:w-auto"
                 >
                   Know More About Us
                 </Link>
@@ -182,7 +182,7 @@ export default function AboutBMA() {
                     return (
                       <div
                         key={item.id}
-                        className={`flex flex-col items-center shadow-[#deae3c] shadow-lg gap-[clamp(0.5rem,1.5vw,0.75rem)] rounded-xl border border-gray-100 bg-white p-[clamp(0.75rem,2vw,1rem)] transition-shadow hover:shadow-md ${
+                        className={`flex flex-col items-center shadow-[#ddbc69] shadow-lg gap-[clamp(0.5rem,1.5vw,0.75rem)] rounded-xl border border-gray-100 bg-white p-[clamp(0.75rem,2vw,1rem)] transition-shadow hover:shadow-md ${
                           isLastOdd ? "col-span-2 sm:col-span-1" : ""
                         }`}
                       >

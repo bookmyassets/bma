@@ -29,7 +29,7 @@ export default function ChannelPartnerPage() {
             <div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
                 Become a{" "}
-                <span style={{ color: "#deae3c" }}>Channel Partner</span>
+                <span style={{ color: "#ddbc69" }}>Channel Partner</span>
               </h1>
               <p className="text-xl mb-8 text-gray-200">
                 Join BookMyAssets and unlock premium opportunities in Dholera
@@ -57,7 +57,7 @@ export default function ChannelPartnerPage() {
             {/* Hero Image Placeholder */}
             <div
               className="rounded-2xl p-8 text-center shadow-2xl"
-              style={{ backgroundColor: "#deae3c" }}
+              style={{ backgroundColor: "#ddbc69" }}
             >
               <div className="text-6xl mb-4">🤝</div>
               <h3
@@ -111,7 +111,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-4">
                     <div
                       className="p-3 rounded-lg"
-                      style={{ backgroundColor: "#deae3c", opacity: 1 }}
+                      style={{ backgroundColor: "#ddbc69", opacity: 1 }}
                     >
                       <div className="w-6 h-6" style={{ color: "#0d0d0d" }}>
                         📋
@@ -134,7 +134,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-4">
                     <div
                       className="p-3 rounded-lg"
-                      style={{ backgroundColor: "#deae3c", opacity: 1 }}
+                      style={{ backgroundColor: "#ddbc69", opacity: 1 }}
                     >
                       <div className="w-6 h-6" style={{ color: "#0d0d0d" }}>
                         ✅
@@ -157,7 +157,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-4">
                     <div
                       className="p-3 rounded-lg"
-                      style={{ backgroundColor: "#deae3c", opacity: 1 }}
+                      style={{ backgroundColor: "#ddbc69", opacity: 1 }}
                     >
                       <div className="w-6 h-6" style={{ color: "#0d0d0d" }}>
                         🎧
@@ -180,7 +180,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-4">
                     <div
                       className="p-3 rounded-lg"
-                      style={{ backgroundColor: "#deae3c", opacity: 1 }}
+                      style={{ backgroundColor: "#ddbc69", opacity: 1 }}
                     >
                       <div className="w-6 h-6" style={{ color: "#0d0d0d" }}>
                         💰
@@ -203,7 +203,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-4 md:col-span-2">
                     <div
                       className="p-3 rounded-lg"
-                      style={{ backgroundColor: "#deae3c", opacity: 1 }}
+                      style={{ backgroundColor: "#ddbc69", opacity: 1 }}
                     >
                       <div className="w-6 h-6" style={{ color: "#0d0d0d" }}>
                         🎓
@@ -228,7 +228,7 @@ export default function ChannelPartnerPage() {
               {/* About WestWyn County Section */}
               <div
                 className="bg-white p-8 rounded-xl shadow-lg border"
-                style={{ borderColor: "#deae3c", borderWidth: "1px" }}
+                style={{ borderColor: "#ddbc69", borderWidth: "1px" }}
               >
                 <h2
                   className="text-3xl font-bold mb-6"
@@ -245,7 +245,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-3">
                     <div
                       className="w-2 h-2 rounded-full mt-2"
-                      style={{ backgroundColor: "#deae3c" }}
+                      style={{ backgroundColor: "#ddbc69" }}
                     ></div>
                     <div>
                       <h4
@@ -264,7 +264,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-3">
                     <div
                       className="w-2 h-2 rounded-full mt-2"
-                      style={{ backgroundColor: "#deae3c" }}
+                      style={{ backgroundColor: "#ddbc69" }}
                     ></div>
                     <div>
                       <h4
@@ -283,7 +283,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-3">
                     <div
                       className="w-2 h-2 rounded-full mt-2"
-                      style={{ backgroundColor: "#deae3c" }}
+                      style={{ backgroundColor: "#ddbc69" }}
                     ></div>
                     <div>
                       <h4
@@ -301,7 +301,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-3">
                     <div
                       className="w-2 h-2 rounded-full mt-2"
-                      style={{ backgroundColor: "#deae3c" }}
+                      style={{ backgroundColor: "#ddbc69" }}
                     ></div>
                     <div>
                       <h4
@@ -358,7 +358,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
                     <div
                       className="text-white p-2 rounded-lg text-sm font-bold"
-                      style={{ backgroundColor: "#deae3c", color: "#0d0d0d" }}
+                      style={{ backgroundColor: "#ddbc69", color: "#0d0d0d" }}
                     >
                       2
                     </div>
@@ -400,7 +400,7 @@ export default function ChannelPartnerPage() {
                   <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
                     <div
                       className="text-white p-2 rounded-lg text-sm font-bold"
-                      style={{ backgroundColor: "#deae3c", color: "#0d0d0d" }}
+                      style={{ backgroundColor: "#ddbc69", color: "#0d0d0d" }}
                     >
                       4
                     </div>
@@ -452,3 +452,4 @@ export default function ChannelPartnerPage() {
     </div>
   );
 }
+

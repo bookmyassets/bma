@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import logo from "@/assests/bma-logo-black.png";
+import logo from "@/assests/bma-dedicated-to-dholera.svg";
 
 export default function ContactForm({
   onClose,
@@ -361,8 +361,8 @@ export default function ContactForm({
             <Image
               src={logo}
               alt="Logo"
-              width={60}
-              height={60}
+              width={120}
+              height={120}
               className="rounded-lg"
             />
           </motion.div>
@@ -445,14 +445,14 @@ export default function ContactForm({
               transition={{ delay: 0.4 }}
               className="relative"
             >
-              <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
+              <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#ddbc69]" />
               <input
                 name="fullName"
                 placeholder="Full Name *"
                 value={formData.fullName}
                 onChange={handleChange}
                 required
-                className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
+                className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-700 hover:border-[#ddbc69] transition-colors"
               />
             </motion.div>
 
@@ -462,7 +462,7 @@ export default function ContactForm({
               transition={{ delay: 0.5 }}
               className="relative"
             >
-              <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
+              <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#ddbc69]" />
               <input
                 name="phone"
                 type="tel"
@@ -470,7 +470,7 @@ export default function ContactForm({
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
+                className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-700 hover:border-[#ddbc69] transition-colors"
               />
             </motion.div>
 
@@ -490,7 +490,7 @@ export default function ContactForm({
               className={`w-full py-3 px-6 text-black rounded-lg font-semibold transition-all shadow-lg transform active:scale-95 text-base ${
                 isLoading || isDisabled || !recaptchaLoaded
                   ? "bg-gray-600 cursor-not-allowed opacity-70"
-                  : "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 hover:shadow-yellow-500/20 hover:scale-105"
+                  : "bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] hover:from-[#ddbc69] hover:to-[#ddbc69] hover:shadow-[#ddbc69]/20 hover:scale-105"
               }`}
             >
               {isLoading ? (
@@ -527,3 +527,4 @@ export default function ContactForm({
     </div>
   );
 }
+

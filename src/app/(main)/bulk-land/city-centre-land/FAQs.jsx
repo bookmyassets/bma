@@ -48,7 +48,7 @@ export default function FAQSection() {
               More Questions about Dholera Smart City?
             </p>
             <div className="pt-4">
-              <a className="px-2 py-3 bg-[#deae3c] rounded-md" href="tel:+918130371647">Give Us A Missed Call</a>
+              <a className="px-2 py-3 bg-[#ddbc69] rounded-md" href="tel:+918130371647">Give Us A Missed Call</a>
             </div>
           </div>
 
@@ -94,3 +94,4 @@ export default function FAQSection() {
     </>
   );
 }
+

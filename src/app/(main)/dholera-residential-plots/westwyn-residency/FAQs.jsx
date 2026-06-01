@@ -50,7 +50,7 @@ export default function FAQSection() {
             </p>
             <div className="pt-4">
               <a
-                className="px-2 py-3 bg-[#deae3c] rounded-md"
+                className="px-2 py-3 bg-[#ddbc69] rounded-md"
                 href="tel:+918130371647"
               >
                 Request a Call Back
@@ -99,3 +99,4 @@ export default function FAQSection() {
     </>
   );
 }
+

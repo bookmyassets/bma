@@ -22,13 +22,13 @@ export default function MobilePropertyGrid() {
   }
 
   return (
-    <div className="w-full md:hidden  bg-[#deae3c] overflow-hidden">
+    <div className="w-full md:hidden  bg-[#ddbc69] overflow-hidden">
       {/* Top row */}
       <div className="grid grid-cols-2 divide-x divide-yellow-600">
         {/* Land Parcel */}
         <div className="p-3 text-center">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
-            <Home className="w-3 h-3 text-[#deae3c]" />
+            <Home className="w-3 h-3 text-[#ddbc69]" />
           </div>
           <h3 className="text-xs font-semibold text-white mb-1"> </h3>
           <p className="text-sm font-bold text-white">Immediate Possesion</p>
@@ -37,7 +37,7 @@ export default function MobilePropertyGrid() {
         {/* Type */}
         <div className="p-3 text-center">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
-            <CheckCircle className="w-3 h-3 text-[#deae3c]" />
+            <CheckCircle className="w-3 h-3 text-[#ddbc69]" />
           </div>
           <h3 className="text-xs font-semibold text-white mb-1"></h3>
           <p className="text-sm font-bold text-white">Government Approved</p>
@@ -45,11 +45,11 @@ export default function MobilePropertyGrid() {
       </div>
 
       {/* Bottom row */}
-      <div className="grid grid-cols-2 divide-x divide-yellow-600 border-t border-yellow-600">
+      <div className="grid grid-cols-2 divide-x divide-yellow-600 border-t border-[#ddbc69]">
         {/* Amenities */}
         <div className="p-3 text-center">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
-            <CalendarCheck className="w-3 h-3 text-[#deae3c]" />
+            <CalendarCheck className="w-3 h-3 text-[#ddbc69]" />
           </div>
           <h3 className="text-xs font-semibold text-white mb-1"> </h3>
           <p className="text-sm font-bold text-white leading-tight">
@@ -60,7 +60,7 @@ export default function MobilePropertyGrid() {
         {/* Price */}
         <div className="p-3 text-center">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-1">
-            <FileCheck className="w-3 h-3 text-[#deae3c]" />
+            <FileCheck className="w-3 h-3 text-[#ddbc69]" />
           </div>
           <h3 className="text-xs font-semibold text-white mb-1"></h3>
           <p className="text-sm font-bold text-white">Due Diligence</p>
@@ -68,9 +68,9 @@ export default function MobilePropertyGrid() {
       </div>
 
       {/* Download Brochure - Full width at bottom */}
-      <div className="p-3 text-center bg-[#c49634] border-t border-yellow-600">
+      <div className="p-3 text-center bg-[#c49634] border-t border-[#ddbc69]">
         <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center mx-auto mb-2">
-          <Download className="w-3 h-3 text-[#deae3c]" />
+          <Download className="w-3 h-3 text-[#ddbc69]" />
         </div>
         <h3 className="text-xs font-semibold text-white" onClick={openBrochure}>Download Brochure</h3>
       </div>

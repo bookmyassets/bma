@@ -207,7 +207,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   };
 
   return (
-    <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
+    <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-[#ddbc69]/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
       <div>
         <h3 className="text-black font-semibold text-center text-lg md:text-[clamp(1.25rem,1.85vw,1.7rem)] leading-tight">
           Invest in India's First Smart City
@@ -223,7 +223,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
       <input
         name="fullName"
         placeholder="Full Name*"
-        className="w-full h-10 md:h-[clamp(2.25rem,3.45vw,2.85rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+        className="w-full h-10 md:h-[clamp(2.25rem,3.45vw,2.85rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
         value={formData.fullName}
         onChange={handleChange}
         required
@@ -232,7 +232,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         name="phone"
         placeholder="Phone Number*"
         type="tel"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
         value={formData.phone}
         onChange={handleChange}
         required
@@ -241,7 +241,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         name="email"
         placeholder="Email (Optional)"
         type="email"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
         value={formData.email}
         onChange={handleChange}
       />
@@ -249,14 +249,14 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         name="city"
         placeholder="City*"
         type="text"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
         value={formData.city}
         onChange={handleChange}
         required
       />
       <select
         name="investmentAmt"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-yellow-600/25 focus:border-yellow-500 rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
         value={formData.investmentAmt}
         onChange={handleChange}
         required
@@ -276,7 +276,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         disabled={isLoading || parentIsDisabled || !recaptchaLoaded}
         className={`w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] font-bold px-6 rounded-lg transition-all duration-300 text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest ${isLoading || parentIsDisabled || !recaptchaLoaded
             ? "bg-gray-600 cursor-not-allowed text-gray-400"
-            : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            : "bg-[#ddbc69] hover:bg-[#ddbc69] text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           }`}
       >
         {isLoading ? (

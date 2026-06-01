@@ -151,7 +151,7 @@ export default function BookMyAssets() {
       <div className="bg-black text-white py-8 text-center px-4">
         <h1
           className="text-4xl md:text-5xl font-bold mb-4"
-          style={{ color: "#deae4c" }}
+          style={{ color: "#ddbc69" }}
         >
           BookMyAssets
         </h1>
@@ -168,7 +168,7 @@ export default function BookMyAssets() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <h2
             className="text-3xl md:text-4xl font-bold text-center mb-8"
-            style={{ color: "#deae4c" }}
+            style={{ color: "#ddbc69" }}
           >
             365 Days That Changed Everything
           </h2>
@@ -188,7 +188,7 @@ export default function BookMyAssets() {
                   timelineVisible ? "timeline-progress" : ""
                 }`}
                 style={{
-                  backgroundColor: "#deae4c",
+                  backgroundColor: "#ddbc69",
                   boxShadow: "0 0 20px rgba(222, 174, 76, 0.5)",
                 }}
               ></div>
@@ -210,13 +210,13 @@ export default function BookMyAssets() {
                     {/* Vertical connector line */}
                     <div
                       className="w-0.5 h-16 mx-auto"
-                      style={{ backgroundColor: "#deae4c" }}
+                      style={{ backgroundColor: "#ddbc69" }}
                     ></div>
 
                     {/* Icon circle */}
                     <div
                       className="relative w-16 h-16 rounded-full border-4 border-white flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg z-10"
-                      style={{ backgroundColor: "#deae4c" }}
+                      style={{ backgroundColor: "#ddbc69" }}
                     >
                       <milestone.icon
                         className="w-7 h-7 text-white"
@@ -225,7 +225,7 @@ export default function BookMyAssets() {
                       <div
                         className="absolute inset-0 rounded-full animate-ping opacity-50"
                         style={{
-                          backgroundColor: "#deae4c",
+                          backgroundColor: "#ddbc69",
                           animationDuration: "2s",
                           animationDelay: `${index * 0.3}s`,
                         }}
@@ -235,17 +235,17 @@ export default function BookMyAssets() {
                     {/* Vertical connector line */}
                     <div
                       className="w-0.5 h-16 mx-auto"
-                      style={{ backgroundColor: "#deae4c" }}
+                      style={{ backgroundColor: "#ddbc69" }}
                     ></div>
 
                     {/* Content card */}
                     <div
                       className="bg-white rounded-lg shadow-lg p-4 w-32 h-32 flex flex-col justify-center transform group-hover:-translate-y-2 group-hover:shadow-xl transition-all duration-300 border-2"
-                      style={{ borderColor: "#deae4c" }}
+                      style={{ borderColor: "#ddbc69" }}
                     >
                       <p
                         className="text-xs font-bold mb-2 text-center"
-                        style={{ color: "#deae4c" }}
+                        style={{ color: "#ddbc69" }}
                       >
                         {milestone.date}
                       </p>
@@ -265,7 +265,7 @@ export default function BookMyAssets() {
               {/* Horizontal line for mobile */}
               <div
                 className="absolute left-0 right-0 h-1 top-20"
-                style={{ backgroundColor: "#deae4c" }}
+                style={{ backgroundColor: "#ddbc69" }}
               ></div>
 
               {milestones.map((milestone, index) => (
@@ -277,13 +277,13 @@ export default function BookMyAssets() {
                   {/* Vertical connector to line */}
                   <div
                     className="w-0.5 h-8 mx-auto"
-                    style={{ backgroundColor: "#deae4c" }}
+                    style={{ backgroundColor: "#ddbc69" }}
                   ></div>
 
                   {/* Icon circle */}
                   <div
                     className="relative w-14 h-14 rounded-full border-4 border-white flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg mb-3 z-10"
-                    style={{ backgroundColor: "#deae4c" }}
+                    style={{ backgroundColor: "#ddbc69" }}
                   >
                     <milestone.icon
                       className="w-6 h-6 text-white"
@@ -294,17 +294,17 @@ export default function BookMyAssets() {
                   {/* Vertical connector to card */}
                   <div
                     className="w-0.5 h-8 mx-auto"
-                    style={{ backgroundColor: "#deae4c" }}
+                    style={{ backgroundColor: "#ddbc69" }}
                   ></div>
 
                   {/* Content card */}
                   <div
                     className="bg-white rounded-lg shadow-md p-3 w-28 h-28 flex flex-col justify-center border-2"
-                    style={{ borderColor: "#deae4c" }}
+                    style={{ borderColor: "#ddbc69" }}
                   >
                     <p
                       className="text-xs font-bold mb-1 text-center"
-                      style={{ color: "#deae4c" }}
+                      style={{ color: "#ddbc69" }}
                     >
                       {milestone.date}
                     </p>
@@ -324,7 +324,7 @@ export default function BookMyAssets() {
         <div className="max-w-7xl mx-auto">
           <p
             className="text-center text-sm tracking-widest uppercase mb-3"
-            style={{ color: "#deae4c" }}
+            style={{ color: "#ddbc69" }}
           >
             The Visionaries Behind BMA
           </p>
@@ -333,7 +333,7 @@ export default function BookMyAssets() {
             style={{ fontFamily: "Georgia, serif" }}
           >
             Meet Our{" "}
-            <em style={{ color: "#deae4c", fontStyle: "italic" }}>Founders</em>
+            <em style={{ color: "#ddbc69", fontStyle: "italic" }}>Founders</em>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-3xl mx-auto">
@@ -349,7 +349,7 @@ export default function BookMyAssets() {
                 {/* Gold top accent */}
                 <div
                   className="absolute top-0 left-0 right-0 h-0.5 z-10"
-                  style={{ backgroundColor: "#deae4c" }}
+                  style={{ backgroundColor: "#ddbc69" }}
                 />
 
                 {/* Image area — 4:5 ratio at card width (~280px wide = 350px tall) */}
@@ -375,7 +375,7 @@ export default function BookMyAssets() {
                       style={{
                         fontFamily: "Georgia, serif",
                         fontSize: "80px",
-                        color: "#deae4c",
+                        color: "#ddbc69",
                         letterSpacing: "-4px",
                       }}
                     >
@@ -394,7 +394,7 @@ export default function BookMyAssets() {
                   </p>
                   <p
                     className="text-xs tracking-widest uppercase mb-3"
-                    style={{ color: "#deae4c", letterSpacing: "0.15em" }}
+                    style={{ color: "#ddbc69", letterSpacing: "0.15em" }}
                   >
                     {founder.title}
                   </p>
@@ -411,7 +411,7 @@ export default function BookMyAssets() {
                   </p>
                   <div
                   className="absolute bottom-0 left-0 right-0 h-0.5 z-10"
-                  style={{ backgroundColor: "#deae4c" }}
+                  style={{ backgroundColor: "#ddbc69" }}
                 />
                 </div>
                 
@@ -449,7 +449,7 @@ export default function BookMyAssets() {
                 style={{
                   backgroundColor:
                     currentSlide === index
-                      ? "#deae4c"
+                      ? "#ddbc69"
                       : "rgba(255,255,255,0.5)",
                 }}
               ></div>
@@ -466,13 +466,13 @@ export default function BookMyAssets() {
             <div>
               <section
                 className="bg-white rounded-xl shadow-lg p-6 md:p-8 border-l-4"
-                style={{ borderColor: "#deae4c" }}
+                style={{ borderColor: "#ddbc69" }}
               >
                 <div className="grid md:grid-cols-1 gap-8">
                   <div>
                     <h2
                       className="text-2xl md:text-3xl font-bold mb-4"
-                      style={{ color: "#deae4c" }}
+                      style={{ color: "#ddbc69" }}
                     >
                       The Beginning
                     </h2>
@@ -516,14 +516,14 @@ export default function BookMyAssets() {
               <section className="bg-white rounded-xl shadow-lg p-6">
                 <h2
                   className="text-2xl md:text-3xl font-bold mb-6"
-                  style={{ color: "#deae4c" }}
+                  style={{ color: "#ddbc69" }}
                 >
                   What we Believe
                 </h2>
                 <div className="space-y-4">
                   <div
                     className="border-l-4 pl-4"
-                    style={{ borderColor: "#deae4c" }}
+                    style={{ borderColor: "#ddbc69" }}
                   >
                     <h3 className="font-bold text-base md:text-lg mb-1">
                       People Over Everything
@@ -535,7 +535,7 @@ export default function BookMyAssets() {
                   </div>
                   <div
                     className="border-l-4 pl-4"
-                    style={{ borderColor: "#deae4c" }}
+                    style={{ borderColor: "#ddbc69" }}
                   >
                     <h3 className="font-bold text-base md:text-lg mb-1">
                       Trust Is Earned Daily
@@ -546,7 +546,7 @@ export default function BookMyAssets() {
                   </div>
                   <div
                     className="border-l-4 pl-4"
-                    style={{ borderColor: "#deae4c" }}
+                    style={{ borderColor: "#ddbc69" }}
                   >
                     <h3 className="font-bold text-base md:text-lg mb-1">
                       Speed Meets Wisdom
@@ -562,7 +562,7 @@ export default function BookMyAssets() {
             <section className="bg-black rounded-xl shadow-lg p-6 text-center">
               <h2
                 className="text-xl md:text-3xl font-bold mb-4"
-                style={{ color: "#deae4c" }}
+                style={{ color: "#ddbc69" }}
               >
                 WE'RE JUST GETTING STARTED
               </h2>
@@ -595,7 +595,7 @@ export default function BookMyAssets() {
                     style={{
                       backgroundColor:
                         currentSlide === index
-                          ? "#deae4c"
+                          ? "#ddbc69"
                           : "rgba(255,255,255,0.5)",
                     }}
                   ></div>
@@ -608,3 +608,4 @@ export default function BookMyAssets() {
     </div>
   );
 }
+

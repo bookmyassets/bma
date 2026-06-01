@@ -106,7 +106,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           <div className="mt-6 pt-4 border-t border-gray-600">
             <Link
               href="/dholera-sir-updates"
-              className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39]  p-3 transition-colors"
+              className="w-full text-center rounded-xl text-white font-semibold bg-[#ddbc69] hover:bg-[#f3bb39]  p-3 transition-colors"
             >
               Explore More
             </Link>
@@ -804,7 +804,7 @@ export default async function Post({ params }) {
                       display: flex;
                     }
                     #related-page-${index}:checked ~ .related-slider .related-dot-${index} {
-                      background-color: #deae3c;
+                      background-color: #ddbc69;
                       width: 2rem;
                     }
                   `,
@@ -893,14 +893,14 @@ export default async function Post({ params }) {
                                 >
                                   <label
                                     htmlFor={`related-page-${prevIndex}`}
-                                    className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#deae3c]"
+                                    className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#ddbc69]"
                                     aria-label="Previous"
                                   >
                                     <span aria-hidden="true">&#8249;</span>
                                   </label>
                                   <label
                                     htmlFor={`related-page-${nextIndex}`}
-                                    className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#deae3c]"
+                                    className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#ddbc69]"
                                     aria-label="Next"
                                   >
                                     <span aria-hidden="true">&#8250;</span>
@@ -917,7 +917,7 @@ export default async function Post({ params }) {
                                 <label
                                   key={`related-dot-${index}`}
                                   htmlFor={`related-page-${index}`}
-                                  className={`related-dot-${index} h-2.5 w-2.5 cursor-pointer rounded-full bg-gray-300 transition-all duration-300 hover:bg-[#deae3c]`}
+                                  className={`related-dot-${index} h-2.5 w-2.5 cursor-pointer rounded-full bg-gray-300 transition-all duration-300 hover:bg-[#ddbc69]`}
                                   aria-label={`Page ${index + 1}`}
                                 />
                               ))}
@@ -971,3 +971,4 @@ export default async function Post({ params }) {
     );
   }
 }
+

@@ -12,7 +12,7 @@ export default function DholeraLandingPage() {
           <div className="max-w-3xl mx-auto">
             <h1
               className="text-xl md:text-3xl font-bold mb-6"
-              style={{ color: "#deae3c" }}
+              style={{ color: "#ddbc69" }}
             >
               Dholera Smart City
             </h1>
@@ -54,3 +54,4 @@ export default function DholeraLandingPage() {
     </div>
   );
 }
+

@@ -65,7 +65,7 @@ export default function LegalClarity() {
           <div>
             <h2
               className="text-2xl md:text-3xl font-bold mb-2"
-              style={{ color: "#deae3c" }}
+              style={{ color: "#ddbc69" }}
             >
               Legal Clarity & Documentation Support
             </h2>
@@ -87,7 +87,7 @@ export default function LegalClarity() {
             >
               <h3
                 className="text-base md:text-lg font-semibold"
-                style={{ color: "#deae3c" }}
+                style={{ color: "#ddbc69" }}
               >
                 What we help verify
               </h3>
@@ -98,7 +98,7 @@ export default function LegalClarity() {
                       className="mt-0.5 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-xs font-bold"
                       style={{
                         backgroundColor: "rgba(222,174,60,0.15)",
-                        color: "#deae3c",
+                        color: "#ddbc69",
                       }}
                     >
                       ✓
@@ -143,7 +143,7 @@ export default function LegalClarity() {
           <div>
             <p
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#deae3c" }}
+              style={{ color: "#ddbc69" }}
             >
               Process — Enquiry to Registry
             </p>
@@ -157,7 +157,7 @@ export default function LegalClarity() {
                     <div
                       className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
                       style={{
-                        backgroundColor: "#deae3c",
+                        backgroundColor: "#ddbc69",
                         color: "#111111",
                       }}
                     >
@@ -191,7 +191,7 @@ export default function LegalClarity() {
               onClick={() => openContactForm("Get Legal Checklist")}
               className="text-sm font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:opacity-90 active:scale-95"
               style={{
-                backgroundColor: "#deae3c",
+                backgroundColor: "#ddbc69",
                 color: "#111111",
               }}
             >

@@ -303,7 +303,7 @@ const onRecaptchaSuccess = async (token) => {
             placeholder="Enter your full name"
             value={formData.fullName}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:border-[#deae3c]"
+            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
             required
           />
           <input
@@ -312,7 +312,7 @@ const onRecaptchaSuccess = async (token) => {
             placeholder="Enter your phone number"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:border-[#deae3c]"
+            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
             required
           />
           {errorMessage && (
@@ -322,7 +322,7 @@ const onRecaptchaSuccess = async (token) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-[#ddbc69] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? "Processing..." : "Get A Call Back"}
           </button>
@@ -344,7 +344,7 @@ const onRecaptchaSuccess = async (token) => {
                 href={getArticlePath(article)}
                 className="block group"
               >
-                <h4 className="text-base font-semibold text-gray-800 mb-1 group-hover:text-[#deae3c] transition-colors">
+                <h4 className="text-base font-semibold text-gray-800 mb-1 group-hover:text-[#ddbc69] transition-colors">
                   {article?.title || `Dholera Update ${index + 1}`}
                 </h4>
                 <p className="text-sm text-gray-500">
@@ -358,7 +358,7 @@ const onRecaptchaSuccess = async (token) => {
 
 
       {/* Newsletter Signup */}
-      {/* <div className="bg-gradient-to-br from-[#deae3c]/10 to-gray-100 rounded-xl p-6 border border-gray-200">
+      {/* <div className="bg-gradient-to-br from-[#ddbc69]/10 to-gray-100 rounded-xl p-6 border border-gray-200">
         <h3 className="text-xl font-bold text-gray-900 mb-4">
           Stay Updated
         </h3>
@@ -369,12 +369,12 @@ const onRecaptchaSuccess = async (token) => {
           <input
             type="email"
             placeholder="Your email address"
-            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#deae3c] focus:border-[#deae3c]"
+            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
             required
           />
           <button 
             type="submit"
-            className="w-full bg-[#deae3c] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-colors shadow-sm hover:shadow-md"
+            className="w-full bg-[#ddbc69] text-gray-900 py-3 rounded-lg font-bold hover:bg-[#d0a235] transition-colors shadow-sm hover:shadow-md"
           >
             Subscribe Now
           </button>
@@ -411,7 +411,7 @@ const onRecaptchaSuccess = async (token) => {
             </p>
             <button
               onClick={() => setShowPopup(false)}
-              className="w-full bg-[#deae3c] text-gray-900 py-2 rounded-lg font-bold hover:bg-[#d0a235]"
+              className="w-full bg-[#ddbc69] text-gray-900 py-2 rounded-lg font-bold hover:bg-[#d0a235]"
             >
               Close
             </button>
@@ -421,3 +421,4 @@ const onRecaptchaSuccess = async (token) => {
     </aside>
   );
 }
+

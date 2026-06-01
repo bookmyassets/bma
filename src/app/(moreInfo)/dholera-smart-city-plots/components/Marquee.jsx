@@ -7,7 +7,7 @@ const Running = () => {
   return (
     <div className="w-full overflow-hidden bg-black py-2.5">
       <div className="flex animate-marquee whitespace-nowrap">
-        <span className="inline-block text-[#deae3c] px-5 py-1.5 rounded-lg shadow text-[15px] font-semibold shrink-0 mr-10">
+        <span className="inline-block text-[#ddbc69] px-5 py-1.5 rounded-lg shadow text-[15px] font-semibold shrink-0 mr-10">
           {text}
         </span>
         {/* duplicate for seamless loop */}

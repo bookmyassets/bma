@@ -55,7 +55,7 @@ export default function DholeraLandingPage() {
           <div className=" w-full">
             <h1 className="text-xl md:text-3xl max-w-7xl mx-auto font-bold md:mb-4 text-center">
               Invest in India's First Planned Smart City:{" "}
-              <span className="text-[#deae3c]">Dholera SIR</span>
+              <span className="text-[#ddbc69]">Dholera SIR</span>
             </h1>
 
             <div className="md:grid md:grid-cols-2 pt-8 max-w-6xl mx-auto  space-y-4">
@@ -66,14 +66,14 @@ export default function DholeraLandingPage() {
               <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
                 <ul className="space-y-4 text-gray-700 ">
                   <li className="flex items-start justify-start gap-2 font-semibold">
-                    <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •
                     </span>
                     <span>Special Investment Region (SIR) Act implemented in 2009</span>
                   </li>
 
                   <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •
                     </span>
                     <span>
@@ -81,7 +81,7 @@ export default function DholeraLandingPage() {
                     </span>
                   </li>
                   <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •
                     </span>
                     <span>
@@ -90,14 +90,14 @@ export default function DholeraLandingPage() {
                   </li>
 
                   <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •
                     </span>
                     <span>35+ Global Companies already Invested</span>
                   </li>
 
                   <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •
                     </span>
                     <span>
@@ -106,7 +106,7 @@ export default function DholeraLandingPage() {
                   </li>
 
                   <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •
                     </span>
                     <span>
@@ -116,7 +116,7 @@ export default function DholeraLandingPage() {
                   </li>
 
                   <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •
                     </span>
                     <span>
@@ -125,7 +125,7 @@ export default function DholeraLandingPage() {
                   </li>
 
                   <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •
                     </span>
                     <span>500% Appreciation in Last 5 Years</span>
@@ -139,3 +139,4 @@ export default function DholeraLandingPage() {
     </div>
   );
 }
+

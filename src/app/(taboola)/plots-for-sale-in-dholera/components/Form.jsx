@@ -4,7 +4,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
-import logo from "@/assests/bma-logo-black.png";
+import logo from "@/assests/bma-with-background.svg";
 import Image from "next/image";
 
 export default function Form({ title }) {
@@ -299,14 +299,14 @@ export default function Form({ title }) {
                       transition={{ delay: 0.4 }}
                       className="relative"
                     >
-                      <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
+                      <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#ddbc69]" />
                       <input
                         name="fullName"
                         placeholder="Full Name *"
                         value={formData.fullName}
                         onChange={handleChange}
                         required
-                        className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
+                        className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-700 hover:border-[#ddbc69] transition-colors"
                       />
                     </motion.div>
 
@@ -316,7 +316,7 @@ export default function Form({ title }) {
                       transition={{ delay: 0.5 }}
                       className="relative"
                     >
-                      <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
+                      <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#ddbc69]" />
                       <input
                         name="phone"
                         type="tel"
@@ -324,7 +324,7 @@ export default function Form({ title }) {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"
+                        className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-700 hover:border-[#ddbc69] transition-colors"
                       />
                     </motion.div>
                   </div>
@@ -340,7 +340,7 @@ export default function Form({ title }) {
                     className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
                       isLoading || !recaptchaLoaded
                         ? "bg-gray-400 cursor-not-allowed text-gray-600"
-                        : "bg-[#deae3c] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                        : "bg-[#ddbc69] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
                     }`}
                   >
                     {isLoading ? (
@@ -387,3 +387,4 @@ export default function Form({ title }) {
     </AnimatePresence>
   );
 }
+

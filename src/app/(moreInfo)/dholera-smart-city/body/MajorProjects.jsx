@@ -147,7 +147,7 @@ function DesktopDesign() {
         <div className="order-1 md:order-2 bg-black p-6 md:p-8">
           <h2
             className="text-3xl md:text-4xl font-bold text-center mb-2"
-            style={{ color: "#deae3c" }}
+            style={{ color: "#ddbc69" }}
           >
             Major Projects in Dholera
           </h2>
@@ -162,7 +162,7 @@ function DesktopDesign() {
                 onClick={() => handleProjectClick(project)}
                 className={`w-full text-left p-4 md:p-5 rounded-xl transition-all duration-300 transform hover:scale-102 ${
                   selectedProject.id === project.id
-                    ? "bg-gradient-to-r from-[#deae3c] to-[#c49a2f] text-white shadow-xl scale-102"
+                    ? "bg-gradient-to-r from-[#ddbc69] to-[#c49a2f] text-white shadow-xl scale-102"
                     : "bg-gray-800 hover:bg-gray-700 text-white shadow-md hover:shadow-lg"
                 }`}
               >
@@ -171,8 +171,8 @@ function DesktopDesign() {
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
                         selectedProject.id === project.id
-                          ? "bg-white text-[#deae3c]"
-                          : "bg-[#deae3c] text-white"
+                          ? "bg-white text-[#ddbc69]"
+                          : "bg-[#ddbc69] text-white"
                       }`}
                     >
                       {project.id}
@@ -227,7 +227,7 @@ function Design3() {
 
   return (
     <div className="md:hidden bg-black flex flex-col">
-      <h2 className="text-xl font-bold text-center mb-2 pt-4 text-[#deae3c]">
+      <h2 className="text-xl font-bold text-center mb-2 pt-4 text-[#ddbc69]">
         Major Projects
       </h2>
       <PopupForm
@@ -243,7 +243,7 @@ function Design3() {
             className="h-1 bg-gray-700 rounded-full flex-1 overflow-hidden"
           >
             <div
-              className={`h-full bg-[#deae3c] transition-all duration-300 ${
+              className={`h-full bg-[#ddbc69] transition-all duration-300 ${
                 idx === currentIndex
                   ? "w-full"
                   : idx < currentIndex
@@ -258,7 +258,7 @@ function Design3() {
       {/* Header */}
       <div className="px-4 py-2">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-[#deae3c] to-[#c49a2f] rounded-full flex items-center justify-center text-white font-bold">
+          <div className="w-12 h-12 bg-gradient-to-br from-[#ddbc69] to-[#c49a2f] rounded-full flex items-center justify-center text-white font-bold">
             {currentProject.id}
           </div>
           <div>
@@ -344,7 +344,7 @@ function Design3() {
         </button>
         <button
           onClick={nextProject}
-          className="bg-[#deae3c] text-white p-4 rounded-full shadow-lg active:scale-95 transition-transform"
+          className="bg-[#ddbc69] text-white p-4 rounded-full shadow-lg active:scale-95 transition-transform"
         >
           <svg
             className="w-6 h-6"
@@ -381,7 +381,7 @@ export default function MobileDesignShowcase() {
         <p className="text-xl md:text-3xl pt-8 font-semibold text-center">
           The Complete Dholera Blueprint
         </p>
-        <div className="w-24 h-1 mt-4 mb-4 bg-[#deae3c] mx-auto"></div>
+        <div className="w-24 h-1 mt-4 mb-4 bg-[#ddbc69] mx-auto"></div>
         <p className=" mb-4  max-w-4xl mx-auto px-8 text-left">
           India’s first Special Investment Region planned with clearly defined
           industrial, residential, commercial, and logistics zones. The master
@@ -398,3 +398,4 @@ export default function MobileDesignShowcase() {
     </div>
   );
 }
+

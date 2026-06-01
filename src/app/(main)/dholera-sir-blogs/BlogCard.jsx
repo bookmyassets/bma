@@ -15,7 +15,7 @@ export default function BlogCard({ post }) {
       href={post.slug?.current ? `/dholera-sir-blogs/${post.slug.current}` : "#"}
       className="group h-full block"
     >
-      <div className="flex flex-col bg-white shadow-2xl hover:shadow-2xl hover:shadow-[#deae3c] rounded-xl overflow-hidden h-full transition-all duration-300 group-hover:-translate-y-1 border border-gray-200">
+      <div className="flex flex-col bg-white shadow-2xl hover:shadow-2xl hover:shadow-[#ddbc69] rounded-xl overflow-hidden h-full transition-all duration-300 group-hover:-translate-y-1 border border-gray-200">
         {/* Image */}
         <div className="relative h-48 shrink-0">
           {post.mainImage ? (
@@ -43,7 +43,7 @@ export default function BlogCard({ post }) {
           <div className="border-t border-gray-200 pt-4 mt-auto">
             <div className="flex justify-between text-sm">
               <p className="text-black">{formatDate(post.publishedAt || post._createdAt)}</p>
-              <p className="font-medium hover:underline text-[#deae3c]">Explore More →</p>
+              <p className="font-medium hover:underline text-[#ddbc69]">Explore More →</p>
             </div>
           </div>
         </div>

@@ -81,7 +81,7 @@ const amenities = [
   {
     icon: <Zap className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Power & Water Supply",
-    color: "from-yellow-600 to-yellow-800",
+    color: "from-[#ddbc69] to-yellow-800",
   },
   {
     icon: <User className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
@@ -143,7 +143,7 @@ const ProjectAmenities = () => {
             <p
               className="font-bold tracking-[0.25em] uppercase mb-3
                 text-xl sm:text-2xl lg:text-3xl"
-              style={{ color: "#deae3c" }}
+              style={{ color: "#ddbc69" }}
             >
               WestWyn Estates
             </p>
@@ -230,7 +230,7 @@ const ProjectAmenities = () => {
                     onClick={() => setCurrent(i)}
                     className={`rounded-full transition-all duration-500 ${
                       i === current
-                        ? "w-6 h-2 bg-[#deae3c]"
+                        ? "w-6 h-2 bg-[#ddbc69]"
                         : "w-2 h-2 bg-white/70 hover:bg-white"
                     }`}
                     aria-label={`Go to slide ${i + 1}`}
@@ -252,7 +252,7 @@ const ProjectAmenities = () => {
                   <div className="flex justify-center mt-6 sm:mt-8">
                     <button
                       onClick={() => setShowAll(!showAll)}
-                      className="show-btn bg-[#deae3c] text-white
+                      className="show-btn bg-[#ddbc69] text-white
                         px-6 sm:px-8 py-2 sm:py-3
                         rounded-full font-semibold
                         text-xs sm:text-sm
@@ -281,3 +281,4 @@ const ProjectAmenities = () => {
 };
 
 export default ProjectAmenities;
+

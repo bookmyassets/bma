@@ -132,7 +132,7 @@ export default function AboutBMA() {
       <div className="pt-8 py-4 bg-gray-50" id="why-bma">
         <div className="max-w-7xl mx-auto px-4 ">
           <motion.h2
-            className="text-2xl md:text-[32px] lg:text-[40px] font-semibold text-center text-[#deae3c] mb-12 md:mb-16"
+            className="text-2xl md:text-[32px] lg:text-[40px] font-semibold text-center text-[#ddbc69] mb-12 md:mb-16"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -145,7 +145,7 @@ export default function AboutBMA() {
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
-                className="group border-2 border-gray-300 rounded-2xl p-2 md:p-4 bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:border-[#deae3c]"
+                className="group border-2 border-gray-300 rounded-2xl p-2 md:p-4 bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:border-[#ddbc69]"
                 variants={cardVariants}
                 initial="hidden"
                 animate="visible"
@@ -154,13 +154,13 @@ export default function AboutBMA() {
                 {/* Card Header */}
                 <div className="text-center mb-6">
                   <motion.div
-                    className="w-10 md:w-16 h-10 md:h-16 mx-auto mb-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex justify-center items-center border-2 border-gray-200 group-hover:border-[#deae3c] transition-all duration-300"
+                    className="w-10 md:w-16 h-10 md:h-16 mx-auto mb-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex justify-center items-center border-2 border-gray-200 group-hover:border-[#ddbc69] transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 200 }}
                   >
                     <div className="scale-125">{benefit.icon}</div>
                   </motion.div>
-                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#deae3c] transition-colors duration-300 leading-snug">
+                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#ddbc69] transition-colors duration-300 leading-snug">
                     {benefit.title}
                   </h3>
                 </div>
@@ -253,3 +253,4 @@ export default function AboutBMA() {
     </>
   );
 }
+

@@ -150,7 +150,7 @@ export default function PrideClient() {
                   "",
                 )
               }
-              className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
+              className="mt-4 bg-[#ddbc69] hover:bg-[#ddbc69] text-black font-semibold py-2 px-6 rounded-full transition-colors duration-300 w-full"
             >
               Book Your Plot In Dholera from ₹8 Lakh
             </button>
@@ -213,13 +213,13 @@ export default function PrideClient() {
                     "brochure",
                   )
                 }
-                className="bg-[#deae3c] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
+                className="bg-[#ddbc69] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
               >
                 Download Brochure
               </button>
 
               <a href="https://wa.me/918130371647">
-                <span className="bg-white border w-full border-[#deae3c] text-[#deae3c] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                <span className="bg-white border w-full border-[#ddbc69] text-[#ddbc69] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                   <FaWhatsapp />
                   Book Site Visit
                 </span>
@@ -232,7 +232,7 @@ export default function PrideClient() {
       {/* Section 4 - Why Invest in Dholera Forest Estate */}
       <div className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#deae3c] mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#ddbc69] mb-12 md:mb-16">
             Why Invest in Pride?
           </h2>
 
@@ -285,15 +285,15 @@ export default function PrideClient() {
                     >
                       <span className="flex items-center space-x-4">
                         <span className="text-2xl">{benefit.icon}</span>
-                        <span className="text-lg md:text-xl font-semibold text-gray-800 group-hover:text-[#deae3c]">
+                        <span className="text-lg md:text-xl font-semibold text-gray-800 group-hover:text-[#ddbc69]">
                           {benefit.title}
                         </span>
                       </span>
                       <span className="flex-shrink-0 transition-transform duration-200">
                         {openIndex === index ? (
-                          <Minus className="w-6 h-6 text-[#deae3c]" />
+                          <Minus className="w-6 h-6 text-[#ddbc69]" />
                         ) : (
-                          <Plus className="w-6 h-6 text-gray-400 group-hover:text-[#deae3c]" />
+                          <Plus className="w-6 h-6 text-gray-400 group-hover:text-[#ddbc69]" />
                         )}
                       </span>
                     </button>
@@ -378,3 +378,4 @@ export default function PrideClient() {
     </>
   );
 }
+

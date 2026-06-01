@@ -209,10 +209,10 @@ export default function Ribbon() {
 
   return (
     <>
-  <div className="bg-gray-100 border-t-4 border-b-4 border-[#deae3c] py-8">
+  <div className="bg-gray-100 border-t-4 border-b-4 border-[#ddbc69] py-8">
   {/* Header */}
   <div className="text-center px-6 mb-6">
-    <h2 className="text-[#deae3c] font-bold text-xl md:text-2xl mb-2">
+    <h2 className="text-[#ddbc69] font-bold text-xl md:text-2xl mb-2">
       Govt Approved plots , 12 Minute from the Expressway
     </h2>
     <p className="text-white text-base"></p>
@@ -230,7 +230,7 @@ export default function Ribbon() {
           <div className="relative">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute left-3 top-3.5 h-5 w-5 text-[#deae3c]"
+              className="absolute left-3 top-3.5 h-5 w-5 text-[#ddbc69]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -248,7 +248,7 @@ export default function Ribbon() {
               value={formData.fullName}
               onChange={handleChange}
               required
-              className="w-full p-3 pl-11 text-base bg-white text-gray-800 rounded-md border-2 border-gray-300 focus:border-[#deae3c] focus:outline-none"
+              className="w-full p-3 pl-11 text-base bg-white text-gray-800 rounded-md border-2 border-gray-300 focus:border-[#ddbc69] focus:outline-none"
             />
           </div>
         </div>
@@ -261,7 +261,7 @@ export default function Ribbon() {
           <div className="relative">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute left-3 top-3.5 h-5 w-5 text-[#deae3c]"
+              className="absolute left-3 top-3.5 h-5 w-5 text-[#ddbc69]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -282,7 +282,7 @@ export default function Ribbon() {
               minLength={10}
               maxLength={15}
               required
-              className="w-full p-3 pl-11 text-base bg-white text-gray-800 rounded-md border-2 border-gray-300 focus:border-[#deae3c] focus:outline-none"
+              className="w-full p-3 pl-11 text-base bg-white text-gray-800 rounded-md border-2 border-gray-300 focus:border-[#ddbc69] focus:outline-none"
             />
           </div>
         </div>
@@ -305,7 +305,7 @@ export default function Ribbon() {
           id="ribbion-form"
           onClick={handleSubmit}
           disabled={isLoading}
-          className="w-full py-3.5 bg-[#deae3c] text-black font-bold text-lg rounded-md hover:bg-[#c99a2e] transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full py-3.5 bg-[#ddbc69] text-black font-bold text-lg rounded-md hover:bg-[#c99a2e] transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isLoading ? "Please Wait..." : "Get A Call Back"}
         </button>
@@ -320,8 +320,8 @@ export default function Ribbon() {
   {/* Thank You Modal */}
   {showThankYou && (
     <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4">
-      <div className="bg-white rounded-lg p-8 shadow-xl text-center max-w-sm border-4 border-[#deae3c]">
-        <div className="w-16 h-16 bg-[#deae3c] rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="bg-white rounded-lg p-8 shadow-xl text-center max-w-sm border-4 border-[#ddbc69]">
+        <div className="w-16 h-16 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8 text-white"

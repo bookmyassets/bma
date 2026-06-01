@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import React from "react";
-import logo from "@/assests/bma-logo-black.png";
+import logo from "@/assests/bma-dedicated-to-dholera.svg";
 import Image from "next/image";
 
 export default function RagePopup({
@@ -266,8 +266,8 @@ export default function RagePopup({
                       <Image
                         src={logo}
                         alt="Logo"
-                        width={60}
-                        height={60}
+                        width={120}
+                        height={120}
                         className="rounded-lg"
                       />
                     </div>
@@ -337,7 +337,7 @@ export default function RagePopup({
                 className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 text-base ${
                   isLoading
                     ? "bg-gray-400 cursor-not-allowed text-gray-600"
-                    : "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                    : "bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] hover:from-[#ddbc69] hover:to-[#ddbc69] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
                 }`}
               >
                 {isLoading ? (

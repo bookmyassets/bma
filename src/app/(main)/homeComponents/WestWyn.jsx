@@ -44,7 +44,7 @@ export default function WestWyn() {
         <div className="mb-[clamp(1.25rem,3vw,2rem)] text-center">
           <h2 className="mx-auto max-w-[64rem] text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold leading-[1.15] text-gray-900">
             Premium{" "}
-            <span className="text-[#deae3c]">Residential Plots in Dholera</span>
+            <span className="text-[#ddbc69]">Residential Plots in Dholera</span>
           </h2>
         </div>
 
@@ -65,7 +65,7 @@ export default function WestWyn() {
               </div>
 
               <div className="flex flex-1 flex-col p-[clamp(0.5rem,1.25vw,0.875rem)]">
-                <span className="mb-[0.75rem] inline-flex w-fit rounded-full border-[0.0625rem] border-[#deae3c]/40 bg-[#deae3c]/10 px-[0.875rem] py-[0.375rem] text-[0.75rem] font-semibold leading-none text-[#9a741d]">
+                <span className="mb-[0.75rem] inline-flex w-fit rounded-full border-[0.0625rem] border-[#ddbc69]/40 bg-[#ddbc69]/10 px-[0.875rem] py-[0.375rem] text-[0.75rem] font-semibold leading-none text-[#9a741d]">
                   {project.tag}
                 </span>
 
@@ -73,7 +73,7 @@ export default function WestWyn() {
                   {project.name}
                 </h3>
 
-                <p className="mb-[0.875rem] text-[clamp(0.9rem,1.25vw,1.0625rem)] font-semibold leading-[1.45] text-[#deae3c]">
+                <p className="mb-[0.875rem] text-[clamp(0.9rem,1.25vw,1.0625rem)] font-semibold leading-[1.45] text-[#ddbc69]">
                   {project.subtext}
                 </p>
 
@@ -87,7 +87,7 @@ export default function WestWyn() {
                       key={point}
                       className="flex items-start gap-[0.5rem] text-[clamp(0.875rem,1.3vw,1rem)] leading-[1.45] text-black"
                     >
-                      <FaCheckCircle className="mt-[0.125rem] shrink-0 text-[1rem] text-[#deae3c]" />
+                      <FaCheckCircle className="mt-[0.125rem] shrink-0 text-[1rem] text-[#ddbc69]" />
                       <span>{point}</span>
                     </li>
                   ))}
@@ -95,7 +95,7 @@ export default function WestWyn() {
 
                 <Link
                   href={project.href}
-                  className="mt-auto inline-flex w-fit items-center gap-[0.5rem] rounded-lg border-[0.0625rem] border-[#deae3c] px-[1rem] py-[0.5rem] text-[clamp(0.8125rem,1vw,0.9375rem)] font-semibold leading-none text-[#deae3c] transition-colors duration-200 hover:bg-[#deae3c] hover:text-white"
+                  className="mt-auto inline-flex w-fit items-center gap-[0.5rem] rounded-lg border-[0.0625rem] border-[#ddbc69] px-[1rem] py-[0.5rem] text-[clamp(0.8125rem,1vw,0.9375rem)] font-semibold leading-none text-[#ddbc69] transition-colors duration-200 hover:bg-[#ddbc69] hover:text-white"
                 >
                   View Project Details
                   <FaArrowRight className="text-[0.75rem]" />

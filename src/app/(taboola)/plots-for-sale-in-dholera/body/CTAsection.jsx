@@ -8,22 +8,22 @@ export default function CTAsection({text1, text2, subTitle}) {
     >
       <div
         className="absolute top-10 left-10 w-24 h-24 rounded-full blur-2xl animate-pulse"
-        style={{ backgroundColor: "#deae3c22" }}
+        style={{ backgroundColor: "#ddbc6922" }}
       />
       <div
         className="absolute bottom-10 right-10 w-36 h-36 rounded-full blur-3xl animate-pulse delay-1000"
-        style={{ backgroundColor: "#deae3c11" }}
+        style={{ backgroundColor: "#ddbc6911" }}
       />
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
         <div className="mb-8">
           <h2 className="text-xl md:text-4xl font-bold text-white mb-4 drop-shadow-lg">
             {text1}{" "}
-            <span style={{ color: "#deae3c" }}>{text2}</span>
+            <span style={{ color: "#ddbc69" }}>{text2}</span>
           </h2>
           <div
             className="w-24 h-1 mx-auto rounded-full"
-            style={{ backgroundColor: "#deae3c" }}
+            style={{ backgroundColor: "#ddbc69" }}
           />
         </div>
 
@@ -38,7 +38,7 @@ export default function CTAsection({text1, text2, subTitle}) {
           <a
             href="tel:+918130371647"
             className="text-black px-4 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-lg shadow-lg transition-all duration-300 hover:scale-105"
-            style={{ backgroundColor: "#deae3c", border: "1px solid #deae3c" }}
+            style={{ backgroundColor: "#ddbc69", border: "1px solid #ddbc69" }}
           >
             <span className="flex items-center justify-center gap-2">
               <svg
@@ -57,7 +57,7 @@ export default function CTAsection({text1, text2, subTitle}) {
             target="_blank"
             rel="noopener noreferrer"
             className="text-black px-4 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-lg shadow-lg transition-all duration-300 hover:scale-105"
-            style={{ backgroundColor: "#deae3c", border: "1px solid #deae3c" }}
+            style={{ backgroundColor: "#ddbc69", border: "1px solid #ddbc69" }}
           >
             <span className="flex items-center justify-center gap-2">
               <svg
@@ -80,3 +80,4 @@ export default function CTAsection({text1, text2, subTitle}) {
     </div>
   );
 }
+

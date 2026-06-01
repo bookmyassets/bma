@@ -90,7 +90,7 @@ export default function Gallery() {
     <div className="py-12 bg-white" id="Gallery">
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
-        <h2 className="text-4xl font-bold text-center text-[#deae3c] mb-4">
+        <h2 className="text-4xl font-bold text-center text-[#ddbc69] mb-4">
           Dholera Gallery
         </h2>
 
@@ -121,7 +121,7 @@ export default function Gallery() {
                 onClick={() => openLightbox(index)}
                 className="snap-center flex-shrink-0 w-64 md:w-80 mx-3 cursor-pointer hover:scale-105 transition duration-300"
               >
-                <div className="rounded-xl overflow-hidden border border-[#deae3c] shadow-lg">
+                <div className="rounded-xl overflow-hidden border border-[#ddbc69] shadow-lg">
                   <div className="relative h-56">
                     <Image
                       src={item.src}
@@ -188,3 +188,4 @@ export default function Gallery() {
     </div>
   );
 }
+

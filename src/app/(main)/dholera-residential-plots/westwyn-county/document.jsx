@@ -90,13 +90,13 @@ export default async function WestWynDocx() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#deae3c] to-yellow-600 py-16">
+      <div className="bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
               {project.title || 'WestWyn County'} Documents
             </h1>
-            <p className="text-xl text-yellow-100 max-w-3xl mx-auto">
+            <p className="text-xl text-[#ddbc69] max-w-3xl mx-auto">
               Access all project documents, approvals, and important information for your investment decision
             </p>
           </div>
@@ -112,7 +112,7 @@ export default async function WestWynDocx() {
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                   Project Documents
                 </h2>
-                <span className="bg-[#deae3c] bg-opacity-20 text-[#deae3c] text-sm font-medium px-3 py-1 rounded-full">
+                <span className="bg-[#ddbc69] bg-opacity-20 text-[#ddbc69] text-sm font-medium px-3 py-1 rounded-full">
                   {allDocuments.length} Document{allDocuments.length !== 1 ? 's' : ''} Available
                 </span>
               </div>
@@ -160,7 +160,7 @@ export default async function WestWynDocx() {
                 <p className="text-gray-500 mb-6">
                   Project documents are being uploaded and will be available shortly.
                 </p>
-                <button className="bg-[#deae3c] text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition-colors">
+                <button className="bg-[#ddbc69] text-white px-6 py-2 rounded-lg hover:bg-[#ddbc69] transition-colors">
                   Contact for Documents
                 </button>
               </div>

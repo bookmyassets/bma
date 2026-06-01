@@ -122,7 +122,7 @@ const projectFeatures = [
 ];
 
 const FeatureCard = ({ icon, title, value }) => (
-  <div className="bg-white rounded-xl p-3 md:p-4 border hover:bg-[#deae3c] group border-gray-200 text-center transition-colors duration-300 ease-in-out">
+  <div className="bg-white rounded-xl p-3 md:p-4 border hover:bg-[#ddbc69] group border-gray-200 text-center transition-colors duration-300 ease-in-out">
     <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 group-hover:text-white group-hover:scale-110 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300 ease-in-out">
       {icon}
     </div>
@@ -147,7 +147,7 @@ export default function Residency() {
         <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold text-black">
           WestWyn Residency : Residential Plots in Dholera
         </h2>
-        <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-[#deae3c] italic font-semibold leading-relaxed">
+        <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-[#ddbc69] italic font-semibold leading-relaxed">
           Registry-Ready | Govt. Approved | Immediate Possession
         </p>
       </div>
@@ -226,7 +226,7 @@ export default function Residency() {
                   onClick={() => setCurrent(i)}
                   className={`rounded-full transition-all duration-500 ${
                     i === current
-                      ? "w-6 h-2 bg-[#deae3c]"
+                      ? "w-6 h-2 bg-[#ddbc69]"
                       : "w-2 h-2 bg-white/70 hover:bg-white"
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
@@ -240,10 +240,10 @@ export default function Residency() {
               return (
                 <div
                   key={i}
-                  className="flex items-center justify-start gap-2 bg-white border border-[#deae3c]/30 rounded-xl p-[clamp(0.25rem,1vw,0.75rem)] shadow-sm hover:border-[#deae3c] hover:shadow-md transition-all duration-200"
+                  className="flex items-center justify-start gap-2 bg-white border border-[#ddbc69]/30 rounded-xl p-[clamp(0.25rem,1vw,0.75rem)] shadow-sm hover:border-[#ddbc69] hover:shadow-md transition-all duration-200"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-[#deae3c]/10 flex items-center justify-center shrink-0">
-                    <Icon className="text-[#deae3c] text-base w-5 h-5" />
+                  <div className="w-12 h-12 rounded-lg bg-[#ddbc69]/10 flex items-center justify-center shrink-0">
+                    <Icon className="text-[#ddbc69] text-base w-5 h-5" />
                   </div>
                   <p className="text-[clamp(1rem,2vw,0.875rem)] font-semibold text-gray-800 leading-snug">
                     {point.text}
@@ -296,7 +296,7 @@ export default function Residency() {
           {amenities.map((amenity, index) => (
             <div
               key={index}
-              className="bg-[#deae3c]/5 backdrop-blur-sm rounded-lg p-4 text-center border border-[#deae3c]/30 hover:bg-[#deae3c]/5 transition-all duration-300"
+              className="bg-[#ddbc69]/5 backdrop-blur-sm rounded-lg p-4 text-center border border-[#ddbc69]/30 hover:bg-[#ddbc69]/5 transition-all duration-300"
             >
               <div className="text-xl md:text-4xl mb-2 flex items-center justify-center">
                 <Image
@@ -315,3 +315,4 @@ export default function Residency() {
     </div>
   );
 }
+

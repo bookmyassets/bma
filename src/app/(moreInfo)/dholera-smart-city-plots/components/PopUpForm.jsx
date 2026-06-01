@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import logo from "@/assests/bma-logo2.png";
+import logo from "@/assests/bma-with-background.svg";
 
 
 export default function PopupForm({ title, sectionId }) {
@@ -316,7 +316,7 @@ export default function PopupForm({ title, sectionId }) {
                     className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
                       isLoading || !recaptchaLoaded
                         ? "bg-gray-400 cursor-not-allowed text-gray-600"
-                        : "bg-[#deae3c] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                        : "bg-[#ddbc69] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
                     }`}
                   >
                     {isLoading ? (
@@ -362,3 +362,4 @@ export default function PopupForm({ title, sectionId }) {
     </AnimatePresence>
   );
 }
+

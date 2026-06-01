@@ -101,7 +101,7 @@ export default function FAQSection() {
             </p>
             <div className="pt-4">
               <a
-                className="inline-flex min-h-[2.75rem] items-center px-4 bg-[#deae3c] rounded-md text-[0.95rem] font-semibold text-black"
+                className="inline-flex min-h-[2.75rem] items-center px-4 bg-[#ddbc69] rounded-md text-[0.95rem] font-semibold text-black"
                 href="tel:+918130371647"
               >
                 Give Us A Missed Call
@@ -158,3 +158,4 @@ export default function FAQSection() {
     </>
   );
 }
+

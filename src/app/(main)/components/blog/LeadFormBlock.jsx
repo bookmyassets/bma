@@ -241,7 +241,7 @@ export default function LeadFormBlock({
 
   return (
     <section className="my-8 w-full">
-      <div className="rounded-[22px] border border-[#deae3c]/35 bg-[#fffaf0] p-5 shadow-[0_12px_28px_rgba(0,0,0,0.06)] sm:p-6">
+      <div className="rounded-[22px] border border-[#ddbc69]/35 bg-[#fffaf0] p-5 shadow-[0_12px_28px_rgba(0,0,0,0.06)] sm:p-6">
         <div className="mb-5">
           <h3 className="text-[clamp(1.35rem,5vw,1.65rem)] font-extrabold leading-tight text-[#111111]">
             {title}
@@ -269,7 +269,7 @@ export default function LeadFormBlock({
                 onChange={handleChange}
                 placeholder="Enter your name"
                 autoComplete="name"
-                className="min-h-12 w-full rounded-xl border border-[#dddddd] bg-white px-4 text-base text-[#111111] outline-none transition focus:border-[#deae3c] focus:ring-4 focus:ring-[#deae3c]/20"
+                className="min-h-12 w-full rounded-xl border border-[#dddddd] bg-white px-4 text-base text-[#111111] outline-none transition focus:border-[#ddbc69] focus:ring-4 focus:ring-[#ddbc69]/20"
               />
             </label>
 
@@ -283,7 +283,7 @@ export default function LeadFormBlock({
                 placeholder="Enter your phone number"
                 autoComplete="tel"
                 inputMode="tel"
-                className="min-h-12 w-full rounded-xl border border-[#dddddd] bg-white px-4 text-base text-[#111111] outline-none transition focus:border-[#deae3c] focus:ring-4 focus:ring-[#deae3c]/20"
+                className="min-h-12 w-full rounded-xl border border-[#dddddd] bg-white px-4 text-base text-[#111111] outline-none transition focus:border-[#ddbc69] focus:ring-4 focus:ring-[#ddbc69]/20"
               />
             </label>
             <div className="flex justify-center">
@@ -296,7 +296,7 @@ export default function LeadFormBlock({
                 className={`w-full font-bold py-3 px-6 rounded-lg transition duration-300 ${
                   isLoading || isDisabled || !recaptchaLoaded
                     ? "bg-gray-600 cursor-not-allowed text-gray-400"
-                    : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-md"
+                    : "bg-[#ddbc69] hover:bg-[#ddbc69] text-white shadow-md"
                 }`}
               >
                 {isLoading ? "Submitting..." : "Get A Call Back"}
@@ -314,3 +314,4 @@ export default function LeadFormBlock({
     </section>
   );
 }
+

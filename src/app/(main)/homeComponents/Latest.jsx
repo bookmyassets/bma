@@ -41,7 +41,7 @@ const RelatedBlogCard = ({ item, type }) => {
         <div className="p-[calc(0.75rem+0.25vw)]">
           <Link href={slug} className="block">
             {/* ✅ clamp() — title scales between 13px and 16px */}
-            <h3 className="text-[clamp(0.8125rem,1.5vw,1rem)] font-semibold text-gray-800 line-clamp-2 mb-2 hover:text-[#deae3c] transition-colors duration-300">
+            <h3 className="text-[clamp(0.8125rem,1.5vw,1rem)] font-semibold text-gray-800 line-clamp-2 mb-2 hover:text-[#ddbc69] transition-colors duration-300">
               {item.title}
             </h3>
 
@@ -57,7 +57,7 @@ const RelatedBlogCard = ({ item, type }) => {
               </time>
             </div>
 
-            <span className="text-[#deae3c] hover:text-[#deae4c] text-[clamp(0.75rem,1.2vw,0.875rem)] font-medium inline-flex items-center group">
+            <span className="text-[#ddbc69] hover:text-[#ddbc69] text-[clamp(0.75rem,1.2vw,0.875rem)] font-medium inline-flex items-center group">
               Explore More
               <svg
                 className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
@@ -319,3 +319,4 @@ export default function LatestUpdates() {
     </>
   );
 }
+

@@ -35,7 +35,7 @@ function ProjectCard({ projectName, sections, essentials, location }) {
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-center">
-          <span className="text-[#deae3c]">{projectName}</span>
+          <span className="text-[#ddbc69]">{projectName}</span>
         </h2>
       </div>
 
@@ -56,13 +56,13 @@ function ProjectCard({ projectName, sections, essentials, location }) {
             onClick={() => setActiveSection(index)}
             className={`pb-3 px-6 font-semibold transition-all relative ${
               activeSection === index
-                ? "text-[#deae3c]"
+                ? "text-[#ddbc69]"
                 : "text-gray-400 hover:text-gray-600"
             }`}
           >
             {section.title}
             {activeSection === index && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#deae3c]" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ddbc69]" />
             )}
           </button>
         ))}
@@ -204,3 +204,4 @@ export default function WestWyn() {
     </div>
   );
 }
+

@@ -26,7 +26,7 @@ const PointsList = () => (
     <h1 className="text-white font-bold text-[clamp(1.5rem,3vw,3rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
       Govt. Approved Plots in Dholera
       <br />
-      <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
+      <span className="text-[#ddbc69]">Starting from ₹8 Lakh</span>
     </h1>
 
     {/* Body */}
@@ -43,8 +43,8 @@ const PointsList = () => (
         className="flex gap-[clamp(0.4rem,1vw,0.75rem)] items-center"
       >
         {/* Icon circle */}
-        <div className="shrink-0 w-[clamp(1.1rem,1.5vw,1.35rem)] h-[clamp(1.1rem,1.5vw,1.35rem)] rounded-full border border-yellow-500/60 flex items-center justify-center">
-          <span className="text-[#deae3c] text-[clamp(0.55rem,0.85vw,0.7rem)] font-semibold">
+        <div className="shrink-0 w-[clamp(1.1rem,1.5vw,1.35rem)] h-[clamp(1.1rem,1.5vw,1.35rem)] rounded-full border border-[#ddbc69]/60 flex items-center justify-center">
+          <span className="text-[#ddbc69] text-[clamp(0.55rem,0.85vw,0.7rem)] font-semibold">
             ➤
           </span>
         </div>
@@ -93,7 +93,7 @@ export default function Hero() {
             <div className="text-white font-bold text-[clamp(1.25rem,4vw,1.75rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
               Dedicated to Dholera
               <br />
-              <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
+              <span className="text-[#ddbc69]">Starting from ₹8 Lakh</span>
             </div>
 
             {points.map((point, i) => (
@@ -101,8 +101,8 @@ export default function Hero() {
                 key={i}
                 className="flex gap-[clamp(0.4rem,1.5vw,0.75rem)] items-start"
               >
-                <div className="mt-0.5 shrink-0 w-[clamp(1rem,3vw,1.2rem)] h-[clamp(1rem,3vw,1.2rem)] rounded-full border border-yellow-500/60 flex items-center justify-center">
-                  <span className="text-[#deae3c] text-[clamp(0.5rem,1.25vw,0.6rem)] font-semibold">
+                <div className="mt-0.5 shrink-0 w-[clamp(1rem,3vw,1.2rem)] h-[clamp(1rem,3vw,1.2rem)] rounded-full border border-[#ddbc69]/60 flex items-center justify-center">
+                  <span className="text-[#ddbc69] text-[clamp(0.5rem,1.25vw,0.6rem)] font-semibold">
                     ➤
                   </span>
                 </div>
@@ -112,7 +112,7 @@ export default function Hero() {
               </div>
             ))}
 
-            <div className="mt-[clamp(0.75rem,2vw,1.25rem)] border-t border-yellow-600/20 pt-[clamp(0.75rem,2vw,1.25rem)]">
+            <div className="mt-[clamp(0.75rem,2vw,1.25rem)] border-t border-[#ddbc69]/20 pt-[clamp(0.75rem,2vw,1.25rem)]">
               <HeroForm />
             </div>
           </div>
@@ -121,3 +121,4 @@ export default function Hero() {
     </div>
   );
 }
+

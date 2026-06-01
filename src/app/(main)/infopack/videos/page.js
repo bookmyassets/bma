@@ -140,7 +140,7 @@ const videos = [
 
               <div className="p-5">
                 {video.title && (
-                  <h3 className="text-lg font-bold text-gray-800 group-hover:text-[#deae3c] transition-colors">
+                  <h3 className="text-lg font-bold text-gray-800 group-hover:text-[#ddbc69] transition-colors">
                     {video.title}
                   </h3>
                 )}
@@ -160,3 +160,4 @@ const videos = [
     </div>
   );
 }
+

@@ -19,7 +19,7 @@ export default function DholeraSmartCity() {
         {/* Section heading */}
         <h2 className="text-[clamp(1.25rem,2.5vw,2rem)] font-semibold text-white text-center mb-[clamp(1rem,2.5vw,1.75rem)] leading-snug">
           Invest in India's First Semiconductor City:{" "}
-          <span className="text-[#deae3c]">Dholera Smart City</span>
+          <span className="text-[#ddbc69]">Dholera Smart City</span>
         </h2>
 
         {/* Two-column layout */}
@@ -45,7 +45,7 @@ export default function DholeraSmartCity() {
               <Link
                 href="https://www.bookmyassets.com/about-dholera-sir"
                 title="Dholera Smart City"
-                className="text-[#deae3c] hover:underline"
+                className="text-[#ddbc69] hover:underline"
               >
                 Dholera Smart City
               </Link>{" "}
@@ -80,3 +80,4 @@ export default function DholeraSmartCity() {
     </section>
   );
 }
+

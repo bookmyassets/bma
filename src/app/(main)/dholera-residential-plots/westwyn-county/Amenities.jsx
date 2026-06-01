@@ -86,7 +86,7 @@ const ProjectAmenities = () => {
     {
       icon: <Lightbulb className="w-8 h-8" />,
       title: "Automated Street Light",
-      color: "from-yellow-500 to-orange-500",
+      color: "from-[#ddbc69] to-orange-500",
       description:
         "Street lights that turn on and off automatically for energy efficiency and safety.",
     },
@@ -121,7 +121,7 @@ const ProjectAmenities = () => {
     {
       icon: <Zap className="w-8 h-8" />,
       title: "Power & Water Supply",
-      color: "from-yellow-600 to-yellow-800",
+      color: "from-[#ddbc69] to-yellow-800",
       description:
         "Reliable and uninterrupted electricity and water supply for daily convenience.",
     },
@@ -144,7 +144,7 @@ const ProjectAmenities = () => {
           </h4>
           <div
             className="w-24 h-1 mx-auto mb-6"
-            style={{ backgroundColor: "#deae3c" }}
+            style={{ backgroundColor: "#ddbc69" }}
           ></div>
           <p
             className="text-xl max-w-3xl mx-auto leading-relaxed"
@@ -188,7 +188,7 @@ const ProjectAmenities = () => {
                 >
                   {/* Front of card */}
                   <div
-                    className="absolute inset-0 bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-[#deae3c] transition-all duration-300 hover:shadow-xl flex flex-col items-center justify-center"
+                    className="absolute inset-0 bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-[#ddbc69] transition-all duration-300 hover:shadow-xl flex flex-col items-center justify-center"
                     style={{ backfaceVisibility: "hidden", height: "100%" }}
                   >
                     <div
@@ -232,7 +232,7 @@ const ProjectAmenities = () => {
                 setShowAll(!showAll);
                 setFlippedCard(null); // Reset flipped card when toggling show all
               }}
-              className="px-6 py-3 bg-[#deae3c] text-white font-medium rounded-lg hover:bg-[#c6992a] transition-colors duration-300"
+              className="px-6 py-3 bg-[#ddbc69] text-white font-medium rounded-lg hover:bg-[#c6992a] transition-colors duration-300"
             >
               {showAll ? "Show Less" : "Show More"}
             </button>
@@ -244,3 +244,4 @@ const ProjectAmenities = () => {
 };
 
 export default ProjectAmenities;
+

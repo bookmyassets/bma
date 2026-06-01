@@ -9,20 +9,20 @@ const projects = [
   {
     name: "Westwyn Estates",
     price: "Rs. 6,700/per sq yd",
-    location: "Polarpur",
+    location: "Polarpur State Highway",
     href: "/dholera-residential-plots/westwyn-estate",
     image: westwynEstatesImage,
   },
   {
     name: "Westwyn Residency",
     price: "Rs. 6,500/per sq yd",
-    location: "Pipariya, Dholera",
+    location: "Pipariya, MDR",
     href: "/dholera-residential-plots/westwyn-residency",
     image: westwynResidencyImage,
   },
   {
     name: "Westwyn County",
-    price: "Rs. 11,000/per sq yd",
+    price: "Re-Selling from Rs. 12,000/per sq yd",
     location: "Fedra-pipli state highway",
     href: "/dholera-residential-plots/westwyn-county",
     image: westwynCountyImage,
@@ -35,7 +35,7 @@ export default function ProjectsSection() {
     <section className="bg-[#080808] py-[clamp(2.5rem,6vw,5rem)] text-white">
       <div className="mx-auto max-w-7xl px-[clamp(1rem,4vw,3rem)]">
         <div className="mb-[clamp(1.5rem,3vw,3rem)] max-w-[42rem]">
-          <span className="text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[#deae3c]">
+          <span className="text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[#ddbc69]">
             Featured Projects
           </span>
           <h2 className="mt-[0.75rem] text-[clamp(1.5rem,3vw,2.5rem)] font-semibold leading-[1.15]">
@@ -47,7 +47,7 @@ export default function ProjectsSection() {
           {projects.map((project) => (
             <article
               key={project.name}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_1.5rem_3rem_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-[0.25rem] hover:border-[#deae3c]/40 hover:bg-white/[0.07]"
+              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_1.5rem_3rem_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-[0.25rem] hover:border-[#ddbc69]/40 hover:bg-white/[0.07]"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-black">
                 <Image
@@ -73,17 +73,17 @@ export default function ProjectsSection() {
                   <h3 className="text-[clamp(1rem,1.6vw,1.25rem)] font-semibold leading-[1.25]">
                     {project.name}
                   </h3>
-                  <p className="mt-[0.375rem] text-[clamp(0.9375rem,1.2vw,1rem)] font-semibold text-[#deae3c]">
+                  <p className="mt-[0.375rem] text-[clamp(0.9375rem,1.2vw,1rem)] font-semibold text-[#ddbc69]">
                     Starting from {project.price}
                   </p>
                 </div>
 
                 <div className="flex items-start gap-[0.625rem] text-[0.875rem] leading-[1.55] text-white/70">
-                  <span className="mt-[0.45rem] h-[0.375rem] w-[0.375rem] shrink-0 rounded-full bg-[#deae3c]" />
+                  <span className="mt-[0.45rem] h-[0.375rem] w-[0.375rem] shrink-0 rounded-full bg-[#ddbc69]" />
                   <span>{project.location}</span>
                 </div>
 
-                <span className="inline-flex min-h-[2.5rem] items-center justify-center rounded-lg bg-[#deae3c] px-[1rem] text-[0.875rem] font-semibold text-black transition-colors duration-300 group-hover:bg-[#f3bb39]">
+                <span className="inline-flex min-h-[2.5rem] items-center justify-center rounded-lg bg-[#ddbc69] px-[1rem] text-[0.875rem] font-semibold text-black transition-colors duration-300 group-hover:bg-[#ddbc69]">
                   Explore
                 </span>
               </Link>
@@ -94,3 +94,4 @@ export default function ProjectsSection() {
     </section>
   );
 }
+

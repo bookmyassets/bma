@@ -79,7 +79,7 @@ export default function OrchidLeadActions({ variant = "hero" }) {
       {variant === "hero" ? (
         <button
           onClick={openContact}
-          className="w-full rounded-full bg-yellow-500 px-6 py-2 font-semibold text-black transition-colors duration-300 hover:bg-yellow-600"
+          className="w-full rounded-full bg-[#ddbc69] px-6 py-2 font-semibold text-black transition-colors duration-300 hover:bg-[#ddbc69]"
         >
           Book Your Plot In Dholera from ₹8 Lakh
         </button>
@@ -87,7 +87,7 @@ export default function OrchidLeadActions({ variant = "hero" }) {
         <div className="flex flex-col gap-4 sm:flex-row">
           <button
             onClick={openBrochure}
-            className="rounded-md bg-[#deae3c] px-6 py-3 font-medium text-black shadow-md transition duration-300 hover:bg-[#f3bb39]"
+            className="rounded-md bg-[#ddbc69] px-6 py-3 font-medium text-black shadow-md transition duration-300 hover:bg-[#f3bb39]"
           >
             Download Brochure
           </button>
@@ -96,7 +96,7 @@ export default function OrchidLeadActions({ variant = "hero" }) {
             href="https://wa.me/918130371647"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center rounded-xl border border-[#deae3c] bg-white px-6 py-3 font-medium text-[#deae3c] transition-colors hover:bg-[#f8f5e6]"
+            className="flex items-center justify-center rounded-xl border border-[#ddbc69] bg-white px-6 py-3 font-medium text-[#ddbc69] transition-colors hover:bg-[#f8f5e6]"
           >
             WhatsApp Site Visit
           </a>

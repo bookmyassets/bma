@@ -170,7 +170,7 @@ export default function MegaIndustries() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-xl md:text-4xl text-center font-bold text-gray-800 mb-4">
             Mega Projects Powering{" "}
-            <span className="text-[#deae3c]">Dholera Smart City</span>
+            <span className="text-[#ddbc69]">Dholera Smart City</span>
           </p>
 
           {/* Slider Container */}

@@ -24,7 +24,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* About Us Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#deae3c] mb-4 border-b border-yellow-200 pb-2">
+            <h3 className="text-xl font-semibold text-[#ddbc69] mb-4 border-b border-[#ddbc69] pb-2">
               About Us
             </h3>
             <p className="text-black mb-4">
@@ -33,16 +33,16 @@ const Footer = () => {
             
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-6">
-              <a href="https://www.facebook.com/share/1AXGEEX1M8/" className="text-gray-500 hover:text-[#deae3c] transition">
+              <a href="https://www.facebook.com/share/1AXGEEX1M8/" className="text-gray-500 hover:text-[#ddbc69] transition">
                 <Facebook size={20} />
               </a>
-              <a href="https://x.com/BookMyAssets" className="text-gray-500 hover:text-[#deae3c] transition">
+              <a href="https://x.com/BookMyAssets" className="text-gray-500 hover:text-[#ddbc69] transition">
                 <Twitter size={20} />
               </a>
-              <a href="https://www.instagram.com/bookmyassets/" className="text-gray-500 hover:text-[#deae3c] transition">
+              <a href="https://www.instagram.com/bookmyassets/" className="text-gray-500 hover:text-[#ddbc69] transition">
                 <Instagram size={20} />
               </a>
-              <a href="https://www.linkedin.com/company/bookmyassetss" className="text-gray-500 hover:text-[#deae3c] transition">
+              <a href="https://www.linkedin.com/company/bookmyassetss" className="text-gray-500 hover:text-[#ddbc69] transition">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -50,14 +50,14 @@ const Footer = () => {
           
           {/* Policies Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#deae3c] mb-4 border-b border-yellow-200 pb-2">
+            <h3 className="text-xl font-semibold text-[#ddbc69] mb-4 border-b border-[#ddbc69] pb-2">
               Policies
             </h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/more-info/policy/copyright"
-                  className="text-black hover:text-[#deae3c] transition flex items-center"
+                  className="text-black hover:text-[#ddbc69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Copyright Policy
                 </Link>
@@ -65,7 +65,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/more-info/policy/terms"
-                  className="text-black hover:text-[#deae3c] transition flex items-center"
+                  className="text-black hover:text-[#ddbc69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Terms of Use
                 </Link>
@@ -73,7 +73,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/more-info/policy/privacy"
-                  className="text-black hover:text-[#deae3c] transition flex items-center"
+                  className="text-black hover:text-[#ddbc69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Privacy Policy
                 </Link>
@@ -81,7 +81,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/more-info/policy/refund-and-cancellation"
-                  className="text-black hover:text-[#deae3c] transition flex items-center"
+                  className="text-black hover:text-[#ddbc69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Refund & Cancellation Policy
                 </Link>
@@ -92,12 +92,12 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#deae3c] mb-4 border-b border-yellow-200 pb-2">
+            <h3 className="text-xl font-semibold text-[#ddbc69] mb-4 border-b border-[#ddbc69] pb-2">
               Reach Our Head office
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <div className="flex-shrink-0 text-yellow-500 mr-3 mt-1">
+                <div className="flex-shrink-0 text-[#ddbc69] mr-3 mt-1">
                   <MapPin size={18} />
                 </div>
                 <span className="text-black">
@@ -106,23 +106,23 @@ const Footer = () => {
                 </span>
               </li>
               <li className="flex items-center">
-                <div className="flex-shrink-0 text-yellow-500 mr-3">
+                <div className="flex-shrink-0 text-[#ddbc69] mr-3">
                   <Mail size={18} />
                 </div>
                 <a
                   href="mailto:info@bookmyassets.com"
-                  className="text-black hover:text-[#deae3c] transition"
+                  className="text-black hover:text-[#ddbc69] transition"
                 >
                   info@bookmyassets.com
                 </a>
               </li>
               <li className="flex items-center" onClick={handleCallClick}>
-                <div className="flex-shrink-0 text-yellow-500 mr-3">
+                <div className="flex-shrink-0 text-[#ddbc69] mr-3">
                   <PhoneCall size={18} />
                 </div>
                 <a
                   href="tel:+918130371647"
-                  className="text-black hover:text-[#deae3c] transition"
+                  className="text-black hover:text-[#ddbc69] transition"
                 >
                   +91 81 30 37 16 47
                 </a>

@@ -19,7 +19,7 @@ export default function BulkLandCard({ landItem, compact = false }) {
         </div>
         <div className={`${compact ? "p-3" : "p-4"}`}>
           <h4
-            className={`font-semibold text-gray-800 group-hover:text-[#deae3c] transition-colors ${
+            className={`font-semibold text-gray-800 group-hover:text-[#ddbc69] transition-colors ${
               compact ? "text-sm" : "text-base"
             }`}
           >

@@ -221,7 +221,7 @@ export default async function page() {
               <h1 className="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-white mb-3">
                 What is Dholera SIR?
               </h1>
-              <div className="w-[clamp(4rem,10vw,6rem)] h-1 bg-[#deae3c] mx-auto"></div>
+              <div className="w-[clamp(4rem,10vw,6rem)] h-1 bg-[#ddbc69] mx-auto"></div>
             </div>
 
             <div className="mx-auto">
@@ -242,7 +242,7 @@ export default async function page() {
                     <strong>
                       <Link
                         href="dholera-sir-blogs/dholera-2025-development-infrastructure-progress"
-                        className="text-[#deae3c] hover:underline"
+                        className="text-[#ddbc69] hover:underline"
                       >
                         Dholera Special Investment Region (Dholera SIR)
                       </Link>
@@ -257,7 +257,7 @@ export default async function page() {
                   </p>
                   <p className="text-white/90 text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.8]">
                     Spread across nearly{" "}
-                    <strong className="text-[#deae3c]">920 sq. km</strong>,
+                    <strong className="text-[#ddbc69]">920 sq. km</strong>,
                     Dholera Smart City is designed to integrate industry,
                     infrastructure, sustainability, and modern living, creating a
                     long-term ecosystem rather than short-term real estate growth.
@@ -285,7 +285,7 @@ export default async function page() {
                 <div className="flex items-center justify-center  flex-row gap-[clamp(0.6rem,1.2vw,0.85rem)]">
                   <Link
                     href="tel:+918130371647"
-                    className="inline-flex items-center justify-center gap-2 rounded-[clamp(0.75rem,1.5vw,1rem)] bg-[#deae3c] px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.4vw,1rem)] text-sm font-semibold text-black transition-transform duration-200 hover:scale-[1.01]"
+                    className="inline-flex items-center justify-center gap-2 rounded-[clamp(0.75rem,1.5vw,1rem)] bg-[#ddbc69] px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.4vw,1rem)] text-sm font-semibold text-black transition-transform duration-200 hover:scale-[1.01]"
                   >
                     <svg
                       className="h-4 w-4 shrink-0"
@@ -301,7 +301,7 @@ export default async function page() {
                     href="https://wa.me/918130371647"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-[clamp(0.75rem,1.5vw,1rem)] border border-[#deae3c] bg-black px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.4vw,1rem)] text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.01]">
+                    className="inline-flex items-center justify-center gap-2 rounded-[clamp(0.75rem,1.5vw,1rem)] border border-[#ddbc69] bg-black px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.4vw,1rem)] text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.01]">
                     <svg
                       className="h-4 w-4 shrink-0"
                       fill="currentColor"
@@ -343,7 +343,7 @@ export default async function page() {
               <div className="grid gap-[clamp(1rem,2vw,1.5rem)] lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
                 <div className="space-y-[clamp(0.75rem,1.5vw,1rem)]">
                   <div className="space-y-[clamp(0.25rem,0.75vw,0.5rem)]">
-                    <p className="inline-flex rounded-full bg-[#deae3c]/15 px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#deae3c]">
+                    <p className="inline-flex rounded-full bg-[#ddbc69]/15 px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
                       Why invest with BookMyAssets
                     </p>
                     <h5 className="text-[clamp(1.35rem,2.5vw,1.9rem)] font-bold text-black">
@@ -354,7 +354,7 @@ export default async function page() {
                   <p className="text-[clamp(0.95rem,1.3vw,1.05rem)] leading-[1.7] text-gray-700">
                     <Link
                       href="/contact"
-                      className="font-semibold text-[#deae3c] underline decoration-[#deae3c]/60 underline-offset-2"
+                      className="font-semibold text-[#ddbc69] underline decoration-[#ddbc69]/60 underline-offset-2"
                     >
                       BookMyAssets
                     </Link>{" "}
@@ -373,7 +373,7 @@ export default async function page() {
                         key={item}
                         className="flex items-center gap-3 text-[0.875rem] font-semibold text-black"
                       >
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#deae3c] text-[0.75rem] font-bold text-black">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#ddbc69] text-[0.75rem] font-bold text-black">
                           ✓
                         </span>
                         <span>{item}</span>
@@ -384,7 +384,7 @@ export default async function page() {
                   <div className="flex flex-col sm:flex-row gap-[clamp(0.6rem,1.2vw,0.85rem)] pt-1">
                     <Link
                       href="/contact"
-                      className="inline-flex items-center justify-center rounded-[clamp(0.65rem,1.2vw,0.9rem)] bg-[#deae3c] px-[clamp(0.9rem,1.8vw,1.25rem)] py-[clamp(0.75rem,1.3vw,0.95rem)] text-sm font-semibold text-black transition-transform duration-200 hover:scale-[1.01]"
+                      className="inline-flex items-center justify-center rounded-[clamp(0.65rem,1.2vw,0.9rem)] bg-[#ddbc69] px-[clamp(0.9rem,1.8vw,1.25rem)] py-[clamp(0.75rem,1.3vw,0.95rem)] text-sm font-semibold text-black transition-transform duration-200 hover:scale-[1.01]"
                     >
                       Talk to Our Expert
                     </Link>
@@ -423,13 +423,13 @@ export default async function page() {
                 Dholera Is Not a Project - It's India's Long-Term Industrial
                 Strategy
               </h5>
-              <div className="w-24 h-1 bg-[#deae3c] mx-auto mb-4"></div>
+              <div className="w-24 h-1 bg-[#ddbc69] mx-auto mb-4"></div>
               <p className="text-lg text-white/90 max-w-4xl mx-auto leading-relaxed">
                 Dholera Smart City is not just about infrastructure-it is about
                 India's industrial future, smart governance, and globally
                 competitive manufacturing. For investors and decision-makers
                 seeking stability, scale, and strategic growth,{" "}
-                <strong className="text-[#deae3c]">Dholera SIR</strong>{" "}
+                <strong className="text-[#ddbc69]">Dholera SIR</strong>{" "}
                 represents a once-in-a-generation urban vision.
               </p>
             </div>
@@ -439,3 +439,4 @@ export default async function page() {
     </>
   );
 }
+

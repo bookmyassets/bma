@@ -90,7 +90,7 @@ export default function WestWyn() {
           {/* Header */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-center text-black mb-4">
-              <span className="text-[#deae3c]">WestWyn Estate</span> -
+              <span className="text-[#ddbc69]">WestWyn Estate</span> -
               Investment Goldmine of Dholera
             </h2>
           </div>
@@ -103,13 +103,13 @@ export default function WestWyn() {
                 onClick={() => setActiveSection(index)}
                 className={`pb-4 px-6 font-semibold transition-all relative ${
                   activeSection === index
-                    ? "text-[#deae3c]"
+                    ? "text-[#ddbc69]"
                     : "text-gray-400 hover:text-gray-600"
                 }`}
               >
                 {section.title}
                 {activeSection === index && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#deae3c]" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ddbc69]" />
                 )}
               </button>
             ))}
@@ -182,7 +182,7 @@ export default function WestWyn() {
         <div className="px-4 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h2 className="text-xl md:text-3xl text-center font-bold text-[#deae3c] mb-2">
+            <h2 className="text-xl md:text-3xl text-center font-bold text-[#ddbc69] mb-2">
               WestWyn Estate
             </h2>
           </div>
@@ -207,7 +207,7 @@ export default function WestWyn() {
                 onClick={() => setActiveSection(index)}
                 className={`px-5 py-2.5 rounded-full font-medium whitespace-nowrap transition-all ${
                   activeSection === index
-                    ? "bg-black text-[#deae3c]"
+                    ? "bg-black text-[#ddbc69]"
                     : "bg-gray-100 text-gray-600"
                 }`}
               >
@@ -260,3 +260,4 @@ export default function WestWyn() {
     </div>
   );
 }
+

@@ -105,7 +105,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
           <div className="mt-6 pt-4 border-t border-gray-600">
             <Link
               href="/about-dholera-sir"
-              className="w-full text-center rounded-xl text-white font-semibold bg-[#deae3c] hover:bg-[#f3bb39] p-3 transition-colors"
+              className="w-full text-center rounded-xl text-white font-semibold bg-[#ddbc69] hover:bg-[#f3bb39] p-3 transition-colors"
             >
               Explore More
             </Link>
@@ -637,7 +637,7 @@ export default async function Post({ params }) {
                       {post.title}
                     </h1>
 
-                    <div className="flex items-center gap-4 text-[#deae3c] text-[clamp(0.75rem,1.5vw,0.875rem)] mb-6">
+                    <div className="flex items-center gap-4 text-[#ddbc69] text-[clamp(0.75rem,1.5vw,0.875rem)] mb-6">
                       <div className="flex items-center">
                         <svg
                           className="w-4 h-4 mr-1"
@@ -655,7 +655,7 @@ export default async function Post({ params }) {
                         </svg>
 
                         <time
-                          className="text-[#deae3c]"
+                          className="text-[#ddbc69]"
                           dateTime={
                             new Date(post.publishedAt || post._createdAt)
                               .toISOString()
@@ -756,7 +756,7 @@ export default async function Post({ params }) {
                 </h2>
                 <Link
                   href="/dholera-sir-blogs"
-                  className="rounded-xl text-white font-semibold px-4 py-2 bg-[#deae3c] hover:bg-[#f3bb39]"
+                  className="rounded-xl text-white font-semibold px-4 py-2 bg-[#ddbc69] hover:bg-[#f3bb39]"
                 >
                   View all
                 </Link>
@@ -784,7 +784,7 @@ export default async function Post({ params }) {
                 display: flex;
               }
               #related-page-${index}:checked ~ .related-slider .related-dot-${index} {
-                background-color: #deae3c;
+                background-color: #ddbc69;
                 width: 2rem;
               }
             `,
@@ -873,14 +873,14 @@ export default async function Post({ params }) {
                               >
                                 <label
                                   htmlFor={`related-page-${prevIndex}`}
-                                  className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#deae3c]"
+                                  className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#ddbc69]"
                                   aria-label="Previous"
                                 >
                                   <span aria-hidden="true">&#8249;</span>
                                 </label>
                                 <label
                                   htmlFor={`related-page-${nextIndex}`}
-                                  className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#deae3c]"
+                                  className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white shadow-lg transition hover:bg-[#ddbc69]"
                                   aria-label="Next"
                                 >
                                   <span aria-hidden="true">&#8250;</span>
@@ -897,7 +897,7 @@ export default async function Post({ params }) {
                               <label
                                 key={`related-dot-${index}`}
                                 htmlFor={`related-page-${index}`}
-                                className={`related-dot-${index} h-2.5 w-2.5 cursor-pointer rounded-full bg-gray-300 transition-all duration-300 hover:bg-[#deae3c]`}
+                                className={`related-dot-${index} h-2.5 w-2.5 cursor-pointer rounded-full bg-gray-300 transition-all duration-300 hover:bg-[#ddbc69]`}
                                 aria-label={`Page ${index + 1}`}
                               />
                             ))}
@@ -950,3 +950,4 @@ export default async function Post({ params }) {
     );
   }
 }
+

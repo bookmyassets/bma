@@ -4,6 +4,8 @@ import React from "react";
 import img1 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-desktop-banner.webp";
 import img2 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-mobile-banner.webp";
 import HeroForm from "./HeroForm";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 
 const points = [
   {
@@ -21,18 +23,26 @@ const points = [
 ];
 
 const PointsList = () => (
-  <div className="flex flex-col gap-[clamp(0.4rem,1vw,0.75rem)] w-[clamp(480px,44vw,680px)]">
-    {/* H1 */}
-    <h1 className="text-white font-bold text-[clamp(2rem,3vw,3rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
-      Dedicated to Dholera
-      <br />
-    </h1>
+  <>
+    <div className="flex flex-col gap-[clamp(0.4rem,1vw,0.75rem)] w-[clamp(480px,44vw,680px)]">
+      {/* H1 */}
+      <h1 className="text-white font-bold text-[clamp(2rem,3vw,3rem)] leading-tight mb-[clamp(0.5rem,1.25vw,1rem)]">
+        Dedicated to Dholera
+        <br />
+      </h1>
 
-    {/* Body */}
-    <p className="text-white text-[clamp(1.2rem,2vw,1.125rem)] leading-relaxed mb-[clamp(0.4rem,1vw,0.75rem)]">
-      We help to simplify Dholera before you book a plot.
-    </p>
-  </div>
+      {/* Body */}
+      <p className="text-white text-[clamp(1.2rem,2vw,1.125rem)] leading-relaxed mb-[clamp(0.4rem,1vw,0.75rem)]">
+        We help to simplify Dholera before you book a plot.
+      </p>
+
+      <Link href="/about">
+        <p className="bg-[#ddbc69] text-white p-2 w-48 rounded-lg">
+          Know More About Us <FaArrowRight className="inline-block ml-1" />
+        </p>
+      </Link>
+    </div>
+  </>
 );
 
 export default function Hero() {
@@ -78,13 +88,20 @@ export default function Hero() {
               </p>
             </div>
 
+            <Link href="/about">
+              <p className="bg-[#ddbc69] text-white p-1 w-44 text-sm rounded-lg">
+                Know More About Us{" "}
+                <FaArrowRight className="inline-block ml-1" />
+              </p>
+            </Link>
+
             {/* {points.map((point, i) => (
               <div
                 key={i}
                 className="flex gap-[clamp(0.4rem,1.5vw,0.75rem)] items-start"
               >
-                <div className="mt-0.5 shrink-0 w-[clamp(1rem,3vw,1.2rem)] h-[clamp(1rem,3vw,1.2rem)] rounded-full border border-yellow-500/60 flex items-center justify-center">
-                  <span className="text-[#deae3c] text-[clamp(0.5rem,1.25vw,0.6rem)] font-semibold">
+                <div className="mt-0.5 shrink-0 w-[clamp(1rem,3vw,1.2rem)] h-[clamp(1rem,3vw,1.2rem)] rounded-full border border-[#ddbc69]/60 flex items-center justify-center">
+                  <span className="text-[#ddbc69] text-[clamp(0.5rem,1.25vw,0.6rem)] font-semibold">
                     ➤
                   </span>
                 </div>
@@ -94,7 +111,7 @@ export default function Hero() {
               </div>
             ))} */}
 
-            <div className="mt-[clamp(0.75rem,2vw,1.25rem)] border-t border-yellow-600/20 pt-[clamp(0.75rem,2vw,1.25rem)]">
+            <div className="mt-[clamp(0.75rem,2vw,1.25rem)] border-t border-[#ddbc69]/20 pt-[clamp(0.75rem,2vw,1.25rem)]">
               <HeroForm />
             </div>
           </div>
@@ -103,3 +120,4 @@ export default function Hero() {
     </div>
   );
 }
+

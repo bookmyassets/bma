@@ -69,7 +69,7 @@ const WestWynAboutSection = () => {
       <div className="relative max-w-7xl mx-auto px-4 py-4">
         {/* Header Section */}
         <div className="text-center space-y-2">
-          <h1 className=" text-[#deae3c] text-[32px] leading-none font-bold">
+          <h1 className=" text-[#ddbc69] text-[32px] leading-none font-bold">
             WestWyn Estates{" "}
             <span className="font-semibold text-sm md:text-lg whitespace-nowrap text-black">
               {" "}
@@ -96,14 +96,14 @@ const WestWynAboutSection = () => {
             <div className="flex justify-center items-center flex-row gap-4 ">
               <button
                 onClick={openBrochureForm}
-                className="bg-[#deae3c] text-white text-base px-2 md:px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
+                className="bg-[#ddbc69] text-white text-base px-2 md:px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
               >
                 <FaDownload />
                 Get Brochure
               </button>
 
               <Link href="https://wa.me/918130371647">
-                <p className="bg-white border border-[#deae3c] whitespace-nowrap text-[#deae3c] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
                   <FaWhatsapp />
                   Book Dholera Site Visit
                 </p>
@@ -131,7 +131,7 @@ const WestWynAboutSection = () => {
             <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
               <ul className="space-y-4 text-gray-700">
                 <li className="flex items-start justify-start gap-2 font-semibold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>
@@ -140,7 +140,7 @@ const WestWynAboutSection = () => {
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>
@@ -149,49 +149,49 @@ const WestWynAboutSection = () => {
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>5 Minutes from Bhimnath Railway Junction</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>15 Minutes from Dholera SIR boundary</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>15 Minutes from RMS Multi-Specialty Hospital</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>18 minutes from Ahmedabad Dholera Expressway</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>30 minutes from Tata Semiconductor Plant</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>45 minutes from Dholera International Airport</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>
@@ -202,7 +202,7 @@ const WestWynAboutSection = () => {
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#deae4c] leading-none shrink-0 mt-1">
+                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
                   <span>
@@ -237,3 +237,4 @@ const WestWynAboutSection = () => {
 };
 
 export default WestWynAboutSection;
+

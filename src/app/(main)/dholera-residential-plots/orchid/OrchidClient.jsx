@@ -149,7 +149,7 @@ export default function OrchidClient() {
       {/* ── Why Invest ── */}
       <section className="bg-gray-50 py-12 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-light text-[#deae3c] md:mb-16 md:text-4xl lg:text-5xl">
+          <h2 className="mb-12 text-center text-3xl font-light text-[#ddbc69] md:mb-16 md:text-4xl lg:text-5xl">
             Why Invest in Orchid?
           </h2>
 
@@ -179,7 +179,7 @@ export default function OrchidClient() {
                       </span>
                     </span>
 
-                    <span className="ml-4 text-2xl text-[#deae3c]">
+                    <span className="ml-4 text-2xl text-[#ddbc69]">
                       <span className="group-open:hidden">+</span>
                       <span className="hidden group-open:inline">−</span>
                     </span>
@@ -210,3 +210,4 @@ export default function OrchidClient() {
     </main>
   );
 }
+

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import React from "react";
-import logo from "@/assests/bma-logo-black.png";
+import logo from "@/assests/bma-dedicated-to-dholera.svg";
 
 import Image from "next/image";
 
@@ -281,9 +281,9 @@ export default function PopupForm({ title, project }) {
                       <Image
                         src={logo}
                         alt="Logo"
-                        width={60}
-                        height={60}
-                        className="rounded-lg"
+                        width={120}
+                        height={120}
+                        className="rounded-lg pt-3"
                       />
                     </div>
                   </div>
@@ -357,7 +357,7 @@ export default function PopupForm({ title, project }) {
                     className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
                       isLoading || !recaptchaLoaded
                         ? "bg-gray-400 cursor-not-allowed text-gray-600"
-                        : "bg-[#deae3c] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                        : "bg-[#ddbc69] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
                     }`}
                   >
                     {isLoading ? (
@@ -404,3 +404,4 @@ export default function PopupForm({ title, project }) {
     </div>
   );
 }
+

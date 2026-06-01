@@ -10,7 +10,7 @@ export default function AboutBMA() {
         <div className="w-full lg:w-2/5">
           <div className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-1 h-8 bg-[#deae3c]"></div>
+              <div className="w-1 h-8 bg-[#ddbc69]"></div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
                 About Us
               </h2>
@@ -24,7 +24,7 @@ export default function AboutBMA() {
             
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-[#deae3c] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <div className="w-6 h-6 bg-[#ddbc69] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                   <Shield className="w-4 h-4 text-white" />
                 </div>
                 <p className="text-gray-700">
@@ -33,7 +33,7 @@ export default function AboutBMA() {
               </div>
               
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-[#deae3c] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <div className="w-6 h-6 bg-[#ddbc69] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                   <BadgeCheck className="w-4 h-4 text-white" />
                 </div>
                 <p className="text-gray-700">
@@ -42,7 +42,7 @@ export default function AboutBMA() {
               </div>
               
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-[#deae3c] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <div className="w-6 h-6 bg-[#ddbc69] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                   <TrendingUp className="w-4 h-4 text-white" />
                 </div>
                 <p className="text-gray-700">
@@ -51,7 +51,7 @@ export default function AboutBMA() {
               </div>
               
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-[#deae3c] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <div className="w-6 h-6 bg-[#ddbc69] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                   <Building2 className="w-4 h-4 text-white" />
                 </div>
                 <p className="text-gray-700">

@@ -27,7 +27,7 @@ const PointsList = () => (
     <h1 className="text-white font-bold text-[clamp(1.5rem,2.7vw,2.45rem)] leading-tight mb-[clamp(0.25rem,0.75vw,0.75rem)]">
       Residential Plots in Dholera
       <br />
-      <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
+      <span className="text-[#ddbc69]">Starting from ₹8 Lakh</span>
     </h1>
 
     <p className="text-white text-[clamp(0.75rem,1.5vw,1.2rem)] mb-[clamp(0.25rem,0.75vw,0.75rem)]">
@@ -42,8 +42,8 @@ const PointsList = () => (
         key={i}
         className="flex gap-[clamp(0.5rem,1vw,0.875rem)] items-center"
       >
-        <div className="shrink-0 w-[clamp(1.5rem,2.15vw,1.8rem)] h-[clamp(1.5rem,2.15vw,1.8rem)] rounded-full border border-yellow-500/60 flex items-center justify-center">
-          <span className="text-[#deae3c] text-[clamp(0.8rem,1.2vw,1rem)] font-semibold">
+        <div className="shrink-0 w-[clamp(1.5rem,2.15vw,1.8rem)] h-[clamp(1.5rem,2.15vw,1.8rem)] rounded-full border border-[#ddbc69]/60 flex items-center justify-center">
+          <span className="text-[#ddbc69] text-[clamp(0.8rem,1.2vw,1rem)] font-semibold">
             ➤
           </span>
         </div>
@@ -124,7 +124,7 @@ export default function Hero() {
             </p>
             <button
               onClick={() => setShowPopup(false)}
-              className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-2 rounded-md transition-colors"
+              className="bg-[#ddbc69] hover:bg-[#ddbc69] text-black font-semibold px-6 py-2 rounded-md transition-colors"
             >
               Close
             </button>
@@ -165,13 +165,13 @@ export default function Hero() {
             <h1 className="text-white font-bold text-[clamp(1.5rem,6vw,2rem)] leading-tight mb-2">
               Residential Plots in Dholera
               <br />
-              <span className="text-[#deae3c]">Starting from ₹8 Lakh</span>
+              <span className="text-[#ddbc69]">Starting from ₹8 Lakh</span>
             </h1>
 
             {points.map((point, i) => (
               <div key={i} className="flex gap-3 items-start">
-                <div className="mt-0.5 shrink-0 w-6 h-6 rounded-full border border-yellow-500/60 flex items-center justify-center">
-                  <span className="text-[#deae3c] text-[0.6rem] font-semibold">
+                <div className="mt-0.5 shrink-0 w-6 h-6 rounded-full border border-[#ddbc69]/60 flex items-center justify-center">
+                  <span className="text-[#ddbc69] text-[0.6rem] font-semibold">
                     ➤
                   </span>
                 </div>
@@ -183,7 +183,7 @@ export default function Hero() {
               </div>
             ))}
 
-            <div className="mt-2 border-t border-yellow-600/20 pt-4">
+            <div className="mt-2 border-t border-[#ddbc69]/20 pt-4">
               <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
             </div>
           </div>
@@ -192,3 +192,4 @@ export default function Hero() {
     </div>
   );
 }
+

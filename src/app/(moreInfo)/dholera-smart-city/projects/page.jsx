@@ -57,7 +57,7 @@ export default function ProjectSlider() {
       default:
         return {
           text: "Featured",
-          bgColor: "bg-[#deae3c]",
+          bgColor: "bg-[#ddbc69]",
           textColor: "text-black",
         };
     }
@@ -169,14 +169,14 @@ export default function ProjectSlider() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64 bg-black">
-        <div className="w-8 h-8 border-4 border-[#deae3c] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-[#ddbc69] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-64 bg-black text-[#deae3c]">
+      <div className="flex items-center justify-center h-64 bg-black text-[#ddbc69]">
         <p>{error}</p>
       </div>
     );
@@ -184,7 +184,7 @@ export default function ProjectSlider() {
 
   if (residentialProjects.length === 0) {
     return (
-      <div className="flex items-center justify-center h-64 bg-black text-[#deae3c]">
+      <div className="flex items-center justify-center h-64 bg-black text-[#ddbc69]">
         <p>No projects available</p>
       </div>
     );
@@ -196,7 +196,7 @@ export default function ProjectSlider() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-4">
-            <h2 className="text-[32px] font-bold text-[#deae3c] ">
+            <h2 className="text-[32px] font-bold text-[#ddbc69] ">
               Our Premium Projects
             </h2>
             <p className="text-white text-lg max-w-2xl mx-auto">
@@ -229,12 +229,12 @@ export default function ProjectSlider() {
                     style={{ width: `${100 / cardsPerView}%` }}
                   >
                     <motion.div
-                      className="bg-white border-2 border-[#deae3c] rounded-2xl overflow-hidden shadow-2xl  transition-all duration-300 group flex flex-col h-[450px]"
+                      className="bg-white border-2 border-[#ddbc69] rounded-2xl overflow-hidden shadow-2xl  transition-all duration-300 group flex flex-col h-[450px]"
                       whileHover={{ scale: 1.03 }}
                       transition={{ duration: 0.3 }}
                     >
                       {/* Project Image */}
-                      <div className="relative h-48 bg-gradient-to-r from-[#deae3c]/20 to-[#deae3c]/10 flex items-center justify-center overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-r from-[#ddbc69]/20 to-[#ddbc69]/10 flex items-center justify-center overflow-hidden">
                         {project.image ? (
                           <Image
                             src={project.image}
@@ -243,7 +243,7 @@ export default function ProjectSlider() {
                             className="object-cover"
                           />
                         ) : (
-                          <Home className="w-16 h-16 text-[#deae3c] opacity-50" />
+                          <Home className="w-16 h-16 text-[#ddbc69] opacity-50" />
                         )}
                         <div
                           className={`absolute top-4 right-4 ${statusBadge.bgColor} ${statusBadge.textColor} px-3 py-1 rounded-full text-sm font-semibold z-10`}
@@ -255,20 +255,20 @@ export default function ProjectSlider() {
 
                       {/* Project Details */}
                       <div className="p-5 flex flex-col flex-grow">
-                        <h3 className="text-xl font-bold text-[#deae3c] mb-3 group-hover:text-yellow-600 transition-colors line-clamp-1">
+                        <h3 className="text-xl font-bold text-[#ddbc69] mb-3 group-hover:text-[#ddbc69] transition-colors line-clamp-1">
                           {project.projectName || `Project ${index + 1}`}
                         </h3>
 
                         <div className="space-y-2 mb-2">
                           <div className="flex items-center text-gray-800">
-                            <IndianRupee className="w-4 h-4 text-[#deae3c] mr-2 flex-shrink-0" />
+                            <IndianRupee className="w-4 h-4 text-[#ddbc69] mr-2 flex-shrink-0" />
                             <span className="font-semibold text-sm">
                               ₹{project.price || "Price on Request"}
                             </span>
                           </div>
 
                           <div className="flex items-center text-gray-800">
-                            <Home className="w-4 h-4 text-[#deae3c] mr-2 flex-shrink-0" />
+                            <Home className="w-4 h-4 text-[#ddbc69] mr-2 flex-shrink-0" />
                             <span className="text-sm">
                               {project.plots ||
                                 project.numberOfPlots ||
@@ -278,7 +278,7 @@ export default function ProjectSlider() {
                           </div>
 
                           <div className="flex items-start text-gray-800">
-                            <MapPin className="w-4 h-4 text-[#deae3c] mr-2 mt-0.5 flex-shrink-0" />
+                            <MapPin className="w-4 h-4 text-[#ddbc69] mr-2 mt-0.5 flex-shrink-0" />
                             <span className="text-xs line-clamp-2">
                               {project.location || "Prime Location"}
                             </span>
@@ -295,7 +295,7 @@ export default function ProjectSlider() {
                           className={`w-full trackerx font-bold py-2 px-4 rounded-lg transition-colors duration-300 mt-auto ${project.status?.toLowerCase() === "sold-out" ||
                               project.status?.toLowerCase() === "soldout"
                               ? "bg-gray-400 text-gray-600 cursor-not-allowed"
-                              : "bg-[#deae3c] hover:bg-yellow-600 text-white"
+                              : "bg-[#ddbc69] hover:bg-[#ddbc69] text-white"
                             }`}
                           disabled={
                             project.status?.toLowerCase() === "sold out" ||
@@ -318,14 +318,14 @@ export default function ProjectSlider() {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-[#deae3c] hover:bg-yellow-500 text-white p-3 rounded-full shadow-lg transition-colors duration-300 z-10"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-[#ddbc69] hover:bg-[#ddbc69] text-white p-3 rounded-full shadow-lg transition-colors duration-300 z-10"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-[#deae3c] hover:bg-yellow-500 text-white p-3 rounded-full shadow-lg transition-colors duration-300 z-10"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-[#ddbc69] hover:bg-[#ddbc69] text-white p-3 rounded-full shadow-lg transition-colors duration-300 z-10"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -339,7 +339,7 @@ export default function ProjectSlider() {
                   key={index}
                   onClick={() => goToSlide(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index
-                      ? "bg-[#deae3c] scale-125"
+                      ? "bg-[#ddbc69] scale-125"
                       : "bg-gray-600 hover:bg-gray-400"
                     }`}
                 />
@@ -381,3 +381,4 @@ export default function ProjectSlider() {
     </>
   );
 }
+

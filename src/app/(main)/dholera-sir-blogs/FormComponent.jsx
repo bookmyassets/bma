@@ -39,7 +39,7 @@ export default function FormComponent() {
           <div className="flex gap-3">
             <button
               onClick={openContactForm}
-              className="bg-[#deae3c] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap"
+              className="bg-[#ddbc69] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap"
             >
               Free Consultation
             </button>
@@ -79,3 +79,4 @@ export default function FormComponent() {
     </div>
   );
 }
+

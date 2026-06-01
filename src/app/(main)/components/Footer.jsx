@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "@/assests/bookmyassets-dholera-logo-v3.svg";
+import logo from "@/assests/bma-banner-website.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
@@ -13,7 +13,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-[#deae3c] border-t border-[#deae3c]">
+    <footer className="bg-black text-[#ddbc69] border-t border-[#ddbc69]">
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-8 lg:px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo + Contact Info */}
@@ -21,21 +21,21 @@ export default function Footer() {
             <Link href="/">
               <Image
                 src={logo}
-                height={80}
-                width={80}
+                height={200}
+                width={200}
                 alt="BookMyAssets Logo"
                 className="hover:opacity-80 transition-opacity"
               />
             </Link>
 
-            <div className="space-y-4 text-sm text-[#deae3c]">
+            <div className="space-y-4 text-sm text-[#ddbc69]">
               {/* Phone */}
               <Link
-                className="flex items-center gap-3 hover:text-yellow-500 transition-colors"
+                className="flex items-center gap-3 hover:text-[#ddbc69] transition-colors"
                 aria-label="BookMyAssets Phone"
                 href="tel:+918130371647"
               >
-                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500">
+                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-[#ddbc69]">
                   <FaPhone className="rotate-90 text-xs" />
                 </span>
                 +91 81 30 37 16 47
@@ -43,11 +43,11 @@ export default function Footer() {
 
               {/* Email */}
               <Link
-                className="flex items-center gap-3 hover:text-yellow-500 transition-colors"
+                className="flex items-center gap-3 hover:text-[#ddbc69] transition-colors"
                 aria-label="BookMyAssets Email"
                 href="mailto:info@bookmyassets.com"
               >
-                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500">
+                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-[#ddbc69]">
                   <FaEnvelope className="text-xs" />
                 </span>
                 info@bookmyassets.com
@@ -55,15 +55,15 @@ export default function Footer() {
 
               {/* Head Office */}
               <Link
-                className="flex items-start gap-3 hover:text-yellow-500 transition-colors"
+                className="flex items-start gap-3 hover:text-[#ddbc69] transition-colors"
                 aria-label="BookMyAssets Head Office"
                 href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7"
               >
-                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500 mt-0.5">
+                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-[#ddbc69] mt-0.5">
                   <FaMapMarkerAlt className="text-xs" />
                 </span>
                 <div>
-                  <p className="font-semibold text-[#deae3c] mb-0.5">
+                  <p className="font-semibold text-[#ddbc69] mb-0.5">
                     Head Office
                   </p>
                   <p className="leading-relaxed">
@@ -76,15 +76,15 @@ export default function Footer() {
 
               {/* Branch Office */}
               <a
-                className="flex items-start gap-3 hover:text-yellow-500 transition-colors"
+                className="flex items-start gap-3 hover:text-[#ddbc69] transition-colors"
                 aria-label="BookMyAssets Branch Office"
                 href="https://maps.app.goo.gl/MsdYUzz3WuUD4ZWb6"
               >
-                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-yellow-500 mt-0.5">
+                <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-[#ddbc69] mt-0.5">
                   <FaMapMarkerAlt className="text-xs" />
                 </span>
                 <div>
-                  <p className="font-semibold text-[#deae3c] mb-0.5">
+                  <p className="font-semibold text-[#ddbc69] mb-0.5">
                     Branch Office
                   </p>
                   <p className="leading-relaxed">
@@ -140,11 +140,11 @@ export default function Footer() {
             <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
               Residential Projects
             </h3>
-            <ul className="space-y-3 text-sm text-[#deae3c]">
+            <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link
                   href="/dholera-residential-plots/westwyn-residency"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   WestWyn Residency
                 </Link>
@@ -152,7 +152,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/dholera-residential-plots/westwyn-estate"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   WestWyn Estates
                 </Link>
@@ -160,7 +160,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/dholera-residential-plots/westwyn-county"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   WestWyn County
                 </Link>
@@ -174,11 +174,11 @@ export default function Footer() {
             <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
               Quick Links
             </h3>
-            <ul className="space-y-3 text-sm text-[#deae3c]">
+            <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   About us
                 </Link>
@@ -186,7 +186,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/dholera-sir-blogs"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Blog
                 </Link>
@@ -194,7 +194,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/career"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Careers
                 </Link>
@@ -202,7 +202,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/bulk-land/residential"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Bulk Land Deals
                 </Link>
@@ -210,7 +210,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/channel-partner"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Channel Partner
                 </Link>
@@ -223,11 +223,11 @@ export default function Footer() {
             <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
               Policies
             </h3>
-            <ul className="space-y-3 text-sm text-[#deae3c]">
+            <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link
                   href="/policies/terms"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Terms of Service
                 </Link>
@@ -235,7 +235,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/policies/privacy"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Privacy Policy
                 </Link>
@@ -243,7 +243,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/policies/copyright"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Copyright Policy
                 </Link>
@@ -251,7 +251,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/policies/refund-and-cancellation"
-                  className="hover:text-yellow-500 hover:translate-x-1 inline-block transition-all"
+                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Refund and Cancellation
                 </Link>
@@ -291,7 +291,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-[#deae3c]">
+      <div className="border-t border-[#ddbc69]">
         <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 flex justify-center">
           <p className="text-sm text-white">
             © {new Date().getFullYear()} BookMyAssets. All rights reserved.
@@ -301,3 +301,4 @@ export default function Footer() {
     </footer>
   );
 }
+

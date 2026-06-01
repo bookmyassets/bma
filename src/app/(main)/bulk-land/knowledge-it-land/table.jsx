@@ -98,7 +98,7 @@ export default function Table() {
             <h2 className="text-2xl max-sm:text-lg text-gray-900">{location.name}</h2>
             <span
               className={`inline-flex items-center justify-center w-8 h-8 rounded-full transition-all duration-500 ${
-                expandedLocation === index ? "bg-[#deae3c] text-white" : "bg-gray-100 text-gray-500"
+                expandedLocation === index ? "bg-[#ddbc69] text-white" : "bg-gray-100 text-gray-500"
               }`}
             >
               <svg
@@ -172,7 +172,7 @@ export default function Table() {
                 type="button"
                 className={`px-4 py-2 text-sm font-medium rounded-l-lg border transition-all duration-300 ${
                   viewMode === "grid"
-                    ? "bg-[#deae3c] text-white border-[#deae3c]"
+                    ? "bg-[#ddbc69] text-white border-[#ddbc69]"
                     : "bg-white text-gray-700 border-gray-200 hover:bg-gray-100"
                 }`}
                 onClick={() => setViewMode("grid")}
@@ -183,7 +183,7 @@ export default function Table() {
                 type="button"
                 className={`px-4 py-2 text-sm font-medium rounded-r-lg border transition-all duration-300 ${
                   viewMode === "list"
-                    ? "bg-[#deae3c] text-white border-[#deae3c]"
+                    ? "bg-[#ddbc69] text-white border-[#ddbc69]"
                     : "bg-white text-gray-700 border-gray-200 hover:bg-gray-100"
                 }`}
                 onClick={() => setViewMode("list")}
@@ -217,3 +217,4 @@ export default function Table() {
     </div>
   );
 }
+

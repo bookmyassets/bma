@@ -28,12 +28,12 @@ export default function WhyBMA() {
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
           <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#ddbc69]" />
             <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
               Why Invest With{" "}
-              <span className="text-[#deae3c]">BookMyAssets</span>
+              <span className="text-[#ddbc69]">BookMyAssets</span>
             </h2>
-            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#deae3c]" />
+            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#ddbc69]" />
           </div>
         </div>
 
@@ -73,7 +73,7 @@ export default function WhyBMA() {
             hover:shadow-xl transition-shadow
           "
                     >
-                      <div className="text-base sm:text-lg md:text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#deae3c] mb-2">
+                      <div className="text-base sm:text-lg md:text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#ddbc69] mb-2">
                         {value}
                       </div>
                       <p className="text-xs sm:text-sm md:text-[clamp(0.75rem,1.2vw,0.875rem)] text-gray-700 font-medium text-center leading-snug">
@@ -90,7 +90,7 @@ export default function WhyBMA() {
         <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
           <div className="flex items-center gap-3 mb-3">
             <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-              A Name You Can Trust <span className="text-[#deae3c]"></span>
+              A Name You Can Trust <span className="text-[#ddbc69]"></span>
             </h2>
           </div>
         </div>
@@ -125,3 +125,4 @@ export default function WhyBMA() {
     </section>
   );
 }
+

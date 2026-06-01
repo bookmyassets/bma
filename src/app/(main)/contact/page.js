@@ -289,11 +289,11 @@ const ContactPage = () => {
 
       {/* Get In Touch Section with Dark Background */}
       <div className="bg-gray-900 py-10 text-center">
-        <h2 className="text-4xl font-bold text-yellow-500">Get In Touch</h2>
+        <h2 className="text-4xl font-bold text-[#ddbc69]">Get In Touch</h2>
         <div className="flex justify-center items-center mt-2">
-          <span className="h-1 w-16 bg-yellow-500 mx-2"></span>
-          <span className="text-yellow-500 text-xl">★</span>
-          <span className="h-1 w-16 bg-yellow-500 mx-2"></span>
+          <span className="h-1 w-16 bg-[#ddbc69] mx-2"></span>
+          <span className="text-[#ddbc69] text-xl">★</span>
+          <span className="h-1 w-16 bg-[#ddbc69] mx-2"></span>
         </div>
       </div>
 
@@ -309,7 +309,7 @@ const ContactPage = () => {
                 </h2>
 
                 <div className="flex items-start mb-4">
-                  <div className="text-yellow-500 mr-3 mt-1">
+                  <div className="text-[#ddbc69] mr-3 mt-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
@@ -343,7 +343,7 @@ const ContactPage = () => {
                 </div>
 
                 <div className="flex items-center mb-4">
-                  <div className="text-yellow-500 mr-3">
+                  <div className="text-[#ddbc69] mr-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
@@ -369,7 +369,7 @@ const ContactPage = () => {
                 </div>
 
                 <div className="flex items-center mb-6">
-                  <div className="text-yellow-500 mr-3">
+                  <div className="text-[#ddbc69] mr-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
@@ -397,7 +397,7 @@ const ContactPage = () => {
                 <div className="flex space-x-3">
                   <a
                     href="https://www.facebook.com/share/1AXGEEX1M8/"
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                     aria-label="Visit Facebook Page of BookMyAssets"
                   >
                     <span className="sr-only">Facebook</span>
@@ -411,7 +411,7 @@ const ContactPage = () => {
                   </a>
                   <a
                     href="https://x.com/BookMyAssets"
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                     aria-label="Visit X handle of BookMyAssets"
                   >
                     <span className="sr-only">Twitter</span>
@@ -425,7 +425,7 @@ const ContactPage = () => {
                   </a>
                   <a
                     href="https://www.linkedin.com/company/bookmyassetss"
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                     aria-label="Visit LinkedIn Profile of BookMyAssets"
                   >
                     <span className="sr-only">LinkedIn</span>
@@ -439,7 +439,7 @@ const ContactPage = () => {
                   </a>
                   <a
                     href="https://www.instagram.com/bookmyassets/"
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                     aria-label="Visit Instagram Account of BookMyAssets"
                   >
                     <span className="sr-only">Instagram</span>
@@ -453,7 +453,7 @@ const ContactPage = () => {
                   </a>
                   <a
                     href="https://www.youtube.com/@BookMyAssets"
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                     aria-label="Visit YouTube Channel of BookMyAssets"
                   >
                     <span className="sr-only">YouTube</span>
@@ -518,7 +518,7 @@ const ContactPage = () => {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
                     placeholder="Your name"
                   />
                 </div>
@@ -536,7 +536,7 @@ const ContactPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
                     placeholder="Your phone number"
                   />
                 </div>
@@ -555,7 +555,7 @@ const ContactPage = () => {
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
                     placeholder="Message subject"
                   />
                 </div>
@@ -574,7 +574,7 @@ const ContactPage = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
                     placeholder="Your message"
                   />
                 </div>
@@ -591,7 +591,7 @@ const ContactPage = () => {
               ${
                 isSubmitting || !recaptchaLoaded
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-yellow-500 hover:bg-yellow-600"
+                  : "bg-[#ddbc69] hover:bg-[#ddbc69]"
               } transition-colors duration-200`}
                 >
                   {!recaptchaLoaded
@@ -615,3 +615,4 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+

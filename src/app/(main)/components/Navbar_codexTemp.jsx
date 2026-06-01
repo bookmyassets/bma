@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import logo from "@/assests/bookmyassets-dholera-logo-v3.svg";
+import logo from "@/assests/bma-transparent-website.svg";
 import aboutDholera from "@/assests/dholeraSIR-nav/about-dholera-sir-bookmyassets.webp";
 import dholeraBlogs from "@/assests/dholeraSIR-nav/dholera-sir-blogs-bookmyassets.webp";
 import dholeraUpdates from "@/assests/dholeraSIR-nav/dholera-sir-latest-updates-bookmyassets.webp";
@@ -130,7 +130,7 @@ function ChevronIcon({ open, className = "h-[1rem] w-[1rem]" }) {
 
 function LoadingState({ color = "yellow" }) {
   const spinnerColor = {
-    yellow: "border-[#deae3c]",
+    yellow: "border-[#ddbc69]",
     orange: "border-orange-500",
     blue: "border-blue-500",
   };
@@ -233,7 +233,7 @@ function ResidentialCard({ project, index, href, onClick }) {
 
         <div className="absolute bottom-[1.25rem] left-0 right-0 space-y-[0.5rem] p-[1rem] text-white">
           <h3
-            className={`text-[clamp(0.9375rem,0.78rem_+_0.65vw,1.25rem)] font-semibold leading-tight transition-colors duration-300 group-hover:text-[#deae3c] ${
+            className={`text-[clamp(0.9375rem,0.78rem_+_0.65vw,1.25rem)] font-semibold leading-tight transition-colors duration-300 group-hover:text-[#ddbc69] ${
               isSoldOut ? "text-gray-300" : ""
             }`}
           >
@@ -287,7 +287,7 @@ function ImageCard({ project, index, href, onClick }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
 
         <div className="absolute bottom-[1.25rem] left-0 right-0 p-[1rem] text-white">
-          <h3 className="text-[clamp(0.9375rem,0.78rem_+_0.65vw,1.25rem)] font-semibold leading-tight transition-colors duration-300 group-hover:text-[#deae3c]">
+          <h3 className="text-[clamp(0.9375rem,0.78rem_+_0.65vw,1.25rem)] font-semibold leading-tight transition-colors duration-300 group-hover:text-[#ddbc69]">
             {project.projectName}
           </h3>
         </div>
@@ -345,7 +345,7 @@ function MobileProjectLink({ project, href, onClick }) {
                   : project.status === "ongoing"
                     ? "bg-green-500/15 text-green-300"
                     : project.status === "limited"
-                      ? "bg-[#deae3c]/15 text-[#deae3c]"
+                      ? "bg-[#ddbc69]/15 text-[#ddbc69]"
                       : "bg-blue-500/15 text-blue-300"
               }`}
             >
@@ -382,7 +382,7 @@ function DesktopNavButton({ label, open, onClick }) {
         <span
           className={`relative z-10 flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] transition-all duration-200 ${
             open
-              ? "border-[#deae3c] bg-[#deae3c] font-semibold text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.22)]"
+              ? "border-[#ddbc69] bg-[#ddbc69] font-semibold text-black shadow-[0_0.75rem_2rem_rgba(222,174,60,0.22)]"
               : "text-white/85 hover:border-white/20 hover:bg-white/10 hover:text-white"
           }`}
         >
@@ -675,7 +675,7 @@ export default function Navbar() {
                 <div className="relative z-50">
                   <button
                     onClick={() => setIsUtilityMenuOpen((prev) => !prev)}
-                    className=" gap-2 rounded-lg border border-transparent bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
+                    className=" gap-2 rounded-lg border border-transparent bg-transparent px-4 py-2 text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] font-medium text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69]/40"
                     aria-label="Open secondary menu"
                     aria-expanded={isUtilityMenuOpen}
                     type="button"
@@ -708,7 +708,7 @@ export default function Navbar() {
                 href={whatsappEnquiryLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute left-1/2 z-10 inline-flex min-h-[2.75rem] min-w-[2.75rem] -translate-x-1/2 items-center justify-center gap-2 rounded-lg border border-[#deae3c]/45 bg-[#deae3c]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39] md:min-h-[2rem] md:min-w-[2rem]"
+                className="absolute left-1/2 z-10 inline-flex min-h-[2.75rem] min-w-[2.75rem] -translate-x-1/2 items-center justify-center gap-2 rounded-lg border border-[#ddbc69]/45 bg-[#ddbc69]/90 px-2 text-black shadow-sm transition duration-300 hover:bg-[#f3bb39] md:min-h-[2rem] md:min-w-[2rem]"
                 aria-label="Enquire Now on WhatsApp"
               >
                 <FaWhatsapp className="h-[1.25rem] w-[1.25rem] shrink-0" /> Know
@@ -717,7 +717,7 @@ export default function Navbar() {
 
               <button
                 onClick={toggleMobileMenu}
-                className="flex min-h-[3rem] min-w-[3rem] touch-manipulation items-center justify-center rounded-lg border border-white/15 bg-white/10 p-3 text-white transition-all duration-200 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#deae3c]/40"
+                className="flex min-h-[3rem] min-w-[3rem] touch-manipulation items-center justify-center rounded-lg border border-white/15 bg-white/10 p-3 text-white transition-all duration-200 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#ddbc69]/40"
                 aria-label={
                   isMobileMenuOpen ? "Close menu" : "Open mobile menu"
                 }
@@ -944,7 +944,7 @@ export default function Navbar() {
 
                         <div className="absolute bottom-0 left-0 p-[1rem] text-white">
                           <div
-                            className={`font-semibold leading-tight transition-colors duration-300 group-hover:text-[#deae3c] ${
+                            className={`font-semibold leading-tight transition-colors duration-300 group-hover:text-[#ddbc69] ${
                               project.status === "sold-out"
                                 ? "text-gray-300"
                                 : ""
@@ -1010,7 +1010,7 @@ export default function Navbar() {
                 onClick={toggleResidentialMenu}
                 className={`flex w-full items-center justify-between rounded-md px-[0.75rem] py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isResidentialMenuOpen
-                    ? "border border-[#deae3c]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
+                    ? "border border-[#ddbc69]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
                     : "border border-transparent text-white hover:bg-white/10 hover:text-white"
                 }`}
                 aria-expanded={isResidentialMenuOpen}
@@ -1024,10 +1024,10 @@ export default function Navbar() {
               </button>
 
               {isResidentialMenuOpen && (
-                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#deae3c] pl-[1rem]">
+                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#ddbc69] pl-[1rem]">
                   {loading ? (
                     <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-white/60">
-                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-lg border-b-[0.125rem] border-[#deae3c]" />{" "}
+                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-lg border-b-[0.125rem] border-[#ddbc69]" />{" "}
                       Loading...
                     </div>
                   ) : error ? (
@@ -1053,7 +1053,7 @@ export default function Navbar() {
                 onClick={toggleBulkLandMenu}
                 className={`flex w-full items-center justify-between rounded-md px-[0.75rem] py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isBulkLandMenuOpen
-                    ? "border border-[#deae3c]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
+                    ? "border border-[#ddbc69]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
                     : "border border-transparent text-white hover:bg-white/10 hover:text-white"
                 }`}
                 aria-expanded={isBulkLandMenuOpen}
@@ -1067,10 +1067,10 @@ export default function Navbar() {
               </button>
 
               {isBulkLandMenuOpen && (
-                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#deae3c] pl-[1rem]">
+                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#ddbc69] pl-[1rem]">
                   {bulkLandLoading ? (
                     <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-white/60">
-                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-lg border-b-[0.125rem] border-[#deae3c]" />{" "}
+                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-lg border-b-[0.125rem] border-[#ddbc69]" />{" "}
                       Loading...
                     </div>
                   ) : bulkLandError ? (
@@ -1110,7 +1110,7 @@ export default function Navbar() {
               href={whatsappEnquiryLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-[1rem] hidden w-full items-center justify-center gap-[0.5rem] rounded-lg bg-[#deae3c] px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-black transition duration-300 hover:bg-[#f3bb39]"
+              className="mt-[1rem] hidden w-full items-center justify-center gap-[0.5rem] rounded-lg bg-[#ddbc69] px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-black transition duration-300 hover:bg-[#f3bb39]"
               aria-label="Enquire Now on WhatsApp"
             >
               <FaWhatsapp className="h-[1rem] w-[1rem] shrink-0" />
@@ -1122,3 +1122,4 @@ export default function Navbar() {
     </>
   );
 }
+

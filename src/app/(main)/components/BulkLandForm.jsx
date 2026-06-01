@@ -350,7 +350,7 @@ export default function BulkLand({ title }) {
                       value={formData.fullName}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
                       placeholder="Enter your name"
                     />
                   </div>
@@ -369,7 +369,7 @@ export default function BulkLand({ title }) {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
                       placeholder="Enter your phone number"
                     />
                   </div>
@@ -386,7 +386,7 @@ export default function BulkLand({ title }) {
                     className={`w-full font-bold py-3 px-6 rounded-lg transition duration-300 ${
                       isLoading || isDisabled || !recaptchaLoaded
                         ? "bg-gray-600 cursor-not-allowed text-gray-400"
-                        : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-md"
+                        : "bg-[#ddbc69] hover:bg-[#ddbc69] text-white shadow-md"
                     }`}
                   >
                     {isLoading ? "Submitting..." : "Get A Call Back"}
@@ -400,3 +400,4 @@ export default function BulkLand({ title }) {
     </div>
   );
 }
+

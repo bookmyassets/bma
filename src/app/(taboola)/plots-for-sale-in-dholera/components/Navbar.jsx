@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import logo from "@/assests/bma-logo-black.png";
+import logo from "@/assests/bma-with-background.svg";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";

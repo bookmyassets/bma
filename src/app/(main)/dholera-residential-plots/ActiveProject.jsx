@@ -80,7 +80,7 @@ const ActiveProjectsSection = () => {
                   <div className="absolute top-4 right-4">
                     <span 
                       className="px-3 py-1 rounded-full text-sm font-semibold text-white flex items-center gap-2"
-                      style={{backgroundColor: '#deae3c'}}
+                      style={{backgroundColor: '#ddbc69'}}
                     >
                       <Clock className="w-4 h-4" />
                       Active
@@ -90,23 +90,23 @@ const ActiveProjectsSection = () => {
 
                 {/* Project Details */}
                 <div className="p-4">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-yellow-600 transition-colors duration-300" style={{color: '#0d0d0d'}}>
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-[#ddbc69] transition-colors duration-300" style={{color: '#0d0d0d'}}>
                     {project.projectName}
                   </h3>
                   
                   <div className="flex items-start gap-2 mb-3">
-                    <MapPin className="w-4 h-4 mt-1 flex-shrink-0" style={{color: '#deae3c'}} />
+                    <MapPin className="w-4 h-4 mt-1 flex-shrink-0" style={{color: '#ddbc69'}} />
                     <p className="text-gray-600 text-sm">{project.location}</p>
                   </div>
 
                   {/* CTA Button */}
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <span className="font-semibold" style={{color: '#deae3c'}}>
+                    <span className="font-semibold" style={{color: '#ddbc69'}}>
                       Explore Project
                     </span>
                     <ArrowRight 
                       className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-2" 
-                      style={{color: '#deae3c'}} 
+                      style={{color: '#ddbc69'}} 
                     />
                   </div>
                 </div>
@@ -121,16 +121,16 @@ const ActiveProjectsSection = () => {
             href="/dholera-residential-plots" 
             className="inline-flex items-center gap-3 px-8 py-3 border-2 rounded-full font-semibold transition-all duration-300 hover:scale-105"
             style={{
-              borderColor: '#deae3c',
-              color: '#deae3c'
+              borderColor: '#ddbc69',
+              color: '#ddbc69'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#deae3c';
+              e.currentTarget.style.backgroundColor = '#ddbc69';
               e.currentTarget.style.color = '#ffffff';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.color = '#deae3c';
+              e.currentTarget.style.color = '#ddbc69';
             }}
           >
             View All Projects

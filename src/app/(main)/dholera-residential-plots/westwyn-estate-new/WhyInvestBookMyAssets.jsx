@@ -18,7 +18,7 @@ export default function WhyInvestBookMyAssets() {
     <section className="bg-black px-[clamp(1rem,4vw,3rem)] py-[clamp(1.25rem,2.5vw,2rem)] text-white">
       <div className="mx-auto max-w-7xl">
         <div className="mb-[clamp(1rem,2vw,1.5rem)]">
-          <p className="text-[clamp(1.375rem,2.4vw,1.875rem)] text-center font-semibold uppercase tracking-[0.08em] text-[#deae3c]">
+          <p className="text-[clamp(1.375rem,2.4vw,1.875rem)] text-center font-semibold uppercase tracking-[0.08em] text-[#ddbc69]">
             Why Invest with BookMyAssets
           </p>
         </div>
@@ -31,7 +31,7 @@ export default function WhyInvestBookMyAssets() {
             return (
               <div
                 key={item.id}
-                className={`flex min-h-[7rem] flex-col items-center justify-center rounded-[0.5rem] border border-white/10 bg-white/[0.03] p-[clamp(0.875rem,1.6vw,1.25rem)] text-center shadow-[0_0_0_1px_rgba(222,174,60,0.08)] transition-colors hover:border-[#deae3c]/50 ${
+                className={`flex min-h-[7rem] flex-col items-center justify-center rounded-[0.5rem] border border-white/10 bg-white/[0.03] p-[clamp(0.875rem,1.6vw,1.25rem)] text-center shadow-[0_0_0_1px_rgba(222,174,60,0.08)] transition-colors hover:border-[#ddbc69]/50 ${
                   isLastOdd ? "col-span-2 sm:col-span-1" : ""
                 }`}
               >
@@ -56,3 +56,4 @@ export default function WhyInvestBookMyAssets() {
     </section>
   );
 }
+

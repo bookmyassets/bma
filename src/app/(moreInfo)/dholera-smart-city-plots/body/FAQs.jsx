@@ -71,7 +71,7 @@ export default function FAQSection() {
             <div className="pt-4">
               <a
                 href="#"
-                className="px-2 py-3 bg-[#deae3c] text-white rounded-md"
+                className="px-2 py-3 bg-[#ddbc69] text-white rounded-md"
                 onClick={handleCallClick}
               >
                 Give Us A Missed Call
@@ -129,3 +129,4 @@ export default function FAQSection() {
     </>
   );
 }
+
