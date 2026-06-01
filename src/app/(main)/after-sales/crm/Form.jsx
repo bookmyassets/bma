@@ -57,16 +57,16 @@ const INITIAL_RECEIPT = {
 };
 
 const RECEIPT_COORDINATES = {
-  receiptNumber: { page: 1, x: 175, y: 500, fontSize: 12 },
-  receivedFrom: { page: 1, x: 420, y: 500, fontSize: 12 },
-  projectName: { page: 1, x: 175, y: 465, fontSize: 12 },
-  plotNumber: { page: 1, x: 420, y: 465, fontSize: 12 },
-  paymentDate: { page: 1, x: 175, y: 430, fontSize: 12 },
-  referenceNo: { page: 1, x: 420, y: 430, fontSize: 12 },
-  modeOfPayment: { page: 1, x: 175, y: 395, fontSize: 12 },
-  amountInNumbers: { page: 1, x: 420, y: 395, fontSize: 12 },
-  amountInWords: { page: 1, x: 175, y: 360, fontSize: 12 },
-  remarks: { page: 1, x: 175, y: 325, fontSize: 9 },
+  receiptNumber: { page: 1, x: 175, y: 500, fontSize: 10 },
+  receivedFrom: { page: 1, x: 420, y: 500, fontSize: 10 },
+  projectName: { page: 1, x: 175, y: 465, fontSize: 10 },
+  plotNumber: { page: 1, x: 420, y: 465, fontSize: 10 },
+  paymentDate: { page: 1, x: 175, y: 430, fontSize: 10 },
+  referenceNo: { page: 1, x: 420, y: 430, fontSize: 10 },
+  modeOfPayment: { page: 1, x: 175, y: 395, fontSize: 10 },
+  amountInNumbers: { page: 1, x: 420, y: 395, fontSize: 10 },
+  amountInWords: { page: 1, x: 175, y: 360, fontSize: 10 },
+  remarks: { page: 1, x: 175, y: 325, fontSize: 10 },
 };
 
 const DOCUMENT_COORDINATES = {
@@ -364,7 +364,7 @@ const DOCUMENT_COORDINATES = {
     allotmentClientNames: {
       page: 1,
       x: 60,
-      y: 623,
+      y: 626,
       fontSize: 12,
       bold: true,
       maxWidth: 154,
@@ -373,7 +373,7 @@ const DOCUMENT_COORDINATES = {
     date: {
       page: 1,
       x: 436,
-      y: 620,
+      y: 621,
       fontSize: 12,
       maxWidth: 116,
       maxLines: 1,
@@ -411,7 +411,7 @@ const DOCUMENT_COORDINATES = {
     },
     plotConsideration: {
       page: 1,
-      x: 327,
+      x: 347,
       y: 388,
       fontSize: 12,
       maxWidth: 166,
