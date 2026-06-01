@@ -7,21 +7,21 @@ import westwynResidencyImage from "@/assests/residency.webp";
 
 const projects = [
   {
-    name: "Westwyn Estates",
+    name: "WestWyn Estates",
     price: "Rs. 6,700/per sq yd",
     location: "Polarpur State Highway",
     href: "/dholera-residential-plots/westwyn-estate",
     image: westwynEstatesImage,
   },
   {
-    name: "Westwyn Residency",
+    name: "WestWyn Residency",
     price: "Rs. 6,500/per sq yd",
     location: "Pipariya, MDR",
     href: "/dholera-residential-plots/westwyn-residency",
     image: westwynResidencyImage,
   },
   {
-    name: "Westwyn County",
+    name: "WestWyn County",
     price: "Re-Selling from Rs. 12,000/per sq yd",
     location: "Fedra-pipli state highway",
     href: "/dholera-residential-plots/westwyn-county",
