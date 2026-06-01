@@ -47,7 +47,7 @@ export default function ProjectsSection() {
           {projects.map((project) => (
             <article
               key={project.name}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_1.5rem_3rem_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-[0.25rem] hover:border-[#ddbc69]/40 hover:bg-white/[0.07]"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_1.5rem_3rem_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-[0.25rem] hover:border-[#ddbc69]/40 hover:bg-white/[0.07]"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-black">
                 <Image
@@ -67,7 +67,7 @@ export default function ProjectsSection() {
 
               <Link
                 href={project.href}
-                className="block space-y-[0.75rem] p-[clamp(1rem,2vw,1.375rem)] transition-opacity duration-300 hover:opacity-90"
+                className="flex flex-1 flex-col gap-[0.75rem] p-[clamp(1rem,2vw,1.375rem)] transition-opacity duration-300 hover:opacity-90"
               >
                 <div>
                   <h3 className="text-[clamp(1rem,1.6vw,1.25rem)] font-semibold leading-[1.25]">
@@ -83,7 +83,8 @@ export default function ProjectsSection() {
                   <span>{project.location}</span>
                 </div>
 
-                <span className="inline-flex min-h-[2.5rem] items-center justify-center rounded-lg bg-[#ddbc69] px-[1rem] text-[0.875rem] font-semibold text-black transition-colors duration-300 group-hover:bg-[#ddbc69]">
+                {/* mt-auto pushes button to bottom */}
+                <span className="mt-auto inline-flex min-h-[2.5rem] items-center justify-center rounded-lg bg-[#ddbc69] px-[1rem] text-[0.875rem] font-semibold text-black transition-colors duration-300 group-hover:bg-[#ddbc69]">
                   Explore
                 </span>
               </Link>
@@ -94,4 +95,3 @@ export default function ProjectsSection() {
     </section>
   );
 }
-
