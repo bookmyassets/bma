@@ -136,7 +136,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: "lead_form",
+          event: "lead_form_hero",
           page_name: "Dholera Hero Section",
         });
       } else {
