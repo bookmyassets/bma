@@ -8,14 +8,14 @@ import westwynResidencyImage from "@/assests/residency.webp";
 const projects = [
   {
     name: "WestWyn Estates",
-    price: "Rs. 6,700/per sq yd",
+    price: "Starting from Rs. 6,700/per sq yd",
     location: "Polarpur State Highway",
     href: "/dholera-residential-plots/westwyn-estate",
     image: westwynEstatesImage,
   },
   {
     name: "WestWyn Residency",
-    price: "Rs. 6,500/per sq yd",
+    price: "Starting from Rs. 6,500/per sq yd",
     location: "Pipariya, MDR",
     href: "/dholera-residential-plots/westwyn-residency",
     image: westwynResidencyImage,
@@ -38,8 +38,8 @@ export default function ProjectsSection() {
           <span className="text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[#ddbc69]">
             Featured Projects
           </span>
-          <h2 className="mt-[0.75rem] text-[clamp(1.5rem,3vw,2.5rem)] font-semibold leading-[1.15]">
-            Explore Westwyn Projects in Dholera
+          <h2 className="mt-[0.75rem] text-[clamp(1.3rem,3vw,2.3rem)] font-semibold leading-[1.15]">
+            Explore WestWyn Projects in Dholera
           </h2>
         </div>
 
@@ -74,7 +74,7 @@ export default function ProjectsSection() {
                     {project.name}
                   </h3>
                   <p className="mt-[0.375rem] text-[clamp(0.9375rem,1.2vw,1rem)] font-semibold text-[#ddbc69]">
-                    Starting from {project.price}
+                     {project.price}
                   </p>
                 </div>
 
