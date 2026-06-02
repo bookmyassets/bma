@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import RagePopup from "./components/RageClickForm";
 import Whatsapp from "./components/Callus";
 import Navbar from "./components/Navbar_codexTemp";
+import LeadSourceCapture from "./components/LeadSourceCapture";
 /* import Navbar from "./components/Navbar"; */
 
 // ── Font ──────────────────────────────────────────────────────────────────────
@@ -113,6 +114,7 @@ y.parentNode.insertBefore(t,y);
       </head>
 
       <body className={lato.className}>
+        <LeadSourceCapture />
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
@@ -126,7 +128,7 @@ y.parentNode.insertBefore(t,y);
           <img
             height="1"
             width="1"
-            style={{ display: "none"}}
+            style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=982876334382862&ev=PageView&noscript=1"
           />
         </noscript>

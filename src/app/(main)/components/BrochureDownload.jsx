@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-dedicated-to-dholera.svg";
 import { useRouter, usePathname } from "next/navigation";
+import { captureLeadSource, getLeadSource } from "@/lib/leadSource";
 
 export default function BrochureDownload({
   onClose,
@@ -29,19 +30,6 @@ export default function BrochureDownload({
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const router = useRouter();
   const pathname = usePathname();
-
-  const getLeadSource = () => {
-    if (typeof window === "undefined") return "BookMyAssets";
-    const params = new URLSearchParams(window.location.search);
-    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
-    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
-    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
-    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
-    if (params.has("gad_source")) return "BookMyAssets Google Ads";
-    if (params.has("")) return "BookMyAssets";
-    return "BookMyAssets ";
-  };
-
 
   // PDF download URL
   const pdfUrl = link;
@@ -74,6 +62,7 @@ export default function BrochureDownload({
   };
 
   useEffect(() => {
+    captureLeadSource(source);
     // Load reCAPTCHA script
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha) {
@@ -120,7 +109,7 @@ export default function BrochureDownload({
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     };
-  }, []);
+  }, [source]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -159,7 +148,7 @@ export default function BrochureDownload({
   const onRecaptchaSuccess = async (token) => {
     try {
       const now = Date.now();
-      const source = getLeadSource();
+      const finalLeadSource = getLeadSource(source);
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
@@ -172,7 +161,7 @@ export default function BrochureDownload({
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: source,
+              source: finalLeadSource,
             },
             source: "BookMyAssets",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],

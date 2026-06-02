@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { motion } from "framer-motion";
+import { captureLeadSource, getLeadSource } from "@/lib/leadSource";
 
 export default function BulkLand({ title }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,50 +18,9 @@ export default function BulkLand({ title }) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const getLeadSource = () => {
-    if (typeof window === "undefined") return "BookMyAssets";
-    const params = new URLSearchParams(window.location.search);
-
-    // Twitter Ads
-    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
-    if (params.has("paid")) return "BookMyAssets Twitter Ads";
-
-    // Meta Ads — check fbclid + utm_source to split FB vs IG
-    if (params.has("fbclid")) {
-      const source = params.get("utm_source")?.toLowerCase();
-      if (source === "instagram") return "BookMyAssets Meta IG";
-      return "BookMyAssets Meta FB";
-    }
-
-    // Slug-based params — capture first two words of the slug value
-    const slugParam = (key) => {
-      const val = params.get(key) || "";
-      const words = val.split("-").filter(Boolean).slice(0, 2).join(" ");
-      return words || null;
-    };
-
-    if (params.has("dholera-sir-blogs")) {
-      const slug = slugParam("dholera-sir-blogs");
-      return slug ? `BookMyAssets Blogs ${slug}` : "BookMyAssets Blogs";
-    }
-    if (params.has("dholera-sir-updates")) {
-      const slug = slugParam("dholera-sir-updates");
-      return slug ? `BookMyAssets Updates ${slug}` : "BookMyAssets Updates";
-    }
-    if (params.has("about-dholera-sir")) {
-      const slug = slugParam("about-dholera-sir");
-      return slug
-        ? `BookMyAssets Dholera SIR ${slug}`
-        : "BookMyAssets Dholera SIR";
-    }
-
-    // Google Ads
-    if (params.has("gad_source")) return "BookMyAssets Google Ads";
-
-    return "BookMyAssets";
-  };
-
+  
   useEffect(() => {
+    captureLeadSource(source);
     // Load reCAPTCHA script
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
@@ -169,7 +129,7 @@ export default function BulkLand({ title }) {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      const source = getLeadSource();
+      const finalLeadSource = getLeadSource(source);
       const response = await fetch("/api/submit-form", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -178,7 +138,7 @@ export default function BulkLand({ title }) {
             name: formData.fullName,
             phone: formData.phone,
             email: formData.email,
-            source: source,
+            source: finalLeadSource,
           },
           source: "BookMyAssets Website",
           tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
@@ -400,4 +360,3 @@ export default function BulkLand({ title }) {
     </div>
   );
 }
-

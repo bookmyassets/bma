@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
+import { captureLeadSource, getLeadSource } from "@/lib/leadSource";
 
 export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +18,7 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
   });
 
   useEffect(() => {
+    captureLeadSource(source);
     // Load reCAPTCHA script
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha) {
@@ -97,7 +99,7 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
         setIsDisabled(true);
         return;
       }
-
+      const finalLeadSource = getLeadSource(source); // Get the captured lead source
       // API Request
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
@@ -112,7 +114,7 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
               name: formData.fullName,
               phone: formData.phone,
               email: formData.email,
-              source: "BookMyAssets",
+              source: finalLeadSource,
             },
             source: "BookMyAssets Website",
             tags: ["Dholera Investment", "Website Lead"],
