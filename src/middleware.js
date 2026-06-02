@@ -61,14 +61,19 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl
   const auth = req.cookies.get('crm_auth')?.value
 
+  const isCrmRoute =
+    pathname === '/after-sales/crm' ||
+    pathname.startsWith('/after-sales/crm/')
+
+  const isCrmLockRoute =
+    pathname === '/after-sales/crm-lock' ||
+    pathname.startsWith('/after-sales/crm-lock/')
+
   // 1. CRM Auth
-  if (
-    pathname.startsWith('/after-sales/crm') &&
-    !pathname.startsWith('/after-sales/crm-lock')
-  ) {
+  if (isCrmRoute && !isCrmLockRoute) {
     if (auth !== 'granted') {
       return NextResponse.redirect(
-        new URL('/after-sales/crm-lock', req.url)
+        new URL('/after-sales/crm-lock', SITE_URL)
       )
     }
   }
