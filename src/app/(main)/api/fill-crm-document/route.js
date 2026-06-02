@@ -106,15 +106,26 @@ function drawRichText(page, fieldData, formData, font, fontBold) {
     if (!segmentText) return;
 
     const selectedFont = segment.bold ? fontBold : font;
-    const tokens = segmentText.match(/\S+\s*/g) || [];
+    const tokens = segmentText.match(/\s+|\S+/g) || [];
 
     tokens.forEach((token) => {
+      const isWhitespace = /^\s+$/.test(token);
       const tokenWidth = selectedFont.widthOfTextAtSize(token, fontSize);
       const usedWidth = cursorX - startX;
 
       if (maxWidth && usedWidth > 0 && usedWidth + tokenWidth > maxWidth) {
         cursorX = startX;
         cursorY -= lineHeight;
+
+        if (isWhitespace) return;
+      }
+
+      if (isWhitespace) {
+        if (cursorX !== startX) {
+          cursorX += tokenWidth;
+        }
+
+        return;
       }
 
       page.drawText(token, {

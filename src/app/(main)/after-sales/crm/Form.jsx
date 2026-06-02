@@ -363,8 +363,8 @@ const DOCUMENT_COORDINATES = {
   "allotment-letter": {
     allotmentClientNames: {
       page: 1,
-      x: 60,
-      y: 626,
+      x: 65,
+      y: 628,
       fontSize: 12,
       bold: true,
       maxWidth: 154,
@@ -372,8 +372,8 @@ const DOCUMENT_COORDINATES = {
     },
     date: {
       page: 1,
-      x: 436,
-      y: 620,
+      x: 439,
+      y: 628,
       fontSize: 12,
       maxWidth: 116,
       maxLines: 1,
@@ -381,7 +381,7 @@ const DOCUMENT_COORDINATES = {
     dearLine: {
       key: "welcomeGreeting",
       page: 1,
-      x: 37,
+      x: 50,
       y: 540,
       fontSize: 12,
       bold: true,
@@ -401,7 +401,7 @@ const DOCUMENT_COORDINATES = {
         { key: "plotNumber", bold: true },
         { text: ", " },
         { key: "plotAreaSqYardsText", bold: true },
-        { text: " at " },
+        { text: "  at " },
         { key: "projectName", bold: true },
         {
           text:
@@ -1332,4 +1332,3 @@ function Textarea({ label, value, onChange }) {
     </label>
   );
 }
-
