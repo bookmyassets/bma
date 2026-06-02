@@ -4,14 +4,12 @@ import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import logo from "@/assests/bma-dedicated-to-dholera.svg";
-import { captureLeadSource, getLeadSource } from "@/lib/leadSource";
 
 export default function ContactForm({
   onClose,
   title = "Get In Touch",
   buttonName = "Book Consultation",
   project,
-  source = "BookMyAssets Website",
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,10 +23,50 @@ export default function ContactForm({
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
+
+    // Twitter Ads
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("paid")) return "BookMyAssets Twitter Ads";
+
+    // Meta Ads — check fbclid + utm_source to split FB vs IG
+    if (params.has("fbclid")) {
+      const source = params.get("utm_source")?.toLowerCase();
+      if (source === "instagram") return "BookMyAssets Meta IG";
+      return "BookMyAssets Meta FB";
+    }
+
+    // Slug-based params — capture first two words of the slug value
+    const slugParam = (key) => {
+      const val = params.get(key) || "";
+      const words = val.split("-").filter(Boolean).slice(0, 2).join(" ");
+      return words || null;
+    };
+
+    if (params.has("dholera-sir-blogs")) {
+      const slug = slugParam("dholera-sir-blogs");
+      return slug ? `BookMyAssets Blogs ${slug}` : "BookMyAssets Blogs";
+    }
+    if (params.has("dholera-sir-updates")) {
+      const slug = slugParam("dholera-sir-updates");
+      return slug ? `BookMyAssets Updates ${slug}` : "BookMyAssets Updates";
+    }
+    if (params.has("about-dholera-sir")) {
+      const slug = slugParam("about-dholera-sir");
+      return slug
+        ? `BookMyAssets Dholera SIR ${slug}`
+        : "BookMyAssets Dholera SIR";
+    }
+
+    // Google Ads
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+
+    return "BookMyAssets";
+  };
 
   useEffect(() => {
-    captureLeadSource(source);
-
     // Load reCAPTCHA script
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
@@ -97,7 +135,7 @@ export default function ContactForm({
         }
       }
     };
-  }, [siteKey, source]);
+  }, [siteKey]);
 
   // Handle close function
   const handleClose = () => {
@@ -157,7 +195,7 @@ export default function ContactForm({
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      const finalLeadSource = getLeadSource(source);
+      const source = getLeadSource();
       // API Request using the new endpoint and format
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
@@ -171,7 +209,7 @@ export default function ContactForm({
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: finalLeadSource,
+              source: source,
             },
             source: "BookMyAssets Website",
             tags: ["Dholera Investment", "Website Lead"],

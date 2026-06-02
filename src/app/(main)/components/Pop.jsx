@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-dedicated-to-dholera.svg";
 import { useRouter, usePathname } from "next/navigation";
-import { captureLeadSource, getLeadSource } from "@/lib/leadSource";
 
 export default function Popup({
   onClose,
@@ -29,7 +28,48 @@ export default function Popup({
   const [showForm, setShowForm] = useState(false);
 
   const [timeLeft, setTimeLeft] = useState(1800);
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "BookMyAssets";
+    const params = new URLSearchParams(window.location.search);
 
+    // Twitter Ads
+    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+    if (params.has("paid")) return "BookMyAssets Twitter Ads";
+
+    // Meta Ads — check fbclid + utm_source to split FB vs IG
+    if (params.has("fbclid")) {
+      const source = params.get("utm_source")?.toLowerCase();
+      if (source === "instagram") return "BookMyAssets Meta IG";
+      return "BookMyAssets Meta FB";
+    }
+
+    // Slug-based params — capture first two words of the slug value
+    const slugParam = (key) => {
+      const val = params.get(key) || "";
+      const words = val.split("-").filter(Boolean).slice(0, 2).join(" ");
+      return words || null;
+    };
+
+    if (params.has("dholera-sir-blogs")) {
+      const slug = slugParam("dholera-sir-blogs");
+      return slug ? `BookMyAssets Blogs ${slug}` : "BookMyAssets Blogs";
+    }
+    if (params.has("dholera-sir-updates")) {
+      const slug = slugParam("dholera-sir-updates");
+      return slug ? `BookMyAssets Updates ${slug}` : "BookMyAssets Updates";
+    }
+    if (params.has("about-dholera-sir")) {
+      const slug = slugParam("about-dholera-sir");
+      return slug
+        ? `BookMyAssets Dholera SIR ${slug}`
+        : "BookMyAssets Dholera SIR";
+    }
+
+    // Google Ads
+    if (params.has("gad_source")) return "BookMyAssets Google Ads";
+
+    return "BookMyAssets";
+  };
 
   useEffect(() => {
     let timer;
@@ -100,8 +140,6 @@ export default function Popup({
         parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
-
-    captureLeadSource(source); // Capture lead source on component mount
 
     // Load reCAPTCHA script
     const loadRecaptcha = () => {
@@ -192,7 +230,7 @@ export default function Popup({
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: getLeadSource(source),
+              source: getLeadSource(),
             },
             source: "BookMyAssets",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],

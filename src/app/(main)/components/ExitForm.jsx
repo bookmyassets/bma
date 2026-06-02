@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import React from "react";
-import { captureLeadSource, getLeadSource } from "@/lib/leadSource";
 
 export default function ExitPopup({
   title = "Wait! Before You Go...",
@@ -32,8 +31,6 @@ export default function ExitPopup({
 
   // Load reCAPTCHA script
   useEffect(() => {
-    captureLeadSource("BookMyAssets Exit Popup");
-
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
         const script = document.createElement("script");
@@ -182,7 +179,6 @@ export default function ExitPopup({
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      const finalLeadSource = getLeadSource("BookMyAssets Exit Popup");
       const response = await fetch(
          "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
@@ -196,7 +192,7 @@ export default function ExitPopup({
               name: formData.fullName,
               phone: formData.mobileNumber,
               email: formData.email || undefined,
-              source: finalLeadSource,
+              source: "BookMyAssets Exit Popup",
             },
             source: "BookMyAssets Exit Popup",
             tags: ["Exit Intent", "Popup Lead", "BookMyAssets"],
