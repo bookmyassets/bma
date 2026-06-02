@@ -299,7 +299,7 @@ export default function PopupScroll({ title }) {
               <>
                 {/* Section 1: Heading */}
                 <div className="text-center mb-6 space-y-4">
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+                  <div className="absolute top-3 left-1/2 transform -translate-x-1/2">
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}

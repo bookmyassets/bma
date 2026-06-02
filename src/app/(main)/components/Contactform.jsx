@@ -316,7 +316,7 @@ export default function ContactForm({
 
   return (
     <div
-      className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4 z-[1000]"
+      className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-6 z-[1000]"
       onClick={handleBackdropClick}
     >
       <motion.div
@@ -324,7 +324,7 @@ export default function ContactForm({
         initial={{ scale: 0.9, y: 50 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 50 }}
-        className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative mx-2"
+        className="bg-white p-6 sm:p-6 rounded-xl shadow-2xl border border-gray-700 max-w-md w-full relative mx-2"
         onClick={handleFormClick}
       >
         {/* Close Button */}
@@ -351,7 +351,7 @@ export default function ContactForm({
         </button>
 
         {/* Logo */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+        <div className="absolute top-2 left-1/2 transform -translate-x-1/2">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
