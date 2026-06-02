@@ -4,17 +4,17 @@ import path from "path";
 import { NextResponse } from "next/server";
 
 const FIELD_MAP = [
-  { key: "projectName",         x: 130,  y: 668.3, fontSize: 12 },  
-  { key: "clientName",          x: 130,  y: 647.3, fontSize: 12 },  
-  { key: "plotNumber",          x: 130,  y: 626.3, fontSize: 12 }, 
-  { key: "tokenPaymentDueDate", x: 456,  y: 527.0 },
-  { key: "m1DueTimeline",       x: 365,  y: 497.6 },
-  { key: "m1PaymentDueDate",    x: 458,  y: 497.6 },
-  { key: "m2DueTimeline",       x: 365,  y: 467.9 },
-  { key: "m2PaymentDueDate",    x: 456,  y: 467.9 },
-  { key: "m3DueTimeline",       x: 365,  y: 438.2 },
-  { key: "m3PaymentDueDate",    x: 456,  y: 438.2 },
-  { key: "totalDueTimeline",    x: 365,  y: 408.5, bold: true },
+  { key: "projectName",         x: 130,  y: 676, fontSize: 12 },  
+  { key: "clientName",          x: 130,  y: 655, fontSize: 12 },  
+  { key: "plotNumber",          x: 130,  y: 634, fontSize: 12 }, 
+  { key: "tokenPaymentDueDate", x: 479,  y: 525 },
+  { key: "m1DueTimeline",       x: 384,  y: 483 },
+  { key: "m1PaymentDueDate",    x: 480,  y: 483 },
+  { key: "m2DueTimeline",       x: 384,  y: 445 },
+  { key: "m2PaymentDueDate",    x: 479,  y: 445 },
+  { key: "m3DueTimeline",       x: 384,  y: 407 },
+  { key: "m3PaymentDueDate",    x: 478,  y: 407 },
+  { key: "totalDueTimeline",    x: 384,  y: 372, bold: true },
 ];
 
 function formatValue(key, value) {
