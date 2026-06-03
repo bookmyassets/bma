@@ -69,7 +69,7 @@ const WestWynAboutSection = () => {
       <div className="relative max-w-7xl mx-auto px-4 py-4">
         {/* Header Section */}
         <div className="text-center mb-4 space-y-2">
-          <h1 className="text-[32px] font-bold text-[#ddbc69]">
+          <h1 className="md:text-[32px] font-bold text-[#ddbc69]">
             WestWyn Residency{" "}
             <span className="text-black">
               - Govt Approved Premium Residential Plots

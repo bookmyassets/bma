@@ -1,23 +1,17 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState } from "react";
 import CommonForm from "../../components/CommonForm";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
 import SoldOutProjectsSection from "../SoldOutProjects";
-
 import WestWynAboutSection from "./About";
 
 //images import
 import img1 from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate.webp";
-import img2 from "@/assests/residential/residency/westwyn-residency-dholera-sir-clubhouse-hero.webp";
-import img3 from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area-hero.webp";
 import img1M from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate-mobile.webp";
-import img2M from "@/assests/residential/residency/westwyn-residency-dholera-sir-clubhouse-lite-mobile.webp";
-import img3M from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area-mobile.webp";
 import PopupScroll from "../../components/PopUpScroll";
 import CostSheet from "../costsheet2";
 import OurCommits from "./OurCommits";
