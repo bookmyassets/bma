@@ -238,7 +238,7 @@ export default function WestWynResidencyClient() {
             <div className="relative w-full md:h-[70vh] aspect-[3/1]">
               <Image
                 src={img1}
-                alt="WestWyn Estates, Dholera Premium Residential Plots"
+                alt="WestWyn Residency, Dholera Premium Residential Plots"
                 fill
                 className="object-fill aspect-[3/1]"
                 fetchPriority="high"
@@ -258,7 +258,7 @@ export default function WestWynResidencyClient() {
           <div>
             <Image
               src={img1M}
-              alt="WestWyn Estates, Dholera Premium Residential Plots"
+              alt="WestWyn Residency, Dholera Premium Residential Plots"
               fill
               className="object-cover"
               fetchPriority="high"
