@@ -134,6 +134,7 @@ export async function generateMetadata({ params }) {
     type: "article",
     publishedAt: post.publishedAt,
     updatedAt: post._updatedAt,
+    authors: [{ name: "BookMyAssets" }],
   });
 }
 

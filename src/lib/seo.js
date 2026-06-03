@@ -1,5 +1,5 @@
 // lib/seo.js
-import defaultImageSrc from "@/assests/bma-logo.png"
+import defaultImageSrc from "@/assests/bma-logo.png";
 const BASE_URL = "https://www.bookmyassets.com";
 
 export function generateMetadata({
@@ -13,6 +13,7 @@ export function generateMetadata({
   type = "website",
   publishedAt,
   updatedAt,
+  authors = [],
 }) {
   // Auto canonical generate from slug if not provided
   const canonical = canonicalUrl || `${BASE_URL}/${slug}`;
@@ -24,7 +25,7 @@ export function generateMetadata({
     ? image.startsWith("https")
       ? image
       : `${BASE_URL}/${image}`
-    : defaultImageSrc.src;;
+    : defaultImageSrc.src;
 
   return {
     title: metaTitle,
@@ -34,6 +35,8 @@ export function generateMetadata({
     alternates: {
       canonical,
     },
+    robots: noIndex ? "noindex, nofollow" : "index, follow",
+    authors: [{ name: "BookMyAssets" }],
     openGraph: {
       title: metaTitle,
       description: metaDesc,
