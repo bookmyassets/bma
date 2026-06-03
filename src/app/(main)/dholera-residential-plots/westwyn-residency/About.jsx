@@ -69,7 +69,7 @@ const WestWynAboutSection = () => {
       <div className="relative max-w-7xl mx-auto px-4 py-4">
         {/* Header Section */}
         <div className="text-center mb-4 space-y-2">
-          <h1 className="md:text-[32px] font-bold text-[#ddbc69]">
+          <h1 className="text-xl md:text-[32px] font-bold text-[#ddbc69]">
             WestWyn Residency{" "}
             <span className="text-black">
               - Govt Approved Premium Residential Plots
@@ -89,7 +89,7 @@ const WestWynAboutSection = () => {
         <div className=" gap-12 items-stretch space-y-4">
           {/* Left Content */}
           <div className=" h-full">
-            <div className="flex justify-center items-center flex-row gap-4 ">
+            <div className="flex justify-center items-center flex-col md:flex-row gap-4 ">
               <button
                 onClick={openBrochureForm}
                 className="bg-[#ddbc69] text-white px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
