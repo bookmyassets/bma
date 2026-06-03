@@ -168,7 +168,7 @@ export default function MegaIndustries() {
     <>
       <div className="py-[clamp(2rem,5vw,3.5rem)] bg-white min-h-[480px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xl md:text-4xl text-center font-bold text-gray-800 mb-4">
+          <p className="text-[clamp(1.5rem,3vw,2.25rem)] text-center font-semibold leading-[1.2] text-gray-800 mb-4">
             Mega Projects Powering{" "}
             <span className="text-[#ddbc69]">Dholera Smart City</span>
           </p>
@@ -197,7 +197,7 @@ export default function MegaIndustries() {
                       />
                     </div>
                     <div className="p-4">
-                      <p className="text-sm text-gray-600 truncate font-medium">
+                      <p className="text-[0.875rem] font-normal leading-[1.5] text-gray-600 truncate">
                         {image.alt}
                       </p>
                     </div>
@@ -340,7 +340,7 @@ export default function MegaIndustries() {
             </button>
 
             <div className="absolute bottom-4 left-0 right-0 text-center">
-              <p className="text-white text-lg font-medium bg-black/50 inline-block px-6 py-3 rounded-lg backdrop-blur-sm">
+              <p className="text-white text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] bg-black/50 inline-block px-6 py-3 rounded-lg backdrop-blur-sm">
                 {images[currentIndex].alt}
               </p>
             </div>

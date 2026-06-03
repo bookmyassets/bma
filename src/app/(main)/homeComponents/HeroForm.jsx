@@ -40,7 +40,8 @@ function FormInput({
           pl-[clamp(1.75rem,2.5vw,2.25rem)]
           pr-[clamp(0.5rem,1vw,0.75rem)]
           py-[clamp(0.4rem,0.85vw,0.6rem)]
-          text-[clamp(0.8rem,1.1vw,0.875rem)]
+          text-[0.875rem]
+          leading-[1.5]
           border border-gray-200
           rounded-lg
           bg-gray-50
@@ -202,7 +203,7 @@ export default function HeroForm() {
       {/* ── Logo + Headline ── */}
       <div className="text-center mb-[clamp(0.75rem,1.5vw,1.25rem)]">
         {/* Logo — desktop only */}
-        <div className="relative w-[clamp(200px,18vw,280px)] aspect-[3/1] mx-auto mb-[clamp(0.4rem,0.85vw,0.75rem)] hidden md:block">
+        {/* <div className="relative w-[clamp(200px,18vw,280px)] aspect-[3/1] mx-auto mb-[clamp(0.4rem,0.85vw,0.75rem)] hidden md:block">
           <Image
             src={logo}
             alt="BookMyAssets - Dholera Property Investment"
@@ -211,14 +212,14 @@ export default function HeroForm() {
             className="object-contain"
             fetchPriority="high"
           />
-        </div>
+        </div> */}
 
         {/* Headline */}
-        <div className="flashy-blink space-y-[clamp(0.2rem,0.5vw,0.4rem)]">
-          <h2 className="text-[clamp(1.1rem,2vw,1.35rem)] font-bold glowing-text px-2 leading-snug">
-            Buy Residential Plots in Dholera
+        <div className="">
+          <h2 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] glowing-text px-2">
+            Buy Residential Plot in Dholera
           </h2>
-          <p className="text-[clamp(0.875rem,1.25vw,1rem)] glowing-text px-2">
+          <p className="text-[0.875rem] font-normal leading-[1.5] glowing-text px-2">
             Get Project Details{" "}
           </p>
         </div>
@@ -251,13 +252,13 @@ export default function HeroForm() {
             </div>
           </div>
 
-          <h2 className="text-[clamp(1.1rem,2vw,1.35rem)] font-bold text-black mb-[clamp(0.3rem,0.75vw,0.5rem)]">
+          <h2 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-black mb-[clamp(0.3rem,0.75vw,0.5rem)]">
             Thank You!
           </h2>
-          <p className="text-[clamp(0.8rem,1.1vw,0.875rem)] text-gray-600 mb-[clamp(0.2rem,0.5vw,0.4rem)]">
+          <p className="text-[0.875rem] font-normal leading-[1.5] text-gray-600 mb-[clamp(0.2rem,0.5vw,0.4rem)]">
             Your request has been submitted successfully.
           </p>
-          <p className="text-[clamp(0.8rem,1.1vw,0.875rem)] text-[#ddbc69] font-semibold">
+          <p className="text-[0.875rem] text-[#ddbc69] font-semibold leading-[1.5]">
             Our expert will contact you within 24 hours for your free
             consultation.
           </p>
@@ -319,9 +320,10 @@ export default function HeroForm() {
               py-[clamp(0.5rem,1vw,0.75rem)]
               px-[clamp(1rem,2vw,1.5rem)]
               bg-gradient-to-r from-[#ddbc69] to-[#ddbc69]
-              text-white
-              text-[clamp(0.875rem,1.25vw,1rem)]
+              text-black
+              text-[0.875rem] md:text-[1rem]
               font-semibold
+              leading-[1.4]
               rounded-lg
               hover:from-[#ddbc69] hover:to-[#ddbc69]
               transition-all

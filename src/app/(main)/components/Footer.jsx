@@ -13,7 +13,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-[#ddbc69] border-t border-[#ddbc69]">
+    <footer className="bg-black border-t border-[#ddbc69]">
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-8 lg:px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo + Contact Info */}
@@ -75,7 +75,7 @@ export default function Footer() {
               </Link>
 
               {/* Branch Office */}
-              <a
+              <Link
                 className="flex items-start gap-3 hover:text-[#ddbc69] transition-colors"
                 aria-label="BookMyAssets Branch Office"
                 href="https://maps.app.goo.gl/MsdYUzz3WuUD4ZWb6"
@@ -92,7 +92,7 @@ export default function Footer() {
                     <br /> Noida, Uttar Pradesh 201301
                   </p>
                 </div>
-              </a>
+              </Link>
             </div>
 
             {/* Social Icons */}
@@ -137,14 +137,14 @@ export default function Footer() {
 
           {/* Residential */}
           <div>
-            <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
+            <h3 className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Residential Projects
             </h3>
             <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link
                   href="/dholera-residential-plots/westwyn-residency"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   WestWyn Residency
                 </Link>
@@ -152,7 +152,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/dholera-residential-plots/westwyn-estate"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   WestWyn Estates
                 </Link>
@@ -160,7 +160,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/dholera-residential-plots/westwyn-county"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   WestWyn County
                 </Link>
@@ -171,14 +171,14 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
+            <h3 className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Quick Links
             </h3>
             <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   About us
                 </Link>
@@ -186,7 +186,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/dholera-sir-blogs"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Blog
                 </Link>
@@ -194,7 +194,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/career"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white   hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Careers
                 </Link>
@@ -202,7 +202,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/bulk-land/residential"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Bulk Land Deals
                 </Link>
@@ -210,7 +210,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/channel-partner"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Channel Partner
                 </Link>
@@ -220,14 +220,14 @@ export default function Footer() {
 
           {/* Policies */}
           <div>
-            <h3 className="text-base font-semibold mb-5 pb-2 border-b border-gray-100">
+            <h3 className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Policies
             </h3>
             <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link
                   href="/policies/terms"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Terms of Service
                 </Link>
@@ -235,7 +235,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/policies/privacy"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Privacy Policy
                 </Link>
@@ -243,7 +243,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/policies/copyright"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Copyright Policy
                 </Link>
@@ -251,7 +251,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/policies/refund-and-cancellation"
-                  className="hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Refund and Cancellation
                 </Link>

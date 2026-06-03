@@ -1,10 +1,13 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import img1 from "@/assests/taboola/icons/bookmyassets-365-days-assistance-icon.svg";
 import img2 from "@/assests/taboola/icons/bookmyassets-buy-back-assistance-icon.svg";
 import img3 from "@/assests/taboola/icons/bookmyassets-due-diligence-team-icon.svg";
 import img4 from "@/assests/taboola/icons/bookmyassets-immediate-sale-deed-icon.svg";
 import img5 from "@/assests/taboola/icons/bookmyassets-resale-support-icon.svg";
-import Link from "next/link";
 
 const icons = [
   { id: 1, icon: img3, label: "Due Diligence Team" },
@@ -12,97 +15,159 @@ const icons = [
   { id: 3, icon: img1, label: "365 Days Site Visit" },
   { id: 4, icon: img5, label: "Resale Support" },
   { id: 5, icon: img2, label: "Buyback Assistance" },
+  { id: 6, icon: img2, label: "Rental Support" },
 ];
 
 const COUNTERS = [
-  { value: "7+ Projects", label: "Successfully Sold Out" },
-  { value: "2 Lakh+ Sq. Yd", label: "Dholera Land Sold" },
-  { value: "957+ Plots", label: "Registry Delivered" },
-  { value: "561+ Clients", label: "Investor Client Base" },
+  {
+    target: 7,
+    suffix: "+ Projects",
+    label: "Successfully Sold Out",
+  },
+  {
+    target: 2,
+    suffix: " Lakh+ Sq. Yd",
+    label: "Dholera Land Sold",
+  },
+  {
+    target: 957,
+    suffix: "+ Plots",
+    label: "Registry Delivered",
+  },
+  {
+    target: 561,
+    suffix: "+ Clients",
+    label: "Investor Client Base",
+  },
 ];
 
+function AnimatedCounter({ target, suffix, shouldStart }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!shouldStart) return undefined;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      setCount(target);
+      return undefined;
+    }
+
+    let animationFrame;
+    const duration = 3100;
+    const startTime = performance.now();
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setCount(Math.round(target * easedProgress));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [shouldStart, target]);
+
+  return (
+    <span className="inline-block min-w-[7ch] tabular-nums">
+      {count.toLocaleString("en-IN")}
+      {suffix}
+    </span>
+  );
+}
+
 export default function AboutBMA() {
+  const counterGridRef = useRef(null);
+  const [shouldStartCounters, setShouldStartCounters] = useState(false);
+
+  useEffect(() => {
+    if (shouldStartCounters) return undefined;
+
+    const counterGrid = counterGridRef.current;
+    if (!counterGrid) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldStartCounters(true);
+          observer.disconnect();
+        }
+      },
+      { root: null, rootMargin: "0px 0px -15% 0px", threshold: 0.25 },
+    );
+
+    observer.observe(counterGrid);
+
+    return () => observer.disconnect();
+  }, [shouldStartCounters]);
+
   return (
     <>
-      <div className="bg-gray-50 py-[clamp(2.5rem,5vw,3.5rem)]" id="why-bma">
-        <div className="mx-auto max-w-7xl px-[clamp(1rem,4vw,2rem)]">
+      <div
+        className="bg-gray-50 px-[clamp(1rem,4vw,2rem)] py-[clamp(2rem,2vw,3rem)]"
+        id="why-bma"
+      >
+        <div className="mx-auto max-w-7xl">
           <div className="mb-[clamp(1rem,3vw,1.75rem)] flex flex-col items-center text-center">
             <div className="flex items-center gap-3">
-              <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-                <span className="text-[#ddbc69]">BookMyAssets</span> : Trusted
-                Developers in Dholera{" "}
+              <h2 className="mx-auto max-w-5xl text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-gray-900">
+                Why Invest with{" "}
+                <span className="text-[#ddbc69]">BookMyAssets</span>?
               </h2>
             </div>
           </div>
-
-          <div className="space-y-[clamp(1.25rem,3vw,2rem)]">
-            <p className="mx-auto max-w-[56rem] text-center text-[clamp(0.875rem,2vw,1.125rem)] leading-[1.65] text-gray-700">
-              BookMyAssets brings prime location residential plots in Dholera
-              for sale with strong growth potential, registry ready
-              documentation, clear guidance, and complete support before and
-              after booking.
-            </p>
-
-            <div className="mx-auto max-w-7xl">
-              <div className="grid grid-cols-2 gap-[clamp(0.75rem,2vw,1.25rem)] lg:grid-cols-4">
-                {COUNTERS.map(({ value, label }) => (
-                  <div
-                    key={label}
-                    className="
-                    flex flex-col justify-center items-center
-                    p-[clamp(0.875rem,2vw,1.25rem)]
-                    bg-white rounded-2xl shadow-md
-                    hover:shadow-xl transition-shadow
-                  "
-                  >
-                    <div className="text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#ddbc69] mb-2">
-                      {value}
-                    </div>
-                    <p className="text-[clamp(0.75rem,1.5vw,0.875rem)] text-gray-700 font-medium text-center">
-                      {label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              {/* CTA Buttons */}
-              <div className="flex items-center justify-center gap-4">
-                <Link
-                  href="/about"
-                  className="flex items-center gap-2 bg-[#ddbc69] hover:bg-[#c99a2e] text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto justify-center text-[clamp(0.875rem,1.5vw,1rem)]"
-                  
+          <div className="mx-auto max-w-7xl text-center text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-gray-700">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <div
+                  ref={counterGridRef}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(0.75rem,2vw,1.25rem)]"
                 >
-                  Know More About Us
-                </Link>
+                  {COUNTERS.map(({ target, suffix, label }) => (
+                    <div
+                      key={label}
+                      className="flex shadow-black flex-col items-center justify-center rounded-2xl bg-[#ddbc69] p-[clamp(0.5rem,1.5vw,0.75rem)] shadow-md transition-shadow hover:shadow-xl"
+                    >
+                      <div className="mb-2 text-center text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-black">
+                        <AnimatedCounter
+                          target={target}
+                          suffix={suffix}
+                          shouldStart={shouldStartCounters}
+                        />
+                      </div>
+                      <p className="text-center text-[0.875rem] font-normal leading-[1.5] text-black">
+                        {label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            <div>
-              <div className="max-w-7xl mx-auto text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold text-gray-900 leading-tight text-center">
-                <p>Why Invest with BookMyAssets</p>
-              </div>
-              <div className="pt-[clamp(1rem,2vw,1.5rem)]">
-                <div className="grid grid-cols-2 gap-[clamp(0.75rem,2vw,1rem)] sm:grid-cols-3 lg:grid-cols-5">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                {/* <p className="font-semibold pb-4 md:hidden">We Promise</p> */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(0.75rem,2vw,1rem)]">
                   {icons.map((item, index) => {
                     const isLastOdd =
                       index === icons.length - 1 && icons.length % 2 !== 0;
                     return (
                       <div
                         key={item.id}
-                        className={`flex flex-col items-center gap-[clamp(0.5rem,1.5vw,0.75rem)] rounded-xl border border-gray-100 bg-white p-[clamp(0.75rem,2vw,1rem)] shadow-sm transition-shadow hover:shadow-md
-                              ${isLastOdd ? "col-span-2 sm:col-span-1" : ""}`}
+                        className={`flex flex-col items-center shadow-lg gap-[clamp(0.5rem,1.5vw,0.75rem)] rounded-xl border border-gray-100 bg-black p-[clamp(0.75rem,2vw,1rem)] transition-shadow hover:shadow-md ${
+                          isLastOdd
+                            ? "col-span-2 justify-self-center w-[calc(50%-0.5rem)]"
+                            : ""
+                        }`}
                       >
-                        <div className="relative w-[clamp(7rem,8vw,9rem)] h-[clamp(7rem,8vw,9rem)]">
-                          <Image
-                            src={item.icon}
-                            alt={item.label}
-                            fill
-                            className="object-contain"
-                          />
-                        </div>
-                        <p className="text-center text-[clamp(0.75rem,1.5vw,0.95rem)] font-medium text-gray-700">
+                        <p className="text-center text-[0.875rem] font-semibold leading-[1.5] text-[#ddbc69]">
+                          <span className="text-green-500 text-center px-2">✓</span>{" "}
                           {item.label}
                         </p>
                       </div>
@@ -110,6 +175,11 @@ export default function AboutBMA() {
                   })}
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="space-y-[clamp(1.25rem,3vw,2rem)]">
+            <div>
+              <div className="pt-[clamp(1rem,2vw,1.5rem)]"></div>
             </div>
           </div>
         </div>

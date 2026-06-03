@@ -301,10 +301,10 @@ export default function InteractiveMap() {
       <div className={`mx-auto ${isMobile ? 'max-w-md' : 'max-w-6xl'}`}>
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-4xl whitespace-nowrap font-bold text-gray-900 mb-2">
+          <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] whitespace-nowrap font-semibold leading-[1.2] text-gray-900 mb-2">
             8 Mega Projects Powering 
           </h2>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#ddbc69] mb-4">Dholera</h2>
+          <h2 className="text-[clamp(1.875rem,4vw,3.25rem)] font-semibold leading-[1.15] text-[#ddbc69] mb-4">Dholera</h2>
         </div>
 
         {/* Map Container */}
@@ -327,7 +327,7 @@ export default function InteractiveMap() {
         </div>
 
         {/* Instruction */}
-        <p className="text-center text-gray-600 mt-6 text-lg font-medium">
+        <p className="text-center text-gray-600 mt-6 text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7]">
           <span className="inline-block w-3 h-3 rounded-full animate-pulse mr-2"></span>
           {isMobile ? 'Tap' : 'Click'} on icons to explore Mega Projects
         </p>
@@ -350,7 +350,7 @@ export default function InteractiveMap() {
               <div className="flex flex-col h-full">
                 {/* Header with close button */}
                 <div className="relative h-12 bg-black flex items-center justify-between px-4 flex-shrink-0">
-                  <h3 className="text-[#ddbc69] font-bold text-lg truncate pr-10">
+                  <h3 className="text-[#ddbc69] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] truncate pr-10">
                     {selectedArea.title}
                   </h3>
                   <button
@@ -377,7 +377,7 @@ export default function InteractiveMap() {
                           allowFullScreen
                         ></iframe>
                       </div>
-                      <p className="text-sm text-gray-600 mt-2 text-center">
+                      <p className="text-[0.875rem] font-normal leading-[1.5] text-gray-600 mt-2 text-center">
                         {getAreaVideo(selectedArea.id).title}
                       </p>
                     </div>
@@ -399,23 +399,23 @@ export default function InteractiveMap() {
                   {/* Content */}
                   <div className="p-5">
                     <div className="mb-4">
-                      <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                      <h4 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-gray-800 mb-2">
                         Project Overview
                       </h4>
-                      <p className="text-gray-700 text-sm leading-relaxed">
+                      <p className="text-gray-700 text-[0.875rem] font-normal leading-[1.5]">
                         {selectedArea.description}
                       </p>
                     </div>
 
                     <div className="mb-6">
-                      <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                      <h4 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-gray-800 mb-2">
                         Key Highlights
                       </h4>
                       <ul className="space-y-2">
                         {selectedArea.details.map((detail, index) => (
                           <li key={index} className="flex items-start">
                             <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></div>
-                            <span className="text-gray-700 text-sm">{detail}</span>
+                            <span className="text-gray-700 text-[0.875rem] font-normal leading-[1.5]">{detail}</span>
                           </li>
                         ))}
                       </ul>

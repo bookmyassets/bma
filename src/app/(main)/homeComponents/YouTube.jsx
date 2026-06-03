@@ -95,10 +95,10 @@ export default function ShortsSection() {
       aria-label="Dholera in Motion"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-[#ddbc69] font-bold text-center mb-2">
+        <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] text-[#ddbc69] font-semibold leading-[1.2] text-center mb-2">
           Dholera Drone Shorts{" "}
         </h2>
-        <p className="text-center font-light text-white text-lg mb-6">
+        <p className="text-center text-white text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] mb-6">
           Witness real-time progress of Dholera Smart City Project and Latest
           updates on infrastructure projects in Dholera
         </p>
@@ -186,7 +186,7 @@ export default function ShortsSection() {
                     )}
                   </div>
                   <div className="p-2 text-center">
-                    <h3 className="text-gray-800 font-semibold text-lg line-clamp-2">
+                    <h3 className="text-gray-800 text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] line-clamp-2">
                       {short.title}
                     </h3>
                   </div>

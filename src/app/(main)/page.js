@@ -1,18 +1,15 @@
 import React from "react";
 import Dholera from "./homeComponents/Dholera";
-/* import BMA from "./homeComponents/BMA"; */
-import ShortsSection from "./homeComponents/YouTube";
+import BMA from "./homeComponents/BMA";
+
 import FAQSection from "./homeComponents/FAQs";
 import WestWyn from "./homeComponents/WestWyn";
 import PopupForm from "./components/PopUpForm";
-import Hero from "./homeComponents/heroTemp";
-/* import Hero from "./homeComponents/Hero"; */
+import Hero from "./homeComponents/Hero";
 import LatestUpdates from "./homeComponents/Latest";
 import LeadForm from "./components/LeadForm";
-import MegaIndustries from "./homeComponents/MegaIndustries";
+
 import HowToBuy from "./homeComponents/BuyingProcess";
-import ProjectsSection from "./homeComponents/ProjectsSection_codexTemp";
-import AboutBMA from "./homeComponents/BMA_codexTemp";
 
 export default function page() {
 
@@ -211,10 +208,10 @@ export default function page() {
       <div>
         <Hero />
         <Dholera />
-       <ProjectsSection/>
-        {/* <BMA /> */}
-        <AboutBMA/>
-       {/*  <WestWyn /> */}
+      
+        <WestWyn />
+        <BMA />
+        
         <HowToBuy/>
         {/* <MegaIndustries/> */}
         <div className="" id="contact">

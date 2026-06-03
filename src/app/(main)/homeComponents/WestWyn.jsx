@@ -1,106 +1,93 @@
 import Image from "next/image";
 import Link from "next/link";
-import img from "@/assests/we_cover.webp";
-import img2 from "@/assests/residency.webp";
-import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 
-const PROJECTS = [
+import westwynCountyImage from "@/assests/westwyn-county/westwyn-county-mob2.webp";
+import westwynEstatesImage from "@/assests/we_cover.webp";
+import westwynResidencyImage from "@/assests/residency.webp";
+
+const projects = [
   {
-    image: img2,
-    name: "WestWyn Residency",
-    subtext: "Registry ready plots starting from ₹8 lakh*",
-    tag: "Premium plots",
-    href: "/dholera-residential-plots/westwyn-residency",
-    description:
-      "WestWyn Residency is a gated plotting society offering residential plots in Pipariya, Dholera. The project provides immediate possession with long term appreciation potential.",
-    points: [
-      "Prime location: 5 minutes from SIR boundary, 30 minutes from Dholera International Airport",
-      "Basic selling price: ₹6500*/sq. yard",
-      "Documentation: NA, NOC, title clear plots, registry ready",
-      "Premium amenities: Clubhouse Lite, EV charging station and more",
-    ],
+    name: "WestWyn Estates",
+    price: "Starting from Rs. 6,700/per sq yd",
+    location: "Polarpur State Highway",
+    href: "/dholera-residential-plots/westwyn-estate",
+    image: westwynEstatesImage,
   },
   {
-    image: img,
-    name: "WestWyn Estates",
-    subtext: "State Highway plots in Dholera starting from ₹10 lakh*",
-    tag: "Plotted residential",
-    href: "/dholera-residential-plots/westwyn-estate",
-    description:
-      "WestWyn Estates by BookMyAssets is a plotted residential society on State Highway 117, Polarpur, Dholera. The project offers registry ready plots with documentation support.",
-    points: [
-      "Prime location: 5 minutes from Bhimnath Railway Junction, 30 minutes from TATA Semiconductor Plant",
-      "Basic selling price: ₹6700*/sq. yard",
-      "Documentation: NA, NOC, title clear plots, registry ready",
-      "Premium amenities: Clubhouse Lite, EV charging station and more",
-    ],
+    name: "WestWyn Residency",
+    price: "Starting from Rs. 6,500/per sq yd",
+    location: "Pipariya, MDR",
+    href: "/dholera-residential-plots/westwyn-residency",
+    image: westwynResidencyImage,
+  },
+  {
+    name: "WestWyn County",
+    price: "Re-Selling from Rs. 12,000/per sq yd",
+    location: "Fedra-pipli state highway",
+    href: "/dholera-residential-plots/westwyn-county",
+    image: westwynCountyImage,
+    status: "Sold Out",
   },
 ];
 
-export default function WestWyn() {
+export default function ProjectsSection() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-[80rem] px-[clamp(1rem,4vw,2rem)] py-[clamp(2rem,5vw,3rem)]">
-        <div className="mb-[clamp(1.25rem,3vw,2rem)] text-center">
-          <h2 className="mx-auto max-w-[64rem] text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold leading-[1.15] text-gray-900">
-            Premium{" "}
-            <span className="text-[#ddbc69]">Residential Plots in Dholera</span>
+    <section className="bg-[#080808] py-[clamp(2.5rem,6vw,5rem)] text-white">
+      <div className="mx-auto max-w-7xl px-[clamp(1rem,4vw,3rem)]">
+        <div className="mb-[clamp(1.5rem,3vw,3rem)] max-w-[42rem]">
+          <span className="text-[0.875rem] font-normal leading-[1.5] uppercase tracking-[0.18em] text-[#ddbc69]">
+            Featured Projects
+          </span>
+          <h2 className="mt-[0.75rem] text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
+            Explore WestWyn Projects in Dholera
           </h2>
         </div>
 
-        <div className="mx-auto grid max-w-[34rem] grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)] md:max-w-[62rem] md:grid-cols-2">
-          {PROJECTS.map((project) => (
+        <div className="mx-auto grid max-w-[68rem] grid-cols-1 gap-[clamp(0.875rem,1.8vw,1.5rem)] md:grid-cols-3">
+          {projects.map((project) => (
             <article
               key={project.name}
-              className="group flex h-full flex-col overflow-hidden rounded-[1rem] border-[0.0625rem] border-gray-100 bg-white shadow-[0_0.0625rem_0.125rem_rgb(0_0_0_/_0.05)] transition-shadow duration-300 hover:shadow-[0_1.25rem_2.5rem_rgb(0_0_0_/_0.12)]"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_1.5rem_3rem_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-[0.25rem] hover:border-[#ddbc69]/40 hover:bg-white/[0.07]"
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <div className="relative aspect-[16/10] overflow-hidden bg-black">
                 <Image
                   src={project.image}
                   alt={project.name}
                   fill
-                  sizes="(max-width: 47.999rem) 100vw, 31rem"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(min-width: 1024px) 22rem, 100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                {project.status && (
+                  <span className="absolute right-[1rem] top-[1rem] rounded-full bg-red-600 px-[0.75rem] py-[0.375rem] text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-white shadow-lg">
+                    {project.status}
+                  </span>
+                )}
               </div>
 
-              <div className="flex flex-1 flex-col p-[clamp(0.5rem,1.25vw,0.875rem)]">
-                <span className="mb-[0.75rem] inline-flex w-fit rounded-full border-[0.0625rem] border-[#ddbc69]/40 bg-[#ddbc69]/10 px-[0.875rem] py-[0.375rem] text-[0.75rem] font-semibold leading-none text-[#9a741d]">
-                  {project.tag}
+              <Link
+                href={project.href}
+                className="flex flex-1 flex-col gap-[0.75rem] p-[clamp(1rem,2vw,1.375rem)] transition-opacity duration-300 hover:opacity-90"
+              >
+                <div>
+                  <h3 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35]">
+                    {project.name}
+                  </h3>
+                  <p className="mt-[0.375rem] text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-[#ddbc69]">
+                     {project.price}
+                  </p>
+                </div>
+
+                <div className="flex items-start gap-[0.625rem] text-[0.875rem] font-normal leading-[1.5] text-white/70">
+                  <span className="mt-[0.45rem] h-[0.375rem] w-[0.375rem] shrink-0 rounded-full bg-[#ddbc69]" />
+                  <span>{project.location}</span>
+                </div>
+
+                {/* mt-auto pushes button to bottom */}
+                <span className="mt-auto inline-flex min-h-[2.5rem] items-center justify-center rounded-lg bg-[#ddbc69] px-[1rem] text-[0.875rem] md:text-[1rem] font-semibold leading-[1.4] text-black transition-colors duration-300 group-hover:bg-[#ddbc69]">
+                  Explore
                 </span>
-
-                <h3 className="mb-[0.375rem] text-[clamp(1rem,2vw,1.5rem)] font-bold leading-[1.2] text-black">
-                  {project.name}
-                </h3>
-
-                <p className="mb-[0.875rem] text-[clamp(0.9rem,1.25vw,1.0625rem)] font-semibold leading-[1.45] text-[#ddbc69]">
-                  {project.subtext}
-                </p>
-
-                <p className="mb-[1rem] text-[clamp(0.87rem,1.05vw,1rem)] leading-[1.65] text-black">
-                  {project.description}
-                </p>
-
-                <ul className="mb-[1.25rem] space-y-[0.5rem]">
-                  {project.points.map((point) => (
-                    <li
-                      key={point}
-                      className="flex items-start gap-[0.5rem] text-[clamp(0.875rem,1.3vw,1rem)] leading-[1.45] text-black"
-                    >
-                      <FaCheckCircle className="mt-[0.125rem] shrink-0 text-[1rem] text-[#ddbc69]" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href={project.href}
-                  className="mt-auto inline-flex w-fit items-center gap-[0.5rem] rounded-lg border-[0.0625rem] border-[#ddbc69] px-[1rem] py-[0.5rem] text-[clamp(0.8125rem,1vw,0.9375rem)] font-semibold leading-none text-[#ddbc69] transition-colors duration-200 hover:bg-[#ddbc69] hover:text-white"
-                >
-                  View Project Details
-                  <FaArrowRight className="text-[0.75rem]" />
-                </Link>
-              </div>
+              </Link>
             </article>
           ))}
         </div>

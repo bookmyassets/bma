@@ -64,13 +64,13 @@ export default function FAQSection() {
   return (
     <>
       <div className="bg-white">
-        <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-8 gap-6 md:gap-12 max-w-7xl mx-auto">
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h2 className="text-[32px] font-semibold text-black mb-4">
+            <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-black mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-600 mb-2">
+            <p className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-gray-600 mb-2">
               More Questions about Dholera Smart City?
             </p>
             <div className="pt-4">
@@ -92,7 +92,7 @@ export default function FAQSection() {
                   className="w-full py-4 flex justify-between items-center text-left hover:bg-gray-50 transition-all duration-200"
                   onClick={() => toggleFAQ(index)}
                 >
-                  <span className="text-gray-900 font-medium pr-4 leading-relaxed">
+                  <span className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-gray-900 pr-4">
                     {faq.question}
                   </span>
                   <span className="flex-shrink-0 transition-transform duration-200">
@@ -112,7 +112,7 @@ export default function FAQSection() {
                   }`}
                 >
                   <div className="pb-4 px-0">
-                    <div className="text-gray-600 text-sm leading-relaxed">
+                    <div className="text-gray-600 text-[0.875rem] font-normal leading-[1.5]">
                       {Array.isArray(faq.answer) ? (
                         <ul className="list-disc pl-5 space-y-1">
                           {faq.answer.map((point, i) => (

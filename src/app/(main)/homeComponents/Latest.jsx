@@ -32,7 +32,7 @@ const RelatedBlogCard = ({ item, type }) => {
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400 text-sm">No image</span>
+              <span className="text-gray-400 text-[0.875rem] font-normal leading-[1.5]">No image</span>
             </div>
           )}
         </div>
@@ -41,11 +41,11 @@ const RelatedBlogCard = ({ item, type }) => {
         <div className="p-[calc(0.75rem+0.25vw)]">
           <Link href={slug} className="block">
             {/* ✅ clamp() — title scales between 13px and 16px */}
-            <h3 className="text-[clamp(0.8125rem,1.5vw,1rem)] font-semibold text-gray-800 line-clamp-2 mb-2 hover:text-[#ddbc69] transition-colors duration-300">
+            <h3 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-gray-800 line-clamp-2 mb-2 hover:text-[#ddbc69] transition-colors duration-300">
               {item.title}
             </h3>
 
-            <div className="text-xs text-black mb-3">
+            <div className="text-[0.875rem] font-normal leading-[1.5] text-black mb-3">
               <time className="block mb-1">
                 {new Date(
                   item.publishedAt || item._createdAt,
@@ -57,7 +57,7 @@ const RelatedBlogCard = ({ item, type }) => {
               </time>
             </div>
 
-            <span className="text-[#ddbc69] hover:text-[#ddbc69] text-[clamp(0.75rem,1.2vw,0.875rem)] font-medium inline-flex items-center group">
+            <span className="text-[#ddbc69] hover:text-[#ddbc69] text-[0.875rem] font-normal leading-[1.5] inline-flex items-center group">
               Explore More
               <svg
                 className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
@@ -206,16 +206,16 @@ export default function LatestUpdates() {
     return (
       <div className="py-[clamp(2rem,5vw,3.5rem)] bg-white min-h-[480px]">
         <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
-          <p className="text-[clamp(1.25rem,3vw,2.25rem)] text-center font-bold text-gray-800 mb-4">
+          <p className="text-[clamp(1.5rem,3vw,2.25rem)] text-center font-semibold leading-[1.2] text-gray-800 mb-4">
             Everything about Dholera Smart City
           </p>
-          <p className="text-[clamp(0.75rem,1.5vw,0.875rem)] text-center font-bold text-gray-800 mb-4">
+          <p className="text-[0.875rem] text-center font-normal leading-[1.5] text-gray-800 mb-4">
             Stay updated with the latest developments, project updates, dholera
             plots for sale, and important insights from Dholera Smart City.
           </p>
           <div className="text-center text-red-500">
             <p>Error loading content. Please try again later.</p>
-            <p className="text-sm">{error}</p>
+            <p className="text-[0.875rem] font-normal leading-[1.5]">{error}</p>
           </div>
         </div>
       </div>
@@ -228,11 +228,11 @@ export default function LatestUpdates() {
       <div className="py-[calc(2rem+2vw)] bg-white min-h-[480px]">
         <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
           {/* ✅ clamp() — section heading scales between 20px and 36px */}
-          <p className="text-[clamp(1.5rem,3.5vw,2.5rem)] text-center font-bold text-gray-800 mb-4">
+          <p className="text-[clamp(1.5rem,3vw,2.25rem)] text-center font-semibold leading-[1.2] text-gray-800 mb-4">
             Dholera Smart City Updates & Blogs
           </p>
           {/* ✅ clamp() — subheading scales between 14px and 18px */}
-          <p className="text-[clamp(0.875rem,1.5vw,1.125rem)] text-gray-600 text-center mb-12 max-w-5xl mx-auto">
+          <p className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-gray-600 text-center mb-8 max-w-5xl mx-auto">
             Stay updated with the latest developments, project updates and
             important investment insights from Dholera Smart City.
           </p>
