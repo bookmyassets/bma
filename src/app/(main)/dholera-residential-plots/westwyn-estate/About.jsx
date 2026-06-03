@@ -93,7 +93,7 @@ const WestWynAboutSection = () => {
         <div className=" gap-12 items-stretch space-y-4 px-4 py-4">
           {/* Left Content */}
           <div className=" h-full">
-            <div className="flex justify-center items-center flex-row gap-4 ">
+            <div className="flex justify-center items-center flex-col md:flex-row gap-4 ">
               <button
                 onClick={openBrochureForm}
                 className="bg-[#ddbc69] text-white text-base px-2 md:px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
