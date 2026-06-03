@@ -243,14 +243,17 @@ const RealEstateLandingPage = () => {
       />
       <link rel="canonical" href="https://www.bookmyassets.com/about" />
       <div className="bg-white">
+        <div className="">
+          <BookMyAssets />
+        </div>
         {/* Hero Section - Fixed Layout */}
-        <div className="relative min-h-screen bg-gray-900 overflow-hidden">
+        <div className="relative bg-gray-900 overflow-hidden">
           <div
             ref={heroRef}
             className="relative z-10 container mx-auto px-4 py-8"
           >
             {/* Mobile View - Stacked (Text first then Video) */}
-            <div className="lg:hidden flex flex-col min-h-screen justify-center space-y-8">
+            <div className="lg:hidden flex flex-col justify-center space-y-8">
               {/* Text Content */}
               <div
                 className={`w-full text-white space-y-6 transform transition-all duration-1000 ${
@@ -287,23 +290,7 @@ const RealEstateLandingPage = () => {
 
                 {/* CTA Buttons */}
 
-                <div className="flex flex-col gap-4">
-                  <div onClick={handleScrollDown}>
-                    <button className="group bg-[#ddbc69] hover:bg-[#ddbc69] text-black px-6 py-3 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
-                      <span>Scroll Down to View More</span>
-                      <ArrowDown
-                        className="group-hover:translate-x-1 transition-transform"
-                        size={20}
-                      />
-                    </button>
-                  </div>
-                  <Link href="https://www.youtube.com/@BookMyAssets">
-                    <span className="group bg-transparent border-2 border-white/30 hover:border-[#ddbc69] text-white hover:text-[#ddbc69] px-6 py-3 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
-                      <Play size={20} />
-                      <span>Watch Video</span>
-                    </span>
-                  </Link>
-                </div>
+                
               </div>
 
               {/* Video */}
@@ -340,12 +327,10 @@ const RealEstateLandingPage = () => {
               </div>
             </div>
 
-            {/* <div className="lg:hidden">
-                <BookMyAssets/>
-            </div> */}
+   
 
             {/* Desktop View - Side by Side */}
-            <div className="hidden lg:flex lg:items-center lg:justify-center min-h-screen pt-8">
+            <div className="hidden lg:flex lg:items-center lg:justify-center pt-8">
               <div className="grid grid-cols-2 gap-12 xl:gap-16 max-w-7xl w-full items-center">
                 {/* Left Content */}
                 <div
@@ -382,23 +367,7 @@ const RealEstateLandingPage = () => {
                   </div>
 
                   {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <div onClick={handleScrollDown}>
-                      <button className="group bg-[#ddbc69] hover:bg-[#ddbc69] text-black px-8 py-4 rounded-full font-bold text-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
-                        <span>Scroll Down to View More</span>
-                        <ArrowDown
-                          className="group-hover:translate-x-1 transition-transform"
-                          size={20}
-                        />
-                      </button>
-                    </div>
-                    <Link href="https://www.youtube.com/@BookMyAssets">
-                      <span className="group bg-transparent border-2 border-white/30 hover:border-[#ddbc69] text-white hover:text-[#ddbc69] px-8 py-4 rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
-                        <Play size={20} />
-                        <span>Watch Video</span>
-                      </span>
-                    </Link>
-                  </div>
+                  
                 </div>
 
                 {/* Right Content - YouTube Shorts Video */}
@@ -438,9 +407,7 @@ const RealEstateLandingPage = () => {
           </div>
         </div>
 
-        <div className="">
-          <BookMyAssets />
-        </div>
+        
         {/* About Us Section */}
         <div
           ref={aboutRef}

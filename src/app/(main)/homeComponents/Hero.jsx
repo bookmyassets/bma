@@ -37,7 +37,7 @@ const PointsList = () => (
       </p>
 
       <Link href="/about">
-        <p className="bg-[#ddbc69] text-white p-2 w-48 rounded-lg">
+        <p className="bg-[#ddbc69] text-black p-2 w-48 rounded-lg">
           Know More About Us <FaArrowRight className="inline-block ml-1" />
         </p>
       </Link>
@@ -89,7 +89,7 @@ export default function Hero() {
             </div>
 
             <Link href="/about">
-              <p className="bg-[#ddbc69] text-white p-1 w-44 text-[0.875rem] md:text-[1rem] font-semibold leading-[1.4] rounded-lg">
+              <p className="bg-[#ddbc69] text-black p-1 w-44 text-[0.875rem] md:text-[1rem] font-semibold leading-[1.4] rounded-lg">
                 Know More About Us{" "}
                 <FaArrowRight className="inline-block ml-1" />
               </p>

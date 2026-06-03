@@ -54,7 +54,7 @@ export default function Whatsapp() {
               lengthAdjust="spacing"
               className="tracking-wider"
             >
-              LET'S CONNECT ● LET'S CONNECT ●
+             &nbsp;LET'S CONNECT ● &nbsp;LET'S CONNECT ● 
             </textPath>
             
           </text>

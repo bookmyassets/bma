@@ -31,7 +31,7 @@ export default function Footer() {
             <div className="space-y-4 text-sm text-[#ddbc69]">
               {/* Phone */}
               <Link
-                className="flex items-center gap-3 hover:text-[#ddbc69] transition-colors"
+                className="flex items-center gap-3 text-white hover:text-[#ddbc69] transition-colors"
                 aria-label="BookMyAssets Phone"
                 href="tel:+918130371647"
               >
@@ -43,7 +43,7 @@ export default function Footer() {
 
               {/* Email */}
               <Link
-                className="flex items-center gap-3 hover:text-[#ddbc69] transition-colors"
+                className="flex items-center gap-3 text-white hover:text-[#ddbc69] transition-colors"
                 aria-label="BookMyAssets Email"
                 href="mailto:info@bookmyassets.com"
               >
@@ -62,8 +62,8 @@ export default function Footer() {
                 <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-[#ddbc69] mt-0.5">
                   <FaMapMarkerAlt className="text-xs" />
                 </span>
-                <div>
-                  <p className="font-semibold text-[#ddbc69] mb-0.5">
+                <div className="text-white hover:text-[#ddbc69]">
+                  <p className="font-semibold mb-0.5">
                     Head Office
                   </p>
                   <p className="leading-relaxed">
@@ -83,8 +83,8 @@ export default function Footer() {
                 <span className="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center text-[#ddbc69] mt-0.5">
                   <FaMapMarkerAlt className="text-xs" />
                 </span>
-                <div>
-                  <p className="font-semibold text-[#ddbc69] mb-0.5">
+                <div className="text-white hover:text-[#ddbc69]">
+                  <p className="font-semibold  mb-0.5">
                     Branch Office
                   </p>
                   <p className="leading-relaxed">
@@ -294,7 +294,7 @@ export default function Footer() {
       <div className="border-t border-[#ddbc69]">
         <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 flex justify-center">
           <p className="text-sm text-white">
-            © {new Date().getFullYear()} BookMyAssets. All rights reserved.
+            © {new Date().getFullYear()} BookMyAssets. All Rights Reserved.
           </p>
         </div>
       </div>
