@@ -11,7 +11,7 @@ const COORDINATES = {
   receiptNumber: {
     page: 1,
     x: 175,
-    y: 500,
+    y: 470,
     width: 100,
     fontSize: 9,
     align: "left",
@@ -19,7 +19,7 @@ const COORDINATES = {
   receivedFrom: {
     page: 1,
     x: 420,
-    y: 500,
+    y: 470,
     width: 130,
     fontSize: 9,
     align: "left",

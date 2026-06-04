@@ -10,7 +10,7 @@ const client = createClient({
 })
 
 const SITE_NAME = 'bookmyassets'
-const SITE_URL = 'https://www.bookmyassets.com'
+const SITE_URL = 'http://localhost:3000' // Update to your production URL when deploying
 
 let redirectCache = null
 let cacheTime = 0

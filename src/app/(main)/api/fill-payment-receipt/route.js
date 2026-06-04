@@ -179,7 +179,8 @@ export async function POST(request) {
       process.cwd(),
       "public",
       "assets",
-      "Payment-Receipt.pdf",
+      "new",
+      "Payment Receipt Template.pdf",
     );
     const existingPdfBytes = fs.readFileSync(templatePath);
 

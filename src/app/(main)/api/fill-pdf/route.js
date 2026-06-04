@@ -4,17 +4,17 @@ import path from "path";
 import { NextResponse } from "next/server";
 
 const FIELD_MAP = [
-  { key: "projectName",         x: 130,  y: 676, fontSize: 12 },  
-  { key: "clientName",          x: 130,  y: 655, fontSize: 12 },  
-  { key: "plotNumber",          x: 130,  y: 634, fontSize: 12 }, 
-  { key: "tokenPaymentDueDate", x: 479,  y: 525 },
-  { key: "m1DueTimeline",       x: 384,  y: 483 },
-  { key: "m1PaymentDueDate",    x: 480,  y: 483 },
-  { key: "m2DueTimeline",       x: 384,  y: 445 },
-  { key: "m2PaymentDueDate",    x: 479,  y: 445 },
-  { key: "m3DueTimeline",       x: 384,  y: 407 },
-  { key: "m3PaymentDueDate",    x: 478,  y: 407 },
-  { key: "totalDueTimeline",    x: 384,  y: 372, bold: true },
+  { key: "projectName",         x: 130,  y: 664, fontSize: 12 },  
+  { key: "clientName",          x: 130,  y: 643, fontSize: 12 },  
+  { key: "plotNumber",          x: 130,  y: 622, fontSize: 12 }, 
+  { key: "tokenPaymentDueDate", x: 479,  y: 513 },
+  { key: "m1DueTimeline",       x: 384,  y: 471 },
+  { key: "m1PaymentDueDate",    x: 480,  y: 471 },
+  { key: "m2DueTimeline",       x: 384,  y: 433 },
+  { key: "m2PaymentDueDate",    x: 479,  y: 433 },
+  { key: "m3DueTimeline",       x: 384,  y: 395 },
+  { key: "m3PaymentDueDate",    x: 478,  y: 395 },
+  { key: "totalDueTimeline",    x: 384,  y: 361, bold: true },
 ];
 
 function formatValue(key, value) {
@@ -64,7 +64,7 @@ export async function POST(request) {
       calculatedDates = calculatePaymentDates(body.bookingDate, parseInt(body.paymentPlanDays));
     }
 
-    const pdfPath = path.join(process.cwd(), "public", "assets", "Payment_Schedule.pdf");
+    const pdfPath = path.join(process.cwd(), "public", "assets","new", "Payment Schedule Template.pdf");
     const templateBytes = await readFile(pdfPath);
 
     const pdfDoc = await PDFDocument.load(templateBytes);

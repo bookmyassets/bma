@@ -6,15 +6,15 @@ import fontkit from "@pdf-lib/fontkit";
 
 const DOCUMENT_TEMPLATES = {
   "welcome-letter": {
-    fileName: "Welcome Letter.pdf",
+    fileName: "Welcome Letter Template.pdf",
     downloadName: "Welcome-Letter.pdf",
   },
   "plot-details": {
-    fileName: "Plot Details.pdf",
+    fileName: "Plot Details Template.pdf",
     downloadName: "Plot-Details.pdf",
   },
   "allotment-letter": {
-    fileName: "ALLOTMENT LETTER.pdf",
+    fileName: "Allotment Letter.pdf",
     downloadName: "Allotment-Letter.pdf",
   },
 };
@@ -163,6 +163,7 @@ export async function POST(request) {
       process.cwd(),
       "public",
       "assets",
+      "new",
       template.fileName,
     );
     const templateBytes = await readFile(templatePath);

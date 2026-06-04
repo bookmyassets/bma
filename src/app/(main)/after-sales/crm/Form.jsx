@@ -57,16 +57,16 @@ const INITIAL_RECEIPT = {
 };
 
 const RECEIPT_COORDINATES = {
-  receiptNumber: { page: 1, x: 175, y: 503, fontSize: 10 },
-  receivedFrom: { page: 1, x: 420, y: 503, fontSize: 10 },
-  projectName: { page: 1, x: 175, y: 468, fontSize: 10 },
-  plotNumber: { page: 1, x: 420, y: 468, fontSize: 10 },
-  paymentDate: { page: 1, x: 175, y: 433, fontSize: 10 },
-  referenceNo: { page: 1, x: 420, y: 433, fontSize: 10 },
-  modeOfPayment: { page: 1, x: 175, y: 398, fontSize: 10 },
-  amountInNumbers: { page: 1, x: 420, y: 398, fontSize: 10 },
-  amountInWords: { page: 1, x: 175, y: 363, fontSize: 10 },
-  remarks: { page: 1, x: 175, y: 328, fontSize: 10 },
+  receiptNumber: { page: 1, x: 175, y: 494, fontSize: 10 },
+  receivedFrom: { page: 1, x: 420, y: 494, fontSize: 10 },
+  projectName: { page: 1, x: 175, y: 460, fontSize: 10 },
+  plotNumber: { page: 1, x: 420, y: 460, fontSize: 10 },
+  paymentDate: { page: 1, x: 175, y: 427, fontSize: 10 },
+  referenceNo: { page: 1, x: 420, y: 427, fontSize: 10 },
+  modeOfPayment: { page: 1, x: 175, y: 392, fontSize: 10 },
+  amountInNumbers: { page: 1, x: 420, y: 392, fontSize: 10 },
+  amountInWords: { page: 1, x: 175, y: 356, fontSize: 10 },
+  remarks: { page: 1, x: 175, y: 323, fontSize: 10 },
 };
 
 const DOCUMENT_COORDINATES = {
@@ -282,7 +282,7 @@ const DOCUMENT_COORDINATES = {
     clientNames: {
       page: 1,
       x: 311,
-      y: 591,
+      y: 581,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -290,7 +290,7 @@ const DOCUMENT_COORDINATES = {
     client1Phone: {
       page: 1,
       x: 311,
-      y: 552,
+      y: 542,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -298,7 +298,7 @@ const DOCUMENT_COORDINATES = {
     client1Email: {
       page: 1,
       x: 311,
-      y: 512,
+      y: 502,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -306,7 +306,7 @@ const DOCUMENT_COORDINATES = {
     bookingDate: {
       page: 1,
       x: 311,
-      y: 473,
+      y: 463,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -314,7 +314,7 @@ const DOCUMENT_COORDINATES = {
     projectName: {
       page: 1,
       x: 311,
-      y: 434,
+      y: 424,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -322,7 +322,7 @@ const DOCUMENT_COORDINATES = {
     plotNumber: {
       page: 1,
       x: 311,
-      y: 395,
+      y: 385,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -330,7 +330,7 @@ const DOCUMENT_COORDINATES = {
     plotArea: {
       page: 1,
       x: 311,
-      y: 357,
+      y: 347,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -338,7 +338,7 @@ const DOCUMENT_COORDINATES = {
     plotAreaSqFeet: {
       page: 1,
       x: 311,
-      y: 317,
+      y: 307,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -346,7 +346,7 @@ const DOCUMENT_COORDINATES = {
     paymentSchedule: {
       page: 1,
       x: 311,
-      y: 278,
+      y: 268,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -354,7 +354,7 @@ const DOCUMENT_COORDINATES = {
     associateName: {
       page: 1,
       x: 311,
-      y: 239,
+      y: 229,
       fontSize: 12,
       maxWidth: 218,
       maxLines: 1,
@@ -363,8 +363,8 @@ const DOCUMENT_COORDINATES = {
   "allotment-letter": {
     allotmentClientNames: {
       page: 1,
-      x: 65,
-      y: 628,
+      x: 49,
+      y: 604,
       fontSize: 12,
       bold: true,
       maxWidth: 154,
@@ -372,8 +372,8 @@ const DOCUMENT_COORDINATES = {
     },
     date: {
       page: 1,
-      x: 439,
-      y: 628,
+      x: 441,
+      y: 613,
       fontSize: 12,
       maxWidth: 116,
       maxLines: 1,
@@ -412,7 +412,7 @@ const DOCUMENT_COORDINATES = {
     plotConsideration: {
       page: 1,
       x: 347,
-      y: 388,
+      y: 380,
       fontSize: 12,
       maxWidth: 166,
       maxLines: 1,
