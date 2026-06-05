@@ -4,7 +4,7 @@ import banner from "@/assests/bulkLand/Knowledge and it zone-hero.webp";
 import bannerMob from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp";
 import knowledgeITMap from "@/assests/bulkLand/knowledge-it-map.webp";
 import Table from "./table";
-import BulkLand from "../../components/BulkLandForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import Interlink, { getKnowledgeITLinks } from "../Interlink";
 import FAQSection from "./FAQs";
 import KnowledgeITZoneCards from "./Cards";
@@ -122,7 +122,10 @@ export default function page() {
         {/* <Table /> */}
         <GDCR/>
       </div>
-      <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
+      <InlineLeadForm
+        variant="bulkLand"
+        title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR"
+      />
       <FAQSection/>
       <Interlink
         properties={getKnowledgeITLinks()}

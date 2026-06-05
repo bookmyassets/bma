@@ -3,7 +3,7 @@ import React from "react";
 import banner from "@/assests/about-dholera-sir-desktop-banner.webp";
 import semiconductorHubImage from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
 import BlogSlider from "./BlogSlider";
-import LeadForm from "../components/LeadForm";
+import InlineLeadForm from "../components/InlineLeadForm";
 import Link from "next/link";
 import Image from "next/image";
 import FAQSection from "./FAQs";
@@ -331,7 +331,8 @@ export default async function page() {
        
           {/* Lead Form */}
           <div className="mb-8" id="contact">
-            <LeadForm
+            <InlineLeadForm
+              variant="lead"
               title="Want to invest in Dholera but don't know how?"
               button="Talk to an Expert"
             />

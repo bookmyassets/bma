@@ -7,7 +7,7 @@ import WestWyn from "./homeComponents/WestWyn";
 import PopupForm from "./components/PopUpForm";
 import Hero from "./homeComponents/Hero";
 import LatestUpdates from "./homeComponents/Latest";
-import LeadForm from "./components/LeadForm";
+import InlineLeadForm from "./components/InlineLeadForm";
 
 import HowToBuy from "./homeComponents/BuyingProcess";
 
@@ -215,9 +215,10 @@ export default function page() {
         <HowToBuy/>
         {/* <MegaIndustries/> */}
         <div className="" id="contact">
-          <LeadForm
-            title="Invest in Registry Ready Plots in Dholera"
-            button="Talk to an Expert"
+          <InlineLeadForm
+            variant="lead"
+            title="Registry Ready Plots in Dholera"
+            buttonText="Get A Call Back"
           />
         </div>
         <LatestUpdates />

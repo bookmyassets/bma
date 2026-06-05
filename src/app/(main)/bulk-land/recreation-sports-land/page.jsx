@@ -4,7 +4,7 @@ import banner from "@/assests/bulkLand/recreation-sports-entertainment-Zone-hero
 import bannerMob from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp";
 import recreationmap from "@/assests/bulkLand/recreation-sports-map.webp";
 import Table from "./table";
-import BulkLand from "../../components/BulkLandForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import Interlink, { getSportLinks } from "../Interlink";
 import FAQSection from "./FAQs";
 import RecreationZoneCards from "./Cards";
@@ -123,7 +123,10 @@ export default function page() {
        {/*  <Table /> */}
        <GDCR/>
       </div>
-       <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
+       <InlineLeadForm
+         variant="bulkLand"
+         title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR"
+       />
       <div>
         <FAQSection/>
       </div>

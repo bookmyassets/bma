@@ -4,7 +4,7 @@ import banner from "@/assests/bulkLand/citycentre-hero-desktop.webp";
 import bannerMob from "@/assests/bulkLand/citycentre-hero-mob.webp";
 import cityCenterMap from "@/assests/bulkLand/city-centre-map.webp";
 import Table from "./table";
-import BulkLand from "../../components/BulkLandForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import Interlink, { getCityCenterLinks } from "../Interlink";
 import FAQSection from "./FAQs";
 import CityCentreZoneCards from "./Cards";
@@ -123,7 +123,10 @@ export default function page() {
         {/* <Table /> */}
         <GDCR/>
       </div>
-      <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
+      <InlineLeadForm
+        variant="bulkLand"
+        title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR"
+      />
       <div>
         <FAQSection/>
       </div>

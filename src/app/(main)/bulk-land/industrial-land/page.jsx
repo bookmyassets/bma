@@ -4,7 +4,7 @@ import banner from "@/assests/bulkLand/industrial zone-hero.webp";
 import bannerMob from "@/assests/bulkLand/industrial-hero-mob-webp.webp";
 import industrialMap from "@/assests/bulkLand/industrial-map.webp";
 import Table from "./table";
-import BulkLand from "../../components/BulkLandForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import Interlink, { getIndustrialLinks } from "../Interlink";
 import FAQSection from "./FAQs";
 import IndustrialZoneCards from "./Cards";
@@ -121,7 +121,10 @@ export default function page() {
         {/* <Table /> */}
         <GDCR/>
       </div>
-       <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
+       <InlineLeadForm
+         variant="bulkLand"
+         title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR"
+       />
       <FAQSection/>
       <Interlink
         properties={getIndustrialLinks()}

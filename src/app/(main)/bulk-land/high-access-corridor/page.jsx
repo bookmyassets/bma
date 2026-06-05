@@ -4,7 +4,7 @@ import banner from "@/assests/bulkLand/HighAccess corridor-hero.webp";
 import bannerMob from "@/assests/bulkLand/high-access-hero-mob-webp.webp";
 import hacMap from "@/assests/bulkLand/high-access-corridor-map.webp";
 import Table from "./table";
-import BulkLand from "../../components/BulkLandForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import Interlink, { getHACLinks } from "../Interlink";
 import FAQSection from "./FAQs";
 import HighAccessCorridorCards from "./Cards";
@@ -122,7 +122,10 @@ export default function page() {
         {/* <Table /> */}
         <GDCR/>
       </div>
-       <BulkLand title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR" />
+       <InlineLeadForm
+         variant="bulkLand"
+         title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR"
+       />
       <div>
         <FAQSection/>
       </div>
