@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import CommonForm from "../../components/CommonForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
@@ -197,7 +197,8 @@ export default function WestWynEstateClient() {
       />
 
       <div className="">
-        <CommonForm
+        <InlineLeadForm
+          variant="common"
           title="Want to Know More About WestWyn Estates?"
           button="Connect with an Expert"
         />

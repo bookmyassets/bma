@@ -333,7 +333,7 @@ export default async function page() {
           <div className="mb-8" id="contact">
             <InlineLeadForm
               variant="lead"
-              title="Want to invest in Dholera but don't know how?"
+              title="Registry Ready Plots in Dholera"
               button="Talk to an Expert"
             />
           </div>

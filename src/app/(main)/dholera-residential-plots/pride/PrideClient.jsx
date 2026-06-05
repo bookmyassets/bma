@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/residential/Paradise-2-dholera-plan-layout.webp";
 import banner from "@/assests/residential/pride-hero-desktopview.webp";
 import { Plus, Minus } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 
@@ -336,8 +336,9 @@ export default function PrideClient() {
       </div>
 
       {/* Form */}
-      <CommonForm
-        title="Pride is Sold Out. Want to Invest in More Projects Like This?"
+      <InlineLeadForm
+        variant="common"
+        title="Invest in Dholera Residential Plots"
         button="Talk to our Team"
       />
 

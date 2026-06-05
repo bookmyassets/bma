@@ -6,7 +6,7 @@ import westwyn1 from "@/assests/residential/Maple-Township-dholera-plan-layout.w
 import banner from "@/assests/residential/maple-hero-desktop.webp";
 import bannerMob from "@/assests/residential/maple-hero-mob.view-webp.webp";
 import { Plus, Minus } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -315,8 +315,9 @@ export default function MapleClient() {
       </div>
 
       {/* Form */}
-      <CommonForm
-        title="Maple is Sold Out. Want to Invest in More Projects Like This?"
+      <InlineLeadForm
+        variant="common"
+        title="Invest in Dholera Residential Plots"
         button="Talk to our Team"
       />
 

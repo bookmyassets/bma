@@ -6,7 +6,7 @@ import westwyn1 from "@/assests/residential/Paradise-2-dholera-plan-layout.webp"
 import banner from "@/assests/residential/marinabay-hero-desktopview.webp";
 import bannerMob from "@/assests/residential/marinabay-hero-mob.view-webp.webp";
 import { Plus, Minus } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import CostSheet from "../costsheet2";
@@ -343,8 +343,9 @@ export default function MarinaBayClient() {
       </div>
 
       {/* Form */}
-      <CommonForm
-        title="Marina Bay is Sold Out. Want to Invest in More Projects Like This?"
+      <InlineLeadForm
+        variant="common"
+        title="Invest in Dholera Residential Plots"
         button="Talk to our Team"
       />
 

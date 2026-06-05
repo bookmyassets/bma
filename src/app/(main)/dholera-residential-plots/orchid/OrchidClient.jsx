@@ -15,7 +15,7 @@ const CostSheet = dynamic(() => import("../costsheet2"), {
   ),
 });
 
-const CommonForm = dynamic(() => import("../../components/CommonForm"), {
+const InlineLeadForm = dynamic(() => import("../../components/InlineLeadForm"), {
   loading: () => <div className="h-24" />,
 });
 
@@ -201,8 +201,9 @@ export default function OrchidClient() {
       </div>
 
       {/* ── Lead capture + related projects ── */}
-      <CommonForm
-        title="Orchid is Sold Out. Want to Invest in More Projects Like This?"
+      <InlineLeadForm
+        variant="common"
+        title="Invest in Dholera Residential Plots"
         button="Talk to our Team"
       />
 

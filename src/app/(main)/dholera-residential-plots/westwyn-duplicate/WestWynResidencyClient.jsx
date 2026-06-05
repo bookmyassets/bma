@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
@@ -283,7 +283,8 @@ export default function WestWynResidencyClient() {
       </div>
 
       <div className="">
-        <CommonForm
+        <InlineLeadForm
+          variant="common"
           title="Get Brochure, Price Sheet & Project Guidance"
           button="Connect with an Expert"
         />

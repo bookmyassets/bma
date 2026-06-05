@@ -6,7 +6,7 @@ import westwyn1 from "@/assests/residential/Paradise-2-dholera-plan-layout.webp"
 import banner from "@/assests/residential/paradise-2-hero-desktopview.webp";
 import bannerMob from "@/assests/residential/paradise2hero-mob.view-webp.webp";
 import { Plus, Minus } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 
@@ -338,7 +338,7 @@ export default function Paradise2Client() {
       </div>
 
       {/* Form */}
-      <CommonForm title="Paradise 2 is Sold Out. Want to Invest in More Projects Like This?" button="Talk to our Team" />
+      <InlineLeadForm variant="common" title="Invest in Dholera Residential Plots" />
 
       <ActiveProjectsSection />
 

@@ -10,7 +10,7 @@ import westwynmob2 from "@/assests/westwyn-county/westwyn-county-mob2.webp";
 import westwynmob3 from "@/assests/westwyn-county/westwyn-county-mob3.webp";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import { Plus, Minus } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
@@ -558,8 +558,9 @@ export default function WestWynCountyClient() {
       </div>
 
       <div className="">
-        <CommonForm
-          title="Invest on Dholera’s Widest Road:Fedra-Pipli Highway"
+        <InlineLeadForm
+          variant="common"
+          title="Invest in Dholera Residential Plots"
           button="Talk to an Advisor"
         />
       </div>

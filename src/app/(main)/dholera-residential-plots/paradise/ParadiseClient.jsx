@@ -6,7 +6,7 @@ import westwyn1 from "@/assests/residential/Paradise-1-dholera-plan-layout.webp"
 import banner from "@/assests/residential/paradise-hero-desktopview.webp";
 import bannerMob from "@/assests/residential/paradise-hero-mob.view-webp.webp";
 import { Plus, Minus } from "lucide-react";
-import CommonForm from "../../components/CommonForm";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import CostSheet from "../costsheet2";
@@ -394,8 +394,9 @@ export default function ParadiseClient() {
       </div>
 
       {/* Form */}
-      <CommonForm
-        title="Paradise is Sold Out. Want to Invest in More Projects Like This?"
+      <InlineLeadForm
+        variant="common"
+        title="Invest in Dholera Residential Plots"
         button="Talk to our Team"
       />
 
