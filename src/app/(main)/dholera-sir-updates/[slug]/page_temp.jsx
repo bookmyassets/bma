@@ -15,7 +15,7 @@ import PopupLeadForm from "../../components/PopupLeadForm";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
-import LeadFormSlug from "../../components/LeadFormSlug";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 
 const URLFormatter = (text) => {
@@ -63,7 +63,8 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
   return (
     <aside className="lg:w-1/3 space-y-4 pt-4">
       <div className=" pt-4 max-w-xl mx-auto">
-        <LeadFormSlug
+        <InlineLeadForm
+          variant="common"
           title="Registry Ready Plots in Dholera"
           buttonName="Know More"
         />

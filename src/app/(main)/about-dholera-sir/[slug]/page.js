@@ -12,7 +12,7 @@ import Image from "next/image";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import SchemaMarkup from "../../components/SchemaMarkup";
-import LeadFormSlug from "../../components/LeadFormSlug";
+import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 
 const URLFormatter = (text) => {
@@ -61,7 +61,8 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
     <aside className="lg:w-1/3">
       <div className="sticky top-24 space-y-6">
         <div className=" pt-4 max-w-xl mx-auto">
-          <LeadFormSlug
+          <InlineLeadForm
+            variant="common"
             title="Buy Residential Plots in Dholera Starting From ₹8 Lakh"
             buttonName="Know More"
           />
