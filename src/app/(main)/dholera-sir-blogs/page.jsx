@@ -2,8 +2,7 @@ import { getblogs } from "@/sanity/lib/api";
 import React from "react";
 import BlogCard from "./BlogCard";
 import MobileBlogPagination from "./MobileBlogPagination";
-import Image from "next/image";
-import hero from "@/assests/dholera-sir-blogs-2026-desktop-banner.webp";
+import BlogHeroCarousel from "./BlogHeroCarousel";
 
 export default async function page() {
   let posts = [];
@@ -64,39 +63,22 @@ export default async function page() {
         href="https://www.bookmyassets.com/dholera-sir-blogs"
       />
       <div className="min-h-screen bg-black relative overflow-hidden">
-        {/* Enhanced Hero Section - Responsive Height */}
-        <div className="bg-white relative">
-          <div className="pt-16 md:pt-0">
-            <div className="relative md:h-[60vh] overflow-hidden shadow-lg">
-              {/* Hero Image */}
-              <Image
-                src={hero}
-                alt="Dholera SIR Development"
-                className="w-full h-auto md:h-[60vh] object-contain md:object-cover"
-                quality={100}
-                priority
-                sizes="100vw"
-              />
+        {/* Hero Section */}
+        <div className="bg-black relative ">
+          <div className="mx-auto w-full max-w-[calc(100vw-0rem)] overflow-hidden">
+            <BlogHeroCarousel />
+          </div>
 
-              {/* Black Overlay */}
-              <div className="absolute inset-0 bg-black/30"></div>
-
-              {/* Text Content */}
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">
-                <h1 className="text-2xl md:text-5xl py-4 font-bold text-white leading-tight">
-                  Dholera Smart City Blogs
-                </h1>
-                <p className="text-sm md:text-lg font-bold text-white leading-tight">
-                  Stay updated with the latest trends, infrastructure developments, and residential plot opportunities shaping Dholera’s growth.
-                </p>
-              </div>
-            </div>
+          <div className="mx-auto max-w-7xl px-[clamp(1rem,4vw,3rem)] py-4 text-center">
+            <h1 className="text-2xl md:text-5xl leading-[1.15] font-bold text-white">
+              Dholera SIR Blogs
+            </h1>
           </div>
         </div>
 
         {/* Blog Posts Section */}
         <div className="relative z-10">
-          <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
+          <div className="max-w-7xl mx-auto px-4 py-4">
             {safePosts.length > 0 ? (
               <>
                 {/* Mobile paginated grid */}
