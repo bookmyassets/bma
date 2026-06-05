@@ -16,7 +16,7 @@ import img1 from "@/assests/residential/estates/westwyn-estates-dholera-entry-ga
 
 import img1M from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate-mobile.webp";
 
-import PopupScroll from "../../components/PopUpScroll";
+import PopupLeadForm from "../../components/PopupLeadForm";
 import CostSheet from "../costsheet2";
 import OurCommits from "./OurCommits";
 import PlanLayout from "./PlanLayout";
@@ -217,7 +217,7 @@ export default function WestWynEstateClient() {
       </div>
 
       <SoldOutProjectsSection />
-      <PopupScroll title="Get Verified Project Details" />
+      <PopupLeadForm type="scroll" title="Get Verified Project Details" />
 
       <AnimatePresence>
         {isContactFormOpen && (

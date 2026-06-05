@@ -4,8 +4,7 @@ import { getblogs, getUpdates, getBlogBySlug } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 
-import SlugPageForm from "../../components/SlugPageForm";
-import ExitPopup from "../../components/ExitForm";
+import PopupLeadForm from "../../components/PopupLeadForm";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import "./blogPage.css";
@@ -754,9 +753,9 @@ export default async function Post({ params }) {
                   <div className="text-xl max-w-none">
                     <PortableText value={post.body} components={components} />
                   </div>
-                  <SlugPageForm
+                  <PopupLeadForm
+                    type="slug"
                     title={post.formTitle}
-                    button="Show Me How"
                     project={post.title}
                   />
 
@@ -981,7 +980,7 @@ export default async function Post({ params }) {
               </div>
             </div>
           </section>
-          <ExitPopup />
+          <PopupLeadForm type="exit" />
         </div>
       </>
     );

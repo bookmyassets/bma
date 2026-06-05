@@ -19,7 +19,7 @@ import CostSheet from "../costsheet2";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import BrochureDownload from "../../components/BrochureDownload";
 import { FaWhatsapp } from "react-icons/fa6";
-import PopupScroll from "../../components/PopUpScroll";
+import PopupLeadForm from "../../components/PopupLeadForm";
 import ActiveProjectsSection from "../ActiveProject";
 import { breadcrumbSchema, faqSchema, realEstateSchema } from "@/lib/schema";
 import SchemaMarkup from "../../components/SchemaMarkup";
@@ -671,7 +671,7 @@ export default function WestWynCountyClient() {
         <CostSheet projectSlug="westwyn-county" showProjectSelector={false} />
       </div>
       <FAQSection />
-      <PopupScroll title="Get Verified Project Details" />
+      <PopupLeadForm type="scroll" title="Get Verified Project Details" />
       {/* <SoldOutProjectsSection /> */}
       <ActiveProjectsSection />
 

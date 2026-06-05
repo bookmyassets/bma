@@ -4,7 +4,7 @@ import BMA from "./homeComponents/BMA";
 
 import FAQSection from "./homeComponents/FAQs";
 import WestWyn from "./homeComponents/WestWyn";
-import PopupForm from "./components/PopUpForm";
+import PopupLeadForm from "./components/PopupLeadForm";
 import Hero from "./homeComponents/Hero";
 import LatestUpdates from "./homeComponents/Latest";
 import InlineLeadForm from "./components/InlineLeadForm";
@@ -226,7 +226,8 @@ export default function page() {
         <FAQSection />
       </div>
 
-      <PopupForm
+      <PopupLeadForm
+        type="time"
         title="Best Investment-Ready Locations in Dholera"
         project="Home-Page"
       />

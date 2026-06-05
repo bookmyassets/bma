@@ -12,7 +12,7 @@ import WestWynAboutSection from "./About";
 //images import
 import img1 from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate.webp";
 import img1M from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate-mobile.webp";
-import PopupScroll from "../../components/PopUpScroll";
+import PopupLeadForm from "../../components/PopupLeadForm";
 import CostSheet from "../costsheet2";
 import OurCommits from "./OurCommits";
 import PlanLayout from "./PlanLayout";
@@ -300,7 +300,7 @@ export default function WestWynResidencyClient() {
       </div>
 
       <SoldOutProjectsSection />
-      <PopupScroll title="Get Verified Project Details" />
+      <PopupLeadForm type="scroll" title="Get Verified Project Details" />
 
       <AnimatePresence>
         {isContactFormOpen && (

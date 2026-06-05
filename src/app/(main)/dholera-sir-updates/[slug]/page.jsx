@@ -11,7 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
-import SlugPageForm from "../../components/SlugPageForm";
+import PopupLeadForm from "../../components/PopupLeadForm";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
@@ -564,9 +564,9 @@ export default async function Post({ params }) {
           ])}
         />
 
-        <SlugPageForm
+        <PopupLeadForm
+          type="slug"
           title="Book Your Plot in Dholera"
-          button="Talk To A Dholera Expert"
           project={post.title}
         />
         <div className="bg-black min-h-screen text-white">
