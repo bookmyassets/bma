@@ -4,6 +4,25 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./about.css";
 
+function getLeadSource() {
+  if (typeof window === "undefined") return "BookMyAssets Twitter Ads";
+
+  const params = new URLSearchParams(window.location.search);
+
+  const utmSource = params.get("utm_source")?.toLowerCase();
+  const utmCampaign = params.get("utm_campaign");
+
+  if (params.has("twclid") || utmSource === "twitter" || utmSource === "x") {
+    if (utmCampaign) {
+      const campaign = utmCampaign.split("-").filter(Boolean).slice(0, 2).join(" ");
+      return campaign ? `BookMyAssets Twitter ${campaign}` : "BookMyAssets Twitter Ads";
+    }
+    return "BookMyAssets Twitter Ads";
+  }
+
+  return "BookMyAssets Twitter Ads";
+}
+
 export default function LeadForm({ title }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ 
@@ -134,9 +153,9 @@ export default function LeadForm({ title }) {
               name: formData.fullName,
               phone: formData.mobileNumber,
               email: formData.email,
-              source: "BookMyAssets Twitter Ads",
+              source: getLeadSource(),
             },
-            source: "BookMyAssets Website",
+            source: getLeadSource(),
             tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
             recaptchaToken: token,
           }),

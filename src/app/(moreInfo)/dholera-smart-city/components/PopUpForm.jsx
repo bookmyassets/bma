@@ -5,6 +5,24 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import logo from "@/assests/bma-with-background.svg";
 
+function getLeadSource() {
+  if (typeof window === "undefined") return "BookMyAssets Twitter Ads";
+
+  const params = new URLSearchParams(window.location.search);
+
+  const utmSource = params.get("utm_source")?.toLowerCase();
+  const utmCampaign = params.get("utm_campaign");
+
+  if (params.has("twclid") || utmSource === "twitter" || utmSource === "x") {
+    if (utmCampaign) {
+      const campaign = utmCampaign.split("-").filter(Boolean).slice(0, 2).join(" ");
+      return campaign ? `BookMyAssets Twitter ${campaign}` : "BookMyAssets Twitter Ads";
+    }
+    return "BookMyAssets Twitter Ads";
+  }
+
+  return "BookMyAssets Twitter Ads";
+}
 
 export default function PopupForm({ title, sectionId }) {
   const [showFormPopup, setShowFormPopup] = useState(false);
@@ -100,9 +118,9 @@ export default function PopupForm({ title, sectionId }) {
               name: formData.fullName,
               phone: formData.mobileNumber,
               email: formData.email,
-              source: "BookMyAssets Twitter Ads",
+              source: getLeadSource(),
             },
-            source: "BookMyAssets Popup",
+            source: getLeadSource(),
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),

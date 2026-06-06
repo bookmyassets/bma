@@ -6,6 +6,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-with-background.svg";
 import { useRouter, usePathname } from "next/navigation"
 
+function getLeadSource() {
+  if (typeof window === "undefined") return "BookMyAssets Twitter Ads";
+
+  const params = new URLSearchParams(window.location.search);
+
+  const utmSource = params.get("utm_source")?.toLowerCase();
+  const utmCampaign = params.get("utm_campaign");
+
+  if (params.has("twclid") || utmSource === "twitter" || utmSource === "x") {
+    if (utmCampaign) {
+      const campaign = utmCampaign.split("-").filter(Boolean).slice(0, 2).join(" ");
+      return campaign ? `BookMyAssets Twitter ${campaign}` : "BookMyAssets Twitter Ads";
+    }
+    return "BookMyAssets Twitter Ads";
+  }
+
+  return "BookMyAssets Twitter Ads";
+}
+
 export default function BrochureDownload({
   onClose,
   title,
@@ -158,9 +177,9 @@ const onRecaptchaSuccess = async (token) => {
           fields: {
             name: formData.fullName,
             phone: formData.phone,
-            source: source,
+            source: getLeadSource(),
           },
-          source: "BookMyAssets Twitter Ads",
+          source: getLeadSource(),
           tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
           recaptchaToken: token,
         }),
