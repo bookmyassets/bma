@@ -27,6 +27,69 @@ const DOCUMENT_WORKFLOWS = {
   },
 };
 
+const DOCUMENT_FIELD_REQUIREMENTS = {
+  "welcome-letter": {
+    client: ["name", "phone", "email", "address"],
+    booking: ["projectName", "plotNumber", "bookingDate"],
+    receipt: [],
+  },
+  "plot-details": {
+    client: ["name", "phone", "email"],
+    booking: [
+      "projectName",
+      "plotNumber",
+      "plotArea",
+      "paymentSchedule",
+      "associateName",
+      "bookingDate",
+    ],
+    receipt: [],
+  },
+  "allotment-letter": {
+    client: ["name"],
+    booking: ["projectName", "plotNumber", "plotArea", "totalConsideration"],
+    receipt: [],
+  },
+  "payment-receipt": {
+    client: ["name"],
+    booking: ["projectName", "plotNumber"],
+    receipt: [
+      "receiptNumber",
+      "paymentDate",
+      "referenceNo",
+      "modeOfPayment",
+      "amountInNumbers",
+      "remarks",
+    ],
+  },
+};
+
+const CLIENT_FIELD_LABELS = {
+  name: "name",
+  phone: "phone",
+  email: "email",
+  address: "address",
+};
+
+const BOOKING_FIELD_LABELS = {
+  projectName: "Project name",
+  plotNumber: "Plot number",
+  plotArea: "Plot area",
+  totalConsideration: "Total consideration",
+  paymentSchedule: "Payment schedule",
+  associateName: "Associate name",
+  bookingDate: "Booking date",
+};
+
+const RECEIPT_FIELD_LABELS = {
+  receiptNumber: "Receipt number",
+  paymentDate: "Payment date",
+  referenceNo: "Reference number",
+  modeOfPayment: "Mode of payment",
+  amountInNumbers: "Amount",
+  remarks: "Remarks",
+};
+
 const EMPTY_CLIENT = {
   salutation: "Mr.",
   name: "",
@@ -81,6 +144,7 @@ const DOCUMENT_COORDINATES = {
       maxLines: 1,
     },
     client1Name: {
+      key: "client1FullName",
       page: 1,
       x: 36,
       y: 592,
@@ -127,7 +191,7 @@ const DOCUMENT_COORDINATES = {
       flowKey: "client1Address",
       page: 1,
       x: 36,
-      y: 478,
+      y: 505,
       fontSize: 10,
       maxWidth: 267,
       lineHeight: 14,
@@ -143,6 +207,7 @@ const DOCUMENT_COORDINATES = {
       maxLines: 1,
     },
     client2Name: {
+      key: "client2FullName",
       page: 1,
       x: 331,
       y: 591,
@@ -189,7 +254,7 @@ const DOCUMENT_COORDINATES = {
       flowKey: "client2Address",
       page: 1,
       x: 331,
-      y: 476,
+      y: 504,
       fontSize: 10,
       maxWidth: 240,
       lineHeight: 14,
@@ -224,8 +289,7 @@ const DOCUMENT_COORDINATES = {
         { key: "projectName", bold: true },
         { text: ", Dholera", bold: true },
         {
-          text:
-            ". Your association with us is important, and we are committed to making your experience smooth, clear, and well-supported.",
+          text: ". Your association with us is important, and we are committed to making your experience smooth, clear, and well-supported.",
         },
       ],
     },
@@ -268,8 +332,7 @@ const DOCUMENT_COORDINATES = {
       maxLines: 1,
     },
     closingParagraph: {
-      text:
-        "Thank you for placing your trust in us. We are committed to supporting you with documentation, project updates, and complete customer assistance throughout your ownership journey.",
+      text: "Thank you for placing your trust in us. We are committed to supporting you with documentation, project updates, and complete customer assistance throughout your ownership journey.",
       page: 1,
       x: 36,
       y: 250,
@@ -404,8 +467,7 @@ const DOCUMENT_COORDINATES = {
         { text: "  at " },
         { key: "projectName", bold: true },
         {
-          text:
-            ", subject to receipt of payments as per the attached payment schedule and compliance with all booking terms.",
+          text: ", subject to receipt of payments as per the attached payment schedule and compliance with all booking terms.",
         },
       ],
     },
@@ -448,6 +510,26 @@ function getWelcomeGreeting(clients) {
   return `Dear ${titles.join("/")},`;
 }
 
+function getRequiredFieldSets(documentIds) {
+  const fieldSets = {
+    client: new Set(),
+    booking: new Set(),
+    receipt: new Set(),
+  };
+
+  documentIds.forEach((documentId) => {
+    const requirements = DOCUMENT_FIELD_REQUIREMENTS[documentId];
+
+    if (!requirements) return;
+
+    requirements.client.forEach((field) => fieldSets.client.add(field));
+    requirements.booking.forEach((field) => fieldSets.booking.add(field));
+    requirements.receipt.forEach((field) => fieldSets.receipt.add(field));
+  });
+
+  return fieldSets;
+}
+
 function formatDateSlash(dateValue) {
   if (!dateValue) return "";
   const [year, month, day] = dateValue.split("-");
@@ -481,9 +563,12 @@ async function fetchReceiptCounter(projectName, paymentDate, signal) {
     params.set("paymentDate", paymentDate);
   }
 
-  const response = await fetch(`/api/fill-payment-receipt?${params.toString()}`, {
-    signal,
-  });
+  const response = await fetch(
+    `/api/fill-payment-receipt?${params.toString()}`,
+    {
+      signal,
+    },
+  );
   const data = await response.json();
 
   if (!response.ok) {
@@ -592,7 +677,9 @@ function numberToWords(value) {
   const toWords = (num) => {
     if (num < 20) return ones[num];
     if (num < 100) {
-      return tens[Math.floor(num / 10)] + (num % 10 ? ` ${ones[num % 10]}` : "");
+      return (
+        tens[Math.floor(num / 10)] + (num % 10 ? ` ${ones[num % 10]}` : "")
+      );
     }
     if (num < 1000) {
       return `${ones[Math.floor(num / 100)]} Hundred${
@@ -643,7 +730,8 @@ export default function Form() {
   const [lastReceiptNumber, setLastReceiptNumber] = useState("");
 
   const selectedProject = useMemo(
-    () => PROJECT_OPTIONS.find((project) => project.name === booking.projectName),
+    () =>
+      PROJECT_OPTIONS.find((project) => project.name === booking.projectName),
     [booking.projectName],
   );
 
@@ -652,6 +740,13 @@ export default function Form() {
     [booking.bookingAmount, receipt.amountInNumbers],
   );
   const activeWorkflow = DOCUMENT_WORKFLOWS[activeTool];
+  const requiredFields = useMemo(
+    () => getRequiredFieldSets(selectedDocuments),
+    [selectedDocuments],
+  );
+  const hasClientFields = requiredFields.client.size > 0;
+  const hasBookingFields = requiredFields.booking.size > 0;
+  const hasReceiptFields = requiredFields.receipt.size > 0;
 
   useEffect(() => {
     return () => {
@@ -660,7 +755,10 @@ export default function Form() {
   }, [previews]);
 
   useEffect(() => {
-    if (!selectedDocuments.includes("payment-receipt") || !booking.projectName) {
+    if (
+      !selectedDocuments.includes("payment-receipt") ||
+      !booking.projectName
+    ) {
       setLastReceiptNumber("");
       return;
     }
@@ -673,7 +771,11 @@ export default function Form() {
       params.set("paymentDate", paymentDate);
     }
 
-    fetchReceiptCounter(booking.projectName, params.get("paymentDate"), controller.signal)
+    fetchReceiptCounter(
+      booking.projectName,
+      params.get("paymentDate"),
+      controller.signal,
+    )
       .then(({ lastReceiptNumber, nextReceiptNumber }) => {
         setLastReceiptNumber(lastReceiptNumber || "");
         if (nextReceiptNumber) {
@@ -723,6 +825,23 @@ export default function Form() {
     setError("");
   };
 
+  const toggleSelectedDocument = (documentId) => {
+    previews.forEach((preview) => URL.revokeObjectURL(preview.url));
+    setSelectedDocuments((current) => {
+      const nextDocuments = new Set(current);
+
+      if (nextDocuments.has(documentId)) {
+        nextDocuments.delete(documentId);
+      } else {
+        nextDocuments.add(documentId);
+      }
+
+      return activeWorkflow.documents.filter((id) => nextDocuments.has(id));
+    });
+    setPreviews([]);
+    setError("");
+  };
+
   const returnToDashboard = () => {
     previews.forEach((preview) => URL.revokeObjectURL(preview.url));
     setActiveTool("");
@@ -743,24 +862,29 @@ export default function Form() {
       .filter(Boolean)
       .join(" & ");
     const [client1 = EMPTY_CLIENT, client2 = EMPTY_CLIENT] = activeClients;
+    const hasClient2 = activeClients.length > 1;
 
     return {
       date: formatDisplayDate(new Date().toISOString().slice(0, 10)),
       clientCount,
       clientNames: clientNames.join(" and "),
       allotmentClientNames,
-      welcomeGreeting: activeClients.length ? getWelcomeGreeting(activeClients) : "",
-      salutationLine: clientNames.length ? `Dear ${clientNames.join(" and ")},` : "",
+      welcomeGreeting: activeClients.length
+        ? getWelcomeGreeting(activeClients)
+        : "",
+      salutationLine: clientNames.length
+        ? `Dear ${clientNames.join(" and ")},`
+        : "",
       client1FullName: getFullName(client1),
       client1Name: client1.name,
       client1Phone: client1.phone,
       client1Email: client1.email,
       client1Address: client1.address,
-      client2FullName: getFullName(client2),
-      client2Name: client2.name,
-      client2Phone: client2.phone,
-      client2Email: client2.email,
-      client2Address: client2.address,
+      client2FullName: hasClient2 ? getFullName(client2) : "",
+      client2Name: hasClient2 ? client2.name : "",
+      client2Phone: hasClient2 ? client2.phone : "",
+      client2Email: hasClient2 ? client2.email : "",
+      client2Address: hasClient2 ? client2.address : "",
       projectName: booking.projectName,
       projectCode: selectedProject?.code || "",
       plotNumber: booking.plotNumber,
@@ -810,28 +934,32 @@ export default function Form() {
 
   const validate = () => {
     const activeClients = getActiveClients(clients, clientCount);
-    const missingClients = activeClients
-      .map((client, index) => (!client.name ? `Client ${index + 1} name` : ""))
+    const missingClients = activeClients.flatMap((client, index) =>
+      Object.entries(CLIENT_FIELD_LABELS)
+        .map(([field, label]) =>
+          requiredFields.client.has(field) && !client[field]
+            ? `Client ${index + 1} ${label}`
+            : "",
+        )
+        .filter(Boolean),
+    );
+    const missingBooking = Object.entries(BOOKING_FIELD_LABELS)
+      .map(([field, label]) =>
+        requiredFields.booking.has(field) && !booking[field] ? label : "",
+      )
+      .filter(Boolean);
+    const missingReceipt = Object.entries(RECEIPT_FIELD_LABELS)
+      .map(([field, label]) =>
+        requiredFields.receipt.has(field) && !receipt[field] ? label : "",
+      )
       .filter(Boolean);
 
     const missing = [
       ...missingClients,
-      !booking.projectName ? "Project name" : "",
-      !booking.plotNumber ? "Plot number" : "",
+      ...missingBooking,
+      ...missingReceipt,
       selectedDocuments.length === 0 ? "At least one document" : "",
     ].filter(Boolean);
-
-    if (selectedDocuments.includes("payment-receipt")) {
-      [
-        ["Receipt number", receipt.receiptNumber],
-        ["Payment date", receipt.paymentDate],
-        ["Reference number", receipt.referenceNo],
-        ["Mode of payment", receipt.modeOfPayment],
-        ["Amount", receipt.amountInNumbers],
-      ].forEach(([label, value]) => {
-        if (!value) missing.push(label);
-      });
-    }
 
     if (missing.length) {
       setError(`Missing required fields: ${missing.join(", ")}`);
@@ -869,7 +997,9 @@ export default function Form() {
 
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
-      throw new Error(data.error || `Failed to generate ${getDocumentLabel(documentId)}`);
+      throw new Error(
+        data.error || `Failed to generate ${getDocumentLabel(documentId)}`,
+      );
     }
 
     return {
@@ -893,7 +1023,11 @@ export default function Form() {
       const generated = [];
 
       for (const documentId of selectedDocuments) {
-        const { blob, filename } = await requestDocument(documentId, payload, false);
+        const { blob, filename } = await requestDocument(
+          documentId,
+          payload,
+          false,
+        );
         generated.push({
           documentId,
           label: getDocumentLabel(documentId),
@@ -941,7 +1075,9 @@ export default function Form() {
           formatDateSlash(receipt.paymentDate),
         );
 
-        setLastReceiptNumber(counter.lastReceiptNumber || receipt.receiptNumber);
+        setLastReceiptNumber(
+          counter.lastReceiptNumber || receipt.receiptNumber,
+        );
         if (counter.nextReceiptNumber) {
           setReceipt((current) => ({
             ...current,
@@ -970,21 +1106,23 @@ export default function Form() {
           </div>
 
           <div className="grid gap-[1rem] md:grid-cols-2">
-            {Object.entries(DOCUMENT_WORKFLOWS).map(([workflowId, workflow]) => (
-              <button
-                key={workflowId}
-                type="button"
-                onClick={() => selectWorkflow(workflowId)}
-                className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)] text-left transition hover:border-[#ddbc69]/60 hover:bg-[#203140]"
-              >
-                <span className="block text-[clamp(1.125rem,2vw,1.5rem)] font-semibold text-white">
-                  {workflow.label}
-                </span>
-                <span className="mt-[0.5rem] block text-[0.9375rem] leading-[1.6] text-white/65">
-                  {workflow.description}
-                </span>
-              </button>
-            ))}
+            {Object.entries(DOCUMENT_WORKFLOWS).map(
+              ([workflowId, workflow]) => (
+                <button
+                  key={workflowId}
+                  type="button"
+                  onClick={() => selectWorkflow(workflowId)}
+                  className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)] text-left transition hover:border-[#ddbc69]/60 hover:bg-[#203140]"
+                >
+                  <span className="block text-[clamp(1.125rem,2vw,1.5rem)] font-semibold text-white">
+                    {workflow.label}
+                  </span>
+                  <span className="mt-[0.5rem] block text-[0.9375rem] leading-[1.6] text-white/65">
+                    {workflow.description}
+                  </span>
+                </button>
+              ),
+            )}
           </div>
         </div>
       </main>
@@ -1017,147 +1155,185 @@ export default function Form() {
           className="grid gap-[clamp(1rem,2vw,2rem)] xl:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)]"
         >
           <div className="space-y-[clamp(1rem,2vw,1.5rem)]">
-            <section className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)]">
-              <div className="mb-[1rem] flex flex-wrap items-center justify-between gap-[0.75rem]">
-                <h2 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold">
-                  Client Details
-                </h2>
-                <div className="inline-flex rounded-lg border border-white/15 bg-white/5 p-[0.25rem]">
-                  {["1", "2"].map((count) => (
-                    <button
-                      key={count}
-                      type="button"
-                      onClick={() => setClientCount(count)}
-                      className={`rounded-md px-[0.875rem] py-[0.5rem] text-[0.875rem] font-medium transition ${
-                        clientCount === count
-                          ? "bg-[#ddbc69] text-black"
-                          : "text-white/75 hover:bg-white/10"
-                      }`}
-                    >
-                      {count} Client{count === "2" ? "s" : ""}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid gap-[1rem] lg:grid-cols-2">
-                {getActiveClients(clients, clientCount).map((client, index) => (
-                  <div
-                    key={index}
-                    className="rounded-lg border border-white/10 bg-white/[0.03] p-[1rem]"
-                  >
-                    <h3 className="mb-[0.875rem] text-[1rem] font-semibold text-white">
-                      Client {index + 1}
-                    </h3>
-                    <div className="grid gap-[0.875rem]">
-                      <label className="grid gap-[0.375rem] text-[0.875rem] text-white/75">
-                        Salutation
-                        <select
-                          value={client.salutation}
-                          onChange={(event) =>
-                            updateClient(index, "salutation", event.target.value)
-                          }
-                          className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
-                        >
-                          <option value="Mr.">Mr.</option>
-                          <option value="Ms.">Ms.</option>
-                          <option value="Mrs.">Mrs.</option>
-                        </select>
-                      </label>
-                      <Input
-                        label="Name"
-                        value={client.name}
-                        onChange={(value) => updateClient(index, "name", value)}
-                      />
-                      <Input
-                        label="Phone"
-                        value={client.phone}
-                        onChange={(value) => updateClient(index, "phone", value)}
-                      />
-                      <Input
-                        label="Email"
-                        type="email"
-                        value={client.email}
-                        onChange={(value) => updateClient(index, "email", value)}
-                      />
-                      <Textarea
-                        label="Address"
-                        value={client.address}
-                        onChange={(value) => updateClient(index, "address", value)}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)]">
-              <h2 className="mb-[1rem] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold">
-                Plot And Booking Details
-              </h2>
-              <div className="grid gap-[1rem] md:grid-cols-2">
-                <label className="grid gap-[0.375rem] text-[0.875rem] text-white/75">
-                  Project Name
-                  <select
-                    value={booking.projectName}
-                    onChange={(event) =>
-                      updateBooking("projectName", event.target.value)
-                    }
-                    className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
-                  >
-                    <option value="">Select project</option>
-                    {PROJECT_OPTIONS.map((project) => (
-                      <option key={project.code} value={project.name}>
-                        {project.name}
-                      </option>
+            {hasClientFields && (
+              <section className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)]">
+                <div className="mb-[1rem] flex flex-wrap items-center justify-between gap-[0.75rem]">
+                  <h2 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold">
+                    Client Details
+                  </h2>
+                  <div className="inline-flex rounded-lg border border-white/15 bg-white/5 p-[0.25rem]">
+                    {["1", "2"].map((count) => (
+                      <button
+                        key={count}
+                        type="button"
+                        onClick={() => setClientCount(count)}
+                        className={`rounded-md px-[0.875rem] py-[0.5rem] text-[0.875rem] font-medium transition ${
+                          clientCount === count
+                            ? "bg-[#ddbc69] text-black"
+                            : "text-white/75 hover:bg-white/10"
+                        }`}
+                      >
+                        {count} Client{count === "2" ? "s" : ""}
+                      </button>
                     ))}
-                  </select>
-                </label>
-                <Input
-                  label="Plot Number"
-                  value={booking.plotNumber}
-                  onChange={(value) => updateBooking("plotNumber", value)}
-                />
-                <Input
-                  label="Plot Area (sq yards)"
-                  value={booking.plotArea}
-                  onChange={(value) => updateBooking("plotArea", value)}
-                />
-                <Input
-                  label="Total Consideration"
-                  value={booking.totalConsideration}
-                  onChange={(value) => updateBooking("totalConsideration", value)}
-                />
-                <Input
-                  label="Payment Schedule"
-                  value={booking.paymentSchedule}
-                  onChange={(value) => updateBooking("paymentSchedule", value)}
-                />
-                <Input
-                  label="Associate Name"
-                  value={booking.associateName}
-                  onChange={(value) => updateBooking("associateName", value)}
-                />
-                <Input
-                  label="Booking Date"
-                  type="date"
-                  value={booking.bookingDate}
-                  onChange={(value) => updateBooking("bookingDate", value)}
-                />
-                <Input
-                  label="Booking Amount"
-                  value={booking.bookingAmount}
-                  onChange={(value) => updateBooking("bookingAmount", value)}
-                />
-                <Input
-                  label="Project Advisor"
-                  value={booking.projectAdvisor}
-                  onChange={(value) => updateBooking("projectAdvisor", value)}
-                />
-              </div>
-            </section>
+                  </div>
+                </div>
 
-            {activeTool === "payment-receipt" && (
+                <div className="grid gap-[1rem] lg:grid-cols-2">
+                  {getActiveClients(clients, clientCount).map(
+                    (client, index) => (
+                      <div
+                        key={index}
+                        className="rounded-lg border border-white/10 bg-white/[0.03] p-[1rem]"
+                      >
+                        <h3 className="mb-[0.875rem] text-[1rem] font-semibold text-white">
+                          Client {index + 1}
+                        </h3>
+                        <div className="grid gap-[0.875rem]">
+                          {requiredFields.client.has("name") && (
+                            <label className="grid gap-[0.375rem] text-[0.875rem] text-white/75">
+                              Salutation
+                              <select
+                                value={client.salutation}
+                                onChange={(event) =>
+                                  updateClient(
+                                    index,
+                                    "salutation",
+                                    event.target.value,
+                                  )
+                                }
+                                className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
+                              >
+                                <option value="Mr.">Mr.</option>
+                                <option value="Ms.">Ms.</option>
+                                <option value="Mrs.">Mrs.</option>
+                              </select>
+                            </label>
+                          )}
+                          {requiredFields.client.has("name") && (
+                            <Input
+                              label="Name"
+                              value={client.name}
+                              onChange={(value) =>
+                                updateClient(index, "name", value)
+                              }
+                            />
+                          )}
+                          {requiredFields.client.has("phone") && (
+                            <Input
+                              label="Phone"
+                              value={client.phone}
+                              onChange={(value) =>
+                                updateClient(index, "phone", value)
+                              }
+                            />
+                          )}
+                          {requiredFields.client.has("email") && (
+                            <Input
+                              label="Email"
+                              type="email"
+                              value={client.email}
+                              onChange={(value) =>
+                                updateClient(index, "email", value)
+                              }
+                            />
+                          )}
+                          {requiredFields.client.has("address") && (
+                            <Textarea
+                              label="Address"
+                              value={client.address}
+                              onChange={(value) =>
+                                updateClient(index, "address", value)
+                              }
+                            />
+                          )}
+                        </div>
+                      </div>
+                    ),
+                  )}
+                </div>
+              </section>
+            )}
+
+            {hasBookingFields && (
+              <section className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)]">
+                <h2 className="mb-[1rem] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold">
+                  Plot And Booking Details
+                </h2>
+                <div className="grid gap-[1rem] md:grid-cols-2">
+                  {requiredFields.booking.has("projectName") && (
+                    <label className="grid gap-[0.375rem] text-[0.875rem] text-white/75">
+                      Project Name
+                      <select
+                        value={booking.projectName}
+                        onChange={(event) =>
+                          updateBooking("projectName", event.target.value)
+                        }
+                        className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
+                      >
+                        <option value="">Select project</option>
+                        {PROJECT_OPTIONS.map((project) => (
+                          <option key={project.code} value={project.name}>
+                            {project.name}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  )}
+                  {requiredFields.booking.has("plotNumber") && (
+                    <Input
+                      label="Plot Number"
+                      value={booking.plotNumber}
+                      onChange={(value) => updateBooking("plotNumber", value)}
+                    />
+                  )}
+                  {requiredFields.booking.has("plotArea") && (
+                    <Input
+                      label="Plot Area (sq yards)"
+                      value={booking.plotArea}
+                      onChange={(value) => updateBooking("plotArea", value)}
+                    />
+                  )}
+                  {requiredFields.booking.has("totalConsideration") && (
+                    <Input
+                      label="Total Consideration"
+                      value={booking.totalConsideration}
+                      onChange={(value) =>
+                        updateBooking("totalConsideration", value)
+                      }
+                    />
+                  )}
+                  {requiredFields.booking.has("paymentSchedule") && (
+                    <Input
+                      label="Payment Schedule"
+                      value={booking.paymentSchedule}
+                      onChange={(value) =>
+                        updateBooking("paymentSchedule", value)
+                      }
+                    />
+                  )}
+                  {requiredFields.booking.has("associateName") && (
+                    <Input
+                      label="Associate Name"
+                      value={booking.associateName}
+                      onChange={(value) =>
+                        updateBooking("associateName", value)
+                      }
+                    />
+                  )}
+                  {requiredFields.booking.has("bookingDate") && (
+                    <Input
+                      label="Booking Date"
+                      type="date"
+                      value={booking.bookingDate}
+                      onChange={(value) => updateBooking("bookingDate", value)}
+                    />
+                  )}
+                </div>
+              </section>
+            )}
+
+            {hasReceiptFields && (
               <section className="rounded-lg border border-white/10 bg-[#1a2733] p-[clamp(1rem,2vw,1.5rem)]">
                 <h2 className="mb-[1rem] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold">
                   Receipt Details
@@ -1171,40 +1347,64 @@ export default function Form() {
                   </div>
                 )}
                 <div className="grid gap-[1rem] md:grid-cols-2">
-                  <Input
-                    label="Receipt Number"
-                    value={receipt.receiptNumber}
-                    onChange={(value) => updateReceipt("receiptNumber", value)}
-                  />
-                  <Input
-                    label="Payment Date"
-                    type="date"
-                    value={receipt.paymentDate}
-                    onChange={(value) => updateReceipt("paymentDate", value)}
-                  />
-                  <Input
-                    label="Reference Number"
-                    value={receipt.referenceNo}
-                    onChange={(value) => updateReceipt("referenceNo", value)}
-                  />
-                  <Input
-                    label="Mode Of Payment"
-                    value={receipt.modeOfPayment}
-                    onChange={(value) => updateReceipt("modeOfPayment", value)}
-                  />
-                  <Input
-                    label="Amount"
-                    value={receipt.amountInNumbers}
-                    onChange={(value) => updateReceipt("amountInNumbers", value)}
-                  />
-                  <Input label="Amount In Words" value={amountInWords} readOnly />
-                  <div className="md:col-span-2">
+                  {requiredFields.receipt.has("receiptNumber") && (
                     <Input
-                      label="Remarks"
-                      value={receipt.remarks}
-                      onChange={(value) => updateReceipt("remarks", value)}
+                      label="Receipt Number"
+                      value={receipt.receiptNumber}
+                      onChange={(value) =>
+                        updateReceipt("receiptNumber", value)
+                      }
                     />
-                  </div>
+                  )}
+                  {requiredFields.receipt.has("paymentDate") && (
+                    <Input
+                      label="Payment Date"
+                      type="date"
+                      value={receipt.paymentDate}
+                      onChange={(value) => updateReceipt("paymentDate", value)}
+                    />
+                  )}
+                  {requiredFields.receipt.has("referenceNo") && (
+                    <Input
+                      label="Reference Number"
+                      value={receipt.referenceNo}
+                      onChange={(value) => updateReceipt("referenceNo", value)}
+                    />
+                  )}
+                  {requiredFields.receipt.has("modeOfPayment") && (
+                    <Input
+                      label="Mode Of Payment"
+                      value={receipt.modeOfPayment}
+                      onChange={(value) =>
+                        updateReceipt("modeOfPayment", value)
+                      }
+                    />
+                  )}
+                  {requiredFields.receipt.has("amountInNumbers") && (
+                    <Input
+                      label="Amount"
+                      value={receipt.amountInNumbers}
+                      onChange={(value) =>
+                        updateReceipt("amountInNumbers", value)
+                      }
+                    />
+                  )}
+                  {requiredFields.receipt.has("amountInNumbers") && (
+                    <Input
+                      label="Amount In Words"
+                      value={amountInWords}
+                      readOnly
+                    />
+                  )}
+                  {requiredFields.receipt.has("remarks") && (
+                    <div className="md:col-span-2">
+                      <Input
+                        label="Remarks"
+                        value={receipt.remarks}
+                        onChange={(value) => updateReceipt("remarks", value)}
+                      />
+                    </div>
+                  )}
                 </div>
               </section>
             )}
@@ -1224,13 +1424,19 @@ export default function Form() {
                 </p>
               </div>
               <div className="mt-[0.75rem] space-y-[0.5rem]">
-                {selectedDocuments.map((documentId) => (
-                  <div
+                {activeWorkflow.documents.map((documentId) => (
+                  <label
                     key={documentId}
-                    className="rounded-lg border border-white/10 bg-white/[0.03] px-[0.875rem] py-[0.625rem] text-[0.875rem] text-white/80"
+                    className="flex cursor-pointer items-center gap-[0.625rem] rounded-lg border border-white/10 bg-white/[0.03] px-[0.875rem] py-[0.625rem] text-[0.875rem] text-white/80 transition hover:border-[#ddbc69]/50"
                   >
+                    <input
+                      type="checkbox"
+                      checked={selectedDocuments.includes(documentId)}
+                      onChange={() => toggleSelectedDocument(documentId)}
+                      className="h-[1rem] w-[1rem] accent-[#ddbc69]"
+                    />
                     {getDocumentLabel(documentId)}
-                  </div>
+                  </label>
                 ))}
               </div>
 
@@ -1245,7 +1451,9 @@ export default function Form() {
                 disabled={loading}
                 className="mt-[1rem] w-full rounded-lg bg-[#ddbc69] px-[1rem] py-[0.875rem] text-[0.9375rem] font-semibold text-black transition hover:bg-[#f1cf78] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {loading ? "Preparing Preview..." : "Preview Selected Documents"}
+                {loading
+                  ? "Preparing Preview..."
+                  : "Preview Selected Documents"}
               </button>
 
               <button
@@ -1275,7 +1483,9 @@ export default function Form() {
                         </span>
                         <button
                           type="button"
-                          onClick={() => downloadUrl(preview.url, preview.filename)}
+                          onClick={() =>
+                            downloadUrl(preview.url, preview.filename)
+                          }
                           className="rounded-md border border-black/15 px-[0.625rem] py-[0.375rem] text-[0.75rem] font-semibold hover:bg-black/5"
                         >
                           Download Preview
