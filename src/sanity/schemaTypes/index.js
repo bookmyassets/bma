@@ -7,7 +7,8 @@ import contact from './contact'; // Import the blockContent schema
 import redirect from './redirect';
 import receiptCounter from './receiptCounter';
 import leadFormBlock from './objects/leadFormBlock';
+import youtubeEmbed from './objects/youtubeEmbed';
 
 export const schema = {
-  types: [post, author, redirect, category, blockContent, contact, receiptCounter, leadFormBlock], // Add all schemas here
+  types: [post, author, redirect, category, blockContent, contact, receiptCounter, leadFormBlock, youtubeEmbed], // Add all schemas here
 };

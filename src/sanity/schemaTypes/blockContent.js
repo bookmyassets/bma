@@ -129,9 +129,11 @@ export default {
           title: "Link URL",
         },
       ],
-    },{
+    },
+    {
       type: "leadFormBlock",
     },
+    { type: "youtubeEmbed" },
     // Code block
     {
       type: "code",

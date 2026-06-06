@@ -17,6 +17,7 @@ import SchemaMarkup from "../../components/SchemaMarkup";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
+import YoutubeEmbed from "../../components/YoutubeEmbed";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -215,6 +216,10 @@ export default async function Post({ params }) {
 
         leadFormBlock: ({ value }) => {
           return <LeadFormBlock {...value} />;
+        },
+
+        youtubeEmbed: ({ value }) => {
+          return <YoutubeEmbed url={value.url} caption={value.caption} />;
         },
 
         table: ({ value }) => {
