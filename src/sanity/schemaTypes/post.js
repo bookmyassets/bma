@@ -106,6 +106,11 @@ export default {
       of: [{ type: "reference", to: { type: "category" } }],
     },
     {
+      name: "createdAt",
+      title: "Created At",
+      type: "datetime",
+    },
+    {
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
