@@ -322,10 +322,10 @@ export default function InlineLeadForm({
   };
 
   return (
-    <section className="py-[clamp(2rem,4vw,3.5rem)] bg-black">
+    <section className="py-[clamp(2rem,4vw,3.5rem)] bg-white rounded-lg">
       <div className="container mx-auto px-[clamp(1rem,4vw,3rem)]">
         <div className="max-w-5xl mx-auto">
-          <HeadingTag className="text-white text-[clamp(1.375rem,2.5vw,2rem)] leading-[1.25] font-bold text-center">
+          <HeadingTag className="text-black text-[clamp(1.375rem,2.5vw,2rem)] leading-[1.25] font-bold text-center">
             {config.title}
           </HeadingTag>
 
@@ -345,7 +345,7 @@ export default function InlineLeadForm({
                 <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-white"
+                    className="h-10 w-10 text-black"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -359,7 +359,7 @@ export default function InlineLeadForm({
                   </svg>
                 </div>
               </motion.div>
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-2xl font-bold text-black mb-2">
                 Thank You!
               </h3>
               <p className="text-gray-300">
@@ -393,7 +393,7 @@ export default function InlineLeadForm({
                 <div>
                   <label
                     htmlFor="fullName"
-                    className="block text-white text-sm font-medium mb-2"
+                    className="block text-black text-sm font-medium mb-2"
                   >
                     Full Name *
                   </label>
@@ -412,7 +412,7 @@ export default function InlineLeadForm({
                 <div>
                   <label
                     htmlFor="mobileNumber"
-                    className="block text-white text-sm font-medium mb-2"
+                    className="block text-black text-sm font-medium mb-2"
                   >
                     Mobile Number *
                   </label>
@@ -433,7 +433,7 @@ export default function InlineLeadForm({
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-white text-sm font-medium mb-2"
+                    className="block text-black text-sm font-medium mb-2"
                   >
                     Email ID
                   </label>
@@ -443,7 +443,7 @@ export default function InlineLeadForm({
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69] placeholder-gray-400"
+                    className="w-full px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg bg-gray-800 border border-gray-700 text-black focus:outline-none focus:ring-2 focus:ring-[#ddbc69] placeholder-gray-400"
                     placeholder="Enter your email address"
                   />
                 </div>

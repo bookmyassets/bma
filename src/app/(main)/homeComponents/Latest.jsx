@@ -225,14 +225,14 @@ export default function LatestUpdates() {
   return (
     <>
       {/* ✅ calc() — section padding scales with viewport */}
-      <div className="py-[calc(2rem+2vw)] bg-white min-h-[480px]">
+      <div className="py-[calc(2rem+2vw)] bg-black min-h-[480px]">
         <div className="max-w-7xl mx-auto px-[calc(1rem+2vw)]">
           {/* ✅ clamp() — section heading scales between 20px and 36px */}
-          <p className="text-[clamp(1.5rem,3vw,2.25rem)] text-center font-semibold leading-[1.2] text-gray-800 mb-4">
+          <p className="text-[clamp(1.5rem,3vw,2.25rem)] text-center font-semibold leading-[1.2] text-white mb-4">
             Dholera Smart City Updates & Blogs
           </p>
           {/* ✅ clamp() — subheading scales between 14px and 18px */}
-          <p className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-gray-600 text-center mb-8 max-w-5xl mx-auto">
+          <p className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-white text-center mb-8 max-w-5xl mx-auto">
             Stay updated with the latest developments, project updates and
             important investment insights from Dholera Smart City.
           </p>
