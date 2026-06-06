@@ -1,5 +1,4 @@
-import { getYoutubeId } from "../../../lib/getYouTubeId";
-
+import {getYoutubeId} from "@/lib/getYouTubeId"
 export default function YoutubeEmbed({ url, caption }) {
   const id = getYoutubeId(url);
   if (!id) return null;
