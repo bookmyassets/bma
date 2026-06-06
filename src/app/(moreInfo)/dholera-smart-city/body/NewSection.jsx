@@ -148,7 +148,7 @@ export default function WestWyn() {
 
   const sections = [
     {
-      title: "WestWyn Estate",
+      title: "WestWyn Estates",
       content: `WestWyn Estates brings a refined residential plotted experience in the evolving landscape of Dholera. Developed by BookMyAssets, this premium community is designed for those who value planning, connectivity, and long-term clarity. Strategically located on State Highway-117 and close to Bhimnath Railway Station and the Dholera SIR boundary.
 `,
       image: img2a,
