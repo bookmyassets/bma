@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useCallback, useRef, useState } from "react";
-import logo from "@/assests/ad-page/dholera-govt-logo.webp"; // adjust path as needed
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 
 function FormInput({
@@ -35,54 +34,66 @@ function FormInput({
         minLength={minLength}
         maxLength={maxLength}
         aria-label={ariaLabel}
-        className="
-          w-full
-          pl-[clamp(1.75rem,2.5vw,2.25rem)]
-          pr-[clamp(0.5rem,1vw,0.75rem)]
-          py-[clamp(0.4rem,0.85vw,0.6rem)]
-          text-[0.875rem]
-          leading-[1.5]
-          border border-gray-200
-          rounded-lg
-          bg-gray-50
-          text-gray-800
-          placeholder:text-gray-400
-          focus:outline-none focus:ring-1 focus:ring-[#ddbc69] focus:border-[#ddbc69]
-          transition-colors
-        "
+        className="w-full pl-[clamp(1.75rem,2.5vw,2.25rem)] pr-[clamp(0.5rem,1vw,0.75rem)] py-[clamp(0.4rem,0.85vw,0.6rem)] text-[0.875rem] leading-[1.5] border border-gray-200 rounded-lg bg-gray-50 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-[#ddbc69] focus:border-[#ddbc69] transition-colors"
       />
     </div>
   );
+}
+
+// ← FIX: getLeadSource extracted outside component — no re-creation on every render
+function getLeadSource() {
+  if (typeof window === "undefined") return "BookMyAssets";
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("twclid")) return "BookMyAssets Twitter Ads";
+  if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
+  if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
+  if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
+  if (params.has("gad_source")) return "BookMyAssets Google Ads";
+  return "BookMyAssets";
 }
 
 export default function HeroForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
-  const [submissionCount, setSubmissionCount] = useState(0);
-  const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [submittedName, setSubmittedName] = useState("");
   const recaptchaRef = useRef(null);
+  const recaptchaWidgetId = useRef(null); // ← FIX: track widget ID for proper reset
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const getLeadSource = () => {
-    if (typeof window === "undefined") return "BookMyAssets";
-    const params = new URLSearchParams(window.location.search);
-    if (params.has("twclid")) return "BookMyAssets Twitter Ads";
-    if (params.has("dholera-sir-blogs")) return "BookMyAssets Blogs";
-    if (params.has("dholera-sir-updates")) return "BookMyAssets Updates";
-    if (params.has("about-dholera-sir")) return "BookMyAssets Dholera SIR";
-    if (params.has("gad_source")) return "BookMyAssets Google Ads";
-    if (params.has("")) return "BookMyAssets";
-    return "BookMyAssets ";
-  };
+
+  // ← FIX: Read localStorage on mount so rate limit persists across refreshes
+  const [submissionCount, setSubmissionCount] = useState(() => {
+    if (typeof window === "undefined") return 0;
+    const saved = localStorage.getItem("formSubmissionCount");
+    const lastTime = parseInt(
+      localStorage.getItem("lastSubmissionTime") || "0",
+    );
+    const hoursPassed = (Date.now() - lastTime) / (1000 * 60 * 60);
+    if (hoursPassed >= 24) return 0;
+    return parseInt(saved || "0");
+  });
+  const [lastSubmissionTime, setLastSubmissionTime] = useState(() => {
+    if (typeof window === "undefined") return 0;
+    return parseInt(localStorage.getItem("lastSubmissionTime") || "0");
+  });
 
   const loadRecaptcha = useCallback(() => {
     if (recaptchaLoaded) return;
+
+    // ← FIX: Global deduplication — don't inject if already in DOM
+    const existing = document.querySelector('script[src*="recaptcha/api.js"]');
+    if (existing) {
+      setRecaptchaLoaded(true);
+      return;
+    }
+
     const s = document.createElement("script");
-    s.src = "https://www.google.com/recaptcha/api.js";
+    // ← FIX: render=explicit prevents auto-rendering phantom widgets
+    s.src = "https://www.google.com/recaptcha/api.js?render=explicit";
     s.async = true;
+    s.defer = true;
     document.head.appendChild(s);
     setRecaptchaLoaded(true);
   }, [recaptchaLoaded]);
@@ -141,6 +152,7 @@ export default function HeroForm() {
           }),
         },
       );
+
       if (response.ok) {
         setShowPopup(true);
         setSubmissionCount((prev) => {
@@ -161,8 +173,10 @@ export default function HeroForm() {
       );
     } finally {
       setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current)
-        window.grecaptcha.reset(recaptchaRef.current);
+      // ← FIX: reset by widget ID, not blindly
+      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
+        window.grecaptcha.reset(recaptchaWidgetId.current);
+      }
     }
   };
 
@@ -170,62 +184,54 @@ export default function HeroForm() {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage("");
+
     if (!validateForm()) {
       setIsLoading(false);
       return;
     }
-    if (window.grecaptcha && recaptchaLoaded) {
-      try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-          window.grecaptcha.render(recaptchaRef.current, {
+
+    if (!recaptchaLoaded || !window.grecaptcha) {
+      setErrorMessage("reCAPTCHA not loaded. Please try again.");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // ← FIX: render only once, reuse widget ID on subsequent submits
+      if (recaptchaWidgetId.current === null) {
+        recaptchaWidgetId.current = window.grecaptcha.render(
+          recaptchaRef.current,
+          {
             sitekey: siteKey,
             callback: onRecaptchaSuccess,
             theme: "dark",
-          });
-        } else {
-          window.grecaptcha.reset();
-          window.grecaptcha.execute();
-        }
-      } catch (error) {
-        console.error("reCAPTCHA render error:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
+            size: "invisible", // ← keeps it invisible until execute()
+          },
+        );
+      } else {
+        window.grecaptcha.reset(recaptchaWidgetId.current);
       }
-    } else {
-      setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
+      window.grecaptcha.execute(recaptchaWidgetId.current);
+    } catch (error) {
+      console.error("reCAPTCHA error:", error);
+      setErrorMessage("Verification error. Please refresh and try again.");
       setIsLoading(false);
     }
   };
 
   return (
-    // ✅ calc() — padding scales with viewport instead of hard breakpoint jumps
     <div className="w-full bg-white rounded-xl max-w-lg p-[clamp(1rem,2vw,1.5rem)] md:overflow-hidden shadow-lg">
-      {/* ── Logo + Headline ── */}
       <div className="text-center mb-[clamp(0.75rem,1.5vw,1.25rem)]">
-        {/* Logo — desktop only */}
-        {/* <div className="relative w-[clamp(200px,18vw,280px)] aspect-[3/1] mx-auto mb-[clamp(0.4rem,0.85vw,0.75rem)] hidden md:block">
-          <Image
-            src={logo}
-            alt="BookMyAssets - Dholera Property Investment"
-            fill
-            sizes="(min-width: 768px) 18vw, 0px"
-            className="object-contain"
-            fetchPriority="high"
-          />
-        </div> */}
-
-        {/* Headline */}
-        <div className="">
+        <div>
           <h2 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] glowing-text px-2">
             Buy Residential Plot in Dholera
           </h2>
           <p className="text-[0.875rem] font-normal leading-[1.5] glowing-text px-2">
-            Get Project Details{" "}
+            Get Project Details
           </p>
         </div>
       </div>
 
-      {/* ── Success State ── */}
       {showPopup ? (
         <div
           className="text-center py-[clamp(1rem,2.5vw,1.75rem)]"
@@ -251,7 +257,6 @@ export default function HeroForm() {
               </svg>
             </div>
           </div>
-
           <h2 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-black mb-[clamp(0.3rem,0.75vw,0.5rem)]">
             Thank You!
           </h2>
@@ -264,7 +269,6 @@ export default function HeroForm() {
           </p>
         </div>
       ) : (
-        /* ── Form ── */
         <form
           onSubmit={handleSubmit}
           onFocus={loadRecaptcha}
@@ -279,7 +283,6 @@ export default function HeroForm() {
             </div>
           )}
 
-          {/* Name + Phone */}
           <div className="grid grid-cols-2 gap-[clamp(0.5rem,1.5vw,0.875rem)]">
             <FormInput
               name="fullName"
@@ -306,31 +309,13 @@ export default function HeroForm() {
             />
           </div>
 
-          {/* reCAPTCHA */}
-          <div className="flex justify-center">
-            <div ref={recaptchaRef} />
-          </div>
+          {/* ← FIX: invisible reCAPTCHA — no visible widget box, no layout shift */}
+          <div ref={recaptchaRef} />
 
-          {/* Submit */}
           <button
             type="submit"
             disabled={isLoading}
-            className="
-              w-full
-              py-[clamp(0.5rem,1vw,0.75rem)]
-              px-[clamp(1rem,2vw,1.5rem)]
-              bg-gradient-to-r from-[#ddbc69] to-[#ddbc69]
-              text-black
-              text-[0.875rem] md:text-[1rem]
-              font-semibold
-              leading-[1.4]
-              rounded-lg
-              hover:from-[#ddbc69] hover:to-[#ddbc69]
-              transition-all
-              shadow-md hover:shadow-[#ddbc69]/20
-              disabled:opacity-70 disabled:cursor-not-allowed
-              touch-manipulation
-            "
+            className="w-full py-[clamp(0.5rem,1vw,0.75rem)] px-[clamp(1rem,2vw,1.5rem)] bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] text-black text-[0.875rem] md:text-[1rem] font-semibold leading-[1.4] rounded-lg hover:from-[#ddbc69] hover:to-[#ddbc69] transition-all shadow-md hover:shadow-[#ddbc69]/20 disabled:opacity-70 disabled:cursor-not-allowed touch-manipulation"
           >
             {isLoading ? "Submitting..." : "Get A Call Back"}
           </button>
@@ -339,4 +324,3 @@ export default function HeroForm() {
     </div>
   );
 }
-

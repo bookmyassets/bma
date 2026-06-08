@@ -33,7 +33,6 @@ export default function DholeraSmartCity() {
                 fill
                 sizes="(min-width: 768px) 40vw, 100vw"
                 className="object-contain h-full w-auto"
-                priority
               />
             </div>
           </div>
