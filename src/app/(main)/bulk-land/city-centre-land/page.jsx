@@ -65,7 +65,11 @@ export default function page() {
                   Zone Area
                 </p>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
-                  1678.045<span className="md:hidden"><br /></span> sq. yards
+                  1678.045
+                  <span className="md:hidden">
+                    <br />
+                  </span>{" "}
+                  sq. yards
                 </p>
               </div>
               <div className="flex flex-col items-center">
@@ -78,11 +82,11 @@ export default function page() {
               </div>
               <div className="flex flex-col items-center">
                 <p className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
-                  Get Brochure
+                  Future Potential
                 </p>
-                <a href="https://cdn.sanity.io/files/c3e1h345/projects/66dcad140036ee16f4c1d0d40cb3f56d39841639.pdf" target="_blank" className="text-blue-400 underline text-sm md:text-lg font-medium">
-                  Brochure
-                </a>
+                <p className="text-gray-700 text-sm md:text-lg font-medium">
+                  High ROI
+                </p>
               </div>
             </div>
           </div>
@@ -98,10 +102,10 @@ export default function page() {
             lifestyle in one vibrant hub. This zone is meant for retail,
             hospitality, corporate offices, and civic institutions, along with
             high-density residential and mixed-use projects. As the focal point
-            of Dholera Smart City master plan, the City Centre offers maximum visibility,
-            footfall, and prestige - making it the prime location for businesses
-            and investors seeking a landmark presence in India’s first
-            greenfield smart city.
+            of Dholera Smart City master plan, the City Centre offers maximum
+            visibility, footfall, and prestige - making it the prime location
+            for businesses and investors seeking a landmark presence in India’s
+            first greenfield smart city.
           </p>
         </div>
       </div>
@@ -116,19 +120,19 @@ export default function page() {
           />
         </div>
       </div>
-<div>
-  <CityCentreZoneCards/>
-</div>
+      <div>
+        <CityCentreZoneCards />
+      </div>
       <div>
         {/* <Table /> */}
-        <GDCR/>
+        <GDCR />
       </div>
       <InlineLeadForm
         variant="bulkLand"
         title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR"
       />
       <div>
-        <FAQSection/>
+        <FAQSection />
       </div>
       <Interlink
         properties={getCityCenterLinks()}

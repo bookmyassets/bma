@@ -132,7 +132,7 @@ export default function HighAccessCorridorCards() {
             healthcare, housing, and mixed-use planning.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-8 pt-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-5 gap-8 pt-4">
             {benefits.map((benefit) => {
               const Icon = benefit.icon;
               const isFlipped = activeBenefit === benefit.id;
@@ -198,7 +198,7 @@ export default function HighAccessCorridorCards() {
             commercial or access-based development in Dholera.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-5 gap-8">
             {projects.map((project) => {
               const Icon = project.icon;
               const isFlipped = activeProject === project.id;

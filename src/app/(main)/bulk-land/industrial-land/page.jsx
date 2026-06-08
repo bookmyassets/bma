@@ -76,11 +76,11 @@ export default function page() {
               </div>
               <div className="flex flex-col items-center">
                 <p className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
-                  Get Brochure
+                  Future Potential
                 </p>
-                <a href="https://cdn.sanity.io/files/c3e1h345/projects/66dcad140036ee16f4c1d0d40cb3f56d39841639.pdf" target="_blank" className="text-blue-400 underline text-sm md:text-lg font-medium">
-                  Brochure
-                </a>
+                <p className="text-gray-700 text-sm md:text-lg font-medium">
+                  High ROI
+                </p>
               </div>
             </div>
           </div>
