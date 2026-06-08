@@ -329,11 +329,7 @@ export default function InlineLeadForm({
             {config.title}
           </HeadingTag>
 
-          {config.subtitle && (
-            <p className="text-gray-300 mt-[clamp(0.75rem,1.5vw,1rem)] text-center">
-              {config.subtitle}
-            </p>
-          )}
+          
 
           {showPopup ? (
             <div className="text-center py-8">
