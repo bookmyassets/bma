@@ -174,11 +174,19 @@ export default function LandingPage({ openForm }) {
           return newCount;
         });
 
-        // Push event to Google Tag Manager
+        // Google Tag Manager
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: "lead_form_hero",
         });
+
+        // ✅ Twitter Conversion Event — add this
+        if (window.twq) {
+          window.twq("event", "tw-oxi2l-rbwwv", {
+            email_address: null,
+            phone_number: `+91${formData.phone}`,
+          });
+        }
 
         // Show thank you popup
         setShowThankYou(true);
@@ -696,4 +704,3 @@ export default function LandingPage({ openForm }) {
     </div>
   );
 }
-
