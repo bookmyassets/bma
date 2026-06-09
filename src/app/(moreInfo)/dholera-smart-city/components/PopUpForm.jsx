@@ -148,9 +148,9 @@ export default function PopupForm({ title, sectionId }) {
 
         // ✅ Twitter Conversion Event
         if (window.twq) {
-          window.twq("event", "tw-xyz", {
-            email_address: formData.email || null,
-            phone_number: `+91${formData.mobileNumber.replace(/\D/g, "")}`,
+          window.twq("event", "tw-oxi2l-rbwwv", {
+            email_address: null,
+            phone_number: `+91${formData.phone}`,
           });
         }
       } else {

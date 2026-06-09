@@ -4,7 +4,7 @@ import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-with-background.svg";
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation";
 
 function getLeadSource() {
   if (typeof window === "undefined") return "BookMyAssets Twitter Ads";
@@ -16,8 +16,14 @@ function getLeadSource() {
 
   if (params.has("twclid") || utmSource === "twitter" || utmSource === "x") {
     if (utmCampaign) {
-      const campaign = utmCampaign.split("-").filter(Boolean).slice(0, 2).join(" ");
-      return campaign ? `BookMyAssets Twitter ${campaign}` : "BookMyAssets Twitter Ads";
+      const campaign = utmCampaign
+        .split("-")
+        .filter(Boolean)
+        .slice(0, 2)
+        .join(" ");
+      return campaign
+        ? `BookMyAssets Twitter ${campaign}`
+        : "BookMyAssets Twitter Ads";
     }
     return "BookMyAssets Twitter Ads";
   }
@@ -33,7 +39,7 @@ export default function GetinTouch({
   thankYouTitle = "Thank You!",
   thankYouMessage = "Your request has been submitted successfully.",
   source = "BookMyAssets google ads",
-  ids
+  ids,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
@@ -50,7 +56,7 @@ export default function GetinTouch({
 
   // Handle close function
   const handleClose = () => {
-    if (onClose && typeof onClose === 'function') {
+    if (onClose && typeof onClose === "function") {
       onClose();
     }
   };
@@ -83,24 +89,24 @@ export default function GetinTouch({
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
 
     // Handle Escape key press
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         handleClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
 
@@ -130,7 +136,7 @@ export default function GetinTouch({
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       return false;
     }
@@ -138,74 +144,70 @@ export default function GetinTouch({
     return true;
   };
 
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const now = Date.now();
 
-const onRecaptchaSuccess = async (token) => {
-  try {
-    const now = Date.now();
-
-    const response = await fetch(
-      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-        },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            source: getLeadSource(),
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
-          source: getLeadSource(),
-          tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-          recaptchaToken: token,
-        }),
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: getLeadSource(),
+            },
+            source: getLeadSource(),
+            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+            recaptchaToken: token,
+          }),
+        },
+      );
+
+      if (response.ok) {
+        setFormData({ fullName: "", phone: "" });
+        setShowPopup(true);
+        setSubmissionCount((prev) => {
+          const newCount = prev + 1;
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", now.toString());
+          return newCount;
+        });
+
+        // ✅ Twitter Conversion Event
+        if (window.twq) {
+          window.twq("event", "tw-oxi2l-rbwwv", {
+            email_address: null,
+            phone_number: `+91${formData.phone.replace(/\D/g, "")}`,
+          });
+        }
+
+        setShowThankYou(true);
+        setTimeout(() => {
+          setShowThankYou(false);
+          handleClose();
+          router.push(`/dholera-smart-city/thankyou`);
+        }, 2000);
+      } else {
+        throw new Error("Error submitting form");
       }
-    );
-
-    if (response.ok) {
-      setFormData({ fullName: "", phone: "" });
-      setShowPopup(true);
-      setSubmissionCount((prev) => {
-        const newCount = prev + 1;
-        localStorage.setItem("formSubmissionCount", newCount.toString());
-        localStorage.setItem("lastSubmissionTime", now.toString());
-        return newCount;
-      });
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "lead_form_hero",
-      });
-
-      // Show thank you popup for 2 seconds
-      setShowThankYou(true);
-      setTimeout(() => {
-        setShowThankYou(false);
-        handleClose();
-
-        // Get current pathname for return URL
-        const currentPath = pathname || window.location.pathname;
-        
-        // Push to thank-you route with return URL
-        router.push(`/dholera-smart-city/thankyou`);
-      }, 2000);
-    } else {
-      throw new Error("Error submitting form");
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setErrorMessage(
+        error.message || "Error submitting form. Please try again.",
+      );
+    } finally {
+      setIsLoading(false);
+      if (window.grecaptcha && recaptchaRef.current) {
+        window.grecaptcha.reset(recaptchaRef.current);
+      }
     }
-  } catch (error) {
-    console.error("Form submission error:", error);
-    setErrorMessage(
-      error.message || "Error submitting form. Please try again."
-    );
-  } finally {
-    setIsLoading(false);
-    if (window.grecaptcha && recaptchaRef.current) {
-      window.grecaptcha.reset(recaptchaRef.current);
-    }
-  }
-};
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
