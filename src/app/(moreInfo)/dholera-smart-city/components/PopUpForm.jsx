@@ -15,8 +15,14 @@ function getLeadSource() {
 
   if (params.has("twclid") || utmSource === "twitter" || utmSource === "x") {
     if (utmCampaign) {
-      const campaign = utmCampaign.split("-").filter(Boolean).slice(0, 2).join(" ");
-      return campaign ? `BookMyAssets Twitter ${campaign}` : "BookMyAssets Twitter Ads";
+      const campaign = utmCampaign
+        .split("-")
+        .filter(Boolean)
+        .slice(0, 2)
+        .join(" ");
+      return campaign
+        ? `BookMyAssets Twitter ${campaign}`
+        : "BookMyAssets Twitter Ads";
     }
     return "BookMyAssets Twitter Ads";
   }
@@ -124,7 +130,7 @@ export default function PopupForm({ title, sectionId }) {
             tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -134,10 +140,19 @@ export default function PopupForm({ title, sectionId }) {
           setShowThankYou(false);
           setShowFormPopup(false);
         }, 3000);
+
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: "lead_form_hero",
         });
+
+        // ✅ Twitter Conversion Event
+        if (window.twq) {
+          window.twq("event", "tw-xyz", {
+            email_address: formData.email || null,
+            phone_number: `+91${formData.mobileNumber.replace(/\D/g, "")}`,
+          });
+        }
       } else {
         throw new Error("Error submitting form");
       }
@@ -168,7 +183,7 @@ export default function PopupForm({ title, sectionId }) {
 
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page."
+        "Security verification not loaded. Please refresh the page.",
       );
       setIsLoading(false);
       return;
@@ -380,4 +395,3 @@ export default function PopupForm({ title, sectionId }) {
     </AnimatePresence>
   );
 }
-

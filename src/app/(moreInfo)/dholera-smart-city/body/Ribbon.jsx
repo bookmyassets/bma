@@ -3,6 +3,31 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 
+function getLeadSource() {
+  if (typeof window === "undefined") return "BookMyAssets Twitter Ads";
+
+  const params = new URLSearchParams(window.location.search);
+
+  const utmSource = params.get("utm_source")?.toLowerCase();
+  const utmCampaign = params.get("utm_campaign");
+
+  if (params.has("twclid") || utmSource === "twitter" || utmSource === "x") {
+    if (utmCampaign) {
+      const campaign = utmCampaign
+        .split("-")
+        .filter(Boolean)
+        .slice(0, 2)
+        .join(" ");
+      return campaign
+        ? `BookMyAssets Twitter ${campaign}`
+        : "BookMyAssets Twitter Ads";
+    }
+    return "BookMyAssets Twitter Ads";
+  }
+
+  return "BookMyAssets Twitter Ads";
+}
+
 export default function Ribbon() {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -15,7 +40,7 @@ export default function Ribbon() {
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  
+
   const recaptchaRef = useRef(null);
   const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -45,15 +70,15 @@ export default function Ribbon() {
         setRecaptchaLoaded(true);
       }
     };
-    
+
     loadRecaptcha();
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
 
@@ -62,9 +87,9 @@ export default function Ribbon() {
         handleClose();
       }
     };
-    
+
     document.addEventListener("keydown", handleEscapeKey);
-    
+
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     };
@@ -88,7 +113,7 @@ export default function Ribbon() {
       setErrorMessage("Please fill in all fields");
       return false;
     }
-    
+
     if (!/^\d{10,15}$/.test(formData.phone)) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
@@ -96,18 +121,18 @@ export default function Ribbon() {
 
     const now = Date.now();
     const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
-    
+
     if (hoursPassed >= 24) {
       setSubmissionCount(0);
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       return false;
     }
-    
+
     return true;
   };
 
@@ -115,7 +140,7 @@ export default function Ribbon() {
     try {
       const now = Date.now();
       const response = await fetch(
-         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
@@ -126,18 +151,16 @@ export default function Ribbon() {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: "BookMyAssets Google Ads",
+              source: getLeadSource(),
             },
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
         setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        
         setSubmissionCount((prev) => {
           const newCount = prev + 1;
           localStorage.setItem("formSubmissionCount", newCount.toString());
@@ -145,13 +168,22 @@ export default function Ribbon() {
           return newCount;
         });
 
+        // Google Tag Manager
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: "lead_form_hero",
         });
 
+        // ✅ Twitter Conversion Event — add this
+        if (window.twq) {
+          window.twq("event", "tw-oxi2l-rbwwv", {
+            email_address: null,
+            phone_number: `+91${formData.phone}`,
+          });
+        }
+
         setShowThankYou(true);
-        
+
         setTimeout(() => {
           setShowThankYou(false);
           handleClose();
@@ -164,7 +196,7 @@ export default function Ribbon() {
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(
-        error.message || "Error submitting form. Please try again."
+        error.message || "Error submitting form. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -187,11 +219,14 @@ export default function Ribbon() {
     if (window.grecaptcha && recaptchaLoaded) {
       try {
         if (recaptchaWidgetId.current === null && recaptchaRef.current) {
-          recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
-          });
+          recaptchaWidgetId.current = window.grecaptcha.render(
+            recaptchaRef.current,
+            {
+              sitekey: siteKey,
+              callback: onRecaptchaSuccess,
+              theme: "dark",
+            },
+          );
         } else if (recaptchaWidgetId.current !== null) {
           window.grecaptcha.reset(recaptchaWidgetId.current);
           window.grecaptcha.execute(recaptchaWidgetId.current);
@@ -209,140 +244,146 @@ export default function Ribbon() {
 
   return (
     <>
-  <div className="bg-gray-100 border-t-4 border-b-4 border-[#ddbc69] py-8">
-  {/* Header */}
-  <div className="text-center px-6 mb-6">
-    <h2 className="text-[#ddbc69] font-bold text-xl md:text-2xl mb-2">
-      Govt Approved plots , 12 Minute from the Expressway
-    </h2>
-    <p className="text-white text-base"></p>
-  </div>
+      <div className="bg-gray-100 border-t-4 border-b-4 border-[#ddbc69] py-8">
+        {/* Header */}
+        <div className="text-center px-6 mb-6">
+          <h2 className="text-[#ddbc69] font-bold text-xl md:text-2xl mb-2">
+            Govt Approved plots , 12 Minute from the Expressway
+          </h2>
+          <p className="text-white text-base"></p>
+        </div>
 
-  {/* Form */}
-  <div className="max-w-lg mx-auto px-6">
-    <div className="bg-white rounded-lg p-6 shadow-lg">
-      <div className="space-y-4">
-        {/* Name Input */}
-        <div>
-          <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Your Name *
-          </label>
-          <div className="relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute left-3 top-3.5 h-5 w-5 text-[#ddbc69]"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-            <input
-              name="fullName"
-              placeholder="Enter your name"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-              className="w-full p-3 pl-11 text-base bg-white text-gray-800 rounded-md border-2 border-gray-300 focus:border-[#ddbc69] focus:outline-none"
-            />
+        {/* Form */}
+        <div className="max-w-lg mx-auto px-6">
+          <div className="bg-white rounded-lg p-6 shadow-lg">
+            <div className="space-y-4">
+              {/* Name Input */}
+              <div>
+                <label className="block text-gray-700 text-sm font-semibold mb-2">
+                  Your Name *
+                </label>
+                <div className="relative">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute left-3 top-3.5 h-5 w-5 text-[#ddbc69]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  <input
+                    name="fullName"
+                    placeholder="Enter your name"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    className="w-full p-3 pl-11 text-base bg-white text-gray-800 rounded-md border-2 border-gray-300 focus:border-[#ddbc69] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Phone Input */}
+              <div>
+                <label className="block text-gray-700 text-sm font-semibold mb-2">
+                  Mobile Number *
+                </label>
+                <div className="relative">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute left-3 top-3.5 h-5 w-5 text-[#ddbc69]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                  <input
+                    name="phone"
+                    type="tel"
+                    placeholder="Enter mobile number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    minLength={10}
+                    maxLength={15}
+                    required
+                    className="w-full p-3 pl-11 text-base bg-white text-gray-800 rounded-md border-2 border-gray-300 focus:border-[#ddbc69] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Error Message */}
+              {errorMessage && (
+                <div className="bg-red-50 border border-red-300 rounded-md p-3 text-center">
+                  <p className="text-red-600 text-sm font-medium">
+                    {errorMessage}
+                  </p>
+                </div>
+              )}
+
+              {/* ReCAPTCHA */}
+              <div className="flex justify-center py-2">
+                <div ref={recaptchaRef}></div>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="button"
+                id="ribbion-form"
+                onClick={handleSubmit}
+                disabled={isLoading}
+                className="w-full py-3.5 bg-[#ddbc69] text-black font-bold text-lg rounded-md hover:bg-[#c99a2e] transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {isLoading ? "Please Wait..." : "Get A Call Back"}
+              </button>
+
+              <p className="text-gray-500 text-xs text-center pt-2">
+                We respect your privacy. Your information is secure.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Phone Input */}
-        <div>
-          <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Mobile Number *
-          </label>
-          <div className="relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute left-3 top-3.5 h-5 w-5 text-[#ddbc69]"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              />
-            </svg>
-            <input
-              name="phone"
-              type="tel"
-              placeholder="Enter mobile number"
-              value={formData.phone}
-              onChange={handleChange}
-              minLength={10}
-              maxLength={15}
-              required
-              className="w-full p-3 pl-11 text-base bg-white text-gray-800 rounded-md border-2 border-gray-300 focus:border-[#ddbc69] focus:outline-none"
-            />
-          </div>
-        </div>
-
-        {/* Error Message */}
-        {errorMessage && (
-          <div className="bg-red-50 border border-red-300 rounded-md p-3 text-center">
-            <p className="text-red-600 text-sm font-medium">{errorMessage}</p>
+        {/* Thank You Modal */}
+        {showThankYou && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4">
+            <div className="bg-white rounded-lg p-8 shadow-xl text-center max-w-sm border-4 border-[#ddbc69]">
+              <div className="w-16 h-16 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={3}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                Thank You!
+              </h3>
+              <p className="text-gray-600 text-base">
+                We will call you shortly.
+              </p>
+            </div>
           </div>
         )}
-
-        {/* ReCAPTCHA */}
-        <div className="flex justify-center py-2">
-          <div ref={recaptchaRef}></div>
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="button"
-          id="ribbion-form"
-          onClick={handleSubmit}
-          disabled={isLoading}
-          className="w-full py-3.5 bg-[#ddbc69] text-black font-bold text-lg rounded-md hover:bg-[#c99a2e] transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
-        >
-          {isLoading ? "Please Wait..." : "Get A Call Back"}
-        </button>
-
-        <p className="text-gray-500 text-xs text-center pt-2">
-          We respect your privacy. Your information is secure.
-        </p>
       </div>
-    </div>
-  </div>
-
-  {/* Thank You Modal */}
-  {showThankYou && (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4">
-      <div className="bg-white rounded-lg p-8 shadow-xl text-center max-w-sm border-4 border-[#ddbc69]">
-        <div className="w-16 h-16 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={3}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
-        <p className="text-gray-600 text-base">We will call you shortly.</p>
-      </div>
-    </div>
-  )}
-</div>
     </>
   );
 }
