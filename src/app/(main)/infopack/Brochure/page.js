@@ -90,6 +90,7 @@ export default async function BrochurePage() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}>
+    <meta name="robots" content="noindex, nofollow"/>
       <div
         className="absolute inset-0 bg-cover bg-center opacity-10 -z-10"
         style={{ backgroundImage: `url(${bg.src})` }}

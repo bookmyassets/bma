@@ -224,6 +224,7 @@ return (
       backgroundRepeat: 'no-repeat',
     }}
   >
+  <meta name="robots" content="noindex, nofollow"/>
     <div className="w-full max-w-7xl mx-auto space-y-3 max-md:flex flex-col justify-center items-center pt-24 px-4 py-8 sm:px-6 lg:px-8">
       {/* <h1 className="md:text-5xl font-bold text-3xl text-center text-gray-500 p-4 animate-fadeIn">DHOLERA LOCATIONS</h1> */}
       <p className="text-center md:text-xl md:font-medium font-semibold mb-6 animate-fadeIn">

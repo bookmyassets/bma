@@ -51,10 +51,6 @@ export default async function page() {
         name="description"
         content="Read Dholera Smart City blogs, plot buying guides, price insights, and investor-focused analysis from BookMyAssets"
       />
-      <meta
-        name="keywords"
-        content="Dholera latest updates,Dholera investment blog, Dholera plot guides, Dholera Smart City news, Dholera SIR updates, Dholera Smart City blog"
-      />
       <meta name="robots" content="index, follow" />
       <meta name="author" content="BookMyAssets" />
       <meta name="publisher" content="BookMyAssets" />

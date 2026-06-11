@@ -21,11 +21,7 @@ export default function page() {
 
       <meta
         name="description"
-        content="Buy govt approved, registry-ready residential plots in Dholera Smart City from ₹8 Lakh. Get Project brochure, price list, & location details."
-      />
-      <meta
-        name="keywords"
-        content="Dholera Smart City, Dholera plots, plots in Dholera, Dholera SIR plots, Dholera land investment, Dholera Smart City investment, residential plots in Dholera, industrial plots in Dholera, Dholera real estate, Dholera investment opportunities, BookMyAssets, Gujarat smart city plots, DMIC corridor, Investments in Dholera Smart City, dholera latest news, Dholera International Airport, Dholera Solar Park,  Ahmedabad Dholera Expressway, Dholera SIR, Dholera plot prices,Dholera Smart City Project"
+        content="Buy government-approved, registry-ready residential plots in Dholera Smart City, Gujarat from ₹8 Lakh. 400+ investors. Immediate sale deed. Book a free site visit today."
       />
       <link rel="canonical" href={`https://www.bookmyassets.com/`} />
       <script

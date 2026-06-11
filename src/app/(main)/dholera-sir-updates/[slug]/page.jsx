@@ -131,7 +131,6 @@ export async function generateMetadata({ params }) {
     image: post.mainImage?.asset?.url,
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
-    keywords: post.seo?.keywords || post.keywords || [],
     type: "article",
     publishedAt: post.publishedAt,
     updatedAt: post._updatedAt,

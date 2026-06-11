@@ -53,6 +53,7 @@ export default async function InventoryPage() {
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
     }}>
+    <meta name="robots" content="noindex, nofollow"/>
       <div className="max-w-7xl pt-12 mx-auto">
         <div className="text-center mb-16 relative">
           <div className="absolute left-1/2 transform -translate-x-1/2 top-0 w-24 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>

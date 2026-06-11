@@ -4,7 +4,7 @@ import React from "react";
 export default function Copyright() {
   return (
     <>
-    <meta name="robots" content="noindex" />
+      <meta name="robots" content="noindex, nofollow"/>
       <div className="w-full bg-black">
         <div className="max-w-7xl mx-auto pt-44 bg-black">
           <div className="  text-white">

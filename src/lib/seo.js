@@ -9,7 +9,6 @@ export function generateMetadata({
   image,
   canonicalUrl,
   noIndex = false,
-  keywords = [],
   type = "website",
   publishedAt,
   updatedAt,
@@ -30,7 +29,6 @@ export function generateMetadata({
   return {
     title: metaTitle,
     description: metaDesc,
-    keywords: keywords,
     ...(noIndex && { robots: { index: false, follow: false } }),
     alternates: {
       canonical,

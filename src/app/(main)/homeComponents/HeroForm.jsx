@@ -223,9 +223,9 @@ export default function HeroForm() {
     <div className="w-full bg-white rounded-xl max-w-lg p-[clamp(1rem,2vw,1.5rem)] md:overflow-hidden shadow-lg">
       <div className="text-center mb-[clamp(0.75rem,1.5vw,1.25rem)]">
         <div>
-          <h2 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] glowing-text px-2">
+          <h1 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] glowing-text px-2">
             Buy Residential Plot in Dholera
-          </h2>
+          </h1>
           <p className="text-[0.875rem] font-normal leading-[1.5] glowing-text px-2">
             Get Project Details
           </p>

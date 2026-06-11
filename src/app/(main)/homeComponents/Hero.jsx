@@ -26,10 +26,10 @@ const PointsList = () => (
   <>
     <div className="flex flex-col gap-[clamp(0.4rem,1vw,0.75rem)] w-[clamp(480px,44vw,680px)]">
       {/* H1 */}
-      <h1 className="text-white text-[clamp(1.5rem,5vw,3.75rem)] font-bold leading-[1.1] mb-[clamp(0.5rem,1.25vw,1rem)]">
+      <h2 className="text-white text-[clamp(1.5rem,5vw,3.75rem)] font-bold leading-[1.1] mb-[clamp(0.5rem,1.25vw,1rem)]">
         Dedicated to Dholera
         <br />
-      </h1>
+      </h2>
 
       {/* Body */}
       <p className="text-white text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] mb-[clamp(0.4rem,1vw,0.75rem)]">

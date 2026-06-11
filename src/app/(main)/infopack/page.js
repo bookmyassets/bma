@@ -16,6 +16,7 @@ import Info from './latest';
 export default function page() {
   return (
     <div>
+    <meta name="robots" content="noindex, nofollow"/>
       <Info/>
     </div>
   )

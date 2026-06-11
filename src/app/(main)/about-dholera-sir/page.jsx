@@ -190,10 +190,6 @@ export default async function page() {
         name="description"
         content="Dholera SIR, India’s first greenfield smart city Dholera. Know more about Dholera airport, expressway, activation area, infrastructure, industries & investment."
       />
-      <meta
-        name="keywords"
-        content="Dholera SIR, Smart city Dholera"
-      />
       <link
         rel="canonical"
         href="https://www.bookmyassets.com/about-dholera-sir"
