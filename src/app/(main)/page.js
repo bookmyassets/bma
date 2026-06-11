@@ -16,12 +16,12 @@ export default function page() {
   return (
     <>
       <title>
-        Govt Approved Plots in Dholera from ₹8 Lakh | BookMyAssets
+        Buy Residential Plots in Dholera Smart City
       </title>
 
       <meta
         name="description"
-        content="Buy government-approved, registry-ready residential plots in Dholera Smart City, Gujarat from ₹8 Lakh. 400+ investors. Immediate sale deed. Book a free site visit today."
+        content="Buy residential plots in Dholera Smart City, Gujarat from ₹8 Lakh. Government-approved and registry-ready plots. Book your plot now with BookMyAssets."
       />
       <link rel="canonical" href={`https://www.bookmyassets.com/`} />
       <script
