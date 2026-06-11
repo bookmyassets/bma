@@ -226,7 +226,7 @@ export default async function page() {
                   <div className="relative overflow-hidden rounded-[clamp(1rem,2vw,1.5rem)] shadow-lg border border-white/10">
                     <Image
                       src={semiconductorHubImage}
-                      alt="Dholera SIR semiconductor hub"
+                      alt="Dholera Smart City"
                       className="w-full h-auto object-cover"
                       priority
                       sizes="(max-width: 1024px) 100vw, 40vw"

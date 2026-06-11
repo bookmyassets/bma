@@ -27,7 +27,7 @@ export default function BlogCard({ post }) {
                 urlFor(post.mainImage).width(1200).height(675).url() ||
                 "/placeholder.svg"
               }
-              alt={post.title}
+              alt={post.mainImage?.alt || post.title}
               fill
               className="object-cover"
             />

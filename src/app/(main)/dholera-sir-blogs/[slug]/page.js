@@ -741,7 +741,7 @@ export default async function Post({ params }) {
                   <div className="mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
                     <Image
                       src={urlFor(post.mainImage).width(1200).height(800).url()}
-                      alt={post.title}
+                      alt={post.mainImage?.alt || post.title || "Blog post image"}
                       width={1200}
                       height={800}
                       className="w-full h-auto aspect-[3/2]"

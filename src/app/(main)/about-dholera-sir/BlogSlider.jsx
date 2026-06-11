@@ -104,7 +104,7 @@ export default function BlogSlider({ posts = [] }) {
                             .height(675)
                             .url() || "/placeholder.svg"
                         }
-                        alt={post.title}
+                        alt={post.mainImage?.alt || post.title}
                         fill
                         className="object-cover"
                       />

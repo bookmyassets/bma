@@ -119,7 +119,7 @@ const WestWynAboutSection = () => {
             <div className="px-4 sm:px-6 lg:px-8 ">
               <Image
                 src={img}
-                alt="dholera map"
+                alt="westwyn residency location map"
                 className="rounded-xl w-full h-auto md:h-full"
                 priority
               />

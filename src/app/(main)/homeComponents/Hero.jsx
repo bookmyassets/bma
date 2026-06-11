@@ -51,7 +51,7 @@ export default function Hero() {
       <div className="relative w-full h-screen hidden md:block">
         <Image
           src={img1}
-          alt="Dholera Smart City Plots"
+          alt="Dholera Smart City"
           fill
           className="object-cover"
           priority
@@ -68,7 +68,7 @@ export default function Hero() {
         <div className="relative w-full min-h-screen">
           <Image
             src={img2}
-            alt="Dholera Smart City Plots"
+            alt="Dholera Smart City"
             fill
             className="object-cover"
             priority

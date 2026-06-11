@@ -24,7 +24,7 @@ export default function BlogCard({ post }) {
                 urlFor(post.mainImage).width(700).height(467).auto("format").quality(75).url()
                 || "/placeholder.svg"
               }
-              alt={post.title || "Blog post image"}
+              alt={post.mainImage?.alt || post.title || "Blog post image"}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 25vw"
               className="object-cover"

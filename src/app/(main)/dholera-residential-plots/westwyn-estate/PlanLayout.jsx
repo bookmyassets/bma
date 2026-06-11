@@ -72,7 +72,7 @@ const PlanLayout = () => {
             <div className="px-4 sm:px-6 lg:px-8 md:order-2">
               <Image
                 src={img}
-                alt="dholera map"
+                alt="plan layout of westwyn estates"
                 className="rounded-xl w-full md:h-full h-auto md:order-1"
                 priority
               />

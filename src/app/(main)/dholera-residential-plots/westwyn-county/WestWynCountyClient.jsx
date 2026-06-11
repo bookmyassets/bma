@@ -51,15 +51,15 @@ export default function WestWynCountyClient() {
   ];
 
   const desktopImages = [
-    { src: westwyn1, alt: "Dholera Investment Opportunity 1" },
-    { src: westwyn2, alt: "Dholera Investment Opportunity 2" },
-    { src: westwyn3, alt: "Dholera Investment Opportunity 3" },
+    { src: westwyn1, alt: "Westwyn County 1" },
+    { src: westwyn2, alt: "Westwyn County 2" },
+    { src: westwyn3, alt: "Westwyn County 3" },
   ];
 
   const mobileImages = [
-    { src: westwynmob1, alt: "Dholera Mobile 1" },
-    { src: westwynmob2, alt: "Dholera Mobile 2" },
-    { src: westwynmob3, alt: "Dholera Mobile 3" },
+    { src: westwynmob1, alt: "Westwyn County 1" },
+    { src: westwynmob2, alt: "Westwyn County 2" },
+    { src: westwynmob3, alt: "Westwyn County 3" },
   ];
 
   const [sqYards, setSqYards] = useState(0);
@@ -578,7 +578,7 @@ export default function WestWynCountyClient() {
               <div className="relative">
                 <Image
                   src={westwyn3}
-                  alt="Dholera Forest Estate Entrance"
+                  alt="WestWyn County Investment Benefits"
                   className="w-full h-auto rounded-2xl shadow-2xl"
                 />
               </div>

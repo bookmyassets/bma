@@ -113,7 +113,7 @@ export default function PrideClient() {
           <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
             <Image
               src={banner}
-              alt="maple"
+              alt="pride"
               fill
               className="w-full h-full "
               priority // Only prioritize first image

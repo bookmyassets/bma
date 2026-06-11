@@ -113,14 +113,14 @@ export default function Paradise2Client() {
           <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
             <Image
               src={banner}
-              alt="maple"
+              alt="paradise2"
               fill
               className="w-full h-full max-sm:hidden"
               priority // Only prioritize first image
             />
             <Image
               src={bannerMob}
-              alt="maple"
+              alt="paradise2"
               fill
               className="w-full h-full md:hidden"
               priority // Only prioritize first image

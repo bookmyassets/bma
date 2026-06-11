@@ -29,7 +29,7 @@ export default function DholeraSmartCity() {
             <div className="relative w-full aspect-[5/4] rounded-lg overflow-hidden">
               <Image
                 src={ROI}
-                alt="Dholera SIR — India's first semiconductor hub"
+                alt="Dholera Location Map"
                 fill
                 sizes="(min-width: 768px) 40vw, 100vw"
                 className="object-contain h-full w-auto"

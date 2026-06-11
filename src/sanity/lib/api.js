@@ -1,6 +1,5 @@
 // lib/api.js
 import { client } from "./client";
-import { NextResponse } from "next/server";
 
 // Define site name from env or fallback
 const site = "bookmyassets";
@@ -40,7 +39,7 @@ export async function getSub() {
 export async function getblogs() {
   const query = `*[_type == "post" && "Blog" in categories[]->title && site == $site]
     | order(coalesce(publishedAt, _createdAt) desc) {
-      _id, title, slug, mainImage, publishedAt, _createdAt, body,
+      _id, title, slug, mainImage { ..., alt }, publishedAt, _createdAt, body,
       author->{name, image},
       categories[]->{title}
     }`;
@@ -51,7 +50,7 @@ export async function getblogs() {
 export async function getUpdates() {
   const query = `*[_type == "post" && "Updates" in categories[]->title && site == $site]
     | order(coalesce(publishedAt, _createdAt) desc) {
-      _id, title, slug, mainImage, publishedAt, _createdAt, body,
+      _id, title, slug, mainImage { ..., alt }, publishedAt, _createdAt, body,
       author->{name, image},
       categories[]->{title}
     }`;
@@ -62,7 +61,7 @@ export async function getUpdates() {
 
 export async function projectInfo() {
   const query = `*[_type == "post" && "project-Info" in categories[]->title && site == $site ]{
-    _id, title, slug, mainImage, publishedAt, body, author->{name, image}, categories[]->{title}
+    _id, title, slug, mainImage { ..., alt }, publishedAt, body, author->{name, image}, categories[]->{title}
   }`;
   return await client.fetch(query, { site }, { cache: "no-store" });
 }

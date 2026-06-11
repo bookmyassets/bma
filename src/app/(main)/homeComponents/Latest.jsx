@@ -24,7 +24,7 @@ const RelatedBlogCard = ({ item, type }) => {
                 .format("webp")
                 .quality(60)
                 .url()}
-              alt={item.title}
+              alt={item.mainImage?.alt || item.title || "Blog post image"}
               fill
               sizes="(max-width: 768px) 56vw, 72vw"
               loading="lazy"

@@ -23,8 +23,8 @@ import { FaShop } from "react-icons/fa6";
 
 const carouselImages = [
   { src: img1, alt: "WestWyn Estates - Kids Play Area" },
-  { src: img2, alt: "WestWyn Estates - Project Boundary" },
-  { src: img3, alt: "WestWyn Estates - Villa" },
+  { src: img2, alt: "WestWyn Estates - Jogging Track" },
+  { src: img3, alt: "WestWyn Estates - Utilities Shop" },
 ];
 // ✅ Moved OUTSIDE the component — not recreated on every render
 const AmenityCard = ({ amenity }) => (

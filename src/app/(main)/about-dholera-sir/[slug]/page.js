@@ -84,7 +84,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                       <Image
                         src={urlFor(item.mainImage).width(64).height(64).url()}
-                        alt={item.title}
+                        alt={item.mainImage?.alt || item.title}
                         width={64}
                         height={64}
                         className="w-full h-full"
@@ -701,7 +701,7 @@ export default async function Post({ params }) {
                           .width(1200)
                           .height(800)
                           .url()}
-                        alt={post.title}
+                        alt={post.mainImage?.alt || post.title}
                         width={1200}
                         height={800}
                         className="w-full h-full object-cover"
@@ -834,7 +834,7 @@ export default async function Post({ params }) {
                                               .width(1200)
                                               .height(675)
                                               .url()}
-                                            alt={blog.title}
+                                            alt={blog.mainImage?.alt || blog.title}
                                             width={1200}
                                             height={675}
                                             className="object-cover"
