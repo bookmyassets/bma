@@ -49,7 +49,6 @@ export default async function sitemap() {
     { url: `${BASE_URL}/bulk-land/knowledge-it-land`, priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/bulk-land/recreation-sports-land`,  priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/gallery`,                 priority: 0.5, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/policies`,                priority: 0.3, changeFrequency: "yearly" },
     { url: `${BASE_URL}/dholera-sir-blogs`,       priority: 0.8, changeFrequency: "daily" },
     { url: `${BASE_URL}/dholera-sir-updates`,     priority: 0.7, changeFrequency: "daily" },
     { url: `${BASE_URL}/about-dholera-sir`,       priority: 0.7, changeFrequency: "monthly" },
