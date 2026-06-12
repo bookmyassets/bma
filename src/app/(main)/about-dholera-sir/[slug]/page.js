@@ -121,7 +121,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 };
 
 export async function generateMetadata({ params }) {
-  const {slug} = params;
+  const { slug } = params;
   const post = await getAboutBySlug(slug);
   if (!post) return {};
 
@@ -541,13 +541,20 @@ export default async function Post({ params }) {
       );
     };
 
-    const formattedDate = new Date(
-      post.publishedAt || post._createdAt,
-    ).toLocaleDateString("en-US", {
+    const publishedDate = post.publishedAt ? new Date(post.publishedAt) : null;
+    const formattedPublishedDate = publishedDate?.toLocaleDateString("en-US", {
       day: "numeric",
       month: "long",
       year: "numeric",
     });
+    const publishedDateTime = publishedDate?.toISOString().split("T")[0];
+    const createdDate = post.createdAt ? new Date(post.createdAt) : null;
+    const formattedCreatedDate = createdDate?.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    const createdDateTime = createdDate?.toISOString().split("T")[0];
     const relatedSlideCount = relatedBlogs?.length || 0;
 
     return (
@@ -642,34 +649,58 @@ export default async function Post({ params }) {
                       {post.title}
                     </h1>
 
-                    <div className="flex items-center gap-4 text-[#ddbc69] text-[clamp(0.75rem,1.5vw,0.875rem)] mb-6">
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          ></path>
-                        </svg>
+                    <div className="flex flex-wrap items-center justify-between gap-4 text-[#ddbc69] text-sm mb-6">
+                      {formattedCreatedDate && (
+                        <div className="flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            ></path>
+                          </svg>
 
-                        <time
-                          className="text-[#ddbc69]"
-                          dateTime={
-                            new Date(post.publishedAt || post._createdAt)
-                              .toISOString()
-                              .split("T")[0]
-                          }
-                        >
-                          {formattedDate}
-                        </time>
-                      </div>
+                          <time
+                            className="text-[#ddbc69]"
+                            dateTime={createdDateTime}
+                          >
+                            Published On: {formattedCreatedDate}
+                          </time>
+                        </div>
+                      )}
+
+                      {formattedPublishedDate && (
+                        <div className="flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            ></path>
+                          </svg>
+
+                          <time
+                            className="text-[#ddbc69]"
+                            dateTime={publishedDateTime}
+                          >
+                            Updated On: {formattedPublishedDate}
+                          </time>
+                        </div>
+                      )}
 
                       {post.readingTime && (
                         <div className="flex items-center">
@@ -834,7 +865,9 @@ export default async function Post({ params }) {
                                               .width(1200)
                                               .height(675)
                                               .url()}
-                                            alt={blog.mainImage?.alt || blog.title}
+                                            alt={
+                                              blog.mainImage?.alt || blog.title
+                                            }
                                             width={1200}
                                             height={675}
                                             className="object-cover"
@@ -955,4 +988,3 @@ export default async function Post({ params }) {
     );
   }
 }
-

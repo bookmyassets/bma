@@ -128,7 +128,7 @@ export async function getPostBySlug(slug, category = null) {
     "ogImage": ogImage.asset->url,    
     slug,
     mainImage { asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, alt },
-    publishedAt, _updatedAt,
+    publishedAt, createdAt, _updatedAt,
     body[]{ ..., _type=="image"=>{..., asset->{ _id, _ref, url }}, markDefs[]{..., _type=="link"=>{"href":@.href}} },
     author->{ name, image }, categories[]->{ title, _id }, readingTime
   }`;
