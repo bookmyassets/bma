@@ -9,6 +9,7 @@ import {
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import SchemaMarkup from "../../components/SchemaMarkup";
@@ -123,7 +124,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const post = await getAboutBySlug(slug);
-  if (!post) return {};
+  if (!post) notFound();
 
   return buildMeta({
     title: post.metaTitle || post.title,
@@ -160,19 +161,7 @@ export default async function Post({ params }) {
     ]);
 
     if (!post) {
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-2">Blog post not found</h1>
-            <Link
-              href="/blogs"
-              className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
-            >
-              ← Back to Blogs
-            </Link>
-          </div>
-        </div>
-      );
+      notFound();
     }
 
     const components = {

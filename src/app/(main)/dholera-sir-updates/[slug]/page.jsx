@@ -9,6 +9,7 @@ import {
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import PopupLeadForm from "../../components/PopupLeadForm";
@@ -122,7 +123,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getUpdateBySlug(slug);
-  if (!post) return {};
+  if (!post) notFound();
 
   return buildMeta({
     title: post.metaTitle || post.title,
@@ -159,19 +160,7 @@ export default async function Post({ params }) {
     ]);
 
     if (!post) {
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-2">Blog post not found</h1>
-            <Link
-              href="/dholera-sir-updates"
-              className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
-            >
-              ← Back to Updates
-            </Link>
-          </div>
-        </div>
-      );
+      notFound();
     }
 
     const components = {
