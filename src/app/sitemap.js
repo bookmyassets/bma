@@ -63,21 +63,21 @@ export default async function sitemap() {
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-estate`,    priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-residency`, priority: 0.8, changeFrequency: "monthly" },
 
-  ].map((page) => ({ ...page, lastModified: new Date() }));
+  ].map((page) => ({ ...page }));
 
   // ✅ Dynamic URLs
   const blogUrls = blogs.map((post) => ({
     url: `${BASE_URL}/dholera-sir-blogs/${post.slug}`,
     lastModified: post._updatedAt,
     changeFrequency: "daily",
-    priority: 0.8,
+    priority: 0.7,
   }));
 
   const updateUrls = updates.map((post) => ({
     url: `${BASE_URL}/dholera-sir-updates/${post.slug}`,
     lastModified: post._updatedAt,
     changeFrequency: "daily",
-    priority: 0.7,
+    priority: 0.8,
   }));
 
   const aboutDholeraUrls = aboutDholera.map((post) => ({
