@@ -16,7 +16,7 @@ export default function () {
           <div className="p-4 md:p-8">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {[
-                { value: "Approved Layout Plan", label: "Total Land Parcel" },
+                { value: "NA/NOC/Title Clearance", label: "Total Land Parcel" },
                 { value: "Immediate Registry", label: "Total Units" },
                 {
                   value: "365 Days Site Visit Assitance",
