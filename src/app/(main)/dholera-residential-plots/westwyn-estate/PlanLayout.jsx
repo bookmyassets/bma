@@ -120,7 +120,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Documentation",
-                  content: "Approved Layout Plan",
+                  content: "NA/NOC, Title Clear, Plan Pass Approved",
                   align: "text-left",
                 },
                 {
