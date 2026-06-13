@@ -90,22 +90,22 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Location",
-                  content: "Polarpur, near Bhimnath Railway Station",
+                  content: "Polarpur, near Bhimnath Railway Junction",
                   align: "text-left",
                 },
                 {
                   title: "Highway Access",
-                  content: "Entry from 4-Lane State Highway (150-Feet Road)",
+                  content: "Direct Entry from 150 ft wide 4-lane State Highway-117",
                   align: "text-left",
                 },
                 {
                   title: "Plot Sizes",
-                  content: "152 & 200 sq. yards",
+                  content: "Approx 147-250 sq. yards",
                   align: "text-left",
                 },
                 {
                   title: "Total Units",
-                  content: "131 exclusive plots",
+                  content: "129 exclusive plots",
                   align: "text-left",
                 },
                 {
@@ -120,7 +120,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Documentation",
-                  content: "NA/NOC",
+                  content: "Approved Layout Plan",
                   align: "text-left",
                 },
                 {

@@ -113,16 +113,7 @@ const amenities = [
     title: "Drainage System",
     color: "from-amber-600 to-amber-800",
   },
-  {
-    icon: <FaBuilding className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    title: "Clubhouse Lite",
-    color: "from-gray-600 to-gray-800",
-  },
-  {
-    icon: <FaShop className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    title: "Utilities Inside",
-    color: "from-orange-600 to-orange-800",
-  },
+  
 ];
 
 const ProjectAmenities = () => {

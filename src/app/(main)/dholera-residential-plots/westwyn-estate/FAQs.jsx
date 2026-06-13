@@ -6,7 +6,7 @@ const faqs = [
   {
     question: "Is WestWyn Estates legally clear and safe to invest in?",
     answer:
-      "Yes, WestWyn Estates offers plots with NA/NOC approvals and title clarity, ensuring that your investment is legally secure. We provide full documentation support so you can verify everything before making a decision.",
+      "Yes, WestWyn Estates offers plots with Approved Layout Plan and title clarity, ensuring that your investment is legally secure. We provide full documentation support so you can verify everything before making a decision.",
   },
   {
     question: "Is immediate registry available in WestWyn Estates?",
