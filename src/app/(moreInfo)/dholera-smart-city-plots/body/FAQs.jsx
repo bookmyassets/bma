@@ -12,12 +12,7 @@ const faqs = [
   {
     question: "Are Dholera plots registry-ready?",
     answer:
-      "Some projects are registry-ready. Always verify AUDA approval, title clarity, NA/NOC, and layout plan before booking.",
-  },
-  {
-    question: "What are AUDA-approved plots in Dholera?",
-    answer:
-      "AUDA-approved plots follow development authority guidelines, giving better clarity on layout, legal structure, and planning.",
+      "Some projects are registry-ready. Always verify Approved Layout Plan , title clarity, NA/NOC, and layout plan before booking.",
   },
   {
     question: "Can I visit the Dholera plot before buying?",

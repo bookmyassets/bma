@@ -8,7 +8,7 @@ import Running from "../components/Marquee";
 
 const points = [
   {
-    title: "AUDA Approved",
+    title: "Approved Layout Plan",
     desc: "Suitable for buyers exploring high-growth land opportunities in India's first greenfield smart city.",
   },
   {

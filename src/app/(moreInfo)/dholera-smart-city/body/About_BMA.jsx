@@ -57,7 +57,7 @@ export default function AboutBMA() {
     {
       title: "Government Approved Plots",
       icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
-      body: "All plots are AUDA-approved and aligned with Dholera's official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
+      body: "All plots are Approved Layout Plan and aligned with Dholera's official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
     },
   ];
 
