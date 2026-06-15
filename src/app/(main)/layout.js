@@ -3,7 +3,6 @@ import { Lato } from "next/font/google";
 import Script from "next/script";
 
 import Footer from "./components/Footer";
-import FloatingButtons from "./components/whatsapp";
 import ScrollToTop from "./components/ScrollToTop";
 import PopupLeadForm from "./components/PopupLeadForm";
 import Whatsapp from "./components/Callus";
