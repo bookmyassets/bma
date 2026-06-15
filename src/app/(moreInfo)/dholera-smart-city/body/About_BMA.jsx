@@ -55,7 +55,7 @@ export default function AboutBMA() {
       body: "We provide year-round site visit assistance, allowing you to physically verify projects at your convenience. This reflects our commitment to transparency and informed decision-making.",
     },
     {
-      title: "Government Approved AUDA Plots",
+      title: "Government Approved Plots",
       icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
       body: "All plots are AUDA-approved and aligned with Dholera's official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
     },
