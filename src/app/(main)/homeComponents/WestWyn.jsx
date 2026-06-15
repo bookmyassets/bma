@@ -43,7 +43,7 @@ export default function ProjectsSection() {
           </h2>
         </div>
 
-        <div className="mx-auto grid max-w-[68rem] grid-cols-1 gap-[clamp(0.875rem,1.8vw,1.5rem)] md:grid-cols-3">
+        <div className="mx-auto grid max-w-[68rem] grid-cols-1 max-sm:px-4 gap-[clamp(0.875rem,1.8vw,1.5rem)] md:grid-cols-3">
           {projects.map((project) => (
             <article
               key={project.name}

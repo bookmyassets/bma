@@ -87,12 +87,12 @@ export default function Hero() {
                 Simplifying Dholera Before You Book A Plot.
               </p>
 
-            <Link href="/about">
-              <p className="bg-[#ddbc69] text-black p-1 w-44 text-[0.875rem] md:text-[1rem] font-semibold leading-[1.4] rounded-lg">
-                Know More About Us{" "}
-                <FaArrowRight className="inline-block ml-1" />
-              </p>
-            </Link>
+              <Link href="/about">
+                <p className="bg-[#ddbc69] text-black p-1 w-44 text-[0.875rem] md:text-[1rem] font-semibold leading-[1.4] rounded-lg">
+                  Know More About Us{" "}
+                  <FaArrowRight className="inline-block ml-1" />
+                </p>
+              </Link>
             </div>
 
             <div className="mt-[clamp(1rem,2.5vw,1.75rem)] border-t border-[#ddbc69]/20 pt-[clamp(1.25rem,2.25vw,1.5rem)]">
