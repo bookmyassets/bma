@@ -42,7 +42,8 @@ const COUNTERS = [
 ];
 
 function AnimatedCounter({ target, suffix, shouldStart }) {
-  const [count, setCount] = useState(0);
+  // Important: initial render shows the final value, not 0
+  const [count, setCount] = useState(target);
 
   useEffect(() => {
     if (!shouldStart) return undefined;
@@ -60,12 +61,18 @@ function AnimatedCounter({ target, suffix, shouldStart }) {
     const duration = 3100;
     const startTime = performance.now();
 
+    // Animation starts only on the client, after initial HTML already has real value
+    setCount(0);
+
     const animate = (currentTime) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-      setCount(Math.round(target * easedProgress));
+      const nextCount =
+        progress === 1 ? target : Math.round(target * easedProgress);
+
+      setCount(nextCount);
 
       if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
@@ -77,8 +84,14 @@ function AnimatedCounter({ target, suffix, shouldStart }) {
     return () => cancelAnimationFrame(animationFrame);
   }, [shouldStart, target]);
 
+  const finalText = `${target.toLocaleString("en-IN")}${suffix}`;
+
   return (
-    <span className="inline-block min-w-[7ch] tabular-nums">
+    <span
+      className="inline-block min-w-[7ch] tabular-nums"
+      data-final-value={finalText}
+      aria-label={finalText}
+    >
       {count.toLocaleString("en-IN")}
       {suffix}
     </span>
