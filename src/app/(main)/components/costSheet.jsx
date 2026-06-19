@@ -1,11 +1,11 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { jsPDF } from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import icon from "@/assests/pdfIcon.webp"
+"use client";
+import React, { useState, useEffect } from "react";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
+import icon from "@/assests/headerCostsheet.png";
 
 function formatIndianNumber(value) {
-  return parseFloat(value).toLocaleString('en-IN', {
+  return parseFloat(value).toLocaleString("en-IN", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -13,15 +13,15 @@ function formatIndianNumber(value) {
 
 export default function CostSheet() {
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    plotNo: '',
-    plc: '',
-    plotAreaYards: '',
+    name: "",
+    phone: "",
+    email: "",
+    plotNo: "",
+    plc: "",
+    plotAreaYards: "",
     basePlotPriceYards: 11000, // Base price without PLC
-    plotAreaFeet: '',
-    totalPaymentYards: '',
+    plotAreaFeet: "",
+    totalPaymentYards: "",
     maintenanceRate: 500, // Default maintenance rate
     maintenanceCharge: 0,
     oneTimeMaintenance: 50000, // Default one-time maintenance value
@@ -36,7 +36,8 @@ export default function CostSheet() {
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
 
   // Calculate the final plot price including PLC
-  const plotPriceWithPLC = parseFloat(formData.basePlotPriceYards) + (parseFloat(formData.plc) || 0);
+  const plotPriceWithPLC =
+    parseFloat(formData.basePlotPriceYards) + (parseFloat(formData.plc) || 0);
 
   // Handle field changes
   const handleChange = (e) => {
@@ -53,11 +54,12 @@ export default function CostSheet() {
       const plotPrice = plotPriceWithPLC;
       const totalPayment = formData.plotAreaYards * plotPrice;
       const maintenance = formData.plotAreaYards * formData.maintenanceRate;
-      const totalCharges = maintenance + 20000 + parseFloat(formData.oneTimeMaintenance); // Legal Fee + One Time Maintenance
+      const totalCharges =
+        maintenance + 20000 + parseFloat(formData.oneTimeMaintenance); // Legal Fee + One Time Maintenance
       const plotTotalPayment = totalPayment + totalCharges;
       const plotAreaFeet = formData.plotAreaYards * 9;
-  
-      setFormData(prevData => ({
+
+      setFormData((prevData) => ({
         ...prevData,
         plotAreaFeet,
         totalPaymentYards: totalPayment.toFixed(2),
@@ -70,17 +72,28 @@ export default function CostSheet() {
     // Get submission count from localStorage
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("costSheetSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("costSheetSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("costSheetLastSubmissionTime") || "0", 10)
+        parseInt(
+          localStorage.getItem("costSheetLastSubmissionTime") || "0",
+          10,
+        ),
       );
     }
-  }, [formData.plotAreaYards, formData.basePlotPriceYards, formData.plc, formData.maintenanceRate, formData.oneTimeMaintenance]);
+  }, [
+    formData.plotAreaYards,
+    formData.basePlotPriceYards,
+    formData.plc,
+    formData.maintenanceRate,
+    formData.oneTimeMaintenance,
+  ]);
 
   const validateForm = () => {
     if (!formData.name || !formData.phone || !formData.email) {
-      setErrorMessage("Please fill in Name, Phone, and Email fields to generate PDF");
+      setErrorMessage(
+        "Please fill in Name, Phone, and Email fields to generate PDF",
+      );
       return false;
     }
 
@@ -106,132 +119,154 @@ export default function CostSheet() {
       localStorage.setItem("costSheetSubmissionCount", "0");
       localStorage.setItem("costSheetLastSubmissionTime", now.toString());
     } else if (submissionCount >= 5) {
-      setErrorMessage("You have reached the maximum PDF generation limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum PDF generation limit. Try again after 24 hours.",
+      );
       return false;
     }
 
     return true;
   };
 
-const submitToCRM = async () => {
-  try {
-    // Clean and validate the data before sending
-    const phoneNumber = formData.phone.replace(/\D/g, ''); // Remove non-digits
-    const cleanedName = formData.name.trim();
-    const cleanedEmail = formData.email.trim().toLowerCase();
+  const submitToCRM = async () => {
+    try {
+      // Clean and validate the data before sending
+      const phoneNumber = formData.phone.replace(/\D/g, ""); // Remove non-digits
+      const cleanedName = formData.name.trim();
+      const cleanedEmail = formData.email.trim().toLowerCase();
 
-    // Additional validation
-    if (!cleanedName || cleanedName.length < 2) {
-      throw new Error("Name must be at least 2 characters long");
-    }
-    
-    if (!phoneNumber || phoneNumber.length < 10) {
-      throw new Error("Phone number must be at least 10 digits");
-    }
-    
-    if (!cleanedEmail.includes('@') || !cleanedEmail.includes('.')) {
-      throw new Error("Invalid email format");
-    }
-
-    // Format according to TeleCRM API requirements
-    const crmData = {
-      phoneNumber: phoneNumber.startsWith('+91') ? phoneNumber : `+91${phoneNumber}`,
-      fields: {
-        name: cleanedName,
-        email: cleanedEmail,
-        phone: phoneNumber,
-        source: "BookMyAssets - Cost Sheet"
-      }
-    };
-
-    console.log("Submitting to CRM:", crmData);
-
-    // Use the correct API endpoint format
-    const apiUrl = `https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead`;
-    
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-      },
-      body: JSON.stringify(crmData),
-    });
-
-    console.log("CRM Response status:", response.status);
-    console.log("CRM Response headers:", response.headers);
-
-    // Check if response is successful
-    if (response.ok) {
-      // Try to parse JSON response, but handle cases where response might be empty
-      let data = {};
-      const contentType = response.headers.get("content-type");
-      
-      if (contentType && contentType.includes("application/json")) {
-        try {
-          data = await response.json();
-          console.log("CRM Response data:", data);
-        } catch (jsonError) {
-          console.log("Response is not valid JSON, but request was successful");
-        }
+      // Additional validation
+      if (!cleanedName || cleanedName.length < 2) {
+        throw new Error("Name must be at least 2 characters long");
       }
 
-      // Success - update submission count
-      const now = Date.now();
-      setSubmissionCount((prev) => {
-        const newCount = prev + 1;
-        localStorage.setItem("costSheetSubmissionCount", newCount.toString());
-        localStorage.setItem("costSheetLastSubmissionTime", now.toString());
-        return newCount;
+      if (!phoneNumber || phoneNumber.length < 10) {
+        throw new Error("Phone number must be at least 10 digits");
+      }
+
+      if (!cleanedEmail.includes("@") || !cleanedEmail.includes(".")) {
+        throw new Error("Invalid email format");
+      }
+
+      // Format according to TeleCRM API requirements
+      const crmData = {
+        phoneNumber: phoneNumber.startsWith("+91")
+          ? phoneNumber
+          : `+91${phoneNumber}`,
+        fields: {
+          name: cleanedName,
+          email: cleanedEmail,
+          phone: phoneNumber,
+          source: "BookMyAssets - Cost Sheet",
+        },
+      };
+
+      console.log("Submitting to CRM:", crmData);
+
+      // Use the correct API endpoint format
+      const apiUrl = `https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead`;
+
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+        },
+        body: JSON.stringify(crmData),
       });
-      
-      setShowPopup(true);
-      setTimeout(() => setShowPopup(false), 3000);
-      return true;
-    } else {
-      // Handle error responses
-      let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-      
-      try {
-        const errorData = await response.json();
-        console.log("Error response:", errorData);
-        errorMessage = errorData.message || errorData.error || errorData.details || errorMessage;
-      } catch (jsonError) {
-        // If we can't parse the error response, try to get response text
-        try {
-          const errorText = await response.text();
-          console.log("Error response text:", errorText);
-          if (errorText) errorMessage = errorText;
-        } catch (textError) {
-          console.log("Could not parse error response");
+
+      console.log("CRM Response status:", response.status);
+      console.log("CRM Response headers:", response.headers);
+
+      // Check if response is successful
+      if (response.ok) {
+        // Try to parse JSON response, but handle cases where response might be empty
+        let data = {};
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+          try {
+            data = await response.json();
+            console.log("CRM Response data:", data);
+          } catch (jsonError) {
+            console.log(
+              "Response is not valid JSON, but request was successful",
+            );
+          }
         }
+
+        // Success - update submission count
+        const now = Date.now();
+        setSubmissionCount((prev) => {
+          const newCount = prev + 1;
+          localStorage.setItem("costSheetSubmissionCount", newCount.toString());
+          localStorage.setItem("costSheetLastSubmissionTime", now.toString());
+          return newCount;
+        });
+
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 3000);
+        return true;
+      } else {
+        // Handle error responses
+        let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+
+        try {
+          const errorData = await response.json();
+          console.log("Error response:", errorData);
+          errorMessage =
+            errorData.message ||
+            errorData.error ||
+            errorData.details ||
+            errorMessage;
+        } catch (jsonError) {
+          // If we can't parse the error response, try to get response text
+          try {
+            const errorText = await response.text();
+            console.log("Error response text:", errorText);
+            if (errorText) errorMessage = errorText;
+          } catch (textError) {
+            console.log("Could not parse error response");
+          }
+        }
+
+        throw new Error(errorMessage);
       }
-      
-      throw new Error(errorMessage);
+    } catch (error) {
+      console.error("CRM submission error:", error);
+
+      // Provide more specific error messages
+      if (error.name === "TypeError" && error.message.includes("fetch")) {
+        setErrorMessage(
+          "Network error: Could not connect to CRM. Please check your internet connection or disable ad blockers.",
+        );
+      } else if (error.message.includes("401")) {
+        setErrorMessage(
+          "Authentication error: Invalid API key. Please contact support.",
+        );
+      } else if (error.message.includes("400")) {
+        setErrorMessage("Bad request: Please check your input data format.");
+      } else if (error.message.includes("429")) {
+        setErrorMessage(
+          "Too many requests: Please wait a moment and try again.",
+        );
+      } else if (error.message.includes("500")) {
+        setErrorMessage(
+          "Server error: CRM service is temporarily unavailable.",
+        );
+      } else if (error.message.includes("INVALID_DATA")) {
+        setErrorMessage(
+          "Invalid data format: Please check your name, phone, and email fields.",
+        );
+      } else {
+        setErrorMessage(
+          `CRM submission failed: ${error.message}. PDF will still be generated.`,
+        );
+      }
+
+      return false;
     }
-  } catch (error) {
-    console.error("CRM submission error:", error);
-    
-    // Provide more specific error messages
-    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-      setErrorMessage("Network error: Could not connect to CRM. Please check your internet connection or disable ad blockers.");
-    } else if (error.message.includes('401')) {
-      setErrorMessage("Authentication error: Invalid API key. Please contact support.");
-    } else if (error.message.includes('400')) {
-      setErrorMessage("Bad request: Please check your input data format.");
-    } else if (error.message.includes('429')) {
-      setErrorMessage("Too many requests: Please wait a moment and try again.");
-    } else if (error.message.includes('500')) {
-      setErrorMessage("Server error: CRM service is temporarily unavailable.");
-    } else if (error.message.includes('INVALID_DATA')) {
-      setErrorMessage("Invalid data format: Please check your name, phone, and email fields.");
-    } else {
-      setErrorMessage(`CRM submission failed: ${error.message}. PDF will still be generated.`);
-    }
-    
-    return false;
-  }
-};
+  };
   // Function to generate the PDF
   const generatePDF = async () => {
     setIsLoading(true);
@@ -247,7 +282,21 @@ const submitToCRM = async () => {
 
     const doc = new jsPDF();
 
-    const { name, phone, email, plc, plotNo, plotAreaYards, plotAreaFeet, totalPaymentYards, maintenanceRate, maintenanceCharge, oneTimeMaintenance, totalCharges, plotTotalPayment } = formData;
+    const {
+      name,
+      phone,
+      email,
+      plc,
+      plotNo,
+      plotAreaYards,
+      plotAreaFeet,
+      totalPaymentYards,
+      maintenanceRate,
+      maintenanceCharge,
+      oneTimeMaintenance,
+      totalCharges,
+      plotTotalPayment,
+    } = formData;
 
     let startY = 40;
 
@@ -258,11 +307,11 @@ const submitToCRM = async () => {
 
     img.onload = () => {
       // Add image to PDF (top left corner)
-      doc.addImage(img, "WEBP",  5, 5, 185, 38);
+      doc.addImage(img, "PNG", 15, 0, 180, 45);
 
       // Project Heading
       doc.setFontSize(16);
-      doc.setFont('helvetica', 'bold');
+      doc.setFont("helvetica", "bold");
       let pageWidth = doc.internal.pageSize.getWidth();
       const head = document.querySelector("h1")?.innerText || "Cost Sheet";
       let text = doc.getTextWidth(head);
@@ -276,66 +325,95 @@ const submitToCRM = async () => {
       const formattedPricePerYard = formatIndianNumber(plotPriceWithPLC);
       const formattedTotalPaymentYards = formatIndianNumber(totalPaymentYards);
       const formattedMaintenanceCharge = formatIndianNumber(maintenanceCharge);
-      const formattedOneTimeMaintenance = formatIndianNumber(oneTimeMaintenance);
+      const formattedOneTimeMaintenance =
+        formatIndianNumber(oneTimeMaintenance);
       const formattedTotalCharges = formatIndianNumber(totalCharges);
       const formattedPlotTotalPayment = formatIndianNumber(plotTotalPayment);
 
       // Table with details
-      autoTable(doc,{
+      autoTable(doc, {
         startY: startY,
         body: [
-          ['Name', name],
-          ['Phone', phone],
-          ['Email', email],
-          ['PlotNo', plotNo],
-          ['Plot Area (Sq. Yards)', plotAreaYards],
-          ['Plot Area (Sq. Feet)', plotAreaFeet],
-          ['Plot Price per Sq. Yard', `Rs. ${formatIndianNumber(formData.basePlotPriceYards)}`],
-          ['Preffered Location Charges (PLC)', `Rs. ${formattedplc}`],
-          ['Final Plot Price per Sq. Yard', `Rs. ${formattedPricePerYard}`],
-          ['Total Payment', `Rs. ${formattedTotalPaymentYards}`],
+          ["Name", name],
+          ["Phone", phone],
+          ["Email", email],
+          ["PlotNo", plotNo],
+          ["Plot Area (Sq. Yards)", plotAreaYards],
+          ["Plot Area (Sq. Feet)", plotAreaFeet],
+          [
+            "Plot Price per Sq. Yard",
+            `Rs. ${formatIndianNumber(formData.basePlotPriceYards)}`,
+          ],
+          ["Preffered Location Charges (PLC)", `Rs. ${formattedplc}`],
+          ["Final Plot Price per Sq. Yard", `Rs. ${formattedPricePerYard}`],
+          ["Total Payment", `Rs. ${formattedTotalPaymentYards}`],
         ],
-        theme: 'grid',
-        styles: { fontSize: 12, cellPadding: 3, lineWidth: 0.5, lineColor: [0, 0, 0] },
-        headStyles: { fillColor: [0, 51, 102], textColor: 255, fontStyle: 'bold', lineWidth: 0.8 },
+        theme: "grid",
+        styles: {
+          fontSize: 12,
+          cellPadding: 3,
+          lineWidth: 0.5,
+          lineColor: [0, 0, 0],
+        },
+        headStyles: {
+          fillColor: [0, 51, 102],
+          textColor: 255,
+          fontStyle: "bold",
+          lineWidth: 0.8,
+        },
         alternateRowStyles: { fillColor: [225, 230, 255] },
         columnStyles: {
-          0: { halign: 'left', cellWidth: 'auto' },
-          1: { halign: 'right', cellWidth: 80 }
-        }
+          0: { halign: "left", cellWidth: "auto" },
+          1: { halign: "right", cellWidth: 80 },
+        },
       });
 
       let finalY = doc.lastAutoTable.finalY + 6;
 
       // Additional Charges Heading
       doc.setFontSize(14);
-      doc.text('Additional Charges', pageWidth / 2, finalY, { align: "center" });
+      doc.text("Additional Charges", pageWidth / 2, finalY, {
+        align: "center",
+      });
 
       // Table for Additional Charges
-      autoTable(doc,{
+      autoTable(doc, {
         startY: finalY + 4,
         body: [
-          [`Development Charge (${maintenanceRate} x Size)`, `Rs. ${formattedMaintenanceCharge}`],
-          ['Legal Fee (Per Sale Deed)', 'Rs. 20,000.00'],
-          ['Maintenance For 3 years', `Rs. ${formattedOneTimeMaintenance}`],
-          ['Total Charges', `Rs. ${formattedTotalCharges}`],
-          ['Plot Total Payment', `Rs. ${formattedPlotTotalPayment}`],
+          [
+            `Development Charge (${maintenanceRate} x Size)`,
+            `Rs. ${formattedMaintenanceCharge}`,
+          ],
+          ["Legal Fee (Per Sale Deed)", "Rs. 20,000.00"],
+          ["Maintenance For 3 years", `Rs. ${formattedOneTimeMaintenance}`],
+          ["Total Charges", `Rs. ${formattedTotalCharges}`],
+          ["Plot Total Payment", `Rs. ${formattedPlotTotalPayment}`],
         ],
         theme: "grid",
-        styles: { fontSize: 12, cellPadding: 3, lineWidth: 0.5, lineColor: [0, 0, 0] },
-        headStyles: { fillColor: [0, 51, 102], textColor: 255, fontStyle: "bold", lineWidth: 0.8 },
+        styles: {
+          fontSize: 12,
+          cellPadding: 3,
+          lineWidth: 0.5,
+          lineColor: [0, 0, 0],
+        },
+        headStyles: {
+          fillColor: [0, 51, 102],
+          textColor: 255,
+          fontStyle: "bold",
+          lineWidth: 0.8,
+        },
         alternateRowStyles: { fillColor: [225, 230, 255] },
         columnStyles: {
-            0: { halign: 'left', cellWidth: 'auto' },
-            1: { halign: 'right', cellWidth: 80 }
-        }
+          0: { halign: "left", cellWidth: "auto" },
+          1: { halign: "right", cellWidth: 80 },
+        },
       });
 
       finalY = doc.lastAutoTable.finalY;
 
       // Terms & Conditions Section
       doc.setFontSize(10);
-      doc.text('Terms & Conditions:', 15, finalY + 8);
+      doc.text("Terms & Conditions:", 15, finalY + 8);
       doc.setFontSize(9);
       const terms = [
         "1. The booking amount is Rs. 50,000.",
@@ -348,7 +426,7 @@ const submitToCRM = async () => {
         "8. Full payment is to be completed within 30 days.",
         "9. For registry, stamp duty is 4.9% for females and 5.9% for males.",
         "10. Preferred Location Charge (PLC) will be added where necessary.",
-];
+      ];
 
       terms.forEach((term, index) => {
         doc.text(term, 15, finalY + 18 + index * 5);
@@ -357,10 +435,14 @@ const submitToCRM = async () => {
       // Date of Generation
       let date = new Date().toLocaleDateString();
       doc.setFontSize(9);
-      doc.text(`Date of Generation: ${date}`, 15, doc.internal.pageSize.height - 5);
+      doc.text(
+        `Date of Generation: ${date}`,
+        15,
+        doc.internal.pageSize.height - 5,
+      );
 
       // Save PDF
-      doc.save('Plot_Details.pdf');
+      doc.save("Plot_Details.pdf");
       setIsLoading(false);
     };
 
@@ -372,7 +454,9 @@ const submitToCRM = async () => {
 
   return (
     <div className="max-w-3xl mx-auto bg-white shadow-xl shadow-gray-500 rounded-lg p-6 mt-10">
-      <p className="text-center text-3xl font-bold text-gray-700 mb-4">Cost Estimate</p>
+      <p className="text-center text-3xl font-bold text-gray-700 mb-4">
+        Cost Estimate
+      </p>
 
       {/* Error Message */}
       {errorMessage && (
@@ -443,7 +527,9 @@ const submitToCRM = async () => {
             </tr>
             {/* PLC */}
             <tr className="border-b">
-              <td className="p-2 font-semibold">Preferred Location Charge (PLC)</td>
+              <td className="p-2 font-semibold">
+                Preferred Location Charge (PLC)
+              </td>
               <td className="p-2">
                 <input
                   type="number"
@@ -482,7 +568,9 @@ const submitToCRM = async () => {
             </tr>
             {/* Base Plot Price per Yard */}
             <tr className="border-b">
-              <td className="p-2 font-semibold">Base Plot Price per Sq. Yard</td>
+              <td className="p-2 font-semibold">
+                Base Plot Price per Sq. Yard
+              </td>
               <td className="p-2">
                 <input
                   type="number"
@@ -495,7 +583,9 @@ const submitToCRM = async () => {
             </tr>
             {/* Final Plot Price per Yard (calculated) */}
             <tr className="border-b">
-              <td className="p-2 font-semibold">Final Plot Price per Sq. Yard (Base + PLC)</td>
+              <td className="p-2 font-semibold">
+                Final Plot Price per Sq. Yard (Base + PLC)
+              </td>
               <td className="p-2">
                 <input
                   type="text"
@@ -521,7 +611,9 @@ const submitToCRM = async () => {
 
             {/* Additional Charges Section */}
             <tr className="border-b bg-gray-100">
-              <td colSpan="2" className="p-2 font-bold text-center">Additional Charges</td>
+              <td colSpan="2" className="p-2 font-bold text-center">
+                Additional Charges
+              </td>
             </tr>
 
             {/* Maintenance Charge Rate Dropdown */}
@@ -542,7 +634,9 @@ const submitToCRM = async () => {
 
             {/* Maintenance Charge */}
             <tr className="border-b">
-              <td className="p-2 font-semibold">Maintenance Charge ({formData.maintenanceRate} x Size)</td>
+              <td className="p-2 font-semibold">
+                Maintenance Charge ({formData.maintenanceRate} x Size)
+              </td>
               <td className="p-2">
                 <input
                   type="text"
@@ -567,7 +661,9 @@ const submitToCRM = async () => {
             </tr>
 
             <tr className="border-b">
-              <td className="p-2 font-semibold">One Time Maintenance(for 3 years)</td>
+              <td className="p-2 font-semibold">
+                One Time Maintenance(for 3 years)
+              </td>
               <td className="p-2">
                 <input
                   type="number"
@@ -615,7 +711,7 @@ const submitToCRM = async () => {
         >
           {isLoading ? "Generating PDF..." : "Generate PDF"}
         </button>
-        
+
         <p className="text-sm text-gray-600 mt-2 text-center">
           * Required fields for PDF generation
         </p>

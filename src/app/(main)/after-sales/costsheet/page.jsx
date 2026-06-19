@@ -1,5 +1,5 @@
 "use client";
-import icon from "@/assests/pdfIcon.webp";
+import icon from "@/assests/headerCostsheet.png";
 import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -154,7 +154,7 @@ export default function CostSheet() {
     img.crossOrigin = "anonymous";
 
     img.onload = () => {
-      doc.addImage(img, "PNG", 5, 5, 185, 38);
+      doc.addImage(img, "PNG", 15, 0, 180, 45);
 
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");

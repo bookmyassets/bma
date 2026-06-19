@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import icon from "@/assests/pdfIcon.webp";
+import icon from "@/assests/headerCostsheet.png";
 
 const SALUTATIONS = [
   { value: "Mr.", label: "Mr." },
@@ -214,7 +214,7 @@ export default function CostSheet({
     const pageWidth = doc.internal.pageSize.getWidth();
 
     const headerImage = await loadImage(icon.src);
-    doc.addImage(headerImage, "WEBP", 5, 5, 185, 38);
+    doc.addImage(headerImage, "PNG", 15, 0, 180, 45);
 
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
