@@ -12,6 +12,10 @@ const PROJECT_INITIAL_RECEIPTS = {
   "westwyn-residency": "BMA/28/2026-27",
   "westwyn-estates": "BMA/201/2026-27",
 };
+const PROJECT_RECEIPT_TEMPLATES = {
+  "westwyn-estates": "Payment Receipt Template LLP.pdf",
+};
+const DEFAULT_RECEIPT_TEMPLATE = "Payment Receipt Template.pdf";
 
 function getProjectKey(projectName) {
   return (projectName || "default")
@@ -57,6 +61,11 @@ function getInitialReceiptNumber(projectKey, financialYear) {
   }
 
   return `${RECEIPT_PREFIX}/001/${financialYear}`;
+}
+
+function getPaymentReceiptTemplate(projectName) {
+  const projectKey = getProjectKey(projectName);
+  return PROJECT_RECEIPT_TEMPLATES[projectKey] || DEFAULT_RECEIPT_TEMPLATE;
 }
 
 function getNextReceiptNumber(lastReceiptNumber, projectKey, financialYear) {
@@ -174,13 +183,13 @@ export async function POST(request) {
       saveCounter = true,
     } = await request.json();
 
-    // Load the PDF template
+    // Load the project-specific PDF template
     const templatePath = path.join(
       process.cwd(),
       "public",
       "assets",
       "new",
-      "Payment Receipt Template.pdf",
+      getPaymentReceiptTemplate(formData.projectName),
     );
     const existingPdfBytes = fs.readFileSync(templatePath);
 
