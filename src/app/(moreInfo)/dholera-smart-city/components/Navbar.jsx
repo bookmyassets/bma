@@ -6,7 +6,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import GetinTouch from "./GetinTouch";
-import { twEvent, TW_EVENTS } from "@/lib/twitterPixel"; // 👈 add this
+import { twEvent, TW_EVENTS } from "../lib/twitterPixel";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

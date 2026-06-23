@@ -1,6 +1,6 @@
 import React from "react";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
-import { twEvent, TW_EVENTS } from "@/lib/twitterPixel"; // 👈 add this
+import { twEvent, TW_EVENTS } from "../lib/twitterPixel"; // 👈 add this
 
 const FloatingButtons = () => {
   const handleCallClick = () => {
