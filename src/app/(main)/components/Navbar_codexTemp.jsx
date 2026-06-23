@@ -14,6 +14,7 @@ import cityCenter from "@/assests/bulkLand/city-centre-cover.webp";
 import industrial from "@/assests/bulkLand/industrial-cover.webp";
 import sport from "@/assests/bulkLand/recreation-sports-map.webp";
 import knowledgeIT from "@/assests/bulkLand/knowledge-it-cover.webp";
+import BookButton from "./BookVC";
 
 const whatsappEnquiryLink = `https://wa.me/918130371647?text=${encodeURIComponent(
   "Hi, I need a call back",
@@ -49,7 +50,7 @@ const bulkLandItems = [
 
     image: industrial,
     link: "/industrial-land",
-  },  
+  },
   {
     projectName: "Recreation Sports & Entertainment",
 
@@ -80,6 +81,7 @@ const utilityLinks = [
   { href: "/dholera-events", label: "Investor Meetups" },
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
+  { label: "Book A VC", calendly: true },
 ];
 
 const mobileLinks = [
@@ -91,6 +93,7 @@ const mobileLinks = [
   { href: "/career", label: "Careers" },
   { href: "/about", label: "About Us" },
   { href: "/gallery", label: "Gallery" },
+  { label: "Book A VC", calendly: true },
 ];
 
 const statusClasses = {
@@ -845,22 +848,24 @@ export default function Navbar() {
           className="utility-dropdown fixed right-[clamp(1rem,4vw,2rem)] z-40 hidden w-[min(calc(100vw_-_8rem),16rem)] origin-top animate-in fade-in-0 slide-in-from-top-2 zoom-in-95 overflow-hidden rounded-lg border border-white/15 bg-[#f3f5f2] text-[#171717] shadow-[0_1.25rem_3rem_rgba(0,0,0,0.35)] duration-200 lg:block"
           style={{ top: "calc(var(--nav-offset-top, 0px) + 6rem)" }}
         >
-          
           <div className="grid grid-cols-1 gap-[0.375rem] p-[0.625rem]">
-            {utilityLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={closeAllMenus}
-                className="group flex min-h-[3rem] items-center justify-between gap-[0.5rem] rounded-md px-[0.75rem] py-[0.625rem] text-[0.875rem] font-medium text-[#171717]/75 transition-all duration-200 hover:bg-[#111713] hover:text-white"
-              >
-                <span>{label}</span>
-                <ArrowUpRight
-                  className="h-[0.875rem] w-[0.875rem] shrink-0 text-[#8a6d24] transition-transform duration-200 group-hover:-translate-y-[0.125rem] group-hover:translate-x-[0.125rem] group-hover:text-[#ddbc69]"
-                  aria-hidden="true"
+            {utilityLinks.map(({ href, label, calendly }) =>
+              calendly ? (
+                <BookButton
+                  key="book-vc-desktop"
+                  className="block w-full px-[calc(0.875rem_+_0.25vw)] py-[calc(0.625rem_+_0.125vw)] text-left text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-black transition-colors hover:bg-gray-50 hover:text-[#ddbc69]"
                 />
-              </Link>
-            ))}
+              ) : (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={closeAllMenus}
+                  className="block px-[calc(0.875rem_+_0.25vw)] py-[calc(0.625rem_+_0.125vw)] text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-black transition-colors hover:bg-gray-50 hover:text-[#ddbc69]"
+                >
+                  {label}
+                </Link>
+              ),
+            )}
           </div>
         </div>
       )}
@@ -964,20 +969,27 @@ export default function Navbar() {
               )}
             </div>
 
-            {mobileLinks.map(({ href, label }, index) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={closeAllMenus}
-                className={`block rounded-md px-[0.75rem] py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-white transition-colors hover:bg-white/10 hover:text-white ${
-                  index < mobileLinks.length - 1
-                    ? "border-b border-white/10"
-                    : ""
-                }`}
-              >
-                {label}
-              </Link>
-            ))}
+            {mobileLinks.map(({ href, label, calendly }, index) =>
+              calendly ? (
+                <BookButton
+                  key="book-vc-mobile"
+                  className="block w-full py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-black transition-colors hover:text-[#ddbc69]"
+                />
+              ) : (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={closeAllMenus}
+                  className={`block py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-black transition-colors hover:text-[#ddbc69] ${
+                    index < mobileLinks.length - 1
+                      ? "border-b border-gray-100"
+                      : ""
+                  }`}
+                >
+                  {label}
+                </Link>
+              ),
+            )}
 
             <Link
               href={whatsappEnquiryLink}
