@@ -899,10 +899,10 @@ export default function Navbar() {
           }`}
         >
           <div className="space-y-[0.5rem] p-[calc(0.75rem_+_0.5vw)] pt-[calc(5.5rem_+_0.75rem)]">
-            <div className="border-b border-white/10 pb-[0.5rem]">
+            <div className="border-b border-white pb-[0.5rem]">
               <button
                 onClick={toggleResidentialMenu}
-                className={`flex w-full items-center justify-between rounded-md px-[0.75rem] py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
+                className={`flex w-full items-center justify-between rounded-md py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isResidentialMenuOpen
                     ? "border border-[#ddbc69]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
                     : "border border-transparent text-white hover:bg-white/10 hover:text-white"
@@ -942,10 +942,10 @@ export default function Navbar() {
               )}
             </div>
 
-            <div className="border-b border-white/10 pb-[0.5rem]">
+            <div className="border-b border-white pb-[0.5rem]">
               <button
                 onClick={toggleBulkLandMenu}
-                className={`flex w-full items-center justify-between rounded-md px-[0.75rem] py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
+                className={`flex w-full items-center justify-between rounded-md  py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
                   isBulkLandMenuOpen
                     ? "border border-[#ddbc69]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
                     : "border border-transparent text-white hover:bg-white/10 hover:text-white"
@@ -961,7 +961,7 @@ export default function Navbar() {
               </button>
 
               {isBulkLandMenuOpen && (
-                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#ddbc69] pl-[1rem]">
+                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#ddbc69] ">
                   {bulkLandLoading ? (
                     <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-white/60">
                       <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-lg border-b-[0.125rem] border-[#ddbc69]" />{" "}
@@ -989,14 +989,14 @@ export default function Navbar() {
               calendly ? (
                 <BookButton
                   key="book-vc-mobile"
-                  className="block w-full py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-black transition-colors hover:text-[#ddbc69]"
+                  className="block w-full py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-white transition-colors hover:text-[#ddbc69]"
                 />
               ) : (
                 <Link
                   key={href}
                   href={href}
                   onClick={closeAllMenus}
-                  className={`block py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-black transition-colors hover:text-[#ddbc69] ${
+                  className={`block py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-white transition-colors hover:text-[#ddbc69] ${
                     index < mobileLinks.length - 1
                       ? "border-b border-gray-100"
                       : ""
