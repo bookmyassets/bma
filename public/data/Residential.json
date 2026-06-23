@@ -2,7 +2,7 @@
   {
     "projectName": "WestWyn Residency",
     "link": "westwyn-residency",
-    "location": "Pipariya, Dholera, Gujarat",
+    "location": "Pipariya",
     "image": "/assets/residential/residency.webp",
     "constructionStatus" : "Under Construction",
     "status" : "ongoing",
@@ -12,7 +12,7 @@
   {
     "projectName": "WestWyn Estates",
     "link": "westwyn-estate",
-    "location": "Polarpur, Dholera, Gujarat",
+    "location": "Polarpur",
     "image": "/assets/residential/we_cover.webp",
     "constructionStatus" : "Under Construction",
     "status" : "ongoing",
@@ -22,65 +22,10 @@
   {
     "projectName": "WestWyn County",
     "link": "westwyn-county",
-    "location": "Fedra-Pipli State Highway, Dholera, Gujarat",
+    "location": "Fedra-Pipli State Highway",
     "image": "/assets/residential/westwyn.webp",
     "constructionStatus" : "Under Construction",
     "status" : "re-sale",
     "description" : "Premium township with spacious plots, world-class connectivity, and Tata Semiconductor Fab nearby."
-  },
-  {
-    "projectName": "Orchid",
-    "link": "orchid",
-    "location": "Gamph, Dholera",
-    "image": "/assets/residential/orchid-cover.webp",
-    "constructionStatus" : "Under Construction",
-    "status" : "sold-out",
-    "description" : "Peaceful residential project with smart amenities and direct connectivity to Ahmedabad Dholera Expressway."
-  },
-  {
-    "projectName": "Paradise",
-    "link": "paradise",
-    "location": "Shela, Dholera",
-    "image": "/assets/residential/paradise1.webp",
-    "constructionStatus" : "Under Construction",
-    "status" : "sold-out",
-    "description" : "Luxury plotted developments close to Dholera International Airport, designed for long term investors and smart living."
-  },
-  {
-    "projectName": "Paradise 2",
-    "link": "paradise-2",
-    "location": "Shela, Dholera",
-    "image": "/assets/residential/paradise2.webp",
-    "constructionStatus" : "Under Construction",
-    "status" : "sold-out",
-    "description" : "Luxury plotted developments close to Dholera International Airport, designed for long term investors and smart living."
-  },
-  {
-    "projectName": "Maple Township",
-    "link": "maple",
-    "location": "Gamph, Gujarat",
-    "image": "/assets/residential/maple-township.webp",
-    "constructionStatus" : "Under Construction",
-    "status" : "sold-out",
-    "description" : "Affordable premium plots near the ABCD Building, Dholera, and Smart City Booking Centre, ideal for families and investors."
-  },
-  {
-    "projectName": "Marina bay",
-    "link": "marina-bay",
-    "location": "Gamph, Dholera",
-    "image": "/assets/residential/marina-bay.webp",
-    "constructionStatus" : "Under Construction",
-    "status" : "sold-out",
-    "description" : "A unique project inspired by coastal living, situated near Dholera Port and the Solar Power Plant, is ideal for future growth."
-  }
-  ,
-  {
-    "projectName": "Pride",
-    "link": "pride",
-    "location": "Gamph, Dholera",
-    "image": "/assets/residential/marina-bay.webp",
-    "constructionStatus" : "Under Construction",
-    "status" : "sold-out",
-    "description" : "A unique project inspired by coastal living, situated near Dholera Port and the Solar Power Plant, is ideal for future growth."
   }
 ]
