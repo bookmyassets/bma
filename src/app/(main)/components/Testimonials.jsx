@@ -4,52 +4,52 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import vikas from "@/assests/testimonials/vikas-patel.webp";
+import karan from "@/assests/testimonials/vikas-patel.webp";
 import amit from "@/assests/testimonials/amit-khurana.webp";
-import anjali from "@/assests/testimonials/anjali-mehta.webp";
-import pooja from "@/assests/testimonials/pooja-shah.webp";
+import priya from "@/assests/testimonials/anjali-mehta.webp";
+import nidhi from "@/assests/testimonials/pooja-shah.webp";
 import vikram from "@/assests/testimonials/vikram-singh.webp";
-import saransh from "@/assests/testimonials/saransh-pal.webp";
+import rahul from "@/assests/testimonials/saransh-pal.webp";
 
 const testimonials = [
   {
     quote:
-      "Investing in Dholera Smart City through Book My Assets was one of the best decisions I made. The team guided me through every step, ensuring a hassle-free purchase. The plot prices are affordable, and I am already seeing a great appreciation in value. Highly recommended.",
-    name: "Saransh Pal",
-    location: "Gurugram",
-    avatar: saransh,
-  },
-  {
-    quote:
-      "I was initially skeptical about investing in Dholera, but Book My Assets provided me with all the necessary details and market insights. Their transparency and professionalism gave me confidence, and now I own a prime plot in Gujarat's first smart city. Excited about the future.",
-    name: "Pooja Shah",
-    location: "Ahmedabad",
-    avatar: pooja,
-  },
-  {
-    quote:
-      "Dholera Smart City is the future, and Book My Assets helped me secure a great investment opportunity. Their team is knowledgeable and responsive and ensures a smooth transaction. I am confident my investment will yield high returns in the coming years.",
-    name: "Vikas Patel",
+      "BookMyAssets explained the plot documents, location, and buying process very clearly. Their team gave us proper time and guidance before we made our decision.",
+    name: "Rahul Sharma",
     location: "Delhi",
-    avatar: vikas,
+    avatar: rahul,
   },
   {
     quote:
-      "I invested ₹25 lakhs in a plot at Dholera Smart City three years ago through Book My Assets. Today, my investment has already appreciated by 10%, and I can see the future growth potential is even higher. The team provided excellent support throughout the buying process, making it a seamless experience. I highly recommend Book My Assets to anyone looking for a profitable real estate investment.",
-    name: "Amit Khurana",
-    location: "Ghaziabad",
+      "The site visit was well planned and professional. We understood the project location, nearby development, and future scope of Dholera in a clear way.",
+    name: "Nidhi Patel",
+    location: "Ahmedabad",
+    avatar: nidhi,
+  },
+  {
+    quote:
+      "As a first-time investor in Dholera, I had many questions. BookMyAssets answered everything patiently and helped me understand each step without any pressure.",
+    name: "Karan Mehta",
+    location: "Mumbai",
+    avatar: karan,
+  },
+  {
+    quote:
+      "Mujhe Dholera investment ko lekar kaafi doubts the, but BookMyAssets team ne documents, pricing aur location sab simple way mein explain kiya. Process kaafi transparent laga.",
+    name: "Amit Verma",
+    location: "Noida",
     avatar: amit,
   },
   {
     quote:
-      "This was my first real estate investment, and I had many doubts. Book My Assets patiently guided me through every detail, helping me choose the best plot within my budget. The property value has already been appreciated, and I feel confident about my decision. Great service and a trustworthy team.",
-    name: "Anjali Mehta",
-    location: "Delhi",
-    avatar: anjali,
+      "Main long-term investment ke liye Dholera mein plot dekh raha tha. BookMyAssets ne mujhe realistic guidance di aur right project samajhne mein help ki.",
+    name: "Priya Shah",
+    location: "Surat",
+    avatar: priya,
   },
   {
     quote:
-      "I wanted to invest in a futuristic city with strong growth potential, and Dholera Smart City was the perfect choice. The infrastructure development, government support, and upcoming projects make it a great investment hub. Thanks to Book My Assets for their expert advice and smooth transaction process.",
+      "From enquiry to plot registration, the BookMyAssets team supported us at every stage. The process felt smooth, clear, and professional.",
     name: "Vikram Singh",
     location: "Ludhiana",
     avatar: vikram,
