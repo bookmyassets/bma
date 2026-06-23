@@ -6,6 +6,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import GetinTouch from "./GetinTouch";
+import { twEvent, TW_EVENTS } from "@/lib/twitterPixel"; // 👈 add this
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -75,7 +76,6 @@ export default function Navbar() {
     { href: "#dholera", label: "Dholera" },
     { href: "#major-projects", label: "Major Projects" },
     { href: "#westwyn-estate", label: "Westwyn Estate" },
-    /* { href: "#WhyInvest", label: "Investment Benefits" }, */
     { href: "#why-bma", label: "Why BMA" },
     { href: "#Gallery", label: "Gallery" },
     { href: "#videos", label: "Dholera Live" },
@@ -155,17 +155,21 @@ export default function Navbar() {
                       >
                         Book A Free Site Visit
                       </button>
+                      {/* 👇 Desktop Call */}
                       <a
                         href="tel:+918130371647"
+                        onClick={() => twEvent(TW_EVENTS.CALL_CLICK)}
                         className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                         id="call-now"
                       >
                         Call Now
                       </a>
+                      {/* 👇 Desktop WhatsApp */}
                       <a
                         href="https://wa.me/918130371647"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => twEvent(TW_EVENTS.WHATSAPP_CLICK)}
                         id="whatsapp-git"
                         className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                       >
@@ -220,16 +224,20 @@ export default function Navbar() {
                       >
                         Enquire Now
                       </button>
+                      {/* 👇 Mobile Call */}
                       <a
                         href="tel:+918130371647"
+                        onClick={() => twEvent(TW_EVENTS.CALL_CLICK)}
                         className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                       >
                         Call Now
                       </a>
+                      {/* 👇 Mobile WhatsApp */}
                       <a
                         href="https://wa.me/918130371647"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => twEvent(TW_EVENTS.WHATSAPP_CLICK)}
                         className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                       >
                         WhatsApp Us

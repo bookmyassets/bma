@@ -1,16 +1,11 @@
 import React from "react";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import { twEvent, TW_EVENTS } from "@/lib/twitterPixel"; // 👈 add this
 
 const FloatingButtons = () => {
-
   const handleCallClick = () => {
-    // 🔥 Google Tag Manager event
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "click_to_call",
-      lead_type: "phone",
-      device: "mobile",
-    });
+    // 🐦 Twitter Pixel event
+    twEvent(TW_EVENTS.CALL_CLICK); // 👈 add this
 
     // 📞 Call trigger
     window.location.href = "tel:+918130371647";
@@ -24,6 +19,9 @@ const FloatingButtons = () => {
       device: "mobile",
     });
 
+    // 🐦 Twitter Pixel event
+    twEvent(TW_EVENTS.WHATSAPP_CLICK); // 👈 add this
+
     window.open("https://wa.me/918130371647", "_blank");
   };
 
@@ -31,7 +29,6 @@ const FloatingButtons = () => {
     <>
       {/* Mobile View - Fixed Box at Bottom */}
       <div className="trackerx fixed bottom-0 left-0 w-full bg-white shadow-md p-3 flex justify-around lg:hidden z-50">
-        
         {/* WhatsApp Button */}
         <button
           onClick={handleWhatsAppClick}
@@ -49,7 +46,6 @@ const FloatingButtons = () => {
         >
           <FaPhoneAlt size={24} className="mr-2" /> Call
         </button>
-
       </div>
     </>
   );
