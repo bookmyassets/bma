@@ -81,7 +81,7 @@ const utilityLinks = [
   { href: "/dholera-events", label: "Investor Meetups" },
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
-  { label: "Book A VC", calendly: true },
+  { label: "Book Video Call", calendly: true },
 ];
 
 const mobileLinks = [
@@ -93,14 +93,23 @@ const mobileLinks = [
   { href: "/career", label: "Careers" },
   { href: "/about", label: "About Us" },
   { href: "/gallery", label: "Gallery" },
-  { label: "Book A VC", calendly: true },
+  { label: "Book Video Call", calendly: true },
 ];
 
 const statusClasses = {
-  ongoing: "bg-green-500",
-  "sold-out": "bg-red-500",
-  upcoming: "bg-blue-500",
-  limited: "bg-orange-500",
+  ongoing: "bg-green-500 text-white",
+  "sold-out": "bg-red-500 text-white",
+  "re-sale": "bg-[#ddbc69] text-black",
+  resale: "bg-[#ddbc69] text-black",
+  upcoming: "bg-blue-500 text-white",
+  limited: "bg-orange-500 text-white",
+};
+
+const getStatusLabel = (status) => {
+  if (status === "sold-out") return "SOLD OUT";
+  if (status === "re-sale" || status === "resale") return "RESALE";
+
+  return status.toUpperCase();
 };
 
 function ChevronIcon({ open, className = "h-[1rem] w-[1rem]" }) {
@@ -125,21 +134,20 @@ function ChevronIcon({ open, className = "h-[1rem] w-[1rem]" }) {
 function StatusBadge({ status }) {
   if (!status || status === "available") return null;
 
-  const label = status === "sold-out" ? "SOLD OUT" : status.toUpperCase();
-
   return (
     <span
-      className={`rounded-lg px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.3vw,0.8125rem)] font-semibold uppercase text-white shadow-lg ${
-        statusClasses[status] || "bg-gray-500"
+      className={`rounded-lg px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.3vw,0.8125rem)] font-semibold uppercase shadow-lg ${
+        statusClasses[status] || "bg-gray-500 text-white"
       } ${status === "ongoing" || status === "limited" ? "animate-pulse" : ""}`}
     >
-      {label}
+      {getStatusLabel(status)}
     </span>
   );
 }
 
 function ResidentialCard({ project, index, href, onClick }) {
   const isSoldOut = project.status === "sold-out";
+  const isReSale = project.status === "re-sale" || project.status === "resale";
 
   return (
     <Link
@@ -169,6 +177,14 @@ function ResidentialCard({ project, index, href, onClick }) {
           <div className="absolute inset-0 flex items-center justify-center bg-black/30">
             <span className="-rotate-6 rounded-md border border-red-300 bg-red-600/85 px-[0.5rem] py-[0.125rem] text-[0.5625rem] font-bold uppercase text-white">
               Sold
+            </span>
+          </div>
+        )}
+
+        {isReSale && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+            <span className="-rotate-6 rounded-md border border-[#f3bb39] bg-[#ddbc69]/90 px-[0.5rem] py-[0.125rem] text-[0.5625rem] font-bold uppercase text-black">
+              Resale
             </span>
           </div>
         )}
@@ -300,6 +316,8 @@ function MobileProjectLink({ project, href, onClick }) {
               className={`rounded-lg px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold ${
                 project.status === "sold-out"
                   ? "bg-red-500/15 text-red-300"
+                  : project.status === "re-sale" || project.status === "resale"
+                    ? "bg-[#ddbc69]/15 text-[#ddbc69]"
                   : project.status === "ongoing"
                     ? "bg-green-500/15 text-green-300"
                     : project.status === "limited"
@@ -307,9 +325,7 @@ function MobileProjectLink({ project, href, onClick }) {
                       : "bg-blue-500/15 text-blue-300"
               }`}
             >
-              {project.status === "sold-out"
-                ? "SOLD OUT"
-                : project.status.toUpperCase()}
+              {getStatusLabel(project.status)}
             </span>
           )}
         </div>

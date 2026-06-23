@@ -17,7 +17,7 @@ export default function BookButton({ className }) {
     <PopupButton
       url="https://calendly.com/dholeratimes/30min"
       rootElement={root}
-      text="Book A VC"
+      text="Book Video Call"
       className={className}
     />
   );

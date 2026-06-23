@@ -109,10 +109,19 @@ const mobileLinks = [
 ];
 
 const statusClasses = {
-  ongoing: "bg-green-500",
-  "sold-out": "bg-red-500",
-  upcoming: "bg-blue-500",
-  limited: "bg-orange-500",
+  ongoing: "bg-green-500 text-white",
+  "sold-out": "bg-red-500 text-white",
+  "re-sale": "bg-[#ddbc69] text-black",
+  resale: "bg-[#ddbc69] text-black",
+  upcoming: "bg-blue-500 text-white",
+  limited: "bg-orange-500 text-white",
+};
+
+const getStatusLabel = (status) => {
+  if (status === "sold-out") return "SOLD OUT";
+  if (status === "re-sale" || status === "resale") return "RESALE";
+
+  return status.toUpperCase();
 };
 
 function ChevronIcon({ open, className = "h-[1rem] w-[1rem]" }) {
@@ -184,21 +193,20 @@ function EmptyState() {
 function StatusBadge({ status }) {
   if (!status || status === "available") return null;
 
-  const label = status === "sold-out" ? "SOLD OUT" : status.toUpperCase();
-
   return (
     <span
-      className={`rounded-full px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.3vw,0.8125rem)] font-semibold uppercase text-white shadow-lg ${
-        statusClasses[status] || "bg-gray-500"
+      className={`rounded-full px-[0.5rem] py-[0.25rem] text-[clamp(0.625rem,0.5rem_+_0.3vw,0.8125rem)] font-semibold uppercase shadow-lg ${
+        statusClasses[status] || "bg-gray-500 text-white"
       } ${status === "ongoing" || status === "limited" ? "animate-pulse" : ""}`}
     >
-      {label}
+      {getStatusLabel(status)}
     </span>
   );
 }
 
 function ResidentialCard({ project, index, href, onClick }) {
   const isSoldOut = project.status === "sold-out";
+  const isResale = project.status === "re-sale" || project.status === "resale";
 
   return (
     <Link
@@ -222,6 +230,8 @@ function ResidentialCard({ project, index, href, onClick }) {
           className={`absolute inset-0 transition-all duration-500 ${
             isSoldOut
               ? "bg-gradient-to-t from-red-900/50 via-red-900/20 to-transparent"
+              : isResale
+                ? "bg-gradient-to-t from-[#4a3811]/55 via-[#ddbc69]/15 to-transparent"
               : ""
           }`}
         />
@@ -234,6 +244,14 @@ function ResidentialCard({ project, index, href, onClick }) {
           <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[0.0625rem]">
             <div className="-rotate-12 rounded-lg border-[0.125rem] border-red-400 bg-red-600/80 px-[1.5rem] py-[0.5rem] text-[clamp(1.25rem,1rem_+_1vw,1.5rem)] font-bold text-white">
               SOLD OUT
+            </div>
+          </div>
+        )}
+
+        {isResale && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[0.0625rem]">
+            <div className="-rotate-12 rounded-lg border-[0.125rem] border-[#f3bb39] bg-[#ddbc69]/90 px-[1.5rem] py-[0.5rem] text-[clamp(1.25rem,1rem_+_1vw,1.5rem)] font-bold text-black">
+              RESALE
             </div>
           </div>
         )}
@@ -354,6 +372,8 @@ function MobileProjectLink({ project, href, onClick }) {
               className={`rounded-full px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold ${
                 project.status === "sold-out"
                   ? "bg-red-50 text-red-600"
+                  : project.status === "re-sale" || project.status === "resale"
+                    ? "bg-[#ddbc69]/20 text-[#8a6d24]"
                   : project.status === "ongoing"
                     ? "bg-green-50 text-green-600"
                     : project.status === "limited"
@@ -361,9 +381,7 @@ function MobileProjectLink({ project, href, onClick }) {
                       : "bg-blue-50 text-blue-600"
               }`}
             >
-              {project.status === "sold-out"
-                ? "SOLD OUT"
-                : project.status.toUpperCase()}
+              {getStatusLabel(project.status)}
             </span>
           )}
         </div>
@@ -396,6 +414,7 @@ export default function Navbar() {
   const [bulkLandError, setBulkLandError] = useState(null);
   const [dholeraError, setDholeraError] = useState(null);
   const [isSoldOutOpen, setIsSoldOutOpen] = useState(false);
+  const [isResaleOpen, setIsResaleOpen] = useState(false);
 
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -576,9 +595,12 @@ export default function Navbar() {
     },
   ];
 
+  const isResaleProject = (project) =>
+    project.status === "re-sale" || project.status === "resale";
   const activeProjects = residentialProjects.filter(
-    (project) => project.status !== "sold-out",
+    (project) => project.status !== "sold-out" && !isResaleProject(project),
   );
+  const resaleProjects = residentialProjects.filter(isResaleProject);
   const soldOutProjects = residentialProjects.filter(
     (project) => project.status === "sold-out",
   );
@@ -742,6 +764,51 @@ export default function Navbar() {
                         onClick={closeAllMenus}
                       />
                     ))}
+                  </div>
+                )}
+
+                {resaleProjects.length > 0 && (
+                  <div
+                    className={`mt-[calc(0.375rem_+_0.125vw)] overflow-hidden rounded-xl border border-[#ddbc69]/50 transition-colors duration-200 ${
+                      isResaleOpen ? "bg-[#ddbc69]/10" : "bg-[#ddbc69]/5"
+                    }`}
+                  >
+                    <button
+                      onClick={() => setIsResaleOpen((prev) => !prev)}
+                      className="flex w-full items-center justify-between px-[calc(1rem_+_0.25vw)] py-[calc(0.625rem_+_0.125vw)] transition-colors duration-200 hover:bg-[#ddbc69]/15"
+                    >
+                      <div className="flex items-center gap-[0.75rem]">
+                        <span className="h-[0.5rem] w-[0.5rem] rounded-full bg-[#ddbc69]" />
+                        <span className="text-[clamp(0.8125rem,0.72rem_+_0.38vw,0.9375rem)] font-semibold uppercase tracking-widest text-[#8a6d24]">
+                          Resale Projects
+                        </span>
+                        <span className="rounded-full bg-[#ddbc69]/25 px-[0.5rem] py-[0.125rem] text-[clamp(0.6875rem,0.6rem_+_0.3vw,0.8125rem)] font-bold text-[#8a6d24]">
+                          {resaleProjects.length}
+                        </span>
+                      </div>
+                      <ChevronIcon
+                        open={isResaleOpen}
+                        className="h-[1rem] w-[1rem] shrink-0 text-[#8a6d24]"
+                      />
+                    </button>
+
+                    <div
+                      className={`grid grid-cols-4 gap-[calc(0.5rem_+_0.5vw)] overflow-hidden transition-all duration-500 ease-in-out ${
+                        isResaleOpen
+                          ? "max-h-[125rem] p-[1rem] opacity-100"
+                          : "max-h-0 px-[1rem] opacity-0"
+                      }`}
+                    >
+                      {resaleProjects.map((project, index) => (
+                        <ResidentialCard
+                          key={project.link || index}
+                          project={project}
+                          index={index}
+                          href={`/dholera-residential-plots/${project.link}`}
+                          onClick={closeAllMenus}
+                        />
+                      ))}
+                    </div>
                   </div>
                 )}
 

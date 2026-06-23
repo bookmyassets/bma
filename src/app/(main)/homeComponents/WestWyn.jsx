@@ -8,7 +8,7 @@ import westwynResidencyImage from "@/assests/residency.webp";
 const projects = [
   {
     name: "WestWyn Estates",
-    price: "Starting from Rs. 6,700/per sq yd",
+    price: "Starting from Rs. 7,000/per sq yd",
     location: "Polarpur State Highway",
     href: "/dholera-residential-plots/westwyn-estate",
     image: westwynEstatesImage,
