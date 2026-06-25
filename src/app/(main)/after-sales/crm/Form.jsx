@@ -537,6 +537,10 @@ function getFullName(client) {
   return [client.salutation, client.name].filter(Boolean).join(" ").trim();
 }
 
+function getClientName(client) {
+  return (client.name || "").trim();
+}
+
 function getGreetingTitle(client) {
   return client.salutation === "Mr." ? "Sir" : "Ma'am";
 }
@@ -787,6 +791,7 @@ export default function Form() {
   const hasReceiptDocument = selectedDocuments.some((documentId) =>
     RECEIPT_DOCUMENT_IDS.includes(documentId),
   );
+  const showSalutationFields = !hasReceiptDocument;
 
   useEffect(() => {
     return () => {
@@ -894,6 +899,7 @@ export default function Form() {
   const buildPayload = () => {
     const activeClients = getActiveClients(clients, clientCount);
     const clientNames = activeClients.map(getFullName).filter(Boolean);
+    const receiptClientNames = activeClients.map(getClientName).filter(Boolean);
     const allotmentClientNames = activeClients
       .map((client) => client.name)
       .filter(Boolean)
@@ -905,6 +911,7 @@ export default function Form() {
       date: formatDisplayDate(new Date().toISOString().slice(0, 10)),
       clientCount,
       clientNames: clientNames.join(" and "),
+      receiptClientNames: receiptClientNames.join(" and "),
       allotmentClientNames,
       welcomeGreeting: activeClients.length
         ? getWelcomeGreeting(activeClients)
@@ -943,7 +950,7 @@ export default function Form() {
 
   const buildReceiptData = (payload) => ({
     receiptNumber: receipt.receiptNumber,
-    receivedFrom: payload.clientNames,
+    receivedFrom: payload.receiptClientNames,
     projectName: booking.projectName,
     plotNumber: booking.plotNumber,
     paymentDate: formatDisplayDate(receipt.paymentDate),
@@ -1229,26 +1236,27 @@ export default function Form() {
                           Client {index + 1}
                         </h3>
                         <div className="grid gap-[0.875rem]">
-                          {requiredFields.client.has("name") && (
-                            <label className="grid gap-[0.375rem] text-[0.875rem] text-white/75">
-                              Salutation
-                              <select
-                                value={client.salutation}
-                                onChange={(event) =>
-                                  updateClient(
-                                    index,
-                                    "salutation",
-                                    event.target.value,
-                                  )
-                                }
-                                className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
-                              >
-                                <option value="Mr.">Mr.</option>
-                                <option value="Ms.">Ms.</option>
-                                <option value="Mrs.">Mrs.</option>
-                              </select>
-                            </label>
-                          )}
+                          {showSalutationFields &&
+                            requiredFields.client.has("name") && (
+                              <label className="grid gap-[0.375rem] text-[0.875rem] text-white/75">
+                                Salutation
+                                <select
+                                  value={client.salutation}
+                                  onChange={(event) =>
+                                    updateClient(
+                                      index,
+                                      "salutation",
+                                      event.target.value,
+                                    )
+                                  }
+                                  className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
+                                >
+                                  <option value="Mr.">Mr.</option>
+                                  <option value="Ms.">Ms.</option>
+                                  <option value="Mrs.">Mrs.</option>
+                                </select>
+                              </label>
+                            )}
                           {requiredFields.client.has("name") && (
                             <Input
                               label="Name"
