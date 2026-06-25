@@ -173,7 +173,7 @@ export default function WestWyn() {
       {/* Desktop: Two independent project columns */}
       <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 max-w-7xl mx-auto px-8 py-12">
         <ProjectCard
-          projectName="WestWyn Estate"
+          projectName="WestWyn Estates"
           sections={sections}
           essentials={essentials}
           location={location}
@@ -189,7 +189,7 @@ export default function WestWyn() {
       {/* Mobile: stacked */}
       <div className="lg:hidden px-4 py-8 space-y-12">
         <ProjectCard
-          projectName="WestWyn Estate"
+          projectName="WestWyn Estates"
           sections={sections}
           essentials={essentials}
           location={location}

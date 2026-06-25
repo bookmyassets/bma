@@ -5,15 +5,16 @@ import Image from "next/image";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 /* import logo from "@/assests/festival-images/dholera-diwali.webp" */
 import {
-  Home,
   CheckCircle,
   CalendarCheck,
   Download,
   ChevronRight,
   ChevronLeft,
   FileCheck,
+  Phone,
+  User,
 } from "lucide-react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 //images import
 import img1 from "@/assests/ad-page/hero/dholera-activation-area-banner.webp";
@@ -24,11 +25,9 @@ import img5 from "@/assests/ad-page/hero/dholera-tata-semiconductor-plant-landin
 import img6 from "@/assests/ad-page/hero/dholera-tata-solar-park-landing-page-desktop.webp";
 
 import BrochureDownload from "../components/BrochureDownload";
-import MobilePropertyGrid from "./MobileGrid";
 
 export default function LandingPage({ openForm }) {
   const router = useRouter();
-  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -288,11 +287,11 @@ export default function LandingPage({ openForm }) {
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
       setCurrentSlide((prev) =>
-        prev === mobileImages.length - 1 ? 0 : prev + 1,
+        prev === desktopImages.length - 1 ? 0 : prev + 1,
       );
     } else if (touchEnd - touchStart > 50) {
       setCurrentSlide((prev) =>
-        prev === 0 ? mobileImages.length - 1 : prev - 1,
+        prev === 0 ? desktopImages.length - 1 : prev - 1,
       );
     }
   };
@@ -317,6 +316,27 @@ export default function LandingPage({ openForm }) {
   const closeBrochure = () => {
     setIsDownload(false);
   };
+
+  const handleBookVisit = () => {
+    if (typeof openForm === "function") {
+      openForm();
+      return;
+    }
+
+    openBrochure();
+  };
+
+  const heroStats = [
+    { label: "Activation Area", value: "20 min" },
+    { label: "Expressway Access", value: "5 min" },
+    { label: "Airport Corridor", value: "30 min" },
+  ];
+
+  const trustPoints = [
+    { label: "Approved layouts", icon: FileCheck },
+    { label: "Immediate registry", icon: CheckCircle },
+    { label: "Site visit support", icon: CalendarCheck },
+  ];
 
   return (
     <div id="hero" className="relative min-h-screen bg-gray-100">
@@ -379,317 +399,221 @@ export default function LandingPage({ openForm }) {
         )}
       </AnimatePresence>
 
-      {/* Main Layout - Desktop */}
-      <div className="h-screen max-sm:h-[95vh] flex flex-col">
-        {/* Main Content Section */}
-        <div className="flex-1 flex flex-col lg:flex-row md:min-h-0">
-          {/* Left Side - Slider Section (60%) */}
-          <div className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[40vh]">
-            {/* Desktop Slider */}
-            <div className="absolute inset-0 hidden lg:block">
-              <div className="relative w-full h-full overflow-hidden">
-                {desktopImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="md:object-contain md:pt-8"
-                      priority={index === 0}
-                    />
-                  </div>
-                ))}
-                {/* Navigation */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </div>
-            </div>
-
-            {/* Mobile Slider */}
-            <div
-              className="absolute inset-0 block lg:hidden overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              role="region"
-              aria-label="Mobile image carousel"
-            >
-              {desktopImages.map((image, index) => (
-                <div
-                  key={`mobile-${index}`}
-                  className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-                  style={{
-                    opacity: index === currentSlide ? 1 : 0,
-                    pointerEvents: index === currentSlide ? "auto" : "none",
-                  }}
-                >
-                  <div className="h-full flex items-center justify-center px-1 pt-16 pb-4">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      width={1200}
-                      height={675}
-                      className="w-full h-auto object-contain rounded-lg shadow-lg"
-                      quality={85}
-                      fetchPriority={index === 0 ? "high" : "low"}
-                      sizes="100vw"
-                    />
-                  </div>
-                </div>
-              ))}
-              {/* Navigation buttons for mobile */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                aria-label="Previous image"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                aria-label="Next image"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
+      <section
+        className="relative min-h-[100svh] overflow-hidden bg-[#101820] text-white"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        aria-label="Dholera Smart City investment hero"
+      >
+        {desktopImages.map((image, index) => (
+          <div
+            key={`hero-slide-${index}`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              priority={index === 0}
+              quality={90}
+              sizes="100vw"
+              className="object-cover"
+            />
           </div>
+        ))}
 
-          {/* Right Side - Lead Form Section (40%) */}
-          <div className="w-full lg:w-[40%] bg-gray-100 flex items-center justify-center p-4 lg:p-6">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,12,18,0.72)_0%,rgba(7,12,18,0.55)_20%,rgba(7,12,18,0.24)_40%,rgba(7,12,18,0.12)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#202830] to-transparent" />
+
+        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pb-12 pt-24 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_28rem]">
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="w-full max-w-md"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="max-w-3xl "
             >
-              {/* Logo */}
-              <div className="text-center mb-6">
+              <motion.div
+                variants={itemVariants}
+                className="mb-6 inline-flex max-sm:hidden items-center gap-3 border border-white/15 bg-black/25 px-4 py-3 backdrop-blur-md"
+              >
                 <Image
                   src={logo}
-                  alt="BookMyAssets Logo"
-                  className="mx-auto mb-3 md:h-auto md:w-80"
+                  alt="Government of Gujarat"
+                  className="h-10 w-auto"
                 />
-                <h2 className="text-xl lg:text-2xl font-bold text-black mb-2">
-                  Registry-Ready Plots under ₹10 Lakh
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ddbc69]">
+                  Dholera Smart City
+                </span>
+              </motion.div>
+
+              <motion.h1
+                variants={itemVariants}
+                className="max-w-3xl text-3xl font-bold  leading-[1.05] text-white sm:text-4xl lg:text-5xl"
+              >
+                Invest In Dholera Plots
+              </motion.h1>
+
+              <motion.p
+                variants={itemVariants}
+                className="mt-5 max-w-2xl text-base max-sm:hidden leading-7 text-white/78 sm:text-lg"
+              >
+                Invest in verified, Registry-Ready Residential Projects, Expressway Access, Industrial Hubs, and the
+                upcoming International Airport.
+              </motion.p>
+
+              <motion.div
+                variants={itemVariants}
+                className="mt-8 grid max-w-2xl grid-cols-3 border border-white/15 bg-black/25 backdrop-blur-md"
+              >
+                {heroStats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="border-r border-white/10 px-4 py-4 last:border-r-0"
+                  >
+                    <div className="text-2xl font-bold text-[#ddbc69]">
+                      {stat.value}
+                    </div>
+                    <div className="mt-1 text-xs font-medium uppercase tracking-[0.12em] text-white/60">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="mt-8 flex flex-wrap items-center gap-3"
+              >
+                <button
+                  type="button"
+                  onClick={openBrochure}
+                  className="inline-flex items-center justify-center gap-2 bg-[#ddbc69] px-5 py-3 text-sm font-bold text-black transition hover:bg-[#f0cf78]"
+                >
+                  <CalendarCheck className="h-4 w-4" />
+                  Book Site Visit
+                </button>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="border border-white/15 rounded-xl bg-white/95 p-4 text-black shadow-2xl shadow-black/30 backdrop-blur-md sm:p-6"
+            >
+              <div className="mb-5">
+                <h2 className="mt-2 text-2xl font-bold leading-tight text-[#101820]">
+                  Premium residential plots in Dholera
                 </h2>
               </div>
 
               {showPopup ? (
-                <div className="text-center py-6">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="mb-4 inline-block"
-                  >
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-10 w-10 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-black mb-2">
-                    Thank You!
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Your request has been submitted successfully. We'll contact
-                    you shortly.
+                <div className="py-6 text-center">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-600">
+                    <CheckCircle className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-black">Thank You!</h3>
+                  <p className="mt-2 text-sm text-gray-600">
+                    Your request has been submitted successfully.
                   </p>
                 </div>
               ) : (
-                <form id="lead-form-1">
-                  <div className="space-y-4">
+                <form id="lead-form-1" onSubmit={handleSubmit}>
+                  <div className="space-y-3">
                     {errorMessage && (
-                      <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm">
+                      <div className="border border-red-300 bg-red-50 p-3 text-sm text-red-700">
                         {errorMessage}
                       </div>
                     )}
 
-                    <div className="grid grid-cols-2 gap-2">
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 }}
-                        className="relative"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#ddbc69] h-4 w-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                          />
-                        </svg>
-                        <input
-                          name="fullName"
-                          placeholder="Enter Name"
-                          value={formData.fullName}
-                          onChange={handleChange}
-                          required
-                          className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-300 hover:border-[#ddbc69] transition-colors text-sm"
-                        />
-                      </motion.div>
-
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.7 }}
-                        className="relative"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#ddbc69] h-4 w-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                          />
-                        </svg>
-                        <input
-                          name="phone"
-                          type="tel"
-                          placeholder="Mobile No"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          minLength={10}
-                          maxLength={15}
-                          required
-                          className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-300 hover:border-[#ddbc69] transition-colors text-sm"
-                        />
-                      </motion.div>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9a782f]" />
+                      <input
+                        name="fullName"
+                        placeholder="Enter name"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                        className="w-full border border-gray-300 bg-white p-3 pl-10 text-sm text-black outline-none transition focus:border-[#ddbc69] focus:ring-2 focus:ring-[#ddbc69]/30"
+                      />
                     </div>
 
-                    {/* reCAPTCHA container */}
+                    <div className="relative">
+                      <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9a782f]" />
+                      <input
+                        name="phone"
+                        type="tel"
+                        placeholder="Mobile no"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        minLength={10}
+                        maxLength={15}
+                        required
+                        className="w-full border border-gray-300 bg-white p-3 pl-10 text-sm text-black outline-none transition focus:border-[#ddbc69] focus:ring-2 focus:ring-[#ddbc69]/30"
+                      />
+                    </div>
+
                     <div className="flex justify-center">
                       <div ref={recaptchaRef}></div>
                     </div>
 
-                    <motion.button
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.0 }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      type="button"
-                      id=""
-                      onClick={handleSubmit}
+                    <button
+                      type="submit"
                       disabled={isLoading}
-                      className="w-full py-3 px-6 bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] text-white rounded-lg hover:from-[#ddbc69] hover:to-[#ddbc69] transition-all shadow-lg hover:shadow-[#ddbc69]/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="flex w-full items-center justify-center gap-2 bg-[#101820] px-5 py-3 text-sm font-bold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-70"
                     >
                       {isLoading ? "Submitting..." : "Get A Call Back"}
-                    </motion.button>
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
                   </div>
                 </form>
               )}
             </motion.div>
           </div>
-        </div>
 
-        {/* Bottom Stats Section - Compact */}
-        <div className="bg-white border-t border-gray-200 py-4">
-          <div className=" px-4">
-            {/* desktop view */}
-            <div className="grid max-sm:hidden md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-gray-200">
-              {/* Land Parcel */}
-              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Home className="w-4 h-4 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold flex items-center justify-center text-[#ddbc69]">
-                  Immediate Possession
-                </h3>
-                <p className="text-lg font-bold text-[#ddbc69]"></p>
-              </div>
-
-              {/* Type */}
-              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <CheckCircle className="w-4 h-4 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold flex items-center justify-center text-[#ddbc69]">
-                  Government Approved
-                </h3>
-                <p className="text-lg font-bold text-[#ddbc69]"></p>
-              </div>
-
-              {/* Amenities */}
-              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <CalendarCheck className="w-4 h-4 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold flex items-center justify-center text-[#ddbc69]">
-                  365 Days Site Visit
-                </h3>
-                <p className="text-lg font-bold text-[#ddbc69]"></p>
-              </div>
-
-              {/* Price */}
-              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <FileCheck className="w-4 h-4 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold flex items-center justify-center text-[#ddbc69]">
-                  Due Diligence
-                </h3>
-                <p className="text-lg font-bold text-[#ddbc69]"></p>
-                <p className="text-xs text-gray-500"></p>
-              </div>
-
-              {/* Download Brochure */}
-              <div className="p-3 text-center hover:bg-orange-50 transition-colors duration-300">
-                <div className="w-8 h-8 bg-[#ddbc69] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Download className="w-4 h-4 text-white" />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1"></h3>
+          <div className="mt-10 flex items-center justify-between gap-4">
+            <div className="flex gap-2">
+              {desktopImages.map((image, index) => (
                 <button
-                  onClick={openBrochure}
-                  className="bg-[#ddbc69] hover:bg-[#f3bb39] text-white font-semibold py-1 px-3 rounded-lg transition-colors duration-300 text-sm"
-                >
-                  Download Brochure
-                </button>
-              </div>
+                  key={`hero-indicator-${index}`}
+                  type="button"
+                  onClick={() => setCurrentSlide(index)}
+                  className={`h-1.5 transition-all ${
+                    index === currentSlide
+                      ? "w-12 bg-[#ddbc69]"
+                      : "w-6 bg-white/35 hover:bg-white/70"
+                  }`}
+                  aria-label={`Show slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={prevSlide}
+                className="flex h-11 w-11 items-center justify-center border border-white/20 bg-black/25 text-white transition hover:border-[#ddbc69] hover:text-[#ddbc69]"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={nextSlide}
+                className="flex h-11 w-11 items-center justify-center border border-white/20 bg-black/25 text-white transition hover:border-[#ddbc69] hover:text-[#ddbc69]"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
             </div>
           </div>
         </div>
-      </div>
-      <MobilePropertyGrid />
+      </section>
+
       <AnimatePresence>
         {isDownload && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">

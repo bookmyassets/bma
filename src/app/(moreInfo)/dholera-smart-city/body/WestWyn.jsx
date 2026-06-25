@@ -62,8 +62,8 @@ export default function WestWyn() {
 
   const sections = [
     {
-      title: "About WestWyn Estate",
-      content: `WestWyn Estate is strategically positioned at the epicenter of Dholera’s rapid transformation, located directly at the SIR boundary. This project offers unmatched proximity to major infrastructure milestones, making it one of the most accessible residential plot developments in the region.
+      title: "About WestWyn Estates",
+      content: `WestWyn Estates is strategically positioned at the epicenter of Dholera’s rapid transformation, located directly at the SIR boundary. This project offers unmatched proximity to major infrastructure milestones, making it one of the most accessible residential plot developments in the region.
 
       This is not just about buying land. It is about securing a location that combines prime connectivity, immediate possession with registry, verified legal documentation, and an accessible entry point aligned with prevailing Dholera Smart City Plot Price expectations.
 
@@ -90,7 +90,7 @@ export default function WestWyn() {
           {/* Header */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-center text-black mb-4">
-              <span className="text-[#ddbc69]">WestWyn Estate</span> -
+              <span className="text-[#ddbc69]">WestWyn Estates</span> -
               Investment Goldmine of Dholera
             </h2>
           </div>
