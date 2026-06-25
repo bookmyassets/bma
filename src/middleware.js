@@ -9,8 +9,8 @@ const client = createClient({
   useCdn: false,
 })
 
-const SITE_NAME = 'localhost:3000'
-const SITE_URL = 'http://localhost:3000/'
+const SITE_NAME = 'bookmyassets'
+const SITE_URL = 'https://www.bookmyassets.com'
 
 let redirectCache = null
 let cacheTime = 0
