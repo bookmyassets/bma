@@ -12,6 +12,7 @@ const DOCUMENT_OPTIONS = [
   { id: "plot-details", label: "Plot Details" },
   { id: "allotment-letter", label: "Allotment Letter" },
   { id: "payment-receipt", label: "Payment Receipt" },
+  { id: "token-receipt", label: "Token Receipt" },
 ];
 
 const DOCUMENT_WORKFLOWS = {
@@ -24,6 +25,11 @@ const DOCUMENT_WORKFLOWS = {
     label: "Payment Receipt",
     description: "Generate payment receipt separately.",
     documents: ["payment-receipt"],
+  },
+  "token-receipt": {
+    label: "Token Receipt",
+    description: "Generate token receipt separately.",
+    documents: ["token-receipt"],
   },
 };
 
@@ -51,6 +57,18 @@ const DOCUMENT_FIELD_REQUIREMENTS = {
     receipt: [],
   },
   "payment-receipt": {
+    client: ["name"],
+    booking: ["projectName", "plotNumber"],
+    receipt: [
+      "receiptNumber",
+      "paymentDate",
+      "referenceNo",
+      "modeOfPayment",
+      "amountInNumbers",
+      "remarks",
+    ],
+  },
+  "token-receipt": {
     client: ["name"],
     booking: ["projectName", "plotNumber"],
     receipt: [
@@ -120,16 +138,35 @@ const INITIAL_RECEIPT = {
 };
 
 const RECEIPT_COORDINATES = {
-  receiptNumber: { page: 1, x: 175, y: 494, fontSize: 10 },
-  receivedFrom: { page: 1, x: 420, y: 494, fontSize: 10 },
-  projectName: { page: 1, x: 175, y: 460, fontSize: 10 },
-  plotNumber: { page: 1, x: 420, y: 460, fontSize: 10 },
-  paymentDate: { page: 1, x: 175, y: 427, fontSize: 10 },
-  referenceNo: { page: 1, x: 420, y: 427, fontSize: 10 },
-  modeOfPayment: { page: 1, x: 175, y: 392, fontSize: 10 },
-  amountInNumbers: { page: 1, x: 420, y: 392, fontSize: 10 },
-  amountInWords: { page: 1, x: 175, y: 356, fontSize: 10 },
-  remarks: { page: 1, x: 175, y: 323, fontSize: 10 },
+  receiptNumber: { page: 1, x: 175, y: 502, fontSize: 10 },
+  receivedFrom: { page: 1, x: 420, y: 502, fontSize: 10 },
+  projectName: { page: 1, x: 175, y: 468, fontSize: 10 },
+  plotNumber: { page: 1, x: 420, y: 468, fontSize: 10 },
+  paymentDate: { page: 1, x: 175, y: 435, fontSize: 10 },
+  referenceNo: { page: 1, x: 420, y: 435, fontSize: 10 },
+  modeOfPayment: { page: 1, x: 175, y: 400, fontSize: 10 },
+  amountInNumbers: { page: 1, x: 420, y: 400, fontSize: 10 },
+  amountInWords: { page: 1, x: 175, y: 364, fontSize: 10 },
+  remarks: { page: 1, x: 175, y: 331, fontSize: 10 },
+};
+
+const TOKEN_COORDINATES = {
+  receiptNumber: { page: 1, x: 175, y: 502, fontSize: 10 },
+  receivedFrom: { page: 1, x: 420, y: 502, fontSize: 10 },
+  projectName: { page: 1, x: 175, y: 468, fontSize: 10 },
+  plotNumber: { page: 1, x: 420, y: 468, fontSize: 10 },
+  paymentDate: { page: 1, x: 175, y: 435, fontSize: 10 },
+  referenceNo: { page: 1, x: 420, y: 435, fontSize: 10 },
+  modeOfPayment: { page: 1, x: 175, y: 400, fontSize: 10 },
+  amountInNumbers: { page: 1, x: 420, y: 400, fontSize: 10 },
+  amountInWords: { page: 1, x: 175, y: 364, fontSize: 10 },
+  remarks: { page: 1, x: 175, y: 331, fontSize: 10 },
+};
+
+const RECEIPT_DOCUMENT_IDS = ["payment-receipt", "token-receipt"];
+const RECEIPT_DOCUMENT_COORDINATES = {
+  "payment-receipt": RECEIPT_COORDINATES,
+  "token-receipt": TOKEN_COORDINATES,
 };
 
 const DOCUMENT_COORDINATES = {
@@ -747,6 +784,9 @@ export default function Form() {
   const hasClientFields = requiredFields.client.size > 0;
   const hasBookingFields = requiredFields.booking.size > 0;
   const hasReceiptFields = requiredFields.receipt.size > 0;
+  const hasReceiptDocument = selectedDocuments.some((documentId) =>
+    RECEIPT_DOCUMENT_IDS.includes(documentId),
+  );
 
   useEffect(() => {
     return () => {
@@ -755,10 +795,7 @@ export default function Form() {
   }, [previews]);
 
   useEffect(() => {
-    if (
-      !selectedDocuments.includes("payment-receipt") ||
-      !booking.projectName
-    ) {
+    if (!hasReceiptDocument || !booking.projectName) {
       setLastReceiptNumber("");
       return;
     }
@@ -792,7 +829,7 @@ export default function Form() {
       });
 
     return () => controller.abort();
-  }, [booking.projectName, receipt.paymentDate, selectedDocuments]);
+  }, [booking.projectName, hasReceiptDocument, receipt.paymentDate]);
 
   const updateClient = (index, field, value) => {
     setClients((current) =>
@@ -924,9 +961,9 @@ export default function Form() {
     const plot = cleanFilePart(booking.plotNumber || "unit");
     const project = cleanFilePart(selectedProject?.code || booking.projectName);
 
-    if (documentId === "payment-receipt") {
+    if (RECEIPT_DOCUMENT_IDS.includes(documentId)) {
       const date = formatDateSlash(receipt.paymentDate).replace(/\//g, "");
-      return `Payment-Receipt-Unit-${plot}-${project}-${date || "date"}.pdf`;
+      return `${label}-Unit-${plot}-${project}-${date || "date"}.pdf`;
     }
 
     return `${label}-Unit-${plot}-${project}.pdf`;
@@ -971,7 +1008,7 @@ export default function Form() {
 
   const requestDocument = async (documentId, payload, saveCounter = false) => {
     const filename = getFilename(documentId);
-    const isReceipt = documentId === "payment-receipt";
+    const isReceipt = RECEIPT_DOCUMENT_IDS.includes(documentId);
     const response = await fetch(
       isReceipt ? "/api/fill-payment-receipt" : "/api/fill-crm-document",
       {
@@ -980,8 +1017,10 @@ export default function Form() {
         body: JSON.stringify(
           isReceipt
             ? {
+                documentType: documentId,
                 formData: buildReceiptData(payload),
-                coordinates: RECEIPT_COORDINATES,
+                coordinates: RECEIPT_DOCUMENT_COORDINATES[documentId],
+                filename,
                 paymentDate: formatDateSlash(receipt.paymentDate),
                 saveCounter,
               }
@@ -1054,7 +1093,7 @@ export default function Form() {
       const payload = buildPayload();
 
       for (const preview of previews) {
-        if (preview.documentId === "payment-receipt") {
+        if (RECEIPT_DOCUMENT_IDS.includes(preview.documentId)) {
           const { blob, filename } = await requestDocument(
             preview.documentId,
             payload,
@@ -1069,7 +1108,7 @@ export default function Form() {
         downloadUrl(preview.url, preview.filename);
       }
 
-      if (selectedDocuments.includes("payment-receipt")) {
+      if (hasReceiptDocument) {
         const counter = await fetchReceiptCounter(
           booking.projectName,
           formatDateSlash(receipt.paymentDate),

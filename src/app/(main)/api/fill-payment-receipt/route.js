@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
+import { readFile } from "fs/promises";
 import path from "path";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import fontkit from "@pdf-lib/fontkit";
 import {
   hasSanityWriteToken,
   receiptCounterClient,
@@ -13,9 +15,28 @@ const PROJECT_INITIAL_RECEIPTS = {
   "westwyn-estates": "BMA/201/2026-27",
 };
 const PROJECT_RECEIPT_TEMPLATES = {
-  "westwyn-estates": "Payment Receipt Template LLP.pdf",
+  "westwyn-estates": "Payment Receipt Template.pdf",
 };
 const DEFAULT_RECEIPT_TEMPLATE = "Payment Receipt Template.pdf";
+const RECEIPT_TEMPLATES = {
+  "payment-receipt": DEFAULT_RECEIPT_TEMPLATE,
+  "token-receipt": "Token Receipt.pdf",
+};
+const PROJECT_COMPANY_NAMES = {
+  "westwyn-estates": "WestWyn Partners LLP",
+  "westwyn-residency": "BookMyAssets Projects",
+};
+const COMPANY_NAME_COORDINATE = {
+  page: 1,
+  x: 40 ,
+  y: 655,
+  width: 349,
+  height: 35,
+  fontName: "Montserrat",
+  fontSize: 20,
+  bold: true,
+  align: "left",
+};
 
 function getProjectKey(projectName) {
   return (projectName || "default")
@@ -63,9 +84,47 @@ function getInitialReceiptNumber(projectKey, financialYear) {
   return `${RECEIPT_PREFIX}/001/${financialYear}`;
 }
 
-function getPaymentReceiptTemplate(projectName) {
+function getPaymentReceiptTemplate(projectName, documentType) {
+  if (documentType && documentType !== "payment-receipt") {
+    return RECEIPT_TEMPLATES[documentType] || DEFAULT_RECEIPT_TEMPLATE;
+  }
+
   const projectKey = getProjectKey(projectName);
   return PROJECT_RECEIPT_TEMPLATES[projectKey] || DEFAULT_RECEIPT_TEMPLATE;
+}
+
+async function embedFontFromPaths(pdfDoc, fontPaths) {
+  for (const fontPath of fontPaths) {
+    try {
+      const fontBytes = await readFile(fontPath);
+      return pdfDoc.embedFont(fontBytes);
+    } catch {
+      // Try the next configured font path.
+    }
+  }
+
+  return null;
+}
+
+function getFieldX(value, fieldData, font, fontSize) {
+  const x = Number(fieldData.x || 0);
+  const width = Number(fieldData.width || 0);
+
+  if (!width || !fieldData.align || fieldData.align === "left") {
+    return x;
+  }
+
+  const textWidth = font.widthOfTextAtSize(value, fontSize);
+
+  if (fieldData.align === "right") {
+    return x + Math.max(0, width - textWidth);
+  }
+
+  if (fieldData.align === "center") {
+    return x + Math.max(0, (width - textWidth) / 2);
+  }
+
+  return x;
 }
 
 function getNextReceiptNumber(lastReceiptNumber, projectKey, financialYear) {
@@ -177,11 +236,22 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const {
+      documentType = "payment-receipt",
       formData = {},
       coordinates = {},
+      filename = "payment-receipt.pdf",
       paymentDate,
       saveCounter = true,
     } = await request.json();
+    const projectKey = getProjectKey(formData.projectName);
+    const pdfFormData = {
+      ...formData,
+      companyName:
+        formData.companyName || PROJECT_COMPANY_NAMES[projectKey] || "",
+    };
+    const pdfCoordinates = pdfFormData.companyName
+      ? { companyName: COMPANY_NAME_COORDINATE, ...coordinates }
+      : coordinates;
 
     // Load the project-specific PDF template
     const templatePath = path.join(
@@ -189,24 +259,60 @@ export async function POST(request) {
       "public",
       "assets",
       "new",
-      getPaymentReceiptTemplate(formData.projectName),
+      getPaymentReceiptTemplate(pdfFormData.projectName, documentType),
     );
     const existingPdfBytes = fs.readFileSync(templatePath);
 
     // Load the PDF document
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    pdfDoc.registerFontkit(fontkit);
     const pages = pdfDoc.getPages();
     const page = pages[0];
 
     // Embed fonts
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const montserratRegular =
+      (await embedFontFromPaths(pdfDoc, [
+        path.join(
+          process.cwd(),
+          "public",
+          "assets",
+          "fonts",
+          "Montserrat-Regular.ttf",
+        ),
+        "C:\\Windows\\Fonts\\Montserrat-Regular.ttf",
+        "C:\\Windows\\Fonts\\Montserrat.ttf",
+      ])) || font;
+    const montserratBold =
+      (await embedFontFromPaths(pdfDoc, [
+        path.join(
+          process.cwd(),
+          "public",
+          "assets",
+          "fonts",
+          "Montserrat-Bold.ttf",
+        ),
+        "C:\\Windows\\Fonts\\Montserrat-Bold.ttf",
+        "C:\\Windows\\Fonts\\Montserrat-SemiBold.ttf",
+        "C:\\Windows\\Fonts\\Montserrat-ExtraBold.ttf",
+      ])) || fontBold;
 
     // Fill all fields based on coordinates
-    for (const [fieldKey, fieldData] of Object.entries(coordinates)) {
-      const value = String(formData[fieldKey] || "");
+    for (const [fieldKey, fieldData] of Object.entries(pdfCoordinates)) {
+      const value = String(pdfFormData[fieldKey] || "");
       if (value.trim()) {
-        let fontSize = fieldData.fontSize || 9;
+        let fontSize = Number(fieldData.fontSize || 9);
         const displayValue = value;
+        const wantsMontserrat =
+          String(fieldData.fontName || "").toLowerCase() === "montserrat";
+        const selectedFont = wantsMontserrat
+          ? fieldData.bold
+            ? montserratBold
+            : montserratRegular
+          : fieldData.bold
+            ? fontBold
+            : font;
 
         // Adjust font size for long text
         if (fieldKey === "amountInWords" && value.length > 50) {
@@ -217,10 +323,10 @@ export async function POST(request) {
         const targetPage = pages[pageIndex] || page;
 
         targetPage.drawText(displayValue, {
-          x: fieldData.x,
+          x: getFieldX(displayValue, fieldData, selectedFont, fontSize),
           y: fieldData.y,
           size: fontSize,
-          font: font,
+          font: selectedFont,
           color: rgb(0, 0, 0),
         });
       }
@@ -232,8 +338,8 @@ export async function POST(request) {
     if (saveCounter) {
       // Persist the receipt number exactly as provided (no transformation)
       await saveLastReceiptNumber(
-        formData.receiptNumber,
-        formData.projectName,
+        pdfFormData.receiptNumber,
+        pdfFormData.projectName,
         paymentDate,
       );
     }
@@ -243,7 +349,7 @@ export async function POST(request) {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": 'attachment; filename="payment-receipt.pdf"',
+        "Content-Disposition": `attachment; filename="${filename}"`,
       },
     });
   } catch (error) {

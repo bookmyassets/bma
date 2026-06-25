@@ -7,11 +7,27 @@ const PROJECT_OPTIONS = [
   { name: "WestWyn Estates", code: "WWE" },
 ];
 
+const PROJECT_COMPANY_NAMES = {
+  "WestWyn Estates": "WestWyn Partners LLP",
+  "WestWyn Residency": "BookMyAssets Projects",
+};
+
 const COORDINATES = {
+  companyName: {
+    page: 1,
+    x: 42,
+    y: 640,
+    width: 349,
+    height: 35,
+    fontName: "Montserrat",
+    fontSize: 20,
+    bold: true,
+    align: "center",
+  },
   receiptNumber: {
     page: 1,
     x: 175,
-    y: 494,
+    y: 500,
     width: 100,
     fontSize: 10,
     align: "left",
@@ -403,6 +419,7 @@ export default function PaymentReceiptPage() {
       }
 
       const formattedFormData = {
+        companyName: PROJECT_COMPANY_NAMES[form.projectName] || "",
         receiptNumber: form.receiptNumber, // stamped exactly as typed — no transformation
         receivedFrom: form.receivedFrom,
         projectName: form.projectName,
