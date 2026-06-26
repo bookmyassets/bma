@@ -8,7 +8,7 @@ const POPUP_TYPES = {
   time: {
     title: "Book Your Plot in Dholera",
     trigger: "time",
-    delay: 8000,
+    delay: 10000,
     sessionKey: "popupShownThisSession",
     source: "BookMyAssets Popup",
     tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
@@ -141,7 +141,7 @@ export default function PopupLeadForm({
   project,
   mobileStrategy = "scroll",
   clickThreshold = 5,
-  timeWindow = 2000,
+  timeWindow = 8000,
 }) {
   const typeConfig = POPUP_TYPES[type] || POPUP_TYPES.time;
   const canOverrideTitle = !["time", "scroll"].includes(type);
@@ -226,7 +226,7 @@ export default function PopupLeadForm({
       } else {
         openPopup();
       }
-    }, config.delay || 3000);
+    }, config.delay || 10000);
 
     return () => {
       clearTimeout(timer);
