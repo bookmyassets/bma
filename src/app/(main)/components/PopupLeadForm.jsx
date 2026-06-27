@@ -7,8 +7,7 @@ import logo from "@/assests/bma-dedicated-to-dholera.svg";
 const POPUP_TYPES = {
   time: {
     title: "Book Your Plot in Dholera",
-    trigger: "time",
-    delay: 10000,
+    trigger: "scroll",
     sessionKey: "popupShownThisSession",
     source: "BookMyAssets Popup",
     tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
@@ -47,8 +46,7 @@ const POPUP_TYPES = {
   },
   slug: {
     title: "Get Investment Details",
-    trigger: "time",
-    delay: 3000,
+    trigger: "scroll",
     sessionKey: "popupShown",
     source: "BookMyAssets christmas Popup",
     tags: ["Dholera Investment", "Popup Lead", "BookMyAssets"],
@@ -248,7 +246,7 @@ export default function PopupLeadForm({
         document.documentElement.clientHeight;
       const scrollPercentage = (scrollTop / documentHeight) * 100;
 
-      if (scrollPercentage >= 50 && scrollPercentage <= 60) {
+      if (scrollPercentage >= 45) {
         const remainingCooldown = getPopupCooldownRemaining(type);
         const openPopup = () => setShowFormPopup(true);
 

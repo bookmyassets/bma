@@ -533,14 +533,14 @@ export default async function Post({ params }) {
     const publishedDate = post.publishedAt ? new Date(post.publishedAt) : null;
     const formattedPublishedDate = publishedDate?.toLocaleDateString("en-US", {
       day: "numeric",
-      month: "long",
+      month: "short",
       year: "numeric",
     });
     const publishedDateTime = publishedDate?.toISOString().split("T")[0];
     const createdDate = post.createdAt ? new Date(post.createdAt) : null;
     const formattedCreatedDate = createdDate?.toLocaleDateString("en-US", {
       day: "numeric",
-      month: "long",
+      month: "short",
       year: "numeric",
     });
     const createdDateTime = createdDate?.toISOString().split("T")[0];
@@ -574,7 +574,7 @@ export default async function Post({ params }) {
               {/* Main Content */}
               <article className="lg:w-2/3">
                 {/* Breadcrumb */}
-                <div className="mb-4">
+                <div className="mb-4 hidden">
                   <nav className="flex" aria-label="Breadcrumb">
                     <ol className="inline-flex items-center space-x-1 md:space-x-3">
                       <li className="inline-flex items-center">
@@ -629,59 +629,142 @@ export default async function Post({ params }) {
                 </div>
 
                 {/* Article Header */}
-                <div className="mb-8">
-                  <div className="flex justify-between items-center">
-                    {post.categories && post.categories.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {post.categories.map((category) => (
-                          <span
-                            key={category._id || category.title}
-                            className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
-                          >
-                            {category.title}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                    <div className="flex space-x-2 pr-2">
-                      {/* WhatsApp */}
-                      <Link
-                        href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                      >
-                        <FaWhatsapp className="text-green-500 w-5 h-5" />
-                      </Link>
-
-                      {/* Facebook */}
-                      <Link
-                        href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                      >
-                        <FaFacebook className="text-blue-500 w-5 h-5" />
-                      </Link>
-
-                      {/* Instagram - Note: Direct sharing not supported */}
-                      {/* Instagram doesn't support web URL sharing. Users need to manually share */}
-
-                      {/* LinkedIn */}
-                      <Link
-                        href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                      >
-                        <FaLinkedin className="text-blue-800 w-5 h-5" />
-                      </Link>
-
-                      {/* Twitter/X */}
-                      <Link
-                        href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                      >
-                        <FaXTwitter className=" w-5 h-5" />
-                      </Link>
-                    </div>
-                  </div>
-
+                <div className="mb-4">
                   <h1 className="text-[clamp(1.35rem,calc(1.8vw+0.85rem),2.5rem)] leading-[1.22]  font-bold text-white mb-4">
                     {post.title}
                   </h1>
 
-                  <div className="flex flex-wrap items-center justify-between gap-4 text-[#ddbc69] text-sm mb-6">
+<div>
+  {formattedPublishedDate && (
+                        <div className="flex items-center">
+                          <time
+                            className="text-white"
+                            dateTime={publishedDateTime}
+                          >
+                            <span className="text-[#ddbc69]">
+                              {" "}
+                              Updated On:{" "}
+                            </span>{" "}
+                            {formattedPublishedDate}
+                          </time>
+                        </div>
+                      )}
+</div>
+
+                  <div className="hidden md:block">
+                    <div className="flex flex-wrap items-center space-x-4 justify-between p-2 rounded-lg gap-4 text-white text-sm mb-2">
+                      {formattedPublishedDate && (
+                        <div className="flex items-center">
+                          <time
+                            className="text-white"
+                            dateTime={publishedDateTime}
+                          >
+                            <span className="text-[#ddbc69]">
+                              {" "}
+                              Updated On:{" "}
+                            </span>{" "}
+                            {formattedPublishedDate}
+                          </time>
+                        </div>
+                      )}
+
+                      <div className="flex space-x-2 pr-2 ">
+                        <p className="font-semibold">Share This Article On:</p>
+                        {/* WhatsApp */}
+                        <Link
+                          href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                        >
+                          <FaWhatsapp className="text-green-500 w-5 h-5" />
+                        </Link>
+
+                        {/* Facebook */}
+                        <Link
+                          href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                        >
+                          <FaFacebook className="text-blue-500 w-5 h-5" />
+                        </Link>
+
+                        {/* Instagram - Note: Direct sharing not supported */}
+                        {/* Instagram doesn't support web URL sharing. Users need to manually share */}
+
+                        {/* LinkedIn */}
+                        <Link
+                          href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                        >
+                          <FaLinkedin className="text-blue-800 w-5 h-5" />
+                        </Link>
+
+                        {/* Twitter/X */}
+                        <Link
+                          href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                        >
+                          <FaXTwitter className=" w-5 h-5" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Featured Image */}
+                {post.mainImage && (
+                  <div className="mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
+                    <Image
+                      src={urlFor(post.mainImage).width(1200).height(800).url()}
+                      alt={
+                        post.mainImage?.alt || post.title || "Blog post image"
+                      }
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto aspect-[3/2]"
+                      priority
+                      fetchPriority="high"
+                    />
+                  </div>
+                )}
+
+                <div className="flex flex-wrap md:hidden items-center space-x-4 justify-center rounded-lg  text-[#f8f6f2] text-sm ">
+                  <p className="font-semibold">Share This Article On:</p>
+
+                  <div className="flex space-x-2 pr-2 ">
+                    {/* WhatsApp */}
+                    <Link
+                      href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                    >
+                      <FaWhatsapp className="text-green-500 w-5 h-5" />
+                    </Link>
+
+                    {/* Facebook */}
+                    <Link
+                      href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                    >
+                      <FaFacebook className="text-blue-500 w-5 h-5" />
+                    </Link>
+
+                    {/* Instagram - Note: Direct sharing not supported */}
+                    {/* Instagram doesn't support web URL sharing. Users need to manually share */}
+
+                    {/* LinkedIn */}
+                    <Link
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                    >
+                      <FaLinkedin className="text-blue-800 w-5 h-5" />
+                    </Link>
+
+                    {/* Twitter/X */}
+                    <Link
+                      href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                    >
+                      <FaXTwitter className=" w-5 h-5" />
+                    </Link>
+                  </div>
+                </div>
+
+                <TableOfContent headings={extractHeadings(post.body)} />
+
+                {/* Article Content */}
+                <div className="bg-black rounded-xl shadow-2xl p-8 border border-gray-700">
+                  <div className=" max-w-none">
+                    <PortableText value={post.body} components={components} className="text-xl" />
                     {formattedCreatedDate && (
                       <div className="flex items-center">
                         <svg
@@ -707,78 +790,6 @@ export default async function Post({ params }) {
                         </time>
                       </div>
                     )}
-
-                    {formattedPublishedDate && (
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          ></path>
-                        </svg>
-
-                        <time
-                          className="text-[#ddbc69]"
-                          dateTime={publishedDateTime}
-                        >
-                          Updated On: {formattedPublishedDate}
-                        </time>
-                      </div>
-                    )}
-
-                    {post.readingTime && (
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                        <span>{post.readingTime} min read</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Featured Image */}
-                {post.mainImage && (
-                  <div className="mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
-                    <Image
-                      src={urlFor(post.mainImage).width(1200).height(800).url()}
-                      alt={
-                        post.mainImage?.alt || post.title || "Blog post image"
-                      }
-                      width={1200}
-                      height={800}
-                      className="w-full h-auto aspect-[3/2]"
-                      priority
-                      fetchPriority="high"
-                    />
-                  </div>
-                )}
-
-                <TableOfContent headings={extractHeadings(post.body)} />
-
-                {/* Article Content */}
-                <div className="bg-black rounded-xl shadow-2xl p-8 border border-gray-700">
-                  <div className="text-xl max-w-none">
-                    <PortableText value={post.body} components={components} />
                   </div>
                   <PopupLeadForm
                     type="slug"

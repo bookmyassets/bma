@@ -44,21 +44,33 @@ export default function PopupForm({ title, sectionId }) {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  // Auto-popup after 5 seconds only if sectionId is "major-projects"
+  // Show popup at 45% scroll only if sectionId is "major-projects"
   useEffect(() => {
     const sessionPopupShown = sessionStorage.getItem("popupShownThisSession");
 
-    // Only show popup if section is "major-projects" and hasn't been shown this session
     if (sectionId === "major-projects" && !sessionPopupShown) {
-      const timer = setTimeout(() => {
-        setShowFormPopup(true);
-        sessionStorage.setItem("popupShownThisSession", "true");
-      }, 5000); // 5 seconds
+      const handleScroll = () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const documentHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrollPercentage = (scrollTop / documentHeight) * 100;
 
-      return () => clearTimeout(timer);
+        if (scrollPercentage >= 45) {
+          setShowFormPopup(true);
+          sessionStorage.setItem("popupShownThisSession", "true");
+          window.removeEventListener("scroll", handleScroll);
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     }
   }, [sectionId]);
-
   // Load reCAPTCHA
   useEffect(() => {
     const loadRecaptcha = () => {

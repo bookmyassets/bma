@@ -23,7 +23,7 @@ export default function Form({ title }) {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  // Auto-popup after 5 seconds
+  // Popup at 45% scroll
   useEffect(() => {
     const sessionPopupShown = sessionStorage.getItem("popupShownThisSession");
 
@@ -36,8 +36,7 @@ export default function Form({ title }) {
           document.documentElement.clientHeight;
         const scrollPercentage = (scrollTop / documentHeight) * 100;
 
-        // Trigger popup when user scrolls between 50-60%
-        if (scrollPercentage >= 50 && scrollPercentage <= 60) {
+        if (scrollPercentage >= 45) {
           setShowFormPopup(true);
           sessionStorage.setItem("popupShownThisSession", "true");
           window.removeEventListener("scroll", handleScroll);

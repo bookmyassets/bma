@@ -464,7 +464,7 @@ const DOCUMENT_COORDINATES = {
     allotmentClientNames: {
       page: 1,
       x: 49,
-      y: 604,
+      y: 620,
       fontSize: 12,
       bold: true,
       maxWidth: 154,
@@ -473,7 +473,7 @@ const DOCUMENT_COORDINATES = {
     date: {
       page: 1,
       x: 441,
-      y: 613,
+      y: 630,
       fontSize: 12,
       maxWidth: 116,
       maxLines: 1,
@@ -511,7 +511,7 @@ const DOCUMENT_COORDINATES = {
     plotConsideration: {
       page: 1,
       x: 347,
-      y: 380,
+      y: 376,
       fontSize: 12,
       maxWidth: 166,
       maxLines: 1,

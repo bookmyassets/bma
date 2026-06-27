@@ -14,7 +14,7 @@ const DOCUMENT_TEMPLATES = {
     downloadName: "Plot-Details.pdf",
   },
   "allotment-letter": {
-    fileName: "Allotment Letter.pdf",
+    fileName: "Allotment Letter base.pdf",
     downloadName: "Allotment-Letter.pdf",
   },
 };
