@@ -634,22 +634,19 @@ export default async function Post({ params }) {
                     {post.title}
                   </h1>
 
-<div>
-  {formattedPublishedDate && (
-                        <div className="flex items-center">
-                          <time
-                            className="text-white"
-                            dateTime={publishedDateTime}
-                          >
-                            <span className="text-[#ddbc69]">
-                              {" "}
-                              Updated On:{" "}
-                            </span>{" "}
-                            {formattedPublishedDate}
-                          </time>
-                        </div>
-                      )}
-</div>
+                  <div className="md:hidden">
+                    {formattedPublishedDate && (
+                      <div className="flex items-center">
+                        <time
+                          className="text-white"
+                          dateTime={publishedDateTime}
+                        >
+                          <span className="text-[#ddbc69]"> Updated On: </span>{" "}
+                          {formattedPublishedDate}
+                        </time>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="hidden md:block">
                     <div className="flex flex-wrap items-center space-x-4 justify-between p-2 rounded-lg gap-4 text-white text-sm mb-2">
@@ -764,7 +761,11 @@ export default async function Post({ params }) {
                 {/* Article Content */}
                 <div className="bg-black rounded-xl shadow-2xl p-8 border border-gray-700">
                   <div className=" max-w-none">
-                    <PortableText value={post.body} components={components} className="text-xl" />
+                    <PortableText
+                      value={post.body}
+                      components={components}
+                      className="text-xl"
+                    />
                     {formattedCreatedDate && (
                       <div className="flex items-center">
                         <svg
