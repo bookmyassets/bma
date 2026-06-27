@@ -253,7 +253,7 @@ export default async function page() {
                   </p>
                   <p className="text-white/90 text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.8]">
                     Spread across nearly{" "}
-                    <strong className="text-[#ddbc69]">920 sq. km</strong>,
+                    <strong className="text-[#ddbc69]">922.5 sq. km</strong>,
                     Dholera Smart City is designed to integrate industry,
                     infrastructure, sustainability, and modern living, creating a
                     long-term ecosystem rather than short-term real estate growth.
