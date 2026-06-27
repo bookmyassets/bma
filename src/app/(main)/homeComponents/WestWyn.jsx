@@ -26,7 +26,7 @@ const projects = [
     location: "Fedra-pipli state highway",
     href: "/dholera-residential-plots/westwyn-county",
     image: westwynCountyImage,
-    status: "Sold Out",
+    status: "Re-Sale",
   },
 ];
 
