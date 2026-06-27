@@ -16,6 +16,9 @@ import SchemaMarkup from "../../components/SchemaMarkup";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed";
+import PopupLeadForm from "../../components/PopupLeadForm";
+import { FaFacebook, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -58,11 +61,11 @@ const extractHeadings = (body) => {
 };
 
 // Right Sidebar Component
-const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
+const RightSidebar = ({ trendingBlogs }) => {
   return (
-    <aside className="lg:w-1/3">
+    <aside className="lg:w-1/3 space-y-4 pt-4">
       <div className="sticky top-24 space-y-6">
-        <div className=" pt-4 max-w-xl mx-auto">
+        <div className=" pt-4 max-w-xl mx-auto hidden md:block">
           <InlineLeadForm
             variant="common"
             title="Buy Residential Plots in Dholera Starting From ₹8 Lakh"
@@ -72,13 +75,13 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
         {/* Latest Content Section */}
         <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
           <h3 className="text-xl font-bold mb-4 text-white">
-            About Dholera SIR
+            Latest News on Dholera SIR
           </h3>
           <div className=" overflow-y-auto">
             {trendingBlogs?.slice(0, 4).map((item) => (
               <Link
                 key={item._id}
-                href={`/dholera-sir-blogs/${item.slug.current}`}
+                href={`/dholera-sir-updates/${item.slug.current}`}
               >
                 <div className="flex gap-3 items-center bg-gray-950 hover:bg-gray-900 p-3 border border-gray-700 transition-all hover:shadow-md">
                   {item.mainImage && (
@@ -107,7 +110,7 @@ const RightSidebar = ({ trendingBlogs, relatedProjects, type = "blog" }) => {
 
           <div className="mt-6 pt-4 border-t border-gray-600">
             <Link
-              href="/about-dholera-sir"
+              href="/dholera-sir-updates"
               className="w-full text-center rounded-xl text-white font-semibold bg-[#ddbc69] hover:bg-[#f3bb39] p-3 transition-colors"
             >
               Explore More
@@ -533,14 +536,14 @@ export default async function Post({ params }) {
     const publishedDate = post.publishedAt ? new Date(post.publishedAt) : null;
     const formattedPublishedDate = publishedDate?.toLocaleDateString("en-US", {
       day: "numeric",
-      month: "long",
+      month: "short",
       year: "numeric",
     });
     const publishedDateTime = publishedDate?.toISOString().split("T")[0];
     const createdDate = post.createdAt ? new Date(post.createdAt) : null;
     const formattedCreatedDate = createdDate?.toLocaleDateString("en-US", {
       day: "numeric",
-      month: "long",
+      month: "short",
       year: "numeric",
     });
     const createdDateTime = createdDate?.toISOString().split("T")[0];
@@ -631,115 +634,162 @@ export default async function Post({ params }) {
                 </div>
 
                 {/* Article Header */}
-                <div className="flex flex-col gap-4 items-center">
-                  {/* Article Header */}
-                  <div className="w-full ">
-                    <h1 className="text-[clamp(1rem,calc(2vw+1rem),2.5rem)] font-bold text-white mb-4 leading-tight">
-                      {post.title}
-                    </h1>
+                <div className="mb-4">
+                  <h1 className="text-[clamp(1rem,calc(2vw+1rem),2.5rem)] leading-[1.22]  font-bold text-white mb-4">
+                    {post.title}
+                  </h1>
 
-                    <div className="flex flex-wrap items-center justify-between gap-4 text-[#ddbc69] text-sm mb-6">
-                      {formattedCreatedDate && (
-                        <div className="flex items-center">
-                          <svg
-                            className="w-4 h-4 mr-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            ></path>
-                          </svg>
-
-                          <time
-                            className="text-[#ddbc69]"
-                            dateTime={createdDateTime}
-                          >
-                            Published On: {formattedCreatedDate}
-                          </time>
-                        </div>
-                      )}
-
-                      {formattedPublishedDate && (
-                        <div className="flex items-center">
-                          <svg
-                            className="w-4 h-4 mr-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            ></path>
-                          </svg>
-
-                          <time
-                            className="text-[#ddbc69]"
-                            dateTime={publishedDateTime}
-                          >
-                            Updated On: {formattedPublishedDate}
-                          </time>
-                        </div>
-                      )}
-
-                      {post.readingTime && (
-                        <div className="flex items-center">
-                          <svg
-                            className="w-4 h-4 mr-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                            ></path>
-                          </svg>
-                          <span>{post.readingTime} min read</span>
-                        </div>
-                      )}
-                    </div>
+                  <div className="md:hidden">
+                    {formattedPublishedDate && (
+                      <div className="flex items-center">
+                        <time
+                          className="text-white"
+                          dateTime={publishedDateTime}
+                        >
+                          <span className="text-[#ddbc69]"> Updated On: </span>{" "}
+                          {formattedPublishedDate}
+                        </time>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Featured Image */}
-                  {post.mainImage && (
-                    <div className="w-full overflow-hidden rounded-xl shadow-lg aspect-[3/2] flex-shrink-0">
-                      <Image
-                        src={urlFor(post.mainImage)
-                          .width(1200)
-                          .height(800)
-                          .url()}
-                        alt={post.mainImage?.alt || post.title}
-                        width={1200}
-                        height={800}
-                        className="w-full h-full object-cover"
-                        priority
-                        fetchPriority="high"
-                      />
+                  <div className="hidden md:block">
+                    <div className="flex flex-wrap items-center space-x-4 justify-between p-2 rounded-lg gap-4 text-white text-sm mb-2">
+                      {formattedPublishedDate && (
+                        <div className="flex items-center">
+                          <time
+                            className="text-white"
+                            dateTime={publishedDateTime}
+                          >
+                            <span className="text-[#ddbc69]">
+                              {" "}
+                              Updated On:{" "}
+                            </span>{" "}
+                            {formattedPublishedDate}
+                          </time>
+                        </div>
+                      )}
+
+                      <div className="flex space-x-2 pr-2 ">
+                        <p className="font-semibold">Share This Article On:</p>
+                        <Link
+                          href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
+                        >
+                          <FaWhatsapp className="text-green-500 w-5 h-5" />
+                        </Link>
+
+                        <Link
+                          href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
+                        >
+                          <FaFacebook className="text-blue-500 w-5 h-5" />
+                        </Link>
+
+                        <Link
+                          href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
+                        >
+                          <FaLinkedin className="text-blue-800 w-5 h-5" />
+                        </Link>
+
+                        <Link
+                          href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
+                        >
+                          <FaXTwitter className=" w-5 h-5" />
+                        </Link>
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
-                {/* close hero flex wrapper */}
+
+                {/* Featured Image */}
+                {post.mainImage && (
+                  <div className="mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
+                    <Image
+                      src={urlFor(post.mainImage).width(1200).height(800).url()}
+                      alt={
+                        post.mainImage?.alt ||
+                        post.title ||
+                        "Dholera SIR article image"
+                      }
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto aspect-[3/2]"
+                      priority
+                      fetchPriority="high"
+                    />
+                  </div>
+                )}
+
+                <div className="flex flex-wrap md:hidden items-center space-x-4 justify-center rounded-lg  text-[#f8f6f2] text-sm ">
+                  <p className="font-semibold">Share This Article On:</p>
+
+                  <div className="flex space-x-2 pr-2 ">
+                    <Link
+                      href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
+                    >
+                      <FaWhatsapp className="text-green-500 w-5 h-5" />
+                    </Link>
+
+                    <Link
+                      href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
+                    >
+                      <FaFacebook className="text-blue-500 w-5 h-5" />
+                    </Link>
+
+                    <Link
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
+                    >
+                      <FaLinkedin className="text-blue-800 w-5 h-5" />
+                    </Link>
+
+                    <Link
+                      href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/about-dholera-sir/${post.slug.current}`}
+                    >
+                      <FaXTwitter className=" w-5 h-5" />
+                    </Link>
+                  </div>
+                </div>
 
                 <TableOfContent headings={extractHeadings(post.body)} />
 
                 {/* Article Content */}
                 <div className="bg-black rounded-xl shadow-2xl p-8 border border-gray-700">
-                  <div className="text-xl max-w-none">
-                    <PortableText value={post.body} components={components} />
+                  <div className=" max-w-none">
+                    <PortableText
+                      value={post.body}
+                      components={components}
+                      className="text-xl"
+                    />
+                    {formattedCreatedDate && (
+                      <div className="flex items-center">
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          ></path>
+                        </svg>
+
+                        <time
+                          className="text-[#ddbc69]"
+                          dateTime={createdDateTime}
+                        >
+                          Published On: {formattedCreatedDate}
+                        </time>
+                      </div>
+                    )}
                   </div>
+                  <PopupLeadForm
+                    type="slug"
+                    title={post.formTitle || "Book Your Plot in Dholera"}
+                    project={post.title}
+                  />
 
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
@@ -766,8 +816,6 @@ export default async function Post({ params }) {
               {/* Right Sidebar */}
               <RightSidebar
                 trendingBlogs={trendingBlogs}
-                relatedProjects={relatedBlogs}
-                type="blog"
               />
             </div>
           </main>
@@ -777,7 +825,7 @@ export default async function Post({ params }) {
             <div className="max-w-7xl mx-auto px-4">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-bold text-white">
-                  You might also like
+                  Our Latest Blogs
                 </h2>
                 <Link
                   href="/dholera-sir-blogs"

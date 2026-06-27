@@ -630,7 +630,7 @@ export default async function Post({ params }) {
 
                 {/* Article Header */}
                 <div className="mb-4">
-                  <h1 className="text-[clamp(1.35rem,calc(1.8vw+0.85rem),2.5rem)] leading-[1.22]  font-bold text-white mb-4">
+                  <h1 className="text-[clamp(1rem,calc(2vw+1rem),2.5rem)] leading-[1.22]  font-bold text-white mb-4">
                     {post.title}
                   </h1>
 

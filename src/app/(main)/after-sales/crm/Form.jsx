@@ -901,7 +901,7 @@ export default function Form() {
     const clientNames = activeClients.map(getFullName).filter(Boolean);
     const receiptClientNames = activeClients.map(getClientName).filter(Boolean);
     const allotmentClientNames = activeClients
-      .map((client) => client.name)
+      .map(getFullName)
       .filter(Boolean)
       .join(" & ");
     const [client1 = EMPTY_CLIENT, client2 = EMPTY_CLIENT] = activeClients;
