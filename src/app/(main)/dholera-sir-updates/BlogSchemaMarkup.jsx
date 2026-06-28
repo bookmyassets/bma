@@ -52,7 +52,7 @@ const BlogSchemaMarkup = ({ post, relatedBlogs = [] }) => {
     return images;
   };
 
-  const baseUrl = "https://bookmyassets.com"; // Replace with your actual domain
+  const baseUrl = "https://www.bookmyassets.com";
   const postUrl = `${baseUrl}/dholera-sir-updates/${post.slug.current}`;
   
   // Main blog post schema
