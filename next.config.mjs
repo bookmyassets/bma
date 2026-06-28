@@ -205,7 +205,7 @@ const nextConfig = {
       },
       {
         source: "/blogs/sitemap.xml",
-        destination: "/sitemap.html", // NOT /dholera-sir-blogs/sitemap.xml
+        destination: "/sitemap.xml", // NOT /dholera-sir-blogs/sitemap.xml
         permanent: true,
       },
       {
@@ -336,7 +336,7 @@ const nextConfig = {
       },
       {
         source: "/projects/sitemap.xml",
-        destination: "/sitemap.html",
+        destination: "/sitemap.xml",
         permanent: true,
       },
       {
