@@ -60,8 +60,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Navbar />
         {children}
         <Footer />
-        <Whatsapp/>
-        <FloatingButtons />
+{/*         <Whatsapp/>
+        <FloatingButtons /> */}
       </body>
     </html>
   );

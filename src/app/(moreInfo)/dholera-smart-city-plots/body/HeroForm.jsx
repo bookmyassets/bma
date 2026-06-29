@@ -6,9 +6,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
-    email: "",
-    investmentAmt: "",
-    city: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -66,12 +63,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
       return false;
     }
 
-    // Email validation (optional field)
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
-      return false;
-    }
-
     // Phone validation
     if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
@@ -90,13 +81,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      // Prepare notes from additional fields (same as before)
-      const notesArray = [];
-      if (formData.city) notesArray.push(`City: ${formData.city}`);
-      if (formData.investmentAmt)
-        notesArray.push(`Budget: ${formData.investmentAmt}`);
-      const notes = notesArray.join(" | ");
-
       // Using GetinTouch's TeleCRM API endpoint
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
@@ -110,8 +94,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              email: formData.email || "",
-              notes: notes,
               source: "BookMyAssets Google Ads",
             },
             tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
@@ -237,38 +219,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         onChange={handleChange}
         required
       />
-      <input
-        name="email"
-        placeholder="Email (Optional)"
-        type="email"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <input
-        name="city"
-        placeholder="City*"
-        type="text"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.city}
-        onChange={handleChange}
-        required
-      />
-      <select
-        name="investmentAmt"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.investmentAmt}
-        onChange={handleChange}
-        required
-      >
-        <option value="" disabled>
-          Budget*
-        </option>
-        <option value="5-15">₹5 Lakh - ₹15 Lakh</option>
-        <option value="15-25">₹15 Lakh - ₹25 Lakh</option>
-        <option value="25+">₹25 Lakh +</option>
-      </select>
-
+     
       <div ref={recaptchaRef} className="recaptcha-container"></div>
 
       <button

@@ -73,8 +73,8 @@ export default function Navbar() {
     { href: "#dholera", label: "Dholera" },
     { href: "#westwyn-estates", label: "Westwyn Estates" },
     { href: "#why-bma", label: "Why BMA" },
-    { href: "#Gallery", label: "Gallery" },
-    { href: "#videos", label: "Dholera Live" },
+
+
   ];
 
   return (
@@ -151,22 +151,6 @@ export default function Navbar() {
                       >
                         Book A Free Site Visit
                       </button>
-                      <a
-                        href="tel:+918130371647"
-                        className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                        id="call-now"
-                      >
-                        Call Now
-                      </a>
-                      <a
-                        href="https://wa.me/918130371647"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        id="whatsapp-git"
-                        className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                      >
-                        WhatsApp Us
-                      </a>
                     </div>
                   </motion.div>
                 )}
@@ -216,20 +200,6 @@ export default function Navbar() {
                       >
                         Enquire Now
                       </button>
-                      <a
-                        href="tel:+918130371647"
-                        className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                      >
-                        Call Now
-                      </a>
-                      <a
-                        href="https://wa.me/918130371647"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                      >
-                        WhatsApp Us
-                      </a>
                     </div>
                   </motion.div>
                 )}

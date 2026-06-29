@@ -64,7 +64,7 @@ export default function DholeraLandingPage() {
               </div>
               {/* Distance Grid */}
               <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
-                <ul className="space-y-4 text-gray-700 ">
+                <ul className="space-y-4 text-gray-700">
                   <li className="flex items-start justify-start gap-2 font-semibold">
                     <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                       •

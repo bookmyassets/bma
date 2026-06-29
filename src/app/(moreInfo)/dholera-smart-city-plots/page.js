@@ -20,7 +20,7 @@ export default function Page() {
 
   return (
     <>
-      <title>Dholera Smart City Plots | AUDA Approved | BookMyAssets</title>
+      <title>Dholera Smart City Plots | 100% Govt. Verified | Immediate Possession</title>
       <meta
         name="description"
         content="Invest in AUDA-approved Dholera plots with registry-ready paperwork, site visit assistance, resale support, and expert guidance from BookMyAssets."
