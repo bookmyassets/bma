@@ -84,6 +84,8 @@ async function embedUnicodeFont(pdfDoc, bold = false) {
 }
 
 function resolveSegmentText(segment, formData) {
+  if (!segment) return "";
+
   if (segment.key) {
     return sanitizePdfValue(formData[segment.key]);
   }
@@ -106,11 +108,23 @@ function drawRichText(page, fieldData, formData, font, fontBold) {
     if (!segmentText) return;
 
     const selectedFont = segment.bold ? fontBold : font;
-    const tokens = segmentText.match(/\s+|\S+/g) || [];
+    const tokens = segmentText.match(/\r\n|\r|\n|[^\S\r\n]+|\S+/g) || [];
 
     tokens.forEach((token) => {
+      if (/^(?:\r\n|\r|\n)$/.test(token)) {
+        cursorX = startX;
+        cursorY -= lineHeight;
+        return;
+      }
+
       const isWhitespace = /^\s+$/.test(token);
-      const tokenWidth = selectedFont.widthOfTextAtSize(token, fontSize);
+      const measuredToken = isWhitespace
+        ? token.replace(/[^\S\r\n]/g, " ")
+        : token;
+      const tokenWidth = selectedFont.widthOfTextAtSize(
+        measuredToken,
+        fontSize,
+      );
       const usedWidth = cursorX - startX;
 
       if (maxWidth && usedWidth > 0 && usedWidth + tokenWidth > maxWidth) {
