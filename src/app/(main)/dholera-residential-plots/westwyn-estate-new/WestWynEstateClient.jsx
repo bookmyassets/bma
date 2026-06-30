@@ -208,8 +208,6 @@ export default function WestWynEstateClient() {
 
       {/* <ProjectAmenities /> */}
 
-      
-
       <FAQSection />
 
       <div className=" ">
