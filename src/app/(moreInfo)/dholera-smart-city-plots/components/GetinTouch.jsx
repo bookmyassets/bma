@@ -6,6 +6,42 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-with-background.svg";
 import { useRouter, usePathname } from "next/navigation"
 
+function getLeadSource() {
+  if (typeof window === "undefined") return "BookMyAssets Google Ads";
+
+  const params = new URLSearchParams(window.location.search);
+
+  const utmSource = params.get("utm_source")?.toLowerCase();
+  const utmMedium = params.get("utm_medium")?.toLowerCase();
+
+  const isGoogleAds =
+    params.has("gclid") ||
+    utmSource === "google" ||
+    (utmSource === "google" && utmMedium === "paid");
+
+  if (!isGoogleAds) return "BookMyAssets Google Ads";
+
+  const campaign = params.get("utm_campaign");
+  const adGroup = params.get("utm_adgroup");
+  const keyword = params.get("utm_keyword");
+  const matchType = params.get("utm_matchtype");
+  const device = params.get("utm_device");
+  const location = params.get("utm_location");
+
+  const parts = [];
+
+  if (campaign) parts.push(campaign);
+  if (adGroup) parts.push(adGroup);
+  if (keyword) parts.push(keyword);
+  if (matchType) parts.push(`(${matchType})`);
+  if (device) parts.push(`[${device}]`);
+  if (location) parts.push(`- ${location}`);
+
+  return parts.length
+    ? `BookMyAssets Google ${parts.join(" | ")}`
+    : "BookMyAssets Google Ads";
+}
+
 export default function GetinTouch({
   onClose,
   title,
@@ -136,7 +172,7 @@ const onRecaptchaSuccess = async (token) => {
           fields: {
             name: formData.fullName,
             phone: formData.phone,
-            source: "BookMyAssets Google Ads",
+            source: getLeadSource(),
           },
           tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
           recaptchaToken: token,
