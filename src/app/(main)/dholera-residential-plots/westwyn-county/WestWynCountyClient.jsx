@@ -464,11 +464,16 @@ export default function WestWynCountyClient() {
           {/* Right Section (60%) */}
           <div className="w-full md:w-3/5 pl-2 pr-2 space-y-6">
             <p className="text-base md:text-lg font-light leading-relaxed text-gray-600">
-              WestWyn County by BookMyAssets is a premium plotted development in
-              Dholera Smart City. Located on the Fedra–Pipli State Highway, our
-              project is just 12 minutes away from Dholera International
-              Airport. We offer smart amenities and secure investment
-              opportunities with a strategic location.
+              WestWyn County, located on the Fedra-Pipli State Highway, is one
+              of BookMyAssets' successfully sold-out residential plot projects
+              in Dholera. Due to high demand, we are now offering verified
+              resale plots in WestWyn County. If you missed the original launch,
+              this is your chance to own a plot in one of Dholera's most trusted
+              residential projects.
+              <br />
+              Whether you are planning to build your dream home or invest for
+              the future, WestWyn County resale plots offer a great opportunity
+              with complete legal support and a hassle-free buying process.
             </p>
 
             {/* CTA Buttons */}
@@ -531,10 +536,10 @@ export default function WestWynCountyClient() {
             {/* Plots Counter */}
             <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
               <div className="text-3xl md:text-5xl font-bold text-[#ddbc69] mb-2 md:mb-4">
-                ₹ 11000
+                ₹ 12000
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                Price
+                ReSale Price
               </div>
               <div className="text-sm md:text-base text-gray-600">
                 per sq. yards
@@ -693,4 +698,3 @@ export default function WestWynCountyClient() {
     </>
   );
 }
-
