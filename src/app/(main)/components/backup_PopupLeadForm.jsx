@@ -58,27 +58,7 @@ const POPUP_TYPES = {
 
 const POPUP_COOLDOWN_KEY = "bmaLeadPopupLastClosedAt";
 const POPUP_COOLDOWN_MS = 11000;
-const ACTIVE_POPUP_KEY = "__bmaActiveLeadPopup";
 const COOLDOWN_TYPES = new Set(["time", "scroll", "slug"]);
-
-function requestPopupOpen(instanceId, type) {
-  if (typeof window === "undefined") return false;
-
-  const activePopup = window[ACTIVE_POPUP_KEY];
-  if (activePopup && activePopup.instanceId !== instanceId) return false;
-
-  window[ACTIVE_POPUP_KEY] = { instanceId, type };
-  return true;
-}
-
-function releasePopup(instanceId) {
-  if (typeof window === "undefined") return;
-
-  const activePopup = window[ACTIVE_POPUP_KEY];
-  if (activePopup?.instanceId === instanceId) {
-    delete window[ACTIVE_POPUP_KEY];
-  }
-}
 
 function getPopupCooldownRemaining(type) {
   if (typeof window === "undefined" || !COOLDOWN_TYPES.has(type)) return 0;
@@ -184,29 +164,12 @@ export default function PopupLeadForm({
   const recaptchaWidgetId = useRef(null);
   const clickCount = useRef(0);
   const clickTimer = useRef(null);
-  const popupInstanceId = useRef(
-    `lead-popup-${type}-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-  );
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
-  const openPopup = () => {
-    if (!requestPopupOpen(popupInstanceId.current, type)) return false;
-
-    setShowFormPopup(true);
-    return true;
-  };
 
   const closePopup = () => {
     markPopupClosed(type);
-    releasePopup(popupInstanceId.current);
     setShowFormPopup(false);
   };
-
-  useEffect(() => {
-    return () => {
-      releasePopup(popupInstanceId.current);
-    };
-  }, []);
 
   useEffect(() => {
     const loadRecaptcha = () => {
@@ -249,16 +212,17 @@ export default function PopupLeadForm({
     let cooldownTimer;
     const timer = setTimeout(() => {
       const remainingCooldown = getPopupCooldownRemaining(type);
-      const openDelayedPopup = () => {
-        if (openPopup() && config.sessionKey) {
+      const openPopup = () => {
+        setShowFormPopup(true);
+        if (config.sessionKey) {
           sessionStorage.setItem(config.sessionKey, "true");
         }
       };
 
       if (remainingCooldown > 0) {
-        cooldownTimer = setTimeout(openDelayedPopup, remainingCooldown);
+        cooldownTimer = setTimeout(openPopup, remainingCooldown);
       } else {
-        openDelayedPopup();
+        openPopup();
       }
     }, config.delay || 10000);
 
@@ -284,18 +248,18 @@ export default function PopupLeadForm({
 
       if (scrollPercentage >= 45) {
         const remainingCooldown = getPopupCooldownRemaining(type);
-        const openScrollPopup = () => {
-          if (openPopup() && config.sessionKey) {
-            sessionStorage.setItem(config.sessionKey, "true");
-            window.removeEventListener("scroll", handleScroll);
-          }
-        };
+        const openPopup = () => setShowFormPopup(true);
 
         if (remainingCooldown > 0) {
-          cooldownTimer = setTimeout(openScrollPopup, remainingCooldown);
+          cooldownTimer = setTimeout(openPopup, remainingCooldown);
         } else {
-          openScrollPopup();
+          openPopup();
         }
+
+        if (config.sessionKey) {
+          sessionStorage.setItem(config.sessionKey, "true");
+        }
+        window.removeEventListener("scroll", handleScroll);
       }
     };
 
@@ -320,9 +284,8 @@ export default function PopupLeadForm({
       }
 
       if (clickCount.current >= clickThreshold) {
-        if (openPopup()) {
-          setPopupShown(true);
-        }
+        setShowFormPopup(true);
+        setPopupShown(true);
         clickCount.current = 0;
         return;
       }
@@ -347,9 +310,8 @@ export default function PopupLeadForm({
 
     const showPopup = () => {
       if (!popupShown) {
-        if (openPopup()) {
-          setPopupShown(true);
-        }
+        setShowFormPopup(true);
+        setPopupShown(true);
       }
     };
 
@@ -383,9 +345,8 @@ export default function PopupLeadForm({
 
       const handlePopState = () => {
         if (!popupShown) {
-          if (openPopup()) {
-            setPopupShown(true);
-          }
+          setShowFormPopup(true);
+          setPopupShown(true);
           window.history.pushState(null, "", window.location.href);
         }
       };
@@ -400,9 +361,8 @@ export default function PopupLeadForm({
     if (mobileStrategy === "time") {
       const timer = setTimeout(() => {
         if (!popupShown) {
-          if (openPopup()) {
-            setPopupShown(true);
-          }
+          setShowFormPopup(true);
+          setPopupShown(true);
         }
       }, 15000);
 
@@ -418,9 +378,8 @@ export default function PopupLeadForm({
         100;
 
       if (scrollPercent > 50) {
-        if (openPopup()) {
-          setPopupShown(true);
-        }
+        setShowFormPopup(true);
+        setPopupShown(true);
       }
     };
 
