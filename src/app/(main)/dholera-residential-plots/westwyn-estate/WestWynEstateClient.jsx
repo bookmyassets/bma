@@ -11,9 +11,9 @@ import SoldOutProjectsSection from "../SoldOutProjects";
 import WestWynAboutSection from "./About";
 
 //images import
-import img1 from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate.webp";
+import img1 from "@/assests/residential/estates/westwyn-estates-dholera-times-desktop.webp";
 
-import img1M from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate-mobile.webp";
+import img1M from "@/assests/residential/estates/westwyn-estates-dholera-times-mobile.webp";
 
 import PopupLeadForm from "../../components/PopupLeadForm";
 import CostSheet from "../costsheet2";
