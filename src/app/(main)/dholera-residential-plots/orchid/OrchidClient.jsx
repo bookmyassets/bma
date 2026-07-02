@@ -64,6 +64,7 @@ export default function OrchidClient() {
           url: "/dholera-residential-plots/orchid",
         })}
       />
+      <meta name="robots" content="noindex, nofollow" />
 
       <SchemaMarkup
         schema={breadcrumbSchema([

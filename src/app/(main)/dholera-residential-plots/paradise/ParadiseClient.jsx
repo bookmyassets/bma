@@ -149,6 +149,7 @@ export default function ParadiseClient() {
           url: "/dholera-residential-plots/paradise",
         })}
       />
+      <meta name="robots" content="noindex, nofollow" />
 
       <SchemaMarkup
         schema={breadcrumbSchema([

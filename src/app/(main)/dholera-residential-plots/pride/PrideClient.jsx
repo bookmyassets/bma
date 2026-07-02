@@ -97,6 +97,7 @@ export default function PrideClient() {
           url: "/dholera-residential-plots/pride",
         })}
       />
+      <meta name="robots" content="noindex, nofollow" />
 
       <SchemaMarkup
         schema={breadcrumbSchema([

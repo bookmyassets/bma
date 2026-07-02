@@ -85,6 +85,7 @@ export default function MapleClient() {
           url: "/dholera-residential-plots/maple",
         })}
       />
+      <meta name="robots" content="noindex, nofollow" />
 
       <SchemaMarkup
         schema={breadcrumbSchema([
