@@ -43,7 +43,7 @@ export default function FAQSection() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h4 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold text-black mb-4">
-              Frequently Asked Questions
+              FAQs
             </h4>
             <p className="text-[clamp(0.95rem,1.4vw,1.125rem)] text-gray-600 mb-2">
               Got questions about WestWyn Residency?
