@@ -56,6 +56,24 @@ const extractHeadings = (body) => {
     }));
 };
 
+const getPlainText = (value) => {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  if (Array.isArray(value)) return value.map(getPlainText).join(" ");
+  if (typeof value === "object") {
+    if (typeof value.text === "string") return value.text;
+    if (Array.isArray(value.children)) return value.children.map(getPlainText).join(" ");
+    if (Array.isArray(value.rows)) return value.rows.map(getPlainText).join(" ");
+    if (Array.isArray(value.cells)) return value.cells.map(getPlainText).join(" ");
+  }
+  return "";
+};
+
+const getReadingTime = (body) => {
+  const words = getPlainText(body).trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 200));
+};
+
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs }) => {
   return (
@@ -544,6 +562,7 @@ export default async function Post({ params }) {
       year: "numeric",
     });
     const createdDateTime = createdDate?.toISOString().split("T")[0];
+    const readingTime = getReadingTime(post.body);
 
     return (
       <>
@@ -635,8 +654,8 @@ export default async function Post({ params }) {
                   </h1>
 
                   <div className="md:hidden">
-                    {formattedPublishedDate && (
-                      <div className="flex items-center">
+                    <div className="flex items-center justify-between gap-4 text-sm">
+                      {formattedPublishedDate && (
                         <time
                           className="text-white"
                           dateTime={publishedDateTime}
@@ -644,8 +663,14 @@ export default async function Post({ params }) {
                           <span className="text-[#ddbc69]"> Updated On: </span>{" "}
                           {formattedPublishedDate}
                         </time>
-                      </div>
-                    )}
+                      )}
+                      <span
+                        className="shrink-0 rounded-full border border-white/15 bg-white/10 px-3 py-1 font-semibold text-white"
+                        aria-label={`Estimated reading time ${readingTime} minutes`}
+                      >
+                        <span className="text-[#ddbc69]">{readingTime}</span> min read
+                      </span>
+                    </div>
                   </div>
 
                   <div className="hidden md:block">
@@ -666,7 +691,7 @@ export default async function Post({ params }) {
                       )}
 
                       <div className="flex space-x-2 pr-2 ">
-                        <p className="font-semibold">Share This Article On:</p>
+                        <p className="font-semibold">Share This Blog On:</p>
                         {/* WhatsApp */}
                         <Link
                           href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
@@ -704,7 +729,7 @@ export default async function Post({ params }) {
 
                 {/* Featured Image */}
                 {post.mainImage && (
-                  <div className="mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
+                  <div className="relative mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
                     <Image
                       src={urlFor(post.mainImage).width(1200).height(800).url()}
                       alt={
@@ -716,11 +741,17 @@ export default async function Post({ params }) {
                       priority
                       fetchPriority="high"
                     />
+                    <div
+                      className="absolute left-4 top-4 z-10 hidden rounded-full border border-white/20 bg-black/75 px-4 py-2 text-sm font-semibold text-white shadow-md backdrop-blur-sm md:block"
+                      aria-label={`Estimated reading time ${readingTime} minutes`}
+                    >
+                      <span className="text-[#ddbc69]">{readingTime}</span> min read
+                    </div>
                   </div>
                 )}
 
                 <div className="flex flex-wrap md:hidden items-center space-x-4 justify-center rounded-lg  text-[#f8f6f2] text-sm ">
-                  <p className="font-semibold">Share This Article On:</p>
+                  <p className="font-semibold">Share This Blog On:</p>
 
                   <div className="flex space-x-2 pr-2 ">
                     {/* WhatsApp */}
