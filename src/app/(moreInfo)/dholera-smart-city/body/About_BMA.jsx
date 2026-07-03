@@ -1,256 +1,196 @@
-import { useState } from "react";
-import { MapPin, Plus, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  FileCheck,
-  Scale,
-  RefreshCcw,
-  CalendarCheck2,
-  ShieldCheck,
-} from "lucide-react";
+"use client";
 
-export default function AboutBMA() {
-  const [openIndex, setOpenIndex] = useState(null);
-  const [selectedBenefit, setSelectedBenefit] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+import { useEffect, useRef, useState } from "react";
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
 
-  const openModal = (benefit, index) => {
-    setSelectedBenefit({ ...benefit, index });
-    setShowModal(true);
-  };
+const icons = [
+  { id: 1, label: "Due Diligence Team" },
+  { id: 2, label: "Immediate Sale Deed" },
+  { id: 3, label: "365 Days Site Visit" },
+  { id: 4, label: "Resale Support" },
+  { id: 5, label: "Buyback Assistance" },
+  { id: 6, label: "Rental Support" },
+];
 
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedBenefit(null);
-  };
+const COUNTERS = [
+  {
+    target: 7,
+    suffix: "+ Projects",
+    label: "Successfully Sold Out",
+  },
+  {
+    target: 2,
+    suffix: " Lakh+ Sq. Yd",
+    label: "Dholera Land Sold",
+  },
+  {
+    target: 957,
+    suffix: "+ Plots",
+    label: "Registry Delivered",
+  },
+  {
+    target: 561,
+    suffix: "+ Clients",
+    label: "Investor Client Base",
+  },
+];
 
-  const benefits = [
-    {
-      title: "Prime Location Projects",
-      icon: <MapPin className="w-6 h-6 text-indigo-600" />,
-      body: "We curate opportunities in Dholera's most strategic zones near expressways, airports, and industrial hubs. Each location offers strong connectivity while maintaining reasonable pricing for optimal long-term value.",
-    },
-    {
-      title: "Resale Support & Buyback Option",
-      icon: <RefreshCcw className="w-6 h-6 text-purple-600" />,
-      body: "Our structured resale assistance and buyback option provide enhanced liquidity and exit flexibility. Supported by BookMyAssets' active network, your investment remains marketable when required.",
-    },
-    {
-      title: "In-house Due Diligence Team",
-      icon: <Scale className="w-6 h-6 text-orange-600" />,
-      body: "Every project undergoes comprehensive legal and technical verification by our experts. Title checks, government approvals, NOCs, and land records are thoroughly validated before any opportunity reaches investors.",
-    },
-    {
-      title: "Immediate Sale Registry",
-      icon: <FileCheck className="w-6 h-6 text-blue-600" />,
-      body: "All properties come with complete documentation, enabling immediate sale registration. This eliminates uncertainty, approval delays, and post-purchase legal complications.",
-    },
-    {
-      title: "365 Days Site Visit Assistance",
-      icon: <CalendarCheck2 className="w-6 h-6 text-pink-600" />,
-      body: "We provide year-round site visit assistance, allowing you to physically verify projects at your convenience. This reflects our commitment to transparency and informed decision-making.",
-    },
-    {
-      title: "Government Approved Plots",
-      icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
-      body: "All plots are Approved Layout Plan and aligned with Dholera's official master plan. Government approval ensures regulatory compliance, legal clarity, and long-term development security.",
-    },
-  ];
+function AnimatedCounter({ target, suffix, shouldStart }) {
+  // Important: initial render shows the final value, not 0
+  const [count, setCount] = useState(target);
 
-  // Animation variants
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-    hover: {
-      scale: 1.03,
-      boxShadow:
-        "0 10px 25px -5px rgba(222, 174, 60, 0.1), 0 8px 10px -6px rgba(222, 174, 60, 0.1)",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  };
+  useEffect(() => {
+    if (!shouldStart) return undefined;
 
-  const modalOverlayVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-  const modalContentVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-      y: 50,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.8,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
+    if (reduceMotion) {
+      setCount(target);
+      return undefined;
+    }
 
-  const iconVariants = {
-    hover: {
-      rotate: 180,
-      transition: {
-        duration: 0.4,
-        ease: "easeInOut",
-      },
-    },
-  };
+    let animationFrame;
+    const duration = 3100;
+    const startTime = performance.now();
+
+    // Animation starts only on the client, after initial HTML already has real value
+    setCount(0);
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      const nextCount =
+        progress === 1 ? target : Math.round(target * easedProgress);
+
+      setCount(nextCount);
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [shouldStart, target]);
+
+  const finalText = `${target.toLocaleString("en-IN")}${suffix}`;
 
   return (
-    <>
-      <div className="pt-8 py-4 bg-gray-50" id="why-bma">
-        <div className="max-w-7xl mx-auto px-4 ">
-          <motion.h2
-            className="text-2xl md:text-[32px] lg:text-[40px] font-semibold text-center text-[#ddbc69] mb-12 md:mb-16"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Why Trust BookMyAssets?
-          </motion.h2>
-
-          {/* Desktop: 5 cards in a row, Mobile: 1 card per row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                className="group border-2 border-gray-300 rounded-2xl p-2 md:p-4 bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:border-[#ddbc69]"
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: index * 0.1 }}
-              >
-                {/* Card Header */}
-                <div className="text-center mb-6">
-                  <motion.div
-                    className="w-10 md:w-16 h-10 md:h-16 mx-auto mb-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex justify-center items-center border-2 border-gray-200 group-hover:border-[#ddbc69] transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 200 }}
-                  >
-                    <div className="scale-125">{benefit.icon}</div>
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#ddbc69] transition-colors duration-300 leading-snug">
-                    {benefit.title}
-                  </h3>
-                </div>
-
-                {/* Description - Always Visible */}
-                <div className="mb-3">
-                  <p className="text-base text-gray-700 text-center">
-                    {benefit.body}
-                  </p>
-                </div>
-                {/* Expandable Content */}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Popup Modal with AnimatePresence */}
-      <AnimatePresence>
-        {showModal && selectedBenefit && (
-          <motion.div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-            variants={modalOverlayVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-          >
-            <motion.div
-              className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-              variants={modalContentVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-            >
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <div className="flex items-center">
-                    <motion.div
-                      className="text-3xl mr-3"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.2, type: "spring" }}
-                    >
-                      {selectedBenefit.icon}
-                    </motion.div>
-                    <motion.h3
-                      className="text-xl font-semibold text-gray-800"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      {selectedBenefit.title}
-                    </motion.h3>
-                  </div>
-                  <motion.button
-                    onClick={closeModal}
-                    className="text-gray-500 hover:text-gray-700"
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <X className="w-6 h-6" />
-                  </motion.button>
-                </div>
-
-                <motion.div
-                  className="mb-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <p className="text-gray-600">{selectedBenefit.description}</p>
-                </motion.div>
-
-                <motion.div
-                  className="border-t border-gray-200 pt-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <h4 className="font-medium text-gray-800 mb-2">
-                    Detailed Information:
-                  </h4>
-                  <p className="text-gray-600">{selectedBenefit.body}</p>
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    <span
+      className="inline-block min-w-[7ch] tabular-nums"
+      data-final-value={finalText}
+      aria-label={finalText}
+    >
+      {count.toLocaleString("en-IN")}
+      {suffix}
+    </span>
   );
 }
 
+export default function AboutBMA() {
+  const counterGridRef = useRef(null);
+  const [shouldStartCounters, setShouldStartCounters] = useState(false);
+
+  useEffect(() => {
+    if (shouldStartCounters) return undefined;
+
+    const counterGrid = counterGridRef.current;
+    if (!counterGrid) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldStartCounters(true);
+          observer.disconnect();
+        }
+      },
+      { root: null, rootMargin: "0px 0px -15% 0px", threshold: 0.25 },
+    );
+
+    observer.observe(counterGrid);
+
+    return () => observer.disconnect();
+  }, [shouldStartCounters]);
+
+  return (
+    <>
+      <div
+        className="bg-gray-50 px-[clamp(1rem,4vw,2rem)] py-[clamp(2rem,2vw,3rem)]"
+        id="why-bma"
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-[clamp(1rem,3vw,1.75rem)] flex flex-col items-center text-center">
+            <div className="flex items-center gap-3">
+              <h2 className="mx-auto max-w-5xl text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-gray-900">
+                Why Invest with{" "}
+                <span className="text-[#ddbc69]">BookMyAssets</span>?
+              </h2>
+            </div>
+          </div>
+          <div className="mx-auto max-w-7xl text-center text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-gray-700">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <div
+                  ref={counterGridRef}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(0.75rem,2vw,1.25rem)]"
+                >
+                  {COUNTERS.map(({ target, suffix, label }) => (
+                    <div
+                      key={label}
+                      className="flex shadow-black flex-col items-center justify-center rounded-2xl bg-[#ddbc69] p-[clamp(0.5rem,1.5vw,0.75rem)] shadow-md transition-shadow hover:shadow-xl"
+                    >
+                      <div className="mb-2 text-center text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-black">
+                        <AnimatedCounter
+                          target={target}
+                          suffix={suffix}
+                          shouldStart={shouldStartCounters}
+                        />
+                      </div>
+                      <p className="text-center text-[0.875rem] font-normal leading-[1.5] text-black">
+                        {label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                {/* <p className="font-semibold pb-4 md:hidden">We Promise</p> */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(0.75rem,2vw,1rem)]">
+                  {icons.map((item, index) => {
+                    const isLastOdd =
+                      index === icons.length - 1 && icons.length % 2 !== 0;
+                    return (
+                      <div
+                        key={item.id}
+                        className={`flex flex-col items-center shadow-lg gap-[clamp(0.5rem,1.5vw,0.75rem)] rounded-xl border border-gray-100 bg-black p-[clamp(0.75rem,2vw,1rem)] transition-shadow hover:shadow-md ${
+                          isLastOdd
+                            ? "col-span-2 justify-self-center w-[calc(50%-0.5rem)]"
+                            : ""
+                        }`}
+                      >
+                        <p className="text-center text-[0.875rem] font-semibold leading-[1.5] text-[#ddbc69]">
+                          <span className="text-green-500 text-center px-2">✓</span>{" "}
+                          {item.label}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-[clamp(1.25rem,3vw,2rem)]">
+            <div>
+              <div className="pt-[clamp(1rem,2vw,1.5rem)]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

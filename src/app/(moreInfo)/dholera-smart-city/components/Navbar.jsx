@@ -73,12 +73,11 @@ export default function Navbar() {
   // Navigation items
   const navItems = [
     { href: "#hero", label: "Home" },
+    { href: "#westwyn-estates", label: "Westwyn Estates" },
     { href: "#dholera", label: "Dholera" },
-    { href: "#major-projects", label: "Major Projects" },
-    { href: "#westwyn-estate", label: "Westwyn Estate" },
     { href: "#why-bma", label: "Why BMA" },
+    { href: "#major-projects", label: "Major Projects" },
     { href: "#Gallery", label: "Gallery" },
-    { href: "#videos", label: "Dholera Live" },
   ];
 
   return (

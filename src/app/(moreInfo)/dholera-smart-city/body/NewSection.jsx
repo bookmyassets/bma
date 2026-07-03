@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import img1a from "@/assests/ad-page/westwyn-residency-dholera-society-gate.webp";
 import img1b from "@/assests/ad-page/amenities-residency.webp";
@@ -7,6 +9,7 @@ import img2b from "@/assests/ad-page/clubhouse-lite-westwyn-estates-dholera-land
 import img2c from "@/assests/ad-page/estates-map.webp";
 //import img1b from "@/assests/ad-page/westwyn-estates-dholera-society-gate.webp";
 
+import GetinTouch from "../components/GetinTouch";
 import Image from "next/image";
 import {
   Fence,
@@ -24,11 +27,13 @@ import {
   Clock,
 } from "lucide-react";
 import { FaRoad } from "react-icons/fa6";
+import { FaWhatsapp } from "react-icons/fa";
 import { GiRailway, GiRoad } from "react-icons/gi";
 
 // ✅ Extracted reusable component — each instance has its OWN state
 function ProjectCard({ projectName, sections, essentials, location }) {
   const [activeSection, setActiveSection] = useState(0);
+  const [showDetailsForm, setShowDetailsForm] = useState(false);
 
   return (
     <div className="flex flex-col">
@@ -91,7 +96,7 @@ function ProjectCard({ projectName, sections, essentials, location }) {
           ))}
         </div>
       ) : (
-        <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm">
+        <p className="text-black leading-relaxed whitespace-pre-line">
           {sections[activeSection].content}
         </p>
       )}
@@ -102,6 +107,7 @@ function ProjectCard({ projectName, sections, essentials, location }) {
           <button
             key={i}
             onClick={() => setActiveSection(i)}
+            aria-label={`Show ${sections[i].title}`}
             className={`h-2 rounded-full transition-all ${
               i === activeSection
                 ? "w-16 bg-gray-900"
@@ -110,6 +116,25 @@ function ProjectCard({ projectName, sections, essentials, location }) {
           />
         ))}
       </div>
+
+      <button
+        type="button"
+        onClick={() => setShowDetailsForm(true)}
+        className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#ddbc69] px-5 py-3 text-sm font-bold text-black shadow-md transition-all duration-200 hover:bg-[#cda852] focus:outline-none focus:ring-2 focus:ring-[#ddbc69] focus:ring-offset-2 sm:w-fit"
+      >
+        <FaWhatsapp className="h-5 w-5 text-green-700" aria-hidden="true" />
+        Get Details On Whatsapp
+      </button>
+
+      {showDetailsForm && (
+        <GetinTouch
+          onClose={() => setShowDetailsForm(false)}
+          title="Get Project Details"
+          subtitle={projectName}
+          buttonName="Book Your Plot"
+          thankYouMessage="We will contact you shortly on WhatsApp."
+        />
+      )}
     </div>
   );
 }
