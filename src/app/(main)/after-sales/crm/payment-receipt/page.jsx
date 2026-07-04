@@ -7,11 +7,6 @@ const PROJECT_OPTIONS = [
   { name: "WestWyn Estates", code: "WWE" },
 ];
 
-const PROJECT_COMPANY_NAMES = {
-  "WestWyn Estates": "WestWyn Partners LLP",
-  "WestWyn Residency": "BookMyAssets Projects",
-};
-
 const COORDINATES = {
   companyName: {
     page: 1,
@@ -115,6 +110,13 @@ const FIELDS = [
     maxLength: 25,
   },
   { key: "projectName", label: "Project Name", type: "dropdown" },
+  {
+    key: "companyName",
+    label: "Project Company Name",
+    type: "text",
+    placeholder: "Enter company name to print on receipt",
+    maxLength: 45,
+  },
   {
     key: "plotNumber",
     label: "Plot Number",
@@ -419,7 +421,7 @@ export default function PaymentReceiptPage() {
       }
 
       const formattedFormData = {
-        companyName: PROJECT_COMPANY_NAMES[form.projectName] || "",
+        companyName: form.companyName.trim(),
         receiptNumber: form.receiptNumber, // stamped exactly as typed — no transformation
         receivedFrom: form.receivedFrom,
         projectName: form.projectName,
@@ -615,6 +617,7 @@ export default function PaymentReceiptPage() {
 
           {/* Live Preview */}
           {(form.plotNumber ||
+            form.companyName ||
             form.projectName ||
             form.paymentDate ||
             form.receiptNumber ||
@@ -637,6 +640,14 @@ export default function PaymentReceiptPage() {
                     <span className="text-neutral-600">Payment Date:</span>
                     <span className="text-black">
                       {formatIndianDate(form.paymentDate)}
+                    </span>
+                  </div>
+                )}
+                {form.companyName && (
+                  <div className="flex justify-between">
+                    <span className="text-neutral-600">Company Name:</span>
+                    <span className="text-black text-right break-words max-w-[60%]">
+                      {form.companyName}
                     </span>
                   </div>
                 )}

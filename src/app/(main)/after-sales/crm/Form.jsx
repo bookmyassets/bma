@@ -61,6 +61,7 @@ const DOCUMENT_FIELD_REQUIREMENTS = {
     booking: ["projectName", "plotNumber"],
     receipt: [
       "receiptNumber",
+      "companyName",
       "paymentDate",
       "referenceNo",
       "modeOfPayment",
@@ -73,6 +74,7 @@ const DOCUMENT_FIELD_REQUIREMENTS = {
     booking: ["projectName", "plotNumber"],
     receipt: [
       "receiptNumber",
+      "companyName",
       "paymentDate",
       "referenceNo",
       "modeOfPayment",
@@ -101,6 +103,7 @@ const BOOKING_FIELD_LABELS = {
 
 const RECEIPT_FIELD_LABELS = {
   receiptNumber: "Receipt number",
+  companyName: "Project company name",
   paymentDate: "Payment date",
   referenceNo: "Reference number",
   modeOfPayment: "Mode of payment",
@@ -130,6 +133,7 @@ const INITIAL_BOOKING = {
 
 const INITIAL_RECEIPT = {
   receiptNumber: "",
+  companyName: "",
   paymentDate: "",
   referenceNo: "",
   modeOfPayment: "",
@@ -963,6 +967,7 @@ export default function Form() {
 
   const buildReceiptData = (payload) => ({
     receiptNumber: receipt.receiptNumber,
+    companyName: receipt.companyName.trim(),
     receivedFrom: payload.receiptClientNames,
     projectName: booking.projectName,
     plotNumber: booking.plotNumber,
@@ -1414,6 +1419,13 @@ export default function Form() {
                       onChange={(value) =>
                         updateReceipt("receiptNumber", value)
                       }
+                    />
+                  )}
+                  {requiredFields.receipt.has("companyName") && (
+                    <Input
+                      label="Project Company Name"
+                      value={receipt.companyName}
+                      onChange={(value) => updateReceipt("companyName", value)}
                     />
                   )}
                   {requiredFields.receipt.has("paymentDate") && (

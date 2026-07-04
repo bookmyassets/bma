@@ -22,13 +22,9 @@ const RECEIPT_TEMPLATES = {
   "payment-receipt": DEFAULT_RECEIPT_TEMPLATE,
   "token-receipt": "Token Receipt.pdf",
 };
-const PROJECT_COMPANY_NAMES = {
-  "westwyn-estates": "WestWyn Partners LLP",
-  "westwyn-residency": "BookMyAssets Projects",
-};
 const COMPANY_NAME_COORDINATE = {
   page: 1,
-  x: 40 ,
+  x: 40,
   y: 655,
   width: 349,
   height: 35,
@@ -243,11 +239,9 @@ export async function POST(request) {
       paymentDate,
       saveCounter = true,
     } = await request.json();
-    const projectKey = getProjectKey(formData.projectName);
     const pdfFormData = {
       ...formData,
-      companyName:
-        formData.companyName || PROJECT_COMPANY_NAMES[projectKey] || "",
+      companyName: (formData.companyName || "").trim(),
     };
     const pdfCoordinates = pdfFormData.companyName
       ? { companyName: COMPANY_NAME_COORDINATE, ...coordinates }
