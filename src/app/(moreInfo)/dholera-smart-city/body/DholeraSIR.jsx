@@ -1,6 +1,6 @@
 import React from "react";
 import ProjectsSection from "./MajorProjects";
-import abcd from "@/assests/ad-page/abcd-building-dholera-about-section.webp";
+import abcd from "@/assests/dholera-smart-city-bookmyassets.webp";
 import Image from "next/image";
 
 export default function DholeraLandingPage() {
@@ -38,17 +38,16 @@ export default function DholeraLandingPage() {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center bg-gray-100 p-8">
+        <div className="flex items-center justify-center bg-black p-4 ">
           <Image
             src={abcd}
             alt="Dholera Smart City"
-            className="w-72 aspect-[3/4] rounded-xl shadow-2xl object-contain"
+            className="w-full aspect-[2/1] rounded-lg shadow-2xl object-cover"
           />
         </div>
       </section>
 
       {/* Section 2: Major Companies & Projects */}
-      
     </div>
   );
 }
