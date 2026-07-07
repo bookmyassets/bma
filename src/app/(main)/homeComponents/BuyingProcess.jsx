@@ -21,7 +21,7 @@ const steps = [
   {
     num: "4",
     title: "Get Your Plot",
-    desc: ["Pay in full within 45 days", "Get your plot registered"],
+    desc: ["Pay in full within 15 days", "Get your plot registered"],
   },
 ];
 
