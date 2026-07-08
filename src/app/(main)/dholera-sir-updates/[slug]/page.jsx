@@ -78,6 +78,22 @@ const getReadingTime = (body) => {
   return Math.max(1, Math.ceil(words / 200));
 };
 
+const getDateInfo = (value) => {
+  if (!value) return null;
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  return {
+    formatted: date.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+    dateTime: date.toISOString().split("T")[0],
+  };
+};
+
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs }) => {
   return (
@@ -144,6 +160,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getUpdateBySlug(slug);
   if (!post) notFound();
+  const firstCreatedAt = post.createdAt || post._createdAt || post.publishedAt;
 
   return buildMeta({
     title: post.metaTitle || post.title,
@@ -153,7 +170,7 @@ export async function generateMetadata({ params }) {
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
     type: "article",
-    publishedAt: post.publishedAt,
+    publishedAt: firstCreatedAt,
     updatedAt: post._updatedAt,
   });
 }
@@ -549,20 +566,9 @@ export default async function Post({ params }) {
       );
     };
 
-    const publishedDate = post.publishedAt ? new Date(post.publishedAt) : null;
-    const formattedPublishedDate = publishedDate?.toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-    const publishedDateTime = publishedDate?.toISOString().split("T")[0];
-    const createdDate = post.createdAt ? new Date(post.createdAt) : null;
-    const formattedCreatedDate = createdDate?.toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-    const createdDateTime = createdDate?.toISOString().split("T")[0];
+    const firstCreatedAt = post.createdAt || post._createdAt || post.publishedAt;
+    const publishedDate = getDateInfo(firstCreatedAt);
+    const updatedDate = getDateInfo(post._updatedAt || firstCreatedAt);
     const readingTime = getReadingTime(post.body);
     return (
       <>
@@ -571,7 +577,7 @@ export default async function Post({ params }) {
             title: post.metaTitle || post.title,
             description: post.metaDescription,
             image: post.mainImage?.asset?.url,
-            publishedAt: post.publishedAt,
+            publishedAt: firstCreatedAt,
             updatedAt: post._updatedAt,
             slug: `dholera-sir-updates/${slug}`,
             authorName: post.author?.name || "BookMyAssets",
@@ -656,13 +662,13 @@ export default async function Post({ params }) {
 
                   <div className="md:hidden">
                     <div className="flex items-center justify-between gap-4 text-sm">
-                      {formattedPublishedDate && (
+                      {updatedDate && (
                         <time
                           className="text-white"
-                          dateTime={publishedDateTime}
+                          dateTime={updatedDate.dateTime}
                         >
                           <span className="text-[#ddbc69]"> Updated On: </span>{" "}
-                          {formattedPublishedDate}
+                          {updatedDate.formatted}
                         </time>
                       )}
                       <span
@@ -676,17 +682,16 @@ export default async function Post({ params }) {
 
                   <div className="hidden md:block">
                     <div className="flex flex-wrap items-center space-x-4 justify-between p-2 rounded-lg gap-4 text-white text-sm mb-2">
-                      {formattedPublishedDate && (
+                      {updatedDate && (
                         <div className="flex items-center">
                           <time
                             className="text-white"
-                            dateTime={publishedDateTime}
+                            dateTime={updatedDate.dateTime}
                           >
                             <span className="text-[#ddbc69]">
-                              {" "}
                               Updated On:{" "}
-                            </span>{" "}
-                            {formattedPublishedDate}
+                            </span>
+                            {updatedDate.formatted}
                           </time>
                         </div>
                       )}
@@ -784,7 +789,7 @@ export default async function Post({ params }) {
                       components={components}
                       className="text-xl"
                     />
-                    {formattedCreatedDate && (
+                    {publishedDate && (
                       <div className="flex items-center">
                         <svg
                           className="w-4 h-4 mr-1"
@@ -803,9 +808,9 @@ export default async function Post({ params }) {
 
                         <time
                           className="text-[#ddbc69]"
-                          dateTime={createdDateTime}
+                          dateTime={publishedDate.dateTime}
                         >
-                          Published On: {formattedCreatedDate}
+                          Published On: {publishedDate.formatted}
                         </time>
                       </div>
                     )}
