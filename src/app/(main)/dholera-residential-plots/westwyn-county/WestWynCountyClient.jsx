@@ -251,19 +251,19 @@ export default function WestWynCountyClient() {
       <SchemaMarkup
         schema={faqSchema([
           {
-            question: "Is Maple Township NA/NOC approved?",
+            question: "Is WestWyn County a good investment for NRIs?",
             answer:
-              "Yes, Maple Township plots are NA NOC approved with clear titles and registry ready.",
+              "WestWyn County offers clear-title, government-approved Dholera residential plots in a government and industry-backed smart city location. NRIs should review project documents, registry details, resale support, and due diligence before deciding.",
           },
           {
-            question: "Where is Maple Township located?",
+            question: "Where exactly is WestWyn County located?",
             answer:
-              "Maple Township is located in Village Gamph, Tehsil Dholera, District Ahmedabad inside Dholera SIR.",
+              "WestWyn County is located on Fedra-Pipli State Highway near Dholera SIR, with connectivity toward Dholera International Airport and the Ahmedabad-Dholera Expressway.",
           },
           {
-            question: "What is the starting price of plots in Maple Township?",
+            question: "How can BookMyAssets help me buy a plot in WestWyn County?",
             answer:
-              "Maple Township is sold out. Similar projects start from ₹8 lakh at WestWyn Residency.",
+              "BookMyAssets helps buyers with project guidance, site visit support, document review coordination, registry support, and resale assistance where applicable.",
           },
         ])}
       />

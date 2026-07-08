@@ -1,6 +1,51 @@
 const BASE_URL = "https://www.bookmyassets.com";
 const LOGO_URL = `${BASE_URL}/bma-logo.png`;
 
+function absoluteUrl(path = "") {
+  if (!path) return BASE_URL;
+  const normalizedPath = String(path);
+  return normalizedPath.startsWith("http")
+    ? normalizedPath
+    : `${BASE_URL}/${normalizedPath.replace(/^\/+/, "")}`;
+}
+
+function cleanText(value) {
+  if (!value) return undefined;
+  return String(value).replace(/\s+/g, " ").trim() || undefined;
+}
+
+function toIsoDate(value) {
+  if (!value) return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
+}
+
+function compactObject(value) {
+  if (Array.isArray(value)) {
+    return value
+      .map(compactObject)
+      .filter((item) => item !== undefined && item !== null);
+  }
+
+  if (value && typeof value === "object") {
+    const entries = Object.entries(value)
+      .map(([key, item]) => [key, compactObject(item)])
+      .filter(([, item]) => {
+        if (item === undefined || item === null || item === "") return false;
+        if (Array.isArray(item) && item.length === 0) return false;
+        return !(
+          typeof item === "object" &&
+          !Array.isArray(item) &&
+          Object.keys(item).length === 0
+        );
+      });
+
+    return Object.fromEntries(entries);
+  }
+
+  return value;
+}
+
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -22,6 +67,155 @@ export function organizationSchema() {
       "https://www.linkedin.com/company/bookmyassetss/",
     ],
   };
+}
+
+export function blogPostSchema({
+  title,
+  description,
+  image,
+  imageAlt,
+  publishedAt,
+  updatedAt,
+  slug,
+  canonicalUrl,
+  authorName = "BookMyAssets",
+  categories = [],
+  keywords = [],
+  bodyText,
+  readingTime,
+  relatedBlogs = [],
+}) {
+  const pageUrl = absoluteUrl(canonicalUrl || slug);
+  const headline = cleanText(title) || "Dholera Smart City Blog";
+  const articleText = cleanText(bodyText);
+  const summary =
+    cleanText(description) ||
+    (articleText
+      ? `${articleText.slice(0, 157)}${articleText.length > 157 ? "..." : ""}`
+      : undefined);
+  const categoryNames = categories
+    .map((category) => cleanText(category?.title || category))
+    .filter(Boolean);
+  const keywordNames = keywords
+    .map((keyword) => cleanText(keyword))
+    .filter(Boolean);
+  const wordCount = articleText
+    ? articleText.split(/\s+/).filter(Boolean).length
+    : undefined;
+  const readMinutes =
+    readingTime ||
+    (wordCount ? Math.max(1, Math.ceil(wordCount / 200)) : undefined);
+  const mainImage = image || LOGO_URL;
+  const author =
+    authorName === "BookMyAssets"
+      ? { "@id": `${BASE_URL}/#organization` }
+      : { "@type": "Person", name: cleanText(authorName) };
+
+  const relatedItems = relatedBlogs
+    .filter((blog) => blog?.slug?.current && blog?.title)
+    .map((blog, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: absoluteUrl(`dholera-sir-blogs/${blog.slug.current}`),
+      item: {
+        "@type": "BlogPosting",
+        headline: cleanText(blog.title),
+        description: cleanText(blog.metaDescription || blog.description),
+        url: absoluteUrl(`dholera-sir-blogs/${blog.slug.current}`),
+        datePublished: toIsoDate(blog.publishedAt || blog._createdAt),
+      },
+    }));
+
+  const graph = [
+    {
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      name: "BookMyAssets",
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: LOGO_URL,
+      },
+    },
+    {
+      "@type": "Blog",
+      "@id": `${BASE_URL}/dholera-sir-blogs#blog`,
+      name: "BookMyAssets Dholera SIR Blogs",
+      url: `${BASE_URL}/dholera-sir-blogs`,
+      publisher: {
+        "@id": `${BASE_URL}/#organization`,
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: headline,
+      description: summary,
+      isPartOf: {
+        "@id": `${BASE_URL}/dholera-sir-blogs#blog`,
+      },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: mainImage,
+      },
+      datePublished: toIsoDate(publishedAt),
+      dateModified: toIsoDate(updatedAt || publishedAt),
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": `${pageUrl}#blogposting`,
+      mainEntityOfPage: {
+        "@id": `${pageUrl}#webpage`,
+      },
+      headline,
+      name: headline,
+      description: summary,
+      image: [
+        {
+          "@type": "ImageObject",
+          url: mainImage,
+          caption: cleanText(imageAlt || headline),
+        },
+      ],
+      thumbnailUrl: mainImage,
+      url: pageUrl,
+      datePublished: toIsoDate(publishedAt),
+      dateModified: toIsoDate(updatedAt || publishedAt),
+      author,
+      publisher: {
+        "@id": `${BASE_URL}/#organization`,
+      },
+      articleSection: categoryNames[0] || "Dholera SIR Blogs",
+      keywords: [...new Set([...categoryNames, ...keywordNames])].join(", "),
+      wordCount,
+      timeRequired: readMinutes ? `PT${readMinutes}M` : undefined,
+      inLanguage: "en-IN",
+      isAccessibleForFree: true,
+      isPartOf: {
+        "@id": `${BASE_URL}/dholera-sir-blogs#blog`,
+      },
+      about: categoryNames.map((name) => ({
+        "@type": "Thing",
+        name,
+      })),
+      articleBody: articleText ? articleText.slice(0, 5000) : undefined,
+    },
+    relatedItems.length > 0
+      ? {
+          "@type": "ItemList",
+          "@id": `${pageUrl}#related-posts`,
+          name: "Related Dholera SIR blog posts",
+          itemListElement: relatedItems,
+        }
+      : undefined,
+  ];
+
+  return compactObject({
+    "@context": "https://schema.org",
+    "@graph": graph,
+  });
 }
 
 export function articleSchema({

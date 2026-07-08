@@ -93,7 +93,7 @@ export default function MarinaBayClient() {
         schema={realEstateSchema({
           name: "Marina Bay - Residential Plots in Dholera SIR",
           description: "Buy residential plots in Marina Bay, Dholera SIR.",
-          url: "/dholera-residential-plots/maple",
+          url: "/dholera-residential-plots/marina-bay",
         })}
       />
       <meta name="robots" content="noindex, nofollow" />

@@ -11,7 +11,7 @@ import { FaLinkedin } from "react-icons/fa";
 import "./blogPage.css";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import SchemaMarkup from "../../components/SchemaMarkup";
-import { articleSchema, breadcrumbSchema } from "@/lib/schema";
+import { blogPostSchema, breadcrumbSchema } from "@/lib/schema";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed";
@@ -567,14 +567,21 @@ export default async function Post({ params }) {
     return (
       <>
         <SchemaMarkup
-          schema={articleSchema({
+          schema={blogPostSchema({
             title: post.metaTitle || post.title,
             description: post.metaDescription,
             image: post.mainImage?.asset?.url,
+            imageAlt: post.mainImage?.alt,
             publishedAt: post.publishedAt,
             updatedAt: post._updatedAt,
             slug: `dholera-sir-blogs/${slug}`,
+            canonicalUrl: post.canonicalUrl,
             authorName: post.author?.name || "BookMyAssets",
+            categories: post.categories,
+            keywords: post.keywords,
+            bodyText: getPlainText(post.body),
+            readingTime,
+            relatedBlogs,
           })}
         />
 
