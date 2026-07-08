@@ -250,8 +250,8 @@ export function articleSchema({
         url: LOGO_URL,
       },
     },
-    datePublished: publishedAt,
-    dateModified: updatedAt || publishedAt,
+      datePublished: toIsoDate(publishedAt),
+      dateModified: toIsoDate(updatedAt || publishedAt),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": pageUrl,
