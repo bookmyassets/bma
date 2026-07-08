@@ -12,7 +12,7 @@ export default async function sitemap() {
 
     client.fetch(
       `*[_type == "post" && "Blog" in categories[]->title && site == "bookmyassets" && (noIndex == null || noIndex == false)]{
-        "slug": slug.current, _updatedAt
+        "slug": slug.current, publishedAt, _updatedAt
       }`,
       {},
       FETCH_OPTIONS  // ← add as third arg
@@ -62,7 +62,7 @@ export default async function sitemap() {
   // ✅ Dynamic URLs
   const blogUrls = blogs.map((post) => ({
     url: `${BASE_URL}/dholera-sir-blogs/${post.slug}`,
-    lastModified: post._updatedAt,
+    lastModified: post.publishedAt || post._updatedAt,
     changeFrequency: "daily",
     priority: 0.7,
   }));

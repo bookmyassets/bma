@@ -90,6 +90,13 @@ const getDateInfo = (value) => {
   };
 };
 
+const getArticleDates = (post) => {
+  const publishedAt = post?.createdAt || post?._createdAt || post?.publishedAt;
+  const updatedAt = post?.publishedAt || post?._updatedAt || publishedAt;
+
+  return { publishedAt, updatedAt };
+};
+
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs }) => {
   return (
@@ -158,7 +165,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getBlogBySlug(slug);
   if (!post) notFound();
-  const firstCreatedAt = post.createdAt || post._createdAt || post.publishedAt;
+  const articleDates = getArticleDates(post);
 
   return buildMeta({
     title: post.metaTitle || post.title,
@@ -168,8 +175,8 @@ export async function generateMetadata({ params }) {
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
     type: "article",
-    publishedAt: firstCreatedAt,
-    updatedAt: post._updatedAt,
+    publishedAt: articleDates.publishedAt,
+    updatedAt: articleDates.updatedAt,
     authors: [{ name: "BookMyAssets" }],
   });
 }
@@ -565,9 +572,9 @@ export default async function Post({ params }) {
       );
     };
 
-    const firstCreatedAt = post.createdAt || post._createdAt || post.publishedAt;
-    const publishedDate = getDateInfo(firstCreatedAt);
-    const updatedDate = getDateInfo(post._updatedAt || firstCreatedAt);
+    const articleDates = getArticleDates(post);
+    const publishedDate = getDateInfo(articleDates.publishedAt);
+    const updatedDate = getDateInfo(articleDates.updatedAt);
     const readingTime = getReadingTime(post.body);
 
     return (
@@ -578,8 +585,8 @@ export default async function Post({ params }) {
             description: post.metaDescription,
             image: post.mainImage?.asset?.url,
             imageAlt: post.mainImage?.alt,
-            publishedAt: firstCreatedAt,
-            updatedAt: post._updatedAt,
+            publishedAt: articleDates.publishedAt,
+            updatedAt: articleDates.updatedAt,
             slug: `dholera-sir-blogs/${slug}`,
             canonicalUrl: post.canonicalUrl,
             authorName: post.author?.name || "BookMyAssets",
@@ -780,9 +787,6 @@ export default async function Post({ params }) {
                     >
                       <FaFacebook className="text-blue-500 w-5 h-5" />
                     </Link>
-
-                    {/* Instagram - Note: Direct sharing not supported */}
-                    {/* Instagram doesn't support web URL sharing. Users need to manually share */}
 
                     {/* LinkedIn */}
                     <Link

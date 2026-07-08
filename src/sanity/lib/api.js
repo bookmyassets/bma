@@ -132,7 +132,9 @@ export async function getPostBySlug(slug, category = null) {
     body[]{ ..., _type=="image"=>{..., asset->{ _id, _ref, url }}, markDefs[]{..., _type=="link"=>{"href":@.href}} },
     author->{ name, image }, categories[]->{ title, _id }, readingTime
   }`;
-  return await client.fetch(query, { slug, site });
+  return await client
+    .withConfig({ useCdn: false })
+    .fetch(query, { slug, site }, { cache: "no-store" });
 } 
 
 // Named wrappers — use these in your page files
