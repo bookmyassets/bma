@@ -320,7 +320,7 @@ export default function Paradise2Client() {
                           {index === 3 &&
                             "Gated entry, internal roads, electrification, water supply, and landscaped green spaces."}
                           {index === 4 &&
-                            "Multiple plot sizes and flexible payment plans for every investor."}
+                            "Multiple plot sizes and 15 Days Payment Plans for every investor."}
                         </p>
                       </div>
                     </div>

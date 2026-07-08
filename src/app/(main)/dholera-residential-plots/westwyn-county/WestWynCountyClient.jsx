@@ -536,7 +536,7 @@ export default function WestWynCountyClient() {
             {/* Plots Counter */}
             <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
               <div className="text-3xl md:text-5xl font-bold text-[#ddbc69] mb-2 md:mb-4">
-                ₹ 12000
+                ₹12000
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
                 ReSale Price
@@ -652,7 +652,7 @@ export default function WestWynCountyClient() {
                           {index === 0 &&
                             "Located on Fedra-Pipli State Highway, just 12 minutes from Ahmedabad-Dholera Expressway, Dholera International Airport, Metro, and industrial hubs, including the TATA Semiconductor Plant (25 minutes away) and Dedicated Freight Corridor."}
                           {index === 1 &&
-                            "Investment We offer registry-ready plots with flexible payment plans on Dholera residential plots. Our team ensures end-to-end assistance with resale support and buyback assistance*."}
+                            "Investment We offer registry-ready plots and 15 Days Payment Plans on Dholera Residential Plots. Our team ensures end-to-end assistance with resale support and buyback assistance*."}
                           {index === 2 &&
                             "We offer immediate registry on Dholera plots with NA/NOC clearance and clear titles."}
                           {index === 3 &&

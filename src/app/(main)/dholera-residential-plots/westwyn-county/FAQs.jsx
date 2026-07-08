@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "Is WestWyn County a good investment for NRIs?",
     answer:
-      "WestWyn County offers clear-title, government-approved Dholera residential plots in the government and industry-backed Dholera metro city, making it a secure choice for NRIs. With flexible payment plans, registry-ready plots, resale support, and buy-back assistance*, investing is hassle-free even from abroad.",
+      "WestWyn County offers clear-title, government-approved Dholera residential plots in the government and industry-backed Dholera metro city, making it a secure choice for NRIs.The 15 Days Payment Plans, registry-ready plots, resale support, and buy-back assistance*, investing is hassle-free even from abroad.",
   },
   {
     question: "Where exactly is it located?",
