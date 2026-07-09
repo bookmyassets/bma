@@ -7,6 +7,8 @@ const PROJECT_OPTIONS = [
   { name: "WestWyn Estates", code: "WWE" },
 ];
 
+const COMPANY_OPTIONS = ["BookMyAssets Projects", "WestWyn Partners LLP"];
+
 const COORDINATES = {
   companyName: {
     page: 1,
@@ -113,9 +115,8 @@ const FIELDS = [
   {
     key: "companyName",
     label: "Project Company Name",
-    type: "text",
-    placeholder: "Enter company name to print on receipt",
-    maxLength: 45,
+    type: "dropdown",
+    options: COMPANY_OPTIONS,
   },
   {
     key: "plotNumber",
@@ -550,7 +551,15 @@ export default function PaymentReceiptPage() {
           {/* Form Fields */}
           <div className="space-y-5">
             {FIELDS.map(
-              ({ key, label, type, placeholder, readonly, maxLength }) => (
+              ({
+                key,
+                label,
+                type,
+                placeholder,
+                readonly,
+                maxLength,
+                options,
+              }) => (
                 <div key={key}>
                   <label className="block text-base text-black mb-1.5">
                     {label}
@@ -576,10 +585,16 @@ export default function PaymentReceiptPage() {
                       onChange={handleChange}
                       className="w-full bg-white border border-neutral-800 rounded-lg px-3 py-2.5 text-base text-black focus:outline-none focus:border-amber-500 transition-colors"
                     >
-                      <option value="">Select project...</option>
-                      {PROJECT_OPTIONS.map((project) => (
-                        <option key={project.code} value={project.name}>
-                          {project.name}
+                      <option value="">
+                        Select {key === "companyName" ? "company" : "project"}
+                        ...
+                      </option>
+                      {(options || PROJECT_OPTIONS).map((option) => (
+                        <option
+                          key={option.code || option}
+                          value={option.name || option}
+                        >
+                          {option.name || option}
                         </option>
                       ))}
                     </select>

@@ -7,6 +7,8 @@ const PROJECT_OPTIONS = [
   { name: "WestWyn Estates", code: "WWE" },
 ];
 
+const COMPANY_OPTIONS = ["BookMyAssets Projects", "WestWyn Partners LLP"];
+
 const DOCUMENT_OPTIONS = [
   { id: "welcome-letter", label: "Welcome Letter" },
   { id: "plot-details", label: "Plot Details" },
@@ -1422,11 +1424,23 @@ export default function Form() {
                     />
                   )}
                   {requiredFields.receipt.has("companyName") && (
-                    <Input
-                      label="Project Company Name"
-                      value={receipt.companyName}
-                      onChange={(value) => updateReceipt("companyName", value)}
-                    />
+                    <label className="grid gap-[0.375rem] text-[0.875rem] text-white/75">
+                      Project Company Name
+                      <select
+                        value={receipt.companyName}
+                        onChange={(event) =>
+                          updateReceipt("companyName", event.target.value)
+                        }
+                        className="rounded-lg border border-white/15 bg-[#101820] px-[0.75rem] py-[0.625rem] text-white outline-none focus:border-[#ddbc69]"
+                      >
+                        <option value="">Select company</option>
+                        {COMPANY_OPTIONS.map((companyName) => (
+                          <option key={companyName} value={companyName}>
+                            {companyName}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
                   )}
                   {requiredFields.receipt.has("paymentDate") && (
                     <Input
