@@ -91,8 +91,8 @@ const getDateInfo = (value) => {
 };
 
 const getArticleDates = (post) => {
-  const publishedAt = post?.createdAt || post?._createdAt || post?.publishedAt;
-  const updatedAt = post?.publishedAt || post?._updatedAt || publishedAt;
+  const publishedAt = post?.createdAt;
+  const updatedAt = post?.publishedAt;
 
   return { publishedAt, updatedAt };
 };

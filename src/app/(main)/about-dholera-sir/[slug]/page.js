@@ -144,7 +144,8 @@ export async function generateMetadata({ params }) {
   const { slug } = params;
   const post = await getAboutBySlug(slug);
   if (!post) notFound();
-  const firstCreatedAt = post.createdAt || post._createdAt || post.publishedAt;
+  const publishedAt = post.createdAt;
+  const updatedAt = post.publishedAt;
 
   return buildMeta({
     title: post.metaTitle || post.title,
@@ -154,8 +155,8 @@ export async function generateMetadata({ params }) {
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
     type: "article",
-    publishedAt: firstCreatedAt,
-    updatedAt: post._updatedAt,
+    publishedAt,
+    updatedAt,
   });
 }
 
@@ -550,9 +551,10 @@ export default async function Post({ params }) {
       );
     };
 
-    const firstCreatedAt = post.createdAt || post._createdAt || post.publishedAt;
-    const publishedDate = getDateInfo(firstCreatedAt);
-    const updatedDate = getDateInfo(post._updatedAt || firstCreatedAt);
+    const publishedAt = post.createdAt;
+    const updatedAt = post.publishedAt;
+    const publishedDate = getDateInfo(publishedAt);
+    const updatedDate = getDateInfo(updatedAt);
     const relatedSlideCount = relatedBlogs?.length || 0;
 
     return (
@@ -562,8 +564,8 @@ export default async function Post({ params }) {
             title: post.metaTitle || post.title,
             description: post.metaDescription,
             image: post.mainImage?.asset?.url,
-            publishedAt: firstCreatedAt,
-            updatedAt: post._updatedAt,
+            publishedAt,
+            updatedAt,
             slug: `about-dholera-sir/${slug}`,
             authorName: post.author?.name || "BookMyAssets",
           })}

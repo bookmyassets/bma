@@ -94,6 +94,13 @@ const getDateInfo = (value) => {
   };
 };
 
+const getArticleDates = (post) => {
+  const publishedAt = post?.createdAt;
+  const updatedAt = post?.publishedAt;
+
+  return { publishedAt, updatedAt };
+};
+
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs }) => {
   return (
@@ -160,7 +167,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getUpdateBySlug(slug);
   if (!post) notFound();
-  const firstCreatedAt = post.createdAt || post._createdAt || post.publishedAt;
+  const articleDates = getArticleDates(post);
 
   return buildMeta({
     title: post.metaTitle || post.title,
@@ -170,8 +177,8 @@ export async function generateMetadata({ params }) {
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
     type: "article",
-    publishedAt: firstCreatedAt,
-    updatedAt: post._updatedAt,
+    publishedAt: articleDates.publishedAt,
+    updatedAt: articleDates.updatedAt,
   });
 }
 
@@ -566,9 +573,9 @@ export default async function Post({ params }) {
       );
     };
 
-    const firstCreatedAt = post.createdAt || post._createdAt || post.publishedAt;
-    const publishedDate = getDateInfo(firstCreatedAt);
-    const updatedDate = getDateInfo(post._updatedAt || firstCreatedAt);
+    const articleDates = getArticleDates(post);
+    const publishedDate = getDateInfo(articleDates.publishedAt);
+    const updatedDate = getDateInfo(articleDates.updatedAt);
     const readingTime = getReadingTime(post.body);
     return (
       <>
@@ -577,8 +584,8 @@ export default async function Post({ params }) {
             title: post.metaTitle || post.title,
             description: post.metaDescription,
             image: post.mainImage?.asset?.url,
-            publishedAt: firstCreatedAt,
-            updatedAt: post._updatedAt,
+            publishedAt: articleDates.publishedAt,
+            updatedAt: articleDates.updatedAt,
             slug: `dholera-sir-updates/${slug}`,
             authorName: post.author?.name || "BookMyAssets",
           })}
