@@ -120,7 +120,7 @@ const faqGroups = [
       {
         question: "Are Dholera plot prices fixed?",
         answer:
-          "No. Pricing varies by legal status, location, access, plot size, development level, project amenities and payment terms. Compare the total payable amount and documents—not only the advertised per-square-yard price.",
+          "No. Pricing varies by legal status, location, access, plot size, development level, project amenities and payment terms. Compare the total payable amount and documentsnot only the advertised per-square-yard price.",
       },
       {
         question: "What additional costs apply when buying a plot?",
@@ -259,7 +259,7 @@ export default function FAQsPage() {
               </h1>
               <p className="mt-6 max-w-2xl text-[clamp(1rem,1.8vw,1.2rem)] leading-8 text-white/65">
                 Straightforward guidance on Dholera SIR, plot documents,
-                approvals, due diligence and site visits—written for buyers who
+                approvals, due diligence and site visitswritten for buyers who
                 prefer facts before decisions.
               </p>
             </div>
