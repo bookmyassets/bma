@@ -1,6 +1,7 @@
 // app/sitemap.js
 export const dynamic = "force-dynamic";
 import { client } from "@/sanity/lib/client";
+import { resolveBlogDates } from "@/lib/blogDates";
 
 const BASE_URL = "https://www.bookmyassets.com";
 
@@ -12,7 +13,7 @@ export default async function sitemap() {
 
     client.fetch(
       `*[_type == "post" && "Blog" in categories[]->title && site == "bookmyassets" && (noIndex == null || noIndex == false)]{
-        "slug": slug.current, publishedAt, _updatedAt
+        "slug": slug.current, createdAt, publishedAt, _createdAt, _updatedAt
       }`,
       {},
       FETCH_OPTIONS  // ← add as third arg
@@ -60,12 +61,16 @@ export default async function sitemap() {
   ].map((page) => ({ ...page }));
 
   // ✅ Dynamic URLs
-  const blogUrls = blogs.map((post) => ({
-    url: `${BASE_URL}/dholera-sir-blogs/${post.slug}`,
-    lastModified: post.publishedAt || post._updatedAt,
-    changeFrequency: "daily",
-    priority: 0.7,
-  }));
+  const blogUrls = blogs.map((post) => {
+    const { modificationDate } = resolveBlogDates(post);
+
+    return {
+      url: `${BASE_URL}/dholera-sir-blogs/${post.slug}`,
+      lastModified: modificationDate,
+      changeFrequency: "daily",
+      priority: 0.7,
+    };
+  });
 
   const updateUrls = updates.map((post) => ({
     url: `${BASE_URL}/dholera-sir-updates/${post.slug}`,

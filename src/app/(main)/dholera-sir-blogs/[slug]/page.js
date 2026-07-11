@@ -15,6 +15,7 @@ import { blogPostSchema, breadcrumbSchema } from "@/lib/schema";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed";
+import { resolveBlogDates } from "@/lib/blogDates";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -83,18 +84,11 @@ const getDateInfo = (value) => {
   return {
     formatted: date.toLocaleDateString("en-US", {
       day: "numeric",
-      month: "short",
+      month: "long",
       year: "numeric",
     }),
     dateTime: date.toISOString().split("T")[0],
   };
-};
-
-const getArticleDates = (post) => {
-  const publishedAt = post?.createdAt;
-  const updatedAt = post?.publishedAt;
-
-  return { publishedAt, updatedAt };
 };
 
 // Right Sidebar Component
@@ -165,7 +159,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getBlogBySlug(slug);
   if (!post) notFound();
-  const articleDates = getArticleDates(post);
+  const articleDates = resolveBlogDates(post);
 
   return buildMeta({
     title: post.metaTitle || post.title,
@@ -175,8 +169,8 @@ export async function generateMetadata({ params }) {
     canonicalUrl: post.seo?.canonicalUrl,
     noIndex: post.seo?.noIndex,
     type: "article",
-    publishedAt: articleDates.publishedAt,
-    updatedAt: articleDates.updatedAt,
+    publishedAt: articleDates.originalPublicationDate,
+    updatedAt: articleDates.modificationDate,
     authors: [{ name: "BookMyAssets" }],
   });
 }
@@ -572,9 +566,18 @@ export default async function Post({ params }) {
       );
     };
 
-    const articleDates = getArticleDates(post);
-    const publishedDate = getDateInfo(articleDates.publishedAt);
-    const updatedDate = getDateInfo(articleDates.updatedAt);
+    const articleDates = resolveBlogDates(post);
+    const publicationTime = new Date(
+      articleDates.originalPublicationDate,
+    ).getTime();
+    const modificationTime = new Date(articleDates.modificationDate).getTime();
+    const wasModified = modificationTime > publicationTime;
+    const visibleDate = getDateInfo(
+      wasModified
+        ? articleDates.modificationDate
+        : articleDates.originalPublicationDate,
+    );
+    const visibleDateLabel = wasModified ? "Updated On" : "Published On";
     const readingTime = getReadingTime(post.body);
 
     return (
@@ -585,8 +588,8 @@ export default async function Post({ params }) {
             description: post.metaDescription,
             image: post.mainImage?.asset?.url,
             imageAlt: post.mainImage?.alt,
-            publishedAt: articleDates.publishedAt,
-            updatedAt: articleDates.updatedAt,
+            publishedAt: articleDates.originalPublicationDate,
+            updatedAt: articleDates.modificationDate,
             slug: `dholera-sir-blogs/${slug}`,
             canonicalUrl: post.canonicalUrl,
             authorName: post.author?.name || "BookMyAssets",
@@ -675,13 +678,13 @@ export default async function Post({ params }) {
 
                   <div className="md:hidden">
                     <div className="flex items-center justify-between gap-4 text-sm">
-                      {updatedDate && (
+                      {visibleDate && (
                         <div className="flex flex-col gap-1 text-white">
-                          <time dateTime={updatedDate.dateTime}>
+                          <time dateTime={visibleDate.dateTime}>
                             <span className="text-[#ddbc69]">
-                              Updated On:{" "}
+                              {visibleDateLabel}:{" "}
                             </span>
-                            {updatedDate.formatted}
+                            {visibleDate.formatted}
                           </time>
                         </div>
                       )}
@@ -696,16 +699,16 @@ export default async function Post({ params }) {
 
                   <div className="hidden md:block">
                     <div className="flex flex-wrap items-center space-x-4 justify-between p-2 rounded-lg gap-4 text-white text-sm mb-2">
-                      {updatedDate && (
+                      {visibleDate && (
                         <div className="flex flex-wrap items-center gap-4">
                           <time
                             className="text-white"
-                            dateTime={updatedDate.dateTime}
+                            dateTime={visibleDate.dateTime}
                           >
                             <span className="text-[#ddbc69]">
-                              Updated On:{" "}
+                              {visibleDateLabel}:{" "}
                             </span>
-                            {updatedDate.formatted}
+                            {visibleDate.formatted}
                           </time>
                         </div>
                       )}
@@ -814,31 +817,6 @@ export default async function Post({ params }) {
                       components={components}
                       className="text-xl"
                     />
-                    {publishedDate && (
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          ></path>
-                        </svg>
-
-                        <time
-                          className="text-[#ddbc69]"
-                          dateTime={publishedDate.dateTime}
-                        >
-                          Published On: {publishedDate.formatted}
-                        </time>
-                      </div>
-                    )}
                   </div>
                   <PopupLeadForm
                     type="slug"
