@@ -130,7 +130,7 @@ const WestWynAboutSection = () => {
                   <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>Premium residential plots in Pipariya, Dholera</span>
+                  <span>Premium residential plots in Pipariya</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">

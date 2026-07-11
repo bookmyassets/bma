@@ -135,7 +135,7 @@ const WestWynAboutSection = () => {
                     •
                   </span>
                   <span>
-                    Premium residential plots in Polarpur, Dholera, Gujarat
+                    Premium residential plots in Polarpur
                   </span>
                 </li>
 
@@ -144,7 +144,7 @@ const WestWynAboutSection = () => {
                     •
                   </span>
                   <span>
-                    Direct Entry from State Highway-117 (150 foot road)
+                    Direct Entry from State Highway-117 (150 feet road)
                   </span>
                 </li>
 
