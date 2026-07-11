@@ -12,15 +12,17 @@ import {
 } from "lucide-react";
 
 const topicIcons = {
-  "dholera-basics": MapPinned,
-  "buying-due-diligence": FileCheck2,
-  "plots-documents": Building2,
-  "bookmyassets-support": Handshake,
+  general: FileCheck2,
+  "dholera-investment": MapPinned,
+  projects: Building2,
+  "nri-corner": Handshake,
+  "channel-partner": Handshake,
 };
 
 export default function FAQExplorer({ groups }) {
   const [activeTopic, setActiveTopic] = useState("all");
   const [query, setQuery] = useState("");
+  const [openQuestion, setOpenQuestion] = useState(null);
 
   const filteredGroups = useMemo(() => {
     const searchTerm = query.trim().toLowerCase();
@@ -197,29 +199,64 @@ export default function FAQExplorer({ groups }) {
                       </div>
 
                       <div className="w-full min-w-0 max-w-full divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-[#0d1014]">
-                        {group.items.map((item) => (
-                          <details
-                            key={item.question}
-                            className="group w-full min-w-0 open:bg-white/[0.025]"
-                          >
-                            <summary className="flex min-h-16 w-full min-w-0 cursor-pointer list-none items-center gap-3 px-4 py-4 text-left font-semibold leading-6 text-white transition-colors hover:text-[#ddbc69] focus:outline-none focus-visible:bg-white/5 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ddbc69] sm:gap-5 sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
-                              <span className="min-w-0 flex-1 break-words [overflow-wrap:anywhere]">
-                                {item.question}
-                              </span>
-                              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-[#ddbc69] transition-transform duration-200 group-open:rotate-180">
-                                <ChevronDown
-                                  className="h-4 w-4"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </summary>
-                            <div className="min-w-0 px-4 pb-5 sm:px-6 sm:pb-6 sm:pr-20">
-                              <p className="max-w-3xl break-words text-[0.95rem] leading-7 text-white/60 [overflow-wrap:anywhere] sm:text-base">
-                                {item.answer}
-                              </p>
+                        {group.items.map((item) => {
+                          const questionKey = `${group.id}-${item.question}`;
+                          const answerId = `${group.id}-answer-${item.question
+                            .toLowerCase()
+                            .replace(/[^a-z0-9]+/g, "-")
+                            .replace(/(^-|-$)/g, "")}`;
+                          const isOpen = openQuestion === questionKey;
+
+                          return (
+                            <div
+                              key={questionKey}
+                              className={`w-full min-w-0 transition-colors duration-300 motion-reduce:transition-none ${
+                                isOpen ? "bg-white/[0.025]" : ""
+                              }`}
+                            >
+                              <button
+                                type="button"
+                                aria-expanded={isOpen}
+                                aria-controls={answerId}
+                                onClick={() =>
+                                  setOpenQuestion(isOpen ? null : questionKey)
+                                }
+                                className="flex min-h-16 w-full min-w-0 items-center gap-3 px-4 py-4 text-left font-semibold leading-6 text-white transition-colors hover:text-[#ddbc69] focus:outline-none focus-visible:bg-white/5 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ddbc69] sm:gap-5 sm:px-6 sm:py-5"
+                              >
+                                <span className="min-w-0 flex-1 break-words [overflow-wrap:anywhere]">
+                                  {item.question}
+                                </span>
+                                <span
+                                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-[#ddbc69] transition-transform duration-300 motion-reduce:transition-none ${
+                                    isOpen ? "rotate-180" : ""
+                                  }`}
+                                >
+                                  <ChevronDown
+                                    className="h-4 w-4"
+                                    aria-hidden="true"
+                                  />
+                                </span>
+                              </button>
+                              <div
+                                id={answerId}
+                                aria-hidden={!isOpen}
+                                className={`grid min-w-0 transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${
+                                  isOpen
+                                    ? "grid-rows-[1fr] opacity-100"
+                                    : "grid-rows-[0fr] opacity-0"
+                                }`}
+                              >
+                                <div className="min-h-0 overflow-hidden">
+                                  <div className="min-w-0 px-4 pb-5 sm:px-6 sm:pb-6 sm:pr-20">
+                                    <p className="max-w-3xl break-words text-[0.95rem] leading-7 text-white/60 [overflow-wrap:anywhere] sm:text-base">
+                                      {item.answer}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                          </details>
-                        ))}
+                          );
+                        })}
                       </div>
                     </section>
                   );

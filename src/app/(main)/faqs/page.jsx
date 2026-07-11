@@ -38,131 +38,237 @@ export const metadata = {
 
 const faqGroups = [
   {
-    id: "dholera-basics",
-    label: "Dholera SIR Basics",
-    shortLabel: "Dholera basics",
-    description:
-      "Understand the region, its planning framework and the infrastructure that shapes its long-term potential.",
-    items: [
+    "id": "general",
+    "label": "General",
+    "shortLabel": "General",
+    "description": "Learn about BookMyAssets, its Dholera projects and the support available before and after purchase.",
+    "items": [
       {
-        question: "What is Dholera SIR?",
-        answer:
-          "Dholera Special Investment Region (Dholera SIR) is a planned industrial and urban development region in Gujarat. It is part of the Delhi–Mumbai Industrial Corridor and is being developed in phases with dedicated residential, industrial, commercial and public-use zones.",
+        "question": "What is BookMyAssets?",
+        "answer": "BookMyAssets (BMA) is a real estate developer specializing in Dholera Smart City. We offer NA-approved, registry-ready residential plots, along with in-house villa construction through BookMyAssets Construction."
       },
       {
-        question: "Where is Dholera SIR located?",
-        answer:
-          "Dholera SIR is in Ahmedabad district, Gujarat, to the south-west of Ahmedabad. Its location is planned around future industrial activity and regional links such as the Ahmedabad–Dholera Expressway and Dholera International Airport.",
+        "question": "Where is BookMyAssets located?",
+        "answer": "BookMyAssets' office is located in JMD Megapolis, Sector 48, Gurugram, Haryana. The company primarily operates and develops projects in Dholera, Gujarat."
       },
       {
-        question: "Is Dholera Smart City a government-planned project?",
-        answer:
-          "Yes. Dholera SIR is being developed through a government-led planning framework. However, a plot sold near or around Dholera is not automatically government owned or approved. Buyers should verify the exact survey number, title, land use and permissions for the specific property.",
+        "question": "Is BookMyAssets a developer or a channel partner?",
+        "answer": "BookMyAssets develops its own residential projects while also offering complete property solutions through its group companies and allied services."
       },
       {
-        question: "What is the Dholera Activation Area?",
-        answer:
-          "The Activation Area is the initial development zone where trunk infrastructure and city-level services have been prioritised. A property's distance from this area can be useful context, but it should not replace title, zoning, access-road and approval checks.",
+        "question": "Which projects are developed by BookMyAssets?",
+        "answer": "BookMyAssets has Developed 3 residential projects WestWyn County, WestWyn Estates, and WestWyn Residency in Dholera."
       },
       {
-        question: "What are Town Planning schemes in Dholera?",
-        answer:
-          "Town Planning schemes organise land into planned roads, public spaces, utilities and developable plots. If a property is described using a TP scheme or final plot number, confirm the details in the relevant records and approved plans before making a decision.",
+        "question": "How can I contact BookMyAssets?",
+        "answer": "You can call +91 81 30 37 1647, email info@bookmyassets.com, or fill out the enquiry form on bookmyassets.com to request a callback or price sheet."
       },
-    ],
+      {
+        "question": "Does BookMyAssets offer site visits?",
+        "answer": "Yes. BookMyAssets arranges guided, planned site visits for investors to view plot locations, layouts, and ongoing development work after paying the token amount."
+      },
+      {
+        "question": "What makes BookMyAssets different from other Dholera developers?",
+        "answer": "BookMyAssets offers an end-to-end journey plot selection, NA/NOC plan pass approved plots, immediate registry, in-house villa construction, and resale/rental support all under one team, rather than requiring investors to coordinate multiple vendors."
+      },
+      {
+        "question": "Does BookMyAssets provide resale assistance?",
+        "answer": "Yes. BookMyAssets offers resale support to help buyers when they decide to sell their property."
+      },
+      {
+        "question": "Does BookMyAssets offer buyback assistance?",
+        "answer": "Yes. Buyback assistance is available as per the applicable terms and conditions."
+      },
+      {
+        "question": "Will I receive support after buying the plot?",
+        "answer": "Yes. BookMyAssets continues to assist with documentation, construction planning, resale guidance, and other post-purchase services."
+      },
+      {
+        "question": "What is NOC clearance, and why does it matter?",
+        "answer": "A No Objection Certificate (NOC) confirms that a plot has cleared the required regulatory checks (such as land use, environment, or utility clearances) before sale or construction, adding legal safety for the buyer."
+      },
+      {
+        "question": "Does BookMyAssets provide an immediate registry after purchase?",
+        "answer": "Yes, BookMyAssets offers immediate sale deeds and registry-ready documentation for its projects."
+      },
+      {
+        "question": "Does BookMyAssets have a dedicated due diligence team?",
+        "answer": "Yes, BookMyAssets maintains a dedicated due diligence team to verify project documentation, titles, and approvals before sale."
+      }
+    ]
   },
   {
-    id: "buying-due-diligence",
-    label: "Buying & Due Diligence",
-    shortLabel: "Due diligence",
-    description:
-      "Know what to verify before you pay a token, sign an agreement or schedule registration.",
-    items: [
+    "id": "dholera-investment",
+    "label": "Dholera SIR & Investment",
+    "shortLabel": "Dholera SIR",
+    "description": "Understand Dholera SIR, its major infrastructure and the checks buyers should complete before investing.",
+    "items": [
       {
-        question: "What should I check before buying a plot in Dholera?",
-        answer:
-          "Start with the ownership chain, title search, survey details, land-use status, approved layout, access road, encumbrances and the seller's authority to sell. Ask an independent property lawyer to review the documents before paying a non-refundable amount.",
+        "question": "What is Dholera SIR?",
+        "answer": "Dholera Special Investment Region (SIR) is India's first greenfield smart city, developed under the Delhi-Mumbai Industrial Corridor (DMIC). It is being built from scratch with planned infrastructure across residential, commercial, and industrial zones."
       },
       {
-        question: "What does ‘government approved plot’ mean?",
-        answer:
-          "The phrase can refer to different permissions and is often used too broadly. Ask the seller to identify the exact approval, issuing authority and document number. Government planning of the wider region does not by itself approve every private plotting project.",
+        "question": "Why is Dholera considered a good investment?",
+        "answer": "Dholera's growth is backed by major infrastructure, including the Ahmedabad-Dholera Expressway, Dholera International Airport, and industrial investments such as the Tata Semiconductor plant. These developments may support long-term demand and future potential, subject to location, approvals, market demand, and holding period."
       },
       {
-        question: "What does registry-ready mean?",
-        answer:
-          "Registry-ready generally means the seller says the plot can be transferred through a registered sale deed. You should still confirm ownership, registration eligibility, applicable stamp duty, outstanding dues and whether the plot shown on site matches the legal records.",
+        "question": "Is the Ahmedabad-Dholera Expressway complete?",
+        "answer": "Yes, the Ahmedabad-Dholera Expressway is complete and operational, inaugurated by PM Modi on 31 March 2026."
       },
       {
-        question: "Are all plotted projects in Dholera RERA registered?",
-        answer:
-          "No assumption should be made. RERA applicability depends on the project and applicable rules. Ask for the registration number when RERA is claimed, verify it on the official portal and review the approved project information.",
+        "question": "What is the current status of Dholera International Airport?",
+        "answer": "The First Phase is Completed and the runway of Dholera International Airport is also successfully Tested."
       },
       {
-        question: "Should I use an independent lawyer for verification?",
-        answer:
-          "Yes. Independent legal review adds an important layer of protection because the lawyer works for you, not the seller. They can review title, permissions, agreements, payment terms and registration documents before you proceed.",
+        "question": "What is the Tata Semiconductor plant's significance for Dholera?",
+        "answer": "Tata's semiconductor fabrication plant in Dholera is expected to roll out its first chip in late 2026, with full completion by 2028. It is a key driver of industrial and housing demand in the region."
       },
-    ],
+      {
+        "question": "What is NA (Non-Agricultural) land, and why does it matter?",
+        "answer": "NA conversion is the legal process of converting agricultural land into land approved for residential or commercial use. NA-approved plots reduce legal risk and are essential before construction or registry."
+      },
+      {
+        "question": "What should I check before buying a plot in Dholera?",
+        "answer": "Buyers should evaluate project location, documentation status (NA/NOC/title), layout planning, road access, pricing structure, and the registry process before booking."
+      },
+      {
+        "question": "Is Dholera better for long-term or short-term investment?",
+        "answer": "Most investors treat Dholera as a long-term land-holding opportunity rather than a short-term investment,"
+      },
+      {
+        "question": "What is DSIRDA?",
+        "answer": "DSIRDA (Dholera Special Investment Region Development Authority) is the government body responsible for planning, approvals, and development oversight of Dholera SIR."
+      }
+    ]
   },
   {
-    id: "plots-documents",
-    label: "Plots & Documentation",
-    shortLabel: "Documents",
-    description:
-      "Practical answers about plot sizes, pricing, paperwork and ownership-related costs.",
-    items: [
+    "id": "projects",
+    "label": "Projects",
+    "shortLabel": "Projects",
+    "description": "Compare locations, plot sizes, prices, amenities and development details across BookMyAssets projects.",
+    "items": [
       {
-        question: "Which documents should a buyer request?",
-        answer:
-          "The exact list varies, but commonly requested records include the title chain, latest land record, sale deed or development agreement, approved layout, land-use permission, encumbrance details, tax or dues receipts and the seller's identity and authority documents.",
+        "question": "What is WestWyn County?",
+        "answer": "WestWyn County is a premium residential plotted development by BookMyAssets in Dholera Smart City. The project is located on the Fedra-Pipli State Highway and offers legally verified residential plots with modern infrastructure and lifestyle amenities."
       },
       {
-        question: "Are Dholera plot prices fixed?",
-        answer:
-          "No. Pricing varies by legal status, location, access, plot size, development level, project amenities and payment terms. Compare the total payable amount and documentsnot only the advertised per-square-yard price.",
+        "question": "Where is WestWyn County located?",
+        "answer": "WestWyn County is located on the Fedra–Pipli State Highway in Dholera, offering direct highway connectivity."
       },
       {
-        question: "What additional costs apply when buying a plot?",
-        answer:
-          "Possible costs include stamp duty, registration charges, legal review, maintenance, development charges, taxes and other project-specific fees. Ask for a written cost sheet so you can understand the complete amount before booking.",
+        "question": "Who is the developer of WestWyn County?",
+        "answer": "WestWyn County is developed by BookMyAssets, a real estate developer focused on residential communities and investment opportunities in Dholera Smart City."
       },
       {
-        question: "Can NRIs buy plots in Dholera?",
-        answer:
-          "Eligibility depends on the buyer's status and the land category under Indian law and RBI rules. NRIs should take advice from a qualified legal and tax professional before paying, particularly where agricultural land or special ownership conditions may be involved.",
+        "question": "What are the plot sizes in WestWyn County?",
+        "answer": "The plot size available in WestWyn County is 150 square yards."
       },
-    ],
+      {
+        "question": "What is the price of the WestWyn County project?",
+        "answer": "WestWyn County is a successfully sold-out project. The resale price is ₹12000 Price per sq. yard."
+      },
+      {
+        "question": "What amenities are available in WestWyn County?",
+        "answer": "The project offers a clubhouse, co-working space, swimming pool, gym, jogging track, yoga deck, children's play area, senior citizen zone, CCTV security, EV charging station, landscaped green areas, internal roads, and app-based society management."
+      },
+      {
+        "question": "What makes WestWyn County a good investment?",
+        "answer": "WestWyn County offers a strategic location, legally verified plots, modern infrastructure, premium amenities, and long-term growth potential in Dholera. Future performance depends on development, approvals, demand, and holding period."
+      },
+      {
+        "question": "What is WestWyn Estates?",
+        "answer": "WestWyn Estate is a premium residential plot developed by BookMyAssets located in Polarpur, Dholera. The project offers legally verified residential plots with immediate possession, modern amenities, and excellent connectivity to major infrastructure projects."
+      },
+      {
+        "question": "Where is WestWyn Estates located?",
+        "answer": "WestWyn Estate is located in Polarpur, Dholera, Gujarat, with direct entry from State Highway 117 (150-foot road). The project enjoys excellent connectivity to the Dholera SIR boundary, Bhimnath Railway Junction, Ahmedabad Dholera Expressway, and Dholera International Airport."
+      },
+      {
+        "question": "What plot sizes are available in WestWyn Estates?",
+        "answer": "WestWyn Estate offers residential plots ranging from approximately 147 to 250 square yards."
+      },
+      {
+        "question": "What is the price of plots in WestWyn Estates?",
+        "answer": "The plot price is ₹7000/sq. yard in WestWyn Estates"
+      },
+      {
+        "question": "What amenities will WestWyn Estates offer?",
+        "answer": "The project includes a gated community, project boundary, CCTV security, kids' play area, app-based management, power and water supply, yoga deck, jogging track, senior citizen zone, EV charging station, wide internal roads, and drainage system."
+      },
+      {
+        "question": "What site development work is underway at WestWyn Estates?",
+        "answer": "Ongoing work includes land cleaning and leveling, boundary development, soil testing, internal road development, a 1.75 lakh litre water tank (providing 1,000 litres free water per resident), drainage systems, MEP work, plot demarcation, and landscaping."
+      },
+      {
+        "question": "Can I buy a plot and build a villa at WestWyn Estates through BookMyAssets?",
+        "answer": "Yes. Since WestWyn Estates plots are sold by BookMyAssets and construction is handled by BookMyAssets Construction, investors can complete the entire plot-to-villa journey with one team."
+      },
+      {
+        "question": "What is WestWyn Residency?",
+        "answer": "WestWyn Residency is a government-approved residential plotted development by BookMyAssets located in Pipariya, Dholera. The project offers legally verified residential plots with immediate possession, modern amenities, and excellent connectivity to major infrastructure projects."
+      },
+      {
+        "question": "Where is WestWyn Residency located?",
+        "answer": "WestWyn Residency is located in Pipariya, Dholera, with direct entry from the Major District Road (MDR). The project is close to the Dholera SIR boundary, Bhimnath Railway Junction, Ahmedabad Dholera Expressway, and Dholera International Airport."
+      },
+      {
+        "question": "What amenities are planned at WestWyn Residency?",
+        "answer": "Planned features include a gated community with 24/7 security and CCTV, wide internal roads, a proper drainage system, planned power and water supply, a kids' play area, senior citizen zone, jogging track, yoga deck, EV charging station, and app-based community management."
+      },
+      {
+        "question": "Why should I invest in WestWyn Residency?",
+        "answer": "WestWyn Residency offers a strategic location, legally verified plots, modern amenities, immediate registry, and connectivity to Dholera's major infrastructure projects. Its long-term potential depends on development, approvals, demand, and holding period."
+      }
+    ]
   },
   {
-    id: "bookmyassets-support",
-    label: "Site Visits & Support",
-    shortLabel: "Buyer support",
-    description:
-      "See how BookMyAssets can help you compare options and plan an informed next step.",
-    items: [
+    "id": "nri-corner",
+    "label": "NRI Corner",
+    "shortLabel": "NRI Corner",
+    "description": "Answers for overseas buyers managing plot purchases, villa construction, taxation and resale support.",
+    "items": [
       {
-        question: "How can BookMyAssets help me evaluate Dholera plots?",
-        answer:
-          "BookMyAssets can help you shortlist suitable options, understand project information, compare key details and coordinate discussions or site visits. Final legal and financial due diligence should still be completed by your independent advisers.",
+        "question": "Can NRIs buy residential plots in Dholera through BookMyAssets?",
+        "answer": "Yes. NRIs can purchase residential plots in Dholera, without any limit on the number of properties, under FEMA and RBI guidelines."
       },
       {
-        question: "Can I schedule a Dholera site visit?",
-        answer:
-          "Yes. Share your preferred date, city and the type of plot you are considering. The team can confirm availability and help plan a visit so you can review the location, access and project surroundings in person.",
+        "question": "Can NRIs manage plot purchase and villa construction remotely?",
+        "answer": "Yes. BookMyAssets is built to support NRI investors with remote coordination, dedicated relationship managers, and one point of contact for both plot purchase and villa construction."
       },
       {
-        question: "What should I carry or check during a site visit?",
-        answer:
-          "Carry the shared layout and plot details. Check the approach road, plot identification, surrounding development, drainage or utilities where visible, nearby landmarks and the distance claims made in marketing material. Take notes and request documents for anything that needs verification.",
+        "question": "Is income from a resold or rented Dholera plot taxable for NRIs?",
+        "answer": "Yes. While purchasing property isn't taxed, any income from rent or capital gains on resale is taxable in India. NRIs should consult a tax advisor for their specific liability, including any applicable Double Taxation Avoidance Agreement (DTAA) benefits."
       },
       {
-        question: "How do I request current prices or a project brochure?",
-        answer:
-          "Use the contact page or enquiry option and mention your preferred plot size and budget range. Since availability and prices can change, the team should confirm the latest details directly rather than relying on an older brochure or advertisement.",
-      },
-    ],
+        "question": "Does BookMyAssets assist with resale for NRI investors?",
+        "answer": "Yes, BookMyAssets offers resale and buyback assistance to help NRI and overseas investors exit or liquidate their investment when needed."
+      }
+    ]
   },
+  {
+    "id": "channel-partner",
+    "label": "Channel Partner",
+    "shortLabel": "Channel Partner",
+    "description": "Learn who can join the Channel Partner Program and what sales, legal and marketing support is available.",
+    "items": [
+      {
+        "question": "Can I become a channel partner with BookMyAssets?",
+        "answer": "Yes. BookMyAssets runs a Channel Partner Program for brokers and professionals who want to sell verified Dholera plots with guaranteed, on-time commissions."
+      },
+      {
+        "question": "What support do channel partners get?",
+        "answer": "Partners receive ready-to-use brochures, videos, and pitch decks, verified inventory, legal assistance, site visit support, regular sales training, and market updates."
+      },
+      {
+        "question": "Who can join the Channel Partner Program?",
+        "answer": "The program suits independent brokers, real estate professionals, international buyer connectors, and businesses looking to expand into Dholera plot sales."
+      },
+      {
+        "question": "Are commissions guaranteed and paid on time?",
+        "answer": "Yes, BookMyAssets states it follows a broker-first culture with transparent processes and guaranteed, on-time commission payments."
+      }
+    ]
+  }
 ];
 
 const allFaqs = faqGroups.flatMap((group) => group.items);
@@ -280,7 +386,7 @@ export default function FAQsPage() {
               <dl className="mt-6 grid grid-cols-3 border-t border-white/10 pt-5">
                 <div>
                   <dt className="text-xs text-white/45">Topics</dt>
-                  <dd className="mt-1 text-xl font-bold text-white">04</dd>
+                  <dd className="mt-1 text-xl font-bold text-white">05</dd>
                 </div>
                 <div className="border-l border-white/10 pl-5">
                   <dt className="text-xs text-white/45">Answers</dt>

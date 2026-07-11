@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import React from "react";
 import img1 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-desktop-banner.webp";
 import img2 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-mobile-banner.webp";
@@ -21,6 +21,15 @@ const points = [
     desc: "Access maps, master plans, and plot layout walkthroughs before making any decision.",
   },
 ];
+
+const {
+  props: { srcSet: desktopSrcSet },
+} = getImageProps({
+  src: img1,
+  alt: "",
+  fill: true,
+  sizes: "100vw",
+});
 
 const PointsList = () => (
   <>
@@ -47,15 +56,25 @@ const PointsList = () => (
 
 export default function Hero() {
   return (
-    <div id="hero">
-      <div className="relative w-full h-screen hidden md:block">
+    <div id="hero" className="relative">
+      <picture>
+        <source
+          media="(min-width: 768px)"
+          srcSet={desktopSrcSet}
+          sizes="100vw"
+        />
         <Image
-          src={img1}
+          src={img2}
           alt="Dholera Smart City"
           fill
+          sizes="100vw"
           className="object-cover"
-          priority
+          loading="eager"
+          fetchPriority="high"
         />
+      </picture>
+
+      <div className="relative w-full h-screen hidden md:block">
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/50 via-black/30 to-black/55" />
 
         <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)]">
@@ -66,13 +85,6 @@ export default function Hero() {
 
       <div className="md:hidden">
         <div className="relative w-full min-h-screen">
-          <Image
-            src={img2}
-            alt="Dholera Smart City"
-            fill
-            className="object-cover"
-            priority
-          />
           <div className="absolute inset-0 bg-black/60" />
 
           <div className="absolute space-y-2 inset-0 z-20 flex flex-col px-[clamp(1rem,4vw,2rem)] py-[clamp(2.5rem,5.25vw,3.75rem)] justify-center gap-[clamp(0.4rem,1vw,0.75rem)] overflow-y-auto">
