@@ -81,6 +81,7 @@ const utilityLinks = [
   { href: "/dholera-events", label: "Investor Meetups" },
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
+  { href: "/faqs",label: "FAQs"},
   { label: "Book Video Call", calendly: true },
 ];
 
@@ -93,6 +94,7 @@ const mobileLinks = [
   { href: "/career", label: "Careers" },
   { href: "/about", label: "About Us" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/faqs",label: "FAQs"},
   { label: "Book Video Call", calendly: true },
 ];
 
