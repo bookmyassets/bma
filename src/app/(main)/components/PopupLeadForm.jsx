@@ -174,7 +174,6 @@ export default function PopupLeadForm({
   const [formData, setFormData] = useState({
     fullName: "",
     mobileNumber: "",
-    email: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -443,11 +442,6 @@ export default function PopupLeadForm({
       return false;
     }
 
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
-      return false;
-    }
-
     if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
@@ -470,7 +464,6 @@ export default function PopupLeadForm({
             fields: {
               name: formData.fullName,
               phone: formData.mobileNumber,
-              email: config.includeEmail ? formData.email || undefined : undefined,
               source: config.leadSource || getLeadSource(),
             },
             source: config.source,
@@ -481,7 +474,7 @@ export default function PopupLeadForm({
       );
 
       if (response.ok) {
-        setFormData({ fullName: "", mobileNumber: "", email: "" });
+        setFormData({ fullName: "", mobileNumber: "" });
         setShowThankYou(true);
 
         if (typeof window !== "undefined" && config.dataLayerEvent) {
@@ -664,25 +657,6 @@ export default function PopupLeadForm({
                   />
                 </div>
 
-                {config.includeEmail && (
-                  <div>
-                    <label
-                      htmlFor="popupEmail"
-                      className="block text-gray-700 text-sm font-medium mb-2"
-                    >
-                      Email (Optional)
-                    </label>
-                    <input
-                      type="email"
-                      id="popupEmail"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] transition-colors"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                )}
               </div>
 
               <div className="flex justify-center mb-4">

@@ -16,6 +16,7 @@ import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed";
 import { resolveBlogDates } from "@/lib/blogDates";
+import TableOfContents from "./TableOfContents";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -25,8 +26,15 @@ const URLFormatter = (text) => {
     .replace(/(^-|-$)/g, "");
 };
 
+const getHeadingText = (block) =>
+  Array.isArray(block?.children)
+    ? block.children.map((child) => child?.text || "").join("").trim()
+    : "";
+
 const extractHeadings = (body) => {
   if (!body || !Array.isArray(body)) return [];
+
+  const usedIds = new Map();
 
   return body
     .filter((block) => {
@@ -36,25 +44,44 @@ const extractHeadings = (body) => {
         ["h1", "h2", "h3", "h4", "h5", "h6"].includes(block.style);
 
       // Check if it has valid text content
-      const hasValidText =
-        block.children &&
-        Array.isArray(block.children) &&
-        block.children.length > 0 &&
-        block.children[0]?.text &&
-        block.children[0].text.trim().length > 0;
+      const hasValidText = getHeadingText(block).length > 0;
 
       return isHeading && hasValidText;
     })
-    .map((block) => ({
-      ...block,
-      // Ensure we have clean text
-      children: [
-        {
-          ...block.children[0],
-          text: block.children[0].text.trim(),
-        },
-      ],
-    }));
+    .map((block, index) => {
+      const text = getHeadingText(block);
+      const baseId = URLFormatter(text) || `section-${index + 1}`;
+      const occurrence = (usedIds.get(baseId) || 0) + 1;
+      usedIds.set(baseId, occurrence);
+
+      return {
+        key: block._key || `${baseId}-${index}`,
+        blockKey: block._key,
+        text,
+        level: Number.parseInt(block.style.replace("h", ""), 10),
+        id: occurrence === 1 ? baseId : `${baseId}-${occurrence}`,
+      };
+    });
+};
+
+const buildHeadingTree = (headings) => {
+  const roots = [];
+  const stack = [];
+
+  headings.forEach((heading) => {
+    const node = { ...heading, children: [] };
+
+    while (stack.length && stack[stack.length - 1].level >= node.level) {
+      stack.pop();
+    }
+
+    if (stack.length) stack[stack.length - 1].children.push(node);
+    else roots.push(node);
+
+    stack.push(node);
+  });
+
+  return roots;
 };
 
 const getPlainText = (value) => {
@@ -63,9 +90,12 @@ const getPlainText = (value) => {
   if (Array.isArray(value)) return value.map(getPlainText).join(" ");
   if (typeof value === "object") {
     if (typeof value.text === "string") return value.text;
-    if (Array.isArray(value.children)) return value.children.map(getPlainText).join(" ");
-    if (Array.isArray(value.rows)) return value.rows.map(getPlainText).join(" ");
-    if (Array.isArray(value.cells)) return value.cells.map(getPlainText).join(" ");
+    if (Array.isArray(value.children))
+      return value.children.map(getPlainText).join(" ");
+    if (Array.isArray(value.rows))
+      return value.rows.map(getPlainText).join(" ");
+    if (Array.isArray(value.cells))
+      return value.cells.map(getPlainText).join(" ");
   }
   return "";
 };
@@ -94,7 +124,7 @@ const getDateInfo = (value) => {
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs }) => {
   return (
-    <aside className="lg:w-1/3 space-y-4 pt-4">
+    <aside className="order-3 space-y-4 pt-4 lg:order-2">
       <div className=" pt-4 max-w-xl mx-auto hidden md:block">
         <InlineLeadForm
           variant="common"
@@ -197,6 +227,14 @@ export default async function Post({ params }) {
     if (!post) {
       notFound();
     }
+
+    const headings = extractHeadings(post.body);
+    const headingTree = buildHeadingTree(headings);
+    const headingIds = new Map(
+      headings
+        .filter((heading) => heading.blockKey)
+        .map((heading) => [heading.blockKey, heading.id]),
+    );
 
     const components = {
       types: {
@@ -382,7 +420,7 @@ export default async function Post({ params }) {
         ...(() => {
           const makeHeading =
             (Tag, className) =>
-            ({ children }) => {
+            ({ children, value }) => {
               const getText = () => {
                 if (typeof children === "string") return children;
                 if (Array.isArray(children))
@@ -393,9 +431,11 @@ export default async function Post({ params }) {
                     .join("");
                 return "";
               };
-              const id = URLFormatter(getText());
+              const id =
+                headingIds.get(value?._key) ||
+                URLFormatter(getHeadingText(value) || getText());
               return (
-                <Tag id={id} className={className}>
+                <Tag id={id} className={`${className} scroll-mt-24`}>
                   <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#C69C21] to-[#FDB913] rounded-full" />
                   {children}
                 </Tag>
@@ -516,56 +556,6 @@ export default async function Post({ params }) {
       },
     };
 
-    const TableOfContent = ({ headings }) => {
-      const validHeadings =
-        headings?.filter((heading) => {
-          const text = heading.children?.[0]?.text;
-          return text && text.trim().length > 0;
-        }) || [];
-
-      const h1h2Headings = validHeadings.filter(
-        (heading) => heading.style === "h1" || heading.style === "h2",
-      );
-
-      if (h1h2Headings.length === 0) return null;
-
-      // Declare prevLevel here, outside JSX
-      let prevLevel = 1;
-
-      return (
-        <div className="my-8 p-6 bg-gradient-to-br from-[#C69C21]/5 to-[#FDB913]/10 rounded-2xl shadow-lg border border-[#C69C21]/20">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Table of Contents
-          </h2>
-          <ul className="space-y-3">
-            {validHeadings.map((heading, index) => {
-              const rawLevel = parseInt(heading.style.replace("h", ""));
-              const level = Math.min(rawLevel, prevLevel + 1);
-              prevLevel = level;
-              const text = heading.children[0].text.trim();
-              const indent = (level - 2) * 16;
-
-              return (
-                <li
-                  key={index}
-                  style={{ marginLeft: `${Math.max(0, indent)}px` }}
-                  className="relative"
-                >
-                  <a
-                    href={`#${URLFormatter(text)}`}
-                    className="text-[#C69C21] hover:text-[#FDB913] hover:underline transition-colors duration-200 flex items-start gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 bg-[#C69C21] rounded-full mt-2 flex-shrink-0 group-hover:scale-125 transition-transform"></span>
-                    <span className="text-sm leading-relaxed">{text}</span>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      );
-    };
-
     const articleDates = resolveBlogDates(post);
     const publicationTime = new Date(
       articleDates.originalPublicationDate,
@@ -612,9 +602,9 @@ export default async function Post({ params }) {
         <div className="bg-black min-h-screen text-white">
           <div className="bg-black shadow-sm sticky top-0 z-20" />
           <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
-            <div className="flex flex-col lg:flex-row gap-10">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
               {/* Main Content */}
-              <article className="lg:w-2/3">
+              <article className="order-1 min-w-0">
                 {/* Breadcrumb */}
                 <div className="mb-4 hidden">
                   <nav className="flex" aria-label="Breadcrumb">
@@ -692,7 +682,8 @@ export default async function Post({ params }) {
                         className="shrink-0 rounded-full border border-white/15 bg-white/10 px-3 py-1 font-semibold text-white"
                         aria-label={`Estimated reading time ${readingTime} minutes`}
                       >
-                        <span className="text-[#ddbc69]">{readingTime}</span> min read
+                        <span className="text-[#ddbc69]">{readingTime}</span>{" "}
+                        min read
                       </span>
                     </div>
                   </div>
@@ -712,40 +703,6 @@ export default async function Post({ params }) {
                           </time>
                         </div>
                       )}
-
-                      <div className="flex space-x-2 pr-2 ">
-                        <p className="font-semibold">Share This Blog On:</p>
-                        {/* WhatsApp */}
-                        <Link
-                          href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                        >
-                          <FaWhatsapp className="text-green-500 w-5 h-5" />
-                        </Link>
-
-                        {/* Facebook */}
-                        <Link
-                          href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                        >
-                          <FaFacebook className="text-blue-500 w-5 h-5" />
-                        </Link>
-
-                        {/* Instagram - Note: Direct sharing not supported */}
-                        {/* Instagram doesn't support web URL sharing. Users need to manually share */}
-
-                        {/* LinkedIn */}
-                        <Link
-                          href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                        >
-                          <FaLinkedin className="text-blue-800 w-5 h-5" />
-                        </Link>
-
-                        {/* Twitter/X */}
-                        <Link
-                          href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                        >
-                          <FaXTwitter className=" w-5 h-5" />
-                        </Link>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -768,46 +725,13 @@ export default async function Post({ params }) {
                       className="absolute left-4 top-4 z-10 hidden rounded-full border border-white/20 bg-black/75 px-4 py-2 text-sm font-semibold text-white shadow-md backdrop-blur-sm md:block"
                       aria-label={`Estimated reading time ${readingTime} minutes`}
                     >
-                      <span className="text-[#ddbc69]">{readingTime}</span> min read
+                      <span className="text-[#ddbc69]">{readingTime}</span> min
+                      read
                     </div>
                   </div>
                 )}
 
-                <div className="flex flex-wrap md:hidden items-center space-x-4 justify-center rounded-lg  text-[#f8f6f2] text-sm ">
-                  <p className="font-semibold">Share This Blog On:</p>
-
-                  <div className="flex space-x-2 pr-2 ">
-                    {/* WhatsApp */}
-                    <Link
-                      href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                    >
-                      <FaWhatsapp className="text-green-500 w-5 h-5" />
-                    </Link>
-
-                    {/* Facebook */}
-                    <Link
-                      href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                    >
-                      <FaFacebook className="text-blue-500 w-5 h-5" />
-                    </Link>
-
-                    {/* LinkedIn */}
-                    <Link
-                      href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                    >
-                      <FaLinkedin className="text-blue-800 w-5 h-5" />
-                    </Link>
-
-                    {/* Twitter/X */}
-                    <Link
-                      href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
-                    >
-                      <FaXTwitter className=" w-5 h-5" />
-                    </Link>
-                  </div>
-                </div>
-
-                <TableOfContent headings={extractHeadings(post.body)} />
+                <TableOfContents items={headingTree} />
 
                 {/* Article Content */}
                 <div className="bg-black rounded-xl shadow-2xl p-8 border border-gray-700">
@@ -818,33 +742,50 @@ export default async function Post({ params }) {
                       className="text-xl"
                     />
                   </div>
+
                   <PopupLeadForm
                     type="slug"
                     title={post.formTitle}
                     project={post.title}
                   />
-
-                  {/* Tags */}
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="mt-12 pt-6 border-t border-gray-700">
-                      <h4 className="font-semibold text-white mb-3">
-                        Related Topics:
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags.map((tag) => (
-                          <Link
-                            key={tag}
-                            href={`/blogs/tag/${tag}`}
-                            className="px-3 py-1 bg-gray-900 hover:bg-gray-800 text-[#FDB913] text-sm rounded-full transition"
-                          >
-                            #{tag}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </article>
+
+              <div className="order-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 rounded-lg text-[#f8f6f2] lg:order-3 lg:col-span-2 lg:justify-start lg:px-4 lg:text-xl">
+                <p className="font-semibold">
+                  Share With Your Friends &amp; Family:
+                </p>
+
+                <div className="flex items-center gap-4 pr-2">
+                  <Link
+                    href={`https://api.whatsapp.com/send?text=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                    aria-label="Share this blog on WhatsApp"
+                  >
+                    <FaWhatsapp className="h-6 w-6 text-green-500 lg:h-8 lg:w-8" />
+                  </Link>
+
+                  <Link
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                    aria-label="Share this blog on Facebook"
+                  >
+                    <FaFacebook className="h-6 w-6 text-blue-500 lg:h-8 lg:w-8" />
+                  </Link>
+
+                  <Link
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                    aria-label="Share this blog on LinkedIn"
+                  >
+                    <FaLinkedin className="h-6 w-6 text-blue-800 lg:h-8 lg:w-8" />
+                  </Link>
+
+                  <Link
+                    href={`https://twitter.com/intent/tweet?url=https://www.bookmyassets.com/dholera-sir-blogs/${post.slug.current}`}
+                    aria-label="Share this blog on X"
+                  >
+                    <FaXTwitter className="h-6 w-6 lg:h-8 lg:w-8" />
+                  </Link>
+                </div>
+              </div>
 
               {/* Right Sidebar */}
               <RightSidebar

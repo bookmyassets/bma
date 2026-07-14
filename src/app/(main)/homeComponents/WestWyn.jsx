@@ -34,9 +34,9 @@ export default function ProjectsSection() {
   return (
     <section className="bg-[#080808] py-[clamp(2.5rem,6vw,5rem)] text-white">
       <div className="mx-auto max-w-7xl px-[clamp(1rem,4vw,3rem)]">
-        <div className="mb-[clamp(1.5rem,3vw,3rem)] max-w-[42rem]">
+        <div className="mb-[clamp(1.5rem,3vw,3rem)] ">
           
-          <h2 className="mt-[0.75rem] text-[#ddbc69] text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
+          <h2 className="mt-[0.75rem] text-[#ddbc69] md:text-center max-sm:px-4 gap-[clamp(0.875rem,1.8vw,1.5rem)] text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
             Explore Our Projects in Dholera
           </h2>
         </div>
