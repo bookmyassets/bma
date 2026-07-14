@@ -197,12 +197,6 @@ export default function page() {
         <LatestUpdates />
         <FAQSection />
       </div>
-
-      <PopupLeadForm
-        type="time"
-        title="Best Investment-Ready Locations in Dholera"
-        project="Home-Page"
-      />
     </>
   );
 }

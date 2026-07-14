@@ -59,15 +59,27 @@ const POPUP_TYPES = {
 const POPUP_COOLDOWN_KEY = "bmaLeadPopupLastClosedAt";
 const POPUP_COOLDOWN_MS = 11000;
 const ACTIVE_POPUP_KEY = "__bmaActiveLeadPopup";
+const PAGE_POPUP_STATE_KEY = "__bmaLeadPopupPageState";
 const COOLDOWN_TYPES = new Set(["time", "scroll", "slug"]);
 
 function requestPopupOpen(instanceId, type) {
   if (typeof window === "undefined") return false;
 
+  const pageKey = window.location.pathname;
+  const pagePopupState = window[PAGE_POPUP_STATE_KEY];
+
+  if (
+    pagePopupState?.pageKey === pageKey &&
+    pagePopupState.instanceId !== instanceId
+  ) {
+    return false;
+  }
+
   const activePopup = window[ACTIVE_POPUP_KEY];
   if (activePopup && activePopup.instanceId !== instanceId) return false;
 
   window[ACTIVE_POPUP_KEY] = { instanceId, type };
+  window[PAGE_POPUP_STATE_KEY] = { pageKey, instanceId, type };
   return true;
 }
 

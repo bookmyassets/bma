@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import BrochureDownload from "../../components/BrochureDownload";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FaFile, FaPhone, FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { FaDownload } from "react-icons/fa";
 import Image from "next/image";
@@ -78,7 +78,7 @@ const WestWynAboutSection = () => {
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
             Westwyn Residency brings a balanced mix of smart planning and
-            future-ready living in Pipariya, Dholera, crafted for those who want
+            future-ready living in Pipariya, crafted for those who want
             more than just land real long-term value. With clear documentation,
             a well-connected location, and steady growth potential, it stands
             out as a reliable investment choice. A place where today’s decision
@@ -86,22 +86,21 @@ const WestWynAboutSection = () => {
           </p>
         </div>
 
-        <div className=" gap-12 items-stretch space-y-4">
+        <div className=" gap-12 items-stretch space-y-4 px-4 py-4">
           {/* Left Content */}
           <div className=" h-full">
             <div className="flex justify-center items-center flex-col md:flex-row gap-4 ">
-              <button
-                onClick={openBrochureForm}
-                className="bg-[#ddbc69] text-white px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
-              >
-                <FaDownload />
-                Download Brochure
-              </button>
-
               <Link href="https://wa.me/918130371647">
-                <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaWhatsapp />
-                  Book Site Visit
+                <p className="bg-[#ddbc69] border border-[#ddbc69] whitespace-nowrap text-white text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#eecb71] transition-colors flex items-center justify-center gap-2">
+                  <FaFile />
+                  Get Brochure
+                </p>
+              </Link>
+
+              <Link href="tel:+918130371647">
+                <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                  <FaPhone />
+                  Connect with our RM
                 </p>
               </Link>
             </div>

@@ -70,13 +70,14 @@ export default function FAQSection() {
             <h2 className="order-1 px-2 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-black md:order-none md:px-0 md:mb-4">
               FAQs
             </h2>
-            <div className="order-3 px-2 pt-4 md:order-none md:px-0">
+            <div className="order-3  md:order-none md:px-0">
+              <p className="pb-3">Have Any Other Question?</p>
               <a
                 href="#"
-                className="px-2 py-3 bg-[#ddbc69] text-white rounded-md"
+                className="px-1 py-2 bg-[#ddbc69] text-white rounded-md"
                 onClick={handleCallClick}
               >
-                Give Us A Missed Call
+                Let's Connect
               </a>
             </div>
           </div>

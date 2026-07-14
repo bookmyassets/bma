@@ -1,11 +1,12 @@
 import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import BrochureDownload from "../../components/BrochureDownload";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FaDochub, FaFile, FaPhone, FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { FaDownload } from "react-icons/fa";
 import Image from "next/image";
 import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-google-maps-location.webp";
+import { File } from "lucide-react";
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({
@@ -82,7 +83,7 @@ const WestWynAboutSection = () => {
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
             Westwyn Estates offers premium, well-planned residential plots in a
-            fast-growing zone in Polarpur, Dholera, best for investors looking
+            fast-growing zone in Polarpur, best for investors looking
             for long-term value. With clear documentation, strategic location,
             and strong development potential, it ensures a secure and
             transparent buying experience. It is a smart opportunity to be part
@@ -94,18 +95,17 @@ const WestWynAboutSection = () => {
           {/* Left Content */}
           <div className=" h-full">
             <div className="flex justify-center items-center flex-col md:flex-row gap-4 ">
-              <button
-                onClick={openBrochureForm}
-                className="bg-[#ddbc69] text-white text-base px-2 md:px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
-              >
-                <FaDownload />
-                Get Brochure
-              </button>
-
               <Link href="https://wa.me/918130371647">
+                <p className="bg-[#ddbc69] border border-[#ddbc69] whitespace-nowrap text-white text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#eecb71] transition-colors flex items-center justify-center gap-2">
+                  <FaFile />
+                  Get Brochure
+                </p>
+              </Link>
+
+              <Link href="tel:+918130371647">
                 <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaWhatsapp />
-                  Book Dholera Site Visit
+                  <FaPhone />
+                  Connect with our RM
                 </p>
               </Link>
             </div>

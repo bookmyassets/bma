@@ -91,7 +91,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Location",
-                  content: "Pipariya, Dholera",
+                  content: "Pipariya",
                   align: "text-left",
                 },
                 {
