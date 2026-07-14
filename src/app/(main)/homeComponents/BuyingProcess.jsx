@@ -36,16 +36,16 @@ export default function HowToBuy() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-[clamp(2rem,5vw,4rem)]">
-          <p className="text-[#ddbc69] uppercase tracking-[0.2em] text-[0.875rem] font-normal leading-[1.5] mb-3">
-            Simple. Transparent. Guided.
-          </p>
           <h2 className="text-white text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
             Buying Process
           </h2>
+          <p className="text-[#ddbc69] uppercase tracking-[0.2em] text-[0.875rem] font-normal leading-[1.5] mb-3">
+            Simple. Transparent. Guided.
+          </p>
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(0.75rem,2vw,1rem)]">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(0.75rem,2vw,1rem)]">
           {steps.map((step) => (
             <div
               key={step.num}

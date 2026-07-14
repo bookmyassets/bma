@@ -198,11 +198,6 @@ export default function InlineLeadForm({
       return false;
     }
 
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
-      return false;
-    }
-
     if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
@@ -233,7 +228,6 @@ export default function InlineLeadForm({
             fields: {
               name: formData.fullName,
               phone: formData.mobileNumber,
-              email: formData.email || undefined,
               source: getLeadSource(),
             },
             source: config.source,
@@ -424,26 +418,6 @@ export default function InlineLeadForm({
                   />
                 </div>
               </div>
-
-              {config.includeEmail && (
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-black text-sm font-medium mb-2"
-                  >
-                    Email ID
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg bg-gray-800 border border-gray-700 text-black focus:outline-none focus:ring-2 focus:ring-[#ddbc69] placeholder-gray-400"
-                    placeholder="Enter your email address"
-                  />
-                </div>
-              )}
 
               <div className="flex justify-center">
                 <div ref={recaptchaRef}></div>

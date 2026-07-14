@@ -8,22 +8,22 @@ import westwynResidencyImage from "@/assests/residency.webp";
 const projects = [
   {
     name: "WestWyn Estates",
-    price: "Starting from Rs. 7,000 per sq yd",
-    location: "Polarpur State Highway",
+    price: "Starting from ₹10 Lakh",
+    location: "State Highway 117",
     href: "/dholera-residential-plots/westwyn-estate",
     image: westwynEstatesImage,
   },
   {
     name: "WestWyn Residency",
-    price: "Starting from Rs. 6,500 per sq yd",
-    location: "Pipariya, MDR",
+    price: "Starting from ₹8 Lakh",
+    location: "1.5 KM from DFC",
     href: "/dholera-residential-plots/westwyn-residency",
     image: westwynResidencyImage,
   },
   {
     name: "WestWyn County",
-    price: "Re-Selling from Rs. 12,000 per sq yd",
-    location: "Fedra-pipli state highway",
+    price: "Re-Selling from ₹20 Lakh",
+    location: "Fedra-Pipli state highway",
     href: "/dholera-residential-plots/westwyn-county",
     image: westwynCountyImage,
     status: "Re-Sale",
@@ -35,11 +35,9 @@ export default function ProjectsSection() {
     <section className="bg-[#080808] py-[clamp(2.5rem,6vw,5rem)] text-white">
       <div className="mx-auto max-w-7xl px-[clamp(1rem,4vw,3rem)]">
         <div className="mb-[clamp(1.5rem,3vw,3rem)] max-w-[42rem]">
-          <span className="text-[0.875rem] font-normal leading-[1.5] uppercase tracking-[0.18em] text-[#ddbc69]">
-            Featured Projects
-          </span>
-          <h2 className="mt-[0.75rem] text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
-            Explore WestWyn Projects in Dholera
+          
+          <h2 className="mt-[0.75rem] text-[#ddbc69] text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
+            Explore Our Projects in Dholera
           </h2>
         </div>
 

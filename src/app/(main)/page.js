@@ -194,13 +194,6 @@ export default function page() {
         <WestWyn />
         <BMA />
         <HowToBuy />
-        <div id="contact">
-          <InlineLeadForm
-            variant="lead"
-            title="Registry Ready Plots in Dholera"
-            buttonText="Get A Call Back"
-          />
-        </div>
         <LatestUpdates />
         <FAQSection />
       </div>

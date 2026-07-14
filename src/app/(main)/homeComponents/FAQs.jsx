@@ -66,14 +66,11 @@ export default function FAQSection() {
       <div className="bg-white">
         <div className="flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-8 gap-6 md:gap-12 max-w-7xl mx-auto">
           {/* Left Section (40%) */}
-          <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-black mb-4">
+          <div className="contents md:flex md:w-2/5 md:flex-col md:px-2">
+            <h2 className="order-1 px-2 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-black md:order-none md:px-0 md:mb-4">
               FAQs
             </h2>
-            <p className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-gray-600 mb-2">
-              More Questions about Dholera Smart City?
-            </p>
-            <div className="pt-4">
+            <div className="order-3 px-2 pt-4 md:order-none md:px-0">
               <a
                 href="#"
                 className="px-2 py-3 bg-[#ddbc69] text-white rounded-md"
@@ -85,7 +82,7 @@ export default function FAQSection() {
           </div>
 
           {/* Right Section (60%) */}
-          <div className="w-full md:w-3/5 md:pl-24 md:pr-4  md:mt-0 space-y-1">
+          <div className="order-2 w-full md:order-none md:w-3/5 md:pl-24 md:pr-4 md:mt-0 space-y-1">
             {faqs.map((faq, index) => (
               <div key={index} className="border-b border-gray-200">
                 <button

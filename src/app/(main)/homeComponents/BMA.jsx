@@ -133,8 +133,8 @@ export default function AboutBMA() {
           <div className="mb-[clamp(1rem,3vw,1.75rem)] flex flex-col items-center text-center">
             <div className="flex items-center gap-3">
               <h2 className="mx-auto max-w-5xl text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-gray-900">
-                Why Invest with{" "}
-                <span className="text-[#ddbc69]">BookMyAssets</span>?
+                Why {" "}
+                <span className="text-[#ddbc69]">BookMyAssets Developers</span>?
               </h2>
             </div>
           </div>
@@ -148,16 +148,16 @@ export default function AboutBMA() {
                   {COUNTERS.map(({ target, suffix, label }) => (
                     <div
                       key={label}
-                      className="flex shadow-black flex-col items-center justify-center rounded-2xl bg-[#ddbc69] p-[clamp(0.5rem,1.5vw,0.75rem)] shadow-md transition-shadow hover:shadow-xl"
+                      className="flex shadow-black flex-col items-center justify-center rounded-2xl bg-black p-[clamp(0.5rem,1.5vw,0.75rem)] shadow-md transition-shadow hover:shadow-xl"
                     >
-                      <div className="mb-2 text-center text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-black">
+                      <div className="mb-2 text-center text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] text-[#ddbc69]">
                         <AnimatedCounter
                           target={target}
                           suffix={suffix}
                           shouldStart={shouldStartCounters}
                         />
                       </div>
-                      <p className="text-center text-[0.875rem] font-normal leading-[1.5] text-black">
+                      <p className="text-center text-[0.875rem] font-normal leading-[1.5] text-white">
                         {label}
                       </p>
                     </div>
