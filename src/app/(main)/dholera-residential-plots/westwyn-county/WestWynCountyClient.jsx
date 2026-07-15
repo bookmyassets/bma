@@ -18,11 +18,12 @@ import FAQSection from "./FAQs";
 import CostSheet from "../costsheet2";
 import SoldOutProjectsSection from "../SoldOutProjects";
 import BrochureDownload from "../../components/BrochureDownload";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FaFile, FaPhone, FaWhatsapp } from "react-icons/fa6";
 import PopupLeadForm from "../../components/PopupLeadForm";
 import ActiveProjectsSection from "../ActiveProject";
 import { breadcrumbSchema, faqSchema, realEstateSchema } from "@/lib/schema";
 import SchemaMarkup from "../../components/SchemaMarkup";
+import Link from "next/link";
 
 export default function WestWynCountyClient() {
   const faqs = [
@@ -477,28 +478,26 @@ export default function WestWynCountyClient() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() =>
-                  openBrochureForm(
-                    "Get Verified Project Details",
-                    "Please fill out the form to download our brochure. Fields marked with * are mandatory.",
-                    "Get Project Details",
-                    "brochure",
-                  )
-                }
-                className="bg-[#ddbc69] text-black px-6 py-3 rounded-md font-medium hover:bg-[#f3bb39] transition duration-300 shadow-md"
-              >
-                Download Brochure
-              </button>
-
-              <a href="https://wa.me/918130371647">
-                <p className="bg-white border w-full border-[#ddbc69] text-[#ddbc69] px-6 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaWhatsapp />
-                  Book Site Visit
+            <div className=" gap-12 items-stretch space-y-4 px-4 py-4">
+          {/* Left Content */}
+          <div className=" h-full">
+            <div className="flex justify-center items-center flex-col md:flex-row gap-4 ">
+              <Link href="https://wa.me/918130371647">
+                <p className="bg-[#ddbc69] border border-[#ddbc69] whitespace-nowrap text-white text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#eecb71] transition-colors flex items-center justify-center gap-2">
+                  <FaFile />
+                  Get Brochure
                 </p>
-              </a>
+              </Link>
+
+              <Link href="tel:+918130371647">
+                <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                  <FaPhone />
+                  Connect with our RM
+                </p>
+              </Link>
             </div>
+          </div>
+        </div>
           </div>
         </div>
       </div>
@@ -536,7 +535,7 @@ export default function WestWynCountyClient() {
             {/* Plots Counter */}
             <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
               <div className="text-3xl md:text-5xl font-bold text-[#ddbc69] mb-2 md:mb-4">
-                ₹12000
+                ₹20 Lakh
               </div>
               <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
                 ReSale Price

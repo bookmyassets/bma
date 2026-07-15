@@ -2,7 +2,7 @@
   {
     "projectName": "WestWyn Residency",
     "link": "westwyn-residency",
-    "location": "Pipariya",
+    "location": "1.5 KM from DFC ",
     "image": "/assets/residential/residency.webp",
     "constructionStatus" : "Under Construction",
     "status" : "ongoing",
@@ -12,7 +12,7 @@
   {
     "projectName": "WestWyn Estates",
     "link": "westwyn-estate",
-    "location": "Polarpur",
+    "location": "State Highway 117",
     "image": "/assets/residential/we_cover.webp",
     "constructionStatus" : "Under Construction",
     "status" : "ongoing",

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import ContactForm from "../components/Contactform";
+import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa6";
 
 const steps = [
   {
@@ -36,7 +38,7 @@ export default function HowToBuy() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-[clamp(2rem,5vw,4rem)]">
-          <h2 className="text-white text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
+          <h2 className="text-white mb-2 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
             Buying Process
           </h2>
           <p className="text-[#ddbc69] uppercase tracking-[0.2em] text-[0.875rem] font-normal leading-[1.5] mb-3">
@@ -83,12 +85,12 @@ export default function HowToBuy() {
         {/* Bottom CTA strip */}
         <div className="mt-[clamp(2rem,4vw,3rem)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="text-white/40 text-[clamp(0.75rem,1.3vw,0.85rem)]"></p>
-          <button
-            onClick={openContactForm}
-            className="self-start sm:self-auto bg-[#ddbc69] hover:bg-[#c89b2e] text-black font-semibold rounded-lg text-[0.875rem] md:text-[1rem] leading-[1.4] px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] transition-colors duration-200"
+          <Link
+            href="https://wa.me/918130371647"
+            className="flex justify-center items-center gap-2 self-start sm:self-auto bg-[#ddbc69] hover:bg-[#c89b2e] text-black font-semibold rounded-lg text-[0.875rem] md:text-[1rem] leading-[1.4] px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] transition-colors duration-200"
           >
-            Get A Call Back
-          </button>
+           {/* <FaWhatsapp className="w-6 h-6"/> */}  Connect with Our RM
+          </Link>
         </div>
       </div>
 

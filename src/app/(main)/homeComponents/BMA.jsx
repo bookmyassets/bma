@@ -133,8 +133,7 @@ export default function AboutBMA() {
           <div className="mb-[clamp(1rem,3vw,1.75rem)] flex flex-col items-center text-center">
             <div className="flex items-center gap-3">
               <h2 className="mx-auto max-w-5xl text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-gray-900">
-                Why {" "}
-                <span className="text-[#ddbc69]">BookMyAssets Developers</span>?
+                Why BookMyAssets Developers ?
               </h2>
             </div>
           </div>
@@ -180,7 +179,9 @@ export default function AboutBMA() {
                         }`}
                       >
                         <p className="text-center text-[0.875rem] font-semibold leading-[1.5] text-[#ddbc69]">
-                          <span className="text-green-500 text-center px-2">✓</span>{" "}
+                          <span className="text-green-500 text-center px-2">
+                            ✓
+                          </span>{" "}
                           {item.label}
                         </p>
                       </div>
