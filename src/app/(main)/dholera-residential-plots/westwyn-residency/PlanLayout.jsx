@@ -91,7 +91,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Location",
-                  content: "Pipariya",
+                  content: "1.5KM from DFC",
                   align: "text-left",
                 },
                 {
@@ -130,7 +130,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Price",
-                  content: "₹6500/sq yard",
+                  content: "₹8 Lakh",
                   align: "text-left",
                 },
               ].map(({ title, content, align }, index, arr) => {
