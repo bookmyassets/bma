@@ -57,13 +57,13 @@ const POPUP_TYPES = {
 };
 
 const POPUP_COOLDOWN_KEY = "bmaLeadPopupLastClosedAt";
-const POPUP_COOLDOWN_MS = 11000;
+const POPUP_COOLDOWN_MS = 20000;
 const ACTIVE_POPUP_KEY = "__bmaActiveLeadPopup";
 const PAGE_POPUP_STATE_KEY = "__bmaLeadPopupPageState";
-const COOLDOWN_TYPES = new Set(["time", "scroll", "slug"]);
 
 function requestPopupOpen(instanceId, type) {
   if (typeof window === "undefined") return false;
+  if (getPopupCooldownRemaining() > 0) return false;
 
   const pageKey = window.location.pathname;
   const pagePopupState = window[PAGE_POPUP_STATE_KEY];
@@ -92,12 +92,20 @@ function releasePopup(instanceId) {
   }
 }
 
-function getPopupCooldownRemaining(type) {
-  if (typeof window === "undefined" || !COOLDOWN_TYPES.has(type)) return 0;
+function getStoredCloseTime(storage) {
+  try {
+    return parseInt(storage.getItem(POPUP_COOLDOWN_KEY) || "0", 10) || 0;
+  } catch {
+    return 0;
+  }
+}
 
-  const lastClosedAt = parseInt(
-    sessionStorage.getItem(POPUP_COOLDOWN_KEY) || "0",
-    10,
+function getPopupCooldownRemaining() {
+  if (typeof window === "undefined") return 0;
+
+  const lastClosedAt = Math.max(
+    getStoredCloseTime(window.localStorage),
+    getStoredCloseTime(window.sessionStorage),
   );
 
   if (!lastClosedAt) return 0;
@@ -106,10 +114,22 @@ function getPopupCooldownRemaining(type) {
   return Math.max(POPUP_COOLDOWN_MS - elapsed, 0);
 }
 
-function markPopupClosed(type) {
-  if (typeof window === "undefined" || !COOLDOWN_TYPES.has(type)) return;
+function markPopupClosed() {
+  if (typeof window === "undefined") return;
 
-  sessionStorage.setItem(POPUP_COOLDOWN_KEY, Date.now().toString());
+  const closedAt = Date.now().toString();
+
+  try {
+    window.localStorage.setItem(POPUP_COOLDOWN_KEY, closedAt);
+  } catch {
+    // The in-memory popup lock still prevents overlapping popups.
+  }
+
+  try {
+    window.sessionStorage.setItem(POPUP_COOLDOWN_KEY, closedAt);
+  } catch {
+    // Keep the popup usable when browser storage is unavailable.
+  }
 }
 
 function getLeadSource() {
@@ -195,6 +215,7 @@ export default function PopupLeadForm({
   const recaptchaWidgetId = useRef(null);
   const clickCount = useRef(0);
   const clickTimer = useRef(null);
+  const popupIsOpen = useRef(false);
   const popupInstanceId = useRef(
     `lead-popup-${type}-${Date.now()}-${Math.random().toString(36).slice(2)}`,
   );
@@ -203,18 +224,23 @@ export default function PopupLeadForm({
   const openPopup = () => {
     if (!requestPopupOpen(popupInstanceId.current, type)) return false;
 
+    popupIsOpen.current = true;
     setShowFormPopup(true);
     return true;
   };
 
   const closePopup = () => {
-    markPopupClosed(type);
+    markPopupClosed();
+    popupIsOpen.current = false;
     releasePopup(popupInstanceId.current);
     setShowFormPopup(false);
   };
 
   useEffect(() => {
     return () => {
+      if (popupIsOpen.current) {
+        markPopupClosed();
+      }
       releasePopup(popupInstanceId.current);
     };
   }, []);
@@ -259,7 +285,7 @@ export default function PopupLeadForm({
 
     let cooldownTimer;
     const timer = setTimeout(() => {
-      const remainingCooldown = getPopupCooldownRemaining(type);
+      const remainingCooldown = getPopupCooldownRemaining();
       const openDelayedPopup = () => {
         if (openPopup() && config.sessionKey) {
           sessionStorage.setItem(config.sessionKey, "true");
@@ -294,7 +320,7 @@ export default function PopupLeadForm({
       const scrollPercentage = (scrollTop / documentHeight) * 100;
 
       if (scrollPercentage >= 45) {
-        const remainingCooldown = getPopupCooldownRemaining(type);
+        const remainingCooldown = getPopupCooldownRemaining();
         const openScrollPopup = () => {
           if (openPopup() && config.sessionKey) {
             sessionStorage.setItem(config.sessionKey, "true");
@@ -303,6 +329,7 @@ export default function PopupLeadForm({
         };
 
         if (remainingCooldown > 0) {
+          clearTimeout(cooldownTimer);
           cooldownTimer = setTimeout(openScrollPopup, remainingCooldown);
         } else {
           openScrollPopup();
