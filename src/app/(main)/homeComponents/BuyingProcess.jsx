@@ -43,11 +43,11 @@ export default function HowToBuy() {
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-[clamp(0.75rem,2vw,1rem)]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3  gap-[clamp(0.75rem,2vw,1rem)]">
           {steps.map((step) => (
             <div
               key={step.num}
-              className="group relative border border-white/10 p-[clamp(1.25rem,3vw,2rem)] hover:border-[#ddbc69]/60 transition-colors duration-300 bg-black hover:bg-white/[0.03]"
+              className="group relative border p-[clamp(1.25rem,3vw,2rem)] border-[#ddbc69] transition-colors duration-300 bg-black hover:bg-white/[0.03]"
             >
               {/* Step number */}
               <span className="block text-[#ddbc69] text-[0.875rem] font-semibold leading-[1.5] mb-[clamp(1rem,2.5vw,1.5rem)] opacity-90 select-none">
@@ -70,7 +70,7 @@ export default function HowToBuy() {
                   return (
                     <li
                       key={i}
-                      className={`flex items-start gap-1.5 text-white/70 text-[0.875rem] font-normal leading-[1.5] ${
+                      className={`flex items-center gap-1.5 text-white/70 text-[0.875rem] font-normal leading-[1.5] ${
                         isLastOdd ? "col-span-2" : ""
                       }`}
                     >
