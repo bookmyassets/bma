@@ -192,7 +192,7 @@ export default function page() {
         <Hero />
         <Dholera />
         <WestWyn />
-        <BMA />
+        {/* <BMA /> */}
         <HowToBuy />
         <LatestUpdates />
         <FAQSection />
