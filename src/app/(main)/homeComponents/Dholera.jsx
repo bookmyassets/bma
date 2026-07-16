@@ -13,7 +13,6 @@ export default function DholeraSmartCity() {
     {
       text: "Strong Connectivity via Road, Railway, Sea Port, Airport & MonoRail",
     },
-    { text: "Strong Long Term Investment Potential" },
   ];
 
   return (

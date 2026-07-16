@@ -106,7 +106,7 @@ export default function Hero() {
               </Link>
             </div>
 
-            <div className="mt-[clamp(0.5rem,1.75vw,1rem)] border-t border-[#ddbc69]/20 pt-[clamp(0.5rem,1.5vw,1rem)]">
+            <div className="mt-[clamp(0.5rem,1.75vw,1rem)] border-t border-[#ddbc69]/20 pt-[clamp(0.5rem,1.5vw,1rem)] -translate-y-8">
               <HeroForm />
             </div>
           </div>

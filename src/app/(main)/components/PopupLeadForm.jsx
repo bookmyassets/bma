@@ -6,7 +6,7 @@ import logo from "@/assests/bma-dedicated-to-dholera.svg";
 
 const POPUP_TYPES = {
   time: {
-    title: "Book Your Plot in Dholera",
+    title: "Get the Payment Plan",
     trigger: "scroll",
     sessionKey: "popupShownThisSession",
     source: "BookMyAssets Popup",
@@ -16,7 +16,7 @@ const POPUP_TYPES = {
     includeEmail: false,
   },
   scroll: {
-    title: "Registry Ready Plots in Dholera",
+    title: "Invest in Dholera Plots",
     trigger: "scroll",
     sessionKey: "popupShownThisSession",
     source: "BookMyAssets Popup",
@@ -26,7 +26,7 @@ const POPUP_TYPES = {
     includeEmail: false,
   },
   rage: {
-    title: "Get Govt Approved Plots Starting from Rs 8 Lakh",
+    title: "Start Your Dholera Plot Investment Today",
     trigger: "rage",
     source: "BookMyAssets Exit Popup",
     tags: ["Exit Intent", "Popup Lead", "BookMyAssets"],
@@ -36,7 +36,7 @@ const POPUP_TYPES = {
   },
   exit: {
     title: "Wait! Before You Go...",
-    subtitle: "Get exclusive updates",
+    subtitle: "",
     trigger: "exit",
     source: "BookMyAssets Exit Popup",
     tags: ["Exit Intent", "Popup Lead", "BookMyAssets"],
@@ -45,7 +45,7 @@ const POPUP_TYPES = {
     includeEmail: true,
   },
   slug: {
-    title: "Get Investment Details",
+    title: "Get Project Details",
     trigger: "scroll",
     sessionKey: "popupShown",
     source: "BookMyAssets christmas Popup",

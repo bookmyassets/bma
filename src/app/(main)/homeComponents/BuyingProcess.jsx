@@ -91,18 +91,10 @@ export default function HowToBuy() {
             href="https://wa.me/918130371647"
             className="flex justify-center items-center gap-2 self-start sm:self-auto bg-[#ddbc69] hover:bg-[#c89b2e] text-black font-semibold rounded-lg text-[0.875rem] md:text-[1rem] leading-[1.4] px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] transition-colors duration-200"
           >
-            {/* <FaWhatsapp className="w-6 h-6"/> */} Connect with Our RM
+            {/* <FaWhatsapp className="w-6 h-6"/> */} Connect with our RM
           </Link>
         </div>
       </div>
-
-      {isContactFormOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-          <div className="w-full max-w-md">
-            <ContactForm onClose={closeContactForm} />
-          </div>
-        </div>
-      )}
     </section>
   );
 }

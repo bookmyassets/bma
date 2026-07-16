@@ -9,7 +9,7 @@ const projects = [
   {
     name: "WestWyn Residency",
     price: "Starting from ₹8 Lakh",
-    location: "1.5 KM from DFC",
+    location: "1.5 km from DFC",
     href: "/dholera-residential-plots/westwyn-residency",
     image: westwynResidencyImage,
   },
