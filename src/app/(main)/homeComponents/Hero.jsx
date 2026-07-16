@@ -41,8 +41,8 @@ const PointsList = () => (
       </h2>
 
       {/* Body */}
-      <p className="text-white text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] mb-[clamp(0.4rem,1vw,0.75rem)]">
-        Simplifying Dholera Before You Book A Plot.
+      <p className="text-white text-[clamp(1rem,1.6vw,1.5rem)] font-normal leading-[1.7] mb-[clamp(0.4rem,1vw,0.75rem)]">
+        Invest in Dholera Residential Plots
       </p>
 
       <Link href="/about-dholera-sir">
@@ -87,27 +87,26 @@ export default function Hero() {
         <div className="relative w-full min-h-screen">
           <div className="absolute inset-0 bg-black/60" />
 
-          <div className="absolute space-y-2 inset-0 z-20 flex flex-col px-[clamp(1rem,4vw,2rem)] py-[clamp(2.5rem,5.25vw,3.75rem)] justify-center gap-[clamp(0.4rem,1vw,0.75rem)] overflow-y-auto">
+          <div className="absolute space-y-10 inset-0 z-20 flex flex-col px-[clamp(1rem,4vw,2rem)] py-[clamp(2.25rem,5.25vw,3.25rem)] justify-center gap-[clamp(0.4rem,1vw,0.75rem)] overflow-y-auto">
             {/* Visual heading Mobile */}
             <div className="text-white text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.1] mb-[clamp(0.5rem,1.25vw,1rem)]">
               Dedicated to Dholera
               <br />
             </div>
 
-            <div className="flex-col py-6 transform -translate-y-8">
-              <p className="mt-0.5 text-white text-[clamp(0.95rem,1.4vw,1.125rem)] mb-8 font-normal leading-[1.7]">
-                Simplifying Dholera Before You Book A Plot.
+            <div className="flex-col py-6 transform -translate-y-16">
+              <p className="mt-0.5 text-white text-[clamp(1.12rem,1.5vw,1.25rem)] mb-8 font-normal leading-[1.7]">
+                Invest in Dholera Residential Plots
               </p>
 
               <Link href="/about-dholera-sir">
-                <p className="bg-[#ddbc69] text-black text-center p-1 w-44 text-[0.875rem] md:text-[1rem] font-semibold leading-[1.4] rounded-lg">
-                  About Dholera{" "}
-                  <FaArrowRight className="inline-block ml-1" />
+                <p className="bg-[#ddbc69] text-black text-center p-2 w-40 text-[1rem] md:text-[1rem] font-semibold leading-[1.4] rounded-lg">
+                  About Dholera <FaArrowRight className="inline-block ml-1" />
                 </p>
               </Link>
             </div>
 
-            <div className="mt-[clamp(1rem,2.5vw,1.75rem)] border-t border-[#ddbc69]/20 pt-[clamp(1.25rem,2.25vw,1.5rem)]">
+            <div className="mt-[clamp(0.5rem,1.75vw,1rem)] border-t border-[#ddbc69]/20 pt-[clamp(0.5rem,1.5vw,1rem)]">
               <HeroForm />
             </div>
           </div>
@@ -116,4 +115,3 @@ export default function Hero() {
     </div>
   );
 }
-

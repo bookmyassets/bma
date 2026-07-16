@@ -3,14 +3,15 @@ import React from "react";
 import ROI from "@/assests/dholera-on-gujarat-map-bookmyassets.webp";
 import Link from "next/link";
 
-
 export default function DholeraSmartCity() {
   const locationFeatures = [
-    { text: "India's First Special Investment Region (SIR)" },
-    { text: "Part of the Delhi-Mumbai Industrial Corridor (DMIC)" },
-    { text: "India's First Semiconductor Hub" },
-    { text: "Government-Backed Projects" },
-    { text: "Strong Connectivity via Road, Railway, Sea Port, Airport, MonoRail" },
+    { text: "India's First Greenfield Smart City" },
+    { text: "Government Backed Development" },
+    { text: "Dholera International Airport" },
+    { text: "Ahmedabad Dholera Expressway" },
+    { text: "Tata Semiconductor Plant", },
+    { text: "Plug & Play Infrastructure" },
+    { text: "Strong Long Term Investment Potential" },
   ];
 
   return (
@@ -18,8 +19,7 @@ export default function DholeraSmartCity() {
       <div className="max-w-7xl mx-auto px-[clamp(1rem,4vw,2.5rem)] py-[clamp(2rem,5vw,3.5rem)]">
         {/* Section heading */}
         <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-white text-center mb-[clamp(1rem,2.5vw,1.75rem)]">
-          What is{" "}
-          <span className="text-[#ddbc69]">Dholera Smart City</span>?
+          What is <span className="text-[#ddbc69]">Dholera Smart City</span>?
         </h2>
 
         {/* Two-column layout */}
@@ -51,15 +51,14 @@ export default function DholeraSmartCity() {
               is a planned smart city in Gujarat, India, developed as part of
               the Delhi-Mumbai Industrial Corridor (DMIC). It is India’s first
               greenfield smart city, building from scratch with modern
-              infrastructure and proper planning. The city is designed to become
-              a major industrial, manufacturing, and technology hub, with
-              sectors like semiconductors, renewable energy, data centres, and
-              logistics.
+              infrastructure and proper planning.
             </p>
 
             {/* 3×2 highlight cards */}
             <div className=" gap-3 text-left py-1">
-              <p className="text-[#ddbc69] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] pb-2">Why Invest in Dholera?</p>
+              <p className="text-[#ddbc69] text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] pb-2">
+                Why Invest in Dholera?
+              </p>
               {locationFeatures.map((feature, index) => {
                 return (
                   <div
@@ -80,4 +79,3 @@ export default function DholeraSmartCity() {
     </section>
   );
 }
-

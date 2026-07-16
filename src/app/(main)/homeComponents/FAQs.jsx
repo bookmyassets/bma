@@ -5,39 +5,29 @@ import TestimonialPagination from "../components/Testimonials";
 
 const faqs = [
   {
-    question: "What type of plots does BookMyAssets offer in Dholera?",
+    question: "Why should I invest in Dholera Smart City?",
     answer:
-      "We help buyers explore verified residential plot options in and around relevant Dholera growth zones, depending on project availability and buyer requirements.",
+      "Dholera Smart City is India's first greenfield smart city with major infrastructure projects like the Dholera International Airport, Ahmedabad–Dholera Expressway, and Tata Semiconductor Plant, making it a promising destination for long-term investment.",
   },
   {
-    question: "Are these government approved plots?",
+    question: "What types of residential plots does BookMyAssets offer in Dholera?",
     answer:
-      "BookMyAssets focuses on plotted opportunities where buyers can review:\n• Project documents\n• Layout details\n• Approval-related information\nbefore making a decision.",
+      "BookMyAssets offers legally verified, registry-ready residential plots in prime locations across Dholera with transparent documentation and modern infrastructure.",
   },
   {
-    question: "Who usually considers buying plots in Dholera?",
+    question: "Are BookMyAssets projects legally verified?",
     answer:
-      "Most enquiries come from:\n• Long-term investors\n• Retirement-focused buyers\n• Delhi NCR families\n• NRIs",
+      "Yes. All BookMyAssets residential projects come with NA/NOC approvals, clear title documents, plan pass approval, and registry-ready plots for a secure buying experience.",
   },
   {
-    question: "What should I check before buying a plot in Dholera?",
+    question: "Does BookMyAssets provide support after buying a plot?",
     answer:
-      "You should evaluate:\n• Project location\n• Documentation process\n• Layout planning\n• Road access\n• Pricing structure\n• Registry process\nbefore booking.",
+      "Yes. We provide complete post-purchase support, including registration assistance, villa construction support, resale assistance, rental support, and dedicated customer service.",
   },
   {
-    question: "Is Dholera suitable for short-term investment?",
+    question: "Why choose BookMyAssets for investing in Dholera?",
     answer:
-      "Most buyers evaluate Dholera as a long-term land holding opportunity rather than a short-term flip market.",
-  },
-  {
-    question: "Is it safe to invest in Dholera plots right now?",
-    answer:
-      "Dholera is India’s first Greenfield Smart City with strong government backing. Key factors include:\n• International airport development\n• Expressway connectivity\n• Industrial growth including semiconductor ecosystem\n\nAt BookMyAssets, we focus on:\n• NA-approved plots\n• NOC clearance\n• Clear title verification\n• Immediate registry\n\nThese factors significantly reduce investment risk.",
-  },
-  {
-    question: "What is the future potential of Dholera Smart City?",
-    answer:
-      "Dholera is planned as a major industrial and infrastructure hub with:\n• International airport\n• Expressway connectivity\n• Industrial zones\n• Semiconductor and manufacturing investments\n\nThese developments are expected to drive long-term demand and value appreciation.",
+      "BookMyAssets offers verified residential projects, transparent documentation, registry-ready plots, site visit assistance, and end-to-end support from booking to villa construction support.",
   },
 ];
 

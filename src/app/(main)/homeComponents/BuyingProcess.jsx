@@ -7,24 +7,20 @@ import { FaWhatsapp } from "react-icons/fa6";
 const steps = [
   {
     num: "1",
-    title: "Get a Call Back",
-    desc: ["Share your details", "Our team will guide you"],
+    title: "Connect with Our RM",
+    desc: ["Get Project Details"],
   },
   {
     num: "2",
-    title: "Token & KYC",
-    desc: ["Pay ₹50,000 token amount", "Complete basic KYC"],
+    title: "Book Your Plot",
+    desc: ["Pay Booking Amount ₹50,000", "Complete KYC"],
   },
   {
     num: "3",
-    title: "Site Visit",
-    desc: ["Schedule your visit"],
+    title: "Complete Payment",
+    desc: ["Complete Your Payment in 15 days", "Get Your Plot Registry"],
   },
-  {
-    num: "4",
-    title: "Get Your Plot",
-    desc: ["Pay in full within 15 days", "Get your plot registered"],
-  },
+
 ];
 
 export default function HowToBuy() {
@@ -47,7 +43,7 @@ export default function HowToBuy() {
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(0.75rem,2vw,1rem)]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-[clamp(0.75rem,2vw,1rem)]">
           {steps.map((step) => (
             <div
               key={step.num}
@@ -67,16 +63,22 @@ export default function HowToBuy() {
               </h3>
 
               {/* Description list */}
-              <ul className="space-y-1">
-                {step.desc.map((point, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-1.5 text-white/70 text-[0.875rem] font-normal leading-[1.5]"
-                  >
-                    <span className="mt-[0.35em] w-1 h-1 rounded-full bg-[#ddbc69] shrink-0" />
-                    {point}
-                  </li>
-                ))}
+              <ul className="grid grid-cols-1 gap-x-2 gap-y-1">
+                {step.desc.map((point, i) => {
+                  const isLastOdd =
+                    step.desc.length % 2 !== 0 && i === step.desc.length - 1;
+                  return (
+                    <li
+                      key={i}
+                      className={`flex items-start gap-1.5 text-white/70 text-[0.875rem] font-normal leading-[1.5] ${
+                        isLastOdd ? "col-span-2" : ""
+                      }`}
+                    >
+                      <span className="mt-[0.35em] w-1 h-1 rounded-full bg-[#ddbc69] shrink-0" />
+                      {point}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -89,7 +91,7 @@ export default function HowToBuy() {
             href="https://wa.me/918130371647"
             className="flex justify-center items-center gap-2 self-start sm:self-auto bg-[#ddbc69] hover:bg-[#c89b2e] text-black font-semibold rounded-lg text-[0.875rem] md:text-[1rem] leading-[1.4] px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] transition-colors duration-200"
           >
-           {/* <FaWhatsapp className="w-6 h-6"/> */}  Connect with Our RM
+            {/* <FaWhatsapp className="w-6 h-6"/> */} Connect with Our RM
           </Link>
         </div>
       </div>
