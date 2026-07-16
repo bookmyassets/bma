@@ -69,7 +69,7 @@ export default function Footer() {
                   <p className="leading-relaxed">
                     620, 6th Floor, JMD Megapolis,
                     <br />
-                    Sector 48, Gurugram, Haryana 122001
+                    Sector 48, Gurugram, Haryana 122018
                   </p>
                 </div>
               </Link>
