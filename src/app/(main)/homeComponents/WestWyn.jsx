@@ -7,18 +7,18 @@ import westwynResidencyImage from "@/assests/residency.webp";
 
 const projects = [
   {
-    name: "WestWyn Estates",
-    price: "Starting from ₹10 Lakh",
-    location: "State Highway 117",
-    href: "/dholera-residential-plots/westwyn-estate",
-    image: westwynEstatesImage,
-  },
-  {
     name: "WestWyn Residency",
     price: "Starting from ₹8 Lakh",
     location: "1.5 KM from DFC",
     href: "/dholera-residential-plots/westwyn-residency",
     image: westwynResidencyImage,
+  },
+  {
+    name: "WestWyn Estates",
+    price: "Starting from ₹10 Lakh",
+    location: "State Highway 117",
+    href: "/dholera-residential-plots/westwyn-estate",
+    image: westwynEstatesImage,
   },
   {
     name: "WestWyn County",

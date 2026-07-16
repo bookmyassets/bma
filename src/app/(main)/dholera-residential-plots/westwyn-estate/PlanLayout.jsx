@@ -94,7 +94,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Location",
-                  content: "Polarpur, near Bhimnath Railway Junction",
+                  content: "State Highway 117",
                   align: "text-left",
                 },
                 {

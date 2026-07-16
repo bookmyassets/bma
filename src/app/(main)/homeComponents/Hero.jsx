@@ -45,9 +45,9 @@ const PointsList = () => (
         Simplifying Dholera Before You Book A Plot.
       </p>
 
-      <Link href="/about">
+      <Link href="/about-dholera-sir">
         <p className="bg-[#ddbc69] text-black text-center p-2 w-48 rounded-lg">
-          About BMA <FaArrowRight className="inline-block ml-1" />
+          About Dholera <FaArrowRight className="inline-block ml-1" />
         </p>
       </Link>
     </div>
@@ -99,9 +99,9 @@ export default function Hero() {
                 Simplifying Dholera Before You Book A Plot.
               </p>
 
-              <Link href="/about">
+              <Link href="/about-dholera-sir">
                 <p className="bg-[#ddbc69] text-black text-center p-1 w-44 text-[0.875rem] md:text-[1rem] font-semibold leading-[1.4] rounded-lg">
-                  About BMA{" "}
+                  About Dholera{" "}
                   <FaArrowRight className="inline-block ml-1" />
                 </p>
               </Link>
