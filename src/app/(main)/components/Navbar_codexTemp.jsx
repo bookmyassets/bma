@@ -76,11 +76,9 @@ const dholeraItems = [
 
 const utilityLinks = [
   { href: "/about-dholera-sir", label: "About Dholera" },
-  { href: "/career", label: "Careers" },
   { href: "/channel-partner", label: "Channel Partner" },
-  { href: "/dholera-events", label: "Investor Meetups" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About Us" },
   { href: "/faqs",label: "FAQs"},
   { label: "Book Video Call", calendly: true },
 ];
@@ -89,9 +87,7 @@ const mobileLinks = [
   { href: "/dholera-sir-blogs", label: "Dholera Blogs" },
   { href: "/dholera-sir-updates", label: "Dholera SIR Updates" },
   { href: "/about-dholera-sir", label: "About Dholera" },
-  { href: "/dholera-events", label: "Investor Meetups" },
   { href: "/contact", label: "Contact Us" },
-  { href: "/career", label: "Careers" },
   { href: "/about", label: "About Us" },
   { href: "/gallery", label: "Gallery" },
   { href: "/faqs",label: "FAQs"},

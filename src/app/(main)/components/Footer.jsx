@@ -201,6 +201,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/dholera-events"
+                  className="text-white   hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                >
+                  Investor Meetups
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/bulk-land/residential"
                   className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >

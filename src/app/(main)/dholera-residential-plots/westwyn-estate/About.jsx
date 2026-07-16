@@ -83,28 +83,38 @@ const WestWynAboutSection = () => {
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
             Westwyn Estates offers premium, well-planned residential plots in a
-            fast-growing zone in Polarpur, best for investors looking
-            for long-term value. With clear documentation, strategic location,
-            and strong development potential, it ensures a secure and
-            transparent buying experience. It is a smart opportunity to be part
-            of India’s next big smart city growth story.
+            fast-growing zone in Polarpur, best for investors looking for
+            long-term value. With clear documentation, strategic location, and
+            strong development potential, it ensures a secure and transparent
+            buying experience. It is a smart opportunity to be part of India’s
+            next big smart city growth story.
           </p>
         </div>
 
-        <div className=" gap-12 items-stretch space-y-4 px-4 py-4">
+        <div className="gap-12 items-stretch space-y-4 px-4 py-4">
           {/* Left Content */}
-          <div className=" h-full">
-            <div className="flex justify-center items-center flex-col md:flex-row gap-4 ">
+          <div className="h-full">
+            <div className="flex justify-center items-center flex-row gap-[clamp(0.5rem,2vw,1rem)]">
               <Link href="https://wa.me/918130371647">
-                <p className="bg-[#ddbc69] border border-[#ddbc69] whitespace-nowrap text-white text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#eecb71] transition-colors flex items-center justify-center gap-2">
-                  <FaFile />
+                <p
+                  className="bg-[#ddbc69] border border-[#ddbc69] whitespace-nowrap text-white rounded-xl font-medium hover:bg-[#eecb71] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
+                    text-[clamp(0.8rem,1.8vw,1rem)]
+                    px-[clamp(0.75rem,3vw,1.25rem)]
+                    py-[clamp(0.5rem,2vw,0.75rem)]"
+                >
+                  <FaFile className="text-[clamp(0.8rem,2vw,1.1rem)]" />
                   Get Brochure
                 </p>
               </Link>
 
               <Link href="tel:+918130371647">
-                <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaPhone />
+                <p
+                  className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
+                    text-[clamp(0.8rem,1.8vw,1rem)]
+                    px-[clamp(0.75rem,3vw,1.25rem)]
+                    py-[clamp(0.5rem,2vw,0.75rem)]"
+                >
+                  <FaPhone className="text-[clamp(0.8rem,2vw,1.1rem)]" />
                   Connect with our RM
                 </p>
               </Link>
@@ -134,9 +144,7 @@ const WestWynAboutSection = () => {
                   <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>
-                    Premium residential plots in Polarpur
-                  </span>
+                  <span>Premium residential plots in Polarpur</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
@@ -237,4 +245,3 @@ const WestWynAboutSection = () => {
 };
 
 export default WestWynAboutSection;
-

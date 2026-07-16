@@ -385,14 +385,7 @@ export default async function page() {
                     >
                       Talk to Our Expert
                     </Link>
-                    <a
-                      href="https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-[clamp(0.65rem,1.2vw,0.9rem)] border border-black px-[clamp(0.9rem,1.8vw,1.25rem)] py-[clamp(0.75rem,1.3vw,0.95rem)] text-sm font-semibold text-black transition-transform duration-200 hover:scale-[1.01]"
-                    >
-                      Download Brochure
-                    </a>
+                    
                   </div>
                 </div>
 

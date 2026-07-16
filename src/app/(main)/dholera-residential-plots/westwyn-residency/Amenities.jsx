@@ -172,7 +172,7 @@ const ProjectAmenities = () => {
               {/* Prev button */}
               <button
                 onClick={prev}
-                className="absolute left-6 top-1/2 -translate-y-1/2 z-30
+                className="absolute left-6 top-1/2 -translate-y-1/2 z-20
       w-8 h-8 sm:w-10 sm:h-10
       bg-white/80 hover:bg-white
       rounded-full shadow-lg
@@ -224,7 +224,7 @@ const ProjectAmenities = () => {
               </button>
 
               {/* Dot indicators */}
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
                 {carouselImages.map((_, i) => (
                   <button
                     key={i}

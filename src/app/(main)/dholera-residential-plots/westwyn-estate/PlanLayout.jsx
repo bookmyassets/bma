@@ -4,7 +4,11 @@ import BrochureDownload from "../../components/BrochureDownload";
 import Image from "next/image";
 import img from "@/assests/residential/estates/westwyn-Estates.webp";
 import { FaDownload } from "react-icons/fa";
-import { FaLocationPin, FaLocationPinLock, FaMapLocation } from "react-icons/fa6";
+import {
+  FaLocationPin,
+  FaLocationPinLock,
+  FaMapLocation,
+} from "react-icons/fa6";
 import Link from "next/link";
 
 const PlanLayout = () => {
@@ -95,7 +99,8 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Highway Access",
-                  content: "Direct Entry from 150 ft wide 4-lane State Highway-117",
+                  content:
+                    "Direct Entry from 150 ft wide 4-lane State Highway-117",
                   align: "text-left",
                 },
                 {
@@ -181,21 +186,29 @@ const PlanLayout = () => {
               })}
             </div>
           </div>
-          <div className=" gap-12 items-stretch space-y-4 px-4 py-4">
+          <div className="gap-12 items-stretch space-y-4 px-4 py-4">
             {/* Left Content */}
-            <div className=" h-full">
-              <div className="flex justify-center items-center flex-row gap-4 ">
+            <div className="h-full">
+              <div className="flex justify-center items-center flex-row gap-[clamp(0.5rem,2vw,1rem)]">
                 <button
                   onClick={openBrochureForm}
-                  className="bg-[#ddbc69] text-white text-base px-2 md:px-4 whitespace-nowrap py-3 rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-2"
+                  className="bg-[#ddbc69] text-white whitespace-nowrap rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
+                    text-[clamp(0.8rem,1.8vw,1rem)]
+                    px-[clamp(0.75rem,3vw,1.25rem)]
+                    py-[clamp(0.5rem,2vw,0.75rem)]"
                 >
-                  <FaDownload />
+                  <FaDownload className="text-[clamp(0.8rem,2vw,1.1rem)]" />
                   Download Plan Layout
                 </button>
 
                 <Link href="https://maps.app.goo.gl/UkvNKmgf1yPF8eKS6">
-                  <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                    <FaMapLocation />
+                  <p
+                    className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
+                    text-[clamp(0.8rem,1.8vw,1rem)]
+                    px-[clamp(0.75rem,3vw,1.25rem)]
+                    py-[clamp(0.5rem,2vw,0.75rem)]"
+                  >
+                    <FaMapLocation className="text-[clamp(0.8rem,2vw,1.1rem)]" />
                     Project Location
                   </p>
                 </Link>
@@ -225,4 +238,3 @@ const PlanLayout = () => {
 };
 
 export default PlanLayout;
-
