@@ -75,19 +75,19 @@ const WestWynAboutSection = () => {
             <span className="font-semibold text-sm md:text-lg whitespace-nowrap text-black">
               {" "}
               <br />
-              Plots Starting from ₹10 Lakh
+              Residential Plot Project in Dholera
             </span>
           </h1>
 
           <p className=" italic  py-0.5"></p>
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
-            Westwyn Estates offers premium, well-planned residential plots in a
-            fast-growing zone in Polarpur, best for investors looking for
-            long-term value. With clear documentation, strategic location, and
-            strong development potential, it ensures a secure and transparent
-            buying experience. It is a smart opportunity to be part of India’s
-            next big smart city growth story.
+            WestWyn Estates a registry-ready Residential plot project located on
+            Dholera's widest Road. Direct entry from 150 ft State Highway 117.
+            With clear documentation, strategic location, and strong development
+            potential, it ensures a secure and transparent buying experience. It
+            is a smart opportunity to be part of India’s next big smart city
+            growth story.
           </p>
         </div>
 

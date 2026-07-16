@@ -5,12 +5,14 @@ import Link from "next/link";
 
 export default function DholeraSmartCity() {
   const locationFeatures = [
-    { text: "India's First Greenfield Smart City" },
+    { text: "India's First Special Investment Region (SIR)" },
     { text: "Government Backed Development" },
-    { text: "Dholera International Airport" },
-    { text: "Ahmedabad Dholera Expressway" },
-    { text: "Tata Semiconductor Plant", },
+    { text: "Part of the Delhi-Mumbai Industrial Corridor (DMIC)" },
+    { text: "India's First Semiconductor Hub" },
     { text: "Plug & Play Infrastructure" },
+    {
+      text: "Strong Connectivity via Road, Railway, Sea Port, Airport & MonoRail",
+    },
     { text: "Strong Long Term Investment Potential" },
   ];
 
