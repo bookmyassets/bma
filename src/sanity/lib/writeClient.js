@@ -5,6 +5,7 @@ import { apiVersion, dataset, projectId } from "../env";
 export const hasSanityWriteToken = () =>
   Boolean(process.env.SANITY_API_WRITE_TOKEN);
 
+
 export const receiptCounterClient = createClient({
   projectId,
   dataset,
