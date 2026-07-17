@@ -4,28 +4,29 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Who should choose WestWyn Residency?",
+    question: "What is WestWyn Residency?",
     answer:
-      "WestWyn Residency is best for buyers who want a lower-entry plotted option with practical ticket size and location clarity.",
+      "WestWyn Residency is a registry-ready residential plot project by BookMyAssets in Pipariya, Dholera. It offers legally verified plots with immediate possession, modern amenities, and excellent connectivity.",
   },
   {
-    question: "What are the available plot sizes?",
+    question: "Where is WestWyn Residency located?",
     answer:
-      "124, 152, and 187 sq. yards plots are available in WestWyn Residency.",
+      "WestWyn Residency is located in Pipariya with direct access from the Major District Road (MDR). It is close to the DFC, Bhimnath Railway Junction, Dholera SIR, Ahmedabad–Dholera Expressway, Tata Semiconductor Plant, and Dholera International Airport.",
   },
   {
-    question: "What is the token amount?",
-    answer: "The token amount is ₹50,000.",
+    question: "Are the plots at WestWyn Residency legally verified?",
+    answer:
+      "Yes. All plots at WestWyn Residency are NA/NOC approved, title clear, plan pass approved, and registry-ready for a secure and transparent property purchase.",
   },
   {
-    question: "Is the project registry-ready?",
+    question: "What amenities are available at WestWyn Residency?",
     answer:
-      "Yes, WestWyn Residency is presented as a registry-ready residential plot project with immediate possession, suitable for buyers seeking clarity and quicker ownership transfer.",
+      "WestWyn Residency offers a gated community, 24×7 security with CCTV, wide internal roads, power and water supply, drainage system, kids play area, yoga deck, jogging track, EV charging station, and senior citizen zone.",
   },
   {
-    question: "Can I plan a site visit before buying?",
+    question: "Does BookMyAssets provide support after buying a plot?",
     answer:
-      "Yes. BookMyAssets offers 365-day site visit assistance and also allows buyers to book a visit for on-ground guidance and better understanding of the project.",
+      "Yes. BookMyAssets provides complete support including site visits, documentation assistance, villa construction, resale support, rental support, and post-purchase guidance.",
   },
 ];
 

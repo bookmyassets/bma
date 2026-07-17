@@ -71,18 +71,19 @@ const WestWynAboutSection = () => {
         <div className="text-center mb-4 space-y-2">
           <h1 className="text-xl md:text-[32px] font-bold text-[#ddbc69]">
             WestWyn Residency{" "}
-            <span className="text-black">
-              - Govt Approved Premium Residential Plots
-            </span>
           </h1>
+            <p className="text-black mt-4 text-lg">
+              Residential Plots in Dholera
+
+            </p>
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
-            Westwyn Residency brings a balanced mix of smart planning and
-            future-ready living in Pipariya, crafted for those who want more
-            than just land real long-term value. With clear documentation, a
-            well-connected location, and steady growth potential, it stands out
-            as a reliable investment choice. A place where today’s decision
-            turns into tomorrow’s asset.
+            WestWyn Residency is a 40,000 sq. yard residential plot project in
+            Pipariya Developed by BookMyAssets. Located on Major District Road
+            in Dholera. 1.5 km from DFC (Dedicated Freight Corridor) further it
+            is close to the Bhimnath Railway Junction, and within reach of
+            everyday needs a bus stand, school, hospital, shopping complex,
+            park, and food courts.
           </p>
         </div>
 
@@ -135,18 +136,18 @@ const WestWynAboutSection = () => {
             </div>
             <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
               <ul className="space-y-4 text-gray-700">
-                <li className="flex items-start justify-start gap-2 font-semibold">
+                <li className="flex items-start justify-start gap-2 font-bold">
                   <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>Premium residential plots in Pipariya</span>
+                  <span>Direct Entry from Major District Road (MDR)</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">
                   <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
                     •
                   </span>
-                  <span>Direct Entry from Major District Road(MDR)</span>
+                  <span>2 Minutes from DFC (Dedicated Freight Corridor)</span>
                 </li>
 
                 <li className="flex items-start justify-start gap-2 font-bold">

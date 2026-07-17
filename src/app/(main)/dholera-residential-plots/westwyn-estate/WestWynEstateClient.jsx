@@ -18,6 +18,7 @@ import img1M from "@/assests/residential/estates/westwyn-estates-dholera-times-m
 import PopupLeadForm from "../../components/PopupLeadForm";
 import CostSheet from "../costsheet2";
 import OurCommits from "./OurCommits";
+import DevelopmentProgress from "./DevelopmentProgress";
 import PlanLayout from "./PlanLayout";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
@@ -162,6 +163,8 @@ export default function WestWynEstateClient() {
       <div className=" ">
         <OurCommits />
       </div>
+
+      <DevelopmentProgress />
 
       <FAQSection />
 

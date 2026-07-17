@@ -55,7 +55,7 @@ export default function ProjectsSection() {
                   sizes="(min-width: 1024px) 22rem, 100vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                
                 {project.status && (
                   <span className="absolute right-[1rem] top-[1rem] rounded-full bg-red-600 px-[0.75rem] py-[0.375rem] text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-white shadow-lg">
                     {project.status}

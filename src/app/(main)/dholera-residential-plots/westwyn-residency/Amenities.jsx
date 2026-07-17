@@ -89,11 +89,11 @@ const amenities = [
     title: "Yoga Deck",
     color: "from-pink-500 to-rose-500",
   },
-  {
+  /* {
     icon: <Footprints className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Jogging Track",
     color: "from-green-500 to-emerald-500",
-  },
+  }, */
   {
     icon: <Users className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Senior Citizen Zone",
@@ -114,7 +114,7 @@ const amenities = [
     title: "Drainage System",
     color: "from-amber-600 to-amber-800",
   },
-  {
+  /* {
     icon: <FaBuilding className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Clubhouse Lite",
     color: "from-gray-600 to-gray-800",
@@ -123,7 +123,7 @@ const amenities = [
     icon: <FaShop className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     title: "Utilities Inside",
     color: "from-orange-600 to-orange-800",
-  },
+  }, */
 ];
 
 const ProjectAmenities = () => {
@@ -244,7 +244,7 @@ const ProjectAmenities = () => {
             <div className="w-full">
               {/* Mobile */}
               <div className="block lg:hidden">
-                <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {visibleAmenities.map((amenity) => (
                     <AmenityCard key={amenity.title} amenity={amenity} />
                   ))}

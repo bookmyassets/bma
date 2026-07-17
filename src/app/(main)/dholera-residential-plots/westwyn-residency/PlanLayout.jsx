@@ -95,7 +95,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Location",
-                  content: "1.5KM from DFC",
+                  content: "Pipariya",
                   align: "text-left",
                 },
                 {

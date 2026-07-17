@@ -8,6 +8,8 @@ import {
   FaLocationPin,
   FaLocationPinLock,
   FaMapLocation,
+  FaPhone,
+  FaWhatsapp,
 } from "react-icons/fa6";
 import Link from "next/link";
 
@@ -94,18 +96,13 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Location",
-                  content: "State Highway 117",
-                  align: "text-left",
-                },
-                {
-                  title: "Highway Access",
                   content:
-                    "Direct Entry from 150 ft wide 4-lane State Highway-117",
+                    "Polarpur",
                   align: "text-left",
                 },
                 {
                   title: "Plot Sizes",
-                  content: "Approx 147-250 sq. yards",
+                  content: " 147-250 sq. yards",
                   align: "text-left",
                 },
                 {
@@ -114,8 +111,24 @@ const PlanLayout = () => {
                   align: "text-left",
                 },
                 {
-                  title: "Possession",
-                  content: "Immediate",
+                  title: "Documentation",
+                  content: "NA/NOC, Title Clear, Plan Pass Approved",
+                  align: "text-left",
+                },
+                {
+                  title: "Development Status",
+                  content: "Nearing Completion",
+                  align: "text-left",
+                },
+                {
+                  title: "Plot Price",
+                  content: "₹7000/sq. Yard",
+                  align: "text-left",
+                },
+                {
+                  title: "Payment Plan",
+                  content:
+                    "Full Payment within 15 Days",
                   align: "text-left",
                 },
                 {
@@ -123,16 +136,7 @@ const PlanLayout = () => {
                   content: "BookMyAssets",
                   align: "text-left",
                 },
-                {
-                  title: "Documentation",
-                  content: "NA/NOC, Title Clear, Plan Pass Approved",
-                  align: "text-left",
-                },
-                {
-                  title: "Plot Price",
-                  content: "₹10 Lakh",
-                  align: "text-left",
-                },
+                
               ].map(({ title, content, align }, index, arr) => {
                 const isLastOdd =
                   index === arr.length - 1 && arr.length % 2 !== 0;
@@ -190,26 +194,26 @@ const PlanLayout = () => {
             {/* Left Content */}
             <div className="h-full">
               <div className="flex justify-center items-center flex-row gap-[clamp(0.5rem,2vw,1rem)]">
-                <button
-                  onClick={openBrochureForm}
+                <Link
+                  href="https://wa.me/918130371647"
                   className="bg-[#ddbc69] text-white whitespace-nowrap rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
                     text-[clamp(0.8rem,1.8vw,1rem)]
                     px-[clamp(0.75rem,3vw,1.25rem)]
                     py-[clamp(0.5rem,2vw,0.75rem)]"
                 >
-                  <FaDownload className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                  Download Plan Layout
-                </button>
+                  <FaWhatsapp className="text-[clamp(0.8rem,2vw,1.1rem)]" />
+                  Get  Brochure
+                </Link>
 
-                <Link href="https://maps.app.goo.gl/UkvNKmgf1yPF8eKS6">
+                <Link href="tel:+918130371647">
                   <p
                     className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
                     text-[clamp(0.8rem,1.8vw,1rem)]
                     px-[clamp(0.75rem,3vw,1.25rem)]
                     py-[clamp(0.5rem,2vw,0.75rem)]"
                   >
-                    <FaMapLocation className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                    Project Location
+                    <FaPhone className="text-[clamp(0.8rem,2vw,1.1rem)]" />
+                    Connect With Our RM
                   </p>
                 </Link>
               </div>

@@ -14,16 +14,31 @@ export default function () {
           </p>
 
           <div className="p-4 md:p-8">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
               {[
-                { value: "NA/NOC/Title Clearance", label: "Total Land Parcel" },
-                { value: "Immediate Registry", label: "Total Units" },
+                { value: "NA/NOC/Title Clear", label: "Total Land Parcel" },
+                { value: "Plan Pass Approved", label: "Total Units" },
                 {
-                  value: "365 Days Site Visit Assitance",
-                  label: "Plot Sizes",
+                  value: "Registry Ready",
+                  label: "Site Visit Assistance",
                 },
-                { value: <>ReSale <br /> Support</>, label: "Starting Price" },
-                { value: "BuyBack Assistance", label: "Returns In 5 years" },
+                {
+                  value: (
+                    <>
+                      ReSale <br /> Support
+                    </>
+                  ),
+                  label: "Starting Price",
+                },
+                {
+                  value: (
+                    <>
+                      Rental <br /> Support
+                    </>
+                  ),
+                  label: "Villa Construction",
+                },
+                { value: "Site Visit Assistance", label: "Returns In 5 years" },
               ].map(({ value }, i) => (
                 <div
                   key={i}
@@ -31,7 +46,6 @@ export default function () {
       ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}
                 >
                   <div className="text-xl flex justify-center items-center lg:text-2xl font-bold text-[#ddbc69] leading-tight mb-2">
-                    
                     {value}
                   </div>
                 </div>
