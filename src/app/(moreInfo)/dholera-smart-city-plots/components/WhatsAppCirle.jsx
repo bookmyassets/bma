@@ -15,7 +15,7 @@ export default function Whatsapp() {
       });
 
       window.open(
-        "https://wa.me/918130371647?text=Hi%2C%20I%27m%20interested%20in%20Dholera%20plots.%20Please%20share%20details.",
+        "https://wa.me/918130371647?text=Hi%2C%20I%27m%20interested%20in%20Dholera%20plots.%20Please%20share%20details%20Google.",
         "_blank",
         "noopener,noreferrer",
       );

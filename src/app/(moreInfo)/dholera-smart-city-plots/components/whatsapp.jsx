@@ -24,7 +24,8 @@ const FloatingButtons = () => {
       device: "mobile",
     });
 
-    window.open("https://wa.me/918130371647", "_blank");
+    const message = encodeURIComponent("Hi I'm enquiring from google");
+    window.open(`https://wa.me/918130371647?text=${message}`, "_blank");
   };
 
   return (
