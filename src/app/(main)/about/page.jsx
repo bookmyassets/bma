@@ -110,20 +110,7 @@ const RealEstateLandingPage = () => {
         "WestWyn County Project",
       ],
     },
-    {
-      name: "BMA Channel Partners",
-      subtitle: "Because Your Dreams Have No Borders",
-      description:
-        "A global network that connects you with verified, high-quality developers in India and internationally. Whether you want to invest in Dubai, Mumbai, or anywhere else, we open every investment door for you.",
-      icon: Globe,
-      color: "from-green-500 to-green-600",
-      features: [
-        "Global Network",
-        "Verified Developers",
-        "International Investments",
-        "Client-Centric Approach",
-      ],
-    },
+   
     {
       name: "BMA Allied Services",
       subtitle: "Helping You Build, Manage & Enjoy Your Investment",
