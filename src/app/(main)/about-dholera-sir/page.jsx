@@ -7,6 +7,30 @@ import InlineLeadForm from "../components/InlineLeadForm";
 import Link from "next/link";
 import Image from "next/image";
 import FAQSection from "./FAQs";
+import MegaIndustries from "./MegaIndustries";
+
+const MAJOR_INFRASTRUCTURE_PROJECTS = [
+  "Ahmedabad-Dholera Expressway",
+  "Dholera International Airport",
+  "Ahmedabad-Dholera Semi-High-Speed Rail",
+  "Tata Semiconductor Plant (₹91,000 crore)",
+  "Dholera Solar Park (planned in phases)",
+  "Proposed Dedicated Seaport by Adani Group",
+  "Proposed Monorail Connectivity",
+  "ABCD Building for City Administration",
+  "ReNew Solar Cell Manufacturing",
+];
+
+const UPCOMING_DHOLERA_PROJECTS = [
+  "Multi-Speciality Hospital",
+  "Integrated School by DICDL",
+  "Accommodation Facility for Investors",
+  "Fire Station",
+  "Multi-Cuisine Food Court",
+  "Corporate Hotel",
+  "International Tent City",
+  "Residential & Commercial Complex",
+];
 
 export default async function page() {
   let posts = [];
@@ -183,9 +207,7 @@ export default async function page() {
         }}
       />
 
-      <title>
-        About Dholera SIR - India’s First Smart City | BookMyAssets
-      </title>
+      <title>About Dholera SIR - India’s First Smart City | BookMyAssets</title>
       <meta
         name="description"
         content="Dholera SIR, India’s first greenfield smart city Dholera. Know more about Dholera airport, expressway, activation area, infrastructure, industries & investment."
@@ -243,23 +265,182 @@ export default async function page() {
                         Dholera Special Investment Region (Dholera SIR)
                       </Link>
                     </strong>{" "}
-                    is India's first and largest greenfield smart city,
-                    strategically located about 100 km from Ahmedabad in Gujarat.
-                    Planned as a global-scale industrial and urban hub, Dholera is
-                    a key node of the{" "}
-                    <strong>Delhi-Mumbai Industrial Corridor (DMIC)</strong> and
-                    is being developed under the Gujarat Special Investment Region
-                    Act.
-                  </p>
-                  <p className="text-white/90 text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.8]">
-                    Spread across nearly{" "}
-                    <strong className="text-[#ddbc69]">922.5 sq. km</strong>,
-                    Dholera Smart City is designed to integrate industry,
-                    infrastructure, sustainability, and modern living, creating a
-                    long-term ecosystem rather than short-term real estate growth.
+                    also known as Dholera SIR, is a planned smart city in
+                    Gujarat located about 100 km from Ahmedabad. Spread across
+                    approximately 920 sq. km and 22 villages, Dholera SIR is
+                    being developed under the Delhi-Mumbai Industrial Corridor
+                    with industrial zones, residential areas, commercial spaces,
+                    wide roads, underground utilities and smart city
+                    infrastructure. Dholera is also gaining attention because of
+                    major projects such as the Ahmedabad-Dholera Expressway,
+                    Dholera International Airport and Tata’s semiconductor
+                    manufacturing plant.
                   </p>
                 </div>
               </div>
+            </div>
+          </section>
+
+          {/* Dholera SIR Act and Master Plan Section */}
+          <section
+            id="dholera-sir-act"
+            aria-labelledby="dholera-sir-act-title"
+            className="mb-[clamp(2.5rem,5vw,4.5rem)] border-y border-[#ddbc69]/30 py-[clamp(2.5rem,6vw,5rem)]"
+          >
+            <div className="mx-auto max-w-7xl">
+              <header className="mb-[clamp(1.5rem,3vw,2.25rem)]">
+                
+                <h2
+                  id="dholera-sir-act-title"
+                  className="max-w-3xl text-[clamp(1.25rem,3.5vw,3rem)] font-bold leading-[1.12] tracking-[-0.03em] text-white"
+                >
+                  What Is the{" "}
+                  <span className="text-[#ddbc69]">Dholera SIR Act?</span>
+                </h2>
+              </header>
+
+              <div className="space-y-5 text-[clamp(1rem,1.5vw,1.125rem)] leading-[1.85] text-white/85">
+                <p>
+                  The Dholera SIR Act refers to the{" "}
+                  <strong className="font-semibold text-white">
+                    Gujarat Special Investment Region Act, 2009
+                  </strong>
+                  . It was introduced by the Government of Gujarat to support
+                  the planned development of large investment regions such as
+                  Dholera SIR.
+                </p>
+                <p>
+                  The Act provides a structured framework for planning
+                  industrial zones, residential areas, roads, public facilities
+                  and modern infrastructure. It also led to the formation of the{" "}
+                  <strong className="font-semibold text-[#ddbc69]">
+                    Dholera Special Investment Region Development Authority
+                  </strong>
+                  , which manages the planning and development of Dholera SIR.
+                </p>
+              </div>
+
+              <div
+                aria-hidden="true"
+                className="my-[clamp(2.5rem,5vw,4rem)] h-px bg-gradient-to-r from-[#ddbc69] via-[#ddbc69]/35 to-transparent"
+              />
+
+              <div>
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-[#ddbc69] sm:text-sm">
+                  Planned development
+                </p>
+                <h2 className="text-[clamp(1.6rem,3.5vw,2.75rem)] font-bold leading-tight tracking-[-0.025em] text-white">
+                  Dholera SIR Master Plan
+                </h2>
+                <p className="mt-5 text-[clamp(1rem,1.5vw,1.125rem)] leading-[1.85] text-white/85">
+                  The Dholera SIR Master Plan has been designed to develop the
+                  city in planned phases. Spread across approximately 920 sq.
+                  km, the project includes six town-planning schemes with
+                  dedicated areas for industry, housing, business and public
+                  infrastructure.
+                </p>
+
+                <p className="mb-2 mt-8 text-sm font-bold uppercase tracking-[0.18em] text-white">
+                  The master plan includes
+                </p>
+                <ul className="divide-y divide-white/15 border-y border-white/15">
+                  {[
+                    "Residential Zone",
+                    "High Access Corridor",
+                    "City Centre",
+                    "Knowledge and IT Zones",
+                    "Industrial Zones",
+                    "Recreation, Sports & Entertainment",
+                    "Other Planned Zones",
+                  ].map((zone, index) => (
+                    <li
+                      key={zone}
+                      className="flex items-center gap-4 py-3.5 text-[clamp(1rem,1.5vw,1.125rem)] text-white/90 sm:gap-6"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="w-7 shrink-0 font-mono text-xs font-bold tracking-wider text-[#ddbc69]"
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span>{zone}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* Major and Upcoming Infrastructure Projects */}
+          <section
+            id="dholera-infrastructure-projects"
+            aria-label="Major and upcoming infrastructure projects in Dholera"
+            className="mb-[clamp(2.5rem,5vw,4.5rem)]"
+          >
+            <div className="mb-[clamp(1.75rem,4vw,3rem)] flex items-center gap-4">
+              <span
+                aria-hidden="true"
+                className="h-px flex-1 bg-gradient-to-r from-transparent to-[#ddbc69]/55"
+              />
+              <p className="shrink-0 text-center text-xs font-bold uppercase tracking-[0.22em] text-[#ddbc69] sm:text-sm">
+                Infrastructure roadmap
+              </p>
+              <span
+                aria-hidden="true"
+                className="h-px flex-1 bg-gradient-to-l from-transparent to-[#ddbc69]/55"
+              />
+            </div>
+
+            <div className="grid gap-[clamp(3rem,7vw,6rem)] lg:grid-cols-2 lg:gap-0">
+              <article className="lg:pr-[clamp(2.5rem,5vw,5rem)]">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
+                  Major developments
+                </p>
+                <h2 className="max-w-xl text-[clamp(1.35rem,2.2vw,1.9rem)] font-bold leading-[1.2] tracking-[-0.02em] text-white">
+                  Major Infrastructure{" "}
+                  <span className="text-[#ddbc69]">Projects in Dholera</span>
+                </h2>
+
+                <ul className="mt-7 divide-y divide-white/15 border-y border-white/15">
+                  {MAJOR_INFRASTRUCTURE_PROJECTS.map((project) => (
+                    <li
+                      key={project}
+                      className="flex items-start gap-4 py-3.5 text-[clamp(0.95rem,1.3vw,1.075rem)] leading-relaxed text-white/90"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.55rem] size-2 shrink-0 rotate-45 bg-[#ddbc69]"
+                      />
+                      <span>{project}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+
+              <article className="border-t border-[#ddbc69]/30 pt-[clamp(2.5rem,5vw,4rem)] lg:border-l lg:border-t-0 lg:py-0 lg:pl-[clamp(2.5rem,5vw,5rem)]">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
+                  Next phase
+                </p>
+                <h2 className="max-w-xl text-[clamp(1.35rem,2.2vw,1.9rem)] font-bold leading-[1.2] tracking-[-0.02em] text-white">
+                  Upcoming Projects{" "}
+                  <span className="text-[#ddbc69]">in Dholera</span>
+                </h2>
+
+                <ul className="mt-7 divide-y divide-white/15 border-y border-white/15">
+                  {UPCOMING_DHOLERA_PROJECTS.map((project) => (
+                    <li
+                      key={project}
+                      className="flex items-start gap-4 py-3.5 text-[clamp(0.95rem,1.3vw,1.075rem)] leading-relaxed text-white/90"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.55rem] size-2 shrink-0 rotate-45 bg-[#ddbc69]"
+                      />
+                      <span>{project}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
             </div>
           </section>
 
@@ -269,12 +450,12 @@ export default async function page() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(222,174,60,0.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(222,174,60,0.12),transparent_25%)]"></div>
               <div className="relative z-10 flex flex-col gap-[clamp(0.75rem,1.5vw,1rem)]">
                 <div className="space-y-[clamp(0.5rem,1vw,0.75rem)]">
-                  
                   <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] text-center font-bold text-white">
                     Speak with our investment advisor today
                   </h2>
                   <p className=" text-[clamp(1rem,1.4vw,1.125rem)] text-center leading-[1.7] text-white/85">
-                    Get clear guidance on the semiconductor hub, infrastructure roadmap, and the best investment options in Dholera.
+                    Get clear guidance on the semiconductor hub, infrastructure
+                    roadmap, and the best investment options in Dholera.
                   </p>
                 </div>
 
@@ -297,7 +478,8 @@ export default async function page() {
                     href="https://wa.me/918130371647"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-[clamp(0.75rem,1.5vw,1rem)] border border-[#ddbc69] bg-black px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.4vw,1rem)] text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.01]">
+                    className="inline-flex items-center justify-center gap-2 rounded-[clamp(0.75rem,1.5vw,1rem)] border border-[#ddbc69] bg-black px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.4vw,1rem)] text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.01]"
+                  >
                     <svg
                       className="h-4 w-4 shrink-0"
                       fill="currentColor"
@@ -313,18 +495,16 @@ export default async function page() {
             </div>
           </section>
 
-       
-
           {/* Infrastructure & Connectivity */}
-        
 
           {/* Blog Slider */}
           <div className="mb-8">
-            <p className="text-3xl font-bold text-white text-center py-4">Mega Projects in Dholera</p>
+            <p className="text-3xl font-bold text-white text-center py-4">
+              Mega Projects in Dholera
+            </p>
             <BlogSlider posts={safePosts} />
           </div>
 
-       
           {/* Lead Form */}
           <div className="mb-8" id="contact">
             <InlineLeadForm
@@ -334,76 +514,12 @@ export default async function page() {
             />
           </div>
 
-          {/* BookMyAssets Section */}
-          <section className="mb-[clamp(1.5rem,3vw,2.5rem)]">
-            <div className="rounded-[clamp(0.875rem,1.5vw,1.25rem)] border border-white/10 bg-white p-[clamp(1rem,2vw,1.5rem)] shadow-[0_18px_40px_rgba(0,0,0,0.12)]">
-              <div className="grid gap-[clamp(1rem,2vw,1.5rem)] lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-                <div className="space-y-[clamp(0.75rem,1.5vw,1rem)]">
-                  <div className="space-y-[clamp(0.25rem,0.75vw,0.5rem)]">
-                    <p className="inline-flex rounded-full bg-[#ddbc69]/15 px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
-                      Why invest with BookMyAssets
-                    </p>
-                    <h5 className="text-[clamp(1.35rem,2.5vw,1.9rem)] font-bold text-black">
-                      Expert guidance, legal clarity, and transparent execution
-                    </h5>
-                  </div>
+          <MegaIndustries/>
 
-                  <p className="text-[clamp(0.95rem,1.3vw,1.05rem)] leading-[1.7] text-gray-700">
-                    <Link
-                      href="/contact"
-                      className="font-semibold text-[#ddbc69] underline decoration-[#ddbc69]/60 underline-offset-2"
-                    >
-                      BookMyAssets
-                    </Link>{" "}
-                    helps investors and buyers navigate Dholera with end-to-end support,
-                    from documentation to project selection and advisory.
-                  </p>
 
-                  <div className="space-y-2">
-                    {[
-                      "100% legal and transparent",
-                      "Hassle-free support",
-                      "Trusted investment advisory",
-                      "Better long-term outcomes",
-                    ].map((item) => (
-                      <div
-                        key={item}
-                        className="flex items-center gap-3 text-[0.875rem] font-semibold text-black"
-                      >
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#ddbc69] text-[0.75rem] font-bold text-black">
-                          ✓
-                        </span>
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-[clamp(0.6rem,1.2vw,0.85rem)] pt-1">
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center justify-center rounded-[clamp(0.65rem,1.2vw,0.9rem)] bg-[#ddbc69] px-[clamp(0.9rem,1.8vw,1.25rem)] py-[clamp(0.75rem,1.3vw,0.95rem)] text-sm font-semibold text-black transition-transform duration-200 hover:scale-[1.01]"
-                    >
-                      Talk to Our Expert
-                    </Link>
-                    
-                  </div>
-                </div>
-
-                <div className="relative overflow-hidden rounded-[clamp(0.875rem,1.5vw,1.25rem)] border border-black/10 bg-[#f8f4ea]">
-                  <Image
-                    src={semiconductorHubImage}
-                    alt="Dholera SIR semiconductor hub"
-                    className="h-full w-full object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
 
           <section>
-            <FAQSection/>
+            <FAQSection />
           </section>
 
           {/* Final Statement Section */}
@@ -429,4 +545,3 @@ export default async function page() {
     </>
   );
 }
-

@@ -6,57 +6,45 @@ const faqs = [
   {
     question: "What is Dholera SIR?",
     answer:
-      "Dholera SIR, or Dholera Special Investment Region, is India’s first and largest greenfield smart city. It is being developed in Gujarat as a large-scale industrial and urban hub under the Delhi-Mumbai Industrial Corridor.",
+      "Dholera SIR is a planned industrial smart city in Gujarat. It covers about 920 sq. km and is located around 100 km from Ahmedabad.",
   },
   {
     question: "Where is Dholera SIR located?",
     answer:
-      "Dholera SIR is located in Gujarat, around 100 km from Ahmedabad. Its location gives it strong strategic importance for industrial, infrastructure, and long-term urban development.",
+      "Dholera SIR is located in the Ahmedabad district of Gujarat. It is connected to Ahmedabad through the Ahmedabad–Dholera Expressway.",
   },
   {
-    question: "Is Dholera SIR government approved?",
+    question: "What is the Dholera SIR Act?",
     answer:
-      "Yes, Dholera SIR is a government-backed development. It is being developed with support from the Government of Gujarat and the Government of India under a planned policy and infrastructure framework.",
+      "The Dholera SIR Act refers to the Gujarat Special Investment Region Act, 2009. It provides the legal framework for planning and developing Dholera SIR.",
   },
   {
-    question: "Why is Dholera called a smart city?",
+    question: "What are the major projects in Dholera SIR?",
     answer:
-      "Dholera is called a smart city because it is being planned with:\n• Modern infrastructure\n• Underground utilities\n• Digital governance\n• Smart mobility planning\n• Sustainable zoning\n• Future-ready urban design",
+      "Major Dholera SIR projects include the Ahmedabad–Dholera Expressway, Dholera International Airport, Tata Semiconductor Plant, solar park, and smart city infrastructure.",
   },
   {
-    question: "What makes Dholera different from other developing cities?",
+    question: "Why invest in Dholera SIR with BookMyAssets?",
     answer:
-      "Dholera stands out due to:\n• Greenfield smart city development (built from scratch)\n• Planned infrastructure-first approach\n• Strong industrial vision\n• Government policy support\n• Structured urban growth instead of unplanned expansion",
-  },
-  {
-    question: "What major infrastructure projects are planned in Dholera?",
-    answer:
-      "Major infrastructure projects include:\n• Ahmedabad-Dholera Expressway\n• Dholera International Airport\n• Activation Area development\n• Industrial zones\n• Large-scale power and connectivity infrastructure",
-  },
-  {
-    question: "What is Dholera’s role in India’s semiconductor ecosystem?",
-    answer:
-      "Dholera is emerging as an important destination in India’s semiconductor and advanced manufacturing ecosystem. This strengthens its long-term industrial relevance and increases investor interest in the region.",
-  },
-  {
-    question: "What is the Activation Area in Dholera?",
-    answer:
-      "The Activation Area is the early operational zone of Dholera where:\n• Core infrastructure is being developed first\n• Residential and commercial zones are becoming ready\n• Initial economic and urban activity is expected to begin",
-  },
-  {
-    question: "Is Dholera suitable for long-term investment?",
-    answer:
-      "Dholera is generally seen as a long-term growth destination because its value is linked to:\n• Phased infrastructure development\n• Industrial expansion\n• Planned urban growth\nrather than short-term speculation.",
-  },
-  {
-    question: "Who governs and plans Dholera SIR?",
-    answer:
-      "Dholera SIR is administered by the Dholera Special Investment Region Development Authority, which oversees planning, infrastructure, and development implementation for the region.",
+      "BookMyAssets offers verified residential plots, clear property documents, site visit support, immediate possession options, and assistance with construction, rental, and resale.",
   },
 ];
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
+
+  const handleCallClick = () => {
+    //  Google Tag Manager event
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "call_click_Faq",
+      lead_type: "phone",
+      device: "all",
+    });
+
+    // 📞 Call trigger
+    window.location.href = "tel:+918130371647";
+  };
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -64,42 +52,41 @@ export default function FAQSection() {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-black">
         <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
           {/* Left Section (40%) */}
-          <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h5 className="text-[32px] font-semibold text-black mb-4">
+          <div className="contents w-full md:w-2/5 pl-2 pr-2">
+            <h5 className=" text-[32px] order-1 md:order-none font-semibold text-white mb-4">
               FAQs
             </h5>
-            <p className="text-gray-600 mb-2">
-              Got questions about WestWyn Estates?
-            </p>
-            <div className="pt-4">
+            <div className="order-3 md:order-none md:px-0">
+              <p className="pb-3">Have Any Other Question?</p>
               <a
-                className="px-2 py-3 bg-[#ddbc69] rounded-md"
-                href="tel:+918130371647"
+                href="#"
+                className="px-1 py-2 bg-[#ddbc69] text-white rounded-md"
+                onClick={handleCallClick}
               >
-                Give Us A Missed Call
+                Let's Connect
               </a>
             </div>
           </div>
 
           {/* Right Section (60%) */}
-          <div className="w-full md:w-3/5 md:pl-24 md:pr-4  md:mt-0 space-y-1">
+          <div className="w-full order-2 md:order-none md:w-3/5 md:pl-24 md:pr-4  md:mt-0 space-y-1">
             {faqs.map((faq, index) => (
               <div key={index} className="border-b border-gray-200">
                 <button
-                  className="w-full py-4 flex justify-between items-center text-left hover:bg-gray-50 transition-all duration-200"
+                  className="w-full py-4 flex justify-between items-center text-left transition-all duration-200"
                   onClick={() => toggleFAQ(index)}
                 >
-                  <span className="text-gray-900 font-medium pr-4 leading-relaxed">
+                  <span className="text-white font-medium pr-4 leading-relaxed">
                     {faq.question}
                   </span>
                   <span className="flex-shrink-0 transition-transform duration-200">
                     {openIndex === index ? (
-                      <Minus className="w-5 h-5 text-gray-600" />
+                      <Minus className="w-5 h-5 text-white" />
                     ) : (
-                      <Plus className="w-5 h-5 text-gray-600" />
+                      <Plus className="w-5 h-5 text-white" />
                     )}
                   </span>
                 </button>
@@ -112,7 +99,7 @@ export default function FAQSection() {
                   }`}
                 >
                   <div className="pb-4 px-0">
-                    <div className="text-gray-600 text-sm leading-relaxed">
+                    <div className="text-white text-sm leading-relaxed">
                       {Array.isArray(faq.answer) ? (
                         <ul className="list-disc pl-5 space-y-1">
                           {faq.answer.map((point, i) => (
@@ -133,4 +120,3 @@ export default function FAQSection() {
     </>
   );
 }
-

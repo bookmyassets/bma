@@ -2,6 +2,17 @@
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import img from "@/assests/contact.webp";
+import {
+  Info,
+  LandPlot,
+  BadgeIndianRupee,
+  MapPinned,
+  FileCheck,
+  CalendarCheck,
+  ClipboardCheck,
+  Layers3,
+  Handshake,
+} from "lucide-react";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +29,44 @@ const ContactPage = () => {
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const helpItems = [
+    {
+      icon: <Info className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Dholera Project Information",
+    },
+    {
+      icon: <LandPlot className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Residential Plots in Dholera",
+    },
+    {
+      icon: <BadgeIndianRupee className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Current Prices & Payment Plans",
+    },
+    {
+      icon: <MapPinned className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Project Location Details",
+    },
+    {
+      icon: <FileCheck className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Legal Documents",
+    },
+    {
+      icon: <CalendarCheck className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Site Visit Bookings",
+    },
+    {
+      icon: <ClipboardCheck className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Booking & Registration Information",
+    },
+    {
+      icon: <Layers3 className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Bulk Land Requirements",
+    },
+    {
+      icon: <Handshake className="w-8 h-8 text-[#ddbc69]" />,
+      title: "Channel Partner Enquiries",
+    },
+  ];
 
   useEffect(() => {
     // Load reCAPTCHA script
@@ -271,7 +320,6 @@ const ContactPage = () => {
             </div>
 
             {/* Second Line */}
-            
 
             {/* Description Text */}
             <p className="text-black mt-6 text-lg md:text-xl max-w-lg mx-auto md:mx-0">
@@ -286,6 +334,45 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+
+      {/* How Can We Help You */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900">
+              How Can We Help You?
+            </h2>
+
+            <div className="flex justify-center items-center mt-3">
+              <span className="h-[2px] w-16 bg-[#ddbc69]"></span>
+              <span className="mx-3 text-[#ddbc69] text-xl">★</span>
+              <span className="h-[2px] w-16 bg-[#ddbc69]"></span>
+            </div>
+
+            <p className="mt-5 text-gray-600 max-w-2xl mx-auto">
+              Our experts are here to guide you at every stage of your Dholera
+              investment journey.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+            {helpItems.map((item, index) => (
+              <div
+                key={index}
+                className="group bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-lg hover:border-[#ddbc69] transition-all duration-300"
+              >
+                <div className="w-14 h-14 rounded-full bg-[#ddbc69]/10 flex items-center justify-center mb-5  transition-all">
+                  <div className="group-hover:text-white">{item.icon}</div>
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-800 leading-relaxed">
+                  {item.title}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Get In Touch Section with Dark Background */}
       <div className="bg-gray-900 py-10 text-center">
@@ -615,4 +702,3 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
-
