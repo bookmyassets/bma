@@ -16,7 +16,7 @@ import Image from "next/image";
 
 import { FaBuilding, FaFilter, FaRoad, FaStore } from "react-icons/fa";
 
-import img1 from "@/assests/residential/residency/westwyn-residency-dholera-sir-clubhouse.webp";
+import img1 from "@/assests/residential/residency/residency-jogging.webp";
 import img2 from "@/assests/residential/residency/westwyn-residency-dholera-sir-ev-charging-station.webp";
 import img3 from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area.webp";
 

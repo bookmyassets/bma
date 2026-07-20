@@ -24,6 +24,8 @@ import ActiveProjectsSection from "../ActiveProject";
 import { breadcrumbSchema, faqSchema, realEstateSchema } from "@/lib/schema";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import Link from "next/link";
+import WestWynAboutSection from "./About";
+import PlanLayout from "./PlanLayout";
 
 export default function WestWynCountyClient() {
   const faqs = [
@@ -262,7 +264,8 @@ export default function WestWynCountyClient() {
               "WestWyn County is located on Fedra-Pipli State Highway near Dholera SIR, with connectivity toward Dholera International Airport and the Ahmedabad-Dholera Expressway.",
           },
           {
-            question: "How can BookMyAssets help me buy a plot in WestWyn County?",
+            question:
+              "How can BookMyAssets help me buy a plot in WestWyn County?",
             answer:
               "BookMyAssets helps buyers with project guidance, site visit support, document review coordination, registry support, and resale assistance where applicable.",
           },
@@ -274,7 +277,7 @@ export default function WestWynCountyClient() {
           {/* Main Content Section */}
           <div className="flex-1 flex flex-col lg:flex-row min-h-0">
             {/* Left Side - Slider Section (60%) */}
-            <div className="w-full lg:w-[60%] relative flex-1 max-sm:min-h-[50vh]">
+            <div className="relative w-full flex-1 bg-white lg:w-[60%] max-sm:min-h-[50vh]">
               {/* Desktop Slider */}
               <div className="absolute inset-0 hidden lg:block">
                 <div className="relative w-full h-full overflow-hidden">
@@ -289,8 +292,10 @@ export default function WestWynCountyClient() {
                         src={image.src}
                         alt={image.alt}
                         fill
-                        className="md:object-cover"
+                        className="object-cover object-center"
                         priority={index === 0}
+                        sizes="60vw"
+                        quality={85}
                       />
                     </div>
                   ))}
@@ -333,8 +338,8 @@ export default function WestWynCountyClient() {
                         src={image.src}
                         alt={image.alt}
                         width={1200}
-                        height={675}
-                        className="w-full h-auto object-contain rounded-lg shadow-lg"
+                        height={800}
+                        className="w-full h-auto rounded-lg shadow-lg"
                         quality={85}
                         fetchPriority={index === 0 ? "high" : "low"}
                         sizes="100vw"
@@ -466,100 +471,47 @@ export default function WestWynCountyClient() {
           <div className="w-full md:w-3/5 pl-2 pr-2 space-y-6">
             <p className="text-base md:text-lg font-light leading-relaxed text-gray-600">
               WestWyn County, located on the Fedra-Pipli State Highway, is one
-              of BookMyAssets' successfully sold-out residential plot projects
+              of BookMyAssets's successfully sold-out residential plot projects
               in Dholera. Due to high demand, we are now offering verified
               resale plots in WestWyn County. If you missed the original launch,
               this is your chance to own a plot in one of Dholera's most trusted
               residential projects.
-              <br />
-              Whether you are planning to build your dream home or invest for
-              the future, WestWyn County resale plots offer a great opportunity
-              with complete legal support and a hassle-free buying process.
             </p>
 
             {/* CTA Buttons */}
-            <div className=" gap-12 items-stretch space-y-4 px-4 py-4">
-          {/* Left Content */}
-          <div className=" h-full">
-            <div className="flex justify-center items-center flex-col md:flex-row gap-4 ">
-              <Link href="https://wa.me/918130371647">
-                <p className="bg-[#ddbc69] border border-[#ddbc69] whitespace-nowrap text-white text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#eecb71] transition-colors flex items-center justify-center gap-2">
-                  <FaFile />
-                  Get Brochure
-                </p>
-              </Link>
+            <div className=" gap-12 items-stretch space-y-4 py-4 max-sm:-px-4">
+              {/* Left Content */}
+              <div className=" h-full">
+                <div className="flex flex-row gap-4 ">
+                  <Link href="https://wa.me/918130371647">
+                    <p className="bg-[#ddbc69] border border-[#ddbc69] whitespace-nowrap text-white text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#eecb71] transition-colors flex items-center justify-center gap-2">
+                      <FaFile />
+                      Get Brochure
+                    </p>
+                  </Link>
 
-              <Link href="tel:+918130371647">
-                <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
-                  <FaPhone />
-                  Connect with our RM
-                </p>
-              </Link>
-            </div>
-          </div>
-        </div>
-          </div>
-        </div>
-      </div>
-
-      {/* New Section 3 - Auto-Incrementing Counters */}
-      <div
-        id="counters-section"
-        className="py-12 md:py-20 bg-gradient-to-r from-blue-50 to-indigo-100"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
-              WestWyn County by Numbers
-            </h2>
-            <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover the impressive scale and premium amenities that make
-              WestWyn County your ideal investment destination.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {/* Square Yards Counter */}
-            <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
-              <div className="text-3xl md:text-5xl font-bold text-[#ddbc69] mb-2 md:mb-4">
-                {sqYards}
-              </div>
-              <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                sq. Yards
-              </div>
-              <div className="text-sm md:text-base text-gray-600">
-                Minimum plot size
-              </div>
-            </div>
-
-            {/* Plots Counter */}
-            <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
-              <div className="text-3xl md:text-5xl font-bold text-[#ddbc69] mb-2 md:mb-4">
-                ₹20 Lakh
-              </div>
-              <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                ReSale Price
-              </div>
-              <div className="text-sm md:text-base text-gray-600">
-                per sq. yards
-              </div>
-            </div>
-
-            {/* Amenities Counter */}
-            <div className="text-center p-6 md:p-8 bg-white rounded-2xl shadow-lg">
-              <div className="text-3xl md:text-5xl font-bold text-[#ddbc69] mb-2 md:mb-4">
-                {amenities}
-              </div>
-              <div className="text-base md:text-xl font-semibold text-gray-800 mb-2">
-                Amenities
-              </div>
-              <div className="text-sm md:text-base text-gray-600">
-                World-Class Facilities
+                  <Link href="tel:+918130371647">
+                    <p className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] text-base px-2 md:px-4 py-3 rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-2">
+                      <FaPhone />
+                      Connect with our RM
+                    </p>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div>
+        <WestWynAboutSection/>
+      </div>
+
+      <div>
+        <PlanLayout/>
+      </div>
+
+      
 
       <div className="">
         <InlineLeadForm
@@ -569,105 +521,7 @@ export default function WestWynCountyClient() {
         />
       </div>
 
-      {/* Section 4 - Why Invest in WestWyn Estate */}
-      <div className="py-12 md:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#ddbc69] mb-12 md:mb-16">
-            Why Invest in WestWyn County?
-          </h3>
-
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
-            {/* Left Column - Image */}
-            <div className="w-full lg:w-1/2">
-              <div className="relative">
-                <Image
-                  src={westwyn3}
-                  alt="WestWyn County Investment Benefits"
-                  className="w-full h-auto rounded-2xl shadow-2xl"
-                />
-              </div>
-            </div>
-
-            {/* Right Column - Investment Benefits */}
-            <div className="w-full lg:w-1/2">
-              <div className="space-y-4">
-                {[
-                  {
-                    title: "Prime Location",
-                    icon: "📍",
-                  },
-                  {
-                    title: "Investment-Friendly",
-                    icon: "📈",
-                  },
-                  {
-                    title: "100% Government-Verified",
-                    icon: "🌿",
-                  },
-                  {
-                    title: "High ROI Potential",
-                    icon: "✅",
-                  },
-                  {
-                    title: "Smart Infrastructure",
-                    icon: "🏆",
-                  },
-                ].map((benefit, index) => (
-                  <div
-                    key={index}
-                    className="group border border-gray-200 rounded-xl p-6 bg-white transition-all duration-300 hover:shadow-lg"
-                  >
-                    <button
-                      className="w-full flex justify-between items-center text-left focus:outline-none"
-                      onClick={() => toggleFAQ(index)}
-                      aria-expanded={openIndex === index}
-                      aria-controls={`benefit-${index}`}
-                    >
-                      <span className="flex items-center space-x-4">
-                        <span className="text-2xl">{benefit.icon}</span>
-                        <span className="text-lg md:text-xl font-semibold text-gray-800 group-hover:text-[#ddbc69]">
-                          {benefit.title}
-                        </span>
-                      </span>
-                      <span className="flex-shrink-0 transition-transform duration-200">
-                        {openIndex === index ? (
-                          <Minus className="w-6 h-6 text-[#ddbc69]" />
-                        ) : (
-                          <Plus className="w-6 h-6 text-gray-400 group-hover:text-[#ddbc69]" />
-                        )}
-                      </span>
-                    </button>
-
-                    <div
-                      id={`benefit-${index}`}
-                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                        openIndex === index
-                          ? "max-h-96 opacity-100 mt-4"
-                          : "max-h-0 opacity-0"
-                      }`}
-                    >
-                      <div className="pl-10">
-                        <p className="text-black leading-relaxed">
-                          {index === 0 &&
-                            "Located on Fedra-Pipli State Highway, just 12 minutes from Ahmedabad-Dholera Expressway, Dholera International Airport, Metro, and industrial hubs, including the TATA Semiconductor Plant (25 minutes away) and Dedicated Freight Corridor."}
-                          {index === 1 &&
-                            "Investment We offer registry-ready plots and 15 Days Payment Plans on Dholera Residential Plots. Our team ensures end-to-end assistance with resale support and buyback assistance*."}
-                          {index === 2 &&
-                            "We offer immediate registry on Dholera plots with NA/NOC clearance and clear titles."}
-                          {index === 3 &&
-                            "Early-stage entry in a developing future-ready city, with potential for 3-10x appreciation by 2030."}
-                          {index === 4 &&
-                            "9 meter and 12 meter internal roads, underground trunk infrastructure for wire cables, and water and drainage systems."}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       <ProjectAmenities />
 

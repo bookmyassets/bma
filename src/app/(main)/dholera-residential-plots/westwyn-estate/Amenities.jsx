@@ -16,9 +16,9 @@ import Image from "next/image";
 
 import { FaBuilding, FaFilter, FaHome, FaRoad } from "react-icons/fa";
 
-import img1 from "@/assests/residential/estates/westwyn-estates-dholera-sir-kids-play-area.webp";
-import img2 from "@/assests/residential/estates/westwyn-estates-dholera-sir-jogging-track.webp";
-import img3 from "@/assests/residential/estates/westwyn-estates-dholera-sir-utilities-shop.webp";
+import img1 from "@/assests/residential/estates/yogadeck.webp";
+import img2 from "@/assests/residential/residency/westwyn-residency-dholera-sir-ev-charging-station.webp";
+import img3 from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area.webp";
 import { FaShop } from "react-icons/fa6";
 
 const carouselImages = [

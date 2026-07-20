@@ -64,10 +64,10 @@ export default function DholeraSmartCity() {
                 return (
                   <div
                     key={index}
-                    className={`flex items-start gap-3 p-1 rounded-lg text-white hover:border-amber-300 hover:shadow-md transition-all duration-200 `}
+                    className="flex items-start gap-3 p-1 rounded-lg text-white hover:border-amber-300 hover:shadow-md transition-all duration-200"
                   >
+                    <span className="text-green-500 shrink-0">✓</span>
                     <span className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7]">
-                      <span className="text-green-500 px-2">✓</span>{" "}
                       {feature.text}
                     </span>
                   </div>

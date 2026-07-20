@@ -1,245 +1,273 @@
 import React, { useState } from "react";
 import {
-  Home,
   Shield,
-  Waves,
-  Car,
-  Lightbulb,
-  Trees,
-  Activity,
-  Users,
-  Zap,
-  MapPin,
-  Heart,
   Baby,
-  Globe,
+  Zap,
+  Wifi,
+  Car,
+  Users,
+  Camera,
+  Square,
+  User,
+  Activity,
+  Footprints,
 } from "lucide-react";
+import Image from "next/image";
+
+import { FaBuilding, FaFilter, FaHome, FaRoad } from "react-icons/fa";
+
+import img1 from "@/assests/westwyn-county/ev-charge.webp";
+import img2 from "@/assests/westwyn-county/cctv.webp";
+import img3 from "@/assests/westwyn-county/kids-play.webp";
+import { FaShop } from "react-icons/fa6";
+
+const carouselImages = [
+  { src: img1, alt: "WestWyn Estates - Kids Play Area" },
+  { src: img2, alt: "WestWyn Estates - Jogging Track" },
+  { src: img3, alt: "WestWyn Estates - Utilities Shop" },
+];
+// ✅ Moved OUTSIDE the component — not recreated on every render
+const AmenityCard = ({ amenity }) => (
+  <div
+    className="amenity-card border-2 rounded-2xl
+    p-2 sm:p-3 lg:p-4
+    flex flex-col items-center justify-center text-center aspect-square"
+    style={{ borderColor: "#e8e8e8" }}
+  >
+    <div
+      className={`card-icon flex items-center justify-center
+        w-8 h-8 md:w-10 md:h-10  lg:w-12 lg:h-12
+        bg-gradient-to-br ${amenity.color}
+        rounded-xl
+        mb-2 sm:mb-3 lg:mb-4`}
+    >
+      <div className="text-white">{amenity.icon}</div>
+    </div>
+    <h3
+      className="font-semibold leading-snug text-[10px] sm:text-xs lg:text-sm"
+      style={{ color: "#0d0d0d" }}
+    >
+      {amenity.title}
+    </h3>
+  </div>
+);
+
+const amenities = [
+  {
+    icon: <Square className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Project Boundary",
+    color: "from-gray-500 to-gray-700",
+  },
+  {
+    icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Gated Community",
+    color: "from-indigo-500 to-purple-600",
+  },
+  {
+    icon: <Camera className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "24/7 Security & CCTV",
+    color: "from-red-500 to-red-700",
+  },
+  {
+    icon: <Baby className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Kids Play Area",
+    color: "from-purple-400 to-pink-400",
+  },
+  {
+    icon: <Wifi className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "App-Based Management",
+    color: "from-teal-500 to-teal-700",
+  },
+  {
+    icon: <Zap className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Power & Water Supply",
+    color: "from-[#ddbc69] to-yellow-800",
+  },
+  {
+    icon: <User className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Yoga Deck",
+    color: "from-pink-500 to-rose-500",
+  },
+  {
+    icon: <Footprints className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Jogging Track",
+    color: "from-green-500 to-emerald-500",
+  },
+  {
+    icon: <Users className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Senior Citizen Zone",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    icon: <Car className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "EV Charging Station",
+    color: "from-green-600 to-green-800",
+  },
+  {
+    icon: <FaRoad className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Wide Internal Roads",
+    color: "from-blue-600 to-blue-800",
+  },
+  {
+    icon: <FaFilter className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    title: "Drainage System",
+    color: "from-amber-600 to-amber-800",
+  },
+  
+];
 
 const ProjectAmenities = () => {
   const [showAll, setShowAll] = useState(false);
-  const [flippedCard, setFlippedCard] = useState(null);
-
-  const amenities = [
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Club House & Co-Working Space",
-      color: "from-blue-500 to-cyan-500",
-      description:
-        "A common area for meetings, work, and social activities with modern facilities.",
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Gated Community",
-      color: "from-indigo-500 to-purple-600",
-      description:
-        "A secure gated entry ensures controlled access and privacy for residents.",
-    },
-    {
-      icon: <Car className="w-8 h-8" />,
-      title: "EV Charging Station",
-      color: "from-green-500 to-emerald-500",
-      description:
-        "A charging facility for electric vehicles to support eco-friendly living.",
-    },
-    {
-      icon: <Baby className="w-8 h-8" />,
-      title: "Kids Play Area",
-      color: "from-purple-400 to-pink-400",
-      description:
-        "A dedicated play zone for children with safe and fun recreational equipment.",
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "24/7 Security & CCTV Surveillance",
-      color: "from-red-500 to-red-700",
-      description:
-        "Round-the-clock security with CCTV monitoring for a safe and protected living environment.",
-    },
-    {
-      icon: <Waves className="w-8 h-8" />,
-      title: "Swimming Pool",
-      color: "from-blue-400 to-blue-600",
-      description:
-        "A clean pool for relaxation and swimming with proper maintenance.",
-    },
-    {
-      icon: <Globe className="w-8 h-8" />,
-      title: "App-based Society Management",
-      color: "from-teal-500 to-teal-700",
-      description:
-        "Society services and communication are managed efficiently through a mobile app.",
-    },
-    {
-      icon: <Trees className="w-8 h-8" />,
-      title: "Lush Green Surroundings",
-      color: "from-green-600 to-green-800",
-      description:
-        "Green areas and plants around the project for a fresh environment and natural beauty.",
-    },
-    {
-      icon: <Baby className="w-8 h-8" />,
-      title: "Indoor Games & Gymnasium",
-      color: "from-purple-500 to-pink-500",
-      description:
-        "Space for indoor games and basic fitness activities with modern equipment.",
-    },
-    {
-      icon: <Lightbulb className="w-8 h-8" />,
-      title: "Automated Street Light",
-      color: "from-[#ddbc69] to-orange-500",
-      description:
-        "Street lights that turn on and off automatically for energy efficiency and safety.",
-    },
-    {
-      icon: <Activity className="w-8 h-8" />,
-      title: "Jogging Track",
-      color: "from-orange-500 to-red-500",
-      description:
-        "A dedicated jogging path for fitness and daily exercise within the project.",
-    },
-    {
-      icon: <MapPin className="w-8 h-8" />,
-      title: "Internal Roads",
-      color: "from-gray-600 to-gray-800",
-      description:
-        "Well-planned roads inside the project for easy and safe movement.",
-    },
-    {
-      icon: <Home className="w-8 h-8" />,
-      title: "Project Boundary",
-      color: "from-gray-500 to-gray-700",
-      description:
-        "The project is fully enclosed with a defined boundary for better security and organized development.",
-    },
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: "Yoga Deck & Senior Citizen Zone",
-      color: "from-pink-500 to-rose-500",
-      description:
-        "Serene outdoor space for yoga and wellness, plus a comfortable area for elderly residents.",
-    },
-    {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Power & Water Supply",
-      color: "from-[#ddbc69] to-yellow-800",
-      description:
-        "Reliable and uninterrupted electricity and water supply for daily convenience.",
-    },
-  ];
-
-  const toggleFlip = (index) => {
-    setFlippedCard(flippedCard === index ? null : index);
-  };
+  const visibleAmenities = showAll ? amenities : amenities.slice(0, 6);
+  const [current, setCurrent] = useState(0);
+  const prev = () =>
+    setCurrent((c) => (c - 1 + carouselImages.length) % carouselImages.length);
+  const next = () => setCurrent((c) => (c + 1) % carouselImages.length);
 
   return (
-    <div className="bg-white p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="text-center">
-          <h4
-            className="text-4xl md:text-5xl font-bold mb-6"
-            style={{ color: "#0d0d0d" }}
-          >
-            Amenities
-          </h4>
-          <div
-            className="w-24 h-1 mx-auto mb-6"
-            style={{ backgroundColor: "#ddbc69" }}
-          ></div>
-          <p
-            className="text-xl max-w-3xl mx-auto leading-relaxed"
-            style={{ color: "#0d0d0d" }}
-          >
-            Discover world-class amenities designed to elevate your lifestyle
-            with luxury, comfort, and convenience at every step.
-          </p>
-        </div>
+    <>
 
-        {/* Amenities Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pt-4">
-          {/* Mobile: Show only 6 items initially, all when showAll is true */}
-          {amenities.map((amenity, index) => {
-            const isFlipped = flippedCard === index;
+      <div className="bg-white py-4 sm:py-10 lg:py-4 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-4 sm:mb-4 lg:mb-8">
+            <p
+              className="font-bold tracking-[0.25em] uppercase mb-3
+                text-xl sm:text-2xl lg:text-3xl"
+              style={{ color: "#ddbc69" }}
+            >
+              WestWyn Estates
+            </p>
+            <h4
+              className="font-bold mb-4 text-lg sm:text-2xl lg:text-3xl"
+              style={{ color: "#0d0d0d", letterSpacing: "-0.02em" }}
+            >
+              Amenities
+            </h4>
+          </div>
 
-            // For mobile, hide items beyond index 5 when showAll is false
-            const shouldShowOnMobile = showAll || index < 6;
+          {/* Two-column layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-start">
+            {/* Left — Image */}
+            {/* Left — Carousel */}
+            <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/4] w-full h-full group">
+              {/* Original image — style completely unchanged */}
+              <Image
+                src={carouselImages[current].src}
+                alt={carouselImages[current].alt}
+                className="rounded-xl w-full aspect-[5/4] md:h-full h-auto overflow-hidden object-cover"
+                priority
+              />
 
-            return (
-              <div
-                key={index}
-                className={`relative ${shouldShowOnMobile ? "block" : "hidden"} md:block`}
-                style={{ perspective: "1000px", minHeight: "16rem" }}
+              {/* Prev button */}
+              <button
+                onClick={prev}
+                className="absolute left-6 top-1/2 -translate-y-1/2 z-30
+      w-8 h-8 sm:w-10 sm:h-10
+      bg-white/80 hover:bg-white
+      rounded-full shadow-lg
+      flex items-center justify-center
+      transition-all duration-200 hover:scale-110
+      opacity-0 group-hover:opacity-100"
+                aria-label="Previous image"
               >
-                <div
-                  className="relative w-full h-full cursor-pointer transition-transform duration-700"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                    height: "100%",
-                  }}
-                  onClick={() => toggleFlip(index)}
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      toggleFlip(index);
-                    }
-                  }}
+                <svg
+                  className="w-4 h-4 text-gray-800"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  {/* Front of card */}
-                  <div
-                    className="absolute inset-0 bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-[#ddbc69] transition-all duration-300 hover:shadow-xl flex flex-col items-center justify-center"
-                    style={{ backfaceVisibility: "hidden", height: "100%" }}
-                  >
-                    <div
-                      className={`flex items-center justify-center w-12 h-12 bg-gradient-to-br ${amenity.color} rounded-2xl mb-6 transition-transform duration-300 hover:scale-110`}
-                    >
-                      <div className="text-white">{amenity.icon}</div>
-                    </div>
-                    <h3
-                      className="text-lg text-center font-medium mb-3"
-                      style={{ color: "#0d0d0d" }}
-                    >
-                      {amenity.title}
-                    </h3>
-                  </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
 
-                  {/* Back of card */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${amenity.color} border-2 border-transparent rounded-2xl p-6 shadow-lg flex flex-col justify-center items-center text-center`}
-                    style={{
-                      backfaceVisibility: "hidden",
-                      transform: "rotateY(180deg)",
-                      height: "100%",
-                    }}
-                  >
-                    <div className="text-white mb-4">{amenity.icon}</div>
-                    <p className="text-white text-sm leading-relaxed mb-4">
-                      {amenity.description}
-                    </p>
+              {/* Next button */}
+              <button
+                onClick={next}
+                className="absolute right-6 top-1/2 -translate-y-1/2 z-30
+      w-8 h-8 sm:w-10 sm:h-10
+      bg-white/80 hover:bg-white
+      rounded-full shadow-lg
+      flex items-center justify-center
+      transition-all duration-200 hover:scale-110
+      opacity-0 group-hover:opacity-100"
+                aria-label="Next image"
+              >
+                <svg
+                  className="w-4 h-4 text-gray-800"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+
+              {/* Dot indicators */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                {carouselImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrent(i)}
+                    className={`rounded-full transition-all duration-500 ${
+                      i === current
+                        ? "w-6 h-2 bg-[#ddbc69]"
+                        : "w-2 h-2 bg-white/70 hover:bg-white"
+                    }`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Right — Amenities */}
+            <div className="w-full">
+              {/* Mobile */}
+              <div className="block lg:hidden">
+                <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+                  {visibleAmenities.map((amenity) => (
+                    <AmenityCard key={amenity.title} amenity={amenity} />
+                  ))}
+                </div>
+                {amenities.length > 6 && (
+                  <div className="flex justify-center mt-6 sm:mt-8">
+                    <button
+                      onClick={() => setShowAll(!showAll)}
+                      className="show-btn bg-[#ddbc69] text-white
+                        px-6 sm:px-8 py-2 sm:py-3
+                        rounded-full font-semibold
+                        text-xs sm:text-sm
+                        hover:bg-opacity-90 transition-all"
+                    >
+                      {showAll ? "Show Less" : "Show More"}
+                    </button>
                   </div>
+                )}
+              </div>
+
+              {/* Desktop */}
+              <div className="hidden lg:block">
+                <div className="grid grid-cols-4 gap-4">
+                  {amenities.map((amenity) => (
+                    <AmenityCard key={amenity.title} amenity={amenity} />
+                  ))}
                 </div>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Show More / Less Button - Only show on mobile when there are more than 6 amenities */}
-        {amenities.length > 6 && (
-          <div className="flex justify-center mt-8 md:hidden">
-            <button
-              onClick={() => {
-                setShowAll(!showAll);
-                setFlippedCard(null); // Reset flipped card when toggling show all
-              }}
-              className="px-6 py-3 bg-[#ddbc69] text-white font-medium rounded-lg hover:bg-[#c6992a] transition-colors duration-300"
-            >
-              {showAll ? "Show Less" : "Show More"}
-            </button>
+            </div>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

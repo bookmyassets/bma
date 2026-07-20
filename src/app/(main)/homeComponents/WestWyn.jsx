@@ -22,11 +22,11 @@ const projects = [
   },
   {
     name: "WestWyn County",
-    price: "Re-Selling from ₹20 Lakh",
+    price: "Resale from ₹20 Lakh",
     location: "Fedra-Pipli state highway",
     href: "/dholera-residential-plots/westwyn-county",
     image: westwynCountyImage,
-    status: "Re-Sale",
+    status: "Resale",
   },
 ];
 
@@ -57,7 +57,7 @@ export default function ProjectsSection() {
                 />
                 
                 {project.status && (
-                  <span className="absolute right-[1rem] top-[1rem] rounded-full bg-red-600 px-[0.75rem] py-[0.375rem] text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-white shadow-lg">
+                  <span className="absolute right-[1rem] top-[1rem] rounded-full bg-red-600 px-[0.75rem] py-[0.375rem] text-[0.75rem] font-semibold tracking-[0.08em] text-white shadow-lg">
                     {project.status}
                   </span>
                 )}
