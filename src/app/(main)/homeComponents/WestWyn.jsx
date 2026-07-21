@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import westwynCountyImage from "@/assests/westwyn-county/westwyn-county-mob2.webp";
+import westwynCountyImage from "@/assests/westwyn-county/westwyn-county-mob1.webp";
 import westwynEstatesImage from "@/assests/we_cover.webp";
 import westwynResidencyImage from "@/assests/residency.webp";
 

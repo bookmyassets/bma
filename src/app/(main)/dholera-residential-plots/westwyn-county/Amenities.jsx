@@ -136,7 +136,7 @@ const ProjectAmenities = () => {
                 text-xl sm:text-2xl lg:text-3xl"
               style={{ color: "#ddbc69" }}
             >
-              WestWyn Estates
+              WestWyn County
             </p>
             <h4
               className="font-bold mb-4 text-lg sm:text-2xl lg:text-3xl"
