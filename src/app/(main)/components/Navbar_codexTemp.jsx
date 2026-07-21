@@ -8,56 +8,11 @@ import { useEffect, useState } from "react";
 import logo from "@/assests/bma-transparent-website.svg";
 import dholeraBlogs from "@/assests/dholeraSIR-nav/dholera-sir-blogs-bookmyassets.webp";
 import dholeraUpdates from "@/assests/dholeraSIR-nav/dholera-sir-latest-updates-bookmyassets.webp";
-import residential from "@/assests/bulkLand/residential-zone-cover.webp";
-import hac from "@/assests/bulkLand/high-access-corridor-cover.webp";
-import cityCenter from "@/assests/bulkLand/city-centre-cover.webp";
-import industrial from "@/assests/bulkLand/industrial-cover.webp";
-import sport from "@/assests/bulkLand/recreation-sports-map.webp";
-import knowledgeIT from "@/assests/bulkLand/knowledge-it-cover.webp";
 import BookButton from "./BookVC";
 
 const whatsappEnquiryLink = `https://wa.me/918130371647?text=${encodeURIComponent(
   "Hi, I need a call back",
 )}`;
-
-const bulkLandItems = [
-  {
-    projectName: "Residential Zone",
-
-    image: residential,
-    link: "/residential",
-  },
-  {
-    projectName: "High Access Corridor",
-
-    image: hac,
-    link: "/high-access-corridor",
-  },
-  {
-    projectName: "City Centre",
-
-    image: cityCenter,
-    link: "/city-centre-land",
-  },
-  {
-    projectName: "Knowledge and IT",
-
-    image: knowledgeIT,
-    link: "/knowledge-it-land",
-  },
-  {
-    projectName: "Industrial",
-
-    image: industrial,
-    link: "/industrial-land",
-  },
-  {
-    projectName: "Recreation Sports & Entertainment",
-
-    image: sport,
-    link: "/recreation-sports-land",
-  },
-];
 
 const dholeraItems = [
   {
@@ -414,15 +369,11 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isResidentialMenuOpen, setIsResidentialMenuOpen] = useState(false);
   const [isDholeraMenuOpen, setIsDholeraMenuOpen] = useState(false);
-  const [isBulkLandMenuOpen, setIsBulkLandMenuOpen] = useState(false);
   const [residentialProjects, setResidentialProjects] = useState([]);
-  const [bulkLandProjects, setBulkLandProjects] = useState([]);
   const [dholeraProjects, setDholeraProjects] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [bulkLandLoading, setBulkLandLoading] = useState(false);
   const [dholeraLoading, setDholeraLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [bulkLandError, setBulkLandError] = useState(null);
   const [dholeraError, setDholeraError] = useState(null);
   const [isUtilityMenuOpen, setIsUtilityMenuOpen] = useState(false);
 
@@ -472,27 +423,6 @@ export default function Navbar() {
   }, [isResidentialMenuOpen, residentialProjects.length]);
 
   useEffect(() => {
-    async function fetchBulkLandProjects() {
-      if (!isBulkLandMenuOpen || bulkLandProjects.length > 0) return;
-
-      try {
-        setBulkLandLoading(true);
-        setBulkLandError(null);
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setBulkLandProjects(bulkLandItems);
-      } catch (err) {
-        console.error(err);
-        setBulkLandError("Failed to load projects");
-        setBulkLandProjects([]);
-      } finally {
-        setBulkLandLoading(false);
-      }
-    }
-
-    fetchBulkLandProjects();
-  }, [isBulkLandMenuOpen, bulkLandProjects.length]);
-
-  useEffect(() => {
     async function fetchDholeraProjects() {
       if (!isDholeraMenuOpen || dholeraProjects.length > 0) return;
 
@@ -516,7 +446,6 @@ export default function Navbar() {
   useEffect(() => {
     const closeDesktopDropdowns = () => {
       setIsResidentialMenuOpen(false);
-      setIsBulkLandMenuOpen(false);
       setIsDholeraMenuOpen(false);
       setIsUtilityMenuOpen(false);
     };
@@ -527,7 +456,6 @@ export default function Navbar() {
       if (
         !event.target.closest(".dropdown-container") &&
         !event.target.closest(".residential-dropdown") &&
-        !event.target.closest(".bulk-land-dropdown") &&
         !event.target.closest(".dholera-dropdown") &&
         !event.target.closest(".utility-dropdown")
       ) {
@@ -557,7 +485,6 @@ export default function Navbar() {
   const closeAllMenus = () => {
     setIsMobileMenuOpen(false);
     setIsResidentialMenuOpen(false);
-    setIsBulkLandMenuOpen(false);
     setIsDholeraMenuOpen(false);
     setIsUtilityMenuOpen(false);
   };
@@ -566,7 +493,6 @@ export default function Navbar() {
     setIsMobileMenuOpen((prev) => {
       if (!prev) {
         setIsResidentialMenuOpen(false);
-        setIsBulkLandMenuOpen(false);
         setIsDholeraMenuOpen(false);
         setIsUtilityMenuOpen(false);
       }
@@ -577,14 +503,6 @@ export default function Navbar() {
 
   const toggleResidentialMenu = () => {
     setIsResidentialMenuOpen((prev) => !prev);
-    setIsBulkLandMenuOpen(false);
-    setIsDholeraMenuOpen(false);
-    setIsUtilityMenuOpen(false);
-  };
-
-  const toggleBulkLandMenu = () => {
-    setIsBulkLandMenuOpen((prev) => !prev);
-    setIsResidentialMenuOpen(false);
     setIsDholeraMenuOpen(false);
     setIsUtilityMenuOpen(false);
   };
@@ -592,14 +510,12 @@ export default function Navbar() {
   const toggleDholeraMenu = () => {
     setIsDholeraMenuOpen((prev) => !prev);
     setIsResidentialMenuOpen(false);
-    setIsBulkLandMenuOpen(false);
     setIsUtilityMenuOpen(false);
   };
 
   const toggleUtilityMenu = () => {
     setIsUtilityMenuOpen((prev) => !prev);
     setIsResidentialMenuOpen(false);
-    setIsBulkLandMenuOpen(false);
     setIsDholeraMenuOpen(false);
   };
 
@@ -619,14 +535,6 @@ export default function Navbar() {
       onClick: toggleDholeraMenu,
       dropdownClass: "dholera-dropdown",
       align: "center",
-    },
-    {
-      menu: "bulk-land",
-      label: "Bulk Land Deals",
-      open: isBulkLandMenuOpen,
-      onClick: toggleBulkLandMenu,
-      dropdownClass: "bulk-land-dropdown",
-      align: "right",
     },
   ];
 
@@ -649,35 +557,6 @@ export default function Navbar() {
               index={index}
               href={`/dholera-residential-plots/${project.link}`}
               onClick={closeAllMenus}
-            />
-          ))}
-        </div>
-      );
-    }
-
-    if (menu === "bulk-land") {
-      if (bulkLandLoading) {
-        return <DropdownNotice>Loading land deals...</DropdownNotice>;
-      }
-      if (bulkLandError) {
-        return <DropdownNotice tone="error">{bulkLandError}</DropdownNotice>;
-      }
-      if (bulkLandProjects.length === 0) {
-        return (
-          <DropdownNotice>No projects available at the moment</DropdownNotice>
-        );
-      }
-
-      return (
-        <div className="space-y-[0.5rem]">
-          {bulkLandProjects.map((project, index) => (
-            <ImageCard
-              key={project.link}
-              project={project}
-              index={index}
-              href={`/bulk-land/${project.link}`}
-              onClick={closeAllMenus}
-              eyebrow="Bulk land"
             />
           ))}
         </div>
@@ -775,6 +654,16 @@ export default function Navbar() {
                     </div>
                   ),
                 )}
+
+                <Link
+                  href="/bulk-land"
+                  onClick={closeAllMenus}
+                  className="relative flex min-h-[2.75rem] touch-manipulation items-center font-medium"
+                >
+                  <span className="relative z-10 flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent px-[clamp(0.625rem,0.45rem_+_0.6vw,1rem)] py-[clamp(0.375rem,0.25rem_+_0.35vw,0.625rem)] text-[clamp(0.9375rem,0.76rem_+_0.55vw,1.125rem)] text-white/85 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white">
+                    Bulk Land Deals
+                  </span>
+                </Link>
               </nav>
             </div>
 
@@ -940,48 +829,13 @@ export default function Navbar() {
               )}
             </div>
 
-            <div className="border-b border-white pb-[0.5rem]">
-              <button
-                onClick={toggleBulkLandMenu}
-                className={`flex w-full items-center justify-between rounded-md  py-[0.75rem] text-left text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium transition-colors ${
-                  isBulkLandMenuOpen
-                    ? "border border-[#ddbc69]/45 bg-white/15 text-white shadow-[0_0.75rem_2rem_rgba(222,174,60,0.14)]"
-                    : "border border-transparent text-white hover:bg-white/10 hover:text-white"
-                }`}
-                aria-expanded={isBulkLandMenuOpen}
-                type="button"
-              >
-                <span>Bulk Land Deals</span>
-                <ChevronIcon
-                  open={isBulkLandMenuOpen}
-                  className="h-[1.25rem] w-[1.25rem]"
-                />
-              </button>
-
-              {isBulkLandMenuOpen && (
-                <div className="mt-[0.5rem] max-h-[20rem] space-y-[0.5rem] overflow-y-auto border-l-[0.125rem] border-[#ddbc69] ">
-                  {bulkLandLoading ? (
-                    <div className="py-[1rem] text-center text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-white/60">
-                      <div className="mr-[0.5rem] inline-block h-[1rem] w-[1rem] animate-spin rounded-lg border-b-[0.125rem] border-[#ddbc69]" />{" "}
-                      Loading...
-                    </div>
-                  ) : bulkLandError ? (
-                    <div className="py-[0.5rem] text-[clamp(0.8125rem,0.72rem_+_0.38vw,1rem)] text-red-400">
-                      {bulkLandError}
-                    </div>
-                  ) : (
-                    bulkLandProjects.map((project) => (
-                      <MobileProjectLink
-                        key={project.link}
-                        project={project}
-                        href={`/bulk-land/${project.link}`}
-                        onClick={closeAllMenus}
-                      />
-                    ))
-                  )}
-                </div>
-              )}
-            </div>
+            <Link
+              href="/bulk-land"
+              onClick={closeAllMenus}
+              className="block border-b border-white py-[0.75rem] text-[clamp(0.9375rem,0.78rem_+_0.55vw,1.125rem)] font-medium text-white transition-colors hover:text-[#ddbc69]"
+            >
+              Bulk Land Deals
+            </Link>
 
             {mobileLinks.map(({ href, label, calendly }, index) =>
               calendly ? (
