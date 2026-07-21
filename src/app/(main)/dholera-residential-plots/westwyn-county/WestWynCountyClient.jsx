@@ -1,23 +1,14 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import { ChevronRight, ChevronLeft } from "lucide-react";
-import westwyn1 from "@/assests/westwyn-county/westwyn-3.webp";
-import westwyn2 from "@/assests/westwyn-county/westwyn-1.webp";
-import westwyn3 from "@/assests/westwyn-county/westwyn-2.webp";
-import westwynmob1 from "@/assests/westwyn-county/westwyn-county-mob1.webp";
-import westwynmob2 from "@/assests/westwyn-county/westwyn-county-mob2.webp";
-import westwynmob3 from "@/assests/westwyn-county/westwyn-county-mob3.webp";
+import westwyn1 from "@/assests/westwyn-county/westwyn-county-1.webp";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
-import { Plus, Minus } from "lucide-react";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence, motion } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
 import CostSheet from "../costsheet2";
-import SoldOutProjectsSection from "../SoldOutProjects";
-import BrochureDownload from "../../components/BrochureDownload";
 import { FaFile, FaPhone, FaWhatsapp } from "react-icons/fa6";
 import PopupLeadForm from "../../components/PopupLeadForm";
 import ActiveProjectsSection from "../ActiveProject";
@@ -53,18 +44,6 @@ export default function WestWynCountyClient() {
     },
   ];
 
-  const desktopImages = [
-    { src: westwyn1, alt: "Westwyn County 1" },
-    { src: westwyn2, alt: "Westwyn County 2" },
-    { src: westwyn3, alt: "Westwyn County 3" },
-  ];
-
-  const mobileImages = [
-    { src: westwynmob1, alt: "Westwyn County 1" },
-    { src: westwynmob2, alt: "Westwyn County 2" },
-    { src: westwynmob3, alt: "Westwyn County 3" },
-  ];
-
   const [sqYards, setSqYards] = useState(0);
   const [plots, setPlots] = useState(0);
   const [amenities, setAmenities] = useState(0);
@@ -75,15 +54,10 @@ export default function WestWynCountyClient() {
   const [buttonName, setButtonName] = useState("");
   const [formType, setFormType] = useState("");
 
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [openIndex, setOpenIndex] = useState(0);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
   const [eventVar, setEventVar] = useState("");
-
-  // Touch handlers for swipe
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
 
   const openContactForm = (title, headline, btnName, type, project) => {
     setFormTitle(title);
@@ -140,43 +114,6 @@ export default function WestWynCountyClient() {
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
-  };
-
-  // Auto-rotate images every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) =>
-        prev === desktopImages.length - 1 ? 0 : prev + 1,
-      );
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [desktopImages.length]);
-
-  // Touch handlers for swipe (mobile)
-  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
-  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 50) {
-      setCurrentSlide((prev) =>
-        prev === mobileImages.length - 1 ? 0 : prev + 1,
-      );
-    } else if (touchEnd - touchStart > 50) {
-      setCurrentSlide((prev) =>
-        prev === 0 ? mobileImages.length - 1 : prev - 1,
-      );
-    }
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === desktopImages.length - 1 ? 0 : prev + 1,
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? desktopImages.length - 1 : prev - 1,
-    );
   };
 
   // Auto-increment counters for section 3
@@ -271,98 +208,22 @@ export default function WestWynCountyClient() {
           },
         ])}
       />
-      {/* Hero Section with Carousel - Matching Hero3 Design */}
+      {/* Hero Section */}
       <div id="hero" className="relative min-h-screen bg-white">
         <div className="h-screen max-sm:h-auto flex flex-col">
           {/* Main Content Section */}
           <div className="flex-1 flex flex-col lg:flex-row min-h-0">
-            {/* Left Side - Slider Section (60%) */}
+            {/* Left Side - Project Image (60%) */}
             <div className="relative w-full flex-1 bg-white lg:w-[60%] max-sm:min-h-[50vh]">
-              {/* Desktop Slider */}
-              <div className="absolute inset-0 hidden lg:block">
-                <div className="relative w-full h-full overflow-hidden">
-                  {desktopImages.map((image, index) => (
-                    <div
-                      key={index}
-                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                        index === currentSlide ? "opacity-100" : "opacity-0"
-                      }`}
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        className="object-cover object-center"
-                        priority={index === 0}
-                        sizes="60vw"
-                        quality={85}
-                      />
-                    </div>
-                  ))}
-                  {/* Navigation */}
-                  <button
-                    onClick={prevSlide}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Mobile Slider */}
-              <div
-                className="absolute inset-0 block lg:hidden overflow-hidden"
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-                role="region"
-                aria-label="Mobile image carousel"
-              >
-                {desktopImages.map((image, index) => (
-                  <div
-                    key={`mobile-${index}`}
-                    className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-                    style={{
-                      opacity: index === currentSlide ? 1 : 0,
-                      pointerEvents: index === currentSlide ? "auto" : "none",
-                    }}
-                  >
-                    <div className="h-full flex items-center justify-center px-1 pt-16 pb-4">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={1200}
-                        height={800}
-                        className="w-full h-auto rounded-lg shadow-lg"
-                        quality={85}
-                        fetchPriority={index === 0 ? "high" : "low"}
-                        sizes="100vw"
-                      />
-                    </div>
-                  </div>
-                ))}
-                {/* Navigation buttons for mobile */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
+              <Image
+                src={westwyn1}
+                alt="WestWyn County residential plot project in Dholera SIR"
+                fill
+                priority
+                sizes="(min-width: 1024px) 60vw, 100vw"
+                quality={85}
+                className="object-contain lg:object-cover"
+              />
             </div>
 
             {/* Right Side - Lead Form Section (40%) */}

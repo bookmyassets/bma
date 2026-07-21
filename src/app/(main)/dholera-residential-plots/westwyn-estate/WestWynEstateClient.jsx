@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState } from "react";
 import InlineLeadForm from "../../components/InlineLeadForm";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
@@ -11,9 +10,9 @@ import SoldOutProjectsSection from "../SoldOutProjects";
 import WestWynAboutSection from "./About";
 
 //images import
-import img1 from "@/assests/residential/estates/westwyn-estates-dholera-times-desktop.webp";
+import img1 from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate.webp";
 
-import img1M from "@/assests/residential/estates/westwyn-estates-dholera-times-mobile.webp";
+import img1M from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate-mobile.webp";
 
 import PopupLeadForm from "../../components/PopupLeadForm";
 import CostSheet from "../costsheet2";

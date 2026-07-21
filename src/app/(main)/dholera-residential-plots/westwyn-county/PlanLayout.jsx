@@ -76,7 +76,7 @@ const PlanLayout = () => {
               <Image
                 src={img}
                 alt="plan layout of westwyn estates"
-                className="rounded-xl w-full md:h-full h-auto md:order-1"
+                className="rounded-xl w-[650px] md:h-[350px] h-auto md:order-1 "
                 priority
               />
             </div>
