@@ -19,6 +19,82 @@ import OurCommits from "./OurCommits";
 import PlanLayout from "./PlanLayout";
 import DocumentVault from "./DocumentVault";
 
+const availablePlotSizes = [124, 152, 187];
+
+function PlotAvailabilitySection() {
+  return (
+    <section
+      aria-labelledby="plot-availability-title"
+      className="bg-[#101010] px-4 py-6 text-[#f5f1e8] sm:px-6 sm:py-8"
+    >
+      <div className="mx-auto max-w-4xl space-y-3">
+        <div className="rounded-xl border border-[#ddbc69]/35 bg-[#080808] p-4 shadow-[0_0_24px_rgba(221,188,105,0.07)] sm:p-5">
+          <h2
+            id="plot-availability-title"
+            className="text-center text-base font-semibold uppercase tracking-[0.08em] text-[#ddbc69] sm:text-lg"
+          >
+            Plot Sizes Available
+          </h2>
+
+          <div className="mx-auto mt-3 grid max-w-2xl grid-cols-3 gap-2.5 sm:gap-3">
+            {availablePlotSizes.map((size) => (
+              <div
+                key={size}
+                className="flex min-h-20 flex-col items-center justify-center rounded-lg border border-[#ddbc69]/40 bg-[#101010] px-2 py-3 text-center sm:min-h-24"
+              >
+                <span className="text-[clamp(1.5rem,4vw,2.1rem)] font-semibold leading-none text-[#f5f1e8]">
+                  {size}
+                </span>
+                <span className="mt-1.5 text-[0.7rem] font-medium text-[#f5f1e8]/65 sm:text-sm">
+                  Sq. Yd.
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-3 text-center text-xs font-medium text-[#f5f1e8]/65 sm:text-sm">
+            WhatsApp for current availability.
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-[#ddbc69]/35 bg-[#080808] p-4 shadow-[0_0_24px_rgba(221,188,105,0.07)] sm:p-5">
+          <p className="text-center text-sm font-semibold uppercase tracking-[0.08em] text-[#ddbc69] sm:text-base">
+            Availability Status
+          </p>
+
+          <div className="mt-3 grid grid-cols-[5.5rem_1fr] items-center gap-4 sm:grid-cols-[7rem_1fr] sm:gap-6">
+            <div className="flex size-[5.5rem] items-center justify-center rounded-full border-[0.4rem] border-[#ddbc69] bg-[#101010] sm:size-28">
+              <div className="text-center">
+                <span className="block text-base font-semibold uppercase text-[#f5f1e8] sm:text-lg">
+                  Live
+                </span>
+                <span className="block text-[0.6rem] font-bold uppercase tracking-[0.12em] text-[#ddbc69] sm:text-[0.65rem]">
+                  Status
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm font-semibold leading-5 text-[#f5f1e8] sm:text-lg">
+                Subject to Current Inventory
+              </p>
+              <Link
+                href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20check%20WestWyn%20Residency%20plot%20availability"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-[#ddbc69]/60 px-4 py-2 text-xs font-semibold text-[#ddbc69] transition-colors hover:bg-[#ddbc69] hover:text-[#101010] focus:outline-none focus:ring-2 focus:ring-[#ddbc69] sm:text-sm"
+              >
+                <FaWhatsapp className="size-4" aria-hidden="true" />
+                Check Availability
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function WestWynResidencyClient() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
@@ -282,7 +358,6 @@ export default function WestWynResidencyClient() {
 
             <h2 className="max-w-xl text-[clamp(1.65rem,3vw,2.7rem)] font-semibold leading-[1.18] tracking-[-0.025em] text-white">
               Registry-Ready. Future-Ready.
-              <span className="mt-1 block">Your Legacy Starts Here.</span>
             </h2>
 
            {/*  <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
@@ -337,6 +412,8 @@ export default function WestWynResidencyClient() {
       <div className="pt-4 pb-4">
         <WestWynAboutSection />
       </div>
+
+      <PlotAvailabilitySection />
 
       <div className="">
         <InlineLeadForm

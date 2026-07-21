@@ -18,6 +18,10 @@ export default function page() {
         name="description"
         content="Industrial land in Dholera designed for factories, warehouses and long term growth."
       />
+      <meta
+        name="robots"
+        content="noindex, nofollow"
+      />
       <link
         rel="canonical"
         href="https://www.bookmyassets.com/bulk-land/industrial-land"

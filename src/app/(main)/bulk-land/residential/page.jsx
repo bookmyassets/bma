@@ -20,6 +20,10 @@ export default function page() {
         name="description"
         content="Buy bulk residential land in Dholera SIR. Best for long-term investors. High ROI, prime locations & future-ready infrastructure."
       />
+      <meta
+        name="robots"
+        content="noindex, nofollow"
+      />
       <link
         rel="canonical"
         href="https://www.bookmyassets.com/bulk-land/residential"

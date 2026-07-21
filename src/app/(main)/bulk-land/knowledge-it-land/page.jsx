@@ -18,6 +18,10 @@ export default function page() {
         name="description"
         content="Explore IT and Knowledge Zone land in Dholera with verified papers and strong long term development potential."
       />
+      <meta
+        name="robots"
+        content="noindex, nofollow"
+      />
       <link
         rel="canonical"
         href="https://www.bookmyassets.com/bulk-land/knowledge-it-land"

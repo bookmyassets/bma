@@ -26,7 +26,7 @@ export default function DholeraLandingPage() {
                 ambitious examples of a smart city in Gujarat.
               </p>
               <p>
-                Spanning 922.5 sq km, Dholera features planned industrial zones,
+                Spanning 920 sq km, Dholera features planned industrial zones,
                 100m-wide roads, underground utilities, renewable energy
                 integration, and IoT-enabled smart governance. With major
                 projects such as Dholera International Airport, Asia's largest

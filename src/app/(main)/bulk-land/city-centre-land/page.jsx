@@ -20,6 +20,10 @@ export default function page() {
         name="description"
         content="Find investor friendly bulk land in Dholera City Centre with full support and clean paperwork."
       />
+      <meta
+        name="robots"
+        content="noindex, nofollow"
+      />
       <link
         rel="canonical"
         href="https://www.bookmyassets.com/bulk-land/city-centre-land"
