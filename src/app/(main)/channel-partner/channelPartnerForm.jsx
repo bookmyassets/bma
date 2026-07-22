@@ -20,11 +20,14 @@ export default function ChannelPartnerForm() {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   const professionOptions = [
-    "Real Estate Brokers & Agents",
-    "Wealth Advisors & Financial Consultants", 
-    "NRIs & Overseas Consultants",
-    "Property Developers & Firms",
-    "Influencers & Business Networks"
+    "Real Estate Brokers and Agents",
+    "Property Consultants",
+    "Wealth and Financial Consultants",
+    "NRI and Overseas Consultants",
+    "Real Estate Companies",
+    "Referral Partners",
+    "Women Entrepreneurs",
+    "Individuals Interested in Real Estate"
   ];
 
   const experienceOptions = [
@@ -259,7 +262,7 @@ export default function ChannelPartnerForm() {
   return (
     <div className="bg-white p-8 rounded-xl shadow-2xl border border-gray-200 sticky top-8">
       <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-        Join Our Channel Partner Program
+        Channel Partner Registration Form
       </h3>
 
       {showPopup && (
@@ -384,7 +387,7 @@ export default function ChannelPartnerForm() {
                 : "bg-[#be9233] hover:bg-[#dbaf51] hover:shadow-lg active:scale-95"
             }`}
           >
-            {isLoading ? "Submitting..." : "Apply Now"}
+            {isLoading ? "Submitting..." : "Join the Partner Program"}
           </button>
         </form>
       )}

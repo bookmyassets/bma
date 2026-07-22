@@ -4,22 +4,21 @@ import {
   MapPin,
   Star,
   Shield,
-  TrendingUp,
   Phone,
   ArrowRight,
   Building,
   Users,
   Heart,
-  Play,
   Target,
   Globe,
   Settings,
-  Zap,
-  Award,
   CheckCircle,
-  ArrowDown,
+  LandPlot,
+  HardHat,
+  Wrench,
+  Handshake,
+  Megaphone,
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 import c1 from "@/assests/testimonials/sanchit-mishra.webp";
 import c2 from "@/assests/testimonials/janvi-goel.webp";
@@ -46,7 +45,7 @@ const RealEstateLandingPage = () => {
   const handleScrollDown = () => {
     window.scrollTo({
       top: window.innerHeight,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
@@ -98,45 +97,81 @@ const RealEstateLandingPage = () => {
   const companies = [
     {
       name: "BMA Developers",
-      subtitle: "From Selling Projects to Creating Landmarks",
+      subtitle: "Land and Plotted Project Support",
       description:
-        "BMA has been part of 6 successful projects that have been sold out, selling over 1,00,000 square yards of land in Dholera. We now don't just sell land, we build dreams.",
-      icon: Building,
+        "BMA Developers helps buyers, investors and businesses explore land and plotted projects in and around Dholera.",
+      icon: LandPlot,
       color: "from-blue-500 to-blue-600",
       features: [
-        "8 Successful Projects",
-        "1,00,000+ Sq Yards Sold",
-        "Premium Communities",
-        "WestWyn County Project",
+        "Purchase and sale of land",
+        "Residential plots in Dholera",
+        "Bulk land deals",
+        "Project location and pricing information",
+        "NA, NOC and title-document support",
+        "Approved layout and plan-pass details",
+        "Site visit and transaction coordination",
       ],
     },
-   
+    {
+      name: "BMA Construction Services",
+      subtitle: "Planning to Final Handover",
+      description:
+        "BMA Construction provides support for land development and villa construction, from planning to final handover.",
+      icon: HardHat,
+      color: "from-green-500 to-green-600",
+      features: [
+        "Land development",
+        "Villa planning and design",
+        "Complete construction services",
+        "Interior and finishing support",
+        "Planned 1 BHK and 2 BHK villa options",
+        "Construction updates and project coordination",
+      ],
+    },
+    {
+      name: "BMA Fabrication",
+      subtitle: "Practical Custom Structures",
+      description:
+        "BMA Fabrication develops practical structures for residential, commercial and temporary use.",
+      icon: Wrench,
+      color: "from-slate-500 to-slate-600",
+      features: [
+        "Container homes",
+        "Container offices",
+        "Portable structures",
+        "Custom fabrication",
+        "Site installation support",
+      ],
+    },
     {
       name: "BMA Allied Services",
-      subtitle: "Helping You Build, Manage & Enjoy Your Investment",
+      subtitle: "Property Support After Purchase",
       description:
-        "From construction to maintenance to hospitality support, we take care of it all. Whether you're a new investor or an existing one, we've got your back, start to finish.",
-      icon: Settings,
+        "BMA Allied Services helps property owners maintain, manage and use their properties after purchase.",
+      icon: Handshake,
       color: "from-purple-500 to-purple-600",
       features: [
-        "Construction Services",
-        "Maintenance Support",
-        "Hospitality Management",
-        "End-to-End Solutions",
+        "Property maintenance",
+        "Hospitality management",
+        "Rental management",
+        "Resale assistance",
+        "Property-care support",
       ],
     },
     {
       name: "Truliyo Digital",
-      subtitle: "Marketing That Creates Trust, Online and Offline",
+      subtitle: "Marketing and Online Trust Building",
       description:
-        "Our in house marketing and digital performance team that drives leads, creates brand visibility, and builds trust across borders. It's not just about running ads, it's about connecting the right investor with the right opportunity.",
-      icon: Zap,
+        "Truliyo Digital provides marketing solutions for developers, businesses and real estate projects.",
+      icon: Megaphone,
       color: "from-orange-500 to-orange-600",
       features: [
         "Digital Marketing",
         "Brand Visibility",
         "Lead Generation",
-        "Trust Building",
+        "Social media marketing",
+        "Website and content support",
+        "Online trust building",
       ],
     },
   ];
@@ -197,7 +232,7 @@ const RealEstateLandingPage = () => {
 
     const observer = new IntersectionObserver(
       observerCallback,
-      observerOptions
+      observerOptions,
     );
 
     if (featuresRef.current) observer.observe(featuresRef.current);
@@ -221,12 +256,10 @@ const RealEstateLandingPage = () => {
 
   return (
     <>
-      <title>
-        About BookMyAssets | Trusted Real Estate Investment in Dholera
-      </title>
+      <title>About BookMyAssets | Real Estate Developer in Dholera</title>
       <meta
         name="description"
-        content="Join BMA Group in Dholera Smart City for reliable real estate services. We provide legally verified plots and end-to-end investment support for smart growth."
+        content="Learn about BookMyAssets, our residential projects in Dholera, BMA Group services, construction support, property management and buyer assistance."
       />
       <link rel="canonical" href="https://www.bookmyassets.com/about" />
       <div className="bg-white">
@@ -268,16 +301,15 @@ const RealEstateLandingPage = () => {
                   </h1>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
-                   {/*  Discover premium, legally verified plots in Dholera Smart
+                    {/*  Discover premium, legally verified plots in Dholera Smart
                     City. We don't just offer land-we offer a vision of the
                     future. */}
-                    Celebrating one year of turning raw belief into Dholera's boldest success story
+                    Celebrating one year of turning raw belief into Dholera's
+                    boldest success story
                   </p>
                 </div>
 
                 {/* CTA Buttons */}
-
-                
               </div>
 
               {/* Video */}
@@ -314,8 +346,6 @@ const RealEstateLandingPage = () => {
               </div>
             </div>
 
-   
-
             {/* Desktop View - Side by Side */}
             <div className="hidden lg:flex lg:items-center lg:justify-center pt-8">
               <div className="grid grid-cols-2 gap-12 xl:gap-16 max-w-7xl w-full items-center">
@@ -348,13 +378,12 @@ const RealEstateLandingPage = () => {
                       {/* Discover premium, legally verified plots in Dholera Smart
                       City. We don't just offer land-we offer a vision of the
                       future. */}
-                      Celebrating one year of turning raw belief into Dholera's boldest success story
-
+                      Celebrating one year of turning raw belief into Dholera's
+                      boldest success story
                     </p>
                   </div>
 
                   {/* CTA Buttons */}
-                  
                 </div>
 
                 {/* Right Content - YouTube Shorts Video */}
@@ -394,123 +423,186 @@ const RealEstateLandingPage = () => {
           </div>
         </div>
 
-        
         {/* About Us Section */}
-        <div
-          ref={aboutRef}
-          className="py-12 bg-gradient-to-br from-gray-50 to-white"
-        >
+        <div ref={aboutRef} className="bg-white py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-8">
+              <div className="mb-12 text-center">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   About Us
                 </h2>
                 <div className="flex items-center justify-center mb-6">
                   <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
-                  <Star className="mx-4 text-[#ddbc69]" size={24} />
+                  <span className="mx-4 size-2 rotate-45 bg-[#ddbc69]" />
                   <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
                 </div>
                 <p className="text-lg  text-[#ddbc69] font-bold mb-4">
-                  Focused on Your Growth. Driven by Your Trust.
+                  Company Profile
                 </p>
               </div>
 
               <div
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch transform transition-all duration-1000 ${
+                className={`grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-2 transform transition-all duration-1000 ${
                   isVisible.about
                     ? "translate-y-0 opacity-100"
                     : "translate-y-10 opacity-0"
                 }`}
               >
                 {/* Left Content */}
-                <div className="space-y-8 flex flex-col">
-                  <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 flex-1 flex flex-col">
+                <div className="order-1 lg:col-span-2">
+                  <div className="border-l-4 border-[#ddbc69] pl-5 sm:pl-8">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-                      Our Vision
+                      BookMyAssets
                     </h3>
-                    <p className="text-gray-700 leading-relaxed mb-6 flex-1">
-                      At BMA (Book My Assets), we are redefining real estate
-                      investment by making it transparent, secure, and growth
-                      driven. Specializing in AUDA approved projects in Dholera
-                      Smart City, India’s first greenfield smart city, we offer
-                      investors and brokers legally clear, registry ready plots
-                      with assured appreciation.
+                    <p className="text-gray-700 leading-relaxed mb-4">
+                      BookMyAssets started its journey in December 2024. We
+                      began developing our own residential plotted projects in
+                      and around Dholera.
                     </p>
-                    <p className="text-gray-700 leading-relaxed mb-6 flex-1">
-                      With a strong focus on trust, timely delivery, and an
-                      investor first approach, BMA bridges the gap between
-                      opportunity and reliability.
+                    <p className="text-gray-700 leading-relaxed mb-4">
+                      Our projects include WestWyn County, WestWyn Estates and
+                      WestWyn Residency.
                     </p>
-                  </div>
-
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-6 sm:p-8 border border-blue-200 flex-1 flex flex-col">
-                    <h3 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4">
-                      Our Mission
-                    </h3>
-                    <div className="space-y-3">
-                      <div className="flex items-center space-x-3">
-                        <CheckCircle className="text-green-500" size={20} />
-                        <span className="text-blue-800">
-                          To make property buying hassle-free, transparent, and
-                          legally secure.
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <CheckCircle className="text-green-500" size={20} />
-                        <span className="text-blue-800">
-                          To guide investors and channel partners with expert
-                          insights and dedicated support.
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <CheckCircle className="text-green-500" size={20} />
-                        <span className="text-blue-800">
-                          To deliver long-term value through premium projects in
-                          India’s fastest-growing smart cities
-                        </span>
-                      </div>
-                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      We focus on practical, liveable and future-ready
+                      development. Our aim is to support organised habitation as
+                      Dholera grows.
+                    </p>
                   </div>
                 </div>
 
-                {/* Right Content */}
-                <div className="space-y-8 flex flex-col">
-                  <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 flex-1 flex flex-col">
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-                      Our Journey
+                <div className="order-2 border-t border-black/15 pt-10">
+                    <h3 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">
+                      Our Mission
                     </h3>
-                    <p className="text-gray-700 leading-relaxed mb-6 flex-1">
-                      Over the years, we have helped thousands of investors
-                      across India and overseas invest in the right places:
-                      Gurugram, Delhi NCR, Noida, Dubai, Dholera, and more.
+                    <p className="mb-5 leading-relaxed text-gray-700">
+                      Our mission is to make property investment in Dholera
+                      simple, clear and transparent. We focus on:
                     </p>
-                    <p className="text-gray-700 leading-relaxed flex-1">
-                      After doing a deep comparison of all our projects, our
-                      research proved one thing clearly: Dholera offers better
-                      growth, returns, and long-term potential than any other
-                      location.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed flex-1">
-                      After doing a deep comparison of all our projects, our
-                      research proved one thing clearly.
-                    </p>
+                    <ul className="grid gap-3 sm:grid-cols-2">
+                      {[
+                        "Clear project information",
+                        "Transparent pricing",
+                        "Available legal documents",
+                        "Easy booking process",
+                        "Registry-ready plot options",
+                        "Site visit support",
+                        "Construction assistance",
+                        "Rental and resale support",
+                      ].map((item) => (
+                        <li key={item} className="flex items-start gap-3 text-gray-700">
+                          <CheckCircle
+                            className="mt-0.5 flex-shrink-0 text-[#b28d38]"
+                            size={20}
+                            aria-hidden="true"
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-6 sm:p-8 border border-[#ddbc69] flex-1 flex flex-col">
-                    <h3 className="text-xl sm:text-2xl font-bold text-orange-900 mb-4">
-                      Our Promise
+                {/* Right Content */}
+                <div className="contents">
+                  <div className="order-4 border-t border-black/15 pt-10">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+                      Trusted Real Estate Developer in Dholera
                     </h3>
-                    <p className="text-orange-800 leading-relaxed mb-4 flex-1">
-                      We are Not Just in Real Estate. We are in the Business of
-                      Growing People's Wealth, Dreams, and Trust.
+                    <p className="text-gray-700 leading-relaxed mb-5">
+                      BookMyAssets provides complete property support through:
                     </p>
-                    <p className="text-orange-800 leading-relaxed flex-1">
-                      Everything we do is built around one core belief:{" "}
-                      <strong>"You" come first.</strong> We are here to guide
-                      you, protect your money, simplify your journey, and give
-                      you investment opportunities that truly change your life.
+                    <ul className="grid gap-3 sm:grid-cols-2">
+                      {[
+                        "Residential plots in Dholera",
+                        "Bulk land deals",
+                        "Clear project information",
+                        "Legal document support",
+                        "Site visit assistance",
+                        "After-sales support",
+                        "Villa construction",
+                        "Rental and resale assistance",
+                      ].map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-3 text-gray-700"
+                        >
+                          <CheckCircle
+                            className="mt-0.5 flex-shrink-0 text-[#b28d38]"
+                            size={20}
+                            aria-hidden="true"
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="order-3 border-t-2 border-[#ddbc69] pt-10">
+                    <h3 className="text-xl sm:text-2xl font-bold text-black mb-4">
+                      Our Vision
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed mb-5">
+                      Our vision is to create planned and liveable residential
+                      communities in Dholera. We aim to:
                     </p>
+                    <ul className="space-y-3">
+                      {[
+                        "Develop practical residential projects",
+                        "Support home and villa construction",
+                        "Create future rental opportunities",
+                        "Promote organised habitation",
+                        "Build long-term relationships with buyers",
+                        "Support the growth of Dholera as a residential destination",
+                      ].map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-3 text-gray-700"
+                        >
+                          <CheckCircle
+                            className="mt-0.5 flex-shrink-0 text-[#b28d38]"
+                            size={20}
+                            aria-hidden="true"
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="order-5 border-t border-black/15 pt-10">
+                    <h3 className="text-xl sm:text-2xl font-bold text-black mb-4">
+                      Setting a New Standard for Living in Dholera
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed mb-5">
+                      BookMyAssets is not focused on selling empty plots alone.
+                      We aim to create places where people can build homes, live
+                      comfortably and generate future rental opportunities.
+                    </p>
+                    <p className="font-semibold text-black mb-3">
+                      We are working to set a new standard for:
+                    </p>
+                    <ul className="space-y-3">
+                      {[
+                        "Liveable homes in and around Dholera",
+                        "Planned residential communities",
+                        "Villa construction and ready housing",
+                        "Rental-ready properties",
+                        "Long-term habitation in Dholera",
+                        "Complete support after plot purchase",
+                      ].map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-3 text-gray-700"
+                        >
+                          <CheckCircle
+                            className="mt-0.5 flex-shrink-0 text-[#b28d38]"
+                            size={20}
+                            aria-hidden="true"
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -519,40 +611,47 @@ const RealEstateLandingPage = () => {
         </div>
 
         {/* BMA Group Companies Section */}
-        <div ref={companiesRef} className="py-12 bg-white">
+        <div
+          ref={companiesRef}
+          className="bg-[#0d0d0d] py-16 text-white lg:py-24"
+        >
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
                 BMA Group of Companies
               </h2>
               <div className="flex items-center justify-center mb-6">
                 <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
-                <Star className="mx-4 text-[#ddbc69]" size={24} />
+                <span className="mx-4 size-2 rotate-45 bg-[#ddbc69]" />
                 <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
               </div>
-              <p className="text-xl text-black max-w-5xl mx-auto">
-                Four strong arms, each one created to serve you better, faster,
-                and smarter in your real estate investment journey.
+              <p className="text-xl text-white/80 max-w-5xl mx-auto">
+                BookMyAssets is more than a real estate developer in Dholera.
+                Through the BMA Group of Companies, we provide support for land
+                purchase, project development, villa construction, fabrication,
+                property management, hospitality and marketing.
+              </p>
+              <p className="mt-4 text-base text-[#ddbc69] max-w-4xl mx-auto">
+                One group, multiple services, and fewer vendors turning a
+                straightforward project into a group-chat crisis.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="mt-12">
               {companies.map((company, index) => (
                 <div
                   key={index}
-                  className={`group transform transition-all duration-700 hover:scale-105 ${
+                  className={`transform transition-all duration-700 ${
                     isVisible.companies
                       ? "translate-y-0 opacity-100"
                       : "translate-y-10 opacity-0"
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  <div className="bg-gray-900 backdrop-blur-xl rounded-3xl p-6 border border-white/20 hover:border-[#ddbc69] transition-all duration-500 h-full">
+                  <div className="border-t border-[#ddbc69]/35 py-8 lg:grid lg:grid-cols-[0.8fr_1.2fr] lg:gap-12 lg:py-10">
                     <div className="flex items-center space-x-4 mb-6">
-                      <div
-                        className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${company.color} flex items-center justify-center group-hover:rotate-12 transition-transform duration-300`}
-                      >
-                        <company.icon size={28} className="text-white" />
+                      <div className="flex size-12 items-center justify-center text-[#ddbc69]">
+                        <company.icon size={32} aria-hidden="true" />
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold text-white">
@@ -564,25 +663,22 @@ const RealEstateLandingPage = () => {
                       </div>
                     </div>
 
-                    <p className="text-gray-300 leading-relaxed mb-6">
-                      {company.description}
-                    </p>
+                    <div>
+                      <p className="text-gray-300 leading-relaxed mb-6">
+                        {company.description}
+                      </p>
 
-                    <div className="grid grid-cols-2 gap-3">
-                      {company.features.map((feature, featureIndex) => (
-                        <div
-                          key={featureIndex}
-                          className="flex items-center space-x-2"
-                        >
-                          <CheckCircle
-                            className="text-green-400 flex-shrink-0"
-                            size={16}
-                          />
-                          <span className="text-gray-300 text-sm">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
+                      <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                        {company.features.map((feature, featureIndex) => (
+                          <li
+                            key={featureIndex}
+                            className="flex items-start gap-2 text-sm text-gray-300"
+                          >
+                            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#ddbc69]" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -591,21 +687,21 @@ const RealEstateLandingPage = () => {
           </div>
         </div>
 
-        {/* Milestones Section - Glassmorphism Design */}
-        <div className="py-12 bg-gradient-to-b from-gray-50 to-white">
+        {/* Milestones Section */}
+        <div className="bg-[#ddbc69] py-16 lg:py-20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
                 Our Milestones
               </h2>
               <div className="flex items-center justify-center">
-                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
-                <Star className="mx-4 text-[#ddbc69]" size={24} />
-                <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
+                <div className="h-px w-16 bg-black/60"></div>
+                <span className="mx-4 size-2 rotate-45 bg-black" />
+                <div className="h-px w-16 bg-black/60"></div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 divide-y divide-black/25 border-y border-black/25 md:grid-cols-3 md:divide-x md:divide-y-0">
               {[
                 {
                   count: counts.partners,
@@ -627,17 +723,15 @@ const RealEstateLandingPage = () => {
                 },
               ].map((item, index) => (
                 <div key={index} className="group">
-                  <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
-                    <div
-                      className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      <item.icon size={32} className="text-white" />
+                  <div className="flex items-center justify-center gap-5 py-8 md:px-8 md:py-10">
+                    <div className="flex size-14 shrink-0 items-center justify-center text-black">
+                      <item.icon size={34} aria-hidden="true" />
                     </div>
-                    <div className="text-center">
-                      <div className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
+                    <div>
+                      <div className="text-4xl lg:text-5xl font-bold text-black mb-1">
                         {item.count}+
                       </div>
-                      <div className="text-lg lg:text-xl text-gray-600">
+                      <div className="text-base font-medium text-black/70 lg:text-lg">
                         {item.label}
                       </div>
                     </div>
@@ -648,83 +742,102 @@ const RealEstateLandingPage = () => {
           </div>
         </div>
 
-        {/* Why Choose Us Section - Cards with Hover Effects */}
-        <div ref={featuresRef} className="py-12 bg-gray-900">
+        {/* Why Choose Us Section */}
+        <div ref={featuresRef} className="bg-black py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
               <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-                Why Choose Us?
+                Why Choose BookMyAssets?
               </h2>
               <div className="flex items-center justify-center mb-6">
                 <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
-                <Star className="mx-4 text-[#ddbc69]" size={24} />
+                <span className="mx-4 size-2 rotate-45 bg-[#ddbc69]" />
                 <div className="h-1 w-16 bg-[#ddbc69] rounded"></div>
               </div>
               <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-                We go beyond just selling properties we create investment
-                opportunities that build your future.
+                BookMyAssets provides complete property support in Dholera under
+                one group.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="mt-12 grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
               {[
                 {
                   icon: MapPin,
-                  title: "Exclusive Locations",
+                  title: "Dholera-Focused Developer",
                   description:
-                    "We focus solely on prime plots in Dholera, ensuring you get the best options in this futuristic city.",
+                    "Focused real estate development and property support in and around Dholera.",
                   color: "from-red-500 to-red-600",
                 },
                 {
-                  icon: TrendingUp,
-                  title: "Expert Market Insights",
+                  icon: Building,
+                  title: "Plots and Bulk Land",
                   description:
-                    "Our team provides data driven insights to help you make informed investment decisions.",
+                    "Residential plot options and bulk land support for different requirements.",
                   color: "from-green-500 to-green-600",
                 },
                 {
                   icon: Shield,
-                  title: "Legally Verified Properties",
+                  title: "Project and Legal Documents",
                   description:
-                    "We ensure all listings are legally compliant, minimizing risks and ensuring smooth transactions.",
+                    "Available project information and legal documents for buyer review.",
                   color: "from-blue-500 to-blue-600",
                 },
                 {
                   icon: Target,
-                  title: "Focused Investment Strategy",
+                  title: "Transparent Process",
                   description:
-                    "We specialize in Dholera Smart City, giving you unmatched expertise in this emerging market.",
+                    "Clear pricing, project information and a straightforward buying process.",
                   color: "from-purple-500 to-purple-600",
                 },
                 {
-                  icon: Award,
-                  title: "Industry Recognition",
+                  icon: Settings,
+                  title: "In-House Services",
                   description:
-                    "Award winning real estate consultancy with a proven track record of successful investments.",
+                    "Construction and fabrication support coordinated within the BMA Group.",
                   color: "from-[#ddbc69] to-[#ddbc69]",
                 },
                 {
                   icon: Phone,
-                  title: "Dedicated Support",
+                  title: "Site Visit and Registry Support",
                   description:
-                    "Personal relationship managers available 24/7 to assist you at every step of your investment journey.",
+                    "Assistance with site visits, documentation and registry coordination.",
                   color: "from-indigo-500 to-indigo-600",
+                },
+                {
+                  icon: Heart,
+                  title: "Property Support",
+                  description:
+                    "Rental, resale and maintenance assistance after property purchase.",
+                  color: "from-pink-500 to-pink-600",
+                },
+                {
+                  icon: Globe,
+                  title: "Indian and NRI Buyers",
+                  description:
+                    "Practical guidance for buyers based in India and overseas.",
+                  color: "from-cyan-500 to-cyan-600",
+                },
+                {
+                  icon: CheckCircle,
+                  title: "Liveable, Future-Ready Development",
+                  description:
+                    "A long-term focus on planned communities, habitation and buyer support.",
+                  color: "from-emerald-500 to-emerald-600",
                 },
               ].map((feature, index) => (
                 <div
                   key={index}
-                  className={`transform transition-all duration-500 hover:-translate-y-2 ${
+                  className={`transform transition-all duration-500 ${
                     isVisible.features
                       ? "translate-y-0 opacity-100"
                       : "translate-y-10 opacity-0"
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-[#ddbc69] transition-all duration-300 h-full">
-                    <div
-                      className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6`}
-                    >
-                      <feature.icon size={28} className="text-white" />
+                  <div className="h-full border-t border-white/20 py-7">
+                    <div className="mb-5 flex size-10 items-center justify-start text-[#ddbc69]">
+                      <feature.icon size={28} aria-hidden="true" />
                     </div>
                     <h3 className="text-xl font-bold text-white mb-3">
                       {feature.title}
@@ -789,7 +902,7 @@ const RealEstateLandingPage = () => {
                             className="text-[#ddbc69] fill-[#ddbc69]"
                             size={20}
                           />
-                        )
+                        ),
                       )}
                     </div>
                     <p className="text-gray-700 text-lg italic mb-6">
@@ -859,4 +972,3 @@ const RealEstateLandingPage = () => {
 };
 
 export default RealEstateLandingPage;
-
