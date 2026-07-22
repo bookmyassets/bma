@@ -12,10 +12,10 @@ const DOCUMENTS = [
   "Immediate Registry Possession",
 ];
 
-function DocumentCard({ docName }) {
+function DocumentCard({ docName, whatsappHref }) {
   return (
     <article
-      aria-label={`Verified sale deed document: ${docName}`}
+      aria-label={`Project document: ${docName}`}
       className="relative isolate h-[250px] w-[250px] overflow-hidden bg-transparent"
     >
       <div
@@ -61,7 +61,7 @@ function DocumentCard({ docName }) {
 
         <div className="absolute inset-x-6 bottom-5 rounded-xl border border-[#ddbc69]/50 bg-black px-4 shadow-[0_7px_16px_rgba(0,0,0,0.22)]">
           <Link
-            href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20see%20the%20legal%20documents"
+            href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-12 items-center justify-center gap-2  "
@@ -78,10 +78,10 @@ function DocumentCard({ docName }) {
   );
 }
 
-function WhatsAppCTA() {
+function WhatsAppCTA({ whatsappHref }) {
   return (
     <Link
-      href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20see%20the%20legal%20documents"
+      href={whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-white shadow-[0_8px_20px_rgba(37,211,102,0.35)] transition-transform hover:scale-[1.03] active:scale-[0.98]"
@@ -92,8 +92,16 @@ function WhatsAppCTA() {
   );
 }
 
-export default function DocumentVault() {
+export default function DocumentVault({
+  projectName = "WestWyn Residency",
+  documents = DOCUMENTS,
+  sectionId = "document-vault",
+}) {
   const sliderRef = useRef(null);
+  const sliderId = `${sectionId}-slider`;
+  const whatsappHref = `https://wa.me/918130371647?text=${encodeURIComponent(
+    `Hi, I'd like to review the available legal documents for ${projectName}`,
+  )}`;
 
   const scrollDocuments = (direction) => {
     const slider = sliderRef.current;
@@ -110,13 +118,21 @@ export default function DocumentVault() {
   return (
     <div className="bg-black">
 
-    <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <section
+      id={sectionId}
+      className="mx-auto w-full max-w-7xl scroll-mt-24 px-4 py-10 sm:px-6 lg:px-8"
+    >
       {/* Section header */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <h2 className="text-2xl font-bold tracking-[-0.02em] text-[#ddbc69] sm:text-3xl">
-          Legal Document Vault
-        </h2>
-        <WhatsAppCTA />
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#f7f3e8]/60">
+            {projectName}
+          </p>
+          <h2 className="mt-1 text-2xl font-bold tracking-[-0.02em] text-[#ddbc69] sm:text-3xl">
+            Legal Document Vault
+          </h2>
+        </div>
+        <WhatsAppCTA whatsappHref={whatsappHref} />
       </div>
 
       <div className="mb-3 flex items-center justify-between md:hidden">
@@ -129,7 +145,7 @@ export default function DocumentVault() {
             type="button"
             onClick={() => scrollDocuments(-1)}
             aria-label="View previous document"
-            aria-controls="document-vault-slider"
+            aria-controls={sliderId}
             className="grid size-11 place-items-center rounded-full border border-[#ddbc69]/50 bg-black text-[#ddbc69] transition-colors hover:bg-[#ddbc69] hover:text-black active:scale-95"
           >
             <svg
@@ -150,7 +166,7 @@ export default function DocumentVault() {
             type="button"
             onClick={() => scrollDocuments(1)}
             aria-label="View next document"
-            aria-controls="document-vault-slider"
+            aria-controls={sliderId}
             className="grid size-11 place-items-center rounded-full border border-[#ddbc69] bg-[#ddbc69] text-black shadow-[0_6px_16px_rgba(221,188,105,0.22)] transition-colors hover:bg-[#f7f3e8] active:scale-95"
           >
             <svg
@@ -172,17 +188,17 @@ export default function DocumentVault() {
       {/* Cards: full-size swipeable cards on mobile, full row on desktop */}
       <div
         ref={sliderRef}
-        id="document-vault-slider"
+        id={sliderId}
         className="flex scroll-smooth gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory md:grid md:grid-cols-5 md:gap-6 md:overflow-visible [&::-webkit-scrollbar]:hidden"
       >
-        {DOCUMENTS.map((docName) => (
+        {documents.map((docName) => (
           <div
             key={docName}
             data-document-card
             className="w-[250px] shrink-0 snap-start md:w-auto md:shrink"
           >
             <div className="h-[250px] w-[250px] overflow-hidden">
-              <DocumentCard docName={docName} />
+              <DocumentCard docName={docName} whatsappHref={whatsappHref} />
             </div>
           </div>
         ))}

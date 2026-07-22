@@ -2,9 +2,8 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/westwyn-county/westwyn-county-1.webp";
-import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import InlineLeadForm from "../../components/InlineLeadForm";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
 import ProjectAmenities from "./Amenities";
 import FAQSection from "./FAQs";
@@ -17,6 +16,16 @@ import SchemaMarkup from "../../components/SchemaMarkup";
 import Link from "next/link";
 import WestWynAboutSection from "./About";
 import PlanLayout from "./PlanLayout";
+import ProjectPlotAvailability from "../ProjectPlotAvailability";
+import DocumentVault from "../westwyn-residency/DocumentVault";
+
+const countyDocuments = [
+  "NA / NOC Documents",
+  "Title Documents",
+  "Approved Layout",
+  "Plan Pass Details",
+  "Registry Information",
+];
 
 export default function WestWynCountyClient() {
   const faqs = [
@@ -209,123 +218,108 @@ export default function WestWynCountyClient() {
         ])}
       />
       {/* Hero Section */}
-      <div id="hero" className="relative min-h-screen bg-white">
-        <div className="h-screen max-sm:h-auto flex flex-col">
-          {/* Main Content Section */}
-          <div className="flex-1 flex flex-col lg:flex-row min-h-0">
-            {/* Left Side - Project Image (60%) */}
-            <div className="relative w-full flex-1 bg-white lg:w-[60%] max-sm:min-h-[50vh]">
-              <Image
-                src={westwyn1}
-                alt="WestWyn County residential plot project in Dholera SIR"
-                fill
-                priority
-                sizes="(min-width: 1024px) 60vw, 100vw"
-                quality={85}
-                className="object-contain lg:object-cover"
-              />
-            </div>
+      <section
+        id="hero"
+        aria-labelledby="westwyn-county-title"
+        className="relative min-h-screen min-h-[100svh] overflow-hidden bg-black text-white"
+      >
+        <Image
+          src={westwyn1}
+          alt="Entrance gate of WestWyn County on Fedra-Pipli State Highway"
+          fill
+          priority
+          quality={90}
+          sizes="100vw"
+          className="object-cover object-[58%_center] lg:object-center"
+        />
 
-            {/* Right Side - Lead Form Section (40%) */}
-            <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 sm:p-6 lg:p-8 ">
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="w-full max-w-md"
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0.64)_38%,#000_100%)] lg:bg-[linear-gradient(90deg,#000_0%,#000_12%,rgba(0,0,0,0.86)_35%,rgba(0,0,0,0.12)_68%,transparent_100%)]"
+        />
+
+        <div className="relative z-10 flex min-h-screen min-h-[100dvh] w-full items-end px-5 pb-8 pt-28 sm:px-8 sm:pb-10 lg:items-center lg:px-10 lg:py-24 xl:px-16">
+          <div className="w-full lg:w-[40%] lg:max-w-[620px]">
+            <h1
+              id="westwyn-county-title"
+              className="text-[clamp(2.65rem,5vw,4rem)] font-semibold uppercase leading-[0.9] text-[#ddbc69]"
+            >
+              WestWyn
+              <span className="mt-3 block text-[0.47em] font-medium tracking-[0.32em] text-[#ddbc69]">
+                County
+              </span>
+            </h1>
+
+            <p className="mt-5 flex items-center gap-2 text-sm font-semibold text-white/85 sm:text-base">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="size-5 shrink-0 text-[#ddbc69]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                {/* Logo */}
-                <div className="text-center mb-4 sm:mb-6 max-sm:space-y-6">
-                  <Image
-                    src={logo}
-                    alt="BookMyAssets Logo"
-                    className="mx-auto mb-2 sm:mb-3"
-                  />
+                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+              Fedra-Pipli State Highway, Dholera
+            </p>
 
-                  <div className="relative max-sm:space-y-8">
-                    <style jsx>{`
-                      @keyframes textGlow {
-                        0%,
-                        100% {
-                          text-shadow: 0 0 50px rgba(222, 174, 60, 0.8);
-                          color: black;
-                        }
-                        50% {
-                          text-shadow:
-                            0 0 20px rgba(255, 255, 255, 1),
-                            0 0 30px rgba(255, 255, 255, 0.8);
-                          color: black;
-                        }
-                      }
+            <div className="my-6 h-px w-20 bg-[#ddbc69] sm:my-7" />
 
-                      .flashy-blink {
-                        animation: flashyBlink 3s infinite ease-in-out;
-                        padding: 4px;
-                        border-radius: 1rem;
-                        border: 3px solid #ddbc69;
-                      }
+            <h2 className="max-w-xl text-[clamp(1.65rem,3vw,2.7rem)] font-semibold leading-[1.18] tracking-[-0.025em] text-white">
+              Verified Resale Plots in Dholera.
+            </h2>
 
-                      .glowing-text {
-                        animation: textGlow 1s infinite ease-in-out;
-                      }
-                    `}</style>
+            <div className="mt-7 grid grid-cols-2 gap-2 sm:gap-3">
+              <Link
+                href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20check%20WestWyn%20County%20resale%20plot%20availability"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-h-14 items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3 py-3 text-center text-sm font-semibold text-white shadow-[0_10px_28px_rgba(37,211,102,0.25)] transition-transform hover:-translate-y-0.5 sm:gap-3 sm:px-4 sm:text-base"
+              >
+                <FaWhatsapp className="size-6 shrink-0" aria-hidden="true" />
+                <span className="leading-tight">Check Resale Availability</span>
+              </Link>
 
-                    <div className="flashy-blink">
-                      <h2 className="text-xl sm:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 glowing-text px-2">
-                        WestWyn County
-                      </h2>
-                      <p className="text-sm md:text-base glowing-text px-2">
-                        Residential Plots on - Fedra-Pipli State Highway
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* CTA Buttons */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.9, duration: 0.5 }}
-                  className="space-y-3 md:space-y-4"
+              <Link
+                href="#westwyn-county-document-vault"
+                className="group flex min-h-14 max-sm:hidden items-center justify-center gap-2 rounded-xl border border-[#ddbc69]/70 bg-black/70 px-3 py-3 text-center text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-[#ddbc69] hover:text-black sm:gap-3 sm:text-base"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="size-5 shrink-0 text-[#ddbc69] transition-colors group-hover:text-black"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  {/* Primary CTA */}
-                  <motion.button
-                    onClick={() =>
-                      openContactForm(
-                        "Get Exclusive Pricing",
-                        "Fill the form to get the best prices",
-                        "Get Pricing",
-                        "contact",
-                      )
-                    }
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.0 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] text-white text-sm sm:text-base rounded-lg hover:from-[#ddbc69] hover:to-[#ddbc69] transition-all shadow-lg hover:shadow-[#ddbc69]/20 font-semibold"
-                  >
-                    Unbeatable Price in Dholera
-                  </motion.button>
-                </motion.div>
-              </motion.div>
+                  <path d="M6 3h9l3 3v15H6z" />
+                  <path d="M14 3v4h4M9 12h6M9 16h6" />
+                </svg>
+                <span className="leading-tight">Get Legal Documents</span>
+              </Link>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Section 2 - About */}
       <div className="bg-white">
         <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h1 className="text-[32px] font-semibold text-black mb-4">
+            <h2 className="text-[32px] font-semibold text-black mb-4">
               About{" "}
               <span className="max-sm:hidden">
                 <br />
               </span>{" "}
               WestWyn County
-            </h1>
+            </h2>
           </div>
 
           {/* Right Section (60%) */}
@@ -365,14 +359,28 @@ export default function WestWynCountyClient() {
       </div>
 
       <div>
-        <WestWynAboutSection/>
+        <WestWynAboutSection />
       </div>
+
+      <ProjectPlotAvailability
+        projectName="WestWyn County"
+        minSize={149}
+        maxSize={325}
+        percentage={68}
+        percentageLabel="Resale"
+        statusText="Resale Plots Available"
+        inventoryLabel="Resale plot sizes and availability vary by current inventory."
+      />
 
       <div>
-        <PlanLayout/>
+        <PlanLayout />
       </div>
 
-      
+      <DocumentVault
+        projectName="WestWyn County"
+        documents={countyDocuments}
+        sectionId="westwyn-county-document-vault"
+      />
 
       <div className="">
         <InlineLeadForm
@@ -381,8 +389,6 @@ export default function WestWynCountyClient() {
           button="Talk to an Advisor"
         />
       </div>
-
-      
 
       <ProjectAmenities />
 

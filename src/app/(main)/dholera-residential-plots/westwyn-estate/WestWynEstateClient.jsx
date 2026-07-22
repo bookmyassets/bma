@@ -21,6 +21,16 @@ import DevelopmentProgress from "./DevelopmentProgress";
 import PlanLayout from "./PlanLayout";
 import SchemaMarkup from "../../components/SchemaMarkup";
 import { breadcrumbSchema, realEstateSchema } from "@/lib/schema";
+import ProjectPlotAvailability from "../ProjectPlotAvailability";
+import DocumentVault from "../westwyn-residency/DocumentVault";
+
+const estateDocuments = [
+  "NA / NOC Documents",
+  "Title Documents",
+  "Encumbrance Details",
+  "Approved Plan Details",
+  "Registry Information",
+];
 
 export default function WestWynEstateClient() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -168,9 +178,7 @@ export default function WestWynEstateClient() {
               </Link>
 
               <Link
-                href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20review%20the%20legal%20documents%20for%20WestWyn%20Estates"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#westwyn-estates-document-vault"
                 className="group flex min-h-14 max-sm:hidden items-center justify-center gap-2 rounded-xl border border-[#ddbc69]/70 bg-black/70 px-3 py-3 text-center text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-[#ddbc69] hover:text-black sm:gap-3 sm:text-base"
               >
                 <svg
@@ -210,6 +218,20 @@ export default function WestWynEstateClient() {
 
       <PlanLayout />
 
+      <ProjectPlotAvailability
+        projectName="WestWyn Estates"
+        minSize={147}
+        maxSize={250}
+        percentage={90}
+        percentageLabel="Sold"
+        statusText="Limited Plots Left"
+      />
+        <DocumentVault
+          projectName="WestWyn Estates"
+          documents={estateDocuments}
+          sectionId="westwyn-estates-document-vault"
+        />
+
       <ProjectAmenities />
 
       <div className=" ">
@@ -217,6 +239,7 @@ export default function WestWynEstateClient() {
       </div>
 
       <DevelopmentProgress />
+
 
       <FAQSection />
 
