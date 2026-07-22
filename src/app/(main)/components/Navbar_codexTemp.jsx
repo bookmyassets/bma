@@ -52,8 +52,8 @@ const mobileLinks = [
 const statusClasses = {
   ongoing: "bg-green-500 text-white",
   "sold-out": "bg-red-500 text-white",
-  "re-sale": "bg-[#ddbc69] text-black",
-  resale: "bg-[#ddbc69] text-black",
+  "re-sale": "bg-red-700 text-white",
+  resale: "bg-red-700 text-white",
   upcoming: "bg-blue-500 text-white",
   limited: "bg-orange-500 text-white",
 };
@@ -62,7 +62,7 @@ const getStatusLabel = (status) => {
   if (status === "sold-out") return "SOLD OUT";
   if (status === "re-sale" || status === "resale") return "RESALE";
 
-  return status.toUpperCase();
+  return status;
 };
 
 function ChevronIcon({ open, className = "h-[1rem] w-[1rem]" }) {
@@ -136,7 +136,7 @@ function ResidentialCard({ project, index, href, onClick }) {
 
         {isReSale && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-            <span className="-rotate-6 rounded-md border border-[#f3bb39] bg-[#ddbc69]/90 px-[0.5rem] py-[0.125rem] text-[0.5625rem] font-bold uppercase text-black">
+            <span className="-rotate-6 rounded-md border border-red-700 bg-red-700 px-[0.5rem] py-[0.125rem] text-[0.5625rem] font-bold uppercase text-white">
               Resale
             </span>
           </div>
@@ -268,9 +268,9 @@ function MobileProjectLink({ project, href, onClick }) {
             <span
               className={`rounded-lg px-[0.375rem] py-[0.125rem] text-[0.5625rem] font-semibold ${
                 project.status === "sold-out"
-                  ? "bg-red-500/15 text-red-300"
+                  ? "bg-red-700 text-white"
                   : project.status === "re-sale" || project.status === "resale"
-                    ? "bg-[#ddbc69]/15 text-[#ddbc69]"
+                    ? "bg-red-700 text-white"
                   : project.status === "ongoing"
                     ? "bg-green-500/15 text-green-300"
                     : project.status === "limited"

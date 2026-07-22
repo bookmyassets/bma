@@ -95,6 +95,8 @@ export default function InlineLeadForm({
   dataLayerEvent,
   pageName,
   headingTag,
+  theme = "light",
+  showSubtitle = false,
 }) {
   const variantConfig = FORM_VARIANTS[variant] || FORM_VARIANTS.lead;
   const config = {
@@ -110,6 +112,7 @@ export default function InlineLeadForm({
     ...(headingTag !== undefined ? { headingTag } : {}),
   };
   const HeadingTag = config.headingTag;
+  const isDark = theme === "dark";
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -316,14 +319,32 @@ export default function InlineLeadForm({
   };
 
   return (
-    <section className="py-[clamp(2rem,4vw,3.5rem)] bg-white rounded-lg">
+    <section
+      className={`rounded-2xl border py-[clamp(2rem,4vw,3.5rem)] ${
+        isDark
+          ? "border-white/10 bg-[#151515]"
+          : "border-transparent bg-white"
+      }`}
+    >
       <div className="container mx-auto px-[clamp(1rem,4vw,3rem)]">
         <div className="max-w-5xl mx-auto">
-          <HeadingTag className="text-black text-[clamp(1.375rem,2.5vw,2rem)] leading-[1.25] font-bold text-center">
+          <HeadingTag
+            className={`text-center text-[clamp(1.375rem,2.5vw,2rem)] font-bold leading-[1.25] ${
+              isDark ? "text-[#f5f1e8]" : "text-black"
+            }`}
+          >
             {config.title}
           </HeadingTag>
 
-          
+          {showSubtitle && config.subtitle && (
+            <p
+              className={`mx-auto mt-3 max-w-2xl text-center text-sm leading-6 sm:text-base ${
+                isDark ? "text-[#f5f1e8]/70" : "text-gray-600"
+              }`}
+            >
+              {config.subtitle}
+            </p>
+          )}
 
           {showPopup ? (
             <div className="text-center py-8">
@@ -349,10 +370,14 @@ export default function InlineLeadForm({
                   </svg>
                 </div>
               </motion.div>
-              <h3 className="text-2xl font-bold text-black mb-2">
+              <h3
+                className={`mb-2 text-2xl font-bold ${
+                  isDark ? "text-[#f5f1e8]" : "text-black"
+                }`}
+              >
                 Thank You!
               </h3>
-              <p className="text-gray-300">
+              <p className={isDark ? "text-[#f5f1e8]/70" : "text-gray-600"}>
                 Your request has been submitted successfully. We'll contact you
                 shortly.
               </p>
@@ -383,7 +408,9 @@ export default function InlineLeadForm({
                 <div>
                   <label
                     htmlFor="fullName"
-                    className="block text-black text-sm font-medium mb-2"
+                    className={`mb-2 block text-sm font-medium ${
+                      isDark ? "text-[#f5f1e8]" : "text-black"
+                    }`}
                   >
                     Full Name *
                   </label>
@@ -402,7 +429,9 @@ export default function InlineLeadForm({
                 <div>
                   <label
                     htmlFor="mobileNumber"
-                    className="block text-black text-sm font-medium mb-2"
+                    className={`mb-2 block text-sm font-medium ${
+                      isDark ? "text-[#f5f1e8]" : "text-black"
+                    }`}
                   >
                     Mobile Number *
                   </label>
@@ -458,7 +487,7 @@ export default function InlineLeadForm({
                       Submitting...
                     </span>
                   ) : (
-                    "Get A Call Back"
+                    config.buttonText
                   )}
                 </button>
               </div>

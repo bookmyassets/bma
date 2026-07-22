@@ -351,7 +351,7 @@ export default function WestWynResidencyClient() {
                 <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
                 <circle cx="12" cy="10" r="2.5" />
               </svg>
-              1.5 km From DFC, Polarpur
+              1.5 km From DFC, Pipariya 
             </p>
 
             <div className="my-6 h-px w-20 bg-[#ddbc69] sm:my-7" />
