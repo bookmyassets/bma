@@ -5,7 +5,7 @@ import {
   Phone,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import residentialImage from "@/assests/bulkLand/residential plot-hero.webp";
+import residentialImage from "@/assests/bulkLand/residential-bulk-land.webp";
 import highAccessImage from "@/assests/bulkLand/HighAccess corridor-hero.webp";
 import cityCentreImage from "@/assests/bulkLand/citycentre-hero-desktop.webp";
 import recreationImage from "@/assests/bulkLand/recreation-sports-entertainment-Zone-hero.webp";
@@ -164,7 +164,7 @@ function LandOpportunity({ opportunity, index }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
           <div
-            className={`relative order-2 min-h-[19rem] overflow-hidden rounded-2xl border border-white/10 sm:min-h-[25rem] ${
+            className={`relative order-2 min-h-[29rem] overflow-hidden rounded-2xl border border-white/10 sm:min-h-[29rem] ${
               isReversed ? "lg:order-2" : "lg:order-1"
             }`}
           >
@@ -174,9 +174,8 @@ function LandOpportunity({ opportunity, index }) {
               fill
               priority={index === 0}
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
+              className=""
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#101010]/70 via-transparent to-transparent" />
           </div>
 
           <div className={`order-1 ${isReversed ? "lg:order-1" : "lg:order-2"}`}>

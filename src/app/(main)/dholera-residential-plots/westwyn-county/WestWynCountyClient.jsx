@@ -1,7 +1,8 @@
 "use client";
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import React, { useState, useEffect } from "react";
 import westwyn1 from "@/assests/westwyn-county/westwyn-county-1.webp";
+import westwynMobile from "@/assests/westwyn-county/westwyn-county-mob1.webp";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import { AnimatePresence } from "framer-motion";
 import ContactForm from "../../components/Contactform";
@@ -26,6 +27,26 @@ const countyDocuments = [
   "Plan Pass Details",
   "Registry Information",
 ];
+
+const countyHeroAlt =
+  "Entrance gate of WestWyn County on Fedra-Pipli State Highway";
+
+const { props: countyDesktopHeroProps } = getImageProps({
+  src: westwyn1,
+  alt: countyHeroAlt,
+  sizes: "100vw",
+  quality: 90,
+  priority: true,
+});
+
+const {
+  props: { srcSet: countyMobileHeroSrcSet },
+} = getImageProps({
+  src: westwynMobile,
+  alt: countyHeroAlt,
+  sizes: "100vw",
+  quality: 90,
+});
 
 export default function WestWynCountyClient() {
   const faqs = [
@@ -221,17 +242,19 @@ export default function WestWynCountyClient() {
       <section
         id="hero"
         aria-labelledby="westwyn-county-title"
-        className="relative min-h-screen min-h-[100svh] overflow-hidden bg-black text-white"
+        className="relative md:min-h-screen  overflow-hidden bg-black text-white"
       >
-        <Image
-          src={westwyn1}
-          alt="Entrance gate of WestWyn County on Fedra-Pipli State Highway"
-          fill
-          priority
-          quality={90}
-          sizes="100vw"
-          className="object-cover object-[58%_center] lg:object-center"
-        />
+        <picture className="absolute inset-0 block">
+          <source
+            media="(max-width: 767px)"
+            srcSet={countyMobileHeroSrcSet}
+            sizes="100vw"
+          />
+          <img
+            {...countyDesktopHeroProps}
+            className="absolute inset-0 h-auto w-full  object-center"
+          />
+        </picture>
 
         <div
           aria-hidden="true"
