@@ -6,8 +6,8 @@ import {
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import residentialImage from "@/assests/bulkLand/residential-bulk-land.webp";
-import highAccessImage from "@/assests/bulkLand/HighAccess corridor-hero.webp";
-import cityCentreImage from "@/assests/bulkLand/citycentre-hero-desktop.webp";
+import highAccessImage from "@/assests/bulkLand/hac.webp";
+import cityCentreImage from "@/assests/bulkLand/city-centre.webp";
 import recreationImage from "@/assests/bulkLand/recreation-sports-entertainment-Zone-hero.webp";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import InlineLeadForm from "../components/InlineLeadForm";
