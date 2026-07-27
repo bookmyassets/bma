@@ -207,10 +207,10 @@ export default async function page() {
         }}
       />
 
-      <title>About Dholera SIR - India’s First Smart City | BookMyAssets</title>
+      <title>What is Dholera SIR? Smart City Guide, Map & Investment 2026</title>
       <meta
         name="description"
-        content="Dholera SIR, India’s first greenfield smart city Dholera. Know more about Dholera airport, expressway, activation area, infrastructure, industries & investment."
+        content="Complete guide to Dholera SIR, India's first greenfield smart city. Location, DMIC role, airport, expressway, semiconductor hub and investment outlook."
       />
       <link
         rel="canonical"

@@ -17,10 +17,10 @@ import Link from "next/link";
 
 export const metadata = {
   title: {
-    absolute: "Become a Channel Partner with BookMyAssets",
+    absolute: "Become a Channel Partner | Dholera Real Estate Partnership",
   },
   description:
-    "Join BookMyAssets as a channel partner. Get verified plot inventory, marketing material, training, site visit support and clear commission terms.",
+    "Partner with BookMyAssets to sell Dholera residential plots. Attractive commissions, marketing support, verified inventory and dedicated RM assistance.",
   alternates: {
     canonical: "https://www.bookmyassets.com/channel-partner",
   },

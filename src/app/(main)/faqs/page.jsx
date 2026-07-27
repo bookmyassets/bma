@@ -3,9 +3,9 @@ import { ArrowUpRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import FAQExplorer from "./FAQExplorer";
 
 export const metadata = {
-  title: "Dholera SIR FAQs: Plots, Documents & Site Visits | BookMyAssets",
+  title: "Dholera Plot FAQs | Buying, Registry & Legal Answers",
   description:
-    "Find clear answers about Dholera SIR, plot documentation, registry, approvals, due diligence, pricing and site visits with BookMyAssets.",
+    "Answers to common Dholera plot questions: NA/NOC approvals, registry process, possession timelines, pricing and after-sales support by BookMyAssets.",
   keywords: [
     "Dholera SIR FAQs",
     "Dholera plot questions",

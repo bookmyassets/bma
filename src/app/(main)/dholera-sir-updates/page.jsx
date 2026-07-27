@@ -56,10 +56,10 @@ export default async function page() {
 
   return (
     <>
-      <title>Dholera Latest News & Project Updates | Smart City Progress</title>
+      <title>Dholera SIR Updates 2026 | Latest News & Project Progress</title>
       <meta
         name="description"
-        content=" Discover the latest on Dholera SIR! Get real-time updates on airport, metro, expressways, and industrial projects to help you make smart investment choices."
+        content="Track the latest Dholera SIR updates: airport, expressway, Tata semiconductor plant, solar park and activation area progress, verified by BookMyAssets."
       />
       <link
         rel="canonical"

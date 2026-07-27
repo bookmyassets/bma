@@ -71,11 +71,11 @@ export default function page() {
   return (
     <>
       <title>
-        Dholera Events & Updates | Latest News & Announcements by BookMy Assets
+        Dholera Investor Meetups & Events | BookMyAssets
       </title>
       <meta
         name="description"
-        content="Stay updated with the latest Dholera events, news, project launches and smart city activities. Get official updates and insights from BookMyAssets."
+        content="Join BookMyAssets Dholera investor meetups across India. Meet our team, review project documents and get Dholera Smart City investment insights live."
       />
 
       <section className="relative overflow-hidden max-sm:bg-[#0d0d0d]">

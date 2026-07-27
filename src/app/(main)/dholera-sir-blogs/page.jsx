@@ -45,11 +45,11 @@ export default async function page() {
   return (
     <>
       <title>
-        Dholera Smart City Blogs, News, Plot Guides & Investment Updates
+        Dholera Smart City Blog | Investment Guides, News & Updates
       </title>
       <meta
         name="description"
-        content="Read Dholera Smart City blogs, plot buying guides, price insights, and investor-focused analysis from BookMyAssets"
+        content="Expert Dholera SIR blogs on plot prices, investment strategy, infrastructure progress and buying guides, updated regularly by BookMyAssets."
       />
       <meta name="robots" content="index, follow" />
       <meta name="author" content="BookMyAssets" />

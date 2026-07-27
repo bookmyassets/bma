@@ -14,16 +14,16 @@ import InlineLeadForm from "../components/InlineLeadForm";
 import SchemaMarkup from "../components/SchemaMarkup";
 
 export const metadata = {
-  title: "Bulk Land in Dholera SIR | BookMyAssets",
+  title: "Bulk Land in Dholera | Commercial Land Deals",
   description:
-    "Explore bulk land in Dholera SIR for residential, commercial, mixed-use, hospitality, sports and entertainment development.",
+    "Buy bulk land in Dholera Smart City for township, residential or industrial development. Clear titles, NA approvals and end-to-end legal support.",
   alternates: {
     canonical: "https://www.bookmyassets.com/bulk-land",
   },
   openGraph: {
     title: "Bulk Land in Dholera SIR | BookMyAssets",
     description:
-      "Explore bulk land in Dholera SIR for residential, commercial, mixed-use, hospitality, sports and entertainment development.",
+      "Buy bulk land in Dholera Smart City for township, residential or industrial development. Clear titles, NA approvals and end-to-end legal support.",
     url: "https://www.bookmyassets.com/bulk-land",
     siteName: "BookMyAssets",
     type: "website",

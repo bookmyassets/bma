@@ -143,10 +143,10 @@ export default function DholeraProgressPage() {
         href="https://www.bookmyassets.com/gallery"
       />
       <meta name="robots" content="index, dofollow" />
-      <title>Dholera Smart City Site Photos & Project Visual</title>
+      <title>Dholera Project Gallery | Site Photos & Development Updates</title>
       <meta
         name="description"
-        content="Explore Dholera SIR images, site photos and verified residential plot visuals from Book My Assets."
+        content="See real photos of BookMyAssets Dholera projects: WestWyn County, Estates and Residency site progress, villa construction and investor site visits."
       />
       <link rel="canonical" href={`https://www.bookmyassets.com/gallery`} />
       

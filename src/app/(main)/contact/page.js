@@ -288,10 +288,10 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <link rel="canonical" href={canonicalUrl} />
-      <title>Contact BookMyAssets | Buy Plots in Dholera SIR</title>
+      <title>Contact BookMyAssets | Dholera Plot Enquiry & Site Visit</title>
       <meta
         name="description"
-        content="Connect with BookMyAssets top real estate consultant. Get details, brochures, and investment help."
+        content="Contact BookMyAssets for Dholera residential plot prices, legal documents and free site visits. Call +91 81303 71647 or request a callback today."
       />
       {/* Hero Section */}
       <div className="container mx-auto px-4">

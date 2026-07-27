@@ -63,11 +63,11 @@ function JsonLd({ schema }) {
 export default function page() {
   return (
     <>
-      <title>Buy Residential Plots in Dholera Smart City</title>
+      <title>Dholera Smart City Investment | Trusted Developer BookMyAssets</title>
 
       <meta
         name="description"
-        content="Buy residential plots in Dholera Smart City, Gujarat. Review project documents, location clarity, and registry-ready plot options with BookMyAssets."
+        content="Invest in Dholera Smart City with BookMyAssets, a trusted Dholera developer. Registry-ready residential plots, NA/NOC verified titles & full after-sales support."
       />
       <link rel="canonical" href={`${SITE_URL}/`} />
 

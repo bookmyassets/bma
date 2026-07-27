@@ -256,10 +256,10 @@ const RealEstateLandingPage = () => {
 
   return (
     <>
-      <title>About BookMyAssets | Real Estate Developer in Dholera</title>
+      <title>About BookMyAssets | Trusted Real Estate Developer in Dholera</title>
       <meta
         name="description"
-        content="Learn about BookMyAssets, our residential projects in Dholera, BMA Group services, construction support, property management and buyer assistance."
+        content="BookMyAssets is a Dholera-focused real estate developer founded in 2024. Meet our founders, BMA Group companies, projects and end-to-end buyer support."
       />
       <link rel="canonical" href="https://www.bookmyassets.com/about" />
       <div className="bg-white">
