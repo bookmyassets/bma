@@ -1,7 +1,15 @@
 import React from "react";
-import { FaCheck, FaCheckCircle, FaCheckDouble } from "react-icons/fa";
 
 export default function () {
+  const items = [
+    "NA/NOC/Title Clear",
+    "Plan Pass Approved",
+    "Registry Ready",
+    "ReSale Support",
+    "Rental Support",
+    "Site Visit Assistance",
+  ];
+
   return (
     <div className="max-w-7xl mx-auto">
       <div className="space-y-4 md:space-y-8 h-full p-4">
@@ -14,38 +22,14 @@ export default function () {
           </p>
 
           <div className="p-4 md:p-8">
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-              {[
-                { value: "NA/NOC/Title Clear", label: "Total Land Parcel" },
-                { value: "Plan Pass Approved", label: "Total Units" },
-                {
-                  value: "Registry Ready",
-                  label: "Site Visit Assistance",
-                },
-                {
-                  value: (
-                    <>
-                      ReSale <br /> Support
-                    </>
-                  ),
-                  label: "Starting Price",
-                },
-                {
-                  value: (
-                    <>
-                      Rental <br /> Support
-                    </>
-                  ),
-                  label: "Villa Construction",
-                },
-                { value: "Site Visit Assistance", label: "Returns In 5 years" },
-              ].map(({ value }, i) => (
+            <div className="flex flex-wrap justify-center gap-4">
+              {items.map((value, i) => (
                 <div
                   key={i}
-                  className={`flex flex-col w-auto items-center justify-center text-center p-6 bg-white/15 rounded-xl min-h-[100px]
-      ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}
+                  className="flex items-center justify-center text-center p-6 bg-white/15 rounded-xl min-h-[100px]
+                             w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.7rem)]"
                 >
-                  <div className="text-xl flex justify-center items-center lg:text-2xl font-bold text-[#ddbc69] leading-tight mb-2">
+                  <div className="text-xl lg:text-2xl font-bold text-[#ddbc69] leading-tight">
                     {value}
                   </div>
                 </div>
@@ -57,4 +41,3 @@ export default function () {
     </div>
   );
 }
-

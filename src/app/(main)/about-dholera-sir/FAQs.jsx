@@ -33,56 +33,47 @@ const faqs = [
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
-  const handleCallClick = () => {
-    //  Google Tag Manager event
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "call_click_Faq",
-      lead_type: "phone",
-      device: "all",
-    });
-
-    // 📞 Call trigger
-    window.location.href = "tel:+918130371647";
-  };
-
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <>
-      <div className="bg-black">
-        <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
+    <section className="bg-black" aria-labelledby="about-dholera-faq-heading">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-6 md:flex-row md:gap-12 md:px-8 md:py-8">
           {/* Left Section (40%) */}
-          <div className="contents w-full md:w-2/5 pl-2 pr-2">
-            <h5 className=" text-[32px] order-1 md:order-none font-semibold text-white mb-4">
+          <div className="contents md:flex md:w-2/5 md:flex-col md:px-2">
+            <h2
+              id="about-dholera-faq-heading"
+              className="order-1 px-2 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-white md:order-none md:mb-4 md:px-0"
+            >
               FAQs
-            </h5>
+            </h2>
             <div className="order-3 md:order-none md:px-0">
-              <p className="pb-3">Have Any Other Question?</p>
+              <p className="pb-3 text-white">Have Any Other Question?</p>
               <a
-                href="#"
-                className="px-1 py-2 bg-[#ddbc69] text-white rounded-md"
-                onClick={handleCallClick}
+                href="tel:+918130371647"
+                className="inline-flex min-h-11 items-center rounded-md bg-[#ddbc69] px-3 py-2 text-black"
               >
-                Let's Connect
+                Give Us A Missed Call
               </a>
             </div>
           </div>
 
           {/* Right Section (60%) */}
-          <div className="w-full order-2 md:order-none md:w-3/5 md:pl-24 md:pr-4  md:mt-0 space-y-1">
+          <div className="order-2 w-full space-y-1 md:order-none md:mt-0 md:w-3/5 md:pl-24 md:pr-4">
             {faqs.map((faq, index) => (
               <div key={index} className="border-b border-gray-200">
                 <button
-                  className="w-full py-4 flex justify-between items-center text-left transition-all duration-200"
+                  type="button"
+                  className="flex w-full items-center justify-between py-4 text-left transition-colors duration-200 hover:bg-white/5"
                   onClick={() => toggleFAQ(index)}
+                  aria-expanded={openIndex === index}
+                  aria-controls={`about-dholera-faq-answer-${index}`}
                 >
-                  <span className="text-white font-medium pr-4 leading-relaxed">
+                  <span className="pr-4 text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-white">
                     {faq.question}
                   </span>
-                  <span className="flex-shrink-0 transition-transform duration-200">
+                  <span className="flex-shrink-0" aria-hidden="true">
                     {openIndex === index ? (
                       <Minus className="w-5 h-5 text-white" />
                     ) : (
@@ -92,6 +83,7 @@ export default function FAQSection() {
                 </button>
 
                 <div
+                  id={`about-dholera-faq-answer-${index}`}
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
                     openIndex === index
                       ? "max-h-96 opacity-100"
@@ -99,24 +91,15 @@ export default function FAQSection() {
                   }`}
                 >
                   <div className="pb-4 px-0">
-                    <div className="text-white text-sm leading-relaxed">
-                      {Array.isArray(faq.answer) ? (
-                        <ul className="list-disc pl-5 space-y-1">
-                          {faq.answer.map((point, i) => (
-                            <li key={i}>{point}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p>{faq.answer}</p>
-                      )}
-                    </div>
+                    <p className="text-[0.875rem] font-normal leading-[1.5] text-white">
+                      {faq.answer}
+                    </p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
       </div>
-    </>
+    </section>
   );
 }
