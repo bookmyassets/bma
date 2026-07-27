@@ -4,79 +4,27 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is WestWyn Estates legally clear and safe to invest in?",
+    question: "What is WestWyn Estates?",
     answer:
-      "Yes, WestWyn Estates offers plots with Approved Layout Plan and title clarity, ensuring that your investment is legally secure. We provide full documentation support so you can verify everything before making a decision.",
+      "WestWyn Estates is a registry-ready residential plot project by BookMyAssets in Polarpur, Dholera. It offers legally verified plots with immediate possession, modern amenities, and excellent connectivity.",
   },
   {
-    question: "Is immediate registry available in WestWyn Estates?",
+    question: "Where is WestWyn Estates located?",
     answer:
-      "Yes, plots in WestWyn Estates come with immediate registry, allowing you to secure ownership quickly without long waiting periods or uncertainty.",
+      "WestWyn Estates is located in Polarpur with direct entry from the 150 ft wide State Highway 117. It is close to Bhimnath Railway Junction, Dholera SIR, Ahmedabad-Dholera Expressway, Tata Semiconductor Plant, and Dholera International Airport.",
   },
   {
-    question: "What documents will I receive when I buy a plot?",
-    answer: [
-      "Sale deed",
-      "NA approval documents",
-      "Title clearance details",
-      "Layout plan",
-    ],
-  },
-  {
-    question: "Where exactly is WestWyn Estates located in Dholera?",
+    question: "Are the plots at WestWyn Estates legally verified?",
     answer:
-      "WestWyn Estates is strategically located in a developing zone of Dholera with proximity to key infrastructure such as planned roads, industrial areas, and future connectivity projects.",
+      "Yes. All plots at WestWyn Estates are NA/NOC approved, title clear, plan pass approved, and registry-ready for a safe and transparent property purchase.",
   },
   {
-    question:
-      "How close is WestWyn Estates to the Dholera SIR activation area?",
-    answer:
-      "The project is positioned with access to the broader Dholera SIR development zone, making it relevant for long-term growth aligned with infrastructure expansion.",
+    question: "What amenities are available at WestWyn Estates?",
+    answer: "WestWyn Estates offers a gated community, 24×7 security, CCTV surveillance, wide internal roads, power and water supply, drainage system, kids play area, yoga deck, jogging track, EV charging station, and senior citizen zone.",
   },
   {
-    question: "What plot sizes are available in WestWyn Estates?",
-    answer:
-      "WestWyn Estates offers multiple plot sizes suitable for different investment and usage needs. Detailed size options and availability are shared based on current inventory.",
-  },
-  {
-    question: "What infrastructure and amenities are planned in the project?",
-    answer: [
-      "Internal roads",
-      "Gated layout planning",
-      "Basic infrastructure readiness",
-      "Planned development structure",
-      "Full project layout is explained before booking",
-    ],
-  },
-  {
-    question: "Can I visit WestWyn Estates before buying?",
-    answer: [
-      "Complete site visit planning",
-      "On-ground assistance",
-      "Project walkthrough",
-      "Especially helpful for buyers traveling from Delhi NCR",
-    ],
-  },
-  {
-    question: "What is the process to book a plot in WestWyn Estates?",
-    answer: [
-      "Consultation",
-      "Project selection",
-      "Document verification",
-      "Token booking",
-      "Registry completion",
-      "Our team guides you step-by-step",
-    ],
-  },
-  {
-    question: "Do you provide support after purchase?",
-    answer: [
-      "Registry assistance",
-      "Documentation support",
-      "Site visit coordination",
-      "Ongoing guidance",
-      "You are supported even after the transaction is complete",
-    ],
+    question: "Does BookMyAssets provide support after buying a plot?",
+    answer: "Yes. BookMyAssets provides complete support including site visits, documentation assistance, villa construction, resale support, rental support, and post-purchase guidance.",
   },
 ];
 

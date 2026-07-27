@@ -5,34 +5,28 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is WestWyn County a good investment for NRIs?",
+    question: "Where is WestWyn County located?",
     answer:
-      "WestWyn County offers clear-title, government-approved Dholera residential plots in the government and industry-backed Dholera metro city, making it a secure choice for NRIs.The 15 Days Payment Plans, registry-ready plots, resale support, and buy-back assistance*, investing is hassle-free even from abroad.",
+      "WestWyn County is located on the Fedra-Pipli State Highway (SH-40) with direct entry from the 100-ft-wide state highway.",
   },
   {
-    question: "Where exactly is it located?",
+    question: "Are resale plots available in WestWyn County?",
     answer:
-      "WestWyn County is located on Fedra-Pipli State Highway (100 ft road) which is the most lively location of Dholera SIR, just 12 minutes from the Dholera International Airport and Ahmedabad-Dholera Expressway.",
+      "Yes. Verified resale plots are available in WestWyn County after the project was sold out.",
   },
   {
-    question: "How can BookMyAssets (BMA) help me buy a plot in WestWyn County easily?",
+    question: "What plot sizes are available in WestWyn County?",
     answer:
-      "With a global presence and fully focusing on Dholera Smart City, BookMyAssets offers 365-day site visit assistance, immediate sale deed registration, and an in-house due diligence team, along with resale support and buyback assistance*.",
+      "WestWyn County offers residential plots ranging from 149 to 325 sq. yards.",
   },
   {
-    question: "How does WestWyn County compare to other projects in Dholera Smart City?",
+    question: "What is the resale price of plots in WestWyn County?",
     answer:
-      "WestWyn County stands apart with its strategic location near the upcoming Dholera International Airport and Expressway, ensuring unmatched connectivity and growth potential. Unlike many projects, it offers government approved plots backed by premium amenities and future ready infrastructure. This combination not only elevates lifestyle but also makes WestWyn County a high yield investment opportunity in one of India’s fastest growing smart city zones.",
+      "The resale price is ₹12,000 per sq. yard. The final price may depend on the plot size, location, and availability.",
   },
   {
-    question: "What legal approvals does WestWyn County have?",
-    answer:
-      "WestWyn County is government-approved, with NA (Non-Agricultural) and NOC clearance, ensuring 100% legal compliance and title clear plots.",
-  },
-  {
-    question: "Is WestWyn County an eco-friendly project?",
-    answer:
-      "It features landscaped gardens, green zones, EV charging stations, lush green surroundings, jogging track, and automated street lights.",
+    question: "What amenities are available in WestWyn County?",
+    answer: "The project offers a gated boundary, 24/7 security, CCTV, wide roads, drainage, power and water supply, a kids’ play area, yoga deck, senior citizen zone and EV charging.",
   },
 ];
 
