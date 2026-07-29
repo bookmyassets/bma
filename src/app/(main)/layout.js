@@ -4,7 +4,7 @@ import Script from "next/script";
 
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import PopupLeadForm from "./components/PopupLeadForm";
+import GlobalPopupLeadForm from "./components/GlobalPopupLeadForm";
 import Whatsapp from "./components/Callus";
 import Navbar from "./components/Navbar_codexTemp";
 
@@ -145,7 +145,7 @@ y.parentNode.insertBefore(t,y);
         <Footer />
         {/* <FloatingButtons /> */}
         <Whatsapp />
-        <PopupLeadForm type="rage" />
+        <GlobalPopupLeadForm />
       </body>
     </html>
   );
