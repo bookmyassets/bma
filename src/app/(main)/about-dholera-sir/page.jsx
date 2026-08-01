@@ -294,7 +294,7 @@ export default async function page() {
                   id="dholera-sir-act-title"
                   className="max-w-3xl text-[clamp(1.25rem,3.5vw,3rem)] font-bold leading-[1.12] tracking-[-0.03em] text-white"
                 >
-                  What Is the{" "}
+                  What is the{" "}
                   <span className="text-[#ddbc69]">Dholera SIR Act?</span>
                 </h2>
               </header>
