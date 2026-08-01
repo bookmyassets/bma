@@ -25,6 +25,11 @@ const faqs = [
       "Yes. We provide complete post-purchase support, including registration assistance, villa construction support, resale assistance, rental support, and dedicated customer service.",
   },
   {
+    question: "Is immediate registry available for your plots?",
+    answer:
+      "Yes, our selected projects offer immediate registry, which means you get ownership transferred quickly, reduced risk compared to long-term commitments, and clear legal standing from day one. This is one of the key reasons many investors prefer our projects.",
+  },
+  {
     question: "Why choose BookMyAssets for investing in Dholera?",
     answer:
       "BookMyAssets offers verified residential projects, transparent documentation, registry-ready plots, site visit assistance, and end-to-end support from booking to villa construction support.",
@@ -43,7 +48,7 @@ export default function FAQSection() {
       device: "all",
     });
 
-    // 📞 Call trigger
+    // Phone call trigger
     window.location.href = "tel:+918130371647";
   };
 

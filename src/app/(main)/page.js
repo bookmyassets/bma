@@ -12,42 +12,44 @@ import HowToBuy from "./homeComponents/BuyingProcess";
 
 const SITE_URL = "https://www.bookmyassets.com";
 const LOGO_URL = `${SITE_URL}${bmaLogo.src}`;
+const SOCIAL_PROFILES = [
+  "https://www.facebook.com/profile.php?id=61583265159985",
+  "https://x.com/BookMyAssets",
+  "https://www.instagram.com/bookmyassets",
+  "https://www.youtube.com/@BookMyAssets",
+  "https://www.linkedin.com/company/bookmyassetss/",
+];
 
 const homeFaqs = [
   {
-    question: "What type of plots does BookMyAssets offer in Dholera?",
+    question: "Why should I invest in Dholera Smart City?",
     answer:
-      "We help buyers explore verified residential plot options in and around relevant Dholera growth zones, depending on project availability and buyer requirements.",
+      "Dholera Smart City is India's first greenfield smart city with major infrastructure projects like the Dholera International Airport, Ahmedabad–Dholera Expressway, and Tata Semiconductor Plant, making it a promising destination for long-term investment.",
   },
   {
-    question: "Are these government approved plots?",
+    question: "What types of residential plots does BookMyAssets offer in Dholera?",
     answer:
-      "BookMyAssets focuses on plotted opportunities where buyers can review project documents, layout details, and approval-related information before making a decision.",
+      "BookMyAssets offers legally verified, registry-ready residential plots in prime locations across Dholera with transparent documentation and modern infrastructure.",
   },
   {
-    question: "Who usually considers buying plots in Dholera?",
+    question: "Are BookMyAssets projects legally verified?",
     answer:
-      "Most enquiries come from long-term investors, retirement-focused buyers, Delhi NCR families, and NRIs who want a clear land-holding option.",
+      "Yes. All BookMyAssets residential projects come with NA/NOC approvals, clear title documents, plan pass approval, and registry-ready plots for a secure buying experience.",
   },
   {
-    question: "What should I check before buying a plot in Dholera?",
+    question: "Does BookMyAssets provide support after buying a plot?",
     answer:
-      "You should evaluate project location, documentation process, layout planning, road access, pricing structure, and registry process before booking.",
+      "Yes. We provide complete post-purchase support, including registration assistance, villa construction support, resale assistance, rental support, and dedicated customer service.",
   },
   {
-    question: "Is Dholera suitable for short-term investment?",
+    question: "Is immediate registry available for your plots?",
     answer:
-      "Most buyers evaluate Dholera as a long-term land holding opportunity rather than a short-term flip market.",
+      "Yes, our selected projects offer immediate registry, which means you get ownership transferred quickly, reduced risk compared to long-term commitments, and clear legal standing from day one. This is one of the key reasons many investors prefer our projects.",
   },
   {
-    question: "Is it safe to invest in Dholera plots right now?",
+    question: "Why choose BookMyAssets for investing in Dholera?",
     answer:
-      "Dholera is India's first Greenfield Smart City with strong government backing. Important factors include airport development, expressway connectivity, industrial growth, approval status, title clarity, and immediate registry. Buyers should verify documents carefully before deciding.",
-  },
-  {
-    question: "What is the future potential of Dholera Smart City?",
-    answer:
-      "Dholera is planned as a major industrial and infrastructure hub with airport, expressway, industrial zones, and manufacturing investments. Future potential depends on development progress, location, approvals, demand, and holding period.",
+      "BookMyAssets offers verified residential projects, transparent documentation, registry-ready plots, site visit assistance, and end-to-end support from booking to villa construction support.",
   },
 ];
 
@@ -75,8 +77,12 @@ export default function page() {
         schema={{
           "@context": "https://schema.org",
           "@type": "WebSite",
+          "@id": `${SITE_URL}/#website`,
           name: "BookMyAssets",
           url: `${SITE_URL}/`,
+          publisher: {
+            "@id": `${SITE_URL}/#organization`,
+          },
         }}
       />
 
@@ -84,9 +90,13 @@ export default function page() {
         schema={{
           "@context": "https://schema.org",
           "@type": "Organization",
+          "@id": `${SITE_URL}/#organization`,
           name: "BookMyAssets",
           url: `${SITE_URL}/`,
-          logo: LOGO_URL,
+          logo: {
+            "@type": "ImageObject",
+            url: LOGO_URL,
+          },
           contactPoint: {
             "@type": "ContactPoint",
             telephone: "+91-8130371647",
@@ -94,13 +104,7 @@ export default function page() {
             areaServed: "IN",
             availableLanguage: ["English", "Hindi"],
           },
-          sameAs: [
-            "https://www.facebook.com/profile.php?id=61583265159985",
-            "https://x.com/BookMyAssets",
-            "https://www.instagram.com/bookmyassets",
-            "https://www.youtube.com/@BookMyAssets",
-            "https://www.linkedin.com/company/bookmyassetss/",
-          ],
+          sameAs: SOCIAL_PROFILES,
         }}
       />
 
@@ -108,12 +112,13 @@ export default function page() {
         schema={{
           "@context": "https://schema.org",
           "@type": "RealEstateAgent",
+          "@id": `${SITE_URL}/#real-estate-agent`,
           name: "BookMyAssets",
-          url: SITE_URL,
-          logo: LOGO_URL,
           image: LOGO_URL,
-          priceRange: "INR",
+          logo: LOGO_URL,
+          url: `${SITE_URL}/`,
           telephone: "+91-8130371647",
+          priceRange: "₹₹",
           address: {
             "@type": "PostalAddress",
             streetAddress:
@@ -126,28 +131,6 @@ export default function page() {
           areaServed: {
             "@type": "Place",
             name: "Dholera Smart City",
-          },
-        }}
-      />
-
-      <JsonLd
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          name: "BookMyAssets",
-          image: LOGO_URL,
-          "@id": `${SITE_URL}/#localbusiness`,
-          url: SITE_URL,
-          telephone: "+91-8130371647",
-          priceRange: "INR",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress:
-              "6th Floor, Unit 620, JMD Megapolis, Badshahpur Sohna Road, Sector 48",
-            addressLocality: "Gurugram",
-            addressRegion: "Haryana",
-            postalCode: "122018",
-            addressCountry: "IN",
           },
           openingHoursSpecification: {
             "@type": "OpeningHoursSpecification",
@@ -163,12 +146,7 @@ export default function page() {
             opens: "09:00",
             closes: "21:00",
           },
-          sameAs: [
-            "https://www.instagram.com/bookmyassets",
-            "https://www.youtube.com/@BookMyAssets",
-            "https://www.facebook.com/profile.php?id=61583265159985",
-            "https://x.com/BookMyAssets",
-          ],
+          sameAs: SOCIAL_PROFILES,
         }}
       />
 
@@ -176,7 +154,7 @@ export default function page() {
         schema={{
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          name: "BookMyAssets",
+          "@id": `${SITE_URL}/#faq`,
           mainEntity: homeFaqs.map((faq) => ({
             "@type": "Question",
             name: faq.question,
