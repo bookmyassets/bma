@@ -33,6 +33,11 @@ const DOCUMENT_WORKFLOWS = {
     description: "Generate token receipt separately.",
     documents: ["token-receipt"],
   },
+  "payment-schedule": {
+    label: "Payment Schedule",
+    description: "Generate Payment Schedule separately.",
+    documents: ["payment-schedule"],
+  },
 };
 
 const DOCUMENT_FIELD_REQUIREMENTS = {
