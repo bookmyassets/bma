@@ -1,8 +1,11 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import icon from "@/assests/pdfIcon.webp"
+
+const SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT =
+  process.env.NODE_ENV === "development";
 
 function formatIndianNumber(value) {
   return parseFloat(value).toLocaleString('en-IN', {
@@ -34,6 +37,10 @@ export default function CostSheet() {
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const recaptchaRef = useRef(null);
+  const recaptchaWidgetId = useRef(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // Calculate the final plot price including PLC
   const plotPriceWithPLC = parseFloat(formData.basePlotPriceYards) + (parseFloat(formData.plc) || 0);
@@ -78,6 +85,29 @@ export default function CostSheet() {
     }
   }, [formData.plotAreaYards, formData.basePlotPriceYards, formData.plc, formData.maintenanceRate, formData.oneTimeMaintenance]);
 
+  useEffect(() => {
+    if (SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT) {
+      setRecaptchaLoaded(true);
+      return;
+    }
+
+    if (window.grecaptcha) {
+      setRecaptchaLoaded(true);
+      return;
+    }
+
+    if (!siteKey) return;
+
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => setRecaptchaLoaded(true);
+    script.onerror = () =>
+      setErrorMessage("Security verification failed to load.");
+    document.head.appendChild(script);
+  }, [siteKey]);
+
   const validateForm = () => {
     if (!formData.name || !formData.phone || !formData.email) {
       setErrorMessage("Please fill in Name, Phone, and Email fields to generate PDF");
@@ -113,7 +143,7 @@ export default function CostSheet() {
     return true;
   };
 
-const submitToCRM = async () => {
+const submitToCRM = async (recaptchaToken) => {
   try {
     // Clean and validate the data before sending
     const phoneNumber = formData.phone.replace(/\D/g, ''); // Remove non-digits
@@ -141,19 +171,21 @@ const submitToCRM = async () => {
         email: cleanedEmail,
         phone: phoneNumber,
         source: "BookMyAssets - Cost Sheet"
-      }
+      },
+      source: "BookMyAssets - Cost Sheet",
+      tags: ["Dholera Investment", "Website Lead", "Cost Sheet"],
+      recaptchaToken,
     };
 
     console.log("Submitting to CRM:", crmData);
 
     // Use the correct API endpoint format
-    const apiUrl = `https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead`;
+    const apiUrl = `/api/submit-form`;
     
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
       },
       body: JSON.stringify(crmData),
     });
@@ -232,18 +264,9 @@ const submitToCRM = async () => {
     return false;
   }
 };
-  // Function to generate the PDF
-  const generatePDF = async () => {
-    setIsLoading(true);
-    setErrorMessage("");
-
-    if (!validateForm()) {
-      setIsLoading(false);
-      return;
-    }
-
+  const generateVerifiedPDF = async (recaptchaToken) => {
     // Submit to CRM first
-    await submitToCRM();
+    await submitToCRM(recaptchaToken);
 
     const doc = new jsPDF();
 
@@ -372,6 +395,50 @@ const submitToCRM = async () => {
       console.error("Error loading image.");
       setIsLoading(false);
     };
+  };
+
+  // Validate the form and complete reCAPTCHA before generating the PDF.
+  const generatePDF = async () => {
+    setIsLoading(true);
+    setErrorMessage("");
+
+    if (!validateForm()) {
+      setIsLoading(false);
+      return;
+    }
+
+    if (SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT) {
+      await generateVerifiedPDF("");
+      return;
+    }
+
+    if (!recaptchaLoaded || !window.grecaptcha || !siteKey) {
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      if (recaptchaWidgetId.current === null && recaptchaRef.current) {
+        recaptchaWidgetId.current = window.grecaptcha.render(
+          recaptchaRef.current,
+          {
+            sitekey: siteKey,
+            callback: generateVerifiedPDF,
+            theme: "light",
+          },
+        );
+      } else {
+        window.grecaptcha.reset(recaptchaWidgetId.current);
+        window.grecaptcha.execute(recaptchaWidgetId.current);
+      }
+    } catch (error) {
+      console.error("Error with reCAPTCHA:", error);
+      setErrorMessage("Error with verification. Please try again.");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -611,10 +678,14 @@ const submitToCRM = async () => {
           </tbody>
         </table>
 
+        {!SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT && (
+          <div className="mt-4 flex justify-center" ref={recaptchaRef}></div>
+        )}
+
         <button
           type="button"
           onClick={generatePDF}
-          disabled={isLoading}
+          disabled={isLoading || !recaptchaLoaded}
           className="bg-blue-600 text-white p-2 mt-6 w-full rounded hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? "Generating PDF..." : "Generate PDF"}

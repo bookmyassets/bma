@@ -1,158 +1,200 @@
 // app/api/submit-form/route.js
 import { NextResponse } from "next/server";
 
+const TELECRM_ENDPOINT =
+  "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead";
+
+const OPTIONAL_FIELD_LIMITS = {
+  email: 254,
+  source: 100,
+  profession: 100,
+  experience: 100,
+  subject: 150,
+  message: 2000,
+  notes: 1000,
+};
+
+function cleanString(value, maxLength) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+async function verifyRecaptcha(recaptchaToken) {
+  const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+
+  if (!recaptchaSecretKey) {
+    console.error("RECAPTCHA_SECRET_KEY is not set");
+    return { ok: false, status: 500, error: "Server configuration error" };
+  }
+
+  if (!recaptchaToken) {
+    return {
+      ok: false,
+      status: 400,
+      error: "Security verification is required",
+    };
+  }
+
+  const recaptchaRes = await fetch(
+    "https://www.google.com/recaptcha/api/siteverify",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: recaptchaSecretKey,
+        response: recaptchaToken,
+      }),
+    },
+  );
+
+  const recaptchaData = await recaptchaRes.json();
+
+  if (!recaptchaData.success) {
+    console.error(
+      "reCAPTCHA verification failed:",
+      recaptchaData["error-codes"],
+    );
+    return {
+      ok: false,
+      status: 400,
+      error: "reCAPTCHA verification failed. Please try again.",
+    };
+  }
+
+  return { ok: true };
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { fields, source, tags, recaptchaToken } = body;
-    const isLocalDevelopment = process.env.NODE_ENV === "development";
+    const fields =
+      body?.fields && typeof body.fields === "object" ? body.fields : {};
 
-    // --- 1. Validate required fields ---
-    const name = typeof fields?.name === "string" ? fields.name.trim() : "";
+    const name = cleanString(fields.name, 100);
     const phone =
-      typeof fields?.phone === "string"
-        ? fields.phone.replace(/\D/g, "")
+      typeof fields.phone === "string"
+        ? fields.phone.replace(/\D/g, "").slice(0, 15)
         : "";
 
-    if (!name || !phone) {
+    if (!name || !/^\d{10,15}$/.test(phone)) {
       return NextResponse.json(
-        { error: "Name and phone are required" },
-        { status: 400 }
+        { error: "Please provide a valid name and phone number" },
+        { status: 400 },
       );
     }
 
-    if (name.length > 100 || !/^\d{10,15}$/.test(phone)) {
+    const email = cleanString(fields.email, OPTIONAL_FIELD_LIMITS.email);
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
-        { error: "Please provide valid lead details" },
-        { status: 400 }
+        { error: "Please provide a valid email address" },
+        { status: 400 },
       );
     }
 
-    // --- 2. Verify reCAPTCHA in production ---
-    if (!isLocalDevelopment) {
-      const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+    if (process.env.NODE_ENV !== "development") {
+      const recaptchaResult = await verifyRecaptcha(body.recaptchaToken);
 
-      if (!recaptchaSecretKey) {
-        console.error("RECAPTCHA_SECRET_KEY is not set");
+      if (!recaptchaResult.ok) {
         return NextResponse.json(
-          { error: "Server configuration error" },
-          { status: 500 }
-        );
-      }
-
-      if (!recaptchaToken) {
-        return NextResponse.json(
-          { error: "Security verification is required" },
-          { status: 400 }
-        );
-      }
-
-      const recaptchaVerifyUrl =
-        "https://www.google.com/recaptcha/api/siteverify";
-      const recaptchaRes = await fetch(recaptchaVerifyUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          secret: recaptchaSecretKey,
-          response: recaptchaToken,
-        }),
-      });
-
-      const recaptchaData = await recaptchaRes.json();
-
-      if (!recaptchaData.success) {
-        console.error(
-          "reCAPTCHA verification failed:",
-          recaptchaData["error-codes"]
-        );
-        return NextResponse.json(
-          { error: "reCAPTCHA verification failed. Please try again." },
-          { status: 400 }
+          { error: recaptchaResult.error },
+          { status: recaptchaResult.status },
         );
       }
     }
 
-    // Optional: enforce minimum score for v3 (skip for v2 checkbox)
-    // if (recaptchaData.score < 0.5) {
-    //   return NextResponse.json({ error: "Low reCAPTCHA score" }, { status: 400 });
-    // }
-
-    // --- 3. Forward lead to TeleCRM ---
-    // Prefer the server-only name. The public-name fallback is temporary while
-    // the remaining forms are migrated to this server route.
-    const telecrmApiKey =
-      process.env.TELECRM_API_KEY ||
-      process.env.NEXT_PUBLIC_TELECRM_API_KEY;
-    const telecrmEndpoint =
-      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead";
+    const telecrmApiKey = process.env.TELECRM_API_KEY;
 
     if (!telecrmApiKey) {
-      console.error("TeleCRM config missing");
+      console.error("TELECRM_API_KEY is not set");
       return NextResponse.json(
         { error: "Server configuration error" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     const leadSource =
-      typeof fields.source === "string" && fields.source.trim()
-        ? fields.source.trim().slice(0, 100)
-        : "BookMyAssets";
+      cleanString(fields.source, OPTIONAL_FIELD_LIMITS.source) ||
+      "BookMyAssets";
     const formSource =
-      typeof source === "string" && source.trim()
-        ? source.trim().slice(0, 100)
-        : "BookMyAssets";
-    const safeTags = Array.isArray(tags)
-      ? tags
+      cleanString(body.source, OPTIONAL_FIELD_LIMITS.source) || leadSource;
+    const safeTags = Array.isArray(body.tags)
+      ? body.tags
           .filter((tag) => typeof tag === "string" && tag.trim())
           .map((tag) => tag.trim().slice(0, 50))
           .slice(0, 10)
       : [];
 
-    const telecrmRes = await fetch(telecrmEndpoint, {
+    const safeFields = {
+      name,
+      phone,
+      source: leadSource,
+    };
+
+    for (const [fieldName, maxLength] of Object.entries(
+      OPTIONAL_FIELD_LIMITS,
+    )) {
+      if (fieldName === "source") continue;
+
+      const value =
+        fieldName === "email"
+          ? email
+          : cleanString(fields[fieldName], maxLength);
+
+      if (value) {
+        safeFields[fieldName] = value;
+      }
+    }
+
+    const telecrmPayload = {
+      fields: safeFields,
+      source: formSource,
+      tags: safeTags,
+    };
+
+    const phoneNumber = cleanString(body.phoneNumber, 20).replace(
+      /[^\d+]/g,
+      "",
+    );
+    if (phoneNumber) {
+      telecrmPayload.phoneNumber = phoneNumber;
+    }
+
+    const telecrmRes = await fetch(TELECRM_ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${telecrmApiKey}`,
       },
-      body: JSON.stringify({
-        fields: {
-          name,
-          phone,
-          source: leadSource,
-        },
-        source: formSource,
-        tags: safeTags,
-      }),
+      body: JSON.stringify(telecrmPayload),
     });
 
     const telecrmText = await telecrmRes.text();
 
     if (!telecrmRes.ok) {
-      console.error("TeleCRM error:", telecrmText);
+      console.error("TeleCRM request failed with status:", telecrmRes.status);
       return NextResponse.json(
         { error: "Failed to submit lead. Please try again." },
-        { status: 500 }
+        { status: 502 },
       );
     }
 
-    // TeleCRM returns "OK" on success
-    if (telecrmText === "OK" || telecrmText.toLowerCase().includes("success")) {
-      return NextResponse.json({ success: true }, { status: 200 });
-    }
+    const normalizedResponse = telecrmText.trim().toLowerCase();
+    const responseWasExpected =
+      normalizedResponse === "ok" || normalizedResponse.includes("success");
 
-    // Unexpected but non-error response
-    console.warn("Unexpected TeleCRM response:", telecrmText);
     return NextResponse.json(
-      { success: true, note: "Submitted with unexpected response" },
-      { status: 200 }
+      {
+        success: true,
+        ...(!responseWasExpected
+          ? { note: "Submitted with an unexpected CRM response" }
+          : {}),
+      },
+      { status: 200 },
     );
-
   } catch (error) {
-    console.error("API route error:", error);
+    console.error("Lead API route error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

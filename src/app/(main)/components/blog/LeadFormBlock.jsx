@@ -9,6 +9,10 @@ export default function LeadFormBlock({
   helperText = "Your details are safe. Our team will call you shortly.",
   sourceLabel = "Blog Lead Form",
 }) {
+  const crmSource =
+    typeof sourceLabel === "string" && sourceLabel.trim()
+      ? sourceLabel.trim()
+      : "Blog Lead Form";
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -136,20 +140,19 @@ export default function LeadFormBlock({
     try {
       // API Request using the new endpoint and format
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "/api/submit-form",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
           body: JSON.stringify({
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: "BookMyAssets",
+              source: crmSource,
             },
-            source: "BookMyAssets Website",
+            source: crmSource,
             tags: ["Dholera Investment", "Website Lead", "Common Form"],
             recaptchaToken: token,
           }),

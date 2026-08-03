@@ -161,12 +161,11 @@ export default function BrochureDownload({
       const now = Date.now();
       const source = getLeadSource();
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        "/api/submit-form",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
           body: JSON.stringify({
             fields: {
