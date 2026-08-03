@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const CORRECT_PIN = 'crm2026'
+const CORRECT_PIN = 'crm@2026'
 const USERNAME = 'crmuser'
 
 export default function CrmLock() {
