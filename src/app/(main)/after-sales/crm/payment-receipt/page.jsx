@@ -450,8 +450,11 @@ export default function PaymentReceiptPage() {
         throw new Error(msg || "Failed to generate PDF");
       }
 
-      // Update badge after successful generation
-      setLastReceiptNumber(form.receiptNumber);
+      const savedLastReceiptNumber =
+        res.headers.get("X-Last-Receipt-Number") || form.receiptNumber;
+      const savedNextReceiptNumber = res.headers.get("X-Next-Receipt-Number");
+
+      setLastReceiptNumber(savedLastReceiptNumber);
 
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
@@ -461,16 +464,23 @@ export default function PaymentReceiptPage() {
       a.click();
       URL.revokeObjectURL(url);
 
-      const counter = await fetchReceiptCounter(
-        form.projectName,
-        form.paymentDate,
-      );
-      setLastReceiptNumber(counter.lastReceiptNumber || form.receiptNumber);
-      if (counter.nextReceiptNumber) {
+      if (savedNextReceiptNumber) {
         setForm((prev) => ({
           ...prev,
-          receiptNumber: counter.nextReceiptNumber,
+          receiptNumber: savedNextReceiptNumber,
         }));
+      } else {
+        const counter = await fetchReceiptCounter(
+          form.projectName,
+          form.paymentDate,
+        );
+        setLastReceiptNumber(counter.lastReceiptNumber || form.receiptNumber);
+        if (counter.nextReceiptNumber) {
+          setForm((prev) => ({
+            ...prev,
+            receiptNumber: counter.nextReceiptNumber,
+          }));
+        }
       }
     } catch (err) {
       setError(err.message);
@@ -715,4 +725,3 @@ export default function PaymentReceiptPage() {
     </>
   );
 }
-

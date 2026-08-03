@@ -49,7 +49,7 @@ f.parentNode.insertBefore(j,f);
           }}
         />
 
-        <Script strategy="afterInteractive">
+        <Script id="twitter-pixel" strategy="lazyOnload">
           {` !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
 },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
 a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
@@ -59,12 +59,12 @@ twq('config','oxi2l');`}
         {/* ── Google Analytics ── */}
         <Script
           id="ga-src"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         />
         <Script
           id="ga-config"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
 window.dataLayer=window.dataLayer||[];
@@ -80,14 +80,12 @@ gtag('config','${GA_ID}',{page_path:window.location.pathname,send_page_view:true
             1. Hardcoded src inside the stub (immediately)
             2. Again via createElement on user interaction
           
-          Correct pattern:
-            - Stub (fbq function mock) runs immediately via afterInteractive
-            - Actual fbevents.js script loads only on first user interaction
-            - No double load, no render blocking
+          The pixel loads during browser idle time so it does not compete with
+          the homepage hero image or other critical rendering resources.
         */}
         <Script
           id="fb-pixel"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
 !function(f,b,e,v,n,t,s)
