@@ -1,48 +1,75 @@
-// app/api/submit-lead/route.js
+// app/api/submit-form/route.js
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
     const body = await request.json();
     const { fields, source, tags, recaptchaToken } = body;
+    const isLocalDevelopment = process.env.NODE_ENV === "development";
 
     // --- 1. Validate required fields ---
-    if (!fields?.name || !fields?.phone) {
+    const name = typeof fields?.name === "string" ? fields.name.trim() : "";
+    const phone =
+      typeof fields?.phone === "string"
+        ? fields.phone.replace(/\D/g, "")
+        : "";
+
+    if (!name || !phone) {
       return NextResponse.json(
         { error: "Name and phone are required" },
         { status: 400 }
       );
     }
 
-    // --- 2. Verify reCAPTCHA token with Google ---
-    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
-
-    if (!recaptchaSecretKey) {
-      console.error("RECAPTCHA_SECRET_KEY is not set");
+    if (name.length > 100 || !/^\d{10,15}$/.test(phone)) {
       return NextResponse.json(
-        { error: "Server configuration error" },
-        { status: 500 }
+        { error: "Please provide valid lead details" },
+        { status: 400 }
       );
     }
 
-    const recaptchaVerifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
-    const recaptchaRes = await fetch(recaptchaVerifyUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        secret: recaptchaSecretKey,
-        response: recaptchaToken,
-      }),
-    });
+    // --- 2. Verify reCAPTCHA in production ---
+    if (!isLocalDevelopment) {
+      const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
 
-    const recaptchaData = await recaptchaRes.json();
+      if (!recaptchaSecretKey) {
+        console.error("RECAPTCHA_SECRET_KEY is not set");
+        return NextResponse.json(
+          { error: "Server configuration error" },
+          { status: 500 }
+        );
+      }
 
-    if (!recaptchaData.success) {
-      console.error("reCAPTCHA verification failed:", recaptchaData["error-codes"]);
-      return NextResponse.json(
-        { error: "reCAPTCHA verification failed. Please try again." },
-        { status: 400 }
-      );
+      if (!recaptchaToken) {
+        return NextResponse.json(
+          { error: "Security verification is required" },
+          { status: 400 }
+        );
+      }
+
+      const recaptchaVerifyUrl =
+        "https://www.google.com/recaptcha/api/siteverify";
+      const recaptchaRes = await fetch(recaptchaVerifyUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: recaptchaSecretKey,
+          response: recaptchaToken,
+        }),
+      });
+
+      const recaptchaData = await recaptchaRes.json();
+
+      if (!recaptchaData.success) {
+        console.error(
+          "reCAPTCHA verification failed:",
+          recaptchaData["error-codes"]
+        );
+        return NextResponse.json(
+          { error: "reCAPTCHA verification failed. Please try again." },
+          { status: 400 }
+        );
+      }
     }
 
     // Optional: enforce minimum score for v3 (skip for v2 checkbox)
@@ -51,10 +78,15 @@ export async function POST(request) {
     // }
 
     // --- 3. Forward lead to TeleCRM ---
-    const telecrm_api_key = process.env.NEXT_PUBLIC_TELECRM_API_KEY;
-    const telecrm_endpoint =  "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead";
+    // Prefer the server-only name. The public-name fallback is temporary while
+    // the remaining forms are migrated to this server route.
+    const telecrmApiKey =
+      process.env.TELECRM_API_KEY ||
+      process.env.NEXT_PUBLIC_TELECRM_API_KEY;
+    const telecrmEndpoint =
+      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead";
 
-    if (!telecrm_api_key || !telecrm_endpoint) {
+    if (!telecrmApiKey) {
       console.error("TeleCRM config missing");
       return NextResponse.json(
         { error: "Server configuration error" },
@@ -62,20 +94,35 @@ export async function POST(request) {
       );
     }
 
-    const telecrmRes = await fetch(telecrm_endpoint, {
+    const leadSource =
+      typeof fields.source === "string" && fields.source.trim()
+        ? fields.source.trim().slice(0, 100)
+        : "BookMyAssets";
+    const formSource =
+      typeof source === "string" && source.trim()
+        ? source.trim().slice(0, 100)
+        : "BookMyAssets";
+    const safeTags = Array.isArray(tags)
+      ? tags
+          .filter((tag) => typeof tag === "string" && tag.trim())
+          .map((tag) => tag.trim().slice(0, 50))
+          .slice(0, 10)
+      : [];
+
+    const telecrmRes = await fetch(telecrmEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${telecrm_api_key}`,
+        Authorization: `Bearer ${telecrmApiKey}`,
       },
       body: JSON.stringify({
         fields: {
-          name: fields.name,
-          phone: fields.phone,
-          email: fields.email || "",
-          source: "BookMyAssets",
+          name,
+          phone,
+          source: leadSource,
         },
-        source: "BookMyAssets",
+        source: formSource,
+        tags: safeTags,
       }),
     });
 

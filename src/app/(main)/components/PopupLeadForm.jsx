@@ -60,6 +60,8 @@ const POPUP_COOLDOWN_KEY = "bmaLeadPopupLastClosedAt";
 const POPUP_COOLDOWN_MS = 20000;
 const ACTIVE_POPUP_KEY = "__bmaActiveLeadPopup";
 const PAGE_POPUP_STATE_KEY = "__bmaLeadPopupPageState";
+const SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT =
+  process.env.NODE_ENV === "development";
 
 function requestPopupOpen(instanceId, type) {
   if (typeof window === "undefined") return false;
@@ -246,6 +248,11 @@ export default function PopupLeadForm({
   }, []);
 
   useEffect(() => {
+    if (SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT) {
+      setRecaptchaLoaded(true);
+      return undefined;
+    }
+
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
         const script = document.createElement("script");
@@ -491,26 +498,24 @@ export default function PopupLeadForm({
 
   const submitVerifiedLead = async (token) => {
     try {
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.mobileNumber,
-              source: config.leadSource || getLeadSource(),
-            },
-            source: config.source,
-            tags: config.tags,
-            recaptchaToken: token,
-          }),
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.mobileNumber,
+            source: config.leadSource || getLeadSource(),
+          },
+          source: config.source,
+          tags: config.tags,
+          recaptchaToken: token,
+        }),
+      });
+
+      const responseData = await response.json().catch(() => ({}));
 
       if (response.ok) {
         setFormData({ fullName: "", mobileNumber: "" });
@@ -529,7 +534,7 @@ export default function PopupLeadForm({
           closePopup();
         }, 3000);
       } else {
-        throw new Error("Error submitting form");
+        throw new Error(responseData.error || "Error submitting form");
       }
     } catch (error) {
       console.error("Form submission error:", error);
@@ -554,6 +559,11 @@ export default function PopupLeadForm({
 
     if (!validateForm()) {
       setIsLoading(false);
+      return;
+    }
+
+    if (SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT) {
+      submitVerifiedLead("");
       return;
     }
 
@@ -698,9 +708,11 @@ export default function PopupLeadForm({
 
               </div>
 
-              <div className="flex justify-center mb-4">
-                <div ref={recaptchaRef}></div>
-              </div>
+              {!SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT && (
+                <div className="flex justify-center mb-4">
+                  <div ref={recaptchaRef}></div>
+                </div>
+              )}
 
               <button
                 type="submit"
