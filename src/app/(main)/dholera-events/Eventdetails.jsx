@@ -38,7 +38,7 @@ export default function DholeraEventSection() {
               <div className="flex gap-3">
                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p className="text-gray-700 leading-relaxed">
-                  Exclusive Chandigarh-only on-spot booking window with special offers.
+                  Exclusive Gurgaon-only on-spot booking window with special offers.
                 </p>
               </div>
             </div>

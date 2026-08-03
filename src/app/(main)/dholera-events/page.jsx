@@ -221,7 +221,7 @@ export default function page() {
                     Dholera's development roadmap and explore registry-ready
                     options backed by due diligence. This real estate event
                     invitation is open to all looking to learn and connect with
-                    industry experts in Chandigarh. Register now to be part of
+                    industry experts in Gurgaon. Register now to be part of
                     the discussion shaping Dholera's future.
                   </p>
                 </div>
