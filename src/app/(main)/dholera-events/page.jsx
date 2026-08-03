@@ -118,12 +118,12 @@ export default function page() {
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Date</p>
-                <p className="font-semibold text-gray-900">TBA</p>
+                <p className="font-semibold text-gray-900">8th August 2026</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Location</p>
                 <a href="https://maps.app.goo.gl/oZHMZEpNRPMw33Q88">
-                  <span className="text-[#ddbc69]">TBD</span>
+                  <span className="text-[#ddbc69]">Sec 48, Gurugram</span>
                 </a>
               </div>
             </div>
@@ -155,7 +155,7 @@ export default function page() {
                 <MapPin className="w-6 h-6 md:w-8 md:h-8 text-black" />
               </div>
               <p className="text-xs md:text-base font-medium text-black leading-tight">
-                TBD
+                Sec 48, Gurugram
               </p>
             </div>
 
@@ -241,18 +241,18 @@ export default function page() {
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">Dates:</span>{" "}
-                    TBA
+                    8th August 2026
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">Time:</span>{" "}
-                    TBA
+                    10:00 AM to 08:00 PM
                   </li>
                   <li>
                     <a href="https://maps.app.goo.gl/oZHMZEpNRPMw33Q88">
                       <span className="font-semibold text-gray-700">
                         Venue:
                       </span>{" "}
-                      <span className="text-blue-400">TBD</span>
+                      <span className="text-blue-400">Sec 48, Gurugram</span>
                     </a>
                   </li>
                   <li>
