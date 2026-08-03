@@ -13,6 +13,8 @@ import BookButton from "./BookVC";
 const whatsappEnquiryLink = `https://wa.me/918130371647?text=${encodeURIComponent(
   "Hi, I need a call back",
 )}`;
+const RESIDENTIAL_PROJECTS_URL =
+  "/data/Residential.json?v=20260803-project-images";
 
 const dholeraItems = [
   {
@@ -405,7 +407,9 @@ export default function Navbar() {
         setLoading(true);
         setError(null);
 
-        const response = await fetch("/data/Residential.json");
+        const response = await fetch(RESIDENTIAL_PROJECTS_URL, {
+          cache: "no-store",
+        });
 
         if (!response.ok) throw new Error("Failed to fetch projects");
 

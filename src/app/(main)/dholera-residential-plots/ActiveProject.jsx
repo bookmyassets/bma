@@ -4,6 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, MapPin, Clock } from 'lucide-react';
 
+const RESIDENTIAL_PROJECTS_URL =
+  "/data/Residential.json?v=20260803-project-images";
+
 const ActiveProjectsSection = () => {
   const [activeProjects, setActiveProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +14,9 @@ const ActiveProjectsSection = () => {
   useEffect(() => {
     async function fetchActiveProjects() {
       try {
-        const response = await fetch("/data/Residential.json");
+        const response = await fetch(RESIDENTIAL_PROJECTS_URL, {
+          cache: "no-store",
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch projects");
         }
