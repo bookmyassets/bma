@@ -171,10 +171,12 @@ async function getProjectReceiptCounter(projectName, paymentDate) {
 }
 
 async function saveLastReceiptNumber(receiptNumber, projectName, paymentDate) {
-  if (!receiptNumber) return;
+  if (!receiptNumber) return null;
 
   if (!hasSanityWriteToken()) {
-    throw new Error("Missing SANITY_API_WRITE_TOKEN for receipt counter update");
+    throw new Error(
+      "Missing SANITY_API_WRITE_TOKEN for receipt counter update",
+    );
   }
 
   const projectKey = getProjectKey(projectName);
@@ -201,6 +203,15 @@ async function saveLastReceiptNumber(receiptNumber, projectName, paymentDate) {
       updatedAt: new Date().toISOString(),
     })
     .commit();
+
+  return {
+    lastReceiptNumber: receiptNumber,
+    nextReceiptNumber: getNextReceiptNumber(
+      receiptNumber,
+      projectKey,
+      financialYear,
+    ),
+  };
 }
 
 // GET — returns the last saved receipt number string
@@ -329,22 +340,37 @@ export async function POST(request) {
     // Save the PDF
     const pdfBytes = await pdfDoc.save();
 
+    let savedCounter = null;
+
     if (saveCounter) {
       // Persist the receipt number exactly as provided (no transformation)
-      await saveLastReceiptNumber(
+      savedCounter = await saveLastReceiptNumber(
         pdfFormData.receiptNumber,
         pdfFormData.projectName,
         paymentDate,
       );
     }
 
+    const responseHeaders = new Headers({
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `attachment; filename="${filename}"`,
+    });
+
+    if (savedCounter) {
+      responseHeaders.set(
+        "X-Last-Receipt-Number",
+        savedCounter.lastReceiptNumber,
+      );
+      responseHeaders.set(
+        "X-Next-Receipt-Number",
+        savedCounter.nextReceiptNumber,
+      );
+    }
+
     // Return the PDF as a download
     return new NextResponse(pdfBytes, {
       status: 200,
-      headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="${filename}"`,
-      },
+      headers: responseHeaders,
     });
   } catch (error) {
     console.error("Error filling PDF:", error);

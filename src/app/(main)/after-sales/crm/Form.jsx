@@ -1071,6 +1071,8 @@ export default function Form() {
     return {
       blob: await response.blob(),
       filename,
+      lastReceiptNumber: response.headers.get("X-Last-Receipt-Number") || "",
+      nextReceiptNumber: response.headers.get("X-Next-Receipt-Number") || "",
     };
   };
 
@@ -1118,14 +1120,20 @@ export default function Form() {
 
     try {
       const payload = buildPayload();
+      let savedReceiptCounter = null;
 
       for (const preview of previews) {
         if (RECEIPT_DOCUMENT_IDS.includes(preview.documentId)) {
-          const { blob, filename } = await requestDocument(
-            preview.documentId,
-            payload,
-            true,
-          );
+          const {
+            blob,
+            filename,
+            lastReceiptNumber: savedLastReceiptNumber,
+            nextReceiptNumber: savedNextReceiptNumber,
+          } = await requestDocument(preview.documentId, payload, true);
+          savedReceiptCounter = {
+            lastReceiptNumber: savedLastReceiptNumber,
+            nextReceiptNumber: savedNextReceiptNumber,
+          };
           const url = URL.createObjectURL(blob);
           downloadUrl(url, filename);
           URL.revokeObjectURL(url);
@@ -1136,19 +1144,29 @@ export default function Form() {
       }
 
       if (hasReceiptDocument) {
-        const counter = await fetchReceiptCounter(
-          booking.projectName,
-          formatDateSlash(receipt.paymentDate),
-        );
-
-        setLastReceiptNumber(
-          counter.lastReceiptNumber || receipt.receiptNumber,
-        );
-        if (counter.nextReceiptNumber) {
+        if (savedReceiptCounter?.nextReceiptNumber) {
+          setLastReceiptNumber(
+            savedReceiptCounter.lastReceiptNumber || receipt.receiptNumber,
+          );
           setReceipt((current) => ({
             ...current,
-            receiptNumber: counter.nextReceiptNumber,
+            receiptNumber: savedReceiptCounter.nextReceiptNumber,
           }));
+        } else {
+          const counter = await fetchReceiptCounter(
+            booking.projectName,
+            formatDateSlash(receipt.paymentDate),
+          );
+
+          setLastReceiptNumber(
+            counter.lastReceiptNumber || receipt.receiptNumber,
+          );
+          if (counter.nextReceiptNumber) {
+            setReceipt((current) => ({
+              ...current,
+              receiptNumber: counter.nextReceiptNumber,
+            }));
+          }
         }
       }
     } catch (downloadError) {
