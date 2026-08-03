@@ -209,7 +209,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/bulk-land/residential"
+                  href="/bulk-land"
                   className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
                 >
                   Bulk Land Deals
