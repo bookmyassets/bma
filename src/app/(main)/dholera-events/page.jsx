@@ -9,6 +9,7 @@ import eventHeroM from "@/assests/bma-events/bma-dholera-events-mobile-banner.we
 import Image from "next/image";
 import ImageGallery from "./Image";
 
+
 export default function page() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -113,9 +114,9 @@ export default function page() {
             <div className="p-6 gap-6 max-sm:flex-col flex sm:justify-between sm:items-center">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Partner:</p>
-                <Link href="https://www.dholeranowornever.com/" className="font-semibold text-gray-900">
+                <a href="https://www.dholeranowornever.com/" className="font-semibold text-gray-900">
                   Dholera : Now or Never
-                </Link>
+                </a>
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Date</p>
