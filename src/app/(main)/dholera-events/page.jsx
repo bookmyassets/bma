@@ -239,7 +239,7 @@ export default function page() {
                     <span className="font-semibold text-gray-700">
                       Event Name:
                     </span>{" "}
-                    Dholera: Now or Never - One-Day Investor Meetup
+                    Dholera: Now or Never
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">Dates:</span>{" "}
