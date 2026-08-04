@@ -112,10 +112,10 @@ export default function page() {
           <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg">
             <div className="p-6 gap-6 max-sm:flex-col flex sm:justify-between sm:items-center">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Event Name</p>
-                <p className="font-semibold text-gray-900">
+                <p className="text-sm text-gray-600 mb-1">Event Partner:</p>
+                <Link href="https://www.dholeranowornever.com/" className="font-semibold text-gray-900">
                   Dholera : Now or Never
-                </p>
+                </Link>
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Date</p>
