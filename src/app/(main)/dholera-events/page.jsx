@@ -9,7 +9,6 @@ import eventHeroM from "@/assests/bma-events/bma-dholera-events-mobile-banner.we
 import Image from "next/image";
 import ImageGallery from "./Image";
 
-
 export default function page() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -114,7 +113,10 @@ export default function page() {
             <div className="p-6 gap-6 max-sm:flex-col flex sm:justify-between sm:items-center">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Partner:</p>
-                <a href="https://www.dholeranowornever.com/" className="font-semibold text-gray-900">
+                <a
+                  href="https://www.dholeranowornever.com/"
+                  className="underline text-blue-400"
+                >
                   Dholera : Now or Never
                 </a>
               </div>
@@ -125,7 +127,9 @@ export default function page() {
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Location</p>
                 <a href="https://maps.app.goo.gl/oZHMZEpNRPMw33Q88">
-                  <span className="font-semibold text-gray-900">Sec 48, Gurugram</span>
+                  <span className="font-semibold text-gray-900">
+                    Sec 48, Gurugram
+                  </span>
                 </a>
               </div>
             </div>
@@ -238,9 +242,14 @@ export default function page() {
                 <ul className="space-y-2 text-gray-600">
                   <li>
                     <span className="font-semibold text-gray-700">
-                      Event Name:
+                      Event Parnter:
                     </span>{" "}
-                    Dholera: Now or Never
+                    <a
+                      href="https://www.dholeranowornever.com/"
+                      className="underline text-blue-400"
+                    >
+                      Dholera : Now or Never
+                    </a>
                   </li>
                   <li>
                     <span className="font-semibold text-gray-700">Dates:</span>{" "}
@@ -255,7 +264,7 @@ export default function page() {
                       <span className="font-semibold text-gray-700">
                         Venue:
                       </span>{" "}
-                      <span className="text-blue-400">Sec 48, Gurugram</span>
+                      <span className="text-blue-400 underline">Sec 48, Gurugram</span>
                     </a>
                   </li>
                   <li>
