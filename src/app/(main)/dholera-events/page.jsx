@@ -124,7 +124,7 @@ export default function page() {
               <div>
                 <p className="text-sm text-gray-600 mb-1">Event Location</p>
                 <a href="https://maps.app.goo.gl/oZHMZEpNRPMw33Q88">
-                  <span className="text-[#ddbc69]">Sec 48, Gurugram</span>
+                  <span className="font-semibold text-gray-900">Sec 48, Gurugram</span>
                 </a>
               </div>
             </div>
