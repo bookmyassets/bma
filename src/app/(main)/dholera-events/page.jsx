@@ -70,12 +70,14 @@ export default function page() {
 
   return (
     <>
-      <title>
-        Dholera Investor Meetups & Events | BookMyAssets
-      </title>
+      <title>Dholera: Now or Never | Dholera Investor Meet in Gurgaon</title>
       <meta
         name="description"
-        content="Join BookMyAssets Dholera investor meetups across India. Meet our team, review project documents and get Dholera Smart City investment insights live."
+        content="Join Dholera: Now or Never, India's Biggest 1-on-1 Dholera Investor Meet in Gurgaon by BookMyAssets. Explore Dholera Smart City investment opportunities, infrastructure updates and expert guidance."
+      />
+      <meta
+        name="keywords"
+        content="Dholera event in Gurgaon, Dholera investment event, Dholera investor event, Dholera seminar in Gurgaon, Dholera Smart City investment, Dholera investment opportunities, Dholera property investment, Investment events in Gurgaon, Dholera latest event, Dholera event near me, Dholera Smart City, Dholera Infrastructure, Dholera Now or never"
       />
 
       <section className="relative overflow-hidden max-sm:bg-[#0d0d0d]">
@@ -98,7 +100,6 @@ export default function page() {
             <Image
               src={eventHeroM}
               alt="Dholera Event - Mobile Banner"
-
               className="w-full h-auto object-cover"
               fetchPriority="high"
             />
@@ -209,20 +210,21 @@ export default function page() {
                   </h3>
 
                   <p className="leading-relaxed text-black mb-4">
-                    Dholera: Now or Never is a one-day real estate event for
-                    investors, channel partners, and advisors exploring
-                    Dholera's rapid growth and future potential. As one of the
-                    key real estate current events, it offers expert insights,
-                    verified opportunities, and practical real estate event
-                    ideas for professionals.
+                    Dholera: Now or Never is an organizer of exclusive investor
+                    meet in Gurgaon to help real estate investors understand
+                    Dholera beyond online information. This event focuses on the
+                    latest developments, infrastructure progress, legal guidance
+                    and investment opportunities through meaningful discussions
+                    with Dholera Experts.
                   </p>
                   <p className="leading-relaxed text-black">
-                    Join this exclusive real estate broker event to understand
-                    Dholera's development roadmap and explore registry-ready
-                    options backed by due diligence. This real estate event
-                    invitation is open to all looking to learn and connect with
-                    industry experts in Gurgaon. Register now to be part of
-                    the discussion shaping Dholera's future.
+                    After successfully organizing a Dholera Investor Meet in
+                    Chandigarh, BookMyAssets is bringing the next edition to
+                    Gurgaon in collaboration with Dholera: Now or Never.
+                    <br />
+                    If you are looking for clarity before investing in Dholera
+                    Smart City, this event is the perfect opportunity to ask
+                    questions, resolve doubts and make informed decisions.
                   </p>
                 </div>
               </div>
@@ -396,4 +398,3 @@ export default function page() {
     </>
   );
 }
-
