@@ -8,7 +8,7 @@ import InlineLeadForm from "../../components/InlineLeadForm";
 import Interlink, { getKnowledgeITLinks } from "../Interlink";
 import FAQSection from "./FAQs";
 import KnowledgeITZoneCards from "./Cards";
-import GDCR from "../residential/GDCR";
+import GDCR from "./GDCR";
 
 export default function page() {
   return (
