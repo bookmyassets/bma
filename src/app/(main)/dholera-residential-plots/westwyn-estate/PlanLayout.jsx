@@ -122,7 +122,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Plot Price",
-                  content: "₹7000/sq. Yard",
+                  content: "₹7500/sq. Yard",
                   align: "text-left",
                 },
                 {
