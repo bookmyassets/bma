@@ -32,7 +32,7 @@ export default function page() {
               
               <div>
                 <p className="text-sm text-gray-500 font-medium">Receiving Company</p>
-                <p className="text-lg font-medium">WestWyn Partner LLP</p>
+                <p className="text-lg font-medium">WestWyn Partners LLP</p>
               </div>
               
               <div className="pt-2">
