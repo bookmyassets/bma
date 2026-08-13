@@ -15,7 +15,7 @@ const projects = [
   },
   {
     name: "WestWyn Estates",
-    price: "Starting from ₹10 Lakh",
+    price: "Starting from ₹11 Lakh",
     location: "State Highway 117",
     href: "/dholera-residential-plots/westwyn-estate",
     image: westwynEstatesImage,
