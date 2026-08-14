@@ -65,13 +65,13 @@ function PlotAvailabilitySection() {
               className="flex size-[5.5rem] items-center justify-center rounded-full p-1.5 sm:size-28 sm:p-2"
               style={{
                 background:
-                  "conic-gradient(#ddbc69 0 75%, rgba(221, 188, 105, 0.18) 75% 100%)",
+                  "conic-gradient(#ddbc69 0 20%, rgba(221, 188, 105, 0.18) 20% 100%)",
               }}
             >
               <div className="flex size-full items-center justify-center rounded-full bg-[#101010] text-center">
                 <div>
                   <span className="block text-base font-semibold uppercase text-[#f5f1e8] sm:text-lg">
-                    75%
+                    20%
                   </span>
                   <span className="block text-[0.6rem] font-bold uppercase tracking-[0.12em] text-[#ddbc69] sm:text-[0.65rem]">
                     Sold
@@ -333,6 +333,10 @@ export default function WestWynResidencyClient() {
 
         <div className="relative z-10 flex min-h-screen min-h-[100dvh] w-full items-end px-5 pb-8 pt-28 sm:px-8 sm:pb-10 lg:items-center lg:px-10 lg:py-24 xl:px-16">
           <div className="w-full lg:w-[40%] lg:max-w-[620px]">
+            <p className="mb-4 inline-flex min-h-8 items-center rounded-full border border-[#ddbc69]/70 bg-black/65 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#ddbc69] backdrop-blur-sm sm:text-sm">
+              Newly Launched
+            </p>
+
             <h1
               id="westwyn-residency-title"
               className="text-[clamp(2.65rem,5vw,4rem)] font-semibold uppercase leading-[0.9] text-[#ddbc69]"
