@@ -13,6 +13,9 @@ function getLeadSource() {
 
   const utmSource = params.get("utm_source")?.toLowerCase();
   const utmCampaign = params.get("utm_campaign");
+  const utmLocation = params.get("utm_location")?.trim();
+
+  let leadSource = "BookMyAssets Twitter Ads";
 
   if (params.has("twclid") || utmSource === "twitter" || utmSource === "x") {
     if (utmCampaign) {
@@ -21,14 +24,13 @@ function getLeadSource() {
         .filter(Boolean)
         .slice(0, 2)
         .join(" ");
-      return campaign
-        ? `BookMyAssets Twitter ${campaign}`
-        : "BookMyAssets Twitter Ads";
+      if (campaign) {
+        leadSource = `BookMyAssets Twitter ${campaign}`;
+      }
     }
-    return "BookMyAssets Twitter Ads";
   }
 
-  return "BookMyAssets Twitter Ads";
+  return utmLocation ? `${leadSource} - ${utmLocation}` : leadSource;
 }
 
 export default function BrochureDownload({

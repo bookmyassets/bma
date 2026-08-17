@@ -233,7 +233,7 @@ export default function LatestUpdates() {
           </p>
           {/* ✅ clamp() — subheading scales between 14px and 18px */}
           <p className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-white text-center mb-8 max-w-5xl mx-auto">
-            Stay updated with Dholera latest developments.
+            Stay updated with <Link href="/dholera-sir-updates">Dholera latest developments</Link>. 
           </p>
 
           {/* Slider */}

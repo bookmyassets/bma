@@ -37,7 +37,7 @@ export default function ProjectsSection() {
         <div className="mb-[clamp(1.5rem,3vw,3rem)] ">
           
           <h2 className="mt-[0.75rem] text-[#ddbc69] md:text-center max-sm:px-4 gap-[clamp(0.875rem,1.8vw,1.5rem)] text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2]">
-            Explore Our Projects in Dholera
+            Explore BookMyAssets Projects in Dholera
           </h2>
         </div>
 

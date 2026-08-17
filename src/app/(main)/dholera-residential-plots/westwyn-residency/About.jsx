@@ -72,18 +72,20 @@ const WestWynAboutSection = () => {
           <h1 className="text-xl md:text-[32px] font-bold text-[#ddbc69]">
             WestWyn Residency{" "}
           </h1>
-            <p className="text-black mt-4 text-lg">
-              Residential Plots in Dholera
-
-            </p>
+          <p className="text-black mt-4 text-lg">
+            Residential Plots in Dholera
+          </p>
 
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
             WestWyn Residency is a 40,000 sq. yard residential plot project in
             Pipariya Developed by BookMyAssets. Located on Major District Road
-            in Dholera. 1.5 km from DFC (Dedicated Freight Corridor) further it
-            is close to the Bhimnath Railway Junction, and within reach of
-            everyday needs a bus stand, school, hospital, shopping complex,
-            park, and food courts.
+            in Dholera. 1.5 km from{" "}
+            <Link href="https://www.bookmyassets.com/dholera-sir-blogs/dedicated-freight-corridor-dholera-delhi-mumbai-connectivity" className="text-[#ddbc69]">
+              DFC (Dedicated Freight Corridor)
+            </Link>{" "}
+            further it is close to the Bhimnath Railway Junction, and within
+            reach of everyday needs a bus stand, school, hospital, shopping
+            complex, park, and food courts.
           </p>
         </div>
 

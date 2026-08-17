@@ -8,7 +8,10 @@ export default function DholeraSmartCity() {
     { text: "India's First Special Investment Region (SIR)" },
     { text: "Government Backed Development" },
     { text: "Part of the Delhi-Mumbai Industrial Corridor (DMIC)" },
-    { text: "India's First Semiconductor Hub" },
+    {
+      text: "India's First Semiconductor Hub",
+      href: "https://www.bookmyassets.com/about-dholera-sir/Tata-Semiconductor-Plant-in-Dholera",
+    },
     { text: "Plug & Play Infrastructure" },
     {
       text: "Strong Connectivity via Road, Railway, Sea Port, Airport & MonoRail",
@@ -67,9 +70,18 @@ export default function DholeraSmartCity() {
                     className="flex items-start gap-3 p-1 rounded-lg text-white hover:border-amber-300 hover:shadow-md transition-all duration-200"
                   >
                     <span className="text-green-500 shrink-0">✓</span>
-                    <span className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7]">
-                      {feature.text}
-                    </span>
+                    {feature.href ? (
+                      <Link
+                        href={feature.href}
+                        className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-[#ddbc69] hover:underline"
+                      >
+                        {feature.text}
+                      </Link>
+                    ) : (
+                      <span className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7]">
+                        {feature.text}
+                      </span>
+                    )}
                   </div>
                 );
               })}

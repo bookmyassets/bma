@@ -215,13 +215,21 @@ export default function HowToBuy() {
             </div>
           </div>
 
-          <Link
-            href="https://wa.me/918130371647"
-            onClick={openContactForm}
-            className="mx-auto mt-10 flex h-14 w-80 items-center justify-center gap-4 rounded-lg bg-[#ddbc69] px-6 py-3 text-[clamp(1rem,2vw,1.25rem)] font-extrabold text-black transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69]"
-          >
-            Connect with Our RM
-          </Link>
+          <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <Link
+              href="https://wa.me/918130371647"
+              onClick={openContactForm}
+              className="flex min-h-14 w-full max-w-80 items-center justify-center rounded-lg bg-[#ddbc69] px-6 py-3 text-center text-[clamp(1rem,2vw,1.25rem)] font-extrabold text-black transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69]"
+            >
+              Connect with Our RM
+            </Link>
+            <Link
+              href="https://www.bookmyassets.com/book-video-call"
+              className="flex min-h-14 w-full max-w-80 items-center justify-center rounded-lg border border-[#ddbc69] bg-black px-6 py-3 text-center text-[clamp(1rem,2vw,1.25rem)] font-extrabold text-[#ddbc69] transition-colors duration-200 hover:bg-[#ddbc69] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69]"
+            >
+              Get Free Consultation
+            </Link>
+          </div>
         </div>
       </section>
 

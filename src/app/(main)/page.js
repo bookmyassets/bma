@@ -65,11 +65,11 @@ function JsonLd({ schema }) {
 export default function page() {
   return (
     <>
-      <title>Dholera Smart City Investment | Trusted Developer BookMyAssets</title>
+      <title>BookMyAssets | Dholera Smart City Real Estate Developer</title>
 
       <meta
         name="description"
-        content="Invest in Dholera Smart City with BookMyAssets, a trusted Dholera developer. Registry-ready residential plots, NA/NOC verified titles & full after-sales support."
+        content="BookMyAssets is a Dholera-focused real estate developer offering legally verified residential plotted projects, bulk land opportunities and end-to-end support."
       />
       <link rel="canonical" href={`${SITE_URL}/`} />
 

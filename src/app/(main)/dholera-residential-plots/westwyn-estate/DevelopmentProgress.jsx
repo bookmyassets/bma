@@ -1,5 +1,6 @@
 import React from "react";
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 const developmentItems = [
   "Land Cleaning",
@@ -31,13 +32,14 @@ export default function DevelopmentProgress() {
       <div className="mx-auto max-w-7xl">
         <div className="gap-3  md:gap-8">
           <div>
-            
+            <Link href="https://www.bookmyassets.com/dholera-sir-blogs/westwyn-estates-dholera-bookmyassets-construction">
             <h2
               id="development-progress-heading"
               className="text-2xl font-bold leading-tight text-slate-950 sm:text-3xl"
-            >
+              >
               Current Development at WestWyn Estates
             </h2>
+              </Link>
           </div>
           
         </div>

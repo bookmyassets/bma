@@ -124,7 +124,14 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Developer",
-                  content: "BookMyAssets",
+                  content: (
+                    <Link
+                      href="/contact"
+                      className="underline-offset-4 hover:text-[#b58f32] hover:underline"
+                    >
+                      BookMyAssets
+                    </Link>
+                  ),
                   align: "text-left",
                 },
                 {
