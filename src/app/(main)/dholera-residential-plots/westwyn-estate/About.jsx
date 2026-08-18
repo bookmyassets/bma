@@ -70,14 +70,14 @@ const WestWynAboutSection = () => {
       <div className="relative max-w-7xl mx-auto px-4 py-4">
         {/* Header Section */}
         <div className="text-center space-y-2">
-          <h1 className=" text-[#ddbc69] text-[32px] leading-none font-bold">
+          <h2 className=" text-[#ddbc69] text-[32px] leading-none font-bold">
             WestWyn Estates{" "}
             <span className="font-semibold text-sm md:text-lg whitespace-nowrap text-black">
               {" "}
               <br />
               Residential Plot Project in Dholera
             </span>
-          </h1>
+          </h2>
 
           <p className=" italic  py-0.5"></p>
 

@@ -69,9 +69,9 @@ export default async function WestWynDocx() {
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               WestWyn County Documents
-            </h1>
+            </h2>
             <p className="text-gray-600">
               Project documents are currently not available. Please try again later.
             </p>
@@ -93,9 +93,9 @@ export default async function WestWynDocx() {
       <div className="bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               {project.title || 'WestWyn County'} Documents
-            </h1>
+            </h2>
             <p className="text-xl text-[#ddbc69] max-w-3xl mx-auto">
               Access all project documents, approvals, and important information for your investment decision
             </p>

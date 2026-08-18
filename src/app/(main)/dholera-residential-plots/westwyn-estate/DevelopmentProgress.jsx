@@ -33,15 +33,14 @@ export default function DevelopmentProgress() {
         <div className="gap-3  md:gap-8">
           <div>
             <Link href="https://www.bookmyassets.com/dholera-sir-blogs/westwyn-estates-dholera-bookmyassets-construction">
-            <h2
-              id="development-progress-heading"
-              className="text-2xl font-bold leading-tight text-slate-950 sm:text-3xl"
+              <h2
+                id="development-progress-heading"
+                className="text-2xl font-bold leading-tight text-slate-950 sm:text-3xl"
               >
-              Current Development at WestWyn Estates
-            </h2>
-              </Link>
+                Current Development at WestWyn Estates
+              </h2>
+            </Link>
           </div>
-          
         </div>
 
         <ul className="mt-5 grid grid-cols-2 gap-x-5 border-y border-slate-200 sm:grid-cols-2 lg:grid-cols-5">
