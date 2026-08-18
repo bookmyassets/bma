@@ -148,7 +148,6 @@ export default function DholeraProgressPage() {
         name="description"
         content="See real photos of BookMyAssets Dholera projects: WestWyn County, Estates and Residency site progress, villa construction and investor site visits."
       />
-      <link rel="canonical" href={`https://www.bookmyassets.com/gallery`} />
       
       {/* Hero Section with Enhanced Overlay */}
       <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
