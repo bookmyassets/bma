@@ -71,7 +71,7 @@ export default function Navbar() {
   const navItems = [
     { href: "#hero", label: "Home" },
     { href: "#dholera", label: "Dholera" },
-    { href: "#westwyn-estates", label: "Westwyn Estates" },
+    { href: "#westwyn-estates", label: "Westwyn Residency" },
     { href: "#why-bma", label: "Why BMA" },
 
 
