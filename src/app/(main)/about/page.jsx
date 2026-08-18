@@ -290,7 +290,7 @@ const RealEstateLandingPage = () => {
                     </span>
                   </div>
 
-                  <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
+                  <p className="text-3xl sm:text-4xl font-bold leading-tight">
                     Year One: Just the Beginning
                     <br />
                     {/* <span className="bg-[#ddbc69] bg-clip-text text-transparent">
@@ -298,7 +298,7 @@ const RealEstateLandingPage = () => {
                     </span>{" "}
                     <br />
                     Dholera with BookMyAssets */}
-                  </h1>
+                  </p>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
                     {/*  Discover premium, legally verified plots in Dholera Smart
@@ -365,14 +365,14 @@ const RealEstateLandingPage = () => {
                       </span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
+                    <p className="text-3xl sm:text-4xl font-bold leading-tight">
                       Year One: Just the Beginning
                       <br />
                       {/* <span className="bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] bg-clip-text text-transparent">
                         India’s First Greenfield Smart City
                       </span>{" "}
                       Dholera with BookMyAssets */}
-                    </h1>
+                    </p>
 
                     <p className="text-lg xl:text-xl text-gray-300 leading-relaxed">
                       {/* Discover premium, legally verified plots in Dholera Smart
