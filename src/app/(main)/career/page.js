@@ -4,9 +4,9 @@ import Posting from "./job-opening/page";
 
 export async function generateMetadata() {
   return {
-    title: "Careers at BookMyAssets | Real Estate Jobs in Dholera & NCR",
+    title: "BookMyAssets Careers | Job Openings & Career Opportunities",
     description:
-      "Join BookMyAssets, a fast-growing Dholera real estate developer. Explore sales, marketing and construction roles across Gurugram, Noida and Dholera.",
+      "Explore current job openings at BookMyAssets. Apply for sales, accounts and other career opportunities and grow with a fast-growing Dholera real estate company.",
     keywords:
       "BookMyAssets careers, real estate jobs, Dholera Smart City careers, property investment jobs, real estate career opportunities, BookMyAssets recruitment.",
   };
