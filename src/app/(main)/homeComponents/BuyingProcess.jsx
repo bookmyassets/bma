@@ -12,7 +12,7 @@ import Link from "next/link";
 const steps = [
   {
     number: "1",
-    title: "Connect with Our RM",
+    title: "Connect with our RM",
     icon: callIcon,
     iconAlt: "Relationship manager consultation",
     points: [
@@ -221,7 +221,7 @@ export default function HowToBuy() {
               onClick={openContactForm}
               className="flex min-h-14 w-full max-w-80 items-center justify-center rounded-lg bg-[#ddbc69] px-6 py-3 text-center text-[clamp(1rem,2vw,1.25rem)] font-extrabold text-black transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69]"
             >
-              Connect with Our RM
+              Connect with our RM
             </Link>
             <Link
               href="https://www.bookmyassets.com/book-video-call"
@@ -244,7 +244,7 @@ export default function HowToBuy() {
           <div className="w-full max-w-md" onClick={(event) => event.stopPropagation()}>
             <ContactForm
               onClose={closeContactForm}
-              title="Connect with Our RM"
+              title="Connect with our RM"
               headline="Share your details and our relationship manager will contact you."
               buttonName="Get a Call Back"
             />

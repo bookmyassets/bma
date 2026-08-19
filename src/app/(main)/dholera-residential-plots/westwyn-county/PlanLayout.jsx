@@ -203,7 +203,7 @@ const PlanLayout = () => {
                     py-[clamp(0.5rem,2vw,0.75rem)]"
                   >
                     <FaPhone className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                    Connect With Our RM
+                    Connect With our RM
                   </p>
                 </Link>
               </div>
