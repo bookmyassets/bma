@@ -143,9 +143,9 @@ export default function ChannelPartnerPage() {
 
           <div className="rounded-3xl border border-[#ddbc69]/30 bg-white/[0.06] p-6 backdrop-blur-sm sm:p-8">
             <Handshake className="size-12 text-[#ddbc69]" aria-hidden="true" />
-            <h2 className="mt-5 text-2xl font-semibold">
+            <p className="mt-5 text-2xl font-semibold">
               A Partnership Built on Clarity
-            </h2>
+            </p>
             <ul className="mt-6 space-y-4 text-white/80">
               {[
                 "Selected Dholera plot inventory",
@@ -189,9 +189,9 @@ export default function ChannelPartnerPage() {
                   <div className="flex size-12 items-center justify-center rounded-xl bg-[#ddbc69]/20 text-[#8a651d]">
                     <Icon className="size-6" aria-hidden="true" />
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold">
+                  <p className="mt-5 text-xl font-semibold">
                     {benefit.title}
-                  </h3>
+                  </p>
                   <p className="mt-3 leading-relaxed text-gray-600">
                     {benefit.description}
                   </p>
@@ -242,9 +242,9 @@ export default function ChannelPartnerPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div className="lg:sticky lg:top-24">
             <Users className="size-11 text-[#9b7425]" aria-hidden="true" />
-            <h2 className="mt-5 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+            <h3 className="mt-5 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
               Channel Partner Registration Form
-            </h2>
+            </h3>
             <p className="mt-5 max-w-xl leading-relaxed text-gray-600">
               Share your details to begin the onboarding process. Our team will
               contact you to explain project access, support and commission
@@ -261,9 +261,9 @@ export default function ChannelPartnerPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9b7425]">
               FAQ
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+            <h4 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
               Channel Partner Questions
-            </h2>
+            </h4>
           </div>
 
           <div className="mt-10 space-y-4">

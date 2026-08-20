@@ -17,12 +17,12 @@ const faqs = [
   {
     question: "Are BookMyAssets projects legally verified?",
     answer:
-      "Yes. All BookMyAssets residential projects come with NA/NOC approvals, clear title documents, plan pass approval, and registry-ready plots for a secure buying experience.",
+      "Yes, All BookMyAssets residential projects come with NA/NOC approvals, clear title documents, plan pass approval, and registry-ready plots for a secure buying experience.",
   },
   {
     question: "Does BookMyAssets provide support after buying a plot?",
     answer:
-      "Yes. We provide complete post-purchase support, including registration assistance, villa construction support, resale assistance, rental support, and dedicated customer service.",
+      "Yes, We provide complete post-purchase support, including registration assistance, villa construction support, resale assistance, rental support, and dedicated customer service.",
   },
   {
     question: "Is immediate registry available for your plots?",
@@ -66,7 +66,7 @@ export default function FAQSection() {
               FAQs
             </h2>
             <div className="order-3  md:order-none md:px-0">
-              <p className="pb-3">Have Any Other Question?</p>
+              <p className="pb-3">Have More Question?</p>
               <a
                 href="#"
                 className="px-1 py-2 bg-[#ddbc69] text-white rounded-md"

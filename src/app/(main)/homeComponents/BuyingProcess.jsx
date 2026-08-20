@@ -27,8 +27,8 @@ const steps = [
     icon: registryIcon,
     iconAlt: "Legal document verification",
     points: [
-      "Review NA, NOC and title documents",
-      "Check plan pass approval and finalise your plot",
+      "Review NA, NOC, Plan Pass and Title Documents",
+      "Check Plot Availability and finalize your Plot",
     ],
   },
   {

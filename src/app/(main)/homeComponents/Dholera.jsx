@@ -52,10 +52,11 @@ export default function DholeraSmartCity() {
               >
                 Dholera Smart City
               </Link>{" "}
-              is a planned smart city in Gujarat, India, developed as part of
-              the Delhi-Mumbai Industrial Corridor (DMIC). It is India’s first
-              greenfield smart city, building from scratch with modern
-              infrastructure and proper planning.
+              is a planned smart city in Gujarat, India and
+              is being developed as part of the Delhi-Mumbai Industrial Corridor
+              (DMIC). It is India’s first greenfield smart city, being built
+              from scratch with modern infrastructure, better connectivity, and
+              planned development.
             </p>
 
             {/* 3×2 highlight cards */}

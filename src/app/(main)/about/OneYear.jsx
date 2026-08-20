@@ -489,7 +489,7 @@ export default function BookMyAssets() {
                         The odds were stacked against us, but we did not wait
                         for permission. Our first sale came just 14 days later.
                         Then one viral reel brought 400 queries per day. We did
-                        not just handle it but we turned that momentum into our
+                        not just handle it, but we turned that momentum into our
                         first developer project, WestWyn County. While others
                         were planning, we were building.
                         <br />
@@ -507,7 +507,7 @@ export default function BookMyAssets() {
                         hustle.
                         <br />
                         <span className="font-bold">
-                          This is BookMyAssets. And we're just getting started.
+                          This is BookMyAssets, and we're just getting started.
                         </span>
                       </p>
                     </div>
@@ -570,7 +570,7 @@ export default function BookMyAssets() {
                   WE'RE JUST GETTING STARTED
                 </h2>
                 <p className="text-white text-base md:text-lg">
-                  Building legacies, one family at a time.
+                  Building Legacies, One Family at a Time.
                 </p>
               </section>
             </div>

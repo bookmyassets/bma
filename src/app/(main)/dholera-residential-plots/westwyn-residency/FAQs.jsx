@@ -60,7 +60,7 @@ export default function FAQSection() {
               FAQs
             </h2>
             <div className="order-3  md:order-none md:px-0">
-              <p className="pb-3">Have Any Other Question?</p>
+              <p className="pb-3">Have More Question?</p>
               <a
                 href="#"
                 className="px-1 py-2 bg-[#ddbc69] text-white rounded-md"

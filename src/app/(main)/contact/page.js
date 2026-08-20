@@ -364,9 +364,9 @@ const ContactPage = () => {
                   <div className="group-hover:text-white">{item.icon}</div>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-800 leading-relaxed">
+                <p className="text-lg font-semibold text-gray-800 leading-relaxed">
                   {item.title}
-                </h3>
+                </p>
               </div>
             ))}
           </div>
@@ -390,9 +390,9 @@ const ContactPage = () => {
             {/* Contact Info */}
             <div className="w-full md:w-1/3 bg-white rounded-lg shadow-lg p-6">
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">
                   Contact Information
-                </h2>
+                </h3>
 
                 <div className="flex items-start mb-4">
                   <div className="text-[#ddbc69] mr-3 mt-1">
@@ -573,9 +573,9 @@ const ContactPage = () => {
               className="w-full md:w-2/3 bg-white rounded-lg shadow-lg p-8"
               id="contact-form-container"
             >
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+              <h3 className="text-3xl font-bold text-gray-800 mb-6">
                 Send Us a Message
-              </h2>
+              </h3>
 
               {submitStatus.message && (
                 <div

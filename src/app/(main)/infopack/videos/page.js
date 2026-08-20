@@ -17,17 +17,17 @@ const videos = [
     duration: "unknown"
   },
   {
-    id: "_PU0sn6taHQ",
-    title: "ReNew Solar Manufacturing Plant in Dholera",
+    id: "B42CSpgDzuw",
+    title: "5000MW Solar Park - Renewable Energy Hub",
     duration: "unknown"
   },
   {
-    id: "Aih4UJppDbM",
+    id: "nHzHDuZW4-Q",
     title: "Dholera International Airport – Latest Update",
     duration: "unknown"
   },
   {
-    id: "RP9hDShgxhU",
+    id: "7amKouk27_Y",
     title: "Dholera Activation Area – India's Future City",
     duration: "unknown"
   },
@@ -42,7 +42,7 @@ const videos = [
     duration: "unknown"
   },
   {
-    id: "jF2U2IWF3yk",
+    id: "3CsMD0sG3eU",
     title: "ABCD Building – Dholera Activation Area",
     duration: "unknown"
   },
@@ -52,13 +52,13 @@ const videos = [
     duration: "unknown"
   },
   {
-    id: "KxGgxO_GBPY",
+    id: "8p3j7NByvTw",
     title: "Tata Semiconductor Plant – Dholera SIR",
     duration: "unknown"
   },
   {
-    id: "v3NNSMaVHb0",
-    title: "Dholera Solar Park – Renewable Energy Hub",
+    id: "gIAq4zt-LpM",
+    title: "ReNew Solar Manufacturing Plant in Dholera",
     duration: "unknown"
   }
 ];

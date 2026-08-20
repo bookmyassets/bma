@@ -137,9 +137,9 @@ export default function Footer() {
 
           {/* Residential */}
           <div>
-            <h3 className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
+            <p className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Residential Projects
-            </h3>
+            </p>
             <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link
@@ -171,9 +171,9 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
+            <p className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Quick Links
-            </h3>
+            </p>
             <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link
@@ -228,9 +228,9 @@ export default function Footer() {
 
           {/* Policies */}
           <div>
-            <h3 className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
+            <p className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Policies
-            </h3>
+            </p>
             <ul className="space-y-3 text-sm text-[#ddbc69]">
               <li>
                 <Link

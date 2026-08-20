@@ -49,7 +49,7 @@ export default function FAQSection() {
               FAQs
             </h2>
             <div className="order-3 md:order-none md:px-0">
-              <p className="pb-3 text-white">Have Any Other Question?</p>
+              <p className="pb-3 text-white">Have More Question?</p>
               <a
                 href="tel:+918130371647"
                 className="inline-flex min-h-11 items-center rounded-md bg-[#ddbc69] px-3 py-2 text-black"

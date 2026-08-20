@@ -42,7 +42,7 @@ const testimonials = [
   },
   {
     quote:
-      "Main long-term investment ke liye Dholera mein plot dekh raha tha. BookMyAssets ne mujhe realistic guidance di aur right project samajhne mein help ki.",
+      "Main long-term investment ke liye Dholera mein plot dekh rahi thi. BookMyAssets ne mujhe realistic guidance di aur right project samajhne mein help ki.",
     name: "Priya Shah",
     location: "Surat",
     avatar: priya,
