@@ -118,45 +118,36 @@ export default function HeroForm() {
     try {
       const now = Date.now();
       setSubmittedName(formData.fullName);
-      const response = await fetch(
-  "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-    },
-    body: JSON.stringify({
-      fields: {
-        name: formData.fullName,
-        phone: formData.phone,
-        source: getLeadSource(),
-      },
-      source: "BookMyAssets",
-      tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-    }),
-  },
-);
 
-if (!response.ok) {
-  const errText = await response.text().catch(() => "");
-  console.error("TeleCRM error:", response.status, errText);
-  throw new Error(`Error submitting form (${response.status})`);
-}
+      const response = await fetch("/api/submit-form-re", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            source: getLeadSource(),
+          },
+          source: "BookMyAssets",
+          tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+        }),
+      });
 
-      if (response.ok) {
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: "lead_form_hero" });
-      } else {
-        throw new Error("Error submitting form");
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || `Error submitting form (${response.status})`);
       }
+
+      setShowPopup(true);
+      setSubmissionCount((prev) => {
+        const newCount = prev + 1;
+        localStorage.setItem("formSubmissionCount", newCount.toString());
+        localStorage.setItem("lastSubmissionTime", now.toString());
+        return newCount;
+      });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "lead_form_hero" });
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(
