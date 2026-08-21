@@ -126,7 +126,7 @@ const faqs = [
   {
     question: "What is the starting price of bulk land in Dholera SIR?",
     answer:
-      "Bulk land prices depend on the location, land size, zoning and current availability. Contact the BookMyAssets relationship manager for updated pricing.",
+      "Bulk land prices depend on the location, land size, zoning and current availability. Contact the BookMyAssets RM for updated pricing.",
   },
   {
     question: "Does BookMyAssets provide land documents?",
@@ -326,7 +326,7 @@ export default function BulkLandPage() {
             <div className="mb-8 flex items-center gap-3">
               <span className="h-px w-10 bg-[#ddbc69]" />
               <h2 className="text-[clamp(1.75rem,3vw,2.4rem)] font-semibold text-[#f5f1e8]">
-                FAQ
+                FAQs
               </h2>
             </div>
 
