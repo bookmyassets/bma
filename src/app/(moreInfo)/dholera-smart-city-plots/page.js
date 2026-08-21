@@ -11,9 +11,10 @@ import TestimonialPagination from "./components/Testimonials";
 import NewSection from "./body/NewSection";
 import LegalClarity from "./body/LegalClarity";
 import WhyNCRInvestors from "./body/WhyNCR";
-import Hero from "./body/Hero";
+/* import Hero from "./body/Hero"; */
 import Whatsapp from "./components/WhatsAppCirle";
 import FAQSection from "./body/FAQs";
+import LandingPage from "./body/HeroSplit";
 
 export default function Page() {
   const [showForm, setShowForm] = useState(false);
@@ -33,7 +34,7 @@ export default function Page() {
       />
       <div className="overflow-hidden">
         <section>
-          <Hero />
+          <LandingPage/>
         </section>
         {/*About Dholera + Major Projects in Dholera + Why Invest in Dholera with BookMyAssets */}
         <DholeraLandingPage />
