@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 
 function FormInput({
@@ -40,7 +40,7 @@ function FormInput({
   );
 }
 
-// ← FIX: getLeadSource extracted outside component — no re-creation on every render
+// getLeadSource extracted outside component — no re-creation on every render
 function getLeadSource() {
   if (typeof window === "undefined") return "BookMyAssets";
   const params = new URLSearchParams(window.location.search);
@@ -57,13 +57,9 @@ export default function HeroForm() {
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [submittedName, setSubmittedName] = useState("");
-  const recaptchaRef = useRef(null);
-  const recaptchaWidgetId = useRef(null); // ← FIX: track widget ID for proper reset
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  // ← FIX: Read localStorage on mount so rate limit persists across refreshes
+  // Read localStorage on mount so rate limit persists across refreshes
   const [submissionCount, setSubmissionCount] = useState(() => {
     if (typeof window === "undefined") return 0;
     const saved = localStorage.getItem("formSubmissionCount");
@@ -78,25 +74,6 @@ export default function HeroForm() {
     if (typeof window === "undefined") return 0;
     return parseInt(localStorage.getItem("lastSubmissionTime") || "0");
   });
-
-  const loadRecaptcha = useCallback(() => {
-    if (recaptchaLoaded) return;
-
-    // ← FIX: Global deduplication — don't inject if already in DOM
-    const existing = document.querySelector('script[src*="recaptcha/api.js"]');
-    if (existing) {
-      setRecaptchaLoaded(true);
-      return;
-    }
-
-    const s = document.createElement("script");
-    // ← FIX: render=explicit prevents auto-rendering phantom widgets
-    s.src = "https://www.google.com/recaptcha/api.js?render=explicit";
-    s.async = true;
-    s.defer = true;
-    document.head.appendChild(s);
-    setRecaptchaLoaded(true);
-  }, [recaptchaLoaded]);
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
@@ -128,30 +105,44 @@ export default function HeroForm() {
     return true;
   };
 
-  const onRecaptchaSuccess = async (token) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
+
+    if (!validateForm()) {
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const now = Date.now();
       setSubmittedName(formData.fullName);
       const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: getLeadSource(),
-            },
-            source: "BookMyAssets",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-            recaptchaToken: token,
-          }),
-        },
-      );
+  "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+    },
+    body: JSON.stringify({
+      fields: {
+        name: formData.fullName,
+        phone: formData.phone,
+        source: getLeadSource(),
+      },
+      source: "BookMyAssets",
+      tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+    }),
+  },
+);
+
+if (!response.ok) {
+  const errText = await response.text().catch(() => "");
+  console.error("TeleCRM error:", response.status, errText);
+  throw new Error(`Error submitting form (${response.status})`);
+}
 
       if (response.ok) {
         setShowPopup(true);
@@ -173,49 +164,6 @@ export default function HeroForm() {
       );
     } finally {
       setIsLoading(false);
-      // ← FIX: reset by widget ID, not blindly
-      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
-        window.grecaptcha.reset(recaptchaWidgetId.current);
-      }
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage("");
-
-    if (!validateForm()) {
-      setIsLoading(false);
-      return;
-    }
-
-    if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("reCAPTCHA not loaded. Please try again.");
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      // ← FIX: render only once, reuse widget ID on subsequent submits
-      if (recaptchaWidgetId.current === null) {
-        recaptchaWidgetId.current = window.grecaptcha.render(
-          recaptchaRef.current,
-          {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
-            size: "invisible", // ← keeps it invisible until execute()
-          },
-        );
-      } else {
-        window.grecaptcha.reset(recaptchaWidgetId.current);
-      }
-      window.grecaptcha.execute(recaptchaWidgetId.current);
-    } catch (error) {
-      console.error("reCAPTCHA error:", error);
-      setErrorMessage("Verification error. Please refresh and try again.");
-      setIsLoading(false);
     }
   };
 
@@ -226,9 +174,6 @@ export default function HeroForm() {
           <h1 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] glowing-text px-2">
             Get Project Details
           </h1>
-          {/* <p className="text-[0.875rem] font-normal leading-[1.5] glowing-text px-2">
-            Sub title
-          </p> */}
         </div>
       </div>
 
@@ -271,7 +216,6 @@ export default function HeroForm() {
       ) : (
         <form
           onSubmit={handleSubmit}
-          onFocus={loadRecaptcha}
           className="space-y-[clamp(0.5rem,1vw,0.75rem)]"
         >
           {errorMessage && (
@@ -308,9 +252,6 @@ export default function HeroForm() {
               aria-label="Phone Number"
             />
           </div>
-
-          {/* ← FIX: invisible reCAPTCHA — no visible widget box, no layout shift */}
-          <div ref={recaptchaRef} />
 
           <button
             type="submit"
