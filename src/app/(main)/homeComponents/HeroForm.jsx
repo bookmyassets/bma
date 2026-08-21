@@ -133,11 +133,12 @@ export default function HeroForm() {
       const now = Date.now();
       setSubmittedName(formData.fullName);
       const response = await fetch(
-        "/api/submit-form",
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
           body: JSON.stringify({
             fields: {
@@ -221,10 +222,10 @@ export default function HeroForm() {
   return (
     <div className="w-full bg-white rounded-xl max-w-lg p-[clamp(1rem,2vw,1.5rem)] md:overflow-hidden shadow-lg">
       <div className="text-center mb-[clamp(0.75rem,1.5vw,1.25rem)]">
-        <div> 
-          <p className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] glowing-text px-2">
+        <div>
+          <h1 className="text-[clamp(1.125rem,2vw,1.5rem)] font-semibold leading-[1.35] glowing-text px-2">
             Get Project Details
-          </p>
+          </h1>
           {/* <p className="text-[0.875rem] font-normal leading-[1.5] glowing-text px-2">
             Sub title
           </p> */}
