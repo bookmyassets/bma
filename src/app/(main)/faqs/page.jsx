@@ -41,7 +41,7 @@ const faqGroups = [
     "id": "general",
     "label": "General",
     "shortLabel": "General",
-    "description": "Learn about BookMyAssets, its Dholera projects and the support available before and after purchase.",
+    "description": "Learn about BookMyAssets, its Dholera projects, and the support available before and after purchase.",
     "items": [
       {
         "question": "What is BookMyAssets?",
@@ -113,7 +113,7 @@ const faqGroups = [
       },
       {
         "question": "Is the Ahmedabad-Dholera Expressway complete?",
-        "answer": "Yes, the Ahmedabad-Dholera Expressway is complete and operational, inaugurated by PM Modi on 31 March 2026."
+        "answer": "Yes. The Ahmedabad-Dholera Expressway is complete and operational, inaugurated by PM Modi on 31 March 2026."
       },
       {
         "question": "What is the current status of Dholera International Airport?",
@@ -133,7 +133,7 @@ const faqGroups = [
       },
       {
         "question": "Is Dholera better for long-term or short-term investment?",
-        "answer": "Most investors treat Dholera as a long-term land-holding opportunity rather than a short-term investment,"
+        "answer": "Most investors treat Dholera as a long-term land-holding opportunity rather than a short-term investment."
       },
       {
         "question": "What is DSIRDA?",
@@ -365,7 +365,7 @@ export default function FAQsPage() {
               </h1>
               <p className="mt-6 max-w-2xl text-[clamp(1rem,1.8vw,1.2rem)] leading-8 text-white/65">
                 Straightforward guidance on Dholera SIR, plot documents,
-                approvals, due diligence and site visitswritten for buyers who
+                approvals, due diligence and site visits for buyers who
                 prefer facts before decisions.
               </p>
             </div>

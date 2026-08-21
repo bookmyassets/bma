@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     question: "What amenities are available in WestWyn County?",
-    answer: "The project offers a gated boundary, 24/7 security, CCTV, wide roads, drainage, power and water supply, a kids’ play area, yoga deck, senior citizen zone and EV charging.",
+    answer: "The project offers a gated boundary, 24/7 security, CCTV, wide roads, drainage, power and water supply, a kids’ play area, yoga deck, senior citizen zone, and EV charging.",
   },
 ];
 

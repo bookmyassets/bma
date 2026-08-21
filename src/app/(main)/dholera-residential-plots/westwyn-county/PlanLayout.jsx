@@ -90,42 +90,42 @@ const PlanLayout = () => {
                 {
                   title: "Total Plots",
                   content: "131 plots",
-                  align: "text-left",
+                  align: "text-center",
                 },
                 {
                   title: "Possession",
                   content: "Immediate",
-                  align: "text-left",
+                  align: "text-center",
                 },
                 {
                   title: "Plot Size",
                   content: "149-325 sq. yards",
-                  align: "text-left",
+                  align: "text-center",
                 },
                 {
                   title: "Resale Price",
                   content: "₹12,000",
-                  align: "text-left",
+                  align: "text-center",
                 },
                 {
                   title: "Developer",
                   content: "BookMyAssets",
-                  align: "text-left",
+                  align: "text-center",
                 },
                 {
                   title: "Development Status",
                   content: "Under Construction",
-                  align: "text-left",
+                  align: "text-center",
                 },
                 {
                   title: "Documentation",
                   content: "NA/NOC, Title Clear, Plan Pass Approved",
-                  align: "text-left",
+                  align: "text-center",
                 },
                 {
                   title: "Location",
                   content: "Fedra-Pipli State Highway",
-                  align: "text-left",
+                  align: "text-center",
                 },
               ].map(({ title, content, align }, index, arr) => {
                 const isLastOdd =
