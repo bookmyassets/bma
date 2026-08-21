@@ -200,8 +200,7 @@ export default function HeroForm() {
             Your request has been submitted successfully.
           </p>
           <p className="text-[0.875rem] text-[#ddbc69] font-semibold leading-[1.5]">
-            Our expert will contact you within 24 hours for your free
-            consultation.
+            Our expert will contact you within 24 hours.
           </p>
         </div>
       ) : (
