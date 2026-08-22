@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import img1 from "@/assests/rakhi-offer.webp";
 import mobileImg from "@/assests/rakhi-offer-bookmyassets-landing-page-mobile.webp";
@@ -17,37 +18,11 @@ export default function LandingPage({ openForm }) {
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
-  const recaptchaRef = useRef(null);
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true);
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true);
-        }
-      } else if (window.grecaptcha) {
-        setRecaptchaLoaded(true);
-      }
-    };
-
-    loadRecaptcha();
-
     if (typeof window !== "undefined") {
       setSubmissionCount(
         parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
@@ -104,7 +79,16 @@ export default function LandingPage({ openForm }) {
     return true;
   };
 
-  const onRecaptchaSuccess = async (token) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage("");
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
       const now = Date.now();
 
@@ -124,7 +108,6 @@ export default function LandingPage({ openForm }) {
             },
             source: "BookMyAssets Google Ads",
             tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-            recaptchaToken: token,
           }),
         },
       );
@@ -143,7 +126,6 @@ export default function LandingPage({ openForm }) {
         setTimeout(() => {
           setShowThankYou(false);
           handleClose();
-          const currentPath = pathname || window.location.pathname;
           router.push(`/thankyou`);
         }, 2000);
       } else {
@@ -156,42 +138,6 @@ export default function LandingPage({ openForm }) {
       );
     } finally {
       setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
-      }
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage("");
-
-    if (!validateForm()) {
-      setIsLoading(false);
-      return;
-    }
-
-    if (window.grecaptcha && recaptchaLoaded) {
-      try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
-          });
-        } else {
-          window.grecaptcha.reset();
-          window.grecaptcha.execute();
-        }
-      } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
-      }
-    } else {
-      setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
-      setIsLoading(false);
     }
   };
 
@@ -203,6 +149,10 @@ export default function LandingPage({ openForm }) {
 
   const closeBrochure = () => {
     setIsDownload(false);
+  };
+
+  const handleClose = () => {
+    // keep existing close behavior wired up from parent if needed
   };
 
   return (
@@ -452,11 +402,6 @@ export default function LandingPage({ openForm }) {
                         className="w-full p-3 pl-10 bg-white text-black rounded-lg placeholder:text-black focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-900 hover:border-yellow-400 transition-colors text-sm"
                       />
                     </motion.div>
-                  </div>
-
-                  {/* reCAPTCHA container */}
-                  <div className="flex justify-center">
-                    <div ref={recaptchaRef}></div>
                   </div>
 
                   <motion.button
