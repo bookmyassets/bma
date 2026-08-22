@@ -5,7 +5,8 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import img1 from "@/assests/rakhi-offer.webp";
-import mobileImg from "@/assests/rakhi-offer-bookmyassets-landing-page-mobile.webp";
+import mobileImg from "@/assests/rakhi-mobile.png";
+/* import mobileImg from "@/assests/rakhi-offer-bookmyassets-landing-page-mobile.webp"; */
 import BrochureDownload from "../components/BrochureDownload";
 
 export default function LandingPage({ openForm }) {
