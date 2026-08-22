@@ -92,45 +92,41 @@ export default function LandingPage({ openForm }) {
     try {
       const now = Date.now();
 
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: "BookMyAssets",
-            },
+      const response = await fetch("/api/submit-form-re", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
             source: "BookMyAssets Google Ads",
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-          }),
-        },
-      );
+          },
+          source: "BookMyAssets Google Ads",
+          tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+        }),
+      });
 
-      if (response.ok) {
-        setFormData({ fullName: "", phone: "" });
-        setShowPopup(true);
-        setSubmissionCount((prev) => {
-          const newCount = prev + 1;
-          localStorage.setItem("formSubmissionCount", newCount.toString());
-          localStorage.setItem("lastSubmissionTime", now.toString());
-          return newCount;
-        });
+      const data = await response.json().catch(() => ({}));
 
-        setShowThankYou(true);
-        setTimeout(() => {
-          setShowThankYou(false);
-          handleClose();
-          router.push(`/thankyou`);
-        }, 2000);
-      } else {
-        throw new Error("Error submitting form");
+      if (!response.ok) {
+        throw new Error(data.error || `Error submitting form (${response.status})`);
       }
+
+      setFormData({ fullName: "", phone: "" });
+      setShowPopup(true);
+      setSubmissionCount((prev) => {
+        const newCount = prev + 1;
+        localStorage.setItem("formSubmissionCount", newCount.toString());
+        localStorage.setItem("lastSubmissionTime", now.toString());
+        return newCount;
+      });
+
+      setShowThankYou(true);
+      setTimeout(() => {
+        setShowThankYou(false);
+        handleClose();
+        router.push(`/thankyou`);
+      }, 2000);
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(
