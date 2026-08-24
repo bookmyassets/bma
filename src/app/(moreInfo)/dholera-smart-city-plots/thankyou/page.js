@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 function ThankYouContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const returnUrl = '/more-info';
+  const returnUrl = '/dholera-smart-city-plots';
 
   useEffect(() => {
     // Redirect back after 2 seconds instead of 3

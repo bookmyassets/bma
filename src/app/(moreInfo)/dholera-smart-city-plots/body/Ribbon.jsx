@@ -155,7 +155,7 @@ export default function Ribbon() {
           setShowThankYou(false);
           handleClose();
           const currentPath = pathname || window.location.pathname;
-          router.push("/more-info/thankyou");
+          router.push("/dholera-smart-city-plots/thankyou");
         }, 2000);
       } else {
         throw new Error("Error submitting form");
