@@ -7,6 +7,7 @@ import bookingIcon from "@/assests/icons/booking.svg";
 import callIcon from "@/assests/icons/call.svg";
 import constructionIcon from "@/assests/icons/construction.svg";
 import registryIcon from "@/assests/icons/registry.svg";
+import villaIcon from "@/assests/icons/house.svg";
 import Link from "next/link";
 
 const steps = [
@@ -52,8 +53,9 @@ const steps = [
 
 const supportItems = [
   {
-    icon: constructionIcon,
+    icon: villaIcon,
     iconAlt: "Villa layout and design",
+    iconClassName: "p-2 md:p-2.5",
     text: "Choose a suitable villa layout and design",
   },
   {
@@ -113,13 +115,13 @@ export default function HowToBuy() {
                 key={step.number}
                 className="relative flex flex-col rounded-2xl border border-[#ddbc69] bg-black px-4 pb-4 pt-11 sm:px-5 sm:pb-5 sm:pt-12 lg:min-h-[325px] lg:pb-6 lg:pt-16"
               >
-                <div className="absolute left-1/2 top-0 flex h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#ddbc69] shadow-[0_7px_16px_rgba(0,0,0,0.65)]">
+                <div className="absolute left-1/2 top-0 flex h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-2xl bg-[#ddbc69] shadow-[0_7px_16px_rgba(0,0,0,0.65)]">
                   <Image
                     src={step.icon}
                     alt={step.iconAlt}
                     width={54}
                     height={54}
-                    className="h-[54px] w-[54px] object-contain"
+                    className="h-[100px] w-[100px] object-contain"
                   />
                 </div>
 
@@ -181,7 +183,7 @@ export default function HowToBuy() {
                   alt="Construction support"
                   width={94}
                   height={94}
-                  className="h-[82px] w-[82px] shrink-0 rounded-full bg-[#ddbc69] object-contain sm:h-[92px] sm:w-[92px]"
+                  className="h-[82px] w-[82px] shrink-0 rounded-2xl bg-[#ddbc69] object-contain sm:h-[92px] sm:w-[92px]"
                 />
                 <div>
                   <p className="text-[clamp(1.2rem,2vw,1.75rem)] font-bold leading-tight text-[#ddbc69]">
@@ -205,7 +207,7 @@ export default function HowToBuy() {
                     alt={item.iconAlt}
                     width={58}
                     height={58}
-                    className="h-12 w-12 shrink-0 rounded-full bg-[#ddbc69] object-contain md:h-[54px] md:w-[54px]"
+                    className={`h-12 w-12 shrink-0 rounded-2xl bg-[#ddbc69] object-contain md:h-[54px] md:w-[54px] ${item.iconClassName || ""}`}
                   />
                   <p className="max-w-none text-[0.95rem] leading-[1.35] text-white md:mt-2 md:max-w-[220px]">
                     {item.text}
