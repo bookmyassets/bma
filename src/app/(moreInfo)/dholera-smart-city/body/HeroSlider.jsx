@@ -40,6 +40,8 @@ export default function LandingPage({ openForm }) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const recaptchaRef = useRef(null);
+  const recaptchaWidgetIdRef = useRef(null);
+  const recaptchaTokenRef = useRef("");
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // Slider state
@@ -57,30 +59,43 @@ export default function LandingPage({ openForm }) {
   ];
 
   useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true); // Fallback
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true); // Fallback
-        }
-      } else if (window.grecaptcha) {
-        setRecaptchaLoaded(true);
-      }
+    if (!siteKey) {
+      console.error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not set");
+      setErrorMessage("Verification is temporarily unavailable.");
+      return;
+    }
+
+    let isMounted = true;
+    const scriptId = "google-recaptcha-script";
+
+    const markRecaptchaReady = () => {
+      if (!window.grecaptcha?.ready) return;
+
+      window.grecaptcha.ready(() => {
+        if (isMounted) setRecaptchaLoaded(true);
+      });
     };
 
-    loadRecaptcha();
+    let script = document.getElementById(scriptId);
+
+    if (window.grecaptcha?.ready) {
+      markRecaptchaReady();
+    } else if (script) {
+      script.addEventListener("load", markRecaptchaReady);
+    } else {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://www.google.com/recaptcha/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.addEventListener("load", markRecaptchaReady);
+      script.addEventListener("error", () => {
+        if (isMounted) {
+          setErrorMessage("Verification failed to load. Please refresh and try again.");
+        }
+      });
+      document.head.appendChild(script);
+    }
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
@@ -101,9 +116,38 @@ export default function LandingPage({ openForm }) {
     document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
+      isMounted = false;
+      script?.removeEventListener("load", markRecaptchaReady);
       document.removeEventListener("keydown", handleEscapeKey);
     };
-  }, []);
+  }, [siteKey]);
+
+  useEffect(() => {
+    if (!recaptchaLoaded || !recaptchaRef.current || !window.grecaptcha) return;
+
+    window.grecaptcha.ready(() => {
+      if (recaptchaWidgetIdRef.current !== null || !recaptchaRef.current) return;
+
+      recaptchaWidgetIdRef.current = window.grecaptcha.render(
+        recaptchaRef.current,
+        {
+          sitekey: siteKey,
+          theme: "light",
+          callback: (token) => {
+            recaptchaTokenRef.current = token;
+            setErrorMessage("");
+          },
+          "expired-callback": () => {
+            recaptchaTokenRef.current = "";
+          },
+          "error-callback": () => {
+            recaptchaTokenRef.current = "";
+            setErrorMessage("Verification failed. Please try again.");
+          },
+        },
+      );
+    });
+  }, [recaptchaLoaded, siteKey]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -206,8 +250,12 @@ export default function LandingPage({ openForm }) {
       setIsLoading(false);
     } finally {
       setIsLoading(false);
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
+      if (
+        window.grecaptcha &&
+        recaptchaWidgetIdRef.current !== null
+      ) {
+        window.grecaptcha.reset(recaptchaWidgetIdRef.current);
+        recaptchaTokenRef.current = "";
       }
     }
   };
@@ -221,28 +269,21 @@ export default function LandingPage({ openForm }) {
       return;
     }
 
-    // If reCAPTCHA is loaded, render it in the ref
-    if (window.grecaptcha && recaptchaLoaded) {
-      try {
-        if (recaptchaRef.current && !recaptchaRef.current.innerHTML) {
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
-          });
-        } else {
-          window.grecaptcha.reset();
-          window.grecaptcha.execute();
-        }
-      } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
-      }
-    } else {
+    if (!window.grecaptcha || !recaptchaLoaded) {
       setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
       setIsLoading(false);
+      return;
     }
+
+    const recaptchaToken = recaptchaTokenRef.current;
+
+    if (!recaptchaToken) {
+      setErrorMessage("Please complete the reCAPTCHA verification.");
+      setIsLoading(false);
+      return;
+    }
+
+    await onRecaptchaSuccess(recaptchaToken);
   };
 
   // Animation variants

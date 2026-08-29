@@ -48,30 +48,26 @@ export default function Ribbon() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true);
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true);
-        }
-      } else if (window.grecaptcha) {
-        setRecaptchaLoaded(true);
-      }
+    const markRecaptchaReady = () => {
+      if (!window.grecaptcha?.ready) return;
+      window.grecaptcha.ready(() => setRecaptchaLoaded(true));
     };
 
-    loadRecaptcha();
+    let script = document.getElementById("google-recaptcha-script");
+
+    if (window.grecaptcha?.ready) {
+      markRecaptchaReady();
+    } else if (script) {
+      script.addEventListener("load", markRecaptchaReady);
+    } else {
+      script = document.createElement("script");
+      script.id = "google-recaptcha-script";
+      script.src = "https://www.google.com/recaptcha/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.addEventListener("load", markRecaptchaReady);
+      document.head.appendChild(script);
+    }
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
@@ -91,6 +87,7 @@ export default function Ribbon() {
     document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
+      script?.removeEventListener("load", markRecaptchaReady);
       document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
