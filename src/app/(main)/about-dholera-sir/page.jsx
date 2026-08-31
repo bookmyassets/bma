@@ -1,5 +1,5 @@
 import { projectInfo } from "@/sanity/lib/api";
-import React from "react";
+import React, { Suspense } from "react";
 import banner from "@/assests/about-dholera-sir-desktop-banner.webp";
 import semiconductorHubImage from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
 // import BlogSlider from "./BlogSlider";
@@ -23,6 +23,15 @@ const MegaIndustries = dynamic(() => import("./MegaIndustries"), {
 const FAQSection = dynamic(() => import("./FAQs"), {
   loading: () => <div className="min-h-[200px]" />,
 });
+
+export const metadata = {
+  title: "What is Dholera SIR? Smart City Guide, Map & Investment 2026",
+  description:
+    "Complete guide to Dholera SIR, India's first greenfield smart city. Location, DMIC role, airport, expressway, semiconductor hub and investment outlook.",
+  alternates: {
+    canonical: "https://www.bookmyassets.com/about-dholera-sir",
+  },
+};
 
 const MAJOR_INFRASTRUCTURE_PROJECTS = [
   "Ahmedabad-Dholera Expressway",
@@ -222,7 +231,7 @@ export default async function page() {
         }}
       />
 
-      <title>What is Dholera SIR? Smart City Guide, Map & Investment 2026</title>
+      {/* <title>What is Dholera SIR? Smart City Guide, Map & Investment 2026</title>
       <meta
         name="description"
         content="Complete guide to Dholera SIR, India's first greenfield smart city. Location, DMIC role, airport, expressway, semiconductor hub and investment outlook."
@@ -230,17 +239,19 @@ export default async function page() {
       <link
         rel="canonical"
         href="https://www.bookmyassets.com/about-dholera-sir"
-      />
+      /> */}
+
       <div className="bg-black text-white">
         {/* Hero Section */}
         <div className="pt-[clamp(3rem,5vw,4rem)] md:pt-0">
           <div className="md:relative md:h-[70vh] overflow-hidden shadow-lg">
             <Image
               src={banner}
-              alt="banner"
+              alt="Dholera Special Investment Region"
               className="w-full md:h-full h-auto object-contain md:object-cover"
-              quality={85}
+              quality={72}
               priority
+              placeholder="blur"
               sizes="100vw"
             />
           </div>
@@ -266,14 +277,17 @@ export default async function page() {
                       alt="Dholera Smart City"
                       className="w-full h-auto object-cover"
                       sizes="(max-width: 1024px) 100vw, 40vw"
+                      quality={72}
+                      loading="lazy"
                     />
                   </div>
                 </div>
-                <div className="lg:w-[60%] prose prose-lg text-white/90">
+                <div className="lg:w-[60%] text-white/90">
                   <p className="text-white/90 text-fluid-base leading-[1.8] mb-4">
                     <strong>
                       <Link
-                        href="dholera-sir-blogs/dholera-2025-development-infrastructure-progress"
+                        href="/dholera-sir-blogs/dholera-2025-development-infrastructure-progress"
+                        prefetch={false}
                         className="text-[#ddbc69] hover:underline"
                       >
                         Dholera Special Investment Region (Dholera SIR)
@@ -303,7 +317,6 @@ export default async function page() {
           >
             <div className="mx-auto max-w-7xl">
               <header className="mb-[clamp(1.5rem,3vw,2.25rem)]">
-                
                 <h2
                   id="dholera-sir-act-title"
                   className="max-w-3xl text-[clamp(1.25rem,3.5vw,3rem)] font-bold leading-[1.12] tracking-[-0.03em] text-white"
@@ -313,7 +326,7 @@ export default async function page() {
                 </h2>
               </header>
 
-              <div className="space-y-5 text-[clamp(1rem,1.5vw,1.125rem)] leading-[1.85] text-white/85">
+              <div className="space-y-5 text-fluid-base leading-[1.85] text-white/85">
                 <p>
                   The Dholera SIR Act refers to the{" "}
                   <strong className="font-semibold text-white">
@@ -343,10 +356,10 @@ export default async function page() {
                 <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-[#ddbc69] sm:text-sm">
                   Planned development
                 </p>
-                <h2 className="text-[clamp(1.6rem,3.5vw,2.75rem)] font-bold leading-tight tracking-[-0.025em] text-white">
+                <h2 className="text-fluid-lg font-bold leading-tight tracking-[-0.025em] text-white">
                   Dholera SIR Master Plan
                 </h2>
-                <p className="mt-5 text-[clamp(1rem,1.5vw,1.125rem)] leading-[1.85] text-white/85">
+                <p className="mt-5 text-fluid-base leading-[1.85] text-white/85">
                   The Dholera SIR Master Plan has been designed to develop the
                   city in planned phases. Spread across approximately 920 sq.
                   km, the project includes six town-planning schemes with
@@ -369,7 +382,7 @@ export default async function page() {
                   ].map((zone, index) => (
                     <li
                       key={zone}
-                      className="flex items-center gap-4 py-3.5 text-[clamp(1rem,1.5vw,1.125rem)] text-white/90 sm:gap-6"
+                      className="flex items-center gap-4 py-3.5 text-fluid-base text-white/90 sm:gap-6"
                     >
                       <span
                         aria-hidden="true"
@@ -419,7 +432,7 @@ export default async function page() {
                   {MAJOR_INFRASTRUCTURE_PROJECTS.map((project) => (
                     <li
                       key={project}
-                      className="flex items-start gap-4 py-3.5 text-[clamp(0.95rem,1.3vw,1.075rem)] leading-relaxed text-white/90"
+                      className="flex items-start gap-4 py-3.5 text-fluid-sm leading-relaxed text-white/90"
                     >
                       <span
                         aria-hidden="true"
@@ -512,15 +525,46 @@ export default async function page() {
           {/* Infrastructure & Connectivity */}
 
           {/* Blog Slider */}
-          <div className="mb-8">
+          {/* <div className="mb-8">
             <p className="text-3xl font-bold text-white text-center py-4">
               Mega Projects in Dholera
             </p>
             <BlogSlider posts={safePosts} />
+          </div> */}
+          <div
+            className="mb-8"
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "500px",
+            }}
+          >
+            <p className="text-3xl font-bold text-white text-center py-4">
+              Mega Projects in Dholera
+            </p>
+
+            <Suspense
+              fallback={
+                <div
+                  aria-hidden="true"
+                  style={{
+                    minHeight: "300px",
+                  }}
+                />
+              }
+            >
+              <BlogSliderSection />
+            </Suspense>
           </div>
 
           {/* Lead Form */}
-          <div className="mb-8" id="contact">
+          <div
+            className="mb-8"
+            id="contact"
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "420px",
+            }}
+          >
             <InlineLeadForm
               variant="lead"
               title="Registry Ready Plots in Dholera"
@@ -528,16 +572,31 @@ export default async function page() {
             />
           </div>
 
-          <MegaIndustries/>
+          <div
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "900px",
+            }}
+          >
+            <MegaIndustries />
+          </div>
 
-
-
-          <section>
+          <section
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "700px",
+            }}
+          >
             <FAQSection />
           </section>
 
           {/* Final Statement Section */}
-          <section>
+          <section
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "700px",
+            }}
+          >
             <div className="bg-black text-white rounded-xl p-6 md:p-8 text-center">
               <h5 className="text-2xl md:text-3xl font-bold mb-4">
                 Dholera Is Not a Project - It's India's Long-Term Industrial
