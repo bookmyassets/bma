@@ -296,8 +296,7 @@ export default async function page() {
               alt="Dholera Special Investment Region"
               className="w-full md:h-full h-auto object-contain md:object-cover"
               quality={55}
-              priority
-              fetchPriority="high"
+              loading="eager"
               placeholder="blur"
               sizes="100vw"
             />
@@ -325,7 +324,8 @@ export default async function page() {
                       className="w-full h-auto object-cover"
                       sizes="(max-width: 1024px) 100vw, 40vw"
                       quality={65}
-                      loading="lazy"
+                      priority
+                      fetchPriority="high"
                       placeholder="blur"
                       width={1000}
                       height={667}
