@@ -39,6 +39,7 @@ export default function LandingPage({ openForm }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [showRecaptcha, setShowRecaptcha] = useState(false);
   const recaptchaRef = useRef(null);
   const recaptchaWidgetIdRef = useRef(null);
   const recaptchaTokenRef = useRef("");
@@ -123,7 +124,7 @@ export default function LandingPage({ openForm }) {
   }, [siteKey]);
 
   useEffect(() => {
-    if (!recaptchaLoaded || !recaptchaRef.current || !window.grecaptcha) return;
+    if (!recaptchaLoaded || !showRecaptcha || !recaptchaRef.current || !window.grecaptcha) return;
 
     window.grecaptcha.ready(() => {
       if (recaptchaWidgetIdRef.current !== null || !recaptchaRef.current) return;
@@ -136,6 +137,8 @@ export default function LandingPage({ openForm }) {
           callback: (token) => {
             recaptchaTokenRef.current = token;
             setErrorMessage("");
+            // Auto-submit the form after reCAPTCHA is verified
+            setTimeout(() => onRecaptchaSuccess(token), 300);
           },
           "expired-callback": () => {
             recaptchaTokenRef.current = "";
@@ -147,7 +150,14 @@ export default function LandingPage({ openForm }) {
         },
       );
     });
-  }, [recaptchaLoaded, siteKey]);
+  }, [recaptchaLoaded, showRecaptcha, siteKey]);
+
+  useEffect(() => {
+    if (!showRecaptcha) {
+      recaptchaWidgetIdRef.current = null;
+      recaptchaTokenRef.current = "";
+    }
+  }, [showRecaptcha]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -209,6 +219,9 @@ export default function LandingPage({ openForm }) {
 
       if (response.ok) {
         setFormData({ fullName: "", phone: "" });
+        setShowRecaptcha(false);
+        recaptchaTokenRef.current = "";
+        recaptchaWidgetIdRef.current = null;
         setSubmissionCount((prev) => {
           const newCount = prev + 1;
           localStorage.setItem("formSubmissionCount", newCount.toString());
@@ -261,29 +274,30 @@ export default function LandingPage({ openForm }) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     setErrorMessage("");
 
+    // First, validate the form
     if (!validateForm()) {
+      return;
+    }
+
+    // If reCAPTCHA is not shown yet, show it
+    if (!showRecaptcha) {
+      setShowRecaptcha(true);
       setIsLoading(false);
       return;
     }
 
-    if (!window.grecaptcha || !recaptchaLoaded) {
-      setErrorMessage("reCAPTCHA not loaded. Please refresh and try again.");
-      setIsLoading(false);
-      return;
-    }
-
-    const recaptchaToken = recaptchaTokenRef.current;
-
-    if (!recaptchaToken) {
+    // If reCAPTCHA is shown but not verified yet, wait for verification
+    if (!recaptchaTokenRef.current) {
       setErrorMessage("Please complete the reCAPTCHA verification.");
       setIsLoading(false);
       return;
     }
 
-    await onRecaptchaSuccess(recaptchaToken);
+    // If token exists, proceed with submission
+    setIsLoading(true);
+    await onRecaptchaSuccess(recaptchaTokenRef.current);
   };
 
   // Animation variants
@@ -597,12 +611,15 @@ export default function LandingPage({ openForm }) {
                       />
                     </div>
 
-                    <div className="flex justify-center">
-                      <div ref={recaptchaRef}></div>
-                    </div>
+                    {showRecaptcha && (
+                      <div className="flex justify-center">
+                        <div ref={recaptchaRef}></div>
+                      </div>
+                    )}
 
                     <button
-                      type="submit"
+                      type="button"
+                      onClick={handleSubmit}
                       disabled={isLoading}
                       className="flex w-full items-center justify-center gap-2 bg-[#101820] px-5 py-3 text-sm font-bold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-70"
                     >
