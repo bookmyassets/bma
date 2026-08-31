@@ -102,7 +102,7 @@ async function BlogSliderSection() {
   return <BlogSlider posts={safePosts} />;
 }
 
-export default async function page() {
+export default function page() {
   // let posts = [];
   // try {
   //   const postsData = await projectInfo();
@@ -123,15 +123,6 @@ export default async function page() {
 
   return (
     <>
-      {/* Preload LCP image and preconnect to CDN */}
-      <link
-        rel="preload"
-        as="image"
-        href={semiconductorHubImage.src}
-        fetchPriority="high"
-      />
-      <link rel="preconnect" href="https://www.bookmyassets.com" />
-      
       {/* Schema Markups */}
       <script
         type="application/ld+json"
@@ -304,8 +295,9 @@ export default async function page() {
               src={banner}
               alt="Dholera Special Investment Region"
               className="w-full md:h-full h-auto object-contain md:object-cover"
-              quality={40}
-              loading="lazy"
+              quality={45}
+              priority
+              fetchPriority="high"
               placeholder="blur"
               sizes="100vw"
             />
@@ -324,25 +316,10 @@ export default async function page() {
             </div>
 
             <div className="mx-auto">
-              <div className="flex flex-col lg:flex-row gap-[clamp(1rem,2vw,2rem)] items-center">
-                <div className="lg:w-[40%] w-full" style={{ contain: "layout style paint" }}>
-                  <div className="relative overflow-hidden rounded-[clamp(1rem,2vw,1.5rem)] shadow-lg border border-white/10">
-                    <Image
-                      src={semiconductorHubImage}
-                      alt="Dholera Smart City"
-                      className="w-full h-auto object-cover"
-                      sizes="(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) 92vw, (max-width: 1279px) 37vw, 30rem"
-                      quality={35}
-                      priority
-                      fetchPriority="high"
-                      placeholder="blur"
-                      width={600}
-                      height={400}
-                    />
-                  </div>
-                </div>
-                <div className="lg:w-[60%] text-white/90">
-                  <p className="text-white/90 text-fluid-base leading-[1.8] mb-4">
+              <div className="flex flex-col lg:flex-row gap-5 lg:gap-8 items-center">
+                {/* TEXT FIRST ON MOBILE */}
+                <div className="order-1 lg:order-2 lg:w-[60%] text-white/90">
+                  <p className="text-white/90 text-fluid-base leading-[1.7] mb-4">
                     <strong>
                       <Link
                         href="/dholera-sir-blogs/dholera-2025-development-infrastructure-progress"
@@ -364,6 +341,21 @@ export default async function page() {
                     manufacturing plant.
                   </p>
                 </div>
+
+                {/* IMAGE AFTER TEXT ON MOBILE */}
+                <div className="order-2 lg:order-1 lg:w-[40%] w-full">
+                  <div className="relative overflow-hidden rounded-2xl border border-white/10">
+                    <Image
+                      src={semiconductorHubImage}
+                      alt="Dholera Smart City"
+                      className="w-full h-auto object-cover"
+                      sizes="(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) 92vw, 40vw"
+                      quality={55}
+                      loading="lazy"
+                      placeholder="blur"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -373,7 +365,10 @@ export default async function page() {
             id="dholera-sir-act"
             aria-labelledby="dholera-sir-act-title"
             className="mb-[clamp(2.5rem,5vw,4.5rem)] border-y border-[#ddbc69]/30 py-fluid-lg"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 800px" }}
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "auto 800px",
+            }}
           >
             <div className="mx-auto max-w-7xl">
               <header className="mb-[clamp(1.5rem,3vw,2.25rem)]">
@@ -463,7 +458,10 @@ export default async function page() {
             id="dholera-infrastructure-projects"
             aria-label="Major and upcoming infrastructure projects in Dholera"
             className="mb-[clamp(2.5rem,5vw,4.5rem)]"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 900px" }}
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "auto 900px",
+            }}
           >
             <div className="mb-[clamp(1.75rem,4vw,3rem)] flex items-center gap-4">
               <span
@@ -533,7 +531,13 @@ export default async function page() {
           </section>
 
           {/* CTA Section */}
-          <section className="mb-[clamp(1.25rem,2.5vw,2rem)]" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}>
+          <section
+            className="mb-[clamp(1.25rem,2.5vw,2rem)]"
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "auto 300px",
+            }}
+          >
             <div className="relative overflow-hidden rounded-[clamp(1rem,2vw,1.5rem)] border border-white/10 bg-[linear-gradient(135deg,rgba(222,174,60,0.16),rgba(255,255,255,0.03),rgba(17,17,17,0.96))] p-[clamp(1rem,2vw,1.5rem)]">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(222,174,60,0.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(222,174,60,0.12),transparent_25%)]"></div>
               <div className="relative z-10 flex flex-col gap-[clamp(0.75rem,1.5vw,1rem)]">
