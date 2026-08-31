@@ -19,7 +19,7 @@ const InlineLeadForm = dynamicImport(
   () => import("../components/InlineLeadForm"),
   {
     loading: () => <div className="min-h-[200px]" />,
-  }
+  },
 );
 
 const MegaIndustries = dynamicImport(() => import("./MegaIndustries"), {
@@ -289,7 +289,7 @@ export default async function page() {
               alt="Dholera Special Investment Region"
               className="w-full md:h-full h-auto object-contain md:object-cover"
               quality={72}
-              priority
+              loading="eager"
               placeholder="blur"
               sizes="100vw"
             />
@@ -317,7 +317,9 @@ export default async function page() {
                       className="w-full h-auto object-cover"
                       sizes="(max-width: 1024px) 100vw, 40vw"
                       quality={72}
-                      loading="lazy"
+                      priority
+                      fetchPriority="high"
+                      placeholder="blur"
                     />
                   </div>
                 </div>
