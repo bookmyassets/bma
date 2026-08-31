@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
         {/* ── Google Tag Manager ── */}
         <Script
           id="gtm-head"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){
 w[l]=w[l]||[];

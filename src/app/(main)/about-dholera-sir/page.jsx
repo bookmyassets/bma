@@ -281,15 +281,16 @@ export default async function page() {
       /> */}
 
       <div className="bg-black text-white">
-        {/* Hero Section */}
+        {/* Hero Section - Lazy loaded to unblock LCP */}
         <div className="pt-[clamp(3rem,5vw,4rem)] md:pt-0">
-          <div className="md:relative md:h-[70vh] overflow-hidden shadow-lg">
+          <div className="md:relative md:h-[70vh] overflow-hidden shadow-lg bg-black">
             <Image
               src={banner}
               alt="Dholera Special Investment Region"
               className="w-full md:h-full h-auto object-contain md:object-cover"
-              quality={72}
-              loading="eager"
+              quality={55}
+              priority={false}
+              loading="lazy"
               placeholder="blur"
               sizes="100vw"
             />
@@ -309,17 +310,19 @@ export default async function page() {
 
             <div className="mx-auto">
               <div className="flex flex-col lg:flex-row gap-[clamp(1rem,2vw,2rem)] items-center">
-                <div className="lg:w-[40%] w-full">
+                <div className="lg:w-[40%] w-full" style={{ contain: "layout style paint" }}>
                   <div className="relative overflow-hidden rounded-[clamp(1rem,2vw,1.5rem)] shadow-lg border border-white/10">
                     <Image
                       src={semiconductorHubImage}
                       alt="Dholera Smart City"
                       className="w-full h-auto object-cover"
                       sizes="(max-width: 1024px) 100vw, 40vw"
-                      quality={72}
-                      priority
+                      quality={65}
+                      priority={true}
                       fetchPriority="high"
                       placeholder="blur"
+                      width={1000}
+                      height={667}
                     />
                   </div>
                 </div>
@@ -355,6 +358,7 @@ export default async function page() {
             id="dholera-sir-act"
             aria-labelledby="dholera-sir-act-title"
             className="mb-[clamp(2.5rem,5vw,4.5rem)] border-y border-[#ddbc69]/30 py-fluid-lg"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 800px" }}
           >
             <div className="mx-auto max-w-7xl">
               <header className="mb-[clamp(1.5rem,3vw,2.25rem)]">
@@ -444,6 +448,7 @@ export default async function page() {
             id="dholera-infrastructure-projects"
             aria-label="Major and upcoming infrastructure projects in Dholera"
             className="mb-[clamp(2.5rem,5vw,4.5rem)]"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 900px" }}
           >
             <div className="mb-[clamp(1.75rem,4vw,3rem)] flex items-center gap-4">
               <span
@@ -513,7 +518,7 @@ export default async function page() {
           </section>
 
           {/* CTA Section */}
-          <section className="mb-[clamp(1.25rem,2.5vw,2rem)]">
+          <section className="mb-[clamp(1.25rem,2.5vw,2rem)]" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}>
             <div className="relative overflow-hidden rounded-[clamp(1rem,2vw,1.5rem)] border border-white/10 bg-[linear-gradient(135deg,rgba(222,174,60,0.16),rgba(255,255,255,0.03),rgba(17,17,17,0.96))] p-[clamp(1rem,2vw,1.5rem)]">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(222,174,60,0.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(222,174,60,0.12),transparent_25%)]"></div>
               <div className="relative z-10 flex flex-col gap-[clamp(0.75rem,1.5vw,1rem)]">
