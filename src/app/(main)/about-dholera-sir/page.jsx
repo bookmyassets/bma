@@ -1,5 +1,6 @@
 import { projectInfo } from "@/sanity/lib/api";
 import React, { Suspense } from "react";
+import { unstable_cache } from "next/cache";
 import banner from "@/assests/about-dholera-sir-desktop-banner.webp";
 import semiconductorHubImage from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
 // import BlogSlider from "./BlogSlider";
@@ -31,7 +32,13 @@ const FAQSection = dynamicImport(() => import("./FAQs"), {
 });
 
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
+const getCachedProjectInfo = unstable_cache(
+  async () => projectInfo(),
+  ["about-dholera-sir-project-info"],
+  { revalidate: 3600 },
+);
 
 export const metadata = {
   title: "What is Dholera SIR? Smart City Guide, Map & Investment 2026",
@@ -69,7 +76,7 @@ async function BlogSliderSection() {
   let posts = [];
 
   try {
-    const postsData = await projectInfo();
+    const postsData = await getCachedProjectInfo();
 
     posts = Array.isArray(postsData) ? postsData : [];
   } catch (error) {
@@ -281,7 +288,7 @@ export default async function page() {
       /> */}
 
       <div className="bg-black text-white">
-        {/* Hero Section - Lazy loaded to unblock LCP */}
+        {/* Hero Section */}
         <div className="pt-[clamp(3rem,5vw,4rem)] md:pt-0">
           <div className="md:relative md:h-[70vh] overflow-hidden shadow-lg bg-black">
             <Image
@@ -289,8 +296,8 @@ export default async function page() {
               alt="Dholera Special Investment Region"
               className="w-full md:h-full h-auto object-contain md:object-cover"
               quality={55}
-              priority={false}
-              loading="lazy"
+              priority
+              fetchPriority="high"
               placeholder="blur"
               sizes="100vw"
             />
@@ -318,8 +325,7 @@ export default async function page() {
                       className="w-full h-auto object-cover"
                       sizes="(max-width: 1024px) 100vw, 40vw"
                       quality={65}
-                      priority={true}
-                      fetchPriority="high"
+                      loading="lazy"
                       placeholder="blur"
                       width={1000}
                       height={667}
