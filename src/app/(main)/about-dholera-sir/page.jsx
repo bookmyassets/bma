@@ -37,7 +37,7 @@ export const revalidate = 3600;
 const getCachedProjectInfo = unstable_cache(
   async () => projectInfo(),
   ["about-dholera-sir-project-info"],
-  { revalidate: 3600 },
+  { revalidate: 3600, tags: ["dholera-projects"] },
 );
 
 export const metadata = {
@@ -123,6 +123,15 @@ export default async function page() {
 
   return (
     <>
+      {/* Preload LCP image and preconnect to CDN */}
+      <link
+        rel="preload"
+        as="image"
+        href={semiconductorHubImage.src}
+        fetchPriority="high"
+      />
+      <link rel="preconnect" href="https://www.bookmyassets.com" />
+      
       {/* Schema Markups */}
       <script
         type="application/ld+json"
@@ -288,15 +297,15 @@ export default async function page() {
       /> */}
 
       <div className="bg-black text-white">
-        {/* Hero Section */}
+        {/* Hero Section - Lazy loaded to unblock LCP */}
         <div className="pt-[clamp(3rem,5vw,4rem)] md:pt-0">
           <div className="md:relative md:h-[70vh] overflow-hidden shadow-lg bg-black">
             <Image
               src={banner}
               alt="Dholera Special Investment Region"
               className="w-full md:h-full h-auto object-contain md:object-cover"
-              quality={55}
-              loading="eager"
+              quality={40}
+              loading="lazy"
               placeholder="blur"
               sizes="100vw"
             />
@@ -323,12 +332,12 @@ export default async function page() {
                       alt="Dholera Smart City"
                       className="w-full h-auto object-cover"
                       sizes="(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) 92vw, (max-width: 1279px) 37vw, 30rem"
-                      quality={60}
+                      quality={35}
                       priority
                       fetchPriority="high"
                       placeholder="blur"
-                      width={1000}
-                      height={667}
+                      width={600}
+                      height={400}
                     />
                   </div>
                 </div>
