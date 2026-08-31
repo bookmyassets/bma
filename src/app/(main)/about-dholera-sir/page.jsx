@@ -9,20 +9,29 @@ import Image from "next/image";
 // import FAQSection from "./FAQs";
 // import MegaIndustries from "./MegaIndustries";
 
-import dynamic from "next/dynamic";
+import dynamicImport from "next/dynamic";
 
-const BlogSlider = dynamic(() => import("./BlogSlider"), {
+const BlogSlider = dynamicImport(() => import("./BlogSlider"), {
   loading: () => <div className="min-h-[300px]" />,
 });
-const InlineLeadForm = dynamic(() => import("../components/InlineLeadForm"), {
+
+const InlineLeadForm = dynamicImport(
+  () => import("../components/InlineLeadForm"),
+  {
+    loading: () => <div className="min-h-[200px]" />,
+  }
+);
+
+const MegaIndustries = dynamicImport(() => import("./MegaIndustries"), {
   loading: () => <div className="min-h-[200px]" />,
 });
-const MegaIndustries = dynamic(() => import("./MegaIndustries"), {
+
+const FAQSection = dynamicImport(() => import("./FAQs"), {
   loading: () => <div className="min-h-[200px]" />,
 });
-const FAQSection = dynamic(() => import("./FAQs"), {
-  loading: () => <div className="min-h-[200px]" />,
-});
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "What is Dholera SIR? Smart City Guide, Map & Investment 2026",
@@ -56,24 +65,54 @@ const UPCOMING_DHOLERA_PROJECTS = [
   "Residential & Commercial Complex",
 ];
 
-export default async function page() {
+async function BlogSliderSection() {
   let posts = [];
+
   try {
     const postsData = await projectInfo();
+
     posts = Array.isArray(postsData) ? postsData : [];
-    console.log("Posts data fetched:", posts.length);
   } catch (error) {
     console.error("Error fetching project info:", error);
   }
 
   const safePosts = posts.map((post) => ({
     ...post,
+
     author: post.author || "BookMyAssets",
+
     mainImage: post.mainImage || null,
+
     slug: post.slug?.current
-      ? { current: post.slug.current }
-      : { current: "#" },
+      ? {
+          current: post.slug.current,
+        }
+      : {
+          current: "#",
+        },
   }));
+
+  return <BlogSlider posts={safePosts} />;
+}
+
+export default async function page() {
+  // let posts = [];
+  // try {
+  //   const postsData = await projectInfo();
+  //   posts = Array.isArray(postsData) ? postsData : [];
+  //   console.log("Posts data fetched:", posts.length);
+  // } catch (error) {
+  //   console.error("Error fetching project info:", error);
+  // }
+
+  // const safePosts = posts.map((post) => ({
+  //   ...post,
+  //   author: post.author || "BookMyAssets",
+  //   mainImage: post.mainImage || null,
+  //   slug: post.slug?.current
+  //     ? { current: post.slug.current }
+  //     : { current: "#" },
+  // }));
 
   return (
     <>
