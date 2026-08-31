@@ -2,12 +2,27 @@ import { projectInfo } from "@/sanity/lib/api";
 import React from "react";
 import banner from "@/assests/about-dholera-sir-desktop-banner.webp";
 import semiconductorHubImage from "@/assests/dholera-sir-india-first-semiconductor-hub-image.webp";
-import BlogSlider from "./BlogSlider";
-import InlineLeadForm from "../components/InlineLeadForm";
+// import BlogSlider from "./BlogSlider";
+// import InlineLeadForm from "../components/InlineLeadForm";
 import Link from "next/link";
 import Image from "next/image";
-import FAQSection from "./FAQs";
-import MegaIndustries from "./MegaIndustries";
+// import FAQSection from "./FAQs";
+// import MegaIndustries from "./MegaIndustries";
+
+import dynamic from "next/dynamic";
+
+const BlogSlider = dynamic(() => import("./BlogSlider"), {
+  loading: () => <div className="min-h-[300px]" />,
+});
+const InlineLeadForm = dynamic(() => import("../components/InlineLeadForm"), {
+  loading: () => <div className="min-h-[200px]" />,
+});
+const MegaIndustries = dynamic(() => import("./MegaIndustries"), {
+  loading: () => <div className="min-h-[200px]" />,
+});
+const FAQSection = dynamic(() => import("./FAQs"), {
+  loading: () => <div className="min-h-[200px]" />,
+});
 
 const MAJOR_INFRASTRUCTURE_PROJECTS = [
   "Ahmedabad-Dholera Expressway",
@@ -250,7 +265,6 @@ export default async function page() {
                       src={semiconductorHubImage}
                       alt="Dholera Smart City"
                       className="w-full h-auto object-cover"
-                      priority
                       sizes="(max-width: 1024px) 100vw, 40vw"
                     />
                   </div>
