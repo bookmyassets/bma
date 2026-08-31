@@ -322,8 +322,8 @@ export default async function page() {
                       src={semiconductorHubImage}
                       alt="Dholera Smart City"
                       className="w-full h-auto object-cover"
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                      quality={65}
+                      sizes="(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) 92vw, (max-width: 1279px) 37vw, 30rem"
+                      quality={60}
                       priority
                       fetchPriority="high"
                       placeholder="blur"
