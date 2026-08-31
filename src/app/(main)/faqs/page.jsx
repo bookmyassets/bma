@@ -31,7 +31,7 @@ export const metadata = {
       "Clear answers about Dholera plots, documentation, due diligence and site visits.",
   },
   robots: {
-    index: false,
+    index: true,
     follow: true,
   },
 };

@@ -270,7 +270,7 @@ export default async function page() {
                   </div>
                 </div>
                 <div className="lg:w-[60%] prose prose-lg text-white/90">
-                  <p className="text-white/90 text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.8] mb-4">
+                  <p className="text-white/90 text-fluid-base leading-[1.8] mb-4">
                     <strong>
                       <Link
                         href="dholera-sir-blogs/dholera-2025-development-infrastructure-progress"
@@ -299,7 +299,7 @@ export default async function page() {
           <section
             id="dholera-sir-act"
             aria-labelledby="dholera-sir-act-title"
-            className="mb-[clamp(2.5rem,5vw,4.5rem)] border-y border-[#ddbc69]/30 py-[clamp(2.5rem,6vw,5rem)]"
+            className="mb-[clamp(2.5rem,5vw,4.5rem)] border-y border-[#ddbc69]/30 py-fluid-lg"
           >
             <div className="mx-auto max-w-7xl">
               <header className="mb-[clamp(1.5rem,3vw,2.25rem)]">

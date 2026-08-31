@@ -3,6 +3,11 @@
 const nextConfig = {
 
   output: 'standalone',
+
+   experimental: {
+    optimizeCss: true,
+  },
+
   /* LandX Proxy Start */
   async rewrites() {
     return [
