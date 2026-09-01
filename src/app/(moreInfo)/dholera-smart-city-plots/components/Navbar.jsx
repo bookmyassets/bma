@@ -79,7 +79,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white h-20 fixed w-full z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <button 
@@ -96,20 +96,20 @@ export default function Navbar() {
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="text-black hidden md:flex items-center space-x-8">
+          <div className="text-black hidden md:flex items-center space-x-6">
             {navItems.map(({ href, label }) => (
               <button
                 key={label}
                 onClick={() => handleNavigation(href)}
-                className="hover:text-[#e1b24c] transition duration-200"
+                className="text-xl font-medium hover:text-[#e1b24c] transition duration-200"
               >
                 {label}
               </button>
             ))}
             
-            <div ref={getInTouchRef} className="relative group">
+            <div ref={getInTouchRef} className="relative group ml-auto">
               <button
-                className="text-black px-3 py-2 cursor-pointer flex items-center gap-1"
+                className="text-black text-xl px-3 py-2 cursor-pointer flex items-center gap-1"
                 onClick={toggleGetInTouchDropdown}
                 onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
                 onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
@@ -140,7 +140,7 @@ export default function Navbar() {
                     animate="visible"
                     exit="exit"
                     variants={dropdownVariants}
-                    className="absolute left-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
+                    className="absolute right-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
                     onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
                     onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
                   >
@@ -162,7 +162,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-4">
             <div className="relative">
               <button
-                className="text-black text-base font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
+                className="text-black text-xl font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
                 onClick={toggleGetInTouchDropdown}
               >
                 Get in Touch
