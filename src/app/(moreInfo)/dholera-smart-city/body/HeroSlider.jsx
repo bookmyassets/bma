@@ -483,7 +483,7 @@ export default function LandingPage({ openForm }) {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#202830] to-transparent" />
 
         <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pb-12 pt-24 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_26rem] md:grid-cols-[minmax(0,1fr)_28rem]">
+          <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_26rem]">
             <motion.div
               variants={containerVariants}
               initial="hidden"
