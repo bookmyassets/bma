@@ -96,7 +96,7 @@ export default function Navbar() {
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="text-black hidden md:flex items-center space-x-6">
+          <div className="text-black hidden md:flex items-center gap-6">
             {navItems.map(({ href, label }) => (
               <button
                 key={label}
@@ -120,6 +120,7 @@ export default function Navbar() {
                   className={`h-4 w-4 text-black transition-transform duration-300 ${
                     isGetInTouchDropdownOpen ? "rotate-180" : ""
                   }`}
+                   
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
