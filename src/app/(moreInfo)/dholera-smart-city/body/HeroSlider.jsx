@@ -382,7 +382,7 @@ export default function LandingPage({ openForm }) {
 
   const heroStats = [
     { label: "Activation Area", value: "20 min" },
-    { label: "Expressway Access", value: "5 min" },
+    { label: "Expressway Access", value: "10 min" },
     { label: "Airport Corridor", value: "30 min" },
   ];
 
