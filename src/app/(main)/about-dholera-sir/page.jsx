@@ -319,7 +319,7 @@ export default function page() {
               <div className="flex flex-col lg:flex-row gap-5 lg:gap-8 items-center">
                 {/* TEXT FIRST ON MOBILE */}
                 <div className="order-1 lg:order-2 lg:w-[60%] text-white/90">
-                  <p className="text-white/90 text-fluid-base leading-[1.7] mb-4">
+                  <p className="text-white/90 text-clamp(1rem, 1.4vw, 1.125rem) leading-[1.7] mb-4">
                     <strong>
                       <Link
                         href="/dholera-sir-blogs/dholera-2025-development-infrastructure-progress"
@@ -364,7 +364,7 @@ export default function page() {
           <section
             id="dholera-sir-act"
             aria-labelledby="dholera-sir-act-title"
-            className="mb-[clamp(2.5rem,5vw,4.5rem)] border-y border-[#ddbc69]/30 py-fluid-lg"
+            className="mb-[clamp(2.5rem,5vw,4.5rem)] border-y border-[#ddbc69]/30 py-clamp(2.5rem, 6vw, 5rem)"
             style={{
               contentVisibility: "auto",
               containIntrinsicSize: "auto 800px",
@@ -381,7 +381,7 @@ export default function page() {
                 </h2>
               </header>
 
-              <div className="space-y-5 text-fluid-base leading-[1.85] text-white/85">
+              <div className="space-y-5 text-clamp(1rem, 1.4vw, 1.125rem) leading-[1.85] text-white/85">
                 <p>
                   The Dholera SIR Act refers to the{" "}
                   <strong className="font-semibold text-white">
@@ -411,10 +411,10 @@ export default function page() {
                 <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-[#ddbc69] sm:text-sm">
                   Planned development
                 </p>
-                <h2 className="text-fluid-lg font-bold leading-tight tracking-[-0.025em] text-white">
+                <h2 className="text-clamp(1.6rem, 3.5vw, 2.75rem) font-bold leading-tight tracking-[-0.025em] text-white">
                   Dholera SIR Master Plan
                 </h2>
-                <p className="mt-5 text-fluid-base leading-[1.85] text-white/85">
+                <p className="mt-5 text-clamp(1rem, 1.4vw, 1.125rem) leading-[1.85] text-white/85">
                   The Dholera SIR Master Plan has been designed to develop the
                   city in planned phases. Spread across approximately 920 sq.
                   km, the project includes six town-planning schemes with
@@ -437,7 +437,7 @@ export default function page() {
                   ].map((zone, index) => (
                     <li
                       key={zone}
-                      className="flex items-center gap-4 py-3.5 text-fluid-base text-white/90 sm:gap-6"
+                      className="flex items-center gap-4 py-3.5 text-clamp(1rem, 1.4vw, 1.125rem) text-white/90 sm:gap-6"
                     >
                       <span
                         aria-hidden="true"
@@ -491,7 +491,7 @@ export default function page() {
                   {MAJOR_INFRASTRUCTURE_PROJECTS.map((project) => (
                     <li
                       key={project}
-                      className="flex items-start gap-4 py-3.5 text-fluid-sm leading-relaxed text-white/90"
+                      className="flex items-start gap-4 py-3.5 text-clamp(0.95rem, 1.3vw, 1.075rem) leading-relaxed text-white/90"
                     >
                       <span
                         aria-hidden="true"
