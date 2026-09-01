@@ -23,21 +23,6 @@ jobs:
 
       - name: Build project
         run: npm run build
-        env:
-          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
-          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
-          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
-          RECAPTCHA_PROJECT_ID: ${{ secrets.RECAPTCHA_PROJECT_ID }}
-          REVALIDATION_SECRET: ${{ secrets.REVALIDATION_SECRET }}
-          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
-          SITE_NAME: ${{ secrets.SITE_NAME }}
-          GOOGLE_CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_EMAIL }}
-          GOOGLE_CLOUD_API_KEY: ${{ secrets.GOOGLE_CLOUD_API_KEY }}
-          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
-          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
-          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
-          SANITY_API_WRITE_TOKEN: ${{ secrets.SANITY_API_WRITE_TOKEN }}
-          SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
 
       - name: Prepare standalone output
         run: |
@@ -53,7 +38,12 @@ jobs:
           rm -rf .next/standalone/.next/cache
 
       - name: Archive build output
-        run: tar --exclude='.next/standalone/.next/cache' -czf app.tar.gz .next/standalone package.json
+        run: |
+          tar \
+            --exclude='.next/standalone/.next/cache' \
+            -czf app.tar.gz \
+            .next/standalone \
+            package.json
 
       - name: Upload to server
         uses: appleboy/scp-action@v0.1.7
@@ -62,36 +52,90 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           source: "app.tar.gz"
-          target: "/var/www/bma"
+          target: "/var/www/rentalsindholera"
           overwrite: true
 
       - name: Deploy on server via SSH
         uses: appleboy/ssh-action@v1.2.0
         env:
-          SANITY_API_WRITE_TOKEN: ${{ secrets.SANITY_API_WRITE_TOKEN }}
-          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
-          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
-          TELECRM_API_KEY: ${{ secrets.NEXT_PUBLIC_TELECRM_API_KEY }}
-          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+          TELECRM_API_KEY: ${{ secrets.TELECRM_API_KEY }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          envs: SANITY_API_WRITE_TOKEN,NEXT_PUBLIC_SANITY_PROJECT_ID,NEXT_PUBLIC_SANITY_DATASET,TELECRM_API_KEY,RECAPTCHA_SECRET_KEY
+          envs: TELECRM_API_KEY
           script: |
             set -e
 
-            cd /var/www/bma
+            echo "Loading NVM"
 
-            rm -rf .next/standalone/public
+            export NVM_DIR="$HOME/.nvm"
+
+            if [ -s "$NVM_DIR/nvm.sh" ]; then
+              . "$NVM_DIR/nvm.sh"
+            else
+              echo "NVM not found at $NVM_DIR"
+              exit 1
+            fi
+
+            echo "Checking runtime"
+
+            node -v
+            npm -v
+            pm2 -v
+
+            echo "Opening project directory"
+
+            cd /var/www/rentalsindholera
+
+            echo "Extracting build"
 
             tar -xzf app.tar.gz
 
+            echo "Removing unnecessary Next.js cache"
+
             rm -rf .next/standalone/.next/cache
 
-            SANITY_API_WRITE_TOKEN="$SANITY_API_WRITE_TOKEN" NEXT_PUBLIC_SANITY_PROJECT_ID="$NEXT_PUBLIC_SANITY_PROJECT_ID" NEXT_PUBLIC_SANITY_DATASET="$NEXT_PUBLIC_SANITY_DATASET" TELECRM_API_KEY="$TELECRM_API_KEY" RECAPTCHA_SECRET_KEY="$RECAPTCHA_SECRET_KEY" HOSTNAME=127.0.0.1 PORT=3000 pm2 restart bma --update-env || SANITY_API_WRITE_TOKEN="$SANITY_API_WRITE_TOKEN" NEXT_PUBLIC_SANITY_PROJECT_ID="$NEXT_PUBLIC_SANITY_PROJECT_ID" NEXT_PUBLIC_SANITY_DATASET="$NEXT_PUBLIC_SANITY_DATASET" TELECRM_API_KEY="$TELECRM_API_KEY" RECAPTCHA_SECRET_KEY="$RECAPTCHA_SECRET_KEY" HOSTNAME=127.0.0.1 PORT=3000 pm2 start .next/standalone/server.js --name bma
+            echo "Checking standalone server"
+
+            if [ ! -f ".next/standalone/server.js" ]; then
+              echo "server.js not found"
+              exit 1
+            fi
+
+            echo "Restarting application"
+
+            if pm2 describe rentalsindholera > /dev/null 2>&1; then
+
+              TELECRM_API_KEY="$TELECRM_API_KEY" \
+              HOSTNAME=127.0.0.1 \
+              PORT=3000 \
+              pm2 restart rentalsindholera --update-env
+
+            else
+
+              TELECRM_API_KEY="$TELECRM_API_KEY" \
+              HOSTNAME=127.0.0.1 \
+              PORT=3000 \
+              pm2 start .next/standalone/server.js \
+              --name rentalsindholera
+
+            fi
+
+            echo "Saving PM2 process"
 
             pm2 save
+
+            echo "PM2 status"
+
             pm2 list
 
-            curl -I https://www.bookmyassets.com || true
+            echo "Testing Next.js directly"
+
+            sleep 3
+
+            curl -I http://127.0.0.1:3000 || true
+
+            echo "Testing live website"
+
+            curl -I https://www.rentalsindholera.com || true
