@@ -382,7 +382,7 @@ export default function LandingPage({ openForm }) {
 
   const heroStats = [
     { label: "Activation Area", value: "20 min" },
-    { label: "Expressway Access", value: "5 min" },
+    { label: "Expressway Access", value: "10 min" },
     { label: "Airport Corridor", value: "30 min" },
   ];
 
@@ -561,7 +561,7 @@ export default function LandingPage({ openForm }) {
             >
               <div className="mb-5">
                 <h2 className="mt-2 text-2xl font-bold leading-tight text-[#101820]">
-                  Premium residential plots in Dholera
+                  Residential Plots in Dholera from ₹8 Lakh
                 </h2>
               </div>
 
