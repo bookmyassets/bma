@@ -79,7 +79,7 @@ const WestWynAboutSection = () => {
           <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
             WestWyn Residency is a 40,000 sq. yard residential plot project in
             Pipariya Developed by BookMyAssets. Located on a Major District Road
-            in Dholera, the project is just 1.5 km from the
+            in Dholera, the project is just 1.5 km from the &nbsp;
             <Link
               href="https://www.bookmyassets.com/dholera-sir-blogs/dedicated-freight-corridor-dholera-delhi-mumbai-connectivity"
               className="text-[#ddbc69]"
