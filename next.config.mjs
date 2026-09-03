@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  output: "standalone",
 
-  output: 'standalone',
-
-   experimental: {
+  experimental: {
     optimizeCss: true,
   },
 
@@ -246,6 +245,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/dholera-sir/dholera-smart-city-investment",
+        destination: "/dholera-sir-blogs/investment-in-dholera-smart-city",
+        statusCode: 301,
+      },
+      {
         source: "/dholera-sir/:slug*",
         destination: "/about-dholera-sir/:slug*",
         permanent: true,
@@ -437,7 +441,7 @@ const nextConfig = {
         destination: "/events",
         permanent: true,
       },
-      
+
       {
         source: "/about-dholera-sir/dholera-customs-port-update",
         destination: "/dholera-sir-updates/dholera-customs-port-update",
@@ -450,7 +454,7 @@ const nextConfig = {
           "/dholera-sir-updates/nextgen-8800-crore-investment-dholera-industrial-ecosystem",
         permanent: true,
       },
-      
+
       {
         source: "/dholera-sir-updates/buy-plots-in-dholera-smart-city",
         destination: "/dholera-sir-blogs/buy-plots-in-dholera-smart-city",
