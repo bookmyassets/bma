@@ -7,10 +7,5 @@ export const metadata = {
 };
 
 export default function PrivacyPage() {
-  return (
-    <>
-      <meta name="robots" content="noindex, follow" />
-      <PrivacyPolicyContent />
-    </>
-  );
+  return <PrivacyPolicyContent />;
 }

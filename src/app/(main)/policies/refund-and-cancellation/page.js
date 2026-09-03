@@ -7,10 +7,5 @@ export const metadata = {
 };
 
 export default function RefundCancellationPage() {
-  return (
-    <>
-      <meta name="robots" content="noindex, follow" />
-      <RefundCancellationPolicyContent />
-    </>
-  );
+  return <RefundCancellationPolicyContent />;
 }
