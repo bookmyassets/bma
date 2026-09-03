@@ -7,10 +7,5 @@ export const metadata = {
 };
 
 export default function CopyrightPage() {
-  return (
-    <>
-      <meta name="robots" content="noindex, follow" />
-      <CopyrightPolicyContent />
-    </>
-  );
+  return <CopyrightPolicyContent />;
 }

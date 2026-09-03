@@ -7,10 +7,5 @@ export const metadata = {
 };
 
 export default function TermsPage() {
-  return (
-    <>
-      <meta name="robots" content="noindex, follow" />
-      <TermsPolicyContent />
-    </>
-  );
+  return <TermsPolicyContent />;
 }
