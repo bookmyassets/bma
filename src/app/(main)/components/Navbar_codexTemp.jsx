@@ -63,6 +63,8 @@ const statusClasses = {
 const getStatusLabel = (status) => {
   if (status === "sold-out") return "SOLD OUT";
   if (status === "re-sale" || status === "resale") return "RESALE";
+  if (status === "upcoming" || status === "Upcoming") return "UPCOMING";
+  if (status === "ongoing" || status === "Ongoing") return "ONGOING";
 
   return status;
 };
