@@ -5,7 +5,6 @@ import bannerMob from "@/assests/bulkLand/knowledgeIT-hero-mob-webp.webp";
 import knowledgeITMap from "@/assests/bulkLand/knowledge-it-map.webp";
 import Table from "./table";
 import InlineLeadForm from "../../components/InlineLeadForm";
-import Interlink, { getKnowledgeITLinks } from "../Interlink";
 import FAQSection from "./FAQs";
 import KnowledgeITZoneCards from "./Cards";
 import GDCR from "./GDCR";
@@ -135,10 +134,7 @@ export default function page() {
         title="Want to Invest in High Growth Bulk Land Parcels Starting ₹1.75 CR"
       />
       <FAQSection />
-      <Interlink
-        properties={getKnowledgeITLinks()}
-        title="Explore Other Zones in Dholera Smart City"
-      />
+      
     </>
   );
 }
