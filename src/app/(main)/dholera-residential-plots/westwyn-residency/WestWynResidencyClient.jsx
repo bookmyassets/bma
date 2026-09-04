@@ -22,12 +22,15 @@ import DocumentVault from "./DocumentVault";
 const availablePlotSizes = [124, 152, 187];
 
 function PlotAvailabilitySection() {
+  const soldPercentage = 20;
+
   return (
     <section
       aria-labelledby="plot-availability-title"
       className="bg-[#101010] px-4 py-6 text-[#f5f1e8] sm:px-6 sm:py-8"
     >
       <div className="mx-auto max-w-4xl space-y-3">
+        {/* ───────────────── Plot Sizes ───────────────── */}
         <div className="rounded-xl border border-[#ddbc69]/35 bg-[#080808] p-4 shadow-[0_0_24px_rgba(221,188,105,0.07)] sm:p-5">
           <h2
             id="plot-availability-title"
@@ -36,64 +39,228 @@ function PlotAvailabilitySection() {
             Plot Sizes Available
           </h2>
 
-          <div className="mx-auto mt-3 grid max-w-2xl grid-cols-3 gap-2.5 sm:gap-3">
+          <div className="mx-auto mt-3 grid max-w-2xl grid-cols-3 gap-2 sm:gap-3">
             {availablePlotSizes.map((size) => (
               <div
                 key={size}
-                className="flex min-h-20 flex-col items-center justify-center rounded-lg border border-[#ddbc69]/40 bg-[#101010] px-2 py-3 text-center sm:min-h-24"
+                className="
+                  flex
+                  min-h-[4.5rem]
+                  flex-col
+                  items-center
+                  justify-center
+                  rounded-lg
+                  border
+                  border-[#ddbc69]/40
+                  bg-[#101010]
+                  px-1.5
+                  py-2.5
+                  text-center
+                  sm:min-h-24
+                  sm:px-2
+                  sm:py-3
+                "
               >
-                <span className="text-[clamp(1.5rem,4vw,2.1rem)] font-semibold leading-none text-[#f5f1e8]">
+                <span
+                  className="
+                    text-[clamp(1.35rem,4vw,2.1rem)]
+                    font-semibold
+                    leading-none
+                    text-[#f5f1e8]
+                  "
+                >
                   {size}
                 </span>
-                <span className="mt-1.5 text-[0.7rem] font-medium text-[#f5f1e8]/65 sm:text-sm">
+
+                <span className="mt-1.5 text-[0.65rem] font-medium text-[#f5f1e8]/65 sm:text-sm">
                   Sq. Yd.
                 </span>
               </div>
             ))}
           </div>
+
+          <p className="mt-3 text-center text-[0.7rem] leading-5 text-[#f5f1e8]/55 sm:text-sm">
+            Plot sizes are subject to current availability.
+          </p>
         </div>
 
-        <div className="rounded-xl border border-[#ddbc69]/35 bg-[#080808] p-4 shadow-[0_0_24px_rgba(221,188,105,0.07)] sm:p-5">
+        {/* ───────────────── Availability ───────────────── */}
+        <div
+          className="
+            rounded-xl
+            border
+            border-[#ddbc69]/35
+            bg-[#080808]
+            p-4
+            shadow-[0_0_24px_rgba(221,188,105,0.07)]
+            sm:p-5
+            md:p-6
+          "
+        >
           <p className="text-center text-sm font-semibold uppercase tracking-[0.08em] text-[#ddbc69] sm:text-base">
             Availability Status
           </p>
 
-          <div className="mt-4 grid grid-cols-[5.5rem_minmax(0,1fr)] items-center gap-4 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-6">
-            <div
-              role="img"
-              aria-label="75 percent of plots sold"
-              className="flex size-[5.5rem] items-center justify-center rounded-full p-1.5 sm:size-28 sm:p-2"
-              style={{
-                background:
-                  "conic-gradient(#ddbc69 0 20%, rgba(221, 188, 105, 0.18) 20% 100%)",
-              }}
-            >
-              <div className="flex size-full items-center justify-center rounded-full bg-[#101010] text-center">
-                <div>
-                  <span className="block text-base font-semibold uppercase text-[#f5f1e8] sm:text-lg">
-                    20%
-                  </span>
-                  <span className="block text-[0.6rem] font-bold uppercase tracking-[0.12em] text-[#ddbc69] sm:text-[0.65rem]">
-                    Sold
-                  </span>
+          <div
+            className="
+              mx-auto
+              mt-5
+              flex
+              max-w-2xl
+              flex-col
+              gap-5
+              md:grid
+              md:grid-cols-[1fr_auto]
+              md:items-center
+              md:gap-10
+            "
+          >
+            {/* Status */}
+            <div className="min-w-0">
+              {/* Percentage */}
+              <div className="flex items-end justify-center gap-2 md:justify-start">
+                <span
+                  className="
+                    text-[clamp(2rem,7vw,3rem)]
+                    font-semibold
+                    leading-none
+                    text-[#f5f1e8]
+                  "
+                >
+                  {soldPercentage}%
+                </span>
+
+                <span
+                  className="
+                    pb-1
+                    text-[0.65rem]
+                    font-bold
+                    uppercase
+                    tracking-[0.12em]
+                    text-[#ddbc69]
+                    sm:text-xs
+                  "
+                >
+                  Sold
+                </span>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="mt-4">
+                <div
+                  role="progressbar"
+                  aria-label={`${soldPercentage} percent of plots sold`}
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow={soldPercentage}
+                  className="
+                    h-2
+                    w-full
+                    overflow-hidden
+                    rounded-full
+                    bg-[#ddbc69]/15
+                  "
+                >
+                  <div
+                    className="
+                      h-full
+                      rounded-full
+                      bg-[#ddbc69]
+                      transition-all
+                      duration-500
+                    "
+                    style={{
+                      width: `${soldPercentage}%`,
+                    }}
+                  />
+                </div>
+
+                <div
+                  className="
+                    mt-2
+                    flex
+                    items-center
+                    justify-between
+                    gap-3
+                    text-[0.65rem]
+                    text-[#f5f1e8]/50
+                    sm:text-xs
+                  "
+                >
+                  <span>Sold</span>
+                  <span>Current Inventory</span>
                 </div>
               </div>
+
+              {/* Supporting text */}
+              <p
+                className="
+                  mt-3
+                  text-center
+                  text-xs
+                  leading-5
+                  text-[#f5f1e8]/60
+                  sm:text-sm
+                  md:text-left
+                "
+              >
+                Check current plot availability with our team.
+              </p>
             </div>
 
-            <div className="grid min-w-0 grid-cols-2 items-center gap-2 sm:gap-4">
-              <p className="text-center text-sm font-semibold leading-5 text-[#f5f1e8] sm:text-lg">
-                Limited Plots Left
-              </p>
-              <Link
-                href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20check%20WestWyn%20Residency%20plot%20availability"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg bg-[#ddbc69] px-2 py-2 text-center text-[0.7rem] font-semibold leading-tight text-[#101010] transition-colors hover:bg-[#ebcb7a] focus:outline-none focus:ring-2 focus:ring-[#ddbc69] focus:ring-offset-2 focus:ring-offset-[#080808] sm:gap-2 sm:px-4 sm:text-sm"
-              >
-                <FaWhatsapp className="size-4" aria-hidden="true" />
-                Check Availability
-              </Link>
-            </div>
+            {/* CTA */}
+            <Link
+              href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20check%20WestWyn%20Residency%20plot%20availability"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                mx-auto
+                inline-flex
+                min-h-10
+                w-[88%]
+                max-w-[18rem]
+                items-center
+                justify-center
+                gap-1.5
+                rounded-lg
+                bg-[#ddbc69]
+                px-4
+                py-2.5
+                text-center
+                text-[0.78rem]
+                font-semibold
+                leading-tight
+                text-[#101010]
+                transition-all
+                duration-300
+
+                hover:bg-[#ebcb7a]
+
+                focus:outline-none
+                focus:ring-2
+                focus:ring-[#ddbc69]
+                focus:ring-offset-2
+                focus:ring-offset-[#080808]
+
+                sm:min-h-11
+                sm:w-auto
+                sm:max-w-none
+                sm:px-5
+                sm:py-3
+                sm:text-sm
+
+                md:mx-0
+                md:min-w-[17rem]
+                md:text-base
+              "
+            >
+              <FaWhatsapp
+                className="size-3.5 shrink-0 sm:size-4 md:size-5"
+                aria-hidden="true"
+              />
+
+              <span>Check Availability</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -361,7 +528,7 @@ export default function WestWynResidencyClient() {
                 <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
                 <circle cx="12" cy="10" r="2.5" />
               </svg>
-              1.5 km From DFC, Pipariya 
+              1.5 km From DFC, Pipariya
             </p>
 
             <div className="my-6 h-px w-20 bg-[#ddbc69] sm:my-7" />
@@ -370,7 +537,7 @@ export default function WestWynResidencyClient() {
               Registry-Ready. Future-Ready.
             </h2>
 
-           {/*  <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
+            {/*  <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
               A premium plotted community in the heart of Dholera SIR -
               India&apos;s first Greenfield Smart City and the next global
               growth engine.
@@ -386,7 +553,6 @@ export default function WestWynResidencyClient() {
                 <FaWhatsapp className="size-6 shrink-0" />
                 <span className="leading-tight">
                   <span className="block ">Get Details on WhatsApp</span>
-                  
                 </span>
               </Link>
 
@@ -409,8 +575,6 @@ export default function WestWynResidencyClient() {
                 </svg>
                 <span className="leading-tight">Get Legal Documents</span>
               </Link>
-
-             
             </div>
           </div>
         </div>
@@ -437,7 +601,7 @@ export default function WestWynResidencyClient() {
 
       <ProjectAmenities />
 
-      <DocumentVault/>
+      <DocumentVault />
 
       <div className=" ">
         <OurCommits />

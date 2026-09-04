@@ -141,7 +141,7 @@ const PlanLayout = () => {
                 },
                 {
                   title: "Price",
-                  content: "₹8 Lakh",
+                  content: "₹6500/sq. yards",
                   align: "text-left",
                 },
               ].map(({ title, content, align }, index, arr) => {

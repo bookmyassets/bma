@@ -1,9 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  Quote,
+} from "lucide-react";
+
 import karan from "@/assests/testimonials/vikas-patel.webp";
 import amit from "@/assests/testimonials/amit-khurana.webp";
 import priya from "@/assests/testimonials/anjali-mehta.webp";
@@ -56,230 +62,270 @@ const testimonials = [
   },
 ];
 
-const TestimonialPagination = () => {
+function getSeededIndex(seed, itemCount) {
+  let mixedSeed = Math.imul(seed ^ 0x9e3779b9, 0x85ebca6b);
+  mixedSeed = Math.imul(mixedSeed ^ (mixedSeed >>> 13), 0xc2b2ae35);
+
+  return (mixedSeed >>> 0) % itemCount;
+}
+
+export function getMonthlyFeaturedIndex(itemCount, date = new Date()) {
+  if (itemCount <= 1) return 0;
+
+  const targetMonth = date.getFullYear() * 12 + date.getMonth();
+  const rotationStartMonth = 2000 * 12;
+
+  if (targetMonth < rotationStartMonth) {
+    return getSeededIndex(targetMonth, itemCount);
+  }
+
+  let featuredIndex = getSeededIndex(rotationStartMonth, itemCount);
+
+  for (let month = rotationStartMonth + 1; month <= targetMonth; month += 1) {
+    let nextIndex = getSeededIndex(month, itemCount);
+
+    if (nextIndex === featuredIndex) {
+      const alternateOffset =
+        1 + (getSeededIndex(month + 97, itemCount - 1) % (itemCount - 1));
+      nextIndex = (nextIndex + alternateOffset) % itemCount;
+    }
+
+    featuredIndex = nextIndex;
+  }
+
+  return featuredIndex;
+}
+
+function getMonthlyTestimonialOrder(items, date = new Date()) {
+  const featuredIndex = getMonthlyFeaturedIndex(items.length, date);
+  const featuredTestimonial = items[featuredIndex];
+
+  return [
+    featuredTestimonial,
+    ...items.filter((_, index) => index !== featuredIndex),
+  ];
+}
+
+function TestimonialCard({ testimonial }) {
+  return (
+    <article className="relative flex h-full min-h-[22rem] flex-col overflow-hidden rounded-2xl border border-[#ddbc69]/30 bg-[#fafafa] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.2)] sm:p-7">
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-1 bg-[#ddbc69]"
+      />
+
+      <span className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#ddbc69]/20 text-[#8a6d24]">
+        <Quote aria-hidden="true" className="h-5 w-5" />
+      </span>
+
+      <div className="flex flex-col items-center text-center">
+        <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-[#ddbc69] bg-white shadow-sm sm:h-[4.5rem] sm:w-[4.5rem]">
+          <Image
+            src={testimonial.avatar}
+            alt={`${testimonial.name}, BookMyAssets client`}
+            fill
+            sizes="72px"
+            loading="lazy"
+            className="object-cover"
+          />
+        </div>
+
+        <h3 className="mt-4 text-xl font-bold leading-tight text-[#101010] sm:text-2xl">
+          {testimonial.name}
+        </h3>
+        <p className="mt-1.5 flex items-center justify-center gap-1.5 text-base font-semibold text-gray-600 sm:text-lg">
+          <MapPin
+            aria-hidden="true"
+            className="h-5 w-5 shrink-0 text-[#9b7929] sm:h-6 sm:w-6"
+          />
+          {testimonial.location}
+        </p>
+      </div>
+
+      <blockquote className="mt-4 flex flex-1 items-center border-l-2 border-[#ddbc69] pl-4">
+        <p className="text-base font-medium leading-7 text-gray-700 sm:text-[1.05rem] sm:leading-8">
+          “{testimonial.quote}”
+        </p>
+      </blockquote>
+    </article>
+  );
+}
+
+function ArrowButton({ direction, onClick, disabled = false, label }) {
+  const Icon = direction === "previous" ? ChevronLeft : ChevronRight;
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ddbc69]/60 text-[#ddbc69] transition-colors hover:bg-[#ddbc69] hover:text-[#101010] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69] focus-visible:ring-offset-2 focus-visible:ring-offset-[#101010] disabled:cursor-not-allowed disabled:border-white/15 disabled:text-white/30 disabled:hover:bg-transparent"
+    >
+      <Icon aria-hidden="true" className="h-5 w-5" />
+    </button>
+  );
+}
+
+function PaginationDot({ active, onClick, label }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      aria-current={active ? "true" : undefined}
+      className="group inline-flex h-8 w-8 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69]"
+    >
+      <span
+        className={`block h-2.5 rounded-full transition-all ${
+          active
+            ? "w-7 bg-[#ddbc69]"
+            : "w-2.5 bg-white/35 group-hover:bg-white/60"
+        }`}
+      />
+    </button>
+  );
+}
+
+export default function TestimonialPagination() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isMobile, setIsMobile] = useState(false);
   const [currentMobileIndex, setCurrentMobileIndex] = useState(0);
+  const [orderedTestimonials, setOrderedTestimonials] = useState(testimonials);
 
   useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkIfMobile();
-    window.addEventListener("resize", checkIfMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkIfMobile);
-    };
+    setOrderedTestimonials(getMonthlyTestimonialOrder(testimonials));
   }, []);
 
-  // Desktop pagination setup
   const testimonialsPerPage = 3;
-  const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
-
-  const indexOfLastTestimonial = currentPage * testimonialsPerPage;
-  const indexOfFirstTestimonial = indexOfLastTestimonial - testimonialsPerPage;
-  const currentTestimonials = testimonials.slice(
-    indexOfFirstTestimonial,
-    indexOfLastTestimonial
+  const totalPages = Math.ceil(
+    orderedTestimonials.length / testimonialsPerPage,
   );
+  const firstTestimonialIndex = (currentPage - 1) * testimonialsPerPage;
+  const currentTestimonials = orderedTestimonials.slice(
+    firstTestimonialIndex,
+    firstTestimonialIndex + testimonialsPerPage,
+  );
+  const activeMobileTestimonial =
+    orderedTestimonials[currentMobileIndex] || orderedTestimonials[0];
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  // Mobile slider navigation
   const prevMobileSlide = () => {
-    setCurrentMobileIndex((prev) =>
-      prev === 0 ? testimonials.length - 1 : prev - 1
+    setCurrentMobileIndex((currentIndex) =>
+      currentIndex === 0
+        ? orderedTestimonials.length - 1
+        : currentIndex - 1,
     );
   };
 
   const nextMobileSlide = () => {
-    setCurrentMobileIndex((prev) =>
-      prev === testimonials.length - 1 ? 0 : prev + 1
+    setCurrentMobileIndex((currentIndex) =>
+      currentIndex === orderedTestimonials.length - 1
+        ? 0
+        : currentIndex + 1,
     );
   };
 
   return (
-    <div className="bg-black py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-center text-3xl font-bold text-[#ddbc69] mb-12">
-          Client Testimonials
-        </h2>
+    <section
+      aria-labelledby="client-testimonials-heading"
+      className="overflow-hidden bg-[#101010] py-14 text-white sm:py-16 lg:py-20"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#ddbc69]">
+            Client experiences
+          </p>
+          <h2
+            id="client-testimonials-heading"
+            className="mt-3 text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-tight tracking-tight text-white"
+          >
+            What our clients say
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
+            Experiences shared by clients who explored Dholera projects with
+            the BookMyAssets team.
+          </p>
+        </div>
 
-        {/* Mobile Slider View */}
-        {isMobile && (
-          <div className="relative px-4">
-            <motion.div
-              key={`mobile-${currentMobileIndex}`}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-col items-center"
-            >
-              <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-sm">
-                {/* Avatar */}
-                <div className="flex justify-center -mt-16 mb-4">
-                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#ddbc69]">
-                    <Image
-                      src={testimonials[currentMobileIndex].avatar}
-                      alt={testimonials[currentMobileIndex].name}
-                    />
-                  </div>
-                </div>
+        <div className="mx-auto mt-10 max-w-md md:hidden">
+          <motion.div
+            key={`mobile-${activeMobileTestimonial.name}`}
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <TestimonialCard testimonial={activeMobileTestimonial} />
+          </motion.div>
 
-                {/* Name and Location */}
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-bold text-gray-800">
-                    {testimonials[currentMobileIndex].name}
-                  </h3>
-                  <p className="text-sm text-[#ddbc69] font-medium">
-                    {testimonials[currentMobileIndex].location}
-                  </p>
-                </div>
+          <div className="mt-6 flex items-center justify-between gap-2">
+            <ArrowButton
+              direction="previous"
+              onClick={prevMobileSlide}
+              label="Show previous testimonial"
+            />
 
-                {/* Quote */}
-                <div className="relative">
-                  <div className="absolute -top-6 left-0 text-5xl text-[#ddbc69] opacity-20">
-                    “
-                  </div>
-                  <p className="text-gray-600 italic text-center px-2">
-                    {testimonials[currentMobileIndex].quote}
-                  </p>
-                  <div className="absolute -bottom-6 right-0 text-5xl text-[#ddbc69] opacity-20">
-                    ”
-                  </div>
-                </div>
-              </div>
-
-              {/* Navigation Buttons for Mobile */}
-              <div className="flex justify-center space-x-4 mt-6">
-                <Button
-                  onClick={prevMobileSlide}
-                  className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white rounded-full p-2"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-
-                {/* Navigation Dots */}
-                <div className="flex items-center space-x-2">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentMobileIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-colors ${currentMobileIndex === index ? "bg-[#ddbc69]" : "bg-gray-300"}`}
-                    />
-                  ))}
-                </div>
-
-                <Button
-                  onClick={nextMobileSlide}
-                  className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white rounded-full p-2"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-
-        {/* Desktop Grid View */}
-        {!isMobile && (
-          <div className="relative">
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevPage}
-              disabled={currentPage === 1}
-              className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 p-2 rounded-full ${currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-[#ddbc69] hover:bg-[#ddbc69] hover:text-white"}`}
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </button>
-
-            <button
-              onClick={nextPage}
-              disabled={currentPage === totalPages}
-              className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 p-2 rounded-full ${currentPage === totalPages ? "text-gray-400 cursor-not-allowed" : "text-[#ddbc69] hover:bg-[#ddbc69] hover:text-white"}`}
-            >
-              <ChevronRight className="h-8 w-8" />
-            </button>
-
-            {/* Testimonial Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-              {currentTestimonials.map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                >
-                  {/* Avatar */}
-                  <div className="flex justify-center mt-4 mb-4">
-                    <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#ddbc69] shadow-md">
-                      <Image
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        fill
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Name and Location */}
-                  <div className="text-center px-6">
-                    <h3 className="text-xl font-bold text-gray-800">
-                      {testimonial.name}
-                    </h3>
-                    <p className="text-sm text-[#ddbc69] font-medium mb-4">
-                      {testimonial.location}
-                    </p>
-                  </div>
-
-                  {/* Quote */}
-                  <div className="px-6 pb-4 relative">
-                    <div className="absolute top-0 left-6 text-5xl text-[#ddbc69] opacity-10">
-                      “
-                    </div>
-                    <p className="text-gray-600 italic text-center">
-                      {testimonial.quote}
-                    </p>
-                    <div className="absolute bottom-0 right-6 text-5xl text-[#ddbc69] opacity-10">
-                      ”
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Pagination Dots */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => paginate(index + 1)}
-                  className={`w-3 h-3 rounded-full transition-colors ${currentPage === index + 1 ? "bg-[#ddbc69]" : "bg-gray-300"}`}
+            <div className="flex min-w-0 items-center justify-center">
+              {orderedTestimonials.map((testimonial, index) => (
+                <PaginationDot
+                  key={testimonial.name}
+                  active={currentMobileIndex === index}
+                  onClick={() => setCurrentMobileIndex(index)}
+                  label={`Show testimonial from ${testimonial.name}`}
                 />
               ))}
             </div>
+
+            <ArrowButton
+              direction="next"
+              onClick={nextMobileSlide}
+              label="Show next testimonial"
+            />
           </div>
-        )}
+        </div>
+
+        <div className="mt-12 hidden md:block">
+          <div className="grid grid-cols-3 gap-5 lg:gap-7">
+            {currentTestimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.08 }}
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <ArrowButton
+              direction="previous"
+              onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+              disabled={currentPage === 1}
+              label="Show previous testimonial page"
+            />
+
+            <div className="flex items-center">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <PaginationDot
+                  key={index}
+                  active={currentPage === index + 1}
+                  onClick={() => setCurrentPage(index + 1)}
+                  label={`Show testimonial page ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            <ArrowButton
+              direction="next"
+              onClick={() =>
+                setCurrentPage((page) => Math.min(totalPages, page + 1))
+              }
+              disabled={currentPage === totalPages}
+              label="Show next testimonial page"
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default TestimonialPagination;
-
+}

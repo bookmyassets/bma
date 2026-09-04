@@ -56,46 +56,188 @@ export default function ProjectPlotAvailability({
           </p>
         </div>
 
-        <div className="rounded-xl border border-[#ddbc69]/35 bg-[#080808] p-4 shadow-[0_0_24px_rgba(221,188,105,0.07)] sm:p-5">
-          <p className="text-center text-sm font-semibold uppercase tracking-[0.08em] text-[#ddbc69] sm:text-base">
+        <div
+          className="
+    rounded-xl
+    border
+    border-[#ddbc69]/35
+    bg-[#080808]
+    p-4
+    shadow-[0_0_24px_rgba(221,188,105,0.07)]
+    sm:p-5
+    md:p-6
+  "
+        >
+          {/* Heading */}
+          <p
+            className="
+      text-center
+      text-sm
+      font-semibold
+      uppercase
+      tracking-[0.08em]
+      text-[#ddbc69]
+      sm:text-base
+    "
+          >
             Availability Status
           </p>
 
-          <div className="mt-4 grid grid-cols-[5.5rem_minmax(0,1fr)] items-center gap-4 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-6">
-            <div
-              role="img"
-              aria-label={`${safePercentage} percent ${percentageLabel}`}
-              className="flex size-[5.5rem] items-center justify-center rounded-full p-1.5 sm:size-28 sm:p-2"
-              style={{
-                background: `conic-gradient(#ddbc69 0 ${safePercentage}%, rgba(221, 188, 105, 0.18) ${safePercentage}% 100%)`,
-              }}
-            >
-              <div className="flex size-full items-center justify-center rounded-full bg-[#101010] text-center">
-                <div>
-                  <span className="block text-base font-semibold uppercase text-[#f5f1e8] sm:text-lg">
+          {/* Main content */}
+          <div
+            className="
+      mx-auto
+      mt-5
+      flex
+      max-w-2xl
+      flex-col
+      gap-5
+      md:grid
+      md:grid-cols-[1fr_auto]
+      md:items-center
+      md:gap-8
+    "
+          >
+            {/* Availability information */}
+            <div className="min-w-0">
+              {/* Percentage */}
+              <div className="text-center md:text-left">
+                <div className="flex items-end justify-center gap-2 md:justify-start">
+                  <span
+                    className="
+              text-[clamp(2rem,6vw,3rem)]
+              font-semibold
+              leading-none
+              text-[#f5f1e8]
+            "
+                  >
                     {safePercentage}%
                   </span>
-                  <span className="block text-[0.6rem] font-bold uppercase tracking-[0.12em] text-[#ddbc69] sm:text-[0.65rem]">
+
+                  <span
+                    className="
+              pb-1
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.12em]
+              text-[#ddbc69]
+              sm:text-sm
+            "
+                  >
                     {percentageLabel}
                   </span>
                 </div>
               </div>
+
+              {/* Progress bar */}
+              <div className="mt-4">
+                <div
+                  className="
+            h-2
+            w-full
+            overflow-hidden
+            rounded-full
+            bg-[#ddbc69]/15
+          "
+                >
+                  <div
+                    className="
+              h-full
+              rounded-full
+              bg-[#ddbc69]
+              transition-all
+              duration-500
+            "
+                    style={{
+                      width: `${safePercentage}%`,
+                    }}
+                  />
+                </div>
+
+                <div
+                  className="
+            mt-2
+            flex
+            items-center
+            justify-between
+            gap-3
+            text-[1rem]
+            text-[#f5f1e8]/55
+          "
+                >
+                  <span>Sold</span>
+                  <span>Current Inventory</span>
+                </div>
+              </div>
+
+              {/* Supporting copy */}
+              <p
+                className="
+          mt-3
+          text-center
+          text-md
+          leading-5
+          text-[#f5f1e8]/60
+          md:text-left
+          sm:text-sm
+        "
+              >
+                Check current plot availability with our team.
+              </p>
             </div>
 
-            <div className="grid min-w-0 grid-cols-2 items-center gap-2 sm:gap-4">
-              <p className="text-center text-sm font-semibold leading-5 text-[#f5f1e8] sm:text-lg">
-                {statusText}
-              </p>
-              <Link
-                href={`https://wa.me/918130371647?text=${whatsappText}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg bg-[#ddbc69] px-2 py-2 text-center text-[0.7rem] font-semibold leading-tight text-[#101010] transition-colors hover:bg-[#ebcb7a] focus:outline-none focus:ring-2 focus:ring-[#ddbc69] focus:ring-offset-2 focus:ring-offset-[#080808] sm:gap-2 sm:px-4 sm:text-sm"
-              >
-                <FaWhatsapp className="size-4 shrink-0" aria-hidden="true" />
-                Check Availability
-              </Link>
-            </div>
+            {/* CTA */}
+            <Link
+              href={`https://wa.me/918130371647?text=${whatsappText}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+  inline-flex
+  min-h-10
+  w-[88%]
+  max-w-[19rem]
+  items-center
+  justify-center
+  gap-1.5
+  self-center
+  rounded-lg
+  bg-[#ddbc69]
+  px-4
+  py-2.5
+  text-[0.78rem]
+  font-semibold
+  leading-tight
+  text-[#101010]
+  transition-all
+  duration-300
+  hover:bg-[#ebcb7a]
+  focus:outline-none
+  focus:ring-2
+  focus:ring-[#ddbc69]
+  focus:ring-offset-2
+  focus:ring-offset-[#080808]
+
+  sm:min-h-11
+  sm:w-auto
+  sm:min-w-[17rem]
+  sm:max-w-none
+  sm:px-5
+  sm:py-3
+  sm:text-sm
+
+  md:min-h-12
+  md:px-6
+  md:text-base
+"
+            >
+              <FaWhatsapp
+                className="size-4 shrink-0 sm:size-5"
+                aria-hidden="true"
+              />
+
+              <span>Check Limited Plots Left</span>
+            </Link>
           </div>
         </div>
       </div>

@@ -132,7 +132,7 @@ const PlanLayout = () => {
                   align: "text-left",
                 },
                 {
-                  title: "Developers",
+                  title: "Developer",
                   content: "BookMyAssets",
                   align: "text-left",
                 },

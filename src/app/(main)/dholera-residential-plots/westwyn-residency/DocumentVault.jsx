@@ -123,7 +123,7 @@ export default function DocumentVault({
       className="mx-auto w-full max-w-7xl scroll-mt-24 px-4 py-10 sm:px-6 lg:px-8"
     >
       {/* Section header */}
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="mb-3.5 flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#f7f3e8]/60">
             {projectName}
@@ -132,7 +132,6 @@ export default function DocumentVault({
             Legal Document Vault
           </h2>
         </div>
-        <WhatsAppCTA whatsappHref={whatsappHref} />
       </div>
 
       <div className="mb-3 flex items-center justify-between md:hidden">

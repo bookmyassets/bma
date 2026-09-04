@@ -163,7 +163,7 @@ export default function WestWynEstateClient() {
             <div className="my-6 h-px w-20 bg-[#ddbc69] sm:my-7" />
 
             <h2 className="max-w-xl text-[clamp(1.65rem,3vw,2.7rem)] font-semibold leading-[1.18] tracking-[-0.025em] text-white">
-              Registry-Ready. Future-Ready.
+              Registry Ready. Future Ready.
             </h2>
 
             <div className="mt-7 grid grid-cols-2 gap-2 sm:gap-3">

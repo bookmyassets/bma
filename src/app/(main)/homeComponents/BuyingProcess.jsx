@@ -86,8 +86,8 @@ export default function HowToBuy() {
             "radial-gradient(circle at 50% 45%, rgba(221, 188, 105, 0.055), transparent 48%)",
         }}
       >
-        <div className="mx-auto max-w-7xl">
-          <header className="text-center">
+        <div className="mx-auto max-w-7xl text-center">
+          <header className="inline-block">
             <h2
               id="buying-process-title"
               className="text-[clamp(2rem,4vw,3rem)] font-bold leading-none tracking-[-0.03em] text-white"
@@ -186,9 +186,6 @@ export default function HowToBuy() {
                   className="h-[82px] w-[82px] shrink-0 rounded-2xl bg-[#ddbc69] object-contain sm:h-[92px] sm:w-[92px]"
                 />
                 <div>
-                  <p className="text-[clamp(1.2rem,2vw,1.75rem)] font-bold leading-tight text-[#ddbc69]">
-                    BONUS
-                  </p>
                   <p className="text-[clamp(1.25rem,2.2vw,1.7rem)] font-bold leading-[1.05] text-white">
                     Construction
                     <br />
