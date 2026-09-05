@@ -1421,11 +1421,9 @@ export default function Navbar() {
     top-0
     flex
 
-    w-1/2
-    min-w-[280px]
-    max-w-[620px]
-    max-[479px]:w-[calc(100vw-24px)]
-    max-[479px]:min-w-0
+    w-[75vw]
+    min-w-0
+    max-w-none
 
     flex-col
     overflow-hidden
