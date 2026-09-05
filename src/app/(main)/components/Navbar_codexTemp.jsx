@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 
@@ -1421,14 +1421,11 @@ export default function Navbar() {
     top-0
     flex
 
-    w-[92vw]
-    max-w-[430px]
-    sm:w-[72vw]
-    sm:max-w-[520px]
-    md:w-[60vw]
-    md:max-w-[580px]
-    lg:w-[52vw]
-    lg:max-w-[620px]
+    w-1/2
+    min-w-[280px]
+    max-w-[620px]
+    max-[479px]:w-[calc(100vw-24px)]
+    max-[479px]:min-w-0
 
     flex-col
     overflow-hidden
@@ -1450,7 +1447,211 @@ export default function Navbar() {
 
     ${isMobileMenuOpen ? "translate-x-0" : "translate-x-[110%]"}
   `}
-        ></aside>
+        >
+          <div
+            className="
+              flex
+              min-h-[70px]
+              shrink-0
+              items-center
+              justify-between
+              border-b
+              border-[#ddbc69]/15
+              px-2
+              pt-[env(safe-area-inset-top)]
+              min-[390px]:px-3
+              sm:min-h-[82px]
+              sm:px-5
+            "
+          >
+            <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+              <Image
+                src={logo}
+                width={122}
+                height={40}
+                alt="BookMyAssets"
+                className="h-5 w-auto shrink-0 object-contain min-[390px]:h-6 sm:h-8"
+              />
+
+              <span
+                aria-hidden="true"
+                className="hidden h-8 w-px bg-gradient-to-b from-transparent via-[#ddbc69]/60 to-transparent sm:block"
+              />
+
+              <div className="hidden sm:block">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#ddbc69]">
+                  Menu
+                </p>
+                <p className="mt-1 text-sm font-medium text-white">
+                  Explore Dholera
+                </p>
+              </div>
+            </div>
+
+            <button
+              ref={drawerCloseButtonRef}
+              type="button"
+              onClick={closeAllMenus}
+              aria-label="Close menu"
+              className="
+                flex h-10 w-10 shrink-0 items-center justify-center rounded-full
+                border border-[#ddbc69]/20 bg-white/[0.07] text-white transition-colors
+                hover:border-[#ddbc69]/45 hover:bg-[#ddbc69]/10 focus:outline-none
+                focus:ring-2 focus:ring-[#ddbc69] sm:h-11 sm:w-11
+              "
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          <div
+            className="
+              min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 py-3
+              min-[390px]:px-2.5 sm:px-4 sm:py-4
+            "
+          >
+            <div className="space-y-1.5 sm:space-y-2">
+              <Link
+                href="/"
+                onClick={closeAllMenus}
+                className="flex min-h-[56px] items-center justify-between rounded-xl px-2.5 text-lg font-semibold leading-tight text-white transition-colors hover:bg-white/[0.05] min-[390px]:px-3 sm:px-4"
+              >
+                Home
+                <ChevronRight className="h-4 w-4 text-white/30" />
+              </Link>
+
+              <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.025]">
+                <button
+                  type="button"
+                  onClick={toggleResidentialMenu}
+                  aria-expanded={isResidentialMenuOpen}
+                  aria-controls="mobile-residential-projects"
+                  className="flex min-h-[60px] w-full items-center justify-between gap-2 px-2.5 py-3 text-left text-lg font-semibold leading-tight text-white min-[390px]:px-3 sm:px-4"
+                >
+                  <span className="min-w-0 break-words">Residential Projects</span>
+                  <ChevronIcon open={isResidentialMenuOpen} className="h-4 w-4 shrink-0" />
+                </button>
+
+                <div
+                  id="mobile-residential-projects"
+                  aria-hidden={!isResidentialMenuOpen}
+                  inert={!isResidentialMenuOpen}
+                  className={`grid transition-all duration-500 ${
+                    isResidentialMenuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="max-h-[320px] overflow-y-auto border-t border-white/[0.07] p-2">
+                      {loading && <div className="py-8 text-center text-sm text-white/45">Loading projects...</div>}
+                      {error && <div className="py-8 text-center text-sm text-red-300">{error}</div>}
+                      {!loading && !error && residentialProjects.length === 0 && (
+                        <div className="py-8 text-center text-sm text-white/45">No projects available</div>
+                      )}
+                      {!loading && !error && residentialProjects.map((project, index) => (
+                        <MobileProjectLink
+                          key={project.link || index}
+                          project={project}
+                          href={`/dholera-residential-plots/${project.link}`}
+                          onClick={closeAllMenus}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.025]">
+                <button
+                  type="button"
+                  onClick={toggleDholeraMenu}
+                  aria-expanded={isDholeraMenuOpen}
+                  aria-controls="mobile-blog-links"
+                  className="flex min-h-[60px] w-full items-center justify-between gap-2 px-2.5 py-3 text-left text-lg font-semibold leading-tight text-white min-[390px]:px-3 sm:px-4"
+                >
+                  <span className="min-w-0 break-words">Blogs &amp; Updates</span>
+                  <ChevronIcon open={isDholeraMenuOpen} className="h-4 w-4 shrink-0" />
+                </button>
+
+                <div
+                  id="mobile-blog-links"
+                  aria-hidden={!isDholeraMenuOpen}
+                  inert={!isDholeraMenuOpen}
+                  className={`grid transition-all duration-500 ${
+                    isDholeraMenuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="border-t border-white/[0.07] p-2">
+                      {dholeraLoading ? (
+                        <div className="py-6 text-center text-sm text-white/40">Loading...</div>
+                      ) : dholeraProjects.map((project) => (
+                        <MobileProjectLink
+                          key={project.link}
+                          project={project}
+                          href={`/${project.link}`}
+                          onClick={closeAllMenus}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {[
+                ["/bulk-land", "Bulk Land Deals"],
+                ["/contact", "Contact Us"],
+              ].map(([href, label]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={closeAllMenus}
+                  className="flex min-h-[56px] items-center justify-between gap-2 rounded-xl px-2.5 text-lg font-semibold leading-tight text-white transition-colors hover:bg-white/[0.05] min-[390px]:px-3 sm:px-4"
+                >
+                  <span className="min-w-0 break-words">{label}</span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-white/30" />
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-4 border-t border-white/[0.08] pt-3 sm:mt-5 sm:pt-4">
+              <p className="mb-2 px-2.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/30">
+                More
+              </p>
+              {utilityLinks.map(({ href, label, calendly }) =>
+                calendly ? (
+                  <BookButton
+                    key={label}
+                    className="block w-full rounded-xl px-2.5 py-3.5 text-left text-base font-medium leading-snug text-white/65 transition-colors hover:bg-white/[0.05] hover:text-white min-[390px]:text-[17px] sm:px-4"
+                  />
+                ) : (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={closeAllMenus}
+                    className="flex min-h-[48px] items-center justify-between gap-2 rounded-xl px-2.5 text-base font-medium leading-snug text-white/65 transition-colors hover:bg-white/[0.05] hover:text-white min-[390px]:text-[17px] sm:px-4"
+                  >
+                    <span className="min-w-0 break-words">{label}</span>
+                    <ChevronRight className="h-3.5 w-3.5 shrink-0 text-white/20" />
+                  </Link>
+                )
+              )}
+            </div>
+          </div>
+
+          <div className="shrink-0 border-t border-white/[0.08] bg-[linear-gradient(90deg,rgba(8,15,21,0.98),rgba(24,39,50,0.98))] p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur-xl min-[390px]:p-3 min-[390px]:pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4 sm:pb-[max(1rem,env(safe-area-inset-bottom))]">
+            <Link
+              href={whatsappEnquiryLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-[54px] w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#c99f42] via-[#e5c66c] to-[#d2ad55] px-2 text-[15px] font-semibold text-black shadow-[0_10px_35px_rgba(221,188,105,0.16)] transition-all hover:brightness-110 min-[390px]:text-base sm:px-5"
+            >
+              <FaWhatsapp className="h-[18px] w-[18px]" />
+              <span className="sm:hidden">Enquire</span>
+              <span className="hidden sm:inline">Get Project Details</span>
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </aside>
       </div>
     </>
   );
