@@ -33,22 +33,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
 
         {/* ── Google Analytics ── */}
-                <Script
-                  id="ga-src"
-                  strategy="lazyOnload"
-                  src={`https://www.googletagmanager.com/gtag/js?id=G-BYMKLKFT2K${GA_ID}`}
-                />
-                <Script
-                  id="ga-config"
-                  strategy="lazyOnload"
-                  dangerouslySetInnerHTML={{
-                    __html: `
-        window.dataLayer=window.dataLayer||[];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js',new Date());
-        gtag('config','G-BYMKLKFT2K',{page_path:window.location.pathname,send_page_view:true});`,
-                  }}
-                />
+        <Script
+          id="ga-src"
+          strategy="lazyOnload"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-BYMKLKFT2K`}
+        />
+        <Script
+          id="ga-config"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-BYMKLKFT2K',{page_path:window.location.pathname,send_page_view:true});`,
+          }}
+        />
 
         <Script
           id="taboola-base"
