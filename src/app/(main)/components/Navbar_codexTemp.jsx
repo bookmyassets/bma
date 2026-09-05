@@ -3,13 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ChevronRight,
-  Menu,
-  X,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 
@@ -105,10 +99,7 @@ function getStatusLabel(status) {
 /* Chevron                                                                    */
 /* -------------------------------------------------------------------------- */
 
-function ChevronIcon({
-  open,
-  className = "h-4 w-4",
-}) {
+function ChevronIcon({ open, className = "h-4 w-4" }) {
   return (
     <svg
       className={`${className} transition-transform duration-300 ${
@@ -160,12 +151,7 @@ function StatusBadge({ status }) {
 /* Desktop project card                                                       */
 /* -------------------------------------------------------------------------- */
 
-function ResidentialCard({
-  project,
-  index,
-  href,
-  onClick,
-}) {
+function ResidentialCard({ project, index, href, onClick }) {
   const isSoldOut = project.status === "sold-out";
 
   return (
@@ -204,11 +190,7 @@ function ResidentialCard({
             object-cover
             transition-transform
             duration-700
-            ${
-              isSoldOut
-                ? "grayscale"
-                : "group-hover:scale-105"
-            }
+            ${isSoldOut ? "grayscale" : "group-hover:scale-105"}
           `}
           priority={index < 4}
         />
@@ -268,12 +250,7 @@ function ResidentialCard({
 /* Blog card                                                                  */
 /* -------------------------------------------------------------------------- */
 
-function ImageCard({
-  project,
-  index,
-  href,
-  onClick,
-}) {
+function ImageCard({ project, index, href, onClick }) {
   return (
     <Link
       href={href}
@@ -364,11 +341,7 @@ function ImageCard({
 /* Desktop nav button                                                         */
 /* -------------------------------------------------------------------------- */
 
-function DesktopNavButton({
-  label,
-  open,
-  onClick,
-}) {
+function DesktopNavButton({ label, open, onClick }) {
   return (
     <button
       onClick={onClick}
@@ -398,10 +371,7 @@ function DesktopNavButton({
     >
       {label}
 
-      <ChevronIcon
-        open={open}
-        className="h-3.5 w-3.5"
-      />
+      <ChevronIcon open={open} className="h-3.5 w-3.5" />
     </button>
   );
 }
@@ -410,11 +380,7 @@ function DesktopNavButton({
 /* Desktop dropdown                                                           */
 /* -------------------------------------------------------------------------- */
 
-function DesktopDropdownShell({
-  children,
-  className = "",
-  align = "left",
-}) {
+function DesktopDropdownShell({ children, className = "", align = "left" }) {
   const alignment = {
     left: "left-0",
     center: "left-1/2 -translate-x-1/2",
@@ -453,10 +419,7 @@ function DesktopDropdownShell({
   );
 }
 
-function DropdownNotice({
-  children,
-  tone = "muted",
-}) {
+function DropdownNotice({ children, tone = "muted" }) {
   return (
     <div
       className={`
@@ -471,11 +434,7 @@ function DropdownNotice({
         px-6
         text-center
         text-sm
-        ${
-          tone === "error"
-            ? "text-red-300"
-            : "text-white/50"
-        }
+        ${tone === "error" ? "text-red-300" : "text-white/50"}
       `}
     >
       {children}
@@ -487,11 +446,7 @@ function DropdownNotice({
 /* Mobile project                                                             */
 /* -------------------------------------------------------------------------- */
 
-function MobileProjectLink({
-  project,
-  href,
-  onClick,
-}) {
+function MobileProjectLink({ project, href, onClick }) {
   return (
     <Link
       href={href}
@@ -583,45 +538,27 @@ function MobileProjectLink({
 export default function Navbar() {
   const pathname = usePathname();
 
-  const [isScrolled, setIsScrolled] =
-    useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const [isNavbarVisible, setIsNavbarVisible] =
-    useState(true);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] =
-    useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const [
-    isResidentialMenuOpen,
-    setIsResidentialMenuOpen,
-  ] = useState(false);
+  const [isResidentialMenuOpen, setIsResidentialMenuOpen] = useState(false);
 
-  const [
-    isDholeraMenuOpen,
-    setIsDholeraMenuOpen,
-  ] = useState(false);
+  const [isDholeraMenuOpen, setIsDholeraMenuOpen] = useState(false);
 
-  const [
-    isUtilityMenuOpen,
-    setIsUtilityMenuOpen,
-  ] = useState(false);
+  const [isUtilityMenuOpen, setIsUtilityMenuOpen] = useState(false);
 
-  const [
-    residentialProjects,
-    setResidentialProjects,
-  ] = useState([]);
+  const [residentialProjects, setResidentialProjects] = useState([]);
 
-  const [dholeraProjects, setDholeraProjects] =
-    useState([]);
+  const [dholeraProjects, setDholeraProjects] = useState([]);
 
   const [loading, setLoading] = useState(false);
-  const [dholeraLoading, setDholeraLoading] =
-    useState(false);
+  const [dholeraLoading, setDholeraLoading] = useState(false);
 
   const [error, setError] = useState(null);
-  const [dholeraError, setDholeraError] =
-    useState(null);
+  const [dholeraError, setDholeraError] = useState(null);
 
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
@@ -637,8 +574,7 @@ export default function Navbar() {
 
     const updateNavbar = () => {
       const currentScrollY = window.scrollY;
-      const difference =
-        currentScrollY - lastScrollY.current;
+      const difference = currentScrollY - lastScrollY.current;
 
       setIsScrolled(currentScrollY > 24);
 
@@ -692,10 +628,7 @@ export default function Navbar() {
     updateNavbar();
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll,
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isMobileMenuOpen]);
 
@@ -706,22 +639,17 @@ export default function Navbar() {
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
-    const currentOverflow =
-      document.body.style.overflow;
-    const previouslyFocusedElement =
-      document.activeElement;
+    const currentOverflow = document.body.style.overflow;
+    const previouslyFocusedElement = document.activeElement;
 
     document.body.style.overflow = "hidden";
 
-    const focusFrame = window.requestAnimationFrame(
-      () => drawerCloseButtonRef.current?.focus(),
+    const focusFrame = window.requestAnimationFrame(() =>
+      drawerCloseButtonRef.current?.focus(),
     );
 
     const keepFocusInsideDrawer = (event) => {
-      if (
-        event.key !== "Tab" ||
-        !drawerRef.current
-      ) {
+      if (event.key !== "Tab" || !drawerRef.current) {
         return;
       }
 
@@ -729,51 +657,30 @@ export default function Navbar() {
         ...drawerRef.current.querySelectorAll(
           'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
         ),
-      ].filter(
-        (element) => !element.closest("[inert]"),
-      );
+      ].filter((element) => !element.closest("[inert]"));
 
       if (!focusableElements.length) return;
 
       const firstElement = focusableElements[0];
-      const lastElement =
-        focusableElements[
-          focusableElements.length - 1
-        ];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
-      if (
-        event.shiftKey &&
-        document.activeElement === firstElement
-      ) {
+      if (event.shiftKey && document.activeElement === firstElement) {
         event.preventDefault();
         lastElement.focus();
-      } else if (
-        !event.shiftKey &&
-        document.activeElement === lastElement
-      ) {
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
         event.preventDefault();
         firstElement.focus();
       }
     };
 
-    document.addEventListener(
-      "keydown",
-      keepFocusInsideDrawer,
-    );
+    document.addEventListener("keydown", keepFocusInsideDrawer);
 
     return () => {
       window.cancelAnimationFrame(focusFrame);
-      document.removeEventListener(
-        "keydown",
-        keepFocusInsideDrawer,
-      );
-      document.body.style.overflow =
-        currentOverflow;
+      document.removeEventListener("keydown", keepFocusInsideDrawer);
+      document.body.style.overflow = currentOverflow;
 
-      if (
-        previouslyFocusedElement instanceof
-        HTMLElement
-      ) {
+      if (previouslyFocusedElement instanceof HTMLElement) {
         previouslyFocusedElement.focus();
       }
     };
@@ -796,10 +703,7 @@ export default function Navbar() {
 
   useEffect(() => {
     async function fetchProjects() {
-      if (
-        !isResidentialMenuOpen ||
-        residentialProjects.length > 0
-      ) {
+      if (!isResidentialMenuOpen || residentialProjects.length > 0) {
         return;
       }
 
@@ -807,17 +711,12 @@ export default function Navbar() {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(
-          RESIDENTIAL_PROJECTS_URL,
-          {
-            cache: "no-store",
-          },
-        );
+        const response = await fetch(RESIDENTIAL_PROJECTS_URL, {
+          cache: "no-store",
+        });
 
         if (!response.ok) {
-          throw new Error(
-            "Failed to fetch residential projects",
-          );
+          throw new Error("Failed to fetch residential projects");
         }
 
         const data = await response.json();
@@ -834,10 +733,7 @@ export default function Navbar() {
     }
 
     fetchProjects();
-  }, [
-    isResidentialMenuOpen,
-    residentialProjects.length,
-  ]);
+  }, [isResidentialMenuOpen, residentialProjects.length]);
 
   /* ------------------------------------------------------------------------ */
   /* Blog items                                                               */
@@ -845,10 +741,7 @@ export default function Navbar() {
 
   useEffect(() => {
     async function fetchDholeraItems() {
-      if (
-        !isDholeraMenuOpen ||
-        dholeraProjects.length > 0
-      ) {
+      if (!isDholeraMenuOpen || dholeraProjects.length > 0) {
         return;
       }
 
@@ -860,9 +753,7 @@ export default function Navbar() {
       } catch (err) {
         console.error(err);
 
-        setDholeraError(
-          "Unable to load Dholera content",
-        );
+        setDholeraError("Unable to load Dholera content");
 
         setDholeraProjects([]);
       } finally {
@@ -871,10 +762,7 @@ export default function Navbar() {
     }
 
     fetchDholeraItems();
-  }, [
-    isDholeraMenuOpen,
-    dholeraProjects.length,
-  ]);
+  }, [isDholeraMenuOpen, dholeraProjects.length]);
 
   /* ------------------------------------------------------------------------ */
   /* Close dropdown on outside click / Esc                                    */
@@ -890,11 +778,7 @@ export default function Navbar() {
     const handleMouseDown = (event) => {
       if (window.innerWidth < 1180) return;
 
-      if (
-        !event.target.closest(
-          "[data-navbar-dropdown]",
-        )
-      ) {
+      if (!event.target.closest("[data-navbar-dropdown]")) {
         closeDesktopMenus();
       }
     };
@@ -906,26 +790,14 @@ export default function Navbar() {
       setIsMobileMenuOpen(false);
     };
 
-    document.addEventListener(
-      "mousedown",
-      handleMouseDown,
-    );
+    document.addEventListener("mousedown", handleMouseDown);
 
-    document.addEventListener(
-      "keydown",
-      handleEscape,
-    );
+    document.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.removeEventListener(
-        "mousedown",
-        handleMouseDown,
-      );
+      document.removeEventListener("mousedown", handleMouseDown);
 
-      document.removeEventListener(
-        "keydown",
-        handleEscape,
-      );
+      document.removeEventListener("keydown", handleEscape);
     };
   }, []);
 
@@ -993,76 +865,52 @@ export default function Navbar() {
 
   const renderResidentialProjects = () => {
     if (loading) {
-      return (
-        <DropdownNotice>
-          Loading projects...
-        </DropdownNotice>
-      );
+      return <DropdownNotice>Loading projects...</DropdownNotice>;
     }
 
     if (error) {
-      return (
-        <DropdownNotice tone="error">
-          {error}
-        </DropdownNotice>
-      );
+      return <DropdownNotice tone="error">{error}</DropdownNotice>;
     }
 
     if (!residentialProjects.length) {
-      return (
-        <DropdownNotice>
-          No projects available
-        </DropdownNotice>
-      );
+      return <DropdownNotice>No projects available</DropdownNotice>;
     }
 
     return (
       <div className="space-y-1">
-        {residentialProjects.map(
-          (project, index) => (
-            <ResidentialCard
-              key={project.link || index}
-              project={project}
-              index={index}
-              href={`/dholera-residential-plots/${project.link}`}
-              onClick={closeAllMenus}
-            />
-          ),
-        )}
+        {residentialProjects.map((project, index) => (
+          <ResidentialCard
+            key={project.link || index}
+            project={project}
+            index={index}
+            href={`/dholera-residential-plots/${project.link}`}
+            onClick={closeAllMenus}
+          />
+        ))}
       </div>
     );
   };
 
   const renderDholeraProjects = () => {
     if (dholeraLoading) {
-      return (
-        <DropdownNotice>
-          Loading insights...
-        </DropdownNotice>
-      );
+      return <DropdownNotice>Loading insights...</DropdownNotice>;
     }
 
     if (dholeraError) {
-      return (
-        <DropdownNotice tone="error">
-          {dholeraError}
-        </DropdownNotice>
-      );
+      return <DropdownNotice tone="error">{dholeraError}</DropdownNotice>;
     }
 
     return (
       <div className="space-y-1">
-        {dholeraProjects.map(
-          (project, index) => (
-            <ImageCard
-              key={project.link}
-              project={project}
-              index={index}
-              href={`/${project.link}`}
-              onClick={closeAllMenus}
-            />
-          ),
-        )}
+        {dholeraProjects.map((project, index) => (
+          <ImageCard
+            key={project.link}
+            project={project}
+            index={index}
+            href={`/${project.link}`}
+            onClick={closeAllMenus}
+          />
+        ))}
       </div>
     );
   };
@@ -1081,11 +929,7 @@ export default function Navbar() {
           transition-all
           duration-500
           ease-[cubic-bezier(0.22,1,0.36,1)]
-          ${
-            isNavbarVisible
-              ? "translate-y-0"
-              : "-translate-y-[115%]"
-          }
+          ${isNavbarVisible ? "translate-y-0" : "-translate-y-[115%]"}
           ${
             isScrolled
               ? `
@@ -1213,10 +1057,7 @@ export default function Navbar() {
 
               {/* Residential */}
 
-              <div
-                className="relative"
-                data-navbar-dropdown
-              >
+              <div className="relative" data-navbar-dropdown>
                 <DesktopNavButton
                   label="Residential Projects"
                   open={isResidentialMenuOpen}
@@ -1257,19 +1098,14 @@ export default function Navbar() {
                       </p>
                     </div>
 
-                    <div className="mt-2">
-                      {renderResidentialProjects()}
-                    </div>
+                    <div className="mt-2">{renderResidentialProjects()}</div>
                   </DesktopDropdownShell>
                 )}
               </div>
 
               {/* Blogs */}
 
-              <div
-                className="relative"
-                data-navbar-dropdown
-              >
+              <div className="relative" data-navbar-dropdown>
                 <DesktopNavButton
                   label="Blogs"
                   open={isDholeraMenuOpen}
@@ -1310,9 +1146,7 @@ export default function Navbar() {
                       </p>
                     </div>
 
-                    <div className="mt-2">
-                      {renderDholeraProjects()}
-                    </div>
+                    <div className="mt-2">{renderDholeraProjects()}</div>
                   </DesktopDropdownShell>
                 )}
               </div>
@@ -1400,22 +1234,14 @@ export default function Navbar() {
               </button>
 
               {isUtilityMenuOpen && (
-                <DesktopDropdownShell
-                  align="right"
-                  className="w-[270px]"
-                >
+                <DesktopDropdownShell align="right" className="w-[270px]">
                   <div className="p-1">
-                    {utilityLinks.map(
-                      ({
-                        href,
-                        label,
-                        calendly,
-                      }) => {
-                        if (calendly) {
-                          return (
-                            <BookButton
-                              key={label}
-                              className="
+                    {utilityLinks.map(({ href, label, calendly }) => {
+                      if (calendly) {
+                        return (
+                          <BookButton
+                            key={label}
+                            className="
                                 block
                                 w-full
                                 rounded-lg
@@ -1429,16 +1255,16 @@ export default function Navbar() {
                                 hover:bg-white/[0.07]
                                 hover:text-[#ddbc69]
                               "
-                            />
-                          );
-                        }
+                          />
+                        );
+                      }
 
-                        return (
-                          <Link
-                            key={href}
-                            href={href}
-                            onClick={closeAllMenus}
-                            className="
+                      return (
+                        <Link
+                          key={href}
+                          href={href}
+                          onClick={closeAllMenus}
+                          className="
                               flex
                               items-center
                               justify-between
@@ -1452,19 +1278,17 @@ export default function Navbar() {
                               hover:bg-white/[0.07]
                               hover:text-[#ddbc69]
                             "
-                          >
-                            {label}
+                        >
+                          {label}
 
-                            <ChevronRight className="h-4 w-4 opacity-40" />
-                          </Link>
-                        );
-                      },
-                    )}
+                          <ChevronRight className="h-4 w-4 opacity-40" />
+                        </Link>
+                      );
+                    })}
                   </div>
                 </DesktopDropdownShell>
               )}
             </div>
-            
           </div>
 
           {/* ============================================================ */}
@@ -1507,9 +1331,7 @@ export default function Navbar() {
             >
               <FaWhatsapp className="h-4 w-4" />
 
-              <span className="hidden min-[380px]:inline">
-                Enquire
-              </span>
+              <span className="hidden min-[380px]:inline">Enquire</span>
             </Link>
 
             <button
@@ -1580,11 +1402,7 @@ export default function Navbar() {
             backdrop-blur-[5px]
             transition-opacity
             duration-500
-            ${
-              isMobileMenuOpen
-                ? "opacity-100"
-                : "opacity-0"
-            }
+            ${isMobileMenuOpen ? "opacity-100" : "opacity-0"}
           `}
         />
 
@@ -1597,591 +1415,42 @@ export default function Navbar() {
           aria-modal="true"
           aria-label="BookMyAssets navigation menu"
           className={`
-            absolute
-            bottom-0
-            right-0
-            top-0
-            flex
-            w-1/2
-            flex-col
-            overflow-hidden
-            rounded-l-[24px]
-            border
-            border-[#ddbc69]/25
-            bg-[radial-gradient(circle_at_100%_0%,rgba(221,188,105,0.14),transparent_30%),linear-gradient(145deg,rgba(27,44,56,0.99)_0%,rgba(11,21,29,0.99)_52%,rgba(8,15,21,0.99)_100%)]
-            shadow-[-22px_30px_90px_rgba(0,0,0,0.62)]
-            backdrop-blur-2xl
-            transition-transform
-            duration-500
-            ease-[cubic-bezier(0.22,1,0.36,1)]
-            sm:rounded-l-[30px]
-            ${
-              isMobileMenuOpen
-                ? "translate-x-0"
-                : "translate-x-[110%]"
-            }
-          `}
-        >
-          {/* Drawer top */}
+    absolute
+    bottom-0
+    right-0
+    top-0
+    flex
 
-          <div
-            className="
-              flex
-              min-h-[70px]
-              shrink-0
-              items-center
-              justify-between
-              border-b
-              border-[#ddbc69]/15
-              px-2
-              pt-[env(safe-area-inset-top)]
-              min-[390px]:px-3
-              sm:min-h-[82px]
-              sm:px-5
-            "
-          >
-            <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-              <Image
-                src={logo}
-                width={122}
-                height={40}
-                alt="BookMyAssets"
-                className="h-5 w-auto shrink-0 object-contain min-[390px]:h-6 sm:h-8"
-              />
+    w-[92vw]
+    max-w-[430px]
+    sm:w-[72vw]
+    sm:max-w-[520px]
+    md:w-[60vw]
+    md:max-w-[580px]
+    lg:w-[52vw]
+    lg:max-w-[620px]
 
-              <span
-                aria-hidden="true"
-                className="hidden h-8 w-px bg-gradient-to-b from-transparent via-[#ddbc69]/60 to-transparent sm:block"
-              />
+    flex-col
+    overflow-hidden
 
-              <div className="hidden sm:block">
-                <p
-                  className="
-                    text-[12px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.18em]
-                    text-[#ddbc69]
-                  "
-                >
-                  Menu
-                </p>
+    rounded-l-[24px]
+    border
+    border-[#ddbc69]/25
 
-                <p
-                  className="
-                    mt-1
-                    text-md
-                    font-medium
-                    text-white
-                  "
-                >
-                  Explore Dholera
-                </p>
-              </div>
-            </div>
+    bg-[radial-gradient(circle_at_100%_0%,rgba(221,188,105,0.14),transparent_30%),linear-gradient(145deg,rgba(27,44,56,0.99)_0%,rgba(11,21,29,0.99)_52%,rgba(8,15,21,0.99)_100%)]
 
-            <button
-              ref={drawerCloseButtonRef}
-              type="button"
-              onClick={closeAllMenus}
-              aria-label="Close menu"
-              className="
-                flex
-                h-10
-                w-10
-                shrink-0
-                items-center
-                justify-center
-                rounded-full
-                border
-                border-[#ddbc69]/20
-                bg-white/[0.07]
-                text-white
-                transition-colors
-                hover:border-[#ddbc69]/45
-                hover:bg-[#ddbc69]/10
-                focus:outline-none
-                focus:ring-2
-                focus:ring-[#ddbc69]
-                sm:h-11
-                sm:w-11
-              "
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
+    shadow-[-22px_30px_90px_rgba(0,0,0,0.62)]
+    backdrop-blur-2xl
 
-          {/* Drawer scrollable content */}
+    transition-transform
+    duration-500
+    ease-[cubic-bezier(0.22,1,0.36,1)]
 
-          <div
-            className="
-              min-h-0
-              flex-1
-              overflow-y-auto
-              overscroll-contain
-              px-2
-              py-3
-              min-[390px]:px-2.5
-              sm:px-4
-              sm:py-4
-            "
-          >
-            <div className="space-y-1.5 sm:space-y-2">
-              <Link
-                href="/"
-                onClick={closeAllMenus}
-                className="
-                  flex
-                  min-h-[56px]
-                  items-center
-                  justify-between
-                  rounded-xl
-                  border
-                  border-transparent
-                  px-2.5
-                  text-lg
-                  font-semibold
-                  leading-tight
-                  text-white
-                  transition-colors
-                  hover:border-white/10
-                  hover:bg-white/[0.05]
-                  min-[390px]:px-3
-                  sm:px-4
-                "
-              >
-                Home
+    sm:rounded-l-[30px]
 
-                <ChevronRight className="h-4 w-4 text-white/30" />
-              </Link>
-
-              {/* Mobile residential */}
-
-              <div
-                className="
-                  overflow-hidden
-                  rounded-2xl
-                  border
-                  border-white/[0.08]
-                  bg-white/[0.025]
-                "
-              >
-                <button
-                  type="button"
-                  onClick={toggleResidentialMenu}
-                  aria-expanded={
-                    isResidentialMenuOpen
-                  }
-                  aria-controls="mobile-residential-projects"
-                  className="
-                    flex
-                    min-h-[60px]
-                    w-full
-                    items-center
-                    justify-between
-                    gap-2
-                    px-2.5
-                    py-3
-                    text-left
-                    text-lg
-                    font-semibold
-                    leading-tight
-                    text-white
-                    min-[390px]:px-3
-                    sm:px-4
-                  "
-                >
-                  <span className="min-w-0 break-words">
-                    Residential Projects
-                  </span>
-
-                  <ChevronIcon
-                    open={isResidentialMenuOpen}
-                    className="h-4 w-4 shrink-0"
-                  />
-                </button>
-
-                <div
-                  id="mobile-residential-projects"
-                  aria-hidden={!isResidentialMenuOpen}
-                  inert={!isResidentialMenuOpen}
-                  className={`
-                    grid
-                    transition-all
-                    duration-500
-                    ${
-                      isResidentialMenuOpen
-                        ? "grid-rows-[1fr]"
-                        : "grid-rows-[0fr]"
-                    }
-                  `}
-                >
-                  <div className="overflow-hidden">
-                    <div
-                      className="
-                        max-h-[320px]
-                        overflow-y-auto
-                        border-t
-                        border-white/[0.07]
-                        p-2
-                      "
-                    >
-                      {loading && (
-                        <div
-                          className="
-                            py-8
-                            text-center
-                            text-sm
-                            text-white/45
-                          "
-                        >
-                          Loading projects...
-                        </div>
-                      )}
-
-                      {error && (
-                        <div
-                          className="
-                            py-8
-                            text-center
-                            text-sm
-                            text-red-300
-                          "
-                        >
-                          {error}
-                        </div>
-                      )}
-
-                      {!loading &&
-                        !error &&
-                        residentialProjects.map(
-                          (project, index) => (
-                            <MobileProjectLink
-                              key={
-                                project.link ||
-                                index
-                              }
-                              project={project}
-                              href={`/dholera-residential-plots/${project.link}`}
-                              onClick={
-                                closeAllMenus
-                              }
-                            />
-                          ),
-                        )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Mobile Blogs */}
-
-              <div
-                className="
-                  overflow-hidden
-                  rounded-2xl
-                  border
-                  border-white/[0.08]
-                  bg-white/[0.025]
-                "
-              >
-                <button
-                  type="button"
-                  onClick={toggleDholeraMenu}
-                  aria-expanded={
-                    isDholeraMenuOpen
-                  }
-                  aria-controls="mobile-blog-links"
-                  className="
-                    flex
-                    min-h-[60px]
-                    w-full
-                    items-center
-                    justify-between
-                    gap-2
-                    px-2.5
-                    py-3
-                    text-left
-                    text-lg
-                    font-semibold
-                    leading-tight
-                    text-white
-                    min-[390px]:px-3
-                    sm:px-4
-                  "
-                >
-                  <span className="min-w-0 break-words">
-                    Blogs & Updates
-                  </span>
-
-                  <ChevronIcon
-                    open={isDholeraMenuOpen}
-                    className="h-4 w-4 shrink-0"
-                  />
-                </button>
-
-                <div
-                  id="mobile-blog-links"
-                  aria-hidden={!isDholeraMenuOpen}
-                  inert={!isDholeraMenuOpen}
-                  className={`
-                    grid
-                    transition-all
-                    duration-500
-                    ${
-                      isDholeraMenuOpen
-                        ? "grid-rows-[1fr]"
-                        : "grid-rows-[0fr]"
-                    }
-                  `}
-                >
-                  <div className="overflow-hidden">
-                    <div
-                      className="
-                        border-t
-                        border-white/[0.07]
-                        p-2
-                      "
-                    >
-                      {dholeraLoading ? (
-                        <div
-                          className="
-                            py-6
-                            text-center
-                            text-sm
-                            text-white/40
-                          "
-                        >
-                          Loading...
-                        </div>
-                      ) : (
-                        dholeraItems.map(
-                          (project) => (
-                            <MobileProjectLink
-                              key={project.link}
-                              project={project}
-                              href={`/${project.link}`}
-                              onClick={
-                                closeAllMenus
-                              }
-                            />
-                          ),
-                        )
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <Link
-                href="/bulk-land"
-                onClick={closeAllMenus}
-                className="
-                  flex
-                  min-h-[56px]
-                  items-center
-                  justify-between
-                  gap-2
-                  rounded-xl
-                  px-2.5
-                  text-lg
-                  font-semibold
-                  leading-tight
-                  text-white
-                  transition-colors
-                  hover:bg-white/[0.05]
-                  min-[390px]:px-3
-                  sm:px-4
-                "
-              >
-                <span className="min-w-0 break-words">
-                  Bulk Land Deals
-                </span>
-
-                <ChevronRight className="h-4 w-4 shrink-0 text-white/30" />
-              </Link>
-
-              <Link
-                href="/contact"
-                onClick={closeAllMenus}
-                className="
-                  flex
-                  min-h-[56px]
-                  items-center
-                  justify-between
-                  gap-2
-                  rounded-xl
-                  px-2.5
-                  text-lg
-                  font-semibold
-                  leading-tight
-                  text-white
-                  transition-colors
-                  hover:bg-white/[0.05]
-                  min-[390px]:px-3
-                  sm:px-4
-                "
-              >
-                <span className="min-w-0 break-words">
-                  Contact Us
-                </span>
-
-                <ChevronRight className="h-4 w-4 shrink-0 text-white/30" />
-              </Link>
-            </div>
-
-            {/* Secondary links */}
-
-            <div
-              className="
-                mt-4
-                border-t
-                border-white/[0.08]
-                pt-3
-                sm:mt-5
-                sm:pt-4
-              "
-            >
-              <p
-                className="
-                  mb-2
-                  px-2.5
-                  text-[10px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.18em]
-                  text-white/30
-                "
-              >
-                More
-              </p>
-
-              {utilityLinks.map(
-                ({
-                  href,
-                  label,
-                  calendly,
-                }) => {
-                  if (calendly) {
-                    return (
-                      <BookButton
-                        key={label}
-                        className="
-                          block
-                          w-full
-                          rounded-xl
-                          px-2.5
-                          py-3.5
-                          text-left
-                          text-base
-                          font-medium
-                          leading-snug
-                          text-white/65
-                          transition-colors
-                          hover:bg-white/[0.05]
-                          hover:text-white
-                          min-[390px]:text-[17px]
-                          sm:px-4
-                        "
-                      />
-                    );
-                  }
-
-                  return (
-                    <Link
-                      key={href}
-                      href={href}
-                      onClick={closeAllMenus}
-                      className="
-                        flex
-                        min-h-[48px]
-                        items-center
-                        justify-between
-                        gap-2
-                        rounded-xl
-                        px-2.5
-                        text-base
-                        font-medium
-                        leading-snug
-                        text-white/65
-                        transition-colors
-                        hover:bg-white/[0.05]
-                        hover:text-white
-                        min-[390px]:text-[17px]
-                        sm:px-4
-                      "
-                    >
-                      <span className="min-w-0 break-words">
-                        {label}
-                      </span>
-
-                      <ChevronRight
-                        className="h-3.5 w-3.5 shrink-0 text-white/20"
-                      />
-                    </Link>
-                  );
-                },
-              )}
-            </div>
-          </div>
-
-          {/* Bottom CTA */}
-
-          <div
-            className="
-              shrink-0
-              border-t
-              border-white/[0.08]
-              bg-[linear-gradient(90deg,rgba(8,15,21,0.98),rgba(24,39,50,0.98))]
-              p-2
-              pb-[max(0.5rem,env(safe-area-inset-bottom))]
-              backdrop-blur-xl
-              min-[390px]:p-3
-              min-[390px]:pb-[max(0.75rem,env(safe-area-inset-bottom))]
-              sm:p-4
-              sm:pb-[max(1rem,env(safe-area-inset-bottom))]
-            "
-          >
-            <Link
-              href={whatsappEnquiryLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                flex
-                min-h-[54px]
-                w-full
-                items-center
-                justify-center
-                gap-2
-                rounded-full
-                bg-gradient-to-r
-                from-[#c99f42]
-                via-[#e5c66c]
-                to-[#d2ad55]
-                px-2
-                text-[15px]
-                font-semibold
-                text-black
-                shadow-[0_10px_35px_rgba(221,188,105,0.16)]
-                transition-all
-                hover:brightness-110
-                min-[390px]:text-base
-                sm:px-5
-              "
-            >
-              <FaWhatsapp className="h-[18px] w-[18px]" />
-
-              <span className="sm:hidden">
-                Enquire
-              </span>
-              <span className="hidden sm:inline">
-                Get Project Details
-              </span>
-
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </aside>
+    ${isMobileMenuOpen ? "translate-x-0" : "translate-x-[110%]"}
+  `}
+        ></aside>
       </div>
     </>
   );
