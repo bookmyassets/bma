@@ -236,7 +236,7 @@ export default function ProjectPlotAvailability({
                 aria-hidden="true"
               />
 
-              <span>Check Limited Plots Left</span>
+              <span>Check Availability</span>
             </Link>
           </div>
         </div>
