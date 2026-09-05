@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "@/app/(main)/components/Navbar_codexTemp";
 import "./globals.css";
 import Footer from "./body/Footer";
 import FloatingButtons from "./components/whatsapp";

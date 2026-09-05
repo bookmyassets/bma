@@ -144,10 +144,9 @@ function StatusBadge({ status }) {
         border
         px-2
         py-1
-        text-[11px]
+        text-[10px]
         font-semibold
         tracking-[0.08em]
-        whitespace-nowrap
         ${statusClasses[status] || "border-white/10 bg-white/10 text-white/70"}
       `}
     >
@@ -223,8 +222,8 @@ function ResidentialCard({
           className="
             mt-1.5
             truncate
-            text-base
-            font-semibold
+            text-[14px]
+            font-medium
             text-white
             transition-colors
             group-hover:text-[#ddbc69]
@@ -238,7 +237,7 @@ function ResidentialCard({
             className="
               mt-1
               truncate
-              text-[13px]
+              text-xs
               text-white/45
             "
           >
@@ -322,8 +321,8 @@ function ImageCard({
         <h3
           className="
             truncate
-            text-base
-            font-semibold
+            text-[14px]
+            font-medium
             text-white
             transition-colors
             group-hover:text-[#ddbc69]
@@ -336,7 +335,7 @@ function ImageCard({
           className="
             mt-1
             truncate
-            text-[13px]
+            text-xs
             text-white/45
           "
         >
@@ -383,12 +382,12 @@ function DesktopNavButton({
         whitespace-nowrap
         rounded-lg
         px-3
-        text-[17px]
-        font-semibold
+        text-base
+        font-medium
         transition-all
         duration-300
         xl:px-3.5
-        2xl:text-lg
+        2xl:text-[17px]
         ${
           open
             ? "bg-white/10 text-white"
@@ -542,10 +541,6 @@ function MobileProjectLink({
           "
         >
           {project.projectName}
-        </div>
-
-        <div className="mt-1.5">
-          <StatusBadge status={project.status} />
         </div>
 
         {project.location && (
@@ -1197,15 +1192,15 @@ export default function Navbar() {
                   items-center
                   rounded-lg
                   px-3
-                  text-[17px]
-                  font-semibold
+                  text-base
+                  font-medium
                   text-white/80
                   transition-all
                   duration-300
                   hover:bg-white/[0.07]
                   hover:text-white
                   xl:px-3.5
-                  2xl:text-lg
+                  2xl:text-[17px]
                 "
               >
                 Home
@@ -1326,15 +1321,15 @@ export default function Navbar() {
                   items-center
                   rounded-lg
                   px-3
-                  text-[17px]
-                  font-semibold
+                  text-base
+                  font-medium
                   text-white/80
                   transition-all
                   duration-300
                   hover:bg-white/[0.07]
                   hover:text-white
                   xl:px-3.5
-                  2xl:text-lg
+                  2xl:text-[17px]
                 "
               >
                 Bulk Land Deals
@@ -1349,15 +1344,15 @@ export default function Navbar() {
                   items-center
                   rounded-lg
                   px-3
-                  text-[17px]
-                  font-semibold
+                  text-base
+                  font-medium
                   text-white/80
                   transition-all
                   duration-300
                   hover:bg-white/[0.07]
                   hover:text-white
                   xl:px-3.5
-                  2xl:text-lg
+                  2xl:text-[17px]
                 "
               >
                 Contact Us
@@ -1422,8 +1417,7 @@ export default function Navbar() {
                                 px-3
                                 py-3
                                 text-left
-                                text-base
-                                font-medium
+                                text-[15px]
                                 text-white/75
                                 transition-colors
                                 hover:bg-white/[0.07]
@@ -1445,8 +1439,7 @@ export default function Navbar() {
                               rounded-lg
                               px-3
                               py-3
-                              text-base
-                              font-medium
+                              text-[15px]
                               text-white/75
                               transition-colors
                               hover:bg-white/[0.07]
@@ -1657,7 +1650,7 @@ export default function Navbar() {
               <div className="hidden sm:block">
                 <p
                   className="
-                    text-[12px]
+                    text-[10px]
                     font-semibold
                     uppercase
                     tracking-[0.18em]
@@ -1670,7 +1663,7 @@ export default function Navbar() {
                 <p
                   className="
                     mt-1
-                    text-md
+                    text-sm
                     font-medium
                     text-white
                   "

@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "@/app/(main)/components/Navbar_codexTemp";
 import "./globals.css";
 import FloatingButtons from "./components/Whatsapp";
 import Script from "next/script";
