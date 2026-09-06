@@ -543,6 +543,7 @@ export default function Navbar() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuMounted, setIsMobileMenuMounted] = useState(false);
 
   const [isResidentialMenuOpen, setIsResidentialMenuOpen] = useState(false);
 
@@ -564,6 +565,7 @@ export default function Navbar() {
   const ticking = useRef(false);
   const drawerRef = useRef(null);
   const drawerCloseButtonRef = useRef(null);
+  const drawerOpenFrameRef = useRef(null);
 
   /* ------------------------------------------------------------------------ */
   /* Smart hide/show navbar                                                   */
@@ -637,16 +639,19 @@ export default function Navbar() {
   /* ------------------------------------------------------------------------ */
 
   useEffect(() => {
-    if (!isMobileMenuOpen) return;
+    if (!isMobileMenuMounted) return;
 
     const currentOverflow = document.body.style.overflow;
+    const currentPaddingRight = document.body.style.paddingRight;
     const previouslyFocusedElement = document.activeElement;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
 
     document.body.style.overflow = "hidden";
 
-    const focusFrame = window.requestAnimationFrame(() =>
-      drawerCloseButtonRef.current?.focus(),
-    );
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
 
     const keepFocusInsideDrawer = (event) => {
       if (event.key !== "Tab" || !drawerRef.current) {
@@ -676,15 +681,47 @@ export default function Navbar() {
     document.addEventListener("keydown", keepFocusInsideDrawer);
 
     return () => {
-      window.cancelAnimationFrame(focusFrame);
       document.removeEventListener("keydown", keepFocusInsideDrawer);
       document.body.style.overflow = currentOverflow;
+      document.body.style.paddingRight = currentPaddingRight;
 
       if (previouslyFocusedElement instanceof HTMLElement) {
         previouslyFocusedElement.focus();
       }
     };
+  }, [isMobileMenuMounted]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined;
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      drawerCloseButtonRef.current?.focus({ preventScroll: true });
+    });
+
+    return () => window.cancelAnimationFrame(focusFrame);
   }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (drawerOpenFrameRef.current !== null) {
+        window.cancelAnimationFrame(drawerOpenFrameRef.current);
+      }
+    };
+  }, []);
+
+  /* ------------------------------------------------------------------------ */
+  /* Keep the drawer mounted until its closing transition has finished        */
+  /* ------------------------------------------------------------------------ */
+
+  useEffect(() => {
+    if (!isMobileMenuMounted || isMobileMenuOpen) return undefined;
+
+    const closeTimer = window.setTimeout(() => {
+      setIsMobileMenuMounted(false);
+    }, 550);
+
+    return () => window.clearTimeout(closeTimer);
+  }, [isMobileMenuMounted, isMobileMenuOpen]);
 
   /* ------------------------------------------------------------------------ */
   /* Close navigation after a route change                                   */
@@ -804,6 +841,11 @@ export default function Navbar() {
   /* ------------------------------------------------------------------------ */
 
   const closeAllMenus = () => {
+    if (drawerOpenFrameRef.current !== null) {
+      window.cancelAnimationFrame(drawerOpenFrameRef.current);
+      drawerOpenFrameRef.current = null;
+    }
+
     setIsMobileMenuOpen(false);
     setIsResidentialMenuOpen(false);
     setIsDholeraMenuOpen(false);
@@ -846,16 +888,27 @@ export default function Navbar() {
   const toggleMobileMenu = () => {
     setIsNavbarVisible(true);
 
-    setIsMobileMenuOpen((previous) => {
-      const next = !previous;
+    if (isMobileMenuOpen) {
+      closeAllMenus();
+      return;
+    }
 
-      if (next) {
-        setIsResidentialMenuOpen(false);
-        setIsDholeraMenuOpen(false);
-        setIsUtilityMenuOpen(false);
-      }
+    setIsResidentialMenuOpen(false);
+    setIsDholeraMenuOpen(false);
+    setIsUtilityMenuOpen(false);
 
-      return next;
+    if (isMobileMenuMounted) {
+      setIsMobileMenuOpen(true);
+      return;
+    }
+
+    setIsMobileMenuMounted(true);
+
+    drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
+      drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
+        drawerOpenFrameRef.current = null;
+        setIsMobileMenuOpen(true);
+      });
     });
   };
 
@@ -1379,12 +1432,14 @@ export default function Navbar() {
           fixed
           inset-0
           z-[100]
+          overflow-hidden
           min-[1180px]:hidden
           ${
-            isMobileMenuOpen
-              ? "pointer-events-auto visible"
-              : "pointer-events-none invisible"
+            isMobileMenuMounted
+              ? "visible"
+              : "invisible"
           }
+          ${isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"}
         `}
         aria-hidden={!isMobileMenuOpen}
         inert={!isMobileMenuOpen}
@@ -1414,6 +1469,15 @@ export default function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="BookMyAssets navigation menu"
+          onTransitionEnd={(event) => {
+            if (
+              event.target === event.currentTarget &&
+              event.propertyName === "transform" &&
+              !isMobileMenuOpen
+            ) {
+              setIsMobileMenuMounted(false);
+            }
+          }}
           className={`
     absolute
     bottom-0
@@ -1432,18 +1496,20 @@ export default function Navbar() {
     border
     border-[#ddbc69]/25
 
-    bg-[radial-gradient(circle_at_100%_0%,rgba(221,188,105,0.14),transparent_30%),linear-gradient(145deg,rgba(27,44,56,0.99)_0%,rgba(11,21,29,0.99)_52%,rgba(8,15,21,0.99)_100%)]
+    bg-[radial-gradient(circle_at_100%_0%,rgba(221,188,105,0.14),transparent_30%),linear-gradient(145deg,#1b2c38_0%,#0b151d_52%,#080f15_100%)]
 
     shadow-[-22px_30px_90px_rgba(0,0,0,0.62)]
-    backdrop-blur-2xl
+    transform-gpu
+    [backface-visibility:hidden]
+    will-change-transform
 
     transition-transform
     duration-500
-    ease-[cubic-bezier(0.22,1,0.36,1)]
+    ease-[cubic-bezier(0.4,0,0.2,1)]
 
     sm:rounded-l-[30px]
 
-    ${isMobileMenuOpen ? "translate-x-0" : "translate-x-[110%]"}
+    ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}
   `}
         >
           <div

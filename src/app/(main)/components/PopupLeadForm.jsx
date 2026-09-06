@@ -62,6 +62,20 @@ const ACTIVE_POPUP_KEY = "__bmaActiveLeadPopup";
 const PAGE_POPUP_STATE_KEY = "__bmaLeadPopupPageState";
 const SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT =
   process.env.NODE_ENV === "development";
+const RAGE_CLICK_IGNORE_SELECTOR = [
+  "a",
+  "button",
+  "input",
+  "select",
+  "textarea",
+  "label",
+  "form",
+  "header",
+  "nav",
+  '[role="button"]',
+  '[role="dialog"]',
+  "[data-ignore-rage-click]",
+].join(",");
 
 function requestPopupOpen(instanceId, type) {
   if (typeof window === "undefined") return false;
@@ -355,8 +369,21 @@ export default function PopupLeadForm({
   useEffect(() => {
     if (config.trigger !== "rage") return undefined;
 
-    const handleRageClick = () => {
+    const handleRageClick = (event) => {
       if (popupShown) return;
+
+      if (
+        !(event.target instanceof Element) ||
+        event.target.closest(RAGE_CLICK_IGNORE_SELECTOR)
+      ) {
+        clickCount.current = 0;
+
+        if (clickTimer.current) {
+          clearTimeout(clickTimer.current);
+        }
+
+        return;
+      }
 
       clickCount.current += 1;
 
@@ -602,7 +629,10 @@ export default function PopupLeadForm({
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={config.title}
+      className="fixed inset-0 z-[120] flex items-center justify-center bg-black/60 p-4"
       onClick={handleBackdropClick}
     >
       <div
