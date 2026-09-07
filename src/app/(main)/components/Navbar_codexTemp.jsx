@@ -18,7 +18,7 @@ const whatsappEnquiryLink = `https://wa.me/918130371647?text=${encodeURIComponen
 )}`;
 
 const RESIDENTIAL_PROJECTS_URL =
-  "/data/Residential.json?v=20260803-project-images";
+  "/data/Residential.json?v=20260907-residency-badge";
 
 const dholeraItems = [
   {
