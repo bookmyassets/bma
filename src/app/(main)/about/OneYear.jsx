@@ -89,7 +89,7 @@ export default function BookMyAssets() {
 
   const founders = [
     {
-      name: "Samarth Gupta",
+      name: "Sam Gupta",
       title: "Chairman",
       initials: "SG",
       bio: (
@@ -103,7 +103,6 @@ export default function BookMyAssets() {
           capital security, and large-scale asset development—most notably
           across the mega-landscape of Dholera SIR.
           <br />
-          <br />
           As Chairman, Mr. Gupta serves as the ultimate anchor of BMA’s
           corporate governance, financial stewardship, and macro-expansion
           strategy. He specializes in bridging the gap between raw land banking
@@ -112,7 +111,6 @@ export default function BookMyAssets() {
           frameworks, he ensures that complex, large-scale acquisitions are
           executed with absolute transparency and uncompromising capital
           protection.
-          <br />
           <br />
           Steering multiple high-growth enterprises globally, Mr. Gupta acts as
           the organization&apos;s economic compass. His disciplined approach to
