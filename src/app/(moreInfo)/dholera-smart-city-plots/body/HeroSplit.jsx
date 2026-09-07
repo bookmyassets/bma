@@ -237,6 +237,7 @@ export default function LandingPage({ openForm }) {
                 fill
                 sizes="100vw"
                 className="object-fill"
+                quality={100}
                 priority
               />
             </div>
