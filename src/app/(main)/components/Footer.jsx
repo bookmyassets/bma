@@ -165,6 +165,14 @@ export default function Footer() {
                   WestWyn County
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/dholera-residential-plots/westwyn-crown"
+                  className="text-white hover:text-[#ddbc69] hover:translate-x-1 inline-block transition-all"
+                >
+                  WestWyn Crown
+                </Link>
+              </li>
               
             </ul>
           </div>
