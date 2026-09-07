@@ -65,6 +65,8 @@ const utilityLinks = [
 const statusClasses = {
   ongoing: "bg-green-500/15 text-green-300 border-green-400/20",
   Ongoing: "bg-green-500/15 text-green-300 border-green-400/20",
+  "newly launched": "bg-yellow-500/15 text-yellow-300 border-yellow-400/20",
+  "Newly Launched": "bg-yellow-500/15 text-yellow-300 border-yellow-400/20",
 
   "sold-out": "bg-red-500/15 text-red-300 border-red-400/20",
 
@@ -90,6 +92,10 @@ function getStatusLabel(status) {
 
   if (status === "ongoing" || status === "Ongoing") {
     return "ONGOING";
+  }
+
+  if (status === "newly launched" || status === "Newly Launched") {
+    return "NEWLY LAUNCHED";
   }
 
   return status;
