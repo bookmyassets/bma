@@ -538,10 +538,6 @@ function MobileProjectLink({ project, href, onClick }) {
 export default function Navbar() {
   const pathname = usePathname();
 
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileMenuMounted, setIsMobileMenuMounted] = useState(false);
 
@@ -561,78 +557,9 @@ export default function Navbar() {
   const [error, setError] = useState(null);
   const [dholeraError, setDholeraError] = useState(null);
 
-  const lastScrollY = useRef(0);
-  const ticking = useRef(false);
   const drawerRef = useRef(null);
   const drawerCloseButtonRef = useRef(null);
   const drawerOpenFrameRef = useRef(null);
-
-  /* ------------------------------------------------------------------------ */
-  /* Smart hide/show navbar                                                   */
-  /* ------------------------------------------------------------------------ */
-
-  useEffect(() => {
-    lastScrollY.current = window.scrollY;
-
-    const updateNavbar = () => {
-      const currentScrollY = window.scrollY;
-      const difference = currentScrollY - lastScrollY.current;
-
-      setIsScrolled(currentScrollY > 24);
-
-      /*
-       * Drawer open:
-       * navbar must remain visible.
-       */
-      if (isMobileMenuOpen) {
-        setIsNavbarVisible(true);
-        lastScrollY.current = currentScrollY;
-        ticking.current = false;
-        return;
-      }
-
-      /*
-       * Always visible near page top.
-       */
-      if (currentScrollY < 90) {
-        setIsNavbarVisible(true);
-      } else if (difference > 8) {
-        /*
-         * User is scrolling DOWN.
-         */
-        setIsNavbarVisible(false);
-
-        setIsResidentialMenuOpen(false);
-        setIsDholeraMenuOpen(false);
-        setIsUtilityMenuOpen(false);
-      } else if (difference < -8) {
-        /*
-         * User is scrolling UP.
-         */
-        setIsNavbarVisible(true);
-      }
-
-      lastScrollY.current = currentScrollY;
-      ticking.current = false;
-    };
-
-    const handleScroll = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(updateNavbar);
-        ticking.current = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    updateNavbar();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isMobileMenuOpen]);
 
   /* ------------------------------------------------------------------------ */
   /* Lock body when drawer is open                                            */
@@ -853,64 +780,50 @@ export default function Navbar() {
   };
 
   const toggleResidentialMenu = () => {
-    setIsNavbarVisible(true);
+  setIsResidentialMenuOpen((previous) => !previous);
 
-    setIsResidentialMenuOpen((previous) => {
-      return !previous;
-    });
-
-    setIsDholeraMenuOpen(false);
-    setIsUtilityMenuOpen(false);
+  setIsDholeraMenuOpen(false);
+  setIsUtilityMenuOpen(false);
   };
 
-  const toggleDholeraMenu = () => {
-    setIsNavbarVisible(true);
+ const toggleDholeraMenu = () => {
+  setIsDholeraMenuOpen((previous) => !previous);
 
-    setIsDholeraMenuOpen((previous) => {
-      return !previous;
-    });
-
-    setIsResidentialMenuOpen(false);
-    setIsUtilityMenuOpen(false);
-  };
+  setIsResidentialMenuOpen(false);
+  setIsUtilityMenuOpen(false);
+};
 
   const toggleUtilityMenu = () => {
-    setIsNavbarVisible(true);
+  setIsUtilityMenuOpen((previous) => !previous);
 
-    setIsUtilityMenuOpen((previous) => {
-      return !previous;
-    });
-
-    setIsResidentialMenuOpen(false);
-    setIsDholeraMenuOpen(false);
-  };
+  setIsResidentialMenuOpen(false);
+  setIsDholeraMenuOpen(false);
+};
 
   const toggleMobileMenu = () => {
-    setIsNavbarVisible(true);
+  if (isMobileMenuOpen) {
+    closeAllMenus();
+    return;
+  }
 
-    if (isMobileMenuOpen) {
-      closeAllMenus();
-      return;
-    }
+  setIsResidentialMenuOpen(false);
+  setIsDholeraMenuOpen(false);
+  setIsUtilityMenuOpen(false);
 
-    setIsResidentialMenuOpen(false);
-    setIsDholeraMenuOpen(false);
-    setIsUtilityMenuOpen(false);
+  if (isMobileMenuMounted) {
+    setIsMobileMenuOpen(true);
+    return;
+  }
 
-    if (isMobileMenuMounted) {
-      setIsMobileMenuOpen(true);
-      return;
-    }
+  setIsMobileMenuMounted(true);
 
-    setIsMobileMenuMounted(true);
-
+  drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
     drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
-      drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
-        drawerOpenFrameRef.current = null;
-        setIsMobileMenuOpen(true);
-      });
+      drawerOpenFrameRef.current = null;
+      setIsMobileMenuOpen(true);
     });
-  };
+  });
+};
 
   /* ------------------------------------------------------------------------ */
   /* Desktop dropdown content                                                 */
@@ -974,37 +887,7 @@ export default function Navbar() {
       {/* MAIN NAVBAR                                                      */}
       {/* ================================================================ */}
 
-      <header
-        className={`
-          fixed
-          inset-x-0
-          z-[80]
-          transition-all
-          duration-500
-          ease-[cubic-bezier(0.22,1,0.36,1)]
-          ${isNavbarVisible ? "translate-y-0" : "-translate-y-[115%]"}
-          ${
-            isScrolled
-              ? `
-                border-b
-                border-[#ddbc69]/20
-                bg-[linear-gradient(105deg,rgba(8,16,23,0.97)_0%,rgba(29,48,61,0.96)_50%,rgba(10,21,29,0.97)_100%)]
-                shadow-[0_14px_45px_rgba(0,0,0,0.32)]
-                backdrop-blur-2xl
-              `
-              : `
-                border-b
-                border-[#ddbc69]/20
-                bg-[linear-gradient(105deg,rgba(8,16,23,0.94)_0%,rgba(35,55,68,0.88)_50%,rgba(10,21,29,0.94)_100%)]
-                shadow-[0_10px_32px_rgba(0,0,0,0.2)]
-                backdrop-blur-xl
-              `
-          }
-        `}
-        style={{
-          top: "var(--nav-offset-top, 0px)",
-        }}
-      >
+      <header className="fixed inset-x-0 top-0 z-[80] border-b border-[#ddbc69]/20 bg-[linear-gradient(105deg,rgba(8,16,23,0.97)_0%,rgba(29,48,61,0.96)_50%,rgba(10,21,29,0.97)_100%)] shadow-[0_14px_45px_rgba(0,0,0,0.32)] backdrop-blur-2xl">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_-90%,rgba(221,188,105,0.28),transparent_38%)]"
@@ -1434,11 +1317,7 @@ export default function Navbar() {
           z-[100]
           overflow-hidden
           min-[1180px]:hidden
-          ${
-            isMobileMenuMounted
-              ? "visible"
-              : "invisible"
-          }
+          ${isMobileMenuMounted ? "visible" : "invisible"}
           ${isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"}
         `}
         aria-hidden={!isMobileMenuOpen}
@@ -1592,8 +1471,13 @@ export default function Navbar() {
                   aria-controls="mobile-residential-projects"
                   className="flex min-h-[60px] w-full items-center justify-between gap-2 px-2.5 py-3 text-left text-lg font-semibold leading-tight text-white min-[390px]:px-3 sm:px-4"
                 >
-                  <span className="min-w-0 break-words">Residential Projects</span>
-                  <ChevronIcon open={isResidentialMenuOpen} className="h-4 w-4 shrink-0" />
+                  <span className="min-w-0 break-words">
+                    Residential Projects
+                  </span>
+                  <ChevronIcon
+                    open={isResidentialMenuOpen}
+                    className="h-4 w-4 shrink-0"
+                  />
                 </button>
 
                 <div
@@ -1601,24 +1485,40 @@ export default function Navbar() {
                   aria-hidden={!isResidentialMenuOpen}
                   inert={!isResidentialMenuOpen}
                   className={`grid transition-all duration-500 ${
-                    isResidentialMenuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    isResidentialMenuOpen
+                      ? "grid-rows-[1fr]"
+                      : "grid-rows-[0fr]"
                   }`}
                 >
                   <div className="overflow-hidden">
                     <div className="max-h-[320px] overflow-y-auto border-t border-white/[0.07] p-2">
-                      {loading && <div className="py-8 text-center text-sm text-white/45">Loading projects...</div>}
-                      {error && <div className="py-8 text-center text-sm text-red-300">{error}</div>}
-                      {!loading && !error && residentialProjects.length === 0 && (
-                        <div className="py-8 text-center text-sm text-white/45">No projects available</div>
+                      {loading && (
+                        <div className="py-8 text-center text-sm text-white/45">
+                          Loading projects...
+                        </div>
                       )}
-                      {!loading && !error && residentialProjects.map((project, index) => (
-                        <MobileProjectLink
-                          key={project.link || index}
-                          project={project}
-                          href={`/dholera-residential-plots/${project.link}`}
-                          onClick={closeAllMenus}
-                        />
-                      ))}
+                      {error && (
+                        <div className="py-8 text-center text-sm text-red-300">
+                          {error}
+                        </div>
+                      )}
+                      {!loading &&
+                        !error &&
+                        residentialProjects.length === 0 && (
+                          <div className="py-8 text-center text-sm text-white/45">
+                            No projects available
+                          </div>
+                        )}
+                      {!loading &&
+                        !error &&
+                        residentialProjects.map((project, index) => (
+                          <MobileProjectLink
+                            key={project.link || index}
+                            project={project}
+                            href={`/dholera-residential-plots/${project.link}`}
+                            onClick={closeAllMenus}
+                          />
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -1632,8 +1532,13 @@ export default function Navbar() {
                   aria-controls="mobile-blog-links"
                   className="flex min-h-[60px] w-full items-center justify-between gap-2 px-2.5 py-3 text-left text-lg font-semibold leading-tight text-white min-[390px]:px-3 sm:px-4"
                 >
-                  <span className="min-w-0 break-words">Blogs &amp; Updates</span>
-                  <ChevronIcon open={isDholeraMenuOpen} className="h-4 w-4 shrink-0" />
+                  <span className="min-w-0 break-words">
+                    Blogs &amp; Updates
+                  </span>
+                  <ChevronIcon
+                    open={isDholeraMenuOpen}
+                    className="h-4 w-4 shrink-0"
+                  />
                 </button>
 
                 <div
@@ -1647,15 +1552,19 @@ export default function Navbar() {
                   <div className="overflow-hidden">
                     <div className="border-t border-white/[0.07] p-2">
                       {dholeraLoading ? (
-                        <div className="py-6 text-center text-sm text-white/40">Loading...</div>
-                      ) : dholeraProjects.map((project) => (
-                        <MobileProjectLink
-                          key={project.link}
-                          project={project}
-                          href={`/${project.link}`}
-                          onClick={closeAllMenus}
-                        />
-                      ))}
+                        <div className="py-6 text-center text-sm text-white/40">
+                          Loading...
+                        </div>
+                      ) : (
+                        dholeraProjects.map((project) => (
+                          <MobileProjectLink
+                            key={project.link}
+                            project={project}
+                            href={`/${project.link}`}
+                            onClick={closeAllMenus}
+                          />
+                        ))
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1697,7 +1606,7 @@ export default function Navbar() {
                     <span className="min-w-0 break-words">{label}</span>
                     <ChevronRight className="h-3.5 w-3.5 shrink-0 text-white/20" />
                   </Link>
-                )
+                ),
               )}
             </div>
           </div>
