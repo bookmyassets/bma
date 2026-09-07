@@ -46,7 +46,7 @@ export default function Page() {
         <MegaIndustries />
         {/* <WhyNCRInvestors/> */}
         {/* Lead Form */}
-        <Gallery />
+        {/* <Gallery /> */}
 
         <TestimonialPagination />
         <FAQSection />

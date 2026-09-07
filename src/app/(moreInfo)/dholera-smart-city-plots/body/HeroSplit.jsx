@@ -153,7 +153,7 @@ export default function LandingPage({ openForm }) {
   };
 
   return (
-    <div id="hero" className="relative min-h-screen bg-white">
+    <div id="hero" className="relative min-h-0 bg-white lg:min-h-screen">
       {/* Thank You Overlay */}
       <AnimatePresence>
         {showThankYou && (
@@ -214,7 +214,7 @@ export default function LandingPage({ openForm }) {
       </AnimatePresence>
 
       {/* Main Layout */}
-      <div className="md:min-h-screen pt-20 flex flex-col lg:h-screen lg:pt-0">
+      <div className="min-h-0 pt-20 flex flex-col lg:min-h-screen lg:h-screen lg:pt-0">
         <div className="flex-1 flex flex-col lg:flex-row">
           {/* Left Side - Single Image */}
           <div className="relative w-full flex-none overflow-hidden lg:w-[60%] lg:flex-1">
@@ -230,19 +230,20 @@ export default function LandingPage({ openForm }) {
             </div>
 
             {/* Mobile Image */}
-            <div className="block w-full lg:hidden">
+            <div className="relative h-[48svh] min-h-[280px] max-h-[390px] w-full overflow-hidden bg-[#071018] lg:hidden">
               <Image
                 src={mobileImg}
                 alt="Dholera Investment Opportunity"
-                className="block h-auto w-full"
+                fill
                 sizes="100vw"
+                className="object-fill"
                 priority
               />
             </div>
           </div>
 
           {/* Right Side - Lead Form Section */}
-          <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-4 lg:p-6">
+          <div className="w-full lg:w-[40%] bg-white flex items-center justify-center p-3 sm:p-4 lg:p-6">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -250,7 +251,7 @@ export default function LandingPage({ openForm }) {
               className="w-full max-w-md"
             >
               {/* Logo */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-3 sm:mb-5 lg:mb-6">
                 <Image
                   src={logo}
                   alt="BookMyAssets Logo"
@@ -285,11 +286,11 @@ export default function LandingPage({ openForm }) {
                     }
                   `}</style>
 
-                  <div className="flashy-blink ">
-                    <h2 className="text-xl lg:text-2xl font-bold mb-2 glowing-text">
+                  <div className="flashy-blink !border-2 !p-2 sm:!p-3">
+                    <h2 className="text-lg font-bold leading-tight mb-1.5 glowing-text sm:text-xl lg:mb-2 lg:text-2xl">
                       Invest in India's First Smart City
                     </h2>
-                    <p className="text-sm lg:text-base glowing-text">
+                    <p className="text-sm leading-5 glowing-text lg:text-base">
                       Fill the Form & Know Why Dholera Is a Big Opportunity
                     </p>
                   </div>
@@ -329,7 +330,7 @@ export default function LandingPage({ openForm }) {
                   </p>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {errorMessage && (
                     <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm">
                       {errorMessage}
@@ -363,7 +364,7 @@ export default function LandingPage({ openForm }) {
                         value={formData.fullName}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 pl-10 bg-white text-black rounded-lg placeholder:text-black focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-900 hover:border-yellow-400 transition-colors text-sm"
+                        className="w-full p-2.5 pl-9 bg-white text-black rounded-lg placeholder:text-black focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-900 hover:border-yellow-400 transition-colors text-sm sm:p-3 sm:pl-10"
                       />
                     </motion.div>
 
@@ -396,7 +397,7 @@ export default function LandingPage({ openForm }) {
                         minLength={10}
                         maxLength={15}
                         required
-                        className="w-full p-3 pl-10 bg-white text-black rounded-lg placeholder:text-black focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-900 hover:border-yellow-400 transition-colors text-sm"
+                        className="w-full p-2.5 pl-9 bg-white text-black rounded-lg placeholder:text-black focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-900 hover:border-yellow-400 transition-colors text-sm sm:p-3 sm:pl-10"
                       />
                     </motion.div>
                   </div>
@@ -422,7 +423,7 @@ export default function LandingPage({ openForm }) {
                     type="button"
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="w-full py-3 px-6 text-white rounded-lg transition-shadow shadow-lg hover:shadow-[#ddbc69]/30 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full py-2.5 px-5 text-white rounded-lg transition-shadow shadow-lg hover:shadow-[#ddbc69]/30 font-semibold disabled:opacity-70 disabled:cursor-not-allowed sm:py-3 sm:px-6"
                   >
                     {isLoading ? "Submitting..." : "Get A Call Back"}
                   </motion.button>
