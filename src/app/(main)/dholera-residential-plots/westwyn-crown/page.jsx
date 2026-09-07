@@ -6,6 +6,7 @@ export const metadata = buildMeta({
   description:
     "WestWyn Crown by BookMyAssets is an upcoming residential plotted development in Dholera, Gujarat. View project launch updates and availability.",
   slug: "dholera-residential-plots/westwyn-crown",
+  noIndex: true,
   type: "website",
 });
 

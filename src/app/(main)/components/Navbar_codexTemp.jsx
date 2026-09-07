@@ -79,6 +79,14 @@ const statusClasses = {
   limited: "bg-[#ddbc69]/15 text-[#ddbc69] border-[#ddbc69]/20",
 };
 
+const badgeStatusOverrides = {
+  "westwyn-residency": "newly launched",
+};
+
+function getProjectBadgeStatus(project) {
+  return badgeStatusOverrides[project.link] || project.status;
+}
+
 function getStatusLabel(status) {
   if (status === "sold-out") return "SOLD OUT";
 
@@ -205,7 +213,7 @@ function ResidentialCard({ project, index, href, onClick }) {
       </div>
 
       <div className="min-w-0 flex-1">
-        <StatusBadge status={project.status} />
+        <StatusBadge status={getProjectBadgeStatus(project)} />
 
         <h3
           className="
@@ -506,7 +514,7 @@ function MobileProjectLink({ project, href, onClick }) {
         </div>
 
         <div className="mt-1.5">
-          <StatusBadge status={project.status} />
+          <StatusBadge status={getProjectBadgeStatus(project)} />
         </div>
 
         {project.location && (
