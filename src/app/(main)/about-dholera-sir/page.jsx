@@ -289,7 +289,7 @@ export default function page() {
 
       <div className="bg-black text-white">
         {/* Hero Section - Lazy loaded to unblock LCP */}
-        <div className="pt-[clamp(3rem,5vw,4rem)] md:pt-0">
+        <div className="pt-[72px] lg:pt-[86px]">
           <div className="md:relative md:h-[70vh] overflow-hidden shadow-lg bg-black">
             <Image
               src={banner}

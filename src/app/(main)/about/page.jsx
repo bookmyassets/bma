@@ -262,7 +262,7 @@ const RealEstateLandingPage = () => {
         content="BookMyAssets is a Dholera-focused real estate developer founded in 2024. Meet our founders, BMA Group companies, projects and end-to-end buyer support."
       />
       <link rel="canonical" href="https://www.bookmyassets.com/about" />
-      <div className="bg-white">
+      <div className="bg-white pt-[72px] lg:pt-[86px]">
         <div className="">
           <BookMyAssets />
         </div>

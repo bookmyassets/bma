@@ -8,6 +8,8 @@ import {
   PartyPopper,
   Award,
   Building,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 import img1 from "@/assests/about/charan-meeting.webp";
@@ -23,6 +25,7 @@ import Image from "next/image";
 export default function BookMyAssets() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [timelineVisible, setTimelineVisible] = useState(false);
+  const [expandedFounder, setExpandedFounder] = useState(null);
 
   const milestones = [
     {
@@ -43,7 +46,7 @@ export default function BookMyAssets() {
       icon: TrendingUp,
       position: "top",
     },
-   
+
     {
       date: "May 2025",
       event: "1st In-house Project Launch: Westwyn County",
@@ -68,9 +71,15 @@ export default function BookMyAssets() {
       icon: Award,
       position: "top",
     },
-     {
+    {
       date: "May 2026",
-      event: <>Launch:<br />BMA Constructions</>,
+      event: (
+        <>
+          Launch:
+          <br />
+          BMA Constructions
+        </>
+      ),
       icon: Rocket,
       position: "bottom",
     },
@@ -81,21 +90,43 @@ export default function BookMyAssets() {
   const founders = [
     {
       name: "Samarth Gupta",
-      title: "Co-Founder & Director",
+      title: "Chairman",
       initials: "SG",
       bio: (
         <>
-          A key pillar of BMA with expertise in{" "}
-          <strong className=" font-medium">
-            finance, accounts, legal checks,
-          </strong>{" "}
-          due diligence, and bulk land deals in Dholera. The backbone of
-          Accounts and Legal at BMA.
+          A serial entrepreneur and cross-border investor, Sam Gupta brings over
+          15 years of high-stakes US digital venture leadership, engineering
+          precision (B.Tech), and strategic business mastery (MBA) to India’s
+          real estate ecosystem. Returning to the domestic market after more
+          than a decade in the United States, he leverages an international
+          perspective to revolutionize institutional-grade land acquisition,
+          capital security, and large-scale asset development—most notably
+          across the mega-landscape of Dholera SIR.
+          <br />
+          <br />
+          As Chairman, Mr. Gupta serves as the ultimate anchor of BMA’s
+          corporate governance, financial stewardship, and macro-expansion
+          strategy. He specializes in bridging the gap between raw land banking
+          and secure, high-yield investment realities. By pairing predictive
+          market intelligence with bulletproof legal, financial, and regulatory
+          frameworks, he ensures that complex, large-scale acquisitions are
+          executed with absolute transparency and uncompromising capital
+          protection.
+          <br />
+          <br />
+          Steering multiple high-growth enterprises globally, Mr. Gupta acts as
+          the organization&apos;s economic compass. His disciplined approach to
+          venture building and capital allocation calibrates ambitious land
+          development with institutional prudence—reinforcing global investor
+          confidence, elevating industry benchmarks, and actively shaping the
+          future of real estate.
         </>
       ),
+      expandable: true,
       tag: "Finance & Legal",
       image: img7,
     },
+
     {
       name: "Jivjot Singh",
       title: "Co-Founder & CEO",
@@ -103,13 +134,14 @@ export default function BookMyAssets() {
       bio: (
         <>
           A dynamic leader focused on{" "}
-          <strong className=" font-medium">
+          <strong className="font-medium">
             trust, teamwork, and customer experience.
           </strong>{" "}
           His mission is to make investing in Dholera simple, transparent, and
           reliable for every client.
         </>
       ),
+      expandable: false,
       tag: "Vision & Leadership",
       image: img8,
     },
@@ -165,11 +197,11 @@ export default function BookMyAssets() {
             <em style={{ color: "#ddbc69", fontStyle: "italic" }}>Founders</em>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-24 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 items-stretch gap-8 md:gap-12 lg:gap-16 max-w-3xl mx-auto">
             {founders.map((founder, i) => (
               <div
                 key={i}
-                className="relative overflow-hidden rounded-sm"
+                className="relative flex h-full flex-col overflow-hidden rounded-sm"
                 style={{
                   background: "#111",
                   border: "1px solid #222",
@@ -214,19 +246,24 @@ export default function BookMyAssets() {
                 </div>
 
                 {/* Content */}
-                <div className="p-4">
+                <div className="flex flex-1 flex-col p-4">
                   <p
-                    className="text-xl font-bold text-white mb-0.5"
+                    className="mb-0.5 text-xl font-bold text-white"
                     style={{ fontFamily: "Georgia, serif" }}
                   >
                     {founder.name}
                   </p>
+
                   <p
-                    className="text-xs tracking-widest uppercase mb-3"
-                    style={{ color: "#ddbc69", letterSpacing: "0.15em" }}
+                    className="mb-3 text-xs uppercase tracking-widest"
+                    style={{
+                      color: "#ddbc69",
+                      letterSpacing: "0.15em",
+                    }}
                   >
                     {founder.title}
                   </p>
+
                   <div
                     className="mb-3"
                     style={{
@@ -235,11 +272,93 @@ export default function BookMyAssets() {
                       backgroundColor: "#333",
                     }}
                   />
-                  <p className="text-sm leading-relaxed text-white">
-                    {founder.bio}
-                  </p>
+
+                  <div className="flex flex-1 flex-col">
+                    <div
+                      className={`
+        text-sm
+        leading-relaxed
+        text-white/90
+
+        ${
+          founder.expandable && expandedFounder !== i
+            ? `
+              overflow-hidden
+              [display:-webkit-box]
+              [-webkit-box-orient:vertical]
+              [-webkit-line-clamp:4]
+            `
+            : ""
+        }
+      `}
+                    >
+                      {founder.bio}
+                    </div>
+
+                    {/* Read More / Read Less */}
+                    {founder.expandable && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setExpandedFounder((current) =>
+                            current === i ? null : i,
+                          )
+                        }
+                        aria-expanded={expandedFounder === i}
+                        className="
+          group
+          mt-4
+
+          inline-flex
+          w-fit
+          items-center
+          gap-1.5
+
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.12em]
+
+          text-[#ddbc69]
+
+          transition-colors
+          duration-300
+
+          hover:text-[#f0d482]
+        "
+                      >
+                        <span>
+                          {expandedFounder === i ? "Read Less" : "Read More"}
+                        </span>
+
+                        {expandedFounder === i ? (
+                          <ChevronUp
+                            className="
+              size-4
+              transition-transform
+              duration-300
+              group-hover:-translate-y-0.5
+            "
+                            strokeWidth={1.8}
+                          />
+                        ) : (
+                          <ChevronDown
+                            className="
+              size-4
+              transition-transform
+              duration-300
+              group-hover:translate-y-0.5
+            "
+                            strokeWidth={1.8}
+                          />
+                        )}
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Bottom Gold Accent */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 z-10"
+                    className="absolute bottom-0 left-0 right-0 z-10 h-0.5"
                     style={{ backgroundColor: "#ddbc69" }}
                   />
                 </div>
