@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import { useRouter } from "next/navigation";
 import {
   ArrowRight,
-  Building2,
   CheckCircle2,
   LoaderCircle,
   LockKeyhole,
@@ -14,9 +13,33 @@ import {
 } from "lucide-react";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
 import bannerImage from "@/assests/ad-page/hero/dholera-smart-city-plots.webp";
+import mobileBannerImage from "@/assests/ad-page/hero/dholera-smart-city-plots-mobile.webp";
 
 const MAX_SUBMISSIONS = 3;
 const SUBMISSION_WINDOW_HOURS = 24;
+
+const heroImageAlt =
+  "Residential plots in Dholera Smart City with project connectivity details";
+
+const {
+  props: { srcSet: mobileBannerSrcSet },
+} = getImageProps({
+  src: mobileBannerImage,
+  alt: heroImageAlt,
+  fill: true,
+  quality: 100,
+  sizes: "100vw",
+});
+
+const {
+  props: { srcSet: desktopBannerSrcSet, ...desktopBannerProps },
+} = getImageProps({
+  src: bannerImage,
+  alt: heroImageAlt,
+  fill: true,
+  quality: 100,
+  sizes: "100vw",
+});
 
 export default function HeroSection() {
   const router = useRouter();
@@ -250,24 +273,28 @@ export default function HeroSection() {
       ====================================================== */}
 
       <div className="absolute inset-0 z-0">
-        <Image
-          src={bannerImage}
-          alt="Dholera Smart City residential plots and connectivity"
-          fill
-          priority
-          quality={100}
-          sizes="100vw"
-          className="
-            object-cover
+        <picture>
+          <source
+            media="(max-width: 1023px)"
+            srcSet={mobileBannerSrcSet}
+          />
+          <source
+            media="(min-width: 1024px)"
+            srcSet={desktopBannerSrcSet}
+          />
+          <img
+            {...desktopBannerProps}
+            alt={heroImageAlt}
+            fetchPriority="high"
+            className="
+              object-contain
+              object-top
 
-            object-[48%_center]
-
-            sm:object-[48%_center]
-
-            lg:object-fill
-            lg:object-center
-          "
-        />
+              lg:object-fill
+              lg:object-center
+            "
+          />
+        </picture>
 
         {/* Mobile readability gradient */}
         <div
@@ -616,10 +643,11 @@ export default function HeroSection() {
                   shadow-md
                   shadow-[#A87523]/20
 
-                  transition
+                  transition-colors
+                  duration-200
 
-                  hover:from-[#D3A846]
-                  hover:to-[#B58435]
+                  hover:from-[#A87523]
+                  hover:to-[#855817]
 
                   focus:outline-none
                   focus:ring-2

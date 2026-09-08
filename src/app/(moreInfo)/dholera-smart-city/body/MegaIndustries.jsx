@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Avaada from "@/assests/ad-page/crousel/Avaada.webp";
 import Chiripal from "@/assests/ad-page/crousel/Chiripal.webp";
