@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin, PhoneCall } from "lucide-react";
+import { MapPin, Mail, Facebook, Twitter, Instagram, Linkedin, PhoneCall } from "lucide-react";
 
 const Footer = () => {
 
@@ -19,30 +19,30 @@ const Footer = () => {
   };
 
   return (
-    <footer id="footer" className="bg-white py-16">
+    <footer id="footer" className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* About Us Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#ddbc69] mb-4 border-b border-[#ddbc69] pb-2">
+            <h3 className="text-xl font-semibold text-[#DDBC69] mb-4 border-b border-[#DDBC69] pb-2">
               About Us
             </h3>
-            <p className="text-black mb-4">
+            <p className="text-white mb-4">
               BookMyAssets delivers verified, AUDA-approved projects in Dholera, trusted by 1000+ investors for transparent, expert-led investments.
             </p>
             
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-6">
-              <a href="https://www.facebook.com/share/1AXGEEX1M8/" className="text-gray-500 hover:text-[#ddbc69] transition">
+              <a href="https://www.facebook.com/share/1AXGEEX1M8/" className="text-white hover:text-[#DDBC69] transition">
                 <Facebook size={20} />
               </a>
-              <a href="https://x.com/BookMyAssets" className="text-gray-500 hover:text-[#ddbc69] transition">
+              <a href="https://x.com/BookMyAssets" className="text-white hover:text-[#DDBC69] transition">
                 <Twitter size={20} />
               </a>
-              <a href="https://www.instagram.com/bookmyassets/" className="text-gray-500 hover:text-[#ddbc69] transition">
+              <a href="https://www.instagram.com/bookmyassets/" className="text-white hover:text-[#DDBC69] transition">
                 <Instagram size={20} />
               </a>
-              <a href="https://www.linkedin.com/company/bookmyassetss" className="text-gray-500 hover:text-[#ddbc69] transition">
+              <a href="https://www.linkedin.com/company/bookmyassetss" className="text-white hover:text-[#DDBC69] transition">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -50,14 +50,14 @@ const Footer = () => {
           
           {/* Policies Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#ddbc69] mb-4 border-b border-[#ddbc69] pb-2">
+            <h3 className="text-xl font-semibold text-[#DDBC69] mb-4 border-b border-[#DDBC69] pb-2">
               Policies
             </h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/dholera-smart-city-plots/policy/copyright"
-                  className="text-black hover:text-[#ddbc69] transition flex items-center"
+                  className="text-white hover:text-[#DDBC69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Copyright Policy
                 </Link>
@@ -65,7 +65,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/dholera-smart-city-plots/policy/terms"
-                  className="text-black hover:text-[#ddbc69] transition flex items-center"
+                  className="text-white hover:text-[#DDBC69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Terms of Use
                 </Link>
@@ -73,7 +73,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/dholera-smart-city-plots/policy/privacy"
-                  className="text-black hover:text-[#ddbc69] transition flex items-center"
+                  className="text-white hover:text-[#DDBC69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Privacy Policy
                 </Link>
@@ -81,7 +81,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/dholera-smart-city-plots/policy/refund-and-cancellation"
-                  className="text-black hover:text-[#ddbc69] transition flex items-center"
+                  className="text-white hover:text-[#DDBC69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Refund & Cancellation Policy
                 </Link>
@@ -92,37 +92,37 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#ddbc69] mb-4 border-b border-[#ddbc69] pb-2">
+            <h3 className="text-xl font-semibold text-[#DDBC69] mb-4 border-b border-[#DDBC69] pb-2">
               Reach Our Head office
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <div className="flex-shrink-0 text-[#ddbc69] mr-3 mt-1">
+                <div className="flex-shrink-0 text-[#DDBC69] mr-3 mt-1">
                   <MapPin size={18} />
                 </div>
-                <span className="text-black">
+                <span className="text-white">
                   620, JMD Megapolis, Sohna Rd, Sector 48, Gurugram, India
                   122018
                 </span>
               </li>
               <li className="flex items-center">
-                <div className="flex-shrink-0 text-[#ddbc69] mr-3">
+                <div className="flex-shrink-0 text-[#DDBC69] mr-3">
                   <Mail size={18} />
                 </div>
                 <a
                   href="mailto:info@bookmyassets.com"
-                  className="text-black hover:text-[#ddbc69] transition"
+                  className="text-white hover:text-[#DDBC69] transition"
                 >
                   info@bookmyassets.com
                 </a>
               </li>
               <li className="flex items-center" onClick={handleCallClick}>
-                <div className="flex-shrink-0 text-[#ddbc69] mr-3">
+                <div className="flex-shrink-0 text-[#DDBC69] mr-3">
                   <PhoneCall size={18} />
                 </div>
                 <a
                   href="tel:+918130371647"
-                  className="text-black hover:text-[#ddbc69] transition"
+                  className="text-white hover:text-[#DDBC69] transition"
                 >
                   +91 81 30 37 16 47
                 </a>
@@ -132,9 +132,9 @@ const Footer = () => {
         </div>
 
         {/* Copyright Bar */}
-        <div className="mt-12 pt-6 border-t border-gray-200">
+        <div className="mt-12 pt-6 border-t border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm mb-4 md:mb-0">
+            <p className="text-white text-sm mb-4 md:mb-0">
               © {new Date().getFullYear()} BookMyAssets™. All rights reserved.
             </p>
             

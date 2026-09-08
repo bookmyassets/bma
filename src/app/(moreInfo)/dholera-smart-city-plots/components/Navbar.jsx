@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import logo from "@/assests/bma-with-background.svg";
+import logo from "@/assests/bma-transparent-website.svg";
 import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -49,7 +49,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white h-20 fixed w-full z-50">
+    <nav className="bg-black h-20 fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -60,19 +60,19 @@ export default function Navbar() {
             <Image
               src={logo}
               height={60}
-              width={60}
+              width={120}
               alt="Logo"
               className="cursor-pointer"
             />
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="text-black hidden md:flex items-center gap-6">
+          <div className="text-white hidden md:flex items-center gap-6">
             {navItems.map(({ href, label }) => (
               <button
                 key={label}
                 onClick={() => handleNavigation(href)}
-                className="text-xl font-medium hover:text-[#e1b24c] transition duration-200"
+                className="text-xl font-medium text-white hover:text-[#DDBC69] transition duration-200"
               >
                 {label}
               </button>
@@ -82,7 +82,7 @@ export default function Navbar() {
               type="button"
               onClick={openContactForm}
               aria-haspopup="dialog"
-              className="ml-auto px-3 py-2 text-xl text-black transition-colors hover:text-[#e1b24c]"
+              className="ml-auto px-3 py-2 text-xl text-white transition-colors hover:text-[#DDBC69]"
             >
               Get in Touch
             </button>
@@ -94,7 +94,7 @@ export default function Navbar() {
               type="button"
               onClick={openContactForm}
               aria-haspopup="dialog"
-              className="px-3 py-2 text-xl font-semibold text-black"
+              className="px-3 py-2 text-xl font-semibold text-white hover:text-[#DDBC69] transition-colors"
             >
               Get in Touch
             </button>
@@ -104,9 +104,9 @@ export default function Navbar() {
               aria-label="Toggle navigation menu"
             >
               {isMenuOpen ? (
-                <X className="h-6 w-6 text-black" />
+                <X className="h-6 w-6 text-white" />
               ) : (
-                <Menu className="h-6 w-6 text-black" />
+                <Menu className="h-6 w-6 text-white" />
               )}
             </button>
           </div>
@@ -114,13 +114,13 @@ export default function Navbar() {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 bg-white rounded-lg shadow-lg">
+          <div className="md:hidden mt-4 pb-4 bg-black rounded-lg shadow-lg">
             <div className="flex flex-col space-y-4 font-semibold">
               {navItems.map(({ href, label }) => (
                 <button
                   key={label}
                   onClick={() => handleNavigation(href)}
-                  className="text-black hover:text-[#e1b24c] transition duration-200 text-left px-4 py-2"
+                  className="text-white hover:text-[#DDBC69] transition duration-200 text-left px-4 py-2"
                 >
                   {label}
                 </button>
