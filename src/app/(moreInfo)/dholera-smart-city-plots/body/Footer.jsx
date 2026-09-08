@@ -56,7 +56,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/more-info/policy/copyright"
+                  href="/dholera-smart-city-plots/policy/copyright"
                   className="text-black hover:text-[#ddbc69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Copyright Policy
@@ -64,7 +64,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/more-info/policy/terms"
+                  href="/dholera-smart-city-plots/policy/terms"
                   className="text-black hover:text-[#ddbc69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Terms of Use
@@ -72,7 +72,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/more-info/policy/privacy"
+                  href="/dholera-smart-city-plots/policy/privacy"
                   className="text-black hover:text-[#ddbc69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Privacy Policy
@@ -80,7 +80,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/more-info/policy/refund-and-cancellation"
+                  href="/dholera-smart-city-plots/policy/refund-and-cancellation"
                   className="text-black hover:text-[#ddbc69] transition flex items-center"
                 >
                   <span className="mr-2">›</span> Refund & Cancellation Policy
