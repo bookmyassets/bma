@@ -1,26 +1,22 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import logo from "@/assests/bma-with-background.svg";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import GetinTouch from "./GetinTouch";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   
   const router = useRouter();
   const pathname = usePathname();
   
   const openContactForm = () => {
+    setIsMenuOpen(false);
     setIsContactFormOpen(true);
-  };
-
-  const closeContactForm = () => {
-    setIsContactFormOpen(false);
   };
 
   const handleNavigation = (section) => {
@@ -38,33 +34,8 @@ export default function Navbar() {
     }
   };
 
-  const toggleGetInTouchDropdown = () => {
-    setIsGetInTouchDropdownOpen(!isGetInTouchDropdownOpen);
-  };
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const getInTouchRef = useRef(null);
-  const menuToggleRef = useRef(null);
-
-  const dropdownVariants = {
-    hidden: { opacity: 0, height: 0 },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      transition: {
-        duration: 0.2,
-      },
-    },
-    exit: {
-      opacity: 0,
-      height: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
   };
 
   // Navigation items
@@ -107,106 +78,31 @@ export default function Navbar() {
               </button>
             ))}
             
-            <div ref={getInTouchRef} className="relative group ml-auto">
-              <button
-                className="text-black text-xl px-3 py-2 cursor-pointer flex items-center gap-1"
-                onClick={toggleGetInTouchDropdown}
-                onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
-                onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
-              >
-                Get in Touch
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-4 w-4 text-black transition-transform duration-300 ${
-                    isGetInTouchDropdownOpen ? "rotate-180" : ""
-                  }`}
-                   
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-
-              <AnimatePresence>
-                {isGetInTouchDropdownOpen && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    variants={dropdownVariants}
-                    className="absolute right-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
-                    onMouseEnter={() => setIsGetInTouchDropdownOpen(true)}
-                    onMouseLeave={() => setIsGetInTouchDropdownOpen(false)}
-                  >
-                    <div className="py-2">
-                      <button
-                        onClick={openContactForm}
-                        className="block w-full text-left px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                      >
-                        Book A Free Site Visit
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <button
+              type="button"
+              onClick={openContactForm}
+              aria-haspopup="dialog"
+              className="ml-auto px-3 py-2 text-xl text-black transition-colors hover:text-[#e1b24c]"
+            >
+              Get in Touch
+            </button>
           </div>
 
-          {/* Mobile menu section with Get in Touch dropdown */}
+          {/* Mobile menu section */}
           <div className="md:hidden flex items-center gap-4">
-            <div className="relative">
-              <button
-                className="text-black text-xl font-semibold px-3 py-2 cursor-pointer flex items-center gap-1"
-                onClick={toggleGetInTouchDropdown}
-              >
-                Get in Touch
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-4 w-4 text-black transition-transform duration-300 ${
-                    isGetInTouchDropdownOpen ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-
-              <AnimatePresence>
-                {isGetInTouchDropdownOpen && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    variants={dropdownVariants}
-                    className="absolute right-0 top-12 bg-white rounded-md shadow-lg overflow-hidden z-50 w-48"
-                  >
-                    <div className="py-2">
-                      <button
-                        onClick={openContactForm}
-                        className="block w-full text-left px-4 py-2 text-black hover:bg-gray-200 transition-colors"
-                      >
-                        Enquire Now
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-            <button onClick={toggleMenu} ref={menuToggleRef}>
+            <button
+              type="button"
+              onClick={openContactForm}
+              aria-haspopup="dialog"
+              className="px-3 py-2 text-xl font-semibold text-black"
+            >
+              Get in Touch
+            </button>
+            <button
+              type="button"
+              onClick={toggleMenu}
+              aria-label="Toggle navigation menu"
+            >
               {isMenuOpen ? (
                 <X className="h-6 w-6 text-black" />
               ) : (

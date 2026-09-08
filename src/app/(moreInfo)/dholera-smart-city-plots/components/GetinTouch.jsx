@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -50,7 +50,8 @@ export default function GetinTouch({
   thankYouTitle = "Thank You!",
   thankYouMessage = "Your request has been submitted successfully.",
   source = "BookMyAssets google ads",
-  ids
+  ids,
+  ctaItems = [],
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
@@ -500,6 +501,33 @@ const onRecaptchaSuccess = async (token) => {
                       ? buttonName
                       : "Loading..."}
                 </motion.button>
+
+                {ctaItems.length > 0 && (
+                  <div
+                    className="flex items-stretch justify-center pt-1 text-center text-[10px] font-medium text-gray-300 sm:text-xs"
+                    aria-label="Available enquiry options"
+                  >
+                    {ctaItems.map(({ label, icon: Icon }, index) => (
+                      <Fragment key={label}>
+                        {index > 0 && (
+                          <span
+                            aria-hidden="true"
+                            className="flex shrink-0 items-center px-1 text-gray-500 sm:px-2"
+                          >
+                            |
+                          </span>
+                        )}
+                        <span className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 leading-tight">
+                          <Icon
+                            aria-hidden="true"
+                            className="h-4 w-4 shrink-0 text-[#ddbc69]"
+                          />
+                          <span>{label}</span>
+                        </span>
+                      </Fragment>
+                    ))}
+                  </div>
+                )}
               </form>
             )}
           </motion.div>

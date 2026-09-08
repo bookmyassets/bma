@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import img from "@/assests/residential/residency/Residency.webp";
 import img2 from "@/assests/taboola/section/westwyn-residency-dholera-residential-plots-bookmyassets.webp";
+import WestwynContactForm from "../components/WestwynContactForm";
 import {
   FaMapMarkerAlt,
   FaRoad,
@@ -144,12 +145,55 @@ const FeatureCard = ({ icon, title, value }) => (
 
 export default function Residency() {
   const [current, setCurrent] = useState(0);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const sectionRef = useRef(null);
+  const hasOpenedAutomatically = useRef(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    let popupTimer;
+
+    if (!section || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        window.clearTimeout(popupTimer);
+
+        if (entry.isIntersecting && !hasOpenedAutomatically.current) {
+          popupTimer = window.setTimeout(() => {
+            if (
+              hasOpenedAutomatically.current ||
+              document.getElementById("contact-form-container")
+            ) {
+              return;
+            }
+
+            hasOpenedAutomatically.current = true;
+            setIsContactFormOpen(true);
+          }, 5000);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      window.clearTimeout(popupTimer);
+      observer.disconnect();
+    };
+  }, []);
+
   const prev = () =>
     setCurrent((c) => (c - 1 + carouselImages.length) % carouselImages.length);
   const next = () => setCurrent((c) => (c + 1) % carouselImages.length);
 
   return (
-    <div className="bg-white py-[calc(0.5rem+1.5vw)]" id="westwyn-residency">
+    <div
+      ref={sectionRef}
+      className="bg-white py-[calc(0.5rem+1.5vw)]"
+      id="westwyn-residency"
+    >
       <div className="max-w-7xl mx-auto text-center  px-[calc(1rem+2vw)]">
         <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold text-black">
           WestWyn Residency : Residential Plots in Dholera
@@ -300,9 +344,15 @@ export default function Residency() {
               );
             })}
           </div>
+
         </div>
       </div>
 
+      {isContactFormOpen && (
+        <WestwynContactForm
+          onClose={() => setIsContactFormOpen(false)}
+        />
+      )}
     </div>
   );
 }
