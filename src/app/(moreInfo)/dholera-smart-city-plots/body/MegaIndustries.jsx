@@ -1,3 +1,7 @@
+"use client";
+
+"use client";
+
 import React from "react";
 import Avaada from "@/assests/ad-page/crousel/Avaada.webp";
 import Chiripal from "@/assests/ad-page/crousel/Chiripal.webp";
@@ -50,27 +54,27 @@ export default function MegaIndustries() {
         }
       `}</style>
       <div className="relative">
-        <div className=" max-w-7xl mx-auto pt-8">
+        <div className="mx-auto max-w-7xl pt-5 sm:pt-6">
           <div className="text-center">
-            <h3 className="text-xl md:text-[28px] font-bold text-[#151f28]">
+            <h3 className="text-lg font-bold text-[#151f28] sm:text-xl md:text-2xl">
               Global Giants Building in Dholera
             </h3>
-            <div className="w-24 h-1 mt-4 mb-4 bg-[#ddbc69] mx-auto"></div>
+            <div className="mx-auto mb-1 mt-2 h-0.5 w-16 bg-[#ddbc69]"></div>
           </div>
 
-          <div className="marquee-container py-8">
+          <div className="marquee-container py-3 sm:py-4">
             <div className="animate-marquee whitespace-nowrap flex items-center">
               {duplicatedCompanies.map((company, index) => (
                 <div
                   key={index}
-                  className="mx-8 flex-shrink-0 flex items-center justify-center"
+                  className="mx-4 flex flex-shrink-0 items-center justify-center sm:mx-6"
                 >
                   <Image
                     src={company.logo}
                     alt={company.name}
                     /*   width={160}
                     height={80} */
-                    className="object-contain w-40 h-28 "
+                    className="h-16 w-28 object-contain sm:h-20 sm:w-32"
                   />
                 </div>
               ))}

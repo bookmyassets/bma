@@ -45,93 +45,68 @@ const distances = [
 
 export default function DholeraLandingPage() {
   return (
-    <div className="" id="dholera">
-      {/* ─────────────────────────────────────────
-          Section 1: About Dholera
-      ───────────────────────────────────────── */}
-      <section className="pt-3">
-        {/* Left: Text */}
-        <div className=" bg-white p-4">
-          <div className=" w-full">
-            <h1 className="text-xl md:text-3xl max-w-7xl mx-auto font-bold md:mb-4 text-center">
-              Invest in India's First Planned Smart City:{" "}
-              <span className="text-[#ddbc69]">Dholera SIR</span>
-            </h1>
+    <div className="scroll-mt-[100px] bg-white" id="dholera">
+      <section className="mx-auto w-full max-w-7xl px-3 py-8 sm:px-4 sm:py-8 md:py-12">
+        <div className="mx-auto w-full">
+          <h2 className="mb-5 text-center text-[clamp(1.7rem,2.5vw,2.5rem)] font-bold leading-tight tracking-[-0.02em] text-slate-900 sm:mb-6 md:mb-8">
+            Invest in India's First Planned Smart City:{" "}
+            <span className="text-[#ddbc69]">Dholera SIR</span>
+          </h2>
 
-            <div className="md:grid md:grid-cols-2 pt-8 max-w-6xl mx-auto  space-y-4">
-              <div>
-                <Image src={dholera} alt="Dholera Smart City" />
-              </div>
-              {/* Distance Grid */}
-              <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
-                <ul className="space-y-4 text-gray-700">
-                  <li className="flex items-start justify-start gap-2 font-semibold">
-                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                      •
-                    </span>
-                    <span>Special Investment Region (SIR) Act implemented in 2009</span>
-                  </li>
+          <div className="grid gap-4 md:gap-5 lg:grid-cols-[1.25fr_0.95fr] lg:items-stretch">
+            <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+              <Image
+                src={dholera}
+                alt="Dholera Smart City"
+                className="h-[270px] w-full object-cover sm:h-[320px] md:h-[360px] lg:h-[420px]"
+              />
+            </div>
 
-                  <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                      •
-                    </span>
-                    <span>
-                      Vision of Hon'ble Prime Minister Shri Narendra Modi
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                      •
-                    </span>
-                    <span>
-                      India's First Semiconductor City: TATA Semiconductor Plant  
-                    </span>
-                  </li>
+            <div className="rounded-2xl bg-gray-50 p-4 text-base leading-7 text-gray-700 shadow-sm ring-1 ring-slate-200 sm:p-5 lg:p-6">
+              <ul className="space-y-3 sm:space-y-3.5">
+                <li className="flex items-start gap-3 font-semibold">
+                  <span className="mt-1 shrink-0 text-[#ddbc69]">•</span>
+                  <span>Special Investment Region (SIR) Act implemented in 2009</span>
+                </li>
 
-                  <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                      •
-                    </span>
-                    <span>35+ Global Companies already Invested</span>
-                  </li>
+                <li className="flex items-start gap-3 font-semibold">
+                  <span className="mt-1 shrink-0 text-[#ddbc69]">•</span>
+                  <span>Vision of Hon'ble Prime Minister Shri Narendra Modi</span>
+                </li>
 
-                  <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                      •
-                    </span>
-                    <span>
-                      ₹6 Lakh Crore Investment by Government & Industries
-                    </span>
-                  </li>
+                <li className="flex items-start gap-3 font-semibold">
+                  <span className="mt-1 shrink-0 text-[#ddbc69]">•</span>
+                  <span>India's First Semiconductor City: TATA Semiconductor Plant</span>
+                </li>
 
-                  <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                      •
-                    </span>
-                    <span>
-                      Seamless Connectivity: International Airport, Expressway,
-                      Railways, Monorail & Seaport
-                    </span>
-                  </li>
+                <li className="flex items-start gap-3 font-semibold">
+                  <span className="mt-1 shrink-0 text-[#ddbc69]">•</span>
+                  <span>35+ Global Companies already Invested</span>
+                </li>
 
-                  <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                      •
-                    </span>
-                    <span>
-                      #1 Choice of Investors due to High Return Potential
-                    </span>
-                  </li>
+                <li className="flex items-start gap-3 font-semibold">
+                  <span className="mt-1 shrink-0 text-[#ddbc69]">•</span>
+                  <span>₹6 Lakh Crore Investment by Government & Industries</span>
+                </li>
 
-                  <li className="flex items-start gap-2 font-bold">
-                    <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                      •
-                    </span>
-                    <span>500% Appreciation in Last 5 Years</span>
-                  </li>
-                </ul>
-              </div>
+                <li className="flex items-start gap-3 font-semibold">
+                  <span className="mt-1 shrink-0 text-[#ddbc69]">•</span>
+                  <span>
+                    Seamless Connectivity: International Airport, Expressway,
+                    Railways, Monorail & Seaport
+                  </span>
+                </li>
+
+                <li className="flex items-start gap-3 font-semibold">
+                  <span className="mt-1 shrink-0 text-[#ddbc69]">•</span>
+                  <span>#1 Choice of Investors due to High Return Potential</span>
+                </li>
+
+                <li className="flex items-start gap-3 font-semibold">
+                  <span className="mt-1 shrink-0 text-[#ddbc69]">•</span>
+                  <span>500% Appreciation in Last 5 Years</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

@@ -34,7 +34,8 @@ const faqs = [
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
-  const handleCallClick = () => {
+  const handleCallClick = (event) => {
+    event.preventDefault();
     //  Google Tag Manager event
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
@@ -53,20 +54,20 @@ export default function FAQSection() {
 
   return (
     <>
-      <div className="bg-white">
-        <div className="flex flex-col md:flex-row px-4 md:px-8 py-12 md:py-20 gap-6 md:gap-12 max-w-7xl mx-auto">
+      <section className="bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-6 sm:py-8 md:flex-row md:gap-8 md:px-6">
           {/* Left Section (40%) */}
-          <div className="w-full md:w-2/5 pl-2 pr-2">
-            <h2 className="text-[32px] font-semibold text-black mb-4">
+          <div className="w-full md:w-2/5">
+            <h2 className="mb-2 text-2xl font-semibold text-black md:text-[28px]">
               FAQs
             </h2>
-            <p className="text-gray-600 mb-2">
+            <p className="mb-1 text-sm text-gray-600 sm:text-base">
               More Questions about Dholera Smart City?
             </p>
-            <div className="pt-4">
+            <div className="pt-3">
               <a
                 href="#"
-                className="px-2 py-3 bg-[#ddbc69] text-white rounded-md"
+                className="inline-flex min-h-11 items-center rounded-md bg-[#ddbc69] px-4 py-2.5 text-sm font-medium text-white"
                 onClick={handleCallClick}
               >
                 Give Us A Missed Call
@@ -75,14 +76,14 @@ export default function FAQSection() {
           </div>
 
           {/* Right Section (60%) */}
-          <div className="w-full md:w-3/5 md:pl-24 md:pr-4  md:mt-0 space-y-1">
+          <div className="w-full space-y-1 md:w-3/5 md:pl-8 lg:pl-12">
             {faqs.map((faq, index) => (
               <div key={index} className="border-b border-gray-200">
                 <button
-                  className="w-full py-4 flex justify-between items-center text-left hover:bg-gray-50 transition-all duration-200"
+                  className="flex min-h-11 w-full items-center justify-between py-3 text-left transition-all duration-200 hover:bg-gray-50"
                   onClick={() => toggleFAQ(index)}
                 >
-                  <span className="text-gray-900 font-medium pr-4 leading-relaxed">
+                  <span className="pr-4 text-sm font-medium leading-5 text-gray-900 sm:text-base">
                     {faq.question}
                   </span>
                   <span className="flex-shrink-0 transition-transform duration-200">
@@ -101,7 +102,7 @@ export default function FAQSection() {
                       : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="pb-4 px-0">
+                  <div className="px-0 pb-3">
                     <div className="text-gray-600 text-sm leading-relaxed">
                       {Array.isArray(faq.answer) ? (
                         <ul className="list-disc pl-5 space-y-1">
@@ -119,7 +120,7 @@ export default function FAQSection() {
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
     </>
   );

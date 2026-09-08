@@ -19,20 +19,20 @@ const Footer = () => {
   };
 
   return (
-    <footer id="footer" className="bg-black py-16">
+    <footer id="footer" className="bg-black py-8 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* About Us Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#DDBC69] mb-4 border-b border-[#DDBC69] pb-2">
+            <h3 className="mb-3 border-b border-[#DDBC69] pb-1.5 text-lg font-semibold text-[#DDBC69]">
               About Us
             </h3>
-            <p className="text-white mb-4">
+            <p className="mb-3 text-sm leading-6 text-white sm:text-base">
               BookMyAssets delivers verified, AUDA-approved projects in Dholera, trusted by 1000+ investors for transparent, expert-led investments.
             </p>
             
             {/* Social Media Icons */}
-            <div className="flex space-x-4 mt-6">
+            <div className="mt-4 flex space-x-4">
               <a href="https://www.facebook.com/share/1AXGEEX1M8/" className="text-white hover:text-[#DDBC69] transition">
                 <Facebook size={20} />
               </a>
@@ -50,10 +50,10 @@ const Footer = () => {
           
           {/* Policies Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#DDBC69] mb-4 border-b border-[#DDBC69] pb-2">
+            <h3 className="mb-3 border-b border-[#DDBC69] pb-1.5 text-lg font-semibold text-[#DDBC69]">
               Policies
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2 text-sm sm:text-base">
               <li>
                 <Link
                   href="/dholera-smart-city-plots/policy/copyright"
@@ -92,10 +92,10 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-xl font-semibold text-[#DDBC69] mb-4 border-b border-[#DDBC69] pb-2">
+            <h3 className="mb-3 border-b border-[#DDBC69] pb-1.5 text-lg font-semibold text-[#DDBC69]">
               Reach Our Head office
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-3 text-sm sm:text-base">
               <li className="flex items-start">
                 <div className="flex-shrink-0 text-[#DDBC69] mr-3 mt-1">
                   <MapPin size={18} />
@@ -132,7 +132,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright Bar */}
-        <div className="mt-12 pt-6 border-t border-gray-700">
+        <div className="mt-8 border-t border-gray-700 pt-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-white text-sm mb-4 md:mb-0">
               © {new Date().getFullYear()} BookMyAssets™. All rights reserved.

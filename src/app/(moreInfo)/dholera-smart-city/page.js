@@ -32,25 +32,54 @@ export default function Page() {
         name="keywords"
         content="Dholera Smart City, Dholera plots, plots in Dholera, Dholera SIR plots, Dholera land investment, Dholera Smart City investment, residential plots in Dholera, industrial plots in Dholera, Dholera real estate, Dholera investment opportunities, dholerainsider, Gujarat smart city plots, DMIC corridor, Investments in Dholera Smart City, dholera latest news, Dholera International Airport, Dholera Solar Park,  Ahmedabad Dholera Expressway, Dholera SIR, Dholera plot prices, Dholera Smart City Projects"
       />
-      <div className="overflow-hidden">
-        <section>
+      <div className="overflow-hidden bg-white text-slate-900">
+        <section className="bg-white">
           <LandingPage
             img1={img1}
             mimg1={mimg1}
             openForm={() => setShowForm(true)}
           />
         </section>
-        <WestWyn/>
-        
-        <DholeraLandingPage />
-        <Ribbon />
-        <AboutBMA />
-        <MegaIndustries />
-        <MajorProjects />
-        <Gallery />
-        <Dholeravideos />
-        <TestimonialPagination />
-        <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <WestWyn />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <DholeraLandingPage />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <Ribbon />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <AboutBMA />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <MegaIndustries />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <MajorProjects />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <Gallery />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <Dholeravideos />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <TestimonialPagination />
+        </div>
+
+        <div className="bg-white py-4 sm:py-6 md:py-8">
+          <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
+        </div>
       </div>
 
       {showForm && (

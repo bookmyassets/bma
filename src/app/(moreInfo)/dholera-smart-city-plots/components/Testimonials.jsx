@@ -113,15 +113,15 @@ const TestimonialPagination = () => {
   };
 
   return (
-    <div className="bg-black py-16">
+    <section className="bg-black py-8 sm:py-10">
       <div className="container mx-auto px-4">
-        <h2 className="text-center text-3xl font-bold text-[#ddbc69] mb-12">
+        <h2 className="mb-8 text-center text-xl font-bold leading-tight text-[#ddbc69] sm:text-2xl md:text-[28px]">
           #1 Choice of 561+ Families Across India and Globe
         </h2>
 
         {/* Mobile Slider View */}
         {isMobile && (
-          <div className="relative px-4">
+          <div className="relative px-1 sm:px-4">
             <motion.div
               key={`mobile-${currentMobileIndex}`}
               initial={{ opacity: 0, x: 50 }}
@@ -130,10 +130,10 @@ const TestimonialPagination = () => {
               transition={{ duration: 0.5 }}
               className="flex flex-col items-center"
             >
-              <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-sm">
+              <div className="w-full max-w-sm rounded-xl bg-white p-4 shadow-lg sm:p-5">
                 {/* Avatar */}
-                <div className="flex justify-center -mt-16 mb-4">
-                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#ddbc69]">
+                <div className="-mt-12 mb-3 flex justify-center">
+                  <div className="relative h-20 w-20 overflow-hidden rounded-full border-4 border-[#ddbc69]">
                     <Image
                       src={testimonials[currentMobileIndex].avatar}
                       alt={testimonials[currentMobileIndex].name}
@@ -142,8 +142,8 @@ const TestimonialPagination = () => {
                 </div>
 
                 {/* Name and Location */}
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-bold text-gray-800">
+                <div className="mb-3 text-center">
+                  <h3 className="text-lg font-bold text-gray-800">
                     {testimonials[currentMobileIndex].name}
                   </h3>
                   <p className="text-sm text-[#ddbc69] font-medium">
@@ -156,7 +156,7 @@ const TestimonialPagination = () => {
                   <div className="absolute -top-6 left-0 text-5xl text-[#ddbc69] opacity-20">
                     “
                   </div>
-                  <p className="text-gray-600 italic text-center px-2">
+                  <p className="px-1 text-center text-sm italic leading-6 text-gray-600">
                     {testimonials[currentMobileIndex].quote}
                   </p>
                   <div className="absolute -bottom-6 right-0 text-5xl text-[#ddbc69] opacity-20">
@@ -166,7 +166,7 @@ const TestimonialPagination = () => {
               </div>
 
               {/* Navigation Buttons for Mobile */}
-              <div className="flex justify-center space-x-4 mt-6">
+              <div className="mt-4 flex justify-center space-x-3">
                 <Button
                   onClick={prevMobileSlide}
                   className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white rounded-full p-2"
@@ -217,7 +217,7 @@ const TestimonialPagination = () => {
             </button>
 
             {/* Testimonial Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+            <div className="grid grid-cols-1 gap-4 px-4 md:grid-cols-3">
               {currentTestimonials.map((testimonial, index) => (
                 <motion.div
                   key={index}
@@ -227,8 +227,8 @@ const TestimonialPagination = () => {
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 >
                   {/* Avatar */}
-                  <div className="flex justify-center mt-4 mb-4">
-                    <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#ddbc69] shadow-md">
+                  <div className="mb-3 mt-3 flex justify-center">
+                    <div className="relative h-20 w-20 overflow-hidden rounded-full border-4 border-[#ddbc69] shadow-md">
                       <Image
                         src={testimonial.avatar}
                         alt={testimonial.name}
@@ -239,21 +239,21 @@ const TestimonialPagination = () => {
                   </div>
 
                   {/* Name and Location */}
-                  <div className="text-center px-6">
-                    <h3 className="text-xl font-bold text-gray-800">
+                  <div className="px-4 text-center">
+                    <h3 className="text-lg font-bold text-gray-800">
                       {testimonial.name}
                     </h3>
-                    <p className="text-sm text-[#ddbc69] font-medium mb-4">
+                    <p className="mb-2 text-sm font-medium text-[#ddbc69]">
                       {testimonial.location}
                     </p>
                   </div>
 
                   {/* Quote */}
-                  <div className="px-6 pb-4 relative">
+                  <div className="relative px-4 pb-4">
                     <div className="absolute top-0 left-6 text-5xl text-[#ddbc69] opacity-10">
                       “
                     </div>
-                    <p className="text-gray-600 italic text-center">
+                    <p className="text-center text-sm italic leading-6 text-gray-600">
                       {testimonial.quote}
                     </p>
                     <div className="absolute bottom-0 right-6 text-5xl text-[#ddbc69] opacity-10">
@@ -265,7 +265,7 @@ const TestimonialPagination = () => {
             </div>
 
             {/* Pagination Dots */}
-            <div className="flex justify-center mt-8 space-x-2">
+            <div className="mt-5 flex justify-center space-x-2">
               {Array.from({ length: totalPages }).map((_, index) => (
                 <button
                   key={index}
@@ -277,7 +277,7 @@ const TestimonialPagination = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

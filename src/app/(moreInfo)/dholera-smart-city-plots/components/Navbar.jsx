@@ -59,8 +59,8 @@ export default function Navbar() {
           >
             <Image
               src={logo}
-              height={60}
-              width={120}
+              height={48}
+              width={96}
               alt="Logo"
               className="cursor-pointer"
             />
@@ -72,7 +72,7 @@ export default function Navbar() {
               <button
                 key={label}
                 onClick={() => handleNavigation(href)}
-                className="text-xl font-medium text-white hover:text-[#DDBC69] transition duration-200"
+                className="text-base font-medium text-white transition duration-200 hover:text-[#DDBC69] lg:text-lg"
               >
                 {label}
               </button>
@@ -82,7 +82,7 @@ export default function Navbar() {
               type="button"
               onClick={openContactForm}
               aria-haspopup="dialog"
-              className="ml-auto px-3 py-2 text-xl text-white transition-colors hover:text-[#DDBC69]"
+              className="ml-auto px-3 py-2 text-base text-white transition-colors hover:text-[#DDBC69] lg:text-lg"
             >
               Get in Touch
             </button>
@@ -94,7 +94,7 @@ export default function Navbar() {
               type="button"
               onClick={openContactForm}
               aria-haspopup="dialog"
-              className="px-3 py-2 text-xl font-semibold text-white hover:text-[#DDBC69] transition-colors"
+              className="px-2 py-2 text-sm font-semibold text-white transition-colors hover:text-[#DDBC69] sm:text-base"
             >
               Get in Touch
             </button>
@@ -114,13 +114,13 @@ export default function Navbar() {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 bg-black rounded-lg shadow-lg">
-            <div className="flex flex-col space-y-4 font-semibold">
+          <div className="mt-2 rounded-lg bg-black pb-2 shadow-lg md:hidden">
+            <div className="flex flex-col space-y-1 font-semibold">
               {navItems.map(({ href, label }) => (
                 <button
                   key={label}
                   onClick={() => handleNavigation(href)}
-                  className="text-white hover:text-[#DDBC69] transition duration-200 text-left px-4 py-2"
+                  className="min-h-11 px-4 py-2 text-left text-sm text-white transition duration-200 hover:text-[#DDBC69]"
                 >
                   {label}
                 </button>

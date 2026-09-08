@@ -208,13 +208,13 @@ export default function Ribbon() {
 
   return (
     <>
-      <div className="bg-black border-t-8 border-t-[#ddbc69] border-b-8 border-b-[#ddbc69] py-4">
-        <div className="pr-8 pl-8 pb-8 text-[#ddbc69] flex justify-center items-center font-semibold text-xl md:text-3xl">
+      <div className="border-y-4 border-[#ddbc69] bg-black py-3 sm:py-4">
+        <div className="flex items-center justify-center px-4 pb-3 text-center text-lg font-semibold leading-tight text-[#ddbc69] sm:text-xl md:text-2xl">
          Govt Approved Plots Starting from ₹8 Lakh
         </div>
         
-        <div className="max-w-3xl mx-auto max-sm:pl-4 max-sm:pr-4 space-y-4">
-          <div className="grid md:grid-cols-2 gap-2 max-sm:space-y-2">
+        <div className="mx-auto max-w-3xl space-y-3 px-4">
+          <div className="grid gap-2 md:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -241,7 +241,7 @@ export default function Ribbon() {
                 value={formData.fullName}
                 onChange={handleChange}
                 required
-                className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-300 hover:border-[#ddbc69] transition-colors text-sm"
+                className="h-11 w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-3 text-sm text-black transition-colors hover:border-[#ddbc69] focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
               />
             </motion.div>
             
@@ -274,7 +274,7 @@ export default function Ribbon() {
                 minLength={10}
                 maxLength={15}
                 required
-                className="w-full p-3 pl-10 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] border border-gray-300 hover:border-[#ddbc69] transition-colors text-sm"
+                className="h-11 w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-3 text-sm text-black transition-colors hover:border-[#ddbc69] focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
               />
             </motion.div>
           </div>
@@ -300,7 +300,7 @@ export default function Ribbon() {
               id="ribbion-form"
               onClick={handleSubmit}
               disabled={isLoading}
-              className="w-auto py-3 px-6 bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] text-white rounded-lg hover:from-[#ddbc69] hover:to-[#ddbc69] transition-all shadow-lg hover:shadow-[#ddbc69]/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+              className="min-h-11 w-auto rounded-lg bg-[#ddbc69] px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-[#ddbc69]/20 disabled:cursor-not-allowed disabled:opacity-70 sm:text-base"
             >
               {isLoading ? "Submitting..." : "Get A Call Back"}
             </motion.button>
@@ -313,9 +313,9 @@ export default function Ribbon() {
             animate={{ opacity: 1, scale: 1 }}
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
           >
-            <div className="bg-white p-8 rounded-lg shadow-xl text-center">
-              <h3 className="text-2xl font-bold text-green-600 mb-2">Thank You!</h3>
-              <p className="text-gray-700">Your submission was successful.</p>
+            <div className="rounded-lg bg-white p-5 text-center shadow-xl sm:p-6">
+              <h3 className="mb-1 text-xl font-bold text-green-600">Thank You!</h3>
+              <p className="text-sm text-gray-700">Your submission was successful.</p>
             </div>
           </motion.div>
         )}
