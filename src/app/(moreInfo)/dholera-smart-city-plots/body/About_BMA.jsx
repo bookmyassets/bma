@@ -168,10 +168,10 @@ export default function AboutBMA() {
         </div>
       </div> */}
 
-      <div className="bg-black py-8 sm:py-10">
+      <div className="bg-white py-8 sm:py-10">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-6 text-center sm:mb-8">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
+            <h2 className="text-2xl font-bold text-black sm:text-3xl">
               Why Choose BookMyAssets?
             </h2>
             <div className="my-3 flex items-center justify-center sm:my-4">
@@ -179,7 +179,7 @@ export default function AboutBMA() {
               <span className="mx-3 size-2 rotate-45 bg-[#ddbc69]" />
               <div className="h-0.5 w-12 rounded bg-[#ddbc69] sm:w-16" />
             </div>
-            <p className="mx-auto max-w-4xl text-sm leading-6 text-gray-300 sm:text-base">
+            <p className="mx-auto max-w-4xl text-sm leading-6 text-black sm:text-base">
               BookMyAssets provides complete property support in Dholera under
               one group.
             </p>
@@ -192,16 +192,16 @@ export default function AboutBMA() {
               return (
                 <article
                   key={feature.title}
-                  className="border-t border-white/20 py-4 sm:py-5"
+                  className="border-t border-black/20 py-4 sm:py-5"
                 >
                   <Icon
                     className="mb-3 h-7 w-7 text-[#ddbc69]"
                     aria-hidden="true"
                   />
-                  <h3 className="mb-1.5 text-base font-bold text-white sm:text-lg">
+                  <h3 className="mb-1.5 text-base font-bold text-black sm:text-lg">
                     {feature.title}
                   </h3>
-                  <p className="text-sm leading-6 text-gray-300">
+                  <p className="text-sm leading-6 text-black">
                     {feature.description}
                   </p>
                 </article>

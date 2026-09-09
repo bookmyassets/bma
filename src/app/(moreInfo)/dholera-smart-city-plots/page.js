@@ -27,7 +27,7 @@ export default function Page() {
           <LandingPage />
           <DholeraLandingPage />
           <NewSection />
-          <div>
+          <div className="flex flex-col gap-4">
             <Ribbon />
             <AboutBMA />
           </div>
