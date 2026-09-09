@@ -248,23 +248,28 @@ export default function HeroSection() {
       isolate
       overflow-hidden
       bg-[#0b0f14]
-      pt-16
-      sm:pt-20
+      lg:-mb-10
+      pt-20
+      sm:pt-24
+      lg:pt-20
     "
   >
     <div
       className="
         relative
         flex
-        min-h-[720px]
+        h-[177.7778vw]
+        min-h-0
         w-full
         items-end
 
-        sm:min-h-[760px]
+        sm:h-auto
+        sm:min-h-[840px]
 
-        lg:h-[calc(100svh-5rem)]
-        lg:min-h-[700px]
-        lg:max-h-[900px]
+        lg:aspect-video
+        lg:h-auto
+        lg:min-h-0
+        lg:max-h-none
         lg:items-center
       "
     >
@@ -296,20 +301,6 @@ export default function HeroSection() {
           />
         </picture>
 
-        {/* Mobile readability gradient */}
-        <div
-          className="
-            absolute
-            inset-0
-
-            bg-gradient-to-b
-            from-black/5
-            via-black/10
-            to-black/65
-
-            lg:bg-transparent
-          "
-        />
       </div>
 
       {/* =====================================================
@@ -320,19 +311,22 @@ export default function HeroSection() {
         className="
           relative
           z-20
+          self-end
+          -translate-y-12
 
           mx-auto
-          mb-5
-          w-[calc(100%-24px)]
-          max-w-[390px]
+          mb-4
+          w-[calc(100%-20px)]
+          max-w-[360px]
 
-          sm:mb-7
-          sm:w-[calc(100%-32px)]
-          sm:max-w-[430px]
+          sm:mb-6
+          sm:w-[calc(100%-28px)]
+          sm:max-w-[400px]
+          sm:-translate-y-12
 
           lg:absolute
           lg:right-[5.5%]
-          lg:top-1/2
+          lg:top-[45%]
           lg:m-0
           lg:w-[31%]
           lg:max-w-[515px]
@@ -345,14 +339,14 @@ export default function HeroSection() {
             border
             border-white/70
             bg-white
-            px-4
-            py-4
+            px-3.5
+            py-2.5
 
             shadow-[0_18px_55px_rgba(0,0,0,0.28)]
 
             sm:rounded-2xl
-            sm:px-5
-            sm:py-5
+            sm:px-4
+            sm:py-3.5
 
             lg:p-6
             xl:p-7
@@ -362,18 +356,18 @@ export default function HeroSection() {
               FORM HEADER
           ================================================== */}
 
-          <div className="mb-4 lg:mb-5">
+            <div className="mb-3 lg:mb-7">
             <h1
               className="
-                text-[21px]
+                text-[18px]
                 font-bold
                 leading-[1.1]
                 tracking-[-0.025em]
                 text-[#111820]
 
-                min-[390px]:text-[22px]
+                min-[390px]:text-[19px]
 
-                sm:text-[25px]
+                sm:text-[23px]
 
                 lg:text-[clamp(1.8rem,2.4vw,2.65rem)]
               "
@@ -386,12 +380,12 @@ export default function HeroSection() {
 
             <p
               className="
-                mt-2
-                text-[13px]
-                leading-5
+                mt-1.5
+                text-xs
+                leading-4
                 text-slate-600
 
-                sm:text-sm
+                sm:text-[13px]
 
                 lg:text-base
                 lg:leading-6
@@ -443,11 +437,11 @@ export default function HeroSection() {
               onSubmit={handleSubmit}
               className="
                 w-full
-                space-y-3
+                space-y-2
 
-                sm:space-y-3.5
+                sm:space-y-2.5
 
-                lg:space-y-4
+                lg:space-y-5
               "
             >
               {/* ERROR */}
@@ -511,7 +505,7 @@ export default function HeroSection() {
                   onChange={handleChange}
                   required
                   className="
-                    h-11
+                    h-10
                     w-full
                     rounded-[11px]
                     border
@@ -530,7 +524,7 @@ export default function HeroSection() {
                     focus:ring-2
                     focus:ring-[#DDBC69]/30
 
-                    sm:h-12
+                    sm:h-11
                     sm:rounded-xl
                     sm:pl-11
                     sm:pr-4
@@ -584,7 +578,7 @@ export default function HeroSection() {
                   maxLength={15}
                   required
                   className="
-                    h-11
+                    h-10
                     w-full
                     rounded-[11px]
                     border
@@ -603,7 +597,7 @@ export default function HeroSection() {
                     focus:ring-2
                     focus:ring-[#DDBC69]/30
 
-                    sm:h-12
+                    sm:h-11
                     sm:rounded-xl
                     sm:pl-11
                     sm:pr-4
@@ -624,7 +618,7 @@ export default function HeroSection() {
                 disabled={isLoading}
                 className="
                   flex
-                  h-11
+                  h-10
                   w-full
                   items-center
                   justify-center
@@ -657,7 +651,7 @@ export default function HeroSection() {
                   disabled:cursor-not-allowed
                   disabled:opacity-70
 
-                  sm:h-12
+                  sm:h-11
                   sm:text-[15px]
 
                   lg:h-14
@@ -688,18 +682,18 @@ export default function HeroSection() {
                   PRIVACY
               ================================================== */}
 
-              <div
-                className="
-                  flex
-                  items-center
-                  gap-1.5
-                  pt-0.5
-                  text-[10px]
-                  leading-4
-                  text-slate-500
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-1.5
+                      pt-0
+                      text-[9px]
+                      leading-3
+                      text-slate-500
 
-                  sm:gap-2
-                  sm:text-xs
+                      sm:gap-2
+                      sm:text-[11px]
                 "
               >
                 <LockKeyhole

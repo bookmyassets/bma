@@ -4,6 +4,7 @@ import Link from "next/link";
 import westwynCountyImage from "@/assests/westwyn-county/westwyn-county-mob1.webp";
 import westwynEstatesImage from "@/assests/we_cover.webp";
 import westwynResidencyImage from "@/assests/residency.webp";
+import westwynCrownImage from "@/assests/residential/crown/westwyn-crown-dholera-entry-gate-desktop.webp";
 
 const projects = [
   {
@@ -27,6 +28,14 @@ const projects = [
     href: "/dholera-residential-plots/westwyn-county",
     image: westwynCountyImage,
     status: "Resale",
+  },
+  {
+    name: "WestWyn Crown",
+    price: "Coming Soon",
+    location: "8 mins from Dholera SIR",
+    href: "/dholera-residential-plots/westwyn-crown",
+    image: westwynCrownImage,
+    status: "Coming Soon",
   },
 ];
 
@@ -164,12 +173,16 @@ export default function ProjectsSection() {
 
                 {project.status && (
                   <span
-                    className="
+                    className={`
                       absolute
                       right-[1rem]
                       top-[1rem]
                       rounded-full
-                      bg-red-600
+                      ${
+                        project.name === "WestWyn Crown"
+                          ? "bg-emerald-600"
+                          : "bg-red-600"
+                      }
                       px-[0.75rem]
                       py-[0.375rem]
                       text-[0.75rem]
@@ -177,7 +190,7 @@ export default function ProjectsSection() {
                       tracking-[0.08em]
                       text-white
                       shadow-lg
-                    "
+                    `}
                   >
                     {project.status}
                   </span>
