@@ -1,4 +1,4 @@
-import WestWynCrownHero from "./components/CrownHeronHero";
+import WestWynCrownHero from "./components/CrownHero";
 
 export default function WestWynCrownClient() {
   return (
