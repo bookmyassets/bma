@@ -1,285 +1,816 @@
-import React, { useState } from "react";
-import {
-  Shield,
-  Baby,
-  Zap,
-  Wifi,
-  Car,
-  Users,
-  Camera,
-  Square,
-  User,
-  Activity,
-  Footprints,
-} from "lucide-react";
+import React, { useRef } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Square,
+  Shield,
+  Camera,
+  Baby,
+  Wifi,
+  Zap,
+  User,
+  Users,
+  Car,
+  ChevronDown,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react";
 
-import { FaBuilding, FaFilter, FaRoad, FaStore } from "react-icons/fa";
+import { FaRoad, FaFilter } from "react-icons/fa6";
 
 import img1 from "@/assests/residential/residency/residency-jogging.webp";
 import img2 from "@/assests/residential/residency/westwyn-residency-dholera-sir-ev-charging-station.webp";
 import img3 from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area.webp";
-
-import { FaShop } from "react-icons/fa6";
 
 const carouselImages = [
   { src: img1, alt: "WestWyn Estates - Clubhouse" },
   { src: img2, alt: "WestWyn Estates - EV Charging Station" },
   { src: img3, alt: "WestWyn Estates - Kids Play Area" },
 ];
-// ✅ Moved OUTSIDE the component — not recreated on every render
-const AmenityCard = ({ amenity }) => (
-  <div
-    className="amenity-card border-2 rounded-2xl
-    p-2 sm:p-3 lg:p-4
-    flex flex-col items-center justify-center text-center aspect-square"
-    style={{ borderColor: "#e8e8e8" }}
-  >
-    <div
-      className={`card-icon flex items-center justify-center
-        w-8 h-8 md:w-10 md:h-10  lg:w-12 lg:h-12
-        bg-gradient-to-br ${amenity.color}
-        rounded-xl
-        mb-2 sm:mb-3 lg:mb-4`}
-    >
-      <div className="text-white">{amenity.icon}</div>
-    </div>
-    <h3
-      className="font-semibold leading-snug text-[10px] sm:text-xs lg:text-sm"
-      style={{ color: "#0d0d0d" }}
-    >
-      {amenity.title}
-    </h3>
-  </div>
-);
+
+// ============================================================
+// AMENITY DATA
+// ============================================================
 
 const amenities = [
   {
-    icon: <Square className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "boundary",
+    icon: <Square />,
     title: "Project Boundary",
-    color: "from-gray-500 to-gray-700",
+    subtitle: "Clearly defined project limits",
+    description:
+      "A clearly defined project boundary provides structure, security and a well-organised community environment.",
+    points: [
+      "Clearly demarcated project",
+      "Organised community planning",
+    ],
+    color: "bg-gradient-to-br from-gray-500 to-gray-700",
   },
+
   {
-    icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "gated",
+    icon: <Shield />,
     title: "Gated Community",
-    color: "from-indigo-500 to-purple-600",
+    subtitle: "A safer, more secure tomorrow",
+    description:
+      "A secure gated community with controlled access provides a safer and more peaceful environment for residents and their families.",
+    points: [
+      "Controlled entry & exit points",
+      "Visitor management system",
+    ],
+    color: "bg-gradient-to-br from-indigo-500 to-purple-600",
   },
+
   {
-    icon: <Camera className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "security",
+    icon: <Camera />,
     title: "24/7 Security & CCTV",
-    color: "from-red-500 to-red-700",
+    subtitle: "Round-the-clock surveillance",
+    description:
+      "Round-the-clock security and CCTV surveillance help provide a secure environment and greater peace of mind.",
+    points: [
+      "24/7 on-site security",
+      "CCTV at key locations",
+      "Trained security personnel",
+    ],
+    color: "bg-gradient-to-br from-red-500 to-red-700",
   },
+
   {
-    icon: <Baby className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "kids",
+    icon: <Baby />,
     title: "Kids Play Area",
-    color: "from-purple-400 to-pink-400",
+    subtitle: "A safe space for little joys",
+    description:
+      "A dedicated space where children can play, enjoy outdoor activities and spend quality time within the community.",
+    points: [
+      "Dedicated children's area",
+      "Safe recreational environment",
+    ],
+    color: "bg-gradient-to-br from-purple-400 to-pink-400",
   },
+
   {
-    icon: <Wifi className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "management",
+    icon: <Wifi />,
     title: "App-Based Management",
-    color: "from-teal-500 to-teal-700",
+    subtitle: "Community management made simple",
+    description:
+      "App-based management brings important community services and everyday management needs together in one convenient platform.",
+    points: [
+      "Digital community management",
+      "Convenient access to services",
+    ],
+    color: "bg-gradient-to-br from-teal-500 to-teal-700",
   },
+
   {
-    icon: <Zap className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "power",
+    icon: <Zap />,
     title: "Power & Water Supply",
-    color: "from-[#ddbc69] to-yellow-800",
+    subtitle: "Uninterrupted living, always",
+    description:
+      "Reliable power and water infrastructure supports a comfortable and hassle-free everyday living experience.",
+    points: [
+      "Reliable power infrastructure",
+      "Dedicated water supply",
+    ],
+    color: "bg-gradient-to-br from-[#D4A84F] to-[#A8751C]",
   },
+
   {
-    icon: <User className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "yoga",
+    icon: <User />,
     title: "Yoga Deck",
-    color: "from-pink-500 to-rose-500",
+    subtitle: "Space for health and wellness",
+    description:
+      "A dedicated wellness space designed for relaxation, yoga and maintaining a healthier everyday lifestyle.",
+    points: [
+      "Dedicated wellness space",
+      "Peaceful environment",
+    ],
+    color: "bg-gradient-to-br from-pink-500 to-rose-500",
   },
-  /* {
-    icon: <Footprints className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    title: "Jogging Track",
-    color: "from-green-500 to-emerald-500",
-  }, */
+
   {
-    icon: <Users className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "senior",
+    icon: <Users />,
     title: "Senior Citizen Zone",
-    color: "from-purple-500 to-pink-500",
+    subtitle: "Comfort, care and community",
+    description:
+      "Thoughtfully planned spaces for senior citizens to relax, interact and enjoy meaningful community experiences.",
+    points: [
+      "Dedicated relaxation space",
+      "Community interaction",
+    ],
+    color: "bg-gradient-to-br from-purple-500 to-pink-500",
   },
+
   {
-    icon: <Car className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "ev",
+    icon: <Car />,
     title: "EV Charging Station",
-    color: "from-green-600 to-green-800",
+    subtitle: "Green-ready infrastructure",
+    description:
+      "EV charging infrastructure supports cleaner mobility and prepares the community for an increasingly electric future.",
+    points: [
+      "EV-ready infrastructure",
+      "Convenient charging facility",
+    ],
+    color: "bg-gradient-to-br from-green-600 to-green-800",
   },
+
   {
-    icon: <FaRoad className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "roads",
+    icon: <FaRoad />,
     title: "Wide Internal Roads",
-    color: "from-blue-600 to-blue-800",
+    subtitle: "Smooth, spacious and well-planned",
+    description:
+      "Wide and well-planned internal roads provide smooth movement and better accessibility throughout the community.",
+    points: [
+      "Spacious internal roads",
+      "Planned community circulation",
+    ],
+    color: "bg-gradient-to-br from-blue-600 to-blue-800",
   },
+
   {
-    icon: <FaFilter className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "drainage",
+    icon: <FaFilter />,
     title: "Drainage System",
-    color: "from-amber-600 to-amber-800",
+    subtitle: "Modern drainage infrastructure",
+    description:
+      "A planned drainage system helps maintain a cleaner, healthier and better-managed community environment.",
+    points: [
+      "Planned drainage infrastructure",
+      "Improved water management",
+    ],
+    color: "bg-gradient-to-br from-amber-600 to-amber-800",
   },
-  /* {
-    icon: <FaBuilding className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    title: "Clubhouse Lite",
-    color: "from-gray-600 to-gray-800",
-  },
-  {
-    icon: <FaShop className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    title: "Utilities Inside",
-    color: "from-orange-600 to-orange-800",
-  }, */
 ];
 
+
+// ============================================================
+// DESKTOP AMENITY CARD
+// ============================================================
+
+const DesktopAmenityCard = ({ amenity, isActive, onClick }) => {
+  return (
+    <motion.div
+      layout
+      onClick={onClick}
+      className={`cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300 ${
+        isActive
+          ? "border-[#C9A65D] bg-[#34312B] shadow-sm"
+          : "border-[#4C463C] bg-[#2D2B26] hover:border-[#C9A65D]/60"
+      }`}
+    >
+      <div className="p-5">
+        <div className="flex items-start justify-between gap-3">
+
+          {/* Colorful Icon */}
+          <div
+            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${amenity.color} text-white shadow-sm`}
+          >
+            {React.cloneElement(amenity.icon, {
+              className: "h-6 w-6",
+            })}
+          </div>
+
+          {/* Arrow */}
+          <motion.div
+            animate={{
+              rotate: isActive ? 90 : 0,
+            }}
+            transition={{ duration: 0.2 }}
+            className="mt-1 text-[#F4EFE6]"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </motion.div>
+        </div>
+
+        {/* Title */}
+        <h3 className="mt-5 text-[25px] font-semibold font-serif text-[#F4EFE6]">
+          {amenity.title}
+        </h3>
+
+        {/* Subtitle */}
+        <p className="mt-2 text-md leading-5 text-[#B9B1A5]">
+          {amenity.subtitle}
+        </p>
+      </div>
+
+      {/* Expanded Content */}
+      <AnimatePresence initial={false}>
+        {isActive && (
+          <motion.div
+            initial={{
+              height: 0,
+              opacity: 0,
+            }}
+            animate={{
+              height: "auto",
+              opacity: 1,
+            }}
+            exit={{
+              height: 0,
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.25,
+            }}
+          >
+            <div className="border-t border-[#4C463C] px-5 pb-5 pt-4">
+
+              {amenity.points?.length > 0 && (
+                <div className="mt-4 space-y-2.5">
+                  {amenity.points.map((point) => (
+                    <div
+                      key={point}
+                      className="flex items-center gap-2.5 text-sm text-[#F4EFE6]"
+                    >
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#C9A65D] text-white">
+                        ✓
+                      </span>
+
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+
+// ============================================================
+// MOBILE ACCORDION
+// ============================================================
+
+const MobileAmenityAccordion = ({
+  amenity,
+  isActive,
+  onClick,
+}) => {
+  return (
+    <div
+      className={`overflow-hidden rounded-xl border transition-colors duration-200 ${
+        isActive
+          ? "border-[#C9A65D] bg-[#34312B]"
+          : "border-[#4C463C] bg-[#2D2B26]"
+      }`}
+    >
+      <button
+        type="button"
+        onClick={onClick}
+        className="flex w-full items-center gap-3 p-4 text-left"
+        aria-expanded={isActive}
+      >
+        {/* Colorful Icon */}
+        <div
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${amenity.color} text-white`}
+        >
+          {React.cloneElement(amenity.icon, {
+            className: "h-5 w-5",
+          })}
+        </div>
+
+        {/* Text */}
+        <div className="min-w-0 flex-1">
+          <h3 className="text-base font-semibold text-[#F4EFE6]">
+            {amenity.title}
+          </h3>
+
+          <p className="mt-0.5 text-xs leading-5 text-[#B9B1A5]">
+            {amenity.subtitle}
+          </p>
+        </div>
+
+        {/* Arrow */}
+        <motion.div
+          animate={{
+            rotate: isActive ? 180 : 0,
+          }}
+          transition={{ duration: 0.2 }}
+          className="shrink-0 text-[#C9A65D]"
+        >
+          <ChevronDown className="h-5 w-5" />
+        </motion.div>
+      </button>
+
+      {/* Accordion Content */}
+      <AnimatePresence initial={false}>
+        {isActive && (
+          <motion.div
+            initial={{
+              height: 0,
+              opacity: 0,
+            }}
+            animate={{
+              height: "auto",
+              opacity: 1,
+            }}
+            exit={{
+              height: 0,
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.25,
+            }}
+          >
+            <div className="border-t border-[#4C463C] px-4 pb-4 pt-3">
+
+              {amenity.points?.length > 0 && (
+                <div className="mt-3 space-y-2">
+                  {amenity.points.map((point) => (
+                    <div
+                      key={point}
+                      className="flex items-center gap-2 text-sm text-[#F4EFE6]"
+                    >
+                      <span className="text-[#C9A65D]">
+                        ✓
+                      </span>
+
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+
+// ============================================================
+// MAIN COMPONENT
+// ============================================================
+
 const ProjectAmenities = () => {
-  const [showAll, setShowAll] = useState(false);
-  const visibleAmenities = showAll ? amenities : amenities.slice(0, 6);
-  const [current, setCurrent] = useState(0);
-  const prev = () =>
-    setCurrent((c) => (c - 1 + carouselImages.length) % carouselImages.length);
-  const next = () => setCurrent((c) => (c + 1) % carouselImages.length);
+  const carouselRef = useRef(null);
+
+  const scrollCarousel = (direction) => {
+    if (!carouselRef.current) return;
+
+    const container = carouselRef.current;
+
+    const scrollAmount =
+      window.innerWidth >= 1024
+        ? container.clientWidth * 0.52
+        : container.clientWidth * 0.82;
+
+    container.scrollBy({
+      left: direction === "next" ? scrollAmount : -scrollAmount,
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <>
+    <section
+      className="
+        relative
+        overflow-hidden
+        bg-[#24231F]
+        px-3
+        py-5
 
-      <div className="bg-white py-4 sm:py-10 lg:py-4 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-4 sm:mb-4 lg:mb-8">
-            <p
-              className="font-bold tracking-[0.25em] uppercase mb-3
-                text-xl sm:text-2xl lg:text-3xl"
-              style={{ color: "#ddbc69" }}
-            >
-              WestWyn Residency
-            </p>
-            <h4
-              className="font-bold mb-4 text-lg sm:text-2xl lg:text-3xl"
-              style={{ color: "#0d0d0d", letterSpacing: "-0.02em" }}
-            >
-              Amenities
-            </h4>
-          </div>
+        sm:px-5
+        sm:py-6
 
-          {/* Two-column layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-start">
-            {/* Left — Image */}
-            {/* Left — Carousel */}
-            <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/5] w-full h-full group">
-              {/* Original image — style completely unchanged */}
-              <Image
-                src={carouselImages[current].src}
-                alt={carouselImages[current].alt}
-                className="rounded-xl w-full aspect-[5/6] h-full overflow-hidden object-fit max-sm:object-cover"
-                priority
+        lg:px-6
+        lg:py-7
+      "
+    >
+      {/* Subtle background glow */}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -left-40
+          top-0
+          h-[420px]
+          w-[420px]
+          rounded-full
+          bg-[#C9A65D]/[0.045]
+          blur-[120px]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -bottom-44
+          right-0
+          h-[420px]
+          w-[500px]
+          rounded-full
+          bg-[#C9A65D]/[0.035]
+          blur-[120px]
+        "
+      />
+
+      <div className="relative z-10 mx-auto max-w-[1400px]">
+        {/* =====================================================
+            HEADER
+        ====================================================== */}
+
+        <div className="mx-auto max-w-[340px] text-center sm:max-w-3xl">
+          <h2
+            className="
+              font-serif
+              text-[1.7rem]
+              font-medium
+              leading-[1.1]
+              tracking-[-0.025em]
+               text-[#ca8a04]
+
+              sm:text-[1.95rem]
+
+              lg:text-[2.15rem]
+
+              xl:text-[2.3rem]
+            "
+          >
+            Thoughtful Amenities for a Better Everyday
+          </h2>
+        </div>
+
+        {/* =====================================================
+            CAROUSEL HEADER / CONTROLS
+        ====================================================== */}
+
+        <div
+          className="
+            mt-4
+            flex
+            items-center
+            justify-end
+
+            sm:mt-5
+          "
+        >
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => scrollCarousel("prev")}
+              aria-label="Previous amenities"
+              className="
+                flex
+                size-9
+                items-center
+                justify-center
+
+                rounded-full
+
+                border
+                border-[#4C463C]
+
+                bg-[#2C2A25]
+
+                text-[#F4EFE6]
+
+                transition-all
+                duration-300
+
+                hover:border-[#C9A65D]/50
+                hover:bg-[#34312B]
+
+                sm:size-10
+              "
+            >
+              <ChevronLeft
+                className="size-4"
+                strokeWidth={1.8}
+                aria-hidden="true"
               />
+            </button>
 
-              {/* Prev button */}
-              <button
-                onClick={prev}
-                className="absolute left-6 top-1/2 -translate-y-1/2 z-20
-      w-8 h-8 sm:w-10 sm:h-10
-      bg-white/80 hover:bg-white
-      rounded-full shadow-lg
-      flex items-center justify-center
-      transition-all duration-200 hover:scale-110
-      opacity-0 group-hover:opacity-100"
-                aria-label="Previous image"
-              >
-                <svg
-                  className="w-4 h-4 text-gray-800"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
+            <button
+              type="button"
+              onClick={() => scrollCarousel("next")}
+              aria-label="Next amenities"
+              className="
+                flex
+                size-9
+                items-center
+                justify-center
 
-              {/* Next button */}
-              <button
-                onClick={next}
-                className="absolute right-6 top-1/2 -translate-y-1/2 z-30
-      w-8 h-8 sm:w-10 sm:h-10
-      bg-white/80 hover:bg-white
-      rounded-full shadow-lg
-      flex items-center justify-center
-      transition-all duration-200 hover:scale-110
-      opacity-0 group-hover:opacity-100"
-                aria-label="Next image"
-              >
-                <svg
-                  className="w-4 h-4 text-gray-800"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+                rounded-full
 
-              {/* Dot indicators */}
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
-                {carouselImages.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrent(i)}
-                    className={`rounded-full transition-all duration-500 ${
-                      i === current
-                        ? "w-6 h-2 bg-[#ddbc69]"
-                        : "w-2 h-2 bg-white/70 hover:bg-white"
-                    }`}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+                border
+                border-[#4C463C]
 
-            {/* Right — Amenities */}
-            <div className="w-full">
-              {/* Mobile */}
-              <div className="block lg:hidden">
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  {visibleAmenities.map((amenity) => (
-                    <AmenityCard key={amenity.title} amenity={amenity} />
-                  ))}
-                </div>
-                {amenities.length > 6 && (
-                  <div className="flex justify-center mt-6 sm:mt-8">
-                    <button
-                      onClick={() => setShowAll(!showAll)}
-                      className="show-btn bg-[#ddbc69] text-white
-                        px-6 sm:px-8 py-2 sm:py-3
-                        rounded-full font-semibold
-                        text-xs sm:text-sm
-                        hover:bg-opacity-90 transition-all"
-                    >
-                      {showAll ? "Show Less" : "Show More"}
-                    </button>
-                  </div>
-                )}
-              </div>
+                bg-[#2C2A25]
 
-              {/* Desktop */}
-              <div className="hidden lg:block">
-                <div className="grid grid-cols-4 gap-4">
-                  {amenities.map((amenity) => (
-                    <AmenityCard key={amenity.title} amenity={amenity} />
-                  ))}
-                </div>
-              </div>
-            </div>
+                text-[#F4EFE6]
+
+                transition-all
+                duration-300
+
+                hover:border-[#C9A65D]/50
+                hover:bg-[#34312B]
+
+                sm:size-10
+              "
+            >
+              <ChevronRight
+                className="size-4"
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+            </button>
           </div>
         </div>
+
+        {/* =====================================================
+            CIRCULAR AMENITIES CAROUSEL
+        ====================================================== */}
+
+        <div
+          ref={carouselRef}
+          className="
+            mt-2
+
+            flex
+            snap-x
+            snap-mandatory
+
+            gap-1
+
+            overflow-x-auto
+            overscroll-x-contain
+
+            pb-2
+
+            scroll-smooth
+
+            [scrollbar-width:none]
+            [&::-webkit-scrollbar]:hidden
+
+            min-[430px]:gap-2
+
+            sm:gap-4
+
+            lg:gap-5
+          "
+        >
+          {amenities.map((amenity, index) => {
+            /*
+              Preferred:
+              amenity.image
+
+              Fallback:
+              carouselImages[index]
+            */
+
+            const amenityImage =
+              amenity.image ||
+              carouselImages[index % carouselImages.length]?.src;
+
+            const amenityAlt =
+              amenity.imageAlt ||
+              carouselImages[index % carouselImages.length]?.alt ||
+              amenity.title;
+
+            return (
+              <article
+                key={amenity.id}
+                className="
+                  group
+
+                  flex-none
+                  snap-start
+
+                  basis-[62%]
+
+                  min-[430px]:basis-[43%]
+
+                  sm:basis-[40%]
+
+                  md:basis-[30%]
+
+                  lg:basis-[calc(25%-18px)]
+                "
+              >
+                <div className="flex flex-col items-center text-center">
+                  {/* =============================================
+                      CIRCULAR IMAGE
+                  ============================================== */}
+
+                  <div
+                    className="
+                      relative
+
+                      aspect-square
+
+                      w-full
+                      max-w-[150px]
+
+                      overflow-hidden
+
+                      rounded-full
+
+                      border
+                      border-[#C9A65D]/25
+
+                      bg-[#2D2B26]
+
+                      shadow-[0_14px_35px_rgba(0,0,0,0.18)]
+
+                      transition-transform
+                      duration-500
+
+                      group-hover:scale-[1.025]
+
+                      min-[430px]:max-w-[160px]
+
+                      sm:max-w-[195px]
+
+                      md:max-w-[205px]
+
+                      lg:max-w-[220px]
+
+                      xl:max-w-[230px]
+                    "
+                  >
+                    <Image
+                      src={amenityImage}
+                      alt={amenityAlt}
+                      fill
+                      loading="lazy"
+                      sizes="
+                        (max-width: 430px) 150px,
+                        (max-width: 640px) 160px,
+                        (max-width: 1024px) 205px,
+                        230px
+                      "
+                      className="
+                        object-cover
+
+                        transition-transform
+                        duration-700
+                        ease-out
+
+                        group-hover:scale-[1.06]
+                      "
+                    />
+
+                    {/* Image shading */}
+                    <div
+                      aria-hidden="true"
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-0
+
+                        rounded-full
+
+                        bg-gradient-to-t
+                        from-black/20
+                        via-transparent
+                        to-transparent
+                      "
+                    />
+
+                    {/* subtle circular ring */}
+                    <div
+                      aria-hidden="true"
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-[5px]
+
+                        rounded-full
+
+                        border
+                        border-white/10
+                      "
+                    />
+                  </div>
+
+                  {/* =============================================
+                      TITLE
+                  ============================================== */}
+
+                  <h3
+                    className="
+                      mt-2.5
+
+                      max-w-[230px]
+
+                      font-serif
+                      text-[17px]
+                      font-semibold
+                      leading-[1.25]
+
+                      text-[#F4EFE6]
+
+                      sm:text-[18px]
+
+                      lg:mt-3
+                      lg:text-[19px]
+                    "
+                  >
+                    {amenity.title}
+                  </h3>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {/* =====================================================
+            MOBILE SWIPE INDICATOR
+        ====================================================== */}
+
+        <div
+          className="
+            mt-1
+            flex
+            justify-center
+
+            lg:hidden
+          "
+        >
+          <span
+            className="
+              inline-flex
+              items-center
+              gap-1.5
+
+              text-[10px]
+              font-medium
+              uppercase
+              tracking-[0.12em]
+
+              text-white
+
+              sm:text-[#8F897F]
+            "
+          >
+            Swipe to explore
+            <ChevronRight
+              className="size-3"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
+          </span>
+        </div>
       </div>
-    </>
+    </section>
   );
 };
 
 export default ProjectAmenities;
-

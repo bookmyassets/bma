@@ -58,6 +58,7 @@ export default async function sitemap() {
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-county`,    priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-estate`,    priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-residency`, priority: 0.8, changeFrequency: "monthly" },
+     { url: `${BASE_URL}/dholera-residential-plots/westwyn-crown`, priority: 0.8, changeFrequency: "monthly" },
 
   ].map((page) => ({ ...page }));
 

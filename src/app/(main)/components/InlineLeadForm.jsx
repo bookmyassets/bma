@@ -2,6 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Home,
+  Phone,
+  ShieldCheck,
+  UserRound,
+} from "lucide-react";
 
 const DEFAULT_TAGS = ["Dholera Investment", "Website Lead", "Bulk Land"];
 
@@ -318,101 +325,255 @@ export default function InlineLeadForm({
   };
 
   return (
-    <section
-      className={`rounded-2xl border py-[clamp(2rem,4vw,3.5rem)] ${
-        isDark
-          ? "border-white/10 bg-[#151515]"
-          : "border-transparent bg-white"
-      }`}
+  <section
+    aria-label={config.title}
+    className="
+      bg-[#F7F3EB]
+      px-4
+      py-5
+
+      sm:px-6
+      sm:py-6
+
+      lg:px-8
+      lg:py-8
+    "
+  >
+    <div
+      className="
+        relative
+        mx-auto
+        max-w-7xl
+        overflow-hidden
+
+        rounded-[22px]
+
+        border
+        border-[#B8924F]/55
+
+        bg-[#F7F3EB]
+
+        px-3
+        py-4
+
+        shadow-[0_16px_45px_rgba(89,72,42,0.05)]
+
+        sm:px-5
+        sm:py-5
+
+        lg:px-6
+        lg:py-6
+      "
     >
-      <div className="container mx-auto px-[clamp(1rem,4vw,3rem)]">
-        <div className="max-w-5xl mx-auto">
+
+      <div className="relative z-10 mx-auto max-w-[1180px]">
+        {/* =====================================================
+            HEADER
+        ====================================================== */}
+        <div className="mx-auto max-w-4xl text-center">
+          
           <HeadingTag
-            className={`text-center text-[clamp(1.375rem,2.5vw,2rem)] font-bold leading-[1.25] ${
-              isDark ? "text-[#f5f1e8]" : "text-black"
-            }`}
+            className="
+              mt-1
+
+              font-serif
+              text-[26px]
+              font-medium
+              leading-[1.08]
+              tracking-[-0.025em]
+              text-[#202020]
+
+              sm:text-[30px]
+
+              lg:text-[34px]
+
+              xl:text-[38px]
+            "
           >
             {config.title}
           </HeadingTag>
 
           {showSubtitle && config.subtitle && (
             <p
-              className={`mx-auto mt-3 max-w-2xl text-center text-sm leading-6 sm:text-base ${
-                isDark ? "text-[#f5f1e8]/70" : "text-gray-600"
-              }`}
+              className="
+                mx-auto
+                mt-2.5
+                max-w-3xl
+
+                text-[15px]
+                leading-[1.6]
+                text-[#6F6A62]
+
+                sm:text-base
+              "
             >
               {config.subtitle}
             </p>
           )}
+        </div>
 
-          {showPopup ? (
-            <div className="text-center py-8">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="mb-4 inline-block"
-              >
-                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-black"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-              </motion.div>
-              <h3
-                className={`mb-2 text-2xl font-bold ${
-                  isDark ? "text-[#f5f1e8]" : "text-black"
-                }`}
-              >
-                Thank You!
-              </h3>
-              <p className={isDark ? "text-[#f5f1e8]/70" : "text-gray-600"}>
-                Your request has been submitted successfully. We'll contact you
-                shortly.
-              </p>
-            </div>
-          ) : isDisabled ? (
-            <div className="text-center py-8">
-              <p className="text-center text-red-400 font-semibold">
-                You have reached the maximum submission limit. Try again after
-                24 hours.
-              </p>
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="mt-[clamp(1.5rem,3vw,2rem)] space-y-[clamp(1rem,2vw,1.5rem)]"
+        {/* =====================================================
+            SUCCESS
+        ====================================================== */}
+        {showPopup ? (
+          <div className="py-5 text-center">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="mb-4 inline-block"
             >
-              {errorMessage && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm"
-                >
-                  {errorMessage}
-                </motion.div>
-              )}
+              <div
+                className="
+                  mx-auto
+                  flex
+                  size-14
+                  items-center
+                  justify-center
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(1rem,2vw,1.5rem)]">
-                <div>
-                  <label
-                    htmlFor="fullName"
-                    className={`mb-2 block text-sm font-medium ${
-                      isDark ? "text-[#f5f1e8]" : "text-black"
-                    }`}
-                  >
-                    Full Name *
-                  </label>
+                  rounded-full
+
+                  bg-[#B8924F]/15
+                "
+              >
+                <svg
+                  className="size-7 text-[#B8924F]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+            </motion.div>
+
+            <h3
+              className="
+                font-serif
+                text-[28px]
+                font-medium
+                text-[#202020]
+              "
+            >
+              Thank You!
+            </h3>
+
+            <p
+              className="
+                mx-auto
+                mt-2
+                max-w-lg
+
+                text-[15px]
+                leading-6
+                text-[#6F6A62]
+              "
+            >
+              Your request has been submitted successfully. We&apos;ll contact
+              you shortly.
+            </p>
+          </div>
+        ) : isDisabled ? (
+          <div className="py-5 text-center">
+            <p className="text-sm font-semibold text-red-600">
+              You have reached the maximum submission limit. Try again after 24
+              hours.
+            </p>
+          </div>
+        ) : (
+          /* =====================================================
+              FORM
+          ====================================================== */
+          <form
+            onSubmit={handleSubmit}
+            className="
+              mt-4
+
+              sm:mt-5
+
+              lg:mt-6
+            "
+          >
+            {/* Error */}
+            {errorMessage && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="
+                  mb-3
+
+                  rounded-lg
+
+                  border
+                  border-red-300
+
+                  bg-red-50
+
+                  px-3
+                  py-2
+
+                  text-sm
+                  text-red-700
+                "
+              >
+                {errorMessage}
+              </motion.div>
+            )}
+
+            {/* =================================================
+                FIELDS + CTA
+            ================================================== */}
+            <div
+              className="
+                grid
+                grid-cols-1
+                gap-3
+
+                md:grid-cols-2
+
+                lg:grid-cols-[1fr_1fr_210px]
+                lg:items-end
+              "
+            >
+              {/* Full Name */}
+              <div>
+                <label
+                  htmlFor="fullName"
+                  className="
+                    mb-1.5
+                    block
+
+                    text-[14px]
+                    font-medium
+                    text-[#202020]
+
+                    sm:text-[15px]
+                  "
+                >
+                  Full Name *
+                </label>
+
+                <div className="relative">
+                  <UserRound
+                    strokeWidth={1.7}
+                    className="
+                      pointer-events-none
+
+                      absolute
+                      left-4
+                      top-1/2
+
+                      size-5
+                      -translate-y-1/2
+
+                      text-[#8B857C]
+                    "
+                  />
+
                   <input
                     type="text"
                     id="fullName"
@@ -420,20 +581,80 @@ export default function InlineLeadForm({
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69] placeholder-gray-400"
+                    autoComplete="name"
                     placeholder="Enter your full name"
+                    className="
+                      h-12
+                      w-full
+
+                      rounded-lg
+
+                      border
+                      border-[#DED4C4]
+
+                      bg-[#FBF8F2]
+
+                      pl-12
+                      pr-4
+
+                      text-[15px]
+                      text-[#202020]
+
+                      outline-none
+
+                      transition-all
+                      duration-200
+
+                      placeholder:text-[#918B82]
+
+                      hover:border-[#C9B995]
+
+                      focus:border-[#B8924F]
+                      focus:ring-2
+                      focus:ring-[#B8924F]/15
+
+                      sm:h-[50px]
+                      sm:text-base
+                    "
                   />
                 </div>
+              </div>
 
-                <div>
-                  <label
-                    htmlFor="mobileNumber"
-                    className={`mb-2 block text-sm font-medium ${
-                      isDark ? "text-[#f5f1e8]" : "text-black"
-                    }`}
-                  >
-                    Mobile Number *
-                  </label>
+              {/* Mobile */}
+              <div>
+                <label
+                  htmlFor="mobileNumber"
+                  className="
+                    mb-1.5
+                    block
+
+                    text-[14px]
+                    font-medium
+                    text-[#202020]
+
+                    sm:text-[15px]
+                  "
+                >
+                  Mobile Number *
+                </label>
+
+                <div className="relative">
+                  <Phone
+                    strokeWidth={1.7}
+                    className="
+                      pointer-events-none
+
+                      absolute
+                      left-4
+                      top-1/2
+
+                      size-5
+                      -translate-y-1/2
+
+                      text-[#8B857C]
+                    "
+                  />
+
                   <input
                     type="tel"
                     id="mobileNumber"
@@ -441,59 +662,181 @@ export default function InlineLeadForm({
                     value={formData.mobileNumber}
                     onChange={handleChange}
                     required
-                    className="w-full px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69] placeholder-gray-400"
+                    inputMode="numeric"
+                    autoComplete="tel"
                     placeholder="Enter your mobile number"
+                    className="
+                      h-12
+                      w-full
+
+                      rounded-lg
+
+                      border
+                      border-[#DED4C4]
+
+                      bg-[#FBF8F2]
+
+                      pl-12
+                      pr-4
+
+                      text-[15px]
+                      text-[#202020]
+
+                      outline-none
+
+                      transition-all
+                      duration-200
+
+                      placeholder:text-[#918B82]
+
+                      hover:border-[#C9B995]
+
+                      focus:border-[#B8924F]
+                      focus:ring-2
+                      focus:ring-[#B8924F]/15
+
+                      sm:h-[50px]
+                      sm:text-base
+                    "
                   />
                 </div>
               </div>
 
-              <div className="flex justify-center">
-                <div ref={recaptchaRef}></div>
-              </div>
+              {/* CTA */}
+              <button
+                type="submit"
+                disabled={isLoading || isDisabled || !recaptchaLoaded}
+                className={`
+                  group
 
-              <div className="flex flex-col items-center">
-                <button
-                  type="submit"
-                  disabled={isLoading || isDisabled || !recaptchaLoaded}
-                  className={`w-auto font-bold px-[clamp(1.25rem,3vw,2rem)] py-[clamp(0.6rem,1.2vw,0.75rem)] rounded-lg transition-all duration-300 ${
+                  flex
+                  h-12
+                  w-full
+                  items-center
+                  justify-center
+                  gap-3
+
+                  rounded-lg
+
+                  px-5
+
+                  text-[15px]
+                  font-semibold
+
+                  transition-all
+                  duration-300
+
+                  sm:h-[50px]
+                  sm:text-base
+
+                  md:col-span-2
+
+                  lg:col-span-1
+
+                  ${
                     isLoading || isDisabled || !recaptchaLoaded
-                      ? "bg-gray-600 cursor-not-allowed text-gray-400"
-                      : "bg-[#ddbc69] hover:bg-[#c99a2d] text-black shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                  }`}
-                >
-                  {isLoading ? (
-                    <span className="flex items-center justify-center">
-                      <svg
-                        className="animate-spin -ml-1 mr-3 h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Submitting...
-                    </span>
-                  ) : (
-                    config.buttonText
-                  )}
-                </button>
-              </div>
-            </form>
-          )}
-        </div>
+                      ? `
+                        cursor-not-allowed
+                        border
+                        border-[#DED4C4]
+                        bg-[#E8E2D8]
+                        text-[#938D83]
+                      `
+                      : `
+                        border
+                        border-[#B8924F]
+
+                        bg-[linear-gradient(90deg,#D0AD62,#E3C578)]
+
+                        text-[#202020]
+
+                        shadow-[0_10px_25px_rgba(184,146,79,0.18)]
+
+                        hover:-translate-y-0.5
+                        hover:shadow-[0_14px_30px_rgba(184,146,79,0.26)]
+                      `
+                  }
+                `}
+              >
+                {isLoading ? (
+                  <>
+                    <svg
+                      className="size-5 animate-spin"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
+                    </svg>
+
+                    <span>Submitting...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{config.buttonText}</span>
+
+                    <ArrowRight
+                      strokeWidth={1.8}
+                      className="
+                        size-[18px]
+
+                        transition-transform
+                        duration-300
+
+                        group-hover:translate-x-1
+                      "
+                    />
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* reCAPTCHA */}
+            <div className="mt-2 flex justify-center">
+              <div ref={recaptchaRef} />
+            </div>
+
+            {/* =================================================
+                SECURITY MESSAGE
+            ================================================== */}
+            <div
+              className="
+                mt-2
+
+                flex
+                items-center
+                justify-center
+                gap-2
+
+                text-[12px]
+                text-[#6F6A62]
+
+                sm:text-[13px]
+              "
+            >
+              <ShieldCheck
+                strokeWidth={1.7}
+                className="size-[18px] text-[#B8924F]"
+              />
+
+              <span className="text-black text-[15px]">Your details are safe with us</span>
+            </div>
+          </form>
+        )}
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }

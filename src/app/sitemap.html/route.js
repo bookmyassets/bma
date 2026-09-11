@@ -52,6 +52,10 @@ const STATIC_SECTIONS = [
         href: "/dholera-residential-plots/westwyn-residency",
         title: "WestWyn Residency",
       },
+      {
+        href: "/dholera-residential-plots/westwyn-crown",
+        title: "WestWyn Crown",
+      },
     ],
   },
 ];

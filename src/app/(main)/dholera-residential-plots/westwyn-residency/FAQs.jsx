@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 
 const faqs = [
   {
@@ -34,15 +35,16 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleCallClick = () => {
-    //  Google Tag Manager event
+    // Google Tag Manager event
     window.dataLayer = window.dataLayer || [];
+
     window.dataLayer.push({
       event: "call_click_Faq",
       lead_type: "phone",
       device: "all",
     });
 
-    // 📞 Call trigger
+    // Call trigger
     window.location.href = "tel:+918130371647";
   };
 
@@ -51,72 +53,227 @@ export default function FAQSection() {
   };
 
   return (
-    <>
-      <div className="bg-white">
-        <div className="flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-8 gap-6 md:gap-12 max-w-7xl mx-auto">
-          {/* Left Section (40%) */}
-          <div className="contents md:flex md:w-2/5 md:flex-col md:px-2">
-            <h2 className="order-1 px-2 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] text-black md:order-none md:px-0 md:mb-4">
-              FAQs
-            </h2>
-            <div className="order-3  md:order-none md:px-0">
-              <p className="pb-3">Have More Question?</p>
-              <a
-                href="#"
-                className="px-1 py-2 bg-[#ddbc69] text-white rounded-md"
+    <section className="w-full bg-[#24231F] px-3 py-5 sm:px-5 sm:py-6 lg:px-7 lg:py-8">
+      <div className="mx-auto w-full max-w-7xl">
+
+        {/* Main FAQ Layout */}
+        <div className="grid gap-4 lg:grid-cols-[0.75fr_1.5fr] lg:gap-6 xl:gap-8">
+
+          {/* =========================================
+              LEFT CONTENT
+          ========================================= */}
+          <div className="flex flex-col items-center justify-start text-center">
+
+            <div>
+
+              {/* Heading */}
+              <h2 className="max-w-md font-serif text-[1.5rem] font-medium leading-[1.1] tracking-[-0.025em] text-white sm:text-[1.75rem] lg:text-[1.95rem] xl:text-[2.1rem]">
+                Have More Questions?
+              </h2>
+
+              {/* Short supporting text */}
+              <p className="mt-2 max-w-sm text-md leading-[1.5] text-white sm:text-sm sm:leading-[1.6]">
+                Our relationship managers are here to help you.
+              </p>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-3 lg:mt-4">
+              <button
+                type="button"
                 onClick={handleCallClick}
+                className="
+                  inline-flex
+                  min-h-10
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  border
+                  border-[#C9A65D]
+                  bg-[#C9A65D]
+                  px-4
+                  py-2.5
+                  text-xs
+                  font-semibold
+                  text-[#24231F]
+                  shadow-[0_8px_24px_rgba(201,166,93,0.12)]
+                  transition-all
+                  duration-200
+                  hover:bg-[#D5B673]
+                  active:scale-[0.98]
+                  sm:w-auto
+                  sm:text-sm
+                "
               >
-                Let's Connect
-              </a>
+                <FaWhatsapp className="h-4 w-4 text-[#075E54] sm:h-5 sm:w-5" aria-hidden="true" />
+
+                <span>Connect with Our RM</span>
+
+                <span className="text-lg leading-none">→</span>
+              </button>
             </div>
           </div>
 
-          {/* Right Section (60%) */}
-          <div className="order-2 w-full md:order-none md:w-3/5 md:pl-24 md:pr-4 md:mt-0 space-y-1">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border-b border-gray-200">
-                <button
-                  className="w-full py-4 flex justify-between items-center text-left hover:bg-gray-50 transition-all duration-200"
-                  onClick={() => toggleFAQ(index)}
-                >
-                  <span className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-gray-900 pr-4">
-                    {faq.question}
-                  </span>
-                  <span className="flex-shrink-0 transition-transform duration-200">
-                    {openIndex === index ? (
-                      <Minus className="w-5 h-5 text-gray-600" />
-                    ) : (
-                      <Plus className="w-5 h-5 text-gray-600" />
-                    )}
-                  </span>
-                </button>
+          {/* =========================================
+              RIGHT FAQ ACCORDION
+          ========================================= */}
+          <div className="space-y-2">
 
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+
+              return (
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openIndex === index
-                      ? "max-h-96 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
+                  key={index}
+                  className={`
+                    overflow-hidden
+                    rounded-xl
+                    border
+                    transition-all
+                    duration-300
+                    ${
+                      isOpen
+                        ? "border-[#C9A65D]/70 bg-[#34312B]"
+                        : "border-[#4C463C] bg-[#2D2B26] hover:border-[#C9A65D]/40"
+                    }
+                  `}
                 >
-                  <div className="pb-4 px-0">
-                    <div className="text-gray-600 text-[0.875rem] font-normal leading-[1.5]">
-                      {Array.isArray(faq.answer) ? (
-                        <ul className="list-disc pl-5 space-y-1">
-                          {faq.answer.map((point, i) => (
-                            <li key={i}>{point}</li>
-                          ))}
-                        </ul>
+                  {/* Question */}
+                  <button
+                    type="button"
+                    onClick={() => toggleFAQ(index)}
+                    aria-expanded={isOpen}
+                    className="
+                      flex
+                      min-h-[58px]
+                      w-full
+                      items-center
+                      gap-3
+                      px-2.5
+                      py-2.5
+                      text-left
+                      sm:min-h-[64px]
+                      sm:px-3
+                      sm:py-3
+                    "
+                  >
+                    {/* Number */}
+                    <span
+                      className={`
+                        flex
+                        w-7
+                        shrink-0
+                        items-center
+                        justify-center
+                        text-xs
+                        font-semibold
+                        transition-colors
+                        duration-200
+                        ${
+                          isOpen
+                            ? "text-white"
+                            : "text-white"
+                        }
+                      `}
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    {/* Question */}
+                    <span
+                      className={`
+                        min-w-0
+                        flex-1
+                        pr-2
+                        text-[13px]
+                        font-semibold
+                        leading-5
+                        transition-colors
+                        duration-200
+                        sm:text-sm
+                        lg:text-[15px]
+                        ${
+                          isOpen
+                            ? "text-white"
+                            : "text-white"
+                        }
+                      `}
+                    >
+                      {faq.question}
+                    </span>
+
+                    {/* Plus / Minus */}
+                    <span
+                      className={`
+                        flex
+                        h-8
+                        w-8
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        transition-all
+                        duration-200
+                        ${
+                          isOpen
+                            ? "border-[#C9A65D] bg-[#C9A65D] text-[#24231F]"
+                            : "border-[#4C463C] bg-[#34312B] text-white"
+                        }
+                      `}
+                    >
+                      {isOpen ? (
+                        <Minus className="h-4 w-4" />
                       ) : (
-                        <p>{faq.answer}</p>
+                        <Plus className="h-4 w-4" />
                       )}
+                    </span>
+                  </button>
+
+                  {/* =================================
+                      ANSWER
+                  ================================= */}
+                  <div
+                    className={`
+                      grid transition-all duration-300 ease-in-out
+                      ${
+                        isOpen
+                          ? "grid-rows-[1fr] opacity-100"
+                          : "grid-rows-[0fr] opacity-0"
+                      }
+                    `}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="border-t border-[#4C463C] px-3 pb-3 pt-2.5 sm:px-3 sm:pb-4 sm:pt-3">
+
+                        <div className="pl-10 pr-2 sm:pl-10 sm:pr-6">
+                          <div className="text-xs leading-[1.5] text-white sm:text-sm sm:leading-[1.6]">
+
+                            {Array.isArray(faq.answer) ? (
+                              <ul className="list-disc space-y-2 pl-5">
+                                {faq.answer.map((point, i) => (
+                                  <li key={i}>{point}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>{faq.answer}</p>
+                            )}
+
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
+
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 }

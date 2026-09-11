@@ -1,29 +1,33 @@
-import { AnimatePresence } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import BrochureDownload from "../../components/BrochureDownload";
+"use client";
+
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import img from "@/assests/residential/residency/westwyn-Residency.webp";
-import { FaDownload } from "react-icons/fa";
-import {
-  FaLocationPin,
-  FaLocationPinLock,
-  FaMapLocation,
-} from "react-icons/fa6";
 import Link from "next/link";
 
-const PlanLayout = () => {
-  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-  // New state for brochure form
-  const [formTitle, setFormTitle] = useState("");
-  const [formHeadline, setFormHeadline] = useState("");
-  const [buttonName, setButtonName] = useState("");
-  const [formType, setFormType] = useState("");
+import {
+  FaDownload,
+  FaMapLocation,
+  FaHouse,
+  FaLocationDot,
+  FaFileLines,
+  FaLayerGroup,
+  FaRulerCombined,
+  FaRoad,
+  FaUsers,
+  FaKey,
+  FaUser,
+} from "react-icons/fa6";
 
-  const openBrochureForm = (title, headline, btnName, type) => {
-    setFormTitle(title);
-    setFormHeadline(headline);
-    setButtonName(btnName);
-    setFormType(type);
+import BrochureDownload from "../../components/BrochureDownload";
+
+import img from "@/assests/residential/residency/westwyn-Residency.webp";
+
+const PlanLayout = () => {
+  const [activeTab, setActiveTab] = useState("overview");
+  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
+
+  const openBrochureForm = () => {
     setIsBrochureFormOpen(true);
   };
 
@@ -32,207 +36,434 @@ const PlanLayout = () => {
   };
 
   const handleAfterSubmit = () => {
-    console.log("Form submitted successfully, type:", formType);
+    console.log("Form submitted successfully");
 
-    if (formType === "brochure") {
-      try {
-        console.log("Initiating brochure download");
+    setTimeout(() => {
+      const link = document.createElement("a");
 
-        // Using setTimeout to ensure the popup closes before download starts
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.href =
-            "https://drive.google.com/file/d/1tkK2ChBBTtOR5IY31tggzxnnx9djRUlG/view?usp=sharing";
-          link.target = "_blank";
-          link.download = "brochure.pdf"; // Add download attribute
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          console.log("Download link clicked");
-        }, 300);
-      } catch (error) {
-        console.error("Error downloading brochure:", error);
-        window.open(
-          "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf",
-          "_blank",
-        );
-      }
-    }
+      link.href =
+        "https://drive.google.com/file/d/1tkK2ChBBTtOR5IY31tggzxnnx9djRUlG/view?usp=sharing";
+
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, 300);
   };
 
-  return (
-    <div className="bg-white relative overflow-hidden">
-      {/* Subtle background pattern */}
+  const overviewCards = [
+    {
+      title: "Land Parcel",
+      value: (
+        <>
+          8.26 Acres
+          <span className="block text-sm font-normal text-[#6F6A62] mt-0.5">
+            (40,000 sq. yards)
+          </span>
+        </>
+      ),
+      icon: FaLayerGroup,
+    },
+    {
+      title: "Location",
+      value: "Pipariya",
+      icon: FaLocationDot,
+    },
+    {
+      title: "Plot Sizes",
+      value: "124, 152 & 187 sq. yards",
+      icon: FaRulerCombined,
+    },
+    {
+      title: "Prime Connectivity",
+      value: (
+        <>
+          Entry from Major
+          <span className="block">District Road (MDR)</span>
+        </>
+      ),
+      icon: FaRoad,
+    },
+    {
+      title: "Total Units",
+      value: "290 exclusive plots",
+      icon: FaUsers,
+    },
+    {
+      title: "Developer",
+      value: (
+        <Link
+          href="/contact"
+          className="hover:text-[#B8924F] transition-colors"
+        >
+          BookMyAssets
+        </Link>
+      ),
+      icon: FaUser,
+    },
+  ];
 
-      <div className="relative max-w-7xl mx-auto px-4 py-4">
-        {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto">
-          <div>
-            <h3 className="text-[32px] font-semibold text-center ">
-              Plan Layout
-            </h3>
-          </div>
-          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-            <div className="px-4 sm:px-6 lg:px-8 md:order-2">
-              <Image
-                src={img}
-                alt="westwyn residency plan layout"
-                className="rounded-xl w-full md:h-full h-auto md:order-1"
-                priority
-              />
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                {
-                  title: "Land Parcel",
-                  content: (
-                    <span>
-                      8.26 Acres <br /> (40,000 sq. yards)
-                    </span>
-                  ),
-                  align: "text-center",
-                  divider: true,
-                },
-                {
-                  title: "Location",
-                  content: "Pipariya",
-                  align: "text-left",
-                },
-                {
-                  title: "Prime Connectivity",
-                  content: "Entry From Major District Road (MDR)",
-                  align: "text-left",
-                },
-                {
-                  title: "Plot Sizes",
-                  content: (
-                    <span>
-                      124, 152 & 187 <br /> sq. yards
-                    </span>
-                  ),
-                  align: "text-left",
-                },
-                {
-                  title: "Total Units",
-                  content: "290 exclusive plots",
-                  align: "text-left",
-                },
-                {
-                  title: "Possession",
-                  content: "Immediate",
-                  align: "text-left",
-                },
-                {
-                  title: "Developer",
-                  content: (
-                    <Link
-                      href="/contact"
-                      className="underline-offset-4 hover:text-[#b58f32] hover:underline"
-                    >
-                      BookMyAssets
-                    </Link>
-                  ),
-                  align: "text-left",
-                },
-                {
-                  title: "Documentation",
-                  content: "NA/NOC",
-                  align: "text-left",
-                },
-                {
-                  title: "Price",
-                  content: "₹6500/sq. yards",
-                  align: "text-left",
-                },
-              ].map(({ title, content, align }, index, arr) => {
-                const isLastOdd =
-                  index === arr.length - 1 && arr.length % 2 !== 0;
+  const tabs = [
+    {
+      id: "overview",
+      label: "Overview",
+      icon: FaHouse,
+    },
+    {
+      id: "location",
+      label: "Location",
+      icon: FaLocationDot,
+    },
+    {
+      id: "documentation",
+      label: "Documentation",
+      icon: FaFileLines,
+    },
+  ];
+
+  return (
+    <>
+      <style jsx global>{`
+        .westwyn-residency-dark .plan-layout-heading {
+          color: #ddbc69 !important;
+        }
+      `}</style>
+
+      <section className="relative overflow-hidden bg-[#F7F3EB] py-4 sm:py-6 lg:py-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        {/* =========================
+            SECTION HEADER
+        ========================== */}
+
+        <div className="mx-auto mb-4 max-w-4xl text-center sm:mb-6">
+          <h2 className="plan-layout-heading font-serif text-[2rem] leading-[1.12] tracking-[-0.025em] text-[#ddbc69] sm:text-[2.25rem] lg:text-[2.55rem] xl:text-[2.75rem]">
+            Plan Layout
+          </h2>
+        </div>
+
+        {/* =========================
+            MAIN LAYOUT
+        ========================== */}
+
+        <div className="grid overflow-hidden rounded-2xl border border-[#DED4C4] bg-white lg:grid-cols-[1fr_1.02fr]">
+
+          {/* =========================
+              LEFT CONTENT
+          ========================== */}
+
+          <div className="p-2.5 sm:p-3 lg:flex lg:flex-col lg:justify-center lg:p-4">
+
+            {/* Tabs */}
+
+            <div className="mb-5 grid grid-cols-3 overflow-hidden rounded-xl bg-[#F7F3EB]">
+
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.id;
 
                 return (
-                  <div
-                    key={title}
-                    className={`flex flex-col rounded-2xl text-black overflow-hidden ${
-                      isLastOdd ? "col-span-2 sm:col-span-1" : ""
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`relative flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium transition-all duration-200 sm:text-base ${
+                      isActive
+                        ? "bg-[#F0E8D8] text-[#B8924F]"
+                        : "text-[#6F6A62] hover:text-[#202020]"
                     }`}
-                    style={{
-                      border: "1.5px solid #f0f0f0",
-                      boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-                    }}
                   >
-                    {/* Gold top accent bar */}
-                    <div
-                      className="h-1 w-full"
-                      style={{
-                        background: "linear-gradient(90deg, #ddbc69, #f0c96a)",
-                      }}
+                    <Icon
+                      aria-hidden="true"
+                      className="hidden size-4 shrink-0 sm:block sm:size-5"
                     />
 
-                    <div className="flex flex-col flex-1 p-3 sm:p-4 lg:p-5">
-                      {/* Title */}
-                      <span
-                        className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
-                        style={{ color: "#ddbc69", letterSpacing: "0.01em" }}
-                      >
-                        {title}
-                      </span>
+                    <span>{tab.label}</span>
 
-                      {/* Divider */}
-                      <div
-                        className="w-2/3 mx-auto mt-2 mb-3 h-[1px]"
-                        style={{ background: "#ececec" }}
-                      />
-
-                      {/* Content */}
-                      <div className="flex flex-1 items-center justify-center">
-                        <span
-                          className={`font-semibold ${align} text-xs sm:text-sm lg:text-base leading-snug`}
-                          style={{ color: "#1a1a1a" }}
-                        >
-                          {content}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 h-[2px] w-full bg-[#B8924F]" />
+                    )}
+                  </button>
                 );
               })}
             </div>
-          </div>
-          <div className="gap-12 items-stretch space-y-4">
-            {/* Left Content */}
-            <div className="h-full">
-              <div className="flex justify-center items-center flex-row gap-[clamp(0.5rem,2vw,1rem)]">
-                <button
-                  onClick={openBrochureForm}
-                  className="bg-[#ddbc69] text-white whitespace-nowrap rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
-                    text-[clamp(0.8rem,1.8vw,1rem)]
-                    px-[clamp(0.75rem,3vw,1.25rem)]
-                    py-[clamp(0.5rem,2vw,0.75rem)]"
-                >
-                  <FaDownload className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                  Download Plan Layout
-                </button>
 
-                <Link href="https://maps.app.goo.gl/cokFB3ntW2a66ntD7">
-                  <p
-                    className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
-                      text-[clamp(0.8rem,1.8vw,1rem)]
-                      px-[clamp(0.75rem,3vw,1.25rem)]
-                      py-[clamp(0.5rem,2vw,0.75rem)]"
-                  >
-                    <FaMapLocation className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                    Project Location
-                  </p>
-                </Link>
-              </div>
+            {/* =========================
+                TAB CONTENT
+            ========================== */}
+
+            <AnimatePresence mode="wait">
+
+              {/* OVERVIEW */}
+
+              {activeTab === "overview" && (
+                <motion.div
+                  key="overview"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="mb-4">
+                    <h3 className="text-xl font-semibold text-[#202020] sm:text-2xl">
+                      Project Highlights
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    {overviewCards.map((card) => {
+                      const Icon = card.icon;
+
+                      return (
+                        <div
+                          key={card.title}
+                          className="flex min-h-[74px] items-center gap-3 rounded-xl border border-[#DED4C4] bg-white px-3 py-2.5 transition-all duration-200 hover:border-[#B8924F]/60 hover:shadow-sm"
+                        >
+                          {/* Icon */}
+
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F7F3EB] text-[#B8924F]">
+                            <Icon className="text-lg" />
+                          </div>
+
+                          {/* Content */}
+
+                          <div className="min-w-0">
+                            <p className="text-xs font-medium text-black sm:text-md">
+                              {card.title}
+                            </p>
+
+                            <div className="mt-1 text-sm font-semibold leading-5 text-[#202020] sm:text-base">
+                              {card.value}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* LOCATION */}
+
+              {activeTab === "location" && (
+                <motion.div
+                  key="location"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="min-h-[240px]"
+                >
+                  <div className="mb-4">
+                    <h3 className="text-xl font-semibold text-[#202020] sm:text-2xl">
+                      Project Location
+                    </h3>
+                  </div>
+
+                  <div className="rounded-xl border border-[#ddbc69] bg-[#F7F3EB] p-4 sm:p-5">
+                    <div className="mb-4 flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#B8924F]">
+                        <FaLocationDot className="text-xl" />
+                      </div>
+
+                      <div>
+                        <p className="text-md font-medium text-black">
+                          Location
+                        </p>
+
+                        <p className="mt-1 text-lg font-semibold text-[#202020]">
+                          Pipariya
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2.5 text-md leading-6 text-black">
+                      <p>
+                        The project is strategically located in Pipariya 
+                      </p>
+
+                      <p>
+                        The development enjoys direct entry from the Major
+                        District Road (MDR), providing smooth connectivity to
+                        surrounding areas.
+                      </p>
+                    </div>
+
+                    <Link
+                      href="https://maps.app.goo.gl/cokFB3ntW2a66ntD7"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#B8924F] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#a47e40]"
+                    >
+                      <FaMapLocation />
+                      View Project Location
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* DOCUMENTATION */}
+
+              {activeTab === "documentation" && (
+                <motion.div
+                  key="documentation"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="min-h-[240px]"
+                >
+                  <div className="mb-4">
+                    <h3 className="text-xl font-semibold text-black sm:text-xl">
+                      Documentation
+                    </h3>
+
+                    <p className="mt-1 text-[14px] leading-[1.6] text-black sm:text-sm">
+                      Project documentation and registration details.
+                    </p>
+                  </div>
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-xl border border-[#ddbc69] bg-[#F7F3EB] p-2">
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#B8924F]">
+                          <FaFileLines />
+                        </div>
+
+                        <div>
+                          <p className="text-sm font-medium text-black">
+                            Documentation
+                          </p>
+
+                          <p className="mt-1 text-md font-semibold text-black">
+                            Non-Agricultural Land / No Objection Certificate
+                          </p>
+                          <p className="mt-1 text-md font-semibold text-black">
+                            Plan Pass Approved
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl border border-[#ddbc69] bg-[#F7F3EB] p-2">
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#B8924F]">
+                          <FaKey />
+                        </div>
+
+                        <div>
+                          <p className="text-sm font-medium text-black">
+                            Possession
+                          </p>
+
+                          <p className="mt-1 text-md font-semibold text-black">
+                            Immediate
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+            </AnimatePresence>
+
+            {/* =========================
+                ACTION BUTTONS
+            ========================== */}
+
+            <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+
+              <button
+                type="button"
+                onClick={openBrochureForm}
+                className="flex items-center justify-center gap-2 rounded-lg bg-[#B8924F] px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-[#a47e40]"
+              >
+                <FaDownload />
+                Download Plan Layout
+              </button>
+
+              <Link
+                href="https://maps.app.goo.gl/cokFB3ntW2a66ntD7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 rounded-lg border border-[#B8924F] bg-white px-4 py-3 text-sm font-medium text-[#B8924F] transition-colors hover:bg-[#F7F3EB]"
+              >
+                <FaMapLocation />
+                Project Location
+              </Link>
+
             </div>
+
           </div>
+
+          {/* =========================
+              RIGHT — MASTER PLAN
+          ========================== */}
+
+          <div className="border-t border-[#DED4C4] bg-[#F7F3EB] p-2.5 sm:p-3 lg:border-l lg:border-t-0 lg:p-4">
+
+            <div className="flex h-full flex-col rounded-xl border border-[#DED4C4] bg-white p-2.5 sm:p-3">
+
+              {/* Image Header */}
+
+              <div className="mb-2 px-1 sm:px-2">
+
+                <h3 className="text-xl font-semibold text-[#202020] sm:text-2xl">
+                  Master Plan
+                </h3>
+
+                <p className="mt-1 text-xs uppercase tracking-[0.15em] text-[#6F6A62]">
+                  A vision for a brighter tomorrow
+                </p>
+
+                <div className="mt-2 h-[2px] w-12 bg-[#B8924F]" />
+
+              </div>
+
+              {/* Plan Image */}
+
+              <div className="relative flex-1 overflow-hidden rounded-lg border border-[#DED4C4] bg-white">
+
+                <Image
+                  src={img}
+                  alt="WestWyn Residency master plan layout"
+                  width={1200}
+                  height={900}
+                  className="h-auto w-full object-contain"
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
       </div>
 
+      {/* =========================
+          BROCHURE MODAL
+      ========================== */}
+
       <AnimatePresence>
         {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/50 p-4"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              className="w-full max-w-md"
+            >
               <BrochureDownload
                 onClose={closeBrochureForm}
                 title="Get Project Plan Layout"
@@ -240,11 +471,12 @@ const PlanLayout = () => {
                 onAfterSubmit={handleAfterSubmit}
                 link="https://drive.google.com/file/d/1tkK2ChBBTtOR5IY31tggzxnnx9djRUlG/view?usp=sharing"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
-    </div>
+      </section>
+    </>
   );
 };
 

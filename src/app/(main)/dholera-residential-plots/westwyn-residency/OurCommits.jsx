@@ -14,212 +14,176 @@ export default function OurCommits() {
     {
       title: "NA/NOC/Title Clear",
       icon: FaShieldHalved,
+      color: "text-[#34D399]",
+      bg: "bg-emerald-50",
+      border: "border-emerald-100",
     },
     {
       title: "Plan Pass Approved",
       icon: FaFileCircleCheck,
+      color: "text-[#60A5FA]",
+      bg: "bg-blue-50",
+      border: "border-blue-100",
     },
     {
       title: "Registry Ready",
       icon: FaCircleCheck,
+      color: "text-[#A78BFA]",
+      bg: "bg-violet-50",
+      border: "border-violet-100",
     },
     {
       title: "Resale Support",
       icon: FaArrowRotateLeft,
+      color: "text-[#FB7185]",
+      bg: "bg-rose-50",
+      border: "border-rose-100",
     },
     {
       title: "Rental Support",
       icon: FaHouse,
+      color: "text-[#FBBF24]",
+      bg: "bg-emerald-50",
+      border: "border-emerald-100",
     },
     {
       title: "Site Visit Assistance",
       icon: FaLocationDot,
+      color: "text-[#FB923C]",
+      bg: "bg-orange-50",
+      border: "border-orange-100",
     },
   ];
 
   return (
-    <section className="bg-white px-4 py-5 sm:px-6 sm:py-7">
-      <div className="mx-auto max-w-7xl">
+    <section
+      aria-labelledby="our-commitments-title"
+      className="w-full bg-[#F7F3EB] px-3 py-5 sm:px-5 sm:py-6 lg:px-7 lg:py-8"
+    >
+      <div className="mx-auto w-full max-w-7xl">
+
+        {/* Section Header */}
+        <div className="mb-3 text-center sm:mb-4 lg:mb-5">
+
+          <h2
+            id="our-commitments-title"
+            className="font-serif text-[1.5rem] font-medium leading-[1.1] tracking-[-0.025em] text-[#202020] sm:text-[1.75rem] lg:text-[1.95rem] xl:text-[2.1rem]"
+          >
+            Our Commitments
+          </h2>
+        </div>
+
+        {/* Commitment Cards */}
         <div
           id="counters-section"
-          className="
-            relative
-            overflow-hidden
-            rounded-2xl
-            border
-            border-[#ddbc69]/25
-            bg-[#0b0b0b]
-            px-3
-            py-5
-            shadow-[0_10px_30px_rgba(0,0,0,0.14)]
-
-            sm:px-5
-            sm:py-7
-
-            md:px-7
-            md:py-8
-          "
+          className="grid grid-cols-2 gap-2 sm:gap-2.5 lg:grid-cols-3 lg:gap-3"
         >
-          {/* Subtle top glow */}
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              inset-x-0
-              top-0
-              h-28
-              bg-[radial-gradient(ellipse_at_top,rgba(221,188,105,0.055),transparent_70%)]
-            "
-          />
-
-          {/* Heading */}
-          <div className="relative z-10 text-center">
-            <h2
+          {items.map(({ title, icon: Icon, color, bg, border }) => (
+            <article
+              key={title}
               className="
-                text-[clamp(1.55rem,4vw,2.15rem)]
-                font-semibold
-                leading-tight
-                text-white
+                group
+                flex
+                min-h-[120px]
+                flex-col
+                items-center
+                justify-center
+                gap-2
+                rounded-2xl
+                border
+                border-[#DED4C4]
+                bg-[#FCFAF6]
+                px-2
+                py-2.5
+                text-center
+                shadow-[0_6px_20px_rgba(32,32,32,0.045)]
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:border-[#B8924F]/50
+                hover:shadow-[0_12px_28px_rgba(32,32,32,0.08)]
+                sm:min-h-[140px]
+                sm:px-3
+                sm:py-3
+                lg:min-h-[155px]
+                lg:px-4
+                lg:py-4
               "
             >
-              Our Commitments
-            </h2>
 
-            {/* Gold line */}
-            <div
-              aria-hidden="true"
-              className="
-                mx-auto
-                mt-2.5
-                h-[2px]
-                w-12
-                rounded-full
-                bg-[#ddbc69]
-
-                sm:w-14
-              "
-            />
-          </div>
-
-          {/* Cards */}
-          <div
-            className="
-              relative
-              z-10
-              mt-5
-              grid
-              grid-cols-2
-              gap-2.5
-
-              sm:mt-6
-              sm:gap-3
-
-              md:grid-cols-3
-              md:gap-4
-            "
-          >
-            {items.map(({ title, icon: Icon }) => (
-              <div
-                key={title}
-                className="
-                  group
-
-                  flex
-                  min-h-[7.5rem]
-                  flex-col
-                  items-center
-                  justify-center
-                  gap-3
-
-                  rounded-xl
-                  border
-                  border-white/[0.10]
-                  bg-white/[0.035]
-
-                  px-2.5
-                  py-3
-
-                  text-center
-
-                  transition-all
-                  duration-300
-
-                  hover:-translate-y-[2px]
-                  hover:border-[#ddbc69]/40
-                  hover:bg-white/[0.05]
-
-                  sm:min-h-[8rem]
-                  sm:px-3
-                  sm:py-4
-
-                  md:min-h-[8.5rem]
-                  md:gap-3.5
-                  md:px-5
-                  md:py-4
-                "
-              >
                 {/* Icon */}
                 <div
-                  className="
+                  className={`
                     flex
-                    size-12
+                    h-10
+                    w-10
                     shrink-0
                     items-center
                     justify-center
-
-                    rounded-lg
+                    rounded-full
                     border
-                    border-[#ddbc69]/25
-
-                    bg-[#ddbc69]/[0.08]
-                    text-[#ddbc69]
-
-                    transition-all
+                    ${border}
+                    ${bg}
+                    ${color}
+                    transition-transform
                     duration-300
-
-                    group-hover:border-[#ddbc69]/45
-                    group-hover:bg-[#ddbc69]/[0.12]
-
-                    sm:size-[3.25rem]
-
-                    md:size-14
-                  "
+                    group-hover:scale-105
+                    sm:h-12
+                    sm:w-12
+                    lg:h-14
+                    lg:w-14
+                  `}
                 >
                   <Icon
                     aria-hidden="true"
                     className="
-                      size-[1.4rem]
-                      sm:size-[1.55rem]
-                      md:size-[1.75rem]
+                      h-5
+                      w-5
+                      sm:h-6
+                      sm:w-6
+                      lg:h-7
+                      lg:w-7
                     "
                   />
                 </div>
 
-                {/* Text */}
-                <p
+              {/* Card Content */}
+              <div>
+                <h3
                   className="
-                    max-w-[10rem]
-                    text-sm
+                    mx-auto
+                    max-w-[190px]
+                    text-[15px]
                     font-semibold
-                    leading-[1.3]
-                    text-[#f5f1e8]
-
-                    sm:max-w-[11rem]
+                    leading-[1.15]
+                    tracking-[-0.02em]
+                    text-[#202020]
                     sm:text-base
-
-                    md:max-w-none
-                    md:text-[1.05rem]
-
                     lg:text-lg
                   "
                 >
                   {title}
-                </p>
+                </h3>
+
+                {/* Small gold accent */}
+                <div
+                  aria-hidden="true"
+                  className="
+                    mx-auto
+                    mt-2
+                    h-px
+                    w-8
+                    bg-[#B8924F]/60
+                    transition-all
+                    duration-300
+                    group-hover:w-12
+                  "
+                />
               </div>
-            ))}
-          </div>
+            </article>
+          ))}
         </div>
+
       </div>
     </section>
   );
