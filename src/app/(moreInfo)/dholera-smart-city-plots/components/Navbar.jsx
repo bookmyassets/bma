@@ -6,15 +6,21 @@ import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import GetinTouch from "./GetinTouch";
+import { trackEvent } from "../utils/tracking";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  
+
   const router = useRouter();
   const pathname = usePathname();
-  
-  const openContactForm = () => {
+
+  const openContactForm = (ctaLocation) => {
+    trackEvent("dscp_get_in_touch_click", {
+      cta_name: "get_in_touch",
+      cta_location: ctaLocation,
+    });
+
     setIsMenuOpen(false);
     setIsContactFormOpen(true);
   };
@@ -22,12 +28,13 @@ export default function Navbar() {
   const handleNavigation = (section) => {
     setIsMenuOpen(false);
 
-    if (pathname === '/dholera-smart-city-plots') {
-      const element = document.getElementById(section.replace('#', ''));
+    if (pathname === "/dholera-smart-city-plots") {
+      const element = document.getElementById(section.replace("#", ""));
       if (element) {
         const yOffset = -100;
-        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        const y =
+          element.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
     } else {
       router.push(`/dholera-smart-city-plots${section}`);
@@ -44,8 +51,6 @@ export default function Navbar() {
     { href: "#dholera", label: "Dholera" },
     { href: "#westwyn-residency", label: "Westwyn Residency" },
     { href: "#why-bma", label: "Why BMA" },
-
-
   ];
 
   return (
@@ -53,8 +58,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <button 
-            onClick={() => handleNavigation("#hero")} 
+          <button
+            onClick={() => handleNavigation("#hero")}
             className="flex-shrink-0"
           >
             <Image
@@ -77,10 +82,10 @@ export default function Navbar() {
                 {label}
               </button>
             ))}
-            
+
             <button
               type="button"
-              onClick={openContactForm}
+              onClick={() => openContactForm("navbar_desktop")}
               aria-haspopup="dialog"
               className="ml-auto px-3 py-2 text-base text-white transition-colors hover:text-[#DDBC69] lg:text-lg"
             >
@@ -92,7 +97,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-4">
             <button
               type="button"
-              onClick={openContactForm}
+              onClick={() => openContactForm("navbar_mobile")}
               aria-haspopup="dialog"
               className="px-2 py-2 text-sm font-semibold text-white transition-colors hover:text-[#DDBC69] sm:text-base"
             >
