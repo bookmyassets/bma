@@ -16,6 +16,14 @@ export default function WestwynContactForm({ onClose }) {
       buttonName="Get A Call Back"
       ctaItems={westwynFormCtas}
       onClose={onClose}
+
+      // GTM tracking
+      buttonClickEvent="dscp_popup_get_call_back_click"
+      formSubmitEvent="dscp_popup_form_submit"
+      trackingFormName="westwyn_residency_popup"
+      trackingFormLocation="westwyn_residency_section"
+      trackingCtaLocation="westwyn_residency_popup"
     />
+
   );
 }

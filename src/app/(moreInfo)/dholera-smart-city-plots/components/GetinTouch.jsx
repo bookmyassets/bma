@@ -43,14 +43,6 @@ function getLeadSource() {
     : "BookMyAssets Google Ads";
 }
 
-const handleCallBackClick = () => {
-  trackEvent("dscp_get_call_back_click", {
-    cta_name: "get_a_call_back",
-    cta_location: "get_in_touch_popup",
-    form_name: "get_in_touch",
-  });
-};
-
 export default function GetinTouch({
   onClose,
   title,
@@ -61,6 +53,12 @@ export default function GetinTouch({
   source = "BookMyAssets google ads",
   ids,
   ctaItems = [],
+  // GTM tracking props
+  buttonClickEvent = "dscp_get_call_back_click",
+  formSubmitEvent = "dscp_get_in_touch_form_submit",
+  trackingFormName = "get_in_touch",
+  trackingFormLocation = "navbar_popup",
+  trackingCtaLocation = "get_in_touch_popup",
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
@@ -74,6 +72,14 @@ export default function GetinTouch({
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const router = useRouter();
   const pathname = usePathname();
+
+  const handleCallBackClick = () => {
+    trackEvent(buttonClickEvent, {
+      cta_name: "get_a_call_back",
+      cta_location: trackingCtaLocation,
+      form_name: trackingFormName,
+    });
+  };
 
   // Handle close function
   const handleClose = () => {
@@ -189,9 +195,9 @@ export default function GetinTouch({
         // ================================
         // NEW GTM / GA4 SUCCESS EVENT
         // ================================
-        trackEvent("dscp_get_in_touch_form_submit", {
-          form_name: "get_in_touch",
-          form_location: "navbar_popup",
+        trackEvent(formSubmitEvent, {
+          form_name: trackingFormName,
+          form_location: trackingFormLocation,
           lead_type: "callback_request",
         });
 
