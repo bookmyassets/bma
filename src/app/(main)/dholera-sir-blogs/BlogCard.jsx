@@ -1,14 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { getVisibleBlogDate } from "@/lib/blogDates";
 
 export default function BlogCard({ post }) {
-  const formatDate = (dateString) => {
-    if (!dateString) return "Date not available";
-    const date = new Date(dateString);
-    if (isNaN(date)) return "Date not available";
-    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-  };
+  const visibleDate = getVisibleBlogDate(post);
 
   return (
     <Link
@@ -42,7 +38,9 @@ export default function BlogCard({ post }) {
           </h2>
           <div className="border-t border-gray-200 pt-4 mt-auto">
             <div className="flex justify-between text-sm">
-              <p className="text-black">{formatDate(post.publishedAt || post._createdAt)}</p>
+              <p className="text-black">
+                {visibleDate?.formatted || "Date not available"}
+              </p>
               <p className="font-medium hover:underline text-[#ddbc69]">Explore More →</p>
             </div>
           </div>

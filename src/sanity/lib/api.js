@@ -39,7 +39,7 @@ export async function getSub() {
 export async function getblogs() {
   const query = `*[_type == "post" && "Blog" in categories[]->title && site == $site]
     | order(coalesce(publishedAt, _createdAt) desc) {
-      _id, title, slug, mainImage { ..., alt }, publishedAt, _createdAt, body,
+      _id, title, slug, mainImage { ..., alt }, publishedAt, createdAt, _createdAt, body,
       author->{name, image},
       categories[]->{title}
     }`;

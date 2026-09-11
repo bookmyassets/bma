@@ -15,7 +15,7 @@ import { blogPostSchema, breadcrumbSchema } from "@/lib/schema";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed";
-import { resolveBlogDates } from "@/lib/blogDates";
+import { resolveBlogDates, getVisibleBlogDate } from "@/lib/blogDates";
 import TableOfContents from "./TableOfContents";
 
 const URLFormatter = (text) => {
@@ -103,22 +103,6 @@ const getPlainText = (value) => {
 const getReadingTime = (body) => {
   const words = getPlainText(body).trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 200));
-};
-
-const getDateInfo = (value) => {
-  if (!value) return null;
-
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return null;
-
-  return {
-    formatted: date.toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }),
-    dateTime: date.toISOString().split("T")[0],
-  };
 };
 
 // Right Sidebar Component
@@ -557,17 +541,8 @@ export default async function Post({ params }) {
     };
 
     const articleDates = resolveBlogDates(post);
-    const publicationTime = new Date(
-      articleDates.originalPublicationDate,
-    ).getTime();
-    const modificationTime = new Date(articleDates.modificationDate).getTime();
-    const wasModified = modificationTime > publicationTime;
-    const visibleDate = getDateInfo(
-      wasModified
-        ? articleDates.modificationDate
-        : articleDates.originalPublicationDate,
-    );
-    const visibleDateLabel = wasModified ? "Updated On" : "Published On";
+    const visibleDate = getVisibleBlogDate(post);
+    const visibleDateLabel = visibleDate?.label || "Published On";
     const readingTime = getReadingTime(post.body);
 
     return (

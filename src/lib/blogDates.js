@@ -7,8 +7,8 @@ function toValidDate(value) {
 
 export function resolveBlogDates(post = {}) {
   const originalPublication =
-    toValidDate(post.createdAt) ||
     toValidDate(post.publishedAt) ||
+    toValidDate(post.createdAt) ||
     toValidDate(post._createdAt);
 
   if (!originalPublication) {
@@ -18,15 +18,33 @@ export function resolveBlogDates(post = {}) {
     };
   }
 
-  const editorialModification = toValidDate(post.publishedAt);
-  const systemModification = toValidDate(post._updatedAt);
-  const modification =
-    (editorialModification > originalPublication && editorialModification) ||
-    (systemModification > originalPublication && systemModification) ||
-    originalPublication;
-
   return {
     originalPublicationDate: originalPublication.toISOString(),
-    modificationDate: modification.toISOString(),
+    // _updatedAt is Sanity's document-operation timestamp. It can change
+    // during bulk imports/migrations, so it is not used as the public blog
+    // update date.
+    modificationDate: originalPublication.toISOString(),
+  };
+}
+
+export function getVisibleBlogDate(post = {}) {
+  const dates = resolveBlogDates(post);
+
+  if (!dates.originalPublicationDate) return null;
+
+  const wasModified = false;
+  const visibleValue = dates.originalPublicationDate;
+  const date = new Date(visibleValue);
+
+  return {
+    ...dates,
+    wasModified,
+    label: wasModified ? "Updated On" : "Published On",
+    formatted: date.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+    dateTime: date.toISOString().split("T")[0],
   };
 }
