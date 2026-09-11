@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
+import { trackEvent } from "../utils/tracking";
 
 export default function Ribbon() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ export default function Ribbon() {
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  
+
   const recaptchaRef = useRef(null);
   const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -45,15 +46,15 @@ export default function Ribbon() {
         setRecaptchaLoaded(true);
       }
     };
-    
+
     loadRecaptcha();
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
 
@@ -62,9 +63,9 @@ export default function Ribbon() {
         handleClose();
       }
     };
-    
+
     document.addEventListener("keydown", handleEscapeKey);
-    
+
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     };
@@ -88,7 +89,7 @@ export default function Ribbon() {
       setErrorMessage("Please fill in all fields");
       return false;
     }
-    
+
     if (!/^\d{10,15}$/.test(formData.phone)) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
@@ -96,47 +97,50 @@ export default function Ribbon() {
 
     const now = Date.now();
     const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
-    
+
     if (hoursPassed >= 24) {
       setSubmissionCount(0);
       localStorage.setItem("formSubmissionCount", "0");
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       return false;
     }
-    
+
     return true;
   };
 
   const onRecaptchaSuccess = async (token) => {
     try {
       const now = Date.now();
-      const response = await fetch(
-         "/api/submit-form",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            source: "BookMyAssets Google Ads",
           },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              source: "BookMyAssets Google Ads",
-            },
-            tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
-            recaptchaToken: token,
-          }),
-        }
-      );
+          tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
+          recaptchaToken: token,
+        }),
+      });
 
       if (response.ok) {
+        trackEvent("dscp_ribbon_form_submit", {
+          form_name: "ribbon_lead_form",
+          form_location: "ribbon_section",
+          lead_type: "callback_request",
+        });
+        
         setFormData({ fullName: "", phone: "" });
         setShowPopup(true);
-        
+
         setSubmissionCount((prev) => {
           const newCount = prev + 1;
           localStorage.setItem("formSubmissionCount", newCount.toString());
@@ -150,7 +154,7 @@ export default function Ribbon() {
         });
 
         setShowThankYou(true);
-        
+
         setTimeout(() => {
           setShowThankYou(false);
           handleClose();
@@ -163,7 +167,7 @@ export default function Ribbon() {
     } catch (error) {
       console.error("Form submission error:", error);
       setErrorMessage(
-        error.message || "Error submitting form. Please try again."
+        error.message || "Error submitting form. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -171,6 +175,16 @@ export default function Ribbon() {
         window.grecaptcha.reset(recaptchaWidgetId.current);
       }
     }
+  };
+
+  const handleRibbonCallBackClick = (e) => {
+    trackEvent("dscp_ribbon_get_call_back_click", {
+      cta_name: "get_a_call_back",
+      cta_location: "ribbon_form",
+      form_name: "ribbon_lead_form",
+    });
+
+    handleSubmit(e);
   };
 
   const handleSubmit = async (e) => {
@@ -186,11 +200,14 @@ export default function Ribbon() {
     if (window.grecaptcha && recaptchaLoaded) {
       try {
         if (recaptchaWidgetId.current === null && recaptchaRef.current) {
-          recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "dark",
-          });
+          recaptchaWidgetId.current = window.grecaptcha.render(
+            recaptchaRef.current,
+            {
+              sitekey: siteKey,
+              callback: onRecaptchaSuccess,
+              theme: "dark",
+            },
+          );
         } else if (recaptchaWidgetId.current !== null) {
           window.grecaptcha.reset(recaptchaWidgetId.current);
           window.grecaptcha.execute(recaptchaWidgetId.current);
@@ -210,9 +227,9 @@ export default function Ribbon() {
     <>
       <div className="border-y-4 border-[#ddbc69] bg-black py-3 sm:py-4">
         <div className="flex items-center justify-center px-4 pb-3 text-center text-lg font-semibold leading-tight text-[#ddbc69] sm:text-xl md:text-2xl">
-         Govt Approved Plots Starting from ₹8 Lakh
+          Govt Approved Plots Starting from ₹8 Lakh
         </div>
-        
+
         <div className="mx-auto max-w-3xl space-y-3 px-4">
           <div className="grid gap-2 md:grid-cols-2">
             <motion.div
@@ -244,7 +261,7 @@ export default function Ribbon() {
                 className="h-11 w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-3 text-sm text-black transition-colors hover:border-[#ddbc69] focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
               />
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -298,7 +315,7 @@ export default function Ribbon() {
               whileTap={{ scale: 0.98 }}
               type="button"
               id="ribbion-form"
-              onClick={handleSubmit}
+              onClick={handleRibbonCallBackClick}
               disabled={isLoading}
               className="min-h-11 w-auto rounded-lg bg-[#ddbc69] px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-[#ddbc69]/20 disabled:cursor-not-allowed disabled:opacity-70 sm:text-base"
             >
@@ -314,8 +331,12 @@ export default function Ribbon() {
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
           >
             <div className="rounded-lg bg-white p-5 text-center shadow-xl sm:p-6">
-              <h3 className="mb-1 text-xl font-bold text-green-600">Thank You!</h3>
-              <p className="text-sm text-gray-700">Your submission was successful.</p>
+              <h3 className="mb-1 text-xl font-bold text-green-600">
+                Thank You!
+              </h3>
+              <p className="text-sm text-gray-700">
+                Your submission was successful.
+              </p>
             </div>
           </motion.div>
         )}
