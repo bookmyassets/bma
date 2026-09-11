@@ -4,7 +4,8 @@ import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-with-background.svg";
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation";
+import { trackEvent } from "../utils/tracking";
 
 function getLeadSource() {
   if (typeof window === "undefined") return "BookMyAssets Google Ads";
@@ -42,6 +43,14 @@ function getLeadSource() {
     : "BookMyAssets Google Ads";
 }
 
+const handleCallBackClick = () => {
+  trackEvent("dscp_get_call_back_click", {
+    cta_name: "get_a_call_back",
+    cta_location: "get_in_touch_popup",
+    form_name: "get_in_touch",
+  });
+};
+
 export default function GetinTouch({
   onClose,
   title,
@@ -68,7 +77,7 @@ export default function GetinTouch({
 
   // Handle close function
   const handleClose = () => {
-    if (onClose && typeof onClose === 'function') {
+    if (onClose && typeof onClose === "function") {
       onClose();
     }
   };
@@ -101,24 +110,24 @@ export default function GetinTouch({
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
 
     // Handle Escape key press
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         handleClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
 
@@ -148,7 +157,7 @@ export default function GetinTouch({
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       return false;
     }
@@ -156,14 +165,11 @@ export default function GetinTouch({
     return true;
   };
 
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const now = Date.now();
 
-const onRecaptchaSuccess = async (token) => {
-  try {
-    const now = Date.now();
-
-    const response = await fetch(
-      "/api/submit-form",
-      {
+      const response = await fetch("/api/submit-form", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -177,51 +183,70 @@ const onRecaptchaSuccess = async (token) => {
           tags: ["Dholera Investment", "Website Lead", "BookMyAssets"],
           recaptchaToken: token,
         }),
+      });
+
+      if (response.ok) {
+        // ================================
+        // NEW GTM / GA4 SUCCESS EVENT
+        // ================================
+        trackEvent("dscp_get_in_touch_form_submit", {
+          form_name: "get_in_touch",
+          form_location: "navbar_popup",
+          lead_type: "callback_request",
+        });
+
+        setFormData({
+          fullName: "",
+          phone: "",
+        });
+
+        setShowPopup(true);
+
+        setSubmissionCount((prev) => {
+          const newCount = prev + 1;
+
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+
+          localStorage.setItem("lastSubmissionTime", now.toString());
+
+          return newCount;
+        });
+
+        // ================================
+        // EXISTING / OLD TRACKING
+        // ================================
+        window.dataLayer = window.dataLayer || [];
+
+        window.dataLayer.push({
+          event: "lead_form_hero",
+        });
+
+        // Show thank-you state
+        setShowThankYou(true);
+
+        setTimeout(() => {
+          setShowThankYou(false);
+          handleClose();
+
+          router.push("/dholera-smart-city-plots/thankyou");
+        }, 2000);
+      } else {
+        throw new Error("Error submitting form");
       }
-    );
+    } catch (error) {
+      console.error("Form submission error:", error);
 
-    if (response.ok) {
-      setFormData({ fullName: "", phone: "" });
-      setShowPopup(true);
-      setSubmissionCount((prev) => {
-        const newCount = prev + 1;
-        localStorage.setItem("formSubmissionCount", newCount.toString());
-        localStorage.setItem("lastSubmissionTime", now.toString());
-        return newCount;
-      });
+      setErrorMessage(
+        error.message || "Error submitting form. Please try again.",
+      );
+    } finally {
+      setIsLoading(false);
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "lead_form_hero",
-      });
-
-      // Show thank you popup for 2 seconds
-      setShowThankYou(true);
-      setTimeout(() => {
-        setShowThankYou(false);
-        handleClose();
-
-        // Get current pathname for return URL
-        const currentPath = pathname || window.location.pathname;
-        
-        // Push to thank-you route with return URL
-        router.push(`/dholera-smart-city-plots/thankyou`);
-      }, 2000);
-    } else {
-      throw new Error("Error submitting form");
+      if (window.grecaptcha && recaptchaRef.current) {
+        window.grecaptcha.reset(recaptchaRef.current);
+      }
     }
-  } catch (error) {
-    console.error("Form submission error:", error);
-    setErrorMessage(
-      error.message || "Error submitting form. Please try again."
-    );
-  } finally {
-    setIsLoading(false);
-    if (window.grecaptcha && recaptchaRef.current) {
-      window.grecaptcha.reset(recaptchaRef.current);
-    }
-  }
-};
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -491,6 +516,7 @@ const onRecaptchaSuccess = async (token) => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
+                  onClick={handleCallBackClick}
                   disabled={isLoading || !recaptchaLoaded}
                   id="get-in-touch-Navbar"
                   className="w-full py-3 px-6 bg-gradient-to-r from-[#ddbc69] to-[#ddbc69] text-black rounded-lg hover:from-[#ddbc69] hover:to-[#ddbc69] transition-all shadow-lg hover:shadow-[#ddbc69]/20 font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
