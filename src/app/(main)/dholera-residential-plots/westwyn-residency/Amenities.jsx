@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -398,6 +398,63 @@ const MobileAmenityAccordion = ({
 const ProjectAmenities = () => {
   const carouselRef = useRef(null);
 
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return undefined;
+
+    const desktopQuery = window.matchMedia(
+      "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
+    );
+    let autoplayId;
+
+    const stopAutoplay = () => {
+      if (autoplayId) {
+        window.clearInterval(autoplayId);
+        autoplayId = undefined;
+      }
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (!desktopQuery.matches) return;
+
+      autoplayId = window.setInterval(() => {
+        const firstCard = carousel.firstElementChild;
+        if (!firstCard) return;
+
+        const cardGap = 20;
+        const cardWidth = firstCard.getBoundingClientRect().width + cardGap;
+        const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+        const isAtEnd = carousel.scrollLeft >= maxScrollLeft - cardWidth;
+
+        carousel.scrollTo({
+          left: isAtEnd ? 0 : carousel.scrollLeft + cardWidth,
+          behavior: "smooth",
+        });
+      }, 3500);
+    };
+
+    const handleViewportChange = () => {
+      startAutoplay();
+    };
+
+    startAutoplay();
+    desktopQuery.addEventListener("change", handleViewportChange);
+    carousel.addEventListener("mouseenter", stopAutoplay);
+    carousel.addEventListener("mouseleave", startAutoplay);
+    carousel.addEventListener("focusin", stopAutoplay);
+    carousel.addEventListener("focusout", startAutoplay);
+
+    return () => {
+      stopAutoplay();
+      desktopQuery.removeEventListener("change", handleViewportChange);
+      carousel.removeEventListener("mouseenter", stopAutoplay);
+      carousel.removeEventListener("mouseleave", startAutoplay);
+      carousel.removeEventListener("focusin", stopAutoplay);
+      carousel.removeEventListener("focusout", startAutoplay);
+    };
+  }, []);
+
   const scrollCarousel = (direction) => {
     if (!carouselRef.current) return;
 
@@ -499,6 +556,8 @@ const ProjectAmenities = () => {
             justify-end
 
             sm:mt-5
+
+            lg:hidden
           "
         >
           <div className="flex items-center gap-2">
