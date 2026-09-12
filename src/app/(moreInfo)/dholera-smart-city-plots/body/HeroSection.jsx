@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { getImageProps } from "next/image";
-import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   CheckCircle2,
@@ -12,7 +11,7 @@ import {
   UserRound,
 } from "lucide-react";
 import logo from "@/assests/ad-page/dholera-govt-logo.webp";
-import bannerImage from "@/assests/ad-page/hero/dholera-smart-city-plots.webp";
+import bannerImage from "@/assests/ad-page/hero/dholera-smart-city-plots-desktop.webp";
 import mobileBannerImage from "@/assests/ad-page/hero/dholera-smart-city-plots-mobile.webp";
 import { trackEvent } from "../utils/tracking";
 
@@ -43,8 +42,6 @@ const {
 });
 
 export default function HeroSection() {
-  const router = useRouter();
-
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -205,10 +202,6 @@ export default function HeroSection() {
       });
 
       setIsSubmitted(true);
-
-      window.setTimeout(() => {
-        router.push("/thankyou");
-      }, 1800);
     } catch (error) {
       console.error("Form submission error:", error);
 
@@ -246,10 +239,10 @@ export default function HeroSection() {
         sm:h-auto
         sm:min-h-[840px]
 
-        lg:aspect-video
-        lg:h-auto
+        lg:aspect-auto
+        lg:h-[min(56.25vw,calc(100svh-5rem))]
         lg:min-h-0
-        lg:max-h-none
+        lg:max-h-[1000px]
         lg:items-center
       "
       >
@@ -269,7 +262,7 @@ export default function HeroSection() {
               object-contain
               object-top
 
-              lg:object-fill
+              lg:object-cover
               lg:object-center
             "
             />
