@@ -117,14 +117,11 @@ export default function DocumentVault({
 
       <section
         id={sectionId}
-        className="w-full bg-black px-4 py-8 text-white sm:px-6 sm:py-10 lg:px-8 lg:py-12"
+        className="w-full bg-black px-4 pt-8 pb-8 text-white sm:px-6 sm:pt-10 sm:pb-10 lg:px-8 lg:pt-12 lg:pb-12"
       >
       <div className="mx-auto w-full max-w-[1400px]">
         <div className="mb-6 sm:mb-7 lg:mb-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white sm:text-sm">
-            {projectName}
-          </p>
-          <h2 className="document-vault-heading mt-2 font-playfair-display text-[38px] font-medium leading-[1.08] tracking-[-0.025em] text-[#ddbc69] lg:text-[56px]">
+          <h2 className="document-vault-heading mt-2 font-playfair-display text-[38px] font-semibold leading-[0.98] tracking-[-0.04em] text-[#ddbc69] sm:text-[42px] lg:text-[56px]">
             Legal Document Verification
           </h2>
         </div>

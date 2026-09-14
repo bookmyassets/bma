@@ -484,7 +484,7 @@ const ProjectAmenities = () => {
         sm:py-6
 
         lg:px-6
-        lg:py-7
+        lg:py-9
       "
     >
       {/* Subtle background glow */}
@@ -540,7 +540,7 @@ const ProjectAmenities = () => {
               xl:text-[2.3rem]
             "
           >
-            Thoughtful Amenities for a Better Everyday
+            Practical Amenities Designed for Better Living
           </h2>
         </div>
 

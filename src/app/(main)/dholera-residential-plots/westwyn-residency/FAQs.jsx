@@ -67,12 +67,12 @@ export default function FAQSection() {
             <div>
 
               {/* Heading */}
-              <h2 className="max-w-md font-playfair-display text-[38px] tracking-[-0.025em] text-white lg:text-[56px]">
+              <h2 className="max-w-md font-playfair-display text-[38px] font-semibold leading-[0.98] tracking-[-0.04em] text-white sm:text-[42px] lg:text-[56px]">
                 Have More Questions?
               </h2>
 
               {/* Short supporting text */}
-              <p className="mt-2 max-w-sm font-inter text-[16px] leading-[1.5] text-[#DDCB69] lg:text-[18px]">
+              <p className="mt-10 max-w-sm font-inter text-[16px] leading-[1.5] text-[#DDCB69] lg:text-[18px]">
                 Our relationship managers are here to help you.
               </p>
             </div>

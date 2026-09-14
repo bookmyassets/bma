@@ -707,6 +707,7 @@ export default function InlineLeadForm({
                 type="submit"
                 disabled={isLoading || isDisabled || !recaptchaLoaded}
                 className={`
+                  gold-cta-button
                   group
 
                   flex
@@ -748,7 +749,7 @@ export default function InlineLeadForm({
 
                         bg-[linear-gradient(90deg,#D0AD62,#E3C578)]
 
-                        text-[#202020]
+                        text-black
 
                         shadow-[0_10px_25px_rgba(184,146,79,0.18)]
 

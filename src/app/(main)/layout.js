@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter, Lato, Playfair_Display } from "next/font/google";
+import { Inter, Lato, Montserrat, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 
 import Footer from "./components/Footer";
@@ -29,6 +29,13 @@ const playfairDisplay = Playfair_Display({
   display: "swap",
   variable: "--font-playfair-display",
   weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const GTM_ID = "GTM-5CXXQ9DJ";
@@ -130,7 +137,7 @@ y.parentNode.insertBefore(t,y);
         />
       </head>
 
-      <body className={`${lato.className} ${inter.variable} ${playfairDisplay.variable}`}>
+      <body className={`${lato.className} ${inter.variable} ${playfairDisplay.variable} ${montserrat.variable}`} >
 
         <noscript>
           <iframe

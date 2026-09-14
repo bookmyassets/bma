@@ -44,14 +44,6 @@ const availablePlotSizes = [
 ];
 
 function PlotAvailabilitySection() {
-  const soldPercentage = 20;
-  const progressRadius = 42;
-  const progressCircumference = 2 * Math.PI * progressRadius;
-
-  const progressOffset =
-    progressCircumference -
-    (progressCircumference * soldPercentage) / 100;
-
   return (
     <section
       aria-labelledby="plot-availability-title"
@@ -152,20 +144,19 @@ function PlotAvailabilitySection() {
             grid-cols-3
             gap-1.5
 
-            sm:mt-4
+            sm:mt-6
             sm:gap-3
 
             md:gap-3
 
-            lg:mt-4
+            lg:mt-9
             lg:gap-4
           "
         >
-          {availablePlotSizes.map(
-            ({ size, description, Icon, popular }) => (
-              <div
-                key={size}
-                className={`
+          {availablePlotSizes.map(({ size, description, Icon, popular }) => (
+            <div
+              key={size}
+              className={`
                   group
                   relative
                   overflow-visible
@@ -197,20 +188,16 @@ function PlotAvailabilitySection() {
 
                   lg:p-2.5
 
-                  ${
-                    popular
-                      ? "pt-4 sm:pt-4 md:pt-4 lg:pt-4"
-                      : ""
-                  }
+                  ${popular ? "pt-4 sm:pt-4 md:pt-4 lg:pt-4" : ""}
                 `}
-              >
-                {/* =================================================
+            >
+              {/* =================================================
                     POPULAR TAG
                 ================================================== */}
 
-                {popular && (
-                  <div
-                    className="
+              {popular && (
+                <div
+                  className="
                       absolute
                       left-1/2
                       top-0
@@ -221,9 +208,9 @@ function PlotAvailabilitySection() {
 
                       whitespace-nowrap
                     "
-                  >
-                    <div
-                      className="
+                >
+                  <div
+                    className="
                         relative
                         flex
                         items-center
@@ -247,11 +234,11 @@ function PlotAvailabilitySection() {
 
                         sm:px-3
                       "
-                    >
-                      {/* top highlight */}
-                      <span
-                        aria-hidden="true"
-                        className="
+                  >
+                    {/* top highlight */}
+                    <span
+                      aria-hidden="true"
+                      className="
                           pointer-events-none
                           absolute
                           inset-x-3
@@ -263,11 +250,11 @@ function PlotAvailabilitySection() {
                           via-[#F0D47F]/70
                           to-transparent
                         "
-                      />
+                    />
 
-                      {/* indicator */}
-                      <span
-                        className="
+                    {/* indicator */}
+                    <span
+                      className="
                           relative
                           flex
                           size-1.5
@@ -275,29 +262,29 @@ function PlotAvailabilitySection() {
                           items-center
                           justify-center
                         "
-                      >
-                        <span
-                          className="
+                    >
+                      <span
+                        className="
                             absolute
                             size-2.5
                             rounded-full
                             bg-[#D9B967]/15
                           "
-                        />
+                      />
 
-                        <span
-                          className="
+                      <span
+                        className="
                             relative
                             size-1.5
                             rounded-full
                             bg-[#E4C470]
                             shadow-[0_0_7px_rgba(228,196,112,0.75)]
                           "
-                        />
-                      </span>
+                      />
+                    </span>
 
-                      <span
-                        className="
+                    <span
+                      className="
                           bg-gradient-to-r
                           from-[#F0D47F]
                           via-[#E4C470]
@@ -312,17 +299,17 @@ function PlotAvailabilitySection() {
 
                           text-transparent
                         "
-                      >
-                        Popular
-                      </span>
-                    </div>
+                    >
+                      Popular
+                    </span>
                   </div>
-                )}
+                </div>
+              )}
 
-                {/* Subtle card glow */}
-                <div
-                  aria-hidden="true"
-                  className="
+              {/* Subtle card glow */}
+              <div
+                aria-hidden="true"
+                className="
                     pointer-events-none
                     absolute
                     -right-10
@@ -337,13 +324,13 @@ function PlotAvailabilitySection() {
 
                     md:block
                   "
-                />
+              />
 
-                {/* ================= MOBILE ================= */}
+              {/* ================= MOBILE ================= */}
 
-                <div className="flex flex-col items-center justify-center md:hidden">
-                  <p
-                    className="
+              <div className="flex flex-col items-center justify-center md:hidden">
+                <p
+                  className="
                       font-sans
                       text-[1.3rem]
                       font-bold
@@ -353,28 +340,28 @@ function PlotAvailabilitySection() {
 
                       sm:text-[1.45rem]
                     "
-                  >
-                    {size}
-                  </p>
+                >
+                  {size}
+                </p>
 
-                  <p
-                    className="
+                <p
+                  className="
                       mt-1
                       text-[15px]
                       font-medium
                       text-white
                     "
-                  >
-                    Sq. Yd.
-                  </p>
-                </div>
+                >
+                  Sq. Yd.
+                </p>
+              </div>
 
-                {/* ================= TABLET / DESKTOP ================= */}
+              {/* ================= TABLET / DESKTOP ================= */}
 
-                <div className="hidden md:block">
-                  {/* Size Header */}
-                  <div
-                    className="
+              <div className="hidden md:block">
+                {/* Size Header */}
+                <div
+                  className="
                       relative
                       flex
                       flex-col
@@ -382,10 +369,10 @@ function PlotAvailabilitySection() {
                       justify-center
                       gap-1.5
                     "
-                  >
-                    {/* Icon */}
-                    <div
-                      className="
+                >
+                  {/* Icon */}
+                  <div
+                    className="
                         flex
                         size-10
                         shrink-0
@@ -401,22 +388,22 @@ function PlotAvailabilitySection() {
 
                         lg:size-11
                       "
-                    >
-                      <Ruler
-                        strokeWidth={1.6}
-                        className="
+                  >
+                    <Ruler
+                      strokeWidth={1.6}
+                      className="
                           size-[18px]
                           text-[#D7B66E]
 
                           lg:size-5
                         "
-                      />
-                    </div>
+                    />
+                  </div>
 
-                    {/* Number */}
-                    <div className="text-center">
-                      <p
-                        className="
+                  {/* Number */}
+                  <div className="text-center">
+                    <p
+                      className="
                           font-sans
                           text-[1.6rem]
                           font-bold
@@ -426,12 +413,12 @@ function PlotAvailabilitySection() {
 
                           lg:text-[1.75rem]
                         "
-                      >
-                        {size}
-                      </p>
+                    >
+                      {size}
+                    </p>
 
-                      <p
-                        className="
+                    <p
+                      className="
                           mt-1
                           font-sans
                           text-[11px]
@@ -440,18 +427,18 @@ function PlotAvailabilitySection() {
 
                           lg:text-xs
                         "
-                      >
-                        Sq. Yd.
-                      </p>
-                    </div>
+                    >
+                      Sq. Yd.
+                    </p>
                   </div>
+                </div>
 
-                  {/* Separator */}
-                  <div className="my-2.5 h-px w-full bg-[#4C463C]" />
+                {/* Separator */}
+                <div className="my-2.5 h-px w-full bg-[#4C463C]" />
 
-                  {/* Description */}
-                  <div
-                    className="
+                {/* Description */}
+                <div
+                  className="
                       relative
                       flex
                       items-start
@@ -459,19 +446,19 @@ function PlotAvailabilitySection() {
                       gap-2.5
                       text-left
                     "
-                  >
-                    <Icon
-                      strokeWidth={1.6}
-                      className="
+                >
+                  <Icon
+                    strokeWidth={1.6}
+                    className="
                         mt-0.5
                         size-4
                         shrink-0
                         text-[#C9A65D]
                       "
-                    />
+                  />
 
-                    <p
-                      className="
+                  <p
+                    className="
                         max-w-[260px]
 
                         text-[15px]
@@ -481,14 +468,13 @@ function PlotAvailabilitySection() {
 
                         lg:text-[15px]
                       "
-                    >
-                      {description}
-                    </p>
-                  </div>
+                  >
+                    {description}
+                  </p>
                 </div>
               </div>
-            ),
-          )}
+            </div>
+          ))}
         </div>
 
         {/* Mobile note */}
@@ -506,318 +492,76 @@ function PlotAvailabilitySection() {
         >
           Plot sizes are subject to current availability.
         </p>
+      </div>
 
-        {/* =====================================================
-            PROJECT AVAILABILITY
-        ====================================================== */}
+      {/* =====================================================
+    CHECK AVAILABILITY
+====================================================== */}
 
-        <div
+      <div className="mt-3">
+        <Link
+          href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20check%20the%20current%20availability%20of%20plots%20in%20WestWyn%20Residency."
+          target="_blank"
+          rel="noopener noreferrer"
           className="
-            mx-auto
-            mt-3
-            overflow-hidden
+      group
 
-            rounded-xl
+      mx-auto
+      flex
+      min-h-[40px]
+      w-full
+      items-center
+      justify-center
+      gap-2
 
-            border
-            border-[#C9A65D]/50
+      rounded-lg
 
-            bg-[linear-gradient(
-              120deg,
-              rgba(0,0,0,0.12),
-              rgba(201,166,93,0.03),
-              rgba(0,0,0,0.08)
-            )]
+      border
+      border-[#C9A65D]
 
-            p-2.5
+      bg-[linear-gradient(90deg,#C9A65D,#E0BE72)]
 
-            shadow-[0_14px_40px_rgba(0,0,0,0.12)]
+      px-3
+      py-1
 
-            sm:mt-3
-            sm:p-3
+      text-[15px]
+      font-semibold
+      text-[#24231F]
 
-            lg:mt-4
-            lg:max-w-[900px]
-            lg:px-4
-            lg:py-3
+      shadow-[0_10px_26px_rgba(201,166,93,0.15)]
 
-            xl:max-w-[900px]
-          "
+      transition-all
+      duration-300
+
+      hover:-translate-y-0.5
+      hover:shadow-[0_14px_32px_rgba(201,166,93,0.22)]
+
+      sm:min-h-[40px]
+      sm:text-md
+
+      lg:min-h-[46px]
+      lg:max-w-[400px]
+    "
         >
-          <div
+          <FaWhatsapp
+            aria-hidden="true"
             className="
-              grid
-              w-full
-              gap-3
+        size-[25px]
+        shrink-0
 
-              lg:grid-cols-[180px_minmax(360px,440px)]
-              lg:items-center
-              lg:justify-center
-              lg:gap-8
+        text-green-700
 
-              xl:grid-cols-[190px_minmax(380px,460px)]
-              xl:gap-10
-            "
-          >
-            {/* =================================================
-                AVAILABILITY DATA
-            ================================================== */}
+        transition-transform
+        duration-300
 
-            <div
-              className="
-                text-center
+        group-hover:scale-105
 
-                lg:flex
-                lg:flex-col
-                lg:items-center
-                lg:justify-center
-              "
-            >
-              <p
-                className="
-                  text-[11px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.22em]
-                  text-[#C9A65D]
+        sm:size-[25px]
+      "
+          />
 
-                  sm:text-xs
-
-                  lg:text-sm
-                "
-              >
-                Availability Status
-              </p>
-
-              {/* Circular progress */}
-              <div
-                className="
-                  mt-1.5
-                  flex
-                  items-center
-                  justify-center
-                "
-              >
-                <div
-                  role="progressbar"
-                  aria-label={`${soldPercentage} percent of plots sold`}
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  aria-valuenow={soldPercentage}
-                  className="
-                    relative
-                    size-[96px]
-
-                    sm:size-[102px]
-
-                    lg:size-[100px]
-                  "
-                >
-                  <svg
-                    viewBox="0 0 100 100"
-                    className="size-full -rotate-90"
-                    aria-hidden="true"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="availability-progress-gradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop
-                          offset="0%"
-                          stopColor="#C9A65D"
-                        />
-
-                        <stop
-                          offset="100%"
-                          stopColor="#F0CB70"
-                        />
-                      </linearGradient>
-                    </defs>
-
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r={progressRadius}
-                      fill="none"
-                      stroke="#6A665F"
-                      strokeOpacity="0.45"
-                      strokeWidth="7"
-                    />
-
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r={progressRadius}
-                      fill="none"
-                      stroke="url(#availability-progress-gradient)"
-                      strokeLinecap="round"
-                      strokeWidth="7"
-                      strokeDasharray={progressCircumference}
-                      strokeDashoffset={progressOffset}
-                      className="
-                        transition-[stroke-dashoffset]
-                        duration-700
-                        ease-out
-                      "
-                    />
-                  </svg>
-
-                  {/* Centered percentage */}
-                  <div
-                    className="
-                      pointer-events-none
-                      absolute
-                      left-1/2
-                      top-1/2
-
-                      -translate-x-1/2
-                      -translate-y-1/2
-
-                      text-center
-                    "
-                  >
-                    <span
-                      className="
-                        block
-                        whitespace-nowrap
-
-                        font-sans
-                        text-[1.5rem]
-                        font-bold
-                        leading-none
-                        tracking-tight
-                        text-[#D5B468]
-
-                        sm:text-[1.65rem]
-                      "
-                    >
-                      {soldPercentage}%
-                    </span>
-
-                    <span
-                      className="
-                        mt-1
-                        block
-
-                        font-sans
-                        text-[8px]
-                        font-semibold
-                        uppercase
-                        leading-none
-                        tracking-[0.18em]
-                        text-[#F4EFE6]
-
-                        sm:text-[9px]
-                      "
-                    >
-                      Sold
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* =================================================
-                WHATSAPP CTA
-            ================================================== */}
-
-            <div
-              className="
-                flex
-                items-center
-                justify-center
-
-                border-t
-                border-[#4C463C]
-
-                pt-3
-
-                lg:min-h-[115px]
-                lg:border-l
-                lg:border-t-0
-                lg:pl-4
-                lg:pr-0
-                lg:pt-0
-              "
-            >
-              <div
-                className="
-                  w-full
-
-                  lg:max-w-[520px]
-                "
-              >
-                <Link
-                  href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20check%20the%20current%20availability%20of%20plots%20in%20WestWyn%20Residency."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    group
-
-                    mx-auto
-                    flex
-                    min-h-[40px]
-                    w-full
-                    items-center
-                    justify-center
-                    gap-2
-
-                    rounded-lg
-
-                    border
-                    border-[#C9A65D]
-
-                    bg-[linear-gradient(90deg,#C9A65D,#E0BE72)]
-
-                    px-3
-                    py-1
-
-                    text-[15px]
-                    font-semibold
-                    text-[#24231F]
-
-                    shadow-[0_10px_26px_rgba(201,166,93,0.15)]
-
-                    transition-all
-                    duration-300
-
-                    hover:-translate-y-0.5
-                    hover:shadow-[0_14px_32px_rgba(201,166,93,0.22)]
-
-                    sm:min-h-[40px]
-                    sm:text-md
-
-                    lg:min-h-[46px]
-                    lg:max-w-[400px]
-                  "
-                >
-                  <FaWhatsapp
-                    aria-hidden="true"
-                    className="
-                      size-[25px]
-                      shrink-0
-
-                      text-green-700
-
-                      transition-transform
-                      duration-300
-
-                      group-hover:scale-105
-
-                      sm:size-[25px]
-                    "
-                  />
-
-                  <span>Check Availability</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+          <span>Check Availability</span>
+        </Link>
       </div>
     </section>
   );
@@ -1106,6 +850,21 @@ export default function WestWynResidencyClient() {
           background-color: #ddbc69 !important;
         }
 
+        .westwyn-residency-dark .gold-cta-button,
+        .westwyn-residency-dark .gold-cta-button svg,
+        .westwyn-residency-dark .gold-cta-button path,
+        .westwyn-residency-dark .gold-cta-button span,
+        .westwyn-residency-dark .gold-cta-button i {
+          color: #000 !important;
+          fill: #000 !important;
+        }
+
+        .westwyn-residency-dark .gold-cta-button {
+          background-color: #ddbc69 !important;
+          border-color: #ddbc69 !important;
+          color: #000 !important;
+        }
+
         .westwyn-residency-dark [class~="text-emerald-600"],
         .westwyn-residency-dark [class~="text-blue-600"],
         .westwyn-residency-dark [class~="text-violet-600"],
@@ -1195,9 +954,13 @@ export default function WestWynResidencyClient() {
         <PlanLayout />
         <WestWynAboutSection />
 
-        <PlotAvailabilitySection />
+        <div className="pt-10 sm:pt-12 lg:pt-14">
+          <PlotAvailabilitySection />
+        </div>
 
-        <ProjectAmenities />
+        <div className="pt-10 sm:pt-10 lg:pt-20">
+          <ProjectAmenities />
+        </div>
 
         <div className="-mt-4 sm:-mt-2">
           <InlineLeadForm

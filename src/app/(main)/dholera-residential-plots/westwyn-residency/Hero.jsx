@@ -413,8 +413,7 @@ export default function Hero() {
       sm:text-xs
       sm:tracking-[0.2em]
 
-      lg:text-sm
-      lg:tracking-[0.22em]
+      lg:text-[18px]
     "
             >
               Registry Ready Plots with Clear Documentation
@@ -454,9 +453,10 @@ export default function Hero() {
             <span
               className="
                 block
+                font-montserrat
+                font-semibold
                 text-[clamp(3rem,14vw,4.5rem)]
                 text-[#DDBC69]
-
                 lg:text-[clamp(4.5rem,5.5vw,6.2rem)]
               "
             >
@@ -473,7 +473,7 @@ export default function Hero() {
                 text-white
                 drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]
                 sm:mt-3
-
+                font-montserrat
                 lg:text-[clamp(1.6rem,2vw,2.25rem)]
               "
             >
@@ -636,13 +636,14 @@ export default function Hero() {
                 <div className="min-w-0">
                   <p
                     className="
-                      text-xs
+                      text-[13px]
                       font-medium
                       leading-4
                       text-white
                       drop-shadow-[0_2px_7px_rgba(0,0,0,0.9)]
 
-                      lg:text-sm
+                      sm:text-[12px]
+                      lg:text-[16px]
                       lg:leading-5
                     "
                   >
@@ -658,7 +659,8 @@ export default function Hero() {
                       text-white
                       drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]
 
-                      lg:text-[15px]
+                      sm:text-[16px]
+                      lg:text-[18px]
                       lg:leading-5
                     "
                   >
@@ -710,7 +712,7 @@ export default function Hero() {
 
                 px-2.5
 
-                text-[13px]
+                text-[15px]
                 font-bold
                 text-[#101010]
 
@@ -727,13 +729,13 @@ export default function Hero() {
                 focus:ring-[#f0d68f]
 
                 sm:min-h-[50px]
-                sm:text-sm
+                sm:text-[16px]
 
                 lg:min-h-[58px]
                 lg:gap-2
                 lg:rounded-xl
                 lg:px-3
-                lg:text-base
+                lg:text-[18px]
               "
             >
               <FaWhatsapp
@@ -775,7 +777,7 @@ export default function Hero() {
 
                 px-2.5
 
-                text-[13px]
+                text-[15px]
                 font-bold
                 text-white
 
@@ -795,13 +797,13 @@ export default function Hero() {
                 focus:ring-[#ddbc69]
 
                 sm:min-h-[50px]
-                sm:text-sm
+                sm:text-[16px]
 
                 lg:min-h-[58px]
                 lg:gap-2
                 lg:rounded-xl
                 lg:px-3
-                lg:text-base
+                lg:text-[18px]
               "
             >
               <FileCheck2
@@ -832,7 +834,7 @@ export default function Hero() {
             className="
               mt-4
               text-center
-              text-[12px]
+              text-[14px]
               font-medium
               leading-5
               text-white
@@ -840,10 +842,10 @@ export default function Hero() {
 
               min-[360px]:text-left
 
-              sm:text-[12px]
+              sm:text-[15px]
 
               lg:mt-3
-              lg:text-[17px]
+              lg:text-[18px]
             "
           >
             Price and plot availability are subject to current inventory.

@@ -137,14 +137,14 @@ const PlanLayout = () => {
         }
       `}</style>
 
-      <section className="relative overflow-hidden bg-[#F7F3EB] py-4 sm:py-6 lg:py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#F7F3EB] pt-16 sm:pt-18 lg:pt-24">
+        <div className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
           {/* =========================
             SECTION HEADER
         ========================== */}
 
-          <div className="mx-auto mb-4 max-w-4xl text-center sm:mb-6">
-            <h2 className="plan-layout-heading font-playfair-display text-[38px] leading-[1.08] tracking-[-0.025em] text-[#ddbc69] lg:text-[56px]">
+          <div className="mx-auto mb-7 max-w-4xl text-center sm:mb-8 lg:mb-9">
+            <h2 className="plan-layout-heading font-playfair-display text-[38px] font-semibold leading-[0.98] tracking-[-0.04em] text-[#ddbc69] sm:text-[42px] lg:text-[56px]">
               Plan Layout
             </h2>
           </div>
@@ -161,7 +161,7 @@ const PlanLayout = () => {
             <div className="p-2.5 sm:p-3 lg:flex lg:flex-col lg:justify-center lg:p-4">
               {/* Tabs */}
 
-              <div className="mb-5 grid grid-cols-3 overflow-hidden rounded-xl bg-[#F7F3EB]">
+              <div className="mb-6 grid grid-cols-3 gap-3 overflow-hidden rounded-xl bg-[#F7F3EB] sm:gap-4">
                 {tabs.map((tab) => {
                   const Icon = tab.icon;
                   const isActive = activeTab === tab.id;
@@ -213,7 +213,7 @@ const PlanLayout = () => {
                       </h3>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
                       {overviewCards.map((card) => {
                         const Icon = card.icon;
 
@@ -294,9 +294,9 @@ const PlanLayout = () => {
                         href="https://maps.app.goo.gl/cokFB3ntW2a66ntD7"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#B8924F] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#a47e40]"
+                        className="gold-cta-button mt-5 inline-flex items-center gap-2 rounded-lg bg-[#ddbc69] px-4 py-2.5 text-sm font-medium text-black transition-colors hover:bg-[#d1b15a]"
                       >
-                        <FaMapLocation />
+                        <FaMapLocation className="text-black" />
                         View Project Location
                       </Link>
                     </div>
@@ -376,9 +376,9 @@ const PlanLayout = () => {
                 <button
                   type="button"
                   onClick={openBrochureForm}
-                  className="flex items-center justify-center gap-2 rounded-lg bg-[#B8924F] px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-[#a47e40]"
+                  className="gold-cta-button flex items-center justify-center gap-2 rounded-lg bg-[#ddbc69] px-4 py-3 text-sm font-medium text-black transition-colors hover:bg-[#d1b15a]"
                 >
-                  <FaDownload />
+                  <FaDownload className="text-black" />
                   Download Plan Layout
                 </button>
 

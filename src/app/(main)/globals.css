@@ -25,6 +25,10 @@
     font-style: normal;
   }
 
+  .font-montserrat {
+    font-family: var(--font-montserrat), sans-serif;
+  }
+
   .font-inter {
     font-family: var(--font-inter), sans-serif;
   }

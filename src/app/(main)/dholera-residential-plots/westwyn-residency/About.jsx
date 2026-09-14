@@ -19,8 +19,8 @@ import {
   Plane,
   Route,
   TrainFront,
-  FileDown,
 } from "lucide-react";
+import { FaDownload } from "react-icons/fa6";
 
 import BrochureDownload from "../../components/BrochureDownload";
 
@@ -469,30 +469,16 @@ const WestWynAboutSection = () => {
               className="
                 font-playfair-display
                 text-[38px]
-                font-medium
-                leading-[1.08]
-                tracking-[-0.025em]
+                font-semibold
+                leading-[0.98]
+                tracking-[-0.04em]
                 text-[#202020]
 
+                sm:text-[42px]
                 lg:text-[56px]
               "
             >
-              A Secure Foundation
-              <span
-                className="
-                  mt-0.5
-                  block
-                  text-[#DDBC69]
-                  text-[1.6rem]
-                  leading-[1.2]
-
-                  sm:text-[1.75rem]
-                  lg:text-[2rem]
-                  xl:text-[2.15rem]
-                "
-              >
-                for Your Family’s Future
-              </span>
+              परिवार के लिए एक मजबूत कदम
             </h2>
           </div>
 
@@ -594,15 +580,16 @@ const WestWynAboutSection = () => {
               className="
           font-playfair-display
           text-[38px]
-          font-medium
-          leading-[1.08]
-          tracking-[-0.025em]
+          font-semibold
+          leading-[0.98]
+          tracking-[-0.04em]
           text-[#202020]
 
+          sm:text-[42px]
           lg:text-[56px]
         "
             >
-              Well Connected to Dholera&apos;s
+              Well Positioned for
               <span
                 className="
             mt-0.5
@@ -616,7 +603,7 @@ const WestWynAboutSection = () => {
             xl:text-[2.15rem]
           "
               >
-                Key Growth Corridors
+                Future Habitation
               </span>
             </h2>
           </div>
@@ -800,6 +787,7 @@ const WestWynAboutSection = () => {
                   onClick={() => setIsBrochureFormOpen(true)}
                   className="
               group
+              gold-cta-button
               flex
               min-h-[46px]
               w-full
@@ -810,16 +798,16 @@ const WestWynAboutSection = () => {
               rounded-xl
 
               border
-              border-[#B8924F]
+              border-[#ddbc69]
 
-              bg-[#B8924F]
+              bg-[#ddbc69]
 
               px-4
               py-2.5
 
               text-[13px]
               font-semibold
-              text-white
+              text-black
 
               shadow-[0_8px_22px_rgba(184,146,79,0.18)]
 
@@ -827,27 +815,27 @@ const WestWynAboutSection = () => {
               duration-300
 
               hover:-translate-y-0.5
-              hover:bg-[#9D7839]
+              hover:bg-[#d1b15a]
               hover:shadow-[0_12px_28px_rgba(184,146,79,0.24)]
 
               focus:outline-none
               focus:ring-2
-              focus:ring-[#B8924F]/40
+              focus:ring-[#ddbc69]/40
 
               sm:min-h-[48px]
               sm:text-sm
             "
                 >
-                  <FileDown
+                  <FaDownload
                     className="
-                size-[17px]
+                text-[17px]
+                text-black
                 transition-transform
                 duration-300
                 group-hover:translate-y-0.5
 
-                sm:size-[18px]
+                sm:text-[18px]
               "
-                    strokeWidth={1.8}
                     aria-hidden="true"
                   />
                   Download Brochure
