@@ -98,13 +98,13 @@ const PlanLayout = () => {
       icon: FaUsers,
     },
     {
-      title: "Developer",
+      title: "Development",
       value: (
         <Link
           href="/contact"
           className="hover:text-[#B8924F] transition-colors"
         >
-          BookMyAssets
+          Inhouse
         </Link>
       ),
       icon: FaUser,
