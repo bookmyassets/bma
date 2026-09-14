@@ -78,8 +78,8 @@ const PlanLayout = () => {
       icon: FaRulerCombined,
     },
     {
-      title: "Price",
-      value: "₹6,500 / sq. yard",
+      title: "Plot Price",
+      value: "₹8,000 / sq. yard",
       icon: FaIndianRupeeSign,
     },
     {
