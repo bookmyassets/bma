@@ -467,7 +467,7 @@ const WestWynAboutSection = () => {
           <div className="mx-auto max-w-4xl text-center">
             <h2
               className="
-                font-roboto-serif
+                font-playfair-display
                 text-[38px]
                 font-medium
                 leading-[1.08]
@@ -477,7 +477,7 @@ const WestWynAboutSection = () => {
                 lg:text-[56px]
               "
             >
-              परिवार की सुरक्षा
+              A Secure Foundation
               <span
                 className="
                   mt-0.5
@@ -491,7 +491,7 @@ const WestWynAboutSection = () => {
                   xl:text-[2.15rem]
                 "
               >
-                के लिए एक मज़बूत कदम
+                for Your Family’s Future
               </span>
             </h2>
           </div>
@@ -592,7 +592,7 @@ const WestWynAboutSection = () => {
           <div className="relative mx-auto max-w-4xl text-center">
             <h2
               className="
-          font-roboto-serif
+          font-playfair-display
           text-[38px]
           font-medium
           leading-[1.08]

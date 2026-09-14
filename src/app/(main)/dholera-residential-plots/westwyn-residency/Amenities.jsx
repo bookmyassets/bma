@@ -230,7 +230,7 @@ const DesktopAmenityCard = ({ amenity, isActive, onClick }) => {
         </div>
 
         {/* Title */}
-        <h3 className="mt-5 text-[25px] font-semibold font-serif text-[#F4EFE6]">
+        <h3 className="mt-5 text-[25px] font-semibold font-roboto-serif text-[#F4EFE6]">
           {amenity.title}
         </h3>
 
@@ -526,7 +526,7 @@ const ProjectAmenities = () => {
         <div className="mx-auto max-w-[340px] text-center sm:max-w-3xl">
           <h2
             className="
-              font-serif
+              font-playfair-display
               text-[1.7rem]
               font-medium
               leading-[1.1]

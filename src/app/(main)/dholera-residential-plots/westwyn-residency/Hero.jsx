@@ -443,12 +443,12 @@ export default function Hero() {
             id="westwyn-residency-title"
             className="
               mt-7
-              font-serif
+              font-playfair-display
               uppercase
               leading-[0.9]
               tracking-[0.015em]
               drop-shadow-[0_5px_24px_rgba(0,0,0,0.7)]
-
+              font-semibold
               sm:mt-6
             "
           >

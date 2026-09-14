@@ -144,7 +144,7 @@ const PlanLayout = () => {
         ========================== */}
 
           <div className="mx-auto mb-4 max-w-4xl text-center sm:mb-6">
-            <h2 className="plan-layout-heading font-roboto-serif text-[38px] leading-[1.08] tracking-[-0.025em] text-[#ddbc69] lg:text-[56px]">
+            <h2 className="plan-layout-heading font-playfair-display text-[38px] leading-[1.08] tracking-[-0.025em] text-[#ddbc69] lg:text-[56px]">
               Plan Layout
             </h2>
           </div>

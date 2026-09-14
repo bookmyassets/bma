@@ -67,7 +67,7 @@ export default function FAQSection() {
             <div>
 
               {/* Heading */}
-              <h2 className="max-w-md font-roboto-serif text-[38px] tracking-[-0.025em] text-white lg:text-[56px]">
+              <h2 className="max-w-md font-playfair-display text-[38px] tracking-[-0.025em] text-white lg:text-[56px]">
                 Have More Questions?
               </h2>
 

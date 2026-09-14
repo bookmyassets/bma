@@ -124,7 +124,7 @@ export default function DocumentVault({
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white sm:text-sm">
             {projectName}
           </p>
-          <h2 className="document-vault-heading mt-2 font-roboto-serif text-[38px] font-medium leading-[1.08] tracking-[-0.025em] text-[#ddbc69] lg:text-[56px]">
+          <h2 className="document-vault-heading mt-2 font-playfair-display text-[38px] font-medium leading-[1.08] tracking-[-0.025em] text-[#ddbc69] lg:text-[56px]">
             Legal Document Verification
           </h2>
         </div>

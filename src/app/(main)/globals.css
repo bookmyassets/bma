@@ -19,8 +19,10 @@
     min-height: 100%;
   }
 
-  .font-roboto-serif {
-    font-family: var(--font-roboto-serif), serif;
+  .font-playfair-display {
+    font-family: "Playfair Display", "Georgia", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
   }
 
   .font-inter {

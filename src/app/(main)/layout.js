@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter, Lato, Roboto_Serif } from "next/font/google";
+import { Inter, Lato, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 
 import Footer from "./components/Footer";
@@ -24,10 +24,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const robotoSerif = Roboto_Serif({
+const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-roboto-serif",
+  variable: "--font-playfair-display",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const GTM_ID = "GTM-5CXXQ9DJ";
@@ -129,7 +130,7 @@ y.parentNode.insertBefore(t,y);
         />
       </head>
 
-      <body className={`${lato.className} ${inter.variable} ${robotoSerif.variable}`}>
+      <body className={`${lato.className} ${inter.variable} ${playfairDisplay.variable}`}>
 
         <noscript>
           <iframe

@@ -122,7 +122,7 @@ function PlotAvailabilitySection() {
           <h2
             id="plot-availability-title"
             className="
-              font-serif
+              font-playfair-display
               font-medium
               leading-[1.1]
               tracking-[-0.025em]
