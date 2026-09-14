@@ -1191,10 +1191,13 @@ export default function WestWynResidencyClient() {
       <Hero />
 
       <div className="westwyn-residency-dark">
+        <DocumentVault />
+        <PlanLayout />
         <WestWynAboutSection />
 
         <PlotAvailabilitySection />
-        <PlanLayout />
+
+        <ProjectAmenities />
 
         <div className="-mt-4 sm:-mt-2">
           <InlineLeadForm
@@ -1204,14 +1207,10 @@ export default function WestWynResidencyClient() {
           />
         </div>
 
-        <ProjectAmenities />
-
         <div
           aria-hidden="true"
           className="h-px w-full bg-gradient-to-r from-transparent via-[#ddbc69]/50 to-transparent"
         />
-
-        <DocumentVault />
 
         <div className=" ">
           <OurCommits />

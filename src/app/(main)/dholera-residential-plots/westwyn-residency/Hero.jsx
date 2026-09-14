@@ -1,6 +1,5 @@
-import heroImage from "@/assests/residential/residency/hero-test-1.webp";
-
-import Image from "next/image";
+// import heroImage from "@/assests/residential/residency/hero-test-1.webp";
+// import Image from "next/image";
 import Link from "next/link";
 
 import {
@@ -44,7 +43,7 @@ export default function Hero() {
       className="relative isolate min-h-[740px] overflow-hidden bg-[#071018] text-white sm:min-h-[790px] lg:min-h-[calc(100svh+96px)]"
     >
       {/* Background Image */}
-      <Image
+      {/* <Image
         src={heroImage}
         alt="Entrance gate of WestWyn Residency in Dholera"
         fill
@@ -52,49 +51,317 @@ export default function Hero() {
         quality={85}
         sizes="100vw"
         className="object-cover object-[60%_center] sm:object-[58%_center] lg:object-center"
-      />
+      /> */}
 
       {/* ========================================= */}
-      {/* MOBILE / TABLET OVERLAY */}
+      {/* CSS HERO BACKGROUND */}
       {/* ========================================= */}
+
+      {/* Base deep navy background */}
+      <div aria-hidden="true" className="absolute inset-0 z-0 bg-[#06111d]" />
+
+      {/* Main premium navy gradient */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-[1] lg:hidden"
+        className="absolute inset-0 z-[1]"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.45) 28%, rgba(0,0,0,0.55) 52%, rgba(3,10,15,0.72) 76%, rgba(7,16,24,0.96) 100%)",
+          background: `
+      linear-gradient(
+        110deg,
+        #04101a 0%,
+        #071827 34%,
+        #082039 66%,
+        #061523 100%
+      )
+    `,
         }}
       />
 
-      {/* Additional mobile dark layer */}
+      {/* Soft central blue illumination */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-[2] bg-black/20 lg:hidden"
-      />
-
-      {/* ========================================= */}
-      {/* DESKTOP OVERLAY */}
-      {/* ========================================= */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-[1] hidden lg:block"
+        className="absolute inset-0 z-[1]"
         style={{
-          background:
-            "linear-gradient(90deg, rgba(7,16,24,0.98) 0%, rgba(7,16,24,0.96) 22%, rgba(7,16,24,0.82) 42%, rgba(5,12,17,0.55) 60%, rgba(0,0,0,0.30) 78%, rgba(0,0,0,0.18) 100%)",
+          background: `
+      radial-gradient(
+        ellipse 65% 75% at 52% 38%,
+        rgba(23, 67, 108, 0.25) 0%,
+        rgba(10, 35, 58, 0.12) 42%,
+        transparent 72%
+      )
+    `,
         }}
       />
 
-      {/* Desktop overall tint */}
+      {/* Subtle upper-left lighting */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-[2] hidden bg-black/10 lg:block"
+        className="absolute inset-0 z-[1]"
+        style={{
+          background: `
+      radial-gradient(
+        ellipse 48% 45% at 15% 8%,
+        rgba(35, 73, 104, 0.23) 0%,
+        transparent 68%
+      )
+    `,
+        }}
       />
 
-      {/* Top Shadow */}
+      {/* Bottom-left gold ambient glow */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 z-[3] h-40 bg-gradient-to-b from-black/75 via-black/30 to-transparent lg:h-40 lg:from-black/50"
+        className="
+    absolute
+    -bottom-[250px]
+    -left-[260px]
+    z-[2]
+    h-[620px]
+    w-[620px]
+    rounded-full
+    opacity-70
+    blur-[3px]
+
+    sm:-bottom-[290px]
+    sm:-left-[280px]
+
+    lg:h-[760px]
+    lg:w-[760px]
+  "
+        style={{
+          background:
+            "radial-gradient(circle, rgba(221,188,105,0.26) 0%, rgba(184,146,79,0.10) 36%, transparent 67%)",
+        }}
       />
+
+      {/* Bottom-left gold architectural arcs */}
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    -bottom-[315px]
+    -left-[390px]
+    z-[3]
+    h-[680px]
+    w-[680px]
+    rounded-full
+    border
+    border-[#B8924F]/30
+
+    sm:h-[780px]
+    sm:w-[780px]
+
+    lg:-bottom-[390px]
+    lg:-left-[470px]
+    lg:h-[930px]
+    lg:w-[930px]
+  "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    -bottom-[330px]
+    -left-[425px]
+    z-[3]
+    h-[730px]
+    w-[730px]
+    rounded-full
+    border
+    border-[#B8924F]/15
+
+    sm:h-[840px]
+    sm:w-[840px]
+
+    lg:-bottom-[420px]
+    lg:-left-[505px]
+    lg:h-[1010px]
+    lg:w-[1010px]
+  "
+      />
+
+      {/* Right architectural panel - desktop only */}
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    bottom-0
+    right-[20%]
+    top-0
+    z-[2]
+    hidden
+    w-px
+    bg-gradient-to-b
+    from-[#B8924F]/10
+    via-[#B8924F]/30
+    to-[#B8924F]/10
+
+    xl:block
+  "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    bottom-0
+    right-[17.5%]
+    top-0
+    z-[2]
+    hidden
+    w-px
+    bg-gradient-to-b
+    from-transparent
+    via-[#B8924F]/50
+    to-transparent
+
+    xl:block
+  "
+      />
+
+      {/* Right-side gold illumination */}
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    -right-[300px]
+    top-[5%]
+    z-[1]
+    hidden
+    h-[780px]
+    w-[620px]
+    rounded-full
+
+    lg:block
+  "
+        style={{
+          background:
+            "radial-gradient(ellipse at left center, rgba(221,188,105,0.13) 0%, rgba(221,188,105,0.045) 34%, transparent 66%)",
+        }}
+      />
+
+      {/* Large right gold arc */}
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    -right-[390px]
+    top-[7%]
+    z-[3]
+    hidden
+    h-[900px]
+    w-[720px]
+    rounded-[50%]
+    border
+    border-[#D8AE52]/70
+
+    lg:block
+
+    2xl:-right-[340px]
+    2xl:h-[980px]
+    2xl:w-[790px]
+  "
+      />
+
+      {/* Right upper thin curve */}
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    -right-[100px]
+    -top-[520px]
+    z-[2]
+    hidden
+    h-[900px]
+    w-[780px]
+    rounded-full
+    border
+    border-[#B8924F]/25
+
+    xl:block
+  "
+      />
+
+      {/* Small glow on right arc */}
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    right-[8.6%]
+    top-[37%]
+    z-[4]
+    hidden
+    h-28
+    w-8
+    blur-xl
+
+    xl:block
+  "
+        style={{
+          background:
+            "radial-gradient(ellipse, rgba(255,208,88,0.6) 0%, transparent 70%)",
+        }}
+      />
+
+      {/* Slight bottom vignette */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-[4]"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent 52%, rgba(2,9,15,0.12) 75%, rgba(1,6,11,0.42) 100%)",
+        }}
+      />
+
+      {/* Subtle top depth */}
+      <div
+        aria-hidden="true"
+        className="
+    absolute
+    inset-x-0
+    top-0
+    z-[4]
+    h-36
+    bg-gradient-to-b
+    from-black/30
+    via-black/10
+    to-transparent
+  "
+      />
+
+      {/* Decorative right-side statement */}
+      <div
+        className="
+    absolute
+    right-[4.5%]
+    top-1/2
+    z-[6]
+    hidden
+    -translate-y-1/2
+
+    xl:block
+  "
+      >
+        <div className="flex flex-col gap-4 text-[16px] font-medium uppercase tracking-[0.42em] text-white">
+          <span>A</span>
+          <span>Brighter</span>
+          <span>Tomorrow</span>
+          <span>Begins Here</span>
+        </div>
+
+        <div
+          aria-hidden="true"
+          className="
+      mt-7
+      h-px
+      w-16
+      bg-gradient-to-r
+      from-[#D8AE52]
+      to-transparent
+    "
+        />
+      </div>
 
       {/* ========================================= */}
       {/* CONTENT */}
@@ -130,65 +397,43 @@ export default function Hero() {
       >
         <div className="w-full max-w-[720px] lg:w-[58%] xl:w-[54%]">
           {/* ========================================= */}
-          {/* TAGS */}
+          {/* EYEBROW / PROJECT LINE */}
           {/* ========================================= */}
-          <div className="flex flex-wrap items-center gap-2.5">
-            <span
+
+          <div className="mb-5 sm:mb-6 lg:mb-7">
+            <p
               className="
-                inline-flex
-                min-h-8
-                items-center
-                gap-2
-                rounded-full
-                border
-                border-yellow-300/30
-                bg-yellow-950/65
-                px-3
-                text-[11px]
-                font-bold
-                uppercase
-                tracking-[0.14em]
-                text-yellow-200
-                shadow-[0_6px_20px_rgba(0,0,0,0.2)]
-                backdrop-blur-md
+      text-[11px]
+      font-semibold
+      uppercase
+      leading-[1.5]
+      tracking-[0.16em]
+      text-[#DDBC69]
 
-                sm:px-4
-                sm:text-xs
-              "
+      sm:text-xs
+      sm:tracking-[0.2em]
+
+      lg:text-sm
+      lg:tracking-[0.22em]
+    "
             >
-              <span className="size-2 rounded-full bg-yellow-300 shadow-[0_0_12px_rgba(253,224,71,0.9)]" />
+              Registry Ready Plots with Clear Documentation
+            </p>
 
-              Newly Launched
-            </span>
-
-            <span
+            <div
+              aria-hidden="true"
               className="
-                inline-flex
-                min-h-8
-                items-center
-                gap-1.5
-                rounded-full
-                border
-                border-white/15
-                bg-black/50
-                px-3
-                text-[11px]
-                font-semibold
-                uppercase
-                tracking-[0.12em]
-                text-white/80
-                backdrop-blur-md
+      mt-3
+      h-px
+      w-14
+      bg-gradient-to-r
+      from-[#DDBC69]
+      via-[#DDBC69]/70
+      to-transparent
 
-                sm:text-xs
-              "
-            >
-              <MapPin
-                className="size-3.5 text-[#ddbc69]"
-                aria-hidden="true"
-              />
-
-              Pipariya, Dholera SIR
-            </span>
+      sm:w-16
+    "
+            />
           </div>
 
           {/* ========================================= */}
@@ -211,7 +456,7 @@ export default function Hero() {
               className="
                 block
                 text-[clamp(3rem,14vw,4.5rem)]
-                text-[#fbbf24]
+                text-[#DDBC69]
 
                 lg:text-[clamp(4.5rem,5.5vw,6.2rem)]
               "
@@ -254,26 +499,6 @@ export default function Hero() {
                 lg:mt-8
             "
           />
-
-          {/* ========================================= */}
-          {/* DESCRIPTION - DESKTOP ONLY */}
-          {/* ========================================= */}
-          <p
-            className="
-              hidden
-              max-w-xl
-              font-medium
-              text-white
-              drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]
-
-              lg:mt-7
-              lg:block
-              lg:text-lg
-              lg:leading-8
-            "
-          >
-            Registry ready residential plots in Pipariya, Dholera.
-          </p>
 
           {/* ========================================= */}
           {/* PROJECT FACTS */}
@@ -517,9 +742,7 @@ export default function Hero() {
                 className="size-[18px] shrink-0 text-[#176b3a] lg:size-5"
                 aria-hidden="true"
               />
-
               Price
-
               <ArrowRight
                 className="
                   size-3.5
@@ -600,7 +823,6 @@ export default function Hero() {
                 strokeWidth={1.8}
                 aria-hidden="true"
               />
-
               Legal Documents
             </Link>
           </div>

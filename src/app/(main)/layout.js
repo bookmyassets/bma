@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Lato } from "next/font/google";
+import { Inter, Lato, Roboto_Serif } from "next/font/google";
 import Script from "next/script";
 
 import Footer from "./components/Footer";
@@ -15,7 +15,19 @@ import Navbar from "./components/Navbar_codexTemp";
 const lato = Lato({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "700"], // include 700 — you likely use bold somewhere
+  weight: ["400", "700"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const robotoSerif = Roboto_Serif({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-serif",
 });
 
 const GTM_ID = "GTM-5CXXQ9DJ";
@@ -117,7 +129,7 @@ y.parentNode.insertBefore(t,y);
         />
       </head>
 
-      <body className={lato.className}>
+      <body className={`${lato.className} ${inter.variable} ${robotoSerif.variable}`}>
 
         <noscript>
           <iframe

@@ -67,12 +67,12 @@ export default function FAQSection() {
             <div>
 
               {/* Heading */}
-              <h2 className="max-w-md font-serif text-[1.5rem] font-medium leading-[1.1] tracking-[-0.025em] text-white sm:text-[1.75rem] lg:text-[1.95rem] xl:text-[2.1rem]">
+              <h2 className="max-w-md font-roboto-serif text-[38px] tracking-[-0.025em] text-white lg:text-[56px]">
                 Have More Questions?
               </h2>
 
               {/* Short supporting text */}
-              <p className="mt-2 max-w-sm text-md leading-[1.5] text-white sm:text-sm sm:leading-[1.6]">
+              <p className="mt-2 max-w-sm font-inter text-[16px] leading-[1.5] text-[#DDCB69] lg:text-[18px]">
                 Our relationship managers are here to help you.
               </p>
             </div>
@@ -167,10 +167,12 @@ export default function FAQSection() {
                         shrink-0
                         items-center
                         justify-center
-                        text-xs
+                        text-[16px]
                         font-semibold
+                        leading-[1.4]
                         transition-colors
                         duration-200
+                        sm:text-[18px]
                         ${
                           isOpen
                             ? "text-white"
@@ -187,13 +189,11 @@ export default function FAQSection() {
                         min-w-0
                         flex-1
                         pr-2
-                        text-[13px]
-                        font-semibold
+                        text-[16px]
                         leading-5
                         transition-colors
                         duration-200
-                        sm:text-sm
-                        lg:text-[15px]
+                        sm:text-[18px]
                         ${
                           isOpen
                             ? "text-white"
@@ -249,7 +249,7 @@ export default function FAQSection() {
                       <div className="border-t border-[#4C463C] px-3 pb-3 pt-2.5 sm:px-3 sm:pb-4 sm:pt-3">
 
                         <div className="pl-10 pr-2 sm:pl-10 sm:pr-6">
-                          <div className="text-xs leading-[1.5] text-white sm:text-sm sm:leading-[1.6]">
+                          <div className="text-[16px] leading-[1.5] text-white sm:text-[18px]">
 
                             {Array.isArray(faq.answer) ? (
                               <ul className="list-disc space-y-2 pl-5">

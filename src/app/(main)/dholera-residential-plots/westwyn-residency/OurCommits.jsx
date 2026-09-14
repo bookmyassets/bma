@@ -67,7 +67,7 @@ export default function OurCommits() {
 
           <h2
             id="our-commitments-title"
-            className="font-serif text-[1.5rem] font-medium leading-[1.1] tracking-[-0.025em] text-[#202020] sm:text-[1.75rem] lg:text-[1.95rem] xl:text-[2.1rem]"
+            className="font-roboto-serif text-[38px] leading-[1.08] tracking-[-0.025em] text-[#202020] lg:text-[56px]"
           >
             Our Commitments
           </h2>

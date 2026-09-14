@@ -144,13 +144,31 @@ const locationToneClasses = {
   industrial: "bg-[#D946EF] text-white ring-[#E879F9]",
 };
 
+const getMapLabel = (title) => {
+  const labels = {
+    "Direct Entry from Major District Road (MDR)":
+      "Direct Entry from Major District Road",
+    "Dedicated Freight Corridor": "Dedicated Freight Corridor",
+    "Railway Connectivity": "Railway Connectivity",
+    "Dholera SIR Boundary": "Dholera SIR Boundary",
+    "Ahmedabad Dholera Expressway": "Ahmedabad Dholera Expressway",
+    "RMS Multi-Speciality Hospital": "RMS Multi-Speciality Hospital",
+    "Tata Semiconductor Plant": "Tata Semiconductor Plant",
+    "Dholera International Airport": "Dholera International Airport",
+    "Nearby Public Facilities": "Nearby Public Facilities",
+    "Industrial Proximity": "Industrial Proximity",
+  };
+
+  return labels[title] || title;
+};
+
 function getLocationTone(id) {
   return (
     locationToneClasses[id] || "bg-slate-100 text-slate-700 ring-slate-200/80"
   );
 }
 
-function MapMarker({ location, isActive, showLabel, onSelect }) {
+function MapMarker({ location, isActive, onSelect }) {
   const Icon = location.Icon;
   const toneClass = getLocationTone(location.id);
 
@@ -166,89 +184,130 @@ function MapMarker({ location, isActive, showLabel, onSelect }) {
       style={{ left: `${location.x}%`, top: `${location.y}%` }}
       className="group absolute z-10 -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-300"
     >
-      <span
-        className={`relative flex size-9 items-center justify-center rounded-full border-2 opacity-100 shadow-[0_8px_18px_rgba(32,32,32,0.28)] ring-1 transition-all duration-300 sm:size-10 ${
-          isActive
-            ? `scale-110 border-white ${toneClass} ring-2`
-            : `border-white ${toneClass}`
-        }`}
-      >
-        <Icon className="size-4 sm:size-[18px]" strokeWidth={1.8} />
+      <span className="flex flex-col items-center gap-1">
         <span
-          className={`absolute inset-[-6px] rounded-full border border-current/45 transition-opacity ${
+          className={`relative flex size-9 items-center justify-center rounded-full border-2 opacity-100 shadow-[0_8px_18px_rgba(32,32,32,0.28)] ring-1 transition-all duration-300 sm:size-10 ${
             isActive
-              ? "opacity-100 motion-safe:animate-pulse"
-              : "opacity-0"
+              ? `scale-110 border-white ${toneClass} ring-2`
+              : `border-white ${toneClass}`
           }`}
-        />
-      </span>
-      <span
-        className={`pointer-events-none absolute left-1/2 top-full mt-2 block w-max max-w-[150px] -translate-x-1/2 rounded-lg border border-[#DED4C4] bg-[#F7F3EB] px-2 py-1.5 text-left text-[10px] font-semibold leading-tight text-[#202020] shadow-[0_8px_20px_rgba(32,32,32,0.14)] transition-opacity duration-200 sm:max-w-[190px] sm:px-2.5 sm:py-2 sm:text-xs ${
-          showLabel ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        {location.title}
+        >
+          <Icon className="size-4 sm:size-[18px]" strokeWidth={1.8} />
+          <span
+            className={`absolute inset-[-6px] rounded-full border border-current/45 transition-opacity ${
+              isActive ? "opacity-100 motion-safe:animate-pulse" : "opacity-0"
+            }`}
+          />
+        </span>
+
+        {isActive && (
+          <div
+            className="
+      absolute
+      left-1/2
+      top-full
+      z-[100]
+      mt-2
+      -translate-x-1/2
+      pointer-events-none
+    "
+          >
+            <div
+              className="
+        relative
+        flex
+        min-w-[120px]
+        max-w-[170px]
+        items-center
+        justify-center
+
+        rounded-lg
+        border
+        border-[#DDBC69]
+
+        !bg-[#08243D]
+
+        px-2.5
+        py-2
+
+        text-center
+        text-[9px]
+        font-semibold
+        leading-[1.25]
+        text-white
+
+        shadow-[0_6px_18px_rgba(0,0,0,0.55)]
+
+        sm:min-w-[135px]
+        sm:max-w-[200px]
+        sm:px-3
+        sm:text-[10px]
+
+        lg:min-w-[145px]
+        lg:max-w-[230px]
+        lg:px-3.5
+        lg:py-2.5
+        lg:text-[11px]
+      "
+            >
+              {/* Pointer */}
+              <span
+                aria-hidden="true"
+                className="
+          absolute
+          -top-[5px]
+          left-1/2
+          h-2.5
+          w-2.5
+          -translate-x-1/2
+          rotate-45
+          border-l
+          border-t
+          border-[#DDBC69]
+          !bg-[#08243D]
+        "
+              />
+
+              <span className="relative z-10">
+                {location.title.split(" ")[0] === "Direct"
+                  ? "Direct MDR Entry"
+                  : location.title.split(" ")[0] === "Dedicated"
+                    ? "Dedicated Freight Corridor"
+                    : location.title.split(" ")[0] === "Railway"
+                      ? "Railway Connectivity"
+                      : location.title.includes("SIR")
+                        ? "Dholera SIR Boundary"
+                        : location.title.split(" ")[0] === "Ahmedabad"
+                          ? "Ahmedabad Dholera Expressway"
+                          : location.title.split(" ")[0] === "RMS"
+                            ? "RMS Hospital"
+                            : location.title.split(" ")[0] === "Tata"
+                              ? "Tata Semiconductor Plant"
+                              : location.title.includes("Airport")
+                                ? "Dholera International Airport"
+                                : location.title.split(" ")[0] === "Nearby"
+                                  ? "Nearby Public Facilities"
+                                  : location.title.split(" ")[0] ===
+                                      "Industrial"
+                                    ? "Industrial Proximity"
+                                    : location.title}
+              </span>
+            </div>
+          </div>
+        )}
       </span>
     </button>
   );
 }
 
-function LocationDetailCard({ location, onClose, inline = false }) {
-  const Icon = location.Icon;
-  const toneClass = getLocationTone(location.id);
-
-  return (
-    <div
-      className={`z-20 rounded-xl border border-[#DED4C4] bg-[#F7F3EB]/95 p-3 shadow-[0_12px_30px_rgba(32,32,32,0.16)] backdrop-blur-md ${
-        inline
-          ? "relative mt-2"
-          : "absolute bottom-4 left-4 w-[min(320px,calc(100%-2rem))]"
-      }`}
-    >
-      <div className="flex items-start gap-3">
-        <div
-          className={`flex size-10 shrink-0 items-center justify-center rounded-xl ring-1 ${toneClass}`}
-        >
-          <Icon className="size-5" />
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold leading-tight text-[#202020]">
-            {location.title}
-          </p>
-          <p className="mt-1 text-xs leading-relaxed text-[#6F6A62]">
-            {location.description}
-          </p>
-          <p className="mt-2 text-xs font-bold uppercase tracking-[0.12em] text-[#9D6C20]">
-            {location.value}
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={(event) => {
-            event.stopPropagation();
-            onClose();
-          }}
-          aria-label="Close location details"
-          className="text-lg leading-none text-[#6F6A62] hover:text-[#202020]"
-        >
-          ×
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function InteractiveMap({ activeLocation, onSelect }) {
-  const selected = locations.find((location) => location.id === activeLocation);
   const visibleLocations = activeLocation
     ? locations.filter((location) => location.id === activeLocation)
     : [];
 
   return (
     <div className="group lg:h-full">
-      <div
-        className="relative aspect-[4/3] w-full overflow-hidden rounded-[16px] bg-[#F7F3EB] sm:aspect-[5/4] lg:aspect-auto lg:h-full lg:min-h-[400px]"
-      >
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[16px] bg-[#F7F3EB] sm:aspect-[5/4] lg:aspect-auto lg:h-full lg:min-h-[400px]">
         <Image
           src={img}
           alt="WestWyn Residency location map near Pipariya, Dholera"
@@ -262,20 +321,9 @@ function InteractiveMap({ activeLocation, onSelect }) {
             key={location.id}
             location={location}
             isActive={activeLocation === location.id}
-            showLabel={activeLocation === location.id}
             onSelect={onSelect}
           />
         ))}
-        {selected && (
-          <div className="hidden sm:block">
-            <LocationDetailCard
-              location={selected}
-              onClose={() => {
-                onSelect(null);
-              }}
-            />
-          </div>
-        )}
         <div className="absolute left-3 top-3 flex items-center gap-2 rounded-xl border border-[#DED4C4]/80 bg-[#F7F3EB]/95 px-3 py-2 shadow-[0_8px_25px_rgba(32,32,32,0.1)] backdrop-blur-md sm:left-4 sm:top-4 sm:px-4">
           <MapPin className="size-5 text-[#9D7839]" />
           <span className="text-sm font-semibold text-[#202020]">
@@ -283,18 +331,6 @@ function InteractiveMap({ activeLocation, onSelect }) {
           </span>
         </div>
       </div>
-
-      {selected && (
-        <div className="sm:hidden">
-          <LocationDetailCard
-            location={selected}
-            onClose={() => {
-              onSelect(null);
-            }}
-            inline
-          />
-        </div>
-      )}
     </div>
   );
 }
@@ -431,24 +467,22 @@ const WestWynAboutSection = () => {
           <div className="mx-auto max-w-4xl text-center">
             <h2
               className="
-                text-[#202020]
-                font-serif
-                text-[2rem]
+                font-roboto-serif
+                text-[38px]
                 font-medium
-                leading-[1.12]
+                leading-[1.08]
                 tracking-[-0.025em]
+                text-[#202020]
 
-                sm:text-[2.25rem]
-                lg:text-[2.55rem]
-                xl:text-[2.75rem]
+                lg:text-[56px]
               "
             >
-              Your Plot Today
+              परिवार की सुरक्षा
               <span
                 className="
                   mt-0.5
                   block
-                  text-[#ca8a04]
+                  text-[#DDBC69]
                   text-[1.6rem]
                   leading-[1.2]
 
@@ -457,7 +491,7 @@ const WestWynAboutSection = () => {
                   xl:text-[2.15rem]
                 "
               >
-                A Brighter Tomorrow
+                के लिए एक मज़बूत कदम
               </span>
             </h2>
           </div>
@@ -478,11 +512,12 @@ const WestWynAboutSection = () => {
           >
             <p
               className="
-                lg:text-[18px]
+                font-inter
+                text-[16px]
                 leading-7
                 text-black
-                sm:text-[15px]
-                sm:leading-7
+
+                lg:text-[18px]
                 lg:leading-8
               "
             >
@@ -510,7 +545,6 @@ const WestWynAboutSection = () => {
               daily public facilities and transport.
             </p>
           </div>
-
         </div>
       </section>
 
@@ -558,16 +592,14 @@ const WestWynAboutSection = () => {
           <div className="relative mx-auto max-w-4xl text-center">
             <h2
               className="
-          font-serif
-          text-[2rem]
+          font-roboto-serif
+          text-[38px]
           font-medium
-          leading-[1.12]
+          leading-[1.08]
           tracking-[-0.025em]
           text-[#202020]
 
-          sm:text-[2.25rem]
-          lg:text-[2.55rem]
-          xl:text-[2.75rem]
+          lg:text-[56px]
         "
             >
               Well Connected to Dholera&apos;s
@@ -577,7 +609,7 @@ const WestWynAboutSection = () => {
             block
             text-[1.6rem]
             leading-[1.2]
-            text-[#ca8a04]
+            text-[#DDBC69]
 
             sm:text-[1.75rem]
             lg:text-[2rem]

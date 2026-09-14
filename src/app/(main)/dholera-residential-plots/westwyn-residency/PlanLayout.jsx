@@ -79,7 +79,7 @@ const PlanLayout = () => {
     },
     {
       title: "Plot Price",
-      value: "₹8,000 / sq. yard",
+      value: "₹8,000 / sq. Yard",
       icon: FaIndianRupeeSign,
     },
     {
@@ -144,7 +144,7 @@ const PlanLayout = () => {
         ========================== */}
 
           <div className="mx-auto mb-4 max-w-4xl text-center sm:mb-6">
-            <h2 className="plan-layout-heading font-serif text-[2rem] leading-[1.12] tracking-[-0.025em] text-[#ddbc69] sm:text-[2.25rem] lg:text-[2.55rem] xl:text-[2.75rem]">
+            <h2 className="plan-layout-heading font-roboto-serif text-[38px] leading-[1.08] tracking-[-0.025em] text-[#ddbc69] lg:text-[56px]">
               Plan Layout
             </h2>
           </div>
