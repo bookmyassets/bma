@@ -444,7 +444,6 @@ export default function Hero() {
             className="
               mt-7
               font-playfair-display
-              uppercase
               leading-[0.9]
               tracking-[0.015em]
               drop-shadow-[0_5px_24px_rgba(0,0,0,0.7)]
@@ -473,7 +472,6 @@ export default function Hero() {
                 tracking-[0.28em]
                 text-white
                 drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]
-
                 sm:mt-3
 
                 lg:text-[clamp(1.6rem,2vw,2.25rem)]
