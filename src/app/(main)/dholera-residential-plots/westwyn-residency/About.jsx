@@ -534,9 +534,7 @@ const WestWynAboutSection = () => {
         </div>
       </section>
 
-      {/* =========================================================
-    PRIME LOCATION
-========================================================== */}
+      
       {/* =========================================================
     PRIME LOCATION
 ========================================================== */}
@@ -578,30 +576,24 @@ const WestWynAboutSection = () => {
           <div className="relative mx-auto max-w-4xl text-center">
             <h2
               className="
-          font-playfair-display
-          text-[38px]
-          font-semibold
-          leading-[0.98]
-          tracking-[-0.04em]
-          text-[#202020]
+    font-playfair-display
+    text-[38px]
+    font-semibold
+    leading-[0.98]
+    tracking-[-0.04em]
+    text-[#202020]
 
-          sm:text-[42px]
-          lg:text-[56px]
-        "
+    sm:text-[42px]
+    lg:text-[56px]
+  "
             >
               Well Positioned for
               <span
                 className="
-            mt-0.5
-            block
-            text-[1.6rem]
-            leading-[1.2]
-            text-[#DDBC69]
-
-            sm:text-[1.75rem]
-            lg:text-[2rem]
-            xl:text-[2.15rem]
-          "
+      mt-0.5
+      block
+      text-[#DDBC69]
+    "
               >
                 Future Habitation
               </span>
