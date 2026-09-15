@@ -15,7 +15,7 @@ import { FaWhatsapp } from "react-icons/fa";
 const projectFacts = [
   {
     label: "Starting price",
-    value: "₹8 Lakh",
+    value: "₹10 Lakh",
     Icon: CircleDollarSign,
   },
   {
