@@ -339,7 +339,7 @@ export default function HeroSection() {
               "
               >
                 Residential Plots in Dholera from{" "}
-                <span className="whitespace-nowrap">&#8377;8 Lakh</span>
+                <span className="whitespace-nowrap">&#8377;10 Lakh</span>
               </h1>
 
               <p
