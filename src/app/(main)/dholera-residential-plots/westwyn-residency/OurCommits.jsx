@@ -58,7 +58,7 @@ export default function OurCommits() {
   return (
     <section
       aria-labelledby="our-commitments-title"
-      className="w-full bg-[#F7F3EB] px-3 py-5 sm:px-5 sm:py-6 lg:px-7 lg:py-8"
+      className="w-full bg-[#F7F3EB] px-3 py-5 sm:px-5 sm:py-8 lg:px-7 lg:py-12"
     >
       <div className="mx-auto w-full max-w-7xl">
 
@@ -76,7 +76,7 @@ export default function OurCommits() {
         {/* Commitment Cards */}
         <div
           id="counters-section"
-          className="grid grid-cols-2 gap-2 sm:gap-2.5 lg:grid-cols-3 lg:gap-3"
+          className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 lg:gap-5"
         >
           {items.map(({ title, icon: Icon, color, bg, border }) => (
             <article
@@ -93,8 +93,8 @@ export default function OurCommits() {
                 border
                 border-[#DED4C4]
                 bg-[#FCFAF6]
-                px-2
-                py-2.5
+                px-0
+                py-1
                 text-center
                 shadow-[0_6px_20px_rgba(32,32,32,0.045)]
                 transition-all
@@ -103,9 +103,9 @@ export default function OurCommits() {
                 hover:border-[#B8924F]/50
                 hover:shadow-[0_12px_28px_rgba(32,32,32,0.08)]
                 sm:min-h-[140px]
-                sm:px-3
-                sm:py-3
-                lg:min-h-[155px]
+                sm:px-2
+                sm:py-2
+                lg:min-h-[170px]
                 lg:px-4
                 lg:py-4
               "
