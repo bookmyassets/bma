@@ -53,7 +53,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="w-full bg-[#24231F] px-3 py-5 sm:px-5 sm:py-6 lg:px-7 lg:py-8">
+    <section className="w-full bg-[#24231F] px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
       <div className="mx-auto w-full max-w-7xl">
 
         {/* Main FAQ Layout */}
@@ -67,12 +67,12 @@ export default function FAQSection() {
             <div>
 
               {/* Heading */}
-              <h2 className="max-w-md font-playfair-display text-[38px] font-semibold leading-[0.98] tracking-[-0.04em] text-white sm:text-[42px] lg:text-[56px]">
+              <h2 className="max-w-md font-playfair-display text-[30px] font-semibold leading-[1.1] tracking-[-0.04em] text-[#ddbc69] lg:text-[40px] lg:leading-[0.98]">
                 Have More Questions?
               </h2>
 
               {/* Short supporting text */}
-              <p className="mt-10 max-w-sm font-inter text-[16px] leading-[1.5] text-[#DDCB69] lg:text-[18px]">
+              <p className="mt-10 max-w-sm font-inter text-[16px] leading-[1.5] text-white lg:text-[18px]">
                 Our relationship managers are here to help you.
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function FAQSection() {
                   bg-[#C9A65D]
                   px-4
                   py-2.5
-                  text-xs
+                  text-[16px]
                   font-semibold
                   text-[#24231F]
                   shadow-[0_8px_24px_rgba(201,166,93,0.12)]
@@ -104,12 +104,12 @@ export default function FAQSection() {
                   hover:bg-[#D5B673]
                   active:scale-[0.98]
                   sm:w-auto
-                  sm:text-sm
+                  lg:text-[18px]
                 "
               >
                 <FaWhatsapp className="h-4 w-4 text-[#075E54] sm:h-5 sm:w-5" aria-hidden="true" />
 
-                <span>Connect with Our RM</span>
+                <span>Connect with RM</span>
 
                 <span className="text-lg leading-none">→</span>
               </button>
@@ -172,7 +172,7 @@ export default function FAQSection() {
                         leading-[1.4]
                         transition-colors
                         duration-200
-                        sm:text-[18px]
+                        lg:text-[18px]
                         ${
                           isOpen
                             ? "text-white"
@@ -193,7 +193,7 @@ export default function FAQSection() {
                         leading-5
                         transition-colors
                         duration-200
-                        sm:text-[18px]
+                        lg:text-[18px]
                         ${
                           isOpen
                             ? "text-white"
@@ -249,7 +249,7 @@ export default function FAQSection() {
                       <div className="border-t border-[#4C463C] px-3 pb-3 pt-2.5 sm:px-3 sm:pb-4 sm:pt-3">
 
                         <div className="pl-10 pr-2 sm:pl-10 sm:pr-6">
-                          <div className="text-[16px] leading-[1.5] text-white sm:text-[18px]">
+                          <div className="text-[16px] leading-[1.5] text-white lg:text-[18px]">
 
                             {Array.isArray(faq.answer) ? (
                               <ul className="list-disc space-y-2 pl-5">

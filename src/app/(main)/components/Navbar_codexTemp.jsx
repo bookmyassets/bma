@@ -81,6 +81,7 @@ const statusClasses = {
 
 const badgeStatusOverrides = {
   "westwyn-residency": "newly launched",
+  "westwyn-estate": "re-sale",
 };
 
 function getProjectBadgeStatus(project) {

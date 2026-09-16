@@ -58,7 +58,7 @@ export default function OurCommits() {
   return (
     <section
       aria-labelledby="our-commitments-title"
-      className="w-full bg-[#F7F3EB] px-3 py-5 sm:px-5 sm:py-8 lg:px-7 lg:py-12"
+      className="w-full bg-[#F7F3EB] px-4 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-12"
     >
       <div className="mx-auto w-full max-w-7xl">
 
@@ -67,7 +67,7 @@ export default function OurCommits() {
 
           <h2
             id="our-commitments-title"
-            className="font-playfair-display text-[38px] font-semibold leading-[0.98] tracking-[-0.04em] text-[#202020] sm:text-[42px] lg:text-[56px]"
+            className="font-playfair-display text-[30px] font-semibold leading-[1.1] tracking-[-0.04em] text-[#ddbc69] lg:text-[40px] lg:leading-[0.98]"
           >
             Our Commitments
           </h2>
@@ -76,7 +76,7 @@ export default function OurCommits() {
         {/* Commitment Cards */}
         <div
           id="counters-section"
-          className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 lg:gap-5"
+          className="mt-4 grid grid-cols-2 gap-3 sm:mt-5 sm:gap-7 lg:mt-6 lg:grid-cols-3 lg:gap-5"
         >
           {items.map(({ title, icon: Icon, color, bg, border }) => (
             <article
@@ -157,7 +157,7 @@ export default function OurCommits() {
                     font-semibold
                     leading-[1.15]
                     tracking-[-0.02em]
-                    text-[#202020]
+                    text-white
                     sm:text-base
                     lg:text-lg
                   "

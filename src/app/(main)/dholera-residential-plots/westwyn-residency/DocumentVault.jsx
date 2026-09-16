@@ -97,10 +97,6 @@ export default function DocumentVault({
   return (
     <>
       <style jsx global>{`
-        .westwyn-residency-dark .document-vault-heading {
-          color: #ddbc69 !important;
-        }
-
         .westwyn-residency-dark h3.document-vault-card-title {
           color: #000 !important;
         }
@@ -119,15 +115,15 @@ export default function DocumentVault({
         id={sectionId}
         className="w-full bg-black px-4 pt-8 pb-8 text-white sm:px-6 sm:pt-10 sm:pb-10 lg:px-8 lg:pt-12 lg:pb-12"
       >
-      <div className="mx-auto w-full max-w-[1400px]">
+      <div className="mx-auto w-full max-w-7xl">
         <div className="mb-6 sm:mb-7 lg:mb-8">
-          <h2 className="document-vault-heading mt-2 font-playfair-display text-[38px] font-semibold leading-[0.98] tracking-[-0.04em] text-[#ddbc69] sm:text-[42px] lg:text-[56px]">
+          <h2 className="document-vault-heading mt-2 font-playfair-display text-[30px] font-semibold leading-[1.1] tracking-[-0.04em] text-[#ddbc69] lg:text-[40px] lg:leading-[0.98]">
             Legal Document Verification
           </h2>
         </div>
 
         <div className="mb-5 flex items-center justify-between gap-4 lg:hidden">
-          <p className="text-base text-white sm:text-lg">
+          <p className="text-[16px] text-white lg:text-[18px]">
             Swipe to view all documents
           </p>
 

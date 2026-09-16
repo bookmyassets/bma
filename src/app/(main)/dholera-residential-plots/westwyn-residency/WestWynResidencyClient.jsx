@@ -91,18 +91,17 @@ function PlotAvailabilitySection() {
           z-10
           mx-auto
           w-full
-          max-w-[1400px]
+          max-w-7xl
 
-          px-3
+          px-4
           py-4
 
           sm:px-6
           sm:py-5
 
-          lg:px-6
+          lg:px-8
           lg:py-6
 
-          xl:px-7
           xl:py-7
         "
       >
@@ -115,18 +114,12 @@ function PlotAvailabilitySection() {
             id="plot-availability-title"
             className="
               font-playfair-display
-              font-medium
+              font-semibold
               leading-[1.1]
               tracking-[-0.025em]
-              text-[#ca8a04]
-
-              text-[1.6rem]
-
-              sm:text-[1.9rem]
-
-              lg:text-[2.15rem]
-
-              xl:text-[2.3rem]
+              text-[#ddbc69]
+              text-[30px]
+              lg:text-[40px]
             "
           >
             Choose the Plot Size
@@ -139,17 +132,17 @@ function PlotAvailabilitySection() {
 
         <div
           className="
-            mt-3
+            mt-7
             grid
             grid-cols-3
             gap-1.5
 
-            sm:mt-6
+            sm:mt-8
             sm:gap-3
 
             md:gap-3
 
-            lg:mt-9
+            lg:mt-10
             lg:gap-4
           "
         >
@@ -461,12 +454,12 @@ function PlotAvailabilitySection() {
                     className="
                         max-w-[260px]
 
-                        text-[15px]
+                        text-[16px]
                         font-medium
                         leading-[1.45]
                         text-white
 
-                        lg:text-[15px]
+                        lg:text-[18px]
                       "
                   >
                     {description}
@@ -483,7 +476,7 @@ function PlotAvailabilitySection() {
             mt-2
 
             text-center
-            text-[12px]
+            text-[16px]
             leading-4
             text-white
 
@@ -498,7 +491,7 @@ function PlotAvailabilitySection() {
     CHECK AVAILABILITY
 ====================================================== */}
 
-      <div className="mt-3">
+      <div className="mx-auto mt-3 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link
           href="https://wa.me/918130371647?text=Hi%2C%20I%27d%20like%20to%20check%20the%20current%20availability%20of%20plots%20in%20WestWyn%20Residency."
           target="_blank"
@@ -524,7 +517,7 @@ function PlotAvailabilitySection() {
       px-3
       py-1
 
-      text-[15px]
+      text-[16px]
       font-semibold
       text-[#24231F]
 
@@ -537,16 +530,15 @@ function PlotAvailabilitySection() {
       hover:shadow-[0_14px_32px_rgba(201,166,93,0.22)]
 
       sm:min-h-[40px]
-      sm:text-md
-
       lg:min-h-[46px]
+      lg:text-[18px]
       lg:max-w-[400px]
     "
         >
           <FaWhatsapp
             aria-hidden="true"
             className="
-        size-[25px]
+        size-[23px]
         shrink-0
 
         text-green-700
@@ -556,7 +548,7 @@ function PlotAvailabilitySection() {
 
         group-hover:scale-105
 
-        sm:size-[25px]
+        sm:size-[23px]
       "
           />
 
@@ -818,11 +810,6 @@ export default function WestWynResidencyClient() {
           color: #fff !important;
         }
 
-        .westwyn-residency-dark h2,
-        .westwyn-residency-dark h3 {
-          color: #fff !important;
-        }
-
         .westwyn-residency-dark [class~="border-[#DED4C4]"],
         .westwyn-residency-dark [class*="border-[#DED4C4]/"],
         .westwyn-residency-dark [class~="border-gray-100"],
@@ -915,36 +902,6 @@ export default function WestWynResidencyClient() {
           border-color: rgba(221, 188, 105, 0.3) !important;
         }
 
-        .westwyn-residency-dark h2 {
-          font-size: 2rem !important;
-          line-height: 1.12 !important;
-        }
-
-        .westwyn-residency-dark p,
-        .westwyn-residency-dark li,
-        .westwyn-residency-dark button,
-        .westwyn-residency-dark a {
-          font-size: 1rem !important;
-          line-height: 1.5 !important;
-        }
-
-        @media (min-width: 640px) {
-          .westwyn-residency-dark h2 {
-            font-size: 2.25rem !important;
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .westwyn-residency-dark h2 {
-            font-size: 2.55rem !important;
-          }
-        }
-
-        @media (min-width: 1280px) {
-          .westwyn-residency-dark h2 {
-            font-size: 2.75rem !important;
-          }
-        }
       `}</style>
 
       <Hero />
@@ -962,7 +919,7 @@ export default function WestWynResidencyClient() {
           <ProjectAmenities />
         </div>
 
-        <div className="-mt-4 sm:-mt-2">
+        <div className="-mt-4 sm:-mt-2 ">
           <InlineLeadForm
             variant="common"
             title="Invest in Dholera Residential Plots"

@@ -376,23 +376,22 @@ export default function Hero() {
           w-full
           max-w-[1700px]
           items-center
-          px-5
+          px-4
           pb-12
           pt-[116px]
 
           sm:min-h-[790px]
-          sm:px-7
+          sm:px-6
           sm:pb-14
           sm:pt-28
 
           lg:min-h-[calc(100svh+96px)]
-          lg:px-12
+          lg:px-8
           lg:pb-28
           lg:pt-36
           lg:translate-y-6
 
-          xl:px-20
-          2xl:px-24
+          xl:px-8
         "
       >
         <div className="w-full max-w-[720px] lg:w-[58%] xl:w-[54%]">
@@ -442,11 +441,13 @@ export default function Hero() {
             id="westwyn-residency-title"
             className="
               mt-7
-              font-playfair-display
+              font-montserrat
               leading-[0.9]
               tracking-[0.015em]
               drop-shadow-[0_5px_24px_rgba(0,0,0,0.7)]
               font-semibold
+              text-[38px]
+              lg:text-[56px]
               sm:mt-6
             "
           >
@@ -455,9 +456,9 @@ export default function Hero() {
                 block
                 font-montserrat
                 font-semibold
-                text-[clamp(3rem,14vw,4.5rem)]
+                text-[38px]
                 text-[#DDBC69]
-                lg:text-[clamp(4.5rem,5.5vw,6.2rem)]
+                lg:text-[56px]
               "
             >
               WestWyn
@@ -467,14 +468,14 @@ export default function Hero() {
               className="
                 mt-2.5
                 block
-                text-[clamp(1.3rem,6vw,2rem)]
-                font-medium
-                tracking-[0.28em]
+                text-[38px]
+                font-semibold
+                tracking-[0.2em]
                 text-white
                 drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]
                 sm:mt-3
                 font-montserrat
-                lg:text-[clamp(1.6rem,2vw,2.25rem)]
+                lg:text-[56px]
               "
             >
               Residency
@@ -834,15 +835,11 @@ export default function Hero() {
             className="
               mt-4
               text-center
-              text-[14px]
+              text-[16px]
               font-medium
               leading-5
               text-white
               drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]
-
-              min-[360px]:text-left
-
-              sm:text-[15px]
 
               lg:mt-3
               lg:text-[18px]

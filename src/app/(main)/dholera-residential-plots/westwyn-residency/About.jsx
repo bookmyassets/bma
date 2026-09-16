@@ -451,16 +451,15 @@ const WestWynAboutSection = () => {
             mx-auto
             max-w-7xl
 
-            px-5
+            px-4
             py-7
 
-            sm:px-8
+            sm:px-6
             sm:py-9
 
-            lg:px-12
+            lg:px-8
             lg:py-11
 
-            xl:px-16
           "
         >
           {/* Main Heading */}
@@ -468,17 +467,16 @@ const WestWynAboutSection = () => {
             <h2
               className="
                 font-playfair-display
-                text-[38px]
+                text-[30px]
                 font-semibold
-                leading-[0.98]
+                leading-[1.1]
                 tracking-[-0.04em]
-                text-[#202020]
-
-                sm:text-[42px]
-                lg:text-[56px]
+                text-[#ddbc69]
+                lg:leading-[0.98]
+                lg:text-[40px]
               "
             >
-              परिवार के लिए एक मजबूत कदम
+              परिवार की सुरक्षा के लिए एक मजबूत कदम
             </h2>
           </div>
 
@@ -558,15 +556,12 @@ const WestWynAboutSection = () => {
       px-4
       py-7
 
-      sm:px-7
+      sm:px-6
       sm:py-9
 
-      md:px-9
-
-      lg:px-12
+      lg:px-8
       lg:py-11
 
-      xl:px-16
       xl:py-12
     "
         >
@@ -577,26 +572,16 @@ const WestWynAboutSection = () => {
             <h2
               className="
     font-playfair-display
-    text-[38px]
+    text-[30px]
     font-semibold
-    leading-[0.98]
+    leading-[1.1]
     tracking-[-0.04em]
-    text-[#202020]
-
-    sm:text-[42px]
-    lg:text-[56px]
+    text-[#ddbc69]
+    lg:leading-[0.98]
+    lg:text-[40px]
   "
             >
-              Well Positioned for
-              <span
-                className="
-      mt-0.5
-      block
-      text-[#DDBC69]
-    "
-              >
-                Future Habitation
-              </span>
+              Well Positioned for Future Habitation
             </h2>
           </div>
 
@@ -820,7 +805,7 @@ const WestWynAboutSection = () => {
                 >
                   <FaDownload
                     className="
-                text-[17px]
+                text-[18px]
                 text-black
                 transition-transform
                 duration-300

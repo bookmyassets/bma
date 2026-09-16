@@ -373,7 +373,7 @@ export default function CostSheet({
                       name="salutation"
                       value={formData.salutation}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     >
                       {SALUTATIONS.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -394,7 +394,8 @@ export default function CostSheet({
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter full name"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -410,7 +411,8 @@ export default function CostSheet({
                       value={formData.phone}
                       onChange={handleChange}
                       inputMode="numeric"
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter phone number"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -425,7 +427,8 @@ export default function CostSheet({
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter email address"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -440,7 +443,7 @@ export default function CostSheet({
                         name="projectName"
                         value={formData.projectName}
                         onChange={handleChange}
-                        className="w-full rounded border px-2 py-1 text-sm"
+                        className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                       >
                         <option value="">Select Project</option>
                         {projects.map((project) => (
@@ -466,7 +469,8 @@ export default function CostSheet({
                       name="plotNo"
                       value={formData.plotNo}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter plot number"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -479,7 +483,8 @@ export default function CostSheet({
                       name="plc"
                       value={formData.plc}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter PLC amount"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -500,7 +505,8 @@ export default function CostSheet({
                       name="plotAreaYards"
                       value={formData.plotAreaYards}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter plot area"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -514,7 +520,7 @@ export default function CostSheet({
                       type="text"
                       value={numbers.plotAreaFeet || ""}
                       readOnly
-                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm"
+                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm text-white placeholder:text-white"
                     />
                   </td>
                 </tr>
@@ -529,7 +535,8 @@ export default function CostSheet({
                       name="basePlotPriceYards"
                       value={formData.basePlotPriceYards}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter base price"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -543,7 +550,7 @@ export default function CostSheet({
                       type="text"
                       value={numbers.plotPriceWithPLC.toFixed(2)}
                       readOnly
-                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm"
+                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm text-white placeholder:text-white"
                     />
                   </td>
                 </tr>
@@ -557,7 +564,7 @@ export default function CostSheet({
                       type="text"
                       value={numbers.totalPaymentYards.toFixed(2)}
                       readOnly
-                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm"
+                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm text-white placeholder:text-white"
                     />
                   </td>
                 </tr>
@@ -581,7 +588,8 @@ export default function CostSheet({
                       name="chargeRate"
                       value={formData.chargeRate}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter charge rate"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -595,7 +603,7 @@ export default function CostSheet({
                       type="text"
                       value={numbers.chargeAmount.toFixed(2)}
                       readOnly
-                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm"
+                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm text-white placeholder:text-white"
                     />
                   </td>
                 </tr>
@@ -610,7 +618,8 @@ export default function CostSheet({
                       name="legalFee"
                       value={formData.legalFee}
                       onChange={handleChange}
-                      className="w-full rounded border px-2 py-1 text-sm"
+                      placeholder="Enter legal fee"
+                      className="w-full rounded border px-2 py-1 text-sm text-[#000000] placeholder:text-[#000000]"
                     />
                   </td>
                 </tr>
@@ -622,7 +631,7 @@ export default function CostSheet({
                       type="text"
                       value={numbers.ifmsRate}
                       readOnly
-                      className="w-full rounded border bg-gray-100 p-2"
+                      className="w-full rounded border bg-gray-100 p-2 text-white placeholder:text-white"
                     />
                   </td>
                 </tr>
@@ -636,7 +645,7 @@ export default function CostSheet({
                       type="text"
                       value={numbers.ifms.toFixed(2)}
                       readOnly
-                      className="w-full rounded border bg-gray-100 p-2"
+                      className="w-full rounded border bg-gray-100 p-2 text-white placeholder:text-white"
                     />
                   </td>
                 </tr>
@@ -650,7 +659,7 @@ export default function CostSheet({
                       type="text"
                       value={numbers.totalCharges.toFixed(2)}
                       readOnly
-                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm"
+                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm text-white placeholder:text-white"
                     />
                   </td>
                 </tr>
@@ -664,7 +673,7 @@ export default function CostSheet({
                       type="text"
                       value={numbers.plotTotalPayment.toFixed(2)}
                       readOnly
-                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm"
+                      className="w-full rounded border bg-gray-50 px-2 py-1 text-sm text-white placeholder:text-white"
                     />
                   </td>
                 </tr>

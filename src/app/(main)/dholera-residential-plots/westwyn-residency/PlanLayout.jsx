@@ -131,12 +131,6 @@ const PlanLayout = () => {
 
   return (
     <>
-      <style jsx global>{`
-        .westwyn-residency-dark .plan-layout-heading {
-          color: #ddbc69 !important;
-        }
-      `}</style>
-
       <section className="relative overflow-hidden bg-[#F7F3EB] pt-16 sm:pt-18 lg:pt-24">
         <div className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
           {/* =========================
@@ -144,7 +138,7 @@ const PlanLayout = () => {
         ========================== */}
 
           <div className="mx-auto mb-7 max-w-4xl text-center sm:mb-8 lg:mb-9">
-            <h2 className="plan-layout-heading font-playfair-display text-[38px] font-semibold leading-[0.98] tracking-[-0.04em] text-[#ddbc69] sm:text-[42px] lg:text-[56px]">
+            <h2 className="plan-layout-heading font-playfair-display text-[30px] font-semibold leading-[1.1] tracking-[-0.04em] text-[#ddbc69] lg:text-[40px] lg:leading-[0.98]">
               Plan Layout
             </h2>
           </div>
@@ -153,12 +147,12 @@ const PlanLayout = () => {
             MAIN LAYOUT
         ========================== */}
 
-          <div className="grid overflow-hidden rounded-2xl border border-[#DED4C4] bg-white lg:grid-cols-[1fr_1.02fr]">
+          <div className="grid overflow-hidden rounded-2xl border border-[#DED4C4] bg-white lg:min-h-[597px] lg:grid-cols-[1fr_1.02fr]">
             {/* =========================
               LEFT CONTENT
           ========================== */}
 
-            <div className="p-2.5 sm:p-3 lg:flex lg:flex-col lg:justify-center lg:p-4">
+            <div className="p-2.5 sm:p-3 lg:flex lg:min-h-full lg:flex-col lg:justify-start lg:p-4">
               {/* Tabs */}
 
               <div className="mb-6 grid grid-cols-3 gap-3 overflow-hidden rounded-xl bg-[#F7F3EB] sm:gap-4">
@@ -280,7 +274,7 @@ const PlanLayout = () => {
                         </div>
                       </div>
 
-                      <div className="space-y-2.5 text-md leading-6 text-black">
+                      <div className="space-y-2.5 text-[16px] leading-7 text-black lg:text-[18px] lg:leading-8">
                         <p>The project is strategically located in Pipariya</p>
 
                         <p>
@@ -319,7 +313,7 @@ const PlanLayout = () => {
                         Documentation
                       </h3>
 
-                      <p className="mt-1 text-[14px] leading-[1.6] text-black sm:text-sm">
+                      <p className="mt-1 text-[16px] leading-7 text-black lg:text-[18px] lg:leading-8">
                         Project documentation and registration details.
                       </p>
                     </div>
@@ -372,11 +366,11 @@ const PlanLayout = () => {
                 ACTION BUTTONS
             ========================== */}
 
-              <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:mt-auto">
                 <button
                   type="button"
                   onClick={openBrochureForm}
-                  className="gold-cta-button flex items-center justify-center gap-2 rounded-lg bg-[#ddbc69] px-4 py-3 text-sm font-medium text-black transition-colors hover:bg-[#d1b15a]"
+                  className="gold-cta-button flex items-center justify-center gap-2 rounded-lg bg-[#ddbc69] px-4 py-3 text-md font-medium text-black transition-colors hover:bg-[#d1b15a]"
                 >
                   <FaDownload className="text-black" />
                   Download Plan Layout
@@ -386,7 +380,7 @@ const PlanLayout = () => {
                   href="https://maps.app.goo.gl/cokFB3ntW2a66ntD7"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-lg border border-[#B8924F] bg-white px-4 py-3 text-sm font-medium text-[#B8924F] transition-colors hover:bg-[#F7F3EB]"
+                  className="flex items-center justify-center gap-2 rounded-lg border border-[#B8924F] bg-white px-4 py-3 text-md font-medium text-[#B8924F] transition-colors hover:bg-[#F7F3EB]"
                 >
                   <FaMapLocation />
                   Project Location

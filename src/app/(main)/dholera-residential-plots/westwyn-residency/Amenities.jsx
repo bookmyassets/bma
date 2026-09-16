@@ -235,7 +235,7 @@ const DesktopAmenityCard = ({ amenity, isActive, onClick }) => {
         </h3>
 
         {/* Subtitle */}
-        <p className="mt-2 text-md leading-5 text-[#B9B1A5]">
+        <p className="mt-2 text-[16px] leading-6 text-[#B9B1A5] lg:text-[18px] lg:leading-7">
           {amenity.subtitle}
         </p>
       </div>
@@ -326,7 +326,7 @@ const MobileAmenityAccordion = ({
             {amenity.title}
           </h3>
 
-          <p className="mt-0.5 text-xs leading-5 text-[#B9B1A5]">
+          <p className="mt-0.5 text-[16px] leading-6 text-[#B9B1A5] lg:text-[18px] lg:leading-7">
             {amenity.subtitle}
           </p>
         </div>
@@ -477,13 +477,13 @@ const ProjectAmenities = () => {
         relative
         overflow-hidden
         bg-[#24231F]
-        px-3
+        px-4
         py-5
 
-        sm:px-5
+        sm:px-6
         sm:py-6
 
-        lg:px-6
+        lg:px-8
         lg:py-9
       "
     >
@@ -518,7 +518,7 @@ const ProjectAmenities = () => {
         "
       />
 
-      <div className="relative z-10 mx-auto max-w-[1400px]">
+      <div className="relative z-10 mx-auto w-full max-w-7xl">
         {/* =====================================================
             HEADER
         ====================================================== */}
@@ -527,17 +527,12 @@ const ProjectAmenities = () => {
           <h2
             className="
               font-playfair-display
-              text-[1.7rem]
-              font-medium
+              text-[30px]
+              font-semibold
               leading-[1.1]
               tracking-[-0.025em]
-               text-[#ca8a04]
-
-              sm:text-[1.95rem]
-
-              lg:text-[2.15rem]
-
-              xl:text-[2.3rem]
+              text-[#ddbc69]
+              lg:text-[40px]
             "
           >
             Practical Amenities Designed for Better Living
@@ -550,7 +545,7 @@ const ProjectAmenities = () => {
 
         <div
           className="
-            mt-4
+            mt-5
             flex
             items-center
             justify-end
@@ -640,7 +635,7 @@ const ProjectAmenities = () => {
         <div
           ref={carouselRef}
           className="
-            mt-2
+            mt-5
 
             flex
             snap-x
