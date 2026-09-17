@@ -20,6 +20,7 @@ const projects = [
     location: "State Highway 117",
     href: "/dholera-residential-plots/westwyn-estate",
     image: westwynEstatesImage,
+    status: "Resale",
   },
   {
     name: "WestWyn County",

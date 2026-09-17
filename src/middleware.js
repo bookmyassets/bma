@@ -1,102 +1,211 @@
-// middleware.js
-import { NextResponse } from 'next/server'
-import { createClient } from 'next-sanity'
+import { NextResponse } from "next/server";
+import { createClient } from "next-sanity";
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: '2024-01-01',
-  useCdn: false,
-})
+  apiVersion: "2024-01-01",
 
-const SITE_NAME = 'bookmyassets'
-const SITE_URL = 'https://www.bookmyassets.com'
-/* const SITE_NAME = 'localhost:3000'
-const SITE_URL = 'http://localhost:3000/' */
+  // Redirect documents are public/read-only data.
+  // Using Sanity CDN avoids forcing every lookup to the origin API.
+  useCdn: true,
+});
 
-let redirectCache = null
-let cacheTime = 0
-const CACHE_TTL = 60 * 1000
+const SITE_NAME = "bookmyassets";
+
+// Best-effort per-instance cache.
+// Do not rely on this cache for correctness.
+const CACHE_TTL = 5 * 60 * 1000;
+
+let redirectCache = null;
+let cacheTime = 0;
 
 async function fetchRedirects() {
-  const now = Date.now()
+  const now = Date.now();
 
   if (redirectCache && now - cacheTime < CACHE_TTL) {
-    return redirectCache
+    return redirectCache;
   }
 
   redirectCache = await client.fetch(
-    `*[_type == "redirect" && site == $site]{ source, destination, permanent }`,
-    { site: SITE_NAME }
-  )
+    `*[
+      _type == "redirect" &&
+      site == $site
+    ]{
+      source,
+      destination,
+      permanent
+    }`,
+    {
+      site: SITE_NAME,
+    },
+  );
 
-  cacheTime = now
-  return redirectCache
+  cacheTime = now;
+
+  return redirectCache;
 }
 
-function buildRedirectUrl(destination) {
-  if (!destination) return null
+function buildRedirectUrl(request, destination) {
+  if (!destination) return null;
 
-  let cleanDestination = destination.trim()
+  let cleanDestination = destination.trim();
 
-  // Protect against localhost accidentally saved in Sanity
+  // Prevent accidental localhost URLs stored in Sanity.
   cleanDestination = cleanDestination.replace(
     /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?/i,
-    ''
-  )
+    "",
+  );
 
-  // Internal redirect: /blogs/xyz
-  if (cleanDestination.startsWith('/')) {
-    return new URL(cleanDestination, SITE_URL)
+  try {
+    const target = /^https?:\/\//i.test(cleanDestination)
+      ? new URL(cleanDestination)
+      : new URL(
+          cleanDestination.startsWith("/")
+            ? cleanDestination
+            : `/${cleanDestination}`,
+          request.url,
+        );
+
+    /*
+     * Preserve incoming query parameters such as:
+     *
+     * ?utm_source=google
+     * ?gclid=...
+     *
+     * unless the redirect destination already defines its own query.
+     */
+    if (!target.search && request.nextUrl.search) {
+      target.search = request.nextUrl.search;
+    }
+
+    // Protect against direct self-redirect loops.
+    const isSelfRedirect =
+      target.origin === request.nextUrl.origin &&
+      target.pathname === request.nextUrl.pathname &&
+      target.search === request.nextUrl.search;
+
+    if (isSelfRedirect) {
+      return null;
+    }
+
+    return target;
+  } catch {
+    // Invalid redirect stored in Sanity.
+    // Allow the original request instead of breaking the page.
+    return null;
   }
-
-  // External redirect: https://example.com/page
-  if (cleanDestination.startsWith('https://')) {
-    return cleanDestination
-  }
-
-  // Fallback: treat missing leading slash as internal path
-  return new URL(`/${cleanDestination}`, SITE_URL)
 }
 
-export async function middleware(req) {
-  const { pathname } = req.nextUrl
-  const auth = req.cookies.get('crm_auth')?.value
+export async function middleware(request) {
+  const { pathname } = request.nextUrl;
+
+  /*
+   * ---------------------------------------------------------
+   * 1. CRM AUTHENTICATION
+   * ---------------------------------------------------------
+   */
+
+  const auth = request.cookies.get("crm_auth")?.value;
 
   const isCrmRoute =
-    pathname === '/after-sales/crm' ||
-    pathname.startsWith('/after-sales/crm/')
+    pathname === "/after-sales/crm" ||
+    pathname.startsWith("/after-sales/crm/");
 
-  const isCrmLockRoute =
-    pathname === '/after-sales/crm-lock' ||
-    pathname.startsWith('/after-sales/crm-lock/')
+  if (isCrmRoute && auth !== "granted") {
+    return NextResponse.redirect(
+      new URL("/after-sales/crm-lock", request.url),
+      307,
+    );
+  }
 
-  // 1. CRM Auth
-  if (isCrmRoute && !isCrmLockRoute) {
-    if (auth !== 'granted') {
-      return NextResponse.redirect(
-        new URL('/after-sales/crm-lock', SITE_URL)
-      )
+  /*
+   * ---------------------------------------------------------
+   * 2. INFOPACK URL NORMALIZATION
+   * ---------------------------------------------------------
+   *
+   * This replaces:
+   * app/(main)/infopack/middleware.js
+   *
+   * Next.js supports one project-level middleware.
+   */
+
+  if (pathname.toLowerCase().startsWith("/infopack")) {
+    const lowercasePath = pathname.toLowerCase();
+
+    if (pathname !== lowercasePath) {
+      const lowercaseUrl = request.nextUrl.clone();
+
+      lowercaseUrl.pathname = lowercasePath;
+
+      return NextResponse.redirect(lowercaseUrl, 308);
     }
   }
 
-  // 2. Sanity Redirects
-  const redirects = await fetchRedirects()
-  const match = redirects.find((r) => r.source === pathname)
+  /*
+   * ---------------------------------------------------------
+   * 3. SANITY-MANAGED REDIRECTS
+   * ---------------------------------------------------------
+   */
 
-  if (match) {
-    const redirectUrl = buildRedirectUrl(match.destination)
+  const redirects = await fetchRedirects();
 
-    if (redirectUrl) {
-      return NextResponse.redirect(redirectUrl, {
-        status: match.permanent ? 301 : 302,
-      })
-    }
+  const match = redirects.find(
+    (redirect) => redirect.source === pathname,
+  );
+
+  if (!match) {
+    return NextResponse.next();
   }
 
-  return NextResponse.next()
+  const redirectUrl = buildRedirectUrl(
+    request,
+    match.destination,
+  );
+
+  if (!redirectUrl) {
+    return NextResponse.next();
+  }
+
+  return NextResponse.redirect(
+    redirectUrl,
+    match.permanent ? 308 : 307,
+  );
 }
 
 export const config = {
-  matcher: ['/:path*'],
-}
+  matcher: [
+    {
+      /*
+       * Only run Middleware for real page requests.
+       *
+       * Excludes:
+       * - APIs
+       * - Next.js static files
+       * - Next Image optimization
+       * - Sanity Studio
+       * - LandX proxy/static resources
+       * - metadata files
+       * - normal static assets
+       */
+      source:
+        "/((?!api|_next/static|_next/image|studio|LandX-Beta|landx|css|js|images|img|uploads|favicon.ico|robots.txt|sitemap.xml|sitemap.html|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|css|js|map|woff|woff2|ttf|otf|pdf)$).*)",
+
+      /*
+       * Avoid executing Middleware just because Next.js is
+       * prefetching a route in the background.
+       */
+      missing: [
+        {
+          type: "header",
+          key: "next-router-prefetch",
+        },
+        {
+          type: "header",
+          key: "purpose",
+          value: "prefetch",
+        },
+      ],
+    },
+  ],
+};
