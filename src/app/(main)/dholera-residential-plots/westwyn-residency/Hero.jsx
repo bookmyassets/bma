@@ -40,7 +40,7 @@ export default function Hero() {
     <section
       id="hero"
       aria-labelledby="westwyn-residency-title"
-      className="relative isolate min-h-[740px] overflow-hidden bg-[#071018] text-white sm:min-h-[790px] lg:min-h-[calc(100svh+96px)]"
+      className="relative isolate min-h-[680px] overflow-hidden bg-[#071018] text-white sm:min-h-[740px] lg:min-h-[calc(100svh+96px)]"
     >
       {/* Background Image */}
       {/* <Image
@@ -372,24 +372,24 @@ export default function Hero() {
           z-10
           mx-auto
           flex
-          min-h-[740px]
+          min-h-[680px]
           w-full
           max-w-[1700px]
           items-center
           px-4
           pb-12
-          pt-[116px]
+          pt-[76px]
 
-          sm:min-h-[790px]
+          sm:min-h-[740px]
           sm:px-6
           sm:pb-14
-          sm:pt-28
+          sm:pt-24
 
           lg:min-h-[calc(100svh+96px)]
           lg:px-8
           lg:pb-28
           lg:pt-36
-          lg:translate-y-6
+          lg:translate-y-0
 
           xl:px-8
         "
@@ -399,7 +399,7 @@ export default function Hero() {
           {/* EYEBROW / PROJECT LINE */}
           {/* ========================================= */}
 
-          <div className="mb-5 sm:mb-6 lg:mb-7">
+          <div className="mb-8 sm:mb-8 lg:mb-7">
             <p
               className="
       text-[11px]
@@ -440,7 +440,7 @@ export default function Hero() {
           <h1
             id="westwyn-residency-title"
             className="
-              mt-7
+              mt-14
               font-montserrat
               leading-[0.9]
               tracking-[0.015em]
@@ -448,7 +448,7 @@ export default function Hero() {
               font-semibold
               text-[38px]
               lg:text-[56px]
-              sm:mt-6
+              sm:mt-10
             "
           >
             <span
@@ -504,17 +504,18 @@ export default function Hero() {
           {/* ========================================= */}
           <div
             className="
-              mt-10
+              mt-14
               grid
               max-w-[470px]
               grid-cols-2
               gap-x-3
               gap-y-4
 
+              sm:mt-10
               sm:gap-x-4
               sm:gap-y-4
 
-              lg:mt-8
+              lg:mt-12
               lg:max-w-none
               lg:grid-cols-4
               lg:gap-0
@@ -561,6 +562,7 @@ export default function Hero() {
                   lg:hover:bg-[#ddbc69]/10
                   lg:hover:shadow-[0_10px_35px_rgba(221,188,105,0.12)]
 
+                  ${index >= 2 ? "hidden lg:flex" : ""}
                   ${index > 0 ? "lg:border-l lg:border-white/10" : ""}
                 `}
               >
@@ -637,7 +639,7 @@ export default function Hero() {
                 <div className="min-w-0">
                   <p
                     className="
-                      text-[13px]
+                      text-[14px]
                       font-medium
                       leading-4
                       text-white
@@ -654,7 +656,7 @@ export default function Hero() {
                   <p
                     className="
                       mt-0.5
-                      text-[13px]
+                      text-[14px]
                       font-bold
                       leading-4
                       text-white
@@ -677,10 +679,10 @@ export default function Hero() {
           {/* ========================================= */}
           <div
             className="
-              mt-7
+              mt-9
               grid
               grid-cols-1
-              gap-2
+              gap-3
 
               min-[360px]:grid-cols-2
 
@@ -833,15 +835,17 @@ export default function Hero() {
           {/* ========================================= */}
           <p
             className="
-              mt-4
+              mt-6
               text-center
-              text-[16px]
+              text-[13px]
               font-medium
-              leading-5
+              leading-4
               text-white
               drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]
 
+              sm:mt-4
               lg:mt-3
+              lg:text-left
               lg:text-[18px]
             "
           >

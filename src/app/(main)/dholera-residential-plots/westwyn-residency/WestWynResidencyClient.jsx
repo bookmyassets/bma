@@ -911,11 +911,12 @@ export default function WestWynResidencyClient() {
         <DocumentVault />
         <PlanLayout />
 
-        <PlotInventory
+        {/* <PlotInventory
           plots={westWynResidencyPlotInventory}
           title="Plot Inventory"
           description="Explore plot dimensions and applicable preferential location charges across WestWyn Residency."
-        />
+        /> */}
+
         <WestWynAboutSection />
 
         <div className="pt-10 sm:pt-12 lg:pt-14">

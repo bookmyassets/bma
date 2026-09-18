@@ -42,7 +42,7 @@ export default function PlotInventory({
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const plotsPerPage = 15;
+  const plotsPerPage = 10;
 
   const plotSizes = useMemo(() => {
     return [...new Set(plots.map((plot) => plot.areaSqYd))].sort(
@@ -1085,7 +1085,7 @@ export default function PlotInventory({
                 font-semibold
                 uppercase
                 tracking-[0.1em]
-                text-white/[0.35]
+                text-white/[0.55]
               "
             >
               Sort plots
@@ -1113,7 +1113,7 @@ export default function PlotInventory({
                   pr-8
                   text-[11px]
                   font-semibold
-                  text-white/[0.7]
+                  text-white/[0.8]
                   outline-none
                   transition
                   focus:border-[#DDBC69]/60
@@ -1180,8 +1180,9 @@ export default function PlotInventory({
                   className="
                     border-b
                     border-white/[0.07]
+                    bg-white/[0.02]
                     px-4
-                    py-3.5
+                    py-4
                     last:border-b-0
                   "
                 >
@@ -1194,7 +1195,7 @@ export default function PlotInventory({
                           font-semibold
                           uppercase
                           tracking-[0.12em]
-                          text-white/[0.35]
+                          text-white/[0.5]
                         "
                       >
                         Plot
@@ -1203,7 +1204,7 @@ export default function PlotInventory({
                       <p
                         className="
                           mt-1
-                          text-[13px]
+                          text-[14px]
                           font-semibold
                           tabular-nums
                           text-white
@@ -1220,7 +1221,7 @@ export default function PlotInventory({
                           font-semibold
                           uppercase
                           tracking-[0.12em]
-                          text-white/[0.35]
+                          text-white/[0.5]
                         "
                       >
                         Plot Size
@@ -1229,7 +1230,7 @@ export default function PlotInventory({
                       <p
                         className="
                           mt-1
-                          text-[13px]
+                          text-[14px]
                           font-semibold
                           tabular-nums
                           text-white
@@ -1255,7 +1256,7 @@ export default function PlotInventory({
                   >
                     <p
                       className="
-                        text-[12px]
+                        text-[13px]
                         font-medium
                         tabular-nums
                         text-white/[0.55]
@@ -1284,7 +1285,7 @@ export default function PlotInventory({
                     ) : (
                       <p
                         className="
-                          text-[12px]
+                          text-[13px]
                           font-semibold
                           tabular-nums
                           text-white

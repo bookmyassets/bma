@@ -214,7 +214,7 @@ const PlanLayout = () => {
                         return (
                           <div
                             key={card.title}
-                            className="flex min-h-[74px] items-center gap-3 rounded-xl border border-[#DED4C4] bg-white px-3 py-2.5 transition-all duration-200 hover:border-[#B8924F]/60 hover:shadow-sm"
+                            className="flex min-h-[74px] items-center gap-3 rounded-xl border-[0.2px] border-[#DED4C4] bg-white px-3 py-2.5 transition-all duration-200 hover:border-[#B8924F]/60 hover:shadow-sm"
                           >
                             {/* Icon */}
 
@@ -225,7 +225,7 @@ const PlanLayout = () => {
                             {/* Content */}
 
                             <div className="min-w-0">
-                              <p className="text-xs font-medium text-black sm:text-md">
+                              <p className="text-md font-medium text-black sm:text-md">
                                 {card.title}
                               </p>
 
