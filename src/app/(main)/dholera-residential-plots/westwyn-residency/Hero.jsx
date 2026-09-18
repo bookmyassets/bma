@@ -562,7 +562,6 @@ export default function Hero() {
                   lg:hover:bg-[#ddbc69]/10
                   lg:hover:shadow-[0_10px_35px_rgba(221,188,105,0.12)]
 
-                  ${index >= 2 ? "hidden lg:flex" : ""}
                   ${index > 0 ? "lg:border-l lg:border-white/10" : ""}
                 `}
               >
@@ -638,7 +637,7 @@ export default function Hero() {
                 {/* Text */}
                 <div className="min-w-0">
                   <p
-                    className="
+                    className={`
                       text-[14px]
                       font-medium
                       leading-4
@@ -648,7 +647,8 @@ export default function Hero() {
                       sm:text-[12px]
                       lg:text-[16px]
                       lg:leading-5
-                    "
+                      ${index >= 2 ? "hidden lg:block" : ""}
+                    `}
                   >
                     {label}
                   </p>
