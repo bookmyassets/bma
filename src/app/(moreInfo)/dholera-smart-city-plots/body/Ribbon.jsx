@@ -227,7 +227,7 @@ export default function Ribbon() {
     <>
       <div className="border-y-4 border-[#ddbc69] bg-black py-3 sm:py-4">
         <div className="flex items-center justify-center px-4 pb-3 text-center text-lg font-semibold leading-tight text-[#ddbc69] sm:text-xl md:text-2xl">
-          Govt Approved Plots Starting from ₹8 Lakh
+          Govt Approved Plots Starting from ₹10 Lakh
         </div>
 
         <div className="mx-auto max-w-3xl space-y-3 px-4">

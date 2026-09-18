@@ -12,7 +12,7 @@ const westwynFormCtas = [
 export default function WestwynContactForm({ onClose }) {
   return (
     <GetinTouch
-      title="Register Ready Plots In Dholera From 8 Lakh"
+      title="Register Ready Plots In Dholera From 10 Lakh"
       buttonName="Get A Call Back"
       ctaItems={westwynFormCtas}
       onClose={onClose}
