@@ -561,7 +561,7 @@ export default function LandingPage({ openForm }) {
             >
               <div className="mb-5">
                 <h2 className="mt-2 text-2xl font-bold leading-tight text-[#101820]">
-                  Residential Plots in Dholera from ₹8 Lakh
+                  Residential Plots in Dholera from ₹10 Lakh
                 </h2>
               </div>
 
