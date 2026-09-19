@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 
 import {
@@ -22,7 +21,7 @@ import {
 
 import BrochureDownload from "../../components/BrochureDownload";
 
-import img from "@/assests/residential/residency/westwyn-Residency.webp";
+import LivePlotPlan from "./LivePlotPlan";
 
 const PlanLayout = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -147,15 +146,15 @@ const PlanLayout = () => {
             MAIN LAYOUT
         ========================== */}
 
-          <div className="grid overflow-hidden rounded-2xl border border-[#DED4C4] bg-white lg:min-h-[597px] lg:grid-cols-[1fr_1.02fr]">
+          <div className="overflow-hidden rounded-2xl border border-[#DED4C4] bg-white">
             {/* =========================
               LEFT CONTENT
           ========================== */}
 
-            <div className="p-2.5 sm:p-3 lg:flex lg:min-h-full lg:flex-col lg:justify-start lg:p-4">
+            <div className="p-3 sm:p-4 lg:p-6">
               {/* Tabs */}
 
-              <div className="mb-6 grid grid-cols-3 gap-3 overflow-hidden rounded-xl bg-[#F7F3EB] sm:gap-4">
+              <div className="mb-6 grid grid-cols-3 overflow-hidden rounded-xl border border-[#DED4C4] bg-[#F7F3EB] lg:mx-auto lg:max-w-3xl">
                 {tabs.map((tab) => {
                   const Icon = tab.icon;
                   const isActive = activeTab === tab.id;
@@ -207,7 +206,7 @@ const PlanLayout = () => {
                       </h3>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
                       {overviewCards.map((card) => {
                         const Icon = card.icon;
 
@@ -366,7 +365,7 @@ const PlanLayout = () => {
                 ACTION BUTTONS
             ========================== */}
 
-              <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:mt-auto">
+              <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:max-w-2xl">
                 <button
                   type="button"
                   onClick={openBrochureForm}
@@ -389,15 +388,14 @@ const PlanLayout = () => {
             </div>
 
             {/* =========================
-              RIGHT — MASTER PLAN
+              FULL WIDTH — MASTER PLAN
           ========================== */}
 
-            <div className="border-t border-[#DED4C4] bg-[#F7F3EB] p-2.5 sm:p-3 lg:border-l lg:border-t-0 lg:p-4">
-              <div className="flex h-full flex-col rounded-xl border border-[#DED4C4] bg-white p-2.5 sm:p-3">
-                {/* Image Header */}
+            <div className="border-t border-[#DED4C4] bg-[#F7F3EB] p-3 sm:p-4 lg:p-6">
+              <div className="rounded-xl border border-[#DED4C4] bg-white p-3 sm:p-4 lg:p-5">
 
-                <div className="mb-2 px-1 sm:px-2">
-                  <h3 className="text-xl font-semibold text-[#202020] sm:text-2xl">
+                <div className="mb-4 px-1 sm:px-2">
+                  <h3 className="text-xl font-semibold text-[#202020] sm:text-2xl lg:text-[28px]">
                     Master Plan
                   </h3>
 
@@ -408,19 +406,8 @@ const PlanLayout = () => {
                   <div className="mt-2 h-[2px] w-12 bg-[#B8924F]" />
                 </div>
 
-                {/* Plan Image */}
+                <LivePlotPlan />
 
-                <div className="relative flex-1 overflow-hidden rounded-lg border border-[#DED4C4] bg-white">
-                  <Image
-                    src={img}
-                    alt="WestWyn Residency master plan layout"
-                    width={1200}
-                    height={900}
-                    className="h-auto w-full object-contain"
-                    loading="lazy"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
               </div>
             </div>
           </div>

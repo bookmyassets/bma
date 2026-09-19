@@ -23,8 +23,6 @@ import {
   Trees,
   UsersRound,
 } from "lucide-react";
-import PlotInventory from "@/app/(main)/components/plot-inventory/PlotInventory";
-import { westWynResidencyPlotInventory } from "./data/plotInventoryData";
 
 const availablePlotSizes = [
   {
@@ -911,11 +909,6 @@ export default function WestWynResidencyClient() {
         <DocumentVault />
         <PlanLayout />
 
-        {/* <PlotInventory
-          plots={westWynResidencyPlotInventory}
-          title="Plot Inventory"
-          description="Explore plot dimensions and applicable preferential location charges across WestWyn Residency."
-        /> */}
 
         <WestWynAboutSection />
 

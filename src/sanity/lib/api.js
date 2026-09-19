@@ -280,3 +280,24 @@ export async function getEventBySlug(slug) {
   const post = await client.fetch(query, { slug }, { cache: "no-store" });
   return post;
 }
+
+/* Plot Inventory */
+
+export async function getPlotInventoryByProject(projectSlug) {
+  if (!projectSlug) return [];
+
+  const query = `*[
+    _type == "plotInventory" &&
+    projectSlug == $projectSlug
+  ] | order(plotNumber asc) {
+    _id,
+    plotNumber,
+    saleStatus,
+    plotTier,
+    _updatedAt
+  }`;
+
+  return await client
+    .withConfig({ useCdn: false })
+    .fetch(query, { projectSlug }, { cache: "no-store" });
+}
