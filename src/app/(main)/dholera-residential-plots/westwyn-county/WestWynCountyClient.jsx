@@ -17,7 +17,7 @@ import SchemaMarkup from "../../components/SchemaMarkup";
 import Link from "next/link";
 import WestWynAboutSection from "./About";
 import PlanLayout from "./PlanLayout";
-import ProjectPlotAvailability from "../ProjectPlotAvailability";
+// import ProjectPlotAvailability from "../ProjectPlotAvailability";
 import DocumentVault from "../westwyn-residency/DocumentVault";
 
 const countyDocuments = [
@@ -385,7 +385,7 @@ export default function WestWynCountyClient() {
         <WestWynAboutSection />
       </div>
 
-      <ProjectPlotAvailability
+      {/* <ProjectPlotAvailability
         projectName="WestWyn County"
         minSize={149}
         maxSize={325}
@@ -393,7 +393,7 @@ export default function WestWynCountyClient() {
         percentageLabel="Resale"
         statusText="Resale Plots Available"
         inventoryLabel="Resale plot sizes and availability vary by current inventory."
-      />
+      /> */}
 
       <div>
         <PlanLayout />

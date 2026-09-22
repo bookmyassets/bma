@@ -1,247 +1,205 @@
-import { AnimatePresence } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import BrochureDownload from "../../components/BrochureDownload";
-import { FaDochub, FaFile, FaPhone, FaWhatsapp } from "react-icons/fa6";
-import Link from "next/link";
-import { FaDownload } from "react-icons/fa";
-import Image from "next/image";
-import img from "@/assests/homepage/hero2/test/westwyn-estates-dholera-google-maps-location.webp";
-import { File } from "lucide-react";
+"use client";
 
-const WestWynAboutSection = () => {
-  const [counters, setCounters] = useState({
-    plotSize: 0,
-    price: 0,
-    amenities: 0,
-  });
+import {
+  Building2,
+  Factory,
+  Hospital,
+  MapPinned,
+  Milestone,
+  Plane,
+  Route,
+  TrainFront,
+} from "lucide-react";
 
-  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-  // New state for brochure form
-  const [formTitle, setFormTitle] = useState("");
-  const [formHeadline, setFormHeadline] = useState("");
-  const [buttonName, setButtonName] = useState("");
-  const [formType, setFormType] = useState("");
+import WestWynProjectAbout from "../components/westwyn/WestwynProjectAbout";
 
-  const openBrochureForm = (title, headline, btnName, type) => {
-    setFormTitle(title);
-    setFormHeadline(headline);
-    setButtonName(btnName);
-    setFormType(type);
-    setIsBrochureFormOpen(true);
-  };
+import mapImage from "@/assests/homepage/hero2/test/westwyn-estates-dholera-google-maps-location.webp";
 
-  const closeBrochureForm = () => {
-    setIsBrochureFormOpen(false);
-  };
+const brochureUrl =
+  "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
 
-  const handleAfterSubmit = () => {
-    console.log("Form submitted successfully, type:", formType);
+const locations = [
+  {
+    id: "polarpur",
+    title: "Polarpur, Dholera",
+    subtitle: "Premium residential plot location",
+    value: "Project Location",
 
-    if (formType === "brochure") {
-      try {
-        console.log("Initiating brochure download");
+    x: 31,
+    y: 36,
 
-        // Using setTimeout to ensure the popup closes before download starts
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.href =
-            "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
-          link.target = "_blank";
-          link.download = "brochure.pdf"; // Add download attribute
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          console.log("Download link clicked");
-        }, 300);
-      } catch (error) {
-        console.error("Error downloading brochure:", error);
-        window.open(
-          "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf",
-          "_blank",
-        );
-      }
-    }
-  };
+    Icon: MapPinned,
+    markerLabel: "WestWyn Estates",
 
+    toneClass:
+      "bg-[#10B981] text-white ring-[#34D399]",
+  },
+
+  {
+    id: "highway",
+    title: "State Highway 117 (150 ft Road)",
+    value: "Direct Entry",
+
+    x: 30,
+    y: 46,
+
+    Icon: Route,
+    markerLabel: "Direct SH-117 Entry",
+
+    toneClass:
+      "bg-[#0EA5E9] text-white ring-[#38BDF8]",
+  },
+
+  {
+    id: "railway",
+    title: "Bhimnath Railway Junction",
+    value: "5 Minutes",
+
+    x: 21,
+    y: 22,
+
+    Icon: TrainFront,
+    markerLabel: "Bhimnath Railway Junction",
+
+    toneClass:
+      "bg-[#3B82F6] text-white ring-[#60A5FA]",
+  },
+
+  {
+    id: "boundary",
+    title: "Dholera SIR Boundary",
+    value: "15 Minutes",
+
+    x: 77,
+    y: 31,
+
+    Icon: MapPinned,
+    markerLabel: "Dholera SIR Boundary",
+
+    toneClass:
+      "bg-[#10B981] text-white ring-[#34D399]",
+  },
+
+  {
+    id: "hospital",
+    title: "RMS Multi-Specialty Hospital",
+    value: "15 Minutes",
+
+    x: 69,
+    y: 54,
+
+    Icon: Hospital,
+    markerLabel: "RMS Hospital",
+
+    toneClass:
+      "bg-[#F43F5E] text-white ring-[#FB7185]",
+  },
+
+  {
+    id: "expressway",
+    title: "Ahmedabad Dholera Expressway",
+    value: "18 Minutes",
+
+    x: 82,
+    y: 47,
+
+    Icon: Milestone,
+    markerLabel: "Ahmedabad Dholera Expressway",
+
+    toneClass:
+      "bg-[#F59E0B] text-white ring-[#FBBF24]",
+  },
+
+  {
+    id: "semiconductor",
+    title: "Tata Semiconductor Plant",
+    value: "30 Minutes",
+
+    x: 79,
+    y: 70,
+
+    Icon: Factory,
+    markerLabel: "Tata Semiconductor Plant",
+
+    toneClass:
+      "bg-[#F97316] text-white ring-[#FB923C]",
+  },
+
+  {
+    id: "airport",
+    title: "Dholera International Airport",
+    value: "45 Minutes",
+
+    x: 88,
+    y: 82,
+
+    Icon: Plane,
+    markerLabel: "Dholera International Airport",
+
+    toneClass:
+      "bg-[#06B6D4] text-white ring-[#22D3EE]",
+  },
+
+  {
+    id: "facilities",
+    title: "Nearby Public Facilities",
+    subtitle:
+      "Bus stand, school, hospital, shopping complex, park and food courts.",
+    value: "Close By",
+
+    x: 34,
+    y: 62,
+
+    Icon: Building2,
+    markerLabel: "Nearby Public Facilities",
+
+    toneClass:
+      "bg-[#14B8A6] text-white ring-[#2DD4BF]",
+  },
+
+  {
+    id: "industrial",
+    title: "Industrial Proximity",
+    subtitle:
+      "Tata Semiconductor Plant, ReNew Solar Plant and Hebatpur Industrial Area.",
+    value: "Well Connected",
+
+    x: 74,
+    y: 85,
+
+    Icon: Factory,
+    markerLabel: "Hebatpur Industrial Area",
+
+    toneClass:
+      "bg-[#D946EF] text-white ring-[#E879F9]",
+  },
+];
+
+export default function WestWynAboutSection({
+  surface = "base",
+}) {
   return (
-    <div className="bg-white relative overflow-hidden">
-      {/* Subtle background pattern */}
-
-      <div className="relative max-w-7xl mx-auto px-4 py-4">
-        {/* Header Section */}
-        <div className="text-center space-y-2">
-          <h2 className=" text-[#ddbc69] text-[32px] leading-none font-bold">
-            WestWyn Estates{" "}
-            <span className="font-semibold text-sm md:text-lg whitespace-nowrap text-black">
-              {" "}
-              <br />
-              Residential Plot Project in Dholera
-            </span>
-          </h2>
-
-          <p className=" italic  py-0.5"></p>
-
-          <p className="text-base md:text-lg text-gray-600 max-w-7xl mx-auto">
-            WestWyn Estates a registry-ready Residential plot project located on
-            Dholera's widest Road. Direct entry from 150 ft State Highway 117.
-            With clear documentation, strategic location, and strong development
-            potential, it ensures a secure and transparent buying experience. It
-            is a smart opportunity to be part of India’s next big smart city
-            growth story.
-          </p>
-        </div>
-
-        <div className="gap-12 items-stretch space-y-4 px-4 py-4">
-          {/* Left Content */}
-          <div className="h-full">
-            <div className="flex justify-center items-center flex-row gap-[clamp(0.5rem,2vw,1rem)]">
-              <Link href="https://wa.me/918130371647">
-                <p
-                  className="bg-[#ddbc69] border border-[#ddbc69] whitespace-nowrap text-white rounded-xl font-medium hover:bg-[#eecb71] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
-                    text-[clamp(0.8rem,1.8vw,1rem)]
-                    px-[clamp(0.75rem,3vw,1.25rem)]
-                    py-[clamp(0.5rem,2vw,0.75rem)]"
-                >
-                  <FaFile className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                  Get Brochure
-                </p>
-              </Link>
-
-              <Link href="tel:+918130371647">
-                <p
-                  className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
-                    text-[clamp(0.8rem,1.8vw,1rem)]
-                    px-[clamp(0.75rem,3vw,1.25rem)]
-                    py-[clamp(0.5rem,2vw,0.75rem)]"
-                >
-                  <FaPhone className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                  Connect with our RM
-                </p>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto py-4">
-          <div>
-            <h2 className="text-[32px] font-semibold text-center ">
-              Prime Location
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-            <div className="px-4 sm:px-6 lg:px-8 ">
-              <Image
-                src={img}
-                alt="westwyn estates location map"
-                className="rounded-xl w-full h-auto md:h-full"
-                priority
-              />
-            </div>
-            <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex items-start justify-start gap-2 font-semibold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>Premium residential plots in Polarpur</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>
-                    Direct Entry from State Highway-117 (150 feet road)
-                  </span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>5 Minutes from Bhimnath Railway Junction</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>15 Minutes from Dholera SIR boundary</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>15 Minutes from RMS Multi-Specialty Hospital</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>18 minutes from Ahmedabad Dholera Expressway</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>30 minutes from Tata Semiconductor Plant</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>45 minutes from Dholera International Airport</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>
-                    Close proximity to Public Facilities and Transport: Bus
-                    stand, school, hospital, shopping complex, park, food
-                    courts.
-                  </span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>
-                    Industrial proximity: Seamless connectivity to TATA
-                    Semiconductor Plant & ReNew Solar Plant. Nearby to Hebatpur
-                    Industrial Area.
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
-              <BrochureDownload
-                onClose={closeBrochureForm}
-                title="Get Full Project Details"
-                buttonName="Get Brochure"
-                onAfterSubmit={handleAfterSubmit}
-                link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"
-              />
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
-    </div>
+    <WestWynProjectAbout
+      projectName="WestWyn Estates"
+      overviewHeading="परिवार की सुरक्षा के लिए एक मजबूत कदम"
+      surface={surface}
+      overviewDescription={
+        <>
+          WestWyn Estates is a registry-ready residential plot
+          project located on Dholera&apos;s widest road, with
+          direct entry from the 150 ft State Highway 117. With
+          clear documentation, strategic location and strong
+          development potential, it offers a transparent buying
+          experience and an opportunity to participate in
+          Dholera&apos;s long-term growth.
+        </>
+      }
+      locationHeading="Well Positioned for Future Habitation"
+      mapImage={mapImage}
+      mapAlt="WestWyn Estates location map near Polarpur and Dholera SIR"
+      mapBadge="Strategic Location"
+      locations={locations}
+      brochureUrl={brochureUrl}
+    />
   );
-};
-
-export default WestWynAboutSection;
+}

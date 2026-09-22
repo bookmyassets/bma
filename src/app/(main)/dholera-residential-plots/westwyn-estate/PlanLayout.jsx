@@ -1,244 +1,100 @@
-import { AnimatePresence } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import BrochureDownload from "../../components/BrochureDownload";
-import Image from "next/image";
-import img from "@/assests/residential/estates/westwyn-Estates.webp";
-import { FaDownload } from "react-icons/fa";
+"use client";
+
 import {
-  FaLocationPin,
-  FaLocationPinLock,
-  FaMapLocation,
-  FaPhone,
-  FaWhatsapp,
+  FaBuilding,
+  FaFileCircleCheck,
+  FaIndianRupeeSign,
+  FaLayerGroup,
+  FaLocationDot,
+  FaMoneyCheckDollar,
+  FaRulerCombined,
+  FaUser,
+  FaUsers,
 } from "react-icons/fa6";
-import Link from "next/link";
 
-const PlanLayout = () => {
-  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-  // New state for brochure form
-  const [formTitle, setFormTitle] = useState("");
-  const [formHeadline, setFormHeadline] = useState("");
-  const [buttonName, setButtonName] = useState("");
-  const [formType, setFormType] = useState("");
+import WestWynPlanLayout from "../components/westwyn/WestWynPlanLayout";
 
-  const openBrochureForm = (title, headline, btnName, type) => {
-    setFormTitle(title);
-    setFormHeadline(headline);
-    setButtonName(btnName);
-    setFormType(type);
-    setIsBrochureFormOpen(true);
-  };
+import LivePlotPlan from "./LivePlotPlan";
 
-  const closeBrochureForm = () => {
-    setIsBrochureFormOpen(false);
-  };
+const overviewCards = [
+  {
+    title: "Land Parcel",
+    value: "4.45 Acres",
+    secondaryValue: "21,500 sq. yards",
+    icon: FaLayerGroup,
+  },
+  {
+    title: "Location",
+    value: "Polarpur",
+    icon: FaLocationDot,
+  },
+  {
+    title: "Plot Sizes",
+    value: "147–250 sq. yards",
+    icon: FaRulerCombined,
+  },
+  {
+    title: "Total Units",
+    value: "129 exclusive plots",
+    icon: FaUsers,
+  },
+  {
+    title: "Development Status",
+    value: "Nearing Completion",
+    icon: FaBuilding,
+  },
+  {
+    title: "Resale Price",
+    value: "₹8,500 / sq. Yard",
+    icon: FaIndianRupeeSign,
+  },
+  {
+    title: "Payment Plan",
+    value: "Full Payment within 15 Days",
+    icon: FaMoneyCheckDollar,
+  },
+  {
+    title: "Developer",
+    value: "BookMyAssets",
+    icon: FaUser,
+  },
+];
 
-  const handleAfterSubmit = () => {
-    console.log("Form submitted successfully, type:", formType);
+const documentation = [
+  {
+    title: "Land Documentation",
+    values: [
+      "Non-Agricultural Land / No Objection Certificate",
+      "Title Clear",
+      "Plan Pass Approved",
+    ],
+    icon: FaFileCircleCheck,
+  },
+  {
+    title: "Registration",
+    values: ["Registry Ready", "Immediate Possession"],
+    icon: FaFileCircleCheck,
+  },
+];
 
-    if (formType === "brochure") {
-      try {
-        console.log("Initiating brochure download");
+const brochureUrl =
+  "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
 
-        // Using setTimeout to ensure the popup closes before download starts
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.href =
-            "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
-          link.target = "_blank";
-          link.download = "brochure.pdf"; // Add download attribute
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          console.log("Download link clicked");
-        }, 300);
-      } catch (error) {
-        console.error("Error downloading brochure:", error);
-        window.open(
-          "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf",
-          "_blank",
-        );
-      }
-    }
-  };
-
+export default function PlanLayout({ surface = "alt" }) {
   return (
-    <div className="bg-white relative overflow-hidden">
-      {/* Subtle background pattern */}
-
-      <div className="relative max-w-7xl mx-auto px-4 py-4">
-        {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto">
-          <div>
-            <h3 className="text-[32px] font-semibold text-center">
-              Plan Layout
-            </h3>
-          </div>
-          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-            <div className="px-4 sm:px-6 lg:px-8 md:order-2">
-              <Image
-                src={img}
-                alt="plan layout of westwyn estates"
-                className="rounded-xl w-full md:h-full h-auto md:order-1"
-                priority
-              />
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                {
-                  title: "Land Parcel",
-                  content: (
-                    <span>
-                      4.45 Acres <br /> (21,500 sq. yards)
-                    </span>
-                  ),
-                  align: "text-center",
-                },
-                {
-                  title: "Location",
-                  content:
-                    "Polarpur",
-                  align: "text-left",
-                },
-                {
-                  title: "Plot Sizes",
-                  content: " 147-250 sq. yards",
-                  align: "text-left",
-                },
-                {
-                  title: "Total Units",
-                  content: "129 exclusive plots",
-                  align: "text-left",
-                },
-                {
-                  title: "Documentation",
-                  content: "NA/NOC, Title Clear, Plan Pass Approved",
-                  align: "text-left",
-                },
-                {
-                  title: "Development Status",
-                  content: "Nearing Completion",
-                  align: "text-left",
-                },
-                {
-                  title: "Resale Price",
-                  content: "₹8500/sq. Yard",
-                  align: "text-left",
-                },
-                {
-                  title: "Payment Plan",
-                  content:
-                    "Full Payment within 15 Days",
-                  align: "text-left",
-                },
-                {
-                  title: "Developer",
-                  content: "BookMyAssets",
-                  align: "text-left",
-                },
-                
-              ].map(({ title, content, align }, index, arr) => {
-                const isLastOdd =
-                  index === arr.length - 1 && arr.length % 2 !== 0;
-
-                return (
-                  <div
-                    key={title}
-                    className={`flex flex-col rounded-2xl text-black overflow-hidden ${
-                      isLastOdd ? "col-span-2 sm:col-span-1" : ""
-                    }`}
-                    style={{
-                      border: "1.5px solid #f0f0f0",
-                      boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-                    }}
-                  >
-                    {/* Gold top accent bar */}
-                    <div
-                      className="h-1 w-full"
-                      style={{
-                        background: "linear-gradient(90deg, #ddbc69, #f0c96a)",
-                      }}
-                    />
-
-                    <div className="flex flex-col flex-1 p-3 sm:p-4 lg:p-5">
-                      {/* Title */}
-                      <span
-                        className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
-                        style={{ color: "#ddbc69", letterSpacing: "0.01em" }}
-                      >
-                        {title}
-                      </span>
-
-                      {/* Divider */}
-                      <div
-                        className="w-2/3 mx-auto mt-2 mb-3 h-[1px]"
-                        style={{ background: "#ececec" }}
-                      />
-
-                      {/* Content */}
-                      <div className="flex flex-1 items-center justify-center">
-                        <span
-                          className={`font-semibold ${align} text-xs sm:text-sm lg:text-base leading-snug`}
-                          style={{ color: "#1a1a1a" }}
-                        >
-                          {content}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="gap-12 items-stretch space-y-4 px-4 py-4">
-            {/* Left Content */}
-            <div className="h-full">
-              <div className="flex justify-center items-center flex-row gap-[clamp(0.5rem,2vw,1rem)]">
-                <Link
-                  href="https://wa.me/918130371647"
-                  className="bg-[#ddbc69] text-white whitespace-nowrap rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
-                    text-[clamp(0.8rem,1.8vw,1rem)]
-                    px-[clamp(0.75rem,3vw,1.25rem)]
-                    py-[clamp(0.5rem,2vw,0.75rem)]"
-                >
-                  <FaWhatsapp className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                  Get  Brochure
-                </Link>
-
-                <Link href="tel:+918130371647">
-                  <p
-                    className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
-                    text-[clamp(0.8rem,1.8vw,1rem)]
-                    px-[clamp(0.75rem,3vw,1.25rem)]
-                    py-[clamp(0.5rem,2vw,0.75rem)]"
-                  >
-                    <FaPhone className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                    Connect With our RM
-                  </p>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
-              <BrochureDownload
-                onClose={closeBrochureForm}
-                title="Get Project Plan Layout"
-                buttonName="Get Brochure"
-                onAfterSubmit={handleAfterSubmit}
-                link="https://drive.google.com/file/d/1xJzNlQpyqyDIaSzOCo48s8J44qC3gS2S/view?usp=sharing"
-              />
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
-    </div>
+    <WestWynPlanLayout
+      projectName="WestWyn Estates"
+      overviewCards={overviewCards}
+      location={{
+        name: "Polarpur",
+        description: [
+          "WestWyn Estates is located in Polarpur, Dholera.",
+          "The project enjoys direct entry from the 150 ft wide State Highway 117.",
+        ],
+      }}
+      documentation={documentation}
+      brochureUrl={brochureUrl}
+      masterPlan={<LivePlotPlan />}
+    />
   );
-};
-
-export default PlanLayout;
+}

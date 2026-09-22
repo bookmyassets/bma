@@ -4,8 +4,8 @@ import PlotMapViewer from "@/app/(main)/components/plot-map/PlotMapViewer";
 
 import planImage from "@/assests/residential/residency/westwyn-residency-inventory.svg";
 
-import { westWynResidencyPlotInventory } from "./data/plotInventoryData";
-import { westwynPlotGeometry } from "./data/westwynPlotGeometry";
+import { westWynResidencyPlotInventory } from "./data/PlotInventoryData";
+import { westwynPlotGeometry } from "./data/WestwynPlotGeometry";
 
 const WestWynInteractivePlotMap = ({ fullscreen = false }) => {
   return (
