@@ -14,7 +14,7 @@ import {
   Waves,
 } from "lucide-react";
 
-import WestWynAmenities from "../components/westwyn/WestWynAmenities";
+import WestWynAmenities from "../components/westwyn/WestwynAmenities";
 
 // import entryGateImage from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate.webp";
 // import kidsPlayImage from "@/assests/residential/residency/westwyn-residency-kids-play-area.webp";

@@ -1,4 +1,4 @@
-import WestWynDocumentVault from "../components/westwyn/WestWynDocumentVault";
+import WestWynDocumentVault from "../components/westwyn/WestwynDocumentVault";
 
 const documents = [
   {

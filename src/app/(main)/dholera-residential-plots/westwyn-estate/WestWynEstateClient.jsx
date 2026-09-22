@@ -10,7 +10,7 @@ import WestWynAboutSection from "./About";
 import Hero from "./Hero";
 import { Home, LayoutGrid } from "lucide-react";
 
-import WestWynPlotAvailability from "../components/westwyn/WestWynPlotAvailability";
+import WestWynPlotAvailability from "../components/westwyn/WestwynPlotAvailability";
 
 import PopupLeadForm from "../../components/PopupLeadForm";
 import CostSheet from "../costsheet2";

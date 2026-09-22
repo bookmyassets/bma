@@ -22,7 +22,7 @@ import {
   Trees,
   UsersRound,
 } from "lucide-react";
-import WestWynPlotAvailability from "../components/westwyn/WestWynPlotAvailability";
+import WestWynPlotAvailability from "../components/westwyn/WestwynPlotAvailability";
 import WestWynCommitments from "../components/westwyn/WestwynCommitments";
 
 const plotOptions = [
