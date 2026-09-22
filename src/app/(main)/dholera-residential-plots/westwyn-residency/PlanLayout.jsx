@@ -12,7 +12,7 @@ import {
   FaUsers,
 } from "react-icons/fa6";
 
-import WestWynPlanLayout from "../components/westwyn/WestWynPlanLayout";
+import WestWynPlanLayout from "../components/westwyn/WestwynPlanLayout";
 
 import LivePlotPlan from "./LivePlotPlan";
 
