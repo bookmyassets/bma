@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-deploy:
-    if: github.event.inputs.confirm == 'DEPLOY'
+    if: github.ref == 'refs/heads/main' && github.event.inputs.confirm == 'DEPLOY'
     runs-on: ubuntu-latest
 
     steps:
