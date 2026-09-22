@@ -4,6 +4,7 @@ import { getPlotInventoryByProject } from "@/sanity/lib/api";
 
 const ALLOWED_PROJECTS = new Set([
   "westwyn-residency",
+  "westwyn-estate",
 ]);
 
 export async function GET(_request, context) {
