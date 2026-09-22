@@ -1,12 +1,16 @@
 name: Deploy Next.js
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type DEPLOY to confirm production deployment"
+        required: true
+        type: string
 
 jobs:
   build-and-deploy:
+    if: github.event.inputs.confirm == 'DEPLOY'
     runs-on: ubuntu-latest
 
     steps:
