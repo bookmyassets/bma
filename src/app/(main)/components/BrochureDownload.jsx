@@ -4,7 +4,6 @@ import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assests/bma-dedicated-to-dholera.svg";
-import { useRouter, usePathname } from "next/navigation";
 
 export default function BrochureDownload({
   onClose,
@@ -27,8 +26,6 @@ export default function BrochureDownload({
   const [showThankYou, setShowThankYou] = useState(false);
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const router = useRouter();
-  const pathname = usePathname();
 
   const getLeadSource = () => {
     if (typeof window === "undefined") return "BookMyAssets";
@@ -203,12 +200,6 @@ export default function BrochureDownload({
         setTimeout(() => {
           setShowThankYou(false);
           handleClose();
-
-          // Get current pathname for return URL
-          const currentPath = pathname || window.location.pathname;
-
-          // Push to thank-you route with return URL
-          router.push(`/thankyou`);
         }, 2000);
       } else {
         throw new Error("Error submitting form");
