@@ -15,7 +15,7 @@ const RelatedBlogCard = ({ item, type }) => {
   return (
     <div
       data-slider-card="true"
-      className="flex-shrink-0 w-56 mx-3 snap-center cursor-pointer transform transition-all duration-300 md:w-72 md:mx-0 md:hover:scale-[1.03]"
+      className="flex-shrink-0 w-56 mx-3 snap-start cursor-pointer transform transition-all duration-300 md:w-72 md:mx-0 md:hover:scale-[1.03]"
     >
       <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-shadow duration-300">
         {/* Image */}
@@ -90,7 +90,7 @@ const RelatedBlogCard = ({ item, type }) => {
 const BlogSkeleton = () => (
   <div
     data-slider-card="true"
-    className="flex-shrink-0 w-56 mx-3 snap-center md:w-72 md:mx-0"
+    className="flex-shrink-0 w-56 mx-3 snap-start md:w-72 md:mx-0"
   >
     <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
       <div className="w-full aspect-video bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse" />
@@ -113,8 +113,6 @@ export default function LatestUpdates() {
   const [isClient, setIsClient] = useState(false);
 
   const sliderRef = useRef(null);
-  const autoPlayIntervalRef = useRef(null);
-  const restartTimeoutRef = useRef(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -227,54 +225,13 @@ export default function LatestUpdates() {
       left: selectedCard.offsetLeft,
       behavior: "smooth",
     });
-  }, [currentIndex, isClient]);
-
-  /* ==========================================================
-     AUTOPLAY
-  ========================================================== */
-  const startAutoplay = () => {
-    if (autoPlayIntervalRef.current) {
-      clearInterval(autoPlayIntervalRef.current);
-    }
-
-    if (content.length <= 1) return;
-
-    autoPlayIntervalRef.current = setInterval(() => {
-      setCurrentIndex((prev) =>
-        prev >= content.length - 1 ? 0 : prev + 1,
-      );
-    }, 4000);
-  };
-
-  useEffect(() => {
-    if (!loading && content.length > 1) {
-      startAutoplay();
-    }
-
-    return () => {
-      if (autoPlayIntervalRef.current) {
-        clearInterval(autoPlayIntervalRef.current);
-      }
-
-      if (restartTimeoutRef.current) {
-        clearTimeout(restartTimeoutRef.current);
-      }
-    };
-  }, [loading, content.length]);
+  }, [currentIndex, isClient, content.length]);
 
   /* ==========================================================
      ARROW CLICK
   ========================================================== */
   const handleArrowClick = (direction) => {
     if (!content.length) return;
-
-    if (autoPlayIntervalRef.current) {
-      clearInterval(autoPlayIntervalRef.current);
-    }
-
-    if (restartTimeoutRef.current) {
-      clearTimeout(restartTimeoutRef.current);
-    }
 
     setCurrentIndex((prev) => {
       if (direction === "prev") {
@@ -283,10 +240,6 @@ export default function LatestUpdates() {
 
       return prev === content.length - 1 ? 0 : prev + 1;
     });
-
-    restartTimeoutRef.current = setTimeout(() => {
-      startAutoplay();
-    }, 10000);
   };
 
   /* ==========================================================

@@ -15,7 +15,7 @@ import { blogPostSchema, breadcrumbSchema } from "@/lib/schema";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed";
-import { resolveBlogDates, getVisibleBlogDate } from "@/lib/blogDates";
+import { resolveBlogDates } from "@/lib/blogDates";
 import TableOfContents from "./TableOfContents";
 
 const URLFormatter = (text) => {
@@ -103,6 +103,22 @@ const getPlainText = (value) => {
 const getReadingTime = (body) => {
   const words = getPlainText(body).trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 200));
+};
+
+const formatBlogDate = (value) => {
+  if (!value) return null;
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  return {
+    dateTime: date.toISOString().split("T")[0],
+    formatted: date.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+  };
 };
 
 // Right Sidebar Component
@@ -541,8 +557,10 @@ export default async function Post({ params }) {
     };
 
     const articleDates = resolveBlogDates(post);
-    const visibleDate = getVisibleBlogDate(post);
-    const visibleDateLabel = visibleDate?.label || "Published On";
+    const publishedDate = formatBlogDate(articleDates.originalPublicationDate);
+    const updatedDate = formatBlogDate(
+      post._updatedAt || articleDates.modificationDate,
+    );
     const readingTime = getReadingTime(post.body);
 
     return (
@@ -554,7 +572,7 @@ export default async function Post({ params }) {
             image: post.mainImage?.asset?.url,
             imageAlt: post.mainImage?.alt,
             publishedAt: articleDates.originalPublicationDate,
-            updatedAt: articleDates.modificationDate,
+            updatedAt: post._updatedAt || articleDates.modificationDate,
             slug: `dholera-sir-blogs/${slug}`,
             canonicalUrl: post.canonicalUrl,
             authorName: post.author?.name || "BookMyAssets",
@@ -576,7 +594,7 @@ export default async function Post({ params }) {
 
         <div className="bg-black min-h-screen text-white">
           <div className="bg-black shadow-sm sticky top-0 z-20" />
-          <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
+          <main className="w-full mx-0 px-0 py-8 pt-24">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
               {/* Main Content */}
               <article className="order-1 min-w-0">
@@ -641,44 +659,30 @@ export default async function Post({ params }) {
                     {post.title}
                   </h1>
 
-                  <div className="md:hidden">
-                    <div className="flex items-center justify-between gap-4 text-sm">
-                      {visibleDate && (
-                        <div className="flex flex-col gap-1 text-white">
-                          <time dateTime={visibleDate.dateTime}>
-                            <span className="text-[#ddbc69]">
-                              {visibleDateLabel}:{" "}
-                            </span>
-                            {visibleDate.formatted}
-                          </time>
-                        </div>
+                  <div className="mb-2 flex flex-wrap items-center justify-between gap-3 rounded-lg text-sm text-white">
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+                      {publishedDate && (
+                        <time dateTime={publishedDate.dateTime}>
+                          <span className="text-[#ddbc69]">Published On: </span>
+                          {publishedDate.formatted}
+                        </time>
                       )}
-                      <span
-                        className="shrink-0 rounded-full border border-white/15 bg-white/10 px-3 py-1 font-semibold text-white"
-                        aria-label={`Estimated reading time ${readingTime} minutes`}
-                      >
-                        <span className="text-[#ddbc69]">{readingTime}</span>{" "}
-                        min read
-                      </span>
-                    </div>
-                  </div>
 
-                  <div className="hidden md:block">
-                    <div className="flex flex-wrap items-center space-x-4 justify-between p-2 rounded-lg gap-4 text-white text-sm mb-2">
-                      {visibleDate && (
-                        <div className="flex flex-wrap items-center gap-4">
-                          <time
-                            className="text-white"
-                            dateTime={visibleDate.dateTime}
-                          >
-                            <span className="text-[#ddbc69]">
-                              {visibleDateLabel}:{" "}
-                            </span>
-                            {visibleDate.formatted}
-                          </time>
-                        </div>
+                      {updatedDate && (
+                        <time dateTime={updatedDate.dateTime}>
+                          <span className="text-[#ddbc69]">Updated On: </span>
+                          {updatedDate.formatted}
+                        </time>
                       )}
                     </div>
+
+                    <span
+                      className="shrink-0 rounded-full border border-white/15 bg-white/10 px-3 py-1 font-semibold text-white"
+                      aria-label={`Estimated reading time ${readingTime} minutes`}
+                    >
+                      <span className="text-[#ddbc69]">{readingTime}</span>{" "}
+                      min read
+                    </span>
                   </div>
                 </div>
 

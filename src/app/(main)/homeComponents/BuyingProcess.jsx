@@ -1,14 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import ContactForm from "../components/Contactform";
 import bookingIcon from "@/assests/icons/booking.svg";
 import callIcon from "@/assests/icons/call.svg";
 import constructionIcon from "@/assests/icons/construction.svg";
 import registryIcon from "@/assests/icons/registry.svg";
 import villaIcon from "@/assests/icons/house.svg";
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 
 const steps = [
   {
@@ -71,11 +70,6 @@ const supportItems = [
 ];
 
 export default function HowToBuy() {
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-
-  const openContactForm = () => setIsContactFormOpen(true);
-  const closeContactForm = () => setIsContactFormOpen(false);
-
   return (
     <>
       <section
@@ -137,11 +131,11 @@ export default function HowToBuy() {
                   <div className="mx-auto mt-2 h-px w-10 bg-[#ddbc69]" />
                 </div>
 
-                <ul className="mt-3 space-y-3 lg:mt-3.5 lg:space-y-3.5">
+                <ul className="mx-auto mt-4 flex w-full max-w-[270px] flex-col gap-3.5 text-left lg:mt-4">
                   {step.points.map((point) => (
                     <li
                       key={point}
-                      className="flex items-start gap-2.5 text-[0.95rem] leading-[1.42] text-white"
+                      className="flex items-start gap-3 text-[0.95rem] leading-[1.42] text-white"
                     >
                       <span
                         className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#ddbc69] text-[11px] font-black leading-none text-black"
@@ -215,13 +209,15 @@ export default function HowToBuy() {
           </div>
 
           <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <Link
+            <a
               href="https://wa.me/918130371647"
-              onClick={openContactForm}
-              className="flex min-h-14 w-full max-w-80 items-center justify-center rounded-lg bg-[#ddbc69] px-6 py-3 text-center text-[clamp(1rem,2vw,1.25rem)] font-extrabold text-black transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69]"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-14 w-full max-w-80 items-center justify-center gap-2 rounded-lg bg-[#ddbc69] px-6 py-3 text-center text-[clamp(1rem,2vw,1.25rem)] font-extrabold text-black transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69]"
             >
+              <FaWhatsapp className="h-6 w-6 text-green-800" aria-hidden="true" />
               Connect with our RM
-            </Link>
+            </a>
             <Link
               href="https://www.bookmyassets.com/book-video-call"
               className="flex min-h-14 w-full max-w-80 items-center justify-center rounded-lg border border-[#ddbc69] bg-black px-6 py-3 text-center text-[clamp(1rem,2vw,1.25rem)] font-extrabold text-[#ddbc69] transition-colors duration-200 hover:bg-[#ddbc69] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69]"
@@ -232,24 +228,6 @@ export default function HowToBuy() {
         </div>
       </section>
 
-      {isContactFormOpen && (
-        <div
-          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Connect with our relationship manager"
-          onClick={closeContactForm}
-        >
-          <div className="w-full max-w-md" onClick={(event) => event.stopPropagation()}>
-            <ContactForm
-              onClose={closeContactForm}
-              title="Connect with our RM"
-              headline="Share your details and our relationship manager will contact you."
-              buttonName="Get a Call Back"
-            />
-          </div>
-        </div>
-      )}
     </>
   );
 }
