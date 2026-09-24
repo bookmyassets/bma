@@ -1,234 +1,96 @@
-import { AnimatePresence } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import BrochureDownload from "../../components/BrochureDownload";
-import Image from "next/image";
-import img from "@/assests/westwyn-county/westwyn-county-map-by-bookmyassets.webp";
-import { FaDownload } from "react-icons/fa";
+"use client";
+
 import {
-  FaPhone,
-  FaWhatsapp,
+  FaBuilding,
+  FaFileCircleCheck,
+  FaIndianRupeeSign,
+  FaLayerGroup,
+  FaLocationDot,
+  FaMoneyCheckDollar,
+  FaRulerCombined,
+  FaUser,
+  FaUsers,
 } from "react-icons/fa6";
-import Link from "next/link";
 
-const PlanLayout = () => {
-  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-  // New state for brochure form
-  const [formTitle, setFormTitle] = useState("");
-  const [formHeadline, setFormHeadline] = useState("");
-  const [buttonName, setButtonName] = useState("");
-  const [formType, setFormType] = useState("");
+import WestWynPlanLayout from "../components/westwyn/WestwynPlanLayout";
+import LivePlotPlan from "./LivePlotPlan";
 
-  const openBrochureForm = (title, headline, btnName, type) => {
-    setFormTitle(title);
-    setFormHeadline(headline);
-    setButtonName(btnName);
-    setFormType(type);
-    setIsBrochureFormOpen(true);
-  };
 
-  const closeBrochureForm = () => {
-    setIsBrochureFormOpen(false);
-  };
+const overviewCards = [
+  {
+    title: "Land Parcel",
+    value: "5.99 Acres",
+    secondaryValue: "29,000 sq. yards",
+    icon: FaLayerGroup,
+  },
+  {
+    title: "Location",
+    value: "Fedra-Pipli State Highway",
+    icon: FaLocationDot,
+  },
+  {
+    title: "Plot Sizes",
+    value: "149-325 sq. yards",
+    icon: FaRulerCombined,
+  },
+  {
+    title: "Total Units",
+    value: "131 exclusive plots",
+    icon: FaUsers,
+  },
+  {
+    title: "Development Status",
+    value: "Under Construction",
+    icon: FaBuilding,
+  },
+  {
+    title: "Resale Price",
+    value: "₹12,000 / sq. Yard",
+    icon: FaIndianRupeeSign,
+  },
+  {
+    title: "Developer",
+    value: "BookMyAssets",
+    icon: FaUser,
+  },
+];
 
-  const handleAfterSubmit = () => {
-    console.log("Form submitted successfully, type:", formType);
+const documentation = [
+  {
+    title: "Land Documentation",
+    values: [
+      "Non-Agricultural Land / No Objection Certificate",
+      "Title Clear",
+      "Plan Pass Approved",
+    ],
+    icon: FaFileCircleCheck,
+  },
+  {
+    title: "Registration",
+    values: ["Registry Ready", "Immediate Possession"],
+    icon: FaFileCircleCheck,
+  },
+];
 
-    if (formType === "brochure") {
-      try {
-        console.log("Initiating brochure download");
+const brochureUrl =
+  "https://cdn.sanity.io/files/c3e1h345/projects/c28b4a439e3834cddf988bab24774f3f79bb78a9.pdf";
 
-        // Using setTimeout to ensure the popup closes before download starts
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.href =
-            "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
-          link.target = "_blank";
-          link.download = "brochure.pdf"; // Add download attribute
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          console.log("Download link clicked");
-        }, 300);
-      } catch (error) {
-        console.error("Error downloading brochure:", error);
-        window.open(
-          "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf",
-          "_blank",
-        );
-      }
-    }
-  };
-
+export default function PlanLayout({ surface = "alt" }) {
   return (
-    <div className="bg-white relative overflow-hidden">
-      {/* Subtle background pattern */}
-
-      <div className="relative max-w-7xl mx-auto px-4 py-4">
-        {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto">
-          <div>
-            <h3 className="text-[32px] font-semibold text-center">
-              Plan Layout
-            </h3>
-          </div>
-          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-            <div className="px-4 sm:px-6 lg:px-8 md:order-2">
-              <Image
-                src={img}
-                alt="plan layout of westwyn estates"
-                className="rounded-xl w-[650px] md:h-[350px] h-auto md:order-1 "
-                priority
-              />
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                {
-                  title: "Land Parcel",
-                  content: "29,000 sq. yards (approx.)",
-                  align: "text-center",
-                },
-                {
-                  title: "Total Plots",
-                  content: "131 plots",
-                  align: "text-center",
-                },
-                {
-                  title: "Possession",
-                  content: "Immediate",
-                  align: "text-center",
-                },
-                {
-                  title: "Plot Size",
-                  content: "149-325 sq. yards",
-                  align: "text-center",
-                },
-                {
-                  title: "Resale Price",
-                  content: "₹12,000/sq. yards",
-                  align: "text-center",
-                },
-                {
-                  title: "Developer",
-                  content: "BookMyAssets",
-                  align: "text-center",
-                },
-                {
-                  title: "Development Status",
-                  content: "Under Construction",
-                  align: "text-center",
-                },
-                {
-                  title: "Documentation",
-                  content: "NA/NOC, Title Clear, Plan Pass Approved",
-                  align: "text-center",
-                },
-                {
-                  title: "Location",
-                  content: "Fedra-Pipli State Highway",
-                  align: "text-center",
-                },
-              ].map(({ title, content, align }, index, arr) => {
-                const isLastOdd =
-                  index === arr.length - 1 && arr.length % 2 !== 0;
-
-                return (
-                  <div
-                    key={title}
-                    className={`flex flex-col rounded-2xl text-black overflow-hidden ${
-                      isLastOdd ? "col-span-2 sm:col-span-1" : ""
-                    }`}
-                    style={{
-                      border: "1.5px solid #f0f0f0",
-                      boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-                    }}
-                  >
-                    {/* Gold top accent bar */}
-                    <div
-                      className="h-1 w-full"
-                      style={{
-                        background: "linear-gradient(90deg, #ddbc69, #f0c96a)",
-                      }}
-                    />
-
-                    <div className="flex flex-col flex-1 p-3 sm:p-4 lg:p-5">
-                      {/* Title */}
-                      <span
-                        className="font-bold text-center w-full text-xs sm:text-sm lg:text-base"
-                        style={{ color: "#ddbc69", letterSpacing: "0.01em" }}
-                      >
-                        {title}
-                      </span>
-
-                      {/* Divider */}
-                      <div
-                        className="w-2/3 mx-auto mt-2 mb-3 h-[1px]"
-                        style={{ background: "#ececec" }}
-                      />
-
-                      {/* Content */}
-                      <div className="flex flex-1 items-center justify-center">
-                        <span
-                          className={`font-semibold ${align} text-xs sm:text-sm lg:text-base leading-snug`}
-                          style={{ color: "#1a1a1a" }}
-                        >
-                          {content}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="gap-12 items-stretch space-y-4 px-4 py-4">
-            {/* Left Content */}
-            <div className="h-full">
-              <div className="flex justify-center items-center flex-row gap-[clamp(0.5rem,2vw,1rem)]">
-                <Link
-                  href="https://wa.me/918130371647"
-                  className="bg-[#ddbc69] text-white whitespace-nowrap rounded-xl font-medium hover:bg-[#c9992a] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
-                    text-[clamp(0.8rem,1.8vw,1rem)]
-                    px-[clamp(0.75rem,3vw,1.25rem)]
-                    py-[clamp(0.5rem,2vw,0.75rem)]"
-                >
-                  <FaWhatsapp className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                  Get  Brochure
-                </Link>
-
-                <Link href="tel:+918130371647">
-                  <p
-                    className="bg-white border border-[#ddbc69] whitespace-nowrap text-[#ddbc69] rounded-xl font-medium hover:bg-[#f8f5e6] transition-colors flex items-center justify-center gap-[clamp(0.375rem,1vw,0.5rem)]
-                    text-[clamp(0.8rem,1.8vw,1rem)]
-                    px-[clamp(0.75rem,3vw,1.25rem)]
-                    py-[clamp(0.5rem,2vw,0.75rem)]"
-                  >
-                    <FaPhone className="text-[clamp(0.8rem,2vw,1.1rem)]" />
-                    Connect With our RM
-                  </p>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
-              <BrochureDownload
-                onClose={closeBrochureForm}
-                title="Get Project Plan Layout"
-                buttonName="Get Brochure"
-                onAfterSubmit={handleAfterSubmit}
-                link="https://drive.google.com/file/d/1xJzNlQpyqyDIaSzOCo48s8J44qC3gS2S/view?usp=sharing"
-              />
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
-    </div>
+    <WestWynPlanLayout
+      projectName="WestWyn County"
+      overviewCards={overviewCards}
+      location={{
+        name: "Fedra-Pipli State Highway",
+        description: [
+          "WestWyn county is located in Fedra-Pipli State Highway, Dholera.",
+          "The project enjoys direct Entry/Exit from Fedra-Pipli Highway (SH-40).",
+        ],
+      }}
+      documentation={documentation}
+      brochureUrl={brochureUrl}
+      masterPlan={<LivePlotPlan />}
+    />
   );
-};
+}
 
-export default PlanLayout;

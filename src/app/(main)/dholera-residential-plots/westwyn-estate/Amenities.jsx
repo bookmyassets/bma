@@ -17,12 +17,6 @@ import {
 
 import WestWynAmenities from "../components/westwyn/WestwynAmenities";
 
-// import boundaryImage from "@/assests/residential/estates/Projectboundary.webp";
-// import entryGateImage from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate.webp";
-// import kidsPlayImage from "@/assests/residential/estates/kidsplayarea.webp";
-// import yogaImage from "@/assests/residential/estates/yogadeck.webp";
-// import joggingImage from "@/assests/residential/estates/westwyn-estates-dholera-sir-jogging-track.webp";
-
 const amenities = [
   {
     id: "boundary",

@@ -18,7 +18,7 @@ import WestWynProjectAbout from "../components/westwyn/WestwynProjectAbout";
 import mapImage from "@/assests/residential/residency/Residency.webp";
 
 const brochureUrl =
-  "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
+  "https://cdn.sanity.io/files/c3e1h345/projects/17398b902e7e55f15d7c35b6bb130e30417a7167.pdf";
 
 const locations = [
   {

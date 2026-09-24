@@ -15,8 +15,11 @@ import { blogPostSchema, breadcrumbSchema } from "@/lib/schema";
 import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed";
-import { resolveBlogDates, getVisibleBlogDate } from "@/lib/blogDates";
+import { resolveBlogDates } from "@/lib/blogDates";
 import TableOfContents from "./TableOfContents";
+import { getWestwynSectionSurface } from "../../dholera-residential-plots/components/westwyn/WestwynTheme";
+
+const blogBaseSurface = getWestwynSectionSurface();
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -100,25 +103,57 @@ const getPlainText = (value) => {
   return "";
 };
 
+const sanitizeCmsHtmlTable = (html) => {
+  if (typeof html !== "string") return "";
+
+  return html.replace(
+    /(<style\b[^>]*>)([\s\S]*?)(<\/style>)/gi,
+    (_, openingTag, styles, closingTag) =>
+      `${openingTag}${styles.replace(
+        /(?:html\s*,\s*)?body\s*\{[\s\S]*?\}/gi,
+        "",
+      )}${closingTag}`,
+  );
+};
+
 const getReadingTime = (body) => {
   const words = getPlainText(body).trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 200));
 };
 
+const formatBlogDate = (value) => {
+  if (!value) return null;
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  return {
+    dateTime: date.toISOString().split("T")[0],
+    formatted: date.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+  };
+};
+
 // Right Sidebar Component
 const RightSidebar = ({ trendingBlogs }) => {
   return (
-    <aside className="order-3 space-y-4 pt-4 lg:order-2">
-      <div className=" pt-4 max-w-xl mx-auto hidden md:block">
+    <aside className="order-3 space-y-6 lg:order-2">
+      <div className="max-w-xl mx-auto hidden md:block">
         <InlineLeadForm
           variant="common"
-          title="Buy Residential Plots in Dholera Starting From ₹8 Lakh"
+          title="Buy Residential Plots in Dholera Starting From ₹10 Lakh"
           buttonName="Know More"
+          theme="dark"
+          layout="stacked"
+          surface="alt"
         />
       </div>
       <div className="sticky top-24 space-y-6">
         {/* Latest Content Section */}
-        <div className="bg-black rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
+        <div className="bg-[#161616] rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
           <h3 className="text-xl font-bold mb-4 text-white">
             Latest News on Dholera SIR
           </h3>
@@ -128,7 +163,7 @@ const RightSidebar = ({ trendingBlogs }) => {
                 key={item._id}
                 href={`/dholera-sir-updates/${item.slug.current}`}
               >
-                <div className="flex gap-3 items-center bg-gray-950 hover:bg-gray-900 p-3 border border-gray-700 transition-all hover:shadow-md">
+                <div className="flex gap-3 items-center bg-[#101010] hover:bg-gray-900 p-3 border border-gray-700 transition-all hover:shadow-md">
                   {item.mainImage && (
                     <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                       <Image
@@ -227,17 +262,17 @@ export default async function Post({ params }) {
           const imageUrl =
             value.asset.url || urlFor(value).width(1200).height(800).url();
           const imageNode = (
-            <img
-              src={imageUrl}
-              alt={value.alt || ""}
-              className="w-full h-auto aspect-[3/2] rounded-lg my-6"
-              width={1200}
-              height={800}
-              loading="lazy"
+              <img
+                src={imageUrl}
+                alt={value.alt || ""}
+                className="blog-page__portable-image"
+                width={1200}
+                height={800}
+                loading="lazy"
             />
           );
           return (
-            <figure className="my-6">
+            <figure className="blog-page__portable-figure">
               {value.url ? (
                 <a
                   href={value.url}
@@ -314,7 +349,9 @@ export default async function Post({ params }) {
                   [&_tr:last-child_td]:border-b-0 [&_tr:hover]:bg-gray-900
                   [&_th:first-child]:rounded-tl-lg [&_th:last-child]:rounded-tr-lg
                   [&_tr:last-child_td:first-child]:rounded-bl-lg [&_tr:last-child_td:last-child]:rounded-br-lg"
-                dangerouslySetInnerHTML={{ __html: value.html }}
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeCmsHtmlTable(value.html),
+                }}
               />
             </div>
           );
@@ -541,8 +578,10 @@ export default async function Post({ params }) {
     };
 
     const articleDates = resolveBlogDates(post);
-    const visibleDate = getVisibleBlogDate(post);
-    const visibleDateLabel = visibleDate?.label || "Published On";
+    const publishedDate = formatBlogDate(articleDates.originalPublicationDate);
+    const updatedDate = formatBlogDate(
+      post._updatedAt || articleDates.modificationDate,
+    );
     const readingTime = getReadingTime(post.body);
 
     return (
@@ -554,7 +593,7 @@ export default async function Post({ params }) {
             image: post.mainImage?.asset?.url,
             imageAlt: post.mainImage?.alt,
             publishedAt: articleDates.originalPublicationDate,
-            updatedAt: articleDates.modificationDate,
+            updatedAt: post._updatedAt || articleDates.modificationDate,
             slug: `dholera-sir-blogs/${slug}`,
             canonicalUrl: post.canonicalUrl,
             authorName: post.author?.name || "BookMyAssets",
@@ -574,10 +613,10 @@ export default async function Post({ params }) {
           ])}
         />
 
-        <div className="bg-black min-h-screen text-white">
-          <div className="bg-black shadow-sm sticky top-0 z-20" />
-          <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div className={`${blogBaseSurface} blog-page min-h-screen text-white`}>
+          <div className={`${blogBaseSurface} shadow-sm sticky top-0 z-20`} />
+          <main className="blog-page__container py-8 pt-24">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-10">
               {/* Main Content */}
               <article className="order-1 min-w-0">
                 {/* Breadcrumb */}
@@ -636,55 +675,41 @@ export default async function Post({ params }) {
                 </div>
 
                 {/* Article Header */}
-                <div className="mb-4">
+                <div className="mb-3">
                   <h1 className="text-[clamp(1rem,calc(2vw+1rem),2.5rem)] leading-[1.22]  font-bold text-white mb-4">
                     {post.title}
                   </h1>
 
-                  <div className="md:hidden">
-                    <div className="flex items-center justify-between gap-4 text-sm">
-                      {visibleDate && (
-                        <div className="flex flex-col gap-1 text-white">
-                          <time dateTime={visibleDate.dateTime}>
-                            <span className="text-[#ddbc69]">
-                              {visibleDateLabel}:{" "}
-                            </span>
-                            {visibleDate.formatted}
-                          </time>
-                        </div>
+                  <div className="mb-0 flex flex-wrap items-center justify-between gap-3 rounded-lg text-sm text-white">
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+                      {publishedDate && (
+                        <time dateTime={publishedDate.dateTime}>
+                          <span className="text-[#ddbc69]">Published On: </span>
+                          {publishedDate.formatted}
+                        </time>
                       )}
-                      <span
-                        className="shrink-0 rounded-full border border-white/15 bg-white/10 px-3 py-1 font-semibold text-white"
-                        aria-label={`Estimated reading time ${readingTime} minutes`}
-                      >
-                        <span className="text-[#ddbc69]">{readingTime}</span>{" "}
-                        min read
-                      </span>
-                    </div>
-                  </div>
 
-                  <div className="hidden md:block">
-                    <div className="flex flex-wrap items-center space-x-4 justify-between p-2 rounded-lg gap-4 text-white text-sm mb-2">
-                      {visibleDate && (
-                        <div className="flex flex-wrap items-center gap-4">
-                          <time
-                            className="text-white"
-                            dateTime={visibleDate.dateTime}
-                          >
-                            <span className="text-[#ddbc69]">
-                              {visibleDateLabel}:{" "}
-                            </span>
-                            {visibleDate.formatted}
-                          </time>
-                        </div>
+                      {updatedDate && (
+                        <time dateTime={updatedDate.dateTime}>
+                          <span className="text-[#ddbc69]">Updated On: </span>
+                          {updatedDate.formatted}
+                        </time>
                       )}
                     </div>
+
+                    <span
+                      className="shrink-0 rounded-full border border-white/15 bg-white/10 px-3 py-1 font-semibold text-white"
+                      aria-label={`Estimated reading time ${readingTime} minutes`}
+                    >
+                      <span className="text-[#ddbc69]">{readingTime}</span>{" "}
+                      min read
+                    </span>
                   </div>
                 </div>
 
                 {/* Featured Image */}
                 {post.mainImage && (
-                  <div className="relative mb-10 w-full h-auto overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
+                  <div className="blog-page__featured-image relative mb-8 w-full overflow-hidden rounded-xl shadow-lg">
                     <Image
                       src={urlFor(post.mainImage).width(1200).height(800).url()}
                       alt={
@@ -692,7 +717,7 @@ export default async function Post({ params }) {
                       }
                       width={1200}
                       height={800}
-                      className="w-full h-auto aspect-[3/2]"
+                      className="block w-full aspect-[3/2] object-cover"
                       priority
                       fetchPriority="high"
                     />
@@ -709,7 +734,7 @@ export default async function Post({ params }) {
                 <TableOfContents items={headingTree} />
 
                 {/* Article Content */}
-                <div className="bg-black rounded-xl shadow-2xl p-8 border border-gray-700">
+                <div className={`${blogBaseSurface} rounded-xl shadow-2xl p-4 sm:p-6 lg:p-8 border border-gray-700`}>
                   <div className=" max-w-none">
                     <PortableText
                       value={post.body}
@@ -774,8 +799,8 @@ export default async function Post({ params }) {
           </main>
 
           {/* Related Articles Section */}
-          <section className="bg-black py-12 mt-4">
-            <div className="max-w-7xl mx-auto px-4">
+          <section className={`${blogBaseSurface} py-12 mt-4`}>
+            <div className="blog-page__container">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-bold text-white">
                   Our Latest Blogs

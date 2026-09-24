@@ -10,3 +10,40 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+.blog-page {
+  background-color: #101010;
+}
+
+.blog-page__container {
+  width: calc(100% - 2rem);
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
+.blog-page__featured-image,
+.blog-page__portable-figure {
+  margin-top: 0;
+}
+
+.blog-page__featured-image > img,
+.blog-page__portable-image {
+  display: block;
+}
+
+.blog-page__portable-figure {
+  margin: 0 0 1.5rem;
+}
+
+.blog-page__portable-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .blog-page__container {
+    width: calc(100% - 3rem);
+  }
+}

@@ -46,7 +46,6 @@ const plotOptions = [
 
 export default function WestWynEstateClient() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
   const [formTitle, setFormTitle] = useState("");
   const [formHeadline, setFormHeadline] = useState("");
   const [buttonName, setButtonName] = useState("");
@@ -61,40 +60,6 @@ export default function WestWynEstateClient() {
   };
 
   const closeContactForm = () => setIsContactFormOpen(false);
-
-  const openBrochureForm = (title, headline, btnName, type) => {
-    setFormTitle(title);
-    setFormHeadline(headline);
-    setButtonName(btnName);
-    setFormType(type);
-    setIsBrochureFormOpen(true);
-  };
-
-  const closeBrochureForm = () => setIsBrochureFormOpen(false);
-
-  const handleAfterSubmit = () => {
-    console.log("Form submitted successfully, type:", formType);
-    if (formType === "brochure") {
-      try {
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.href =
-            "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf";
-          link.target = "_blank";
-          link.download = "brochure.pdf";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }, 300);
-      } catch (error) {
-        console.error("Error downloading brochure:", error);
-        window.open(
-          "https://cdn.sanity.io/files/c3e1h345/projects/c9471499567c096befb9416aa99c7f0077900d11.pdf",
-          "_blank",
-        );
-      }
-    }
-  };
 
   return (
     <>
@@ -182,21 +147,6 @@ export default function WestWynEstateClient() {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
-              <ContactForm
-                onClose={closeBrochureForm}
-                title={formTitle}
-                headline={formHeadline}
-                buttonName={buttonName}
-                onAfterSubmit={handleAfterSubmit}
-              />
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

@@ -72,7 +72,7 @@ const documentation = [
 ];
 
 const brochureUrl =
-  "https://drive.google.com/file/d/1tkK2ChBBTtOR5IY31tggzxnnx9djRUlG/view?usp=sharing";
+  "https://drive.google.com/uc?export=download&id=1tkK2ChBBTtOR5IY31tggzxnnx9djRUlG";
 
 export default function PlanLayout({surface="alt"}) {
   return (

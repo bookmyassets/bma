@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   UserRound,
 } from "lucide-react";
+import { getWestwynSectionSurface } from "../dholera-residential-plots/components/westwyn/WestwynTheme";
 
 const DEFAULT_TAGS = ["Dholera Investment", "Website Lead", "Bulk Land"];
 
@@ -104,6 +105,8 @@ export default function InlineLeadForm({
   headingTag,
   theme = "light",
   showSubtitle = false,
+  layout = "inline",
+  surface,
 }) {
   const variantConfig = FORM_VARIANTS[variant] || FORM_VARIANTS.lead;
   const config = {
@@ -120,6 +123,10 @@ export default function InlineLeadForm({
   };
   const HeadingTag = config.headingTag;
   const isDark = theme === "dark";
+  const isStacked = layout === "stacked";
+  const darkSurface = surface
+    ? getWestwynSectionSurface(surface)
+    : "bg-[#0B0B0B]";
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -339,7 +346,7 @@ export default function InlineLeadForm({
 
       ${
         isDark
-          ? "bg-[#0B0B0B] text-white"
+          ? `${darkSurface} text-white`
           : "bg-[#F7F3EB] text-[#202020]"
       }
     `}
@@ -651,16 +658,11 @@ export default function InlineLeadForm({
             ================================================== */}
 
             <div
-              className="
-                grid
-                grid-cols-1
-                gap-3
-
-                md:grid-cols-2
-
-                lg:grid-cols-[1fr_1fr_210px]
-                lg:items-end
-              "
+              className={`grid grid-cols-1 gap-3 ${
+                isStacked
+                  ? ""
+                  : "md:grid-cols-2 lg:grid-cols-[1fr_1fr_210px] lg:items-end"
+              }`}
             >
               {/* ================= FULL NAME ================= */}
 
@@ -925,9 +927,7 @@ export default function InlineLeadForm({
                   sm:h-[50px]
                   sm:text-base
 
-                  md:col-span-2
-
-                  lg:col-span-1
+                  ${isStacked ? "" : "md:col-span-2 lg:col-span-1"}
 
                   ${
                     isLoading ||
