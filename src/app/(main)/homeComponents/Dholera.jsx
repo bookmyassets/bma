@@ -5,14 +5,18 @@ import Link from "next/link";
 
 export default function DholeraSmartCity() {
   const locationFeatures = [
-    { text: "India's First Special Investment Region (SIR)" },
+    { text: "India's First Special Investment Region (SIR)",
+      href:"https://www.bookmyassets.com/about-dholera-sir"
+     },
     { text: "Government Backed Development" },
     { text: "Part of the Delhi-Mumbai Industrial Corridor (DMIC)" },
     {
       text: "India's First Semiconductor Hub",
       href: "https://www.bookmyassets.com/about-dholera-sir/Tata-Semiconductor-Plant-in-Dholera",
     },
-    { text: "Plug & Play Infrastructure" },
+    { text: "Plug & Play Infrastructure",
+      href:"https://www.bookmyassets.com/dholera-sir-blogs/plug-and-play-infrastructure-in-dholera"
+     },
     {
       text: "Strong Connectivity via Road, Railway, Sea Port, Airport & MonoRail",
     },
@@ -48,7 +52,7 @@ export default function DholeraSmartCity() {
               <Link
                 href="https://www.bookmyassets.com/about-dholera-sir"
                 title="Dholera Smart City"
-                className="text-[#ddbc69] hover:underline"
+                className="text-white hover:text-[#ddbc69] hover:underline"
               >
                 Dholera Smart City
               </Link>{" "}
@@ -74,7 +78,7 @@ export default function DholeraSmartCity() {
                     {feature.href ? (
                       <Link
                         href={feature.href}
-                        className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-[#ddbc69] hover:underline"
+                        className="text-[clamp(0.95rem,1.4vw,1.125rem)] font-normal leading-[1.7] text-white hover:underline hover:text-[#ddbc69]"
                       >
                         {feature.text}
                       </Link>

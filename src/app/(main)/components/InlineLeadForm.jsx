@@ -327,8 +327,7 @@ export default function InlineLeadForm({
   return (
   <section
     aria-label={config.title}
-    className="
-      bg-[#F7F3EB]
+    className={`
       px-4
       py-5
 
@@ -337,75 +336,154 @@ export default function InlineLeadForm({
 
       lg:px-8
       lg:py-8
-    "
+
+      ${
+        isDark
+          ? "bg-[#0B0B0B] text-white"
+          : "bg-[#F7F3EB] text-[#202020]"
+      }
+    `}
   >
     <div
-      className="
+      className={`
         relative
+
         mx-auto
         max-w-7xl
+
         overflow-hidden
 
         rounded-[22px]
 
         border
-        border-[#B8924F]/55
-
-        bg-[#F7F3EB]
 
         px-3
         py-4
-
-        shadow-[0_16px_45px_rgba(89,72,42,0.05)]
 
         sm:px-5
         sm:py-5
 
         lg:px-6
         lg:py-6
-      "
+
+        ${
+          isDark
+            ? `
+              border-[#DDBC69]/30
+
+              bg-[#11100E]
+
+              shadow-[0_18px_45px_rgba(0,0,0,0.24)]
+            `
+            : `
+              border-[#B8924F]/55
+
+              bg-[#F7F3EB]
+
+              shadow-[0_16px_45px_rgba(89,72,42,0.05)]
+            `
+        }
+      `}
     >
+      {/* Decorative dark glow */}
+      {isDark && (
+        <>
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+
+              absolute
+              -left-32
+              -top-32
+
+              h-[320px]
+              w-[320px]
+
+              rounded-full
+
+              bg-[#DDBC69]/[0.035]
+
+              blur-[100px]
+            "
+          />
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+
+              absolute
+              -bottom-36
+              right-0
+
+              h-[300px]
+              w-[380px]
+
+              rounded-full
+
+              bg-[#DDBC69]/[0.025]
+
+              blur-[110px]
+            "
+          />
+        </>
+      )}
 
       <div className="relative z-10 mx-auto max-w-[1180px]">
+
         {/* =====================================================
             HEADER
         ====================================================== */}
+
         <div className="mx-auto max-w-4xl text-center">
-          
           <HeadingTag
-            className="
+            className={`
               mt-1
 
-              font-serif
+              font-playfair-display
+
               text-[26px]
-              font-medium
+              font-semibold
+
               leading-[1.08]
+
               tracking-[-0.025em]
-              text-[#202020]
 
               sm:text-[30px]
 
               lg:text-[34px]
 
               xl:text-[38px]
-            "
+
+              ${
+                isDark
+                  ? "text-[#DDBC69]"
+                  : "text-[#202020]"
+              }
+            `}
           >
             {config.title}
           </HeadingTag>
 
           {showSubtitle && config.subtitle && (
             <p
-              className="
+              className={`
                 mx-auto
                 mt-2.5
                 max-w-3xl
 
                 text-[15px]
                 leading-[1.6]
-                text-[#6F6A62]
 
                 sm:text-base
-              "
+
+                ${
+                  isDark
+                    ? "text-white/70"
+                    : "text-[#6F6A62]"
+                }
+              `}
             >
               {config.subtitle}
             </p>
@@ -415,6 +493,7 @@ export default function InlineLeadForm({
         {/* =====================================================
             SUCCESS
         ====================================================== */}
+
         {showPopup ? (
           <div className="py-5 text-center">
             <motion.div
@@ -423,20 +502,34 @@ export default function InlineLeadForm({
               className="mb-4 inline-block"
             >
               <div
-                className="
+                className={`
                   mx-auto
+
                   flex
                   size-14
+
                   items-center
                   justify-center
 
                   rounded-full
 
-                  bg-[#B8924F]/15
-                "
+                  ${
+                    isDark
+                      ? "bg-[#DDBC69]/15"
+                      : "bg-[#B8924F]/15"
+                  }
+                `}
               >
                 <svg
-                  className="size-7 text-[#B8924F]"
+                  className={`
+                    size-7
+
+                    ${
+                      isDark
+                        ? "text-[#DDBC69]"
+                        : "text-[#B8924F]"
+                    }
+                  `}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -452,42 +545,54 @@ export default function InlineLeadForm({
             </motion.div>
 
             <h3
-              className="
-                font-serif
+              className={`
+                font-playfair-display
+
                 text-[28px]
-                font-medium
-                text-[#202020]
-              "
+                font-semibold
+
+                ${
+                  isDark
+                    ? "text-white"
+                    : "text-[#202020]"
+                }
+              `}
             >
               Thank You!
             </h3>
 
             <p
-              className="
+              className={`
                 mx-auto
                 mt-2
                 max-w-lg
 
                 text-[15px]
                 leading-6
-                text-[#6F6A62]
-              "
+
+                ${
+                  isDark
+                    ? "text-white/70"
+                    : "text-[#6F6A62]"
+                }
+              `}
             >
-              Your request has been submitted successfully. We&apos;ll contact
-              you shortly.
+              Your request has been submitted successfully.
+              We&apos;ll contact you shortly.
             </p>
           </div>
         ) : isDisabled ? (
           <div className="py-5 text-center">
-            <p className="text-sm font-semibold text-red-600">
-              You have reached the maximum submission limit. Try again after 24
-              hours.
+            <p className="text-sm font-semibold text-red-500">
+              You have reached the maximum submission limit.
+              Try again after 24 hours.
             </p>
           </div>
         ) : (
           /* =====================================================
               FORM
           ====================================================== */
+
           <form
             onSubmit={handleSubmit}
             className="
@@ -499,26 +604,43 @@ export default function InlineLeadForm({
             "
           >
             {/* Error */}
+
             {errorMessage && (
               <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="
+                initial={{
+                  opacity: 0,
+                  y: -8,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                className={`
                   mb-3
 
                   rounded-lg
 
                   border
-                  border-red-300
-
-                  bg-red-50
 
                   px-3
                   py-2
 
                   text-sm
-                  text-red-700
-                "
+
+                  ${
+                    isDark
+                      ? `
+                        border-red-500/30
+                        bg-red-500/10
+                        text-red-300
+                      `
+                      : `
+                        border-red-300
+                        bg-red-50
+                        text-red-700
+                      `
+                  }
+                `}
               >
                 {errorMessage}
               </motion.div>
@@ -527,6 +649,7 @@ export default function InlineLeadForm({
             {/* =================================================
                 FIELDS + CTA
             ================================================== */}
+
             <div
               className="
                 grid
@@ -539,20 +662,26 @@ export default function InlineLeadForm({
                 lg:items-end
               "
             >
-              {/* Full Name */}
+              {/* ================= FULL NAME ================= */}
+
               <div>
                 <label
                   htmlFor="fullName"
-                  className="
+                  className={`
                     mb-1.5
                     block
 
                     text-[14px]
                     font-medium
-                    text-[#202020]
 
                     sm:text-[15px]
-                  "
+
+                    ${
+                      isDark
+                        ? "text-white"
+                        : "text-[#202020]"
+                    }
+                  `}
                 >
                   Full Name *
                 </label>
@@ -560,7 +689,7 @@ export default function InlineLeadForm({
                 <div className="relative">
                   <UserRound
                     strokeWidth={1.7}
-                    className="
+                    className={`
                       pointer-events-none
 
                       absolute
@@ -568,10 +697,15 @@ export default function InlineLeadForm({
                       top-1/2
 
                       size-5
+
                       -translate-y-1/2
 
-                      text-[#8B857C]
-                    "
+                      ${
+                        isDark
+                          ? "text-[#DDBC69]"
+                          : "text-[#8B857C]"
+                      }
+                    `}
                   />
 
                   <input
@@ -583,57 +717,85 @@ export default function InlineLeadForm({
                     required
                     autoComplete="name"
                     placeholder="Enter your full name"
-                    className="
+                    className={`
                       h-12
                       w-full
 
                       rounded-lg
 
                       border
-                      border-[#DED4C4]
-
-                      bg-[#FBF8F2]
 
                       pl-12
                       pr-4
 
                       text-[15px]
-                      text-[#202020]
 
                       outline-none
 
                       transition-all
                       duration-200
 
-                      placeholder:text-[#918B82]
-
-                      hover:border-[#C9B995]
-
-                      focus:border-[#B8924F]
-                      focus:ring-2
-                      focus:ring-[#B8924F]/15
-
                       sm:h-[50px]
                       sm:text-base
-                    "
+
+                      ${
+                        isDark
+                          ? `
+                            border-white/15
+
+                            bg-[#0B0B0B]
+
+                            text-white
+
+                            placeholder:text-white/35
+
+                            hover:border-[#DDBC69]/45
+
+                            focus:border-[#DDBC69]
+                            focus:ring-2
+                            focus:ring-[#DDBC69]/15
+                          `
+                          : `
+                            border-[#DED4C4]
+
+                            bg-[#FBF8F2]
+
+                            text-[#202020]
+
+                            placeholder:text-[#918B82]
+
+                            hover:border-[#C9B995]
+
+                            focus:border-[#B8924F]
+                            focus:ring-2
+                            focus:ring-[#B8924F]/15
+                          `
+                      }
+                    `}
                   />
                 </div>
               </div>
 
-              {/* Mobile */}
+              {/* ================= MOBILE ================= */}
+
               <div>
                 <label
                   htmlFor="mobileNumber"
-                  className="
+                  className={`
                     mb-1.5
                     block
 
                     text-[14px]
                     font-medium
-                    text-[#202020]
 
                     sm:text-[15px]
-                  "
+
+                    ${
+                      isDark
+                        ? "text-white"
+                        : "text-[#202020]"
+                    }
+                  `}
                 >
                   Mobile Number *
                 </label>
@@ -641,7 +803,7 @@ export default function InlineLeadForm({
                 <div className="relative">
                   <Phone
                     strokeWidth={1.7}
-                    className="
+                    className={`
                       pointer-events-none
 
                       absolute
@@ -649,10 +811,15 @@ export default function InlineLeadForm({
                       top-1/2
 
                       size-5
+
                       -translate-y-1/2
 
-                      text-[#8B857C]
-                    "
+                      ${
+                        isDark
+                          ? "text-[#DDBC69]"
+                          : "text-[#8B857C]"
+                      }
+                    `}
                   />
 
                   <input
@@ -665,47 +832,74 @@ export default function InlineLeadForm({
                     inputMode="numeric"
                     autoComplete="tel"
                     placeholder="Enter your mobile number"
-                    className="
+                    className={`
                       h-12
                       w-full
 
                       rounded-lg
 
                       border
-                      border-[#DED4C4]
-
-                      bg-[#FBF8F2]
 
                       pl-12
                       pr-4
 
                       text-[15px]
-                      text-[#202020]
 
                       outline-none
 
                       transition-all
                       duration-200
 
-                      placeholder:text-[#918B82]
-
-                      hover:border-[#C9B995]
-
-                      focus:border-[#B8924F]
-                      focus:ring-2
-                      focus:ring-[#B8924F]/15
-
                       sm:h-[50px]
                       sm:text-base
-                    "
+
+                      ${
+                        isDark
+                          ? `
+                            border-white/15
+
+                            bg-[#0B0B0B]
+
+                            text-white
+
+                            placeholder:text-white/35
+
+                            hover:border-[#DDBC69]/45
+
+                            focus:border-[#DDBC69]
+                            focus:ring-2
+                            focus:ring-[#DDBC69]/15
+                          `
+                          : `
+                            border-[#DED4C4]
+
+                            bg-[#FBF8F2]
+
+                            text-[#202020]
+
+                            placeholder:text-[#918B82]
+
+                            hover:border-[#C9B995]
+
+                            focus:border-[#B8924F]
+                            focus:ring-2
+                            focus:ring-[#B8924F]/15
+                          `
+                      }
+                    `}
                   />
                 </div>
               </div>
 
-              {/* CTA */}
+              {/* ================= CTA ================= */}
+
               <button
                 type="submit"
-                disabled={isLoading || isDisabled || !recaptchaLoaded}
+                disabled={
+                  isLoading ||
+                  isDisabled ||
+                  !recaptchaLoaded
+                }
                 className={`
                   gold-cta-button
                   group
@@ -713,6 +907,7 @@ export default function InlineLeadForm({
                   flex
                   h-12
                   w-full
+
                   items-center
                   justify-center
                   gap-3
@@ -735,26 +930,45 @@ export default function InlineLeadForm({
                   lg:col-span-1
 
                   ${
-                    isLoading || isDisabled || !recaptchaLoaded
-                      ? `
-                        cursor-not-allowed
-                        border
-                        border-[#DED4C4]
-                        bg-[#E8E2D8]
-                        text-[#938D83]
-                      `
+                    isLoading ||
+                    isDisabled ||
+                    !recaptchaLoaded
+                      ? isDark
+                        ? `
+                          cursor-not-allowed
+
+                          border
+                          border-white/10
+
+                          bg-white/5
+
+                          text-white/35
+                        `
+                        : `
+                          cursor-not-allowed
+
+                          border
+                          border-[#DED4C4]
+
+                          bg-[#E8E2D8]
+
+                          text-[#938D83]
+                        `
                       : `
                         border
-                        border-[#B8924F]
+                        border-[#DDBC69]
 
-                        bg-[linear-gradient(90deg,#D0AD62,#E3C578)]
+                        bg-[#DDBC69]
 
                         text-black
 
-                        shadow-[0_10px_25px_rgba(184,146,79,0.18)]
+                        shadow-[0_10px_25px_rgba(221,188,105,0.16)]
 
                         hover:-translate-y-0.5
-                        hover:shadow-[0_14px_30px_rgba(184,146,79,0.26)]
+
+                        hover:bg-[#E1C474]
+
+                        hover:shadow-[0_14px_30px_rgba(221,188,105,0.24)]
                       `
                   }
                 `}
@@ -804,7 +1018,8 @@ export default function InlineLeadForm({
               </button>
             </div>
 
-            {/* reCAPTCHA */}
+            {/* ================= RECAPTCHA ================= */}
+
             <div className="mt-2 flex justify-center">
               <div ref={recaptchaRef} />
             </div>
@@ -812,8 +1027,9 @@ export default function InlineLeadForm({
             {/* =================================================
                 SECURITY MESSAGE
             ================================================== */}
+
             <div
-              className="
+              className={`
                 mt-2
 
                 flex
@@ -822,17 +1038,32 @@ export default function InlineLeadForm({
                 gap-2
 
                 text-[12px]
-                text-[#6F6A62]
 
                 sm:text-[13px]
-              "
+
+                ${
+                  isDark
+                    ? "text-white/60"
+                    : "text-[#6F6A62]"
+                }
+              `}
             >
               <ShieldCheck
                 strokeWidth={1.7}
-                className="size-[18px] text-[#B8924F]"
+                className={`
+                  size-[18px]
+
+                  ${
+                    isDark
+                      ? "text-[#DDBC69]"
+                      : "text-[#B8924F]"
+                  }
+                `}
               />
 
-              <span className="text-black text-[15px]">Your details are safe with us</span>
+              <span className="text-[15px] text-white">
+                Your details are safe with us
+              </span>
             </div>
           </form>
         )}
@@ -841,3 +1072,4 @@ export default function InlineLeadForm({
   </section>
 );
 }
+

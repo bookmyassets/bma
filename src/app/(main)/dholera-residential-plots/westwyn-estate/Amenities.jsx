@@ -1,275 +1,204 @@
-import React, { useState } from "react";
+"use client";
+
 import {
-  Shield,
-  Baby,
-  Zap,
-  Wifi,
-  Car,
-  Users,
-  Camera,
-  Square,
-  User,
-  Activity,
+  BatteryCharging,
+  Cctv,
+  Fence,
   Footprints,
+  Gamepad2,
+  PersonStanding,
+  Route,
+  ShieldCheck,
+  Smartphone,
+  UsersRound,
+  UtilityPole,
+  Waves,
 } from "lucide-react";
-import Image from "next/image";
 
-import { FaBuilding, FaFilter, FaHome, FaRoad } from "react-icons/fa";
+import WestWynAmenities from "../components/westwyn/WestwynAmenities";
 
-import img1 from "@/assests/residential/estates/yogadeck.webp";
-import img2 from "@/assests/residential/residency/westwyn-residency-dholera-sir-ev-charging-station.webp";
-import img3 from "@/assests/residential/residency/westwyn-residency-dholera-sir-kids-play-area.webp";
-import { FaShop } from "react-icons/fa6";
-
-const carouselImages = [
-  { src: img1, alt: "WestWyn Estates - Kids Play Area" },
-  { src: img2, alt: "WestWyn Estates - Jogging Track" },
-  { src: img3, alt: "WestWyn Estates - Utilities Shop" },
-];
-// ✅ Moved OUTSIDE the component — not recreated on every render
-const AmenityCard = ({ amenity }) => (
-  <div
-    className="amenity-card border-2 rounded-2xl
-    p-2 sm:p-3 lg:p-4
-    flex flex-col items-center justify-center text-center aspect-square"
-    style={{ borderColor: "#e8e8e8" }}
-  >
-    <div
-      className={`card-icon flex items-center justify-center
-        w-8 h-8 md:w-10 md:h-10  lg:w-12 lg:h-12
-        bg-gradient-to-br ${amenity.color}
-        rounded-xl
-        mb-2 sm:mb-3 lg:mb-4`}
-    >
-      <div className="text-white">{amenity.icon}</div>
-    </div>
-    <h3
-      className="font-semibold leading-snug text-[10px] sm:text-xs lg:text-sm"
-      style={{ color: "#0d0d0d" }}
-    >
-      {amenity.title}
-    </h3>
-  </div>
-);
+// import boundaryImage from "@/assests/residential/estates/Projectboundary.webp";
+// import entryGateImage from "@/assests/residential/estates/westwyn-estates-dholera-entry-gate.webp";
+// import kidsPlayImage from "@/assests/residential/estates/kidsplayarea.webp";
+// import yogaImage from "@/assests/residential/estates/yogadeck.webp";
+// import joggingImage from "@/assests/residential/estates/westwyn-estates-dholera-sir-jogging-track.webp";
 
 const amenities = [
   {
-    icon: <Square className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "boundary",
     title: "Project Boundary",
-    color: "from-gray-500 to-gray-700",
+    subtitle: "Clearly defined project limits",
+
+    Icon: Fence,
+
+    iconColor: "text-amber-300",
+    iconBackground: "bg-amber-400/10",
+    iconBorder: "border-amber-300/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(252,211,77,0.18)]",
   },
+
   {
-    icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "gated",
     title: "Gated Community",
-    color: "from-indigo-500 to-purple-600",
+    subtitle: "Controlled project access",
+
+    Icon: ShieldCheck,
+
+    iconColor: "text-emerald-400",
+    iconBackground: "bg-emerald-400/10",
+    iconBorder: "border-emerald-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(52,211,153,0.18)]",
   },
+
   {
-    icon: <Camera className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "security",
     title: "24/7 Security & CCTV",
-    color: "from-red-500 to-red-700",
+    subtitle: "Round-the-clock surveillance",
+
+    Icon: Cctv,
+
+    iconColor: "text-sky-400",
+    iconBackground: "bg-sky-400/10",
+    iconBorder: "border-sky-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(56,189,248,0.18)]",
   },
+
   {
-    icon: <Baby className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "kids",
     title: "Kids Play Area",
-    color: "from-purple-400 to-pink-400",
+    subtitle: "Dedicated recreational space",
+
+    Icon: Gamepad2,
+
+    iconColor: "text-pink-400",
+    iconBackground: "bg-pink-400/10",
+    iconBorder: "border-pink-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(244,114,182,0.18)]",
   },
+
   {
-    icon: <Wifi className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "management",
     title: "App-Based Management",
-    color: "from-teal-500 to-teal-700",
+    subtitle: "Convenient community management",
+
+    Icon: Smartphone,
+
+    iconColor: "text-violet-400",
+    iconBackground: "bg-violet-400/10",
+    iconBorder: "border-violet-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(167,139,250,0.18)]",
   },
+
   {
-    icon: <Zap className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "power",
     title: "Power & Water Supply",
-    color: "from-[#ddbc69] to-yellow-800",
+    subtitle: "Essential infrastructure",
+
+    Icon: UtilityPole,
+
+    iconColor: "text-yellow-300",
+    iconBackground: "bg-yellow-400/10",
+    iconBorder: "border-yellow-300/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(253,224,71,0.18)]",
   },
+
   {
-    icon: <User className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "yoga",
     title: "Yoga Deck",
-    color: "from-pink-500 to-rose-500",
+    subtitle: "Space for health and wellness",
+
+    Icon: PersonStanding,
+
+    iconColor: "text-purple-400",
+    iconBackground: "bg-purple-400/10",
+    iconBorder: "border-purple-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(192,132,252,0.18)]",
   },
+
   {
-    icon: <Footprints className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "jogging",
     title: "Jogging Track",
-    color: "from-green-500 to-emerald-500",
+    subtitle: "Dedicated outdoor activity space",
+
+    Icon: Footprints,
+
+    iconColor: "text-orange-400",
+    iconBackground: "bg-orange-400/10",
+    iconBorder: "border-orange-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(251,146,60,0.18)]",
   },
+
   {
-    icon: <Users className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "senior",
     title: "Senior Citizen Zone",
-    color: "from-purple-500 to-pink-500",
+    subtitle: "Comfort and community",
+
+    Icon: UsersRound,
+
+    iconColor: "text-rose-300",
+    iconBackground: "bg-rose-400/10",
+    iconBorder: "border-rose-300/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(253,164,175,0.18)]",
   },
+
   {
-    icon: <Car className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "ev",
     title: "EV Charging Station",
-    color: "from-green-600 to-green-800",
+    subtitle: "EV-ready infrastructure",
+
+    Icon: BatteryCharging,
+
+    iconColor: "text-lime-400",
+    iconBackground: "bg-lime-400/10",
+    iconBorder: "border-lime-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(163,230,53,0.18)]",
   },
+
   {
-    icon: <FaRoad className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "roads",
     title: "Wide Internal Roads",
-    color: "from-blue-600 to-blue-800",
+    subtitle: "Planned internal circulation",
+
+    Icon: Route,
+
+    iconColor: "text-cyan-400",
+    iconBackground: "bg-cyan-400/10",
+    iconBorder: "border-cyan-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(34,211,238,0.18)]",
   },
+
   {
-    icon: <FaFilter className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    id: "drainage",
     title: "Drainage System",
-    color: "from-amber-600 to-amber-800",
+    subtitle: "Planned drainage infrastructure",
+
+    Icon: Waves,
+
+    iconColor: "text-blue-400",
+    iconBackground: "bg-blue-400/10",
+    iconBorder: "border-blue-400/30",
+    iconGlow:
+      "shadow-[0_8px_24px_rgba(96,165,250,0.18)]",
   },
-  
 ];
 
-const ProjectAmenities = () => {
-  const [showAll, setShowAll] = useState(false);
-  const visibleAmenities = showAll ? amenities : amenities.slice(0, 6);
-  const [current, setCurrent] = useState(0);
-  const prev = () =>
-    setCurrent((c) => (c - 1 + carouselImages.length) % carouselImages.length);
-  const next = () => setCurrent((c) => (c + 1) % carouselImages.length);
-
+export default function Amenities({surface="base"}) {
   return (
-    <>
-
-      <div className="bg-white py-4 sm:py-10 lg:py-4 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-4 sm:mb-4 lg:mb-8">
-            <p
-              className="font-bold tracking-[0.25em] uppercase mb-3
-                text-xl sm:text-2xl lg:text-3xl"
-              style={{ color: "#ddbc69" }}
-            >
-              WestWyn Estates
-            </p>
-            <h4
-              className="font-bold mb-4 text-lg sm:text-2xl lg:text-3xl"
-              style={{ color: "#0d0d0d", letterSpacing: "-0.02em" }}
-            >
-              Amenities
-            </h4>
-          </div>
-
-          {/* Two-column layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-start">
-            {/* Left — Image */}
-            {/* Left — Carousel */}
-            <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/4] w-full h-full group">
-              {/* Original image — style completely unchanged */}
-              <Image
-                src={carouselImages[current].src}
-                alt={carouselImages[current].alt}
-                className="rounded-xl w-full aspect-[5/4] md:h-full h-auto overflow-hidden object-cover"
-                priority
-              />
-
-              {/* Prev button */}
-              <button
-                onClick={prev}
-                className="absolute left-6 top-1/2 -translate-y-1/2 z-30
-      w-8 h-8 sm:w-10 sm:h-10
-      bg-white/80 hover:bg-white
-      rounded-full shadow-lg
-      flex items-center justify-center
-      transition-all duration-200 hover:scale-110
-      opacity-0 group-hover:opacity-100"
-                aria-label="Previous image"
-              >
-                <svg
-                  className="w-4 h-4 text-gray-800"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-
-              {/* Next button */}
-              <button
-                onClick={next}
-                className="absolute right-6 top-1/2 -translate-y-1/2 z-30
-      w-8 h-8 sm:w-10 sm:h-10
-      bg-white/80 hover:bg-white
-      rounded-full shadow-lg
-      flex items-center justify-center
-      transition-all duration-200 hover:scale-110
-      opacity-0 group-hover:opacity-100"
-                aria-label="Next image"
-              >
-                <svg
-                  className="w-4 h-4 text-gray-800"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-
-              {/* Dot indicators */}
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
-                {carouselImages.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrent(i)}
-                    className={`rounded-full transition-all duration-500 ${
-                      i === current
-                        ? "w-6 h-2 bg-[#ddbc69]"
-                        : "w-2 h-2 bg-white/70 hover:bg-white"
-                    }`}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Right — Amenities */}
-            <div className="w-full">
-              {/* Mobile */}
-              <div className="block lg:hidden">
-                <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
-                  {visibleAmenities.map((amenity) => (
-                    <AmenityCard key={amenity.title} amenity={amenity} />
-                  ))}
-                </div>
-                {amenities.length > 6 && (
-                  <div className="flex justify-center mt-6 sm:mt-8">
-                    <button
-                      onClick={() => setShowAll(!showAll)}
-                      className="show-btn bg-[#ddbc69] text-white
-                        px-6 sm:px-8 py-2 sm:py-3
-                        rounded-full font-semibold
-                        text-xs sm:text-sm
-                        hover:bg-opacity-90 transition-all"
-                    >
-                      {showAll ? "Show Less" : "Show More"}
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Desktop */}
-              <div className="hidden lg:block">
-                <div className="grid grid-cols-4 gap-4">
-                  {amenities.map((amenity) => (
-                    <AmenityCard key={amenity.title} amenity={amenity} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    <WestWynAmenities
+     surface={surface}
+      projectName="WestWyn Estates"
+      amenities={amenities}
+    />
   );
-};
-
-export default ProjectAmenities;
-
+}

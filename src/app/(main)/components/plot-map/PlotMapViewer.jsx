@@ -4,15 +4,30 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FaMinus, FaPlus, FaRotateLeft } from "react-icons/fa6";
 
-import { PLOT_VISUAL_CONFIG, getPlotVisualState } from "./plotStatusConfig";
+import { getPlotLegendItems, getPlotVisualState } from "./plotStatusConfig";
 
 const DEFAULT_VIEWBOX = "0 0 915 916";
+
+const getViewBoxAspectRatio = (viewBox) => {
+  const values = String(viewBox).trim().split(/\s+/).map(Number);
+
+  if (values.length !== 4 || values.some((value) => !Number.isFinite(value))) {
+    return "915 / 916";
+  }
+
+  const width = values[2];
+  const height = values[3];
+
+  if (width <= 0 || height <= 0) {
+    return "915 / 916";
+  }
+
+  return `${width} / ${height}`;
+};
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 2.5;
 const ZOOM_STEP = 0.25;
-
-const MAP_ASPECT = "aspect-[915/916]";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -23,6 +38,7 @@ const PlotMapViewer = ({
   geometry,
   plots,
   fullscreen = false,
+  usesPlotTier = true,
 }) => {
   const scrollRef = useRef(null);
   const svgRef = useRef(null);
@@ -45,7 +61,14 @@ const PlotMapViewer = ({
   const [tooltipAnimationKey, setTooltipAnimationKey] = useState(0);
 
   const geometryPlots = geometry?.plots ?? [];
+
   const viewBox = geometry?.viewBox ?? DEFAULT_VIEWBOX;
+
+  const mapAspectRatio = getViewBoxAspectRatio(viewBox);
+
+  const legendItems = getPlotLegendItems({
+    usesPlotTier,
+  });
 
   const hasGeometry = geometryPlots.length > 0;
 
@@ -343,33 +366,31 @@ const PlotMapViewer = ({
               : "flex flex-wrap items-center gap-3"
           }
         >
-          {Object.entries(PLOT_VISUAL_CONFIG).map(([key, config]) => (
+          {legendItems.map((config) => (
             <div
-              key={key}
+              key={config.label}
               className={`
-  inline-flex
-  shrink-0
-  items-center
-  whitespace-nowrap
-  rounded-full
-  border
-  font-semibold
-  text-white
-  backdrop-blur-md
-  transition-all
-  duration-200
+      inline-flex
+      shrink-0
+      items-center
+      whitespace-nowrap
+      rounded-full
+      border
+      font-semibold
+      text-white
+      backdrop-blur-md
+      transition-all
+      duration-200
 
-  ${
-    fullscreen
-      ? "gap-1.5 px-2.5 py-1.5 text-[11px]"
-      : "gap-2.5 px-4 py-2 text-sm lg:hover:-translate-y-0.5"
-  }
-`}
+      ${
+        fullscreen
+          ? "gap-1.5 px-2.5 py-1.5 text-[11px]"
+          : "gap-2.5 px-4 py-2 text-sm lg:hover:-translate-y-0.5"
+      }
+    `}
               style={{
                 borderColor: `${config.color}75`,
-
                 backgroundColor: `${config.color}18`,
-
                 boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)",
               }}
             >
@@ -496,15 +517,15 @@ const PlotMapViewer = ({
       >
         <div
           ref={mapContainerRef}
-          className={`
-            relative
-            mx-auto
-            w-full
-            ${MAP_ASPECT}
-            overflow-hidden
-          `}
+          className="
+    relative
+    mx-auto
+    w-full
+    overflow-hidden
+  "
           style={{
             width: canvasWidth,
+            aspectRatio: mapAspectRatio,
           }}
         >
           <Image
@@ -527,7 +548,7 @@ const PlotMapViewer = ({
               onMouseLeave={handlePlotMouseLeave}
               className="absolute inset-0 h-full w-full"
               role="img"
-              aria-label="Interactive WestWyn Residency plot availability map"
+              aria-label={`${planAlt} interactive plot availability map`}
             >
               {geometryPlots.map((shape) => {
                 const plotNumber = Number(shape.plotNumber);
@@ -657,15 +678,17 @@ const PlotMapViewer = ({
                     </dd>
                   </div>
 
-                  <div className="flex items-center justify-between gap-5">
-                    <dt className="text-[#999187]">Plot Type</dt>
+                  {usesPlotTier && (
+                    <div className="flex items-center justify-between gap-5">
+                      <dt className="text-[#999187]">Plot Type</dt>
 
-                    <dd className="font-semibold text-white">
-                      {hoveredInventory?.saleStatus === "sold"
-                        ? "—"
-                        : (hoveredVisualConfig?.label ?? "—")}
-                    </dd>
-                  </div>
+                      <dd className="font-semibold text-white">
+                        {hoveredInventory?.saleStatus === "sold"
+                          ? "—"
+                          : (hoveredVisualConfig?.label ?? "—")}
+                      </dd>
+                    </div>
+                  )}
 
                   <div className="flex items-center justify-between gap-5">
                     <dt className="text-[#999187]">Area</dt>
@@ -720,7 +743,6 @@ const PlotMapViewer = ({
         >
           <div className="flex items-start justify-between gap-3">
             <div>
-
               <h4 className="mt-1 text-[30px] font-semibold font-inter leading-none">
                 Plot {selectedPlot.plotNumber}
               </h4>

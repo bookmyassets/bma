@@ -1,160 +1,232 @@
 import { defineField, defineType } from "sanity";
 
-const SALE_STATUS_OPTIONS = [
-  {
-    title: "Available",
-    value: "available",
-  },
-  {
-    title: "Sold",
-    value: "sold",
-  },
-];
+import {
+  getPlotInventoryProject,
+  getPlotInventoryProjectOptions,
+} from "../plotInventoryProjects";
 
-const PLOT_TIER_OPTIONS = [
-  {
-    title: "Premium",
-    value: "premium",
-  },
-  {
-    title: "Super Premium",
-    value: "superPremium",
-  },
-];
-
-const SALE_STATUS_LABELS = {
-  available: "Available",
-  sold: "Sold",
-};
-
-const PLOT_TIER_LABELS = {
-  premium: "Premium",
-  superPremium: "Super Premium",
-};
-
-const validateUniquePlot = async (_, context) => {
-  const document = context.document;
-
-  if (!document?.projectSlug || !document?.plotNumber) {
+async function validateUniquePlot(value, context) {
+  if (value === undefined || value === null) {
     return true;
   }
 
+  const projectSlug = context.document?.projectSlug;
+
+  if (!projectSlug) {
+    return "Select a project before entering the plot number.";
+  }
+
   const client = context.getClient({
-    apiVersion: "2025-01-01",
+    apiVersion: "2024-01-01",
   });
 
-  const currentId = document._id?.replace(/^drafts\./, "");
+  const documentId = context.document?._id || "";
 
-  const duplicateCount = await client.fetch(
+  const publishedId = documentId.replace(/^drafts\./, "");
+
+  const draftId = publishedId ? `drafts.${publishedId}` : "";
+
+  const duplicateExists = await client.fetch(
     `
       count(
         *[
-          _type == "plotInventory" &&
-          projectSlug == $projectSlug &&
-          plotNumber == $plotNumber &&
-          !(_id in [$publishedId, $draftId])
+          _type == "plotInventory"
+          && projectSlug == $projectSlug
+          && plotNumber == $plotNumber
+          && _id != $publishedId
+          && _id != $draftId
         ]
-      )
+      ) > 0
     `,
     {
-      projectSlug: document.projectSlug,
-      plotNumber: document.plotNumber,
-      publishedId: currentId,
-      draftId: currentId ? `drafts.${currentId}` : "",
-    }
+      projectSlug,
+      plotNumber: value,
+      publishedId,
+      draftId,
+    },
   );
 
-  if (duplicateCount > 0) {
-    return `Plot ${document.plotNumber} already exists for this project.`;
+  if (duplicateExists) {
+    return `Plot ${value} already exists for this project.`;
   }
 
   return true;
-};
+}
+
+/*
+|--------------------------------------------------------------------------
+| SCHEMA
+|--------------------------------------------------------------------------
+*/
 
 export default defineType({
   name: "plotInventory",
+
   title: "Plot Inventory",
+
   type: "document",
 
   fields: [
+    /*
+    |--------------------------------------------------------------------------
+    | PROJECT
+    |--------------------------------------------------------------------------
+    */
+
     defineField({
       name: "projectSlug",
+
       title: "Project",
+
       type: "string",
+
       description: "Select the project this plot belongs to.",
-      initialValue: "westwyn-residency",
+
       options: {
-        list: [
-          {
-            title: "WestWyn Residency",
-            value: "westwyn-residency",
-          },
-        ],
+        list: getPlotInventoryProjectOptions(),
+
         layout: "dropdown",
       },
-      validation: (Rule) => Rule.required(),
+
+      validation: (Rule) =>
+        Rule.required().error("Project selection is required."),
     }),
+
+    /*
+    |--------------------------------------------------------------------------
+    | PLOT NUMBER
+    |--------------------------------------------------------------------------
+    */
 
     defineField({
       name: "plotNumber",
+
       title: "Plot Number",
+
       type: "number",
-      description: "Plot number shown on the project master plan.",
+
+      description:
+        "Enter the plot number exactly as shown in the project layout.",
+
       validation: (Rule) =>
         Rule.required()
           .integer()
-          .min(1)
-          .max(290)
-          .custom(validateUniquePlot),
+          .custom(async (value, context) => {
+            if (value === undefined || value === null) {
+              return true;
+            }
+
+            const projectSlug = context.document?.projectSlug;
+
+            if (!projectSlug) {
+              return "Select the project first.";
+            }
+
+            const project = getPlotInventoryProject(projectSlug);
+
+            if (!project) {
+              return "The selected project is not configured for plot inventory.";
+            }
+
+            if (
+              value < project.minPlotNumber ||
+              value > project.maxPlotNumber
+            ) {
+              return `${project.title} supports plot numbers ${project.minPlotNumber} to ${project.maxPlotNumber}.`;
+            }
+
+            return validateUniquePlot(value, context);
+          }),
     }),
+
+    /*
+    |--------------------------------------------------------------------------
+    | SALE STATUS
+    |--------------------------------------------------------------------------
+    */
 
     defineField({
       name: "saleStatus",
+
       title: "Sale Status",
+
       type: "string",
-      description:
-        "Controls whether the plot is currently available or sold.",
+
+      description: "Current sales status of this plot.",
+
       options: {
-        list: SALE_STATUS_OPTIONS,
+        list: [
+          {
+            title: "Available",
+            value: "available",
+          },
+          {
+            title: "Sold",
+            value: "sold",
+          },
+        ],
+
         layout: "radio",
       },
-      validation: (Rule) =>
-        Rule.required().custom((value) => {
-          const allowedValues = SALE_STATUS_OPTIONS.map(
-            (option) => option.value
-          );
 
-          if (!allowedValues.includes(value)) {
-            return "Select Available or Sold.";
-          }
-
-          return true;
-        }),
+      validation: (Rule) => Rule.required().error("Sale status is required."),
     }),
+
+    /*
+    |--------------------------------------------------------------------------
+    | PLOT TIER
+    |--------------------------------------------------------------------------
+    */
 
     defineField({
       name: "plotTier",
+
       title: "Plot Tier",
+
       type: "string",
+
       description:
-        "Select Premium or Super Premium for available plots.",
+        "Premium classification used by projects that support plot tiers.",
+
       options: {
-        list: PLOT_TIER_OPTIONS,
+        list: [
+          {
+            title: "Premium",
+            value: "premium",
+          },
+          {
+            title: "Super Premium",
+            value: "superPremium",
+          },
+        ],
+
         layout: "radio",
       },
+
+      hidden: ({ document }) => {
+        const project = getPlotInventoryProject(document?.projectSlug);
+
+        if (!project?.usesPlotTier) {
+          return true;
+        }
+
+        return document?.saleStatus !== "available";
+      },
+
       validation: (Rule) =>
         Rule.custom((value, context) => {
+          const projectSlug = context.document?.projectSlug;
+
           const saleStatus = context.document?.saleStatus;
 
-          if (saleStatus === "available" && !value) {
-            return "Available plots must have a plot tier.";
+          const project = getPlotInventoryProject(projectSlug);
+
+          if (!project?.usesPlotTier) {
+            return true;
           }
 
-          if (
-            value &&
-            !PLOT_TIER_OPTIONS.some((option) => option.value === value)
-          ) {
-            return "Select Premium or Super Premium.";
+          if (saleStatus === "available" && !value) {
+            return "Select Premium or Super Premium for an available plot.";
           }
 
           return true;
@@ -162,50 +234,18 @@ export default defineType({
     }),
   ],
 
-  preview: {
-    select: {
-      plotNumber: "plotNumber",
-      projectSlug: "projectSlug",
-      saleStatus: "saleStatus",
-      plotTier: "plotTier",
-    },
-
-    prepare({
-      plotNumber,
-      projectSlug,
-      saleStatus,
-      plotTier,
-    }) {
-      const projectLabel =
-        projectSlug === "westwyn-residency"
-          ? "WestWyn Residency"
-          : projectSlug || "Project not set";
-
-      const saleStatusLabel =
-        SALE_STATUS_LABELS[saleStatus] || "Status not set";
-
-      const plotTierLabel =
-        PLOT_TIER_LABELS[plotTier] || null;
-
-      let inventoryLabel = saleStatusLabel;
-
-      if (saleStatus === "available") {
-        inventoryLabel = plotTierLabel
-          ? `${plotTierLabel} • Available`
-          : "Available • Tier not set";
-      }
-
-      return {
-        title: plotNumber ? `Plot ${plotNumber}` : "New Plot",
-        subtitle: `${projectLabel} • ${inventoryLabel}`,
-      };
-    },
-  },
+  /*
+  |--------------------------------------------------------------------------
+  | ORDERING
+  |--------------------------------------------------------------------------
+  */
 
   orderings: [
     {
-      title: "Plot Number - Low to High",
-      name: "plotNumberAscending",
+      title: "Plot Number - Ascending",
+
+      name: "plotNumberAsc",
+
       by: [
         {
           field: "plotNumber",
@@ -215,8 +255,10 @@ export default defineType({
     },
 
     {
-      title: "Plot Number - High to Low",
-      name: "plotNumberDescending",
+      title: "Plot Number - Descending",
+
+      name: "plotNumberDesc",
+
       by: [
         {
           field: "plotNumber",
@@ -224,35 +266,56 @@ export default defineType({
         },
       ],
     },
-
-    {
-      title: "Sale Status",
-      name: "saleStatusAscending",
-      by: [
-        {
-          field: "saleStatus",
-          direction: "asc",
-        },
-        {
-          field: "plotNumber",
-          direction: "asc",
-        },
-      ],
-    },
-
-    {
-      title: "Plot Tier",
-      name: "plotTierAscending",
-      by: [
-        {
-          field: "plotTier",
-          direction: "asc",
-        },
-        {
-          field: "plotNumber",
-          direction: "asc",
-        },
-      ],
-    },
   ],
+
+  /*
+  |--------------------------------------------------------------------------
+  | STUDIO PREVIEW
+  |--------------------------------------------------------------------------
+  */
+
+  preview: {
+    select: {
+      projectSlug: "projectSlug",
+      plotNumber: "plotNumber",
+      saleStatus: "saleStatus",
+      plotTier: "plotTier",
+    },
+
+    prepare({ projectSlug, plotNumber, saleStatus, plotTier }) {
+      const project = getPlotInventoryProject(projectSlug);
+
+      const projectLabel =
+        project?.title || projectSlug || "Project not selected";
+
+      let statusLabel = "Status not selected";
+
+      if (saleStatus === "sold") {
+        statusLabel = "Sold";
+      }
+
+      if (saleStatus === "available") {
+        if (project?.usesPlotTier) {
+          if (plotTier === "premium") {
+            statusLabel = "Available - Premium";
+          } else if (plotTier === "superPremium") {
+            statusLabel = "Available - Super Premium";
+          } else {
+            statusLabel = "Available - Tier Required";
+          }
+        } else {
+          statusLabel = "Available";
+        }
+      }
+
+      return {
+        title:
+          plotNumber !== undefined
+            ? `Plot ${plotNumber}`
+            : "Plot number not set",
+
+        subtitle: `${projectLabel} • ${statusLabel}`,
+      };
+    },
+  },
 });
