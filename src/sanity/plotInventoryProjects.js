@@ -16,12 +16,18 @@ export const PLOT_INVENTORY_PROJECTS = [
     expectedPlotCount: 129,
     usesPlotTier: false,
   },
+  {
+    title: "WestWyn County",
+    value: "westwyn-county",
+    minPlotNumber: 1,
+    maxPlotNumber: 126,
+    expectedPlotCount: 130,
+    usesPlotTier: false,
+  },
 ];
 
 export const getPlotInventoryProject = (projectSlug) =>
-  PLOT_INVENTORY_PROJECTS.find(
-    (project) => project.value === projectSlug,
-  );
+  PLOT_INVENTORY_PROJECTS.find((project) => project.value === projectSlug);
 
 export const getPlotInventoryProjectOptions = () =>
   PLOT_INVENTORY_PROJECTS.map(({ title, value }) => ({

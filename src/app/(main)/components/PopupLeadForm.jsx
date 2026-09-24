@@ -636,7 +636,7 @@ export default function PopupLeadForm({
       onClick={handleBackdropClick}
     >
       <div
-        className="bg-white rounded-xl p-[clamp(1.25rem,3vw,2rem)] max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto"
+        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl border border-[#DDBC69]/40 bg-[#161616] p-[clamp(1.25rem,3vw,2rem)] text-white shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
         {showThankYou ? (
@@ -659,16 +659,16 @@ export default function PopupLeadForm({
                 </svg>
               </div>
             </div>
-            <h3 className="text-[clamp(1.375rem,2.5vw,1.75rem)] leading-[1.25] font-bold text-gray-800 mb-2">
+            <h3 className="mb-2 text-[clamp(1.375rem,2.5vw,1.75rem)] font-bold leading-[1.25] text-white">
               Thank You!
             </h3>
-            <p className="text-gray-600">We will contact you shortly.</p>
+            <p className="text-white/70">We will contact you shortly.</p>
           </div>
         ) : (
           <>
             <button
               onClick={closePopup}
-              className="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-3xl leading-none"
+              className="absolute right-4 top-3 text-3xl leading-none text-white/60 hover:text-white"
               aria-label="Close popup"
             >
               x
@@ -684,7 +684,7 @@ export default function PopupLeadForm({
                   className="rounded-lg"
                 />
               </div>
-              <h2 className="text-[clamp(1.25rem,2.5vw,1.75rem)] leading-[1.25] font-bold text-gray-800 mb-2 mt-3 ">
+              <h2 className="mt-3 mb-2 text-[clamp(1.25rem,2.5vw,1.75rem)] font-bold leading-[1.25] text-white">
                 {config.title}
               </h2>
               
@@ -701,7 +701,7 @@ export default function PopupLeadForm({
                 <div>
                   <label
                     htmlFor="popupFullName"
-                    className="block text-gray-700 text-sm font-medium mb-2"
+                    className="mb-2 block text-sm font-medium text-white"
                   >
                     Full Name *
                   </label>
@@ -712,7 +712,7 @@ export default function PopupLeadForm({
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] transition-colors"
+                    className="w-full rounded-lg border border-white/15 bg-[#0B0B0B] px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] text-white placeholder:text-white/35 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -720,7 +720,7 @@ export default function PopupLeadForm({
                 <div>
                   <label
                     htmlFor="popupMobileNumber"
-                    className="block text-gray-700 text-sm font-medium mb-2"
+                    className="mb-2 block text-sm font-medium text-white"
                   >
                     Mobile Number *
                   </label>
@@ -731,7 +731,7 @@ export default function PopupLeadForm({
                     value={formData.mobileNumber}
                     onChange={handleChange}
                     required
-                    className="w-full px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ddbc69] transition-colors"
+                    className="w-full rounded-lg border border-white/15 bg-[#0B0B0B] px-[clamp(1rem,2vw,1.25rem)] py-[clamp(0.75rem,1.5vw,1rem)] text-white placeholder:text-white/35 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
                     placeholder="Enter your mobile number"
                   />
                 </div>
@@ -756,7 +756,7 @@ export default function PopupLeadForm({
                 {isLoading ? "Submitting..." : "Get A Call Back"}
               </button>
 
-              <p className="text-xs text-center text-gray-500 mt-4">
+              <p className="mt-4 text-center text-xs text-white/60">
                 We respect your privacy. Your details are safe with us.
               </p>
             </form>

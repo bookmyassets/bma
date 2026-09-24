@@ -2,32 +2,24 @@ import { createClient } from "@sanity/client";
 
 import { westwynInventoryStatus } from "./data/westwynInventoryStatus.js";
 import { westwynEstateInventoryStatus } from "./data/westwynEstateInventoryStatus.js";
+import { westwynCountyInventoryStatus } from "./data/westwynCountyInventoryStatus.js";
 
-const projectId =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 
-const dataset =
-  process.env.NEXT_PUBLIC_SANITY_DATASET;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 
-const token =
-  process.env.SANITY_API_WRITE_TOKEN;
+const token = process.env.SANITY_API_WRITE_TOKEN;
 
 if (!projectId) {
-  throw new Error(
-    "Missing NEXT_PUBLIC_SANITY_PROJECT_ID",
-  );
+  throw new Error("Missing NEXT_PUBLIC_SANITY_PROJECT_ID");
 }
 
 if (!dataset) {
-  throw new Error(
-    "Missing NEXT_PUBLIC_SANITY_DATASET",
-  );
+  throw new Error("Missing NEXT_PUBLIC_SANITY_DATASET");
 }
 
 if (!token) {
-  throw new Error(
-    "Missing SANITY_API_WRITE_TOKEN",
-  );
+  throw new Error("Missing SANITY_API_WRITE_TOKEN");
 }
 
 const client = createClient({
@@ -68,6 +60,15 @@ const PROJECTS = {
 
     usesPlotTier: false,
   },
+  "westwyn-county": {
+    title: "WestWyn County",
+    inventory: westwynCountyInventoryStatus,
+    minPlotNumber: 1,
+    maxPlotNumber: 126,
+    expectedPlotCount: 130,
+    usesPlotTier: false,
+    hasAlphaPlots: true,
+  },
 };
 
 /*
@@ -101,9 +102,7 @@ if (!PROJECT_SLUG) {
 const project = PROJECTS[PROJECT_SLUG];
 
 if (!project) {
-  throw new Error(
-    `Unsupported inventory project: ${PROJECT_SLUG}`,
-  );
+  throw new Error(`Unsupported inventory project: ${PROJECT_SLUG}`);
 }
 
 const {
@@ -113,6 +112,7 @@ const {
   maxPlotNumber,
   expectedPlotCount,
   usesPlotTier,
+  hasAlphaPlots = false,
 } = project;
 
 /*
@@ -121,15 +121,9 @@ const {
 |--------------------------------------------------------------------------
 */
 
-const allowedSaleStatuses = new Set([
-  "available",
-  "sold",
-]);
+const allowedSaleStatuses = new Set(["available", "sold"]);
 
-const allowedPlotTiers = new Set([
-  "premium",
-  "superPremium",
-]);
+const allowedPlotTiers = new Set(["premium", "superPremium"]);
 
 /*
 |--------------------------------------------------------------------------
@@ -147,14 +141,21 @@ const validateInventory = () => {
     ----------------------------------------------------------------
     */
 
+    const isAlphaPlot =
+      typeof item.plotNumber === "string" &&
+      /^[0-9]+[A-Z]+$/.test(item.plotNumber);
+
+    const isNumericPlot = Number.isInteger(item.plotNumber);
+
+    if (!isNumericPlot && !isAlphaPlot) {
+      throw new Error(`${title}: invalid plot number ${item.plotNumber}.`);
+    }
+
     if (
-      !Number.isInteger(item.plotNumber) ||
-      item.plotNumber < minPlotNumber ||
-      item.plotNumber > maxPlotNumber
+      !isAlphaPlot &&
+      (item.plotNumber < minPlotNumber || item.plotNumber > maxPlotNumber)
     ) {
-      throw new Error(
-        `${title}: invalid plot number ${item.plotNumber}. Expected ${minPlotNumber}-${maxPlotNumber}.`,
-      );
+      throw new Error(`${title}: invalid plot number ${item.plotNumber}.`);
     }
 
     /*
@@ -163,11 +164,7 @@ const validateInventory = () => {
     ----------------------------------------------------------------
     */
 
-    if (
-      !allowedSaleStatuses.has(
-        item.saleStatus,
-      )
-    ) {
+    if (!allowedSaleStatuses.has(item.saleStatus)) {
       throw new Error(
         `${title}: invalid saleStatus for Plot ${item.plotNumber}: ${item.saleStatus}`,
       );
@@ -182,21 +179,14 @@ const validateInventory = () => {
     if (usesPlotTier) {
       if (
         item.saleStatus === "available" &&
-        !allowedPlotTiers.has(
-          item.plotTier,
-        )
+        !allowedPlotTiers.has(item.plotTier)
       ) {
         throw new Error(
           `${title}: Plot ${item.plotNumber} is available but has no valid plotTier.`,
         );
       }
 
-      if (
-        item.plotTier != null &&
-        !allowedPlotTiers.has(
-          item.plotTier,
-        )
-      ) {
+      if (item.plotTier != null && !allowedPlotTiers.has(item.plotTier)) {
         throw new Error(
           `${title}: invalid plotTier for Plot ${item.plotNumber}: ${item.plotTier}`,
         );
@@ -209,10 +199,7 @@ const validateInventory = () => {
     ----------------------------------------------------------------
     */
 
-    if (
-      !usesPlotTier &&
-      item.plotTier != null
-    ) {
+    if (!usesPlotTier && item.plotTier != null) {
       throw new Error(
         `${title}: Plot ${item.plotNumber} should not contain plotTier.`,
       );
@@ -224,12 +211,8 @@ const validateInventory = () => {
     ----------------------------------------------------------------
     */
 
-    if (
-      seenPlots.has(item.plotNumber)
-    ) {
-      throw new Error(
-        `${title}: duplicate Plot ${item.plotNumber} found.`,
-      );
+    if (seenPlots.has(item.plotNumber)) {
+      throw new Error(`${title}: duplicate Plot ${item.plotNumber} found.`);
     }
 
     seenPlots.add(item.plotNumber);
@@ -243,32 +226,31 @@ const validateInventory = () => {
 */
 
 const validateCompleteInventory = () => {
-  if (
-    inventory.length !==
-    expectedPlotCount
-  ) {
+  if (inventory.length !== expectedPlotCount) {
     throw new Error(
       `${title}: expected ${expectedPlotCount} plots but found ${inventory.length}.`,
     );
   }
 
-  const plotNumbers = new Set(
-    inventory.map(
-      (item) => item.plotNumber,
-    ),
-  );
+  const plotNumbers = new Set(inventory.map((item) => String(item.plotNumber)));
+
+  if (hasAlphaPlots) {
+    const requiredAlphaPlots = ["70A", "70B", "70C", "70D"];
+
+    for (const plot of requiredAlphaPlots) {
+      if (!plotNumbers.has(plot)) {
+        throw new Error(`${title}: Plot ${plot} is missing.`);
+      }
+    }
+  }
 
   for (
     let plotNumber = minPlotNumber;
     plotNumber <= maxPlotNumber;
-    plotNumber += 1
+    plotNumber++
   ) {
-    if (
-      !plotNumbers.has(plotNumber)
-    ) {
-      throw new Error(
-        `${title}: Plot ${plotNumber} is missing.`,
-      );
+    if (!plotNumbers.has(String(plotNumber))) {
+      throw new Error(`${title}: Plot ${plotNumber} is missing.`);
     }
   }
 };
@@ -287,11 +269,9 @@ const createPlotDocument = (item) => {
 
     projectSlug: PROJECT_SLUG,
 
-    plotNumber:
-      item.plotNumber,
+    plotNumber: item.plotNumber,
 
-    saleStatus:
-      item.saleStatus,
+    saleStatus: item.saleStatus,
   };
 
   /*
@@ -300,12 +280,8 @@ const createPlotDocument = (item) => {
   ----------------------------------------------------------------
   */
 
-  if (
-    usesPlotTier &&
-    item.plotTier
-  ) {
-    document.plotTier =
-      item.plotTier;
+  if (usesPlotTier && item.plotTier) {
+    document.plotTier = item.plotTier;
   }
 
   return document;
@@ -326,86 +302,49 @@ const run = async () => {
 
   let processed = 0;
 
-  const availableCount =
-    inventory.filter(
-      (item) =>
-        item.saleStatus ===
-        "available",
-    ).length;
+  const availableCount = inventory.filter(
+    (item) => item.saleStatus === "available",
+  ).length;
 
-  const soldCount =
-    inventory.filter(
-      (item) =>
-        item.saleStatus ===
-        "sold",
-    ).length;
+  const soldCount = inventory.filter(
+    (item) => item.saleStatus === "sold",
+  ).length;
 
   console.log("");
-  console.log(
-    `Importing ${title}`,
-  );
+  console.log(`Importing ${title}`);
 
-  console.log(
-    `Project slug: ${PROJECT_SLUG}`,
-  );
+  console.log(`Project slug: ${PROJECT_SLUG}`);
 
-  console.log(
-    `Total plots: ${inventory.length}`,
-  );
+  console.log(`Total plots: ${inventory.length}`);
 
-  console.log(
-    `Available: ${availableCount}`,
-  );
+  console.log(`Available: ${availableCount}`);
 
-  console.log(
-    `Sold: ${soldCount}`,
-  );
+  console.log(`Sold: ${soldCount}`);
 
   console.log("");
 
-  for (
-    let index = 0;
-    index < inventory.length;
-    index += BATCH_SIZE
-  ) {
-    const batch =
-      inventory.slice(
-        index,
-        index + BATCH_SIZE,
-      );
+  for (let index = 0; index < inventory.length; index += BATCH_SIZE) {
+    const batch = inventory.slice(index, index + BATCH_SIZE);
 
-    let transaction =
-      client.transaction();
+    let transaction = client.transaction();
 
     for (const item of batch) {
-      transaction =
-        transaction.createOrReplace(
-          createPlotDocument(item),
-        );
+      transaction = transaction.createOrReplace(createPlotDocument(item));
     }
 
-    const result =
-      await transaction.commit();
+    const result = await transaction.commit();
 
-    processed +=
-      result.results.length;
+    processed += result.results.length;
 
-    console.log(
-      `Processed ${processed}/${inventory.length}`,
-    );
+    console.log(`Processed ${processed}/${inventory.length}`);
   }
 
   console.log("");
-  console.log(
-    `${title} inventory import complete.`,
-  );
+  console.log(`${title} inventory import complete.`);
 };
 
 run().catch((error) => {
-  console.error(
-    "Inventory import failed:",
-    error,
-  );
+  console.error("Inventory import failed:", error);
 
   process.exit(1);
 });

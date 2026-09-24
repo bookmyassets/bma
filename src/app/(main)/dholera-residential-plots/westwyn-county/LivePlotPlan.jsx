@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+
 import { createPortal } from "react-dom";
 
 import {
@@ -9,26 +9,14 @@ import {
   FaXmark,
 } from "react-icons/fa6";
 
-import planImage from "@/assests/westwyn-county/westwyn-county-dholera-plan-layout.webp";
+import WestwynCountyInteractivePlotMap from "./WestwynCountyInteractivePlotMap";
 
-/*
-|--------------------------------------------------------------------------
-| COUNTY PLAN ASPECT
-|--------------------------------------------------------------------------
-*/
-
-const PLAN_ASPECT_RATIO = "1000 / 800";
+const PLAN_ASPECT_RATIO = "2000 / 1411";
 
 /*
 |--------------------------------------------------------------------------
 | STATIC PLAN PREVIEW
 |--------------------------------------------------------------------------
-|
-| County currently does not have the SVG / plot geometry required for
-| individual plot interaction.
-|
-| We keep this component separate so later the static image can be
-| replaced by WestwynCountyInteractiveMap without changing PlanLayout.
 |
 */
 
@@ -58,14 +46,7 @@ const StaticPlanPreview = ({
           aspectRatio: PLAN_ASPECT_RATIO,
         }}
       >
-        <Image
-          src={planImage}
-          alt="WestWyn County master plan layout"
-          fill
-          loading="lazy"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-contain"
-        />
+       <WestwynCountyInteractivePlotMap />
       </div>
 
       {showAction ? (
@@ -119,7 +100,7 @@ const StaticPlanPreview = ({
           >
             <FaExpand />
 
-            View Full Plan
+            Explore Live Plan
           </button>
         </div>
       ) : null}
@@ -131,12 +112,6 @@ const StaticPlanPreview = ({
 |--------------------------------------------------------------------------
 | LIVE PLOT PLAN
 |--------------------------------------------------------------------------
-|
-| This is temporarily a static plan viewer.
-|
-| Once County SVG + plot geometry are available, we will plug the
-| interactive map into this same component.
-|
 */
 
 const LivePlotPlan = () => {
@@ -304,13 +279,10 @@ const LivePlotPlan = () => {
 
             <div
               className="
-                flex
                 min-h-0
                 flex-1
-                items-center
-                justify-center
 
-                overflow-auto
+                overflow-hidden
 
                 p-3
 
@@ -318,36 +290,7 @@ const LivePlotPlan = () => {
                 lg:p-8
               "
             >
-              <div
-                className="
-                  relative
-
-                  w-full
-                  max-w-[1400px]
-
-                  overflow-hidden
-
-                  rounded-[20px]
-
-                  border
-                  border-[#2A2318]
-
-                  bg-white
-                "
-                style={{
-                  aspectRatio:
-                    PLAN_ASPECT_RATIO,
-                }}
-              >
-                <Image
-                  src={planImage}
-                  alt="WestWyn County full master plan layout"
-                  fill
-                  priority
-                  sizes="100vw"
-                  className="object-contain"
-                />
-              </div>
+              <WestwynCountyInteractivePlotMap fullscreen />
             </div>
           </div>,
 

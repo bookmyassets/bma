@@ -8,28 +8,39 @@ import { getPlotLegendItems, getPlotVisualState } from "./plotStatusConfig";
 
 const DEFAULT_VIEWBOX = "0 0 915 916";
 
-const getViewBoxAspectRatio = (viewBox) => {
+const getViewBoxDimensions = (viewBox) => {
   const values = String(viewBox).trim().split(/\s+/).map(Number);
 
   if (values.length !== 4 || values.some((value) => !Number.isFinite(value))) {
-    return "915 / 916";
+    return { width: 915, height: 916 };
   }
 
   const width = values[2];
   const height = values[3];
 
   if (width <= 0 || height <= 0) {
-    return "915 / 916";
+    return { width: 915, height: 916 };
   }
+
+  return { width, height };
+};
+
+const getViewBoxAspectRatio = (viewBox) => {
+  const { width, height } = getViewBoxDimensions(viewBox);
 
   return `${width} / ${height}`;
 };
 
 const MIN_ZOOM = 1;
-const MAX_ZOOM = 2.5;
+const MAX_ZOOM = 3;
 const ZOOM_STEP = 0.25;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+const normalizePlotNumber = (value) =>
+  String(value ?? "")
+    .trim()
+    .toUpperCase();
 
 const PlotMapViewer = ({
   projectSlug,
@@ -38,6 +49,7 @@ const PlotMapViewer = ({
   geometry,
   plots,
   fullscreen = false,
+  initialFullscreenZoom = 2,
   usesPlotTier = true,
 }) => {
   const scrollRef = useRef(null);
@@ -45,6 +57,7 @@ const PlotMapViewer = ({
   const mapContainerRef = useRef(null);
   const hoverShowTimerRef = useRef(null);
   const hoverHideTimerRef = useRef(null);
+  const fullscreenZoom = clamp(initialFullscreenZoom, MIN_ZOOM, MAX_ZOOM);
 
   const [inventory, setInventory] = useState([]);
   const [loadError, setLoadError] = useState(false);
@@ -55,7 +68,11 @@ const PlotMapViewer = ({
 
   const [selectedPlotNumber, setSelectedPlotNumber] = useState(null);
 
-  const [zoom, setZoom] = useState(fullscreen ? 1.25 : 1);
+  const [zoom, setZoom] = useState(fullscreen ? fullscreenZoom : 1);
+  const [mapViewportSize, setMapViewportSize] = useState({
+    width: 0,
+    height: 0,
+  });
 
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipAnimationKey, setTooltipAnimationKey] = useState(0);
@@ -64,6 +81,9 @@ const PlotMapViewer = ({
 
   const viewBox = geometry?.viewBox ?? DEFAULT_VIEWBOX;
 
+  const viewBoxDimensions = getViewBoxDimensions(viewBox);
+  const mapAspectRatioValue =
+    viewBoxDimensions.width / viewBoxDimensions.height;
   const mapAspectRatio = getViewBoxAspectRatio(viewBox);
 
   const legendItems = getPlotLegendItems({
@@ -116,6 +136,33 @@ const PlotMapViewer = ({
     };
   }, []);
 
+  useEffect(() => {
+    if (!fullscreen || !scrollRef.current) {
+      return undefined;
+    }
+
+    const viewport = scrollRef.current;
+    const updateViewportSize = () => {
+      setMapViewportSize({
+        width: viewport.clientWidth,
+        height: viewport.clientHeight,
+      });
+    };
+
+    updateViewportSize();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateViewportSize);
+
+      return () => window.removeEventListener("resize", updateViewportSize);
+    }
+
+    const resizeObserver = new ResizeObserver(updateViewportSize);
+    resizeObserver.observe(viewport);
+
+    return () => resizeObserver.disconnect();
+  }, [fullscreen]);
+
   /*
    * Sanity inventory lookup
    *
@@ -126,7 +173,10 @@ const PlotMapViewer = ({
    * }
    */
   const inventoryByPlot = useMemo(
-    () => new Map(inventory.map((item) => [Number(item.plotNumber), item])),
+    () =>
+      new Map(
+        inventory.map((item) => [normalizePlotNumber(item.plotNumber), item]),
+      ),
     [inventory],
   );
 
@@ -138,7 +188,13 @@ const PlotMapViewer = ({
    * plcPerSqYd
    */
   const plotByNumber = useMemo(
-    () => new Map((plots ?? []).map((plot) => [Number(plot.plotNumber), plot])),
+    () =>
+      new Map(
+        (plots ?? []).map((plot) => [
+          normalizePlotNumber(plot.plotNumber),
+          plot,
+        ]),
+      ),
     [plots],
   );
 
@@ -205,7 +261,7 @@ const PlotMapViewer = ({
   };
 
   const selectPlot = (plotNumber) => {
-    const normalizedPlotNumber = Number(plotNumber);
+    const normalizedPlotNumber = normalizePlotNumber(plotNumber);
 
     if (!plotByNumber.has(normalizedPlotNumber)) {
       return;
@@ -213,7 +269,6 @@ const PlotMapViewer = ({
 
     if (!fullscreen) {
       setHoveredPlotNumber(normalizedPlotNumber);
-
       return;
     }
 
@@ -242,7 +297,7 @@ const PlotMapViewer = ({
       return;
     }
 
-    const plotNumber = Number(target.dataset.plotNumber);
+    const plotNumber = normalizePlotNumber(target.dataset.plotNumber);
 
     if (!plotByNumber.has(plotNumber)) return;
 
@@ -325,7 +380,7 @@ const PlotMapViewer = ({
   };
 
   const resetView = () => {
-    setZoom(fullscreen ? 1.25 : 1);
+    setZoom(fullscreen ? fullscreenZoom : 1);
 
     setSelectedPlotNumber(null);
     setHoveredPlotNumber(null);
@@ -340,7 +395,19 @@ const PlotMapViewer = ({
     }
   };
 
-  const canvasWidth = fullscreen ? `${Math.round(760 * zoom)}px` : "100%";
+  const canvasWidth =
+    fullscreen && mapViewportSize.width > 0
+      ? `${Math.round(
+          mapViewportSize.width * zoom,
+        )}px`
+      : "100%";
+
+  const canvasHeight =
+    fullscreen && mapViewportSize.width > 0
+      ? `${Math.round(
+          (mapViewportSize.width * zoom) / mapAspectRatioValue,
+        )}px`
+      : undefined;
 
   return (
     <div
@@ -505,22 +572,37 @@ const PlotMapViewer = ({
       <div
         ref={scrollRef}
         className={`
-          relative
-          min-h-0
-          overflow-auto
-          ${fullscreen ? "rounded-[20px]" : "rounded-[24px]"}
-          border
-          border-[#241E15]
-          bg-[#050505]
-          ${fullscreen ? "flex-1" : ""}
-        `}
+    relative
+    min-h-0
+    min-w-0
+    overflow-auto
+    ${fullscreen && !canvasHeight ? "flex-1" : ""}
+    ${fullscreen ? "flex items-center justify-center" : ""}
+    ${fullscreen ? "rounded-[20px]" : "rounded-[24px]"}
+    border
+    border-[#241E15]
+    bg-[#050505]
+  `}
+        style={
+          fullscreen
+            ? {
+                alignItems: "safe center",
+                justifyContent: "safe center",
+                ...(canvasHeight
+                  ? {
+                      height: canvasHeight,
+                      flex: "0 1 auto",
+                    }
+                  : {}),
+              }
+            : undefined
+        }
       >
         <div
           ref={mapContainerRef}
-          className="
+    className="
     relative
-    mx-auto
-    w-full
+    shrink-0
     overflow-hidden
   "
           style={{
@@ -533,8 +615,8 @@ const PlotMapViewer = ({
             alt={planAlt}
             fill
             priority={false}
-            sizes={fullscreen ? "760px" : "(max-width: 1024px) 100vw, 100vw"}
-            className="select-none object-contain"
+            sizes={fullscreen ? "100vw" : "(max-width: 1024px) 100vw, 100vw"}
+            className="select-none object-contain object-center"
             draggable={false}
           />
 
@@ -551,7 +633,7 @@ const PlotMapViewer = ({
               aria-label={`${planAlt} interactive plot availability map`}
             >
               {geometryPlots.map((shape) => {
-                const plotNumber = Number(shape.plotNumber);
+                const plotNumber = normalizePlotNumber(shape.plotNumber);
 
                 const inventoryItem = inventoryByPlot.get(plotNumber);
 
@@ -576,10 +658,10 @@ const PlotMapViewer = ({
                     strokeWidth={isActive ? 4.5 : 1.6}
                     vectorEffect="non-scaling-stroke"
                     className="
-                        cursor-pointer
-                        transition-[fill-opacity,stroke-width]
-                        duration-200
-                      "
+        cursor-pointer
+        transition-[fill-opacity,stroke-width]
+        duration-200
+      "
                     style={{
                       filter: isActive
                         ? "drop-shadow(0 0 10px rgba(221,188,105,0.28))"

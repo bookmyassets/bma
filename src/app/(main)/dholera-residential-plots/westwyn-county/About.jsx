@@ -15,7 +15,7 @@ import WestWynProjectAbout from "../components/westwyn/WestwynProjectAbout";
 import mapImage from "@/assests/westwyn-county/westwyn-county-map-by-bookmyassets.webp";
 
 const brochureUrl =
-  "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf?dl=westwyn-estates-brochure.pdf";
+  "https://cdn.sanity.io/files/c3e1h345/projects/dc4be39e6cda5a2dc75fd37969f1cd27a9b22f61.pdf";
 
 const locations = [
   {

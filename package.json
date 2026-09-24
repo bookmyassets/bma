@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "import:westwyn-inventory": "node --env-file=.env.local scripts/importWestwynInventory.mjs westwyn-residency",
-    "import:westwyn-estates":"node --env-file=.env.local scripts/importWestwynInventory.mjs westwyn-estate"
+    "import:westwyn-estates":"node --env-file=.env.local scripts/importWestwynInventory.mjs westwyn-estate",
+    "import:westwyn-county": "node --env-file=.env.local scripts/importWestwynInventory.mjs westwyn-county"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

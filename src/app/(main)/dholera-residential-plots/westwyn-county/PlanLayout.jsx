@@ -73,12 +73,12 @@ const documentation = [
 ];
 
 const brochureUrl =
-  "https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf";
+  "https://cdn.sanity.io/files/c3e1h345/projects/c28b4a439e3834cddf988bab24774f3f79bb78a9.pdf";
 
 export default function PlanLayout({ surface = "alt" }) {
   return (
     <WestWynPlanLayout
-      projectName="WestWyn Estates"
+      projectName="WestWyn County"
       overviewCards={overviewCards}
       location={{
         name: "Fedra-Pipli State Highway",
