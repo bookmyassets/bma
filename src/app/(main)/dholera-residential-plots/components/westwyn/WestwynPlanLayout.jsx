@@ -18,8 +18,6 @@ import {
 
 import { Maximize2, X } from "lucide-react";
 
-import BrochureDownload from "../../../components/BrochureDownload";
-
 const tabs = [
   {
     id: "overview",
@@ -52,8 +50,6 @@ export default function WestWynPlanLayout({
 }) {
   const [activeTab, setActiveTab] = useState("overview");
 
-  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-
   const [isPlanOpen, setIsPlanOpen] = useState(false);
 
   const OverviewCards = Array.isArray(overviewCards)
@@ -70,24 +66,21 @@ export default function WestWynPlanLayout({
       ? [location.description]
       : [];
 
-  const handleAfterSubmit = () => {
+  const handleBrochureDownload = () => {
     if (!brochureUrl) return;
 
     try {
-      setTimeout(() => {
-        const link = document.createElement("a");
+      const link = document.createElement("a");
+      link.href = brochureUrl;
+      link.download = `${projectName || "project"}-brochure.pdf`;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
 
-        link.href = brochureUrl;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }, 300);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
-      console.error("Error opening brochure:", error);
-
+      console.error("Error downloading brochure:", error);
       window.open(brochureUrl, "_blank", "noopener,noreferrer");
     }
   };
@@ -753,7 +746,7 @@ export default function WestWynPlanLayout({
                   {brochureUrl ? (
                     <button
                       type="button"
-                      onClick={() => setIsBrochureFormOpen(true)}
+                      onClick={handleBrochureDownload}
                       className="
                         gold-cta-button
 
@@ -970,72 +963,6 @@ export default function WestWynPlanLayout({
           </div>
         </div>
       </section>
-
-      {/* =========================================================
-          BROCHURE MODAL
-      ========================================================== */}
-
-      <AnimatePresence>
-        {isBrochureFormOpen && brochureUrl ? (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            onClick={() => setIsBrochureFormOpen(false)}
-            className="
-              fixed
-              inset-0
-              z-[1000]
-
-              flex
-              items-center
-              justify-center
-
-              bg-black/70
-
-              p-4
-
-              backdrop-blur-sm
-            "
-          >
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.96,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.96,
-              }}
-              onClick={(event) => event.stopPropagation()}
-              className="
-                w-full
-                max-w-md
-
-                [&_h2]:!text-white
-              "
-            >
-              <BrochureDownload
-                onClose={() => setIsBrochureFormOpen(false)}
-                title="Get Project Plan Layout"
-                buttonName="Get Brochure"
-                onAfterSubmit={handleAfterSubmit}
-                link={brochureUrl}
-              />
-            </motion.div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
 
       {/* =========================================================
           STATIC PLAN FULLSCREEN

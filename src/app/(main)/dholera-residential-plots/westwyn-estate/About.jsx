@@ -16,7 +16,7 @@ import WestWynProjectAbout from "../components/westwyn/WestwynProjectAbout";
 import mapImage from "@/assests/homepage/hero2/test/westwyn-estates-dholera-google-maps-location.webp";
 
 const brochureUrl =
-  "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
+  "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf?dl=westwyn-estates-brochure.pdf";
 
 const locations = [
   {

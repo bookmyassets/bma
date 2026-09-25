@@ -78,7 +78,7 @@ const documentation = [
 ];
 
 const brochureUrl =
-  "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
+  "https://cdn.sanity.io/files/c3e1h345/projects/24ba597843bad573b68919de9391499bd8ceb4f8.pdf";
 
 export default function PlanLayout({ surface = "alt" }) {
   return (

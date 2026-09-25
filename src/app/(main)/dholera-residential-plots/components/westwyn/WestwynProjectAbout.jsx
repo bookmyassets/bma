@@ -8,8 +8,6 @@ import { FaDownload } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import { getWestwynSectionSurface } from "./WestwynTheme";
 
-import BrochureDownload from "../../../components/BrochureDownload";
-
 const DEFAULT_TONE =
   "bg-[#DDBC69] text-[#111111] ring-[#F0D58C]/70";
 
@@ -504,12 +502,7 @@ export default function WestWynProjectAbout({
   locations = [],
 
   brochureUrl,
-  brochureTitle = "Get Full Project Details",
-  brochureButtonName = "Get Brochure",
 }) {
-  const [isBrochureFormOpen, setIsBrochureFormOpen] =
-    useState(false);
-
   const [activeLocationId, setActiveLocationId] =
     useState(null);
 
@@ -531,33 +524,22 @@ export default function WestWynProjectAbout({
     );
   };
 
-  const closeBrochureForm = () => {
-    setIsBrochureFormOpen(false);
-  };
-
-  const handleAfterSubmit = () => {
+  const handleBrochureDownload = () => {
     if (!brochureUrl) return;
 
     try {
-      setTimeout(() => {
-        const link = document.createElement("a");
+      const link = document.createElement("a");
+      link.href = brochureUrl;
+      link.download = `${projectName || "project"}-brochure.pdf`;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
 
-        link.href = brochureUrl;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }, 300);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
-      console.error("Error opening brochure:", error);
-
-      window.open(
-        brochureUrl,
-        "_blank",
-        "noopener,noreferrer",
-      );
+      console.error("Error downloading brochure:", error);
+      window.open(brochureUrl, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -950,9 +932,7 @@ export default function WestWynProjectAbout({
                 >
                   <button
                     type="button"
-                    onClick={() =>
-                      setIsBrochureFormOpen(true)
-                    }
+                    onClick={handleBrochureDownload}
                     className="
                       group
                       gold-cta-button
@@ -1018,72 +998,6 @@ export default function WestWynProjectAbout({
         </div>
       </section>
 
-      {/* ======================================================
-          BROCHURE MODAL
-      ====================================================== */}
-
-      <AnimatePresence>
-        {isBrochureFormOpen && brochureUrl ? (
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Download the ${projectName} brochure`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="
-              fixed
-              inset-0
-              z-[1000]
-
-              flex
-              items-center
-              justify-center
-
-              bg-black/65
-
-              p-4
-
-              backdrop-blur-sm
-            "
-            onClick={closeBrochureForm}
-          >
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.96,
-                y: 16,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                y: 0,
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.96,
-                y: 12,
-              }}
-              transition={{
-                duration: 0.22,
-                ease: "easeOut",
-              }}
-              className="w-full max-w-md"
-              onClick={(event) =>
-                event.stopPropagation()
-              }
-            >
-              <BrochureDownload
-                onClose={closeBrochureForm}
-                title={brochureTitle}
-                buttonName={brochureButtonName}
-                onAfterSubmit={handleAfterSubmit}
-                link={brochureUrl}
-              />
-            </motion.div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
     </>
   );
 }

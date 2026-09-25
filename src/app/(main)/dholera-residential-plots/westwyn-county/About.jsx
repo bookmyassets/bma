@@ -1,171 +1,147 @@
-import { AnimatePresence } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import BrochureDownload from "../../components/BrochureDownload";
-import { FaDochub, FaFile, FaPhone, FaWhatsapp } from "react-icons/fa6";
-import Link from "next/link";
-import { FaDownload } from "react-icons/fa";
-import Image from "next/image";
-import img from "@/assests/westwyn-county/westwyn-county-dholera-plan-layout.webp";
-import { File } from "lucide-react";
+"use client";
 
-const WestWynAboutSection = () => {
-  const [counters, setCounters] = useState({
-    plotSize: 0,
-    price: 0,
-    amenities: 0,
-  });
+import {
+  Building2,
+  Factory,
+  Landmark,
+  MapPinned,
+  Milestone,
+  Plane,
+  Route,
+} from "lucide-react";
 
-  const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-  // New state for brochure form
-  const [formTitle, setFormTitle] = useState("");
-  const [formHeadline, setFormHeadline] = useState("");
-  const [buttonName, setButtonName] = useState("");
-  const [formType, setFormType] = useState("");
+import WestWynProjectAbout from "../components/westwyn/WestwynProjectAbout";
 
-  const openBrochureForm = (title, headline, btnName, type) => {
-    setFormTitle(title);
-    setFormHeadline(headline);
-    setButtonName(btnName);
-    setFormType(type);
-    setIsBrochureFormOpen(true);
-  };
+import mapImage from "@/assests/westwyn-county/westwyn-county-map-by-bookmyassets.webp";
 
-  const closeBrochureForm = () => {
-    setIsBrochureFormOpen(false);
-  };
+const brochureUrl =
+  "https://cdn.sanity.io/files/c3e1h345/projects/dc4be39e6cda5a2dc75fd37969f1cd27a9b22f61.pdf";
 
-  const handleAfterSubmit = () => {
-    console.log("Form submitted successfully, type:", formType);
+const locations = [
+  {
+    id: "project-location",
+    title: "Fedra-Pipli Highway (SH-40)",
+    subtitle: "WestWyn County project location",
+    value: "Project Location",
+    x: 27,
+    y: 46,
+    Icon: MapPinned,
+    markerLabel: "WestWyn County",
+    toneClass: "bg-[#10B981] text-white ring-[#34D399]",
+  },
 
-    if (formType === "brochure") {
-      try {
-        console.log("Initiating brochure download");
+  {
+    id: "highway",
+    title: "Fedra-Pipli Highway (SH-40)",
+    value: "Direct Entry / Exit",
+    x: 35,
+    y: 58,
+    Icon: Route,
+    markerLabel: "Fedra-Pipli Highway",
+    toneClass: "bg-[#0EA5E9] text-white ring-[#38BDF8]",
+  },
 
-        // Using setTimeout to ensure the popup closes before download starts
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.href =
-            "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf";
-          link.target = "_blank";
-          link.download = "brochure.pdf"; // Add download attribute
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          console.log("Download link clicked");
-        }, 300);
-      } catch (error) {
-        console.error("Error downloading brochure:", error);
-        window.open(
-          "https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf",
-          "_blank",
-        );
-      }
-    }
-  };
+  {
+    id: "gallops",
+    title: "Gallops",
+    subtitle: "Located close to the project",
+    value: "Walking Distance",
+    x: 39,
+    y: 37,
+    Icon: Building2,
+    markerLabel: "Gallops",
+    toneClass: "bg-[#8B5CF6] text-white ring-[#A78BFA]",
+  },
 
+  {
+    id: "hotel",
+    title: "Gujarat's Largest Hotel",
+    value: "2 Minutes",
+    x: 47,
+    y: 29,
+    Icon: Building2,
+    markerLabel: "Nearby Hotel",
+    toneClass: "bg-[#D946EF] text-white ring-[#E879F9]",
+  },
+
+  {
+    id: "kamiyala-temple",
+    title: "Kamiyala Temple",
+    value: "10 Minutes",
+    x: 56,
+    y: 40,
+    Icon: Landmark,
+    markerLabel: "Kamiyala Temple",
+    toneClass: "bg-[#F97316] text-white ring-[#FB923C]",
+  },
+
+  {
+    id: "expressway",
+    title: "Ahmedabad-Dholera Expressway",
+    value: "10 Minutes",
+    x: 67,
+    y: 51,
+    Icon: Milestone,
+    markerLabel: "Ahmedabad-Dholera Expressway",
+    toneClass: "bg-[#F59E0B] text-white ring-[#FBBF24]",
+  },
+
+  {
+    id: "sir-boundary",
+    title: "Dholera SIR Boundary",
+    value: "15 Minutes",
+    x: 72,
+    y: 31,
+    Icon: MapPinned,
+    markerLabel: "Dholera SIR Boundary",
+    toneClass: "bg-[#10B981] text-white ring-[#34D399]",
+  },
+
+  {
+    id: "airport",
+    title: "Dholera International Airport",
+    value: "15 Minutes",
+    x: 82,
+    y: 65,
+    Icon: Plane,
+    markerLabel: "Dholera International Airport",
+    toneClass: "bg-[#06B6D4] text-white ring-[#22D3EE]",
+  },
+
+  {
+    id: "semiconductor",
+    title: "Tata Semiconductor Plant",
+    value: "25 Minutes",
+    x: 84,
+    y: 28,
+    Icon: Factory,
+    markerLabel: "Tata Semiconductor Plant",
+    toneClass: "bg-[#F43F5E] text-white ring-[#FB7185]",
+  },
+];
+
+export default function WestWynAboutSection({ surface = "base" }) {
   return (
-    <div className="bg-white relative overflow-hidden">
-      {/* Subtle background pattern */}
-
-      <div className="relative max-w-7xl mx-auto px-4 py-4">
-        {/* Location Advantage */}
-        <div className="max-w-7xl mx-auto py-4">
-          <div>
-            <h2 className="text-[32px] font-semibold text-center ">
-              Prime Location
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-            <div className="px-4 sm:px-6 lg:px-8 ">
-              <Image
-                src={img}
-                alt="westwyn residency location map"
-                className="rounded-xl w-full h-auto md:h-full"
-                priority
-              />
-            </div>
-            <div className="bg-gray-100 text-base md:text-lg p-4 rounded-xl">
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>
-                    Direct Entry/Exit from Fedra-Pipli Highway (SH-40)
-                  </span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>Walking Distance from Gallops</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>2 Minutes from Gujarat&apos;s Largest Hotel</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>10 Minutes from Kamiyala Temple</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>10 Minutes from Ahmedabad-Dholera Expressway</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>15 Minutes from Dholera International Airport</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>15 Minutes from Dholera SIR Boundary</span>
-                </li>
-
-                <li className="flex items-start justify-start gap-2 font-bold">
-                  <span className="text-[#ddbc69] leading-none shrink-0 mt-1">
-                    •
-                  </span>
-                  <span>25 Minutes from Tata Semiconductor Plant</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4">
-            <div className="w-full max-w-md">
-              <BrochureDownload
-                onClose={closeBrochureForm}
-                title="Get Full Project Details"
-                buttonName="Get Brochure"
-                onAfterSubmit={handleAfterSubmit}
-                link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"
-              />
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
-    </div>
+    <WestWynProjectAbout
+      projectName="WestWyn County"
+      overviewHeading="परिवार की सुरक्षा के लिए एक मजबूत कदम"
+      surface={surface}
+      overviewDescription={
+        <>
+          WestWyn County, located on the Fedra-Pipli State Highway, is one of
+          BookMyAssets&apos;s successfully sold-out residential plot projects in
+          Dholera. Due to high demand, we are now offering verified resale plots
+          in WestWyn County. If you missed the original launch, this is your
+          chance to own a plot in one of Dholera&apos;s most trusted residential
+          projects.
+        </>
+      }
+      locationHeading="Well Positioned for Future Habitation"
+      mapImage={mapImage}
+      mapAlt="WestWyn County location map near Dholera"
+      mapBadge="Strategic Location"
+      locations={locations}
+      brochureUrl={brochureUrl}
+    />
   );
-};
-
-export default WestWynAboutSection;
+}

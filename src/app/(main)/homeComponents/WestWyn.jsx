@@ -9,7 +9,7 @@ import westwynCrownImage from "@/assests/residential/crown/westwyn-crown-dholera
 const projects = [
   {
     name: "WestWyn Residency",
-    price: "Starting from ₹8 Lakh",
+    price: "Starting from ₹10 Lakh",
     location: "1.5 km from DFC",
     href: "/dholera-residential-plots/westwyn-residency",
     image: westwynResidencyImage,
