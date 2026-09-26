@@ -20,6 +20,43 @@ const CACHE_TTL = 5 * 60 * 1000;
 let redirectCache = null;
 let cacheTime = 0;
 
+const DEFAULT_PUBLIC_ORIGIN = "https://www.bookmyassets.com";
+
+function getPublicOrigin(request) {
+  if (process.env.NODE_ENV === "production") {
+    const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+    try {
+      const configuredOrigin = new URL(
+        configuredSiteUrl || DEFAULT_PUBLIC_ORIGIN,
+      );
+
+      if (!/^(localhost|127(?:\.\d{1,3}){3})$/i.test(configuredOrigin.hostname)) {
+        return configuredOrigin.origin;
+      }
+    } catch {
+      return DEFAULT_PUBLIC_ORIGIN;
+    }
+
+    return DEFAULT_PUBLIC_ORIGIN;
+  }
+
+  const forwardedHost = request.headers
+    .get("x-forwarded-host")
+    ?.split(",")[0]
+    .trim();
+  const forwardedProtocol = request.headers
+    .get("x-forwarded-proto")
+    ?.split(",")[0]
+    .trim();
+
+  if (forwardedHost && !/^(localhost|127(?:\.\d{1,3}){3})/i.test(forwardedHost)) {
+    return `${forwardedProtocol || request.nextUrl.protocol.replace(":", "")}://${forwardedHost}`;
+  }
+
+  return request.nextUrl.origin;
+}
+
 async function fetchRedirects() {
   const now = Date.now();
 
@@ -58,13 +95,14 @@ function buildRedirectUrl(request, destination) {
   );
 
   try {
+    const publicOrigin = getPublicOrigin(request);
     const target = /^https?:\/\//i.test(cleanDestination)
       ? new URL(cleanDestination)
       : new URL(
           cleanDestination.startsWith("/")
             ? cleanDestination
             : `/${cleanDestination}`,
-          request.url,
+          publicOrigin,
         );
 
     /*

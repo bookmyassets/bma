@@ -16,7 +16,7 @@
 }
 
 .blog-page__container {
-  width: calc(100% - 2rem);
+  width: calc(100% - 2.5rem);
   max-width: 1600px;
   margin-inline: auto;
 }
@@ -44,6 +44,12 @@
 
 @media (min-width: 640px) {
   .blog-page__container {
-    width: calc(100% - 3rem);
+    width: calc(100% - 4rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-page__container {
+    width: calc(100% - 5rem);
   }
 }

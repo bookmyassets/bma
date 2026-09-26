@@ -615,7 +615,7 @@ export default async function Post({ params }) {
 
         <div className={`${blogBaseSurface} blog-page min-h-screen text-white`}>
           <div className={`${blogBaseSurface} shadow-sm sticky top-0 z-20`} />
-          <main className="blog-page__container py-8 pt-24">
+          <main className="blog-page__container py-12 pt-28">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-10">
               {/* Main Content */}
               <article className="order-1 min-w-0">
