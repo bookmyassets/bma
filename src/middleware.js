@@ -12,6 +12,8 @@ const client = createClient({
 });
 
 const SITE_NAME = "bookmyassets";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.bookmyassets.com";
 
 // Best-effort per-instance cache.
 // Do not rely on this cache for correctness.
@@ -31,7 +33,9 @@ function getPublicOrigin(request) {
         configuredSiteUrl || DEFAULT_PUBLIC_ORIGIN,
       );
 
-      if (!/^(localhost|127(?:\.\d{1,3}){3})$/i.test(configuredOrigin.hostname)) {
+      if (
+        !/^(localhost|127(?:\.\d{1,3}){3})$/i.test(configuredOrigin.hostname)
+      ) {
         return configuredOrigin.origin;
       }
     } catch {
@@ -50,7 +54,10 @@ function getPublicOrigin(request) {
     ?.split(",")[0]
     .trim();
 
-  if (forwardedHost && !/^(localhost|127(?:\.\d{1,3}){3})/i.test(forwardedHost)) {
+  if (
+    forwardedHost &&
+    !/^(localhost|127(?:\.\d{1,3}){3})/i.test(forwardedHost)
+  ) {
     return `${forwardedProtocol || request.nextUrl.protocol.replace(":", "")}://${forwardedHost}`;
   }
 
@@ -88,38 +95,26 @@ function buildRedirectUrl(request, destination) {
 
   let cleanDestination = destination.trim();
 
-  // Prevent accidental localhost URLs stored in Sanity.
   cleanDestination = cleanDestination.replace(
     /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?/i,
     "",
   );
 
   try {
-    const publicOrigin = getPublicOrigin(request);
     const target = /^https?:\/\//i.test(cleanDestination)
       ? new URL(cleanDestination)
       : new URL(
           cleanDestination.startsWith("/")
             ? cleanDestination
             : `/${cleanDestination}`,
-          publicOrigin,
+          SITE_URL,
         );
 
-    /*
-     * Preserve incoming query parameters such as:
-     *
-     * ?utm_source=google
-     * ?gclid=...
-     *
-     * unless the redirect destination already defines its own query.
-     */
     if (!target.search && request.nextUrl.search) {
       target.search = request.nextUrl.search;
     }
 
-    // Protect against direct self-redirect loops.
     const isSelfRedirect =
-      target.origin === request.nextUrl.origin &&
       target.pathname === request.nextUrl.pathname &&
       target.search === request.nextUrl.search;
 
@@ -129,8 +124,6 @@ function buildRedirectUrl(request, destination) {
 
     return target;
   } catch {
-    // Invalid redirect stored in Sanity.
-    // Allow the original request instead of breaking the page.
     return null;
   }
 }
@@ -147,8 +140,7 @@ export async function middleware(request) {
   const auth = request.cookies.get("crm_auth")?.value;
 
   const isCrmRoute =
-    pathname === "/after-sales/crm" ||
-    pathname.startsWith("/after-sales/crm/");
+    pathname === "/after-sales/crm" || pathname.startsWith("/after-sales/crm/");
 
   if (isCrmRoute && auth !== "granted") {
     return NextResponse.redirect(
@@ -188,27 +180,19 @@ export async function middleware(request) {
 
   const redirects = await fetchRedirects();
 
-  const match = redirects.find(
-    (redirect) => redirect.source === pathname,
-  );
+  const match = redirects.find((redirect) => redirect.source === pathname);
 
   if (!match) {
     return NextResponse.next();
   }
 
-  const redirectUrl = buildRedirectUrl(
-    request,
-    match.destination,
-  );
+  const redirectUrl = buildRedirectUrl(request, match.destination);
 
   if (!redirectUrl) {
     return NextResponse.next();
   }
 
-  return NextResponse.redirect(
-    redirectUrl,
-    match.permanent ? 308 : 307,
-  );
+  return NextResponse.redirect(redirectUrl, match.permanent ? 308 : 307);
 }
 
 export const config = {
