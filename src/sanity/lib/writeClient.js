@@ -16,3 +16,5 @@ export const receiptCounterClient = createClient({
     return process.env.SANITY_API_WRITE_TOKEN;
   },
 });
+
+export const writeClient = receiptCounterClient;

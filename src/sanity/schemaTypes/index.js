@@ -9,6 +9,7 @@ import receiptCounter from './receiptCounter';
 import plotInventory from './plotInventory';
 import leadFormBlock from './objects/leadFormBlock';
 import youtubeEmbed from './objects/youtubeEmbed';
+import paymentTransaction from "./paymentTransactions";
 
 export const schema = {
   types: [
@@ -20,6 +21,7 @@ export const schema = {
     contact,
     receiptCounter,
     plotInventory,
+    paymentTransaction,
     leadFormBlock,
     youtubeEmbed,
   ],

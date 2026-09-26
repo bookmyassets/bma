@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronRight, CreditCard, Menu, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 
@@ -36,6 +36,11 @@ const dholeraItems = [
 ];
 
 const utilityLinks = [
+  {
+    href: "/payment-link",
+    label: "Payments",
+    payment: true,
+  },
   {
     href: "/about-dholera-sir",
     label: "About Dholera",
@@ -795,50 +800,50 @@ export default function Navbar() {
   };
 
   const toggleResidentialMenu = () => {
-  setIsResidentialMenuOpen((previous) => !previous);
+    setIsResidentialMenuOpen((previous) => !previous);
 
-  setIsDholeraMenuOpen(false);
-  setIsUtilityMenuOpen(false);
+    setIsDholeraMenuOpen(false);
+    setIsUtilityMenuOpen(false);
   };
 
- const toggleDholeraMenu = () => {
-  setIsDholeraMenuOpen((previous) => !previous);
+  const toggleDholeraMenu = () => {
+    setIsDholeraMenuOpen((previous) => !previous);
 
-  setIsResidentialMenuOpen(false);
-  setIsUtilityMenuOpen(false);
-};
+    setIsResidentialMenuOpen(false);
+    setIsUtilityMenuOpen(false);
+  };
 
   const toggleUtilityMenu = () => {
-  setIsUtilityMenuOpen((previous) => !previous);
+    setIsUtilityMenuOpen((previous) => !previous);
 
-  setIsResidentialMenuOpen(false);
-  setIsDholeraMenuOpen(false);
-};
+    setIsResidentialMenuOpen(false);
+    setIsDholeraMenuOpen(false);
+  };
 
   const toggleMobileMenu = () => {
-  if (isMobileMenuOpen) {
-    closeAllMenus();
-    return;
-  }
+    if (isMobileMenuOpen) {
+      closeAllMenus();
+      return;
+    }
 
-  setIsResidentialMenuOpen(false);
-  setIsDholeraMenuOpen(false);
-  setIsUtilityMenuOpen(false);
+    setIsResidentialMenuOpen(false);
+    setIsDholeraMenuOpen(false);
+    setIsUtilityMenuOpen(false);
 
-  if (isMobileMenuMounted) {
-    setIsMobileMenuOpen(true);
-    return;
-  }
-
-  setIsMobileMenuMounted(true);
-
-  drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
-    drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
-      drawerOpenFrameRef.current = null;
+    if (isMobileMenuMounted) {
       setIsMobileMenuOpen(true);
+      return;
+    }
+
+    setIsMobileMenuMounted(true);
+
+    drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
+      drawerOpenFrameRef.current = window.requestAnimationFrame(() => {
+        drawerOpenFrameRef.current = null;
+        setIsMobileMenuOpen(true);
+      });
     });
-  });
-};
+  };
 
   /* ------------------------------------------------------------------------ */
   /* Desktop dropdown content                                                 */
@@ -1187,26 +1192,85 @@ export default function Navbar() {
               {isUtilityMenuOpen && (
                 <DesktopDropdownShell align="right" className="w-[270px]">
                   <div className="p-1">
-                    {utilityLinks.map(({ href, label, calendly }) => {
+                    {utilityLinks.map(({ href, label, calendly, payment }) => {
                       if (calendly) {
                         return (
                           <BookButton
                             key={label}
                             className="
-                                block
-                                w-full
-                                rounded-lg
-                                px-3
-                                py-3
-                                text-left
-                                text-base
-                                font-medium
-                                text-white/75
-                                transition-colors
-                                hover:bg-white/[0.07]
-                                hover:text-[#ddbc69]
-                              "
+            block
+            w-full
+            rounded-lg
+            px-3
+            py-3
+            text-left
+            text-base
+            font-medium
+            text-white/75
+            transition-colors
+            hover:bg-white/[0.07]
+            hover:text-[#ddbc69]
+          "
                           />
+                        );
+                      }
+
+                      if (payment) {
+                        return (
+                          <Link
+                            key={href}
+                            href={href}
+                            onClick={closeAllMenus}
+                            className="
+            group
+            mb-1
+            flex
+            items-center
+            justify-between
+            rounded-xl
+            border
+            border-[#ddbc69]/25
+            bg-[#ddbc69]/10
+            px-3
+            py-3
+            text-base
+            font-semibold
+            text-[#ddbc69]
+            transition-all
+            duration-300
+            hover:border-[#ddbc69]/45
+            hover:bg-[#ddbc69]/15
+          "
+                          >
+                            <span className="flex items-center gap-2.5">
+                              <span
+                                className="
+                flex
+                h-8
+                w-8
+                items-center
+                justify-center
+                rounded-full
+                bg-[#ddbc69]/12
+              "
+                              >
+                                <CreditCard className="h-4 w-4" />
+                              </span>
+
+                              {label}
+                            </span>
+
+                            <ArrowUpRight
+                              className="
+              h-4
+              w-4
+              transition-transform
+              duration-300
+              group-hover:-translate-y-0.5
+              group-hover:translate-x-0.5
+            "
+                            />
+                          </Link>
                         );
                       }
 
@@ -1216,19 +1280,19 @@ export default function Navbar() {
                           href={href}
                           onClick={closeAllMenus}
                           className="
-                              flex
-                              items-center
-                              justify-between
-                              rounded-lg
-                              px-3
-                              py-3
-                              text-base
-                              font-medium
-                              text-white/75
-                              transition-colors
-                              hover:bg-white/[0.07]
-                              hover:text-[#ddbc69]
-                            "
+          flex
+          items-center
+          justify-between
+          rounded-lg
+          px-3
+          py-3
+          text-base
+          font-medium
+          text-white/75
+          transition-colors
+          hover:bg-white/[0.07]
+          hover:text-[#ddbc69]
+        "
                         >
                           {label}
 
@@ -1605,24 +1669,115 @@ export default function Navbar() {
               <p className="mb-2 px-2.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/30">
                 More
               </p>
-              {utilityLinks.map(({ href, label, calendly }) =>
-                calendly ? (
-                  <BookButton
-                    key={label}
-                    className="block w-full rounded-xl px-2.5 py-3.5 text-left text-base font-medium leading-snug text-white/65 transition-colors hover:bg-white/[0.05] hover:text-white min-[390px]:text-[17px] sm:px-4"
-                  />
-                ) : (
+              {utilityLinks.map(({ href, label, calendly, payment }) => {
+                if (calendly) {
+                  return (
+                    <BookButton
+                      key={label}
+                      className="
+            block
+            w-full
+            rounded-xl
+            px-2.5
+            py-3.5
+            text-left
+            text-base
+            font-medium
+            leading-snug
+            text-white/65
+            transition-colors
+            hover:bg-white/[0.05]
+            hover:text-white
+            min-[390px]:text-[17px]
+            sm:px-4
+          "
+                    />
+                  );
+                }
+
+                if (payment) {
+                  return (
+                    <Link
+                      key={href}
+                      href={href}
+                      onClick={closeAllMenus}
+                      className="
+            group
+            my-2
+            flex
+            min-h-[58px]
+            items-center
+            justify-between
+            gap-3
+            rounded-2xl
+            border
+            border-[#ddbc69]/25
+            bg-[#ddbc69]/10
+            px-3.5
+            text-base
+            font-semibold
+            text-[#ddbc69]
+            transition-all
+            hover:border-[#ddbc69]/45
+            hover:bg-[#ddbc69]/15
+            min-[390px]:text-[17px]
+            sm:px-4
+          "
+                    >
+                      <span className="flex items-center gap-3">
+                        <span
+                          className="
+                flex
+                h-9
+                w-9
+                shrink-0
+                items-center
+                justify-center
+                rounded-full
+                bg-[#ddbc69]/12
+              "
+                        >
+                          <CreditCard className="h-[18px] w-[18px]" />
+                        </span>
+
+                        {label}
+                      </span>
+
+                      <ArrowUpRight className="h-4 w-4 shrink-0" />
+                    </Link>
+                  );
+                }
+
+                return (
                   <Link
                     key={href}
                     href={href}
                     onClick={closeAllMenus}
-                    className="flex min-h-[48px] items-center justify-between gap-2 rounded-xl px-2.5 text-base font-medium leading-snug text-white/65 transition-colors hover:bg-white/[0.05] hover:text-white min-[390px]:text-[17px] sm:px-4"
+                    className="
+          flex
+          min-h-[48px]
+          items-center
+          justify-between
+          gap-2
+          rounded-xl
+          px-2.5
+          text-base
+          font-medium
+          leading-snug
+          text-white/65
+          transition-colors
+          hover:bg-white/[0.05]
+          hover:text-white
+          min-[390px]:text-[17px]
+          sm:px-4
+        "
                   >
                     <span className="min-w-0 break-words">{label}</span>
+
                     <ChevronRight className="h-3.5 w-3.5 shrink-0 text-white/20" />
                   </Link>
-                ),
-              )}
+                );
+              })}
             </div>
           </div>
 
