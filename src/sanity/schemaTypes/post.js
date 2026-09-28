@@ -116,6 +116,13 @@ export default {
       type: "datetime",
     },
     {
+      name: "updatedOn",
+      title: "Updated On",
+      type: "datetime",
+      description:
+        "Optional. Add this only when the blog content has been meaningfully updated.",
+    },
+    {
       name: "Location",
       title: "Location",
       type: "string",

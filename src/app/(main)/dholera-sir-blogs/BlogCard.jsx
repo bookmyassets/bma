@@ -39,6 +39,9 @@ export default function BlogCard({ post }) {
           <div className="border-t border-gray-200 pt-4 mt-auto">
             <div className="flex justify-between text-sm">
               <p className="text-black">
+                {visibleDate?.wasModified && (
+                  <span className="text-[#C69C21]">Updated On: </span>
+                )}
                 {visibleDate?.formatted || "Date not available"}
               </p>
               <p className="font-medium hover:underline text-[#ddbc69]">Explore More →</p>

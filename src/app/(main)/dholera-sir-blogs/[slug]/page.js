@@ -579,9 +579,7 @@ export default async function Post({ params }) {
 
     const articleDates = resolveBlogDates(post);
     const publishedDate = formatBlogDate(articleDates.originalPublicationDate);
-    const updatedDate = formatBlogDate(
-      post._updatedAt || articleDates.modificationDate,
-    );
+    const updatedDate = formatBlogDate(articleDates.modificationDate);
     const readingTime = getReadingTime(post.body);
 
     return (
@@ -593,7 +591,7 @@ export default async function Post({ params }) {
             image: post.mainImage?.asset?.url,
             imageAlt: post.mainImage?.alt,
             publishedAt: articleDates.originalPublicationDate,
-            updatedAt: post._updatedAt || articleDates.modificationDate,
+            updatedAt: articleDates.modificationDate,
             slug: `dholera-sir-blogs/${slug}`,
             canonicalUrl: post.canonicalUrl,
             authorName: post.author?.name || "BookMyAssets",

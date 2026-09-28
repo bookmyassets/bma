@@ -39,7 +39,7 @@ export async function getSub() {
 export async function getblogs() {
   const query = `*[_type == "post" && "Blog" in categories[]->title && site == $site]
     | order(coalesce(publishedAt, _createdAt) desc) {
-      _id, title, slug, mainImage { ..., alt }, publishedAt, createdAt, _createdAt, body,
+      _id, title, slug, mainImage { ..., alt }, publishedAt, updatedOn, createdAt, _createdAt, body,
       author->{name, image},
       categories[]->{title}
     }`;
@@ -128,7 +128,7 @@ export async function getPostBySlug(slug, category = null) {
     "ogImage": ogImage.asset->url,    
     slug,
     mainImage { asset->{ _id, _ref, url, metadata{ dimensions, lqip } }, alt },
-    publishedAt, createdAt, _createdAt, _updatedAt,
+    publishedAt, updatedOn, createdAt, _createdAt, _updatedAt,
     body[]{ ..., _type=="image"=>{..., asset->{ _id, _ref, url }}, markDefs[]{..., _type=="link"=>{"href":@.href}} },
     author->{ name, image }, categories[]->{ title, _id }, readingTime
   }`;

@@ -41,6 +41,7 @@ export default async function sitemap() {
           "slug": slug.current,
           createdAt,
           publishedAt,
+          updatedOn,
           _createdAt,
           _updatedAt
         }
