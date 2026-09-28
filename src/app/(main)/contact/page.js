@@ -28,6 +28,7 @@ import {
   Phone,
   ShieldCheck,
 } from "lucide-react";
+import { getWestwynSectionSurface } from "../dholera-residential-plots/components/westwyn/WestwynTheme";
 
 const SOCIAL_LINKS = [
   {
@@ -134,12 +135,12 @@ const ContactPage = () => {
 
       try {
         const existingScript = document.querySelector(
-          'script[src="https://www.google.com/recaptcha/api.js"]'
+          'script[src="https://www.google.com/recaptcha/api.js"]',
         );
 
         if (existingScript) {
           existingScript.addEventListener("load", () =>
-            setRecaptchaLoaded(true)
+            setRecaptchaLoaded(true),
           );
 
           return;
@@ -171,11 +172,11 @@ const ContactPage = () => {
 
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
       );
 
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
       );
     }
   }, []);
@@ -221,18 +222,14 @@ const ContactPage = () => {
   const checkSubmissionLimit = () => {
     const now = Date.now();
 
-    const hoursPassed =
-      (now - lastSubmissionTime) / (1000 * 60 * 60);
+    const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
 
     if (hoursPassed >= 24) {
       setSubmissionCount(0);
 
       localStorage.setItem("formSubmissionCount", "0");
 
-      localStorage.setItem(
-        "lastSubmissionTime",
-        now.toString()
-      );
+      localStorage.setItem("lastSubmissionTime", now.toString());
     }
 
     if (submissionCount >= 3 && hoursPassed < 24) {
@@ -267,32 +264,24 @@ const ContactPage = () => {
             subject: formData.subject,
             message: formData.message,
 
-            source:
-              "BookMyAssets Website Contact Page",
+            source: "BookMyAssets Website Contact Page",
           },
 
           source: "BookMyAssets Website",
 
-          tags: [
-            "Website Lead",
-            "Contact Form",
-            "BookMyAssets",
-          ],
+          tags: ["Website Lead", "Contact Form", "BookMyAssets"],
 
           recaptchaToken: token,
         }),
       });
 
       if (!response.ok) {
-        throw new Error(
-          "Failed to submit to TeleCRM"
-        );
+        throw new Error("Failed to submit to TeleCRM");
       }
 
       setSubmitStatus({
         type: "success",
-        message:
-          "Message sent successfully! We'll contact you soon.",
+        message: "Message sent successfully! We'll contact you soon.",
       });
 
       setFormData({
@@ -306,41 +295,25 @@ const ContactPage = () => {
       setSubmissionCount((prev) => {
         const newCount = prev + 1;
 
-        localStorage.setItem(
-          "formSubmissionCount",
-          newCount.toString()
-        );
+        localStorage.setItem("formSubmissionCount", newCount.toString());
 
-        localStorage.setItem(
-          "lastSubmissionTime",
-          now.toString()
-        );
+        localStorage.setItem("lastSubmissionTime", now.toString());
 
         return newCount;
       });
     } catch (error) {
-      console.error(
-        "Form submission error:",
-        error
-      );
+      console.error("Form submission error:", error);
 
       setSubmitStatus({
         type: "error",
 
-        message:
-          error.message ||
-          "Failed to send message. Please try again.",
+        message: error.message || "Failed to send message. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
 
-      if (
-        window.grecaptcha &&
-        recaptchaRef.current
-      ) {
-        window.grecaptcha.reset(
-          recaptchaRef.current
-        );
+      if (window.grecaptcha && recaptchaRef.current) {
+        window.grecaptcha.reset(recaptchaRef.current);
       }
     }
   };
@@ -355,45 +328,31 @@ const ContactPage = () => {
       message: "",
     });
 
-    if (
-      !validateForm() ||
-      !checkSubmissionLimit()
-    ) {
+    if (!validateForm() || !checkSubmissionLimit()) {
       setIsSubmitting(false);
       return;
     }
 
-    if (
-      window.grecaptcha &&
-      recaptchaLoaded
-    ) {
+    if (window.grecaptcha && recaptchaLoaded) {
       try {
         if (recaptchaRef.current) {
           recaptchaRef.current.innerHTML = "";
 
-          window.grecaptcha.render(
-            recaptchaRef.current,
-            {
-              sitekey: siteKey,
+          window.grecaptcha.render(recaptchaRef.current, {
+            sitekey: siteKey,
 
-              callback:
-                onRecaptchaSuccess,
+            callback: onRecaptchaSuccess,
 
-              theme: "light",
-            }
-          );
+            theme: "light",
+          });
         }
       } catch (error) {
-        console.error(
-          "reCAPTCHA execution error:",
-          error
-        );
+        console.error("reCAPTCHA execution error:", error);
 
         setSubmitStatus({
           type: "error",
 
-          message:
-            "Verification error. Please try again.",
+          message: "Verification error. Please try again.",
         });
 
         setIsSubmitting(false);
@@ -402,8 +361,7 @@ const ContactPage = () => {
       setSubmitStatus({
         type: "error",
 
-        message:
-          "Security verification not loaded. Please refresh the page.",
+        message: "Security verification not loaded. Please refresh the page.",
       });
 
       setIsSubmitting(false);
@@ -422,20 +380,13 @@ const ContactPage = () => {
     });
   };
 
-  const canonicalUrl =
-    "https://www.bookmyassets.com/contact";
+  const canonicalUrl = "https://www.bookmyassets.com/contact";
 
   return (
-    <div className="min-h-screen bg-[#f7f5ef] text-[#0d1b2a]">
-      <link
-        rel="canonical"
-        href={canonicalUrl}
-      />
+    <div className="min-h-screen bg-[#101010] text-[#f5f1e8]">
+      <link rel="canonical" href={canonicalUrl} />
 
-      <title>
-        Contact BookMyAssets | Dholera Plot
-        Enquiry & Site Visit
-      </title>
+      <title>Contact BookMyAssets | Dholera Plot Enquiry & Site Visit</title>
 
       <meta
         name="description"
@@ -443,21 +394,28 @@ const ContactPage = () => {
       />
 
       <main className="overflow-hidden pt-20">
-        <section className="relative border-b border-[#e9e1d3] bg-[#f8f6f1]">
+        <section
+          className={`
+    relative
+    border-b
+    border-white/[0.08]
+    ${getWestwynSectionSurface("base")}
+  `}
+        >
           <div
             className="
               pointer-events-none
               absolute
               inset-0
               opacity-40
-              [background-image:radial-gradient(circle_at_1px_1px,rgba(13,27,42,0.055)_1px,transparent_0)]
+             [background-image:radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.035)_1px,transparent_0)]
               [background-size:28px_28px]
             "
           />
 
           <div className="pointer-events-none absolute -left-28 top-20 h-80 w-80 rounded-full bg-[#ddbc69]/15 blur-3xl" />
 
-          <div className="pointer-events-none absolute -right-24 top-40 h-96 w-96 rounded-full bg-[#0d1b2a]/8 blur-3xl" />
+          <div className="pointer-events-none absolute -right-24 top-40 h-96 w-96 rounded-full bg-[#ddbc69]/[0.05] blur-3xl" />
 
           <div
             className="
@@ -493,7 +451,7 @@ const ContactPage = () => {
                         font-bold
                         uppercase
                         tracking-[0.28em]
-                        text-[#7e692f]
+                        text-[#ddbc69]
                       "
                     >
                       Contact Us
@@ -506,18 +464,16 @@ const ContactPage = () => {
                       text-[42px]
                       font-bold
                       leading-[0.98]
+                      font-playfair-display
                       tracking-[-0.045em]
-                      text-[#0d1b2a]
+                      text-[#f5f1e8]
                       sm:text-5xl
                       xl:text-[58px]
                     "
                   >
                     We&apos;re Here
                     <br />
-                    To{" "}
-                    <span className="text-[#bd902b]">
-                      Help You
-                    </span>
+                    To <span className="text-[#ddbc69]">Help You</span>
                   </h1>
 
                   <p
@@ -526,13 +482,12 @@ const ContactPage = () => {
                       max-w-xl
                       text-[15px]
                       leading-7
-                      text-[#58616d]
+                      text-white
                     "
                   >
-                    Connect with our team for expert
-                    guidance on Dholera investments,
-                    project details, bookings,
-                    documentation and site visits.
+                    Connect with our team for expert guidance on Dholera
+                    investments, project details, bookings, documentation and
+                    site visits.
                   </p>
                 </div>
 
@@ -584,7 +539,7 @@ const ContactPage = () => {
                     </span>
 
                     <span className="min-w-0">
-                      <span className="block text-xs text-[#75808c]">
+                      <span className="block text-sm text-[#75808c]">
                         Call Us
                       </span>
 
@@ -634,7 +589,7 @@ const ContactPage = () => {
                     </span>
 
                     <span className="min-w-0">
-                      <span className="block text-xs text-[#75808c]">
+                      <span className="block text-sm text-[#75808c]">
                         Email Us
                       </span>
 
@@ -686,15 +641,14 @@ const ContactPage = () => {
                     </span>
 
                     <span className="min-w-0">
-                      <span className="block text-xs text-[#75808c]">
+                      <span className="block text-sm text-[#75808c]">
                         Visit Our Office
                       </span>
 
                       <span className="mt-0.5 block text-sm font-semibold leading-5 text-[#0d1b2a]">
                         620, JMD Megapolis, Sohna Rd,
                         <br className="hidden sm:block" />
-                        Sector 48, Gurugram, Haryana
-                        122018
+                        Sector 48, Gurugram, Haryana 122018
                       </span>
                     </span>
 
@@ -728,33 +682,26 @@ const ContactPage = () => {
                     "
                   >
                     <FaWhatsapp className="h-[18px] w-[18px]" />
-
                     Chat on WhatsApp
-
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                   </a>
 
                   {/* SOCIAL ICONS */}
                   <div className="pt-2">
-                    <p className="mb-3 text-xs font-medium text-[#7a838d]">
+                    <p className="mb-3 text-md font-medium text-[#ddbc69]">
                       Follow Us
                     </p>
 
                     <div className="flex flex-wrap gap-2.5">
-                      {SOCIAL_LINKS.map(
-                        ({
-                          label,
-                          href,
-                          icon: Icon,
-                        }) => (
-                          <a
-                            key={label}
-                            href={href}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label={`Visit ${label}`}
-                            title={label}
-                            className="
+                      {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+                        <a
+                          key={label}
+                          href={href}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Visit ${label}`}
+                          title={label}
+                          className="
                               group
                               flex
                               h-10
@@ -773,11 +720,10 @@ const ContactPage = () => {
                               hover:border-[#ddbc69]
                               hover:bg-[#ddbc69]
                             "
-                          >
-                            <Icon className="h-4 w-4" />
-                          </a>
-                        )
-                      )}
+                        >
+                          <Icon className="h-4 w-4" />
+                        </a>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -854,15 +800,13 @@ const ContactPage = () => {
                         text-[#0d1b2a]
                       "
                     >
-                      <MapPin className="h-5 w-5 fill-[#0d1b2a]" />
+                      <MapPin className="h-5 w-5 fill-[#ddbc69]" />
                     </span>
 
                     <div className="min-w-0">
-                      <p className="text-sm font-bold">
-                        Our Office
-                      </p>
+                      <p className="text-md font-bold">Our Office</p>
 
-                      <p className="mt-0.5 truncate text-xs text-white/75">
+                      <p className="mt-0.5 truncate text-sm text-white/75">
                         620, JMD Megapolis, Gurugram
                       </p>
                     </div>
@@ -918,11 +862,11 @@ const ContactPage = () => {
 
                     <span
                       className="
-                        text-[10px]
+                        text-[11px]
                         font-bold
                         uppercase
                         tracking-[0.25em]
-                        text-[#80682f]
+                        text-[#ddbc69]
                       "
                     >
                       Send Us a Message
@@ -936,22 +880,18 @@ const ContactPage = () => {
                       tracking-[-0.03em]
                       text-[#0d1b2a]
                       sm:text-[28px]
+                      font-playfair-display
                     "
                   >
                     Get in Touch
                   </h2>
-
-                  <p className="mt-1.5 text-sm leading-6 text-[#6d7680]">
-                    Share your requirement and our
-                    team will get back to you.
-                  </p>
+                  
                 </div>
 
                 {submitStatus.message && (
                   <div
                     className={`mb-4 rounded-xl border p-3 text-sm ${
-                      submitStatus.type ===
-                      "success"
+                      submitStatus.type === "success"
                         ? "border-green-200 bg-green-50 text-green-700"
                         : "border-red-200 bg-red-50 text-red-700"
                     }`}
@@ -960,10 +900,7 @@ const ContactPage = () => {
                   </div>
                 )}
 
-                <form
-                  onSubmit={handleSubmit}
-                  className="space-y-3.5"
-                >
+                <form onSubmit={handleSubmit} className="space-y-3.5">
                   <div>
                     <label
                       htmlFor="name"
@@ -1088,6 +1025,7 @@ const ContactPage = () => {
                         px-3.5
                         py-2.5
                         text-sm
+                        text-black
                         outline-none
                         transition
                         focus:border-[#ddbc69]
@@ -1095,22 +1033,15 @@ const ContactPage = () => {
                         focus:ring-[#ddbc69]/15
                       "
                     >
-                      <option value="">
-                        Select enquiry type
-                      </option>
+                      <option value="">Select enquiry type</option>
 
                       {helpItems.map((item) => (
-                        <option
-                          key={item.title}
-                          value={item.title}
-                        >
+                        <option key={item.title} value={item.title}>
                           {item.title}
                         </option>
                       ))}
 
-                      <option value="Other Enquiry">
-                        Other Enquiry
-                      </option>
+                      <option value="Other Enquiry">Other Enquiry</option>
                     </select>
                   </div>
 
@@ -1156,13 +1087,9 @@ const ContactPage = () => {
 
                   <button
                     type="submit"
-                    disabled={
-                      isSubmitting ||
-                      !recaptchaLoaded
-                    }
+                    disabled={isSubmitting || !recaptchaLoaded}
                     className={`group inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition duration-300 ${
-                      isSubmitting ||
-                      !recaptchaLoaded
+                      isSubmitting || !recaptchaLoaded
                         ? "cursor-not-allowed bg-gray-300 text-gray-600"
                         : "bg-[#ddbc69] text-[#0d1b2a] hover:-translate-y-0.5 hover:bg-[#d3ae51] hover:shadow-lg"
                     }`}
@@ -1173,18 +1100,15 @@ const ContactPage = () => {
                         ? "Sending..."
                         : "Send Message"}
 
-                    {!isSubmitting &&
-                      recaptchaLoaded && (
-                        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-                      )}
+                    {!isSubmitting && recaptchaLoaded && (
+                      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                    )}
                   </button>
 
-                  <p className="flex items-center justify-center gap-1.5 text-center text-[10px] leading-4 text-[#9299a1]">
-                    <ShieldCheck className="h-3.5 w-3.5" />
-
-                    Your information is safe with us.
-                    We typically respond within 24
-                    hours.
+                  <p className="flex items-center justify-center gap-1.5 text-center text-[13px] leading-4 text-black">
+                    <ShieldCheck className="h-5 w-5 text-[#15803d]" />
+                    Your information is safe with us. We typically respond
+                    within 24 hours.
                   </p>
                 </form>
               </div>
@@ -1198,11 +1122,11 @@ const ContactPage = () => {
 
                   <span
                     className="
-                      text-[10px]
+                      text-[12px]
                       font-bold
                       uppercase
                       tracking-[0.25em]
-                      text-[#80682f]
+                      text-[#ddbc69]
                     "
                   >
                     How Can We Help You?
@@ -1213,23 +1137,21 @@ const ContactPage = () => {
 
                 <h2
                   className="
-                    text-2xl
+                    text-3xl
                     font-bold
+                    font-playfair-display
                     tracking-[-0.03em]
-                    text-[#0d1b2a]
+                    text-white
                     sm:text-3xl
                   "
                 >
                   Choose a topic to get{" "}
-                  <span className="text-[#bd902b]">
-                    quick assistance
-                  </span>
+                  <span className="text-[#ddbc69]">quick assistance</span>
                 </h2>
 
-                <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-[#6c7580]">
-                  Select a category and the enquiry
-                  form will automatically use it as
-                  your subject.
+                <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-white">
+                  Select a category and the enquiry form will automatically use
+                  it as your subject.
                 </p>
               </div>
 
@@ -1242,46 +1164,38 @@ const ContactPage = () => {
                   xl:grid-cols-5
                 "
               >
-                {helpItems.map(
-                  ({
-                    icon: Icon,
-                    title,
-                  }) => {
-                    const selected =
-                      formData.subject === title;
+                {helpItems.map(({ icon: Icon, title }) => {
+                  const selected = formData.subject === title;
 
-                    return (
-                      <button
-                        key={title}
-                        type="button"
-                        onClick={() =>
-                          chooseHelpTopic(title)
-                        }
-                        className={`group flex min-h-[92px] items-center gap-3 rounded-2xl border p-3.5 text-left shadow-[0_8px_22px_rgba(13,27,42,0.035)] transition duration-300 hover:-translate-y-1 hover:border-[#ddbc69] hover:shadow-[0_14px_28px_rgba(13,27,42,0.08)] ${
+                  return (
+                    <button
+                      key={title}
+                      type="button"
+                      onClick={() => chooseHelpTopic(title)}
+                      className={`group flex min-h-[92px] items-center gap-3 rounded-2xl border p-3.5 text-left shadow-[0_8px_22px_rgba(13,27,42,0.035)] transition duration-300 hover:-translate-y-1 hover:border-[#ddbc69] hover:shadow-[0_14px_28px_rgba(13,27,42,0.08)] ${
+                        selected
+                          ? "border-[#ddbc69] bg-[#fff8e6]"
+                          : "border-[#e9e3d8] bg-white"
+                      }`}
+                    >
+                      <span
+                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${
                           selected
-                            ? "border-[#ddbc69] bg-[#fff8e6]"
-                            : "border-[#e9e3d8] bg-white"
+                            ? "bg-[#ddbc69] text-[#0d1b2a]"
+                            : "bg-[#f5ecd4] text-[#a47d26] group-hover:bg-[#ddbc69] group-hover:text-[#0d1b2a]"
                         }`}
                       >
-                        <span
-                          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${
-                            selected
-                              ? "bg-[#ddbc69] text-[#0d1b2a]"
-                              : "bg-[#f5ecd4] text-[#a47d26] group-hover:bg-[#ddbc69] group-hover:text-[#0d1b2a]"
-                          }`}
-                        >
-                          <Icon className="h-[18px] w-[18px]" />
-                        </span>
+                        <Icon className="h-[18px] w-[18px]" />
+                      </span>
 
-                        <span className="text-xs font-bold leading-5 text-[#26313c] sm:text-sm">
-                          {title}
-                        </span>
+                      <span className="text-sm font-bold leading-5 text-[#26313c] sm:text-sm">
+                        {title}
+                      </span>
 
-                        <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-[#7f8993] transition group-hover:translate-x-1 group-hover:text-[#bd902b]" />
-                      </button>
-                    );
-                  }
-                )}
+                      <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-[#7f8993] transition group-hover:translate-x-1 group-hover:text-[#bd902b]" />
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -1327,14 +1241,12 @@ const ContactPage = () => {
               </span>
 
               <div>
-                <h2 className="text-xl font-bold text-white sm:text-2xl">
-                  Looking for personalised
-                  assistance?
+                <h2 className="text-xl font-bold font-playfair-display text-white sm:text-2xl">
+                  Looking for personalised assistance?
                 </h2>
 
-                <p className="mt-1 text-sm leading-6 text-white/65">
-                  Talk to our investment experts and
-                  get guidance suited to your
+                <p className="mt-1 text-md leading-6 text-white/65">
+                  Talk to our investment experts and get guidance suited to your
                   requirement.
                 </p>
               </div>
@@ -1362,7 +1274,6 @@ const ContactPage = () => {
               "
             >
               Talk to an Expert
-
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </a>
           </div>
