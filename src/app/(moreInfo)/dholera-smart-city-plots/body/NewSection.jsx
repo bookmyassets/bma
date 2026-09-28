@@ -87,7 +87,7 @@ const projectFeatures = [
   },
   {
     title: "Price",
-    value: "₹6,500*/Sq.Yd",
+    value: "₹8,000*/Sq.Yd",
   },
 ];
 
