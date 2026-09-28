@@ -137,6 +137,9 @@ const RightSidebar = ({ trendingBlogs }) => {
           variant="common"
           title="Buy Residential Plots in Dholera Starting From Rs 8 Lakh"
           buttonName="Know More"
+          theme="dark"
+          layout="stacked"
+          surface="alt"
         />
       </div>
       <div className="sticky top-24 space-y-6">
