@@ -659,10 +659,11 @@ export default function HeroForm() {
 
               <span
                 className="
-                  text-[0.8rem]
+                  text-[0.74rem]
                   leading-[1.25]
 
-                  sm:text-[0.64rem]
+                  sm:text-[0.78rem]
+                  md:text-[0.84rem]
                 "
               >
                 Quick
@@ -692,10 +693,11 @@ export default function HeroForm() {
 
               <span
                 className="
-                  text-[0.8rem]
+                  text-[0.74rem]
                   leading-[1.25]
 
-                  sm:text-[0.64rem]
+                  sm:text-[0.78rem]
+                  md:text-[0.84rem]
                 "
               >
                 Expert
@@ -725,10 +727,11 @@ export default function HeroForm() {
 
               <span
                 className="
-                  text-[0.8rem]
+                  text-[0.74rem]
                   leading-[1.25]
 
-                  sm:text-[0.64rem]
+                  sm:text-[0.78rem]
+                  md:text-[0.84rem]
                 "
               >
                 100%

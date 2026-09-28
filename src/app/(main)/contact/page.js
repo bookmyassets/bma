@@ -1,316 +1,192 @@
 "use client";
+
 import Image from "next/image";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import img from "@/assests/contact.webp";
 import {
-  Info,
-  LandPlot,
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaWhatsapp,
+  FaYoutube,
+  FaXTwitter,
+} from "react-icons/fa6";
+import {
+  ArrowRight,
+  ArrowUpRight,
   BadgeIndianRupee,
-  MapPinned,
-  FileCheck,
   CalendarCheck,
   ClipboardCheck,
-  Layers3,
+  FileCheck,
   Handshake,
+  Info,
+  LandPlot,
+  Layers3,
+  Mail,
+  MapPin,
+  MapPinned,
+  Phone,
+  ShieldCheck,
 } from "lucide-react";
 
-const ContactInformation = () => (
-  <div className="w-full h-full rounded-lg bg-white p-6 shadow-md md:p-8">
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                  Contact Information
-                </h3>
+const SOCIAL_LINKS = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/bookmyassetss",
+    icon: FaLinkedinIn,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/bookmyassets/",
+    icon: FaInstagram,
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1AXGEEX1M8/",
+    icon: FaFacebookF,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@BookMyAssets",
+    icon: FaYoutube,
+  },
+  {
+    label: "X",
+    href: "https://x.com/BookMyAssets",
+    icon: FaXTwitter,
+  },
+];
 
-                <div className="flex items-start mb-4">
-                  <div className="text-[#ddbc69] mr-3 mt-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-gray-700">
-                      620, JMD MEGAPOLIS, Sohna Rd,
-                    </p>
-                    <p className="text-gray-700">
-                      Sector 48 Gurugram, Haryana,
-                    </p>
-                    <p className="text-gray-700">India 122018</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center mb-4">
-                  <div className="text-[#ddbc69] mr-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
-                  <a
-                    href="mailto:info@bookmyassets.com"
-                    className="text-blue-600 hover:underline"
-                    aria-label="BookMyAssets Email"
-                  >
-                    info@bookmyassets.com
-                  </a>
-                </div>
-
-                <div className="flex items-center mb-6">
-                  <div className="text-[#ddbc69] mr-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
-                  </div>
-                  <a
-                    href="tel:+918130371647"
-                    className="text-blue-600 hover:underline"
-                    aria-label="BookMyAssets Phone"
-                  >
-                    +91 81 30 37 1647
-                  </a>
-                </div>
-
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href="https://www.facebook.com/share/1AXGEEX1M8/"
-                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label="Visit Facebook Page of BookMyAssets"
-                  >
-                    <span className="sr-only">Facebook</span>
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://x.com/BookMyAssets"
-                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label="Visit X handle of BookMyAssets"
-                  >
-                    <span className="sr-only">Twitter</span>
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/bookmyassetss"
-                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label="Visit LinkedIn Profile of BookMyAssets"
-                  >
-                    <span className="sr-only">LinkedIn</span>
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://www.instagram.com/bookmyassets/"
-                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label="Visit Instagram Account of BookMyAssets"
-                  >
-                    <span className="sr-only">Instagram</span>
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://www.youtube.com/@BookMyAssets"
-                    className="bg-[#ddbc69] hover:bg-[#ddbc69] text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                    aria-label="Visit YouTube Channel of BookMyAssets"
-                  >
-                    <span className="sr-only">YouTube</span>
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              {/* Google Map */}
-              <div className="h-56 rounded-lg overflow-hidden">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3508.9936422630562!2d77.0362407!3d28.4194487!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d23d440cffedd%3A0x77e4afa67247493e!2sBookMyAssets!5e0!3m2!1sen!2sin!4v1741251280082!5m2!1sen!2sin"
-                  className="w-full h-full"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Location map"
-                ></iframe>
-              </div>
-            </div>
-
-
-);
+const MAP_URL =
+  "https://www.google.com/maps/search/?api=1&query=BookMyAssets%20620%20JMD%20Megapolis%20Sohna%20Road%20Gurugram";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
+    phone: "",
     subject: "",
     message: "",
-    phone: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({ type: "", message: "" });
+  const [submitStatus, setSubmitStatus] = useState({
+    type: "",
+    message: "",
+  });
+
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
+
   const recaptchaRef = useRef(null);
+  const formRef = useRef(null);
+
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
   const helpItems = [
     {
-      icon: <Info className="w-8 h-8 text-[#ddbc69]" />,
+      icon: Info,
       title: "Dholera Project Information",
     },
     {
-      icon: <LandPlot className="w-8 h-8 text-[#ddbc69]" />,
+      icon: LandPlot,
       title: "Residential Plots in Dholera",
     },
     {
-      icon: <BadgeIndianRupee className="w-8 h-8 text-[#ddbc69]" />,
+      icon: BadgeIndianRupee,
       title: "Current Prices & Payment Plans",
     },
     {
-      icon: <MapPinned className="w-8 h-8 text-[#ddbc69]" />,
+      icon: MapPinned,
       title: "Project Location Details",
     },
     {
-      icon: <FileCheck className="w-8 h-8 text-[#ddbc69]" />,
+      icon: FileCheck,
       title: "Legal Documents",
     },
     {
-      icon: <CalendarCheck className="w-8 h-8 text-[#ddbc69]" />,
+      icon: CalendarCheck,
       title: "Site Visit Bookings",
     },
     {
-      icon: <ClipboardCheck className="w-8 h-8 text-[#ddbc69]" />,
-      title: "Booking & Registration Information",
+      icon: ClipboardCheck,
+      title: "Booking & Registration",
     },
     {
-      icon: <Layers3 className="w-8 h-8 text-[#ddbc69]" />,
+      icon: Layers3,
       title: "Bulk Land Requirements",
     },
     {
-      icon: <Handshake className="w-8 h-8 text-[#ddbc69]" />,
+      icon: Handshake,
       title: "Channel Partner Enquiries",
     },
   ];
 
   useEffect(() => {
-    // Load reCAPTCHA script
     const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true); // Still set as loaded so form submission can proceed as fallback
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true); // Still set as loaded as fallback
+      if (typeof window === "undefined") return;
+
+      if (window.grecaptcha) {
+        setRecaptchaLoaded(true);
+        return;
+      }
+
+      try {
+        const existingScript = document.querySelector(
+          'script[src="https://www.google.com/recaptcha/api.js"]'
+        );
+
+        if (existingScript) {
+          existingScript.addEventListener("load", () =>
+            setRecaptchaLoaded(true)
+          );
+
+          return;
         }
-      } else if (window.grecaptcha) {
+
+        const script = document.createElement("script");
+
+        script.src = "https://www.google.com/recaptcha/api.js";
+        script.async = true;
+        script.defer = true;
+
+        script.onload = () => {
+          setRecaptchaLoaded(true);
+        };
+
+        script.onerror = () => {
+          console.error("Failed to load reCAPTCHA script");
+          setRecaptchaLoaded(true);
+        };
+
+        document.head.appendChild(script);
+      } catch (error) {
+        console.error("reCAPTCHA script loading error:", error);
         setRecaptchaLoaded(true);
       }
     };
 
     loadRecaptcha();
 
-    // Get submission count from localStorage
     if (typeof window !== "undefined") {
       setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10),
+        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
       );
+
       setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10),
+        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
       );
     }
-
-    // Prevent modal close when clicking inside
-    const handleClickInside = (e) => {
-      e.stopPropagation();
-    };
-
-    const formElement = document.getElementById("contact-form-container");
-    if (formElement) {
-      formElement.addEventListener("click", handleClickInside);
-    }
-
-    return () => {
-      if (formElement) {
-        formElement.removeEventListener("click", handleClickInside);
-      }
-    };
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const validateForm = () => {
@@ -324,16 +200,18 @@ const ContactPage = () => {
         type: "error",
         message: "Please fill all required fields.",
       });
+
       return false;
     }
 
-    // Phone validation (if phone is provided)
-    if (formData.phone && !/^\d{10,15}$/.test(formData.phone)) {
+    const cleanPhone = formData.phone.replace(/\s+/g, "");
+
+    if (!/^\d{10,15}$/.test(cleanPhone)) {
       setSubmitStatus({
         type: "error",
-        message:
-          "Please enter a valid phone number (10-15 digits) or leave it blank.",
+        message: "Please enter a valid phone number (10-15 digits).",
       });
+
       return false;
     }
 
@@ -342,20 +220,28 @@ const ContactPage = () => {
 
   const checkSubmissionLimit = () => {
     const now = Date.now();
-    const hoursPassed = (now - lastSubmissionTime) / (1000 * 60 * 60);
+
+    const hoursPassed =
+      (now - lastSubmissionTime) / (1000 * 60 * 60);
 
     if (hoursPassed >= 24) {
       setSubmissionCount(0);
+
       localStorage.setItem("formSubmissionCount", "0");
-      localStorage.setItem("lastSubmissionTime", now.toString());
+
+      localStorage.setItem(
+        "lastSubmissionTime",
+        now.toString()
+      );
     }
 
-    if (submissionCount >= 3) {
+    if (submissionCount >= 3 && hoursPassed < 24) {
       setSubmitStatus({
         type: "error",
         message:
           "You have reached the maximum submission limit. Try again after 24 hours.",
       });
+
       return false;
     }
 
@@ -366,343 +252,1122 @@ const ContactPage = () => {
     try {
       const now = Date.now();
 
-      // Send to TeleCRM
-      const response = await fetch(
-        `/api/submit-form`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.name,
-              email: formData.email,
-              phone: formData.phone,
-              subject: formData.subject,
-              message: formData.message,
-              source: "BookMyAssets Website Contact Page",
-            },
-            source: "BookMyAssets Website",
-            tags: ["Website Lead", "Contact Form", "BookMyAssets"],
-            recaptchaToken: token,
-          }),
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+
+        body: JSON.stringify({
+          fields: {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            subject: formData.subject,
+            message: formData.message,
+
+            source:
+              "BookMyAssets Website Contact Page",
+          },
+
+          source: "BookMyAssets Website",
+
+          tags: [
+            "Website Lead",
+            "Contact Form",
+            "BookMyAssets",
+          ],
+
+          recaptchaToken: token,
+        }),
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to submit to TeleCRM");
+        throw new Error(
+          "Failed to submit to TeleCRM"
+        );
       }
 
-      // Success handling
       setSubmitStatus({
         type: "success",
-        message: "Message sent successfully! We'll contact you soon.",
+        message:
+          "Message sent successfully! We'll contact you soon.",
       });
-      setFormData({ name: "", email: "", subject: "", phone: "", message: "" });
 
-      // Update submission count
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+
       setSubmissionCount((prev) => {
         const newCount = prev + 1;
-        localStorage.setItem("formSubmissionCount", newCount.toString());
-        localStorage.setItem("lastSubmissionTime", now.toString());
+
+        localStorage.setItem(
+          "formSubmissionCount",
+          newCount.toString()
+        );
+
+        localStorage.setItem(
+          "lastSubmissionTime",
+          now.toString()
+        );
+
         return newCount;
       });
     } catch (error) {
-      console.error("Form submission error:", error);
+      console.error(
+        "Form submission error:",
+        error
+      );
+
       setSubmitStatus({
         type: "error",
-        message: error.message || "Failed to send message. Please try again.",
+
+        message:
+          error.message ||
+          "Failed to send message. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
 
-      // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset(recaptchaRef.current);
+      if (
+        window.grecaptcha &&
+        recaptchaRef.current
+      ) {
+        window.grecaptcha.reset(
+          recaptchaRef.current
+        );
       }
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ type: "", message: "" });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    if (!validateForm() || !checkSubmissionLimit()) {
+    setIsSubmitting(true);
+
+    setSubmitStatus({
+      type: "",
+      message: "",
+    });
+
+    if (
+      !validateForm() ||
+      !checkSubmissionLimit()
+    ) {
       setIsSubmitting(false);
       return;
     }
 
-    // Execute reCAPTCHA - Fixed implementation
-    if (window.grecaptcha && recaptchaLoaded) {
+    if (
+      window.grecaptcha &&
+      recaptchaLoaded
+    ) {
       try {
-        // Always render fresh reCAPTCHA widget
         if (recaptchaRef.current) {
-          // Clear previous widget
           recaptchaRef.current.innerHTML = "";
 
-          // Render new widget
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: siteKey,
-            callback: onRecaptchaSuccess,
-            theme: "light",
-          });
+          window.grecaptcha.render(
+            recaptchaRef.current,
+            {
+              sitekey: siteKey,
+
+              callback:
+                onRecaptchaSuccess,
+
+              theme: "light",
+            }
+          );
         }
       } catch (error) {
-        console.error("reCAPTCHA execution error:", error);
+        console.error(
+          "reCAPTCHA execution error:",
+          error
+        );
+
         setSubmitStatus({
           type: "error",
-          message: "Verification error. Please try again.",
+
+          message:
+            "Verification error. Please try again.",
         });
+
         setIsSubmitting(false);
       }
     } else {
       setSubmitStatus({
         type: "error",
-        message: "Security verification not loaded. Please refresh the page.",
+
+        message:
+          "Security verification not loaded. Please refresh the page.",
       });
+
       setIsSubmitting(false);
     }
   };
 
-  const canonicalUrl = `https://www.bookmyassets.com/contact`;
+  const chooseHelpTopic = (title) => {
+    setFormData((prev) => ({
+      ...prev,
+      subject: title,
+    }));
+
+    formRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
+
+  const canonicalUrl =
+    "https://www.bookmyassets.com/contact";
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <link rel="canonical" href={canonicalUrl} />
-      <title>Contact BookMyAssets | Dholera Plot Enquiry & Site Visit</title>
+    <div className="min-h-screen bg-[#f7f5ef] text-[#0d1b2a]">
+      <link
+        rel="canonical"
+        href={canonicalUrl}
+      />
+
+      <title>
+        Contact BookMyAssets | Dholera Plot
+        Enquiry & Site Visit
+      </title>
+
       <meta
         name="description"
         content="Contact BookMyAssets for Dholera residential plot prices, legal documents and free site visits. Call +91 81303 71647 or request a callback today."
       />
-      {/* Hero Section */}
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-stretch gap-8 lg:gap-12 py-8 mt-20">
-          {/* Hero Image */}
-          <div className="w-full h-full md:order-2">
-            <Image
-              src={img}
-              alt="Contact BookMyAssets for Dholera plot enquiries"
-              className="w-full h-full object-cover rounded-lg shadow-md"
-              fetchPriority="high"
-            />
-          </div>
 
-          {/* Contact introduction and information */}
-          <div className="w-full h-full md:order-1 text-center md:text-left">
-            <h1 className="text-4xl md:text-6xl font-bold text-black">
-              Contact Us
-            </h1>
+      <main className="overflow-hidden pt-20">
+        <section className="relative border-b border-[#e9e1d3] bg-[#f8f6f1]">
+          <div
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+              opacity-40
+              [background-image:radial-gradient(circle_at_1px_1px,rgba(13,27,42,0.055)_1px,transparent_0)]
+              [background-size:28px_28px]
+            "
+          />
 
-            {/* Decorative Line with Star */}
-            <div className="flex items-center justify-center md:justify-start mt-4">
-              <div className="h-[2px] w-24 md:w-32 bg-[#FDB913]"></div>
-              <span className="mx-2 text-[#FDB913] text-xl">★</span>
-              <div className="h-[2px] w-24 md:w-32 bg-[#FDB913]"></div>
-            </div>
+          <div className="pointer-events-none absolute -left-28 top-20 h-80 w-80 rounded-full bg-[#ddbc69]/15 blur-3xl" />
 
-            <div className="mt-8 text-left">
-              <ContactInformation />
-            </div>
-          </div>
-        </div>
-      </div>
+          <div className="pointer-events-none absolute -right-24 top-40 h-96 w-96 rounded-full bg-[#0d1b2a]/8 blur-3xl" />
 
-      {/* Hero Description */}
-      <section className="container mx-auto px-4">
-        <p className="mx-auto max-w-4xl text-center text-lg leading-relaxed text-black">
-          Have questions about Dholera investment or need expert guidance?
-          BookMyAssets is here to help you with verified projects and complete
-          support at every step. Whether you are a first-time buyer or an
-          experienced investor, connect with us for transparent assistance and
-          the latest updates on Dholera Smart City opportunities.
-        </p>
-      </section>
+          <div
+            className="
+              relative
+              mx-auto
+              max-w-[1500px]
+              px-4
+              pb-10
+              pt-8
+              sm:px-6
+              lg:px-8
+              lg:pb-12
+              lg:pt-10
+            "
+          >
+            <div
+              className="
+                grid
+                gap-6
+                xl:grid-cols-[0.86fr_1.12fr_0.98fr]
+                xl:items-stretch
+              "
+            >
+              {/* LEFT SIDE */}
+              <div className="contents xl:block">
+                <div className="order-1 xl:order-none xl:pr-2">
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="h-px w-9 bg-[#ddbc69]" />
 
-      {/* How Can We Help You */}
-      <section className="bg-white py-10">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900">
-              How Can We Help You?
-            </h2>
+                    <span
+                      className="
+                        text-[11px]
+                        font-bold
+                        uppercase
+                        tracking-[0.28em]
+                        text-[#7e692f]
+                      "
+                    >
+                      Contact Us
+                    </span>
+                  </div>
 
-            <div className="flex justify-center items-center mt-3">
-              <span className="h-[2px] w-16 bg-[#ddbc69]"></span>
-              <span className="mx-3 text-[#ddbc69] text-xl">★</span>
-              <span className="h-[2px] w-16 bg-[#ddbc69]"></span>
-            </div>
+                  <h1
+                    className="
+                      max-w-[620px]
+                      text-[42px]
+                      font-bold
+                      leading-[0.98]
+                      tracking-[-0.045em]
+                      text-[#0d1b2a]
+                      sm:text-5xl
+                      xl:text-[58px]
+                    "
+                  >
+                    We&apos;re Here
+                    <br />
+                    To{" "}
+                    <span className="text-[#bd902b]">
+                      Help You
+                    </span>
+                  </h1>
 
-            <p className="mt-5 text-black text-lg leading-relaxed max-w-2xl mx-auto">
-              Our experts are here to guide you at every stage of your Dholera
-              investment journey.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            {helpItems.map((item, index) => (
-              <div
-                key={index}
-                className="group bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-lg hover:border-[#ddbc69] transition-all duration-300"
-              >
-                <div className="w-14 h-14 rounded-full bg-[#ddbc69]/10 flex items-center justify-center mb-5  transition-all">
-                  <div className="group-hover:text-white">{item.icon}</div>
+                  <p
+                    className="
+                      mt-4
+                      max-w-xl
+                      text-[15px]
+                      leading-7
+                      text-[#58616d]
+                    "
+                  >
+                    Connect with our team for expert
+                    guidance on Dholera investments,
+                    project details, bookings,
+                    documentation and site visits.
+                  </p>
                 </div>
 
-                <p className="text-lg font-semibold text-gray-800 leading-relaxed">
-                  {item.title}
+                {/* CONTACT ACTIONS */}
+                <div
+                  className="
+                    order-3
+                    mt-1
+                    space-y-3
+                    xl:order-none
+                    xl:mt-6
+                  "
+                >
+                  <a
+                    href="tel:+918130371647"
+                    className="
+                      group
+                      flex
+                      items-center
+                      gap-4
+                      rounded-2xl
+                      border
+                      border-[#ebe5d8]
+                      bg-white
+                      px-4
+                      py-3.5
+                      shadow-[0_10px_30px_rgba(13,27,42,0.045)]
+                      transition
+                      duration-300
+                      hover:-translate-y-0.5
+                      hover:border-[#ddbc69]
+                      hover:shadow-[0_16px_35px_rgba(13,27,42,0.09)]
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        h-11
+                        w-11
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-[#ddbc69]
+                        text-[#0d1b2a]
+                      "
+                    >
+                      <Phone className="h-[18px] w-[18px]" />
+                    </span>
+
+                    <span className="min-w-0">
+                      <span className="block text-xs text-[#75808c]">
+                        Call Us
+                      </span>
+
+                      <span className="mt-0.5 block text-sm font-bold text-[#0d1b2a] sm:text-[15px]">
+                        +91 81 30 37 1647
+                      </span>
+                    </span>
+
+                    <ArrowUpRight className="ml-auto h-4 w-4 text-[#8c949d] transition group-hover:text-[#bd902b]" />
+                  </a>
+
+                  <a
+                    href="mailto:info@bookmyassets.com"
+                    className="
+                      group
+                      flex
+                      items-center
+                      gap-4
+                      rounded-2xl
+                      border
+                      border-[#ebe5d8]
+                      bg-white
+                      px-4
+                      py-3.5
+                      shadow-[0_10px_30px_rgba(13,27,42,0.045)]
+                      transition
+                      duration-300
+                      hover:-translate-y-0.5
+                      hover:border-[#ddbc69]
+                      hover:shadow-[0_16px_35px_rgba(13,27,42,0.09)]
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        h-11
+                        w-11
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-[#ddbc69]
+                        text-[#0d1b2a]
+                      "
+                    >
+                      <Mail className="h-[18px] w-[18px]" />
+                    </span>
+
+                    <span className="min-w-0">
+                      <span className="block text-xs text-[#75808c]">
+                        Email Us
+                      </span>
+
+                      <span className="mt-0.5 block truncate text-sm font-bold text-[#0d1b2a] sm:text-[15px]">
+                        info@bookmyassets.com
+                      </span>
+                    </span>
+
+                    <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-[#8c949d] transition group-hover:text-[#bd902b]" />
+                  </a>
+
+                  <a
+                    href={MAP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="
+                      group
+                      flex
+                      items-center
+                      gap-4
+                      rounded-2xl
+                      border
+                      border-[#ebe5d8]
+                      bg-white
+                      px-4
+                      py-3.5
+                      shadow-[0_10px_30px_rgba(13,27,42,0.045)]
+                      transition
+                      duration-300
+                      hover:-translate-y-0.5
+                      hover:border-[#ddbc69]
+                      hover:shadow-[0_16px_35px_rgba(13,27,42,0.09)]
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        h-11
+                        w-11
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-[#ddbc69]
+                        text-[#0d1b2a]
+                      "
+                    >
+                      <MapPin className="h-[18px] w-[18px]" />
+                    </span>
+
+                    <span className="min-w-0">
+                      <span className="block text-xs text-[#75808c]">
+                        Visit Our Office
+                      </span>
+
+                      <span className="mt-0.5 block text-sm font-semibold leading-5 text-[#0d1b2a]">
+                        620, JMD Megapolis, Sohna Rd,
+                        <br className="hidden sm:block" />
+                        Sector 48, Gurugram, Haryana
+                        122018
+                      </span>
+                    </span>
+
+                    <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-[#8c949d] transition group-hover:text-[#bd902b]" />
+                  </a>
+
+                  <a
+                    href="https://wa.me/918130371647"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="
+                      group
+                      flex
+                      w-full
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-2xl
+                      bg-[#ddbc69]
+                      px-5
+                      py-3.5
+                      text-sm
+                      font-bold
+                      text-[#0d1b2a]
+                      shadow-[0_12px_28px_rgba(221,188,105,0.3)]
+                      transition
+                      duration-300
+                      hover:-translate-y-0.5
+                      hover:bg-[#d3ae51]
+                      hover:shadow-[0_16px_32px_rgba(221,188,105,0.4)]
+                    "
+                  >
+                    <FaWhatsapp className="h-[18px] w-[18px]" />
+
+                    Chat on WhatsApp
+
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </a>
+
+                  {/* SOCIAL ICONS */}
+                  <div className="pt-2">
+                    <p className="mb-3 text-xs font-medium text-[#7a838d]">
+                      Follow Us
+                    </p>
+
+                    <div className="flex flex-wrap gap-2.5">
+                      {SOCIAL_LINKS.map(
+                        ({
+                          label,
+                          href,
+                          icon: Icon,
+                        }) => (
+                          <a
+                            key={label}
+                            href={href}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`Visit ${label}`}
+                            title={label}
+                            className="
+                              group
+                              flex
+                              h-10
+                              w-10
+                              items-center
+                              justify-center
+                              rounded-full
+                              border
+                              border-[#e8e1d4]
+                              bg-white
+                              text-[#0d1b2a]
+                              shadow-sm
+                              transition
+                              duration-300
+                              hover:-translate-y-1
+                              hover:border-[#ddbc69]
+                              hover:bg-[#ddbc69]
+                            "
+                          >
+                            <Icon className="h-4 w-4" />
+                          </a>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* OFFICE IMAGE */}
+              <div className="order-2 xl:order-none">
+                <div
+                  className="
+                    group
+                    relative
+                    h-[330px]
+                    overflow-hidden
+                    rounded-[26px]
+                    border
+                    border-white/70
+                    bg-[#d9d9d9]
+                    shadow-[0_24px_55px_rgba(13,27,42,0.13)]
+                    sm:h-[430px]
+                    xl:h-full
+                    xl:min-h-[610px]
+                  "
+                >
+                  <Image
+                    src={img}
+                    alt="BookMyAssets office at JMD Megapolis, Gurugram"
+                    fill
+                    priority
+                    sizes="(max-width: 1280px) 100vw, 38vw"
+                    className="
+                      object-cover
+                      transition
+                      duration-700
+                      group-hover:scale-[1.025]
+                    "
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#081521]/70 via-transparent to-transparent" />
+
+                  {/* OFFICE OVERLAY */}
+                  <div
+                    className="
+                      absolute
+                      bottom-4
+                      left-4
+                      right-4
+                      flex
+                      items-center
+                      gap-3
+                      rounded-2xl
+                      border
+                      border-white/25
+                      bg-[#0d1b2a]/82
+                      p-3.5
+                      text-white
+                      shadow-2xl
+                      backdrop-blur-md
+                      sm:bottom-5
+                      sm:left-5
+                      sm:right-5
+                      sm:p-4
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        h-11
+                        w-11
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-white
+                        text-[#0d1b2a]
+                      "
+                    >
+                      <MapPin className="h-5 w-5 fill-[#0d1b2a]" />
+                    </span>
+
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold">
+                        Our Office
+                      </p>
+
+                      <p className="mt-0.5 truncate text-xs text-white/75">
+                        620, JMD Megapolis, Gurugram
+                      </p>
+                    </div>
+
+                    <a
+                      href={MAP_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Open BookMyAssets office in Google Maps"
+                      className="
+                        ml-auto
+                        flex
+                        h-9
+                        w-9
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-white/20
+                        bg-white/10
+                        transition
+                        hover:bg-[#ddbc69]
+                        hover:text-[#0d1b2a]
+                      "
+                    >
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* CONTACT FORM */}
+              <div
+                ref={formRef}
+                id="contact-form-container"
+                className="
+                  order-4
+                  rounded-[26px]
+                  border
+                  border-[#e9e1d4]
+                  bg-white
+                  p-5
+                  shadow-[0_24px_55px_rgba(13,27,42,0.085)]
+                  sm:p-6
+                  xl:order-none
+                  xl:p-7
+                "
+              >
+                <div className="mb-5">
+                  <div className="mb-3 flex items-center gap-3">
+                    <span className="h-px w-8 bg-[#ddbc69]" />
+
+                    <span
+                      className="
+                        text-[10px]
+                        font-bold
+                        uppercase
+                        tracking-[0.25em]
+                        text-[#80682f]
+                      "
+                    >
+                      Send Us a Message
+                    </span>
+                  </div>
+
+                  <h2
+                    className="
+                      text-2xl
+                      font-bold
+                      tracking-[-0.03em]
+                      text-[#0d1b2a]
+                      sm:text-[28px]
+                    "
+                  >
+                    Get in Touch
+                  </h2>
+
+                  <p className="mt-1.5 text-sm leading-6 text-[#6d7680]">
+                    Share your requirement and our
+                    team will get back to you.
+                  </p>
+                </div>
+
+                {submitStatus.message && (
+                  <div
+                    className={`mb-4 rounded-xl border p-3 text-sm ${
+                      submitStatus.type ===
+                      "success"
+                        ? "border-green-200 bg-green-50 text-green-700"
+                        : "border-red-200 bg-red-50 text-red-700"
+                    }`}
+                  >
+                    {submitStatus.message}
+                  </div>
+                )}
+
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-3.5"
+                >
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="mb-1.5 block text-xs font-semibold text-[#313b46]"
+                    >
+                      Name *
+                    </label>
+
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      className="
+                        w-full
+                        rounded-xl
+                        border
+                        border-[#d9dde2]
+                        bg-[#fcfcfb]
+                        px-3.5
+                        py-2.5
+                        text-sm
+                        outline-none
+                        transition
+                        focus:border-[#ddbc69]
+                        focus:ring-4
+                        focus:ring-[#ddbc69]/15
+                      "
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="mb-1.5 block text-xs font-semibold text-[#313b46]"
+                    >
+                      Phone *
+                    </label>
+
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Your phone number"
+                      className="
+                        w-full
+                        rounded-xl
+                        border
+                        border-[#d9dde2]
+                        bg-[#fcfcfb]
+                        px-3.5
+                        py-2.5
+                        text-sm
+                        outline-none
+                        transition
+                        focus:border-[#ddbc69]
+                        focus:ring-4
+                        focus:ring-[#ddbc69]/15
+                      "
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-1.5 block text-xs font-semibold text-[#313b46]"
+                    >
+                      Email
+                    </label>
+
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="you@example.com"
+                      className="
+                        w-full
+                        rounded-xl
+                        border
+                        border-[#d9dde2]
+                        bg-[#fcfcfb]
+                        px-3.5
+                        py-2.5
+                        text-sm
+                        outline-none
+                        transition
+                        focus:border-[#ddbc69]
+                        focus:ring-4
+                        focus:ring-[#ddbc69]/15
+                      "
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="subject"
+                      className="mb-1.5 block text-xs font-semibold text-[#313b46]"
+                    >
+                      Enquiry Type *
+                    </label>
+
+                    <select
+                      id="subject"
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="
+                        w-full
+                        rounded-xl
+                        border
+                        border-[#d9dde2]
+                        bg-[#fcfcfb]
+                        px-3.5
+                        py-2.5
+                        text-sm
+                        outline-none
+                        transition
+                        focus:border-[#ddbc69]
+                        focus:ring-4
+                        focus:ring-[#ddbc69]/15
+                      "
+                    >
+                      <option value="">
+                        Select enquiry type
+                      </option>
+
+                      {helpItems.map((item) => (
+                        <option
+                          key={item.title}
+                          value={item.title}
+                        >
+                          {item.title}
+                        </option>
+                      ))}
+
+                      <option value="Other Enquiry">
+                        Other Enquiry
+                      </option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="mb-1.5 block text-xs font-semibold text-[#313b46]"
+                    >
+                      Message *
+                    </label>
+
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={3}
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell us what you need help with"
+                      className="
+                        w-full
+                        resize-none
+                        rounded-xl
+                        border
+                        border-[#d9dde2]
+                        bg-[#fcfcfb]
+                        px-3.5
+                        py-2.5
+                        text-sm
+                        outline-none
+                        transition
+                        focus:border-[#ddbc69]
+                        focus:ring-4
+                        focus:ring-[#ddbc69]/15
+                      "
+                    />
+                  </div>
+
+                  {/* RECAPTCHA */}
+                  <div className="overflow-x-auto py-1">
+                    <div ref={recaptchaRef} />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={
+                      isSubmitting ||
+                      !recaptchaLoaded
+                    }
+                    className={`group inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition duration-300 ${
+                      isSubmitting ||
+                      !recaptchaLoaded
+                        ? "cursor-not-allowed bg-gray-300 text-gray-600"
+                        : "bg-[#ddbc69] text-[#0d1b2a] hover:-translate-y-0.5 hover:bg-[#d3ae51] hover:shadow-lg"
+                    }`}
+                  >
+                    {!recaptchaLoaded
+                      ? "Loading security..."
+                      : isSubmitting
+                        ? "Sending..."
+                        : "Send Message"}
+
+                    {!isSubmitting &&
+                      recaptchaLoaded && (
+                        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                      )}
+                  </button>
+
+                  <p className="flex items-center justify-center gap-1.5 text-center text-[10px] leading-4 text-[#9299a1]">
+                    <ShieldCheck className="h-3.5 w-3.5" />
+
+                    Your information is safe with us.
+                    We typically respond within 24
+                    hours.
+                  </p>
+                </form>
+              </div>
+            </div>
+
+            {/* QUICK HELP */}
+            <div className="mt-10 lg:mt-12">
+              <div className="mb-6 text-center">
+                <div className="mb-3 flex items-center justify-center gap-3">
+                  <span className="h-px w-8 bg-[#ddbc69]" />
+
+                  <span
+                    className="
+                      text-[10px]
+                      font-bold
+                      uppercase
+                      tracking-[0.25em]
+                      text-[#80682f]
+                    "
+                  >
+                    How Can We Help You?
+                  </span>
+
+                  <span className="h-px w-8 bg-[#ddbc69]" />
+                </div>
+
+                <h2
+                  className="
+                    text-2xl
+                    font-bold
+                    tracking-[-0.03em]
+                    text-[#0d1b2a]
+                    sm:text-3xl
+                  "
+                >
+                  Choose a topic to get{" "}
+                  <span className="text-[#bd902b]">
+                    quick assistance
+                  </span>
+                </h2>
+
+                <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-[#6c7580]">
+                  Select a category and the enquiry
+                  form will automatically use it as
+                  your subject.
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Get In Touch Section with Dark Background */}
-      <div className="bg-gray-900 py-10">
-        <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl font-bold text-[#ddbc69]">Get In Touch</h2>
-        <div className="flex justify-center items-center mt-2">
-          <span className="h-1 w-16 bg-[#ddbc69] mx-2"></span>
-          <span className="text-[#ddbc69] text-xl">★</span>
-          <span className="h-1 w-16 bg-[#ddbc69] mx-2"></span>
-        </div>
-        </div>
-      </div>
+              <div
+                className="
+                  grid
+                  gap-3
+                  sm:grid-cols-2
+                  lg:grid-cols-3
+                  xl:grid-cols-5
+                "
+              >
+                {helpItems.map(
+                  ({
+                    icon: Icon,
+                    title,
+                  }) => {
+                    const selected =
+                      formData.subject === title;
 
-      {/* Contact Section */}
-      <div className="bg-gray-100 py-10 flex-grow">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl">
-            {/* Contact Form */}
-            <div
-              className="w-full rounded-lg bg-white p-6 shadow-lg md:p-8"
-              id="contact-form-container"
-            >
-              <h3 className="text-3xl font-bold text-gray-800 mb-6">
-                Send Us a Message
-              </h3>
+                    return (
+                      <button
+                        key={title}
+                        type="button"
+                        onClick={() =>
+                          chooseHelpTopic(title)
+                        }
+                        className={`group flex min-h-[92px] items-center gap-3 rounded-2xl border p-3.5 text-left shadow-[0_8px_22px_rgba(13,27,42,0.035)] transition duration-300 hover:-translate-y-1 hover:border-[#ddbc69] hover:shadow-[0_14px_28px_rgba(13,27,42,0.08)] ${
+                          selected
+                            ? "border-[#ddbc69] bg-[#fff8e6]"
+                            : "border-[#e9e3d8] bg-white"
+                        }`}
+                      >
+                        <span
+                          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${
+                            selected
+                              ? "bg-[#ddbc69] text-[#0d1b2a]"
+                              : "bg-[#f5ecd4] text-[#a47d26] group-hover:bg-[#ddbc69] group-hover:text-[#0d1b2a]"
+                          }`}
+                        >
+                          <Icon className="h-[18px] w-[18px]" />
+                        </span>
 
-              {submitStatus.message && (
-                <div
-                  className={`p-4 rounded-lg mb-6 ${
-                    submitStatus.type === "success"
-                      ? "bg-green-50 text-green-700 border border-green-200"
-                      : "bg-red-50 text-red-700 border border-red-200"
-                  }`}
-                >
-                  {submitStatus.message}
-                </div>
-              )}
+                        <span className="text-xs font-bold leading-5 text-[#26313c] sm:text-sm">
+                          {title}
+                        </span>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
-                    placeholder="Your phone number"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
-                    placeholder="Message subject"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={5}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ddbc69] focus:border-[#ddbc69]"
-                    placeholder="Your message"
-                  />
-                </div>
-
-                {/* reCAPTCHA container - visible widget */}
-                <div className="flex justify-center">
-                  <div ref={recaptchaRef}></div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting || !recaptchaLoaded}
-                  className={`w-full py-3 px-6 text-white font-medium rounded-lg 
-              ${
-                isSubmitting || !recaptchaLoaded
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-[#ddbc69] hover:bg-[#ddbc69]"
-              } transition-colors duration-200`}
-                >
-                  {!recaptchaLoaded
-                    ? "Loading security..."
-                    : isSubmitting
-                      ? "Sending..."
-                      : "Send Message"}
-                </button>
-
-                {/* reCAPTCHA attribution */}
-                <div className="text-xs text-gray-500 text-center mt-2">
-                  This site is protected by reCAPTCHA
-                </div>
-              </form>
+                        <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-[#7f8993] transition group-hover:translate-x-1 group-hover:text-[#bd902b]" />
+                      </button>
+                    );
+                  }
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+
+        {/* PERSONAL ASSISTANCE */}
+        <section className="relative overflow-hidden bg-[#0d1b2a]">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_30%,rgba(221,188,105,0.16),transparent_35%)]" />
+
+          <div
+            className="
+              relative
+              mx-auto
+              flex
+              max-w-[1500px]
+              flex-col
+              gap-5
+              px-4
+              py-8
+              sm:px-6
+              md:flex-row
+              md:items-center
+              md:justify-between
+              lg:px-8
+            "
+          >
+            <div className="flex items-center gap-4">
+              <span
+                className="
+                  flex
+                  h-14
+                  w-14
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-[#ddbc69]/60
+                  text-[#ddbc69]
+                "
+              >
+                <Handshake className="h-6 w-6" />
+              </span>
+
+              <div>
+                <h2 className="text-xl font-bold text-white sm:text-2xl">
+                  Looking for personalised
+                  assistance?
+                </h2>
+
+                <p className="mt-1 text-sm leading-6 text-white/65">
+                  Talk to our investment experts and
+                  get guidance suited to your
+                  requirement.
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="tel:+918130371647"
+              className="
+                group
+                inline-flex
+                shrink-0
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                bg-[#ddbc69]
+                px-6
+                py-3.5
+                text-sm
+                font-bold
+                text-[#0d1b2a]
+                transition
+                hover:-translate-y-0.5
+                hover:bg-[#d3ae51]
+              "
+            >
+              Talk to an Expert
+
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </a>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };
