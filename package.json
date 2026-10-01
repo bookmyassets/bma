@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "import:westwyn-inventory": "node --env-file=.env.local scripts/importWestwynInventory.mjs westwyn-residency",
-    "import:westwyn-estates":"node --env-file=.env.local scripts/importWestwynInventory.mjs westwyn-estate",
+    "import:westwyn-estates": "node --env-file=.env.local scripts/importWestwynInventory.mjs westwyn-estate",
     "import:westwyn-county": "node --env-file=.env.local scripts/importWestwynInventory.mjs westwyn-county"
   },
   "dependencies": {
@@ -41,6 +41,7 @@
     "react-facebook-pixel": "^1.0.4",
     "react-icons": "^5.5.0",
     "react-is": "^19.0.0",
+    "react-pageflip": "^2.0.3",
     "sanity": "^3.71.2",
     "styled-components": "^6.1.14",
     "swiper": "^11.2.6",

@@ -1,23 +1,147 @@
-const contactLinkClass = "text-blue-400 underline underline-offset-4";
+import {
+  ArrowUpRight,
+  Database,
+  Eye,
+  LockKeyhole,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  UserCheck,
+  Scale, 
+  FileCheck2,
+  FileWarning,
+  Fingerprint,
+  BadgeCheck,
+  BadgeIndianRupee,
+  CalendarClock,
+  CircleDollarSign,
+  ReceiptText,
+} from "lucide-react";
 
-function PolicyShell({ title, lastUpdated, children }) {
+
+const GOLD = "#ddbc69";
+
+const contactLinkClass =
+  "text-white transition-colors duration-200 hover:text-[#ddbc69]";
+
+function PolicyShell({
+  title,
+  description,
+  lastUpdated,
+  children,
+}) {
   return (
-    <main className="w-full bg-black text-white">
-      <div className="mx-auto max-w-7xl px-4 pb-12 pt-44 sm:px-6 lg:px-8">
-        <header>
-          <h1 className="text-3xl font-bold leading-tight max-sm:text-center sm:text-4xl">
-            {title}
-          </h1>
-          {lastUpdated ? (
-            <p className="mt-3 text-sm text-white/70 sm:text-base">
-              Last Updated: {lastUpdated}
-            </p>
-          ) : null}
-        </header>
+    <main className="relative min-h-screen overflow-hidden bg-[#050505] text-white">
+      {/* ======================================================
+          HERO
+      ====================================================== */}
+      <section className="relative overflow-hidden border-b border-white/[0.08]">
+        {/* Gold ambient glow */}
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            left-1/2
+            top-[-340px]
+            h-[660px]
+            w-[900px]
+            -translate-x-1/2
+            rounded-full
+            bg-[#ddbc69]/[0.08]
+            blur-[150px]
+          "
+        />
 
-        <div className="mt-10 space-y-8 text-base leading-7 sm:text-lg sm:leading-8">
-          {children}
+        {/* Fine grid */}
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute inset-0
+            opacity-40
+            bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)]
+            bg-[size:64px_64px]
+            [mask-image:linear-gradient(to_bottom,black,transparent)]
+          "
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-36 sm:px-6 sm:pb-16 sm:pt-40 lg:px-8 lg:pb-20 lg:pt-44">
+          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+            {/* Main hero copy */}
+            <div>
+              <h1
+                className="
+                  max-w-4xl
+                  text-[clamp(3rem,8vw,6.8rem)]
+                  font-medium
+                  leading-[0.88]
+                  tracking-[-0.055em]
+                  text-[#ddbc69]
+                  font-playfair-display
+                "
+              >
+                {title}
+              </h1>
+
+              {description ? (
+                <p className="mt-7 max-w-2xl text-base leading-7 text-white sm:text-lg sm:leading-8">
+                  {description}
+                </p>
+              ) : null}
+            </div>
+
+            {/* Desktop metadata */}
+            <div className="hidden min-w-[180px] border-l border-white/10 pl-6 lg:block">
+              <div className="space-y-5">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#ddbc69]">
+                    Document
+                  </p>
+
+                  <p className="mt-1 text-sm text-white">Privacy Policy</p>
+                </div>
+
+                {lastUpdated ? (
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#ddbc69]">
+                      Last updated
+                    </p>
+
+                    <p className="mt-1 text-sm text-white">{lastUpdated}</p>
+                  </div>
+                ) : null}
+
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#ddbc69]">
+                    Company
+                  </p>
+
+                  <p className="mt-1 text-sm text-white">BookMyAssets</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* bottom hero line */}
+          <div className="mt-10 flex items-center gap-4 sm:mt-14">
+            <div className="h-px flex-1 bg-gradient-to-r from-[#ddbc69]/60 via-white/10 to-transparent" />
+
+            <ShieldCheck
+              size={17}
+              strokeWidth={1.6}
+              className="text-[#ddbc69]"
+            />
+          </div>
         </div>
+      </section>
+
+      {/* ======================================================
+          CONTENT
+      ====================================================== */}
+      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
+        {children}
       </div>
     </main>
   );
@@ -25,211 +149,691 @@ function PolicyShell({ title, lastUpdated, children }) {
 
 function PolicySection({ number, title, children }) {
   return (
-    <section className="space-y-4">
-      <h2 className="text-xl font-bold sm:text-2xl">
-        {number}. {title}
-      </h2>
-      {children}
+    <section
+      id={`policy-section-${number}`}
+      className="
+        group
+        relative
+        grid
+        scroll-mt-28
+        grid-cols-[34px_minmax(0,1fr)]
+        gap-x-4
+        sm:grid-cols-[54px_minmax(0,1fr)]
+        sm:gap-x-6
+        lg:grid-cols-[120px_1px_minmax(0,1fr)]
+        lg:gap-x-10
+      "
+    >
+      {/* =========================================
+          NUMBER
+      ========================================= */}
+      <div className="relative">
+        <span
+          className="
+            sticky top-28
+            block
+            text-[13px]
+            font-semibold
+            tracking-[0.14em]
+            text-[#ddbc69]
+
+            lg:text-[44px]
+            lg:font-light
+            lg:leading-none
+            lg:tracking-[-0.05em]
+            lg:text-[#ddbc69]/35
+          "
+        >
+          {String(number).padStart(2, "0")}
+        </span>
+      </div>
+
+      {/* =========================================
+          VERTICAL SPINE
+      ========================================= */}
+      <div
+        aria-hidden="true"
+        className="
+          absolute
+          left-[33px]
+          top-0
+          h-full
+          w-px
+          bg-gradient-to-b
+          from-[#ddbc69]/70
+          via-[#ddbc69]/20
+          to-white/[0.06]
+
+          sm:left-[53px]
+
+          lg:static
+          lg:block
+          lg:h-full
+        "
+      />
+
+      {/* =========================================
+          CONTENT
+      ========================================= */}
+      <div className="relative pb-14 pl-2 sm:pb-16 sm:pl-3 lg:pb-24 lg:pl-0">
+        {/* Gold timeline node */}
+        <span
+          aria-hidden="true"
+          className="
+            absolute
+            -left-[21px]
+            top-[7px]
+            h-2.5
+            w-2.5
+            rounded-full
+            border-2
+            border-[#050505]
+            bg-[#ddbc69]
+
+            sm:-left-[29px]
+
+            lg:-left-[46px]
+            lg:top-[10px]
+          "
+        />
+
+        <header className="mb-6 sm:mb-7">
+          <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
+            Section {String(number).padStart(2, "0")}
+          </span>
+
+          <h2
+            className="
+              max-w-3xl
+              text-[clamp(1.45rem,3vw,2.25rem)]
+              font-medium
+              leading-[1.15]
+              tracking-[-0.03em]
+              text-[#ddbc69]
+            "
+          >
+            {title}
+          </h2>
+
+          <div className="mt-5 h-px w-12 bg-[#ddbc69]/80 transition-all duration-500 group-hover:w-24" />
+        </header>
+
+        <div
+          className="
+            max-w-3xl
+            space-y-5
+            text-[15px]
+            leading-7
+            text-white
+
+            sm:text-base
+            sm:leading-8
+
+            [&_a]:text-[#ddbc69]
+            [&_strong]:font-semibold
+            [&_strong]:text-white
+          "
+        >
+          {children}
+        </div>
+      </div>
     </section>
   );
 }
 
 function PolicyList({ children }) {
-  return <ul className="list-disc space-y-2 pl-6">{children}</ul>;
+  return (
+    <ul
+      className="
+        my-6
+        grid
+        gap-3
+
+        [&>li]:relative
+        [&>li]:pl-7
+        [&>li]:text-white
+
+        [&>li]:before:absolute
+        [&>li]:before:left-0
+        [&>li]:before:top-[0.7rem]
+        [&>li]:before:h-[7px]
+        [&>li]:before:w-[7px]
+        [&>li]:before:rotate-45
+        [&>li]:before:bg-[#ddbc69]
+      "
+    >
+      {children}
+    </ul>
+  );
 }
 
 function ContactDetails({ label = "Call" }) {
   return (
-    <address className="space-y-1 not-italic">
-      <p>
-        Email:{" "}
-        <a href="mailto:info@bookmyassets.com" className={contactLinkClass}>
-          info@bookmyassets.com
-        </a>
-      </p>
-      <p>
-        {label}:{" "}
-        <a href="tel:+918130371647" className={contactLinkClass}>
-          +91 81 30 37 16 47
-        </a>
-      </p>
-      <p>
-        Address: 620, 6th Floor, JMD Megapolis, Sector 48, Gurugram, Haryana
-        122018
-      </p>
+    <address className="mt-6 grid gap-3 not-italic md:grid-cols-2">
+      {/* Email */}
+      <a
+        href="mailto:info@bookmyassets.com"
+        className="
+          group flex items-start gap-4 rounded-2xl
+          border border-white/[0.07]
+          bg-black/20
+          p-4
+          transition-all duration-200
+          hover:border-[#ddbc69]/25
+          hover:bg-[#ddbc69]/[0.035]
+        "
+      >
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.045]">
+          <Mail size={17} strokeWidth={1.7} className="text-[#ddbc69]" />
+        </div>
+
+        <div>
+          <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-white/30">
+            Email
+          </span>
+
+          <span className={`${contactLinkClass} mt-1 block break-all text-sm`}>
+            info@bookmyassets.com
+          </span>
+        </div>
+      </a>
+
+      {/* Phone */}
+      <a
+        href="tel:+918130371647"
+        className="
+          group flex items-start gap-4 rounded-2xl
+          border border-white/[0.07]
+          bg-black/20
+          p-4
+          transition-all duration-200
+          hover:border-[#ddbc69]/25
+          hover:bg-[#ddbc69]/[0.035]
+        "
+      >
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.045]">
+          <Phone size={17} strokeWidth={1.7} className="text-[#ddbc69]" />
+        </div>
+
+        <div>
+          <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-white/30">
+            {label}
+          </span>
+
+          <span className={`${contactLinkClass} mt-1 block text-sm`}>
+            +91 81 30 37 16 47
+          </span>
+        </div>
+      </a>
+
+      {/* Address */}
+      <div
+        className="
+          flex items-start gap-4 rounded-2xl
+          border border-white/[0.07]
+          bg-black/20
+          p-4
+          md:col-span-2
+        "
+      >
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.045]">
+          <MapPin size={17} strokeWidth={1.7} className="text-[#ddbc69]" />
+        </div>
+
+        <div>
+          <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-white/30">
+            Office
+          </span>
+
+          <span className="mt-1 block max-w-xl text-sm leading-6 text-white/65">
+            620, 6th Floor, JMD Megapolis, Sector 48, Gurugram, Haryana 122018
+          </span>
+        </div>
+      </div>
     </address>
+  );
+}
+
+
+function TermsOverview() {
+  const items = [
+    {
+      icon: FileCheck2,
+      label: "Agreement",
+      title: "Using BookMyAssets",
+      text: "These terms govern access to our website, services, content, and features.",
+    },
+    {
+      icon: ShieldCheck,
+      label: "Usage",
+      title: "Acceptable use",
+      text: "Use BookMyAssets lawfully and without interfering with our services or users.",
+    },
+    {
+      icon: UserCheck,
+      label: "Eligibility",
+      title: "Age requirement",
+      text: "You must be at least 18 years old and legally able to accept these terms.",
+    },
+    {
+      icon: Scale,
+      label: "Rights",
+      title: "Your responsibilities",
+      text: "Our content, services, access rules, and intellectual property remain protected.",
+    },
+  ];
+
+  return (
+    <section className="mb-16 sm:mb-20 lg:mb-28">
+      <div className="mb-7 sm:flex sm:items-end sm:justify-between">
+    
+          <h2 className="mt-2 text-2xl font-medium font-playfair-display tracking-[-0.03em] text-[#ddbc69] sm:text-3xl">
+            What these terms cover
+          </h2>
+
+      </div>
+
+      <div className="grid grid-cols-2 border-l border-t border-white/[0.09] lg:grid-cols-4">
+        {items.map(({ icon: Icon, label, title, text }) => (
+          <div
+            key={title}
+            className="
+              min-h-[180px]
+              border-b
+              border-r
+              border-white/[0.09]
+              p-4
+              transition-colors
+              duration-300
+              hover:bg-white/[0.025]
+              sm:min-h-[210px]
+              sm:p-6
+            "
+          >
+            <div className="flex items-start justify-between gap-3">
+              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69] sm:text-[10px]">
+                {label}
+              </span>
+
+              <Icon
+                size={18}
+                strokeWidth={1.5}
+                className="shrink-0 text-[#ddbc69]"
+              />
+            </div>
+
+            <div className="mt-10 sm:mt-14">
+              <h3 className="text-base font-medium text-[#ddbc69] sm:text-lg">
+                {title}
+              </h3>
+
+              <p className="mt-2 text-xs leading-5 text-white sm:text-sm sm:leading-6">
+                {text}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TermsIntroduction() {
+  return (
+    <section className="mb-16 border-y border-white/[0.08] py-9 sm:mb-20 sm:py-12 lg:mb-28">
+      <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
+        <div>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
+            Before you continue
+          </span>
+        </div>
+
+        <div className="max-w-4xl">
+          <p
+            className="
+              text-[clamp(1.45rem,3.5vw,2.5rem)]
+              font-medium
+              leading-[1.3]
+              tracking-[-0.035em]
+              text-[#ddbc69]
+              font-playfair-display
+            "
+          >
+            Clear terms help define how BookMyAssets and its users interact.
+          </p>
+
+          <div className="mt-7 max-w-3xl space-y-4 text-[15px] leading-7 text-white sm:text-base sm:leading-8">
+            <p>
+              Welcome to BookMyAssets. These Terms and Conditions govern your
+              access to and use of our website, services, content, and features.
+            </p>
+
+            <p>
+              By using the BookMyAssets website, you agree to these Terms and
+              Conditions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 export function TermsPolicyContent() {
   return (
-    <PolicyShell title="Terms and Conditions" lastUpdated="08 August 2026">
-      <div className="space-y-4">
-        <p>
-          Welcome to BookMyAssets. These Terms and Conditions govern your access
-          to and use of our website, services, content, and features.
-        </p>
-        <p>
-          By using the BookMyAssets website, you agree to these Terms and
-          Conditions.
-        </p>
+    <PolicyShell
+      title="Terms & Conditions"
+      eyebrow="Terms of Use"
+      description="The rules, responsibilities, and conditions that apply when you use BookMyAssets."
+      lastUpdated="08 August 2026"
+    >
+      <TermsOverview />
+
+      <TermsIntroduction />
+
+      <div>
+        <PolicySection number="1" title="About These Terms">
+          <p>
+            BookMyAssets and its affiliates may update these Terms from time to
+            time.
+          </p>
+
+          <p>
+            When changes are made, the updated version will be posted on the
+            website along with the revised &quot;Last Updated&quot; date.
+          </p>
+
+          <p>
+            Your continued use of the website after an update means that you
+            accept the revised Terms. We recommend reviewing these Terms
+            periodically.
+          </p>
+
+          <p>
+            If you are using BookMyAssets on behalf of a company, organization,
+            or other entity, you confirm that you have the authority to accept
+            these Terms on its behalf.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="2" title="Intellectual Property">
+          <p>
+            All content available on the BookMyAssets website, including its
+            design, layout, text, graphics, logos, features, and overall
+            appearance, is owned by or licensed to BookMyAssets and is protected
+            by applicable intellectual property laws.
+          </p>
+
+          <p>
+            Unless you have received written permission from BookMyAssets, you
+            may not:
+          </p>
+
+          <PolicyList>
+            <li>Copy, reproduce, publish, or distribute website content.</li>
+
+            <li>Sell or license any part of the website.</li>
+
+            <li>
+              Modify, translate, or create derivative works from our content.
+            </li>
+
+            <li>Publicly display or commercially use our website content.</li>
+          </PolicyList>
+
+          <p>
+            All rights not expressly granted under these Terms remain with
+            BookMyAssets.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="3" title="Age Requirement">
+          <p>You must be at least 18 years old to use BookMyAssets.</p>
+
+          <p>
+            By using the website, you confirm that you are 18 years of age or
+            older and are legally able to agree to these Terms.
+          </p>
+
+          <p>
+            If we believe that a user is under 18 or is not legally able to
+            enter into this agreement, we may suspend or terminate their access
+            and remove any related content or information.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="4" title="Changes to the Website and Services">
+          <p>
+            BookMyAssets may update, modify, suspend, or discontinue any part of
+            the website, service, feature, or functionality at any time.
+          </p>
+
+          <p>
+            Certain features may be added, removed, or changed without prior
+            notice.
+          </p>
+
+          <p>
+            We may also restrict or terminate access to the website where
+            necessary, including in cases of misuse, violation of these Terms,
+            security concerns, or legal requirements.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="5" title="Acceptable Use">
+          <p>
+            You agree to use BookMyAssets only for lawful and appropriate
+            purposes.
+          </p>
+
+          <p>You must not use the website or its content to:</p>
+
+          <PolicyList>
+            <li>Violate any applicable law or regulation.</li>
+
+            <li>
+              Harm, threaten, harass, defame, or mislead another person or
+              organization.
+            </li>
+
+            <li>
+              Interfere with the security or proper operation of the website.
+            </li>
+
+            <li>
+              Attempt to gain unauthorized access to BookMyAssets systems or
+              data.
+            </li>
+
+            <li>
+              Use the website in any way that may damage BookMyAssets, its
+              users, or third parties.
+            </li>
+          </PolicyList>
+        </PolicySection>
+
+        <PolicySection number="6" title="Use of the Website at Your Own Risk">
+          <p>Your use of BookMyAssets is at your own risk.</p>
+
+          <p>
+            Unless specifically stated otherwise, the website, its content,
+            third-party content, products, and services are provided on an
+            &quot;as is&quot; and &quot;as available&quot; basis.
+          </p>
+
+          <p>
+            BookMyAssets does not guarantee that the website will always be
+            available, uninterrupted, error-free, secure, or suitable for every
+            purpose.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="7" title="Suspension or Termination">
+          <p>
+            BookMyAssets may suspend, restrict, or terminate your access to the
+            website if you violate these Terms, misuse the platform, create
+            security or legal risks, or where we are otherwise permitted to do
+            so by law.
+          </p>
+
+          <p>
+            Where appropriate, we may also remove content or information
+            associated with your use of the website.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="8" title="Contact Us">
+          <p>
+            If you have questions about these Terms and Conditions, you can
+            contact BookMyAssets at:
+          </p>
+
+          <ContactDetails />
+        </PolicySection>
+      </div>
+    </PolicyShell>
+  );
+}
+
+function PrivacyOverview() {
+  const items = [
+    {
+      icon: Database,
+      label: "Collection",
+      title: "What we collect",
+      text: "Information you provide and limited technical information.",
+    },
+    {
+      icon: Eye,
+      label: "Usage",
+      title: "Why we use it",
+      text: "To operate, improve, communicate and maintain our services.",
+    },
+    {
+      icon: LockKeyhole,
+      label: "Protection",
+      title: "How we protect it",
+      text: "Administrative, technical and security measures.",
+    },
+    {
+      icon: ShieldCheck,
+      label: "Control",
+      title: "Your choices",
+      text: "Cookie controls and communication preferences remain available.",
+    },
+  ];
+
+  return (
+    <section className="mb-16 sm:mb-20 lg:mb-28">
+      <div className="mb-7 sm:flex sm:items-end sm:justify-between">
+        <h2 className="mt-2 text-2xl font-medium font-playfair-display tracking-[-0.03em] text-[#ddbc69] sm:text-3xl">
+          What this policy covers
+        </h2>
       </div>
 
-      <PolicySection number="1" title="About These Terms">
-        <p>
-          BookMyAssets and its affiliates may update these Terms from time to
-          time.
-        </p>
-        <p>
-          When changes are made, the updated version will be posted on the
-          website along with the revised &quot;Last Updated&quot; date.
-        </p>
-        <p>
-          Your continued use of the website after an update means that you
-          accept the revised Terms. We recommend reviewing these Terms
-          periodically.
-        </p>
-        <p>
-          If you are using BookMyAssets on behalf of a company, organization, or
-          other entity, you confirm that you have the authority to accept these
-          Terms on its behalf.
-        </p>
-      </PolicySection>
+      <div className="grid grid-cols-2 border-l border-t border-white/[0.09] lg:grid-cols-4">
+        {items.map(({ icon: Icon, label, title, text }) => (
+          <div
+            key={title}
+            className="
+              min-h-[180px]
+              border-b
+              border-r
+              border-white/[0.09]
+              p-4
+              transition-colors
+              duration-300
+              hover:bg-white/[0.025]
 
-      <PolicySection number="2" title="Intellectual Property">
-        <p>
-          All content available on the BookMyAssets website, including its
-          design, layout, text, graphics, logos, features, and overall
-          appearance, is owned by or licensed to BookMyAssets and is protected
-          by applicable intellectual property laws.
-        </p>
-        <p>
-          Unless you have received written permission from BookMyAssets, you may
-          not:
-        </p>
-        <PolicyList>
-          <li>Copy, reproduce, publish, or distribute website content.</li>
-          <li>Sell or license any part of the website.</li>
-          <li>
-            Modify, translate, or create derivative works from our content.
-          </li>
-          <li>Publicly display or commercially use our website content.</li>
-        </PolicyList>
-        <p>
-          All rights not expressly granted under these Terms remain with
-          BookMyAssets.
-        </p>
-      </PolicySection>
+              sm:min-h-[210px]
+              sm:p-6
+            "
+          >
+            <div className="flex items-start justify-between gap-3">
+              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white sm:text-[10px]">
+                {label}
+              </span>
 
-      <PolicySection number="3" title="Age Requirement">
-        <p>You must be at least 18 years old to use BookMyAssets.</p>
-        <p>
-          By using the website, you confirm that you are 18 years of age or
-          older and are legally able to agree to these Terms.
-        </p>
-        <p>
-          If we believe that a user is under 18 or is not legally able to enter
-          into this agreement, we may suspend or terminate their access and
-          remove any related content or information.
-        </p>
-      </PolicySection>
+              <Icon
+                size={18}
+                strokeWidth={1.5}
+                className="shrink-0 text-[#ddbc69]"
+              />
+            </div>
 
-      <PolicySection number="4" title="Changes to the Website and Services">
-        <p>
-          BookMyAssets may update, modify, suspend, or discontinue any part of
-          the website, service, feature, or functionality at any time.
-        </p>
-        <p>
-          Certain features may be added, removed, or changed without prior
-          notice.
-        </p>
-        <p>
-          We may also restrict or terminate access to the website where
-          necessary, including in cases of misuse, violation of these Terms,
-          security concerns, or legal requirements.
-        </p>
-      </PolicySection>
+            <div className="mt-10 sm:mt-14">
+              <h3 className="text-base font-medium text-[#ddbc69] sm:text-lg">
+                {title}
+              </h3>
 
-      <PolicySection number="5" title="Acceptable Use">
-        <p>
-          You agree to use BookMyAssets only for lawful and appropriate
-          purposes.
-        </p>
-        <p>You must not use the website or its content to:</p>
-        <PolicyList>
-          <li>Violate any applicable law or regulation.</li>
-          <li>
-            Harm, threaten, harass, defame, or mislead another person or
-            organization.
-          </li>
-          <li>
-            Interfere with the security or proper operation of the website.
-          </li>
-          <li>
-            Attempt to gain unauthorized access to BookMyAssets systems or data.
-          </li>
-          <li>
-            Use the website in any way that may damage BookMyAssets, its users,
-            or third parties.
-          </li>
-        </PolicyList>
-      </PolicySection>
+              <p className="mt-2 text-xs leading-5 text-white sm:text-sm sm:leading-6">
+                {text}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
-      <PolicySection number="6" title="Use of the Website at Your Own Risk">
-        <p>Your use of BookMyAssets is at your own risk.</p>
-        <p>
-          Unless specifically stated otherwise, the website, its content,
-          third-party content, products, and services are provided on an
-          &quot;as is&quot; and &quot;as available&quot; basis.
-        </p>
-        <p>
-          BookMyAssets does not guarantee that the website will always be
-          available, uninterrupted, error-free, secure, or suitable for every
-          purpose.
-        </p>
-      </PolicySection>
+function PrivacyIntroduction() {
+  return (
+    <section className="mb-16 border-y border-white/[0.08] py-9 sm:mb-20 sm:py-12 lg:mb-28">
+      <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
+        <div>
+          <span className="text-[12px] font-semibold uppercase tracking-[0.24em] text-white">
+            Our commitment
+          </span>
+        </div>
 
-      <PolicySection number="7" title="Suspension or Termination">
-        <p>
-          BookMyAssets may suspend, restrict, or terminate your access to the
-          website if you violate these Terms, misuse the platform, create
-          security or legal risks, or where we are otherwise permitted to do so
-          by law.
-        </p>
-        <p>
-          Where appropriate, we may also remove content or information
-          associated with your use of the website.
-        </p>
-      </PolicySection>
+        <div className="max-w-4xl">
+          <p
+            className="
+              text-[clamp(1.45rem,3.5vw,2.5rem)]
+              font-medium
+              leading-[1.3]
+              tracking-[-0.035em]
+              text-[#ddbc69]
+              font-playfair-display
+            "
+          >
+            We believe understanding how your information is handled should be
+            simple.
+          </p>
 
-      <PolicySection number="8" title="Contact Us">
-        <p>
-          If you have questions about these Terms and Conditions, you can
-          contact BookMyAssets at:
-        </p>
-        <ContactDetails />
-      </PolicySection>
-    </PolicyShell>
+          <div className="mt-7 max-w-3xl space-y-4 text-[15px] leading-7 text-white sm:text-base sm:leading-8">
+            <p>
+              At BookMyAssets, we respect your privacy and are committed to
+              protecting your personal information.
+            </p>
+
+            <p>
+              This Privacy Policy explains what information we collect, how we
+              use it, and how we protect it when you use our website and
+              services.
+            </p>
+
+            <p>
+              By using BookMyAssets or creating an account, you agree to this
+              Privacy Policy and our Terms and Conditions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 export function PrivacyPolicyContent() {
   return (
-    <PolicyShell title="Privacy Policy">
-      <div className="space-y-4">
-        <p>
-          At BookMyAssets, we respect your privacy and are committed to
-          protecting your personal information.
-        </p>
-        <p>
-          This Privacy Policy explains what information we collect, how we use
-          it, and how we protect it when you use our website and services.
-        </p>
-        <p>
-          By using BookMyAssets or creating an account, you agree to this
-          Privacy Policy and our Terms and Conditions.
-        </p>
-      </div>
+    <PolicyShell
+      title="Privacy Policy"
+      description="Your information. Clearly explained."
+    >
+      <PrivacyOverview />
+
+      <PrivacyIntroduction />
 
       <PolicySection number="1" title="Information We Collect">
         <p>
@@ -423,294 +1027,611 @@ export function PrivacyPolicyContent() {
   );
 }
 
+function CopyrightOverview() {
+  const items = [
+    {
+      icon: Fingerprint,
+      label: "Ownership",
+      title: "Protected content",
+      text: "BookMyAssets content, branding, software, design, and media may be protected by intellectual property laws.",
+    },
+    {
+      icon: Scale,
+      label: "Usage",
+      title: "Use restrictions",
+      text: "Protected content may not be copied, modified, distributed, sold, or commercially used without permission.",
+    },
+    {
+      icon: FileWarning,
+      label: "Reporting",
+      title: "Report infringement",
+      text: "Copyright owners can submit a notice if they believe protected work is being used without authorization.",
+    },
+    {
+      icon: BadgeCheck,
+      label: "Protection",
+      title: "Rights enforcement",
+      text: "BookMyAssets may remove infringing content and protect its intellectual property where necessary.",
+    },
+  ];
+
+  return (
+    <section className="mb-16 sm:mb-20 lg:mb-28">
+      <div className="mb-7 sm:flex sm:items-end sm:justify-between">
+      
+          <h2 className="mt-2 text-2xl font-medium font-playfair-display tracking-[-0.03em] text-[#ddbc69] sm:text-3xl">
+            What this policy covers
+          </h2>
+      </div>
+
+      <div className="grid grid-cols-2 border-l border-t border-white/[0.09] lg:grid-cols-4">
+        {items.map(({ icon: Icon, label, title, text }) => (
+          <div
+            key={title}
+            className="
+              min-h-[180px]
+              border-b
+              border-r
+              border-white/[0.09]
+              p-4
+              transition-colors
+              duration-300
+              hover:bg-white/[0.025]
+              sm:min-h-[210px]
+              sm:p-6
+            "
+          >
+            <div className="flex items-start justify-between gap-3">
+              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69] sm:text-[10px]">
+                {label}
+              </span>
+
+              <Icon
+                size={18}
+                strokeWidth={1.5}
+                className="shrink-0 text-[#ddbc69]"
+              />
+            </div>
+
+            <div className="mt-10 sm:mt-14">
+              <h3 className="text-base font-medium text-[#ddbc69] sm:text-lg">
+                {title}
+              </h3>
+
+              <p className="mt-2 text-xs leading-5 text-white sm:text-sm sm:leading-6">
+                {text}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function CopyrightIntroduction() {
+  return (
+    <section className="mb-16 border-y border-white/[0.08] py-9 sm:mb-20 sm:py-12 lg:mb-28">
+      <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
+        <div>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
+            Intellectual property
+          </span>
+        </div>
+
+        <div className="max-w-4xl">
+          <p
+            className="
+              text-[clamp(1.45rem,3.5vw,2.5rem)]
+              font-medium
+              leading-[1.3]
+              tracking-[-0.035em]
+              text-[#ddbc69]
+              font-playfair-display
+            "
+          >
+            Original work deserves clear ownership and responsible use.
+          </p>
+
+          <div className="mt-7 max-w-3xl space-y-4 text-[15px] leading-7 text-white sm:text-base sm:leading-8">
+            <p>
+              BookMyAssets respects intellectual property rights and expects its
+              users to do the same.
+            </p>
+
+            <p>
+              This Copyright Policy explains how content available through our
+              website and services is protected and how copyright owners can
+              report possible infringement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function CopyrightPolicyContent() {
   return (
-    <PolicyShell title="Copyright Policy" lastUpdated="08 August 2026">
-      <p>
-        BookMyAssets respects intellectual property rights and expects its users
-        to do the same. This Copyright Policy explains how content on our
-        website and services is protected and how copyright owners can report
-        possible infringement.
-      </p>
+    <PolicyShell
+      title="Copyright Policy"
+      eyebrow="Intellectual Property"
+      description="How BookMyAssets protects intellectual property, defines content usage, and handles copyright infringement concerns."
+      lastUpdated="08 August 2026"
+    >
+      <CopyrightOverview />
 
-      <PolicySection number="1" title="Ownership of Content">
-        <p>
-          Unless otherwise stated, the content available on BookMyAssets,
-          including:
-        </p>
-        <PolicyList>
-          <li>Text</li>
-          <li>Graphics</li>
-          <li>Logos</li>
-          <li>Images</li>
-          <li>Icons</li>
-          <li>Videos and media</li>
-          <li>Downloads</li>
-          <li>Data compilations</li>
-          <li>Software</li>
-          <li>Website design and layout</li>
-        </PolicyList>
-        <p>
-          is owned by, licensed to, or legally used by BookMyAssets, its
-          affiliates, users, or content providers.
-        </p>
-        <p>
-          This content is protected by applicable copyright, trademark, and
-          intellectual property laws.
-        </p>
-        <p>
-          Third-party trademarks, logos, and brand names appearing on
-          BookMyAssets remain the property of their respective owners. Their
-          appearance on our platform does not necessarily mean that they are
-          affiliated with or endorsed by BookMyAssets.
-        </p>
-      </PolicySection>
+      <CopyrightIntroduction />
 
-      <PolicySection number="2" title="Restrictions on Use">
-        <p>
-          You may not copy, reproduce, publish, distribute, sell, license,
-          modify, translate, publicly display, or create derivative works from
-          BookMyAssets content without prior written permission from
-          BookMyAssets or the relevant rights owner.
-        </p>
-        <p>
-          You must also not upload, publish, distribute, or use copyrighted
-          material, trademarks, or other protected content belonging to another
-          person without proper authorization.
-        </p>
-        <p>All rights not specifically granted to users remain reserved.</p>
-      </PolicySection>
-
-      <PolicySection number="3" title="Reporting Copyright Infringement">
-        <p>
-          If you believe that content available on BookMyAssets infringes your
-          copyright, please send us a copyright infringement notice containing:
-        </p>
-        <PolicyList>
-          <li>Your name and contact information.</li>
-          <li>
-            A description of the copyrighted work you believe has been
-            infringed.
-          </li>
-          <li>
-            A description or link showing where the allegedly infringing content
-            appears on BookMyAssets.
-          </li>
-          <li>
-            A statement that you believe, in good faith, that the use of the
-            material is not authorized by the copyright owner, its agent, or
-            applicable law.
-          </li>
-          <li>
-            A statement confirming that the information in your notice is
-            accurate and that you are the copyright owner or are authorized to
-            act on the owner&apos;s behalf.
-          </li>
-          <li>Your physical or electronic signature.</li>
-        </PolicyList>
-        <p>Please send copyright infringement notices to:</p>
-        <address className="space-y-1 not-italic">
+      <div>
+        <PolicySection number="1" title="Ownership of Content">
           <p>
-            Email:{" "}
-            <a href="mailto:info@bookmyassets.com" className={contactLinkClass}>
-              info@bookmyassets.com
+            Unless otherwise stated, the content available on BookMyAssets,
+            including:
+          </p>
+
+          <PolicyList>
+            <li>Text</li>
+            <li>Graphics</li>
+            <li>Logos</li>
+            <li>Images</li>
+            <li>Icons</li>
+            <li>Videos and media</li>
+            <li>Downloads</li>
+            <li>Data compilations</li>
+            <li>Software</li>
+            <li>Website design and layout</li>
+          </PolicyList>
+
+          <p>
+            is owned by, licensed to, or legally used by BookMyAssets, its
+            affiliates, users, or content providers.
+          </p>
+
+          <p>
+            This content is protected by applicable copyright, trademark, and
+            intellectual property laws.
+          </p>
+
+          <p>
+            Third-party trademarks, logos, and brand names appearing on
+            BookMyAssets remain the property of their respective owners. Their
+            appearance on our platform does not necessarily mean that they are
+            affiliated with or endorsed by BookMyAssets.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="2" title="Restrictions on Use">
+          <p>
+            You may not copy, reproduce, publish, distribute, sell, license,
+            modify, translate, publicly display, or create derivative works from
+            BookMyAssets content without prior written permission from
+            BookMyAssets or the relevant rights owner.
+          </p>
+
+          <p>
+            You must also not upload, publish, distribute, or use copyrighted
+            material, trademarks, or other protected content belonging to
+            another person without proper authorization.
+          </p>
+
+          <p>
+            All rights not specifically granted to users remain reserved.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="3" title="Reporting Copyright Infringement">
+          <p>
+            If you believe that content available on BookMyAssets infringes your
+            copyright, please send us a copyright infringement notice
+            containing:
+          </p>
+
+          <PolicyList>
+            <li>Your name and contact information.</li>
+
+            <li>
+              A description of the copyrighted work you believe has been
+              infringed.
+            </li>
+
+            <li>
+              A description or link showing where the allegedly infringing
+              content appears on BookMyAssets.
+            </li>
+
+            <li>
+              A statement that you believe, in good faith, that the use of the
+              material is not authorized by the copyright owner, its agent, or
+              applicable law.
+            </li>
+
+            <li>
+              A statement confirming that the information in your notice is
+              accurate and that you are the copyright owner or are authorized to
+              act on the owner&apos;s behalf.
+            </li>
+
+            <li>Your physical or electronic signature.</li>
+          </PolicyList>
+
+          <p>Please send copyright infringement notices to:</p>
+
+          <div className="mt-6 border-y border-[#ddbc69]/25">
+            <a
+              href="mailto:info@bookmyassets.com"
+              className="
+                group
+                flex
+                items-center
+                justify-between
+                gap-4
+                border-b
+                border-white/[0.08]
+                py-5
+              "
+            >
+              <div>
+                <span className="block text-[9px] font-semibold uppercase tracking-[0.2em] text-white">
+                  Email
+                </span>
+
+                <span className="mt-1 block break-all text-sm text-white sm:text-base">
+                  info@bookmyassets.com
+                </span>
+              </div>
+
+              <span className="text-[#ddbc69]">↗</span>
             </a>
-          </p>
+
+            <div className="py-5">
+              <span className="block text-[9px] font-semibold uppercase tracking-[0.2em] text-white">
+                Address
+              </span>
+
+              <span className="mt-1 block max-w-2xl text-sm leading-6 text-white sm:text-base">
+                620, 6th Floor, JMD Megapolis, Sector 48, Gurugram, Haryana
+                122018
+              </span>
+            </div>
+          </div>
+        </PolicySection>
+
+        <PolicySection number="4" title="Removal of Infringing Content">
           <p>
-            Address: 620, 6th Floor, JMD Megapolis, Sector 48, Gurugram, Haryana
-            122018
+            BookMyAssets may review copyright infringement complaints and,
+            where appropriate, remove or restrict access to content that appears
+            to violate intellectual property rights.
           </p>
-        </address>
-      </PolicySection>
 
-      <PolicySection number="4" title="Removal of Infringing Content">
-        <p>
-          BookMyAssets may review copyright infringement complaints and, where
-          appropriate, remove or restrict access to content that appears to
-          violate intellectual property rights.
-        </p>
-        <p>
-          We may also suspend or terminate accounts that repeatedly upload or
-          use infringing content.
-        </p>
-      </PolicySection>
+          <p>
+            We may also suspend or terminate accounts that repeatedly upload or
+            use infringing content.
+          </p>
+        </PolicySection>
 
-      <PolicySection number="5" title="User Responsibility">
-        <p>
-          You are responsible for the content you upload, publish, share, or
-          otherwise make available through BookMyAssets.
-        </p>
-        <p>
-          By submitting content, you confirm that you own the necessary rights
-          or have permission to use and share that content.
-        </p>
-        <p>
-          Unauthorized use of copyrighted works, trademarks, personal
-          information, or other protected material may violate applicable laws
-          and may result in removal of the content or restriction of your
-          account.
-        </p>
-      </PolicySection>
+        <PolicySection number="5" title="User Responsibility">
+          <p>
+            You are responsible for the content you upload, publish, share, or
+            otherwise make available through BookMyAssets.
+          </p>
 
-      <PolicySection
-        number="6"
-        title="Protection of BookMyAssets Intellectual Property"
-      >
-        <p>
-          BookMyAssets reserves the right to protect and enforce its
-          intellectual property rights where necessary.
-        </p>
-        <p>
-          Unauthorized use of our name, branding, content, software, website
-          design, or other protected materials may result in legal action.
-        </p>
-      </PolicySection>
+          <p>
+            By submitting content, you confirm that you own the necessary rights
+            or have permission to use and share that content.
+          </p>
+
+          <p>
+            Unauthorized use of copyrighted works, trademarks, personal
+            information, or other protected material may violate applicable
+            laws and may result in removal of the content or restriction of your
+            account.
+          </p>
+        </PolicySection>
+
+        <PolicySection
+          number="6"
+          title="Protection of BookMyAssets Intellectual Property"
+        >
+          <p>
+            BookMyAssets reserves the right to protect and enforce its
+            intellectual property rights where necessary.
+          </p>
+
+          <p>
+            Unauthorized use of our name, branding, content, software, website
+            design, or other protected materials may result in legal action.
+          </p>
+        </PolicySection>
+      </div>
     </PolicyShell>
+  );
+}
+
+function RefundOverview() {
+  const items = [
+    {
+      icon: BadgeIndianRupee,
+      label: "Booking",
+      title: "₹50,000",
+      text: "Standard booking amount currently applicable to BookMyAssets bookings.",
+    },
+    {
+      icon: CalendarClock,
+      label: "Cancellation",
+      title: "15 Days",
+      text: "Cancellation and refund requests may be submitted within 15 days of booking.",
+    },
+    {
+      icon: CircleDollarSign,
+      label: "Refund",
+      title: "24 Hours",
+      text: "Approved refunds are generally initiated for credit within 24 hours.",
+    },
+    {
+      icon: ReceiptText,
+      label: "Payment",
+      title: "30 Days",
+      text: "Full payment is generally required within 30 days from the booking date.",
+    },
+  ];
+
+  return (
+    <section className="mb-16 sm:mb-20 lg:mb-28">
+      <div className="mb-7 sm:flex sm:items-end sm:justify-between">
+          <h2 className="mt-2 text-2xl font-medium font-playfair-display tracking-[-0.03em] text-[#ddbc69] sm:text-3xl">
+            Key booking terms
+          </h2>
+      </div>
+
+      <div className="grid grid-cols-2 border-l border-t border-white/[0.09] lg:grid-cols-4">
+        {items.map(({ icon: Icon, label, title, text }) => (
+          <div
+            key={label}
+            className="
+              min-h-[180px]
+              border-b
+              border-r
+              border-white/[0.09]
+              p-4
+              transition-colors
+              duration-300
+              hover:bg-white/[0.025]
+              sm:min-h-[210px]
+              sm:p-6
+            "
+          >
+            <div className="flex items-start justify-between gap-3">
+              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69] sm:text-[10px]">
+                {label}
+              </span>
+
+              <Icon
+                size={18}
+                strokeWidth={1.5}
+                className="shrink-0 text-[#ddbc69]"
+              />
+            </div>
+
+            <div className="mt-9 sm:mt-12">
+              <h3 className="text-xl font-medium tracking-[-0.03em] text-[#ddbc69] sm:text-2xl">
+                {title}
+              </h3>
+
+              <p className="mt-2 text-xs leading-5 text-white sm:text-sm sm:leading-6">
+                {text}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function RefundIntroduction() {
+  return (
+    <section className="mb-16 border-y border-white/[0.08] py-9 sm:mb-20 sm:py-12 lg:mb-28">
+      <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
+        <div>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
+            Before you book
+          </span>
+        </div>
+
+        <div className="max-w-4xl">
+          <p
+            className="
+              text-[clamp(1.45rem,3.5vw,2.5rem)]
+              font-medium
+              leading-[1.3]
+              tracking-[-0.035em]
+              text-[#ddbc69]
+              font-playfair-display
+            "
+          >
+            Clear booking terms help you understand payments, cancellations,
+            refunds, and additional charges.
+          </p>
+
+          <div className="mt-7 max-w-3xl space-y-4 text-[15px] leading-7 text-white sm:text-base sm:leading-8">
+            <p>
+              This Refund & Cancellation Policy explains the cancellation,
+              refund, payment, and additional charge terms applicable to
+              bookings made with BookMyAssets.
+            </p>
+
+            <p>
+              Please review these terms carefully before completing your
+              booking or property transaction.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 export function RefundCancellationPolicyContent() {
   return (
-    <PolicyShell title="Refund & Cancellation Policy">
-      <p>
-        This Refund & Cancellation Policy explains the cancellation, refund,
-        payment, and additional charge terms applicable to bookings made with
-        BookMyAssets.
-      </p>
+    <PolicyShell
+      title="Refund & Cancellation Policy"
+      eyebrow="Payments & Bookings"
+      description="Booking amounts, cancellation timelines, refunds, payment obligations, and applicable property charges."
+    >
+      <RefundOverview />
 
-      <PolicySection number="1" title="Booking Amount">
-        <p>The standard booking amount is ₹50,000.</p>
-        <p>
-          BookMyAssets may revise the booking amount from time to time. The
-          amount applicable at the time of booking will apply to the customer.
-        </p>
-      </PolicySection>
+      <RefundIntroduction />
 
-      <PolicySection number="2" title="Cancellation & Refund">
-        <p>
-          Customers may request cancellation and apply for a refund within 15
-          days of booking, subject to the applicable booking terms.
-        </p>
-        <p>
-          Once a refund is approved and initiated, the refundable amount will
-          generally be credited within 24 hours.
-        </p>
-        <p>
-          Refund processing timelines may vary depending on the payment method,
-          banking partner, or other operational factors.
-        </p>
-      </PolicySection>
-
-      <PolicySection number="3" title="Property Pricing & Additional Charges">
-        <p>
-          Plot prices and other applicable charges may vary depending on the
-          property, location, availability, and applicable terms.
-        </p>
-        <p>
-          The final price and applicable charges will be communicated to the
-          buyer before completion of the transaction.
-        </p>
-      </PolicySection>
-
-      <PolicySection number="4" title="Maintenance Charges">
-        <p>
-          Maintenance charges are payable as communicated at the time of booking
-          or purchase.
-        </p>
-        <p>
-          Once paid, maintenance charges are non-refundable, unless otherwise
-          required by applicable law.
-        </p>
-      </PolicySection>
-
-      <PolicySection number="5" title="Preferred Location Charge (PLC)">
-        <p>
-          A Preferred Location Charge (PLC) may apply to selected plots or
-          properties based on factors such as location, facing, accessibility,
-          or other preferences.
-        </p>
-        <p>
-          Where applicable, the PLC will be added to the total property cost.
-        </p>
-      </PolicySection>
-
-      <PolicySection number="6" title="Payment Timeline">
-        <p>
-          Buyers are required to complete the full payment within 30 days from
-          the date of booking, unless a different payment schedule has been
-          agreed to in writing.
-        </p>
-        <p>
-          Failure to complete payment within the applicable period may result in
-          cancellation or other action in accordance with the booking terms.
-        </p>
-      </PolicySection>
-
-      <PolicySection number="7" title="Stamp Duty">
-        <p>
-          Stamp duty and registration-related government charges will be payable
-          as per the rates applicable under the laws and regulations of the
-          Government of Gujarat at the time of the transaction.
-        </p>
-        <p>At present, the stated stamp duty rates are:</p>
-        <PolicyList>
-          <li>Female buyers: 4.90%</li>
-          <li>Male buyers: 5.90%</li>
-        </PolicyList>
-        <p>
-          These rates may change based on government rules, notifications,
-          concessions, or amendments. The rate applicable on the date of
-          registration will apply.
-        </p>
-      </PolicySection>
-
-      <PolicySection number="8" title="Goods and Services Tax (GST)">
-        <p>
-          GST, where applicable, will be charged according to the prevailing
-          rates and regulations issued by the Government of India.
-        </p>
-        <p>
-          Any change in applicable GST rates or rules may affect the final
-          amount payable.
-        </p>
-      </PolicySection>
-
-      <PolicySection number="9" title="Legal & Documentation Charges">
-        <p>Legal fees may include charges related to:</p>
-        <PolicyList>
-          <li>Property documentation</li>
-          <li>Agreement preparation</li>
-          <li>Registration assistance</li>
-          <li>
-            Other legal or administrative services related to the transaction
-          </li>
-        </PolicyList>
-        <p>
-          Applicable charges will be communicated to the buyer as part of the
-          transaction.
-        </p>
-      </PolicySection>
-
-      <PolicySection number="10" title="Contact Us">
-        <p>
-          For cancellation requests, refund-related queries, or any
-          clarification regarding this policy, please contact us:
-        </p>
-        <address className="space-y-1 not-italic">
+      <div>
+        <PolicySection number="1" title="Booking Amount">
           <p>
-            Email:{" "}
-            <a href="mailto:info@bookmyassets.com" className={contactLinkClass}>
-              info@bookmyassets.com
-            </a>
+            The standard booking amount is <strong>₹50,000</strong>.
           </p>
+
           <p>
-            Phone:{" "}
-            <a href="tel:+918130371647" className={contactLinkClass}>
-              +91 81 3037 1647
-            </a>
+            BookMyAssets may revise the booking amount from time to time. The
+            amount applicable at the time of booking will apply to the customer.
           </p>
-        </address>
-      </PolicySection>
+        </PolicySection>
+
+        <PolicySection number="2" title="Cancellation & Refund">
+          <p>
+            Customers may request cancellation and apply for a refund within{" "}
+            <strong>15 days of booking</strong>, subject to the applicable
+            booking terms.
+          </p>
+
+          <p>
+            Once a refund is approved and initiated, the refundable amount will
+            generally be credited within <strong>24 hours</strong>.
+          </p>
+
+          <p>
+            Refund processing timelines may vary depending on the payment
+            method, banking partner, or other operational factors.
+          </p>
+        </PolicySection>
+
+        <PolicySection
+          number="3"
+          title="Property Pricing & Additional Charges"
+        >
+          <p>
+            Plot prices and other applicable charges may vary depending on the
+            property, location, availability, and applicable terms.
+          </p>
+
+          <p>
+            The final price and applicable charges will be communicated to the
+            buyer before completion of the transaction.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="4" title="Maintenance Charges">
+          <p>
+            Maintenance charges are payable as communicated at the time of
+            booking or purchase.
+          </p>
+
+          <p>
+            Once paid, maintenance charges are non-refundable, unless otherwise
+            required by applicable law.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="5" title="Preferred Location Charge (PLC)">
+          <p>
+            A Preferred Location Charge (PLC) may apply to selected plots or
+            properties based on factors such as location, facing,
+            accessibility, or other preferences.
+          </p>
+
+          <p>
+            Where applicable, the PLC will be added to the total property cost.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="6" title="Payment Timeline">
+          <p>
+            Buyers are required to complete the full payment within{" "}
+            <strong>30 days from the date of booking</strong>, unless a
+            different payment schedule has been agreed to in writing.
+          </p>
+
+          <p>
+            Failure to complete payment within the applicable period may result
+            in cancellation or other action in accordance with the booking
+            terms.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="7" title="Stamp Duty">
+          <p>
+            Stamp duty and registration-related government charges will be
+            payable as per the rates applicable under the laws and regulations
+            of the Government of Gujarat at the time of the transaction.
+          </p>
+
+          <p>At present, the stated stamp duty rates are:</p>
+
+          <PolicyList>
+            <li>
+              Female buyers: <strong>4.90%</strong>
+            </li>
+
+            <li>
+              Male buyers: <strong>5.90%</strong>
+            </li>
+          </PolicyList>
+
+          <p>
+            These rates may change based on government rules, notifications,
+            concessions, or amendments. The rate applicable on the date of
+            registration will apply.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="8" title="Goods and Services Tax (GST)">
+          <p>
+            GST, where applicable, will be charged according to the prevailing
+            rates and regulations issued by the Government of India.
+          </p>
+
+          <p>
+            Any change in applicable GST rates or rules may affect the final
+            amount payable.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="9" title="Legal & Documentation Charges">
+          <p>Legal fees may include charges related to:</p>
+
+          <PolicyList>
+            <li>Property documentation</li>
+            <li>Agreement preparation</li>
+            <li>Registration assistance</li>
+
+            <li>
+              Other legal or administrative services related to the transaction
+            </li>
+          </PolicyList>
+
+          <p>
+            Applicable charges will be communicated to the buyer as part of the
+            transaction.
+          </p>
+        </PolicySection>
+
+        <PolicySection number="10" title="Contact Us">
+          <p>
+            For cancellation requests, refund-related queries, or any
+            clarification regarding this policy, please contact us:
+          </p>
+
+          <ContactDetails label="Phone" />
+        </PolicySection>
+      </div>
     </PolicyShell>
   );
 }
