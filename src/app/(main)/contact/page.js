@@ -35,26 +35,31 @@ const SOCIAL_LINKS = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/company/bookmyassetss",
     icon: FaLinkedinIn,
+    iconClass: "text-[#0A66C2]",
   },
   {
     label: "Instagram",
     href: "https://www.instagram.com/bookmyassets/",
     icon: FaInstagram,
+    iconClass: "text-[#E4405F]",
   },
   {
     label: "Facebook",
     href: "https://www.facebook.com/share/1AXGEEX1M8/",
     icon: FaFacebookF,
+    iconClass: "text-[#1877F2]",
   },
   {
     label: "YouTube",
     href: "https://www.youtube.com/@BookMyAssets",
     icon: FaYoutube,
+    iconClass: "text-[#FF0000]",
   },
   {
     label: "X",
     href: "https://x.com/BookMyAssets",
     icon: FaXTwitter,
+    iconClass: "text-[#000000]",
   },
 ];
 
@@ -441,55 +446,54 @@ const ContactPage = () => {
             >
               {/* LEFT SIDE */}
               <div className="contents xl:block">
-                <div className="order-1 xl:order-none xl:pr-2">
-                  <div className="mb-4 flex items-center gap-3">
-                    <span className="h-px w-9 bg-[#ddbc69]" />
+                <div className="contents xl:block">
+  <div className="order-1 xl:order-none xl:pr-2">
+    <div className="relative isolate w-fit py-3">
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none absolute -left-5 top-1/2 -z-10
+          h-20 w-44 -translate-y-1/2 rounded-full
+          bg-[#ddbc69]/10 blur-3xl
+        "
+      />
 
-                    <span
-                      className="
-                        text-[11px]
-                        font-bold
-                        uppercase
-                        tracking-[0.28em]
-                        text-[#ddbc69]
-                      "
-                    >
-                      Contact Us
-                    </span>
-                  </div>
+      <div
+        aria-hidden="true"
+        className="mb-5 flex items-center gap-3"
+      >
+        <span className="h-px w-10 bg-[#ddbc69]/60" />
+        <span className="h-1.5 w-1.5 rotate-45 bg-[#ddbc69]" />
+        <span className="h-px w-16 bg-gradient-to-r from-[#ddbc69]/60 to-transparent" />
+      </div>
 
-                  <h1
-                    className="
-                      max-w-[620px]
-                      text-[42px]
-                      font-bold
-                      leading-[0.98]
-                      font-playfair-display
-                      tracking-[-0.045em]
-                      text-[#f5f1e8]
-                      sm:text-5xl
-                      xl:text-[58px]
-                    "
-                  >
-                    We&apos;re Here
-                    <br />
-                    To <span className="text-[#ddbc69]">Help You</span>
-                  </h1>
+      <h1
+        className="
+          max-w-[620px]
+          font-playfair-display
+          text-[42px]
+          font-bold
+          leading-[1.08]
+          tracking-[-0.045em]
+          text-[#ddbc69]
+          sm:text-5xl
+          xl:text-[58px]
+        "
+      >
+        Contact Us
+      </h1>
 
-                  <p
-                    className="
-                      mt-4
-                      max-w-xl
-                      text-[15px]
-                      leading-7
-                      text-white
-                    "
-                  >
-                    Connect with our team for expert guidance on Dholera
-                    investments, project details, bookings, documentation and
-                    site visits.
-                  </p>
-                </div>
+      <div
+        aria-hidden="true"
+        className="mt-5 flex items-center gap-2"
+      >
+        <span className="h-[3px] w-9 rounded-full bg-[#ddbc69]" />
+        <span className="h-px flex-1 bg-gradient-to-r from-[#ddbc69]/50 to-transparent" />
+        <span className="h-1 w-1 rotate-45 border border-[#ddbc69]/60" />
+      </div>
+    </div>
+  </div>
+</div>
 
                 {/* CONTACT ACTIONS */}
                 <div
@@ -662,28 +666,51 @@ const ContactPage = () => {
                     className="
                       group
                       flex
-                      w-full
                       items-center
-                      justify-center
-                      gap-2
+                      gap-4
                       rounded-2xl
-                      bg-[#ddbc69]
-                      px-5
+                      border
+                      border-[#ebe5d8]
+                      bg-white
+                      px-4
                       py-3.5
-                      text-sm
-                      font-bold
-                      text-[#0d1b2a]
-                      shadow-[0_12px_28px_rgba(221,188,105,0.3)]
+                      shadow-[0_10px_30px_rgba(13,27,42,0.045)]
                       transition
                       duration-300
                       hover:-translate-y-0.5
-                      hover:bg-[#d3ae51]
-                      hover:shadow-[0_16px_32px_rgba(221,188,105,0.4)]
+                      hover:border-[#ddbc69]
+                      hover:shadow-[0_16px_35px_rgba(13,27,42,0.09)]
                     "
                   >
-                    <FaWhatsapp className="h-[18px] w-[18px]" />
-                    Chat on WhatsApp
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                    <span
+                      className="
+                        flex
+                        h-11
+                        w-11
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-[#ddbc69]
+                      "
+                    >
+                      <FaWhatsapp
+                        className="h-[18px] w-[18px] text-black"
+                        aria-hidden="true"
+                      />
+                    </span>
+
+                    <span className="min-w-0">
+                      <span className="block text-sm text-[#75808c]">
+                        WhatsApp
+                      </span>
+
+                      <span className="mt-0.5 block text-sm font-bold text-[#0d1b2a] sm:text-[15px]">
+                        Chat on WhatsApp
+                      </span>
+                    </span>
+
+                    <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-[#8c949d] transition group-hover:text-[#bd902b]" />
                   </a>
 
                   {/* SOCIAL ICONS */}
@@ -693,7 +720,7 @@ const ContactPage = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-2.5">
-                      {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+                      {SOCIAL_LINKS.map(({ label, href, icon: Icon, iconClass }) => (
                         <a
                           key={label}
                           href={href}
@@ -721,7 +748,7 @@ const ContactPage = () => {
                               hover:bg-[#ddbc69]
                             "
                         >
-                          <Icon className="h-4 w-4" />
+                          <Icon className={`h-4 w-4 ${iconClass}`} />
                         </a>
                       ))}
                     </div>
@@ -1111,91 +1138,6 @@ const ContactPage = () => {
                     within 24 hours.
                   </p>
                 </form>
-              </div>
-            </div>
-
-            {/* QUICK HELP */}
-            <div className="mt-10 lg:mt-12">
-              <div className="mb-6 text-center">
-                <div className="mb-3 flex items-center justify-center gap-3">
-                  <span className="h-px w-8 bg-[#ddbc69]" />
-
-                  <span
-                    className="
-                      text-[12px]
-                      font-bold
-                      uppercase
-                      tracking-[0.25em]
-                      text-[#ddbc69]
-                    "
-                  >
-                    How Can We Help You?
-                  </span>
-
-                  <span className="h-px w-8 bg-[#ddbc69]" />
-                </div>
-
-                <h2
-                  className="
-                    text-3xl
-                    font-bold
-                    font-playfair-display
-                    tracking-[-0.03em]
-                    text-white
-                    sm:text-3xl
-                  "
-                >
-                  Choose a topic to get{" "}
-                  <span className="text-[#ddbc69]">quick assistance</span>
-                </h2>
-
-                <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-white">
-                  Select a category and the enquiry form will automatically use
-                  it as your subject.
-                </p>
-              </div>
-
-              <div
-                className="
-                  grid
-                  gap-3
-                  sm:grid-cols-2
-                  lg:grid-cols-3
-                  xl:grid-cols-5
-                "
-              >
-                {helpItems.map(({ icon: Icon, title }) => {
-                  const selected = formData.subject === title;
-
-                  return (
-                    <button
-                      key={title}
-                      type="button"
-                      onClick={() => chooseHelpTopic(title)}
-                      className={`group flex min-h-[92px] items-center gap-3 rounded-2xl border p-3.5 text-left shadow-[0_8px_22px_rgba(13,27,42,0.035)] transition duration-300 hover:-translate-y-1 hover:border-[#ddbc69] hover:shadow-[0_14px_28px_rgba(13,27,42,0.08)] ${
-                        selected
-                          ? "border-[#ddbc69] bg-[#fff8e6]"
-                          : "border-[#e9e3d8] bg-white"
-                      }`}
-                    >
-                      <span
-                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${
-                          selected
-                            ? "bg-[#ddbc69] text-[#0d1b2a]"
-                            : "bg-[#f5ecd4] text-[#a47d26] group-hover:bg-[#ddbc69] group-hover:text-[#0d1b2a]"
-                        }`}
-                      >
-                        <Icon className="h-[18px] w-[18px]" />
-                      </span>
-
-                      <span className="text-sm font-bold leading-5 text-[#26313c] sm:text-sm">
-                        {title}
-                      </span>
-
-                      <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-[#7f8993] transition group-hover:translate-x-1 group-hover:text-[#bd902b]" />
-                    </button>
-                  );
-                })}
               </div>
             </div>
           </div>

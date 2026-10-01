@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import logo from "@/assests/bma-transparent-website.svg";
 import dholeraBlogs from "@/assests/dholeraSIR-nav/dholera-sir-blogs-bookmyassets.webp";
 import dholeraUpdates from "@/assests/dholeraSIR-nav/dholera-sir-latest-updates-bookmyassets.webp";
+import westwynProjectImages from "@/assests/westwynProjectImages";
 
 import BookButton from "./BookVC";
 
@@ -700,7 +701,12 @@ export default function Navbar() {
 
         const data = await response.json();
 
-        setResidentialProjects(data);
+        setResidentialProjects(
+          data.map((project) => ({
+            ...project,
+            image: westwynProjectImages[project.link] || project.image,
+          })),
+        );
       } catch (err) {
         console.error(err);
 

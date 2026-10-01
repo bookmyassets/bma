@@ -16,6 +16,7 @@ import cityCenter from "@/assests/bulkLand/city-centre-cover.webp";
 import industrial from "@/assests/bulkLand/industrial-cover.webp";
 import sport from "@/assests/bulkLand/recreation-sports-map.webp";
 import knowledgeIT from "@/assests/bulkLand/knowledge-it-cover.webp";
+import westwynProjectImages from "@/assests/westwynProjectImages";
 
 const whatsappEnquiryLink = `https://wa.me/918130371647?text=${encodeURIComponent(
   "Hi, I need a call back",
@@ -446,7 +447,13 @@ export default function Navbar() {
 
         if (!response.ok) throw new Error("Failed to fetch projects");
 
-        setResidentialProjects(await response.json());
+        const projects = await response.json();
+        setResidentialProjects(
+          projects.map((project) => ({
+            ...project,
+            image: westwynProjectImages[project.link] || project.image,
+          })),
+        );
       } catch (err) {
         console.error(err);
         setError("Failed to load projects");

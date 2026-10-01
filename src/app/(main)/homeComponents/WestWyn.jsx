@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import westwynCountyImage from "@/assests/westwyn-county/westwyn-county-mob1.webp";
-import westwynEstatesImage from "@/assests/we_cover.webp";
-import westwynResidencyImage from "@/assests/residency.webp";
-import westwynCrownImage from "@/assests/residential/crown/westwyn-crown-dholera-entry-gate-desktop.webp";
+import westwynProjectImages from "@/assests/westwynProjectImages";
 
 const projects = [
   {
@@ -12,14 +9,14 @@ const projects = [
     price: "Starting from ₹10 Lakh",
     location: "1.5 km from DFC",
     href: "/dholera-residential-plots/westwyn-residency",
-    image: westwynResidencyImage,
+    image: westwynProjectImages["westwyn-residency"],
   },
   {
     name: "WestWyn Estates",
     price: "Starting from ₹11 Lakh",
     location: "State Highway 117",
     href: "/dholera-residential-plots/westwyn-estate",
-    image: westwynEstatesImage,
+    image: westwynProjectImages["westwyn-estate"],
     status: "Resale",
   },
   {
@@ -27,7 +24,7 @@ const projects = [
     price: "Resale from ₹20 Lakh",
     location: "Fedra-Pipli state highway",
     href: "/dholera-residential-plots/westwyn-county",
-    image: westwynCountyImage,
+    image: westwynProjectImages["westwyn-county"],
     status: "Resale",
   },
   {
@@ -35,7 +32,7 @@ const projects = [
     price: "Coming Soon",
     location: "8 mins from Dholera SIR",
     href: "/dholera-residential-plots/westwyn-crown",
-    image: westwynCrownImage,
+    image: westwynProjectImages["westwyn-crown"],
     status: "Coming Soon",
   },
 ];
@@ -131,7 +128,7 @@ export default function ProjectsSection() {
           className="
             mx-auto
             grid
-            max-w-[68rem]
+            max-w-[80rem]
             grid-cols-1
             gap-[clamp(1rem,2vw,1.5rem)]
             md:grid-cols-3
@@ -158,7 +155,7 @@ export default function ProjectsSection() {
               "
             >
               {/* Project image */}
-              <div className="relative aspect-[16/10] overflow-hidden bg-black">
+              <div className="relative aspect-video overflow-hidden bg-black">
                 <Image
                   src={project.image}
                   alt={project.name}

@@ -1,22 +1,39 @@
 "use client";
+
 import { useState, useEffect, useRef } from "react";
-import { FaUser, FaEnvelope, FaPhoneAlt, FaBriefcase, FaClock } from "react-icons/fa";
+
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  Check,
+  ChevronDown,
+  Clock3,
+  Mail,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  UserRound,
+} from "lucide-react";
 
 export default function ChannelPartnerForm() {
   const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
     email: "",
     profession: "",
-    experience: ""
+    experience: "",
   });
+
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+
   const recaptchaRef = useRef(null);
+
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   const professionOptions = [
@@ -27,31 +44,38 @@ export default function ChannelPartnerForm() {
     "Real Estate Companies",
     "Referral Partners",
     "Women Entrepreneurs",
-    "Individuals Interested in Real Estate"
+    "Individuals Interested in Real Estate",
   ];
 
   const experienceOptions = [
     "0-1 Years",
-    "1-3 Years", 
+    "1-3 Years",
     "3-5 Years",
     "5-10 Years",
-    "10+ Years"
+    "10+ Years",
   ];
 
   useEffect(() => {
-    // Load reCAPTCHA script
     const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
+      if (
+        typeof window !== "undefined" &&
+        !window.grecaptcha &&
+        siteKey
+      ) {
         try {
           const script = document.createElement("script");
+
           script.src = "https://www.google.com/recaptcha/api.js";
           script.async = true;
           script.defer = true;
+
           script.onload = () => setRecaptchaLoaded(true);
+
           script.onerror = () => {
             console.error("Failed to load reCAPTCHA script");
             setRecaptchaLoaded(true);
           };
+
           document.head.appendChild(script);
         } catch (err) {
           console.error("reCAPTCHA script loading error:", err);
@@ -64,24 +88,38 @@ export default function ChannelPartnerForm() {
 
     loadRecaptcha();
 
-    // Get submission count from localStorage
     if (typeof window !== "undefined") {
-      const storedCount = parseInt(localStorage.getItem("channelPartnerSubmissionCount") || "0", 10);
-      const lastSubmissionTime = parseInt(localStorage.getItem("channelPartnerLastSubmissionTime") || "0", 10);
-      
-      // Check if 24 hours have passed since the last submission
+      const storedCount = parseInt(
+        localStorage.getItem("channelPartnerSubmissionCount") || "0",
+        10
+      );
+
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("channelPartnerLastSubmissionTime") || "0",
+        10
+      );
+
       if (lastSubmissionTime) {
         const timeDifference = Date.now() - lastSubmissionTime;
-        const hoursPassed = timeDifference / (1000 * 60 * 60);
+
+        const hoursPassed =
+          timeDifference / (1000 * 60 * 60);
 
         if (hoursPassed >= 24) {
-          // Reset submission count after 24 hours
           setSubmissionCount(0);
-          localStorage.setItem("channelPartnerSubmissionCount", "0");
-          localStorage.setItem("channelPartnerLastSubmissionTime", Date.now().toString());
+
+          localStorage.setItem(
+            "channelPartnerSubmissionCount",
+            "0"
+          );
+
+          localStorage.setItem(
+            "channelPartnerLastSubmissionTime",
+            Date.now().toString()
+          );
         } else {
           setSubmissionCount(storedCount);
-          // Check if limit reached
+
           if (storedCount >= 20) {
             setIsDisabled(true);
           }
@@ -91,7 +129,6 @@ export default function ChannelPartnerForm() {
       }
     }
 
-    // Cleanup function
     return () => {
       if (window.grecaptcha && recaptchaRef.current) {
         try {
@@ -105,32 +142,50 @@ export default function ChannelPartnerForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-    setErrorMessage(""); // Clear error messages on input change
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    setErrorMessage("");
   };
 
   const validateForm = () => {
-    if (!formData.fullName.trim() || !formData.phone.trim() || !formData.email.trim() || !formData.profession || !formData.experience) {
+    if (
+      !formData.fullName.trim() ||
+      !formData.phone.trim() ||
+      !formData.email.trim() ||
+      !formData.profession ||
+      !formData.experience
+    ) {
       setErrorMessage("Please fill in all required fields");
       return false;
     }
 
-    // Email validation
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       setErrorMessage("Please enter a valid email address");
       return false;
     }
 
-    // Phone validation - accept various formats (10-15 digits)
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
-      setErrorMessage("Please enter a valid phone number (10-15 digits)");
+    if (
+      !/^\d{10,15}$/.test(
+        formData.phone.replace(/\D/g, "")
+      )
+    ) {
+      setErrorMessage(
+        "Please enter a valid phone number (10-15 digits)"
+      );
       return false;
     }
 
-    // Check submission limits
     if (submissionCount >= 20) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours."
+      );
+
       setIsDisabled(true);
+
       return false;
     }
 
@@ -139,84 +194,107 @@ export default function ChannelPartnerForm() {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      // API Request using the new endpoint and format
-      const response = await fetch(
-        "/api/submit-form",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              email: formData.email,
-              source: "BookMyAssets Channel Partner",
-              profession: formData.profession,
-              experience: formData.experience
-            },
-            source: "Channel Partner Program",
-            tags: ["Channel Partner", "Business Partner", "Broker Program"],
-            recaptchaToken: token,
-          }),
-        }
-      );
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
 
-      // Store response text before parsing
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            source: "BookMyAssets Channel Partner",
+            profession: formData.profession,
+            experience: formData.experience,
+          },
+
+          source: "Channel Partner Program",
+
+          tags: [
+            "Channel Partner",
+            "Business Partner",
+            "Broker Program",
+          ],
+
+          recaptchaToken: token,
+        }),
+      });
+
       const responseText = await response.text();
+
       console.log("TeleCRM Response:", responseText);
 
-      // Check response status and handle accordingly
       if (response.ok) {
         if (
           responseText === "OK" ||
           responseText.toLowerCase().includes("success")
         ) {
-          // Success handling
-          setFormData({ 
-            fullName: "", 
-            phone: "", 
-            email: "", 
-            profession: "", 
-            experience: "" 
+          setFormData({
+            fullName: "",
+            phone: "",
+            email: "",
+            profession: "",
+            experience: "",
           });
+
           setShowPopup(true);
 
-          // Update submission count
           const newCount = submissionCount + 1;
+
           setSubmissionCount(newCount);
+
           if (typeof window !== "undefined") {
-            localStorage.setItem("channelPartnerSubmissionCount", newCount.toString());
-            localStorage.setItem("channelPartnerLastSubmissionTime", Date.now().toString());
+            localStorage.setItem(
+              "channelPartnerSubmissionCount",
+              newCount.toString()
+            );
+
+            localStorage.setItem(
+              "channelPartnerLastSubmissionTime",
+              Date.now().toString()
+            );
           }
 
-          // Auto-hide popup after 5 seconds
           setTimeout(() => {
             setShowPopup(false);
           }, 5000);
-
         } else {
           console.log("Response Text:", responseText);
-          setErrorMessage("Submission received but with unexpected response");
+
+          setErrorMessage(
+            "Submission received but with unexpected response"
+          );
         }
       } else {
         console.error("Server Error:", responseText);
-        throw new Error(responseText || "Submission failed");
-      }
 
+        throw new Error(
+          responseText || "Submission failed"
+        );
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage(`Error submitting form: ${error.message}`);
+
+      setErrorMessage(
+        `Error submitting form: ${error.message}`
+      );
     } finally {
       setIsLoading(false);
-      
-      // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaRef.current) {
+
+      if (
+        window.grecaptcha &&
+        recaptchaRef.current
+      ) {
         try {
           window.grecaptcha.reset();
         } catch (err) {
-          console.error("Error resetting reCAPTCHA:", err);
+          console.error(
+            "Error resetting reCAPTCHA:",
+            err
+          );
         }
       }
     }
@@ -224,6 +302,7 @@ export default function ChannelPartnerForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setIsLoading(true);
     setErrorMessage("");
 
@@ -232,164 +311,595 @@ export default function ChannelPartnerForm() {
       return;
     }
 
-    if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+    if (
+      !recaptchaLoaded ||
+      !window.grecaptcha
+    ) {
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page."
+      );
+
       setIsLoading(false);
+
       return;
     }
 
-    // Render reCAPTCHA if not already rendered
     if (!recaptchaRef.current.innerHTML) {
       try {
-        window.grecaptcha.render(recaptchaRef.current, {
-          sitekey: siteKey,
-          callback: onRecaptchaSuccess,
-          theme: "light",
-          size: "compact"
-        });
+        window.grecaptcha.render(
+          recaptchaRef.current,
+          {
+            sitekey: siteKey,
+            callback: onRecaptchaSuccess,
+            theme: "dark",
+            size: "compact",
+          }
+        );
       } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
+        console.error(
+          "Error rendering reCAPTCHA:",
+          error
+        );
+
+        setErrorMessage(
+          "Error with verification. Please try again."
+        );
+
         setIsLoading(false);
       }
     } else {
-      // Execute existing reCAPTCHA
       window.grecaptcha.execute();
     }
   };
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-2xl border border-gray-200 sticky top-8">
-      <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-        Channel Partner Registration Form
-      </h3>
+    <div className="relative overflow-hidden">
+      {/* ambient color */}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute -right-24 -top-24
+          h-56 w-56
+          rounded-full
+          bg-violet-500/[0.08]
+          blur-[90px]
+        "
+      />
 
-      {showPopup && (
-        <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg text-center">
-          <div className="flex items-center justify-center mb-2">
-            <svg className="w-6 h-6 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="font-semibold">Thank You!</span>
-          </div>
-          <p className="text-sm">
-            Your application has been submitted successfully. Our team will contact you shortly.
-          </p>
-        </div>
-      )}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute -bottom-24 -left-24
+          h-56 w-56
+          rounded-full
+          bg-sky-500/[0.07]
+          blur-[90px]
+        "
+      />
 
-      {isDisabled ? (
-        <div className="text-center py-8">
-          <p className="text-red-600 font-semibold">
-            You have reached the maximum submission limit. Try again after 24 hours.
-          </p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {errorMessage && (
-            <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
-              {errorMessage}
+      <div className="relative">
+        {/* ===================================================
+            FORM HEADER
+        =================================================== */}
+
+        <div className="mb-7 border-b border-white/[0.08] pb-6">
+          <div className="flex items-start justify-between gap-5">
+            <div>
+              <div className="mb-3 flex items-center gap-2">
+                <Sparkles
+                  size={20}
+                  strokeWidth={1.7}
+                  className="text-violet-300"
+                />
+
+                <span className="text-[15px] font-semibold uppercase tracking-[0.22em] text-violet-300">
+                  Application
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-medium font-playfair-display tracking-[-0.03em] text-white sm:text-3xl">
+                Partner registration
+              </h3>
+
             </div>
-          )}
 
-          {/* Full Name */}
-          <div className="relative">
-            <FaUser className="absolute left-4 top-4 text-gray-500" />
-            <input
-              name="fullName"
-              placeholder="Full Name *"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-              className="w-full p-4 pl-12 rounded-xl border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition shadow-sm"
-            />
-          </div>
-
-          {/* Phone */}
-          <div className="relative">
-            <FaPhoneAlt className="absolute left-4 top-4 text-gray-500" />
-            <input
-              name="phone"
-              type="tel"
-              placeholder="Phone Number *"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="w-full p-4 pl-12 rounded-xl border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition shadow-sm"
-            />
-          </div>
-
-          {/* Email */}
-          <div className="relative">
-            <FaEnvelope className="absolute left-4 top-4 text-gray-500" />
-            <input
-              name="email"
-              type="email"
-              placeholder="Email ID *"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full p-4 pl-12 rounded-xl border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition shadow-sm"
-            />
-          </div>
-
-          {/* Profession */}
-          <div className="relative">
-            <FaBriefcase className="absolute left-4 top-4 text-gray-500 z-10" />
-            <select
-              name="profession"
-              value={formData.profession}
-              onChange={handleChange}
-              required
-              className="w-full p-4 pl-12 rounded-xl border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition shadow-sm appearance-none bg-white"
+            <div
+              className="
+                hidden
+                h-11 w-11
+                shrink-0
+                items-center
+                justify-center
+                rounded-2xl
+                border border-emerald-400/20
+                bg-emerald-400/10
+                sm:flex
+              "
             >
-              <option value="">What Best Describes You? *</option>
-              {professionOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+              <ShieldCheck
+                size={20}
+                strokeWidth={1.6}
+                className="text-emerald-300"
+              />
+            </div>
           </div>
+        </div>
 
-          {/* Experience */}
-          <div className="relative">
-            <FaClock className="absolute left-4 top-4 text-gray-500 z-10" />
-            <select
-              name="experience"
-              value={formData.experience}
-              onChange={handleChange}
-              required
-              className="w-full p-4 pl-12 rounded-xl border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition shadow-sm appearance-none bg-white"
-            >
-              <option value="">Years of Experience *</option>
-              {experienceOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
+        {/* ===================================================
+            SUCCESS
+        =================================================== */}
 
-          {/* reCAPTCHA */}
-          <div className="flex justify-center">
-            <div ref={recaptchaRef}></div>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isLoading || isDisabled || !recaptchaLoaded}
-            className={`w-full p-4 text-white text-lg font-semibold rounded-xl shadow-md transition-all duration-300 ${
-              isLoading || isDisabled || !recaptchaLoaded
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-[#be9233] hover:bg-[#dbaf51] hover:shadow-lg active:scale-95"
-            }`}
+        {showPopup && (
+          <div
+            className="
+              mb-6
+              flex items-start gap-3
+              rounded-2xl
+              border border-emerald-400/20
+              bg-emerald-400/[0.08]
+              p-4
+            "
           >
-            {isLoading ? "Submitting..." : "Join the Partner Program"}
-          </button>
-        </form>
-      )}
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-400/15">
+              <Check
+                size={17}
+                strokeWidth={2}
+                className="text-emerald-300"
+              />
+            </div>
+
+            <div>
+              <p className="text-sm font-semibold text-emerald-200">
+                Application submitted
+              </p>
+
+              <p className="mt-1 text-sm leading-6 text-white/65">
+                Thank you. Our team will contact you
+                shortly.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* ===================================================
+            DISABLED STATE
+        =================================================== */}
+
+        {isDisabled ? (
+          <div
+            className="
+              rounded-2xl
+              border border-red-400/20
+              bg-red-400/[0.07]
+              p-5
+              text-center
+            "
+          >
+            <p className="text-sm font-medium leading-6 text-red-300">
+              You have reached the maximum submission
+              limit. Try again after 24 hours.
+            </p>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5"
+          >
+            {/* error */}
+            {errorMessage && (
+              <div
+                className="
+                  rounded-xl
+                  border border-red-400/20
+                  bg-red-400/[0.07]
+                  px-4 py-3
+                  text-sm leading-6
+                  text-red-300
+                "
+              >
+                {errorMessage}
+              </div>
+            )}
+
+            {/* ===============================================
+                CONTACT INFORMATION
+            =============================================== */}
+
+            <div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {/* NAME */}
+                <FormField
+                  icon={UserRound}
+                  iconColor="text-sky-300"
+                  iconBg="bg-sky-400/10"
+                  iconBorder="border-sky-400/20"
+                  label="Full name"
+                >
+                  <input
+                    name="fullName"
+                    type="text"
+                    placeholder="Enter your full name"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    className={inputClass}
+                  />
+                </FormField>
+
+                {/* PHONE */}
+                <FormField
+                  icon={Phone}
+                  iconColor="text-emerald-300"
+                  iconBg="bg-emerald-400/10"
+                  iconBorder="border-emerald-400/20"
+                  label="Phone number"
+                >
+                  <input
+                    name="phone"
+                    type="tel"
+                    placeholder="Enter phone number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className={inputClass}
+                  />
+                </FormField>
+              </div>
+
+              {/* EMAIL FULL WIDTH */}
+              <div className="mt-4">
+                <FormField
+                  icon={Mail}
+                  iconColor="text-violet-300"
+                  iconBg="bg-violet-400/10"
+                  iconBorder="border-violet-400/20"
+                  label="Email address"
+                >
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className={inputClass}
+                  />
+                </FormField>
+              </div>
+            </div>
+
+            {/* ===============================================
+                PROFESSIONAL INFORMATION
+            =============================================== */}
+
+            <div className="pt-2">
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {/* PROFESSION */}
+                <FormField
+                  icon={BriefcaseBusiness}
+                  iconColor="text-orange-300"
+                  iconBg="bg-orange-400/10"
+                  iconBorder="border-orange-400/20"
+                  label="Profession"
+                >
+                  <div className="relative">
+                    <select
+                      name="profession"
+                      value={formData.profession}
+                      onChange={handleChange}
+                      required
+                      className={`${inputClass} appearance-none pr-11`}
+                    >
+                      <option
+                        value=""
+                        className="bg-[#111113]"
+                      >
+                        Select profession
+                      </option>
+
+                      {professionOptions.map(
+                        (option) => (
+                          <option
+                            key={option}
+                            value={option}
+                            className="bg-[#111113]"
+                          >
+                            {option}
+                          </option>
+                        )
+                      )}
+                    </select>
+
+                    <ChevronDown
+                      size={16}
+                      className="
+                        pointer-events-none
+                        absolute right-4 top-1/2
+                        -translate-y-1/2
+                        text-white/40
+                      "
+                    />
+                  </div>
+                </FormField>
+
+                {/* EXPERIENCE */}
+                <FormField
+                  icon={Clock3}
+                  iconColor="text-pink-300"
+                  iconBg="bg-pink-400/10"
+                  iconBorder="border-pink-400/20"
+                  label="Experience"
+                >
+                  <div className="relative">
+                    <select
+                      name="experience"
+                      value={formData.experience}
+                      onChange={handleChange}
+                      required
+                      className={`${inputClass} appearance-none pr-11`}
+                    >
+                      <option
+                        value=""
+                        className="bg-[#111113]"
+                      >
+                        Select experience
+                      </option>
+
+                      {experienceOptions.map(
+                        (option) => (
+                          <option
+                            key={option}
+                            value={option}
+                            className="bg-[#111113]"
+                          >
+                            {option}
+                          </option>
+                        )
+                      )}
+                    </select>
+
+                    <ChevronDown
+                      size={16}
+                      className="
+                        pointer-events-none
+                        absolute right-4 top-1/2
+                        -translate-y-1/2
+                        text-white/40
+                      "
+                    />
+                  </div>
+                </FormField>
+              </div>
+            </div>
+
+            {/* ===============================================
+                SECURITY
+            =============================================== */}
+
+            <div className="pt-2">
+              <div
+                className="
+                  flex items-center justify-between gap-4
+                  rounded-2xl
+                  border border-white/[0.08]
+                  bg-white/[0.025]
+                  px-4 py-3
+                "
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-400/10">
+                    <ShieldCheck
+                      size={16}
+                      className="text-emerald-300"
+                    />
+                  </div>
+
+                  <div>
+                    <p className="text-md font-medium text-white">
+                      Secure submission
+                    </p>
+
+                    <p className="mt-0.5 text-[15px] text-white">
+                      Protected by verification
+                    </p>
+                  </div>
+                </div>
+
+                <span
+                  className={`h-2 w-2 rounded-full ${
+                    recaptchaLoaded
+                      ? "bg-emerald-400"
+                      : "bg-amber-400"
+                  }`}
+                />
+              </div>
+
+              <div className="mt-4 flex justify-center overflow-hidden">
+                <div ref={recaptchaRef} />
+              </div>
+            </div>
+
+            {/* ===============================================
+                SUBMIT
+            =============================================== */}
+
+            <button
+              type="submit"
+              disabled={
+                isLoading ||
+                isDisabled ||
+                !recaptchaLoaded
+              }
+              className={`
+                group
+                relative
+                mt-2
+                flex
+                min-h-14
+                w-full
+                items-center
+                justify-center
+                gap-3
+                overflow-hidden
+                px-6 py-4
+                text-sm
+                font-semibold
+                transition-all
+                duration-300
+
+                ${
+                  isLoading ||
+                  isDisabled ||
+                  !recaptchaLoaded
+                    ? `
+                      cursor-not-allowed
+                      bg-white/[0.08]
+                      text-white/35
+                    `
+                    : `
+                      bg-[#ddbc69]
+                      text-[#080808]
+                      shadow-[0_14px_40px_rgba(221,188,105,0.12)]
+                      hover:-translate-y-0.5
+                      hover:bg-[#ecd17e]
+                      hover:shadow-[0_18px_48px_rgba(221,188,105,0.18)]
+                    `
+                }
+              `}
+            >
+              {!isLoading &&
+                !isDisabled &&
+                recaptchaLoaded && (
+                  <span
+                    aria-hidden="true"
+                    className="
+                      absolute inset-y-0
+                      -left-1/2
+                      w-1/3
+                      skew-x-[-20deg]
+                      bg-white/20
+                      transition-all
+                      duration-700
+                      group-hover:left-[120%]
+                    "
+                  />
+                )}
+
+              <span className="relative">
+                {isLoading
+                  ? "Submitting..."
+                  : "Join the Partner Program"}
+              </span>
+
+              {!isLoading && (
+                <ArrowRight
+                  size={17}
+                  className="relative transition-transform group-hover:translate-x-1"
+                />
+              )}
+            </button>
+
+            <p className="text-center text-[15px] leading-5 text-white">
+              By submitting this form, you agree to be
+              contacted regarding the Channel Partner
+              Program.
+            </p>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
+
+/* =========================================================
+   SHARED FIELD
+========================================================= */
+
+function FormField({
+  icon: Icon,
+  iconColor,
+  iconBg,
+  iconBorder,
+  label,
+  children,
+}) {
+  return (
+    <label className="block">
+      <span className="mb-2 block text-sm font-medium uppercase tracking-[0.12em] text-white lg:text-base">
+        {label}
+        <span className="ml-1 text-[#ddbc69]">*</span>
+      </span>
+
+      <div
+        className="
+          group
+          flex
+          items-center
+          gap-3
+          rounded-2xl
+          border border-white/[0.09]
+          bg-[#0c0c0e]
+          px-3
+          transition-all
+          duration-200
+
+          focus-within:border-[#ddbc69]/45
+          focus-within:bg-[#101011]
+          focus-within:shadow-[0_0_0_3px_rgba(221,188,105,0.045)]
+        "
+      >
+        <div
+          className={`
+            flex h-9 w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            border
+            ${iconBg}
+            ${iconBorder}
+          `}
+        >
+          <Icon
+            size={16}
+            strokeWidth={1.7}
+            className={iconColor}
+          />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          {children}
+        </div>
+      </div>
+    </label>
+  );
+}
+
+/* =========================================================
+   INPUT STYLE
+========================================================= */
+
+const inputClass = `
+  min-h-[54px]
+  w-full
+  border-0
+  bg-transparent
+  px-1
+  py-3
+  text-base
+  lg:text-lg
+  text-white
+  outline-none
+
+  placeholder:text-white/30
+
+  focus:outline-none
+  focus:ring-0
+
+  disabled:cursor-not-allowed
+  disabled:opacity-50
+`;

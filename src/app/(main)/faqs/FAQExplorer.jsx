@@ -1,290 +1,1166 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import {
   Building2,
   ChevronDown,
-  FileCheck2,
+  CircleHelp,
+  Globe2,
   Handshake,
   MapPinned,
   Search,
   X,
 } from "lucide-react";
 
-const topicIcons = {
-  general: FileCheck2,
-  "dholera-investment": MapPinned,
-  projects: Building2,
-  "nri-corner": Handshake,
-  "channel-partner": Handshake,
+import {
+  useMemo,
+  useState,
+} from "react";
+
+/* =========================================================
+   CATEGORY VISUAL CONFIG
+========================================================= */
+
+const categoryDesign = {
+  general: {
+    icon: CircleHelp,
+
+    color: "text-amber-300",
+
+    bg: "bg-amber-400/10",
+
+    border: "border-amber-400/20",
+
+    activeBorder: "border-amber-400/40",
+
+    glow: "bg-amber-400/10",
+
+    numberColor: "text-amber-300",
+  },
+
+  "dholera-investment": {
+    icon: Building2,
+
+    color: "text-cyan-300",
+
+    bg: "bg-cyan-400/10",
+
+    border: "border-cyan-400/20",
+
+    activeBorder: "border-cyan-400/40",
+
+    glow: "bg-cyan-400/10",
+
+    numberColor: "text-cyan-300",
+  },
+
+  projects: {
+    icon: MapPinned,
+
+    color: "text-violet-300",
+
+    bg: "bg-violet-400/10",
+
+    border: "border-violet-400/20",
+
+    activeBorder: "border-violet-400/40",
+
+    glow: "bg-violet-400/10",
+
+    numberColor: "text-violet-300",
+  },
+
+  "nri-corner": {
+    icon: Globe2,
+
+    color: "text-emerald-300",
+
+    bg: "bg-emerald-400/10",
+
+    border: "border-emerald-400/20",
+
+    activeBorder: "border-emerald-400/40",
+
+    glow: "bg-emerald-400/10",
+
+    numberColor: "text-emerald-300",
+  },
+
+  "channel-partner": {
+    icon: Handshake,
+
+    color: "text-orange-300",
+
+    bg: "bg-orange-400/10",
+
+    border: "border-orange-400/20",
+
+    activeBorder: "border-orange-400/40",
+
+    glow: "bg-orange-400/10",
+
+    numberColor: "text-orange-300",
+  },
 };
 
-export default function FAQExplorer({ groups }) {
-  const [activeTopic, setActiveTopic] = useState("all");
-  const [query, setQuery] = useState("");
-  const [openQuestion, setOpenQuestion] = useState(null);
+/* =========================================================
+   PROJECT FILTERS
+========================================================= */
 
-  const filteredGroups = useMemo(() => {
-    const searchTerm = query.trim().toLowerCase();
+const projectFilters = [
+  {
+    id: "all",
+    label: "All Projects",
+  },
+
+  {
+    id: "county",
+    label: "WestWyn County",
+  },
+
+  {
+    id: "estate",
+    label: "WestWyn Estates",
+  },
+
+  {
+    id: "residency",
+    label: "WestWyn Residency",
+  },
+];
+
+function matchesProjectFilter(faq, filter) {
+  if (filter === "all") {
+    return true;
+  }
+
+  const content = `${faq.question} ${faq.answer}`.toLowerCase();
+
+  if (filter === "county") {
+    return content.includes("westwyn county");
+  }
+
+  if (filter === "estate") {
+    return (
+      content.includes("westwyn estate") ||
+      content.includes("westwyn estates")
+    );
+  }
+
+  if (filter === "residency") {
+    return content.includes("westwyn residency");
+  }
+
+  return true;
+}
+
+/* =========================================================
+   COMPONENT
+========================================================= */
+
+export default function FAQExplorer({
+  groups,
+}) {
+  const [activeGroupId, setActiveGroupId] =
+    useState(groups[0]?.id || "");
+
+  const [searchQuery, setSearchQuery] =
+    useState("");
+
+  const [projectFilter, setProjectFilter] =
+    useState("all");
+
+  const activeGroup =
+    groups.find(
+      (group) => group.id === activeGroupId
+    ) || groups[0];
+
+  const design =
+    categoryDesign[activeGroup.id] ||
+    categoryDesign.general;
+
+  const ActiveIcon = design.icon;
+
+  /* =======================================================
+     SEARCH RESULTS
+  ======================================================= */
+
+  const searchResults = useMemo(() => {
+    const query = searchQuery
+      .trim()
+      .toLowerCase();
+
+    if (!query) {
+      return [];
+    }
 
     return groups
-      .filter((group) => activeTopic === "all" || group.id === activeTopic)
       .map((group) => ({
         ...group,
-        items: group.items.filter((item) => {
-          if (!searchTerm) return true;
 
-          return `${item.question} ${item.answer}`
-            .toLowerCase()
-            .includes(searchTerm);
-        }),
+        items: group.items.filter(
+          (faq) =>
+            faq.question
+              .toLowerCase()
+              .includes(query) ||
+            faq.answer
+              .toLowerCase()
+              .includes(query)
+        ),
       }))
-      .filter((group) => group.items.length > 0);
-  }, [activeTopic, groups, query]);
+      .filter(
+        (group) => group.items.length > 0
+      );
+  }, [groups, searchQuery]);
 
-  const totalQuestions = groups.reduce(
-    (total, group) => total + group.items.length,
-    0,
-  );
-  const visibleQuestions = filteredGroups.reduce(
-    (total, group) => total + group.items.length,
-    0,
-  );
+  /* =======================================================
+     ACTIVE FAQS
+  ======================================================= */
+
+  const activeItems = useMemo(() => {
+    if (!activeGroup) {
+      return [];
+    }
+
+    if (
+      activeGroup.id === "projects"
+    ) {
+      return activeGroup.items.filter(
+        (faq) =>
+          matchesProjectFilter(
+            faq,
+            projectFilter
+          )
+      );
+    }
+
+    return activeGroup.items;
+  }, [
+    activeGroup,
+    projectFilter,
+  ]);
+
+  const isSearching =
+    searchQuery.trim().length > 0;
+
+  const handleCategoryChange = (id) => {
+    setActiveGroupId(id);
+
+    setSearchQuery("");
+
+    setProjectFilter("all");
+  };
 
   return (
     <section
-      id="faq-directory"
-      aria-labelledby="faq-directory-title"
-      className="w-full overflow-x-clip px-3 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
-    >
-      <div className="mx-auto w-full min-w-0 max-w-7xl">
-        <div className="grid w-full min-w-0 gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[19rem_minmax(0,1fr)]">
-          <aside className="min-w-0 max-w-full lg:sticky lg:top-28 lg:self-start">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ddbc69]">
-              Browse by topic
-            </p>
-            <div
-              className="mt-4 flex max-w-full gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible"
-              aria-label="FAQ topics"
-            >
-              <button
-                type="button"
-                onClick={() => setActiveTopic("all")}
-                aria-pressed={activeTopic === "all"}
-                className={`flex min-h-12 shrink-0 items-center justify-between gap-4 rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors lg:w-full ${
-                  activeTopic === "all"
-                    ? "border-[#ddbc69]/60 bg-[#ddbc69] text-black"
-                    : "border-white/10 bg-white/[0.035] text-white/70 hover:border-white/25 hover:text-white"
-                }`}
-              >
-                <span>All questions</span>
-                <span
-                  className={`rounded-full px-2 py-0.5 text-xs ${
-                    activeTopic === "all" ? "bg-black/10" : "bg-white/5"
-                  }`}
-                >
-                  {totalQuestions}
-                </span>
-              </button>
+      className="
+        relative
+        border-b
+        border-white/[0.08]
+        bg-[#08080a]
+        px-5
+        py-16
 
+        sm:px-8
+        sm:py-20
+
+        lg:px-10
+        lg:py-28
+      "
+    >
+      <div className="mx-auto max-w-7xl">
+        {/* ===================================================
+            SECTION HEADER
+        =================================================== */}
+
+        <div
+          className="
+            mb-10
+            grid
+            gap-6
+
+            lg:grid-cols-[1fr_auto]
+            lg:items-end
+          "
+        >
+          <div className="max-w-3xl">
+            <p
+              className="
+                text-[15px]
+                font-semibold
+                uppercase
+                tracking-[0.24em]
+                text-white
+              "
+            >
+              Explore the Knowledge Centre
+            </p>
+
+            <h2
+              className="
+                mt-3
+                font-playfair-display
+                text-[clamp(2.2rem,4.5vw,4rem)]
+                font-medium
+                leading-[1.05]
+                tracking-[-0.04em]
+                text-[#ddbc69]
+              "
+            >
+              Find the answer you need.
+            </h2>
+          </div>
+
+        </div>
+
+        {/* ===================================================
+            REAL SEARCH
+        =================================================== */}
+
+        <div
+          className="
+            relative
+            z-20
+            mb-10
+            flex
+            min-h-[58px]
+            items-center
+            gap-3
+            rounded-2xl
+            border
+            border-white/[0.1]
+            bg-[#0d0d10]
+            px-3
+            shadow-[0_20px_60px_rgba(0,0,0,0.18)]
+
+            focus-within:border-[#ddbc69]/40
+          "
+        >
+          <div
+            className="
+              flex
+              h-9
+              w-9
+              shrink-0
+              items-center
+              justify-center
+              rounded-xl
+              border
+              border-violet-400/20
+              bg-violet-400/10
+            "
+          >
+            <Search
+              size={17}
+              className="text-violet-300"
+            />
+          </div>
+
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(event) =>
+              setSearchQuery(
+                event.target.value
+              )
+            }
+            placeholder="Search registry, NOC, projects, prices, NRI..."
+            className="
+              min-w-0
+              flex-1
+              bg-transparent
+              py-4
+              text-sm
+              text-white
+              outline-none
+
+              placeholder:text-white/30
+
+              sm:text-base
+            "
+          />
+
+          {searchQuery ? (
+            <button
+              type="button"
+              aria-label="Clear search"
+              onClick={() =>
+                setSearchQuery("")
+              }
+              className="
+                flex
+                h-8
+                w-8
+                shrink-0
+                items-center
+                justify-center
+                rounded-lg
+                text-white/40
+                transition-colors
+
+                hover:bg-white/[0.06]
+                hover:text-white
+              "
+            >
+              <X size={16} />
+            </button>
+          ) : null}
+        </div>
+
+        {/* ===================================================
+            SEARCH MODE
+        =================================================== */}
+
+        {isSearching ? (
+          <SearchResults
+            groups={searchResults}
+            query={searchQuery}
+          />
+        ) : (
+          <>
+            {/* ===============================================
+                MOBILE CATEGORY GRID
+            =============================================== */}
+
+            <div
+              className="
+                mb-10
+                grid
+                grid-cols-2
+                gap-2
+
+                lg:hidden
+              "
+            >
               {groups.map((group) => {
-                const Icon = topicIcons[group.id] || Building2;
-                const isActive = activeTopic === group.id;
+                const itemDesign =
+                  categoryDesign[group.id] ||
+                  categoryDesign.general;
+
+                const Icon =
+                  itemDesign.icon;
+
+                const active =
+                  group.id ===
+                  activeGroupId;
 
                 return (
                   <button
-                    type="button"
                     key={group.id}
-                    onClick={() => setActiveTopic(group.id)}
-                    aria-pressed={isActive}
-                    className={`flex min-h-12 shrink-0 items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors lg:w-full ${
-                      isActive
-                        ? "border-[#ddbc69]/60 bg-[#ddbc69] text-black"
-                        : "border-white/10 bg-white/[0.035] text-white/70 hover:border-white/25 hover:text-white"
-                    }`}
+                    type="button"
+                    onClick={() =>
+                      handleCategoryChange(
+                        group.id
+                      )
+                    }
+                    className={`
+                      flex
+                      min-h-[88px]
+                      items-start
+                      gap-3
+                      rounded-2xl
+                      border
+                      p-3
+                      text-left
+                      transition-all
+
+                      ${
+                        active
+                          ? `
+                            bg-white/[0.055]
+                            ${itemDesign.activeBorder}
+                          `
+                          : `
+                            border-white/[0.07]
+                            bg-white/[0.02]
+                          `
+                      }
+                    `}
                   >
-                    <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-                    <span>{group.shortLabel}</span>
+                    <div
+                      className={`
+                        flex
+                        h-9
+                        w-9
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-xl
+                        border
+
+                        ${itemDesign.bg}
+                        ${itemDesign.border}
+                      `}
+                    >
+                      <Icon
+                        size={16}
+                        className={
+                          itemDesign.color
+                        }
+                      />
+                    </div>
+
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium leading-5 text-white">
+                        {group.shortLabel ||
+                          group.label}
+                      </p>
+
+                      <p className="mt-1 text-[10px] text-white/35">
+                        {group.items.length}{" "}
+                        answers
+                      </p>
+                    </div>
                   </button>
                 );
               })}
             </div>
 
-            <div className="mt-6 hidden rounded-2xl border border-white/10 bg-[#0d1014] p-5 text-sm leading-6 text-white/50 lg:block">
-              <p className="font-semibold text-white/85">A useful first step</p>
-              <p className="mt-2">
-                Use these answers to prepare better questions for the seller,
-                project team and your independent legal adviser.
-              </p>
-            </div>
-          </aside>
+            {/* ===============================================
+                DESKTOP / CONTENT GRID
+            =============================================== */}
 
-          <div className="w-full min-w-0">
-            <div className="flex flex-col gap-5 border-b border-white/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
-              <div className="min-w-0">
-                <p className="text-sm text-[#ddbc69]">Frequently asked</p>
-                <h2
-                  id="faq-directory-title"
-                  className="mt-2 text-[clamp(1.75rem,4vw,3rem)] font-bold tracking-[-0.03em]"
-                >
-                  Find the answer you need
-                </h2>
-              </div>
-              <p
-                className="text-sm text-white/45"
-                role="status"
-                aria-live="polite"
-              >
-                Showing {visibleQuestions} of {totalQuestions} answers
-              </p>
-            </div>
+            <div
+              className="
+                grid
+                gap-10
 
-            <div className="relative mt-7 w-full min-w-0">
-              <label htmlFor="faq-search" className="sr-only">
-                Search frequently asked questions
-              </label>
-              <Search
-                className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-white/35"
-                aria-hidden="true"
-              />
-              <input
-                id="faq-search"
-                type="search"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search documents, registry, RERA, site visit…"
-                className="min-h-14 w-full rounded-2xl border border-white/10 bg-[#0d1014] py-3 pl-12 pr-12 text-base text-white outline-none transition placeholder:text-white/30 focus:border-[#ddbc69]/60 focus:ring-4 focus:ring-[#ddbc69]/10 [&::-webkit-search-cancel-button]:appearance-none"
-              />
-              {query && (
-                <button
-                  type="button"
-                  onClick={() => setQuery("")}
-                  aria-label="Clear FAQ search"
-                  className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-white/50 transition-colors hover:bg-white/5 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
-                >
-                  <X className="h-4 w-4" aria-hidden="true" />
-                </button>
-              )}
-            </div>
+                lg:grid-cols-[280px_minmax(0,1fr)]
+                lg:gap-16
 
-            {filteredGroups.length > 0 ? (
-              <div className="mt-10 min-w-0 space-y-12">
-                {filteredGroups.map((group, groupIndex) => {
-                  const Icon = topicIcons[group.id] || Building2;
+                xl:grid-cols-[310px_minmax(0,1fr)]
+                xl:gap-20
+              "
+            >
+              {/* DESKTOP SIDEBAR */}
 
-                  return (
-                    <section
-                      key={group.id}
-                      aria-labelledby={`${group.id}-title`}
-                      className="min-w-0 scroll-mt-28"
-                    >
-                      <div className="mb-5 flex items-start gap-4">
-                        <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#ddbc69]/30 bg-[#ddbc69]/10 text-[#ddbc69]">
-                          <Icon className="h-5 w-5" aria-hidden="true" />
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/35">
-                            0{groupIndex + 1}
-                          </p>
-                          <h3
-                            id={`${group.id}-title`}
-                            className="mt-1 break-words text-xl font-bold text-white sm:text-2xl"
+              <aside className="hidden lg:block">
+                <div className="sticky top-28">
+                  <div className="mb-5 flex items-center gap-2">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/35">
+                      Browse topics
+                    </span>
+                  </div>
+
+                  <div className="border-t border-white/[0.08]">
+                    {groups.map(
+                      (group) => {
+                        const itemDesign =
+                          categoryDesign[
+                            group.id
+                          ] ||
+                          categoryDesign.general;
+
+                        const Icon =
+                          itemDesign.icon;
+
+                        const active =
+                          group.id ===
+                          activeGroupId;
+
+                        return (
+                          <button
+                            key={group.id}
+                            type="button"
+                            onClick={() =>
+                              handleCategoryChange(
+                                group.id
+                              )
+                            }
+                            className={`
+                              group
+                              flex
+                              w-full
+                              items-center
+                              justify-between
+                              gap-4
+                              border-b
+                              border-white/[0.08]
+                              py-4
+                              text-left
+                              transition-all
+
+                              ${
+                                active
+                                  ? "pl-2"
+                                  : ""
+                              }
+                            `}
                           >
-                            {group.label}
-                          </h3>
-                          <p className="mt-2 max-w-2xl text-sm leading-6 text-white/50">
-                            {group.description}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="w-full min-w-0 max-w-full divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-[#0d1014]">
-                        {group.items.map((item) => {
-                          const questionKey = `${group.id}-${item.question}`;
-                          const answerId = `${group.id}-answer-${item.question
-                            .toLowerCase()
-                            .replace(/[^a-z0-9]+/g, "-")
-                            .replace(/(^-|-$)/g, "")}`;
-                          const isOpen = openQuestion === questionKey;
-
-                          return (
-                            <div
-                              key={questionKey}
-                              className={`w-full min-w-0 transition-colors duration-300 motion-reduce:transition-none ${
-                                isOpen ? "bg-white/[0.025]" : ""
-                              }`}
-                            >
-                              <button
-                                type="button"
-                                aria-expanded={isOpen}
-                                aria-controls={answerId}
-                                onClick={() =>
-                                  setOpenQuestion(isOpen ? null : questionKey)
-                                }
-                                className="flex min-h-16 w-full min-w-0 items-center gap-3 px-4 py-4 text-left font-semibold leading-6 text-white transition-colors hover:text-[#ddbc69] focus:outline-none focus-visible:bg-white/5 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ddbc69] sm:gap-5 sm:px-6 sm:py-5"
-                              >
-                                <span className="min-w-0 flex-1 break-words [overflow-wrap:anywhere]">
-                                  {item.question}
-                                </span>
-                                <span
-                                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-[#ddbc69] transition-transform duration-300 motion-reduce:transition-none ${
-                                    isOpen ? "rotate-180" : ""
-                                  }`}
-                                >
-                                  <ChevronDown
-                                    className="h-4 w-4"
-                                    aria-hidden="true"
-                                  />
-                                </span>
-                              </button>
+                            <div className="flex min-w-0 items-center gap-3">
                               <div
-                                id={answerId}
-                                aria-hidden={!isOpen}
-                                className={`grid min-w-0 transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${
-                                  isOpen
-                                    ? "grid-rows-[1fr] opacity-100"
-                                    : "grid-rows-[0fr] opacity-0"
-                                }`}
+                                className={`
+                                  flex
+                                  h-9
+                                  w-9
+                                  shrink-0
+                                  items-center
+                                  justify-center
+                                  rounded-xl
+                                  border
+
+                                  ${
+                                    active
+                                      ? `${itemDesign.bg} ${itemDesign.border}`
+                                      : "border-white/[0.06] bg-white/[0.025]"
+                                  }
+                                `}
                               >
-                                <div className="min-h-0 overflow-hidden">
-                                  <div className="min-w-0 px-4 pb-5 sm:px-6 sm:pb-6 sm:pr-20">
-                                    <p className="max-w-3xl break-words text-[0.95rem] leading-7 text-white/60 [overflow-wrap:anywhere] sm:text-base">
-                                      {item.answer}
-                                    </p>
-                                  </div>
-                                </div>
+                                <Icon
+                                  size={16}
+                                  className={
+                                    active
+                                      ? itemDesign.color
+                                      : "text-white/40"
+                                  }
+                                />
                               </div>
+
+                              <span
+                                className={`
+                                  text-sm
+                                  font-medium
+                                  transition-colors
+
+                                  ${
+                                    active
+                                      ? "text-white"
+                                      : "text-white/55 group-hover:text-white"
+                                  }
+                                `}
+                              >
+                                {group.label}
+                              </span>
                             </div>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="mt-10 rounded-2xl border border-dashed border-white/15 bg-white/[0.025] px-6 py-14 text-center">
-                <p className="text-lg font-semibold text-white">
-                  No matching answer found
-                </p>
-                <p className="mt-2 text-sm leading-6 text-white/50">
-                  Try a shorter phrase or browse all FAQ topics.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setQuery("");
-                    setActiveTopic("all");
-                  }}
-                  className="mt-5 min-h-11 rounded-xl border border-[#ddbc69]/50 px-5 py-2 text-sm font-semibold text-[#ddbc69] transition-colors hover:bg-[#ddbc69] hover:text-black focus:outline-none focus:ring-2 focus:ring-[#ddbc69]"
+
+                            <span
+                              className={`
+                                text-[10px]
+                                font-semibold
+
+                                ${
+                                  active
+                                    ? itemDesign.color
+                                    : "text-white/25"
+                                }
+                              `}
+                            >
+                              {String(
+                                group.items
+                                  .length
+                              ).padStart(
+                                2,
+                                "0"
+                              )}
+                            </span>
+                          </button>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
+              </aside>
+
+              {/* CONTENT */}
+
+              <div className="min-w-0">
+                {/* active category intro */}
+
+                <div
+                  className="
+                    relative
+                    mb-8
+                    overflow-hidden
+                    border-b
+                    border-white/[0.09]
+                    pb-8
+                  "
                 >
-                  Reset search
-                </button>
+                  <div
+                    aria-hidden="true"
+                    className={`
+                      pointer-events-none
+                      absolute
+                      -right-20
+                      -top-20
+                      h-52
+                      w-52
+                      rounded-full
+                      opacity-50
+                      blur-[70px]
+
+                      ${design.glow}
+                    `}
+                  />
+
+                  <div className="relative">
+                    <div className="mb-5 flex items-center gap-3">
+                      <div
+                        className={`
+                          flex
+                          h-11
+                          w-11
+                          items-center
+                          justify-center
+                          rounded-2xl
+                          border
+
+                          ${design.bg}
+                          ${design.border}
+                        `}
+                      >
+                        <ActiveIcon
+                          size={20}
+                          className={
+                            design.color
+                          }
+                        />
+                      </div>
+
+                      <span
+                        className={`
+                          text-[10px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.2em]
+
+                          ${design.color}
+                        `}
+                      >
+                        {activeGroup.items.length}{" "}
+                        Questions
+                      </span>
+                    </div>
+
+                    <h3
+                      className="
+                        font-playfair-display
+                        text-[30px]
+                        font-medium
+                        leading-[1.08]
+                        tracking-[-0.035em]
+                        text-[#ddbc69]
+
+                        sm:text-[36px]
+                        lg:text-[42px]
+                      "
+                    >
+                      {activeGroup.label}
+                    </h3>
+
+                    <p className="mt-4 max-w-2xl leading-7 text-white">
+                      {
+                        activeGroup.description
+                      }
+                    </p>
+                  </div>
+                </div>
+
+                {/* PROJECT FILTER */}
+
+                {activeGroup.id ===
+                "projects" ? (
+                  <ProjectFilter
+                    selected={
+                      projectFilter
+                    }
+                    onChange={
+                      setProjectFilter
+                    }
+                  />
+                ) : null}
+
+                {/* ACCORDION */}
+
+                <FAQList
+                  items={activeItems}
+                  numberColor={
+                    design.numberColor
+                  }
+                />
               </div>
-            )}
-          </div>
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </section>
+  );
+}
+
+/* =========================================================
+   FAQ LIST
+========================================================= */
+
+function FAQList({
+  items,
+  numberColor,
+}) {
+  return (
+    <div className="border-t border-white/[0.09]">
+      {items.map((faq, index) => (
+        <details
+          key={faq.question}
+          className="
+            group
+            border-b
+            border-white/[0.09]
+          "
+        >
+          <summary
+            className="
+              grid
+              cursor-pointer
+              list-none
+              grid-cols-[30px_minmax(0,1fr)_28px]
+              gap-3
+              py-5
+              marker:content-none
+
+              sm:grid-cols-[44px_minmax(0,1fr)_32px]
+              sm:gap-4
+              sm:py-6
+            "
+          >
+            <span
+              className={`
+                mt-1
+                text-[10px]
+                font-semibold
+                tracking-[0.08em]
+
+                ${numberColor}
+              `}
+            >
+              {String(
+                index + 1
+              ).padStart(2, "0")}
+            </span>
+
+            <span
+              className="
+                pr-2
+                text-[15px]
+                font-medium
+                leading-6
+                text-white
+
+                sm:text-lg
+                sm:leading-7
+              "
+            >
+              {faq.question}
+            </span>
+
+            <span
+              className="
+                flex
+                h-7
+                w-7
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-white/[0.09]
+                text-lg
+                font-light
+                text-[#ddbc69]
+                transition-all
+
+                group-open:rotate-45
+                group-open:border-[#ddbc69]/30
+                group-open:bg-[#ddbc69]/[0.06]
+              "
+            >
+              +
+            </span>
+          </summary>
+
+          <div
+            className="
+              pb-6
+              pl-[42px]
+              pr-7
+
+              sm:pb-7
+              sm:pl-[60px]
+              sm:pr-10
+            "
+          >
+            <p
+              className="
+                max-w-3xl
+                text-sm
+                leading-7
+                text-white
+
+                sm:text-base
+                sm:leading-8
+              "
+            >
+              {faq.answer}
+            </p>
+          </div>
+        </details>
+      ))}
+    </div>
+  );
+}
+
+/* =========================================================
+   SEARCH RESULTS
+========================================================= */
+
+function SearchResults({
+  groups,
+  query,
+}) {
+  const totalResults =
+    groups.reduce(
+      (total, group) =>
+        total +
+        group.items.length,
+      0
+    );
+
+  if (totalResults === 0) {
+    return (
+      <div
+        className="
+          border-y
+          border-white/[0.08]
+          py-16
+          text-center
+        "
+      >
+        <div
+          className="
+            mx-auto
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-2xl
+            border
+            border-white/[0.08]
+            bg-white/[0.03]
+          "
+        >
+          <Search
+            size={20}
+            className="text-white/35"
+          />
+        </div>
+
+        <h3 className="mt-5 text-xl font-medium text-white">
+          No matching questions
+        </h3>
+
+        <p className="mt-2 text-sm text-white/45">
+          Try a broader search term.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="mb-8 border-b border-white/[0.08] pb-6">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
+          Search Results
+        </p>
+
+        <h3
+          className="
+            mt-2
+            font-playfair-display
+            text-[28px]
+            font-medium
+            leading-[1.1]
+            text-white
+
+            sm:text-[36px]
+          "
+        >
+          {totalResults} results for{" "}
+          <span className="text-[#ddbc69]">
+            “{query}”
+          </span>
+        </h3>
+      </div>
+
+      <div className="space-y-12">
+        {groups.map((group) => {
+          const design =
+            categoryDesign[
+              group.id
+            ] ||
+            categoryDesign.general;
+
+          const Icon = design.icon;
+
+          return (
+            <div key={group.id}>
+              <div className="mb-4 flex items-center gap-3">
+                <div
+                  className={`
+                    flex
+                    h-8
+                    w-8
+                    items-center
+                    justify-center
+                    rounded-lg
+                    border
+
+                    ${design.bg}
+                    ${design.border}
+                  `}
+                >
+                  <Icon
+                    size={14}
+                    className={
+                      design.color
+                    }
+                  />
+                </div>
+
+                <h4 className="font-medium text-white">
+                  {group.label}
+                </h4>
+
+                <span
+                  className={`
+                    text-[10px]
+                    font-semibold
+
+                    ${design.color}
+                  `}
+                >
+                  {group.items.length}
+                </span>
+              </div>
+
+              <FAQList
+                items={group.items}
+                numberColor={
+                  design.numberColor
+                }
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   PROJECT FILTER
+========================================================= */
+
+function ProjectFilter({
+  selected,
+  onChange,
+}) {
+  return (
+    <div className="mb-8">
+      {/* MOBILE */}
+
+      <div className="relative sm:hidden">
+        <select
+          value={selected}
+          onChange={(event) =>
+            onChange(
+              event.target.value
+            )
+          }
+          className="
+            min-h-12
+            w-full
+            appearance-none
+            rounded-xl
+            border
+            border-violet-400/20
+            bg-violet-400/[0.06]
+            px-4
+            pr-11
+            text-sm
+            text-white
+            outline-none
+          "
+        >
+          {projectFilters.map(
+            (filter) => (
+              <option
+                key={filter.id}
+                value={filter.id}
+                className="bg-[#111114]"
+              >
+                {filter.label}
+              </option>
+            )
+          )}
+        </select>
+
+        <ChevronDown
+          size={16}
+          className="
+            pointer-events-none
+            absolute
+            right-4
+            top-1/2
+            -translate-y-1/2
+            text-violet-300
+          "
+        />
+      </div>
+
+      {/* DESKTOP */}
+
+      <div className="hidden flex-wrap gap-2 sm:flex">
+        {projectFilters.map(
+          (filter) => {
+            const active =
+              selected === filter.id;
+
+            return (
+              <button
+                key={filter.id}
+                type="button"
+                onClick={() =>
+                  onChange(filter.id)
+                }
+                className={`
+                  rounded-full
+                  border
+                  px-4
+                  py-2
+                  text-xs
+                  font-medium
+                  transition-all
+
+                  ${
+                    active
+                      ? `
+                        border-violet-400/30
+                        bg-violet-400/10
+                        text-violet-200
+                      `
+                      : `
+                        border-white/[0.08]
+                        bg-white/[0.02]
+                        text-white/45
+                        hover:border-white/[0.15]
+                        hover:text-white
+                      `
+                  }
+                `}
+              >
+                {filter.label}
+              </button>
+            );
+          }
+        )}
+      </div>
+    </div>
   );
 }

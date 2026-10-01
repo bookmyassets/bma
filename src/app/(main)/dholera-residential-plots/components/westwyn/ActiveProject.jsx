@@ -9,8 +9,7 @@ import {
   MapPin,
 } from "lucide-react";
 
-import residencyImage from "@/assests/residential/residency/westwyn-residency-dholera-entry-gate.webp";
-import crownImage from "@/assests/residential/crown/westwyn-crown-dholera-entry-gate-desktop.webp";
+import westwynProjectImages from "@/assests/westwynProjectImages";
 import { getWestwynSectionSurface } from "./WestwynTheme";
 
 const RESIDENTIAL_PROJECTS_URL =
@@ -25,7 +24,7 @@ const FEATURED_PROJECTS = [
     projectName: "WestWyn Crown",
     location: "Dholera, Gujarat",
     link: "westwyn-crown",
-    image: crownImage,
+    image: westwynProjectImages["westwyn-crown"],
     displayStatus: "Upcoming",
     statusType: "upcoming",
   },
@@ -33,7 +32,7 @@ const FEATURED_PROJECTS = [
     projectName: "WestWyn Residency",
     location: "1.5 KM from DFC",
     link: "westwyn-residency",
-    image: residencyImage,
+    image: westwynProjectImages["westwyn-residency"],
     displayStatus: "Newly Launched",
     statusType: "newly-launched",
   },
@@ -199,6 +198,7 @@ const ActiveProjectsSection = ({ surface = "alt" }) => {
 
           return {
             ...project,
+            image: westwynProjectImages[project.link] || project.image,
             location,
             statusType,
             displayStatus,

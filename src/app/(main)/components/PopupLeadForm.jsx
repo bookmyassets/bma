@@ -208,6 +208,7 @@ export default function PopupLeadForm({
   mobileStrategy = "scroll",
   clickThreshold = 5,
   timeWindow = 8000,
+  scrollThreshold = 45,
 }) {
   const typeConfig = POPUP_TYPES[type] || POPUP_TYPES.time;
   const canOverrideTitle = !["time", "scroll"].includes(type);
@@ -340,7 +341,7 @@ export default function PopupLeadForm({
         document.documentElement.clientHeight;
       const scrollPercentage = (scrollTop / documentHeight) * 100;
 
-      if (scrollPercentage >= 45) {
+      if (scrollPercentage >= scrollThreshold) {
         const remainingCooldown = getPopupCooldownRemaining();
         const openScrollPopup = () => {
           if (openPopup() && config.sessionKey) {
@@ -364,7 +365,7 @@ export default function PopupLeadForm({
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(cooldownTimer);
     };
-  }, [config.sessionKey, config.trigger, type]);
+  }, [config.sessionKey, config.trigger, scrollThreshold, type]);
 
   useEffect(() => {
     if (config.trigger !== "rage") return undefined;
