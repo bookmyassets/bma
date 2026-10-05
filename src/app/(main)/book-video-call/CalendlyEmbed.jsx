@@ -7,12 +7,12 @@ const CALENDLY_URL =
 
 export default function CalendlyEmbed() {
   return (
-    <div className="-mx-4 overflow-hidden border-y border-[#ddbc69]/40 bg-white shadow-sm sm:mx-0 sm:rounded-2xl sm:border">
+    <div className="min-w-0 overflow-hidden bg-white">
       <InlineWidget
         url={CALENDLY_URL}
         styles={{
-          minWidth: "320px",
-          height: "700px",
+          minWidth: "100%",
+          height: "clamp(760px, 88vh, 920px)",
         }}
       />
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import logo from "@/assests/bma-dedicated-to-dholera.svg";
 
@@ -209,6 +210,9 @@ export default function PopupLeadForm({
   clickThreshold = 5,
   timeWindow = 8000,
   scrollThreshold = 45,
+  isOpen = false,
+  onClose,
+  disableAutoTrigger = false,
 }) {
   const typeConfig = POPUP_TYPES[type] || POPUP_TYPES.time;
   const canOverrideTitle = !["time", "scroll"].includes(type);
@@ -238,8 +242,17 @@ export default function PopupLeadForm({
   );
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  const openPopup = () => {
-    if (!requestPopupOpen(popupInstanceId.current, type)) return false;
+  const openPopup = (bypassGuards = false) => {
+    if (!bypassGuards && !requestPopupOpen(popupInstanceId.current, type)) {
+      return false;
+    }
+
+    if (bypassGuards && typeof window !== "undefined") {
+      window[ACTIVE_POPUP_KEY] = {
+        instanceId: popupInstanceId.current,
+        type,
+      };
+    }
 
     popupIsOpen.current = true;
     setShowFormPopup(true);
@@ -251,6 +264,7 @@ export default function PopupLeadForm({
     popupIsOpen.current = false;
     releasePopup(popupInstanceId.current);
     setShowFormPopup(false);
+    onClose?.();
   };
 
   useEffect(() => {
@@ -261,6 +275,12 @@ export default function PopupLeadForm({
       releasePopup(popupInstanceId.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (isOpen && !showFormPopup) {
+      openPopup(true);
+    }
+  }, [isOpen, showFormPopup]);
 
   useEffect(() => {
     if (SKIP_RECAPTCHA_IN_LOCAL_DEVELOPMENT) {
@@ -300,6 +320,7 @@ export default function PopupLeadForm({
   }, [showFormPopup]);
 
   useEffect(() => {
+    if (disableAutoTrigger) return undefined;
     if (config.trigger !== "time") return undefined;
     if (config.sessionKey && sessionStorage.getItem(config.sessionKey)) {
       return undefined;
@@ -328,6 +349,7 @@ export default function PopupLeadForm({
   }, [config.delay, config.sessionKey, config.trigger, type]);
 
   useEffect(() => {
+    if (disableAutoTrigger) return undefined;
     if (config.trigger !== "scroll") return undefined;
     if (config.sessionKey && sessionStorage.getItem(config.sessionKey)) {
       return undefined;
@@ -368,6 +390,7 @@ export default function PopupLeadForm({
   }, [config.sessionKey, config.trigger, scrollThreshold, type]);
 
   useEffect(() => {
+    if (disableAutoTrigger) return undefined;
     if (config.trigger !== "rage") return undefined;
 
     const handleRageClick = (event) => {
@@ -449,6 +472,7 @@ export default function PopupLeadForm({
   }, [config.trigger, popupShown]);
 
   useEffect(() => {
+    if (disableAutoTrigger) return undefined;
     if (config.trigger !== "exit" || !isMobileDevice()) return undefined;
 
     if (mobileStrategy === "back" || mobileStrategy === "all") {
@@ -628,7 +652,7 @@ export default function PopupLeadForm({
 
   if (!showFormPopup) return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -764,6 +788,7 @@ export default function PopupLeadForm({
           </>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

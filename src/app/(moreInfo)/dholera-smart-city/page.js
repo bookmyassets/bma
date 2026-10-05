@@ -12,7 +12,7 @@ import AboutBMA from "./body/About_BMA";
 import DholeraLandingPage from "./body/DholeraSIR";
 import MegaIndustries from "./body/MegaIndustries";
 import TestimonialPagination from "./components/Testimonials";
-import WestWyn from "./body/NewSection";
+import WestWyn from "./body/Projects";
 import MajorProjects from "./body/MajorProjects";
 
 
@@ -65,7 +65,7 @@ export default function Page() {
           <MajorProjects />
         </div>
 
-        <div className="bg-white py-4 sm:py-6 md:py-8">
+        <div className="-mt-4 bg-white py-0 sm:mt-0 sm:py-6 md:py-8">
           <Gallery />
         </div>
 

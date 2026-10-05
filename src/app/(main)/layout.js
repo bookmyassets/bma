@@ -6,9 +6,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import GlobalPopupLeadForm from "./components/GlobalPopupLeadForm";
 import Whatsapp from "./components/Callus";
-import Navbar from "./components/Navbar_codexTemp";
-
-/* import Navbar from "./components/Navbar"; */
+import Navbar from "./components/Navbar";
 
 // ── Font ──────────────────────────────────────────────────────────────────────
 // next/font handles preloading automatically — no manual <link> needed.

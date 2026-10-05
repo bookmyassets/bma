@@ -175,6 +175,12 @@ export default function page() {
         <LatestUpdates />
         <FAQSection />
       </div>
+
+      <PopupLeadForm
+        type="scroll"
+        project="Home-Page"
+        scrollThreshold={50}
+      />
     </>
   );
 }
