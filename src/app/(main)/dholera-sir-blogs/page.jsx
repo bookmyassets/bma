@@ -1,26 +1,29 @@
 import { getblogs } from "@/sanity/lib/api";
-import React from "react";
+import Link from "next/link";
+import { BookOpen, FileText, TriangleAlert } from "lucide-react";
+
 import BlogCard from "./BlogCard";
 import MobileBlogPagination from "./MobileBlogPagination";
-import BlogHeroCarousel from "./BlogHeroCarousel";
 
-export default async function page() {
+export default async function Page() {
   let posts = [];
-  let fetchError = null;
+  let fetchError = false;
 
   try {
     const postsData = await getblogs();
-    posts = Array.isArray(postsData) ? postsData : [];
+    posts = Array.isArray(postsData) ? [...postsData] : [];
 
-    // Sort by publishedAt date (newest first)
-    posts.sort((a, b) => {
-      const dateA = new Date(a.publishedAt || a._createdAt || 0);
-      const dateB = new Date(b.publishedAt || b._createdAt || 0);
-      return dateB - dateA; // Descending order (newest first)
-    });
+    const getPostDate = (post) => {
+      const timestamp = Date.parse(
+        post.publishedAt || post._createdAt || "",
+      );
 
-    console.log("Posts data fetched:", posts.length);
+      return Number.isFinite(timestamp) ? timestamp : 0;
+    };
+
+    posts.sort((a, b) => getPostDate(b) - getPostDate(a));
   } catch (error) {
+    fetchError = true;
     console.error("Error fetching blog posts:", error);
   }
 
@@ -32,14 +35,13 @@ export default async function page() {
         : typeof post.author === "string"
           ? post.author
           : "BookMyAssets",
-    authorImage:
-      typeof post.author === "object" && post.author?.image
-        ? post.author.image
-        : null,
     mainImage: post.mainImage || null,
-    slug: post.slug?.current
-      ? { current: post.slug.current }
-      : { current: "#" },
+    slug: {
+      current:
+        typeof post.slug === "string"
+          ? post.slug
+          : post.slug?.current || "#",
+    },
   }));
 
   return (
@@ -47,6 +49,7 @@ export default async function page() {
       <title>
         Dholera Smart City Blog | Investment Guides, News & Updates
       </title>
+
       <meta
         name="description"
         content="Expert Dholera SIR blogs on plot prices, investment strategy, infrastructure progress and buying guides, updated regularly by BookMyAssets."
@@ -58,98 +61,94 @@ export default async function page() {
         rel="canonical"
         href="https://www.bookmyassets.com/dholera-sir-blogs"
       />
-      <div className="min-h-screen bg-black relative overflow-hidden">
-        {/* Hero Section */}
-        <div className="bg-black relative ">
-          <div className="mx-auto w-full max-w-[calc(100vw-0rem)] overflow-hidden">
-            <BlogHeroCarousel />
-          </div>
 
-          <div className="mx-auto max-w-7xl px-[clamp(1rem,4vw,3rem)] py-4 text-center">
-            <h1 className="text-2xl md:text-5xl leading-[1.15] font-bold text-white">
-              Dholera SIR Blogs
-            </h1>
-          </div>
-        </div>
+      <div className="min-h-screen bg-black px-4 pb-10 pt-[88px] sm:px-6 lg:px-8 lg:pt-[102px]">
+        <section
+          aria-labelledby="bma-blogs-heading"
+          className="mx-auto max-w-7xl"
+        >
+          {/* Compact Blog Banner */}
+          <header className="group relative mb-6 mt-5 overflow-hidden rounded-[20px] border border-[#ddbc69]/25 bg-gradient-to-br from-[#15243b] via-[#183745] to-[#194a47] px-5 py-5 md:mb-8 md:px-8 md:py-7">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-12 -top-24 h-64 w-64 rounded-full bg-[#ddbc69]/10 blur-3xl"
+            />
 
-        {/* Blog Posts Section */}
-        <div className="relative z-10">
-          <div className="max-w-7xl mx-auto px-4 py-4">
-            {safePosts.length > 0 ? (
-              <>
-                {/* Mobile paginated grid */}
-                <div className="md:hidden">
-                  <MobileBlogPagination>
-                    {safePosts.map((post) => (
-                      <div
-                        key={post._id}
-                        className="transform hover:-translate-y-2  transition-all duration-300"
-                      >
-                        <BlogCard post={post} />
-                      </div>
-                    ))}
-                  </MobileBlogPagination>
-                </div>
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[#ddbc69]/70 to-transparent"
+            />
 
-                {/* Tablet and desktop full grid */}
-                <div>
-                  <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-2 sm:gap-8">
-                    {safePosts.map((post) => (
-                      <div
-                        key={post._id}
-                        className="transform hover:-translate-y-2 transition-all duration-300"
-                      >
-                        <BlogCard post={post} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className="text-center py-12 sm:py-20">
-                <div className="bg-white/95 backdrop-blur-sm p-8 sm:p-12 rounded-2xl shadow-xl max-w-2xl mx-auto border border-gray-200">
-                  {fetchError ? (
-                    <>
-                      <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">
-                        ⚠️
-                      </div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
-                        Unable to Load Blogs
-                      </h3>
-                      <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 px-4">
-                        We're experiencing some technical difficulties loading
-                        the blog posts. Please try refreshing the page or
-                        contact support if the issue persists.
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">
-                        📝
-                      </div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
-                        Expert Content Coming Soon!
-                      </h3>
-                      <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 px-4">
-                        We're preparing comprehensive investment guides, market
-                        analysis, and expert insights about Dholera SIR
-                        opportunities. Stay tuned!
-                      </p>
-                    </>
-                  )}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
-                    <button className="bg-gradient-to-r from-orange-500 to-green-600 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-sm sm:text-base">
-                      Get Notified
-                    </button>
-                    <button className="border-2 border-orange-500 text-orange-600 px-6 sm:px-8 py-3 rounded-xl font-semibold hover:bg-orange-500 hover:text-white transition-all duration-300 text-sm sm:text-base">
-                      Explore Projects
-                    </button>
-                  </div>
-                </div>
+            <div className="relative flex min-w-0 items-center gap-3 md:gap-5">
+              <span
+                aria-hidden="true"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[13px] border border-[#ddbc69]/30 bg-[#ddbc69]/10 text-[#ddbc69] md:h-14 md:w-14 md:rounded-[16px]"
+              >
+                <BookOpen
+                  strokeWidth={1.5}
+                  className="h-6 w-6 transition-transform duration-300 group-hover:-rotate-6 motion-reduce:transform-none motion-reduce:transition-none md:h-7 md:w-7"
+                />
+              </span>
+
+              <h1
+                id="bma-blogs-heading"
+                className="min-w-0 font-playfair-display text-[30px] font-normal leading-[1.15] tracking-[-0.035em] text-[#f4eee2] md:text-[40px]"
+              >
+                Dholera Smart City{" "}
+                <span className="text-[#ddbc69]">Blogs</span>
+              </h1>
+            </div>
+          </header>
+
+          {safePosts.length > 0 ? (
+            <MobileBlogPagination>
+              {safePosts.map((post, index) => (
+                <BlogCard
+                  key={post._id || `${post.slug.current}-${index}`}
+                  post={post}
+                  isLatest={index === 0}
+                />
+              ))}
+            </MobileBlogPagination>
+          ) : (
+            <div className="mx-auto max-w-2xl rounded-[20px] border border-white/10 bg-[#151514] px-6 py-10 text-center">
+              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-[14px] border border-[#ddbc69]/20 bg-[#ddbc69]/10 text-[#ddbc69]">
+                {fetchError ? (
+                  <TriangleAlert
+                    size={25}
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <FileText
+                    size={25}
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                )}
               </div>
-            )}
-          </div>
-        </div>
+
+              <h2 className="font-playfair-display text-[26px] leading-tight text-[#f4eee2] md:text-[30px]">
+                {fetchError
+                  ? "Unable to Load Blogs"
+                  : "Expert Content Coming Soon!"}
+              </h2>
+
+              <p className="mt-4 text-[15px] leading-[1.8] text-[#bcbab3] md:text-[18px]">
+                {fetchError
+                  ? "We're experiencing some technical difficulties loading the blog posts. Please try refreshing the page or contact support if the issue persists."
+                  : "We're preparing comprehensive investment guides, market analysis, and expert insights about Dholera SIR opportunities. Stay tuned!"}
+              </p>
+
+              <Link
+                href="/dholera-residential-plots"
+                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-[#ddbc69] px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-[#ecd18b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69]"
+              >
+                Explore Projects
+              </Link>
+            </div>
+          )}
+        </section>
       </div>
     </>
   );

@@ -58,7 +58,7 @@ export default function Page() {
         </div>
 
         <div className="bg-white py-4 sm:py-6 md:py-8">
-          <MegaIndustries />
+          <MegaIndustries variant="light" />
         </div>
 
         <div className="bg-white py-4 sm:py-6 md:py-8">

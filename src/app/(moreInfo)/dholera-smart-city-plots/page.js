@@ -31,7 +31,7 @@ export default function Page() {
             <Ribbon />
             <AboutBMA />
           </div>
-          <MegaIndustries />
+          <MegaIndustries variant="light" />
           <TestimonialPagination />
           <FAQSection />
           <PopupForm title="Registry Ready Plots Under ₹10 Lakh in Dholera" />

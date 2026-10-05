@@ -1,9 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 
 export default function BlogSlider({ posts = [] }) {
@@ -11,29 +16,30 @@ export default function BlogSlider({ posts = [] }) {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Check if mobile on mount and resize
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
     checkMobile();
+
     window.addEventListener("resize", checkMobile);
+
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const cardsPerPage = isMobile ? 1 : 3;
+
   const totalPages = Math.ceil(posts.length / cardsPerPage);
 
-  // Auto-slide every 4 seconds
   useEffect(() => {
     if (!isAutoPlaying || totalPages <= 1) return;
 
-    const interval = setInterval(() => {
+    const interval = window.setInterval(() => {
       setCurrentPage((prev) => (prev + 1) % totalPages);
-    }, 4000);
+    }, 4500);
 
-    return () => clearInterval(interval);
+    return () => window.clearInterval(interval);
   }, [isAutoPlaying, totalPages]);
 
   const goToPage = (page) => {
@@ -51,162 +57,713 @@ export default function BlogSlider({ posts = [] }) {
     setIsAutoPlaying(false);
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return null;
+
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const currentPosts = useMemo(
+    () =>
+      posts.slice(
+        currentPage * cardsPerPage,
+        (currentPage + 1) * cardsPerPage,
+      ),
+    [posts, currentPage, cardsPerPage],
+  );
+
   if (posts.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-500">No blog posts available</p>
+      <div
+        className="
+          rounded-[22px]
+          border
+          border-white/[0.08]
+          bg-[#101010]/60
+          py-12
+          text-center
+        "
+      >
+        <p className="text-white/50">
+          No project stories available
+        </p>
       </div>
     );
   }
 
-  const formatDate = (dateString) => {
-    if (!dateString) return "Date not available";
-
-    const date = new Date(dateString);
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return date.toLocaleDateString("en-US", options);
-  };
-
-  const currentPosts = posts.slice(
-    currentPage * cardsPerPage,
-    (currentPage + 1) * cardsPerPage,
-  );
-
   return (
-    <div className="mb-8">
-      <div className="relative">
-        {/* Responsive Grid Container */}
-        <div className="grid grid-cols-1 gap-6 lg:gap-8 md:grid-cols-3">
-          {currentPosts.map((post, index) => (
-            <div
-              key={post._id}
-              className="transform hover:-translate-y-2 transition-all duration-300"
-              style={{
-                animation: `fadeIn 0.5s ease-in ${index * 0.1}s both`,
-              }}
-            >
-              <Link
-                href={
-                  post.slug?.current
-                    ? `/about-dholera-sir/${post.slug.current}`
-                    : "#"
-                }
-                className="group"
-              >
-                <div className="bg-white rounded-xl shadow-md overflow-hidden h-full hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 border border-gray-200">
-                  {/* Blog Image */}
-                  <div className="relative h-52">
-                    {post.mainImage ? (
-                      <Image
-                        src={
-                          urlFor(post.mainImage)
-                            .width(1200)
-                            .height(675)
-                            .url() || "/placeholder.svg"
-                        }
-                        alt={post.mainImage?.alt || post.title}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="h-full bg-gradient-to-br from-[#FDB913] to-[#C69C21]"></div>
-                    )}
-                  </div>
+    <div>
+      {/* ========================================================== */}
+      {/* TOP CONTROL BAR                                           */}
+      {/* ========================================================== */}
 
-                  {/* Content */}
-                  <div className="p-6">
-                    <h2 className="text-xl font-bold mb-3 text-black group-hover:text-[#C69C21] line-clamp-2 transition-colors">
-                      {post.title}
-                    </h2>
+      <div
+        className="
+          mb-6
+          flex
+          items-end
+          justify-between
+          gap-5
 
-                    {/* Footer with "ExploreMore" */}
-                    <div className="border-t border-gray-200 pt-4 mt-auto">
-                      <div className=" text-right">
-                        <p className="font-medium hover:underline text-[#ddbc69]">
-                          Explore More →
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
+          lg:mb-8
+        "
+      >
 
-        {/* Navigation Arrows - Only show if more than one page */}
         {totalPages > 1 && (
-          <>
+          <div
+            className="
+              hidden
+              items-center
+              gap-2
+
+              md:flex
+            "
+          >
             <button
+              type="button"
               onClick={goToPrevious}
-              className="absolute -left-4 top-1/2 -translate-y-1/2 rounded-full p-3 shadow-lg bg-[#ddbc69] hover:text-white transition-all duration-300 z-10 hidden md:block"
-              aria-label="Previous page"
+              aria-label="Previous projects"
+              className="
+                flex
+                h-11
+                w-11
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-white/[0.10]
+                bg-white/[0.03]
+                text-white/65
+                transition-all
+
+                hover:border-[#ddbc69]/40
+                hover:bg-[#ddbc69]/[0.08]
+                hover:text-[#ddbc69]
+              "
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
+
             <button
+              type="button"
               onClick={goToNext}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 rounded-full p-3 shadow-lg bg-[#ddbc69] hover:text-white transition-all duration-300 z-10 hidden md:block"
-              aria-label="Next page"
+              aria-label="Next projects"
+              className="
+                flex
+                h-11
+                w-11
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[#ddbc69]/35
+                bg-[#ddbc69]/10
+                text-[#ddbc69]
+                transition-all
+
+                hover:bg-[#ddbc69]
+                hover:text-[#101010]
+              "
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="h-5 w-5" />
             </button>
-          </>
+          </div>
         )}
       </div>
 
-      {/* Controls - Only show if more than one page */}
+      {/* ========================================================== */}
+      {/* DESKTOP EDITORIAL LAYOUT                                  */}
+      {/* ========================================================== */}
+
+      <div className="hidden md:grid md:grid-cols-[1.35fr_0.65fr] md:gap-5">
+        {currentPosts.length > 0 && (
+          <ProjectFeatureCard
+            post={currentPosts[0]}
+            formatDate={formatDate}
+          />
+        )}
+
+        <div className="grid gap-5">
+          {currentPosts.slice(1, 3).map((post) => (
+            <ProjectCompactCard
+              key={post._id}
+              post={post}
+              formatDate={formatDate}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* ========================================================== */}
+      {/* MOBILE                                                    */}
+      {/* ========================================================== */}
+
+      <div className="md:hidden">
+        {currentPosts.map((post) => (
+          <ProjectMobileCard
+            key={post._id}
+            post={post}
+            formatDate={formatDate}
+          />
+        ))}
+      </div>
+
+      {/* ========================================================== */}
+      {/* PAGINATION                                                */}
+      {/* ========================================================== */}
+
       {totalPages > 1 && (
-        <div className="mt-8 flex flex-col items-center gap-4">
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2">
+        <div
+          className="
+            mt-6
+            flex
+            items-center
+            justify-between
+
+            md:justify-center
+          "
+        >
+          {/* MOBILE ARROWS */}
+          <button
+            type="button"
+            onClick={goToPrevious}
+            aria-label="Previous project"
+            className="
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-white/[0.10]
+              text-white/65
+
+              md:hidden
+            "
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          {/* DOTS */}
+          <div className="flex items-center gap-2">
             {Array.from({ length: totalPages }).map((_, index) => (
               <button
                 key={index}
+                type="button"
                 onClick={() => goToPage(index)}
-                className={`transition-all duration-300 rounded-full ${
-                  index === currentPage
-                    ? "bg-[#ddbc69] w-8 h-2"
-                    : "bg-gray-300 w-2 h-2 hover:bg-gray-400"
-                }`}
-                aria-label={`Go to page ${index + 1}`}
+                aria-label={`Go to project page ${index + 1}`}
+                className={`
+                  h-1.5
+                  rounded-full
+                  transition-all
+                  duration-300
+
+                  ${
+                    index === currentPage
+                      ? "w-8 bg-[#ddbc69]"
+                      : "w-1.5 bg-white/20 hover:bg-white/40"
+                  }
+                `}
               />
             ))}
           </div>
 
-          {/* Mobile Navigation Buttons (Hidden since we're not showing slider on mobile) */}
-          <div className="flex gap-3 md:hidden">
-            <button
-              onClick={goToPrevious}
-              className="rounded-full p-2 shadow-md bg-[#ddbc69] hover:text-white transition-all duration-300"
-              aria-label="Previous page"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={goToNext}
-              className="rounded-full p-2 shadow-md bg-[#ddbc69] hover:text-white transition-all duration-300"
-              aria-label="Next page"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={goToNext}
+            aria-label="Next project"
+            className="
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-[#ddbc69]/30
+              bg-[#ddbc69]/10
+              text-[#ddbc69]
+
+              md:hidden
+            "
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 }
 
+/* ========================================================================== */
+/* FEATURE CARD                                                               */
+/* ========================================================================== */
+
+function ProjectFeatureCard({ post, formatDate }) {
+  const date = formatDate(post.publishedAt || post._createdAt);
+
+  return (
+    <Link
+      href={
+        post.slug?.current
+          ? `/about-dholera-sir/${post.slug.current}`
+          : "#"
+      }
+      className="
+        group
+        relative
+        min-h-[430px]
+        overflow-hidden
+        rounded-[24px]
+        border
+        border-white/[0.08]
+        bg-[#101010]
+      "
+    >
+      {post.mainImage ? (
+        <Image
+          src={
+            urlFor(post.mainImage)
+              .width(1400)
+              .height(900)
+              .url() || "/placeholder.svg"
+          }
+          alt={post.mainImage?.alt || post.title}
+          fill
+          className="
+            object-cover
+            transition-transform
+            duration-700
+            ease-out
+
+            group-hover:scale-[1.035]
+          "
+          sizes="(min-width: 768px) 65vw, 100vw"
+        />
+      ) : (
+        <div
+          className="
+            absolute
+            inset-0
+            bg-[radial-gradient(circle_at_top_right,rgba(221,188,105,0.22),transparent_38%),linear-gradient(135deg,#24231f,#101010)]
+          "
+        />
+      )}
+
+      {/* IMAGE OVERLAY */}
+      <div
+        className="
+          absolute
+          inset-0
+          bg-gradient-to-t
+          from-black
+          via-black/40
+          to-black/10
+        "
+      />
+
+      {/* TOP BADGE */}
+      <div
+        className="
+          absolute
+          left-5
+          top-5
+          rounded-full
+          border
+          border-[#ddbc69]/30
+          bg-black/45
+          px-3
+          py-1.5
+          text-[9px]
+          font-semibold
+          uppercase
+          tracking-[0.18em]
+          text-[#ddbc69]
+          backdrop-blur-md
+        "
+      >
+        Mega Project
+      </div>
+
+      {/* CONTENT */}
+      <div
+        className="
+          absolute
+          bottom-0
+          left-0
+          right-0
+          p-6
+
+          lg:p-7
+        "
+      >
+        {date && (
+          <div
+            className="
+              mb-3
+              flex
+              items-center
+              gap-2
+              text-[12px]
+              text-white/45
+            "
+          >
+            <CalendarDays className="h-3.5 w-3.5" />
+
+            {date}
+          </div>
+        )}
+
+        <h3
+          className="
+            max-w-xl
+            font-serif
+            text-[28px]
+            font-medium
+            leading-[1.12]
+            tracking-[-0.025em]
+            text-white
+
+            lg:text-[32px]
+          "
+        >
+          {post.title}
+        </h3>
+
+        <div
+          className="
+            mt-5
+            inline-flex
+            items-center
+            gap-2
+            text-[14px]
+            font-semibold
+            text-[#ddbc69]
+          "
+        >
+          Explore Project
+
+          <ArrowUpRight
+            className="
+              h-4
+              w-4
+              transition-transform
+              duration-300
+
+              group-hover:-translate-y-0.5
+              group-hover:translate-x-0.5
+            "
+          />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ========================================================================== */
+/* COMPACT CARD                                                               */
+/* ========================================================================== */
+
+function ProjectCompactCard({ post, formatDate }) {
+  const date = formatDate(post.publishedAt || post._createdAt);
+
+  return (
+    <Link
+      href={
+        post.slug?.current
+          ? `/about-dholera-sir/${post.slug.current}`
+          : "#"
+      }
+      className="
+        group
+        grid
+        min-h-[205px]
+        grid-cols-[0.92fr_1.08fr]
+        overflow-hidden
+        rounded-[20px]
+        border
+        border-white/[0.08]
+        bg-[#101010]
+        transition-all
+        duration-300
+
+        hover:border-[#ddbc69]/30
+        hover:bg-[#121212]
+      "
+    >
+      <div className="relative min-h-[205px] overflow-hidden">
+        {post.mainImage ? (
+          <Image
+            src={
+              urlFor(post.mainImage)
+                .width(700)
+                .height(700)
+                .url() || "/placeholder.svg"
+            }
+            alt={post.mainImage?.alt || post.title}
+            fill
+            className="
+              object-cover
+              transition-transform
+              duration-700
+
+              group-hover:scale-105
+            "
+            sizes="30vw"
+          />
+        ) : (
+          <div
+            className="
+              absolute
+              inset-0
+              bg-[radial-gradient(circle_at_top_right,rgba(221,188,105,0.22),transparent_40%),linear-gradient(135deg,#24231f,#101010)]
+            "
+          />
+        )}
+
+        <div
+          className="
+            absolute
+            inset-0
+            bg-gradient-to-r
+            from-transparent
+            to-[#101010]/35
+          "
+        />
+      </div>
+
+      <div
+        className="
+          flex
+          flex-col
+          justify-between
+          p-5
+        "
+      >
+        <div>
+          <p
+            className="
+              text-[9px]
+              font-semibold
+              uppercase
+              tracking-[0.18em]
+              text-[#ddbc69]
+            "
+          >
+            Mega Project
+          </p>
+
+          <h3
+            className="
+              mt-3
+              line-clamp-3
+              text-[18px]
+              font-semibold
+              leading-[1.35]
+              text-[#f5f1e8]
+            "
+          >
+            {post.title}
+          </h3>
+
+          {date && (
+            <p
+              className="
+                mt-3
+                text-[12px]
+                text-white/35
+              "
+            >
+              {date}
+            </p>
+          )}
+        </div>
+
+        <div
+          className="
+            mt-4
+            flex
+            items-center
+            justify-between
+            border-t
+            border-white/[0.07]
+            pt-4
+          "
+        >
+          <span
+            className="
+              text-[13px]
+              font-semibold
+              text-[#ddbc69]
+            "
+          >
+            Explore
+          </span>
+
+          <ArrowUpRight
+            className="
+              h-4
+              w-4
+              text-[#ddbc69]
+              transition-transform
+              duration-300
+
+              group-hover:-translate-y-0.5
+              group-hover:translate-x-0.5
+            "
+          />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ========================================================================== */
+/* MOBILE CARD                                                                */
+/* ========================================================================== */
+
+function ProjectMobileCard({ post, formatDate }) {
+  const date = formatDate(post.publishedAt || post._createdAt);
+
+  return (
+    <Link
+      href={
+        post.slug?.current
+          ? `/about-dholera-sir/${post.slug.current}`
+          : "#"
+      }
+      className="
+        group
+        block
+        overflow-hidden
+        rounded-[20px]
+        border
+        border-white/[0.08]
+        bg-[#101010]
+      "
+    >
+      <div
+        className="
+          relative
+          aspect-[1.35/1]
+          overflow-hidden
+        "
+      >
+        {post.mainImage ? (
+          <Image
+            src={
+              urlFor(post.mainImage)
+                .width(900)
+                .height(650)
+                .url() || "/placeholder.svg"
+            }
+            alt={post.mainImage?.alt || post.title}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        ) : (
+          <div
+            className="
+              absolute
+              inset-0
+              bg-[radial-gradient(circle_at_top_right,rgba(221,188,105,0.25),transparent_40%),linear-gradient(135deg,#24231f,#101010)]
+            "
+          />
+        )}
+
+        <div
+          className="
+            absolute
+            inset-0
+            bg-gradient-to-t
+            from-black/65
+            to-transparent
+          "
+        />
+
+        <span
+          className="
+            absolute
+            bottom-4
+            left-4
+            rounded-full
+            border
+            border-[#ddbc69]/30
+            bg-black/50
+            px-3
+            py-1.5
+            text-[9px]
+            font-semibold
+            uppercase
+            tracking-[0.17em]
+            text-[#ddbc69]
+            backdrop-blur-md
+          "
+        >
+          Mega Project
+        </span>
+      </div>
+
+      <div className="p-5">
+        {date && (
+          <p
+            className="
+              text-[12px]
+              text-white/35
+            "
+          >
+            {date}
+          </p>
+        )}
+
+        <h3
+          className="
+            mt-2
+            line-clamp-2
+            font-serif
+            text-[22px]
+            font-medium
+            leading-[1.2]
+            text-[#f5f1e8]
+          "
+        >
+          {post.title}
+        </h3>
+
+        <div
+          className="
+            mt-5
+            flex
+            items-center
+            justify-between
+            border-t
+            border-white/[0.07]
+            pt-4
+          "
+        >
+          <span
+            className="
+              text-[14px]
+              font-semibold
+              text-[#ddbc69]
+            "
+          >
+            Explore Project
+          </span>
+
+          <ArrowUpRight
+            className="h-4 w-4 text-[#ddbc69]"
+          />
+        </div>
+      </div>
+    </Link>
+  );
+}
