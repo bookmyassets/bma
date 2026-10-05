@@ -85,7 +85,7 @@ export const westwynInventoryStatus = [
   { plotNumber: 84, saleStatus: "available", plotTier: "premium" },
   { plotNumber: 85, saleStatus: "available", plotTier: "premium" },
   { plotNumber: 86, saleStatus: "sold", plotTier: null },
-  { plotNumber: 87, saleStatus: "sold", plotTier: null },
+  { plotNumber: 87, saleStatus: "available", plotTier: "premium" },
   { plotNumber: 88, saleStatus: "sold", plotTier: null},
   { plotNumber: 89, saleStatus: "sold", plotTier: null },
   { plotNumber: 90, saleStatus: "sold", plotTier: null },
