@@ -111,6 +111,44 @@ export default function Navbar() {
     handleNavigation(target || "#westwyn-estates");
   };
 
+  const desktopProjectsMenu = (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setIsProjectsMenuOpen((current) => !current)}
+        aria-expanded={isProjectsMenuOpen}
+        aria-haspopup="true"
+        className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-slate-900 transition hover:bg-[#F8F3E7] hover:text-[#9B782C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DDBC69] focus-visible:ring-offset-2 lg:px-3.5"
+      >
+        Our Projects
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${
+            isProjectsMenuOpen ? "rotate-180" : ""
+          }`}
+          aria-hidden="true"
+        />
+      </button>
+
+      {isProjectsMenuOpen && (
+        <div className="absolute left-0 top-full z-10 mt-2 w-64 rounded-2xl border border-[#DDBC69]/40 bg-[#FFFDF8] p-2 shadow-[0_14px_35px_rgba(15,23,42,0.18)]">
+          {projectItems.map(({ label, tag, action, target }) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => handleProjectClick(action, target)}
+              className="flex w-full items-center justify-between gap-4 rounded-xl px-3 py-2.5 text-left transition hover:bg-[#F8F3E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DDBC69]"
+            >
+              <span className="min-w-0 flex-1 text-sm font-semibold text-black">
+                {label}
+              </span>
+              <ProjectTag tag={tag} />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <nav className="fixed z-50 h-20 w-full border-b border-slate-200/80 bg-white/95 shadow-[0_4px_18px_rgba(15,23,42,0.06)] backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -130,51 +168,17 @@ export default function Navbar() {
         </button>
 
         <div className="hidden items-center gap-1.5 md:flex">
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setIsProjectsMenuOpen((current) => !current)}
-              aria-expanded={isProjectsMenuOpen}
-              aria-haspopup="true"
-              className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-slate-900 transition hover:bg-[#F8F3E7] hover:text-[#9B782C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DDBC69] focus-visible:ring-offset-2 lg:px-3.5"
-            >
-              Our Projects
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${
-                  isProjectsMenuOpen ? "rotate-180" : ""
-                }`}
-                aria-hidden="true"
-              />
-            </button>
-
-            {isProjectsMenuOpen && (
-              <div className="absolute right-0 top-full z-10 mt-2 w-64 rounded-2xl border border-[#DDBC69]/40 bg-[#FFFDF8] p-2 shadow-[0_14px_35px_rgba(15,23,42,0.18)]">
-                {projectItems.map(({ label, tag, action, target }) => (
-                  <button
-                    key={label}
-                    type="button"
-                    onClick={() => handleProjectClick(action, target)}
-                    className="flex w-full items-center justify-between gap-4 rounded-xl px-3 py-2.5 text-left transition hover:bg-[#F8F3E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DDBC69]"
-                  >
-                    <span className="min-w-0 flex-1 text-sm font-semibold text-black">
-                      {label}
-                    </span>
-                    <ProjectTag tag={tag} />
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
           {navItems.map(({ href, label }) => (
-            <button
-              key={label}
-              type="button"
-              onClick={() => handleNavigation(href)}
-              className="rounded-full px-3 py-2 text-sm font-medium text-slate-900 transition hover:bg-[#F8F3E7] hover:text-[#9B782C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DDBC69] focus-visible:ring-offset-2 lg:px-3.5"
-            >
-              {label}
-            </button>
+            <React.Fragment key={label}>
+              <button
+                type="button"
+                onClick={() => handleNavigation(href)}
+                className="rounded-full px-3 py-2 text-sm font-medium text-slate-900 transition hover:bg-[#F8F3E7] hover:text-[#9B782C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DDBC69] focus-visible:ring-offset-2 lg:px-3.5"
+              >
+                {label}
+              </button>
+              {label === "About Dholera" && desktopProjectsMenu}
+            </React.Fragment>
           ))}
 
           <button
