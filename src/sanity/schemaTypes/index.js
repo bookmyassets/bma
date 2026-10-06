@@ -9,6 +9,7 @@ import receiptCounter from './receiptCounter';
 import plotInventory from './plotInventory';
 import leadFormBlock from './objects/leadFormBlock';
 import youtubeEmbed from './objects/youtubeEmbed';
+import blogKeywordList from "./blogKeywordList";
 
 export const schema = {
   types: [
@@ -22,5 +23,6 @@ export const schema = {
     plotInventory,
     leadFormBlock,
     youtubeEmbed,
+    blogKeywordList
   ],
 };

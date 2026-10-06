@@ -47,6 +47,38 @@ export async function getblogs() {
   return await client.fetch(query, { site }, { cache: "no-store" });
 }
 
+export async function getBlogKeywords() {
+  const query = `
+    *[
+      _type == "blogKeywordList" &&
+      site == $site
+    ][0]{
+      _id,
+      title,
+      site,
+
+      "keywords": keywords[
+        active != false &&
+        defined(blog->slug.current)
+      ]{
+        _key,
+        label,
+        active,
+
+        "blogTitle": blog->title,
+        "slug": blog->slug.current
+      }
+    }
+  `;
+
+  // Read published keyword edits directly instead of waiting for the CDN.
+  return await client.withConfig({ useCdn: false }).fetch(
+    query,
+    { site },
+    { cache: "no-store" }
+  );
+}
+
 export async function getUpdates() {
   const query = `*[_type == "post" && "Updates" in categories[]->title && site == $site]
     | order(coalesce(publishedAt, _createdAt) desc) {
