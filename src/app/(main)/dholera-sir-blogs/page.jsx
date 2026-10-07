@@ -124,10 +124,9 @@ export default async function Page() {
 
               <h1
                 id="bma-blogs-heading"
-                className="min-w-0 font-playfair-display text-[30px] font-normal leading-[1.15] tracking-[-0.035em] text-[#f4eee2] lg:text-[40px]"
+                className="min-w-0 font-playfair-display text-[30px] font-normal leading-[1.15] tracking-[-0.035em] text-[#ddbc69] lg:text-[40px]"
               >
-                Dholera Smart City{" "}
-                <span className="text-[#ddbc69]">Blogs</span>
+                Dholera Smart City Blogs
               </h1>
             </div>
           </header>
