@@ -16,6 +16,7 @@ import InlineLeadForm from "../../components/InlineLeadForm";
 import LeadFormBlock from "../../components/blog/LeadFormBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed";
 import { resolveBlogDates } from "@/lib/blogDates";
+import { getPlainText, getReadingTime } from "@/lib/blogReadingTime";
 import TableOfContents from "./TableOfContents";
 import { getWestwynSectionSurface } from "../../dholera-residential-plots/components/westwyn/WestwynTheme";
 
@@ -87,22 +88,6 @@ const buildHeadingTree = (headings) => {
   return roots;
 };
 
-const getPlainText = (value) => {
-  if (!value) return "";
-  if (typeof value === "string") return value;
-  if (Array.isArray(value)) return value.map(getPlainText).join(" ");
-  if (typeof value === "object") {
-    if (typeof value.text === "string") return value.text;
-    if (Array.isArray(value.children))
-      return value.children.map(getPlainText).join(" ");
-    if (Array.isArray(value.rows))
-      return value.rows.map(getPlainText).join(" ");
-    if (Array.isArray(value.cells))
-      return value.cells.map(getPlainText).join(" ");
-  }
-  return "";
-};
-
 const sanitizeCmsHtmlTable = (html) => {
   if (typeof html !== "string") return "";
 
@@ -114,11 +99,6 @@ const sanitizeCmsHtmlTable = (html) => {
         "",
       )}${closingTag}`,
   );
-};
-
-const getReadingTime = (body) => {
-  const words = getPlainText(body).trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(words / 200));
 };
 
 const formatBlogDate = (value) => {
@@ -695,13 +675,6 @@ export default async function Post({ params }) {
                       )}
                     </div>
 
-                    <span
-                      className="shrink-0 rounded-full border border-white/15 bg-white/10 px-3 py-1 font-semibold text-white"
-                      aria-label={`Estimated reading time ${readingTime} minutes`}
-                    >
-                      <span className="text-[#ddbc69]">{readingTime}</span>{" "}
-                      min read
-                    </span>
                   </div>
                 </div>
 
@@ -720,7 +693,7 @@ export default async function Post({ params }) {
                       fetchPriority="high"
                     />
                     <div
-                      className="absolute left-4 top-4 z-10 hidden rounded-full border border-white/20 bg-black/75 px-4 py-2 text-sm font-semibold text-white shadow-md backdrop-blur-sm md:block"
+                      className="absolute left-4 top-4 z-10 rounded-full border border-white/20 bg-black/75 px-4 py-2 text-sm font-semibold text-white shadow-md backdrop-blur-sm"
                       aria-label={`Estimated reading time ${readingTime} minutes`}
                     >
                       <span className="text-[#ddbc69]">{readingTime}</span> min

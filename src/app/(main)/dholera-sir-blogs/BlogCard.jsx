@@ -4,9 +4,11 @@ import { ArrowUpRight, CalendarDays } from "lucide-react";
 
 import { urlFor } from "@/sanity/lib/image";
 import { getVisibleBlogDate } from "@/lib/blogDates";
+import { getReadingTime } from "@/lib/blogReadingTime";
 
 export default function BlogCard({ post, featured = false, isLatest = false }) {
   const visibleDate = getVisibleBlogDate(post);
+  const readingTime = getReadingTime(post.body);
   const slug = post.slug?.current;
   const hasSlug = Boolean(slug && slug !== "#");
 
@@ -35,7 +37,7 @@ export default function BlogCard({ post, featured = false, isLatest = false }) {
       sizes={
         featured
           ? "(max-width: 767px) 100vw, 720px"
-          : "(max-width: 767px) 112px, 160px"
+          : "(max-width: 639px) 96px, (max-width: 767px) 112px, (max-width: 1023px) 150px, 160px"
       }
       className="object-cover transition-transform duration-500 group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
     />
@@ -46,13 +48,22 @@ export default function BlogCard({ post, featured = false, isLatest = false }) {
     />
   );
 
+  const readingTimeBadge = (
+    <span
+      className={`absolute top-1.5 left-1.5 z-10 whitespace-nowrap rounded-full border border-white/20 bg-black/80 px-2 py-1 text-[10px] font-semibold leading-tight text-white shadow-sm backdrop-blur-sm md:text-[11px] ${featured ? "sm:top-3 sm:left-3 sm:px-3 sm:py-1.5" : ""}`}
+      aria-label={`Estimated reading time ${readingTime} minutes`}
+    >
+      <span className="text-[#ddbc69]">{readingTime}</span> min read
+    </span>
+  );
+
   const date = (
-    <div className="flex items-start gap-1.5 text-[11px] leading-relaxed text-[#a6afb8] md:text-xs">
+    <div className="flex items-start gap-2 text-[16px] leading-relaxed text-[#a6afb8] lg:text-[18px]">
       <CalendarDays
-        size={14}
+        size={18}
         strokeWidth={1.5}
         aria-hidden="true"
-        className="mt-0.5 shrink-0 text-[#ddbc69]/70"
+        className="mt-1 shrink-0 text-[#ddbc69]/70"
       />
       <p>
         {visibleDate?.wasModified && (
@@ -67,6 +78,7 @@ export default function BlogCard({ post, featured = false, isLatest = false }) {
     <article className="grid overflow-hidden rounded-[20px] border border-white/10 bg-gradient-to-br from-[#15243b] to-[#11282d] md:grid-cols-[1.15fr_0.85fr]">
       <div className="relative aspect-video overflow-hidden bg-[#17263b] md:aspect-auto md:min-h-[300px]">
         {image}
+        {readingTimeBadge}
       </div>
 
       <div className="flex min-w-0 flex-col items-start p-5 md:p-7 lg:p-8">
@@ -92,7 +104,7 @@ export default function BlogCard({ post, featured = false, isLatest = false }) {
           {date}
 
           {hasSlug && (
-            <span className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#ddbc69] px-4 py-2 text-sm font-semibold text-[#18232c]">
+            <span className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#ddbc69] px-4 py-2 text-[16px] font-semibold text-[#18232c] lg:text-[18px]">
               Read article
               <ArrowUpRight
                 size={17}
@@ -105,13 +117,14 @@ export default function BlogCard({ post, featured = false, isLatest = false }) {
       </div>
     </article>
   ) : (
-    <article className="flex h-full min-w-0 items-start gap-3 border-b border-white/10 py-5 md:gap-5 md:py-6">
-      <div className="relative aspect-[4/3] w-[96px] shrink-0 overflow-hidden rounded-[12px] bg-[#17263b] sm:w-[112px] md:w-[150px] lg:w-[160px]">
+    <article className="flex h-full min-w-0 items-stretch gap-4 border-b border-white/10 py-6 lg:gap-5 lg:py-8">
+      <div className="relative min-h-[100px] w-[96px] shrink-0 self-stretch overflow-hidden rounded-[12px] bg-[#17263b] sm:w-[112px] md:min-h-[120px] md:w-[150px] lg:w-[160px]">
         {image}
+        {readingTimeBadge}
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col self-stretch">
-        <h2 className="text-[15px] font-semibold leading-[1.45] tracking-[-0.015em] text-[#eeeae2] transition-colors group-hover:text-[#ddbc69] motion-reduce:transition-none md:text-[18px]">
+        <h2 className="text-[16px] font-semibold leading-[1.45] tracking-[-0.015em] text-[#eeeae2] transition-colors group-hover:text-[#ddbc69] motion-reduce:transition-none lg:text-[18px]">
           {post.title}
         </h2>
 
@@ -119,10 +132,10 @@ export default function BlogCard({ post, featured = false, isLatest = false }) {
           {date}
 
           {hasSlug && (
-            <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-[#ddbc69] md:text-xs">
+            <span className="mt-2 inline-flex items-center gap-1.5 text-[16px] font-medium leading-relaxed text-[#ddbc69] lg:text-[18px]">
               Read article
               <ArrowUpRight
-                size={14}
+                size={18}
                 aria-hidden="true"
                 className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transform-none"
               />

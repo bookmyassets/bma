@@ -37,7 +37,7 @@ export default {
       title: "Keywords",
       type: "array",
       description:
-        "These keywords will appear in the Dholera SIR blogs keyword section.",
+        "Add a destination blog and one or more comma-separated keywords per entry. Each keyword appears as its own tag.",
       validation: (Rule) =>
         Rule.required().min(1).error("Add at least one keyword."),
 
@@ -50,11 +50,19 @@ export default {
           fields: [
             {
               name: "label",
-              title: "Keyword",
+              title: "Keywords (comma-separated)",
               type: "string",
               description:
-                'Text shown to users, for example "Dholera Smart City".',
-              validation: (Rule) => Rule.required(),
+                'For example: "Dholera Smart City, Dholera SIR, Dholera Investment". Each keyword becomes a separate tag linking to the selected blog.',
+              validation: (Rule) =>
+                Rule.required().custom((value) => {
+                  if (typeof value !== "string") return true;
+
+                  return (
+                    value.split(",").some((keyword) => keyword.trim()) ||
+                    "Enter at least one keyword, separated by commas."
+                  );
+                }),
             },
 
             {
@@ -62,7 +70,7 @@ export default {
               title: "Destination Blog",
               type: "reference",
               description:
-                "Select the blog that should open when this keyword is clicked.",
+                "Select the blog that should open when any keyword in this entry is clicked.",
               to: [
                 {
                   type: "post",
@@ -79,7 +87,7 @@ export default {
               title: "Active",
               type: "boolean",
               description:
-                "Turn this off if you temporarily want to hide the keyword.",
+                "Turn this off to hide all keywords in this entry.",
               initialValue: true,
             },
           ],
@@ -111,7 +119,14 @@ export default {
     },
 
     prepare({ title, site, keywords }) {
-      const count = keywords?.length || 0;
+      const count = (keywords || []).reduce(
+        (total, item) =>
+          total +
+          (typeof item?.label === "string"
+            ? item.label.split(",").filter((keyword) => keyword.trim()).length
+            : 0),
+        0,
+      );
 
       return {
         title: title || "Blog Keyword List",

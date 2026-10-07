@@ -39,9 +39,8 @@ const PointsList = () => (
       id="hero-title-desktop"
       className=" text-[clamp(3rem,6vw,5.6rem)] font-semibold leading-[0.92] tracking-[-0.035em]"
     >
-      <span className="block text-white">Dedicated to</span>
       <span className="mt-2 block text-[#ddbc69]">
-        Dholera
+        Dedicated to Dholera
       </span>
     </h1>
 

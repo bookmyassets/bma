@@ -35,10 +35,10 @@ export default function MobileBlogPagination({ children }) {
 
   return (
     <div>
-      {/* Compact mobile grid */}
+      {/* Blog tiles */}
       <div
         ref={gridRef}
-        className="grid scroll-mt-28 grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3"
+        className="grid scroll-mt-28 grid-cols-1 items-stretch gap-x-8 gap-y-4 md:grid-cols-2 lg:gap-y-6"
       >
         {visibleCards}
       </div>
@@ -46,14 +46,14 @@ export default function MobileBlogPagination({ children }) {
       {totalPages > 1 && (
         <nav
           aria-label="Blog pagination"
-          className="mt-5 flex items-center justify-between gap-3 border-t border-white/10 pt-4"
+          className="mt-8 flex items-center justify-between gap-3 border-t border-white/10 pt-6 lg:mt-12 lg:pt-8"
         >
           <button
             type="button"
             onClick={() => goToPage(activePage - 1)}
             disabled={activePage === 1}
             aria-label="Show previous blog page"
-            className="inline-flex min-h-11 items-center justify-center gap-1 rounded-[10px] border border-white/20 bg-white/5 px-3 text-sm font-medium text-[#f4eee2] transition-colors hover:border-[#ddbc69]/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ddbc69] disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/20 disabled:hover:bg-white/5"
+            className="inline-flex min-h-11 items-center justify-center gap-1 rounded-[10px] border border-white/20 bg-white/5 px-3 text-[16px] font-medium text-[#f4eee2] transition-colors hover:border-[#ddbc69]/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ddbc69] disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/20 disabled:hover:bg-white/5 lg:text-[18px]"
           >
             <ChevronLeft size={16} aria-hidden="true" />
             Prev
@@ -62,7 +62,7 @@ export default function MobileBlogPagination({ children }) {
           <p
             aria-live="polite"
             aria-atomic="true"
-            className="text-center text-xs font-medium text-[#bcbab3] tabular-nums"
+            className="text-center text-[16px] font-medium text-[#bcbab3] tabular-nums lg:text-[18px]"
           >
             Page <span className="text-[#ddbc69]">{activePage}</span> of{" "}
             {totalPages}
@@ -73,7 +73,7 @@ export default function MobileBlogPagination({ children }) {
             onClick={() => goToPage(activePage + 1)}
             disabled={activePage === totalPages}
             aria-label="Show next blog page"
-            className="inline-flex min-h-11 items-center justify-center gap-1 rounded-[10px] border border-white/20 bg-white/5 px-3 text-sm font-medium text-[#f4eee2] transition-colors hover:border-[#ddbc69]/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ddbc69] disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/20 disabled:hover:bg-white/5"
+            className="inline-flex min-h-11 items-center justify-center gap-1 rounded-[10px] border border-white/20 bg-white/5 px-3 text-[16px] font-medium text-[#f4eee2] transition-colors hover:border-[#ddbc69]/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ddbc69] disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/20 disabled:hover:bg-white/5 lg:text-[18px]"
           >
             Next
             <ChevronRight size={16} aria-hidden="true" />
