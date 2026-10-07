@@ -7,7 +7,6 @@ import WestWyn from "./homeComponents/WestWyn";
 import PopupLeadForm from "./components/PopupLeadForm";
 import Hero from "./homeComponents/Hero";
 import LatestUpdates from "./homeComponents/Latest";
-import InlineLeadForm from "./components/InlineLeadForm";
 import HowToBuy from "./homeComponents/BuyingProcess";
 
 const SITE_URL = "https://www.bookmyassets.com";

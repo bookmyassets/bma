@@ -521,9 +521,9 @@ export default function FAQsPage() {
                 mx-auto
                 max-w-5xl
                 font-playfair-display
-                text-[clamp(2.8rem,7vw,6.2rem)]
+                text-[30px] lg:text-[40px]
                 font-medium
-                leading-[0.96]
+                leading-[1.15]
                 tracking-[-0.045em]
                 text-[#ddbc69]
               "
@@ -539,11 +539,11 @@ export default function FAQsPage() {
                 mx-auto
                 mt-6
                 max-w-2xl
-                text-[15px]
-                leading-7
+                text-[16px] lg:text-[18px]
+                leading-[1.75]
                 text-white
-                sm:text-lg
-                sm:leading-8
+
+
               "
             >
               Search practical answers about Dholera SIR, projects,
@@ -653,7 +653,7 @@ export default function FAQsPage() {
 
               <span
                 className="
-                  text-[15px]
+                  text-[16px] lg:text-[18px]
                   font-semibold
                   uppercase
                   tracking-[0.22em]
@@ -667,9 +667,9 @@ export default function FAQsPage() {
             <h2
               className="
                 font-playfair-display
-                text-[clamp(2.3rem,5vw,4.8rem)]
+                text-[30px] lg:text-[40px]
                 font-medium
-                leading-[1.02]
+                leading-[1.15]
                 tracking-[-0.045em]
                 text-[#ddbc69]
               "
@@ -680,7 +680,7 @@ export default function FAQsPage() {
               </span>
             </h2>
 
-            <p className="mt-5 max-w-2xl leading-7 text-white">
+            <p className="text-[16px] lg:text-[18px] mt-5 max-w-2xl leading-[1.75] text-white">
               Speak with our team about plots, documentation,
               pricing or a Dholera site visit.
             </p>
@@ -710,7 +710,7 @@ export default function FAQsPage() {
                 bg-[#ddbc69]
                 px-6
                 py-3
-                text-sm
+                text-[16px] lg:text-[18px]
                 font-semibold
                 text-black
                 transition-all
@@ -742,7 +742,7 @@ export default function FAQsPage() {
                 border-white/[0.12]
                 px-6
                 py-3
-                text-sm
+                text-[16px] lg:text-[18px]
                 font-medium
                 text-white
                 transition-colors
@@ -781,17 +781,17 @@ function HeroStat({
       <span
         className="
           block
-          text-xl
+          text-[16px] lg:text-[18px]
           font-medium
           text-[#ddbc69]
 
-          sm:text-2xl
+
         "
       >
         {value}
       </span>
 
-      <span className="mt-1 block text-[10px] uppercase tracking-[0.16em] text-white/35">
+      <span className="mt-1 block text-[16px] lg:text-[18px] uppercase tracking-[0.16em] text-white/35">
         {label}
       </span>
     </div>

@@ -285,7 +285,7 @@ export default function FAQExplorer({
           <div className="max-w-3xl">
             <p
               className="
-                text-[15px]
+                text-[16px] lg:text-[18px]
                 font-semibold
                 uppercase
                 tracking-[0.24em]
@@ -299,9 +299,9 @@ export default function FAQExplorer({
               className="
                 mt-3
                 font-playfair-display
-                text-[clamp(2.2rem,4.5vw,4rem)]
+                text-[30px] lg:text-[40px]
                 font-medium
-                leading-[1.05]
+                leading-[1.15]
                 tracking-[-0.04em]
                 text-[#ddbc69]
               "
@@ -369,13 +369,13 @@ export default function FAQExplorer({
               flex-1
               bg-transparent
               py-4
-              text-sm
+              text-[16px] lg:text-[18px]
               text-white
               outline-none
 
               placeholder:text-white/30
 
-              sm:text-base
+
             "
           />
 
@@ -500,12 +500,12 @@ export default function FAQExplorer({
                     </div>
 
                     <div className="min-w-0">
-                      <p className="text-sm font-medium leading-5 text-white">
+                      <p className="text-[16px] lg:text-[18px] font-medium leading-[1.75] text-white">
                         {group.shortLabel ||
                           group.label}
                       </p>
 
-                      <p className="mt-1 text-[10px] text-white/35">
+                      <p className="mt-1 text-[16px] lg:text-[18px] text-white/35">
                         {group.items.length}{" "}
                         answers
                       </p>
@@ -536,7 +536,7 @@ export default function FAQExplorer({
               <aside className="hidden lg:block">
                 <div className="sticky top-28">
                   <div className="mb-5 flex items-center gap-2">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/35">
+                    <span className="text-[16px] lg:text-[18px] font-semibold uppercase tracking-[0.2em] text-white/35">
                       Browse topics
                     </span>
                   </div>
@@ -617,7 +617,7 @@ export default function FAQExplorer({
 
                               <span
                                 className={`
-                                  text-sm
+                                  text-[16px] lg:text-[18px]
                                   font-medium
                                   transition-colors
 
@@ -634,7 +634,7 @@ export default function FAQExplorer({
 
                             <span
                               className={`
-                                text-[10px]
+                                text-[16px] lg:text-[18px]
                                 font-semibold
 
                                 ${
@@ -718,7 +718,7 @@ export default function FAQExplorer({
 
                       <span
                         className={`
-                          text-[10px]
+                          text-[16px] lg:text-[18px]
                           font-semibold
                           uppercase
                           tracking-[0.2em]
@@ -734,20 +734,20 @@ export default function FAQExplorer({
                     <h3
                       className="
                         font-playfair-display
-                        text-[30px]
+                        text-[30px] lg:text-[40px]
                         font-medium
-                        leading-[1.08]
+                        leading-[1.15]
                         tracking-[-0.035em]
                         text-[#ddbc69]
 
-                        sm:text-[36px]
-                        lg:text-[42px]
+
+
                       "
                     >
                       {activeGroup.label}
                     </h3>
 
-                    <p className="mt-4 max-w-2xl leading-7 text-white">
+                    <p className="text-[16px] lg:text-[18px] mt-4 max-w-2xl leading-[1.75] text-white">
                       {
                         activeGroup.description
                       }
@@ -823,7 +823,7 @@ function FAQList({
             <span
               className={`
                 mt-1
-                text-[10px]
+                text-[16px] lg:text-[18px]
                 font-semibold
                 tracking-[0.08em]
 
@@ -838,12 +838,12 @@ function FAQList({
             <span
               className="
                 pr-2
-                text-[15px]
+                text-[16px] lg:text-[18px]
                 font-medium
                 leading-6
                 text-white
 
-                sm:text-lg
+
                 sm:leading-7
               "
             >
@@ -888,12 +888,12 @@ function FAQList({
             <p
               className="
                 max-w-3xl
-                text-sm
-                leading-7
+                text-[16px] lg:text-[18px]
+                leading-[1.75]
                 text-white
 
-                sm:text-base
-                sm:leading-8
+
+
               "
             >
               {faq.answer}
@@ -951,11 +951,11 @@ function SearchResults({
           />
         </div>
 
-        <h3 className="mt-5 text-xl font-medium text-white">
+        <h3 className="mt-5 text-[30px] lg:text-[40px] font-medium text-white">
           No matching questions
         </h3>
 
-        <p className="mt-2 text-sm text-white/45">
+        <p className="mt-2 text-[16px] lg:text-[18px] text-white/45">
           Try a broader search term.
         </p>
       </div>
@@ -965,7 +965,7 @@ function SearchResults({
   return (
     <div>
       <div className="mb-8 border-b border-white/[0.08] pb-6">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
+        <p className="text-[16px] lg:text-[18px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
           Search Results
         </p>
 
@@ -973,12 +973,12 @@ function SearchResults({
           className="
             mt-2
             font-playfair-display
-            text-[28px]
+            text-[30px] lg:text-[40px]
             font-medium
-            leading-[1.1]
+            leading-[1.15]
             text-white
 
-            sm:text-[36px]
+
           "
         >
           {totalResults} results for{" "}
@@ -1023,13 +1023,13 @@ function SearchResults({
                   />
                 </div>
 
-                <h4 className="font-medium text-white">
+                <h4 className="text-[30px] lg:text-[40px] font-medium text-white">
                   {group.label}
                 </h4>
 
                 <span
                   className={`
-                    text-[10px]
+                    text-[16px] lg:text-[18px]
                     font-semibold
 
                     ${design.color}
@@ -1083,7 +1083,7 @@ function ProjectFilter({
             bg-violet-400/[0.06]
             px-4
             pr-11
-            text-sm
+            text-[16px] lg:text-[18px]
             text-white
             outline-none
           "
@@ -1134,7 +1134,7 @@ function ProjectFilter({
                   border
                   px-4
                   py-2
-                  text-xs
+                  text-[16px] lg:text-[18px]
                   font-medium
                   transition-all
 

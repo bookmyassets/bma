@@ -105,13 +105,13 @@ export default function BlogSlider({ posts = [] }) {
 
       <div
         className="
-          mb-6
-          flex
+          mb-3
+          hidden
           items-end
           justify-between
           gap-5
 
-          lg:mb-8
+          md:flex
         "
       >
 
@@ -181,7 +181,7 @@ export default function BlogSlider({ posts = [] }) {
       {/* DESKTOP EDITORIAL LAYOUT                                  */}
       {/* ========================================================== */}
 
-      <div className="hidden md:grid md:grid-cols-[1.35fr_0.65fr] md:gap-5">
+      <div className="hidden md:grid md:grid-cols-[1.35fr_0.65fr] md:gap-3">
         {currentPosts.length > 0 && (
           <ProjectFeatureCard
             post={currentPosts[0]}
@@ -189,7 +189,7 @@ export default function BlogSlider({ posts = [] }) {
           />
         )}
 
-        <div className="grid gap-5">
+        <div className="grid gap-3">
           {currentPosts.slice(1, 3).map((post) => (
             <ProjectCompactCard
               key={post._id}
@@ -221,7 +221,7 @@ export default function BlogSlider({ posts = [] }) {
       {totalPages > 1 && (
         <div
           className="
-            mt-6
+            mt-3
             flex
             items-center
             justify-between
@@ -319,7 +319,7 @@ function ProjectFeatureCard({ post, formatDate }) {
       className="
         group
         relative
-        min-h-[430px]
+        min-h-[320px]
         overflow-hidden
         rounded-[24px]
         border
@@ -399,20 +399,20 @@ function ProjectFeatureCard({ post, formatDate }) {
           bottom-0
           left-0
           right-0
-          p-6
+          p-5
 
-          lg:p-7
+          lg:p-5
         "
       >
         {date && (
           <div
             className="
-              mb-3
+              mb-2
               flex
               items-center
               gap-2
               text-[12px]
-              text-white/45
+              text-white
             "
           >
             <CalendarDays className="h-3.5 w-3.5" />
@@ -425,13 +425,13 @@ function ProjectFeatureCard({ post, formatDate }) {
           className="
             max-w-xl
             font-serif
-            text-[28px]
+            text-[22px]
             font-medium
             leading-[1.12]
             tracking-[-0.025em]
             text-white
 
-            lg:text-[32px]
+            lg:text-[26px]
           "
         >
           {post.title}
@@ -439,7 +439,7 @@ function ProjectFeatureCard({ post, formatDate }) {
 
         <div
           className="
-            mt-5
+            mt-3
             inline-flex
             items-center
             gap-2
@@ -484,7 +484,7 @@ function ProjectCompactCard({ post, formatDate }) {
       className="
         group
         grid
-        min-h-[205px]
+        min-h-[154px]
         grid-cols-[0.92fr_1.08fr]
         overflow-hidden
         rounded-[20px]
@@ -498,7 +498,7 @@ function ProjectCompactCard({ post, formatDate }) {
         hover:bg-[#121212]
       "
     >
-      <div className="relative min-h-[205px] overflow-hidden">
+      <div className="relative min-h-[154px] overflow-hidden">
         {post.mainImage ? (
           <Image
             src={
@@ -544,7 +544,8 @@ function ProjectCompactCard({ post, formatDate }) {
           flex
           flex-col
           justify-between
-          p-5
+          p-3
+          lg:p-4
         "
       >
         <div>
@@ -554,7 +555,7 @@ function ProjectCompactCard({ post, formatDate }) {
               font-semibold
               uppercase
               tracking-[0.18em]
-              text-[#ddbc69]
+              text-white
             "
           >
             Mega Project
@@ -562,10 +563,10 @@ function ProjectCompactCard({ post, formatDate }) {
 
           <h3
             className="
-              mt-3
+              mt-2
               line-clamp-3
-              text-[18px]
-              font-semibold
+              text-[16px]
+              lg:text-[18px]
               leading-[1.35]
               text-[#f5f1e8]
             "
@@ -576,9 +577,9 @@ function ProjectCompactCard({ post, formatDate }) {
           {date && (
             <p
               className="
-                mt-3
+                mt-2
                 text-[12px]
-                text-white/35
+                text-white
               "
             >
               {date}
@@ -588,20 +589,20 @@ function ProjectCompactCard({ post, formatDate }) {
 
         <div
           className="
-            mt-4
+            mt-3
             flex
             items-center
             justify-between
             border-t
             border-white/[0.07]
-            pt-4
+            pt-2
           "
         >
           <span
             className="
               text-[13px]
               font-semibold
-              text-[#ddbc69]
+              text-white
             "
           >
             Explore
@@ -611,7 +612,7 @@ function ProjectCompactCard({ post, formatDate }) {
             className="
               h-4
               w-4
-              text-[#ddbc69]
+              text-white
               transition-transform
               duration-300
 
@@ -652,7 +653,7 @@ function ProjectMobileCard({ post, formatDate }) {
       <div
         className="
           relative
-          aspect-[1.35/1]
+          aspect-[16/9]
           overflow-hidden
         "
       >
@@ -712,12 +713,12 @@ function ProjectMobileCard({ post, formatDate }) {
         </span>
       </div>
 
-      <div className="p-5">
+      <div className="p-4">
         {date && (
           <p
             className="
               text-[12px]
-              text-white/35
+              text-white
             "
           >
             {date}
@@ -729,7 +730,7 @@ function ProjectMobileCard({ post, formatDate }) {
             mt-2
             line-clamp-2
             font-serif
-            text-[22px]
+            text-[20px]
             font-medium
             leading-[1.2]
             text-[#f5f1e8]
@@ -740,27 +741,27 @@ function ProjectMobileCard({ post, formatDate }) {
 
         <div
           className="
-            mt-5
+            mt-3
             flex
             items-center
             justify-between
             border-t
             border-white/[0.07]
-            pt-4
+            pt-2
           "
         >
           <span
             className="
               text-[14px]
               font-semibold
-              text-[#ddbc69]
+              text-white
             "
           >
             Explore Project
           </span>
 
           <ArrowUpRight
-            className="h-4 w-4 text-[#ddbc69]"
+            className="h-4 w-4 text-white"
           />
         </div>
       </div>

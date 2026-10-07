@@ -14,7 +14,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 export default function WestWynFAQ({
   projectName = "WestWyn Project",
   faqs = [],
-  heading = "Have More Questions?",
+  heading = "FAQs",
   description = "Our relationship managers are here to help you.",
   ctaLabel = "Connect with RM",
   phoneNumber = "+918130371647",

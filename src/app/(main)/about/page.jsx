@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import {
-  MapPin,
   Star,
   Shield,
   Phone,
@@ -9,9 +8,6 @@ import {
   Building,
   Users,
   Heart,
-  Target,
-  Globe,
-  Settings,
   CheckCircle,
   LandPlot,
   HardHat,
@@ -32,6 +28,7 @@ const RealEstateLandingPage = () => {
     properties: 0,
     customers: 0,
   });
+
 
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [isVisible, setIsVisible] = useState({
@@ -62,6 +59,45 @@ const RealEstateLandingPage = () => {
     properties: 1000,
     customers: 400,
   };
+
+  const whyChooseFeatures = [
+    {
+      "title": "Dholera-Focused Developer",
+      "description": "Focused real estate development and property support in and around Dholera."
+    },
+    {
+      "title": "Plots and Bulk Land",
+      "description": "Residential plot options and bulk land support for different requirements."
+    },
+    {
+      "title": "Project and Legal Documents",
+      "description": "Available project information and legal documents for buyer review."
+    },
+    {
+      "title": "Transparent Process",
+      "description": "Clear pricing, project information and a straightforward buying process."
+    },
+    {
+      "title": "In-House Services",
+      "description": "Construction and fabrication support coordinated within the BMA Group."
+    },
+    {
+      "title": "Site Visit and Registry Support",
+      "description": "Assistance with site visits, documentation and registry coordination."
+    },
+    {
+      "title": "Property Support",
+      "description": "Rental, resale and maintenance assistance after property purchase."
+    },
+    {
+      "title": "Indian and NRI Buyers",
+      "description": "Practical guidance for buyers based in India and overseas."
+    },
+    {
+      "title": "Liveable, Future-Ready Development",
+      "description": "A long-term focus on planned communities, habitation and buyer support."
+    }
+  ];
 
   // Sample testimonials
   const testimonials = [
@@ -333,6 +369,87 @@ const RealEstateLandingPage = () => {
         <div className="">
           <BookMyAssets />
         </div>
+
+                {/* CTA Banner */}
+        <section
+          aria-labelledby="bma-cta-heading"
+          className="bg-white px-5 py-10 sm:px-8 md:py-14 lg:px-10"
+        >
+          <div className="relative isolate mx-auto max-w-6xl overflow-hidden rounded-[24px] border border-[#ddbc69]/20 bg-gradient-to-br from-[#111d35] via-[#17394b] to-[#14534f] px-6 py-9 shadow-[0_18px_45px_rgba(17,40,53,0.18)] sm:px-9 md:py-12 lg:px-12">
+            {/* Decorative lighting */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-[#6bc9b0]/10 blur-3xl"
+            />
+
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#ddbc69]/10 blur-3xl"
+            />
+
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#ddbc69]/70 to-transparent"
+            />
+
+            <div className="relative grid items-center gap-7 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
+              {/* Content */}
+              <div>
+                <h2
+                  id="bma-cta-heading"
+                  className="max-w-xl font-playfair-display text-[30px] font-normal leading-[1.15] tracking-[-0.035em] text-[#f5f1e8] md:text-[40px]"
+                >
+                  Ready to Invest in
+                  <span className="block text-[#ddbc69]">Your Future?</span>
+                </h2>
+
+                <p className="mt-4 max-w-xl text-[15px] leading-[1.8] text-[#c4d1d6] md:text-[18px]">
+                  Join hundreds of smart investors who are building wealth
+                  through strategic real estate investments in Dholera Smart
+                  City.
+                </p>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
+                <a
+                  href="https://wa.me/918130371647"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex min-h-14 items-center justify-center gap-3 rounded-[14px] border border-[#ddbc69] bg-[#ddbc69] px-5 py-3.5 text-[15px] font-semibold text-[#172122] shadow-[0_6px_18px_rgba(0,0,0,0.12)] transition-colors hover:border-[#ecd18b] hover:bg-[#ecd18b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69] motion-reduce:transition-none md:text-[18px]"
+                >
+                  <FaWhatsapp
+                    size={23}
+                    aria-hidden="true"
+                    className="shrink-0"
+                  />
+
+                  <span>Schedule a Consultation</span>
+
+                  <ArrowRight
+                    size={18}
+                    aria-hidden="true"
+                    className="shrink-0 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+                  />
+                </a>
+
+                <a
+                  href="tel:+918130371647"
+                  className="flex min-h-14 items-center justify-center gap-3 rounded-[14px] border border-white/30 bg-white/[0.04] px-5 py-3.5 text-[15px] font-medium text-[#f5f1e8] transition-colors hover:border-white/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69] motion-reduce:transition-none md:text-[18px]"
+                >
+                  <Phone
+                    size={20}
+                    strokeWidth={1.7}
+                    aria-hidden="true"
+                    className="shrink-0 text-[#ddbc69]"
+                  />
+
+                  <span>Call Us Now</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Anniversary video banner */}
         <section
@@ -1068,143 +1185,43 @@ const RealEstateLandingPage = () => {
         <section
           ref={featuresRef}
           aria-labelledby="bma-why-choose-heading"
-          className="relative overflow-hidden bg-black px-5 py-12 text-white sm:px-8 md:py-16 lg:px-10"
+          className="relative overflow-hidden bg-[#10100e] px-5 py-12 text-white sm:px-8 lg:px-10 lg:py-16"
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(221,188,105,0.06),transparent_60%)]"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(221,188,105,0.07),transparent_65%)]"
           />
 
-          <div className="relative mx-auto max-w-6xl">
-            {/* Section heading */}
-            <header className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
-              <h2
-                id="bma-why-choose-heading"
-                className="font-playfair-display text-[30px] font-normal leading-[1.15] tracking-[-0.035em] text-[#ddbc69] md:text-[40px]"
-              >
-                Why Choose BookMyAssets?
-              </h2>
-
-              <p className="text-[15px] leading-[1.8] text-[#bcbab3] md:text-[18px]">
-                BookMyAssets provides complete property support in Dholera under
-                one group.
-              </p>
+          <div className="relative mx-auto max-w-7xl">
+            <header className="grid gap-5 border-b border-[#ddbc69]/20 pb-8 md:grid-cols-[1.2fr_0.8fr] md:items-end md:gap-12 lg:pb-10">
+              <div>
+                <h2
+                  id="bma-why-choose-heading"
+                  className="max-w-xl font-playfair-display text-[30px] font-normal leading-[1.15] tracking-[-0.035em] text-[#ddbc69] lg:text-[40px]"
+                >
+                  Why Choose BookMyAssets?
+                </h2>
+              </div>
             </header>
 
-            {/* Feature grid */}
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-3 lg:gap-5">
-              {[
-                {
-                  icon: MapPin,
-                  title: "Dholera-Focused Developer",
-                  description:
-                    "Focused real estate development and property support in and around Dholera.",
-                  iconColor: "text-[#efa99a]",
-                  iconSurface: "bg-[#efa99a]/10",
-                  iconBorder: "border-[#efa99a]/20",
-                },
-                {
-                  icon: Building,
-                  title: "Plots and Bulk Land",
-                  description:
-                    "Residential plot options and bulk land support for different requirements.",
-                  iconColor: "text-[#9bd8b5]",
-                  iconSurface: "bg-[#9bd8b5]/10",
-                  iconBorder: "border-[#9bd8b5]/20",
-                },
-                {
-                  icon: Shield,
-                  title: "Project and Legal Documents",
-                  description:
-                    "Available project information and legal documents for buyer review.",
-                  iconColor: "text-[#9abfec]",
-                  iconSurface: "bg-[#9abfec]/10",
-                  iconBorder: "border-[#9abfec]/20",
-                },
-                {
-                  icon: Target,
-                  title: "Transparent Process",
-                  description:
-                    "Clear pricing, project information and a straightforward buying process.",
-                  iconColor: "text-[#c4a7ea]",
-                  iconSurface: "bg-[#c4a7ea]/10",
-                  iconBorder: "border-[#c4a7ea]/20",
-                },
-                {
-                  icon: Settings,
-                  title: "In-House Services",
-                  description:
-                    "Construction and fabrication support coordinated within the BMA Group.",
-                  iconColor: "text-[#ddbc69]",
-                  iconSurface: "bg-[#ddbc69]/10",
-                  iconBorder: "border-[#ddbc69]/20",
-                },
-                {
-                  icon: Phone,
-                  title: "Site Visit and Registry Support",
-                  description:
-                    "Assistance with site visits, documentation and registry coordination.",
-                  iconColor: "text-[#aeb9ef]",
-                  iconSurface: "bg-[#aeb9ef]/10",
-                  iconBorder: "border-[#aeb9ef]/20",
-                },
-                {
-                  icon: Heart,
-                  title: "Property Support",
-                  description:
-                    "Rental, resale and maintenance assistance after property purchase.",
-                  iconColor: "text-[#e5a6be]",
-                  iconSurface: "bg-[#e5a6be]/10",
-                  iconBorder: "border-[#e5a6be]/20",
-                },
-                {
-                  icon: Globe,
-                  title: "Indian and NRI Buyers",
-                  description:
-                    "Practical guidance for buyers based in India and overseas.",
-                  iconColor: "text-[#94d4df]",
-                  iconSurface: "bg-[#94d4df]/10",
-                  iconBorder: "border-[#94d4df]/20",
-                },
-                {
-                  icon: CheckCircle,
-                  title: "Liveable, Future-Ready Development",
-                  description:
-                    "A long-term focus on planned communities, habitation and buyer support.",
-                  iconColor: "text-[#9bd5c7]",
-                  iconSurface: "bg-[#9bd5c7]/10",
-                  iconBorder: "border-[#9bd5c7]/20",
-                },
-              ].map((feature) => {
-                const Icon = feature.icon;
-
-                return (
-                  <article
-                    key={feature.title}
-                    className="group relative min-w-0 rounded-[18px] border border-white/10 bg-[#121211] p-5 transition-colors duration-300 hover:border-[#ddbc69]/35 hover:bg-[#181816] motion-reduce:transition-none md:p-6"
-                  >
-                    {/* Icon beside title on mobile */}
-                    <div className="flex items-start gap-4 md:block">
-                      <div
-                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[13px] border shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] md:mb-5 md:h-12 md:w-12 ${feature.iconColor} ${feature.iconSurface} ${feature.iconBorder}`}
-                      >
-                        <Icon size={25} strokeWidth={1.6} aria-hidden="true" />
-                      </div>
-
-                      <div className="min-w-0">
-                        <h3 className="text-[17px] font-medium leading-[1.4] tracking-[-0.02em] text-[#f4eee2] md:text-[20px]">
-                          {feature.title}
-                        </h3>
-
-                        <p className="mt-2 text-[15px] leading-[1.75] text-[#bcbab3] md:mt-3 md:text-[18px]">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
+            <ul className="mt-8 grid gap-x-10 gap-y-8 md:grid-cols-2 lg:mt-10 xl:grid-cols-3 xl:gap-x-12 xl:gap-y-10">
+              {whyChooseFeatures.map((feature) => (
+                <li key={feature.title} className="flex min-w-0 items-start gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-[#ddbc69]"
+                  />
+                  <div className="min-w-0">
+                    <h3 className="text-[16px] font-medium leading-[1.4] tracking-[-0.02em] text-[#ddbc69] lg:text-[23px]">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-3 text-[16px] leading-[1.75] text-white lg:text-[20px]">
+                      {feature.description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -1364,86 +1381,6 @@ const RealEstateLandingPage = () => {
           </div>
         </section>
 
-        {/* CTA Banner */}
-        <section
-          aria-labelledby="bma-cta-heading"
-          className="bg-white px-5 py-10 sm:px-8 md:py-14 lg:px-10"
-        >
-          <div className="relative isolate mx-auto max-w-6xl overflow-hidden rounded-[24px] border border-[#ddbc69]/20 bg-gradient-to-br from-[#111d35] via-[#17394b] to-[#14534f] px-6 py-9 shadow-[0_18px_45px_rgba(17,40,53,0.18)] sm:px-9 md:py-12 lg:px-12">
-            {/* Decorative lighting */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-[#6bc9b0]/10 blur-3xl"
-            />
-
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#ddbc69]/10 blur-3xl"
-            />
-
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#ddbc69]/70 to-transparent"
-            />
-
-            <div className="relative grid items-center gap-7 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
-              {/* Content */}
-              <div>
-                <h2
-                  id="bma-cta-heading"
-                  className="max-w-xl font-playfair-display text-[30px] font-normal leading-[1.15] tracking-[-0.035em] text-[#f5f1e8] md:text-[40px]"
-                >
-                  Ready to Invest in
-                  <span className="block text-[#ddbc69]">Your Future?</span>
-                </h2>
-
-                <p className="mt-4 max-w-xl text-[15px] leading-[1.8] text-[#c4d1d6] md:text-[18px]">
-                  Join hundreds of smart investors who are building wealth
-                  through strategic real estate investments in Dholera Smart
-                  City.
-                </p>
-              </div>
-
-              {/* Action buttons */}
-              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
-                <a
-                  href="https://wa.me/918130371647"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex min-h-14 items-center justify-center gap-3 rounded-[14px] border border-[#ddbc69] bg-[#ddbc69] px-5 py-3.5 text-[15px] font-semibold text-[#172122] shadow-[0_6px_18px_rgba(0,0,0,0.12)] transition-colors hover:border-[#ecd18b] hover:bg-[#ecd18b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69] motion-reduce:transition-none md:text-[18px]"
-                >
-                  <FaWhatsapp
-                    size={23}
-                    aria-hidden="true"
-                    className="shrink-0"
-                  />
-
-                  <span>Schedule a Consultation</span>
-
-                  <ArrowRight
-                    size={18}
-                    aria-hidden="true"
-                    className="shrink-0 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-                  />
-                </a>
-
-                <a
-                  href="tel:+918130371647"
-                  className="flex min-h-14 items-center justify-center gap-3 rounded-[14px] border border-white/30 bg-white/[0.04] px-5 py-3.5 text-[15px] font-medium text-[#f5f1e8] transition-colors hover:border-white/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ddbc69] motion-reduce:transition-none md:text-[18px]"
-                >
-                  <Phone
-                    size={20}
-                    strokeWidth={1.7}
-                    aria-hidden="true"
-                    className="shrink-0 text-[#ddbc69]"
-                  />
-
-                  <span>Call Us Now</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
     </>
   );

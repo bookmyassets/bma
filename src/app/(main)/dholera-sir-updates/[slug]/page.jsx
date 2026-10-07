@@ -135,7 +135,7 @@ const RightSidebar = ({ trendingBlogs }) => {
       <div className=" pt-4 max-w-xl mx-auto hidden md:block">
         <InlineLeadForm
           variant="common"
-          title="Buy Residential Plots in Dholera Starting From Rs 8 Lakh"
+          title="Buy Residential Plots in Dholera Starting From ₹10 Lakh"
           buttonName="Know More"
           theme="dark"
           layout="stacked"

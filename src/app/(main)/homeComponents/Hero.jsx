@@ -38,6 +38,9 @@ const PointsList = () => (
     <h1
       id="hero-title-desktop"
       className=" text-[clamp(3rem,6vw,5.6rem)] font-semibold leading-[0.92] tracking-[-0.035em]"
+      style={{
+        textShadow: "0 2px 3px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4)",
+      }}
     >
       <span className="mt-2 block text-[#ddbc69]">
         Dedicated to Dholera
@@ -49,6 +52,9 @@ const PointsList = () => (
     {/* Description */}
     <p
       className="mt-5 max-w-[32.5rem] text-[clamp(1.05rem,1.6vw,1.5rem)] font-normal leading-[1.6] text-white"
+      style={{
+        textShadow: "0 2px 4px rgba(0,0,0,0.8), 0 4px 12px rgba(0,0,0,0.5)",
+      }}
     >
       Invest in Dholera Residential Plots
     </p>
@@ -208,9 +214,12 @@ export default function Hero() {
               <h1
                 id="hero-title-mobile"
                 className="font-serif text-[clamp(2.75rem,11vw,4rem)] font-semibold leading-[0.92] tracking-[-0.025em]"
+                style={{
+                  textShadow: "0 2px 3px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4)",
+                }}
               >
                 <span className="block text-white">Dedicated to</span>
-                <span className="mt-2 block text-[#ddbc69]">
+                <span className="mt-2 block text-[#e6c875]">
                   Dholera
                 </span>
               </h1>
@@ -224,6 +233,9 @@ export default function Hero() {
                   text-white
 
                 "
+                style={{
+                  textShadow: "0 2px 4px rgba(0,0,0,0.8), 0 4px 12px rgba(0,0,0,0.5)",
+                }}
               >
                 Invest in Dholera Residential Plots
               </p>

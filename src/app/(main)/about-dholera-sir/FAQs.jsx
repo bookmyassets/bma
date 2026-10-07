@@ -54,7 +54,7 @@ export default function FAQSection({ surface = "base" }) {
       )}
       aria-labelledby="about-dholera-faq-heading"
     >
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <div className="mx-auto max-w-7xl px-5 py-10 sm:px-6 lg:px-8 lg:py-14">
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
           {/* ====================================================== */}
           {/* LEFT INTRO                                             */}
@@ -66,22 +66,19 @@ export default function FAQSection({ surface = "base" }) {
 
             <h2
               id="about-dholera-faq-heading"
-              className="max-w-xl font-playfair-display text-[30px] font-medium leading-[1.08] tracking-[-0.035em] text-[#ddbc69] lg:text-[40px]"
+              className="max-w-xl font-playfair-display text-[27px] font-medium leading-[1.08] tracking-[-0.035em] text-[#ddbc69] lg:text-[35px]"
             >
-              Frequently Asked{" "}
-              <span className="text-[#ddbc69]">
-                Questions
-              </span>
+              FAQs
             </h2>
 
-            <p className="mt-5 max-w-md text-[16px] leading-[1.7] text-[#f5f1e8]/58 lg:text-[18px]">
+            <p className="mt-5 max-w-md text-[14px] leading-[1.7] text-[#f5f1e8] lg:text-[16px]">
               Find quick answers to common questions about Dholera SIR,
               infrastructure, planning and investment.
             </p>
 
             {/* DESKTOP CONTACT CARD */}
             <div className="mt-8 hidden lg:block">
-              <div className="relative overflow-hidden rounded-[20px] border border-[#ddbc69]/18 bg-[#101010] p-5">
+
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[#ddbc69]/[0.07] blur-[45px]"
@@ -89,16 +86,12 @@ export default function FAQSection({ surface = "base" }) {
 
                 <div className="relative">
 
-                  <p className="mt-4 text-[17px] font-semibold text-[#f5f1e8]">
-                    Still have questions?
-                  </p>
-
                   <a
                     href="tel:+918130371647"
-                    className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#ddbc69] px-4 py-2.5 text-sm font-semibold text-[#101010] transition hover:bg-[#ebcb7a]"
+                    className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#ddbc69] px-4 py-2.5 text-[16px] font-semibold text-[#101010] transition hover:bg-[#ebcb7a] lg:text-[18px]"
                   >
                     <Phone
-                      className="h-4 w-4"
+                      className="h-5 w-5 shrink-0"
                       aria-hidden="true"
                     />
 
@@ -106,7 +99,6 @@ export default function FAQSection({ surface = "base" }) {
                   </a>
                 </div>
               </div>
-            </div>
           </div>
 
           {/* ====================================================== */}
@@ -137,7 +129,7 @@ export default function FAQSection({ surface = "base" }) {
                     {/* NUMBER */}
                     <span
                       className={cn(
-                        "shrink-0 font-serif text-[14px] transition-colors duration-300 lg:text-[16px]",
+                        "shrink-0 font-serif text-[15px] transition-colors duration-300 lg:text-[16px]",
                         isOpen
                           ? "text-[#ddbc69]"
                           : "text-white/22",
@@ -149,7 +141,7 @@ export default function FAQSection({ surface = "base" }) {
                     {/* QUESTION */}
                     <span
                       className={cn(
-                        "flex-1 text-[16px] font-semibold leading-[1.45] transition-colors duration-300 lg:text-[18px]",
+                        "flex-1 text-[15px] font-semibold leading-[1.45] transition-colors duration-300 lg:text-[16px]",
                         isOpen
                           ? "text-[#f5f1e8]"
                           : "text-[#f5f1e8]/78",
@@ -206,21 +198,21 @@ export default function FAQSection({ surface = "base" }) {
           <div className="lg:hidden">
             <div className="flex items-center justify-between gap-4 rounded-[18px] border border-[#ddbc69]/18 bg-[#101010] p-4">
               <div>
-                <p className="text-[15px] font-semibold text-[#f5f1e8]">
+                <p className="text-[16px] font-semibold text-[#f5f1e8] lg:text-[18px]">
                   Need more help?
                 </p>
 
-                <p className="mt-1 text-[13px] text-white/40">
+                <p className="mt-1 text-[16px] text-white/40 lg:text-[18px]">
                   Talk to RM
                 </p>
               </div>
 
               <a
                 href="tel:+918130371647"
-                className="inline-flex min-h-10 shrink-0 items-center gap-2 rounded-xl bg-[#ddbc69] px-3.5 py-2 text-[13px] font-semibold text-[#101010]"
+                className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-xl bg-[#ddbc69] px-3.5 py-2 text-[16px] font-semibold text-[#101010] lg:text-[18px]"
               >
                 <Phone
-                  className="h-3.5 w-3.5"
+                  className="h-5 w-5 shrink-0"
                   aria-hidden="true"
                 />
 
