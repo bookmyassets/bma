@@ -28,7 +28,7 @@ export default function Footer() {
               />
             </Link>
 
-            <div className="space-y-4 text-sm text-[#ddbc69]">
+            <div className="space-y-4 text-[15px] lg:text-[17px] text-[#ddbc69]">
               {/* Phone */}
               <Link
                 className="flex items-center gap-3 text-white hover:text-[#ddbc69] transition-colors"
@@ -140,7 +140,7 @@ export default function Footer() {
             <p className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Residential Projects
             </p>
-            <ul className="space-y-3 text-sm text-[#ddbc69]">
+            <ul className="space-y-3 text-[15px] lg:text-[17px] text-[#ddbc69]">
               <li>
                 <Link
                   href="/dholera-residential-plots/westwyn-residency"
@@ -182,7 +182,7 @@ export default function Footer() {
             <p className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Quick Links
             </p>
-            <ul className="space-y-3 text-sm text-[#ddbc69]">
+            <ul className="space-y-3 text-[15px] lg:text-[17px] text-[#ddbc69]">
               <li>
                 <Link
                   href="/about"
@@ -239,7 +239,7 @@ export default function Footer() {
             <p className="text-base font-semibold mb-5 pb-2 border-b text-[#ddbc69] border-gray-100">
               Policies
             </p>
-            <ul className="space-y-3 text-sm text-[#ddbc69]">
+            <ul className="space-y-3 text-[15px] lg:text-[17px] text-[#ddbc69]">
               <li>
                 <Link
                   href="/policies/terms"
