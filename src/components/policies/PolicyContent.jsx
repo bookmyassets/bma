@@ -1,26 +1,9 @@
 import {
-  ArrowUpRight,
-  Database,
-  Eye,
-  LockKeyhole,
   Mail,
   MapPin,
   Phone,
   ShieldCheck,
-  UserCheck,
-  Scale, 
-  FileCheck2,
-  FileWarning,
-  Fingerprint,
-  BadgeCheck,
-  BadgeIndianRupee,
-  CalendarClock,
-  CircleDollarSign,
-  ReceiptText,
 } from "lucide-react";
-
-
-const GOLD = "#ddbc69";
 
 const contactLinkClass =
   "text-white transition-colors duration-200 hover:text-[#ddbc69]";
@@ -28,7 +11,6 @@ const contactLinkClass =
 function PolicyShell({
   title,
   description,
-  lastUpdated,
   children,
 }) {
   return (
@@ -67,17 +49,18 @@ function PolicyShell({
           "
         />
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-36 sm:px-6 sm:pb-16 sm:pt-40 lg:px-8 lg:pb-20 lg:pt-44">
-          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="relative mx-auto max-w-7xl px-4 pb-8 pt-[104px] sm:px-6 sm:pb-10 sm:pt-[112px] lg:px-8 lg:pb-12 lg:pt-[118px]">
+          <div>
             {/* Main hero copy */}
             <div>
               <h1
                 className="
                   max-w-4xl
-                  text-[clamp(3rem,8vw,6.8rem)]
+                  text-[29px]
+                  lg:text-[38px]
                   font-medium
-                  leading-[0.88]
-                  tracking-[-0.055em]
+                  leading-[1.15]
+                  tracking-[-0.025em]
                   text-[#ddbc69]
                   font-playfair-display
                 "
@@ -86,61 +69,21 @@ function PolicyShell({
               </h1>
 
               {description ? (
-                <p className="mt-7 max-w-2xl text-base leading-7 text-white sm:text-lg sm:leading-8">
+                <p className="mt-4 max-w-2xl text-base leading-7 text-white sm:text-lg sm:leading-8">
                   {description}
                 </p>
               ) : null}
             </div>
 
-            {/* Desktop metadata */}
-            <div className="hidden min-w-[180px] border-l border-white/10 pl-6 lg:block">
-              <div className="space-y-5">
-                <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#ddbc69]">
-                    Document
-                  </p>
-
-                  <p className="mt-1 text-sm text-white">Privacy Policy</p>
-                </div>
-
-                {lastUpdated ? (
-                  <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#ddbc69]">
-                      Last updated
-                    </p>
-
-                    <p className="mt-1 text-sm text-white">{lastUpdated}</p>
-                  </div>
-                ) : null}
-
-                <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#ddbc69]">
-                    Company
-                  </p>
-
-                  <p className="mt-1 text-sm text-white">BookMyAssets</p>
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* bottom hero line */}
-          <div className="mt-10 flex items-center gap-4 sm:mt-14">
-            <div className="h-px flex-1 bg-gradient-to-r from-[#ddbc69]/60 via-white/10 to-transparent" />
-
-            <ShieldCheck
-              size={17}
-              strokeWidth={1.6}
-              className="text-[#ddbc69]"
-            />
-          </div>
         </div>
       </section>
 
       {/* ======================================================
           CONTENT
       ====================================================== */}
-      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
+      <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-5 sm:px-6 sm:pb-14 sm:pt-6 lg:px-8 lg:pb-20 lg:pt-6">
         {children}
       </div>
     </main>
@@ -394,90 +337,6 @@ function ContactDetails({ label = "Call" }) {
   );
 }
 
-
-function TermsOverview() {
-  const items = [
-    {
-      icon: FileCheck2,
-      label: "Agreement",
-      title: "Using BookMyAssets",
-      text: "These terms govern access to our website, services, content, and features.",
-    },
-    {
-      icon: ShieldCheck,
-      label: "Usage",
-      title: "Acceptable use",
-      text: "Use BookMyAssets lawfully and without interfering with our services or users.",
-    },
-    {
-      icon: UserCheck,
-      label: "Eligibility",
-      title: "Age requirement",
-      text: "You must be at least 18 years old and legally able to accept these terms.",
-    },
-    {
-      icon: Scale,
-      label: "Rights",
-      title: "Your responsibilities",
-      text: "Our content, services, access rules, and intellectual property remain protected.",
-    },
-  ];
-
-  return (
-    <section className="mb-16 sm:mb-20 lg:mb-28">
-      <div className="mb-7 sm:flex sm:items-end sm:justify-between">
-    
-          <h2 className="mt-2 text-2xl font-medium font-playfair-display tracking-[-0.03em] text-[#ddbc69] sm:text-3xl">
-            What these terms cover
-          </h2>
-
-      </div>
-
-      <div className="grid grid-cols-2 border-l border-t border-white/[0.09] lg:grid-cols-4">
-        {items.map(({ icon: Icon, label, title, text }) => (
-          <div
-            key={title}
-            className="
-              min-h-[180px]
-              border-b
-              border-r
-              border-white/[0.09]
-              p-4
-              transition-colors
-              duration-300
-              hover:bg-white/[0.025]
-              sm:min-h-[210px]
-              sm:p-6
-            "
-          >
-            <div className="flex items-start justify-between gap-3">
-              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69] sm:text-[10px]">
-                {label}
-              </span>
-
-              <Icon
-                size={18}
-                strokeWidth={1.5}
-                className="shrink-0 text-[#ddbc69]"
-              />
-            </div>
-
-            <div className="mt-10 sm:mt-14">
-              <h3 className="text-base font-medium text-[#ddbc69] sm:text-lg">
-                {title}
-              </h3>
-
-              <p className="mt-2 text-xs leading-5 text-white sm:text-sm sm:leading-6">
-                {text}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function TermsIntroduction() {
   return (
     <section className="mb-16 border-y border-white/[0.08] py-9 sm:mb-20 sm:py-12 lg:mb-28">
@@ -491,7 +350,8 @@ function TermsIntroduction() {
         <div className="max-w-4xl">
           <p
             className="
-              text-[clamp(1.45rem,3.5vw,2.5rem)]
+              text-[25px]
+              lg:text-[36px]
               font-medium
               leading-[1.3]
               tracking-[-0.035em]
@@ -527,7 +387,6 @@ export function TermsPolicyContent() {
       description="The rules, responsibilities, and conditions that apply when you use BookMyAssets."
       lastUpdated="08 August 2026"
     >
-      <TermsOverview />
 
       <TermsIntroduction />
 
@@ -695,88 +554,6 @@ export function TermsPolicyContent() {
   );
 }
 
-function PrivacyOverview() {
-  const items = [
-    {
-      icon: Database,
-      label: "Collection",
-      title: "What we collect",
-      text: "Information you provide and limited technical information.",
-    },
-    {
-      icon: Eye,
-      label: "Usage",
-      title: "Why we use it",
-      text: "To operate, improve, communicate and maintain our services.",
-    },
-    {
-      icon: LockKeyhole,
-      label: "Protection",
-      title: "How we protect it",
-      text: "Administrative, technical and security measures.",
-    },
-    {
-      icon: ShieldCheck,
-      label: "Control",
-      title: "Your choices",
-      text: "Cookie controls and communication preferences remain available.",
-    },
-  ];
-
-  return (
-    <section className="mb-16 sm:mb-20 lg:mb-28">
-      <div className="mb-7 sm:flex sm:items-end sm:justify-between">
-        <h2 className="mt-2 text-2xl font-medium font-playfair-display tracking-[-0.03em] text-[#ddbc69] sm:text-3xl">
-          What this policy covers
-        </h2>
-      </div>
-
-      <div className="grid grid-cols-2 border-l border-t border-white/[0.09] lg:grid-cols-4">
-        {items.map(({ icon: Icon, label, title, text }) => (
-          <div
-            key={title}
-            className="
-              min-h-[180px]
-              border-b
-              border-r
-              border-white/[0.09]
-              p-4
-              transition-colors
-              duration-300
-              hover:bg-white/[0.025]
-
-              sm:min-h-[210px]
-              sm:p-6
-            "
-          >
-            <div className="flex items-start justify-between gap-3">
-              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white sm:text-[10px]">
-                {label}
-              </span>
-
-              <Icon
-                size={18}
-                strokeWidth={1.5}
-                className="shrink-0 text-[#ddbc69]"
-              />
-            </div>
-
-            <div className="mt-10 sm:mt-14">
-              <h3 className="text-base font-medium text-[#ddbc69] sm:text-lg">
-                {title}
-              </h3>
-
-              <p className="mt-2 text-xs leading-5 text-white sm:text-sm sm:leading-6">
-                {text}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function PrivacyIntroduction() {
   return (
     <section className="mb-16 border-y border-white/[0.08] py-9 sm:mb-20 sm:py-12 lg:mb-28">
@@ -790,7 +567,8 @@ function PrivacyIntroduction() {
         <div className="max-w-4xl">
           <p
             className="
-              text-[clamp(1.45rem,3.5vw,2.5rem)]
+              text-[25px]
+              lg:text-[36px]
               font-medium
               leading-[1.3]
               tracking-[-0.035em]
@@ -831,7 +609,6 @@ export function PrivacyPolicyContent() {
       title="Privacy Policy"
       description="Your information. Clearly explained."
     >
-      <PrivacyOverview />
 
       <PrivacyIntroduction />
 
@@ -1027,88 +804,6 @@ export function PrivacyPolicyContent() {
   );
 }
 
-function CopyrightOverview() {
-  const items = [
-    {
-      icon: Fingerprint,
-      label: "Ownership",
-      title: "Protected content",
-      text: "BookMyAssets content, branding, software, design, and media may be protected by intellectual property laws.",
-    },
-    {
-      icon: Scale,
-      label: "Usage",
-      title: "Use restrictions",
-      text: "Protected content may not be copied, modified, distributed, sold, or commercially used without permission.",
-    },
-    {
-      icon: FileWarning,
-      label: "Reporting",
-      title: "Report infringement",
-      text: "Copyright owners can submit a notice if they believe protected work is being used without authorization.",
-    },
-    {
-      icon: BadgeCheck,
-      label: "Protection",
-      title: "Rights enforcement",
-      text: "BookMyAssets may remove infringing content and protect its intellectual property where necessary.",
-    },
-  ];
-
-  return (
-    <section className="mb-16 sm:mb-20 lg:mb-28">
-      <div className="mb-7 sm:flex sm:items-end sm:justify-between">
-      
-          <h2 className="mt-2 text-2xl font-medium font-playfair-display tracking-[-0.03em] text-[#ddbc69] sm:text-3xl">
-            What this policy covers
-          </h2>
-      </div>
-
-      <div className="grid grid-cols-2 border-l border-t border-white/[0.09] lg:grid-cols-4">
-        {items.map(({ icon: Icon, label, title, text }) => (
-          <div
-            key={title}
-            className="
-              min-h-[180px]
-              border-b
-              border-r
-              border-white/[0.09]
-              p-4
-              transition-colors
-              duration-300
-              hover:bg-white/[0.025]
-              sm:min-h-[210px]
-              sm:p-6
-            "
-          >
-            <div className="flex items-start justify-between gap-3">
-              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69] sm:text-[10px]">
-                {label}
-              </span>
-
-              <Icon
-                size={18}
-                strokeWidth={1.5}
-                className="shrink-0 text-[#ddbc69]"
-              />
-            </div>
-
-            <div className="mt-10 sm:mt-14">
-              <h3 className="text-base font-medium text-[#ddbc69] sm:text-lg">
-                {title}
-              </h3>
-
-              <p className="mt-2 text-xs leading-5 text-white sm:text-sm sm:leading-6">
-                {text}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function CopyrightIntroduction() {
   return (
     <section className="mb-16 border-y border-white/[0.08] py-9 sm:mb-20 sm:py-12 lg:mb-28">
@@ -1122,7 +817,8 @@ function CopyrightIntroduction() {
         <div className="max-w-4xl">
           <p
             className="
-              text-[clamp(1.45rem,3.5vw,2.5rem)]
+              text-[25px]
+              lg:text-[36px]
               font-medium
               leading-[1.3]
               tracking-[-0.035em]
@@ -1159,7 +855,6 @@ export function CopyrightPolicyContent() {
       description="How BookMyAssets protects intellectual property, defines content usage, and handles copyright infringement concerns."
       lastUpdated="08 August 2026"
     >
-      <CopyrightOverview />
 
       <CopyrightIntroduction />
 
@@ -1348,101 +1043,16 @@ export function CopyrightPolicyContent() {
   );
 }
 
-function RefundOverview() {
-  const items = [
-    {
-      icon: BadgeIndianRupee,
-      label: "Booking",
-      title: "₹50,000",
-      text: "Standard booking amount currently applicable to BookMyAssets bookings.",
-    },
-    {
-      icon: CalendarClock,
-      label: "Cancellation",
-      title: "15 Days",
-      text: "Cancellation and refund requests may be submitted within 15 days of booking.",
-    },
-    {
-      icon: CircleDollarSign,
-      label: "Refund",
-      title: "24 Hours",
-      text: "Approved refunds are generally initiated for credit within 24 hours.",
-    },
-    {
-      icon: ReceiptText,
-      label: "Payment",
-      title: "30 Days",
-      text: "Full payment is generally required within 30 days from the booking date.",
-    },
-  ];
-
-  return (
-    <section className="mb-16 sm:mb-20 lg:mb-28">
-      <div className="mb-7 sm:flex sm:items-end sm:justify-between">
-          <h2 className="mt-2 text-2xl font-medium font-playfair-display tracking-[-0.03em] text-[#ddbc69] sm:text-3xl">
-            Key booking terms
-          </h2>
-      </div>
-
-      <div className="grid grid-cols-2 border-l border-t border-white/[0.09] lg:grid-cols-4">
-        {items.map(({ icon: Icon, label, title, text }) => (
-          <div
-            key={label}
-            className="
-              min-h-[180px]
-              border-b
-              border-r
-              border-white/[0.09]
-              p-4
-              transition-colors
-              duration-300
-              hover:bg-white/[0.025]
-              sm:min-h-[210px]
-              sm:p-6
-            "
-          >
-            <div className="flex items-start justify-between gap-3">
-              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69] sm:text-[10px]">
-                {label}
-              </span>
-
-              <Icon
-                size={18}
-                strokeWidth={1.5}
-                className="shrink-0 text-[#ddbc69]"
-              />
-            </div>
-
-            <div className="mt-9 sm:mt-12">
-              <h3 className="text-xl font-medium tracking-[-0.03em] text-[#ddbc69] sm:text-2xl">
-                {title}
-              </h3>
-
-              <p className="mt-2 text-xs leading-5 text-white sm:text-sm sm:leading-6">
-                {text}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function RefundIntroduction() {
   return (
-    <section className="mb-16 border-y border-white/[0.08] py-9 sm:mb-20 sm:py-12 lg:mb-28">
-      <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
-        <div>
-          <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
-            Before you book
-          </span>
-        </div>
+    <section className="mb-16 border-b border-white/[0.08] pb-9 sm:mb-20 sm:pb-12 lg:mb-28">
+      <div>
 
         <div className="max-w-4xl">
           <p
             className="
-              text-[clamp(1.45rem,3.5vw,2.5rem)]
+              text-[25px]
+              lg:text-[36px]
               font-medium
               leading-[1.3]
               tracking-[-0.035em]
@@ -1479,7 +1089,6 @@ export function RefundCancellationPolicyContent() {
       eyebrow="Payments & Bookings"
       description="Booking amounts, cancellation timelines, refunds, payment obligations, and applicable property charges."
     >
-      <RefundOverview />
 
       <RefundIntroduction />
 
