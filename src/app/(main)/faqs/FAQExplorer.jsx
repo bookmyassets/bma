@@ -258,13 +258,16 @@ export default function FAQExplorer({
         border-white/[0.08]
         bg-[#08080a]
         px-5
-        py-16
+        pt-[104px]
+        pb-16
 
         sm:px-8
-        sm:py-20
+        sm:pt-[120px]
+        sm:pb-20
 
         lg:px-10
-        lg:py-28
+        lg:pt-[134px]
+        lg:pb-28
       "
     >
       <div className="mx-auto max-w-7xl">
@@ -285,7 +288,7 @@ export default function FAQExplorer({
           <div className="max-w-3xl">
             <p
               className="
-                text-[16px] lg:text-[18px]
+                text-[14px] lg:text-[16px]
                 font-semibold
                 uppercase
                 tracking-[0.24em]
@@ -299,7 +302,7 @@ export default function FAQExplorer({
               className="
                 mt-3
                 font-playfair-display
-                text-[30px] lg:text-[40px]
+                text-[25px] lg:text-[35px]
                 font-medium
                 leading-[1.15]
                 tracking-[-0.04em]
@@ -369,7 +372,7 @@ export default function FAQExplorer({
               flex-1
               bg-transparent
               py-4
-              text-[16px] lg:text-[18px]
+              text-[15px] lg:text-[17px]
               text-white
               outline-none
 
@@ -423,7 +426,7 @@ export default function FAQExplorer({
 
             <div
               className="
-                mb-10
+                mb-6
                 grid
                 grid-cols-2
                 gap-2
@@ -454,12 +457,13 @@ export default function FAQExplorer({
                     }
                     className={`
                       flex
-                      min-h-[88px]
-                      items-start
-                      gap-3
-                      rounded-2xl
+                      min-h-[64px]
+                      items-center
+                      gap-2
+                      rounded-xl
                       border
-                      p-3
+                      px-2.5
+                      py-2
                       text-left
                       transition-all
 
@@ -479,8 +483,8 @@ export default function FAQExplorer({
                     <div
                       className={`
                         flex
-                        h-9
-                        w-9
+                        h-7
+                        w-7
                         shrink-0
                         items-center
                         justify-center
@@ -500,12 +504,12 @@ export default function FAQExplorer({
                     </div>
 
                     <div className="min-w-0">
-                      <p className="text-[16px] lg:text-[18px] font-medium leading-[1.75] text-white">
+                      <p className="text-[15px] lg:text-[17px] font-medium leading-[1.3] text-white">
                         {group.shortLabel ||
                           group.label}
                       </p>
 
-                      <p className="mt-1 text-[16px] lg:text-[18px] text-white/35">
+                      <p className="mt-0.5 text-[15px] lg:text-[17px] leading-[1.3] text-white/35">
                         {group.items.length}{" "}
                         answers
                       </p>
@@ -536,7 +540,7 @@ export default function FAQExplorer({
               <aside className="hidden lg:block">
                 <div className="sticky top-28">
                   <div className="mb-5 flex items-center gap-2">
-                    <span className="text-[16px] lg:text-[18px] font-semibold uppercase tracking-[0.2em] text-white/35">
+                    <span className="text-[15px] lg:text-[17px] font-semibold uppercase tracking-[0.2em] text-white/35">
                       Browse topics
                     </span>
                   </div>
@@ -617,7 +621,7 @@ export default function FAQExplorer({
 
                               <span
                                 className={`
-                                  text-[16px] lg:text-[18px]
+                                  text-[15px] lg:text-[17px]
                                   font-medium
                                   transition-colors
 
@@ -634,7 +638,7 @@ export default function FAQExplorer({
 
                             <span
                               className={`
-                                text-[16px] lg:text-[18px]
+                                text-[15px] lg:text-[17px]
                                 font-semibold
 
                                 ${
@@ -709,7 +713,7 @@ export default function FAQExplorer({
                         `}
                       >
                         <ActiveIcon
-                          size={20}
+                          size={18}
                           className={
                             design.color
                           }
@@ -718,7 +722,7 @@ export default function FAQExplorer({
 
                       <span
                         className={`
-                          text-[16px] lg:text-[18px]
+                          text-[14px] lg:text-[16px]
                           font-semibold
                           uppercase
                           tracking-[0.2em]
@@ -734,7 +738,7 @@ export default function FAQExplorer({
                     <h3
                       className="
                         font-playfair-display
-                        text-[30px] lg:text-[40px]
+                        text-[25px] lg:text-[35px]
                         font-medium
                         leading-[1.15]
                         tracking-[-0.035em]
@@ -747,7 +751,7 @@ export default function FAQExplorer({
                       {activeGroup.label}
                     </h3>
 
-                    <p className="text-[16px] lg:text-[18px] mt-4 max-w-2xl leading-[1.75] text-white">
+                    <p className="text-[15px] lg:text-[17px] mt-4 max-w-2xl leading-[1.75] text-white">
                       {
                         activeGroup.description
                       }
@@ -823,7 +827,7 @@ function FAQList({
             <span
               className={`
                 mt-1
-                text-[16px] lg:text-[18px]
+                text-[15px] lg:text-[17px]
                 font-semibold
                 tracking-[0.08em]
 
@@ -838,7 +842,7 @@ function FAQList({
             <span
               className="
                 pr-2
-                text-[16px] lg:text-[18px]
+                text-[15px] lg:text-[17px]
                 font-medium
                 leading-6
                 text-white
@@ -888,7 +892,7 @@ function FAQList({
             <p
               className="
                 max-w-3xl
-                text-[16px] lg:text-[18px]
+                text-[15px] lg:text-[17px]
                 leading-[1.75]
                 text-white
 
@@ -951,11 +955,11 @@ function SearchResults({
           />
         </div>
 
-        <h3 className="mt-5 text-[30px] lg:text-[40px] font-medium text-white">
+        <h3 className="mt-5 text-[25px] lg:text-[35px] font-medium text-white">
           No matching questions
         </h3>
 
-        <p className="mt-2 text-[16px] lg:text-[18px] text-white/45">
+        <p className="mt-2 text-[15px] lg:text-[17px] text-white/45">
           Try a broader search term.
         </p>
       </div>
@@ -965,7 +969,7 @@ function SearchResults({
   return (
     <div>
       <div className="mb-8 border-b border-white/[0.08] pb-6">
-        <p className="text-[16px] lg:text-[18px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
+        <p className="text-[15px] lg:text-[17px] font-semibold uppercase tracking-[0.2em] text-[#ddbc69]">
           Search Results
         </p>
 
@@ -973,7 +977,7 @@ function SearchResults({
           className="
             mt-2
             font-playfair-display
-            text-[30px] lg:text-[40px]
+            text-[25px] lg:text-[35px]
             font-medium
             leading-[1.15]
             text-white
@@ -1023,13 +1027,13 @@ function SearchResults({
                   />
                 </div>
 
-                <h4 className="text-[30px] lg:text-[40px] font-medium text-white">
+                <h4 className="text-[25px] lg:text-[35px] font-medium text-white">
                   {group.label}
                 </h4>
 
                 <span
                   className={`
-                    text-[16px] lg:text-[18px]
+                    text-[15px] lg:text-[17px]
                     font-semibold
 
                     ${design.color}
@@ -1083,7 +1087,7 @@ function ProjectFilter({
             bg-violet-400/[0.06]
             px-4
             pr-11
-            text-[16px] lg:text-[18px]
+            text-[15px] lg:text-[17px]
             text-white
             outline-none
           "
@@ -1134,7 +1138,7 @@ function ProjectFilter({
                   border
                   px-4
                   py-2
-                  text-[16px] lg:text-[18px]
+                  text-[15px] lg:text-[17px]
                   font-medium
                   transition-all
 

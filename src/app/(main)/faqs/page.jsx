@@ -419,141 +419,6 @@ export default function FAQsPage() {
         }}
       />
 
-      {/* =====================================================
-          HERO
-      ===================================================== */}
-
-      <section
-        className="
-          relative
-          isolate
-          overflow-hidden
-          border-b
-          border-white/[0.08]
-          px-5
-          pb-14
-          pt-36
-
-          sm:px-8
-          sm:pb-20
-          sm:pt-40
-
-          lg:px-10
-          lg:pb-24
-          lg:pt-44
-        "
-      >
-        {/* ambient backgrounds */}
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            left-1/2
-            top-[-400px]
-            -z-20
-            h-[800px]
-            w-[1000px]
-            -translate-x-1/2
-            rounded-full
-            bg-[#ddbc69]/[0.08]
-            blur-[170px]
-          "
-        />
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            right-[-100px]
-            top-[20%]
-            -z-20
-            h-[360px]
-            w-[360px]
-            rounded-full
-            bg-violet-500/[0.06]
-            blur-[130px]
-          "
-        />
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            left-[-100px]
-            bottom-[-120px]
-            -z-20
-            h-[360px]
-            w-[360px]
-            rounded-full
-            bg-cyan-500/[0.05]
-            blur-[120px]
-          "
-        />
-
-        {/* grid */}
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            -z-10
-            bg-[linear-gradient(rgba(255,255,255,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.018)_1px,transparent_1px)]
-            bg-[size:72px_72px]
-            opacity-40
-            [mask-image:linear-gradient(to_bottom,black,transparent_92%)]
-          "
-        />
-
-        <div className="relative mx-auto max-w-7xl">
-
-          {/* hero content */}
-
-          <div className="mx-auto max-w-5xl text-center">
-
-            <h1
-              className="
-                mx-auto
-                max-w-5xl
-                font-playfair-display
-                text-[30px] lg:text-[40px]
-                font-medium
-                leading-[1.15]
-                tracking-[-0.045em]
-                text-[#ddbc69]
-              "
-            >
-              Dholera questions,
-              <span className="block text-[#ddbc69]">
-                answered with clarity.
-              </span>
-            </h1>
-
-            <p
-              className="
-                mx-auto
-                mt-6
-                max-w-2xl
-                text-[16px] lg:text-[18px]
-                leading-[1.75]
-                text-white
-
-
-              "
-            >
-              Search practical answers about Dholera SIR, projects,
-              documentation, approvals, registry and buyer support.
-            </p>
-
-          </div>
-
-        </div>
-      </section>
 
       {/* =====================================================
           FAQ EXPLORER
@@ -646,18 +511,18 @@ export default function FAQsPage() {
                 "
               >
                 <ShieldCheck
-                  size={20}
+                  size={18}
                   className="text-emerald-300"
                 />
               </div>
 
               <span
                 className="
-                  text-[16px] lg:text-[18px]
+                  text-[14px] lg:text-[17px]
                   font-semibold
                   uppercase
                   tracking-[0.22em]
-                  text-[#ddbc69]
+                  text-white
                 "
               >
                 Still have a question?
@@ -667,7 +532,7 @@ export default function FAQsPage() {
             <h2
               className="
                 font-playfair-display
-                text-[30px] lg:text-[40px]
+                text-[27px] lg:text-[35px]
                 font-medium
                 leading-[1.15]
                 tracking-[-0.045em]
