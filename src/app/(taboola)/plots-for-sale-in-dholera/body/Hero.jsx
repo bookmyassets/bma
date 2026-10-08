@@ -1,57 +1,18 @@
 // Hero.jsx
 "use client";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import img1 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-desktop-banner.webp";
-import img2 from "@/assests/ad-page/hero/residential-plots-in-dholera-bookmyassets-mobile-banner.webp";
 import HeroForm from "./HeroForm";
-import Running from "../components/Marquee";
-
-const points = [
-  {
-    title: "Registry-Ready Plots",
-    desc: "Suitable for buyers exploring high-growth land opportunities in India's first greenfield smart city.",
-  },
-  {
-    title: "Immediate Possession",
-    desc: "Focused on long-term planning — we guide you through timelines, returns, and exit strategies.",
-  },
-  {
-    title: "Near Dholera SIR",
-    desc: "Access maps, master plans, and plot layout walkthroughs before making any decision.",
-  },
-];
 
 const PointsList = () => (
-  <div className="flex flex-col gap-[clamp(1rem,1.75vw,1.5rem)] w-[clamp(500px,45vw,700px)]">
-    <h1 className="text-white font-bold text-[clamp(1.5rem,2.7vw,2.45rem)] leading-tight mb-[clamp(0.25rem,0.75vw,0.75rem)]">
-      Residential Plots in Dholera
-      <br />
-      <span className="text-[#ddbc69]">Starting from ₹8 Lakh</span>
+  <div className="min-w-0 max-w-2xl [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]">
+    <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#f3dc9c] sm:text-sm">Your next investment in Dholera</p>
+    <h1 id="hero-title" className="text-[clamp(2.25rem,4.2vw,4rem)] font-semibold leading-[1.12] tracking-tight text-white">
+      Residential Plots<br className="hidden sm:block" /> in Dholera
+      <span className="mt-4 block text-[clamp(1.5rem,2.8vw,2.5rem)] text-[#ddbc69]">Starting from &#8377;10 Lakh</span>
     </h1>
-
-    <p className="text-white text-[clamp(0.75rem,1.5vw,1.2rem)] mb-[clamp(0.25rem,0.75vw,0.75rem)]">
-      Explore premium plotted opportunities in Dholera.
-      <br />
-      Get brochure, price list, location details, and expert guidance from
-      BookMyAssets.
+    <p className="mt-6 max-w-lg text-base leading-relaxed text-white sm:text-lg">
+      Explore premium plotted opportunities with BookMyAssets. Get the brochure, pricing and location details to plan your investment.
     </p>
-
-    {points.map((point, i) => (
-      <div
-        key={i}
-        className="flex gap-[clamp(0.5rem,1vw,0.875rem)] items-center"
-      >
-        <div className="shrink-0 w-[clamp(1.5rem,2.15vw,1.8rem)] h-[clamp(1.5rem,2.15vw,1.8rem)] rounded-full border border-[#ddbc69]/60 flex items-center justify-center">
-          <span className="text-[#ddbc69] text-[clamp(0.8rem,1.2vw,1rem)] font-semibold">
-            ➤
-          </span>
-        </div>
-        <p className="text-white font-medium text-[clamp(0.35rem,1.35vw,1.5rem)] leading-snug">
-          {point.title}
-        </p>
-      </div>
-    ))}
   </div>
 );
 
@@ -132,64 +93,28 @@ export default function Hero() {
         </div>
       )}
 
-      {/* Desktop */}
-      <div className="relative w-full h-screen aspect-[3/1] hidden md:block">
-        <Image
-          src={img1}
-          alt="Dholera Smart City Plots"
-          fill
-          className="object-cover w-full h-screen"
-          priority
-        />
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/75" />
+      <section aria-labelledby="hero-title" className="relative isolate min-h-[100svh] w-full overflow-hidden bg-[#151f28]">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          tabIndex={-1}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+        >
+          <source src="/videos/landing-page-hero-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/20 md:bg-gradient-to-r md:from-black/35 md:via-black/10 md:to-transparent" />
 
-        <div className="absolute inset-0 z-20 flex items-center justify-between max-w-7xl mx-auto px-[clamp(.7rem,3.2vw,3.2rem)]">
+        <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-10 px-5 pb-10 pt-[116px] sm:px-8 sm:pb-14 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:px-10 lg:pb-16 lg:pt-[140px]">
           <PointsList />
-          <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
-        </div>
-      </div>
-
-      {/* Mobile */}
-      <div className="md:hidden">
-        <div className="relative w-full min-h-screen">
-          <Image
-            src={img2}
-            alt="Dholera Smart City Plots"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/60" />
-
-          <div className="absolute inset-0 z-20 flex flex-col px-4 py-6 justify-center gap-4 overflow-y-auto">
-            <h1 className="text-white font-bold text-[clamp(1.5rem,6vw,2rem)] leading-tight mb-2">
-              Residential Plots in Dholera
-              <br />
-              <span className="text-[#ddbc69]">Starting from ₹8 Lakh</span>
-            </h1>
-
-            {points.map((point, i) => (
-              <div key={i} className="flex gap-3 items-start">
-                <div className="mt-0.5 shrink-0 w-6 h-6 rounded-full border border-[#ddbc69]/60 flex items-center justify-center">
-                  <span className="text-[#ddbc69] text-[0.6rem] font-semibold">
-                    ➤
-                  </span>
-                </div>
-                <div>
-                  <p className="mt-1 text-white font-medium text-sm leading-snug">
-                    {point.title}
-                  </p>
-                </div>
-              </div>
-            ))}
-
-            <div className="mt-2 border-t border-[#ddbc69]/20 pt-4">
-              <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
-            </div>
+          <div className="w-full min-w-0 max-w-lg justify-self-center lg:justify-self-end">
+            <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
-

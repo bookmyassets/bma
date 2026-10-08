@@ -1,318 +1,201 @@
 "use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import React, { useState } from "react";
-import img from "@/assests/residential/residency/Residency.webp";
-import img2 from "@/assests/taboola/section/westwyn-residency-dholera-residential-plots-bookmyassets.webp";
-import {
-  FaMapMarkerAlt,
-  FaRoad,
-  FaTrain,
-  FaIndustry,
-  FaPlane,
-  FaClock,
-} from "react-icons/fa";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, ArrowUpRight, MapPin, Route, Train, Clock3, Factory, Plane, Building2, LandPlot, House, Ruler, BadgeIndianRupee } from "lucide-react";
+import westwynProjectImages from "@/assests/westwynProjectImages";
+import crownImage from "@/assests/residential/crown/westwyn-crown-dholera-entry-gate-desktop.webp";
+import GetinTouch from "../components/GetinTouch";
 
-import icon1 from "@/assests/taboola/Amenities/app-based-society-management.svg";
-import icon2 from "@/assests/taboola/Amenities/boundary-wall.svg";
-import icon3 from "@/assests/taboola/Amenities/cctv-security.svg";
-import icon4 from "@/assests/taboola/Amenities/clubhouse-lite.svg";
-import icon5 from "@/assests/taboola/Amenities/daily-essentials-store.svg";
-import icon6 from "@/assests/taboola/Amenities/drainage-system.svg";
-import icon7 from "@/assests/taboola/Amenities/ev-charging-station.svg";
-import icon8 from "@/assests/taboola/Amenities/gated-community.svg";
-import icon9 from "@/assests/taboola/Amenities/internal-roads.svg";
-import icon10 from "@/assests/taboola/Amenities/jogging-track.svg";
-import icon11 from "@/assests/taboola/Amenities/kids-play-area.svg";
-import icon12 from "@/assests/taboola/Amenities/power-and-water-supply.svg";
-import icon13 from "@/assests/taboola/Amenities/senior-citizen-zone.svg";
-import icon14 from "@/assests/taboola/Amenities/yoga-deck.svg";
-import CTAsection from "./CTAsection";
 
-const carouselImages = [
-  { src: img2, alt: "WestWyn Estates - Project Boundary" },
-  { src: img, alt: "WestWyn Estates - Kids Play Area" },
+const connectivity = [
+  { icon: Route, text: "Direct Entry from Major District Road (MDR)" },
+  { icon: Clock3, text: "5 mins from Dholera SIR boundary" },
+  { icon: Route, text: "12 mins from Ahmedabad-Dholera Expressway" },
+  { icon: MapPin, text: "Located in Pipariya, Dholera" },
+  { icon: Train, text: "2 mins from Railway Connectivity" },
+  { icon: Factory, text: "22 mins from Tata Semiconductor Plant & Industrial Zones" },
+  { icon: Plane, text: "30 mins from Dholera International Airport" },
 ];
 
-const amenities = [
-  {
-    icon: icon2,
-    title: "Signature Project Boundary",
-  },
-  {
-    icon: icon8,
-    title: "Controlled Access Gated Community",
-  },
-  {
-    icon: icon9,
-    title: "Wide Internal Road Network",
-  },
-  {
-    icon: icon3,
-    title: "24/7 Security & CCTV Surveillance",
-  },
-  {
-    icon: icon1,
-    title: "App-Based Society Management",
-  },
-  {
-    icon: icon6,
-    title: "Drainage System",
-  },
-  {
-    icon: icon12,
-    title: "Power & Water Supply",
-  },
-  {
-    icon: icon7,
-    title: "EV Charging Station",
-  },
-  {
-    icon: icon5,
-    title: "Daily Essentials & Utilities Store",
-  },
-  {
-    icon: icon4,
-    title: "Clubhouse Lite",
-  },
-  {
-    icon: icon14,
-    title: "Yoga Deck",
-  },
-  {
-    icon: icon10,
-    title: "Jogging Track",
-  },
-  {
-    icon: icon13,
-    title: "Senior Citizen Zone",
-  },
-  {
-    icon: icon11,
-    title: "Kids Play Area",
-  },
+const specs = [
+  { icon: Building2, label: "Project Type", value: "Residential" },
+  { icon: LandPlot, label: "Land Parcel", value: "40,000 Sq. Yd" },
+  { icon: House, label: "Total Units", value: "290 Plots" },
+  { icon: Ruler, label: "Plot Sizes", value: "124, 152 & 187 Sq. Yd" },
 ];
 
-const points = [
-  { icon: FaMapMarkerAlt, text: "Located in Pipariya, Dholera" },
-  { icon: FaRoad, text: "Direct Entry from Major District Road (MDR)" },
-  { icon: FaTrain, text: "2 mins from Railway Connectivity" },
-  { icon: FaClock, text: "5 mins from Dholera SIR boundary" },
-  { icon: FaRoad, text: "12 mins from Ahmedabad-Dholera Expressway" },
-  {
-    icon: FaIndustry,
-    text: "22 mins from Tata Semiconductor Plant & Industrial Zones",
-  },
-  { icon: FaPlane, text: "30 mins from Dholera International Airport" },
+const tabs = [
+  { id: "residency", name: "Westwyn Residency", status: "Newly Launched" },
+  { id: "crown", name: "Westwyn Crown", status: "Coming Soon" },
 ];
-
-const projectFeatures = [
-  { icon: "🏗️", title: "Project Type", value: "Residential" },
-  {
-    icon: "🌏",
-    title: "Land Parcel",
-    value: "40,000 Sq.Yd",
-  },
-  {
-    icon: "📍",
-    title: "Total Units",
-    value: "290 Plots",
-  },
-  { icon: "🏠", title: "Plot Sizes", value: "124, 152 & 187 Sq.Yd" },
-  { icon: "💰", title: "Price", value: "₹6,500*/Sq.Yd" },
-];
-
-const FeatureCard = ({ icon, title, value }) => (
-  <div className="bg-white rounded-xl p-3 md:p-4 border hover:bg-[#ddbc69] group border-gray-200 text-center transition-colors duration-300 ease-in-out">
-    <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 group-hover:text-white group-hover:scale-110 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300 ease-in-out">
-      {icon}
-    </div>
-    <h4 className="group-hover:text-white font-semibold text-gray-900 text-xs md:text-sm mb-1 transition-all duration-300 ease-in-out">
-      {title}
-    </h4>
-    <p className="group-hover:text-white text-[#151f28] font-bold text-base md:text-lg transition-all duration-300 ease-in-out">
-      {value}
-    </p>
-  </div>
-);
 
 export default function Residency() {
-  const [current, setCurrent] = useState(0);
-  const prev = () =>
-    setCurrent((c) => (c - 1 + carouselImages.length) % carouselImages.length);
-  const next = () => setCurrent((c) => (c + 1) % carouselImages.length);
+  const [activeProject, setActiveProject] = useState("residency");
+  const [expanded, setExpanded] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+
+  useEffect(() => {
+    const selectFromHash = () => {
+      if (window.location.hash === "#westwyn-crown") setActiveProject("crown");
+      if (window.location.hash === "#westwyn-residency") setActiveProject("residency");
+    };
+    const selectProject = (event) => {
+      if (["residency", "crown"].includes(event.detail)) setActiveProject(event.detail);
+    };
+    selectFromHash();
+    window.addEventListener("hashchange", selectFromHash);
+    window.addEventListener("westwyn-project-select", selectProject);
+    return () => {
+      window.removeEventListener("hashchange", selectFromHash);
+      window.removeEventListener("westwyn-project-select", selectProject);
+    };
+  }, []);
+
+  const switchProject = (id) => {
+    setActiveProject(id);
+    setExpanded(false);
+  };
 
   return (
-    <div className="bg-white py-[calc(0.5rem+2vw)]" id="westwyn-residency">
-      <div className="max-w-7xl mx-auto text-center  px-[calc(1rem+2vw)]">
-        <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold text-black">
-          WestWyn Residency : Residential Plots in Dholera
-        </h2>
-        <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-[#ddbc69] italic font-semibold leading-relaxed">
-          Registry-Ready | Govt. Approved | Immediate Possession
-        </p>
-      </div>
-
-      {/* Main two-column layout */}
-      <div className="max-w-7xl mx-auto py-4">
-        <div className="grid md:grid-cols-2 py-4 max-sm:space-y-4">
-          <div className="relative px-4 sm:px-6 lg:px-8 aspect-[5/5] w-full h-full group">
-            {/* Original image — style completely unchanged */}
-            <Image
-              src={carouselImages[current].src}
-              alt={carouselImages[current].alt}
-              className="rounded-xl w-full aspect-[5/6] h-full overflow-hidden object-fit max-sm:object-cover"
-              priority
-            />
-
-            {/* Prev button */}
-            <button
-              onClick={prev}
-              className="absolute left-6 top-1/2 -translate-y-1/2 z-30
-               w-8 h-8 sm:w-10 sm:h-10
-               bg-white/80 hover:bg-white
-               rounded-full shadow-lg
-               flex items-center justify-center
-               transition-all duration-200 hover:scale-110
-               opacity-0 group-hover:opacity-100"
-              aria-label="Previous image"
-            >
-              <svg
-                className="w-4 h-4 text-gray-800"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-
-            {/* Next button */}
-            <button
-              onClick={next}
-              className="absolute right-6 top-1/2 -translate-y-1/2 z-30
-               w-8 h-8 sm:w-10 sm:h-10
-               bg-white/80 hover:bg-white
-               rounded-full shadow-lg
-               flex items-center justify-center
-               transition-all duration-200 hover:scale-110
-               opacity-0 group-hover:opacity-100"
-              aria-label="Next image"
-            >
-              <svg
-                className="w-4 h-4 text-gray-800"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-
-            {/* Dot indicators */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
-              {carouselImages.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  className={`rounded-full transition-all duration-500 ${
-                    i === current
-                      ? "w-6 h-2 bg-[#ddbc69]"
-                      : "w-2 h-2 bg-white/70 hover:bg-white"
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-rows-7 gap-3 px-4">
-            {points.map((point, i) => {
-              const Icon = point.icon;
-              return (
-                <div
-                  key={i}
-                  className="flex items-center justify-start gap-2 bg-white border border-[#ddbc69]/30 rounded-xl p-[clamp(0.25rem,1vw,0.75rem)] shadow-sm hover:border-[#ddbc69] hover:shadow-md transition-all duration-200"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-[#ddbc69]/10 flex items-center justify-center shrink-0">
-                    <Icon className="text-[#ddbc69] text-base w-5 h-5" />
-                  </div>
-                  <p className="text-[clamp(1rem,2vw,0.875rem)] font-semibold text-gray-800 leading-snug">
-                    {point.text}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+    <section id="westwyn-residency" aria-labelledby="westwyn-section-heading" className="text-[13px] md:text-[17px] scroll-mt-24 bg-[#f8f7f4] py-6 text-[#1c1c1c] sm:py-7 lg:py-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-4 max-w-2xl text-center sm:mb-4">
+          <h2 id="westwyn-section-heading" className="font-playfair-display text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">Find Your Place in Dholera</h2>
+          <p className="mt-3 text-black">Explore our thoughtfully planned residential developments.</p>
         </div>
-      </div>
 
-      <div className="bg-gray-100 border-b">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 ">
-            {projectFeatures.map((item, index) => {
-              const isLastOdd =
-                index === projectFeatures.length - 1 &&
-                projectFeatures.length % 2 !== 0;
-              return (
-                <div
-                  key={index}
-                  className={isLastOdd ? "col-span-2 md:col-span-1" : ""}
-                >
-                  <FeatureCard
-                    icon={item.icon}
-                    title={item.title}
-                    value={item.value}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <CTAsection
-          text1="Invest in Registry-Ready"
-          text2="Plots in Dholera"
-          subTitle="Get Project Brochure, Pricing, Location Details, and Site Visit Support."
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto py-4">
-        <h2 className="text-xl md:text-4xl text-center font-bold text-black mb-8">
-          Project Amenities
-        </h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
-          {amenities.map((amenity, index) => (
-            <div
-              key={index}
-              className="bg-[#ddbc69]/5 backdrop-blur-sm rounded-lg p-4 text-center border border-[#ddbc69]/30 hover:bg-[#ddbc69]/5 transition-all duration-300"
-            >
-              <div className="text-xl md:text-4xl mb-2 flex items-center justify-center">
-                <Image
-                  src={amenity.icon}
-                  alt={amenity.title}
-                  width={48}
-                  height={48}
-                  className=""
-                />
-              </div>
-              <p className="text-black font-medium text-lg">{amenity.title}</p>
-            </div>
+        <div role="tablist" aria-label="Westwyn projects" className="mx-auto mb-4 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-2 sm:mb-4">
+          {tabs.map((tab) => (
+            <button key={tab.id} id={`project-tab-${tab.id}`} role="tab" type="button"
+              aria-selected={activeProject === tab.id} aria-controls={`project-panel-${tab.id}`}
+              tabIndex={activeProject === tab.id ? 0 : -1}
+              onClick={() => switchProject(tab.id)}
+              onKeyDown={(e) => {
+                if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+                e.preventDefault();
+                const next = e.key === "Home" ? "residency" : e.key === "End" ? "crown" : tab.id === "residency" ? "crown" : "residency";
+                switchProject(next);
+                document.getElementById(`project-tab-${next}`)?.focus();
+              }}
+              className={`flex min-h-[56px] items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69] sm:px-5 ${activeProject === tab.id ? "border-[#c9a454] bg-white shadow-[0_8px_28px_rgba(94,70,22,0.08)]" : "border-[#e5dfd2] bg-white/65 hover:border-[#d5c39b]"}`}>
+              <span className="font-semibold">{tab.name}</span>
+              <span className={`shrink-0 rounded-full px-2.5 py-1  font-semibold ${tab.id === "residency" ? "bg-[#f9edce] text-[#936d21]" : "bg-[#eaf1fb] text-[#45658f]"}`}>{tab.status}</span>
+            </button>
           ))}
         </div>
+
+        <div id="project-panel-residency" role="tabpanel" aria-labelledby="project-tab-residency" hidden={activeProject !== "residency"}>
+          {activeProject === "residency" && (
+            <div className="overflow-hidden rounded-[24px] border border-[#e9e1d3] bg-white shadow-[0_20px_65px_rgba(30,25,15,0.045)] sm:rounded-[30px]">
+              <div className="grid gap-0 lg:grid-cols-[0.95fr_1.05fr]">
+                <div className="relative min-h-[260px] bg-[#eee8dd] sm:min-h-[340px] lg:min-h-[440px]">
+                  <Image src={westwynProjectImages["westwyn-residency"]} alt="Westwyn Residency residential plots in Dholera" fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover" priority />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent px-4 pb-4 pt-10 sm:px-5">
+                  </div>
+                </div>
+
+                <div className="flex flex-col p-4 sm:p-5 lg:p-5">
+                  <p className="font-semibold uppercase tracking-[0.2em] text-[#a78337]">Featured Development</p>
+                  <h3 className="mt-3 font-playfair-display font-semibold leading-tight">Westwyn Residency</h3>
+                  <p className="mt-2 leading-relaxed text-black">Residential Plots in Dholera</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {["Registry-Ready", "Govt. Approved", "Immediate Possession"].map((tag) => (
+                      <span key={tag} className="rounded-full border border-[#ebdfc4] bg-[#fcf8ee] px-3 py-1.5 font-medium text-[#8a6b2d]">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="my-4 h-px bg-[#eee9e0]" />
+                  <div className="flex items-center justify-between gap-3">
+                    <h4 className="font-semibold">Location & Connectivity</h4>
+                    <span className="text-[#9c824f]">Dholera, Gujarat</span>
+                  </div>
+                  <div className="mt-4 space-y-2.5">
+                    {connectivity.slice(0, 3).map(({ icon: Icon, text }) => (
+                      <div key={text} className="flex items-center gap-3 rounded-xl bg-[#faf9f6] px-3 py-3 sm:px-4">
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#e8d9b5] bg-gradient-to-br from-[#fffdf7] to-[#f1e5c9] text-[#98742e]"><Icon aria-hidden="true" size={20} strokeWidth={1.5} /></span>
+                        <p className="font-medium leading-snug text-[#363636]">{text}</p>
+                      </div>
+                    ))}
+                    <AnimatePresence initial={false}>
+                      {expanded && (
+                        <motion.div id="additional-connectivity" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
+                          <div className="space-y-2.5 pt-2.5">
+                            {connectivity.slice(3).map(({ icon: Icon, text }) => (
+                              <div key={text} className="flex items-center gap-3 rounded-xl bg-[#faf9f6] px-3 py-3 sm:px-4">
+                                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#e8d9b5] bg-gradient-to-br from-[#fffdf7] to-[#f1e5c9] text-[#98742e]"><Icon aria-hidden="true" size={20} strokeWidth={1.5} /></span>
+                                <p className="font-medium leading-snug text-[#363636]">{text}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <button type="button" aria-expanded={expanded} aria-controls="additional-connectivity" onClick={() => setExpanded((v) => !v)} className="mt-4 inline-flex w-fit items-center gap-2 font-semibold text-[#98742c] transition-colors hover:text-[#6f5119]">
+                    {expanded ? "Show Less" : "View All Connectivity"}
+                    <ChevronDown size={16} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+                  </button>
+                </div>
+              </div>
+
+              <div className="border-t border-[#eee9e0] px-3 py-3 sm:px-5 sm:py-4 lg:px-5">
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                  {specs.map(({ icon: Icon, label, value }) => (
+                    <div key={label} className="rounded-2xl border border-[#eee7d9] bg-[#faf9f6] p-3 sm:p-4">
+                      <span className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-[#e8d9b5] bg-gradient-to-br from-[#fffdf7] to-[#f1e5c9] text-[#98742e]"><Icon aria-hidden="true" size={21} strokeWidth={1.5} /></span>
+                      <p className="text-[#7a7a7a]">{label}</p>
+                      <p className="mt-1.5 font-semibold leading-snug text-[#252525]">{value}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-3 flex flex-col gap-3 rounded-2xl border border-[#ead6a6] bg-[#f9f0db] p-3 sm:mt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-4">
+                  <div>
+                    <p className="flex items-center gap-2 font-medium text-[#866b35]"><BadgeIndianRupee size={16} /> Project Price</p>
+                    <p className="mt-1 font-playfair-display text-[24px] font-bold leading-tight text-[#272013] sm:text-[17px]">₹8,000 <span className="text-[13px] font-medium sm:text-[17px]">/ Sq. Yd</span></p>
+                  </div>
+                  <button type="button" onClick={() => setIsContactFormOpen(true)} className="inline-flex w-fit items-center justify-center gap-2 rounded-xl bg-[#ddbc69] px-3 py-2 font-semibold text-black transition-shadow hover:shadow-md sm:px-4 sm:py-3">
+                    Get Project Details <ArrowUpRight size={17} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div id="project-panel-crown" role="tabpanel" aria-labelledby="project-tab-crown" hidden={activeProject !== "crown"}>
+          {activeProject === "crown" && (
+            <div id="westwyn-crown" className="grid scroll-mt-24 overflow-hidden rounded-[24px] border border-[#e9e1d3] bg-white shadow-sm lg:grid-cols-2 sm:rounded-[30px]">
+              <div className="relative min-h-[300px] sm:min-h-[340px]">
+                <Image src={crownImage} alt="Westwyn Crown project entrance visual" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+              </div>
+              <div className="flex flex-col justify-center p-4 sm:p-5 lg:p-5">
+                <span className="w-fit rounded-full bg-[#eaf1fb] px-3 py-1.5 font-semibold text-[#45658f]">Coming Soon</span>
+                <p className="mt-4 font-semibold uppercase tracking-[0.2em] text-[#a78337]">The Westwyn Collection</p>
+                <h3 className="mt-3 font-playfair-display font-semibold">Westwyn Crown</h3>
+                <p className="mt-5 max-w-md leading-7 text-[#666]">An upcoming residential plotted development by BookMyAssets in Dholera. Project details will be announced soon.</p>
+                <button type="button" onClick={() => setIsContactFormOpen(true)} className="mt-4 inline-flex w-fit items-center gap-2 rounded-xl bg-[#ddbc69] px-4 py-3 font-semibold text-black transition-shadow hover:shadow-md">Get Launch Updates <ArrowUpRight size={17} /></button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+
+      {activeProject === "residency" && (
+        <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-3 rounded-2xl border border-[#e5d7b5] bg-[#f4ecd9] p-3 text-center sm:flex-row sm:justify-between sm:p-4 sm:text-left">
+            <div>
+              <h2 className="font-semibold text-[#30291c]">Invest in Registry-Ready Plots in Dholera</h2>
+            </div>
+            <button type="button" onClick={() => setIsContactFormOpen(true)} className="min-h-11 w-fit shrink-0 rounded-xl bg-[#ddbc69] px-5 py-2 font-semibold text-black transition-shadow hover:shadow-md sm:py-3">Talk to Our RM</button>
+          </div>
+
+        </div>
+      )}
+
+      {isContactFormOpen && (
+        <GetinTouch title={activeProject === "crown" ? "Discover Westwyn Crown" : "Discover Westwyn Residency"} subtitle={activeProject === "crown" ? "Connect with our team for launch updates and availability." : "Get project pricing, brochure and site visit assistance."} buttonName="Get A Call Back" onClose={() => setIsContactFormOpen(false)} />
+      )}
+    </section>
   );
 }
-

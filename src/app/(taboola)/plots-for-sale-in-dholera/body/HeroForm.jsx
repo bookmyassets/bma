@@ -6,7 +6,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
-    email: "",
     city: "",
   });
 
@@ -60,14 +59,8 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   };
 
   const validateForm = () => {
-    if (!formData.fullName.trim() || !formData.phone.trim()) {
+    if (!formData.fullName.trim() || !formData.phone.trim() || !formData.city.trim()) {
       setErrorMessage("Please fill in all required fields");
-      return false;
-    }
-
-    // Email validation (optional field)
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
       return false;
     }
 
@@ -106,7 +99,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              email: formData.email || "",
               notes: notes,
               source: "BookMyAssets Taboola Hero Section",
             },
@@ -120,7 +112,6 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         setFormData({
           fullName: "",
           phone: "",
-          email: "",
           city: "",
         });
 
@@ -205,118 +196,43 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   };
 
   return (
-    <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-[#ddbc69]/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(2rem,3.5vw,2.75rem)] w-full md:w-[clamp(500px,22vw,660px)]">
-      <div>
-        <h3 className="text-black font-semibold text-center text-lg md:text-[clamp(1.25rem,1.85vw,1.7rem)] leading-tight">
-          Get Project Details
-        </h3>
+    <form onSubmit={handleSubmit} aria-labelledby="hero-form-title" className="w-full overflow-hidden rounded-2xl border border-white/60 bg-[#fffdf8]/95 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-md sm:rounded-3xl sm:p-8">
+      <div className="mb-4 sm:mb-6">
+        <span className="mb-2 block h-1 w-10 rounded-full bg-[#ddbc69] sm:mb-4" />
+        <h2 id="hero-form-title" className="mt-2 text-xl font-semibold tracking-tight text-[#151f28] sm:text-2xl">Get project details</h2>
       </div>
-
       {errorMessage && (
-        <div className="p-2 bg-red-500 bg-opacity-20 border border-red-400 text-red-700 rounded-lg text-sm text-center">
-          {errorMessage}
-        </div>
+        <div role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">{errorMessage}</div>
       )}
-
-      <input
-        name="fullName"
-        placeholder="Full Name*"
-        className="w-full h-10 md:h-[clamp(2.25rem,3.45vw,2.85rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.fullName}
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="phone"
-        placeholder="Phone Number*"
-        type="tel"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.phone}
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="email"
-        placeholder="Email (Optional)"
-        type="email"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <div className="gap-[clamp(0.5rem,1vw,0.75rem)]">
-
-      <input
-        name="city"
-        placeholder="City*"
-        type="text"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.city}
-        onChange={handleChange}
-        required
-        />
-      {/* <select
-        name="investmentAmt"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-[#ddbc69]/25 focus:border-[#ddbc69] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.investmentAmt}
-        onChange={handleChange}
-        required
-        >
-        <option value="" disabled>
-          Budget*
-        </option>
-        <option value="5-15">₹5 Lakh - ₹15 Lakh</option>
-        <option value="15-25">₹15 Lakh - ₹25 Lakh</option>
-        <option value="25+">₹25 Lakh +</option>
-      </select> */}
-
-        </div>
-      <div ref={recaptchaRef} className="recaptcha-container"></div>
-
-      <button
-        onClick={handleSubmit}
-        disabled={isLoading || parentIsDisabled || !recaptchaLoaded}
-        className={`w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] font-bold px-6 rounded-lg transition-all duration-300 text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest ${
-          isLoading || parentIsDisabled || !recaptchaLoaded
-            ? "bg-gray-600 cursor-not-allowed text-gray-400"
-            : "bg-[#ddbc69] hover:bg-[#ddbc69] text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-        }`}
-      >
-        {isLoading ? (
-          <div className="flex items-center justify-center">
-            <svg
-              className="animate-spin -ml-1 mr-3 h-5 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
-            Submitting...
+      <div className="space-y-2.5 sm:space-y-4">
+        {[
+          { name: "fullName", label: "Full name", placeholder: "Enter your full name", type: "text", autoComplete: "name" },
+          { name: "phone", label: "Phone number", placeholder: "Enter your phone number", type: "tel", autoComplete: "tel" },
+          { name: "city", label: "City", placeholder: "Enter your city", type: "text", autoComplete: "address-level2" },
+        ].map((field) => (
+          <div key={field.name}>
+            <label htmlFor={`hero-${field.name}`} className="mb-1 block text-xs font-semibold text-[#37424a] sm:mb-1.5">{field.label} <span className="text-[#92702b]">*</span></label>
+            <input
+              id={`hero-${field.name}`}
+              name={field.name}
+              type={field.type}
+              autoComplete={field.autoComplete}
+              placeholder={field.placeholder}
+              value={formData[field.name]}
+              onChange={handleChange}
+              required
+              className="h-10 w-full rounded-lg border border-[#e4dfd2] bg-white px-3 text-sm text-[#151f28] outline-none transition-colors placeholder:text-[#93999c] focus:border-[#bc9743] focus:ring-2 focus:ring-[#ddbc69]/20 sm:h-12 sm:rounded-xl sm:px-4"
+            />
           </div>
-        ) : (
-          "Get Price"
-        )}
-      </button>
-      <div className="text-center mt-4">
-        <p className="text-sm font-bold text-black">
-          Fill Up the Form To Get Project Price
-        </p>
+        ))}
       </div>
-    </div>
+      <div ref={recaptchaRef} className="recaptcha-container mt-2 overflow-x-auto sm:mt-4" />
+      <button type="submit" disabled={isLoading || parentIsDisabled || !recaptchaLoaded} className="mt-2 flex min-h-10 w-full items-center justify-center rounded-lg bg-[#ddbc69] px-4 py-2 text-sm font-semibold text-[#17130b] shadow-sm transition-colors hover:bg-[#d2ae54] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#92702b] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#e5dfcf] disabled:text-[#827b6b] sm:min-h-12 sm:rounded-xl sm:px-5 sm:py-3">
+        {isLoading ? "Submitting..." : "Get Pricing & Brochure"}
+      </button>
+      <p className="mt-2 text-center text-[11px] leading-snug text-black sm:mt-4 sm:text-[13px] sm:leading-relaxed">Your details stay private. Our team will contact you shortly.</p>
+    </form>
   );
 };
 
 export default HeroForm;
-

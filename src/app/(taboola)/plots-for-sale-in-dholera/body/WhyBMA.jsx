@@ -1,128 +1,48 @@
 import Image from "next/image";
-import img1 from "@/assests/taboola/icons/bookmyassets-365-days-assistance-icon.svg";
-import img2 from "@/assests/taboola/icons/bookmyassets-buy-back-assistance-icon.svg";
-import img3 from "@/assests/taboola/icons/bookmyassets-due-diligence-team-icon.svg";
-import img4 from "@/assests/taboola/icons/bookmyassets-immediate-sale-deed-icon.svg";
-import img5 from "@/assests/taboola/icons/bookmyassets-resale-support-icon.svg";
-import ROI from "@/assests/taboola/section/champions-of-dholera-real-estate-bookmyassets.webp";
+import { Building2, LandPlot, FileCheck2, Users, ShieldCheck, MapPin } from "lucide-react";
+import awardImage from "@/assests/taboola/section/champions-of-dholera-real-estate-bookmyassets.webp";
 
-const icons = [
-  { id: 1, icon: img3, label: "Due Diligence Team" },
-  { id: 2, icon: img4, label: "Immediate Sale Deed" },
-  { id: 3, icon: img1, label: "365 Days Site Visit" },
-  { id: 4, icon: img5, label: "Resale Support" },
-  { id: 5, icon: img2, label: "Buyback Assistance" },
-];
-
-const COUNTERS = [
-  { value: "7+ Projects", label: "Successfully Sold Out" },
-  { value: "2 Lakh+ Sq. Yd", label: "Dholera Land Sold" },
-  { value: "957+ Plots", label: "Registry Delivered" },
-  { value: "561+ Clients", label: "Investor Client Base" },
+const counters = [
+  { value: "7+", unit: "Projects", label: "Successfully sold out", icon: Building2, color: "border-blue-200 bg-blue-50 text-blue-600" },
+  { value: "2 Lakh+", unit: "Sq. Yd", label: "Dholera land sold", icon: LandPlot, color: "border-emerald-200 bg-emerald-50 text-emerald-600" },
+  { value: "957+", unit: "Plots", label: "Registry delivered", icon: FileCheck2, color: "border-violet-200 bg-violet-50 text-violet-600" },
+  { value: "561+", unit: "Clients", label: "Investor client base", icon: Users, color: "border-rose-200 bg-rose-50 text-rose-600" },
 ];
 
 export default function WhyBMA() {
   return (
-    <section className="bg-white py-[clamp(0.75rem,6vw,1rem)]" id="Why-BMA">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Heading */}
-        <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#ddbc69]" />
-            <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-              Why Invest With{" "}
-              <span className="text-[#ddbc69]">BookMyAssets</span>
-            </h2>
-            <div className="h-px w-[clamp(3rem,4vw,4rem)] bg-[#ddbc69]" />
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row max-w-7xl mx-auto gap-4 md:gap-6">
-          {/* Left — 40% */}
-          <div className="w-full md:w-2/5 md:pb-4">
-            <div className="relative w-full aspect-[5/4] rounded-lg overflow-hidden ">
-              <Image
-                src={ROI}
-                alt="Dholera SIR — India's first semiconductor hub"
-                fill
-                sizes=""
-                className="object-contain aspect-[5/4] h-full w-auto"
-                priority
-              />
+    <section id="Why-BMA" aria-labelledby="why-bma-heading" className="scroll-mt-24 bg-white px-4 py-7 text-[14px] md:text-[16px] sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl items-center gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+        <figure className="relative mx-auto w-full max-w-[280px] sm:max-w-md lg:max-w-none">
+          <div aria-hidden="true" className="absolute inset-0 translate-x-2 translate-y-2 rounded-3xl border border-[#ddbc69]/45 bg-[#f6f0e1]" />
+          <div className="relative overflow-hidden rounded-3xl border border-[#e8deca] bg-[#172b26] p-2">
+            <div className="relative aspect-[5/4] overflow-hidden rounded-2xl bg-[#f6f0e1]">
+              <Image src={awardImage} alt="BookMyAssets trophy and certificate at the Asia Excellence Awards 2025" fill sizes="(max-width: 639px) 280px, (max-width: 1023px) 450px, 480px" className="object-cover" />
             </div>
+            <figcaption className="flex items-center gap-3 px-3 py-3 text-white">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#ddbc69]/40 text-[#ddbc69]"><ShieldCheck aria-hidden="true" size={19} strokeWidth={1.6} /></span>
+              <div><p className="font-semibold text-[#ddbc69]">Recognition that inspires us</p><p className="mt-0.5 text-[12px] text-white/65 sm:text-[13px]">BookMyAssets | Asia Excellence Awards 2025</p></div>
+            </figcaption>
           </div>
-          <div className="w-full md:w-3/5">
-            <p className="text-[clamp(1rem,1.5vw,1.2rem)] text-center space-y-6">
-              BookMyAssets is the trusted of Smart investors looking for
-              Dholera plots for sale with location clarity, expert guidance and
-              long-term potential. We explore developing and high growth
-              potential land in Dholera to deliver future growth potential to our
-              clients with 100% trust and transparency.
-            </p>
-            <div className="py-4">
-              <div className="px-[calc(0.5rem+1vw)] max-w-7xl mx-auto">
-                <div className="grid grid-cols-2 gap-3">
-                  {COUNTERS.map(({ value, label }) => (
-                    <div
-                      key={label}
-                      className="
-            flex flex-col justify-center items-center
-            h-[120px] sm:h-auto
-            p-4 sm:p-[calc(0.75rem+0.2vw)]
-            bg-white rounded-2xl shadow-md
-            hover:shadow-xl transition-shadow
-          "
-                    >
-                      <div className="text-base sm:text-lg md:text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#ddbc69] mb-2">
-                        {value}
-                      </div>
-                      <p className="text-xs sm:text-sm md:text-[clamp(0.75rem,1.2vw,0.875rem)] text-gray-700 font-medium text-center leading-snug">
-                        {label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </figure>
 
-        <div className="flex flex-col items-center text-center mb-[clamp(1rem,4vw,2rem)]">
-          <div className="flex items-center gap-3 mb-3">
-            <h2 className="text-[clamp(1.4rem,3vw,2.4rem)] font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
-              A Name You Can Trust <span className="text-[#ddbc69]"></span>
-            </h2>
+        <div className="min-w-0">
+          <p className="mb-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#a78337] sm:text-[13px]">Your partner in Dholera</p>
+          <h2 id="why-bma-heading" className="text-[28px] font-bold leading-tight tracking-tight text-[#202b27] sm:text-[34px] lg:text-[38px]">Why invest with <span className="text-[#ddbc69]">BookMyAssets</span></h2>
+          <p className="mt-4 max-w-xl leading-relaxed text-black">Choose your Dholera plot with location clarity, expert guidance and a team that supports your investment journey. We help you understand the project, documentation and long-term development plans before you decide.</p>
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[13px] font-medium text-[#516057] sm:text-[14px]">
           </div>
-        </div>
-
-        {/* Icons Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {icons.map((item, index) => {
-            const isLastOdd =
-              index === icons.length - 1 && icons.length % 2 !== 0;
-            return (
-              <div
-                key={item.id}
-                className={`flex flex-col items-center gap-3 p-2 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow
-                  ${isLastOdd ? "col-span-2 sm:col-span-1" : ""}`}
-              >
-                <div className="relative w-[clamp(7rem,8vw,9rem)] h-[clamp(7rem,8vw,9rem)]">
-                  <Image
-                    src={item.icon}
-                    alt={item.label}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <p className="text-center text-[clamp(0.75rem,1.5vw,0.95rem)] font-medium text-gray-700">
-                  {item.label}
-                </p>
+          <dl className="mt-5 grid grid-cols-2 gap-3">
+            {counters.map(({ value, unit, label, icon: Icon, color }) => (
+              <div key={label} className="rounded-2xl border border-[#e9e3d7] bg-[#faf9f6] p-3 transition-colors hover:border-[#ddbc69] sm:p-4">
+                <span className={`mb-2 flex h-9 w-9 items-center justify-center rounded-xl border ${color}`}><Icon aria-hidden="true" size={20} strokeWidth={1.6} /></span>
+                <dd className="flex flex-wrap items-baseline gap-x-1.5 text-[#202b27]"><span className="text-[24px] font-bold leading-tight tracking-tight sm:text-[30px]">{value}</span><span className="text-[13px] font-medium text-[#9a7731] sm:text-[14px]">{unit}</span></dd>
+                <dt className="mt-1 text-[13px] leading-snug text-black sm:text-[14px]">{label}</dt>
               </div>
-            );
-          })}
+            ))}
+          </dl>
         </div>
       </div>
     </section>
   );
 }
-
