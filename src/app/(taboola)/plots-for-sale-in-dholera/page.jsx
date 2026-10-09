@@ -28,6 +28,7 @@ export default function page() {
             variant="common"
             theme="light"
             layout="inline"
+            size="compact"
             headingTag="h2"
             title="Own a Plot in Dholera & Unlock Up to ₹30K/Month"
             buttonText="Get Verified Plot Details"

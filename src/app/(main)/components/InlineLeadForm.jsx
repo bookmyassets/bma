@@ -106,6 +106,7 @@ export default function InlineLeadForm({
   theme = "light",
   showSubtitle = false,
   layout = "inline",
+  size = "default",
   surface,
 }) {
   const variantConfig = FORM_VARIANTS[variant] || FORM_VARIANTS.lead;
@@ -124,6 +125,7 @@ export default function InlineLeadForm({
   const HeadingTag = config.headingTag;
   const isDark = theme === "dark";
   const isStacked = layout === "stacked";
+  const isCompact = size === "compact";
   const darkSurface = surface
     ? getWestwynSectionSurface(surface)
     : "bg-[#0B0B0B]";
@@ -336,13 +338,9 @@ export default function InlineLeadForm({
     aria-label={config.title}
     className={`
       px-4
-      py-5
-
       sm:px-6
-      sm:py-6
-
       lg:px-8
-      lg:py-8
+      ${isCompact ? "py-3 sm:py-4 lg:py-5" : "py-5 sm:py-6 lg:py-8"}
 
       ${
         isDark
@@ -356,22 +354,15 @@ export default function InlineLeadForm({
         relative
 
         mx-auto
-        max-w-7xl
+        ${isCompact ? "max-w-5xl" : "max-w-7xl"}
 
         overflow-hidden
 
-        rounded-[22px]
+        ${isCompact ? "rounded-2xl" : "rounded-[22px]"}
 
         border
 
-        px-3
-        py-4
-
-        sm:px-5
-        sm:py-5
-
-        lg:px-6
-        lg:py-6
+        ${isCompact ? "px-3 py-3 sm:px-4 sm:py-4 lg:px-5" : "px-3 py-4 sm:px-5 sm:py-5 lg:px-6 lg:py-6"}
 
         ${
           isDark
@@ -450,18 +441,12 @@ export default function InlineLeadForm({
 
               font-playfair-display
 
-              text-[26px]
+              ${isCompact ? "text-xl sm:text-2xl lg:text-[28px]" : "text-[26px] sm:text-[30px] lg:text-[34px] xl:text-[38px]"}
               font-semibold
 
               leading-[1.08]
 
               tracking-[-0.025em]
-
-              sm:text-[30px]
-
-              lg:text-[34px]
-
-              xl:text-[38px]
 
               ${
                 isDark
@@ -602,13 +587,7 @@ export default function InlineLeadForm({
 
           <form
             onSubmit={handleSubmit}
-            className="
-              mt-4
-
-              sm:mt-5
-
-              lg:mt-6
-            "
+            className={isCompact ? "mt-3 sm:mt-4" : "mt-4 sm:mt-5 lg:mt-6"}
           >
             {/* Error */}
 
@@ -658,7 +637,7 @@ export default function InlineLeadForm({
             ================================================== */}
 
             <div
-              className={`grid grid-cols-1 gap-3 ${
+              className={`grid grid-cols-1 ${isCompact ? "gap-2.5" : "gap-3"} ${
                 isStacked
                   ? ""
                   : "md:grid-cols-2 lg:grid-cols-[1fr_1fr_210px] lg:items-end"
@@ -676,7 +655,7 @@ export default function InlineLeadForm({
                     text-[14px]
                     font-medium
 
-                    sm:text-[15px]
+                    ${isCompact ? "" : "sm:text-[15px]"}
 
                     ${
                       isDark
@@ -720,7 +699,7 @@ export default function InlineLeadForm({
                     autoComplete="name"
                     placeholder="Enter your full name"
                     className={`
-                      h-12
+                      ${isCompact ? "h-11 text-base" : "h-12 text-[15px] sm:h-[50px] sm:text-base"}
                       w-full
 
                       rounded-lg
@@ -730,15 +709,10 @@ export default function InlineLeadForm({
                       pl-12
                       pr-4
 
-                      text-[15px]
-
                       outline-none
 
                       transition-all
                       duration-200
-
-                      sm:h-[50px]
-                      sm:text-base
 
                       ${
                         isDark
@@ -790,7 +764,7 @@ export default function InlineLeadForm({
                     text-[14px]
                     font-medium
 
-                    sm:text-[15px]
+                    ${isCompact ? "" : "sm:text-[15px]"}
 
                     ${
                       isDark
@@ -835,7 +809,7 @@ export default function InlineLeadForm({
                     autoComplete="tel"
                     placeholder="Enter your mobile number"
                     className={`
-                      h-12
+                      ${isCompact ? "h-11 text-base" : "h-12 text-[15px] sm:h-[50px] sm:text-base"}
                       w-full
 
                       rounded-lg
@@ -845,15 +819,10 @@ export default function InlineLeadForm({
                       pl-12
                       pr-4
 
-                      text-[15px]
-
                       outline-none
 
                       transition-all
                       duration-200
-
-                      sm:h-[50px]
-                      sm:text-base
 
                       ${
                         isDark
@@ -907,25 +876,21 @@ export default function InlineLeadForm({
                   group
 
                   flex
-                  h-12
+                  ${isCompact ? "h-11 text-sm" : "h-12 text-[15px] sm:h-[50px] sm:text-base"}
                   w-full
 
                   items-center
                   justify-center
-                  gap-3
+                  ${isCompact ? "gap-2" : "gap-3"}
 
                   rounded-lg
 
-                  px-5
+                  ${isCompact ? "px-3" : "px-5"}
 
-                  text-[15px]
                   font-semibold
 
                   transition-all
                   duration-300
-
-                  sm:h-[50px]
-                  sm:text-base
 
                   ${isStacked ? "" : "md:col-span-2 lg:col-span-1"}
 
@@ -1061,7 +1026,7 @@ export default function InlineLeadForm({
                 `}
               />
 
-              <span className="text-[15px]">
+              <span className={isCompact ? "text-xs sm:text-[13px]" : "text-[15px]"}>
                 Your details are safe with us
               </span>
             </div>
