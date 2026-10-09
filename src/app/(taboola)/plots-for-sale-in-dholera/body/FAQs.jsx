@@ -1,33 +1,33 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Plus, Minus, MessageCircleQuestion, Phone, Headset } from "lucide-react";
+import { Plus, Minus, Phone, Headset } from "lucide-react";
 
 const faqs = [
   {
-    question: " Is WestWyn Residency a near Dholera SIR plot project in Dholera?",
+    question: "Is Dholera a good investment?",
     answer:
-      "Yes, WestWyn Residency is a near Dholera SIR plotted project in Dholera with registry-ready plots and clear documentation.",
+      "Yes, Dholera is a promising long-term real estate investment opportunity, driven by major infrastructure development, industrial growth, improved connectivity and increasing demand for residential and commercial properties.",
   },
   {
-    question: "Where is WestWyn Residency located?",
+    question: "Are WestWyn Residency plots legally approved and registry-ready?",
     answer:
-      "WestWyn Residency is located in Pipariya, Dholera, near the Dholera SIR boundary.",
+      "Yes. WestWyn Residency plots are legally approved and come with NA/NOC, clear-title, registry-ready and approved Plan Pass documentation. Buyers can review and independently verify the relevant documents before making a purchase.",
   },
   {
-    question: "Is this suitable for long-term investors?",
+    question: "Can I visit the project before buying?",
     answer:
-      "Yes, this opportunity is primarily designed for buyers exploring long-term plotted investment options in Dholera rather than short-term gains.",
+      "Yes, you can visit the project and see the plots for yourself. A ₹50,000 booking amount is required to schedule the site visit. Our team will coordinate the visit and help you explore the location and available plots.",
   },
   {
-    question: "Can I review project layout and location before deciding?",
+    question: "Can NRIs buy residential plots in Dholera?",
     answer:
-      "Yes, our team provides complete assistance in understanding:\n• Project layout\n• Plot positioning\n• Location insights\nbefore you make any decision.",
+      "Yes, NRIs can buy residential plots in Dholera, subject to applicable Indian laws and FEMA/RBI regulations. BookMyAssets also offers a convenient process for NRIs to explore, select and purchase residential plots remotely.",
   },
   {
-    question: "Can I schedule a site visit?",
+    question: "Why choose BookMyAssets for investing in Dholera?",
     answer:
-      "Yes, BookMyAssets offers year-round site visit support along with step-by-step guidance based on your interest and availability.",
+      "BookMyAssets offers verified residential projects, transparent documentation, registry-ready plots, site visit assistance, and end-to-end support from booking to villa construction support.",
   },
 ];
 
@@ -41,13 +41,13 @@ export default function FAQSection() {
   };
 
   return (
-    <section aria-labelledby={`${sectionId}-heading`} className="bg-[#faf9f5] px-4 py-6 text-[14px] md:text-[16px] sm:px-6 lg:px-8">
+    <section id="faqs" aria-labelledby={`${sectionId}-heading`} className="scroll-mt-24 bg-[#faf9f5] px-4 py-6 text-[14px] md:text-[16px] sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl items-start gap-5 lg:grid-cols-[0.75fr_1.25fr] lg:gap-8">
         <div>
           <h2 id={`${sectionId}-heading`} className="text-[28px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[34px] lg:text-[38px]">FAQs</h2>
-          <div className="mt-4 rounded-2xl border border-[#e7dfce] bg-white p-3 sm:p-4">
-            <div className="flex items-center gap-2 font-semibold text-[#263b30]"><Headset aria-hidden="true" size={19} strokeWidth={1.6} className="text-[#a78337]" />Still have a question?</div>
-            <a href="tel:+918130371647" onClick={handleCallClick} className="mt-3 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#ddbc69] px-4 py-2 font-semibold text-black transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a78337] focus-visible:ring-offset-2"><Phone aria-hidden="true" size={17} strokeWidth={1.7} />Talk with Our RM</a>
+          <div className="mt-4 flex items-center justify-between gap-2 rounded-2xl border border-[#e7dfce] bg-white p-3 sm:p-4 lg:block lg:max-w-[320px]">
+            <div className="flex min-w-0 items-center gap-1.5 text-[12px] font-semibold leading-snug text-[#263b30] sm:gap-2 sm:text-[14px] lg:text-[16px]"><Headset aria-hidden="true" size={19} strokeWidth={1.6} className="shrink-0 text-[#a78337]" /><span>Still have a question?</span></div>
+            <a href="tel:+918130371647" onClick={handleCallClick} className="inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-[#ddbc69] px-2.5 py-2 text-[12px] font-semibold text-black transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a78337] focus-visible:ring-offset-2 sm:gap-2 sm:px-4 sm:text-[14px] lg:mt-3 lg:text-[16px]"><Phone aria-hidden="true" size={17} strokeWidth={1.7} />Talk with Our RM</a>
           </div>
         </div>
 

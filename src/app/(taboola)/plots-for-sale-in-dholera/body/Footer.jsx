@@ -29,7 +29,7 @@ const Footer = () => {
               About Us
             </h3>
             <p className="text-white/75 mb-4">
-              BookMyAssets delivers verified, clear documentation and project details in Dholera - trusted by 561+ investors for transparent, expert-led investments.
+              BookMyAssets delivers verified, clear documentation and project details in Dholera - trusted by 500+ investors for transparent, expert-led investments.
             </p>
             
             {/* Social Media Icons */}

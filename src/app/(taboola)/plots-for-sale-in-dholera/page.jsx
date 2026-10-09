@@ -5,7 +5,7 @@ import DholeraScaleConnectivity from "./body/DholeraScaleConnectivity";
 import Residency from "./body/Residency";
 import Amenities from "./body/Amenities";
 import Form from "./components/Form";
-import CTAsection from "./body/CTAsection";
+import InlineLeadForm from "@/app/(main)/components/InlineLeadForm";
 import WhyBMA from "./body/WhyBMA";
 import MegaIndustries from "@/components/MegaIndustries";
 import TestimonialPagination from "./body/Testimonials";
@@ -23,20 +23,27 @@ export default function page() {
         <Amenities />
         <WhyDholera />
         <DholeraScaleConnectivity />
+        <div id="expert-guidance" className="scroll-mt-24">
+          <InlineLeadForm
+            variant="common"
+            theme="light"
+            layout="inline"
+            headingTag="h2"
+            title="Own a Plot in Dholera & Unlock Up to ₹30K/Month"
+            buttonText="Get Verified Plot Details"
+            source="BookMyAssets Taboola Inline Form"
+            tags={["Dholera Investment", "Website Lead", "Taboola Inline"]}
+            pageName="Plots for Sale in Dholera"
+          />
+        </div>
         <WhyBMA />
-        <MegaIndustries variant="light" />
-        <CTAsection
-          text1="Get Expert Guidance for"
-          text2="Dholera Plots"
-          subTitle="Have questions about Dholera investments? Our team is here to guide you."
-        />
-
+        <MegaIndustries id="industries" variant="light" />
         <TestimonialPagination />
         <FAQSection />
         <Footer />
       </div>
       <PopupScroll />
-      <Form title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
+      <Form title="Own a Plot in Dholera & Unlock Up to ₹30K/Month" />
     </>
   );
 }

@@ -2,22 +2,22 @@
 
 import Image from "next/image";
 
-import Avaada from "@/assests/ad-page/crousel/Avaada.webp";
-import Chiripal from "@/assests/ad-page/crousel/Chiripal.webp";
-import Cubic from "@/assests/ad-page/crousel/Cubic.webp";
-import Dawat from "@/assests/ad-page/crousel/Dawat.webp";
-import Fujifilm from "@/assests/ad-page/crousel/Fujifilm.webp";
-import HP from "@/assests/ad-page/crousel/HP.webp";
-import Inox from "@/assests/ad-page/crousel/Inox.webp";
-import Jabil from "@/assests/ad-page/crousel/Jabil.webp";
-import Mahindra from "@/assests/ad-page/crousel/mahindra.webp";
-import Polycab from "@/assests/ad-page/crousel/Polyacab.webp";
-import Renew from "@/assests/ad-page/crousel/Renew.webp";
-import TATA from "@/assests/ad-page/crousel/TATA chemical.webp";
-import Torrent from "@/assests/ad-page/crousel/Torrent.webp";
-import Tsingshan from "@/assests/ad-page/crousel/Tsingshan.webp";
-import Vedanta from "@/assests/ad-page/crousel/Vedanta.webp";
-import Vyoma from "@/assests/ad-page/crousel/Vyoma.webp";
+import Avaada from "@/assests/ad-page/carousel/Avaada.webp";
+import Chiripal from "@/assests/ad-page/carousel/Chiripal.webp";
+import Cubic from "@/assests/ad-page/carousel/Cubic.webp";
+import Dawat from "@/assests/ad-page/carousel/Dawat.webp";
+import Fujifilm from "@/assests/ad-page/carousel/Fujifilm.webp";
+import HP from "@/assests/ad-page/carousel/HP.webp";
+import Inox from "@/assests/ad-page/carousel/Inox.webp";
+import Jabil from "@/assests/ad-page/carousel/Jabil.webp";
+import Mahindra from "@/assests/ad-page/carousel/mahindra.webp";
+import Polycab from "@/assests/ad-page/carousel/Polyacab.webp";
+import Renew from "@/assests/ad-page/carousel/Renew.webp";
+import TATA from "@/assests/ad-page/carousel/TATA chemical.webp";
+import Torrent from "@/assests/ad-page/carousel/Torrent.webp";
+import Tsingshan from "@/assests/ad-page/carousel/Tsingshan.webp";
+import Vedanta from "@/assests/ad-page/carousel/Vedanta.webp";
+import Vyoma from "@/assests/ad-page/carousel/Vyoma.webp";
 
 const companies = [
   { name: "Avaada", image: Avaada },
@@ -61,12 +61,12 @@ const themeStyles = {
   },
 };
 
-export default function MegaIndustries({ variant = "light" }) {
+export default function MegaIndustries({ variant = "light", id }) {
   const theme = themeStyles[variant] || themeStyles.light;
   const duplicatedCompanies = [...companies, ...companies];
 
   return (
-    <section className={`relative overflow-hidden ${theme.section}`}>
+    <section id={id} className={`relative scroll-mt-24 overflow-hidden ${theme.section}`}>
       <style jsx>{`
         @keyframes megaIndustriesMarquee {
           from {

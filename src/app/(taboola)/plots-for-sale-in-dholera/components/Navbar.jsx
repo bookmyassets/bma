@@ -10,9 +10,6 @@ import {
   X,
   ChevronDown,
   ArrowUpRight,
-  Phone,
-  MessageCircle,
-  ArrowRight,
 } from "lucide-react";
 
 import logo from "@/assests/bma-with-background.svg";
@@ -27,6 +24,13 @@ const projects = [
     href: "#westwyn-residency",
   },
   {
+    name: "Westwyn Crown",
+    status: "Coming Soon",
+    badge: "bg-blue-100 text-blue-700",
+    dot: "bg-blue-500",
+    href: "#westwyn-crown",
+  },
+  {
     name: "Westwyn Estates",
     status: "Sold Out",
     badge: "bg-red-100 text-red-700",
@@ -39,13 +43,6 @@ const projects = [
     badge: "bg-red-100 text-red-700",
     dot: "bg-red-500",
     href: null,
-  },
-  {
-    name: "Westwyn Crown",
-    status: "Coming Soon",
-    badge: "bg-blue-100 text-blue-700",
-    dot: "bg-blue-500",
-    href: "#westwyn-crown",
   },
 ];
 
@@ -66,6 +63,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const projectsRef = useRef(null);
+  const pendingSectionRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 12);
@@ -97,38 +95,60 @@ export default function Navbar() {
     setIsMobileProjectsOpen(false);
   }, [pathname]);
 
+  const scrollToSection = (section) => {
+    if (pathname.replace(/\/+$/, "") !== "/plots-for-sale-in-dholera") {
+      router.push(`/plots-for-sale-in-dholera${section}`);
+      return;
+    }
+
+    const isProject = ["#westwyn-residency", "#westwyn-crown"].includes(section);
+    if (isProject) {
+      window.dispatchEvent(new CustomEvent("westwyn-project-select", {
+        detail: section === "#westwyn-crown" ? "crown" : "residency",
+      }));
+    }
+
+    // Wait for the selected project panel to render before scrolling.
+    window.requestAnimationFrame(() => {
+      const targetId = isProject ? "westwyn-residency" : section.slice(1);
+      const element = document.getElementById(targetId);
+      if (!element) {
+        router.push(`/plots-for-sale-in-dholera${section}`);
+        return;
+      }
+
+      if (window.location.hash !== section) window.history.pushState(null, "", section);
+      element.style.scrollMarginTop = "96px";
+      element.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+  };
+
+  const completePendingNavigation = () => {
+    const section = pendingSectionRef.current;
+    pendingSectionRef.current = null;
+    if (section) scrollToSection(section);
+  };
+
   const handleNavigation = (section) => {
-    setIsMenuOpen(false);
     setIsProjectsOpen(false);
     setIsMobileProjectsOpen(false);
 
-    if (pathname === "/plots-for-sale-in-dholera") {
-      const isProject = ["#westwyn-residency", "#westwyn-crown"].includes(section);
-      if (isProject) {
-        window.dispatchEvent(new CustomEvent("westwyn-project-select", {
-          detail: section === "#westwyn-crown" ? "crown" : "residency",
-        }));
-      }
-      const element = document.getElementById(isProject ? "westwyn-residency" : section.replace("#", ""));
-
-      if (element) {
-        const offset = -90;
-        const y =
-          element.getBoundingClientRect().top +
-          window.scrollY +
-          offset;
-
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
+    if (isMenuOpen) {
+      pendingSectionRef.current = section;
+      setIsMenuOpen(false);
     } else {
-      router.push(`/plots-for-sale-in-dholera${section}`);
+      scrollToSection(section);
     }
   };
 
   const openContactForm = () => {
+    pendingSectionRef.current = null;
+    setIsMobileProjectsOpen(false);
     setIsMenuOpen(false);
     setIsProjectsOpen(false);
-    setIsMobileProjectsOpen(false);
     setIsContactFormOpen(true);
   };
 
@@ -333,16 +353,10 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={openContactForm}
-                className="
-                  rounded-full bg-[#ddbc69] px-4 py-2.5
-                  text-[12px] font-semibold text-[#17130b]
-                  transition-colors hover:bg-[#d2ae54]
-                  sm:px-5
-                "
+                className="min-h-10 shrink-0 whitespace-nowrap rounded-full bg-[#ddbc69] px-4 py-2.5 text-[12px] font-semibold text-[#17130b] transition-colors hover:bg-[#d2ae54] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a78337] focus-visible:ring-offset-2 sm:px-5"
               >
                 Get in Touch
               </button>
-
               <button
                 type="button"
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -368,7 +382,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <AnimatePresence>
+        <AnimatePresence onExitComplete={completePendingNavigation}>
           {isMenuOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
@@ -383,129 +397,50 @@ export default function Navbar() {
               <div className="max-h-[calc(100dvh-76px)] overflow-y-auto px-5 pb-7 pt-4 sm:px-8">
                 <div className="space-y-1">
                   {navItems.slice(0, 2).map((item) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      onClick={() => handleNavigation(item.href)}
-                      className="
-                        flex w-full items-center justify-between
-                        rounded-xl px-3 py-3.5 text-left
-                        text-[15px] font-medium text-[#252525]
-                        transition-colors hover:bg-[#faf7ef]
-                      "
+                    <a
+                      key={item.href}
+                      href={`/plots-for-sale-in-dholera${item.href}`}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        handleNavigation(item.href);
+                      }}
+                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#252525] transition-colors hover:bg-[#faf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a04a]"
                     >
                       {item.label}
-                      <ArrowUpRight size={17} className="text-[#aaa]" />
-                    </button>
+                      <ArrowUpRight aria-hidden="true" size={17} className="text-[#aaa]" />
+                    </a>
                   ))}
 
-                  {/* Mobile Projects Accordion */}
                   <div>
                     <button
                       type="button"
                       aria-expanded={isMobileProjectsOpen}
-                      onClick={() =>
-                        setIsMobileProjectsOpen((prev) => !prev)
-                      }
-                      className="
-                        flex w-full items-center justify-between
-                        rounded-xl px-3 py-3.5
-                        text-left text-[15px] font-medium
-                        text-[#252525] hover:bg-[#faf7ef]
-                      "
+                      aria-controls="mobile-projects"
+                      onClick={() => setIsMobileProjectsOpen((open) => !open)}
+                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#252525] hover:bg-[#faf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a04a]"
                     >
                       Our Projects
-                      <ChevronDown
-                        size={18}
-                        className={`text-[#a78235] transition-transform duration-300 ${
-                          isMobileProjectsOpen ? "rotate-180" : ""
-                        }`}
-                      />
+                      <ChevronDown size={18} className={`text-[#a78235] transition-transform ${isMobileProjectsOpen ? "rotate-180" : ""}`} />
                     </button>
-
-                    <AnimatePresence>
-                      {isMobileProjectsOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="mt-1 space-y-2 rounded-2xl bg-[#fcfaf5] p-2">
-                            {projects.map((project) =>
-                              renderProject(project, true)
-                            )}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div id="mobile-projects" hidden={!isMobileProjectsOpen} className="mt-1 space-y-2 rounded-2xl bg-[#fcfaf5] p-2">
+                      {projects.map((project) => renderProject(project, true))}
+                    </div>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => handleNavigation("#Why-BMA")}
-                    className="
-                      flex w-full items-center justify-between
-                      rounded-xl px-3 py-3.5 text-left
-                      text-[15px] font-medium text-[#252525]
-                      hover:bg-[#faf7ef]
-                    "
-                  >
-                    Why BookMyAssets
-                    <ArrowUpRight size={17} className="text-[#aaa]" />
-                  </button>
-                </div>
-
-                <div className="mt-5 border-t border-[#eee8dc] pt-5">
-                  <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#a88b4d]">
-                    Let's Connect
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-3">
+                  {navItems.slice(2).map((item) => (
                     <a
-                      href="tel:+918130371647"
-                      className="
-                        flex items-center justify-center gap-2
-                        rounded-xl border border-[#e8e0d0]
-                        px-3 py-3.5 text-[13px]
-                        font-medium text-[#252525]
-                      "
+                      key={item.href}
+                      href={`/plots-for-sale-in-dholera${item.href}`}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        handleNavigation(item.href);
+                      }}
+                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#252525] transition-colors hover:bg-[#faf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a04a]"
                     >
-                      <Phone size={16} />
-                      Call Now
+                      {item.label}
+                      <ArrowUpRight aria-hidden="true" size={17} className="text-[#aaa]" />
                     </a>
-
-                    <a
-                      href="https://wa.me/918130371647"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="
-                        flex items-center justify-center gap-2
-                        rounded-xl border border-[#e8e0d0]
-                        px-3 py-3.5 text-[13px]
-                        font-medium text-[#252525]
-                      "
-                    >
-                      <MessageCircle size={16} />
-                      WhatsApp
-                    </a>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={openContactForm}
-                    className="
-                      mt-3 flex w-full items-center
-                      justify-center gap-2 rounded-xl
-                      bg-[#ddbc69] px-5 py-4
-                      text-[13px] font-semibold text-[#17130b]
-                      transition-colors hover:bg-[#d2ae54]
-                    "
-                  >
-                    Book a Free Site Visit
-                    <ArrowRight size={17} />
-                  </button>
+                  ))}
                 </div>
               </div>
             </motion.div>

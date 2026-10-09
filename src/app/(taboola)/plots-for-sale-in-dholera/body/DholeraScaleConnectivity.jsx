@@ -1,6 +1,14 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import dholeraSirGraphic from "@/assests/taboola/section/dholera-sir-landing-page.webp";
-import { Route, Plane, TrainFront, TramFront, Ship, Landmark, Globe2, Building2, MapPinned, Blocks, LandPlot } from "lucide-react";
+import expresswayGraphic from "@/assests/ad-page/taboola-connectivity/expressway.webp";
+import airportGraphic from "@/assests/ad-page/taboola-connectivity/airport.webp";
+import freightGraphic from "@/assests/ad-page/taboola-connectivity/freight-corridor.webp";
+import monorailGraphic from "@/assests/ad-page/taboola-connectivity/monorail.webp";
+import seaportGraphic from "@/assests/ad-page/taboola-connectivity/seaport.webp";
+import { Globe2, Building2, MapPinned, LandPlot, ChevronLeft, ChevronRight } from "lucide-react";
 
 const comparisons = [
   { name: "Gurgaon", area: 675, icon: Building2, color: "border-cyan-200 bg-cyan-50 text-cyan-600", source: "https://onemapdepts.gmda.gov.in/" },
@@ -9,25 +17,47 @@ const comparisons = [
   { name: "Ahmedabad (AMC)", area: 464.16, icon: MapPinned, color: "border-amber-200 bg-amber-50 text-amber-600", source: "https://ahmedabadcity.gov.in/Home/AboutTheCorporation" },
 ];
 
-const iconColors = [
-  "border-blue-200 bg-blue-50 text-blue-600",
-  "border-violet-200 bg-violet-50 text-violet-600",
-  "border-emerald-200 bg-emerald-50 text-emerald-600",
-  "border-rose-200 bg-rose-50 text-rose-600",
-  "border-cyan-200 bg-cyan-50 text-cyan-600",
-];
-
 const connections = [
-  { title: "Expressway", image: "expressway", icon: Route, description: "Ahmedabad–Dholera corridor" },
-  { title: "Airport", image: "airport", icon: Plane, description: "Dholera International Airport" },
-  { title: "Freight Corridor", image: "freight", icon: TrainFront, description: "Regional logistics network" },
-  { title: "Monorail", image: "monorail", icon: TramFront, description: "Planned urban mobility" },
-  { title: "Seaport", image: "seaport", icon: Ship, description: "Regional maritime access" },
+  { title: "Expressway", image: expresswayGraphic },
+  { title: "Airport", image: airportGraphic },
+  { title: "Freight Corridor", image: freightGraphic },
+  { title: "Monorail", image: monorailGraphic },
+  { title: "Seaport", image: seaportGraphic },
 ];
 
 export default function DholeraScaleConnectivity() {
+  const trackRef = useRef(null);
+  const [canGoBack, setCanGoBack] = useState(false);
+  const [canGoNext, setCanGoNext] = useState(false);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    const update = () => {
+      setCanGoBack(track.scrollLeft > 2);
+      setCanGoNext(track.scrollLeft + track.clientWidth < track.scrollWidth - 2);
+    };
+    track.addEventListener("scroll", update, { passive: true });
+    const observer = new ResizeObserver(update);
+    observer.observe(track);
+    update();
+    return () => {
+      track.removeEventListener("scroll", update);
+      observer.disconnect();
+    };
+  }, []);
+
+  const scroll = (direction) => {
+    const track = trackRef.current;
+    const cardWidth = track.firstElementChild.getBoundingClientRect().width;
+    const gap = parseFloat(window.getComputedStyle(track).columnGap);
+    track.scrollBy({
+      left: direction * (cardWidth + gap),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
+  };
+
   return (
-    <section aria-labelledby="dholera-scale-heading" className="bg-[#f8f7f3] px-4 py-6 text-[14px] md:text-[16px] sm:px-6 lg:px-8">
+    <section id="dholera-scale" aria-labelledby="dholera-scale-heading" className="scroll-mt-24 bg-[#f8f7f3] px-4 py-6 text-[14px] md:text-[16px] sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <header className="mb-5 text-center">
           <p className="font-semibold uppercase tracking-[0.15em] text-[#a78337]">The scale of the vision</p>
@@ -61,24 +91,23 @@ export default function DholeraScaleConnectivity() {
           </div>
         </div>
 
-        <section aria-labelledby="connectivity-heading" className="mt-7">
+        <section id="connectivity" aria-labelledby="connectivity-heading" className="mt-7 scroll-mt-24">
           <header className="mb-4 text-center">
             <h2 id="connectivity-heading" className="text-[28px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[34px] lg:text-[38px]">Connectivity</h2>
           </header>
-          <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scrollbar-width:thin] sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 lg:grid-cols-5">
-            {connections.map(({ title, image, icon: Icon, description }, index) => (
-              <article key={title} className="group w-[75%] shrink-0 snap-start overflow-hidden rounded-2xl border border-[#e6dfd1] bg-white transition-shadow hover:shadow-[0_8px_24px_rgba(47,38,19,0.07)] sm:w-auto">
-                <div className="bg-[#f8f5ed] px-2 pt-2">
-                  <Image src={`/graphics/dholera/${image}.svg`} alt={`${title} conceptual illustration`} width={800} height={600} sizes="(max-width: 640px) 75vw, (max-width: 1024px) 33vw, 250px" className="aspect-[4/3] w-full object-contain" />
-                </div>
-                <div className="border-t border-[#ece4d3] p-3">
-                  <span className={`mb-2 flex h-9 w-9 items-center justify-center rounded-xl border shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] ${iconColors[index]}`}><Icon aria-hidden="true" size={20} strokeWidth={1.6} /></span>
-                  <h3 className="font-semibold leading-snug text-[#283b32]">{title}</h3>
-                  <p className="mt-1 text-[13px] leading-relaxed text-[#7b827d] md:text-[14px]">{description}</p>
-                </div>
+          <div id="connectivity-track" ref={trackRef} tabIndex={0} aria-label="Connectivity graphics; swipe to explore" className="mx-auto flex w-fit max-w-full snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69] lg:gap-4 lg:py-3">
+            {connections.map(({ title, image }) => (
+              <article key={title} className="flex h-[165px] w-[124px] shrink-0 snap-start items-center justify-center overflow-hidden rounded-xl bg-white lg:h-[229px] lg:w-[188px] lg:rounded-2xl lg:border lg:border-[#e6dfd1] lg:bg-gradient-to-b lg:from-white lg:to-[#f6f0e1] lg:shadow-[0_4px_12px_rgba(47,38,19,0.05)]">
+                <Image src={image} alt={`${title} connectivity`} width={124} height={165} sizes="124px" className="h-[165px] w-[124px] shrink-0 rounded-xl object-contain" />
               </article>
             ))}
           </div>
+          {(canGoBack || canGoNext) && (
+            <div className="mt-2 flex justify-center gap-3">
+              <button type="button" aria-label="Previous connectivity graphic" aria-controls="connectivity-track" disabled={!canGoBack} onClick={() => scroll(-1)} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ddbc69] text-black disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a78337]"><ChevronLeft size={20} /></button>
+              <button type="button" aria-label="Next connectivity graphic" aria-controls="connectivity-track" disabled={!canGoNext} onClick={() => scroll(1)} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ddbc69] text-black disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a78337]"><ChevronRight size={20} /></button>
+            </div>
+          )}
         </section>
       </div>
     </section>

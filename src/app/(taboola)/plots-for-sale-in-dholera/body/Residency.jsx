@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ArrowUpRight, MapPin, Route, Train, Clock3, Factory, Plane, Building2, LandPlot, House, Ruler, BadgeIndianRupee } from "lucide-react";
+import { ChevronDown, ArrowUpRight, MapPin, Route, Train, Clock3, Factory, Plane, LandPlot, House, Ruler, BadgeIndianRupee } from "lucide-react";
 import westwynProjectImages from "@/assests/westwynProjectImages";
 import crownImage from "@/assests/residential/crown/westwyn-crown-dholera-entry-gate-desktop.webp";
 import GetinTouch from "../components/GetinTouch";
@@ -11,23 +11,23 @@ import GetinTouch from "../components/GetinTouch";
 
 const connectivity = [
   { icon: Route, text: "Direct Entry from Major District Road (MDR)" },
-  { icon: Clock3, text: "5 mins from Dholera SIR boundary" },
-  { icon: Route, text: "12 mins from Ahmedabad-Dholera Expressway" },
-  { icon: MapPin, text: "Located in Pipariya, Dholera" },
-  { icon: Train, text: "2 mins from Railway Connectivity" },
-  { icon: Factory, text: "22 mins from Tata Semiconductor Plant & Industrial Zones" },
-  { icon: Plane, text: "30 mins from Dholera International Airport" },
+  { icon: Train, text: "2 min – Railway connectivity" },
+  { icon: Clock3, text: "5 min – Dholera SIR boundary" },
+  { icon: Route, text: "12 min – Ahmedabad-Dholera Expressway" },
+  { icon: Factory, text: "22 min – Tata Semiconductor facility" },
+  { icon: Plane, text: "30 min – Dholera International Airport" },
 ];
 
 const specs = [
-  { icon: Building2, label: "Project Type", value: "Residential" },
-  { icon: LandPlot, label: "Land Parcel", value: "40,000 Sq. Yd" },
-  { icon: House, label: "Total Units", value: "290 Plots" },
-  { icon: Ruler, label: "Plot Sizes", value: "124, 152 & 187 Sq. Yd" },
+  { icon: BadgeIndianRupee, label: "Starting Price", value: "₹8,000/sq. yd." },
+  { icon: LandPlot, label: "Land Parcel", value: "40,000 sq. yd." },
+  { icon: House, label: "Possession", value: "Immediate" },
+  { icon: Ruler, label: "Documentation", value: "Clear Title | NA/NOC | Plan Pass" },
+  { icon: MapPin, label: "Location", value: "Pipariya, 5 mins from Dholera SIR" },
 ];
 
 const tabs = [
-  { id: "residency", name: "Westwyn Residency", status: "Newly Launched" },
+  { id: "residency", name: "WestWyn Residency", status: "Newly Launched" },
   { id: "crown", name: "Westwyn Crown", status: "Coming Soon" },
 ];
 
@@ -62,8 +62,8 @@ export default function Residency() {
     <section id="westwyn-residency" aria-labelledby="westwyn-section-heading" className="text-[13px] md:text-[17px] scroll-mt-24 bg-[#f8f7f4] py-6 text-[#1c1c1c] sm:py-7 lg:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-4 max-w-2xl text-center sm:mb-4">
-          <h2 id="westwyn-section-heading" className="font-playfair-display text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">Find Your Place in Dholera</h2>
-          <p className="mt-3 text-black">Explore our thoughtfully planned residential developments.</p>
+          <h2 id="westwyn-section-heading" className="font-playfair-display text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">WestWyn Residency</h2>
+          <p className="mt-3 text-black">Residential Plots 5 mins from Dholera SIR</p>
         </div>
 
         <div role="tablist" aria-label="Westwyn projects" className="mx-auto mb-4 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-2 sm:mb-4">
@@ -98,16 +98,16 @@ export default function Residency() {
 
                 <div className="flex flex-col p-4 sm:p-5 lg:p-5">
                   <p className="font-semibold uppercase tracking-[0.2em] text-[#a78337]">Featured Development</p>
-                  <h3 className="mt-3 font-playfair-display font-semibold leading-tight">Westwyn Residency</h3>
-                  <p className="mt-2 leading-relaxed text-black">Residential Plots in Dholera</p>
+                  <h3 className="mt-3 font-playfair-display font-semibold leading-tight">WestWyn Residency</h3>
+                  <p className="mt-2 leading-relaxed text-black">Residential Plots 5 mins from Dholera SIR</p>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    {["Registry-Ready", "Govt. Approved", "Immediate Possession"].map((tag) => (
+                    {["Clear Title", "NA/NOC", "Plan Pass", "Immediate Possession", "Registry Ready"].map((tag) => (
                       <span key={tag} className="rounded-full border border-[#ebdfc4] bg-[#fcf8ee] px-3 py-1.5 font-medium text-[#8a6b2d]">{tag}</span>
                     ))}
                   </div>
                   <div className="my-4 h-px bg-[#eee9e0]" />
                   <div className="flex items-center justify-between gap-3">
-                    <h4 className="font-semibold">Location & Connectivity</h4>
+                    <h4 className="font-semibold">Key Location Benefits</h4>
                     <span className="text-[#9c824f]">Dholera, Gujarat</span>
                   </div>
                   <div className="mt-4 space-y-2.5">
@@ -140,22 +140,23 @@ export default function Residency() {
               </div>
 
               <div className="border-t border-[#eee9e0] px-3 py-3 sm:px-5 sm:py-4 lg:px-5">
-                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                <h4 className="mb-2 font-semibold">Project Highlights</h4>
+                <div className="grid grid-cols-2 gap-2 lg:grid-cols-5">
                   {specs.map(({ icon: Icon, label, value }) => (
-                    <div key={label} className="rounded-2xl border border-[#eee7d9] bg-[#faf9f6] p-3 sm:p-4">
-                      <span className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-[#e8d9b5] bg-gradient-to-br from-[#fffdf7] to-[#f1e5c9] text-[#98742e]"><Icon aria-hidden="true" size={21} strokeWidth={1.5} /></span>
-                      <p className="text-[#7a7a7a]">{label}</p>
-                      <p className="mt-1.5 font-semibold leading-snug text-[#252525]">{value}</p>
+                    <div key={label} className={`grid grid-cols-[28px_minmax(0,1fr)] content-start gap-x-2 gap-y-1 rounded-xl border border-[#eee7d9] bg-[#faf9f6] p-2.5 ${["Possession", "Documentation", "Location"].includes(label) ? "col-span-2 lg:col-span-1" : ""}`}>
+                      <span className="row-span-2 flex h-7 w-7 items-center justify-center rounded-lg border border-[#e8d9b5] bg-gradient-to-br from-[#fffdf7] to-[#f1e5c9] text-[#98742e]"><Icon aria-hidden="true" size={16} strokeWidth={1.5} /></span>
+                      <p className="text-[12px] leading-snug text-[#7a7a7a] sm:text-[13px]">{label}</p>
+                      <p className="col-start-2 text-[13px] font-semibold leading-snug text-[#252525] sm:text-[14px]">{value}</p>
                     </div>
                   ))}
                 </div>
-                <div className="mt-3 flex flex-col gap-3 rounded-2xl border border-[#ead6a6] bg-[#f9f0db] p-3 sm:mt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-4">
-                  <div>
-                    <p className="flex items-center gap-2 font-medium text-[#866b35]"><BadgeIndianRupee size={16} /> Project Price</p>
-                    <p className="mt-1 font-playfair-display text-[24px] font-bold leading-tight text-[#272013] sm:text-[17px]">₹8,000 <span className="text-[13px] font-medium sm:text-[17px]">/ Sq. Yd</span></p>
+                <div className="mt-3 flex items-center justify-between gap-2 rounded-xl border border-[#ead6a6] bg-[#f9f0db] p-2.5 sm:mt-4 sm:gap-4 sm:rounded-2xl sm:p-4 lg:justify-center lg:gap-8">
+                  <div className="min-w-0">
+                    <p className="flex items-center gap-1.5 text-[12px] font-medium text-[#866b35] sm:gap-2 sm:text-[14px]"><BadgeIndianRupee size={16} className="shrink-0" /> Project Price</p>
+                    <p className="mt-1 whitespace-nowrap font-playfair-display text-[20px] font-bold leading-tight text-[#272013] sm:text-[17px]">₹8,000 <span className="text-[11px] font-medium sm:text-[17px]">/ Sq. Yd</span></p>
                   </div>
-                  <button type="button" onClick={() => setIsContactFormOpen(true)} className="inline-flex w-fit items-center justify-center gap-2 rounded-xl bg-[#ddbc69] px-3 py-2 font-semibold text-black transition-shadow hover:shadow-md sm:px-4 sm:py-3">
-                    Get Project Details <ArrowUpRight size={17} />
+                  <button type="button" onClick={() => setIsContactFormOpen(true)} className="inline-flex min-h-11 shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-lg bg-[#ddbc69] px-2 py-2 text-[12px] font-semibold text-black transition-shadow hover:shadow-md sm:gap-2 sm:rounded-xl sm:px-4 sm:py-3 sm:text-[14px]">
+                    Get Plot Details <ArrowUpRight size={17} />
                   </button>
                 </div>
               </div>
@@ -181,17 +182,6 @@ export default function Residency() {
         </div>
       </div>
 
-      {activeProject === "residency" && (
-        <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-3 rounded-2xl border border-[#e5d7b5] bg-[#f4ecd9] p-3 text-center sm:flex-row sm:justify-between sm:p-4 sm:text-left">
-            <div>
-              <h2 className="font-semibold text-[#30291c]">Invest in Registry-Ready Plots in Dholera</h2>
-            </div>
-            <button type="button" onClick={() => setIsContactFormOpen(true)} className="min-h-11 w-fit shrink-0 rounded-xl bg-[#ddbc69] px-5 py-2 font-semibold text-black transition-shadow hover:shadow-md sm:py-3">Talk to Our RM</button>
-          </div>
-
-        </div>
-      )}
 
       {isContactFormOpen && (
         <GetinTouch title={activeProject === "crown" ? "Discover Westwyn Crown" : "Discover Westwyn Residency"} subtitle={activeProject === "crown" ? "Connect with our team for launch updates and availability." : "Get project pricing, brochure and site visit assistance."} buttonName="Get A Call Back" onClose={() => setIsContactFormOpen(false)} />

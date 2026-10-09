@@ -1061,7 +1061,7 @@ export default function InlineLeadForm({
                 `}
               />
 
-              <span className="text-[15px] text-white">
+              <span className="text-[15px]">
                 Your details are safe with us
               </span>
             </div>

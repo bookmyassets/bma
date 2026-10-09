@@ -3,19 +3,6 @@
 import React, { useEffect, useState } from "react";
 import HeroForm from "./HeroForm";
 
-const PointsList = () => (
-  <div className="min-w-0 max-w-2xl [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]">
-    <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#f3dc9c] sm:text-sm">Your next investment in Dholera</p>
-    <h1 id="hero-title" className="text-[clamp(2.25rem,4.2vw,4rem)] font-semibold leading-[1.12] tracking-tight text-white">
-      Residential Plots<br className="hidden sm:block" /> in Dholera
-      <span className="mt-4 block text-[clamp(1.5rem,2.8vw,2.5rem)] text-[#ddbc69]">Starting from &#8377;10 Lakh</span>
-    </h1>
-    <p className="mt-6 max-w-lg text-base leading-relaxed text-white sm:text-lg">
-      Explore premium plotted opportunities with BookMyAssets. Get the brochure, pricing and location details to plan your investment.
-    </p>
-  </div>
-);
-
 export default function Hero() {
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -93,7 +80,7 @@ export default function Hero() {
         </div>
       )}
 
-      <section aria-labelledby="hero-title" className="relative isolate min-h-[100svh] w-full overflow-hidden bg-[#151f28]">
+      <section aria-labelledby="hero-form-title" className="relative isolate mt-4 min-h-[100svh] w-full overflow-hidden bg-[#151f28] sm:mt-0">
         <video
           autoPlay
           muted
@@ -108,9 +95,14 @@ export default function Hero() {
         </video>
         <div className="absolute inset-0 bg-black/20 md:bg-gradient-to-r md:from-black/35 md:via-black/10 md:to-transparent" />
 
-        <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-10 px-5 pb-10 pt-[116px] sm:px-8 sm:pb-14 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:px-10 lg:pb-16 lg:pt-[140px]">
-          <PointsList />
-          <div className="w-full min-w-0 max-w-lg justify-self-center lg:justify-self-end">
+        <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 content-normal items-end px-4 pb-[calc(72px+env(safe-area-inset-bottom))] pt-[88px] sm:px-8 sm:pt-[120px] lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center lg:gap-16 lg:px-10 lg:pb-16 lg:pt-[140px]">
+          <div className="hidden min-w-0 max-w-2xl [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] lg:block">
+            <h1 id="hero-title" className="text-[clamp(2rem,3.5vw,3.5rem)] font-semibold leading-[1.12] tracking-tight text-white">Buy a Plot in Dholera &amp; Earn Up to ₹30,000 Monthly Rental Income</h1>
+            <p className="mt-5 text-[clamp(1.5rem,2.8vw,2.5rem)] font-semibold text-[#ddbc69]">Starting from ₹8,000/sq. yd.</p>
+            <p className="mt-4 max-w-lg text-md leading-relaxed text-white">Clear Title | NA/NOC | Plan Pass | Immediate Possession | Registry Ready</p>
+            <a href="#hero-form-title" className="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl bg-[#ddbc69] px-5 py-3 font-semibold text-black [text-shadow:none] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">Get Plot Details</a>
+          </div>
+          <div className="mt-auto w-full min-w-0 max-w-lg justify-self-center lg:mt-0 lg:max-w-[420px] lg:justify-self-end">
             <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
           </div>
         </div>

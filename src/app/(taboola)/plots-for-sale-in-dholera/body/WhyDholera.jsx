@@ -1,10 +1,11 @@
-import { Building2, Route, Factory, MapPinned } from "lucide-react";
+import { Building2, Route, Factory, MapPinned, House } from "lucide-react";
 
 const highlights = [
-  { icon: Building2, title: "Planned from the ground up", body: "A greenfield industrial city under the Delhi-Mumbai Industrial Corridor, with an integrated approach to land use and infrastructure." },
-  { icon: Route, title: "Infrastructure at its core", body: "Expressway, airport and rail projects form part of the region's long-term connectivity plans." },
-  { icon: Factory, title: "An industrial ecosystem", body: "Semiconductors, renewable energy and manufacturing are among the sectors shaping Dholera's development." },
-  { icon: MapPinned, title: "Space for long-term growth", body: "Explore planned development, project locations and infrastructure progress before choosing your plot." },
+  { icon: Building2, title: "India’s First Smart City", body: "Dholera SIR is being developed as a planned greenfield smart city." },
+  { icon: Factory, title: "Major Industrial Projects", body: "Semiconductor and other large-scale industries are creating future employment and demand." },
+  { icon: Route, title: "Excellent Connectivity", body: "Ahmedabad-Dholera Expressway, upcoming Dholera Airport and planned rail connectivity are strengthening access." },
+  { icon: MapPinned, title: "Long Term Growth Potential", body: "Growing infrastructure and business activity can support future land value appreciation." },
+  { icon: House, title: "Residential & Rental Opportunity", body: "Developing employment hubs can create demand for homes, rentals and residential plots." },
 ];
 
 const iconColors = [
@@ -16,20 +17,24 @@ const iconColors = [
 
 export default function WhyDholera() {
   return (
-    <section id="dholera" aria-labelledby="dholera-overview-heading" className="bg-white px-4 py-7 text-[14px] md:text-[16px] sm:px-6 lg:px-8">
+    <section id="dholera" aria-labelledby="dholera-overview-heading" className="scroll-mt-24 bg-white px-4 py-5 text-[14px] md:text-[16px] sm:px-6 sm:py-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-8">
-          <div>
-            <h2 id="dholera-overview-heading" className="mb-3 text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">Discover Dholera</h2>
-            <p className="mt-4 max-w-lg leading-relaxed text-black">Dholera brings planned infrastructure, industrial development and room to grow together in one region. Understand the vision behind the city before making your next investment.</p>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#e8dcc0] bg-[#fbf7ed] px-3 py-2 font-medium text-[#88703b]"><span className="h-1.5 w-1.5 rounded-full bg-[#ddbc69]" />Gujarat's planned greenfield industrial city</div>
+        <div className="grid gap-4">
+          <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-6">
+            <div>
+              <h2 id="dholera-overview-heading" className="text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">Why Invest in Dholera?</h2>
+              <p className="mt-2 max-w-3xl leading-relaxed text-black">Dholera is emerging as one of Gujarat’s key investment destinations, backed by major infrastructure, industrial development and improving connectivity.</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 lg:flex-col lg:items-start">
+              <a href="#westwyn-residency" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#ddbc69] px-4 py-2 font-semibold text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a78337] focus-visible:ring-offset-2">Explore Plots in Dholera</a>
+            </div>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-6 lg:gap-3">
             {highlights.map(({ icon: Icon, title, body }, index) => (
-              <article key={title} className="rounded-2xl border border-[#e9e3d7] bg-[#faf9f5] p-3 transition-colors hover:border-[#ddbc69] sm:p-4">
-                <span className={`mb-2 flex h-10 w-10 items-center justify-center rounded-full border sm:mb-3 ${iconColors[index]}`}><Icon aria-hidden="true" size={21} strokeWidth={1.7} /></span>
-                <h3 className="font-semibold leading-snug text-[#ddbc69]">{title}</h3>
-                <p className="mt-2 leading-relaxed text-black">{body}</p>
+              <article key={title} className={`grid grid-cols-[32px_minmax(0,1fr)] content-start gap-x-2.5 gap-y-1 rounded-xl border border-[#e9e3d7] bg-[#faf9f5] p-3 transition-colors hover:border-[#ddbc69] ${index < 3 ? "lg:col-span-2" : "lg:col-span-3"} ${index === highlights.length - 1 ? "sm:col-span-2 lg:col-span-3" : ""}`}>
+                <span className={`row-span-2 flex h-8 w-8 items-center justify-center rounded-full border ${iconColors[index % iconColors.length]}`}><Icon aria-hidden="true" size={18} strokeWidth={1.7} /></span>
+                <h3 className="self-center font-semibold leading-snug text-[#a78337]">{title}</h3>
+                <p className="col-start-2 text-[13px] leading-relaxed text-black sm:text-[14px]">{body}</p>
               </article>
             ))}
           </div>

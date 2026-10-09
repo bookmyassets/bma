@@ -278,7 +278,7 @@ export default function PopupScroll({ title }) {
                     ×
                   </button>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Registry Ready Plots in Dholera Starting from ₹8 Lakh
+                    Own a Plot in Dholera &amp; Unlock Up to ₹30K/Month
                   </h3>
                 </div>
 
