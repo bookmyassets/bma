@@ -199,7 +199,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
     <form onSubmit={handleSubmit} aria-labelledby="hero-form-title" className="mx-auto w-full max-w-[340px] overflow-hidden rounded-2xl border border-white/60 bg-[#fffdf8]/95 p-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-md sm:max-w-none sm:rounded-3xl sm:p-8">
       <div className="mb-2 sm:mb-6">
         <span className="mb-4 hidden h-1 w-10 rounded-full bg-[#ddbc69] sm:block" />
-        <h2 id="hero-form-title" className="scroll-mt-24 text-[16px] font-semibold leading-snug tracking-tight text-[#92702b] sm:mt-2 sm:text-2xl sm:text-[#151f28]"><span className="sm:hidden">Earn up to ₹30K rental income from your plots</span><span className="hidden sm:inline lg:hidden">Residential plots starting from ₹10 lakh in Dholera, Gujarat</span><span className="hidden lg:inline">Residential Plots starting from ₹10 lakh in Dholera, Gujarat</span></h2>
+        <h2 id="hero-form-title" className="scroll-mt-24 text-[16px] font-semibold leading-snug tracking-tight text-[#92702b] sm:mt-2 sm:text-2xl sm:text-[#151f28]"><span className="sm:hidden">Earn up to ₹30,000 rental income</span><span className="hidden sm:inline lg:hidden">Residential plots from ₹10 lakh in Dholera, Gujarat</span><span className="hidden lg:inline">Residential Plots from ₹10 lakh in Dholera, Gujarat</span></h2>
         <p className="mt-1.5 hidden text-[12px] font-medium leading-snug text-[#92702b] sm:mt-2 sm:block sm:text-[15px] lg:hidden">Earn up to ₹30K rental income from your plots</p>
       </div>
       {errorMessage && (

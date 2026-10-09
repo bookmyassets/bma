@@ -21,13 +21,6 @@ export default function WhyDholera() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-4">
           <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-6">
-            <div>
-              <h2 id="dholera-overview-heading" className="text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">Why Invest in Dholera?</h2>
-              <p className="mt-2 max-w-3xl leading-relaxed text-black">Dholera is emerging as one of Gujarat’s key investment destinations, backed by major infrastructure, industrial development and improving connectivity.</p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 lg:flex-col lg:items-start">
-              <a href="#westwyn-residency" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#ddbc69] px-4 py-2 font-semibold text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a78337] focus-visible:ring-offset-2">Explore Plots in Dholera</a>
-            </div>
           </div>
           <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-6 lg:gap-3">
             {highlights.map(({ icon: Icon, title, body }, index) => (
@@ -37,6 +30,9 @@ export default function WhyDholera() {
                 <p className="col-start-2 text-[13px] leading-relaxed text-black sm:text-[14px]">{body}</p>
               </article>
             ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-2 lg:flex-col lg:items-start">
+              <a href="#westwyn-residency" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#ddbc69] px-4 py-2 font-semibold text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a78337] focus-visible:ring-offset-2">Explore Plots in Dholera</a>
           </div>
         </div>
       </div>

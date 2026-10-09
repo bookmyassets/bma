@@ -11,16 +11,14 @@ import GetinTouch from "../components/GetinTouch";
 
 const connectivity = [
   { icon: Route, text: "Direct Entry from Major District Road (MDR)" },
-  { icon: Train, text: "2 min – Railway connectivity" },
-  { icon: Clock3, text: "5 min – Dholera SIR boundary" },
-  { icon: Route, text: "12 min – Ahmedabad-Dholera Expressway" },
-  { icon: Factory, text: "22 min – Tata Semiconductor facility" },
-  { icon: Plane, text: "30 min – Dholera International Airport" },
+  { icon: Train, text: "2 Min – DFC" },
+  { icon: Clock3, text: "5 Min – Dholera SIR boundary" },
+  { icon: Route, text: "12 Min – Ahmedabad-Dholera Expressway" },
+  { icon: Factory, text: "22 Min – Tata Semiconductor facility" },
+  { icon: Plane, text: "30 Min – Dholera International Airport" },
 ];
 
 const specs = [
-  { icon: BadgeIndianRupee, label: "Starting Price", value: "₹8,000/sq. yd." },
-  { icon: LandPlot, label: "Land Parcel", value: "40,000 sq. yd." },
   { icon: House, label: "Possession", value: "Immediate" },
   { icon: Ruler, label: "Documentation", value: "Clear Title | NA/NOC | Plan Pass" },
   { icon: MapPin, label: "Location", value: "Pipariya, 5 mins from Dholera SIR" },
@@ -62,8 +60,7 @@ export default function Residency() {
     <section id="westwyn-residency" aria-labelledby="westwyn-section-heading" className="text-[13px] md:text-[17px] scroll-mt-24 bg-[#f8f7f4] py-6 text-[#1c1c1c] sm:py-7 lg:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-4 max-w-2xl text-center sm:mb-4">
-          <h2 id="westwyn-section-heading" className="font-playfair-display text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">WestWyn Residency</h2>
-          <p className="mt-3 text-black">Residential Plots 5 mins from Dholera SIR</p>
+          <h2 id="westwyn-section-heading" className="font-playfair-display text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">{tabs.find((tab) => tab.id === activeProject)?.name}</h2>
         </div>
 
         <div role="tablist" aria-label="Westwyn projects" className="mx-auto mb-4 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-2 sm:mb-4">
@@ -97,15 +94,23 @@ export default function Residency() {
                 </div>
 
                 <div className="flex flex-col p-4 sm:p-5 lg:p-5">
-                  <p className="font-semibold uppercase tracking-[0.2em] text-[#a78337]">Featured Development</p>
-                  <h3 className="mt-3 font-playfair-display font-semibold leading-tight">WestWyn Residency</h3>
-                  <p className="mt-2 leading-relaxed text-black">Residential Plots 5 mins from Dholera SIR</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {["Clear Title", "NA/NOC", "Plan Pass", "Immediate Possession", "Registry Ready"].map((tag) => (
-                      <span key={tag} className="rounded-full border border-[#ebdfc4] bg-[#fcf8ee] px-3 py-1.5 font-medium text-[#8a6b2d]">{tag}</span>
-                    ))}
-                  </div>
+                  <p className="font-semibold uppercase tracking-[0.2em] text-[#a78337]">WestWyn Residency</p>
+                  <p className="mt-2 leading-relaxed text-black">Residential Plots near DFC</p>
                   <div className="my-4 h-px bg-[#eee9e0]" />
+                <h4 className="mb-2 font-semibold">Project Highlights</h4>
+                <div className="grid grid-cols-2 gap-2 lg:grid-cols-2">
+                  {specs.map(({ icon: Icon, label, value }) => (
+                    <div key={label} className={`grid grid-cols-[28px_minmax(0,1fr)] content-start gap-x-2 gap-y-1 rounded-xl border border-[#eee7d9] bg-[#faf9f6] p-2.5 ${["Possession", "Documentation", "Location"].includes(label) ? "col-span-2" : ""}`}>
+                      <span className="row-span-2 flex h-7 w-7 items-center justify-center rounded-lg border border-[#e8d9b5] bg-gradient-to-br from-[#fffdf7] to-[#f1e5c9] text-[#98742e]"><Icon aria-hidden="true" size={16} strokeWidth={1.5} /></span>
+                      <p className="text-[12px] leading-snug text-[#7a7a7a] sm:text-[13px]">{label}</p>
+                      <p className="col-start-2 text-[13px] font-semibold leading-snug text-[#252525] sm:text-[14px]">{value}</p>
+                    </div>
+                  ))}
+                </div>
+                </div>
+              </div>
+
+              <div className="border-t border-[#eee9e0] px-3 py-3 sm:px-5 sm:py-4 lg:px-5">
                   <div className="flex items-center justify-between gap-3">
                     <h4 className="font-semibold">Key Location Benefits</h4>
                     <span className="text-[#9c824f]">Dholera, Gujarat</span>
@@ -136,20 +141,6 @@ export default function Residency() {
                     {expanded ? "Show Less" : "View All Connectivity"}
                     <ChevronDown size={16} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
                   </button>
-                </div>
-              </div>
-
-              <div className="border-t border-[#eee9e0] px-3 py-3 sm:px-5 sm:py-4 lg:px-5">
-                <h4 className="mb-2 font-semibold">Project Highlights</h4>
-                <div className="grid grid-cols-2 gap-2 lg:grid-cols-5">
-                  {specs.map(({ icon: Icon, label, value }) => (
-                    <div key={label} className={`grid grid-cols-[28px_minmax(0,1fr)] content-start gap-x-2 gap-y-1 rounded-xl border border-[#eee7d9] bg-[#faf9f6] p-2.5 ${["Possession", "Documentation", "Location"].includes(label) ? "col-span-2 lg:col-span-1" : ""}`}>
-                      <span className="row-span-2 flex h-7 w-7 items-center justify-center rounded-lg border border-[#e8d9b5] bg-gradient-to-br from-[#fffdf7] to-[#f1e5c9] text-[#98742e]"><Icon aria-hidden="true" size={16} strokeWidth={1.5} /></span>
-                      <p className="text-[12px] leading-snug text-[#7a7a7a] sm:text-[13px]">{label}</p>
-                      <p className="col-start-2 text-[13px] font-semibold leading-snug text-[#252525] sm:text-[14px]">{value}</p>
-                    </div>
-                  ))}
-                </div>
                 <div className="mt-3 flex items-center justify-between gap-2 rounded-xl border border-[#ead6a6] bg-[#f9f0db] p-2.5 sm:mt-4 sm:gap-4 sm:rounded-2xl sm:p-4 lg:justify-center lg:gap-8">
                   <div className="min-w-0">
                     <p className="flex items-center gap-1.5 text-[12px] font-medium text-[#866b35] sm:gap-2 sm:text-[14px]"><BadgeIndianRupee size={16} className="shrink-0" /> Project Price</p>
@@ -172,7 +163,6 @@ export default function Residency() {
               </div>
               <div className="flex flex-col justify-center p-4 sm:p-5 lg:p-5">
                 <span className="w-fit rounded-full bg-[#eaf1fb] px-3 py-1.5 font-semibold text-[#45658f]">Coming Soon</span>
-                <p className="mt-4 font-semibold uppercase tracking-[0.2em] text-[#a78337]">The Westwyn Collection</p>
                 <h3 className="mt-3 font-playfair-display font-semibold">Westwyn Crown</h3>
                 <p className="mt-5 max-w-md leading-7 text-[#666]">An upcoming residential plotted development by BookMyAssets in Dholera. Project details will be announced soon.</p>
                 <button type="button" onClick={() => setIsContactFormOpen(true)} className="mt-4 inline-flex w-fit items-center gap-2 rounded-xl bg-[#ddbc69] px-4 py-3 font-semibold text-black transition-shadow hover:shadow-md">Get Launch Updates <ArrowUpRight size={17} /></button>

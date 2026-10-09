@@ -29,7 +29,7 @@ export default function page() {
             layout="inline"
             size="compact"
             headingTag="h2"
-            title="Own a Plot in Dholera & Unlock Up to ₹30K/Month"
+            title="Own a Plot in Dholera & Unlock Up to ₹30,000/Month"
             buttonText="Get Verified Plot Details"
             source="BookMyAssets Taboola Inline Form"
             tags={["Dholera Investment", "Website Lead", "Taboola Inline"]}
