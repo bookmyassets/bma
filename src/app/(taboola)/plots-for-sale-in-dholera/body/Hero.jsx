@@ -95,12 +95,14 @@ export default function Hero() {
         </video>
         <div className="absolute inset-0 bg-black/20 md:bg-gradient-to-r md:from-black/35 md:via-black/10 md:to-transparent" />
 
-        <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 content-normal items-end px-4 pb-[calc(72px+env(safe-area-inset-bottom))] pt-[88px] sm:px-8 sm:pt-[120px] lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center lg:gap-16 lg:px-10 lg:pb-16 lg:pt-[140px]">
+        <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 grid-rows-[1fr_auto] content-normal items-end px-4 pb-[calc(72px+env(safe-area-inset-bottom))] pt-[88px] sm:grid-rows-none sm:px-8 sm:pt-[120px] lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center lg:gap-16 lg:px-10 lg:pb-16 lg:pt-[140px]">
+          <h1 className="mb-6 max-w-lg self-start text-[30px] font-semibold leading-tight tracking-tight text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)] sm:hidden">
+            Residential plots starting from ₹10 lakh in Dholera, Gujarat
+          </h1>
           <div className="hidden min-w-0 max-w-2xl [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] lg:block">
             <h1 id="hero-title" className="text-[clamp(2rem,3.5vw,3.5rem)] font-semibold leading-[1.12] tracking-tight text-white">Buy a Plot in Dholera &amp; Earn Up to ₹30,000 Monthly Rental Income</h1>
             <p className="mt-5 text-[clamp(1.5rem,2.8vw,2.5rem)] font-semibold text-[#ddbc69]">Starting from ₹8,000/sq. yd.</p>
             <p className="mt-4 max-w-lg text-md leading-relaxed text-white">Clear Title | NA/NOC | Plan Pass | Immediate Possession | Registry Ready</p>
-            <a href="#hero-form-title" className="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl bg-[#ddbc69] px-5 py-3 font-semibold text-black [text-shadow:none] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">Get Plot Details</a>
           </div>
           <div className="mt-auto w-full min-w-0 max-w-lg justify-self-center lg:mt-0 lg:max-w-[420px] lg:justify-self-end">
             <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />

@@ -29,6 +29,11 @@ export default function Form({ title }) {
 
     if (!sessionPopupShown) {
       const handleScroll = () => {
+        if (sessionStorage.getItem("popupShownThisSession")) {
+          window.removeEventListener("scroll", handleScroll);
+          return;
+        }
+
         const scrollTop =
           window.pageYOffset || document.documentElement.scrollTop;
         const documentHeight =
@@ -37,9 +42,9 @@ export default function Form({ title }) {
         const scrollPercentage = (scrollTop / documentHeight) * 100;
 
         if (scrollPercentage >= 45) {
-          setShowFormPopup(true);
           sessionStorage.setItem("popupShownThisSession", "true");
           window.removeEventListener("scroll", handleScroll);
+          setShowFormPopup(true);
         }
       };
 

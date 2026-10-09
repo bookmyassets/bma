@@ -11,7 +11,6 @@ import MegaIndustries from "@/components/MegaIndustries";
 import TestimonialPagination from "./body/Testimonials";
 import Footer from "./body/Footer";
 import FAQSection from "./body/FAQs";
-import PopupScroll from "./components/PopupScroll";
 
 export default function page() {
   return (
@@ -43,7 +42,6 @@ export default function page() {
         <FAQSection />
         <Footer />
       </div>
-      <PopupScroll />
       <Form title="Own a Plot in Dholera & Unlock Up to ₹30K/Month" />
     </>
   );

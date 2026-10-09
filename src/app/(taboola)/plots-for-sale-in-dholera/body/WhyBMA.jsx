@@ -23,10 +23,9 @@ export default function WhyBMA() {
           <p className="mt-2 max-w-3xl leading-relaxed text-black">Invest with a Dholera-focused real estate company built on experience, transparency and long-term value.</p>
           <ul className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2.5">
             {benefits.map(({ title, body, icon: Icon }, index) => (
-              <li key={title} className={`grid grid-cols-[24px_minmax(0,1fr)] content-start gap-x-1.5 gap-y-1 rounded-xl border border-[#e9e3d7] bg-[#faf9f6] p-2 transition-colors hover:border-[#ddbc69] sm:gap-x-2 sm:p-3 ${index === benefits.length - 1 ? "col-span-2 lg:col-span-1" : ""}`}>
+              <li key={title} className={`grid grid-cols-[24px_minmax(0,1fr)] content-start gap-x-1.5 gap-y-1 rounded-xl border border-[#e9e3d7] bg-[#faf9f6] p-2 transition-colors hover:border-[#ddbc69] sm:gap-x-2 sm:p-3 lg:items-center ${index === benefits.length - 1 ? "col-span-2 lg:col-span-1" : ""}`}>
                 <span className="flex h-6 w-6 items-center justify-center rounded-md border border-[#e8d9b5] bg-[#f6f0e1] text-[#98742e]"><Icon aria-hidden="true" size={15} strokeWidth={1.6} /></span>
-                <h3 className="self-center text-[12px] font-semibold leading-snug text-[#202b27] sm:text-[14px]">{title}</h3>
-                <p className="col-span-2 text-[12px] leading-snug text-black sm:text-[13px]">{body}</p>
+                <h3 className="self-center text-[13.5px] font-semibold leading-snug text-[#202b27] sm:text-[17px] lg:p-2">{title}</h3>
               </li>
             ))}
           </ul>
@@ -39,7 +38,7 @@ export default function WhyBMA() {
             </div>
             <figcaption className="flex min-w-0 items-center gap-3 py-1 pr-2 text-white">
               <span className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#ddbc69]/40 text-[#ddbc69] sm:flex"><ShieldCheck aria-hidden="true" size={19} strokeWidth={1.6} /></span>
-              <div><p className="text-[13px] font-semibold leading-snug text-[#ddbc69] sm:text-[14px] md:text-[16px]">Recognition that inspires us</p><p className="mt-1 text-[11px] leading-snug text-white/65 sm:mt-0.5 sm:text-[13px]">BookMyAssets | Asia Excellence Awards 2025</p></div>
+              <div><p className="text-[15px] font-semibold leading-snug text-[#ddbc69] sm:text-[14px] md:text-[16px]">Recognition that inspires us</p><p className="mt-1 text-[13px] leading-snug text-white sm:mt-0.5 sm:text-[13px]">BookMyAssets | Asia Excellence Awards 2025</p></div>
             </figcaption>
           </div>
         </figure>
