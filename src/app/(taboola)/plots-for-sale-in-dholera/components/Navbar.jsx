@@ -48,7 +48,7 @@ const projects = [
 
 const navItems = [
   { href: "#hero", label: "Home" },
-  { href: "#dholera", label: "About Dholera" },
+  { href: "#dholera-scale", label: "About Dholera" },
   { href: "#Why-BMA", label: "Why BookMyAssets" },
 ];
 
@@ -163,13 +163,13 @@ export default function Navbar() {
         }}
         className={`
           group/item flex w-full items-center justify-between
-          gap-3 rounded-xl border border-[#eee8dc] bg-white px-3.5 py-3.5 text-left
+          gap-3 rounded-xl border border-white/10 bg-[#202e39] px-3.5 py-3.5 text-left
           transition-all duration-200
-          cursor-pointer hover:border-[#ddbc69] hover:bg-[#faf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a04a]
+          cursor-pointer hover:border-[#ddbc69] hover:bg-[#2a3b48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69]
           ${mobile ? "py-3" : ""}
         `}
       >
-        <span className="min-w-0 text-[13px] font-semibold text-[#252525] sm:text-[14px]">{project.name}</span>
+        <span className="min-w-0 text-[13px] font-semibold text-[#f5f1e8] sm:text-[14px]">{project.name}</span>
           <span className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-semibold ${project.badge}`}>
             <span className={`h-1.5 w-1.5 rounded-full ${project.dot}`} />
             {project.status}
@@ -183,8 +183,8 @@ export default function Navbar() {
       <nav
         className={`
           fixed inset-x-0 top-0 z-[100]
-          border-b border-[#eae5da]
-          bg-white/95 backdrop-blur-xl
+          border-b border-white/10
+          bg-[#151f28]/95 backdrop-blur-xl
           transition-shadow duration-300
           ${
             isScrolled
@@ -221,14 +221,14 @@ export default function Navbar() {
                   onClick={() => handleNavigation(item.href)}
                   className="
                     group relative whitespace-nowrap py-3
-                    text-[13px] font-medium text-[#292929]
+                    text-[13px] font-medium text-[#f5f1e8]
                     transition-colors duration-300
-                    hover:text-[#a78235] xl:text-[14px]
+                    hover:text-[#ddbc69] xl:text-[14px]
                   "
                 >
                   {item.label}
 
-                  <span className="absolute bottom-1 left-0 h-[1.5px] w-0 bg-[#c5a04a] transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute bottom-1 left-0 h-[1.5px] w-0 bg-[#ddbc69] transition-all duration-300 group-hover:w-full" />
                 </button>
               ))}
 
@@ -253,8 +253,8 @@ export default function Navbar() {
                     xl:text-[14px]
                     ${
                       isProjectsOpen
-                        ? "text-[#a78235]"
-                        : "text-[#292929] hover:text-[#a78235]"
+                        ? "text-[#ddbc69]"
+                        : "text-[#f5f1e8] hover:text-[#ddbc69]"
                     }
                   `}
                 >
@@ -271,7 +271,7 @@ export default function Navbar() {
                   <span
                     className={`
                       absolute bottom-1 left-0 h-[1.5px]
-                      bg-[#c5a04a] transition-all duration-300
+                      bg-[#ddbc69] transition-all duration-300
                       ${
                         isProjectsOpen
                           ? "w-full"
@@ -293,7 +293,7 @@ export default function Navbar() {
                         -translate-x-1/2 pt-3
                       "
                     >
-                      <div className="overflow-hidden rounded-[18px] border border-[#e9e2d4] bg-[#fcfaf5] p-3 shadow-[0_20px_60px_rgba(0,0,0,0.13)]">
+                      <div className="overflow-hidden rounded-[18px] border border-white/10 bg-[#1b2934] p-3 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
                         <div className="space-y-2">
                           {projects.map((project) =>
                             renderProject(project)
@@ -312,14 +312,14 @@ export default function Navbar() {
                 onClick={() => handleNavigation("#Why-BMA")}
                 className="
                   group relative whitespace-nowrap py-3
-                  text-[13px] font-medium text-[#292929]
+                  text-[13px] font-medium text-[#f5f1e8]
                   transition-colors duration-300
-                  hover:text-[#a78235] xl:text-[14px]
+                  hover:text-[#ddbc69] xl:text-[14px]
                 "
               >
                 Why BookMyAssets
 
-                <span className="absolute bottom-1 left-0 h-[1.5px] w-0 bg-[#c5a04a] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-1 left-0 h-[1.5px] w-0 bg-[#ddbc69] transition-all duration-300 group-hover:w-full" />
               </button>
 
               {/* Contact CTA */}
@@ -366,9 +366,9 @@ export default function Navbar() {
                 }}
                 className="
                   flex h-10 w-10 items-center justify-center
-                  rounded-full border border-[#eae5da]
-                  text-[#252525] transition-colors
-                  hover:bg-[#faf7ef]
+                  rounded-full border border-white/15
+                  text-[#f5f1e8] transition-colors
+                  hover:bg-white/10
                 "
               >
                 {isMenuOpen ? (
@@ -390,8 +390,8 @@ export default function Navbar() {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.28, ease: "easeInOut" }}
               className="
-                overflow-hidden border-t border-[#f0ece4]
-                bg-white lg:hidden
+                overflow-hidden border-t border-white/10
+                bg-[#151f28] lg:hidden
               "
             >
               <div className="max-h-[calc(100dvh-76px)] overflow-y-auto px-5 pb-7 pt-4 sm:px-8">
@@ -404,10 +404,10 @@ export default function Navbar() {
                         event.preventDefault();
                         handleNavigation(item.href);
                       }}
-                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#252525] transition-colors hover:bg-[#faf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a04a]"
+                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#f5f1e8] transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69]"
                     >
                       {item.label}
-                      <ArrowUpRight aria-hidden="true" size={17} className="text-[#aaa]" />
+                      <ArrowUpRight aria-hidden="true" size={17} className="text-[#aeb7bf]" />
                     </a>
                   ))}
 
@@ -417,12 +417,12 @@ export default function Navbar() {
                       aria-expanded={isMobileProjectsOpen}
                       aria-controls="mobile-projects"
                       onClick={() => setIsMobileProjectsOpen((open) => !open)}
-                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#252525] hover:bg-[#faf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a04a]"
+                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#f5f1e8] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69]"
                     >
                       Our Projects
-                      <ChevronDown size={18} className={`text-[#a78235] transition-transform ${isMobileProjectsOpen ? "rotate-180" : ""}`} />
+                      <ChevronDown size={18} className={`text-[#ddbc69] transition-transform ${isMobileProjectsOpen ? "rotate-180" : ""}`} />
                     </button>
-                    <div id="mobile-projects" hidden={!isMobileProjectsOpen} className="mt-1 space-y-2 rounded-2xl bg-[#fcfaf5] p-2">
+                    <div id="mobile-projects" hidden={!isMobileProjectsOpen} className="mt-1 space-y-2 rounded-2xl border border-white/10 bg-[#1b2934] p-2">
                       {projects.map((project) => renderProject(project, true))}
                     </div>
                   </div>
@@ -435,10 +435,10 @@ export default function Navbar() {
                         event.preventDefault();
                         handleNavigation(item.href);
                       }}
-                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#252525] transition-colors hover:bg-[#faf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a04a]"
+                      className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium text-[#f5f1e8] transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69]"
                     >
                       {item.label}
-                      <ArrowUpRight aria-hidden="true" size={17} className="text-[#aaa]" />
+                      <ArrowUpRight aria-hidden="true" size={17} className="text-[#aeb7bf]" />
                     </a>
                   ))}
                 </div>

@@ -1,14 +1,11 @@
 import Image from "next/image";
-import { Building2, FileCheck2, Users, ShieldCheck, MapPin, BadgeIndianRupee, House, KeyRound, CalendarDays } from "lucide-react";
+import { Building2, Users, ShieldCheck, MapPin, House, KeyRound, CalendarDays } from "lucide-react";
 import awardImage from "@/assests/taboola/section/champions-of-dholera-real-estate-bookmyassets.webp";
 
 const benefits = [
   { title: "5+ Years of Experience", body: "Focused experience in Dholera real estate.", icon: CalendarDays },
   { title: "3+ Active Projects", body: "Residential projects in and around Dholera.", icon: Building2 },
-  { title: "Verified Projects", body: "Clear documentation and due diligence.", icon: ShieldCheck },
-  { title: "Transparent Pricing", body: "Clear plot details and pricing with no hidden surprises.", icon: BadgeIndianRupee },
-  { title: "Registry-Ready Plots", body: "Clear title and required property documentation.", icon: FileCheck2 },
-  { title: "Site Visits Available", body: "Visit the project before making your investment.", icon: MapPin },
+  { title: "Site Visit Assistance", body: "Visit the project before making your investment.", icon: MapPin },
   { title: "Villa Construction Assistance", body: "Build your home on your plot with construction support.", icon: House },
   { title: "Rental Assistance", body: "Explore rental opportunities after developing your property.", icon: KeyRound },
   { title: "500+ Investors", body: "Trusted by investors looking at Dholera for the long term.", icon: Users },
@@ -21,11 +18,11 @@ export default function WhyBMA() {
         <div className="min-w-0">
           <h2 id="why-bma-heading" className="text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[36px]">Why Invest With BookMyAssets in Dholera?</h2>
           <p className="mt-2 max-w-3xl leading-relaxed text-black">Invest with a Dholera-focused real estate company built on experience, transparency and long-term value.</p>
-          <ul className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2.5">
-            {benefits.map(({ title, body, icon: Icon }, index) => (
-              <li key={title} className={`grid grid-cols-[24px_minmax(0,1fr)] content-start gap-x-1.5 gap-y-1 rounded-xl border border-[#e9e3d7] bg-[#faf9f6] p-2 transition-colors hover:border-[#ddbc69] sm:gap-x-2 sm:p-3 lg:items-center ${index === benefits.length - 1 ? "col-span-2 lg:col-span-1" : ""}`}>
-                <span className="flex h-6 w-6 items-center justify-center rounded-md border border-[#e8d9b5] bg-[#f6f0e1] text-[#98742e]"><Icon aria-hidden="true" size={15} strokeWidth={1.6} /></span>
-                <h3 className="self-center text-[13.5px] font-semibold leading-snug text-[#202b27] sm:text-[17px] lg:p-2">{title}</h3>
+          <ul className="mt-4 grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-3 lg:gap-3">
+            {benefits.map(({ title, icon: Icon }) => (
+              <li key={title} className="flex min-h-[62px] items-center gap-2.5 rounded-xl border border-[#e9e3d7] bg-[#faf9f6] px-3 py-2.5 transition-colors hover:border-[#ddbc69] sm:min-h-[68px] sm:px-3.5 lg:px-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[#e8d9b5] bg-[#f6f0e1] text-[#98742e]"><Icon aria-hidden="true" size={16} strokeWidth={1.6} /></span>
+                <h3 className="text-[13.5px] font-semibold leading-snug text-[#202b27] sm:text-[16px]">{title}</h3>
               </li>
             ))}
           </ul>

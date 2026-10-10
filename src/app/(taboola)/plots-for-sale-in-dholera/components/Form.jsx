@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import logo from "@/assests/bma-with-background.svg";
@@ -21,6 +21,8 @@ export default function Form({ title }) {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
   const recaptchaRef = useRef(null);
+  const popupRef = useRef(null);
+  const closeTimerRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // Popup at 45% scroll
@@ -138,7 +140,7 @@ export default function Form({ title }) {
         setFormData({ fullName: "", mobileNumber: "" });
         setShowThankYou(true);
 
-        setTimeout(() => {
+        closeTimerRef.current = window.setTimeout(() => {
           setShowThankYou(false);
           setShowFormPopup(false);
         }, 3000);
@@ -201,8 +203,40 @@ export default function Form({ title }) {
   };
 
   const handlePopupClose = () => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+
+    if (window.grecaptcha && recaptchaRef.current) {
+      try {
+        window.grecaptcha.reset();
+      } catch (error) {
+        console.error("Error resetting reCAPTCHA on close:", error);
+      }
+      recaptchaRef.current.replaceChildren();
+    }
+
+    setIsLoading(false);
+    setErrorMessage("");
+    setShowThankYou(false);
     setShowFormPopup(false);
   };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) {
+        window.clearTimeout(closeTimerRef.current);
+      }
+      if (window.grecaptcha && recaptchaRef.current) {
+        try {
+          window.grecaptcha.reset();
+        } catch (error) {
+          console.error("Error cleaning up reCAPTCHA:", error);
+        }
+      }
+    };
+  }, []);
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -211,19 +245,16 @@ export default function Form({ title }) {
   };
 
   return (
-    <AnimatePresence>
+    <>
       {showFormPopup && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        <div
+          ref={popupRef}
           className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
           onClick={handleBackdropClick}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
             className="bg-white rounded-xl p-8 pt-12 max-w-md w-full shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
@@ -277,6 +308,7 @@ export default function Form({ title }) {
                     </motion.div>
                   </div>
                   <button
+                    type="button"
                     onClick={handlePopupClose}
                     className="absolute -top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl "
                   >
@@ -385,9 +417,9 @@ export default function Form({ title }) {
               </>
             )}
           </motion.div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 }
 

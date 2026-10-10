@@ -20,8 +20,8 @@ export default function page() {
         <Hero />
         <Residency />
         <Amenities />
-        <WhyDholera />
         <DholeraScaleConnectivity />
+        <WhyDholera />
         <div id="expert-guidance" className="scroll-mt-24">
           <InlineLeadForm
             variant="common"
@@ -29,8 +29,8 @@ export default function page() {
             layout="inline"
             size="compact"
             headingTag="h2"
-            title="Own a Plot in Dholera & Unlock Up to ₹30,000/Month"
-            buttonText="Get Verified Plot Details"
+            title="Invest in Dholera Residential Plots"
+            buttonText="Talk to Our RM"
             source="BookMyAssets Taboola Inline Form"
             tags={["Dholera Investment", "Website Lead", "Taboola Inline"]}
             pageName="Plots for Sale in Dholera"

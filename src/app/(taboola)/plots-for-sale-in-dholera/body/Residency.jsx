@@ -60,7 +60,7 @@ export default function Residency() {
     <section id="westwyn-residency" aria-labelledby="westwyn-section-heading" className="text-[13px] md:text-[17px] scroll-mt-24 bg-[#f8f7f4] py-6 text-[#1c1c1c] sm:py-7 lg:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-4 max-w-2xl text-center sm:mb-4">
-          <h2 id="westwyn-section-heading" className="font-playfair-display text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">{tabs.find((tab) => tab.id === activeProject)?.name}</h2>
+          <h2 id="westwyn-section-heading" className="font-playfair-display text-[26px] font-bold leading-tight tracking-tight text-[#ddbc69] sm:text-[32px] lg:text-[38px]">Top Residential Plots in Dholera</h2>
         </div>
 
         <div role="tablist" aria-label="Westwyn projects" className="mx-auto mb-4 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-2 sm:mb-4">

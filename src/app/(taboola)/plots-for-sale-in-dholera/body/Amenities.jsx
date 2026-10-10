@@ -1,25 +1,40 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  BatteryCharging,
+  Building2,
+  Camera,
+  ChevronLeft,
+  ChevronRight,
+  Droplets,
+  Footprints,
+  Gamepad2,
+  Leaf,
+  LockKeyhole,
+  Route,
+  ShieldCheck,
+  ShoppingBag,
+  Smartphone,
+  Users,
+  Zap,
+} from "lucide-react";
 
 const amenities = [
-  // Bounds [x, y, width, height] in the original 1280px atlas isolate each
-  // object instead of assuming the artwork stays inside equal grid cells.
-  { title: "Signature Project Boundary", bounds: [0, 335, 335, 275] },
-  { title: "Controlled Access Gated Community", bounds: [0, 65, 350, 260] },
-  { title: "Wide Internal Road Network", bounds: [340, 395, 325, 230] },
-  { title: "24/7 Security & CCTV Surveillance", bounds: [360, 70, 265, 255] },
-  { title: "App-Based Society Management", bounds: [680, 325, 225, 300] },
-  { title: "Drainage System", bounds: [940, 350, 325, 280] },
-  { title: "Power & Water Supply", bounds: [25, 630, 300, 285] },
-  { title: "EV Charging Station", bounds: [665, 10, 240, 310] },
-  { title: "Daily Essentials & Utilities Store", bounds: [330, 655, 275, 255] },
-  { title: "Clubhouse Lite", bounds: [610, 650, 325, 260] },
-  { title: "Yoga Deck", bounds: [940, 675, 320, 235] },
-  { title: "Jogging Track", bounds: [910, 85, 355, 240] },
-  { title: "Senior Citizen Zone", bounds: [0, 935, 340, 280] },
-  { title: "Kids Play Area", bounds: [345, 915, 320, 305] },
+  { title: "Signature Project Boundary", icon: ShieldCheck },
+  { title: "Controlled Access Gated Community", icon: LockKeyhole },
+  { title: "Wide Internal Road Network", icon: Route },
+  { title: "24/7 Security & CCTV Surveillance", icon: Camera },
+  { title: "App-Based Society Management", icon: Smartphone },
+  { title: "Drainage System", icon: Droplets },
+  { title: "Power & Water Supply", icon: Zap },
+  { title: "EV Charging Station", icon: BatteryCharging },
+  { title: "Daily Essentials & Utilities Store", icon: ShoppingBag },
+  { title: "Clubhouse Lite", icon: Building2 },
+  { title: "Yoga Deck", icon: Leaf },
+  { title: "Jogging Track", icon: Footprints },
+  { title: "Senior Citizen Zone", icon: Users },
+  { title: "Kids Play Area", icon: Gamepad2 },
 ];
 
 export default function Amenities() {
@@ -59,22 +74,13 @@ export default function Amenities() {
 
         <div className="relative">
           <ul id="amenities-track" ref={trackRef} aria-label="Community amenities" tabIndex={0} className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ddbc69]">
-            {amenities.map(({ title, bounds: [x, y, width, height] }) => (
+            {amenities.map(({ title, icon: Icon }) => (
               <li key={title} className="flex w-[46%] shrink-0 snap-start flex-col items-center px-1 py-2 text-center sm:w-[calc((100%-32px)/3)] lg:w-[calc((100%-64px)/5)]">
                 <span
                   aria-hidden="true"
-                  className="mb-3 flex h-24 w-24 shrink-0 items-center justify-center sm:h-28 sm:w-28 lg:h-32 lg:w-32"
+                  className="mb-3 flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border border-[#ead9ad] bg-white text-[#a78337] shadow-sm sm:h-28 sm:w-28 lg:h-32 lg:w-32"
                 >
-                  <span
-                    className="block bg-no-repeat"
-                    style={{
-                      width: `${width / Math.max(width, height) * 100}%`,
-                      height: `${height / Math.max(width, height) * 100}%`,
-                      backgroundImage: "url('/assets/amenities/premium-3d-icons.webp')",
-                      backgroundSize: `${1280 / width * 100}% ${1280 / height * 100}%`,
-                      backgroundPosition: `${x / (1280 - width) * 100}% ${y / (1280 - height) * 100}%`,
-                    }}
-                  />
+                  <Icon aria-hidden="true" className="h-11 w-11 sm:h-12 sm:w-12 lg:h-14 lg:w-14" strokeWidth={1.7} />
                 </span>
                 <h3 className="font-semibold leading-snug text-[#303030]">{title}</h3>
               </li>

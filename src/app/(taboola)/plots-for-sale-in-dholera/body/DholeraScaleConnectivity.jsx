@@ -11,8 +11,8 @@ import seaportGraphic from "@/assests/ad-page/taboola-connectivity/seaport.webp"
 import { Globe2, Building2, MapPinned, LandPlot, ChevronLeft, ChevronRight } from "lucide-react";
 
 const comparisons = [
-  { name: "Gurgaon", area: 675, icon: Building2, color: "border-cyan-200 bg-cyan-50 text-cyan-600", source: "https://onemapdepts.gmda.gov.in/" },
   { name: "Bangalore", area: 741, icon: Globe2, color: "border-violet-200 bg-violet-50 text-violet-600", source: "https://www.moh.gov.sg/others/resources-and-statistics/population-and-vital-statistics/" },
+  { name: "Gurgaon", area: 675, icon: Building2, color: "border-cyan-200 bg-cyan-50 text-cyan-600", source: "https://onemapdepts.gmda.gov.in/" },
   { name: "Mumbai", area: 603, icon: Building2, color: "border-rose-200 bg-rose-50 text-rose-600", source: "https://gazetteers.maharashtra.gov.in/cultural.maharashtra.gov.in/english/gazetteer/greater_bombay/general.html" },
   { name: "Ahmedabad (AMC)", area: 464.16, icon: MapPinned, color: "border-amber-200 bg-amber-50 text-amber-600", source: "https://ahmedabadcity.gov.in/Home/AboutTheCorporation" },
 ];
@@ -96,7 +96,7 @@ export default function DholeraScaleConnectivity() {
     <section id="dholera-scale" aria-labelledby="dholera-scale-heading" className="scroll-mt-24 bg-[#f8f7f3] px-4 py-6 text-[14px] md:text-[16px] sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <header className="mb-5 text-center">
-          <p className="font-semibold uppercase tracking-[0.15em] text-[#a78337]">The scale of the vision</p>
+          <p className="font-semibold uppercase tracking-[0.15em] text-[#a78337]">About Dholera SIR</p>
           <h2 id="dholera-scale-heading" className="mt-2 text-[26px] font-semibold leading-tight tracking-tight text-[#202b27] sm:text-[34px]">A city planned at a different scale</h2>
         </header>
 

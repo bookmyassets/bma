@@ -96,7 +96,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/20 md:bg-gradient-to-r md:from-black/35 md:via-black/10 md:to-transparent" />
 
         <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 grid-rows-[1fr_auto] content-normal items-end px-4 pb-[calc(72px+env(safe-area-inset-bottom))] pt-[88px] sm:grid-rows-none sm:px-8 sm:pt-[120px] lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center lg:gap-16 lg:px-10 lg:pb-16 lg:pt-[140px]">
-          <h1 className="mb-6 max-w-lg self-start text-[30px] font-semibold leading-tight tracking-tight text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)] sm:hidden">
+          <h1 className="mt-16 mb-6 max-w-lg self-start text-[30px] font-semibold leading-tight tracking-tight text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)] sm:hidden">
             Residential plots from ₹10 lakh in Dholera, Gujarat
           </h1>
           <div className="hidden min-w-0 max-w-2xl [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] lg:block">

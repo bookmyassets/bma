@@ -196,23 +196,22 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} aria-labelledby="hero-form-title" className="mx-auto w-full max-w-[340px] overflow-hidden rounded-2xl border border-white/60 bg-[#fffdf8]/95 p-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-md sm:max-w-none sm:rounded-3xl sm:p-8">
-      <div className="mb-2 sm:mb-6">
+    <form onSubmit={handleSubmit} aria-labelledby="hero-form-title" className="mx-auto w-full max-w-[400px] overflow-hidden rounded-3xl border border-white/60 bg-[#fffdf8]/95 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-md sm:max-w-none sm:p-8">
+      <div className="mb-3 sm:mb-6">
         <span className="mb-4 hidden h-1 w-10 rounded-full bg-[#ddbc69] sm:block" />
-        <h2 id="hero-form-title" className="scroll-mt-24 text-[16px] font-semibold leading-snug tracking-tight text-[#92702b] sm:mt-2 sm:text-2xl sm:text-[#151f28]"><span className="sm:hidden">Earn up to ₹30,000 rental income</span><span className="hidden sm:inline lg:hidden">Residential plots from ₹10 lakh in Dholera, Gujarat</span><span className="hidden lg:inline">Residential Plots from ₹10 lakh in Dholera, Gujarat</span></h2>
+        <h2 id="hero-form-title" className="scroll-mt-24 text-[16px] font-semibold leading-snug tracking-tight text-[#92702b] sm:mt-2 sm:text-2xl sm:text-[#151f28]"><span className="sm:hidden">Get a Callback &amp; Know How to Earn ₹30,000/Month in Rental Income!</span><span className="hidden sm:inline lg:hidden">Residential plots from ₹10 lakh in Dholera, Gujarat</span><span className="hidden lg:inline">Residential Plots from ₹10 lakh in Dholera, Gujarat</span></h2>
         <p className="mt-1.5 hidden text-[12px] font-medium leading-snug text-[#92702b] sm:mt-2 sm:block sm:text-[15px] lg:hidden">Earn up to ₹30K rental income from your plots</p>
       </div>
       {errorMessage && (
         <div role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">{errorMessage}</div>
       )}
-      <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-1 sm:gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-4">
         {[
           { name: "fullName", label: "Full name", placeholder: "Enter your full name", type: "text", autoComplete: "name" },
           { name: "phone", label: "Phone number", placeholder: "Phone number", type: "tel", autoComplete: "tel" },
           { name: "city", label: "City", placeholder: "Your city", type: "text", autoComplete: "address-level2" },
         ].map((field) => (
           <div key={field.name} className={`min-w-0 ${field.name === "fullName" ? "col-span-2 sm:col-span-1" : ""}`}>
-            <label htmlFor={`hero-${field.name}`} className="mb-1 block text-xs font-semibold text-[#37424a] sm:mb-1.5">{field.label} <span className="text-[#92702b]">*</span></label>
             <input
               id={`hero-${field.name}`}
               name={field.name}
@@ -222,16 +221,16 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
               value={formData[field.name]}
               onChange={handleChange}
               required
-              className="h-10 w-full rounded-lg border border-[#e4dfd2] bg-white px-2.5 text-[16px] text-[#151f28] outline-none transition-colors placeholder:text-[#93999c] focus:border-[#bc9743] focus:ring-2 focus:ring-[#ddbc69]/20 sm:h-12 sm:rounded-xl sm:px-4 sm:text-sm"
+              className="h-11 w-full rounded-lg border border-[#e4dfd2] bg-white px-3 text-[16px] text-[#151f28] outline-none transition-colors placeholder:text-[#93999c] focus:border-[#bc9743] focus:ring-2 focus:ring-[#ddbc69]/20 sm:h-12 sm:rounded-xl sm:px-4 sm:text-sm"
             />
           </div>
         ))}
       </div>
-      <div ref={recaptchaRef} className="recaptcha-container mt-1.5 overflow-x-auto sm:mt-4" />
-      <button type="submit" disabled={isLoading || parentIsDisabled || !recaptchaLoaded} className="mt-1.5 flex min-h-10 w-full items-center justify-center rounded-lg bg-[#ddbc69] px-3 py-1.5 text-sm font-semibold text-[#17130b] shadow-sm transition-colors hover:bg-[#d2ae54] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#92702b] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#e5dfcf] disabled:text-[#827b6b] sm:mt-2 sm:min-h-12 sm:rounded-xl sm:px-5 sm:py-3">
-        {isLoading ? "Submitting..." : <><span className="lg:hidden">Get Verified Plot Details</span><span className="hidden lg:inline">Get Project Details</span></>}
+      <div ref={recaptchaRef} className="recaptcha-container mt-3 overflow-x-auto sm:mt-4" />
+      <button type="submit" disabled={isLoading || parentIsDisabled || !recaptchaLoaded} className="mt-3 flex min-h-12 w-full items-center justify-center rounded-xl bg-[#ddbc69] px-3 py-2 text-sm font-semibold text-[#17130b] shadow-sm transition-colors hover:bg-[#d2ae54] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#92702b] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#e5dfcf] disabled:text-[#827b6b] sm:mt-2 sm:rounded-xl sm:px-5 sm:py-3">
+        {isLoading ? "Submitting..." : <><span className="lg:hidden">Talk to Our RM</span><span className="hidden lg:inline">Talk to Our RM</span></>}
       </button>
-      <p className="mt-2 text-center text-[11px] leading-snug text-black sm:mt-4 sm:text-[13px] sm:leading-relaxed">Your details stay private. Our team will contact you shortly.</p>
+      <p className="mt-3 text-center text-[11px] leading-snug text-black sm:mt-4 sm:text-[13px] sm:leading-relaxed">Your details stay private. Our team will contact you shortly.</p>
     </form>
   );
 };
