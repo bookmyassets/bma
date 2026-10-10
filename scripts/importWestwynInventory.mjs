@@ -43,8 +43,8 @@ const PROJECTS = {
     inventory: westwynInventoryStatus,
 
     minPlotNumber: 1,
-    maxPlotNumber: 290,
-    expectedPlotCount: 290,
+    maxPlotNumber: 305,
+    expectedPlotCount: 305,
 
     usesPlotTier: true,
   },

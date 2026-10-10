@@ -7,7 +7,10 @@ import planImage from "@/assests/residential/residency/westwyn-residency-invento
 import { westWynResidencyPlotInventory } from "./data/plotInventoryData";
 import { westwynPlotGeometry } from "./data/westwynPlotGeometry";
 
-const WestWynInteractivePlotMap = ({ fullscreen = false }) => {
+const WestWynInteractivePlotMap = ({
+  fullscreen = false,
+  initialFullscreenZoom = 2.25,
+}) => {
   return (
     <PlotMapViewer
       projectSlug="westwyn-residency"
@@ -16,6 +19,7 @@ const WestWynInteractivePlotMap = ({ fullscreen = false }) => {
       geometry={westwynPlotGeometry}
       plots={westWynResidencyPlotInventory}
       fullscreen={fullscreen}
+      initialFullscreenZoom={initialFullscreenZoom}
     />
   );
 };

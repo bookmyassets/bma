@@ -397,16 +397,12 @@ const PlotMapViewer = ({
 
   const canvasWidth =
     fullscreen && mapViewportSize.width > 0
-      ? `${Math.round(
-          mapViewportSize.width * zoom,
-        )}px`
+      ? `${Math.round(mapViewportSize.width * zoom)}px`
       : "100%";
 
   const canvasHeight =
     fullscreen && mapViewportSize.width > 0
-      ? `${Math.round(
-          (mapViewportSize.width * zoom) / mapAspectRatioValue,
-        )}px`
+      ? `${Math.round((mapViewportSize.width * zoom) / mapAspectRatioValue)}px`
       : undefined;
 
   return (
@@ -600,7 +596,7 @@ const PlotMapViewer = ({
       >
         <div
           ref={mapContainerRef}
-    className="
+          className="
     relative
     shrink-0
     overflow-hidden
@@ -616,7 +612,7 @@ const PlotMapViewer = ({
             fill
             priority={false}
             sizes={fullscreen ? "100vw" : "(max-width: 1024px) 100vw, 100vw"}
-            className="select-none object-contain object-center"
+            className="select-none object-fill"
             draggable={false}
           />
 

@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 
 import planImage from "@/assests/residential/residency/westwyn-residency-inventory.svg";
 
-const MAP_ASPECT = "aspect-[915/800]";
+const MAP_ASPECT = "aspect-[1191/843]";
 
 const InteractivePlotMap = dynamic(
   () => import("./WestWynInteractivePlotMap"),
@@ -33,7 +33,7 @@ const StaticPlanPreview = ({ showAction = false, onOpen }) => (
         fill
         loading="lazy"
         sizes="(max-width: 1024px) 100vw, 50vw"
-        className="object-contain"
+        className="object-fill"
       />
     </div>
 
@@ -56,7 +56,7 @@ const LivePlotPlan = () => {
   const desktopContainerRef = useRef(null);
 
   const [desktopMapReady, setDesktopMapReady] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [fullscreenOpen, setFullscreenOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -92,14 +92,14 @@ const LivePlotPlan = () => {
   }, []);
 
   useEffect(() => {
-    if (!mobileOpen) return undefined;
+    if (!fullscreenOpen) return undefined;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event) => {
       if (event.key === "Escape") {
-        setMobileOpen(false);
+        setFullscreenOpen(false);
       }
     };
 
@@ -109,20 +109,41 @@ const LivePlotPlan = () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [mobileOpen]);
+  }, [fullscreenOpen]);
 
   return (
     <>
       <div className="lg:hidden">
-        <StaticPlanPreview showAction onOpen={() => setMobileOpen(true)} />
+        <StaticPlanPreview
+          showAction
+          onOpen={() => setFullscreenOpen(true)}
+        />
       </div>
 
       <div ref={desktopContainerRef} className="hidden lg:block">
-        {desktopMapReady ? <InteractivePlotMap /> : <StaticPlanPreview />}
+        {desktopMapReady ? (
+          <div className="relative">
+            <InteractivePlotMap />
+
+            <button
+              type="button"
+              onClick={() => setFullscreenOpen(true)}
+              className="absolute right-3 top-3 z-20 inline-flex min-h-10 items-center gap-2 rounded-xl border border-[#DDBC69]/70 bg-[#080808]/90 px-3 py-2 text-xs font-semibold text-[#F4D991] shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur transition-colors hover:bg-[#DDBC69] hover:text-black"
+            >
+              <FaExpand aria-hidden="true" />
+              View larger plan
+            </button>
+          </div>
+        ) : (
+          <StaticPlanPreview
+            showAction
+            onOpen={() => setFullscreenOpen(true)}
+          />
+        )}
       </div>
 
       {mounted &&
-        mobileOpen &&
+        fullscreenOpen &&
         createPortal(
           <div
             className="
@@ -135,7 +156,6 @@ const LivePlotPlan = () => {
         flex-col
         overflow-hidden
         bg-[#050505]
-        lg:hidden
       "
             role="dialog"
             aria-modal="true"
@@ -175,7 +195,7 @@ const LivePlotPlan = () => {
 
               <button
                 type="button"
-                onClick={() => setMobileOpen(false)}
+                onClick={() => setFullscreenOpen(false)}
                 className="
             flex
             h-10
